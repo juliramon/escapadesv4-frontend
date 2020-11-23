@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55 (78076) - https://sketchapp.com -->
+    <title>favicon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="11.1551114%" y1="16.2562861%" x2="84.9060343%" y2="90.3448045%" id="linearGradient-1">
+            <stop stop-color="#FEFFC9" offset="0%"></stop>
+            <stop stop-color="#FFC892" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="2.13878744%" y1="0%" x2="97.8612126%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#0091FF" offset="0%"></stop>
+            <stop stop-color="#8D18AD" offset="100%"></stop>
+        </linearGradient>
+        <path d="M89.1037868,89.8206897 C89.1037868,83.6965517 94.1809257,78.5931034 100.273492,78.5931034 L169.576438,78.5931034 C175.922861,78.5931034 181,83.6965517 181,89.8206897 L181,172.751724 C181,177.855172 176.938289,181.937931 171.86115,181.937931 L162.468443,181.937931 C158.406732,181.937931 154.852735,179.131034 153.837307,175.048276 L150.537167,162.8 C137.336606,176.57931 118.297335,185 93.6732118,185 C40.3632539,185 0,145.193103 0,92.6275862 C0,39.8068966 40.3632539,0 93.6732118,0 C122.105189,0 146.98317,11.4827586 163.737728,30.1103448 C167.545582,34.1931034 166.530154,40.8275862 161.960729,43.6344828 L129.213184,65.5793103 C125.659187,67.8758621 121.343619,67.3655172 118.297335,64.5586207 C111.697055,58.9448276 103.319776,55.8827586 93.6732118,55.8827586 C72.6030856,55.8827586 56.8639551,71.1931034 56.8639551,92.6275862 C56.8639551,115.337931 72.6030856,131.668966 93.6732118,131.668966 C108.904628,131.668966 120.074334,126.565517 125.913043,115.337931 L100.273492,115.337931 C94.1809257,115.337931 89.1037868,110.489655 89.1037868,104.110345 L89.1037868,89.8206897 Z" id="path-3"></path>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-4">
+            <stop stop-color="#FFB90C" offset="0%"></stop>
+            <stop stop-color="#FD8305" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="favicon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="url(#linearGradient-1)" x="0" y="0" width="200" height="200" rx="20"></rect>
+        <g id="Group" transform="translate(0.000000, 7.000000)">
+            <g id="G" fill-rule="nonzero">
+                <use fill="#FEFFC9" xlink:href="#path-3"></use>
+                <use fill="url(#linearGradient-2)" xlink:href="#path-3"></use>
+            </g>
+            <ellipse id="Oval" fill="url(#linearGradient-4)" cx="181" cy="113" rx="19" ry="20"></ellipse>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="37px" height="41px" viewBox="0 0 37 41" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55 (78076) - https://sketchapp.com -->
+    <title>Group</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M25.3711667,25.5378333 L17.5923333,33.3166667 C16.9052834,34.0043986 15.9730343,34.3908197 15.0009167,34.3908197 C14.028799,34.3908197 13.0965499,34.0043986 12.4095,33.3166667 L4.62883333,25.5378333 C-1.09863913,19.8100657 -1.09847962,10.5237834 4.62918961,4.79621256 C10.3568588,-0.931358288 19.6431412,-0.931358288 25.3708104,4.79621256 C31.0984796,10.5237834 31.0986391,19.8100657 25.3711667,25.5378333 Z M15,20.6666667 C18.0375661,20.6666667 20.5,18.2042328 20.5,15.1666667 C20.5,12.1291005 18.0375661,9.66666667 15,9.66666667 C11.9624339,9.66666667 9.5,12.1291005 9.5,15.1666667 C9.5,18.2042328 11.9624339,20.6666667 15,20.6666667 Z" id="path-1"></path>
+        <filter x="-23.9%" y="-14.8%" width="147.7%" height="141.3%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.252786276 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Cover-Default" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(3.000000, 1.000000)">
+            <polygon id="Path" points="0 1 30 1 30 34 0 34"></polygon>
+            <g id="Combined-Shape">
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <use fill="#0091FF" fill-rule="evenodd" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>
