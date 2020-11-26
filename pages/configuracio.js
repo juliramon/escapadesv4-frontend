@@ -1,6 +1,6 @@
 import Head from "next/head";
 import {useContext, useEffect, useState} from "react";
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import {Button, Col, Container, Form, Row, Toast} from "react-bootstrap";
 import NavigationBar from "../components/global/NavigationBar";
 import UserContext from "../contexts/UserContext";
 import ContentService from "../services/contentService";
@@ -8,51 +8,107 @@ import ContentService from "../services/contentService";
 const configuracio = () => {
 	const {user, refreshUserData} = useContext(UserContext);
 
-	const initialState = {
-		activeTab: "compte",
-		fullName: '',
-		userName: '',
-		gender: '',
-		email: '',
-		birthDate: '',
-		phoneNumber: '',
-		password: '',
-		isProfileIndexed: true,
-		arePostsIndexed: true,
-		isProfileVisible: true,
-		isProfileProtected: false
-	};
+	let initialState;
+	useState(() => {
+		if (user) {
+			let formatedBirthDate;
+			if(user.birthDate){
+				const birthDate = new Date(user.birthDate);
+				let year, month, date;
+				year = birthDate.getFullYear();
+				month = birthDate.getMonth() + 1;
+				if(month < 10){
+					month = `0${month}`
+				}
+				date = birthDate.getUTCDate();
+				if(date < 10){
+					date = `0${date}`
+				}
+				formatedBirthDate = `${year}-${month}-${date}`;
+			}
+			initialState = {
+				activeTab: "compte",
+				isUpdated: false,
+				availableUsername: true,
+				availableEmail: true,
+				serverMessage: '',
+				formData: {
+					avatar: user.avatar,
+					fullName: user.fullName,
+					username: user.username,
+					gender: user.gender,
+					email: user.email,
+					birthDate: formatedBirthDate,
+					phoneNumber: user.phoneNumber,
+					password: '',
+					newPassword: '',
+					verifyNewPassword: ''
+				},
+			};
+		}
+	}, [user]);
 	const [state, setState] = useState(initialState);
 	const service = new ContentService();
 
-	useEffect(() => {
-		if(user.birthDate){
-			const birthDate = new Date(user.birthDate);
-			let year, month, date;
-			year = birthDate.getFullYear();
-			month = birthDate.getMonth() + 1;
-			date = birthDate.getUTCDate();
-			setState({...state, birthDate: `${year}-${month}-${date}`});
-		}
-	}, [user])
-
 	const handleChange = (e) => {
-		console.log(e.target)
-		setState({...state, [e.target.name]: e.target.value})
+		setState({
+			...state, 
+			formData: {...state.formData, [e.target.name]: e.target.value}})
 	}
 
-	const handleSubmit = (e) => {
-		console.log('submiiiit')
-		e.preventDefault();
+	const updateBasicInfo = async () => {
 		const {_id} = user;
-		const {fullName, userName, gender, email, birthDate, phoneNumber, password, isProfileIndexed, arePostsIndexed, isProfileVisible, isProfileProtected} = state;
-		service
-			.editAccountSettings(_id, fullName, userName, gender, email, birthDate, phoneNumber, password, isProfileIndexed, arePostsIndexed, isProfileVisible, isProfileProtected)
-			.then((res) => {
-				console.log("RES =>", res);
-				console.log("state =>", state);
-				// refreshUserData(state);
-			});
+		const {fullName, gender, birthDate, phoneNumber} = state.formData;
+		const updatedUser = await service.editAccountSettings(_id, fullName, gender, birthDate, phoneNumber);
+		console.log(updatedUser)
+		if(updatedUser.data.message){
+			setState({...state, serverMessage: updatedUser.data.message})
+		}
+		setState({...state, isUpdated: true, updatedUser: updatedUser.data})
+	}
+
+	const updateUserName = async () => {
+		const {_id} = user;
+		const {username} = state.formData;
+		const updatedUser = await service.editUserName(_id, username);
+		console.log(updatedUser);
+		if(updatedUser.data.message){
+			setState({...state, availableUsername: false, availableEmail: true, serverMessage: updatedUser.data.message})
+		} else {
+			setState({...state, isUpdated: true, updatedUser: updatedUser.data})
+		}
+	}
+
+	const updateEmailAddress = async () => {
+		const {_id} = user;
+		const {email} = state.formData;
+		const updatedUser = await service.editEmailAddress(_id, email);
+		console.log(updatedUser);
+		if(updatedUser.data.message){
+			setState({...state, availableEmail: false, availableUsername: true, serverMessage: updatedUser.data.message})
+		} else {
+			setState({...state, isUpdated: true, updatedUser: updatedUser.data})
+		}
+	}
+
+	useEffect(() => {
+		if(state.isUpdated){
+			refreshUserData(state.updatedUser);
+		}
+	}, [state])
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		if(state.activeTab === 'compte'){
+			updateBasicInfo()
+		}
+		if(state.activeTab === 'username'){
+			updateUserName()
+		}
+		if(state.activeTab === 'email'){
+			updateEmailAddress()
+		}
+		
 	};
 
 	const activeTab = {
@@ -76,6 +132,12 @@ const configuracio = () => {
 		);
 	}
 
+	let errorInput = {
+		background: 'red',
+		border: 'inset 2px solid red',
+		color: 'red'
+	}
+
 	let panel;
 
 	if (state.activeTab === "compte") {
@@ -86,15 +148,11 @@ const configuracio = () => {
 					<Form>
 						<Form.Group>
 							<Form.Label>Nom i cognoms</Form.Label>
-							<Form.Control type="text" placeholder="Nom i cognoms" name="fullName" defaultValue={user.fullName} onChange={handleChange} />
-						</Form.Group>
-						<Form.Group>
-							<Form.Label>Nom d'usuari</Form.Label>
-							<Form.Control type="text" placeholder="Nom d'usuari" name="userName" defaultValue={user.username} onChange={handleChange} />
+							<Form.Control type="text" placeholder="Nom i cognoms" name="fullName" value={state.formData.fullName} onChange={handleChange} />
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>Gènere</Form.Label>
-							<Form.Control as="select" name="gender" onChange={handleChange}>
+							<Form.Control as="select" name="gender" value={state.formData.gender} onChange={handleChange}>
 								<option>Selecciona una opció</option>
 								<option value="Dona">Dona</option>
 								<option value="Home">Home</option>
@@ -102,16 +160,78 @@ const configuracio = () => {
 							</Form.Control>
 						</Form.Group>
 						<Form.Group>
-							<Form.Label>Adreça electrònica</Form.Label>
-							<Form.Control type="email" placeholder="Adreça electrònica" name="email" defaultValue={user.email} onChange={handleChange} />
-						</Form.Group>
-						<Form.Group>
 							<Form.Label>Data de naixement</Form.Label>
-							<Form.Control type="date" placeholder="Data de naixement" name="birthDate" defaultValue={state.birthDate} onChange={handleChange} />
+							<Form.Control type="date" placeholder="Data de naixement" name="birthDate" value={state.formData.birthDate} onChange={handleChange} />
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>Número de telèfon</Form.Label>
-							<Form.Control type="tel" placeholder="Número de telèfon" name="phoneNumber" defaultValue={user.phoneNumber} onChange={handleChange} />
+							<Form.Control type="tel" placeholder="Número de telèfon" name="phoneNumber" value={state.formData.phoneNumber} onChange={handleChange} />
+						</Form.Group>
+					</Form>
+					<hr />
+					<div className="buttons">
+						<Button className="btn">Cancel·lar</Button>
+						<Button className="btn btn-primary" type="submit" onClick={handleSubmit}>Guardar canvis</Button>
+					</div>
+				</div>
+				<div className="col right">
+				<svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-id" width="40" height="40" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#58708D" fill="none" strokeLinecap="round" strokeLinejoin="round">
+					<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+					<rect x="3" y="4" width="18" height="16" rx="3" />
+					<circle cx="9" cy="10" r="2" />
+					<line x1="15" y1="8" x2="17" y2="8" />
+					<line x1="15" y1="12" x2="17" y2="12" />
+					<line x1="7" y1="16" x2="17" y2="16" />
+				</svg>
+					<h3>Quina informació es comparteix amb altres persones?</h3>
+					<p>Escapadesenparella.cat només proporciona les teves dades de contacte als propietaris d'allotjaments o activitats una vegada efectuada una reserva.</p>
+				</div>
+			</div>
+		);
+	}
+	if(state.activeTab === 'username'){
+		panel = (
+			<div className="wrapper">
+				<div className="col left">
+					<h2>Nom d'usuari</h2>
+					<Form>
+						<Form.Group>
+							<Form.Label>Nom d'usuari</Form.Label>
+							<Form.Control type="text" placeholder="Nom d'usuari" name="username" value={state.formData.username} onChange={handleChange} style={state.availableUsername === 'false' ? errorInput : null} />
+							{!state.availableUsername ? <p style={{color: 'red'}}>{state.serverMessage}</p> : null}
+						</Form.Group>
+					</Form>
+					<hr />
+					<div className="buttons">
+						<Button className="btn">Cancel·lar</Button>
+						<Button className="btn btn-primary" type="submit" onClick={handleSubmit}>Guardar canvis</Button>
+					</div>
+				</div>
+				<div className="col right">
+				<svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-id" width="40" height="40" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#58708D" fill="none" strokeLinecap="round" strokeLinejoin="round">
+					<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+					<rect x="3" y="4" width="18" height="16" rx="3" />
+					<circle cx="9" cy="10" r="2" />
+					<line x1="15" y1="8" x2="17" y2="8" />
+					<line x1="15" y1="12" x2="17" y2="12" />
+					<line x1="7" y1="16" x2="17" y2="16" />
+				</svg>
+					<h3>Quina informació es comparteix amb altres persones?</h3>
+					<p>Escapadesenparella.cat només proporciona les teves dades de contacte als propietaris d'allotjaments o activitats una vegada efectuada una reserva.</p>
+				</div>
+			</div>
+		);
+	}
+	if(state.activeTab === 'email'){
+		panel = (
+			<div className="wrapper">
+				<div className="col left">
+					<h2>Adreça electrònica</h2>
+					<Form>
+						<Form.Group>
+							<Form.Label>Adreça electrònica</Form.Label>
+							<Form.Control type="email" placeholder="Adreça electrònica" name="email" value={state.formData.email} onChange={handleChange} style={state.availableEmail === 'false' ? errorInput : null} />
+							{!state.availableEmail ? <p style={{color: 'red'}}>{state.serverMessage}</p> : null}
 						</Form.Group>
 					</Form>
 					<hr />
@@ -143,15 +263,15 @@ const configuracio = () => {
 					<Form>
 						<Form.Group>
 							<Form.Label>Contrassenya actual</Form.Label>
-							<Form.Control type="password" placeholder="Escriu la contrassenya actual" />
+							<Form.Control type="password" name="password" placeholder="Escriu la contrassenya actual" onChange={handleChange} value={state.formData.password} />
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>Nova contrassenya</Form.Label>
-							<Form.Control type="password" placeholder="Escriu una nova contrassenya"  />
+							<Form.Control type="password" name="newPassword" placeholder="Escriu una nova contrassenya" onChange={handleChange} value={state.formData.newPassword} />
 						</Form.Group>
 						<Form.Group>
 							<Form.Label>Repeteix la contrassenya</Form.Label>
-							<Form.Control type="password" placeholder="Repeteix la nova contrassenya" />
+							<Form.Control type="password" name="verifyNewPassword" placeholder="Repeteix la nova contrassenya" onChange={handleChange} value={state.formData.verifyNewPassword} />
 						</Form.Group>
 					</Form>
 					<hr />
@@ -308,23 +428,40 @@ const configuracio = () => {
 											style={state.activeTab === "compte" ? activeTab : null}
 											onClick={() => setState({...state, activeTab: "compte"})}
 										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												className="icon icon-tabler icon-tabler-settings"
-												width="28"
-												height="28"
-												viewBox="0 0 24 24"
-												strokeWidth="1.5"
-												stroke="#2c3e50"
-												fill="none"
-												strokeLinecap="round"
-												strokeLinejoin="round"
-											>
-												<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-												<path d="M10.325 4.317c.426 -1.756 2.924 -1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543 -.94 3.31 .826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756 .426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543 -.826 3.31 -2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756 -2.924 1.756 -3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543 .94 -3.31 -.826 -2.37 -2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756 -.426 -1.756 -2.924 0 -3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94 -1.543 .826 -3.31 2.37 -2.37c1 .608 2.296 .07 2.572 -1.065z" />
-												<circle cx="12" cy="12" r="3" />
+											<svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-clipboard-list" width="28" height="28" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
+												<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+												<path d="M9 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-12a2 2 0 0 0 -2 -2h-2" />
+												<rect x="9" y="3" width="6" height="4" rx="2" />
+												<line x1="9" y1="12" x2="9.01" y2="12" />
+												<line x1="13" y1="12" x2="15" y2="12" />
+												<line x1="9" y1="16" x2="9.01" y2="16" />
+												<line x1="13" y1="16" x2="15" y2="16" />
 											</svg>{" "}
-											Compte
+											Informació bàsica
+										</li>
+										<li
+											className="list-item"
+											style={state.activeTab === "username" ? activeTab : null}
+											onClick={() => setState({...state, activeTab: "username"})}
+										>
+											<svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-user" width="28" height="28" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
+												<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+												<circle cx="12" cy="7" r="4" />
+												<path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+											</svg>{" "}
+											Nom d'usuari
+										</li>
+										<li
+											className="list-item"
+											style={state.activeTab === "email" ? activeTab : null}
+											onClick={() => setState({...state, activeTab: "email"})}
+										>
+											<svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-at" width="28" height="28" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#2c3e50" fill="none" strokeLinecap="round" strokeLinejoin="round">
+												<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+												<circle cx="12" cy="12" r="4" />
+												<path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28" />
+											</svg>{" "}
+											Adreça electrònica
 										</li>
 										<li
 											className="list-item"
@@ -355,7 +492,7 @@ const configuracio = () => {
 											</svg>{" "}
 											Contrassenya
 										</li>
-										<li
+										{/* <li
 											className="list-item"
 											style={
 												state.activeTab === "privacitat" ? activeTab : null
@@ -382,7 +519,7 @@ const configuracio = () => {
 												<line x1="12" y1="12" x2="12" y2="14.5" />
 											</svg>{" "}
 											Privacitat
-										</li>
+										</li> */}
 									</ul>
 								</div>
 								<div className="col right">{panel}</div>

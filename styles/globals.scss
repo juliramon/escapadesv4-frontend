@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Nunito&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Nunito:wght@400;800&display=swap");
 
 html,
 body {
@@ -653,7 +653,6 @@ nav {
 		.alert-danger {
 			color: #fff;
 			background-color: #e46c62;
-			font-weight: bold;
 			border: none;
 		}
 	}
@@ -769,7 +768,6 @@ nav {
 			padding: 10px 15px;
 			margin: 6px 0;
 			font-size: 1.2em;
-			font-weight: bold;
 			text-transform: capitalize;
 		}
 		a {
@@ -2178,3 +2176,10 @@ nav {
 	}
 }
 /*---END SETTINGS---*/
+/*---TOAST NOTIFICATIONS---*/
+
+.toast.show {
+	z-index: 1000;
+}
+
+/*---END TOAST NOTIFICATIONS---*/

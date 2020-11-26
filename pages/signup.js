@@ -89,7 +89,7 @@ const Signup = () => {
 	if (state.errorMessage.message) {
 		if (
 			state.errorMessage.message ===
-			"Please provide fullname, email and password"
+			"Entra el teu nom complet, correu i contrassenya"
 		) {
 			errorMessage = (
 				<Alert variant="danger">
@@ -114,7 +114,7 @@ const Signup = () => {
 			);
 		} else if (
 			state.errorMessage.message ===
-			"Please provide a stronger password of at least 8 alphanumeric characters"
+			"La contrassenya ha de ser de com a mínim 7 caràcters"
 		) {
 			errorMessage = (
 				<Alert variant="danger">

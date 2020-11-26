@@ -119,9 +119,10 @@ const Login = () => {
 	useEffect(() => {
 		if (user) {
 			if (user !== undefined || user !== "null") {
-				console.log(user);
-				// router.push("/feed");
+				router.push("/feed");
 			}
+		} else {
+			router.push("/login");
 		}
 	}, [user]);
 

@@ -143,9 +143,13 @@ class ContentService {
 			location,
 		});
 	
-	editAccountSettings = (_id, fullName, username, gender, email, birthDate, phoneNumber, password, isProfileIndexed, arePostsIndexed, isProfileVisible, isProfileProtected) => this.service.put(`/users/${_id}/settings`, {
-		fullName, username, gender, email, birthDate, phoneNumber, password, isProfileIndexed, arePostsIndexed, isProfileVisible, isProfileProtected
+	editAccountSettings = (_id, fullName, gender, birthDate, phoneNumber) => this.service.put(`/users/${_id}/settings`, {
+		fullName, gender, birthDate, phoneNumber
 	});
+
+	editUserName = (_id, userName) => this.service.put(`/users/${_id}/username`, {userName});
+
+	editEmailAddress = (_id, email) => this.service.put(`/users/${_id}/email`, {email});
 
 	editUserCover = (_id, cover) => this.service.put(`/users/${_id}`, {cover});
 

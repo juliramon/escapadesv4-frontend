@@ -35,30 +35,32 @@ const Feed = () => {
 	const hideModalVisibility = () => setModalVisibility(false);
 
 	useEffect(() => {
-		const fetchData = async () => {
-			setState({...state, isFetching: true});
-			const userCustomActivities = await service.getUserCustomActivities();
-			const userCustomPlaces = await service.getUserCustomPlaces();
-			let hasActivities, hasPlaces, hasListings;
-			userCustomActivities.length > 0
-				? (hasActivities = true)
-				: (hasActivities = false);
-			userCustomPlaces.length > 0 ? (hasPlaces = true) : (hasPlaces = false);
-			userCustomActivities.length > 0 && userCustomPlaces.length > 0
-				? (hasListings = true)
-				: (hasListings = false);
-			setState({
-				...state,
-				hasListings: hasListings,
-				hasActivities: hasActivities,
-				hasPlaces: hasPlaces,
-				userCustomActivities: userCustomActivities,
-				userCustomPlaces: userCustomPlaces,
-			});
-		};
-		fetchData();
+		if(user){
+			const fetchData = async () => {
+				setState({...state, isFetching: true});
+				const userCustomActivities = await service.getUserCustomActivities();
+				const userCustomPlaces = await service.getUserCustomPlaces();
+				let hasActivities, hasPlaces, hasListings;
+				userCustomActivities.length > 0
+					? (hasActivities = true)
+					: (hasActivities = false);
+				userCustomPlaces.length > 0 ? (hasPlaces = true) : (hasPlaces = false);
+				userCustomActivities.length > 0 && userCustomPlaces.length > 0
+					? (hasListings = true)
+					: (hasListings = false);
+				setState({
+					...state,
+					hasListings: hasListings,
+					hasActivities: hasActivities,
+					hasPlaces: hasPlaces,
+					userCustomActivities: userCustomActivities,
+					userCustomPlaces: userCustomPlaces,
+				});
+			};
+			fetchData();
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [user]);
 
 	const resultsToShow = [];
 	if (state.userCustomActivities) {

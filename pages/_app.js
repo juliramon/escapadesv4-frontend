@@ -45,14 +45,16 @@ function MyApp({Component, pageProps}) {
 		service
 			.logout()
 			.then(() => {
-				getLoggedUser(undefined);
+				setCookie("loggedInUser", undefined, {expires: cookieExpirationDate});
 				removeCookie("loggedInUser");
+				Router.push("/login");
 			})
 			.catch((err) => console.log(err));
-		Router.push("/login");
 	};
 
 	const refreshUserData = (updatedUser) => {
+		console.log('updating user...')
+		removeCookie("loggedInUser");
 		setCookie("loggedInUser", updatedUser, {expires: cookieExpirationDate});
 		setState({...state, loggedUser: updatedUser});
 	};
