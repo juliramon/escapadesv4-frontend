@@ -112,6 +112,10 @@ button,
 	border-radius: 8px !important;
 }
 
+.form-group {
+	position: relative;
+}
+
 .form-control:focus {
 	outline: none !important;
 	border: none !important;
@@ -2183,3 +2187,12 @@ nav {
 }
 
 /*---END TOAST NOTIFICATIONS---*/
+/*---INPUT VALIDATOR---*/
+
+.inputValidator {
+	position: absolute;
+    right: 11px;
+    bottom: 8px;
+}
+
+/*---END INPUT VALIDATOR---*/

@@ -151,6 +151,8 @@ class ContentService {
 
 	editEmailAddress = (_id, email) => this.service.put(`/users/${_id}/email`, {email});
 
+	editPassword = (_id, password, newPassword) => this.service.put(`/users/${_id}/password`, {password, newPassword})
+
 	editUserCover = (_id, cover) => this.service.put(`/users/${_id}`, {cover});
 
 	getAllUsers = () => this.service.get("/users").then((res) => res.data);

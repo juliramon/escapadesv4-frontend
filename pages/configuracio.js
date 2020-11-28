@@ -32,6 +32,7 @@ const configuracio = () => {
 				availableUsername: true,
 				availableEmail: true,
 				serverMessage: '',
+				isPasswordSubmittable: false,
 				formData: {
 					avatar: user.avatar,
 					fullName: user.fullName,
@@ -42,7 +43,7 @@ const configuracio = () => {
 					phoneNumber: user.phoneNumber,
 					password: '',
 					newPassword: '',
-					verifyNewPassword: ''
+					verifyNewPassword: '',
 				},
 			};
 		}
@@ -91,6 +92,18 @@ const configuracio = () => {
 		}
 	}
 
+	const updatedPassword = async () => {
+		const {_id} = user;
+		const {password, newPassword} = state.formData;
+		const updatedPassword = await service.editPassword(_id, password, newPassword);
+		console.log(updatedPassword);
+		if(updatedPassword.data.message){
+			setState({...state, availableEmail: false, availableUsername: false, serverMessage: updatedPassword.data.message})
+		} else {
+			setState({...state, isUpdated: true, updatedUser: updatedPassword.data})
+		}
+	}
+
 	useEffect(() => {
 		if(state.isUpdated){
 			refreshUserData(state.updatedUser);
@@ -108,7 +121,9 @@ const configuracio = () => {
 		if(state.activeTab === 'email'){
 			updateEmailAddress()
 		}
-		
+		if(state.activeTab === 'contrassenya'){
+			updatedPassword()
+		}
 	};
 
 	const activeTab = {
@@ -134,8 +149,42 @@ const configuracio = () => {
 
 	let errorInput = {
 		background: 'red',
-		border: 'inset 2px solid red',
+		border: 'inset 0 0 0 3px red !important',
 		color: 'red'
+	}
+
+	useEffect(() => {
+		if(state.formData.newPassword !== '' && state.formData.verifyNewPassword !== ''){
+			if(state.formData.newPassword === state.formData.verifyNewPassword){
+				setState({...state, isPasswordSubmittable: true})
+			} else {
+				setState({...state, isPasswordSubmittable: false})
+			}
+		} else {
+			setState({...state, isPasswordSubmittable: false})
+		}
+	}, [state.formData])
+
+	let inputValidator;
+
+	if(state.isPasswordSubmittable){
+		inputValidator = <div className="inputValidator">
+			<svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-circle-check" width="22" height="22" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#32cd32" fill="none" strokeLinecap="round" strokeLinejoin="round">
+				<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+				<circle cx="12" cy="12" r="9" />
+				<path d="M9 12l2 2l4 -4" />
+			</svg>
+		</div>
+	} else if(state.formData.newPassword !== '' && state.formData.verifyNewPassword !== '') {
+		if(!state.isPasswordSubmittable){
+			inputValidator = <div className="inputValidator">
+				<svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-circle-x" width="22" height="22" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#f53e3e" fill="none" strokeLinecap="round" strokeLinejoin="round">
+					<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+					<circle cx="12" cy="12" r="9" />
+					<path d="M10 10l4 4m0 -4l-4 4" />
+				</svg>
+			</div>
+		}
 	}
 
 	let panel;
@@ -230,7 +279,7 @@ const configuracio = () => {
 					<Form>
 						<Form.Group>
 							<Form.Label>Adreça electrònica</Form.Label>
-							<Form.Control type="email" placeholder="Adreça electrònica" name="email" value={state.formData.email} onChange={handleChange} style={state.availableEmail === 'false' ? errorInput : null} />
+							<Form.Control type="email" placeholder="Adreça electrònica" name="email" value={state.formData.email} onChange={handleChange} style={state.availableEmail === 'false' ? 'background: red' : null} />
 							{!state.availableEmail ? <p style={{color: 'red'}}>{state.serverMessage}</p> : null}
 						</Form.Group>
 					</Form>
@@ -272,12 +321,13 @@ const configuracio = () => {
 						<Form.Group>
 							<Form.Label>Repeteix la contrassenya</Form.Label>
 							<Form.Control type="password" name="verifyNewPassword" placeholder="Repeteix la nova contrassenya" onChange={handleChange} value={state.formData.verifyNewPassword} />
+							{inputValidator}
 						</Form.Group>
 					</Form>
 					<hr />
 					<div className="buttons">
 						<Button className="btn">Cancel·lar</Button>
-						<Button className="btn btn-primary">Guardar canvis</Button>
+						<Button className="btn btn-primary" type="submit" onClick={handleSubmit}>Guardar canvis</Button>
 					</div>
 				</div>
 				<div className="col right">
