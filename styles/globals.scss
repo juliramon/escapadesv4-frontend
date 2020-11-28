@@ -2196,3 +2196,65 @@ nav {
 }
 
 /*---END INPUT VALIDATOR---*/
+/*---FOLLOW BOX---*/
+
+.followBox {
+	position: fixed;
+	width: 420px;
+	bottom: 20px;
+	left: 20px;
+	z-index: 1000;
+	background-color: #ffffff;
+	padding: 20px;
+	border-radius: 10px;
+	box-shadow: 3px 3px 26px rgb(23 50 105 / 30%);
+	button {
+		width: 30px;
+		height: 30px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: transparent;
+		position: absolute;
+		top: 10px;
+		right: 10px;
+		transition: .3s;
+	}
+	button:hover {
+		background-color: $active-tab-background;
+		
+		border-radius: 100px
+	}
+	.image-area {
+		width: 120px;
+		height: 100%;
+		overflow: hidden;
+		border-radius: 10px;
+		margin-right: 20px;
+		img {
+			width: 100%;
+		}
+	}
+	.text-area {
+		display: flex;
+    	flex-direction: column;
+    	justify-content: space-between;
+    	height: 100%;
+		h3 {
+			font-family: 'Nunito';
+			font-weight: bold;
+			font-size: 1.3rem;
+			margin-bottom: 10px;
+		}
+		a {
+			color: $soft-button-color;
+			display: flex;
+			align-items: center;
+			svg {
+				margin-left: 6px;
+			}
+		}
+	}
+}
+
+/*---END FOLLOW BOX---*/
