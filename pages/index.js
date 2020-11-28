@@ -7,6 +7,7 @@ import Footer from "../components/global/Footer";
 import HomePageResults from "../components/homepage/HomePageResults";
 import {useRouter} from "next/router";
 import UserContext from "../contexts/UserContext";
+import FollowBox from "../components/global/FollowBox";
 
 const Homepage = (props) => {
 	const {user} = useContext(UserContext);
@@ -127,6 +128,7 @@ const Homepage = (props) => {
 					subtitle={subtitle}
 				/>
 				<HomePageResults activities={props.activities} places={props.places} />
+				<FollowBox />
 				<Footer
 					logo_url={
 						"https://res.cloudinary.com/juligoodie/image/upload/c_scale,q_100,w_135/v1600008855/getaways-guru/static-files/logo-getaways-guru_vvbikk.svg"
