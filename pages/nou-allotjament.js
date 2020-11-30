@@ -513,18 +513,8 @@ const PlaceForm = () => {
 											});
 
 											if (place.geometry.viewport) {
-												if (place.geometry.viewport.Za) {
-													place_lat = place.geometry.viewport.Za.i;
-												} else if (place.geometry.viewport.Ya) {
-													place_lat = place.geometry.viewport.Ya.i;
-												} else {
-													place_lat = place.geometry.viewport.ab.i;
-												}
-												if (place.geometry.viewport.Va) {
-													place_lng = place.geometry.viewport.Va.i;
-												} else {
-													place_lng = place.geometry.viewport.Sa.i;
-												}
+												place_lat = Object.values(place.geometry.viewport)[0].i;
+												place_lng = Object.values(place.geometry.viewport)[1].i
 											}
 
 											place_rating = place.rating;

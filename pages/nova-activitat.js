@@ -456,18 +456,8 @@ const ActivityForm = () => {
 											});
 
 											if (activity.geometry.viewport) {
-												if (activity.geometry.viewport.Za) {
-													activity_lat = activity.geometry.viewport.Za.i;
-												} else if (activity.geometry.viewport.Ya) {
-													activity_lat = activity.geometry.viewport.Ya.i;
-												} else {
-													activity_lat = activity.geometry.viewport.ab.i;
-												}
-												if (activity.geometry.viewport.Va) {
-													activity_lng = activity.geometry.viewport.Va.i;
-												} else {
-													activity_lng = activity.geometry.viewport.Sa.i;
-												}
+												activity_lat = Object.values(activity.geometry.viewport)[0].i;
+												activity_lng = Object.values(activity.geometry.viewport)[1].i
 											}
 
 											activity_rating = activity.rating;
