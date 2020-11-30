@@ -940,6 +940,28 @@ nav {
 	}
 }
 
+.shareModal {
+	.body-wrapper {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		img {
+			width: 200px;
+			height: auto;
+		}
+		.modal-title {
+			font-size: 1.8em;
+			margin: 30px 0 20px 0;
+		}
+		.share-buttons {
+			margin-bottom: 20px;
+			a {
+				margin: 0 6px;
+			}
+		}
+	}
+}
+
 /*---MODAL STYLES---*/
 /*---COMPOSER STYLES---*/
 
@@ -1288,6 +1310,7 @@ nav {
 		font-size: 0.95em;
 		text-align: left;
 		width: 100%;
+		background: transparent;
 	}
 	.dropdown-menu ul li a:hover,
 	.dropdown-menu ul li button:hover {
@@ -1435,7 +1458,7 @@ nav {
 			padding: 0;
 		}
 		.col.left {
-			min-width: 80%;
+			min-width: 70%;
 		}
 		.col.right {
 			flex: 1;
@@ -1478,6 +1501,9 @@ nav {
 				display: block;
 				border-bottom: 2px solid #000;
 			}
+		}
+		.listing-bookmark-wrapper:last-child {
+			margin-left: 30px;
 		}
 		.listing-bookmark {
 			border: none;

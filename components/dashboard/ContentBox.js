@@ -1,7 +1,8 @@
-import React from "react";
+import React, {useState } from "react";
 import {Dropdown, Button} from "react-bootstrap";
 import Link from "next/link";
 import ContentService from "../../services/contentService";
+import ShareModal from "../modals/ShareModal";
 
 const ContentBox = ({
 	type,
@@ -12,6 +13,7 @@ const ContentBox = ({
 	publicationDate,
 	fetchData,
 }) => {
+
 	let shortenedSubtitle = subtitle.slice(0, 70);
 	const service = new ContentService();
 	const removeItem = () => {
@@ -31,6 +33,13 @@ const ContentBox = ({
 	} else if (type === "story") {
 		path = "histories";
 	}
+
+	const urlToShare = `https://escapadesenparella.cat/${path}/${id}`;
+
+	const [shareModalVisibility, setShareModalVisibility] = useState(false);
+	const handleShareModalVisibility = () => setShareModalVisibility(true);
+	const hideShareModalVisibility = () => setShareModalVisibility(false);
+
 	return (
 		<div className="content box d-flex align-items-center">
 			<Link href={`/${path}/${id}`}>
@@ -113,8 +122,8 @@ const ContentBox = ({
 									</a>
 								</Link>
 							</li>
-							{/* <li>
-								<Link to="/">
+							<li>
+								<button onClick={() => handleShareModalVisibility()}>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
 										className="icon icon-tabler icon-tabler-share"
@@ -134,9 +143,9 @@ const ContentBox = ({
 										<line x1="8.7" y1="10.7" x2="15.3" y2="7.3" />
 										<line x1="8.7" y1="13.3" x2="15.3" y2="16.7" />
 									</svg>
-									Share
-								</Link>
-							</li> */}
+									Compartir
+								</button>
+							</li>
 							{/* <li>
 								<Link to="/">
 									<svg
@@ -187,6 +196,7 @@ const ContentBox = ({
 					</Dropdown.Menu>
 				</Dropdown>
 			</div>
+			<ShareModal visibility={shareModalVisibility} hideModal={hideShareModalVisibility} url={urlToShare} />
 		</div>
 	);
 };

@@ -8,10 +8,14 @@ import Link from "next/link";
 import GoogleMapReact from "google-map-react";
 import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
+import ShareModal from "../../components/modals/ShareModal";
 
 const PlaceListing = () => {
 	const {user} = useContext(UserContext);
 	const router = useRouter();
+
+	const urlToShare = `https://escapadesenparella.cat/allotjaments/${router.query.id}`
+
 	const initialState = {
 		place: {},
 		placeLoaded: false,
@@ -34,6 +38,10 @@ const PlaceListing = () => {
 	const [modalVisibility, setModalVisibility] = useState(false);
 	const handleModalVisibility = () => setModalVisibility(true);
 	const hideModalVisibility = () => setModalVisibility(false);
+
+	const [shareModalVisibility, setShareModalVisibility] = useState(false);
+	const handleShareModalVisibility = () => setShareModalVisibility(true);
+	const hideShareModalVisibility = () => setShareModalVisibility(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -187,6 +195,20 @@ const PlaceListing = () => {
 			</div>
 		);
 	}
+
+	const shareButton = <div className="listing-bookmark-wrapper" onClick={() => handleShareModalVisibility()}>
+		<button className="listing-bookmark">
+		<svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-share" width="44" height="44" viewBox="0 0 24 24" strokeWidth="1.5" stroke="#0d1f44" fill="none" strokeLinecap="round" strokeLinejoin="round">
+			<path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+			<circle cx="6" cy="12" r="3" />
+			<circle cx="18" cy="6" r="3" />
+			<circle cx="18" cy="18" r="3" />
+			<line x1="8.7" y1="10.7" x2="15.3" y2="7.3" />
+			<line x1="8.7" y1="13.3" x2="15.3" y2="16.7" />
+		</svg>
+		</button>
+		<span>Compartir</span>
+	</div>
 
 	const toast = (
 		<Toast
@@ -447,7 +469,10 @@ const PlaceListing = () => {
 															</ul>
 														</div>
 													</div>
-													<div className="col right">{bookmarkButton}</div>
+													<div className="col right">
+														{bookmarkButton}
+														{shareButton}
+													</div>
 												</div>
 												<div className="listing-cover d-flex justify-space-between">
 													{coversList}
@@ -602,6 +627,7 @@ const PlaceListing = () => {
 					visibility={modalVisibility}
 					hideModal={hideModalVisibility}
 				/>
+				<ShareModal visibility={shareModalVisibility} hideModal={hideShareModalVisibility} url={urlToShare} />
 			</div>
 		</>
 	);
