@@ -12,6 +12,7 @@
     "bootstrap": "^4.5.2",
     "dotenv": "^8.2.0",
     "google-map-react": "^2.1.6",
+    "html-react-parser": "^1.1.0",
     "js-cookie": "^2.2.1",
     "next": "9.5.3",
     "react": "16.13.1",
@@ -20,6 +21,13 @@
     "react-dom": "16.13.1",
     "react-google-autocomplete": "^1.2.6",
     "react-loading-skeleton": "^2.1.1",
+    "react-quill": "^2.0.0-beta.2",
+    "reading-time": "^1.2.1",
     "sass": "^1.26.11"
+  },
+  "devDependencies": {
+    "@editorjs/editorjs": "^2.19.1",
+    "@editorjs/paragraph": "^2.8.0",
+    "react-editor-js": "^1.7.0"
   }
 }
