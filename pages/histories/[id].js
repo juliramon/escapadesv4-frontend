@@ -10,6 +10,7 @@ import UserContext from "../../contexts/UserContext";
 import ShareModal from "../../components/modals/ShareModal";
 import parse from "html-react-parser";
 import readingTime from "reading-time";
+import { PhotoSwipe, PhotoSwipeGallery } from "react-photoswipe";
 
 const PlaceListing = () => {
   const { user } = useContext(UserContext);
@@ -121,13 +122,30 @@ const PlaceListing = () => {
   }
 
   const stateImages = [...state.place.images];
-  const stateImagesList = stateImages.map((el, idx) => (
-    <img key="idx" src={el} />
-  ));
+  const stateImagesList = stateImages.map((el, idx) => ({
+    src: el,
+    thumbnail: el,
+    w: 1200,
+    h: 900,
+    title: state.place.title,
+  }));
+
+  console.log(stateImagesList);
+
+  const getThumbnailContent = (item) => {
+    return <img src={item.thumbnail} width={120} height={90} />;
+  };
 
   let slicedDescription = [];
   parsedDescription.map((el) => slicedDescription.push(el));
-  slicedDescription.splice(5, 0, stateImagesList);
+  slicedDescription.splice(
+    5,
+    0,
+    <PhotoSwipeGallery
+      items={stateImagesList}
+      thumbnailContent={getThumbnailContent}
+    />
+  );
   console.log("slicedDescription =>", slicedDescription);
 
   return (

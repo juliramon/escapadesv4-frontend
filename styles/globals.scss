@@ -1790,6 +1790,11 @@ nav {
       display: initial;
       background: #f7e5b0;
     }
+    .pswp-thumbnail img {
+      width: 33.33%;
+      height: auto;
+      border-radius: 10px;
+    }
     .listing-details-box {
       margin-bottom: 20px;
       a,
