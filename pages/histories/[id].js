@@ -10,22 +10,18 @@ import UserContext from "../../contexts/UserContext";
 import ShareModal from "../../components/modals/ShareModal";
 import parse from "html-react-parser";
 import readingTime from "reading-time";
-import { PhotoSwipe, PhotoSwipeGallery } from "react-photoswipe";
+import { PhotoSwipeGallery } from "react-photoswipe";
 
-const PlaceListing = () => {
+const StoryListing = () => {
   const { user } = useContext(UserContext);
   const router = useRouter();
 
-  const urlToShare = `https://escapadesenparella.cat/allotjaments/${router.query.id}`;
+  const urlToShare = `https://escapadesenparella.cat/histories/${router.query.id}`;
 
   const initialState = {
-    place: {},
-    placeLoaded: false,
+    story: {},
+    storyLoaded: false,
     owner: {},
-    bookmarkDetails: {},
-    isBookmarked: false,
-    showBookmarkToast: false,
-    toastMessage: "",
   };
   const [state, setState] = useState(initialState);
   const [queryId, setQueryId] = useState(null);
@@ -56,8 +52,8 @@ const PlaceListing = () => {
       }
       setState({
         ...state,
-        place: storyDetails,
-        placeLoaded: isLoaded,
+        story: storyDetails,
+        storyLoaded: isLoaded,
         owner: storyDetails.owner,
       });
     };
@@ -65,7 +61,7 @@ const PlaceListing = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryId]);
 
-  if (state.placeLoaded === false) {
+  if (state.storyLoaded === false) {
     return (
       <Container className="spinner d-flex justify-space-between">
         <Spinner animation="border" role="status" variant="primary">
@@ -75,7 +71,7 @@ const PlaceListing = () => {
     );
   }
 
-  let { title, subtitle, description } = state.place;
+  let { title, subtitle, description } = state.story;
 
   const parsedDescription = parse(description);
   const readingTimeIndicator = readingTime(parsedDescription);
@@ -111,8 +107,8 @@ const PlaceListing = () => {
   );
 
   let coversList;
-  if (state.placeLoaded === true) {
-    coversList = state.place.images.map((cover, idx) => (
+  if (state.storyLoaded === true) {
+    coversList = state.story.images.map((cover, idx) => (
       <div
         key={idx}
         className="cover"
@@ -121,16 +117,14 @@ const PlaceListing = () => {
     ));
   }
 
-  const stateImages = [...state.place.images];
+  const stateImages = [...state.story.images];
   const stateImagesList = stateImages.map((el, idx) => ({
     src: el,
     thumbnail: el,
     w: 1200,
     h: 900,
-    title: state.place.title,
+    title: state.story.title,
   }));
-
-  console.log(stateImagesList);
 
   const getThumbnailContent = (item) => {
     return <img src={item.thumbnail} width={120} height={90} />;
@@ -151,24 +145,18 @@ const PlaceListing = () => {
   return (
     <>
       <Head>
-        <title>{state.place.title} - Escapadesenparella.cat</title>
+        <title>{state.story.title} - Escapadesenparella.cat</title>
         <link rel="icon" href="/favicon.ico" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta
-          name="description"
-          content={`${state.place.title}, una escapada que us encantarà! Descobreix ${state.place.title} amb nosaltres i sorprèn a la teva parella. Fes clic aquí!`}
-        />
+        <meta name="description" content={`${state.story.subtitle}`} />
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
-          content={`${state.place.title} - Escapadesenparella.cat`}
+          content={`${state.story.title} - Escapadesenparella.cat`}
         />
-        <meta
-          property="og:description"
-          content={`${state.place.title}, una escapada que us encantarà! Descobreix ${state.place.title} amb nosaltres i sorprèn a la teva parella. Fes clic aquí!`}
-        />
+        <meta property="og:description" content={`${state.story.subtitle}`} />
         <meta
           property="url"
           content={`https://escapadesenparella.cat${router.asPath}`}
@@ -178,14 +166,11 @@ const PlaceListing = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content={`${state.place.title} - Escapadesenparella.cat`}
+          content={`${state.story.title} - Escapadesenparella.cat`}
         />
-        <meta
-          name="twitter:description"
-          content={`${state.place.title}, una escapada que us encantarà! Descobreix ${state.place.title} amb nosaltres i sorprèn a la teva parella. Fes clic aquí!`}
-        />
-        <meta name="twitter:image" content={state.place.images[0]} />
-        <meta property="og:image" content={state.place.images[0]} />
+        <meta name="twitter:description" content={`${state.story.subtitle}`} />
+        <meta name="twitter:image" content={state.story.images[0]} />
+        <meta property="og:image" content={state.story.images[0]} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:heigth" content="1200" />
         <link
@@ -395,4 +380,4 @@ const PlaceListing = () => {
   );
 };
 
-export default PlaceListing;
+export default StoryListing;
