@@ -143,6 +143,7 @@ const StoryListing = () => {
     <PhotoSwipeGallery
       items={stateImagesList}
       thumbnailContent={getThumbnailContent}
+      options={{ history: false }}
     />
   );
   console.log("slicedDescription =>", slicedDescription);

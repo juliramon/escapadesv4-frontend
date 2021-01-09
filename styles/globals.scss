@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Nunito:wght@400;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@600&display=swap");
 
 html,
 body {
@@ -84,7 +85,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Inter", sans-serif;
+  font-family: "Lora", serif;
   color: $dark-text;
 }
 
@@ -1709,7 +1710,7 @@ nav {
       align-items: center;
       img {
         border-radius: 100px;
-        width: 40px;
+        width: 50px;
         height: auto;
       }
       .listing-owner-name {
@@ -2447,6 +2448,10 @@ nav {
 .ql-editor {
   font-size: 16px !important;
   font-family: "Nunito", sans-serif !important;
+}
+
+.ql-editor p {
+  margin-bottom: 15px !important;
 }
 
 #story {

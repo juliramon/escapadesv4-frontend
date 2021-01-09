@@ -2,7 +2,7 @@ import { useEffect, useCallback, useState } from "react";
 import ContentService from "../services/contentService";
 import PublicContentBox from "../components/listings/PublicContentBox";
 import NavigationBar from "../components/global/NavigationBar";
-import { Container, Row, Form } from "react-bootstrap";
+import { Container, Row, Form, Spinner } from "react-bootstrap";
 import Head from "next/head";
 
 const StoriesList = ({ user }) => {
@@ -35,6 +35,19 @@ const StoriesList = ({ user }) => {
         subtitle={el.subtitle}
       />
     ));
+  } else {
+    return (
+      <>
+        <Head>
+          <title>Carregant...</title>
+        </Head>
+        <Container className="spinner d-flex justify-space-between">
+          <Spinner animation="border" role="status" variant="primary">
+            <span className="sr-only">Carregant...</span>
+          </Spinner>
+        </Container>
+      </>
+    );
   }
 
   return (
