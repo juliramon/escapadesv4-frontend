@@ -81,6 +81,8 @@ const StoryListing = () => {
   const parsedDescription = parse(description);
   const readingTimeIndicator = readingTime(parsedDescription);
 
+  console.log(readingTimeIndicator);
+
   const shareButton = (
     <div
       className="listing-bookmark-wrapper"

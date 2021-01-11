@@ -76,6 +76,18 @@ const StoryForm = () => {
 
   const service = new ContentService();
 
+  const saveFileToStatus = (e) => {
+    const fileToUpload = e.target.files[0];
+    // setState({
+    //   ...state,
+    //   formData: {
+    //     ...state.formData,
+    //     images: [...state.formData.images, fileToUpload],
+    //   },
+    // });
+    console.log(fileToUpload);
+  };
+
   const handleFileUpload = (e) => {
     const fileToUpload = e.target.files[0];
     const uploadData = new FormData();
@@ -101,6 +113,10 @@ const StoryForm = () => {
       },
     });
   };
+
+  const imagesList = state.formData.images.map((el, idx) => (
+    <img key={idx} src={el} />
+  ));
 
   const [description, setDescription] = useState("");
 
@@ -184,6 +200,7 @@ const StoryForm = () => {
                 </Form.Group>
                 <div className="images">
                   <span>Imatges d'aquesta història</span>
+                  <div className="images-wrapper">{imagesList}</div>
                   <div className="images-wrapper">
                     <Form.Group>
                       <div className="image-drop-zone">
@@ -208,7 +225,7 @@ const StoryForm = () => {
                           </svg>
                           <Form.Control
                             type="file"
-                            onChange={handleFileUpload}
+                            onChange={saveFileToStatus}
                           />
                         </Form.Label>
                       </div>
