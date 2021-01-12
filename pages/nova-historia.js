@@ -66,6 +66,7 @@ const StoryForm = () => {
       blopImages: [],
       cloudImages: [],
       isReadyToSubmit: false,
+      cloudImagesUploaded: false,
     },
   };
   const [state, setState] = useState(initialState);
@@ -113,7 +114,6 @@ const StoryForm = () => {
   const [description, setDescription] = useState("");
 
   const submitStory = () => {
-    console.log("submitted story");
     const { type, title, subtitle, cloudImages } = state.formData;
     service
       .story(type, title, subtitle, cloudImages, description)
@@ -137,18 +137,23 @@ const StoryForm = () => {
 
   const handleFileUpload = (e) => {
     const imagesList = state.formData.images;
+    let uploadedImages = [];
     imagesList.forEach((el) => {
       const uploadData = new FormData();
       uploadData.append("imageUrl", el);
       service.uploadFile(uploadData).then((res) => {
-        console.log("image uploaded");
-        setState({
-          ...state,
-          formData: {
-            ...state.formData,
-            cloudImages: [...state.formData.cloudImages, res.path],
-          },
-        });
+        uploadedImages.push(res.path);
+        console.log(uploadedImages.length);
+        if (uploadedImages.length === state.formData.images.length) {
+          setState({
+            ...state,
+            formData: {
+              ...state.formData,
+              cloudImages: uploadedImages,
+              cloudImagesUploaded: true,
+            },
+          });
+        }
       });
     });
   };
@@ -156,12 +161,13 @@ const StoryForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleFileUpload();
+    // state.formData.cloudImages.length === state.formData.images
+    //   ? submitStory()
+    //   : null;
   };
 
   useEffect(() => {
-    console.log(state.formData.cloudImages);
-    if (state.formData.cloudImages.length > 0) {
-      console.log(state.formData.cloudImages.length);
+    if (state.formData.cloudImagesUploaded === true) {
       submitStory();
     }
   }, [state.formData]);
