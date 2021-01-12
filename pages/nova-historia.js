@@ -64,6 +64,7 @@ const StoryForm = () => {
       subtitle: "",
       images: [],
       blopImages: [],
+      cloudImages: [],
       isReadyToSubmit: false,
     },
   };
@@ -92,17 +93,6 @@ const StoryForm = () => {
     });
   };
 
-  const handleFileUpload = (e) => {
-    const imagesList = state.formData.images;
-    imagesList.forEach((el) => {
-      const uploadData = new FormData();
-      uploadData.append("imageUrl", el);
-      service
-        .uploadFile(uploadData)
-        .then((res) => console.log("image uploaded"));
-    });
-  };
-
   const handleChange = (e) => {
     setState({
       ...state,
@@ -123,31 +113,58 @@ const StoryForm = () => {
   const [description, setDescription] = useState("");
 
   const submitStory = () => {
-    const { type, title, subtitle, images } = state.formData;
+    console.log("submitted story");
+    const { type, title, subtitle, cloudImages } = state.formData;
     service
-      .story(type, title, subtitle, images, description)
+      .story(type, title, subtitle, cloudImages, description)
       .then(() => {
-        setState({
-          ...state,
-          formData: {
-            emptyForm: true,
-            type: "story",
-            title: "",
-            subtitle: "",
-            blopImages: [],
-            isReadyToSubmit: false,
-          },
-        });
-        setDescription("");
-        Router.push("/dashboard");
+        // setState({
+        //   ...state,
+        //   formData: {
+        //     emptyForm: true,
+        //     type: "story",
+        //     title: "",
+        //     subtitle: "",
+        //     blopImages: [],
+        //     isReadyToSubmit: false,
+        //   },
+        // });
+        // setDescription("");
+        router.push("/dashboard");
       })
       .catch((err) => console.log(err));
   };
 
+  const handleFileUpload = (e) => {
+    const imagesList = state.formData.images;
+    imagesList.forEach((el) => {
+      const uploadData = new FormData();
+      uploadData.append("imageUrl", el);
+      service.uploadFile(uploadData).then((res) => {
+        console.log("image uploaded");
+        setState({
+          ...state,
+          formData: {
+            ...state.formData,
+            cloudImages: [...state.formData.cloudImages, res.path],
+          },
+        });
+      });
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    submitStory();
+    handleFileUpload();
   };
+
+  useEffect(() => {
+    console.log(state.formData.cloudImages);
+    if (state.formData.cloudImages.length > 0) {
+      console.log(state.formData.cloudImages.length);
+      submitStory();
+    }
+  }, [state.formData]);
 
   useEffect(() => {
     const { title, subtitle, images } = state.formData;
@@ -276,22 +293,15 @@ const StoryForm = () => {
             </div>
             <div className="col right">
               <div className="buttons d-flex justify-space-between justify-content-end">
-                {/* {state.isReadyToSubmit ? (
-                  <Button
-                    type="submit"
-                    variant="none"
-                    onClick={handleFileUpload}
-                  >
+                {state.isReadyToSubmit ? (
+                  <Button type="submit" variant="none" onClick={handleSubmit}>
                     Publicar
                   </Button>
                 ) : (
                   <Button type="submit" variant="none" disabled>
                     Publicar
                   </Button>
-                )} */}
-                <Button type="submit" variant="none" onClick={handleFileUpload}>
-                  Publicar
-                </Button>
+                )}
               </div>
             </div>
           </Container>

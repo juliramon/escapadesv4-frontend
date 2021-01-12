@@ -11,30 +11,31 @@ const PublicationModal = ({ visibility, hideModal }) => {
       <div className="col left">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="icon icon-tabler icon-tabler-bed"
+          class="icon icon-tabler icon-tabler-notebook"
           width="44"
           height="44"
           viewBox="0 0 24 24"
-          strokeWidth="1.5"
+          stroke-width="1.5"
           stroke="#2c3e50"
           fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
+          stroke-linecap="round"
+          stroke-linejoin="round"
         >
-          <path stroke="none" d="M0 0h24v24H0z" />
-          <path d="M3 7v11m0 -4h18m0 4v-8a2 2 0 0 0 -2 -2h-8v6" />
-          <circle cx="7" cy="10" r="1" />
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" />
+          <line x1="13" y1="8" x2="15" y2="8" />
+          <line x1="13" y1="12" x2="15" y2="12" />
         </svg>
       </div>
       <div className="col">
-        <h3>Allotjament</h3>
+        <h3>Història</h3>
         <p>
-          Recomana els allotjaments que més t'han agradat, o que gestionis,
-          perquè serveixin d'inspiració a altres parelles i en puguin gaudir
+          Recomana les històries en parella que més t'han agradat perquè
+          serveixin d'inspiració a altres parelles i les puguin reviure
         </p>
       </div>
       <div className="col right">
-        <Link href="/nou-allotjament">
+        <Link href="/nova-historia">
           <a className="btn btn-primary">Publicar</a>
         </Link>
       </div>
