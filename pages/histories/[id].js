@@ -11,10 +11,13 @@ import ShareModal from "../../components/modals/ShareModal";
 import parse from "html-react-parser";
 import readingTime from "reading-time";
 import { PhotoSwipeGallery } from "react-photoswipe";
+import Footer from "../../components/global/Footer";
 
 const StoryListing = () => {
   const { user } = useContext(UserContext);
   const router = useRouter();
+
+  console.log(router);
 
   const urlToShare = `https://escapadesenparella.cat/histories/${router.query.id}`;
 
@@ -267,108 +270,70 @@ const StoryListing = () => {
                   </Row>
                   <Row>
                     <article className="listing-body">
-                      <Col lg={1}></Col>
-                      <Col lg={6}>
+                      <Col lg={12}>
                         <div className="listing-body-wrapper d-flex justify-content-between align-items-center"></div>
                         <div className="listing-description">
                           {slicedDescription}
                         </div>
                       </Col>
-                      <Col lg={1}></Col>
-                      <Col lg={3}>
-                        <aside>
-                          <div className="listing-details-box instagram">
-                            <a
-                              href="https://instagram.com/escapadesenparella"
-                              title="Segueix-nos a Instagram"
-                              target="_blank"
-                              rel="nofollow"
-                            >
-                              <div className="col-left">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="icon icon-tabler icon-tabler-brand-instagram"
-                                  width="40"
-                                  height="40"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth="1.5"
-                                  stroke="#2c3e50"
-                                  fill="none"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                >
-                                  <path
-                                    stroke="none"
-                                    d="M0 0h24v24H0z"
-                                    fill="none"
-                                  />
-                                  <rect
-                                    x="4"
-                                    y="4"
-                                    width="16"
-                                    height="16"
-                                    rx="4"
-                                  />
-                                  <circle cx="12" cy="12" r="3" />
-                                  <line
-                                    x1="16.5"
-                                    y1="7.5"
-                                    x2="16.5"
-                                    y2="7.501"
-                                  />
-                                </svg>
-                              </div>
-                              <div className="col-right">
-                                <h3>Segueix-nos a Instagram</h3>
-                                <p>@escapadesenparella</p>
-                              </div>
-                            </a>
-                          </div>
-                          <div className="listing-details-box share">
-                            <button
-                              onClick={() => handleShareModalVisibility()}
-                            >
-                              <div className="col-left">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="icon icon-tabler icon-tabler-share"
-                                  width="35"
-                                  height="35"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth="1.5"
-                                  stroke="#2c3e50"
-                                  fill="none"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                >
-                                  <path
-                                    stroke="none"
-                                    d="M0 0h24v24H0z"
-                                    fill="none"
-                                  />
-                                  <circle cx="6" cy="12" r="3" />
-                                  <circle cx="18" cy="6" r="3" />
-                                  <circle cx="18" cy="18" r="3" />
-                                  <line x1="8.7" y1="10.7" x2="15.3" y2="7.3" />
-                                  <line
-                                    x1="8.7"
-                                    y1="13.3"
-                                    x2="15.3"
-                                    y2="16.7"
-                                  />
-                                </svg>
-                              </div>
-                              <div className="col-right">
-                                <h3>
-                                  Comparteix
-                                  <br /> aquesta història
-                                </h3>
-                              </div>
-                            </button>
-                          </div>
-                        </aside>
-                      </Col>
                     </article>
+                  </Row>
+                </section>
+                <section>
+                  <Row>
+                    <Col lg={12}>
+                      <div className="cta-instagram-footer">
+                        <h2>
+                          Descobreix més escapades com aquesta.
+                          <br /> Segueix-nos a Instagram!
+                        </h2>
+                        <div className="link-instagram">
+                          <a
+                            href="https://instagram.com/escapadesenparella"
+                            title="Segueix Escapadesenparella.cat a Instagram"
+                            rel="nofollow"
+                            target="_blank"
+                          >
+                            @escapadesenparella.cat{" "}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="icon icon-tabler icon-tabler-arrow-narrow-right"
+                              width="30"
+                              height="30"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="#F03E51"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path
+                                stroke="none"
+                                d="M0 0h24v24H0z"
+                                fill="none"
+                              />
+                              <line x1="5" y1="12" x2="19" y2="12" />
+                              <line x1="15" y1="16" x2="19" y2="12" />
+                              <line x1="15" y1="8" x2="19" y2="12" />
+                            </svg>
+                          </a>
+                        </div>
+                        <div className="banner-wrapper">
+                          <div className="left">
+                            <img
+                              src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-comes-rubio_luuish.jpg"
+                              alt=""
+                            />
+                          </div>
+                          <div className="right">
+                            <img
+                              src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-tossa-mar_m2lvdz.jpg"
+                              alt=""
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </Col>
                   </Row>
                 </section>
               </div>
@@ -385,6 +350,11 @@ const StoryListing = () => {
           url={urlToShare}
         />
       </div>
+      <Footer
+        logo_url={
+          "https://res.cloudinary.com/juligoodie/image/upload/c_scale,q_100,w_135/v1600008855/getaways-guru/static-files/logo-getaways-guru_vvbikk.svg"
+        }
+      />
     </>
   );
 };
