@@ -1533,7 +1533,7 @@ nav {
       border-radius: 100px !important;
       width: 40px;
       height: 40px;
-      margin-right: 8px;
+      margin-right: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1632,7 +1632,7 @@ nav {
     }
     .listing-description {
       font-size: 1.1em;
-      font-family: "INTER";
+      line-height: 1.6em;
     }
   }
   .listing-details-box {
@@ -1701,12 +1701,19 @@ nav {
 /*---STORY PAGE DETAILS---*/
 
 #listingPage.story {
+  .listing-owner {
+    .avatar {
+      max-height: 50px;
+      height: 50px;
+    }
+  }
   .listing-header-wrapper {
     padding: 30px;
   }
   .listing-header,
   .listing-subtitle-inner,
-  .listing-header-meta {
+  .listing-header-meta,
+  .listing-body {
     max-width: 650px;
     margin: 0 auto;
     display: block;
@@ -1756,7 +1763,7 @@ nav {
         border-radius: 100px !important;
         width: 40px;
         height: 40px;
-        margin-right: 8px;
+        margin-right: 12px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1797,6 +1804,10 @@ nav {
     }
   }
   .listing-body {
+    h2 {
+      font-size: 1.7rem;
+      margin: 20px 0;
+    }
     p:first-child {
       margin-top: 0;
     }
@@ -1811,8 +1822,19 @@ nav {
       display: initial;
       background: #f7e5b0;
     }
+    .pswp-thumbnails {
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      flex-direction: row;
+      margin: 0 -7px;
+    }
+    .pswp-thumbnail {
+      margin: 7px;
+      width: 31.126%;
+    }
     .pswp-thumbnail img {
-      width: 33.33%;
+      width: 100%;
       height: auto;
       border-radius: 10px;
     }
@@ -1837,6 +1859,59 @@ nav {
         background-color: white;
         text-align: left;
         align-items: center;
+      }
+    }
+  }
+  .cta-instagram-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px 0 60px 0;
+    border-top: 1px solid #e8e8e8;
+    padding-top: 40px;
+    h2 {
+      text-align: center;
+      font-size: 1.9em;
+      font-weight: bold;
+      line-height: 1.4em;
+    }
+    .link-instagram {
+      margin: 15px 0 5px 0;
+    }
+    .link-instagram a {
+      font-size: 1.3em;
+      display: flex;
+      align-items: center;
+      color: #f03e51;
+      font-weight: bold;
+      letter-spacing: 0.8px;
+      svg {
+        margin-left: 12px;
+      }
+    }
+    .banner-wrapper {
+      display: flex;
+      align-items: center;
+      margin-top: 40px;
+      .left,
+      .right {
+        position: relative;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.2);
+      }
+      .left {
+        transform: rotate(-7deg);
+        z-index: 1;
+        left: 25px;
+      }
+      .right {
+        transform: rotate(3deg);
+        z-index: 0;
+      }
+      img {
+        width: 290px;
+        border: 5px solid #ffffff;
       }
     }
   }
