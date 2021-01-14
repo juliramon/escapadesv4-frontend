@@ -46,7 +46,7 @@ const StoryForm = () => {
   const router = useRouter();
   useEffect(() => {
     if (!user) {
-      user.push("/login");
+      router.push("/login");
     }
   }, [user]);
   if (!user) {
@@ -143,7 +143,6 @@ const StoryForm = () => {
       uploadData.append("imageUrl", el);
       service.uploadFile(uploadData).then((res) => {
         uploadedImages.push(res.path);
-        console.log(uploadedImages.length);
         if (uploadedImages.length === state.formData.images.length) {
           setState({
             ...state,
