@@ -146,12 +146,18 @@ const StoryListing = () => {
     />
   );
 
+  const welcomeText = (
+    <h2>{title}: Benvinguts a l'escapada de la setmana, ens hi acompanyes?</h2>
+  );
+
   if (description) {
     parsedDescription = parse(description);
     let parsedDescriptionArray = [parsedDescription];
     readingTimeIndicator = readingTime(parsedDescriptionArray);
     parsedDescriptionArray.map((el) => slicedDescription.push(el));
-    slicedDescription.splice(5, 0, photoSwipeGallery);
+    console.log(slicedDescription);
+    slicedDescription[0].splice(4, 0, photoSwipeGallery);
+    slicedDescription[0].splice(1, 0, welcomeText);
   }
 
   return (
