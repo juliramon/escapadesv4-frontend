@@ -310,7 +310,9 @@ class ContentService {
     });
 
   removeStory = (id) =>
-    this.service.delete(`/stories/${id}`).then((res) => res.data);
+    this.service
+      .put(`/stories/${id}`, { isRemoved: true })
+      .then((res) => res.data);
 
   // PLACES ENDPOINTS
 

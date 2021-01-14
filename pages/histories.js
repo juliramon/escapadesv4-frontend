@@ -35,19 +35,6 @@ const StoriesList = ({ user }) => {
         subtitle={el.subtitle}
       />
     ));
-  } else {
-    return (
-      <>
-        <Head>
-          <title>Carregant...</title>
-        </Head>
-        <Container className="spinner d-flex justify-space-between">
-          <Spinner animation="border" role="status" variant="primary">
-            <span className="sr-only">Carregant...</span>
-          </Spinner>
-        </Container>
-      </>
-    );
   }
 
   return (
@@ -107,7 +94,7 @@ const StoriesList = ({ user }) => {
           content="756319ea1956c99d055184c4cac47dbfa3c81808"
         />
       </Head>
-      <div id="contentList" className="place">
+      <div id="storiesList" className="stories">
         <NavigationBar
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/c_scale,q_100,w_135/v1600008855/getaways-guru/static-files/logo-getaways-guru_vvbikk.svg"
@@ -117,17 +104,19 @@ const StoriesList = ({ user }) => {
         <Container fluid className="mw-1600">
           <Row>
             <div className="box d-flex">
-              <div className="col left"></div>
               <div className="col center">
                 <div className="top-nav-wrapper">
                   <h1 className="top-nav-title">Històries en parella</h1>
-                  <p className="top-nav-subtitle"></p>
+                  <p className="top-nav-subtitle">
+                    Històries en parella per a inspirar, descobrir nous llocs i,
+                    en definitiva, fer-vos venir ganes d'una escapada en parella
+                    per recordar. De la mà de l'Andrea i en Juli.
+                  </p>
                 </div>
                 <div className="listings-wrapper">
                   <div className="listings-list">{storiesList}</div>
                 </div>
               </div>
-              <div className="col right"></div>
             </div>
           </Row>
         </Container>

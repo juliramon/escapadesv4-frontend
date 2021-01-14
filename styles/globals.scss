@@ -1394,6 +1394,26 @@ nav {
 }
 
 /*---CONTENT LIST STYLES---*/
+/*---HISTORIES LIST STYLES---*/
+
+#storiesList {
+  .box {
+    width: 100%;
+  }
+  .top-nav-wrapper {
+    padding: 40px 0 25px 0;
+    .top-nav-title {
+      font-size: 2.3em;
+    }
+    .top-nav-subtitle {
+      max-width: 31%;
+      margin: 15px 0 0 0;
+      font-size: 1.1em;
+    }
+  }
+}
+
+/*---END HISTORIES LIST STYLES---*/
 /*---LISTINGS BOX STYLES---*/
 
 #listing:not(:last-child) {
@@ -2458,11 +2478,72 @@ nav {
   .images-wrapper {
     display: flex;
     align-items: center;
+    flex-direction: column;
     max-width: 100%;
-    overflow-x: scroll;
-    .image-drop-zone {
-      width: 200px;
-      margin-right: 10px;
+    margin-bottom: 16px;
+    .top-bar {
+      background: #ffffff;
+      border: 1px solid #e8e8e8;
+      border-radius: 8px 8px 0 0;
+      width: 100%;
+      .image-drop-zone {
+        background-color: #ffffff;
+        border: none;
+        height: auto;
+        padding: 16px;
+        justify-content: flex-start;
+        .form-label {
+          margin: 0;
+          justify-content: flex-start;
+          font-weight: 400;
+          background: #fff;
+          border-radius: 3px;
+          box-shadow: 0 0 0 1px rgba(50, 50, 93, 0.1),
+            0 2px 5px 0 rgba(50, 50, 93, 0.08),
+            0 1px 1.5px 0 rgba(0, 0, 0, 0.07), 0 1px 2px 0 rgba(0, 0, 0, 0.08),
+            0 0 0 0 transparent;
+          height: 32px;
+          padding: 0 20px;
+          line-height: 32px;
+          width: auto;
+        }
+        svg {
+          margin-right: 8px;
+          stroke: #0d1f44;
+        }
+      }
+    }
+    .images-list-wrapper {
+      width: 100%;
+      border: 1px solid #e8e8e8;
+      border-radius: 0 0 8px 8px;
+      margin-top: -1px;
+      padding: 16px;
+      display: flex;
+      .image-wrapper {
+        margin: -10px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .image {
+        margin: 10px;
+      }
+    }
+    img {
+      border: 7px solid #fff;
+      border-radius: 8px;
+      display: block;
+      max-height: 150px;
+      max-width: 150px;
+      height: auto;
+      width: auto;
+      margin: 0 auto;
+      box-shadow: 0 0 0 0.5px rgba(49, 49, 93, 0.03),
+        0 2px 5px 0 rgba(49, 49, 93, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
+    }
+    .form-group {
+      margin: 0 !important;
     }
   }
 }

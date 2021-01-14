@@ -78,10 +78,8 @@ const StoryListing = () => {
 
   let { title, subtitle, description } = state.story;
 
-  const parsedDescription = parse(description);
-  const readingTimeIndicator = readingTime(parsedDescription);
-
-  console.log(readingTimeIndicator);
+  let parsedDescription, readingTimeIndicator;
+  let slicedDescription = [];
 
   const shareButton = (
     <div
@@ -137,18 +135,21 @@ const StoryListing = () => {
     return <img src={item.thumbnail} width={120} height={90} />;
   };
 
-  let slicedDescription = [];
-  parsedDescription.map((el) => slicedDescription.push(el));
-  slicedDescription.splice(
-    5,
-    0,
+  const photoSwipeGallery = (
     <PhotoSwipeGallery
       items={stateImagesList}
       thumbnailContent={getThumbnailContent}
       options={{ history: false }}
     />
   );
-  console.log("slicedDescription =>", slicedDescription);
+
+  if (description) {
+    parsedDescription = parse(description);
+    let parsedDescriptionArray = [parsedDescription];
+    readingTimeIndicator = readingTime(parsedDescriptionArray);
+    parsedDescriptionArray.map((el) => slicedDescription.push(el));
+    slicedDescription.splice(5, 0, photoSwipeGallery);
+  }
 
   return (
     <>
