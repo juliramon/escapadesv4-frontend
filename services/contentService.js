@@ -281,12 +281,13 @@ class ContentService {
 
   // STORIES ENDPOINTS
 
-  story = (type, title, subtitle, image, description) => {
+  story = (type, title, subtitle, cover, image, description) => {
     return this.service
       .post("/story", {
         type,
         title,
         subtitle,
+        cover,
         image,
         description,
       })

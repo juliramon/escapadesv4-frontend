@@ -984,7 +984,8 @@ nav {
   .sided-shadow {
     padding-bottom: 50px;
   }
-  .images {
+  .images,
+  .cover {
     span {
       font-size: 0.9em;
       font-weight: bold;
@@ -2549,7 +2550,11 @@ nav {
   margin-bottom: 15px !important;
 }
 
-#story {
+#storyForm,
+#editStory {
+  .cover input[type="file"] {
+    display: none;
+  }
   .images-wrapper {
     display: flex;
     align-items: center;

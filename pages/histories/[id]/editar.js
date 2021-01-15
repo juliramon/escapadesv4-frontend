@@ -60,12 +60,26 @@ const StoryEditionForm = () => {
   }
 
   const initialState = {
-    story: {},
+    formData: {
+      type: "story",
+      title: "",
+      subtitle: "",
+      cover: "",
+      blopCover: "",
+      images: [],
+      blopImages: [],
+      cloudImages: [],
+      coverCloudImage: "",
+      isReadyToSubmit: false,
+      cloudImagesUploaded: false,
+      coverCloudImageUploaded: false,
+    },
     isStoryLoaded: false,
   };
   const [state, setState] = useState(initialState);
   const [queryId, setQueryId] = useState(null);
   const [description, setDescription] = useState("");
+
   useEffect(() => {
     if (router && router.query) {
       setQueryId(router.query.id);
@@ -78,42 +92,151 @@ const StoryEditionForm = () => {
     const fetchData = async () => {
       let storyDetails = await service.getStoryDetails(queryId);
       console.log(storyDetails);
-      setState({ ...state, story: storyDetails, isStoryLoaded: true });
+      setState({
+        ...state,
+        formData: {
+          type: storyDetails.type,
+          title: storyDetails.title,
+          subtitle: storyDetails.subtitle,
+          cover: storyDetails.cover,
+          blopCover: "",
+          images: storyDetails.images,
+          blopImages: [],
+          cloudImages: [],
+          coverCloudImage: "",
+          isReadyToSubmit: false,
+          cloudImagesUploaded: false,
+          coverCloudImageUploaded: false,
+        },
+        isStoryLoaded: true,
+      });
       setDescription(storyDetails.description);
     };
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryId]);
 
-  const { title, subtitle, images } = state.story;
+  const { title, subtitle } = state.formData;
 
-  const handleFileUpload = (e) => {
+  const saveFileToStatus = (e) => {
     const fileToUpload = e.target.files[0];
-    const uploadData = new FormData();
-    uploadData.append("imageUrl", fileToUpload);
-    service.uploadFile(uploadData).then((res) => {
+    if (e.target.name === "cover") {
       setState({
         ...state,
-        story: {
-          ...state.story,
-          images: [...state.story.images, res.path],
+        formData: {
+          ...state.formData,
+          blopCover: URL.createObjectURL(fileToUpload),
+          cover: fileToUpload,
         },
+      });
+    } else {
+      setState({
+        ...state,
+        formData: {
+          ...state.formData,
+          blopImages: [
+            ...state.formData.blopImages,
+            URL.createObjectURL(fileToUpload),
+          ],
+          images: [...state.formData.images, fileToUpload],
+        },
+      });
+    }
+  };
+
+  const handleChange = (e) => {
+    setState({
+      ...state,
+      formData: {
+        ...state.formData,
+        [e.target.name]: e.target.value,
+        emptyForm: false,
+      },
+    });
+  };
+
+  let imagesList, coverImage;
+
+  if (state.formData.blopImages || state.formData.images) {
+    let stateImages;
+    state.formData.blopImages.length > 0
+      ? (stateImages = state.formData.blopImages)
+      : (stateImages = state.formData.images);
+    if (stateImages) {
+      imagesList = stateImages.map((el, idx) => (
+        <div className="image" key={idx}>
+          <img src={el} />
+        </div>
+      ));
+    }
+  }
+
+  if (state.formData.blopCover || state.formData.cover) {
+    coverImage = (
+      <div className="image">
+        <img src={state.formData.blopCover || state.formData.cover} />
+      </div>
+    );
+  }
+
+  const submitStory = () => {
+    const {
+      _id,
+      title,
+      subtitle,
+      coverCloudImage,
+      cloudImages,
+    } = state.formData;
+    service
+      .editStory(
+        _id,
+        title,
+        subtitle,
+        coverCloudImage,
+        cloudImages,
+        description
+      )
+      .then(() => router.push("/dashboard"))
+      .catch((err) => console.log(err));
+  };
+
+  const handleFileUpload = (e) => {
+    const imagesList = state.formData.images;
+    const cover = state.formData.cover;
+    let uploadedImages = [];
+    let uploadedCover = "";
+    const uploadData = new FormData();
+    uploadData.append("imageUrl", cover);
+    service.uploadFile(uploadData).then((res) => {
+      uploadedCover = res.path;
+    });
+
+    imagesList.forEach((el) => {
+      const uploadData = new FormData();
+      uploadData.append("imageUrl", el);
+      service.uploadFile(uploadData).then((res) => {
+        console.log(res.path);
+        uploadedImages.push(res.path);
+        console.log(uploadedImages.length);
+        if (uploadedImages.length === state.formData.images.length) {
+          setState({
+            ...state,
+            formData: {
+              ...state.formData,
+              cloudImages: uploadedImages,
+              coverCloudImage: uploadedCover,
+              cloudImagesUploaded: true,
+              coverCloudImageUploaded: true,
+            },
+          });
+        }
       });
     });
   };
 
-  const handleChange = (e) =>
-    setState({
-      ...state,
-      story: { ...state.story, [e.target.name]: e.target.value },
-    });
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { _id, title, subtitle, images } = state.story;
-    service
-      .editStory(_id, title, subtitle, images, description)
-      .then(() => Router.push("/dashboard"));
+    handleFileUpload();
   };
 
   return (
@@ -122,7 +245,7 @@ const StoryEditionForm = () => {
         <title>Edita la història - Escapadesenparella.cat</title>
       </Head>
 
-      <div id="activity" className="composer">
+      <div id="editStory" className="composer">
         <NavigationBar
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/c_scale,q_100,w_135/v1600008855/getaways-guru/static-files/logo-getaways-guru_vvbikk.svg"
@@ -146,7 +269,7 @@ const StoryEditionForm = () => {
                     type="text"
                     name="title"
                     placeholder="Story title"
-                    value={state.story.title}
+                    value={title}
                     onChange={handleChange}
                   />
                 </Form.Group>
@@ -156,573 +279,95 @@ const StoryEditionForm = () => {
                     type="text"
                     name="subtitle"
                     placeholder="Story subtitle"
-                    value={state.story.subtitle}
+                    value={subtitle}
                     onChange={handleChange}
                   />
                 </Form.Group>
+                <div className="cover">
+                  <span>Imatge de portada</span>
+                  <div className="images-wrapper">
+                    <div className="top-bar">
+                      <Form.Group>
+                        <div className="image-drop-zone">
+                          <Form.Label>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="icon icon-tabler icon-tabler-camera-plus"
+                              width="22"
+                              height="22"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="#0d1f44"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path
+                                stroke="none"
+                                d="M0 0h24v24H0z"
+                                fill="none"
+                              />
+                              <circle cx="12" cy="13" r="3" />
+                              <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+                              <line x1="15" y1="6" x2="21" y2="6" />
+                              <line x1="18" y1="3" x2="18" y2="9" />
+                            </svg>
+                            Afegir imatge
+                            <Form.Control
+                              type="file"
+                              name="cover"
+                              onChange={saveFileToStatus}
+                            />
+                          </Form.Label>
+                        </div>
+                      </Form.Group>
+                    </div>
+                    <div className="images-list-wrapper">
+                      <div className="image-wrapper">{coverImage}</div>
+                    </div>
+                  </div>
+                </div>
                 <div className="images">
                   <span>Imatges d'aquesta història</span>
                   <div className="images-wrapper">
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
-                    <Form.Group>
-                      <div className="image-drop-zone">
-                        <Form.Label>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-photo"
-                            width="44"
-                            height="44"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#2c3e50"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <line x1="15" y1="8" x2="15.01" y2="8" />
-                            <rect x="4" y="4" width="16" height="16" rx="3" />
-                            <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-                            <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-                          </svg>
-                          <Form.Control
-                            type="file"
-                            onChange={handleFileUpload}
-                          />
-                        </Form.Label>
-                      </div>
-                    </Form.Group>
+                    <div className="top-bar">
+                      <Form.Group>
+                        <div className="image-drop-zone">
+                          <Form.Label>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="icon icon-tabler icon-tabler-camera-plus"
+                              width="22"
+                              height="22"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="#0d1f44"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path
+                                stroke="none"
+                                d="M0 0h24v24H0z"
+                                fill="none"
+                              />
+                              <circle cx="12" cy="13" r="3" />
+                              <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+                              <line x1="15" y1="6" x2="21" y2="6" />
+                              <line x1="18" y1="3" x2="18" y2="9" />
+                            </svg>
+                            Afegir imatge
+                            <Form.Control
+                              type="file"
+                              onChange={saveFileToStatus}
+                            />
+                          </Form.Label>
+                        </div>
+                      </Form.Group>
+                    </div>
+                    <div className="images-list-wrapper">
+                      <div className="image-wrapper">{imagesList}</div>
+                    </div>
                   </div>
                 </div>
                 <Form.Group>
