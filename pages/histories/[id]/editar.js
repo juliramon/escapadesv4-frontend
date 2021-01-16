@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Router, { useRouter } from "next/router";
 import { useState, useEffect, useContext } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap";
 import NavigationBar from "../../../components/global/NavigationBar";
 import UserContext from "../../../contexts/UserContext";
 import ContentService from "../../../services/contentService";
@@ -60,14 +60,18 @@ const StoryEditionForm = () => {
   }
 
   const initialState = {
+    story: {},
     formData: {
+      _id: "",
       type: "story",
       title: "",
       subtitle: "",
       cover: "",
       blopCover: "",
+      updatedCover: false,
       images: [],
       blopImages: [],
+      updatedImages: false,
       cloudImages: [],
       coverCloudImage: "",
       isReadyToSubmit: false,
@@ -91,17 +95,20 @@ const StoryEditionForm = () => {
   useEffect(() => {
     const fetchData = async () => {
       let storyDetails = await service.getStoryDetails(queryId);
-      console.log(storyDetails);
       setState({
         ...state,
+        story: storyDetails,
         formData: {
+          _id: storyDetails._id,
           type: storyDetails.type,
           title: storyDetails.title,
           subtitle: storyDetails.subtitle,
           cover: storyDetails.cover,
           blopCover: "",
-          images: storyDetails.images,
+          updatedCover: false,
+          images: [],
           blopImages: [],
+          updatedImages: false,
           cloudImages: [],
           coverCloudImage: "",
           isReadyToSubmit: false,
@@ -127,6 +134,7 @@ const StoryEditionForm = () => {
           ...state.formData,
           blopCover: URL.createObjectURL(fileToUpload),
           cover: fileToUpload,
+          updatedCover: true,
         },
       });
     } else {
@@ -139,6 +147,7 @@ const StoryEditionForm = () => {
             URL.createObjectURL(fileToUpload),
           ],
           images: [...state.formData.images, fileToUpload],
+          updatedImages: true,
         },
       });
     }
@@ -157,11 +166,15 @@ const StoryEditionForm = () => {
 
   let imagesList, coverImage;
 
-  if (state.formData.blopImages || state.formData.images) {
+  if (
+    state.story.images ||
+    state.formData.blopImages ||
+    state.formData.images
+  ) {
     let stateImages;
     state.formData.blopImages.length > 0
       ? (stateImages = state.formData.blopImages)
-      : (stateImages = state.formData.images);
+      : (stateImages = state.story.images);
     if (stateImages) {
       imagesList = stateImages.map((el, idx) => (
         <div className="image" key={idx}>
@@ -175,6 +188,7 @@ const StoryEditionForm = () => {
     coverImage = (
       <div className="image">
         <img src={state.formData.blopCover || state.formData.cover} />
+        <button></button>
       </div>
     );
   }
@@ -187,57 +201,118 @@ const StoryEditionForm = () => {
       coverCloudImage,
       cloudImages,
     } = state.formData;
+    const { cover, images } = state.story;
+    let storyCover, storyImages;
+    coverCloudImage !== ""
+      ? (storyCover = coverCloudImage)
+      : (storyCover = cover);
+    cloudImages.length > 0
+      ? (storyImages = cloudImages)
+      : (storyImages = images);
     service
-      .editStory(
-        _id,
-        title,
-        subtitle,
-        coverCloudImage,
-        cloudImages,
-        description
-      )
+      .editStory(_id, title, subtitle, storyCover, storyImages, description)
       .then(() => router.push("/dashboard"))
       .catch((err) => console.log(err));
   };
 
   const handleFileUpload = (e) => {
-    const imagesList = state.formData.images;
     const cover = state.formData.cover;
-    let uploadedImages = [];
     let uploadedCover = "";
     const uploadData = new FormData();
-    uploadData.append("imageUrl", cover);
-    service.uploadFile(uploadData).then((res) => {
-      uploadedCover = res.path;
-    });
-
-    imagesList.forEach((el) => {
-      const uploadData = new FormData();
-      uploadData.append("imageUrl", el);
+    if (state.formData.updatedCover) {
+      uploadData.append("imageUrl", cover);
       service.uploadFile(uploadData).then((res) => {
-        console.log(res.path);
-        uploadedImages.push(res.path);
-        console.log(uploadedImages.length);
-        if (uploadedImages.length === state.formData.images.length) {
-          setState({
-            ...state,
-            formData: {
-              ...state.formData,
-              cloudImages: uploadedImages,
-              coverCloudImage: uploadedCover,
-              cloudImagesUploaded: true,
-              coverCloudImageUploaded: true,
-            },
-          });
-        }
+        setState({
+          ...state,
+          formData: {
+            ...state.formData,
+            coverCloudImage: res.path,
+            coverCloudImageUploaded: true,
+          },
+        });
       });
-    });
+    }
+    if (state.formData.updatedImages) {
+      const imagesList = state.formData.images;
+      let uploadedImages = [];
+      imagesList.forEach((el) => {
+        const uploadData = new FormData();
+        uploadData.append("imageUrl", el);
+        service.uploadFile(uploadData).then((res) => {
+          uploadedImages.push(res.path);
+          if (uploadedImages.length === state.formData.images.length) {
+            setState({
+              ...state,
+              formData: {
+                ...state.formData,
+                cloudImages: uploadedImages,
+                cloudImagesUploaded: true,
+              },
+            });
+          }
+        });
+      });
+    }
+    if (state.formData.updatedImages && state.formData.updatedCover) {
+      const imagesList = state.formData.images;
+      const cover = state.formData.cover;
+      let uploadedImages = [];
+      let uploadedCover = "";
+      const uploadData = new FormData();
+      uploadData.append("imageUrl", cover);
+      service.uploadFile(uploadData).then((res) => {
+        uploadedCover = res.path;
+      });
+
+      imagesList.forEach((el) => {
+        const uploadData = new FormData();
+        uploadData.append("imageUrl", el);
+        service.uploadFile(uploadData).then((res) => {
+          uploadedImages.push(res.path);
+          if (uploadedImages.length === state.formData.images.length) {
+            setState({
+              ...state,
+              formData: {
+                ...state.formData,
+                cloudImages: uploadedImages,
+                coverCloudImage: uploadedCover,
+                cloudImagesUploaded: true,
+                coverCloudImageUploaded: true,
+              },
+            });
+          }
+        });
+      });
+    }
   };
+
+  useEffect(() => {
+    if (
+      state.formData.cloudImagesUploaded === true ||
+      state.formData.coverCloudImageUploaded === true
+    ) {
+      submitStory();
+    }
+  }, [state.formData]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    handleFileUpload();
+    if (state.formData.updatedImages || state.formData.updatedCover) {
+      handleFileUpload();
+    } else {
+      submitStory();
+    }
   };
+
+  if (!state.isStoryLoaded) {
+    return (
+      <Container className="spinner d-flex justify-space-between">
+        <Spinner animation="border" role="status" variant="primary">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      </Container>
+    );
+  }
 
   return (
     <>
@@ -312,7 +387,10 @@ const StoryEditionForm = () => {
                               <line x1="15" y1="6" x2="21" y2="6" />
                               <line x1="18" y1="3" x2="18" y2="9" />
                             </svg>
-                            Afegir imatge
+                            {state.formData.cover
+                              ? "Canviar imatge"
+                              : "Seleccionar imatge"}
+
                             <Form.Control
                               type="file"
                               name="cover"
@@ -356,7 +434,7 @@ const StoryEditionForm = () => {
                               <line x1="15" y1="6" x2="21" y2="6" />
                               <line x1="18" y1="3" x2="18" y2="9" />
                             </svg>
-                            Afegir imatge
+                            Seleccionar imatges
                             <Form.Control
                               type="file"
                               onChange={saveFileToStatus}

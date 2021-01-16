@@ -17,17 +17,13 @@ const modules = {
     [{ header: "1" }, { header: "2" }],
     ["bold", "italic", "underline", "strike", "blockquote"],
     [{ list: "ordered" }, { list: "bullet" }],
-    ["link", "image"],
+    ["link"],
   ],
   clipboard: {
-    // toggle to add extra line breaks when pasting HTML:
     matchVisual: false,
   },
 };
-/*
- * Quill editor formats
- * See https://quilljs.com/docs/formats/
- */
+
 const formats = [
   "header",
   "bold",
@@ -38,7 +34,6 @@ const formats = [
   "list",
   "bullet",
   "link",
-  "image",
 ];
 
 const StoryForm = () => {
@@ -284,6 +279,7 @@ const StoryForm = () => {
                               type="file"
                               name="cover"
                               onChange={saveFileToStatus}
+                              max="1"
                             />
                           </Form.Label>
                         </div>

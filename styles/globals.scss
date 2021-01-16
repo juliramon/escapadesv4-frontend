@@ -1243,15 +1243,20 @@ nav {
     padding: 8px 12px;
   }
   .image {
-    min-width: 125px;
-    display: flex;
-    justify-content: center;
+    display: block;
+    overflow: hidden;
+    height: 40px;
+    width: 40px;
+    max-width: 40px;
+    max-height: 40px;
+    border-radius: 8px;
+    padding: 0;
+    margin: 0 43px;
   }
   .image img {
-    width: 40px;
-    height: 40px;
+    width: auto;
+    height: 100%;
     background-color: grey;
-    border-radius: 6px;
     display: block;
   }
   .title {
@@ -2608,6 +2613,19 @@ nav {
       }
       .image {
         margin: 10px;
+        position: relative;
+        button {
+          width: auto;
+          padding: 0;
+          background: rgba(0, 0, 0, 0.65);
+          border-radius: 100px !important;
+          position: absolute;
+          top: 12px;
+          right: 12px;
+          svg {
+            padding: 5px;
+          }
+        }
       }
     }
     img {
