@@ -35,6 +35,14 @@ const ContentBox = ({
 
   const urlToShare = `https://escapadesenparella.cat/${path}/${id}`;
 
+  const transformDate = (unformattedDate) => {
+    let modpublicationDate = new Date(unformattedDate);
+    const getYear = modpublicationDate.getFullYear();
+    const getMonth = modpublicationDate.getMonth();
+    const getDay = modpublicationDate.getDate();
+    return `${getDay}/${getMonth + 1}/${getYear}`;
+  };
+
   const [shareModalVisibility, setShareModalVisibility] = useState(false);
   const handleShareModalVisibility = () => setShareModalVisibility(true);
   const hideShareModalVisibility = () => setShareModalVisibility(false);
@@ -48,7 +56,7 @@ const ContentBox = ({
           </div>
           <h1 className="title">{title}</h1>
           <p className="subtitle">{shortenedSubtitle}...</p>
-          <p className="date">{publicationDate}</p>
+          <p className="date">{transformDate(publicationDate)}</p>
         </a>
       </Link>
       <div className="crud-buttons">

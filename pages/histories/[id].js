@@ -129,7 +129,7 @@ const StoryListing = () => {
     src: el,
     thumbnail: el,
     w: 1200,
-    h: 900,
+    h: 800,
     title: state.story.title,
   }));
 

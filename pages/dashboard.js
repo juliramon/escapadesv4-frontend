@@ -348,7 +348,7 @@ const Dashboard = () => {
   return (
     <>
       <Head>
-        <title>Dashboard - Escapadesenparella.cat</title>
+        <title>Gestor - Escapadesenparella.cat</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div id="dashboard">
@@ -360,7 +360,7 @@ const Dashboard = () => {
         />
         <Container fluid className="top-nav">
           <div className="top-nav-wrapper">
-            <h1 className="top-nav-title db mw-1600">Dashboard</h1>
+            <h1 className="top-nav-title db mw-1600">Gestor</h1>
           </div>
         </Container>
         <Container fluid className="mw-1600">

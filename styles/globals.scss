@@ -882,6 +882,9 @@ nav {
           width: 120px;
           height: auto;
           cursor: pointer;
+          min-width: 120px;
+          min-height: 120px;
+          background: white;
         }
         .avatar-overlay {
           position: absolute;
@@ -1844,6 +1847,11 @@ nav {
       height: auto;
       border-radius: 10px;
     }
+    .pswp img {
+      max-width: none;
+      object-fit: contain;
+      background-color: transparent;
+    }
     .listing-details-box {
       margin-bottom: 20px;
       a,
@@ -1969,6 +1977,10 @@ nav {
       height: 130px;
       overflow: hidden;
       margin-bottom: 15px;
+      img {
+        min-width: 130px;
+        min-height: 13px;
+      }
     }
     .user-fullName {
       font-size: 1.6em;
