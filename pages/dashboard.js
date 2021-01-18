@@ -263,7 +263,7 @@ const Dashboard = () => {
           key={el._id}
           type={el.type}
           id={el._id}
-          image={el.images[0]}
+          image={el.cover}
           title={el.title}
           subtitle={el.subtitle}
           publicationDate={el.createdAt}
@@ -280,7 +280,7 @@ const Dashboard = () => {
             key={el._id}
             type={el.type}
             id={el._id}
-            image={el.images[0]}
+            image={el.cover}
             title={el.title}
             subtitle={el.subtitle}
             publicationDate={el.createdAt}
@@ -301,7 +301,7 @@ const Dashboard = () => {
             key={el._id}
             type={el.type}
             id={el._id}
-            image={el.images[0]}
+            image={el.cover}
             title={el.title}
             subtitle={el.subtitle}
             publicationDate={el.createdAt}

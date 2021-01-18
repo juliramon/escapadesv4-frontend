@@ -308,7 +308,7 @@ const StoryEditionForm = () => {
     return (
       <Container className="spinner d-flex justify-space-between">
         <Spinner animation="border" role="status" variant="primary">
-          <span className="sr-only">Loading...</span>
+          <span className="sr-only">Carregant...</span>
         </Spinner>
       </Container>
     );
