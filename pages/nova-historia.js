@@ -17,17 +17,13 @@ const modules = {
     [{ header: "1" }, { header: "2" }],
     ["bold", "italic", "underline", "strike", "blockquote"],
     [{ list: "ordered" }, { list: "bullet" }],
-    ["link", "image"],
+    ["link"],
   ],
   clipboard: {
-    // toggle to add extra line breaks when pasting HTML:
     matchVisual: false,
   },
 };
-/*
- * Quill editor formats
- * See https://quilljs.com/docs/formats/
- */
+
 const formats = [
   "header",
   "bold",
@@ -38,7 +34,6 @@ const formats = [
   "list",
   "bullet",
   "link",
-  "image",
 ];
 
 const StoryForm = () => {
@@ -62,11 +57,15 @@ const StoryForm = () => {
       type: "story",
       title: "",
       subtitle: "",
+      cover: "",
+      blopCover: "",
       images: [],
       blopImages: [],
       cloudImages: [],
+      coverCloudImage: "",
       isReadyToSubmit: false,
       cloudImagesUploaded: false,
+      coverCloudImageUploaded: false,
     },
   };
   const [state, setState] = useState(initialState);
@@ -81,17 +80,28 @@ const StoryForm = () => {
 
   const saveFileToStatus = (e) => {
     const fileToUpload = e.target.files[0];
-    setState({
-      ...state,
-      formData: {
-        ...state.formData,
-        blopImages: [
-          ...state.formData.blopImages,
-          URL.createObjectURL(fileToUpload),
-        ],
-        images: [...state.formData.images, fileToUpload],
-      },
-    });
+    if (e.target.name === "cover") {
+      setState({
+        ...state,
+        formData: {
+          ...state.formData,
+          blopCover: URL.createObjectURL(fileToUpload),
+          cover: fileToUpload,
+        },
+      });
+    } else {
+      setState({
+        ...state,
+        formData: {
+          ...state.formData,
+          blopImages: [
+            ...state.formData.blopImages,
+            URL.createObjectURL(fileToUpload),
+          ],
+          images: [...state.formData.images, fileToUpload],
+        },
+      });
+    }
   };
 
   const handleChange = (e) => {
@@ -111,45 +121,58 @@ const StoryForm = () => {
     </div>
   ));
 
+  let coverImage;
+  if (state.formData.blopCover) {
+    coverImage = (
+      <div className="image">
+        <img src={state.formData.blopCover} />
+      </div>
+    );
+  }
+
   const [description, setDescription] = useState("");
 
   const submitStory = () => {
-    const { type, title, subtitle, cloudImages } = state.formData;
+    const {
+      type,
+      title,
+      subtitle,
+      coverCloudImage,
+      cloudImages,
+    } = state.formData;
     service
-      .story(type, title, subtitle, cloudImages, description)
-      .then(() => {
-        // setState({
-        //   ...state,
-        //   formData: {
-        //     emptyForm: true,
-        //     type: "story",
-        //     title: "",
-        //     subtitle: "",
-        //     blopImages: [],
-        //     isReadyToSubmit: false,
-        //   },
-        // });
-        // setDescription("");
-        router.push("/dashboard");
-      })
+      .story(type, title, subtitle, coverCloudImage, cloudImages, description)
+      .then(() => router.push("/dashboard"))
       .catch((err) => console.log(err));
   };
 
   const handleFileUpload = (e) => {
     const imagesList = state.formData.images;
+    const cover = state.formData.cover;
     let uploadedImages = [];
+    let uploadedCover = "";
+    const uploadData = new FormData();
+    uploadData.append("imageUrl", cover);
+    service.uploadFile(uploadData).then((res) => {
+      uploadedCover = res.path;
+    });
+
     imagesList.forEach((el) => {
       const uploadData = new FormData();
       uploadData.append("imageUrl", el);
       service.uploadFile(uploadData).then((res) => {
+        console.log(res.path);
         uploadedImages.push(res.path);
+        console.log(uploadedImages.length);
         if (uploadedImages.length === state.formData.images.length) {
           setState({
             ...state,
             formData: {
               ...state.formData,
               cloudImages: uploadedImages,
+              coverCloudImage: uploadedCover,
               cloudImagesUploaded: true,
+              coverCloudImageUploaded: true,
             },
           });
         }
@@ -160,13 +183,13 @@ const StoryForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     handleFileUpload();
-    // state.formData.cloudImages.length === state.formData.images
-    //   ? submitStory()
-    //   : null;
   };
 
   useEffect(() => {
-    if (state.formData.cloudImagesUploaded === true) {
+    if (
+      state.formData.cloudImagesUploaded === true &&
+      state.formData.coverCloudImageUploaded === true
+    ) {
       submitStory();
     }
   }, [state.formData]);
@@ -174,7 +197,7 @@ const StoryForm = () => {
   useEffect(() => {
     const { title, subtitle, images } = state.formData;
 
-    if (title && subtitle && images && description) {
+    if (title && subtitle && coverImage && images && description) {
       setState((state) => ({ ...state, isReadyToSubmit: true }));
     }
   }, [state.formData, description]);
@@ -184,7 +207,7 @@ const StoryForm = () => {
       <Head>
         <title>Comparteix una nova història - Escapadesenparella.cat</title>
       </Head>
-      <div id="story" className="composer">
+      <div id="storyForm" className="composer">
         <NavigationBar
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/c_scale,q_100,w_135/v1600008855/getaways-guru/static-files/logo-getaways-guru_vvbikk.svg"
@@ -222,6 +245,51 @@ const StoryForm = () => {
                     value={state.formData.subtitle}
                   />
                 </Form.Group>
+                <div className="cover">
+                  <span>Imatge de portada</span>
+                  <div className="images-wrapper">
+                    <div className="top-bar">
+                      <Form.Group>
+                        <div className="image-drop-zone">
+                          <Form.Label>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="icon icon-tabler icon-tabler-camera-plus"
+                              width="22"
+                              height="22"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="#0d1f44"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path
+                                stroke="none"
+                                d="M0 0h24v24H0z"
+                                fill="none"
+                              />
+                              <circle cx="12" cy="13" r="3" />
+                              <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+                              <line x1="15" y1="6" x2="21" y2="6" />
+                              <line x1="18" y1="3" x2="18" y2="9" />
+                            </svg>
+                            Afegir imatge
+                            <Form.Control
+                              type="file"
+                              name="cover"
+                              onChange={saveFileToStatus}
+                              max="1"
+                            />
+                          </Form.Label>
+                        </div>
+                      </Form.Group>
+                    </div>
+                    <div className="images-list-wrapper">
+                      <div className="image-wrapper">{coverImage}</div>
+                    </div>
+                  </div>
+                </div>
                 <div className="images">
                   <span>Imatges d'aquesta història</span>
                   <div className="images-wrapper">

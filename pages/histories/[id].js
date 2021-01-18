@@ -114,15 +114,14 @@ const StoryListing = () => {
     </div>
   );
 
-  let coversList;
+  let cover;
   if (state.storyLoaded === true) {
-    coversList = state.story.images.map((cover, idx) => (
+    cover = (
       <div
-        key={idx}
         className="cover"
-        style={{ backgroundImage: `url(${cover})` }}
+        style={{ backgroundImage: `url(${state.story.cover})` }}
       ></div>
-    ));
+    );
   }
 
   const stateImages = [...state.story.images];
@@ -253,7 +252,7 @@ const StoryListing = () => {
                   <Row>
                     <Col lg={12}>
                       <div className="listing-cover">
-                        {coversList}
+                        {cover}
                         <p className="cover-text">
                           Foto d' <u>Andrea Prat</u> i <u>Juli Ramon</u> per
                           Escapadesenparella.cat
