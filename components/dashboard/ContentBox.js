@@ -6,6 +6,7 @@ import ShareModal from "../modals/ShareModal";
 
 const ContentBox = ({
   type,
+  slug,
   id,
   image,
   title,
@@ -35,20 +36,28 @@ const ContentBox = ({
 
   const urlToShare = `https://escapadesenparella.cat/${path}/${id}`;
 
+  const transformDate = (unformattedDate) => {
+    let modpublicationDate = new Date(unformattedDate);
+    const getYear = modpublicationDate.getFullYear();
+    const getMonth = modpublicationDate.getMonth();
+    const getDay = modpublicationDate.getDate();
+    return `${getDay}/${getMonth + 1}/${getYear}`;
+  };
+
   const [shareModalVisibility, setShareModalVisibility] = useState(false);
   const handleShareModalVisibility = () => setShareModalVisibility(true);
   const hideShareModalVisibility = () => setShareModalVisibility(false);
 
   return (
     <div className="content box d-flex align-items-center">
-      <Link href={`/${path}/${id}`}>
+      <Link href={`/${path}/${slug}`}>
         <a className="d-flex align-items-center">
           <div className="image">
             <img src={image} alt={title} />
           </div>
           <h1 className="title">{title}</h1>
           <p className="subtitle">{shortenedSubtitle}...</p>
-          <p className="date">{publicationDate}</p>
+          <p className="date">{transformDate(publicationDate)}</p>
         </a>
       </Link>
       <div className="crud-buttons">
@@ -75,7 +84,7 @@ const ContentBox = ({
           <Dropdown.Menu>
             <ul>
               <li>
-                <Link href={`/${path}/${id}`}>
+                <Link href={`/${path}/${slug}`}>
                   <a>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +108,7 @@ const ContentBox = ({
                 </Link>
               </li>
               <li>
-                <Link href={`/${path}/${id}/editar`}>
+                <Link href={`/${path}/${slug}/editar`}>
                   <a>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

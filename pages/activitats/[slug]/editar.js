@@ -1,16 +1,17 @@
 import { useState, useEffect, useContext } from "react";
-import NavigationBar from "../components/global/NavigationBar";
+import NavigationBar from "../../../components/global/NavigationBar";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import ContentService from "../services/contentService";
+import ContentService from "../../../services/contentService";
 import Router, { useRouter } from "next/router";
 import Autocomplete from "react-google-autocomplete";
-import UserContext from "../contexts/UserContext";
+import UserContext from "../../../contexts/UserContext";
 import Head from "next/head";
 import slugify from "slugify";
 
-const ActivityForm = () => {
+const ActivityEditionForm = () => {
   const { user } = useContext(UserContext);
   const router = useRouter();
+
   useEffect(() => {
     if (!user) {
       router.push("/login");
@@ -24,7 +25,9 @@ const ActivityForm = () => {
       </Head>
     );
   }
+
   const initialState = {
+    activity: {},
     formData: {
       emptyForm: true,
       type: "activity",
@@ -58,15 +61,65 @@ const ActivityForm = () => {
       price: "",
       isReadyToSubmit: false,
     },
+    isActivityLoaded: false,
   };
   const [state, setState] = useState(initialState);
+
   const [queryId, setQueryId] = useState(null);
   useEffect(() => {
-    if (router && router.route) {
-      setQueryId(router.route);
+    if (router && router.query) {
+      setQueryId(router.query.slug);
     }
   }, [router]);
+
   const service = new ContentService();
+
+  useEffect(() => {
+    if (router.query.slug !== undefined) {
+      const fetchData = async () => {
+        let activityDetails = await service.activityDetails(router.query.slug);
+        console.log(activityDetails);
+        setState({
+          ...state,
+          activity: activityDetails,
+          formdata: {
+            _id: activityDetails._id,
+            type: activityDetails.type,
+            title: activityDetails.title,
+            subtitle: activityDetails.subtitle,
+            categories: activityDetails.categories,
+            seasons: activityDetails.seasons,
+            region: activityDetails.region,
+            cover: activityDetails.cover,
+            blopCover: "",
+            images: [],
+            blopImages: [],
+            cloudImages: [],
+            coverCloudImage: "",
+            cloudImagesUploaded: false,
+            coverCloudImageUploaded: false,
+            phone: activityDetails.phone,
+            website: activityDetails.website,
+            activity_full_address: "",
+            activity_locality: "",
+            activity_province: "",
+            activity_state: "",
+            activity_country: "",
+            activity_lat: "",
+            activity_lng: "",
+            activity_rating: 0,
+            activity_place_id: "",
+            activity_opening_hours: "",
+            duration: "",
+            price: "",
+          },
+          isActivityLoaded: true,
+        });
+      };
+      fetchData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [queryId]);
 
   const saveFileToStatus = (e) => {
     const fileToUpload = e.target.files[0];
@@ -77,6 +130,7 @@ const ActivityForm = () => {
           ...state.formData,
           blopCover: URL.createObjectURL(fileToUpload),
           cover: fileToUpload,
+          updatedCover: true,
         },
       });
     } else {
@@ -89,117 +143,143 @@ const ActivityForm = () => {
             URL.createObjectURL(fileToUpload),
           ],
           images: [...state.formData.images, fileToUpload],
+          updatedImages: true,
         },
       });
     }
   };
 
-  const imagesList = state.formData.blopImages.map((el, idx) => (
-    <div className="image" key={idx}>
-      <img src={el} />
-    </div>
-  ));
+  let imagesList, coverImage;
 
-  let coverImage;
-  if (state.formData.blopCover) {
+  if (
+    state.activity.images ||
+    state.formData.blopImages ||
+    state.formData.images
+  ) {
+    let stateImages;
+    state.formData.blopImages.length > 0
+      ? (stateImages = state.formData.blopImages)
+      : (stateImages = state.activity.images);
+    if (stateImages) {
+      imagesList = stateImages.map((el, idx) => (
+        <div className="image" key={idx}>
+          <img src={el} />
+        </div>
+      ));
+    }
+  }
+
+  if (
+    state.activity.cover ||
+    state.formData.blopCover ||
+    state.formData.cover
+  ) {
+    let stateCover;
+    state.formData.blopCover !== ""
+      ? (stateCover = state.formData.blopCover)
+      : (stateCover = state.activity.cover);
     coverImage = (
       <div className="image">
-        <img src={state.formData.blopCover} />
+        <img src={stateCover} />
+        <button></button>
       </div>
     );
   }
 
-  const handleFileUpload = (e) => {
-    const imagesList = state.formData.images;
-    const cover = state.formData.cover;
-    let uploadedImages = [];
-    let uploadedCover = "";
-    const uploadData = new FormData();
-    uploadData.append("imageUrl", cover);
-    service.uploadFile(uploadData).then((res) => {
-      uploadedCover = res.path;
-    });
+  let isRomantic,
+    isAdventure,
+    isGastronomic,
+    isCultural,
+    isRelax,
+    isWinter,
+    isSpring,
+    isSummer,
+    isAutumn,
+    isBarcelona,
+    isTarragona,
+    isGirona,
+    isLleida,
+    isCostaBrava,
+    isCostaDaurada,
+    isPirineus;
 
-    imagesList.forEach((el) => {
-      const uploadData = new FormData();
-      uploadData.append("imageUrl", el);
-      service.uploadFile(uploadData).then((res) => {
-        console.log(res.path);
-        uploadedImages.push(res.path);
-        console.log(uploadedImages.length);
-        if (uploadedImages.length === state.formData.images.length) {
-          setState({
-            ...state,
-            formData: {
-              ...state.formData,
-              cloudImages: uploadedImages,
-              coverCloudImage: uploadedCover,
-              cloudImagesUploaded: true,
-              coverCloudImageUploaded: true,
-            },
-          });
-        }
-      });
-    });
-  };
+  if (state.activity.categories) {
+    state.activity.categories.includes("romantic")
+      ? (isRomantic = true)
+      : (isRomantic = false);
+    state.activity.categories.includes("adventure")
+      ? (isAdventure = true)
+      : (isAdventure = false);
+    state.activity.categories.includes("gastronomic")
+      ? (isGastronomic = true)
+      : (isGastronomic = false);
+    state.activity.categories.includes("cultural")
+      ? (isCultural = true)
+      : (isCultural = false);
+    state.activity.categories.includes("relax")
+      ? (isRelax = true)
+      : (isRelax = false);
+  }
+  if (state.activity.seasons) {
+    state.activity.seasons.includes("winter")
+      ? (isWinter = true)
+      : (isWinter = false);
+    state.activity.seasons.includes("spring")
+      ? (isSpring = true)
+      : (isSpring = false);
+    state.activity.seasons.includes("summer")
+      ? (isSummer = true)
+      : (isSummer = false);
+    state.activity.seasons.includes("autumn")
+      ? (isAutumn = true)
+      : (isAutumn = false);
+  }
+  if (state.activity.region) {
+    state.activity.region.includes("barcelona")
+      ? (isBarcelona = true)
+      : (isBarcelona = false);
+    state.activity.region.includes("tarragona")
+      ? (isTarragona = true)
+      : (isTarragona = false);
+    state.activity.region.includes("girona")
+      ? (isGirona = true)
+      : (isGirona = false);
+    state.activity.region.includes("lleida")
+      ? (isLleida = true)
+      : (isLleida = false);
+    state.activity.region.includes("costaBrava")
+      ? (isCostaBrava = true)
+      : (isCostaBrava = false);
+    state.activity.region.includes("costaDaurada")
+      ? (isCostaDaurada = true)
+      : (isCostaDaurada = false);
+    state.activity.region.includes("pirineus")
+      ? (isPirineus = true)
+      : (isPirineus = false);
+  }
 
-  const handleCheckCategory = (e) => {
-    let categories = state.formData.categories;
-    if (e.target.checked === true) {
-      categories.push(e.target.id);
-    } else {
-      let index = categories.indexOf(e.target.id);
-      categories.splice(index, 1);
-    }
-    setState({
-      ...state,
-      formData: { ...state.formData, categories: categories },
-    });
-  };
-
-  const handleCheckSeason = (e) => {
-    let seasons = state.formData.seasons;
-    if (e.target.checked === true) {
-      seasons.push(e.target.id);
-    } else {
-      let index = seasons.indexOf(e.target.id);
-      seasons.splice(index, 1);
-    }
-    setState({
-      ...state,
-      formData: { ...state.formData, seasons: seasons },
-    });
-  };
-
-  const handleCheckRegion = (e) => {
-    setState({
-      ...state,
-      formData: { ...state.formData, region: e.target.id },
-    });
-  };
-
-  const handleChange = (e) => {
-    setState({
-      ...state,
-      formData: {
-        ...state.formData,
-        [e.target.name]: e.target.value,
-        emptyForm: false,
-      },
-    });
-  };
+  const {
+    title,
+    subtitle,
+    activity_full_address,
+    phone,
+    website,
+    price,
+    duration,
+    description,
+  } = state.activity;
 
   const submitActivity = async () => {
-    const slug = await slugify(state.formData.title);
+    const slug = await slugify(state.activity.title);
     const {
-      type,
+      _id,
       title,
       subtitle,
       categories,
       seasons,
       region,
-      coverCloudImage,
-      cloudImages,
+      cover,
+      images,
       description,
       phone,
       website,
@@ -215,18 +295,26 @@ const ActivityForm = () => {
       activity_opening_hours,
       duration,
       price,
-    } = state.formData;
+    } = state.activity;
+    const { coverCloudImage, cloudImages } = state.formData;
+    let activityCover, activityImages;
+    coverCloudImage !== ""
+      ? (activityCover = coverCloudImage)
+      : (activityCover = cover);
+    cloudImages.length > 0
+      ? (activityImages = cloudImages)
+      : (activityImages = images);
     service
-      .activity(
-        type,
+      .editActivity(
+        _id,
         slug,
         title,
         subtitle,
         categories,
         seasons,
         region,
-        coverCloudImage,
-        cloudImages,
+        activityCover,
+        activityImages,
         description,
         phone,
         website,
@@ -243,65 +331,146 @@ const ActivityForm = () => {
         duration,
         price
       )
-      .then(() => Router.push("/dashboard"))
-      .catch((err) => console.log(err));
+      .then(() => router.push("/dashboard"));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleFileUpload();
+  const handleFileUpload = (e) => {
+    const cover = state.formData.cover;
+    let uploadedCover = "";
+    const uploadData = new FormData();
+    if (state.formData.updatedCover) {
+      uploadData.append("imageUrl", cover);
+      service.uploadFile(uploadData).then((res) => {
+        setState({
+          ...state,
+          formData: {
+            ...state.formData,
+            coverCloudImage: res.path,
+            coverCloudImageUploaded: true,
+          },
+        });
+      });
+    }
+    if (state.formData.updatedImages) {
+      const imagesList = state.formData.images;
+      let uploadedImages = [];
+      imagesList.forEach((el) => {
+        const uploadData = new FormData();
+        uploadData.append("imageUrl", el);
+        service.uploadFile(uploadData).then((res) => {
+          uploadedImages.push(res.path);
+          if (uploadedImages.length === state.formData.images.length) {
+            setState({
+              ...state,
+              formData: {
+                ...state.formData,
+                cloudImages: uploadedImages,
+                cloudImagesUploaded: true,
+              },
+            });
+          }
+        });
+      });
+    }
+    if (state.formData.updatedImages && state.formData.updatedCover) {
+      const imagesList = state.formData.images;
+      const cover = state.formData.cover;
+      let uploadedImages = [];
+      let uploadedCover = "";
+      const uploadData = new FormData();
+      uploadData.append("imageUrl", cover);
+      service.uploadFile(uploadData).then((res) => {
+        uploadedCover = res.path;
+      });
+
+      imagesList.forEach((el) => {
+        const uploadData = new FormData();
+        uploadData.append("imageUrl", el);
+        service.uploadFile(uploadData).then((res) => {
+          uploadedImages.push(res.path);
+          if (uploadedImages.length === state.formData.images.length) {
+            setState({
+              ...state,
+              formData: {
+                ...state.formData,
+                cloudImages: uploadedImages,
+                coverCloudImage: uploadedCover,
+                cloudImagesUploaded: true,
+                coverCloudImageUploaded: true,
+              },
+            });
+          }
+        });
+      });
+    }
   };
+
+  const handleCheckCategory = (e) => {
+    let categories = state.activity.categories;
+    if (e.target.checked === true) {
+      categories.push(e.target.id);
+    } else {
+      let index = categories.indexOf(e.target.id);
+      categories.splice(index, 1);
+    }
+    setState({
+      ...state,
+      activity: { ...state.activity, categories: categories },
+    });
+  };
+
+  const handleCheckSeason = (e) => {
+    let seasons = state.activity.seasons;
+    if (e.target.checked === true) {
+      seasons.push(e.target.id);
+    } else {
+      let index = seasons.indexOf(e.target.id);
+
+      seasons.splice(index, 1);
+    }
+    setState({
+      ...state,
+      activity: { ...state.activity, seasons: seasons },
+    });
+  };
+
+  const handleCheckRegion = (e) => {
+    setState({
+      ...state,
+      activity: { ...state.activity, region: e.target.id },
+    });
+  };
+
+  const handleChange = (e) =>
+    setState({
+      ...state,
+      activity: { ...state.activity, [e.target.name]: e.target.value },
+    });
 
   useEffect(() => {
     if (
-      state.formData.cloudImagesUploaded === true &&
+      state.formData.cloudImagesUploaded === true ||
       state.formData.coverCloudImageUploaded === true
     ) {
       submitActivity();
     }
   }, [state.formData]);
 
-  useEffect(() => {
-    const {
-      title,
-      subtitle,
-      categories,
-      seasons,
-      region,
-      activity_full_address,
-      phone,
-      website,
-      coverImage,
-      images,
-      price,
-      duration,
-      description,
-    } = state.formData;
-
-    if (
-      title &&
-      subtitle &&
-      categories &&
-      seasons &&
-      region &&
-      activity_full_address &&
-      phone &&
-      website &&
-      images.length > 0 &&
-      coverImage !== "" &&
-      description &&
-      duration &&
-      price
-    ) {
-      setState((state) => ({ ...state, isReadyToSubmit: true }));
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (state.formData.updatedImages || state.formData.updatedCover) {
+      handleFileUpload();
+    } else {
+      submitActivity();
     }
-  }, [state.formData]);
+  };
 
   return (
     <>
       <Head>
-        <title>Recomana una allotjament - Escapadesenparella.cat</title>
+        <title>Edita l'activitat - Escapadesenparella.cat</title>
       </Head>
+
       <div id="activity" className="composer">
         <NavigationBar
           logo_url={
@@ -314,57 +483,60 @@ const ActivityForm = () => {
           <Row>
             <Col lg={12} className="sided-shadow">
               <div className="form-composer">
-                <h1>Recomana una activitat</h1>
+                <h1>Editar l'activitaty</h1>
                 <p className="sub-h1">
-                  Descriu l'activitat a recomanar perquè altres parelles la
-                  puguin gaudir.
+                  Edit and submit your activity so others start enjoying it.
                 </p>
               </div>
-              <Form>
+              <Form onSubmit={handleSubmit}>
                 <Form.Group>
-                  <Form.Label>Títol</Form.Label>
+                  <Form.Label>Title</Form.Label>
                   <Form.Control
                     type="text"
                     name="title"
-                    placeholder="Títol de l'activitat"
+                    placeholder="Activity title"
+                    defaultValue={title}
                     onChange={handleChange}
-                    value={state.formData.title}
                   />
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label>Subtítol</Form.Label>
+                  <Form.Label>Subtitle</Form.Label>
                   <Form.Control
                     type="text"
                     name="subtitle"
-                    placeholder="Subtítol de l'activitat"
+                    placeholder="Activity subtitle"
+                    defaultValue={subtitle}
                     onChange={handleChange}
-                    value={state.formData.subtitle}
                   />
                 </Form.Group>
                 <Form.Row>
                   <Col lg={4}>
                     <Form.Group>
-                      <Form.Label>Categories</Form.Label>
+                      <Form.Label>Activity Category</Form.Label>
                       <Form.Check
                         type="checkbox"
                         name="romantic"
                         id="romantic"
-                        label="Romàntica"
+                        label="Romantic"
                         onChange={handleCheckCategory}
+                        checked={isRomantic}
                       />
                       <Form.Check
                         type="checkbox"
                         name="adventure"
                         id="adventure"
-                        label="Aventura"
+                        label="Adventure"
                         onChange={handleCheckCategory}
+                        checked={isAdventure}
                       />
+
                       <Form.Check
                         type="checkbox"
                         name="gastronomic"
                         id="gastronomic"
-                        label="Gastronòmica"
+                        label="Gastronomic"
                         onChange={handleCheckCategory}
+                        checked={isGastronomic}
                       />
                       <Form.Check
                         type="checkbox"
@@ -372,6 +544,7 @@ const ActivityForm = () => {
                         id="cultural"
                         label="Cultural"
                         onChange={handleCheckCategory}
+                        checked={isCultural}
                       />
                       <Form.Check
                         type="checkbox"
@@ -379,107 +552,119 @@ const ActivityForm = () => {
                         id="relax"
                         label="Relax"
                         onChange={handleCheckCategory}
+                        checked={isRelax}
                       />
                     </Form.Group>
                   </Col>
                   <Col lg={4}>
                     <Form.Group>
-                      <Form.Label>Estació de l'any</Form.Label>
+                      <Form.Label>Activity Season</Form.Label>
                       <Form.Check
                         type="checkbox"
                         name="winter"
                         id="winter"
-                        label="Hivern"
+                        label="Winter"
                         onChange={handleCheckSeason}
+                        checked={isWinter}
                       />
                       <Form.Check
                         type="checkbox"
                         name="spring"
                         id="spring"
-                        label="Primavera"
+                        label="Spring"
                         onChange={handleCheckSeason}
+                        checked={isSpring}
                       />
                       <Form.Check
                         type="checkbox"
                         name="summer"
                         id="summer"
-                        label="Estiu"
+                        label="Summer"
                         onChange={handleCheckSeason}
+                        checked={isSummer}
                       />
                       <Form.Check
                         type="checkbox"
                         name="autumn"
                         id="autumn"
-                        label="Tardor"
+                        label="Autumn"
                         onChange={handleCheckSeason}
+                        checked={isAutumn}
                       />
                     </Form.Group>
                   </Col>
                   <Col lg={4}>
                     <Form.Group>
                       <Form.Group>
-                        <Form.Label>Regió</Form.Label>
+                        <Form.Label>Activity Region</Form.Label>
                         <Form.Check
                           type="radio"
                           id="barcelona"
                           label="Barcelona"
-                          name="activityRegion"
+                          name="activitySeason"
                           onChange={handleCheckRegion}
+                          checked={isBarcelona}
                         />
                         <Form.Check
                           type="radio"
                           id="tarragona"
                           label="Tarragona"
-                          name="activityRegion"
+                          name="activitySeason"
                           onChange={handleCheckRegion}
+                          checked={isTarragona}
                         />
                         <Form.Check
                           type="radio"
                           id="girona"
                           label="Girona"
-                          name="activityRegion"
+                          name="activitySeason"
                           onChange={handleCheckRegion}
+                          checked={isGirona}
                         />
                         <Form.Check
                           type="radio"
                           id="lleida"
                           label="Lleida"
-                          name="activityRegion"
+                          name="activitySeason"
                           onChange={handleCheckRegion}
+                          checked={isLleida}
                         />
                         <Form.Check
                           type="radio"
                           id="costaBrava"
                           label="Costa Brava"
-                          name="activityRegion"
+                          name="activitySeason"
                           onChange={handleCheckRegion}
+                          checked={isCostaBrava}
                         />
                         <Form.Check
                           type="radio"
                           id="costaDaurada"
                           label="Costa Daurada"
-                          name="activityRegion"
+                          name="activitySeason"
                           onChange={handleCheckRegion}
+                          checked={isCostaDaurada}
                         />
                         <Form.Check
                           type="radio"
                           id="pirineus"
                           label="Pirineus"
-                          name="activityRegion"
+                          name="activitySeason"
                           onChange={handleCheckRegion}
+                          checked={isPirineus}
                         />
                       </Form.Group>
                     </Form.Group>
                   </Col>
                 </Form.Row>
                 <Form.Group>
-                  <Form.Label>Localització</Form.Label>
+                  <Form.Label>Location</Form.Label>
                   <Autocomplete
                     className="location-control"
                     apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
                     style={{ width: "100%" }}
+                    defaultValue={activity_full_address}
                     onPlaceSelected={(activity) => {
-                      console.log(activity);
                       let activity_full_address,
                         activity_locality,
                         activity_province,
@@ -526,8 +711,8 @@ const ActivityForm = () => {
 
                       setState({
                         ...state,
-                        formData: {
-                          ...state.formData,
+                        activity: {
+                          ...state.activity,
                           activity_full_address: activity_full_address,
                           activity_locality: activity_locality,
                           activity_province: activity_province,
@@ -540,11 +725,9 @@ const ActivityForm = () => {
                           activity_opening_hours: activity_opening_hours,
                         },
                       });
-
-                      console.log(activity);
                     }}
                     types={["establishment"]}
-                    placeholder={"Escriu la direcció de l'activitat"}
+                    placeholder={"Type the activity address"}
                     fields={[
                       "rating",
                       "place_id",
@@ -558,25 +741,25 @@ const ActivityForm = () => {
                 <Form.Row>
                   <Col lg={6}>
                     <Form.Group>
-                      <Form.Label>Telèfon</Form.Label>
+                      <Form.Label>Phone Number</Form.Label>
                       <Form.Control
                         type="tel"
                         name="phone"
-                        placeholder="Número de telèfon de contacte"
+                        placeholder="Phone number for contact details"
                         onChange={handleChange}
-                        value={state.formData.phone}
+                        value={phone}
                       />
                     </Form.Group>
                   </Col>
                   <Col lg={6}>
                     <Form.Group>
-                      <Form.Label>Pàgina web</Form.Label>
+                      <Form.Label>Website</Form.Label>
                       <Form.Control
                         type="url"
                         name="website"
-                        placeholder="Pàgina web de reserva o contacte"
+                        placeholder="Activity website"
                         onChange={handleChange}
-                        value={state.formData.website}
+                        value={website}
                       />
                     </Form.Group>
                   </Col>
@@ -584,25 +767,25 @@ const ActivityForm = () => {
                 <Form.Row>
                   <Col lg={6}>
                     <Form.Group>
-                      <Form.Label>Preu (€)</Form.Label>
+                      <Form.Label>Price (€)</Form.Label>
                       <Form.Control
                         type="number"
                         name="price"
-                        placeholder="Preu de l'activitat"
+                        placeholder="Activity price"
                         onChange={handleChange}
-                        value={state.formData.price}
+                        value={price}
                       />
                     </Form.Group>
                   </Col>
                   <Col lg={6}>
                     <Form.Group>
-                      <Form.Label>Durada (h)</Form.Label>
+                      <Form.Label>Duration (h)</Form.Label>
                       <Form.Control
                         type="number"
                         name="duration"
-                        placeholder="Durada de l'activitat"
+                        placeholder="Activity duration"
                         onChange={handleChange}
-                        value={state.formData.duration}
+                        value={duration}
                       />
                     </Form.Group>
                   </Col>
@@ -636,12 +819,14 @@ const ActivityForm = () => {
                               <line x1="15" y1="6" x2="21" y2="6" />
                               <line x1="18" y1="3" x2="18" y2="9" />
                             </svg>
-                            Afegir imatge
+                            {state.formData.cover
+                              ? "Canviar imatge"
+                              : "Seleccionar imatge"}
+
                             <Form.Control
                               type="file"
                               name="cover"
                               onChange={saveFileToStatus}
-                              max="1"
                             />
                           </Form.Label>
                         </div>
@@ -681,7 +866,7 @@ const ActivityForm = () => {
                               <line x1="15" y1="6" x2="21" y2="6" />
                               <line x1="18" y1="3" x2="18" y2="9" />
                             </svg>
-                            Afegir imatge
+                            Seleccionar imatges
                             <Form.Control
                               type="file"
                               onChange={saveFileToStatus}
@@ -696,15 +881,15 @@ const ActivityForm = () => {
                   </div>
                 </div>
                 <Form.Group>
-                  <Form.Label>Descripció</Form.Label>
+                  <Form.Label>Description</Form.Label>
                   <Form.Control
                     as="textarea"
                     rows="5"
                     type="text"
                     name="description"
-                    placeholder="Descripció de l'activitat"
+                    placeholder="Activity description"
+                    defaultValue={description}
                     onChange={handleChange}
-                    value={state.formData.description}
                   />
                 </Form.Group>
               </Form>
@@ -728,15 +913,9 @@ const ActivityForm = () => {
             </div>
             <div className="col right">
               <div className="buttons d-flex justify-space-between justify-content-end">
-                {state.isReadyToSubmit ? (
-                  <Button type="submit" variant="none" onClick={handleSubmit}>
-                    Publicar
-                  </Button>
-                ) : (
-                  <Button type="submit" variant="none" disabled>
-                    Publicar
-                  </Button>
-                )}
+                <Button type="submit" variant="none" onClick={handleSubmit}>
+                  Save changes
+                </Button>
               </div>
             </div>
           </Container>
@@ -746,4 +925,4 @@ const ActivityForm = () => {
   );
 };
 
-export default ActivityForm;
+export default ActivityEditionForm;

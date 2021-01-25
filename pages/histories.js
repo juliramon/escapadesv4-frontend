@@ -29,6 +29,7 @@ const StoriesList = ({ user }) => {
       <PublicContentBox
         key={el._id}
         type={el.type}
+        slug={el.slug}
         id={el._id}
         image={el.images[0]}
         title={el.title}

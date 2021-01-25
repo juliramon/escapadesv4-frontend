@@ -24,7 +24,8 @@
     "react-photoswipe": "^1.3.0",
     "react-quill": "^2.0.0-beta.2",
     "reading-time": "^1.2.1",
-    "sass": "^1.26.11"
+    "sass": "^1.26.11",
+    "slugify": "^1.4.6"
   },
   "devDependencies": {
     "@editorjs/editorjs": "^2.19.1",
