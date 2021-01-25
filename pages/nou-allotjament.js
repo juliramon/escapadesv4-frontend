@@ -6,6 +6,7 @@ import Router, { useRouter } from "next/router";
 import Autocomplete from "react-google-autocomplete";
 import UserContext from "../contexts/UserContext";
 import Head from "next/head";
+import slugify from "slugify";
 
 const PlaceForm = () => {
   const { user } = useContext(UserContext);
@@ -196,7 +197,8 @@ const PlaceForm = () => {
     });
   };
 
-  const submitPlace = () => {
+  const submitPlace = async () => {
+    const slug = await slugify(state.formData.title);
     const {
       type,
       title,
@@ -225,6 +227,7 @@ const PlaceForm = () => {
     service
       .place(
         type,
+        slug,
         title,
         subtitle,
         categories,

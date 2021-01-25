@@ -5,6 +5,7 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import NavigationBar from "../components/global/NavigationBar";
 import UserContext from "../contexts/UserContext";
 import ContentService from "../services/contentService";
+import slugify from "slugify";
 import dynamic from "next/dynamic";
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
@@ -132,7 +133,8 @@ const StoryForm = () => {
 
   const [description, setDescription] = useState("");
 
-  const submitStory = () => {
+  const submitStory = async () => {
+    const slug = await slugify(state.formData.title);
     const {
       type,
       title,
@@ -141,22 +143,60 @@ const StoryForm = () => {
       cloudImages,
     } = state.formData;
     service
-      .story(type, title, subtitle, coverCloudImage, cloudImages, description)
+      .story(
+        type,
+        slug,
+        title,
+        subtitle,
+        coverCloudImage,
+        cloudImages,
+        description
+      )
       .then(() => router.push("/dashboard"))
       .catch((err) => console.log(err));
   };
 
-  const handleFileUpload = (e) => {
+  // const handleFileUpload = (e) => {
+  //   const imagesList = state.formData.images;
+  //   const cover = state.formData.cover;
+  //   let uploadedImages = [];
+  //   let uploadedCover = "";
+  //   const uploadData = new FormData();
+  //   uploadData.append("imageUrl", cover);
+  //   service.uploadFile(uploadData).then((res) => {
+  //     uploadedCover = res.path;
+  //   });
+
+  //   imagesList.forEach((el) => {
+  //     const uploadData = new FormData();
+  //     uploadData.append("imageUrl", el);
+  //     service.uploadFile(uploadData).then((res) => {
+  //       console.log(res.path);
+  //       uploadedImages.push(res.path);
+  //       console.log(uploadedImages.length);
+  //       if (uploadedImages.length === state.formData.images.length) {
+  //         setState({
+  //           ...state,
+  //           formData: {
+  //             ...state.formData,
+  //             cloudImages: uploadedImages,
+  //             coverCloudImage: uploadedCover,
+  //             cloudImagesUploaded: true,
+  //             coverCloudImageUploaded: true,
+  //           },
+  //         });
+  //       }
+  //     });
+  //   });
+  // };
+
+  const handleFileUpload = async (e) => {
     const imagesList = state.formData.images;
     const cover = state.formData.cover;
     let uploadedImages = [];
-    let uploadedCover = "";
     const uploadData = new FormData();
     uploadData.append("imageUrl", cover);
-    service.uploadFile(uploadData).then((res) => {
-      uploadedCover = res.path;
-    });
-
+    const uploadedCover = await service.uploadFile(uploadData);
     imagesList.forEach((el) => {
       const uploadData = new FormData();
       uploadData.append("imageUrl", el);
@@ -170,7 +210,7 @@ const StoryForm = () => {
             formData: {
               ...state.formData,
               cloudImages: uploadedImages,
-              coverCloudImage: uploadedCover,
+              coverCloudImage: uploadedCover.path,
               cloudImagesUploaded: true,
               coverCloudImageUploaded: true,
             },
@@ -188,7 +228,8 @@ const StoryForm = () => {
   useEffect(() => {
     if (
       state.formData.cloudImagesUploaded === true &&
-      state.formData.coverCloudImageUploaded === true
+      state.formData.coverCloudImageUploaded === true &&
+      state.formData.coverCloudImage.length > 0
     ) {
       submitStory();
     }

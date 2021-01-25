@@ -6,6 +6,7 @@ import Router, { useRouter } from "next/router";
 import Autocomplete from "react-google-autocomplete";
 import UserContext from "../contexts/UserContext";
 import Head from "next/head";
+import slugify from "slugify";
 
 const ActivityForm = () => {
   const { user } = useContext(UserContext);
@@ -188,7 +189,8 @@ const ActivityForm = () => {
     });
   };
 
-  const submitActivity = () => {
+  const submitActivity = async () => {
+    const slug = await slugify(state.formData.title);
     const {
       type,
       title,
@@ -217,6 +219,7 @@ const ActivityForm = () => {
     service
       .activity(
         type,
+        slug,
         title,
         subtitle,
         categories,

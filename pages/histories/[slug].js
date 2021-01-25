@@ -17,9 +17,7 @@ const StoryListing = () => {
   const { user } = useContext(UserContext);
   const router = useRouter();
 
-  console.log(router);
-
-  const urlToShare = `https://escapadesenparella.cat/histories/${router.query.id}`;
+  const urlToShare = `https://escapadesenparella.cat/histories/${router.query.slug}`;
 
   const initialState = {
     story: {},
@@ -30,7 +28,7 @@ const StoryListing = () => {
   const [queryId, setQueryId] = useState(null);
   useEffect(() => {
     if (router && router.query) {
-      setQueryId(router.query.id);
+      setQueryId(router.query.slug);
     }
   }, [router]);
 
@@ -45,22 +43,24 @@ const StoryListing = () => {
   const hideShareModalVisibility = () => setShareModalVisibility(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const storyDetails = await service.getStoryDetails(queryId);
-      let isLoaded;
-      if (storyDetails.type) {
-        isLoaded = true;
-      } else {
-        isLoaded = false;
-      }
-      setState({
-        ...state,
-        story: storyDetails,
-        storyLoaded: isLoaded,
-        owner: storyDetails.owner,
-      });
-    };
-    fetchData();
+    if (router.query.slug !== undefined) {
+      const fetchData = async () => {
+        const storyDetails = await service.getStoryDetails(router.query.slug);
+        let isLoaded;
+        if (storyDetails.type) {
+          isLoaded = true;
+        } else {
+          isLoaded = false;
+        }
+        setState({
+          ...state,
+          story: storyDetails,
+          storyLoaded: isLoaded,
+          owner: storyDetails.owner,
+        });
+      };
+      fetchData();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryId]);
 
@@ -154,9 +154,10 @@ const StoryListing = () => {
     let parsedDescriptionArray = [parsedDescription];
     readingTimeIndicator = readingTime(parsedDescriptionArray);
     parsedDescriptionArray.map((el) => slicedDescription.push(el));
-    console.log(slicedDescription);
-    slicedDescription[0].splice(4, 0, photoSwipeGallery);
-    slicedDescription[0].splice(1, 0, welcomeText);
+    if (slicedDescription.length > 1) {
+      slicedDescription[0].splice(4, 0, photoSwipeGallery);
+      slicedDescription[0].splice(1, 0, welcomeText);
+    }
   }
 
   return (

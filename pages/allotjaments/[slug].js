@@ -10,15 +10,15 @@ import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
 import ShareModal from "../../components/modals/ShareModal";
 
-const ActivityListing = () => {
+const PlaceListing = () => {
   const { user } = useContext(UserContext);
   const router = useRouter();
 
-  const urlToShare = `https://escapadesenparella.cat/activitats/${router.query.id}`;
+  const urlToShare = `https://escapadesenparella.cat/allotjaments/${router.query.slug}`;
 
   const initialState = {
-    activity: {},
-    isActivityLoaded: false,
+    place: {},
+    placeLoaded: false,
     owner: {},
     bookmarkDetails: {},
     isBookmarked: false,
@@ -29,7 +29,7 @@ const ActivityListing = () => {
   const [queryId, setQueryId] = useState(null);
   useEffect(() => {
     if (router && router.query) {
-      setQueryId(router.query.id);
+      setQueryId(router.query.slug);
     }
   }, [router]);
 
@@ -44,47 +44,49 @@ const ActivityListing = () => {
   const hideShareModalVisibility = () => setShareModalVisibility(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      let userBookmarks;
-      if (user && user !== "null") {
-        userBookmarks = await service.getUserAllBookmarks();
-      }
-      const activityDetails = await service.activityDetails(queryId);
-      let bookmarkDetails, isBookmarked, isLoaded;
-      if (activityDetails.type) {
-        isLoaded = true;
-      } else {
-        isLoaded = false;
-      }
-      if (userBookmarks) {
-        userBookmarks.forEach((el) => {
-          if (
-            el.bookmarkActivityRef &&
-            el.bookmarkActivityRef._id === activityDetails._id
-          ) {
-            return (bookmarkDetails = el);
-          }
+    if (router.query.slug !== undefined) {
+      const fetchData = async () => {
+        let userBookmarks;
+        if (user && user !== "null") {
+          userBookmarks = await service.getUserAllBookmarks();
+        }
+        const placeDetails = await service.getPlaceDetails(router.query.slug);
+        let bookmarkDetails, isBookmarked, isLoaded;
+        if (placeDetails.type) {
+          isLoaded = true;
+        } else {
+          isLoaded = false;
+        }
+        if (userBookmarks) {
+          userBookmarks.forEach((el) => {
+            if (
+              el.bookmarkPlaceRef &&
+              el.bookmarkPlaceRef._id === placeDetails._id
+            ) {
+              return (bookmarkDetails = el);
+            }
+          });
+        }
+        if (bookmarkDetails) {
+          isBookmarked = !bookmarkDetails.isRemoved;
+        } else {
+          isBookmarked = false;
+        }
+        setState({
+          ...state,
+          place: placeDetails,
+          placeLoaded: isLoaded,
+          owner: placeDetails.owner,
+          bookmarkDetails: userBookmarks,
+          isBookmarked: isBookmarked,
         });
-      }
-      if (bookmarkDetails) {
-        isBookmarked = !bookmarkDetails.isRemoved;
-      } else {
-        isBookmarked = false;
-      }
-      setState({
-        ...state,
-        activity: activityDetails,
-        isActivityLoaded: isLoaded,
-        owner: activityDetails.owner,
-        bookmarkDetails: bookmarkDetails,
-        isBookmarked: isBookmarked,
-      });
-    };
-    fetchData();
+      };
+      fetchData();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryId]);
 
-  if (state.isActivityLoaded === false) {
+  if (state.placeLoaded === false) {
     return (
       <>
         <Head>
@@ -99,11 +101,11 @@ const ActivityListing = () => {
     );
   }
 
-  let { title, subtitle, description } = state.activity;
+  let { title, subtitle, description } = state.place;
 
   const bookmarkListing = () => {
-    const listingId = state.activity._id;
-    const listingType = state.activity.type;
+    const listingId = state.place._id;
+    const listingType = state.place.type;
     service.bookmark(listingId, listingType).then((res) => {
       setState({
         ...state,
@@ -140,7 +142,7 @@ const ActivityListing = () => {
               <path d="M9 4h6a2 2 0 0 1 2 2v14l-5-3l-5 3v-14a2 2 0 0 1 2 -2" />
             </svg>
           </button>
-          <span>Desar</span>
+          <span>Bookmark</span>
         </div>
       );
     } else {
@@ -169,7 +171,7 @@ const ActivityListing = () => {
               />
             </svg>
           </button>
-          <span>Esborrar</span>
+          <span>Unbookmark</span>
         </div>
       );
     }
@@ -196,7 +198,7 @@ const ActivityListing = () => {
             <path d="M9 4h6a2 2 0 0 1 2 2v14l-5-3l-5 3v-14a2 2 0 0 1 2 -2" />
           </svg>
         </button>
-        <span>Desa</span>
+        <span>Bookmark</span>
       </div>
     );
   }
@@ -252,8 +254,8 @@ const ActivityListing = () => {
   );
 
   const center = {
-    lat: parseFloat(state.activity.activity_lat),
-    lng: parseFloat(state.activity.activity_lng),
+    lat: parseFloat(state.place.place_lat),
+    lng: parseFloat(state.place.place_lng),
   };
 
   const getMapOptions = (maps) => {
@@ -271,16 +273,15 @@ const ActivityListing = () => {
 
   const renderMarker = (map, maps) => {
     const position = {
-      lat: parseFloat(state.activity.activity_lat),
-      lng: parseFloat(state.activity.activity_lng),
+      lat: parseFloat(state.place.place_lat),
+      lng: parseFloat(state.place.place_lng),
     };
     new maps.Marker({ position: position, map, title: "Hello" });
   };
 
   let coversList;
-
-  if (state.isActivityLoaded === true) {
-    coversList = state.activity.images.map((cover, idx) => (
+  if (state.placeLoaded === true) {
+    coversList = state.place.images.map((cover, idx) => (
       <div
         key={idx}
         className="cover"
@@ -289,10 +290,10 @@ const ActivityListing = () => {
     ));
   }
 
-  let activityHours, hasOpeningHours;
-  if (state.activity.activity_opening_hours.length > 0) {
-    activityHours = state.activity.activity_opening_hours.map((hour, idx) => (
-      <li key={idx} className="activity-hour">
+  let placeHours, hasOpeningHours;
+  if (state.place.place_opening_hours.length > 0) {
+    placeHours = state.place.place_opening_hours.map((hour, idx) => (
+      <li key={idx} className="place-hour">
         {hour}
       </li>
     ));
@@ -322,26 +323,26 @@ const ActivityListing = () => {
             </svg>
             Opening Hours
           </li>
-          {activityHours}
+          {placeHours}
         </ul>
       </div>
     );
   }
 
-  const activityCategories = state.activity.categories.map((category, idx) => (
-    <li key={idx} className="activity-category">
+  const placeCategories = state.place.categories.map((category, idx) => (
+    <li key={idx} className="place-category">
       {category} getaway
     </li>
   ));
 
-  const activitySeasons = state.activity.seasons.map((season, idx) => (
-    <li key={idx} className="activity-season">
+  const placeSeasons = state.place.seasons.map((season, idx) => (
+    <li key={idx} className="place-season">
       {season}
     </li>
   ));
 
-  const activityRegion = state.activity.region.map((region, idx) => (
-    <li key={idx} className="activity-region">
+  const placeRegion = state.place.region.map((region, idx) => (
+    <li key={idx} className="place-region">
       {region}
     </li>
   ));
@@ -349,23 +350,23 @@ const ActivityListing = () => {
   return (
     <>
       <Head>
-        <title>{state.activity.title} - Escapadesenparella.cat</title>
+        <title>{state.place.title} - Escapadesenparella.cat</title>
         <link rel="icon" href="/favicon.ico" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta
           name="description"
-          content={`${state.activity.title}, una escapada que us encantarà! Descobreix ${state.activity.title} amb nosaltres i sorprèn a la teva parella. Fes clic aquí!`}
+          content={`${state.place.title}, una escapada que us encantarà! Descobreix ${state.place.title} amb nosaltres i sorprèn a la teva parella. Fes clic aquí!`}
         />
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
-          content={`${state.activity.title} - Escapadesenparella.cat`}
+          content={`${state.place.title} - Escapadesenparella.cat`}
         />
         <meta
           property="og:description"
-          content={`${state.activity.title}, una escapada que us encantarà! Descobreix ${state.activity.title} amb nosaltres i sorprèn a la teva parella. Fes clic aquí!`}
+          content={`${state.place.title}, una escapada que us encantarà! Descobreix ${state.place.title} amb nosaltres i sorprèn a la teva parella. Fes clic aquí!`}
         />
         <meta
           property="url"
@@ -376,14 +377,14 @@ const ActivityListing = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content={`${state.activity.title} - Escapadesenparella.cat`}
+          content={`${state.place.title} - Escapadesenparella.cat`}
         />
         <meta
           name="twitter:description"
-          content={`${state.activity.title}, una escapada que us encantarà! Descobreix ${state.activity.title} amb nosaltres i sorprèn a la teva parella. Fes clic aquí!`}
+          content={`${state.place.title}, una escapada que us encantarà! Descobreix ${state.place.title} amb nosaltres i sorprèn a la teva parella. Fes clic aquí!`}
         />
-        <meta name="twitter:image" content={state.activity.images[0]} />
-        <meta property="og:image" content={state.activity.images[0]} />
+        <meta name="twitter:image" content={state.place.images[0]} />
+        <meta property="og:image" content={state.place.images[0]} />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:heigth" content="1200" />
         <link
@@ -438,7 +439,7 @@ const ActivityListing = () => {
                                     <circle cx="18" cy="5" r="2" />
                                     <path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
                                   </svg>
-                                  <span>{state.activity.type}</span>
+                                  <span>{state.place.type}</span>
                                 </li>
                                 <li className="listing-rating">
                                   <svg
@@ -456,7 +457,7 @@ const ActivityListing = () => {
                                     <path stroke="none" d="M0 0h24v24H0z" />
                                     <path d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2l3.086 6.253 6.9 1.002-4.993 4.867 1.179 6.873z" />
                                   </svg>
-                                  <span>{state.activity.activity_rating}</span>
+                                  <span>{state.place.place_rating}</span>
                                 </li>
                                 <li className="listing-location">
                                   <svg
@@ -476,19 +477,17 @@ const ActivityListing = () => {
                                     <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
                                   </svg>
                                   <span>{`${
-                                    state.activity.activity_locality ===
-                                    undefined
+                                    state.place.place_locality === undefined
                                       ? ""
-                                      : state.activity.activity_locality
+                                      : state.place.place_locality
                                   }${
-                                    state.activity.activity_locality ===
-                                    undefined
+                                    state.place.place_locality === undefined
                                       ? ""
                                       : ","
                                   } ${
-                                    state.activity.activity_province ||
-                                    state.activity.activity_state
-                                  }, ${state.activity.activity_country}`}</span>
+                                    state.place.place_province ||
+                                    state.place.place_state
+                                  }, ${state.place.place_country}`}</span>
                                 </li>
                               </ul>
                             </div>
@@ -507,7 +506,7 @@ const ActivityListing = () => {
                 </section>
                 <section>
                   <Row>
-                    <div className="listing-body">
+                    <article className="listing-body">
                       <Col lg={7}>
                         <div className="listing-body-wrapper d-flex justify-content-between align-items-center">
                           <p className="listing-subtitle">{subtitle}</p>
@@ -530,32 +529,30 @@ const ActivityListing = () => {
                         <div className="listing-details-body d-flex">
                           <div className="listing-categories">
                             <span>Ideal per a...</span>
-                            <ul>{activityCategories}</ul>
+                            <ul>{placeCategories}</ul>
                           </div>
                           <div className="listing-seasons">
                             <span>Estació recomanada...</span>
-                            <ul>{activitySeasons}</ul>
+                            <ul>{placeSeasons}</ul>
                           </div>
                           <div className="d-flex right">
+                            <div className="listing-type">
+                              <span>L'allotjament és un</span>
+                              <ul>{state.place.placeType}</ul>
+                            </div>
                             <div className="listing-region">
                               <span>Es troba a</span>
-                              <ul>{activityRegion}</ul>
-                            </div>
-                            <div className="listing-duration">
-                              <span>Durada</span>
-                              {state.activity.duration}{" "}
-                              {state.activity.duration > 1 ? "hores" : "hora"}
+                              <ul>{placeRegion}</ul>
                             </div>
                             <div className="listing-price">
-                              <span>Preu</span>
-                              {state.activity.price} €
+                              <span>Preu per nit</span>
+                              {state.place.price} €
                             </div>
                           </div>
                         </div>
                         <div className="listing-description">{description}</div>
                       </Col>
                       <Col lg={1}></Col>
-
                       <Col lg={4}>
                         <aside>
                           <div className="listing-details-box">
@@ -593,7 +590,7 @@ const ActivityListing = () => {
                                   <circle cx="12" cy="11" r="3" />
                                   <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
                                 </svg>
-                                {state.activity.activity_full_address}
+                                {state.place.place_full_address}
                               </li>
                               <li className="listing-phone">
                                 <svg
@@ -613,8 +610,8 @@ const ActivityListing = () => {
                                   <path d="M15 7a2 2 0 0 1 2 2" />
                                   <path d="M15 3a6 6 0 0 1 6 6" />
                                 </svg>
-                                <a href={`tel:${state.activity.phone}`}>
-                                  {state.activity.phone}
+                                <a href={`tel:${state.place.phone}`}>
+                                  {state.place.phone}
                                 </a>
                               </li>
                               <li className="listing-website">
@@ -634,15 +631,15 @@ const ActivityListing = () => {
                                   <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
                                   <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
                                 </svg>
-                                <a href={`http://${state.activity.website}`}>
-                                  {state.activity.website}
+                                <a href={`http://${state.place.website}`}>
+                                  {state.place.website}
                                 </a>
                               </li>
                             </ul>
                           </div>
                         </aside>
                       </Col>
-                    </div>
+                    </article>
                   </Row>
                 </section>
               </div>
@@ -663,4 +660,4 @@ const ActivityListing = () => {
   );
 };
 
-export default ActivityListing;
+export default PlaceListing;

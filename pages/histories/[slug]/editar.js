@@ -6,6 +6,7 @@ import NavigationBar from "../../../components/global/NavigationBar";
 import UserContext from "../../../contexts/UserContext";
 import ContentService from "../../../services/contentService";
 import dynamic from "next/dynamic";
+import slugify from "slugify";
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
@@ -93,35 +94,37 @@ const StoryEditionForm = () => {
   const service = new ContentService();
 
   useEffect(() => {
-    const fetchData = async () => {
-      let storyDetails = await service.getStoryDetails(queryId);
-      setState({
-        ...state,
-        story: storyDetails,
-        formData: {
-          _id: storyDetails._id,
-          type: storyDetails.type,
-          title: storyDetails.title,
-          subtitle: storyDetails.subtitle,
-          cover: storyDetails.cover,
-          blopCover: "",
-          updatedCover: false,
-          images: [],
-          blopImages: [],
-          updatedImages: false,
-          cloudImages: [],
-          coverCloudImage: "",
-          isReadyToSubmit: false,
-          cloudImagesUploaded: false,
-          coverCloudImageUploaded: false,
-        },
-        isStoryLoaded: true,
-      });
-      setDescription(storyDetails.description);
-    };
-    fetchData();
+    if (router.query.slug !== undefined) {
+      const fetchData = async () => {
+        let storyDetails = await service.getStoryDetails(router.query.slug);
+        setState({
+          ...state,
+          story: storyDetails,
+          formData: {
+            _id: storyDetails._id,
+            type: storyDetails.type,
+            title: storyDetails.title,
+            subtitle: storyDetails.subtitle,
+            cover: storyDetails.cover,
+            blopCover: "",
+            updatedCover: false,
+            images: [],
+            blopImages: [],
+            updatedImages: false,
+            cloudImages: [],
+            coverCloudImage: "",
+            isReadyToSubmit: false,
+            cloudImagesUploaded: false,
+            coverCloudImageUploaded: false,
+          },
+          isStoryLoaded: true,
+        });
+        setDescription(storyDetails.description);
+      };
+      fetchData();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [queryId]);
+  }, [queryId, router.query.slug]);
 
   const { title, subtitle } = state.formData;
 
@@ -193,7 +196,8 @@ const StoryEditionForm = () => {
     );
   }
 
-  const submitStory = () => {
+  const submitStory = async () => {
+    const slug = await slugify(state.story.title);
     const {
       _id,
       title,
@@ -210,7 +214,15 @@ const StoryEditionForm = () => {
       ? (storyImages = cloudImages)
       : (storyImages = images);
     service
-      .editStory(_id, title, subtitle, storyCover, storyImages, description)
+      .editStory(
+        _id,
+        slug,
+        title,
+        subtitle,
+        storyCover,
+        storyImages,
+        description
+      )
       .then(() => router.push("/dashboard"))
       .catch((err) => console.log(err));
   };

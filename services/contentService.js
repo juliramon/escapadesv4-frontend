@@ -13,6 +13,7 @@ class ContentService {
 
   activity = (
     type,
+    slug,
     title,
     subtitle,
     categories,
@@ -39,6 +40,7 @@ class ContentService {
     return this.service
       .post("/activity", {
         type,
+        slug,
         title,
         subtitle,
         categories,
@@ -80,6 +82,7 @@ class ContentService {
 
   editActivity = (
     _id,
+    slug,
     title,
     subtitle,
     categories,
@@ -104,6 +107,7 @@ class ContentService {
     price
   ) =>
     this.service.put(`/activities/${_id}`, {
+      slug,
       title,
       subtitle,
       categories,
@@ -172,6 +176,7 @@ class ContentService {
 
   place = (
     type,
+    slug,
     title,
     subtitle,
     categories,
@@ -198,6 +203,7 @@ class ContentService {
     return this.service
       .post("/place", {
         type,
+        slug,
         title,
         subtitle,
         categories,
@@ -221,7 +227,9 @@ class ContentService {
         place_opening_hours,
         price,
       })
-      .then((res) => res.data);
+      .then((res) => {
+        console.log(res.data);
+      });
   };
 
   getAllPlaces = () => this.service.get("/places").then((res) => res.data);
@@ -236,6 +244,7 @@ class ContentService {
 
   editPlace = (
     _id,
+    slug,
     title,
     subtitle,
     categories,
@@ -260,6 +269,7 @@ class ContentService {
     price
   ) =>
     this.service.put(`/places/${_id}`, {
+      slug,
       title,
       subtitle,
       categories,
@@ -289,10 +299,11 @@ class ContentService {
 
   // STORIES ENDPOINTS
 
-  story = (type, title, subtitle, cover, image, description) => {
+  story = (type, slug, title, subtitle, cover, image, description) => {
     return this.service
       .post("/story", {
         type,
+        slug,
         title,
         subtitle,
         cover,
@@ -310,8 +321,9 @@ class ContentService {
   getUserStories = (id) =>
     this.service.get(`/users/${id}/stories`).then((res) => res.data);
 
-  editStory = (_id, title, subtitle, cover, images, description) =>
+  editStory = (_id, slug, title, subtitle, cover, images, description) =>
     this.service.put(`/stories/${_id}`, {
+      slug,
       title,
       subtitle,
       cover,

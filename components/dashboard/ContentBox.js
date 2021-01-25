@@ -6,6 +6,7 @@ import ShareModal from "../modals/ShareModal";
 
 const ContentBox = ({
   type,
+  slug,
   id,
   image,
   title,
@@ -49,7 +50,7 @@ const ContentBox = ({
 
   return (
     <div className="content box d-flex align-items-center">
-      <Link href={`/${path}/${id}`}>
+      <Link href={`/${path}/${slug}`}>
         <a className="d-flex align-items-center">
           <div className="image">
             <img src={image} alt={title} />
@@ -83,7 +84,7 @@ const ContentBox = ({
           <Dropdown.Menu>
             <ul>
               <li>
-                <Link href={`/${path}/${id}`}>
+                <Link href={`/${path}/${slug}`}>
                   <a>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +108,7 @@ const ContentBox = ({
                 </Link>
               </li>
               <li>
-                <Link href={`/${path}/${id}/editar`}>
+                <Link href={`/${path}/${slug}/editar`}>
                   <a>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

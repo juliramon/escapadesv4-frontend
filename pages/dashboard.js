@@ -262,6 +262,7 @@ const Dashboard = () => {
         <ContentBox
           key={el._id}
           type={el.type}
+          slug={el.slug}
           id={el._id}
           image={el.cover}
           title={el.title}
@@ -279,6 +280,7 @@ const Dashboard = () => {
           <ContentBox
             key={el._id}
             type={el.type}
+            slug={el.slug}
             id={el._id}
             image={el.cover}
             title={el.title}
@@ -300,6 +302,7 @@ const Dashboard = () => {
           <ContentBox
             key={el._id}
             type={el.type}
+            slug={el.slug}
             id={el._id}
             image={el.cover}
             title={el.title}
@@ -320,6 +323,7 @@ const Dashboard = () => {
           <ContentBox
             key={el._id}
             type={el.type}
+            slug={el.slug}
             id={el._id}
             image={el.cover}
             title={el.title}

@@ -6,6 +6,7 @@ import Router, { useRouter } from "next/router";
 import Autocomplete from "react-google-autocomplete";
 import UserContext from "../../../contexts/UserContext";
 import Head from "next/head";
+import slugify from "slugify";
 
 const ActivityEditionForm = () => {
   const { user } = useContext(UserContext);
@@ -67,53 +68,56 @@ const ActivityEditionForm = () => {
   const [queryId, setQueryId] = useState(null);
   useEffect(() => {
     if (router && router.query) {
-      setQueryId(router.query.id);
+      setQueryId(router.query.slug);
     }
   }, [router]);
 
   const service = new ContentService();
 
   useEffect(() => {
-    const fetchData = async () => {
-      let activityDetails = await service.activityDetails(queryId);
-      setState({
-        ...state,
-        activity: activityDetails,
-        formdata: {
-          _id: activityDetails._id,
-          type: activityDetails.type,
-          title: activityDetails.title,
-          subtitle: activityDetails.subtitle,
-          categories: activityDetails.categories,
-          seasons: activityDetails.seasons,
-          region: activityDetails.region,
-          cover: activityDetails.cover,
-          blopCover: "",
-          images: [],
-          blopImages: [],
-          cloudImages: [],
-          coverCloudImage: "",
-          cloudImagesUploaded: false,
-          coverCloudImageUploaded: false,
-          phone: activityDetails.phone,
-          website: activityDetails.website,
-          activity_full_address: "",
-          activity_locality: "",
-          activity_province: "",
-          activity_state: "",
-          activity_country: "",
-          activity_lat: "",
-          activity_lng: "",
-          activity_rating: 0,
-          activity_place_id: "",
-          activity_opening_hours: "",
-          duration: "",
-          price: "",
-        },
-        isActivityLoaded: true,
-      });
-    };
-    fetchData();
+    if (router.query.slug !== undefined) {
+      const fetchData = async () => {
+        let activityDetails = await service.activityDetails(router.query.slug);
+        console.log(activityDetails);
+        setState({
+          ...state,
+          activity: activityDetails,
+          formdata: {
+            _id: activityDetails._id,
+            type: activityDetails.type,
+            title: activityDetails.title,
+            subtitle: activityDetails.subtitle,
+            categories: activityDetails.categories,
+            seasons: activityDetails.seasons,
+            region: activityDetails.region,
+            cover: activityDetails.cover,
+            blopCover: "",
+            images: [],
+            blopImages: [],
+            cloudImages: [],
+            coverCloudImage: "",
+            cloudImagesUploaded: false,
+            coverCloudImageUploaded: false,
+            phone: activityDetails.phone,
+            website: activityDetails.website,
+            activity_full_address: "",
+            activity_locality: "",
+            activity_province: "",
+            activity_state: "",
+            activity_country: "",
+            activity_lat: "",
+            activity_lng: "",
+            activity_rating: 0,
+            activity_place_id: "",
+            activity_opening_hours: "",
+            duration: "",
+            price: "",
+          },
+          isActivityLoaded: true,
+        });
+      };
+      fetchData();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryId]);
 
@@ -265,7 +269,8 @@ const ActivityEditionForm = () => {
     description,
   } = state.activity;
 
-  const submitActivity = () => {
+  const submitActivity = async () => {
+    const slug = await slugify(state.activity.title);
     const {
       _id,
       title,
@@ -302,6 +307,7 @@ const ActivityEditionForm = () => {
     service
       .editActivity(
         _id,
+        slug,
         title,
         subtitle,
         categories,

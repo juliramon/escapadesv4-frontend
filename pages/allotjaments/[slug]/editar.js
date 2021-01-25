@@ -6,6 +6,7 @@ import Router, { useRouter } from "next/router";
 import Autocomplete from "react-google-autocomplete";
 import UserContext from "../../../contexts/UserContext";
 import Head from "next/head";
+import slugify from "slugify";
 
 const ActivityEditionForm = () => {
   const { user } = useContext(UserContext);
@@ -73,50 +74,54 @@ const ActivityEditionForm = () => {
 
   const service = new ContentService();
 
+  console.log(router.query);
+
   useEffect(() => {
-    const fetchData = async () => {
-      let placeDetails = await service.getPlaceDetails(queryId);
-      setState({
-        ...state,
-        place: placeDetails,
-        formData: {
-          _id: placeDetails._id,
-          type: placeDetails.type,
-          title: placeDetails.title,
-          subtitle: placeDetails.subtitle,
-          categories: placeDetails.categories,
-          seasons: placeDetails.seasons,
-          region: placeDetails.region,
-          placeType: placeDetails.placeType,
-          cover: placeDetails.cover,
-          blopCover: "",
-          images: [],
-          blopImages: [],
-          cloudImages: [],
-          coverCloudImage: "",
-          cloudImagesUploaded: false,
-          coverCloudImageUploaded: false,
-          phone: placeDetails.phone,
-          website: placeDetails.website,
-          place_full_address: "",
-          place_locality: "",
-          place_province: "",
-          place_state: "",
-          place_country: "",
-          place_lat: "",
-          place_lng: "",
-          place_rating: 0,
-          place_id: "",
-          place_opening_hours: "",
-          price: "",
-          isReadyToSubmit: false,
-        },
-        isPlaceLoaded: true,
-      });
-    };
-    fetchData();
+    if (router.query.slug !== undefined) {
+      const fetchData = async () => {
+        let placeDetails = await service.getPlaceDetails(router.query.slug);
+        setState({
+          ...state,
+          place: placeDetails,
+          formData: {
+            _id: placeDetails._id,
+            type: placeDetails.type,
+            title: placeDetails.title,
+            subtitle: placeDetails.subtitle,
+            categories: placeDetails.categories,
+            seasons: placeDetails.seasons,
+            region: placeDetails.region,
+            placeType: placeDetails.placeType,
+            cover: placeDetails.cover,
+            blopCover: "",
+            images: [],
+            blopImages: [],
+            cloudImages: [],
+            coverCloudImage: "",
+            cloudImagesUploaded: false,
+            coverCloudImageUploaded: false,
+            phone: placeDetails.phone,
+            website: placeDetails.website,
+            place_full_address: "",
+            place_locality: "",
+            place_province: "",
+            place_state: "",
+            place_country: "",
+            place_lat: "",
+            place_lng: "",
+            place_rating: 0,
+            place_id: "",
+            place_opening_hours: "",
+            price: "",
+            isReadyToSubmit: false,
+          },
+          isPlaceLoaded: true,
+        });
+      };
+      fetchData();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [queryId]);
+  }, [queryId, router.query.slug]);
 
   const saveFileToStatus = (e) => {
     const fileToUpload = e.target.files[0];
@@ -283,8 +288,8 @@ const ActivityEditionForm = () => {
     description,
   } = state.place;
 
-  const submitPlace = () => {
-    console.log("place submitted");
+  const submitPlace = async () => {
+    const slug = await slugify(state.place.title);
     const {
       _id,
       title,
@@ -321,6 +326,7 @@ const ActivityEditionForm = () => {
     service
       .editPlace(
         _id,
+        slug,
         title,
         subtitle,
         categories,
