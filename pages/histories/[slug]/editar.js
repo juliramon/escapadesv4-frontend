@@ -197,7 +197,10 @@ const StoryEditionForm = () => {
   }
 
   const submitStory = async () => {
-    const slug = await slugify(state.story.title);
+    const slug = await slugify(state.story.title, {
+      remove: /[*+~.,()'"!:@]/g,
+      lower: true,
+    });
     const {
       _id,
       title,

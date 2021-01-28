@@ -118,11 +118,16 @@ const Dashboard = () => {
 
   if (state.isFetching === true && state.hasListings === false) {
     return (
-      <Container className="spinner d-flex justify-space-between">
-        <Spinner animation="border" role="status" variant="primary">
-          <span className="sr-only">Loading...</span>
-        </Spinner>
-      </Container>
+      <>
+        <Head>
+          <title>Carregant...</title>
+        </Head>
+        <Container className="spinner d-flex justify-space-between">
+          <Spinner animation="border" role="status" variant="primary">
+            <span className="sr-only">Carregant...</span>
+          </Spinner>
+        </Container>
+      </>
     );
   }
 

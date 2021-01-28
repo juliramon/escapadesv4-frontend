@@ -270,7 +270,10 @@ const ActivityEditionForm = () => {
   } = state.activity;
 
   const submitActivity = async () => {
-    const slug = await slugify(state.activity.title);
+    const slug = await slugify(state.activity.title, {
+      remove: /[*+~.,()'"!:@]/g,
+      lower: true,
+    });
     const {
       _id,
       title,

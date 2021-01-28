@@ -125,6 +125,7 @@ const StoryListing = () => {
   }
 
   const stateImages = [...state.story.images];
+  console.log(stateImages);
   const stateImagesList = stateImages.map((el, idx) => ({
     src: el,
     thumbnail: el,
@@ -154,7 +155,8 @@ const StoryListing = () => {
     let parsedDescriptionArray = [parsedDescription];
     readingTimeIndicator = readingTime(parsedDescriptionArray);
     parsedDescriptionArray.map((el) => slicedDescription.push(el));
-    if (slicedDescription.length > 1) {
+    console.log(slicedDescription);
+    if (slicedDescription[0].length > 1) {
       slicedDescription[0].splice(4, 0, photoSwipeGallery);
       slicedDescription[0].splice(1, 0, welcomeText);
     }
