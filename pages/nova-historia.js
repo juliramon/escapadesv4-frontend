@@ -159,40 +159,6 @@ const StoryForm = () => {
       .catch((err) => console.log(err));
   };
 
-  // const handleFileUpload = (e) => {
-  //   const imagesList = state.formData.images;
-  //   const cover = state.formData.cover;
-  //   let uploadedImages = [];
-  //   let uploadedCover = "";
-  //   const uploadData = new FormData();
-  //   uploadData.append("imageUrl", cover);
-  //   service.uploadFile(uploadData).then((res) => {
-  //     uploadedCover = res.path;
-  //   });
-
-  //   imagesList.forEach((el) => {
-  //     const uploadData = new FormData();
-  //     uploadData.append("imageUrl", el);
-  //     service.uploadFile(uploadData).then((res) => {
-  //       console.log(res.path);
-  //       uploadedImages.push(res.path);
-  //       console.log(uploadedImages.length);
-  //       if (uploadedImages.length === state.formData.images.length) {
-  //         setState({
-  //           ...state,
-  //           formData: {
-  //             ...state.formData,
-  //             cloudImages: uploadedImages,
-  //             coverCloudImage: uploadedCover,
-  //             cloudImagesUploaded: true,
-  //             coverCloudImageUploaded: true,
-  //           },
-  //         });
-  //       }
-  //     });
-  //   });
-  // };
-
   const handleFileUpload = async (e) => {
     const imagesList = state.formData.images;
     const cover = state.formData.cover;
