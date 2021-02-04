@@ -109,17 +109,13 @@ const ActivityForm = () => {
     );
   }
 
-  const handleFileUpload = (e) => {
+  const handleFileUpload = async (e) => {
     const imagesList = state.formData.images;
     const cover = state.formData.cover;
     let uploadedImages = [];
-    let uploadedCover = "";
     const uploadData = new FormData();
     uploadData.append("imageUrl", cover);
-    service.uploadFile(uploadData).then((res) => {
-      uploadedCover = res.path;
-    });
-
+    const uploadedCover = await service.uploadFile(uploadData);
     imagesList.forEach((el) => {
       const uploadData = new FormData();
       uploadData.append("imageUrl", el);
@@ -133,7 +129,7 @@ const ActivityForm = () => {
             formData: {
               ...state.formData,
               cloudImages: uploadedImages,
-              coverCloudImage: uploadedCover,
+              coverCloudImage: uploadedCover.path,
               cloudImagesUploaded: true,
               coverCloudImageUploaded: true,
             },
