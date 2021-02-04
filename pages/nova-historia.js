@@ -134,7 +134,10 @@ const StoryForm = () => {
   const [description, setDescription] = useState("");
 
   const submitStory = async () => {
-    const slug = await slugify(state.formData.title);
+    const slug = await slugify(state.formData.title, {
+      remove: /[*+~.,()'"!:@]/g,
+      lower: true,
+    });
     const {
       type,
       title,
