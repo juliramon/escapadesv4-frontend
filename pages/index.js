@@ -30,9 +30,10 @@ const Homepage = (props) => {
   const [span, setSpan] = useState("perfecta");
 
   const headerSpans = [
+    "en parella",
     "de cap de setmana",
     "romàntica",
-    "gastronomica",
+    "gastronòmica",
     "d'aventura",
     "de relax",
     "cultural",
@@ -52,10 +53,9 @@ const Homepage = (props) => {
 
   const title = (
     <>
-      La vostra propera <strong>escapada en parella</strong>
-      <br /> {span}
-      <br />
-      comença aquí
+      La vostra propera
+      <br /> <strong>escapada {span}</strong>
+      <br /> comença aquí
     </>
   );
 
@@ -122,12 +122,16 @@ const Homepage = (props) => {
         />
         <Hero
           background_url={
-            "https://res.cloudinary.com/juligoodie/image/upload/q_69/v1600242861/getaways-guru/cover-getaways_zogryn.webp"
+            "https://res.cloudinary.com/juligoodie/image/upload/v1612464648/getaways-guru/static-files/IMGP8453_icqjwe.jpg"
           }
           title={title}
           subtitle={subtitle}
         />
-        <HomePageResults activities={props.activities} places={props.places} />
+        <HomePageResults
+          activities={props.activities}
+          places={props.places}
+          stories={props.stories}
+        />
         <FollowBox />
         <Footer
           logo_url={
@@ -143,10 +147,12 @@ export async function getStaticProps() {
   const service = new ContentService();
   const activities = await service.activities();
   const places = await service.getAllPlaces();
+  const stories = await service.getAllStories();
   return {
     props: {
       activities,
       places,
+      stories,
     },
   };
 }
