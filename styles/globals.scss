@@ -1339,7 +1339,10 @@ nav {
     padding: 8px 12px;
   }
   .image {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
     overflow: hidden;
     height: 40px;
     width: 40px;
