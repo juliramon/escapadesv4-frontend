@@ -8,6 +8,7 @@ import Link from "next/link";
 import Head from "next/head";
 import UserContext from "../contexts/UserContext";
 import { useRouter } from "next/router";
+import CreateCategoryModal from "../components/modals/CreateCategoryModal";
 
 const AdminPanel = () => {
   const { user } = useContext(UserContext);
@@ -44,8 +45,12 @@ const AdminPanel = () => {
   };
   const [state, setState] = useState(initialState);
   const [modalVisibility, setModalVisibility] = useState(false);
+  const [categoryModalVisibility, setCategoryModalVisibility] = useState(false);
   const handleModalVisibility = () => setModalVisibility(true);
   const hideModalVisibility = () => setModalVisibility(false);
+
+  const handleCategoryModalVisibility = () => setCategoryModalVisibility(true);
+  const hideCategoryModalVisibility = () => setCategoryModalVisibility(false);
 
   const service = new ContentService();
 
@@ -56,7 +61,7 @@ const AdminPanel = () => {
       const places = await service.getAllPlaces();
       const stories = await service.getAllStories();
       const users = await service.getAllUsers();
-      const categories = [];
+      const categories = await service.getCategories();
       let hasListings,
         hasActivities,
         hasPlaces,
@@ -101,7 +106,7 @@ const AdminPanel = () => {
     const places = await service.getAllPlaces();
     const stories = await service.getAllStories();
     const users = await service.getAllUsers();
-    const categories = [];
+    const categories = await service.getCategories();
     let hasListings,
       hasActivities,
       hasPlaces,
@@ -246,41 +251,43 @@ const AdminPanel = () => {
   };
 
   if (state.hasListings === true) {
-    filterBox = (
-      <div className="filter-box d-flex align-items-center justify-content-between">
-        <Button variant="none">Imatge</Button>
-        <Button
-          variant="none"
-          className="filter"
-          onClick={() => sortTitle(arrToSort, listToSort)}
-        >
-          Títol
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="icon icon-tabler icon-tabler-arrows-sort"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="#212529"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+    if (state.activeTab !== "categories") {
+      filterBox = (
+        <div className="filter-box d-flex align-items-center justify-content-between">
+          <Button variant="none">Imatge</Button>
+          <Button
+            variant="none"
+            className="filter"
+            onClick={() => sortTitle(arrToSort, listToSort)}
           >
-            <path stroke="none" d="M0 0h24v24H0z" />
-            <path d="M3 9l4-4l4 4m-4 -4v14" />
-            <path d="M21 15l-4 4l-4-4m4 4v-14" />
-          </svg>
-        </Button>
-        <Button variant="none" className="filter">
-          Subtítol
-        </Button>
-        <Button variant="none" className="filter">
-          Data
-        </Button>
-        <Button variant="none">Accions</Button>
-      </div>
-    );
+            Títol
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-arrows-sort"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="#212529"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" />
+              <path d="M3 9l4-4l4 4m-4 -4v14" />
+              <path d="M21 15l-4 4l-4-4m4 4v-14" />
+            </svg>
+          </Button>
+          <Button variant="none" className="filter">
+            Subtítol
+          </Button>
+          <Button variant="none" className="filter">
+            Data
+          </Button>
+          <Button variant="none">Accions</Button>
+        </div>
+      );
+    }
     if (state.activeTab === "activities") {
       if (state.hasActivities === true) {
         arrToSort = state.activities;
@@ -361,10 +368,21 @@ const AdminPanel = () => {
         filterBox = null;
         listings = noresults;
       }
-      if (state.activeTab === "categories") {
-        if (state.hasCategories === true) {
-        }
-      }
+    }
+    if (state.activeTab === "categories") {
+      filterBox = (
+        <Button onClick={handleCategoryModalVisibility}>
+          Afegir nova categoria
+        </Button>
+      );
+      listings = state.categories.map((el) => (
+        <ContentBox
+          key={el._id}
+          image={el.image}
+          title={el.title}
+          subtitle={el.subtitle}
+        />
+      ));
     }
   } else {
     filterBox = null;
@@ -549,6 +567,10 @@ const AdminPanel = () => {
         <PublicationModal
           visibility={modalVisibility}
           hideModal={hideModalVisibility}
+        />
+        <CreateCategoryModal
+          visibility={categoryModalVisibility}
+          hideModal={hideCategoryModalVisibility}
         />
       </div>
     </>

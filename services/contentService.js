@@ -371,6 +371,19 @@ class ContentService {
 
   getUserCustomPlaces = () =>
     this.service.get("/searchUserCustomPlaces").then((res) => res.data);
+
+  createCategory = (slug, title, subtitle, image, seoText) =>
+    this.service
+      .post("/category", {
+        slug,
+        title,
+        subtitle,
+        image,
+        seoText,
+      })
+      .then((res) => res.data);
+
+  getCategories = () => this.service.get("/categories").then((res) => res.data);
 }
 
 export default ContentService;
