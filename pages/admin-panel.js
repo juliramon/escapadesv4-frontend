@@ -9,6 +9,8 @@ import Head from "next/head";
 import UserContext from "../contexts/UserContext";
 import { useRouter } from "next/router";
 import CreateCategoryModal from "../components/modals/CreateCategoryModal";
+import CategoryBox from "../components/dashboard/CategoryBox";
+import MetricsBox from "../components/dashboard/MetricsBox";
 
 const AdminPanel = () => {
   const { user } = useContext(UserContext);
@@ -18,6 +20,12 @@ const AdminPanel = () => {
       router.push("/login");
     }
   }, [user]);
+
+  useEffect(() => {
+    if (user.userType !== "admin") {
+      router.push("/feed");
+    }
+  });
 
   if (!user) {
     return (
@@ -376,11 +384,12 @@ const AdminPanel = () => {
         </Button>
       );
       listings = state.categories.map((el) => (
-        <ContentBox
+        <CategoryBox
           key={el._id}
           image={el.image}
           title={el.title}
           subtitle={el.subtitle}
+          slug={el.slug}
         />
       ));
     }
@@ -396,13 +405,42 @@ const AdminPanel = () => {
     color: "#0d1f44",
   };
 
+  let metrics, metricsList;
+  if (state.hasListings) {
+    metrics = [
+      {
+        name: "Activitats",
+        value: state.activities.length,
+      },
+      {
+        name: "Allotjaments",
+        value: state.places.length,
+      },
+      {
+        name: "Històries",
+        value: state.stories.length,
+      },
+      {
+        name: "Usuaris",
+        value: state.users.length,
+      },
+      {
+        name: "Categories",
+        value: state.categories.length,
+      },
+    ];
+    metricsList = metrics.map((el) => (
+      <MetricsBox integer={el.value} metricName={el.name} />
+    ));
+  }
+
   return (
     <>
       <Head>
         <title>Panell d'administració - Escapadesenparella.cat</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div id="dashboard">
+      <div id="dashboard" className="admin-panel">
         <NavigationBar
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/c_scale,q_100,w_135/v1600008855/getaways-guru/static-files/logo-getaways-guru_vvbikk.svg"
@@ -414,12 +452,20 @@ const AdminPanel = () => {
             <h1 className="top-nav-title db mw-1600">Panell d'administració</h1>
           </div>
         </Container>
+        <Container fluid className="mw-1600 metrics">
+          <Row>
+            <h2>Estadístiques de la plataforma</h2>
+            <div className="metrics-list d-flex">{metricsList}</div>
+          </Row>
+        </Container>
         <Container fluid className="mw-1600">
+          <Row>
+            <h2>Estadístiques de la plataforma</h2>
+          </Row>
           <Row>
             <div className="box d-flex">
               <div className="col left">
                 <ul>
-                  <li className="list-title">Continguts</li>
                   <li
                     className="list-item"
                     style={state.activeTab === "activities" ? activeTab : null}

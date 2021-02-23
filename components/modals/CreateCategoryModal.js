@@ -13,6 +13,7 @@ const CreateCategoryModal = ({ visibility, hideModal }) => {
     blopImage: "",
     cloudImage: "",
     cloudImageUploaded: false,
+    icon: "",
     seoText: "",
   };
 
@@ -49,9 +50,9 @@ const CreateCategoryModal = ({ visibility, hideModal }) => {
       remove: /[*+~.,()'"!:@]/g,
       lower: true,
     });
-    const { title, subtitle, cloudImage, seoText } = category;
+    const { title, subtitle, cloudImage, icon, seoText } = category;
     service
-      .createCategory(slug, title, subtitle, cloudImage, seoText)
+      .createCategory(slug, title, subtitle, cloudImage, icon, seoText)
       .then(() => console.log("category created"))
       .catch((err) => console.log(err));
   };
@@ -64,7 +65,6 @@ const CreateCategoryModal = ({ visibility, hideModal }) => {
 
   useEffect(() => {
     if (category.cloudImageUploaded === true) {
-      console.log("category created");
       submitCategory();
     }
   }, [category]);
@@ -139,6 +139,17 @@ const CreateCategoryModal = ({ visibility, hideModal }) => {
           </div>
         </div>
       </div>
+      <Form.Group controlId="categoryIcon">
+        <Form.Label>Icona de la categoria</Form.Label>
+        <textarea
+          rows="3"
+          cols="3"
+          placeholder="Entra text svg de l'icona de la categoria"
+          className="form-control"
+          name="icon"
+          onChange={handleChange}
+        ></textarea>
+      </Form.Group>
       <Form.Group controlId="categorySeoText">
         <Form.Label>Text SEO de la categoria</Form.Label>
         <textarea

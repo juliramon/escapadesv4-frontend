@@ -372,18 +372,24 @@ class ContentService {
   getUserCustomPlaces = () =>
     this.service.get("/searchUserCustomPlaces").then((res) => res.data);
 
-  createCategory = (slug, title, subtitle, image, seoText) =>
+  createCategory = (slug, title, subtitle, image, icon, seoText) =>
     this.service
       .post("/category", {
         slug,
         title,
         subtitle,
         image,
+        icon,
         seoText,
       })
       .then((res) => res.data);
 
   getCategories = () => this.service.get("/categories").then((res) => res.data);
+
+  removeCategory = (id) =>
+    this.service
+      .put(`/categories/${id}`, { isRemoved: true })
+      .then((res) => res.data);
 }
 
 export default ContentService;

@@ -3105,3 +3105,38 @@ nav {
     margin: 0 !important;
   }
 }
+
+// METRICS FROM ADMIN PANEL
+
+.admin-panel {
+  h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    font-family: "Nunito";
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-left: 15px;
+  }
+  .box {
+    padding-top: 15px !important;
+  }
+  .metrics {
+    padding: 50px 0;
+    .metrics-list {
+      justify-content: space-between;
+      width: 100%;
+      margin: 0;
+      .metric-box {
+        flex: 1;
+        box-shadow: 2px 2px 10px rgb(0 0 0 / 10%);
+        padding: 20px;
+        text-align: center;
+        border-radius: 8px;
+        margin: 15px;
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
