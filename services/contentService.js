@@ -390,6 +390,18 @@ class ContentService {
     this.service
       .put(`/categories/${id}`, { isRemoved: true })
       .then((res) => res.data);
+
+  editCategory = (id, slug, title, subtitle, image, icon, seoText) => {
+    console.log("id =>", id);
+    return this.service.put(`/categories/${id}`, {
+      slug,
+      title,
+      subtitle,
+      image,
+      icon,
+      seoText,
+    });
+  };
 }
 
 export default ContentService;

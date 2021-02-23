@@ -909,6 +909,10 @@ nav {
   background-color: rgb(13, 31, 68) !important;
 }
 
+.modal-open .modal {
+  backdrop-filter: blur(5px);
+}
+
 .modal-backdrop.show {
   opacity: 0.75;
 }
@@ -1355,7 +1359,7 @@ nav {
   .image img {
     width: auto;
     height: 100%;
-    background-color: grey;
+    background-color: white;
     display: block;
   }
   .title {

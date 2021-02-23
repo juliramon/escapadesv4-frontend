@@ -150,7 +150,10 @@ const AdminPanel = () => {
     });
   }, [service, state]);
 
-  if (state.isFetching === true && state.hasListings === false) {
+  if (
+    (state.isFetching === true && state.hasListings === false) ||
+    state.isFetching === true
+  ) {
     return (
       <>
         <Head>
@@ -386,10 +389,14 @@ const AdminPanel = () => {
       listings = state.categories.map((el) => (
         <CategoryBox
           key={el._id}
+          id={el._id}
           image={el.image}
           title={el.title}
           subtitle={el.subtitle}
           slug={el.slug}
+          seoText={el.seoText}
+          icon={el.icon}
+          fetchData={fetchData}
         />
       ));
     }

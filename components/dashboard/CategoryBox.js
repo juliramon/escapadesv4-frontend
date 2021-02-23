@@ -2,9 +2,19 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { Button, Dropdown } from "react-bootstrap";
 import ContentService from "../../services/contentService";
+import EditCategoryModal from "../modals/EditCategoryModal";
 import ShareModal from "../modals/ShareModal";
 
-const CategoryBox = ({ slug, title, subtitle, image, fetchData }) => {
+const CategoryBox = ({
+  id,
+  image,
+  title,
+  subtitle,
+  slug,
+  seoText,
+  icon,
+  fetchData,
+}) => {
   let shortenedSubtitle = subtitle.slice(0, 70);
   const service = new ContentService();
   const removeItem = () => service.removeCategory(id).then(() => fetchData());
@@ -14,6 +24,15 @@ const CategoryBox = ({ slug, title, subtitle, image, fetchData }) => {
   const [shareModalVisibility, setShareModalVisibility] = useState(false);
   const handleShareModalVisibility = () => setShareModalVisibility(true);
   const hideShareModalVisibility = () => setShareModalVisibility(false);
+
+  const [
+    editCategoryModalVisibility,
+    setEditCategoryModalVisibility,
+  ] = useState(false);
+  const handleEditCategoryModalVisibility = () =>
+    setEditCategoryModalVisibility(true);
+  const hideEditCategoryModalVisibility = () =>
+    setEditCategoryModalVisibility(false);
 
   return (
     <div className="content box d-flex align-items-center">
@@ -74,27 +93,28 @@ const CategoryBox = ({ slug, title, subtitle, image, fetchData }) => {
                 </Link>
               </li>
               <li>
-                <Link href={`/${slug}/editar`}>
-                  <a>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-pencil"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="#2c3e50"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
-                      <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
-                    </svg>
-                    Editar
-                  </a>
-                </Link>
+                <Button
+                  onClick={handleEditCategoryModalVisibility}
+                  variant="none"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="icon icon-tabler icon-tabler-pencil"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="#2c3e50"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
+                    <line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+                  </svg>
+                  Editar
+                </Button>
               </li>
               <li>
                 <Button variant="none" onClick={removeItem}>
@@ -128,6 +148,17 @@ const CategoryBox = ({ slug, title, subtitle, image, fetchData }) => {
         visibility={shareModalVisibility}
         hideModal={hideShareModalVisibility}
         url={urlToShare}
+      />
+      <EditCategoryModal
+        visibility={editCategoryModalVisibility}
+        hideModal={hideEditCategoryModalVisibility}
+        id={id}
+        title={title}
+        subtitle={subtitle}
+        image={image}
+        icon={icon}
+        seoText={seoText}
+        fetchData={fetchData}
       />
     </div>
   );
