@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import CreateCategoryModal from "../components/modals/CreateCategoryModal";
 import CategoryBox from "../components/dashboard/CategoryBox";
 import MetricsBox from "../components/dashboard/MetricsBox";
+import UserBox from "../components/dashboard/UserBox";
 
 const AdminPanel = () => {
   const { user } = useContext(UserContext);
@@ -262,7 +263,7 @@ const AdminPanel = () => {
   };
 
   if (state.hasListings === true) {
-    if (state.activeTab !== "categories") {
+    if (state.activeTab !== "categories" || state.activeTab !== "users") {
       filterBox = (
         <div className="filter-box d-flex align-items-center justify-content-between">
           <Button variant="none">Imatge</Button>
@@ -366,13 +367,46 @@ const AdminPanel = () => {
     }
     if (state.activeTab === "users") {
       if (state.hasUsers === true) {
+        filterBox = (
+          <div className="filter-box d-flex align-items-center justify-content-between">
+            <Button variant="none">Avatar</Button>
+            <Button
+              variant="none"
+              className="filter"
+              onClick={() => sortTitle(arrToSort, listToSort)}
+            >
+              Nom
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="icon icon-tabler icon-tabler-arrows-sort"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="#212529"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <path d="M3 9l4-4l4 4m-4 -4v14" />
+                <path d="M21 15l-4 4l-4-4m4 4v-14" />
+              </svg>
+            </Button>
+            <Button variant="none" className="filter">
+              Correu electrònic
+            </Button>
+            <Button variant="none">Accions</Button>
+          </div>
+        );
         arrToSort = state.users;
         listings = state.users.map((el) => (
-          <ContentBox
+          <UserBox
             key={el._id}
-            image={el.avatar}
-            title={el.fullName}
-            subtitle={el.email}
+            avatar={el.avatar}
+            fullName={el.fullName}
+            email={el.email}
+            slug={el.slug}
           />
         ));
       } else {
@@ -382,9 +416,43 @@ const AdminPanel = () => {
     }
     if (state.activeTab === "categories") {
       filterBox = (
-        <Button onClick={handleCategoryModalVisibility}>
-          Afegir nova categoria
-        </Button>
+        <>
+          <Button onClick={handleCategoryModalVisibility}>
+            + Afegir nova categoria
+          </Button>
+          <br />
+          <br />
+          <div className="filter-box d-flex align-items-center justify-content-between">
+            <Button variant="none">Imatge</Button>
+            <Button
+              variant="none"
+              className="filter"
+              onClick={() => sortTitle(arrToSort, listToSort)}
+            >
+              Títol
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="icon icon-tabler icon-tabler-arrows-sort"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="#212529"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <path d="M3 9l4-4l4 4m-4 -4v14" />
+                <path d="M21 15l-4 4l-4-4m4 4v-14" />
+              </svg>
+            </Button>
+            <Button variant="none" className="filter">
+              Subtítol
+            </Button>
+            <Button variant="none">Accions</Button>
+          </div>
+        </>
       );
       listings = state.categories.map((el) => (
         <CategoryBox

@@ -170,6 +170,8 @@ class ContentService {
 
   editUserCover = (_id, cover) => this.service.put(`/users/${_id}`, { cover });
 
+  editUserSlug = (_id, slug) => this.service.put(`/users/${_id}`, { slug });
+
   getAllUsers = () => this.service.get("/users").then((res) => res.data);
 
   // PLACES ENDPOINTS
