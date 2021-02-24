@@ -170,6 +170,8 @@ class ContentService {
 
   editUserCover = (_id, cover) => this.service.put(`/users/${_id}`, { cover });
 
+  editUserSlug = (_id, slug) => this.service.put(`/users/${_id}`, { slug });
+
   getAllUsers = () => this.service.get("/users").then((res) => res.data);
 
   // PLACES ENDPOINTS
@@ -371,6 +373,37 @@ class ContentService {
 
   getUserCustomPlaces = () =>
     this.service.get("/searchUserCustomPlaces").then((res) => res.data);
+
+  createCategory = (slug, title, subtitle, image, icon, seoText) =>
+    this.service
+      .post("/category", {
+        slug,
+        title,
+        subtitle,
+        image,
+        icon,
+        seoText,
+      })
+      .then((res) => res.data);
+
+  getCategories = () => this.service.get("/categories").then((res) => res.data);
+
+  removeCategory = (id) =>
+    this.service
+      .put(`/categories/${id}`, { isRemoved: true })
+      .then((res) => res.data);
+
+  editCategory = (id, slug, title, subtitle, image, icon, seoText) => {
+    console.log("id =>", id);
+    return this.service.put(`/categories/${id}`, {
+      slug,
+      title,
+      subtitle,
+      image,
+      icon,
+      seoText,
+    });
+  };
 }
 
 export default ContentService;

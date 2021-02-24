@@ -72,7 +72,7 @@ function MyApp({ Component, pageProps }) {
         logOut: logOut,
       }}
     >
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </UserContext.Provider>
   );
 }
