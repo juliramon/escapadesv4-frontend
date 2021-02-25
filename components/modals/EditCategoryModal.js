@@ -7,6 +7,7 @@ const EditCategoryModal = ({
   visibility,
   hideModal,
   id,
+  name,
   title,
   subtitle,
   image,
@@ -17,6 +18,7 @@ const EditCategoryModal = ({
   const service = new ContentService();
   const initialState = {
     id: id,
+    name: name,
     title: title,
     subtitle: subtitle,
     image: image,
@@ -63,11 +65,29 @@ const EditCategoryModal = ({
       remove: /[*+~.,()'"!:@]/g,
       lower: true,
     });
-    const { id, title, subtitle, image, cloudImage, icon, seoText } = category;
+    const {
+      id,
+      name,
+      title,
+      subtitle,
+      image,
+      cloudImage,
+      icon,
+      seoText,
+    } = category;
     let categoryImage;
     cloudImage !== "" ? (categoryImage = cloudImage) : (categoryImage = image);
     service
-      .editCategory(id, slug, title, subtitle, categoryImage, icon, seoText)
+      .editCategory(
+        id,
+        slug,
+        name,
+        title,
+        subtitle,
+        categoryImage,
+        icon,
+        seoText
+      )
       .then(() => {
         hideModal();
         fetchData();
@@ -114,6 +134,16 @@ const EditCategoryModal = ({
 
   const categoryPublicationForm = (
     <Form>
+      <Form.Group controlId="categoryName">
+        <Form.Label>Nom de la categoria</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Entra el nom de la categoria"
+          name="name"
+          onChange={handleChange}
+          value={category.name}
+        />
+      </Form.Group>
       <Form.Group controlId="categoryTitle">
         <Form.Label>Títol de la categoria</Form.Label>
         <Form.Control

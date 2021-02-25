@@ -458,6 +458,7 @@ const AdminPanel = () => {
         <CategoryBox
           key={el._id}
           id={el._id}
+          name={el.name}
           image={el.image}
           title={el.title}
           subtitle={el.subtitle}
@@ -692,6 +693,7 @@ const AdminPanel = () => {
         <CreateCategoryModal
           visibility={categoryModalVisibility}
           hideModal={hideCategoryModalVisibility}
+          fetchData={fetchData}
         />
       </div>
     </>

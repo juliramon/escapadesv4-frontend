@@ -374,10 +374,11 @@ class ContentService {
   getUserCustomPlaces = () =>
     this.service.get("/searchUserCustomPlaces").then((res) => res.data);
 
-  createCategory = (slug, title, subtitle, image, icon, seoText) =>
+  createCategory = (slug, name, title, subtitle, image, icon, seoText) =>
     this.service
       .post("/category", {
         slug,
+        name,
         title,
         subtitle,
         image,
@@ -393,16 +394,29 @@ class ContentService {
       .put(`/categories/${id}`, { isRemoved: true })
       .then((res) => res.data);
 
-  editCategory = (id, slug, title, subtitle, image, icon, seoText) => {
+  editCategory = (id, slug, name, title, subtitle, image, icon, seoText) => {
     console.log("id =>", id);
     return this.service.put(`/categories/${id}`, {
       slug,
+      name,
       title,
       subtitle,
       image,
       icon,
       seoText,
     });
+  };
+
+  getCategoryDetails = (slug) => {
+    console.log("slug =>", slug);
+    return this.service.get(`/categories/${slug}`).then((res) => res.data);
+  };
+
+  getCategoryResults = (category) => {
+    console.log("category =>", category);
+    return this.service
+      .get(`/searchCategoryResults/${category}`)
+      .then((res) => res.data);
   };
 }
 

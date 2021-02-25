@@ -27,6 +27,7 @@ const PlaceList = ({ user }) => {
       setState({ ...state, places: res, hasPlaces: hasPlaces });
     });
   }, [state, service]);
+
   useEffect(getAllPlaces, []);
   let placesList;
   if (state.hasPlaces === true) {

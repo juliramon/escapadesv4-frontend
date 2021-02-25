@@ -3,10 +3,11 @@ import { Button, Form, Modal } from "react-bootstrap";
 import slugify from "slugify";
 import ContentService from "../../services/contentService";
 
-const CreateCategoryModal = ({ visibility, hideModal }) => {
+const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
   const service = new ContentService();
 
   const initialState = {
+    name: "",
     title: "",
     subtitle: "",
     image: "",
@@ -50,10 +51,13 @@ const CreateCategoryModal = ({ visibility, hideModal }) => {
       remove: /[*+~.,()'"!:@]/g,
       lower: true,
     });
-    const { title, subtitle, cloudImage, icon, seoText } = category;
+    const { name, title, subtitle, cloudImage, icon, seoText } = category;
     service
-      .createCategory(slug, title, subtitle, cloudImage, icon, seoText)
-      .then(() => console.log("category created"))
+      .createCategory(slug, name, title, subtitle, cloudImage, icon, seoText)
+      .then(() => {
+        hideModal();
+        fetchData();
+      })
       .catch((err) => console.log(err));
   };
 
@@ -80,6 +84,15 @@ const CreateCategoryModal = ({ visibility, hideModal }) => {
 
   const categoryPublicationForm = (
     <Form>
+      <Form.Group controlId="categoryName">
+        <Form.Label>Nom de la categoria</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Entra el nom de la categoria"
+          name="name"
+          onChange={handleChange}
+        />
+      </Form.Group>
       <Form.Group controlId="categoryTitle">
         <Form.Label>Títol de la categoria</Form.Label>
         <Form.Control

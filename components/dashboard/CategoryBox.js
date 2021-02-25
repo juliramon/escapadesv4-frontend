@@ -7,6 +7,7 @@ import ShareModal from "../modals/ShareModal";
 
 const CategoryBox = ({
   id,
+  name,
   image,
   title,
   subtitle,
@@ -153,6 +154,7 @@ const CategoryBox = ({
         visibility={editCategoryModalVisibility}
         hideModal={hideEditCategoryModalVisibility}
         id={id}
+        name={name}
         title={title}
         subtitle={subtitle}
         image={image}

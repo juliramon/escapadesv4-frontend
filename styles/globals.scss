@@ -336,13 +336,14 @@ nav {
 
 .content-bar {
   padding: 0;
+  display: block;
   .container {
     padding: 0;
   }
   .content-bar---wrapper {
     margin: 0 -8px;
   }
-  .content-bar---item {
+  .content-bar---item a {
     display: flex;
     align-items: center;
     padding: 8px 0;
