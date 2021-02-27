@@ -31,7 +31,12 @@ const ContentBar = (props) => {
   let categoriesList = [];
   if (state.hasCategories) {
     categoriesList = state.categories.map((el) => (
-      <NavigationCategoryBox name={el.name} icon={el.icon} slug={el.slug} />
+      <NavigationCategoryBox
+        key={el._id}
+        name={el.name}
+        icon={el.icon}
+        slug={el.slug}
+      />
     ));
   }
 

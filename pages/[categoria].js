@@ -1,11 +1,11 @@
-import { get } from "js-cookie";
+import GoogleMapReact from "google-map-react";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
-import { Breadcrumb, Col, Container, Form, Row } from "react-bootstrap";
+import { Container, Form, Row } from "react-bootstrap";
+import FetchingSpinner from "../components/global/FetchingSpinner";
 import NavigationBar from "../components/global/NavigationBar";
-import ContentBar from "../components/homepage/ContentBar";
-import PublicContentBox from "../components/listings/PublicContentBox";
+import PublicSquareBox from "../components/listings/PublicSquareBox";
 import UserContext from "../contexts/UserContext";
 import ContentService from "../services/contentService";
 
@@ -17,6 +17,7 @@ const CategoryPage = () => {
     categoryDetails: {},
     results: [],
     hasResults: false,
+    isFetching: false,
   };
 
   const [state, setState] = useState(initialState);
@@ -33,6 +34,7 @@ const CategoryPage = () => {
   useEffect(() => {
     if (router.query.categoria !== undefined) {
       const fetchData = async () => {
+        setState({ ...state, isFetching: true });
         const categoryDetails = await service.getCategoryDetails(
           router.query.categoria
         );
@@ -51,12 +53,17 @@ const CategoryPage = () => {
           categoryDetails: categoryDetails,
           results: getResults.results,
           hasResults: hasResults,
+          isFetching: false,
         });
       };
       fetchData();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryId]);
+
+  if (state.isFetching) {
+    return <FetchingSpinner />;
+  }
 
   let resultsList;
   if (state.hasResults) {
@@ -81,12 +88,12 @@ const CategoryPage = () => {
         );
       }
       return (
-        <PublicContentBox
+        <PublicSquareBox
           key={el._id}
           type={el.type}
           slug={el.slug}
           id={el._id}
-          image={el.cover}
+          cover={el.cover}
           title={el.title}
           subtitle={el.subtitle}
           location={location}
@@ -95,10 +102,63 @@ const CategoryPage = () => {
     });
   }
 
+  const center = {
+    lat: 41.3948976,
+    lng: 2.0787283,
+  };
+
+  const getMapOptions = (maps) => {
+    return {
+      disableDefaultUI: true,
+      styles: [
+        {
+          featureType: "poi",
+          elementType: "labels",
+          styles: [{ visibility: "on" }],
+        },
+      ],
+    };
+  };
+
+  let renderMarker = (map, maps) => {
+    state.results.forEach((result) => {
+      let position, path;
+      if (result.type === "activity") {
+        position = {
+          lat: parseFloat(result.activity_lat),
+          lng: parseFloat(result.activity_lng),
+        };
+        path = "/activitats";
+      }
+      if (result.type === "place") {
+        position = {
+          lat: parseFloat(result.place_lat),
+          lng: parseFloat(result.place_lng),
+        };
+        path = "/allotjaments";
+      }
+      const contentString =
+        `<div id="infoview-wrapper">` +
+        `<h1 id="firstHeading" class="firstHeading">${result.title}</h1>` +
+        `<p>${result.subtitle}</p>` +
+        `<a href="${path}/${result.slug}" title="${result.title}" target="_blank">Veure l'escapada</>` +
+        `</div>`;
+      const infowindow = new maps.InfoWindow({
+        content: contentString,
+      });
+      const marker = new maps.Marker({
+        position: position,
+        map,
+        icon: "../../map-marker.svg",
+      });
+      marker.addListener("click", () => infowindow.open(map, marker));
+    });
+  };
+
   return (
     <>
       <Head>
-        <title>- Escapadesenparella.cat</title>
+        <title>{state.categoryDetails.title} - Escapadesenparella.cat</title>
         <link rel="icon" href="/favicon.ico" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta
@@ -152,20 +212,20 @@ const CategoryPage = () => {
           content="756319ea1956c99d055184c4cac47dbfa3c81808"
         />
       </Head>
-      <div id="contentList" className="place">
+      <div id="contentList" className="category">
         <NavigationBar
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/c_scale,q_100,w_135/v1600008855/getaways-guru/static-files/logo-getaways-guru_vvbikk.svg"
           }
           user={user}
         />
-        <Container fluid className="mw-1600">
+        <Container fluid>
           <Row>
             <div className="box d-flex">
               <div className="col left">
                 <div className="filter-list">
                   <div className="filter-block">
-                    <span className="block-title">Place type</span>
+                    <span className="block-title">Classe d'allotjament</span>
                     <Form.Check
                       label="Hotel"
                       name="placeType"
@@ -173,38 +233,38 @@ const CategoryPage = () => {
                       //   onChange={handleCheckType}
                     />
                     <Form.Check
-                      label="Apartment"
+                      label="Apartament"
                       name="placeType"
                       id="apartment"
                       //   onChange={handleCheckType}
                     />
                     <Form.Check
-                      label="Cabin"
-                      name="placeType"
-                      id="cabin"
-                      //   onChange={handleCheckType}
-                    />
-                    <Form.Check
-                      label="Treehouse"
-                      name="placeType"
-                      id="treeHouse"
-                      //   onChange={handleCheckType}
-                    />
-                    <Form.Check
-                      label="Ruralhouse"
+                      label="Casa rural"
                       name="placeType"
                       id="ruralHouse"
                       //   onChange={handleCheckType}
                     />
                     <Form.Check
-                      label="Trailer"
+                      label="Cabanya"
+                      name="placeType"
+                      id="cabin"
+                      //   onChange={handleCheckType}
+                    />
+                    <Form.Check
+                      label="Casa-arbre"
+                      name="placeType"
+                      id="treeHouse"
+                      //   onChange={handleCheckType}
+                    />
+                    <Form.Check
+                      label="Carabana"
                       name="placeType"
                       id="trailer"
                       //   onChange={handleCheckType}
                     />
                   </div>
                   <div className="filter-block">
-                    <span className="block-title">Region</span>
+                    <span className="block-title">Regió</span>
                     <Form.Check
                       label="Barcelona"
                       name="placeRegion"
@@ -249,27 +309,27 @@ const CategoryPage = () => {
                     />
                   </div>
                   <div className="filter-block">
-                    <span className="block-title">Season</span>
+                    <span className="block-title">Estació de l'any</span>
                     <Form.Check
-                      label="Winter"
+                      label="Hivern"
                       name="placeSeason"
                       id="winter"
                       //   onChange={handleCheckSeason}
                     />
                     <Form.Check
-                      label="Spring"
+                      label="Primavera"
                       name="placeSeason"
                       id="spring"
                       //   onChange={handleCheckSeason}
                     />
                     <Form.Check
-                      label="Summer"
+                      label="Estiu"
                       name="placeSeason"
                       id="summer"
                       //   onChange={handleCheckSeason}
                     />
                     <Form.Check
-                      label="Autumn"
+                      label="Tardor"
                       name="placeSeason"
                       id="autumn"
                       //   onChange={handleCheckSeason}
@@ -294,7 +354,7 @@ const CategoryPage = () => {
               <div className="col right">
                 <div className="map-wrapper">
                   <div className="map-block">
-                    {/* {state.hasPlaces ? (
+                    {state.hasResults ? (
                       <GoogleMapReact
                         bootstrapURLKeys={{
                           key: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
@@ -307,7 +367,7 @@ const CategoryPage = () => {
                           renderMarker(map, maps)
                         }
                       />
-                    ) : null} */}
+                    ) : null}
                   </div>
                 </div>
               </div>

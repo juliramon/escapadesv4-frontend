@@ -12,6 +12,7 @@ import CreateCategoryModal from "../components/modals/CreateCategoryModal";
 import CategoryBox from "../components/dashboard/CategoryBox";
 import MetricsBox from "../components/dashboard/MetricsBox";
 import UserBox from "../components/dashboard/UserBox";
+import FetchingSpinner from "../components/global/FetchingSpinner";
 
 const AdminPanel = () => {
   const { user } = useContext(UserContext);
@@ -155,18 +156,7 @@ const AdminPanel = () => {
     (state.isFetching === true && state.hasListings === false) ||
     state.isFetching === true
   ) {
-    return (
-      <>
-        <Head>
-          <title>Carregant...</title>
-        </Head>
-        <Container className="spinner d-flex justify-space-between">
-          <Spinner animation="border" role="status" variant="primary">
-            <span className="sr-only">Carregant...</span>
-          </Spinner>
-        </Container>
-      </>
-    );
+    return <FetchingSpinner />;
   }
 
   let filterBox,

@@ -407,17 +407,13 @@ class ContentService {
     });
   };
 
-  getCategoryDetails = (slug) => {
-    console.log("slug =>", slug);
-    return this.service.get(`/categories/${slug}`).then((res) => res.data);
-  };
+  getCategoryDetails = (slug) =>
+    this.service.get(`/categories/${slug}`).then((res) => res.data);
 
-  getCategoryResults = (category) => {
-    console.log("category =>", category);
-    return this.service
+  getCategoryResults = (category) =>
+    this.service
       .get(`/searchCategoryResults/${category}`)
       .then((res) => res.data);
-  };
 }
 
 export default ContentService;
