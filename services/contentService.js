@@ -374,7 +374,18 @@ class ContentService {
   getUserCustomPlaces = () =>
     this.service.get("/searchUserCustomPlaces").then((res) => res.data);
 
-  createCategory = (slug, name, title, subtitle, image, icon, seoText) =>
+  createCategory = (
+    slug,
+    name,
+    title,
+    subtitle,
+    image,
+    icon,
+    seoText,
+    sponsorURL,
+    sponsorLogo,
+    sponsorClaim
+  ) =>
     this.service
       .post("/category", {
         slug,
@@ -384,6 +395,9 @@ class ContentService {
         image,
         icon,
         seoText,
+        sponsorURL,
+        sponsorLogo,
+        sponsorClaim,
       })
       .then((res) => res.data);
 

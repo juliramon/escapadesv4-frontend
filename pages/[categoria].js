@@ -1,5 +1,6 @@
 import GoogleMapReact from "google-map-react";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import { Container, Form, Row } from "react-bootstrap";
@@ -170,7 +171,7 @@ const CategoryPage = () => {
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
-          content={`$Històries en parella - Escapadesenparella.cat`}
+          content={`${state.categoryDetails.title} - Escapadesenparella.cat`}
         />
         <meta
           property="og:description"
@@ -185,7 +186,7 @@ const CategoryPage = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content={`$Històries en parella - Escapadesenparella.cat`}
+          content={`${state.categoryDetails.title} - Escapadesenparella.cat`}
         />
         <meta
           name="twitter:description"
@@ -346,6 +347,27 @@ const CategoryPage = () => {
                   <p className="top-nav-subtitle">
                     {state.categoryDetails.seoText}
                   </p>
+                  <div className="sponsor-block">
+                    <Link href={`${state.categoryDetails.sponsorURL}`}>
+                      <a>
+                        <div className="sponsor-block-top">
+                          <div className="sponsor-block-left">
+                            <span>Patrocinat per</span>
+                          </div>
+                          <div className="sponsor-block-right">
+                            <div className="sponsor-logo">
+                              <img src={state.categoryDetails.sponsorLogo} />
+                            </div>
+                          </div>
+                        </div>
+                        <div className="sponsor-block-bottom">
+                          <div className="sponsor-block-claim">
+                            // TO COMPLETE
+                          </div>
+                        </div>
+                      </a>
+                    </Link>
+                  </div>
                 </div>
                 <div className="listings-wrapper">
                   <div className="listings-list">{resultsList}</div>

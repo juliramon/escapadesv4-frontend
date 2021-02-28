@@ -371,7 +371,6 @@ nav {
 
 .top-nav-wrapper {
   margin: 0 auto;
-  border-bottom: 1px solid $hover-tab-background;
   padding: 20px 0;
   .top-nav-title {
     font-size: 1.8em;
@@ -381,7 +380,7 @@ nav {
     margin: 0 auto;
   }
   .top-nav-subtitle {
-    max-width: 62%;
+    max-width: 70%;
     margin-bottom: 0;
   }
   .top-nav-meta {
@@ -1473,12 +1472,41 @@ nav {
     flex: 1;
     padding: 0 30px;
     margin-left: 10%;
-    margin-right: 25%;
+    margin-right: 20%;
     .top-nav-wrapper {
       padding-top: 0;
     }
+    .sponsor-block {
+      margin-top: 15px;
+      a {
+        color: #000 !important;
+        font-size: 0.85rem;
+      }
+      .sponsor-block-top {
+        display: flex;
+        align-items: center;
+        .sponsor-block-left {
+          margin-right: 10px;
+        }
+        .sponsor-logo {
+          width: 180px;
+          height: 50px;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          img {
+            width: 180px;
+            height: auto;
+          }
+        }
+      }
+      .sponsor-block-claim {
+        opacity: 0.6;
+      }
+    }
     .listings-list {
-      margin: 15px -10px -10px -10px;
+      margin: 0 -10px -10px -10px;
       display: flex;
       flex-wrap: wrap;
     }
@@ -1490,7 +1518,7 @@ nav {
     }
   }
   .col.right {
-    max-width: 25%;
+    max-width: 20%;
     margin: -15px 0;
     height: calc(100vh - 61px);
     overflow-y: scroll;
