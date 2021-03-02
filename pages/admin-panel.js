@@ -455,6 +455,10 @@ const AdminPanel = () => {
           slug={el.slug}
           seoText={el.seoText}
           icon={el.icon}
+          isSponsored={el.isSponsored}
+          sponsorURL={el.sponsorURL}
+          sponsorLogo={el.sponsorLogo}
+          sponsorClaim={el.sponsorClaim}
           fetchData={fetchData}
         />
       ));

@@ -14,6 +14,10 @@ const CategoryBox = ({
   slug,
   seoText,
   icon,
+  isSponsored,
+  sponsorURL,
+  sponsorLogo,
+  sponsorClaim,
   fetchData,
 }) => {
   let shortenedSubtitle = subtitle.slice(0, 70);
@@ -160,6 +164,10 @@ const CategoryBox = ({
         image={image}
         icon={icon}
         seoText={seoText}
+        isSponsored={isSponsored}
+        sponsorURL={sponsorURL}
+        sponsorLogo={sponsorLogo}
+        sponsorClaim={sponsorClaim}
         fetchData={fetchData}
       />
     </div>

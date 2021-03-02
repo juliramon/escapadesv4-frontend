@@ -103,6 +103,28 @@ const CategoryPage = () => {
     });
   }
 
+  const sponsorBlock = state.categoryDetails.isSponsored ? (
+    <div className="sponsor-block">
+      <Link href={`${state.categoryDetails.sponsorURL}`} target="_blank">
+        <a>
+          <div className="sponsor-block-top">
+            <div className="sponsor-block-left">
+              <span>Patrocinat per</span>
+            </div>
+            <div className="sponsor-block-right">
+              <div className="sponsor-logo">
+                <img src={state.categoryDetails.sponsorLogo} />
+              </div>
+              <div className="sponsor-block-claim">
+                <span>{state.categoryDetails.sponsorClaim}</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      </Link>
+    </div>
+  ) : null;
+
   const center = {
     lat: 41.3948976,
     lng: 2.0787283,
@@ -347,27 +369,7 @@ const CategoryPage = () => {
                   <p className="top-nav-subtitle">
                     {state.categoryDetails.seoText}
                   </p>
-                  <div className="sponsor-block">
-                    <Link href={`${state.categoryDetails.sponsorURL}`}>
-                      <a>
-                        <div className="sponsor-block-top">
-                          <div className="sponsor-block-left">
-                            <span>Patrocinat per</span>
-                          </div>
-                          <div className="sponsor-block-right">
-                            <div className="sponsor-logo">
-                              <img src={state.categoryDetails.sponsorLogo} />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="sponsor-block-bottom">
-                          <div className="sponsor-block-claim">
-                            // TO COMPLETE
-                          </div>
-                        </div>
-                      </a>
-                    </Link>
-                  </div>
+                  {sponsorBlock}
                 </div>
                 <div className="listings-wrapper">
                   <div className="listings-list">{resultsList}</div>

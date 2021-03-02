@@ -375,6 +375,7 @@ class ContentService {
     this.service.get("/searchUserCustomPlaces").then((res) => res.data);
 
   createCategory = (
+    isSponsored,
     slug,
     name,
     title,
@@ -385,9 +386,11 @@ class ContentService {
     sponsorURL,
     sponsorLogo,
     sponsorClaim
-  ) =>
-    this.service
+  ) => {
+    console.log("sponsor claim =>", sponsorClaim);
+    return this.service
       .post("/category", {
+        isSponsored,
         slug,
         name,
         title,
@@ -400,6 +403,7 @@ class ContentService {
         sponsorClaim,
       })
       .then((res) => res.data);
+  };
 
   getCategories = () => this.service.get("/categories").then((res) => res.data);
 
@@ -408,8 +412,22 @@ class ContentService {
       .put(`/categories/${id}`, { isRemoved: true })
       .then((res) => res.data);
 
-  editCategory = (id, slug, name, title, subtitle, image, icon, seoText) => {
+  editCategory = (
+    id,
+    slug,
+    name,
+    title,
+    subtitle,
+    image,
+    icon,
+    seoText,
+    isSponsored,
+    sponsorURL,
+    sponsorLogo,
+    sponsorClaim
+  ) => {
     console.log("id =>", id);
+    console.log("categorySponsorLogo =>", sponsorLogo);
     return this.service.put(`/categories/${id}`, {
       slug,
       name,
@@ -418,6 +436,10 @@ class ContentService {
       image,
       icon,
       seoText,
+      isSponsored,
+      sponsorURL,
+      sponsorLogo,
+      sponsorClaim,
     });
   };
 

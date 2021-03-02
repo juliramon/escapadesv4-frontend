@@ -84,6 +84,7 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
       lower: true,
     });
     const {
+      isSponsored,
       name,
       title,
       subtitle,
@@ -96,6 +97,7 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
     } = category;
     service
       .createCategory(
+        isSponsored,
         slug,
         name,
         title,
@@ -130,6 +132,25 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
     }
   }, [category]);
 
+  useEffect(() => {
+    if (!category.isSponsored) {
+      if (
+        category.sponsorURL !== "" ||
+        category.sponsorLogo !== "" ||
+        category.blopSponsorLogo !== "" ||
+        category.sponsorClaim !== ""
+      ) {
+        setCategory({
+          ...category,
+          sponsorURL: "",
+          sponsorLogo: "",
+          blopSponsorLogo: "",
+          sponsorClaim: "",
+        });
+      }
+    }
+  });
+
   let imagePreview, sponsorLogoPreview;
   if (category.blopImage) {
     imagePreview = (
@@ -146,6 +167,71 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
       </div>
     );
   }
+
+  const sponsorBlock = category.isSponsored ? (
+    <>
+      {" "}
+      <Form.Group controlId="categorySponsorURL">
+        <Form.Label>URL del patrocinador</Form.Label>
+        <Form.Control
+          type="url"
+          placeholder="Entra la URL del patrocinador"
+          name="sponsorURL"
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <div className="image">
+        <span>Logo del patrocinador</span>
+        <div className="images-wrapper">
+          <div className="top-bar">
+            <Form.Group>
+              <div className="image-drop-zone">
+                <Form.Label>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="icon icon-tabler icon-tabler-camera-plus"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="#0d1f44"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <circle cx="12" cy="13" r="3" />
+                    <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+                    <line x1="15" y1="6" x2="21" y2="6" />
+                    <line x1="18" y1="3" x2="18" y2="9" />
+                  </svg>
+                  Afegir logo
+                  <Form.Control
+                    type="file"
+                    name="sponsorLogo"
+                    onChange={saveFileToStatus}
+                    max="1"
+                  />
+                </Form.Label>
+              </div>
+            </Form.Group>
+          </div>
+          <div className="images-list-wrapper">
+            <div className="image-wrapper">{sponsorLogoPreview}</div>
+          </div>
+        </div>
+      </div>
+      <Form.Group controlId="categorySponsorClaim">
+        <Form.Label>Claim del patrocinador</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Entra el claim del patrocinador"
+          name="sponsorClaim"
+          onChange={handleChange}
+        />
+      </Form.Group>{" "}
+    </>
+  ) : null;
 
   const categoryPublicationForm = (
     <Form>
@@ -246,65 +332,7 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
           onClick={handleCheck}
         />
       </Form.Group>
-      <Form.Group controlId="categorySponsorURL">
-        <Form.Label>URL del patrocinador</Form.Label>
-        <Form.Control
-          type="url"
-          placeholder="Entra la URL del patrocinador"
-          name="sponsorURL"
-          onChange={handleChange}
-        />
-      </Form.Group>
-      <div className="image">
-        <span>Logo del patrocinador</span>
-        <div className="images-wrapper">
-          <div className="top-bar">
-            <Form.Group>
-              <div className="image-drop-zone">
-                <Form.Label>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="icon icon-tabler icon-tabler-camera-plus"
-                    width="22"
-                    height="22"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="#0d1f44"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                    <circle cx="12" cy="13" r="3" />
-                    <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
-                    <line x1="15" y1="6" x2="21" y2="6" />
-                    <line x1="18" y1="3" x2="18" y2="9" />
-                  </svg>
-                  Afegir logo
-                  <Form.Control
-                    type="file"
-                    name="sponsorLogo"
-                    onChange={saveFileToStatus}
-                    max="1"
-                  />
-                </Form.Label>
-              </div>
-            </Form.Group>
-          </div>
-          <div className="images-list-wrapper">
-            <div className="image-wrapper">{sponsorLogoPreview}</div>
-          </div>
-        </div>
-      </div>
-      <Form.Group controlId="categorySponsorClaim">
-        <Form.Label>Claim del patrocinador</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Entra el claim del patrocinador"
-          name="sponsorClaim"
-          onChange={handleChange}
-        />
-      </Form.Group>
+      {sponsorBlock}
     </Form>
   );
   return (
