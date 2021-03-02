@@ -3,10 +3,11 @@ import { Button, Form, Modal } from "react-bootstrap";
 import slugify from "slugify";
 import ContentService from "../../services/contentService";
 
-const CreateCategoryModal = ({ visibility, hideModal }) => {
+const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
   const service = new ContentService();
 
   const initialState = {
+    name: "",
     title: "",
     subtitle: "",
     image: "",
@@ -15,6 +16,13 @@ const CreateCategoryModal = ({ visibility, hideModal }) => {
     cloudImageUploaded: false,
     icon: "",
     seoText: "",
+    isSponsored: false,
+    sponsorURL: "",
+    sponsorLogo: "",
+    blopSponsorLogo: "",
+    cloudSponsorLogo: "",
+    cloudSponsorLogoUploaded: false,
+    sponsorClaim: "",
   };
 
   const [category, setCategory] = useState(initialState);
@@ -23,26 +31,51 @@ const CreateCategoryModal = ({ visibility, hideModal }) => {
     setCategory({ ...category, [e.target.name]: e.target.value });
   };
 
+  const handleCheck = (e) =>
+    e.target.checked
+      ? setCategory({ ...category, isSponsored: true })
+      : setCategory({ ...category, isSponsored: false });
+
   const saveFileToStatus = (e) => {
     const fileToUpload = e.target.files[0];
-    setCategory({
-      ...category,
-      blopImage: URL.createObjectURL(fileToUpload),
-      image: fileToUpload,
-    });
+    if (e.target.name === "image") {
+      setCategory({
+        ...category,
+        blopImage: URL.createObjectURL(fileToUpload),
+        image: fileToUpload,
+      });
+    }
+    if (e.target.name === "sponsorLogo") {
+      setCategory({
+        ...category,
+        blopSponsorLogo: URL.createObjectURL(fileToUpload),
+        sponsorLogo: fileToUpload,
+      });
+    }
   };
 
   const handleFileUpload = async (e) => {
     const image = category.image;
+    let uploadedSponsorLogo;
     const uploadData = new FormData();
     uploadData.append("imageUrl", image);
     const uploadedImage = await service.uploadFile(uploadData);
-    console.log(uploadedImage);
+    console.log("image uploaded");
+    if (category.isSponsored && category.sponsorLogo !== "") {
+      const sponsorLogo = category.sponsorLogo;
+      const uploadData = new FormData();
+      uploadData.append("imageUrl", sponsorLogo);
+      uploadedSponsorLogo = await service.uploadFile(uploadData);
+      console.log("sponsor logo uploaded");
+    }
     setCategory({
       ...category,
       cloudImage: uploadedImage.path,
       cloudImageUploaded: true,
+      cloudSponsorLogo: uploadedSponsorLogo.path,
+      cloudSponsorLogoUploaded: true,
     });
+    console.log("file state saved");
   };
 
   const submitCategory = async () => {
@@ -50,26 +83,75 @@ const CreateCategoryModal = ({ visibility, hideModal }) => {
       remove: /[*+~.,()'"!:@]/g,
       lower: true,
     });
-    const { title, subtitle, cloudImage, icon, seoText } = category;
+    const {
+      isSponsored,
+      name,
+      title,
+      subtitle,
+      cloudImage,
+      icon,
+      seoText,
+      sponsorURL,
+      cloudSponsorLogo,
+      sponsorClaim,
+    } = category;
     service
-      .createCategory(slug, title, subtitle, cloudImage, icon, seoText)
-      .then(() => console.log("category created"))
+      .createCategory(
+        isSponsored,
+        slug,
+        name,
+        title,
+        subtitle,
+        cloudImage,
+        icon,
+        seoText,
+        sponsorURL,
+        cloudSponsorLogo,
+        sponsorClaim
+      )
+      .then(() => {
+        hideModal();
+        fetchData();
+      })
       .catch((err) => console.log(err));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     handleFileUpload();
-    console.log("category created");
   };
 
   useEffect(() => {
-    if (category.cloudImageUploaded === true) {
+    if (
+      category.cloudImageUploaded === true ||
+      category.cloudSponsorLogoUploaded === true ||
+      (category.cloudImageUploaded === true &&
+        category.cloudSponsorLogoUploaded === true)
+    ) {
       submitCategory();
     }
   }, [category]);
 
-  let imagePreview;
+  useEffect(() => {
+    if (!category.isSponsored) {
+      if (
+        category.sponsorURL !== "" ||
+        category.sponsorLogo !== "" ||
+        category.blopSponsorLogo !== "" ||
+        category.sponsorClaim !== ""
+      ) {
+        setCategory({
+          ...category,
+          sponsorURL: "",
+          sponsorLogo: "",
+          blopSponsorLogo: "",
+          sponsorClaim: "",
+        });
+      }
+    }
+  });
+
+  let imagePreview, sponsorLogoPreview;
   if (category.blopImage) {
     imagePreview = (
       <div className="image">
@@ -78,8 +160,90 @@ const CreateCategoryModal = ({ visibility, hideModal }) => {
     );
   }
 
+  if (category.blopSponsorLogo) {
+    sponsorLogoPreview = (
+      <div className="image">
+        <img src={category.blopSponsorLogo} />
+      </div>
+    );
+  }
+
+  const sponsorBlock = category.isSponsored ? (
+    <>
+      {" "}
+      <Form.Group controlId="categorySponsorURL">
+        <Form.Label>URL del patrocinador</Form.Label>
+        <Form.Control
+          type="url"
+          placeholder="Entra la URL del patrocinador"
+          name="sponsorURL"
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <div className="image">
+        <span>Logo del patrocinador</span>
+        <div className="images-wrapper">
+          <div className="top-bar">
+            <Form.Group>
+              <div className="image-drop-zone">
+                <Form.Label>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="icon icon-tabler icon-tabler-camera-plus"
+                    width="22"
+                    height="22"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="#0d1f44"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <circle cx="12" cy="13" r="3" />
+                    <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+                    <line x1="15" y1="6" x2="21" y2="6" />
+                    <line x1="18" y1="3" x2="18" y2="9" />
+                  </svg>
+                  Afegir logo
+                  <Form.Control
+                    type="file"
+                    name="sponsorLogo"
+                    onChange={saveFileToStatus}
+                    max="1"
+                  />
+                </Form.Label>
+              </div>
+            </Form.Group>
+          </div>
+          <div className="images-list-wrapper">
+            <div className="image-wrapper">{sponsorLogoPreview}</div>
+          </div>
+        </div>
+      </div>
+      <Form.Group controlId="categorySponsorClaim">
+        <Form.Label>Claim del patrocinador</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Entra el claim del patrocinador"
+          name="sponsorClaim"
+          onChange={handleChange}
+        />
+      </Form.Group>{" "}
+    </>
+  ) : null;
+
   const categoryPublicationForm = (
     <Form>
+      <Form.Group controlId="categoryName">
+        <Form.Label>Nom de la categoria</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Entra el nom de la categoria"
+          name="name"
+          onChange={handleChange}
+        />
+      </Form.Group>
       <Form.Group controlId="categoryTitle">
         <Form.Label>Títol de la categoria</Form.Label>
         <Form.Control
@@ -161,6 +325,14 @@ const CreateCategoryModal = ({ visibility, hideModal }) => {
           onChange={handleChange}
         ></textarea>
       </Form.Group>
+      <Form.Group controlId="categoryIsSponsored">
+        <Form.Check
+          type="checkbox"
+          label="Categoria patrocinada?"
+          onClick={handleCheck}
+        />
+      </Form.Group>
+      {sponsorBlock}
     </Form>
   );
   return (

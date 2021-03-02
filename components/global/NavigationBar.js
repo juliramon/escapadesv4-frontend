@@ -229,8 +229,8 @@ const NavigationBar = ({ logo_url, path }) => {
   let navBar;
   if (
     path === "/nova-activitat" ||
-    path === "/place-composer" ||
-    path === "/story-composer"
+    path === "/nou-allotjament" ||
+    path === "/nova-historia"
   ) {
     navBar = (
       <header style={styledHeader}>
@@ -450,7 +450,7 @@ const NavigationBar = ({ logo_url, path }) => {
             </div>
           </Container>
         </Navbar>
-        <ContentBar user={user} />
+        <ContentBar />
       </header>
     );
   }

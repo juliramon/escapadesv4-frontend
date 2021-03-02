@@ -7,12 +7,17 @@ import ShareModal from "../modals/ShareModal";
 
 const CategoryBox = ({
   id,
+  name,
   image,
   title,
   subtitle,
   slug,
   seoText,
   icon,
+  isSponsored,
+  sponsorURL,
+  sponsorLogo,
+  sponsorClaim,
   fetchData,
 }) => {
   let shortenedSubtitle = subtitle.slice(0, 70);
@@ -153,11 +158,16 @@ const CategoryBox = ({
         visibility={editCategoryModalVisibility}
         hideModal={hideEditCategoryModalVisibility}
         id={id}
+        name={name}
         title={title}
         subtitle={subtitle}
         image={image}
         icon={icon}
         seoText={seoText}
+        isSponsored={isSponsored}
+        sponsorURL={sponsorURL}
+        sponsorLogo={sponsorLogo}
+        sponsorClaim={sponsorClaim}
         fetchData={fetchData}
       />
     </div>
