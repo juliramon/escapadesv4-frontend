@@ -1,7 +1,7 @@
 import React, {useEffect, useCallback, useState} from "react";
 import ContentService from "../../services/contentService";
 import PublicContentBox from "./PublicContentBox";
-import NavigationBar from "../NavigationBar";
+import NavigationBar from "../global/NavigationBar;
 import {Container, Row, Form} from "react-bootstrap";
 import GoogleMapReact from "google-map-react";
 
