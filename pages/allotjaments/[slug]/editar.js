@@ -74,8 +74,6 @@ const ActivityEditionForm = () => {
 
   const service = new ContentService();
 
-  console.log(router.query);
-
   useEffect(() => {
     if (router.query.slug !== undefined) {
       const fetchData = async () => {

@@ -227,7 +227,7 @@ const StoryEditionForm = () => {
         description
       )
       .then(() => router.push("/dashboard"))
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const handleFileUpload = (e) => {

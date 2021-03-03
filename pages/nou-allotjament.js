@@ -121,9 +121,7 @@ const PlaceForm = () => {
       const uploadData = new FormData();
       uploadData.append("imageUrl", el);
       service.uploadFile(uploadData).then((res) => {
-        console.log(res.path);
         uploadedImages.push(res.path);
-        console.log(uploadedImages.length);
         if (uploadedImages.length === state.formData.images.length) {
           setState({
             ...state,
@@ -251,7 +249,7 @@ const PlaceForm = () => {
         price
       )
       .then(() => Router.push("/dashboard"))
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const handleSubmit = (e) => {

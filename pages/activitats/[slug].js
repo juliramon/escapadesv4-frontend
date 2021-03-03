@@ -16,8 +16,6 @@ const ActivityListing = () => {
 
   const urlToShare = `https://escapadesenparella.cat/activitats/${router.query.slug}`;
 
-  console.log(router);
-
   const initialState = {
     activity: {},
     isActivityLoaded: false,
