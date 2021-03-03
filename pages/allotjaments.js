@@ -344,7 +344,7 @@ const PlaceList = ({ user }) => {
                   {state.hasPlaces ? (
                     <GoogleMapReact
                       bootstrapURLKeys={{
-                        key: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
+                        key: "AIzaSyAUENym8OVt2pBPNIMzvYLnXj_C7lIZtSw",
                       }}
                       defaultCenter={center}
                       defaultZoom={7}

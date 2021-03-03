@@ -145,12 +145,12 @@ const Homepage = (props) => {
 
 export async function getStaticProps() {
   const service = new ContentService();
-  // const activities = await service.activities();
-  // const places = await service.getAllPlaces();
-  // const stories = await service.getAllStories();
-  const activities = [];
-  const places = [];
-  const stories = [];
+  const activities = await service.activities();
+  const places = await service.getAllPlaces();
+  const stories = await service.getAllStories();
+  // const activities = [];
+  // const places = [];
+  // const stories = [];
   return {
     props: {
       activities,
