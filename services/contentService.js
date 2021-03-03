@@ -3,7 +3,7 @@ const { default: Axios } = require("axios");
 class ContentService {
   constructor() {
     let service = Axios.create({
-      baseURL: `${process.env.NEXT_PUBLIC_APP_API_URL}`,
+      baseURL: `http://escapadesv4-frontend.vercel.app/api`,
       withCredentials: true,
     });
     this.service = service;
