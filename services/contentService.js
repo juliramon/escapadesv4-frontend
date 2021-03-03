@@ -3,7 +3,7 @@ const { default: Axios } = require("axios");
 class ContentService {
   constructor() {
     let service = Axios.create({
-      baseURL: `https://escapadesenparella.herokuapp.com/api`,
+      baseURL: `${process.env.NEXT_PUBLIC_APP_API_URL}`,
       withCredentials: true,
     });
     this.service = service;
