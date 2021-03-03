@@ -3,7 +3,7 @@ import Axios from "axios";
 class AuthService {
   constructor() {
     let service = Axios.create({
-      baseURL: `${process.env.NEXT_PUBLIC_APP_API_URL}`,
+      baseURL: process.env.API_URL,
       withCredentials: true,
     });
     let error, response;
