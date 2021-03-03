@@ -294,7 +294,7 @@ const ActivityList = () => {
                     {state.hasActivities ? (
                       <GoogleMapReact
                         bootstrapURLKeys={{
-                          key: "AIzaSyAUENym8OVt2pBPNIMzvYLnXj_C7lIZtSw",
+                          key: `${process.env.GOOGLE_API_KEY}`,
                         }}
                         center={center}
                         defaultCenter={center}
