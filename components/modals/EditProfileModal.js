@@ -52,8 +52,6 @@ const EditProfileModal = ({ visibility, hideModal, refreshUserData }) => {
     service
       .editProfile(_id, avatar, fullName, username, bio, location)
       .then((res) => {
-        console.log("RES =>", res);
-        console.log("state =>", state.formData);
         hideModal();
         refreshUserData(state.formData);
       });
