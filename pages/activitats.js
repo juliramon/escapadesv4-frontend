@@ -1,10 +1,10 @@
 import { useEffect, useCallback, useState } from "react";
 import ContentService from "../services/contentService";
-import PublicContentBox from "../components/listings/PublicContentBox";
 import NavigationBar from "../components/global/NavigationBar";
 import { Container, Row, Form } from "react-bootstrap";
 import GoogleMapReact from "google-map-react";
 import Head from "next/head";
+import PublicSquareBox from "../components/listings/PublicSquareBox";
 
 const ActivityList = () => {
   const initialState = {
@@ -31,12 +31,12 @@ const ActivityList = () => {
   let activitiesList;
   if (state.hasActivities) {
     activitiesList = state.activities.map((el) => (
-      <PublicContentBox
+      <PublicSquareBox
         key={el._id}
         type={el.type}
         slug={el.slug}
         id={el._id}
-        image={el.images[0]}
+        cover={el.images[0]}
         title={el.title}
         subtitle={el.subtitle}
         location={`${
@@ -44,6 +44,8 @@ const ActivityList = () => {
         } ${el.activity_locality === undefined ? "" : ","} ${
           el.activity_province || el.activity_state
         }, ${el.activity_country}`}
+        website={el.website}
+        phone={el.phone}
       />
     ));
   }
@@ -152,10 +154,12 @@ const ActivityList = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.updateSearch]);
 
+  const listingsCount = state.activities.length;
+
   return (
     <>
       <Head>
-        <title>Feed - Escapadesenparella.cat</title>
+        <title>Activitats en parella - Escapadesenparella.cat</title>
       </Head>
       <div id="contentList" className="activity">
         <NavigationBar
@@ -163,13 +167,13 @@ const ActivityList = () => {
             "https://res.cloudinary.com/juligoodie/image/upload/c_scale,q_100,w_135/v1600008855/getaways-guru/static-files/logo-getaways-guru_vvbikk.svg"
           }
         />
-        <Container fluid className="mw-1600">
+        <Container fluid>
           <Row>
             <div className="box d-flex">
               <div className="col left">
                 <div className="filter-list">
                   <div className="filter-block">
-                    <span className="block-title">Region</span>
+                    <span className="block-title">Regió</span>
                     <Form.Check
                       label="Barcelona"
                       name="activityRegion"
@@ -214,7 +218,7 @@ const ActivityList = () => {
                     />
                   </div>
                   <div className="filter-block">
-                    <span className="block-title">Category</span>
+                    <span className="block-title">Categoria</span>
                     <Form.Check
                       label="Romantic"
                       name="activityCategory"
@@ -247,7 +251,7 @@ const ActivityList = () => {
                     />
                   </div>
                   <div className="filter-block">
-                    <span className="block-title">Season</span>
+                    <span className="block-title">Temporada</span>
                     <Form.Check
                       label="Winter"
                       name="activitySeason"
@@ -279,10 +283,14 @@ const ActivityList = () => {
                 <div className="top-nav-wrapper">
                   <h1 className="top-nav-title">Activitats</h1>
                   <p className="top-nav-subtitle">
-                    Wear your best boots, your swimsuit, your backpack or your
-                    skis. There's a whole world waiting to be discovered. Get
-                    away and enjoy with the activities below.
+                    Calceu-vos les vostres millors botes, poseu-vos el banyador,
+                    prepareu-vos la motxilla o despengeu l'anorac; aquí trobareu
+                    les millors activitats en parella a Catalunya! Escapeu-vos i
+                    gaudir d'activitats per a tots els gustos.
                   </p>
+                  <div className="listings-counter">
+                    <b>{listingsCount}</b> activitats publicades
+                  </div>
                 </div>
                 <div className="listings-wrapper">
                   <div className="listings-list">{activitiesList}</div>

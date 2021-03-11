@@ -98,6 +98,8 @@ const CategoryPage = () => {
           title={el.title}
           subtitle={el.subtitle}
           location={location}
+          website={el.website}
+          phone={el.phone}
         />
       );
     });
@@ -365,7 +367,6 @@ const CategoryPage = () => {
                   <h1 className="top-nav-title">
                     {state.categoryDetails.title}
                   </h1>
-                  <p className="sub-h1">{state.categoryDetails.subtitle}</p>
                   <p className="top-nav-subtitle">
                     {state.categoryDetails.seoText}
                   </p>

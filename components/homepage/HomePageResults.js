@@ -105,6 +105,8 @@ const HomePageResults = ({ activities, places, stories }) => {
             subtitle={el.subtitle}
             rating={el.activity_rating || el.place_rating}
             location={location}
+            website={el.website}
+            phone={el.phone}
           />
         );
       }
@@ -155,6 +157,8 @@ const HomePageResults = ({ activities, places, stories }) => {
             subtitle={el.subtitle}
             rating={el.activity_rating || el.place_rating}
             location={location}
+            website={el.website}
+            phone={el.phone}
           />
         );
       }
@@ -205,6 +209,8 @@ const HomePageResults = ({ activities, places, stories }) => {
             subtitle={el.subtitle}
             rating={el.activity_rating || el.place_rating}
             location={location}
+            website={el.website}
+            phone={el.phone}
           />
         );
       }
@@ -255,6 +261,8 @@ const HomePageResults = ({ activities, places, stories }) => {
             subtitle={el.subtitle}
             rating={el.activity_rating || el.place_rating}
             location={location}
+            website={el.website}
+            phone={el.phone}
           />
         );
       }
@@ -305,6 +313,8 @@ const HomePageResults = ({ activities, places, stories }) => {
             subtitle={el.subtitle}
             rating={el.activity_rating || el.place_rating}
             location={location}
+            website={el.website}
+            phone={el.phone}
           />
         );
       }
