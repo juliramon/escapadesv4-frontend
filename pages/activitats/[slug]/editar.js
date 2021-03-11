@@ -78,7 +78,6 @@ const ActivityEditionForm = () => {
     if (router.query.slug !== undefined) {
       const fetchData = async () => {
         let activityDetails = await service.activityDetails(router.query.slug);
-        console.log(activityDetails);
         setState({
           ...state,
           activity: activityDetails,

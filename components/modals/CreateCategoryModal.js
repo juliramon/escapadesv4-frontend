@@ -60,13 +60,11 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
     const uploadData = new FormData();
     uploadData.append("imageUrl", image);
     const uploadedImage = await service.uploadFile(uploadData);
-    console.log("image uploaded");
     if (category.isSponsored && category.sponsorLogo !== "") {
       const sponsorLogo = category.sponsorLogo;
       const uploadData = new FormData();
       uploadData.append("imageUrl", sponsorLogo);
       uploadedSponsorLogo = await service.uploadFile(uploadData);
-      console.log("sponsor logo uploaded");
     }
     setCategory({
       ...category,
@@ -75,7 +73,6 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
       cloudSponsorLogo: uploadedSponsorLogo.path,
       cloudSponsorLogoUploaded: true,
     });
-    console.log("file state saved");
   };
 
   const submitCategory = async () => {
@@ -113,7 +110,7 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
         hideModal();
         fetchData();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const handleSubmit = (e) => {

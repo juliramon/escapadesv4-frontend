@@ -16,8 +16,6 @@ const ActivityListing = () => {
 
   const urlToShare = `https://escapadesenparella.cat/activitats/${router.query.slug}`;
 
-  console.log(router);
-
   const initialState = {
     activity: {},
     isActivityLoaded: false,
@@ -568,8 +566,7 @@ const ActivityListing = () => {
                             <div className="listing-map">
                               <GoogleMapReact
                                 bootstrapURLKeys={{
-                                  key:
-                                    "AIzaSyAUENym8OVt2pBPNIMzvYLnXj_C7lIZtSw",
+                                  key: `${process.env.GOOGLE_API_KEY}`,
                                 }}
                                 defaultCenter={center}
                                 defaultZoom={11}

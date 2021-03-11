@@ -3,7 +3,7 @@ const { default: Axios } = require("axios");
 class ContentService {
   constructor() {
     let service = Axios.create({
-      baseURL: `${process.env.NEXT_PUBLIC_APP_API_URL}`,
+      baseURL: process.env.API_URL,
       withCredentials: true,
     });
     this.service = service;
@@ -387,7 +387,6 @@ class ContentService {
     sponsorLogo,
     sponsorClaim
   ) => {
-    console.log("sponsor claim =>", sponsorClaim);
     return this.service
       .post("/category", {
         isSponsored,
@@ -426,8 +425,6 @@ class ContentService {
     sponsorLogo,
     sponsorClaim
   ) => {
-    console.log("id =>", id);
-    console.log("categorySponsorLogo =>", sponsorLogo);
     return this.service.put(`/categories/${id}`, {
       slug,
       name,

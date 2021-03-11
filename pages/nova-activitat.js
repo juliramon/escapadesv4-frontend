@@ -120,9 +120,7 @@ const ActivityForm = () => {
       const uploadData = new FormData();
       uploadData.append("imageUrl", el);
       service.uploadFile(uploadData).then((res) => {
-        console.log(res.path);
         uploadedImages.push(res.path);
-        console.log(uploadedImages.length);
         if (uploadedImages.length === state.formData.images.length) {
           setState({
             ...state,
@@ -243,7 +241,7 @@ const ActivityForm = () => {
         price
       )
       .then(() => Router.push("/dashboard"))
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const handleSubmit = (e) => {
@@ -478,7 +476,6 @@ const ActivityForm = () => {
                     apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
                     style={{ width: "100%" }}
                     onPlaceSelected={(activity) => {
-                      console.log(activity);
                       let activity_full_address,
                         activity_locality,
                         activity_province,
@@ -539,8 +536,6 @@ const ActivityForm = () => {
                           activity_opening_hours: activity_opening_hours,
                         },
                       });
-
-                      console.log(activity);
                     }}
                     types={["establishment"]}
                     placeholder={"Escriu la direcció de l'activitat"}

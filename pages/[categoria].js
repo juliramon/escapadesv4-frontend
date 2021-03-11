@@ -382,7 +382,7 @@ const CategoryPage = () => {
                     {state.hasResults ? (
                       <GoogleMapReact
                         bootstrapURLKeys={{
-                          key: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
+                          key: `${process.env.GOOGLE_API_KEY}`,
                         }}
                         defaultCenter={center}
                         defaultZoom={7}

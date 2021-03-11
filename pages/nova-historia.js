@@ -156,7 +156,7 @@ const StoryForm = () => {
         description
       )
       .then(() => router.push("/dashboard"))
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const handleFileUpload = async (e) => {
@@ -170,9 +170,7 @@ const StoryForm = () => {
       const uploadData = new FormData();
       uploadData.append("imageUrl", el);
       service.uploadFile(uploadData).then((res) => {
-        console.log(res.path);
         uploadedImages.push(res.path);
-        console.log(uploadedImages.length);
         if (uploadedImages.length === state.formData.images.length) {
           setState({
             ...state,

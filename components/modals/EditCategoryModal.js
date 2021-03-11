@@ -80,7 +80,6 @@ const EditCategoryModal = ({
       const uploadData = new FormData();
       uploadData.append("imageUrl", image);
       service.uploadFile(uploadData).then((res) => {
-        console.log("cloudimage =>", res.path);
         setCategory({
           ...category,
           cloudImage: res.path,
@@ -93,7 +92,6 @@ const EditCategoryModal = ({
       const uploadData = new FormData();
       uploadData.append("imageUrl", sponsorLogo);
       service.uploadFile(uploadData).then((res) => {
-        console.log("cloudlogo =>", res.path);
         setCategory({
           ...category,
           cloudSponsorLogo: res.path,
@@ -102,7 +100,6 @@ const EditCategoryModal = ({
       });
     }
     if (category.updatedImage && category.updatedSponsorLogo) {
-      console.log("hello");
       const image = category.image;
       const sponsorLogo = category.sponsorLogo;
       let uploadedImage, uploadedSponsorLogo;
@@ -114,8 +111,6 @@ const EditCategoryModal = ({
         uploadData.append("imageUrl", sponsorLogo);
         service.uploadFile(uploadData).then((res) => {
           uploadedSponsorLogo = res.path;
-          console.log("uploaded image =>", uploadedImage);
-          console.log("uploaded logo =>", uploadedSponsorLogo);
           setCategory({
             ...category,
             cloudImage: uploadedImage,
@@ -172,12 +167,11 @@ const EditCategoryModal = ({
         hideModal();
         fetchData();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {
     if (category.cloudImageUploaded || category.cloudSponsorLogoUploaded) {
-      console.log("use effect submit category");
       submitCategory();
     }
   }, [category]);
@@ -185,10 +179,8 @@ const EditCategoryModal = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     if (category.updatedImage || category.updatedSponsorLogo) {
-      console.log("handlesubmit file upload");
       handleFileUpload();
     } else {
-      console.log("handlesubmit submit category");
       submitCategory();
     }
   };

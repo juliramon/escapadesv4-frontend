@@ -198,7 +198,7 @@ const SearchBar = () => {
           <Form.Label className="input-label">Localització</Form.Label>
           <Autocomplete
             className="location-control form-control"
-            apiKey={"AIzaSyAUENym8OVt2pBPNIMzvYLnXj_C7lIZtSw&"}
+            apiKey={`${process.env.GOOGLE_API_KEY}`}
             style={{ width: "100%" }}
             defaultValue={defaultValue}
             onPlaceSelected={(activity) => {
@@ -322,7 +322,7 @@ const SearchBar = () => {
           <Form.Label className="input-label">Localització</Form.Label>
           <Autocomplete
             className="location-control form-control"
-            apiKey={"AIzaSyAUENym8OVt2pBPNIMzvYLnXj_C7lIZtSw&"}
+            apiKey={`${process.env.GOOGLE_API_KEY}`}
             style={{ width: "100%" }}
             defaultValue={defaultValue}
             onPlaceSelected={(place) => {

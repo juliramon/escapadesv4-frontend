@@ -148,6 +148,9 @@ export async function getStaticProps() {
   const activities = await service.activities();
   const places = await service.getAllPlaces();
   const stories = await service.getAllStories();
+  // const activities = [];
+  // const places = [];
+  // const stories = [];
   return {
     props: {
       activities,

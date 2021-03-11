@@ -69,7 +69,6 @@ const configuracio = () => {
       birthDate,
       phoneNumber
     );
-    console.log(updatedUser);
     if (updatedUser.data.message) {
       setState({ ...state, serverMessage: updatedUser.data.message });
     }
@@ -80,7 +79,6 @@ const configuracio = () => {
     const { _id } = user;
     const { username, slug } = state.formData;
     const updatedUser = await service.editUserName(_id, username);
-    console.log(updatedUser);
     if (updatedUser.data.message) {
       setState({
         ...state,
@@ -97,7 +95,6 @@ const configuracio = () => {
     const { _id } = user;
     const { email } = state.formData;
     const updatedUser = await service.editEmailAddress(_id, email);
-    console.log(updatedUser);
     if (updatedUser.data.message) {
       setState({
         ...state,
@@ -118,7 +115,6 @@ const configuracio = () => {
       password,
       newPassword
     );
-    console.log(updatedPassword);
     if (updatedPassword.data.message) {
       setState({
         ...state,

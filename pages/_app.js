@@ -52,11 +52,10 @@ function MyApp({ Component, pageProps }) {
         removeCookie("loggedInUser");
         Router.push("/login");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.error(err));
   };
 
   const refreshUserData = (updatedUser) => {
-    console.log("updating user...");
     removeCookie("loggedInUser");
     setCookie("loggedInUser", updatedUser, { expires: cookieExpirationDate });
     setState({ ...state, loggedUser: updatedUser });
