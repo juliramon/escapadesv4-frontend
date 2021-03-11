@@ -114,6 +114,8 @@ const Feed = () => {
           subtitle={el.subtitle}
           rating={el.activity_rating || el.place_rating}
           location={location}
+          website={el.website}
+          phone={el.phone}
         />
       );
     });

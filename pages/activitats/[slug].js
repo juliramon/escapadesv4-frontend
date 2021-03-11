@@ -326,7 +326,7 @@ const ActivityListing = () => {
               <line x1="11" y1="15" x2="12" y2="15" />
               <line x1="12" y1="15" x2="12" y2="18" />
             </svg>
-            Opening Hours
+            Horari d'obertura
           </li>
           {activityHours}
         </ul>
@@ -580,6 +580,66 @@ const ActivityListing = () => {
                                 }
                               />
                             </div>
+                            <div className="buttons">
+                              <a
+                                href={`http://${state.activity.website}`}
+                                className="listing-Website buttonDark"
+                                title="Reservar"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="icon icon-tabler icon-tabler-device-laptop"
+                                  width="22"
+                                  height="22"
+                                  viewBox="0 0 24 24"
+                                  strokeWidth="1.5"
+                                  stroke="#ffffff"
+                                  fill="none"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                >
+                                  <path
+                                    stroke="none"
+                                    d="M0 0h24v24H0z"
+                                    fill="none"
+                                  />
+                                  <line x1="3" y1="19" x2="21" y2="19" />
+                                  <rect
+                                    x="5"
+                                    y="6"
+                                    width="14"
+                                    height="10"
+                                    rx="1"
+                                  />
+                                </svg>
+                                Més informació
+                              </a>
+
+                              <a
+                                href={`tel:${state.activity.phone}`}
+                                className="listingPhone buttonLight"
+                                title="Trucar"
+                              >
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="icon icon-tabler icon-tabler-phone-call"
+                                  width="22"
+                                  height="22"
+                                  viewBox="0 0 24 24"
+                                  strokeWidth="1.5"
+                                  stroke="#2e6ae4"
+                                  fill="none"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                >
+                                  <path stroke="none" d="M0 0h24v24H0z" />
+                                  <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
+                                  <path d="M15 7a2 2 0 0 1 2 2" />
+                                  <path d="M15 3a6 6 0 0 1 6 6" />
+                                </svg>
+                                Trucar
+                              </a>
+                            </div>
                             {hasOpeningHours}
                             <ul className="listing-details-list">
                               <li className="listing-location">
@@ -600,49 +660,6 @@ const ActivityListing = () => {
                                   <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
                                 </svg>
                                 {state.activity.activity_full_address}
-                              </li>
-                              <li className="listing-phone">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="icon icon-tabler icon-tabler-phone-call"
-                                  width="22"
-                                  height="22"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth="1.5"
-                                  stroke="#2c3e50"
-                                  fill="none"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                >
-                                  <path stroke="none" d="M0 0h24v24H0z" />
-                                  <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
-                                  <path d="M15 7a2 2 0 0 1 2 2" />
-                                  <path d="M15 3a6 6 0 0 1 6 6" />
-                                </svg>
-                                <a href={`tel:${state.activity.phone}`}>
-                                  {state.activity.phone}
-                                </a>
-                              </li>
-                              <li className="listing-website">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="icon icon-tabler icon-tabler-link"
-                                  width="22"
-                                  height="22"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth="1.5"
-                                  stroke="#2c3e50"
-                                  fill="none"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                >
-                                  <path stroke="none" d="M0 0h24v24H0z" />
-                                  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
-                                  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
-                                </svg>
-                                <a href={`http://${state.activity.website}`}>
-                                  {state.activity.website}
-                                </a>
                               </li>
                             </ul>
                           </div>

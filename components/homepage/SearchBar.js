@@ -319,7 +319,7 @@ const SearchBar = () => {
     selectedForm = (
       <Form key={2} className="header-form d-flex align-items-center places">
         <Form.Group>
-          <Form.Label className="input-label">Location</Form.Label>
+          <Form.Label className="input-label">Localització</Form.Label>
           <Autocomplete
             className="location-control form-control"
             apiKey={"AIzaSyAUENym8OVt2pBPNIMzvYLnXj_C7lIZtSw&"}

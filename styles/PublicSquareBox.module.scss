@@ -68,26 +68,3 @@
   justify-content: space-between;
   margin: 15px -4px -4px -4px;
 }
-
-.buttonDark,
-.buttonLight {
-  border-radius: 8px;
-  border: 1px solid #007bff;
-  flex: 1;
-  margin: 4px;
-  text-align: center;
-  padding: 8px 10px;
-  font-size: 14px;
-}
-
-.buttonDark {
-  background-color: #007bff;
-  color: #ffffff;
-  transition: 0.3s;
-}
-
-.buttonDark:hover {
-  color: #ffffff;
-  background-color: #0769d1;
-  border: 1px solid #0769d1;
-}

@@ -39,6 +39,23 @@ $links-color: #2e6ae4;
 $active-tab-background: #abc3f4;
 $hover-tab-background: #eaf0fc;
 
+.buttonDark,
+.buttonLight {
+  border-radius: 8px;
+  border: 1px solid $dark-button-background;
+  flex: 1;
+  margin: 4px;
+  text-align: center;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.buttonDark {
+  background-color: $dark-button-background;
+  color: $white-text !important;
+  transition: 0.3s;
+}
+
 .mw-1600 {
   max-width: 1600px;
 }
@@ -208,7 +225,10 @@ header {
   position: sticky;
   top: 0;
   background-color: #ffffff;
-  border-bottom: 1px solid #e8e8e8;
+  // border-bottom: 1px solid #e8e8e8;
+  border: none !important;
+  box-shadow: 0px 8px 10px rgb(0 0 0 / 6%) !important;
+  margin-bottom: 20px;
 }
 
 nav {
@@ -335,8 +355,10 @@ nav {
 }
 
 .content-bar {
-  padding: 0;
+  padding: 3px 0;
   display: block;
+  border-top: 1px solid #e8e8e8;
+  border-bottom: 1px solid #e8e8e8;
   .container {
     padding: 0;
   }
@@ -1446,7 +1468,6 @@ nav {
   .col.left {
     max-width: 10%;
     margin: -15px 0;
-    border-right: 1px solid #e8e8e8;
     padding-right: 0;
     height: calc(100vh - 61px);
     overflow-y: scroll;
@@ -1472,9 +1493,16 @@ nav {
     flex: 1;
     padding: 0 30px;
     margin-left: 10%;
-    margin-right: 20%;
+    margin-right: 22%;
     .top-nav-wrapper {
-      padding-top: 0;
+      padding: 0 0 10px 0;
+      border-bottom: 1px solid #e8e8e8;
+      margin-bottom: 10px;
+      .listings-counter {
+        margin-top: 10px;
+        font-size: 0.9em;
+        opacity: 0.6;
+      }
     }
     .sponsor-block {
       margin-top: 15px;
@@ -1519,8 +1547,8 @@ nav {
     }
   }
   .col.right {
-    max-width: 20%;
-    margin: -15px 0;
+    max-width: 22%;
+    margin: -35px 0;
     height: calc(100vh - 61px);
     overflow-y: scroll;
     position: fixed;
@@ -1531,13 +1559,10 @@ nav {
       height: 100vh;
     }
   }
-  .filter-block:not(:last-child) {
-    border-bottom: 1px solid #e8e8e8;
-    padding: 20px 0;
+  .filter-block {
+    margin-top: 20px;
   }
-  .filter-block:last-child {
-    padding-top: 20px;
-  }
+
   .block-title {
     font-weight: bold;
     margin-bottom: 8px;
@@ -2146,9 +2171,20 @@ nav {
     }
   }
   .listing-details-box {
-    border: 1px solid $hover-tab-background;
+    box-shadow: 0px 8px 10px rgb(0 0 0 / 6%);
     border-radius: 8px;
     padding: 20px;
+    .buttons {
+      display: flex;
+      flex-direction: column;
+      a {
+        align-items: center;
+        font-size: 15px;
+        svg {
+          margin-right: 15px;
+        }
+      }
+    }
   }
   .listing-map {
     height: 220px;
@@ -3100,21 +3136,22 @@ nav {
       }
     }
   }
-  img {
-    border: 7px solid #fff;
-    border-radius: 8px;
-    display: block;
-    max-height: 150px;
-    max-width: 150px;
-    height: auto;
-    width: auto;
-    margin: 0 auto;
-    box-shadow: 0 0 0 0.5px rgba(49, 49, 93, 0.03),
-      0 2px 5px 0 rgba(49, 49, 93, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
-  }
   .form-group {
     margin: 0 !important;
   }
+}
+
+.image-drop-zone img {
+  border: 7px solid #fff;
+  border-radius: 8px;
+  display: block;
+  max-height: 150px;
+  max-width: 150px;
+  height: auto;
+  width: auto;
+  margin: 0 auto;
+  box-shadow: 0 0 0 0.5px rgba(49, 49, 93, 0.03),
+    0 2px 5px 0 rgba(49, 49, 93, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.08);
 }
 
 // METRICS FROM ADMIN PANEL

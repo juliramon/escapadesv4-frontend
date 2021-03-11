@@ -10,13 +10,28 @@ const PublicSquareBox = ({
   subtitle,
   rating,
   location,
+  website,
+  phone,
 }) => {
   let shortenedSubtitle = subtitle.slice(0, 70);
-  let shortenedLocation;
-  if (location.props.children.length > 35) {
-    shortenedLocation = location.props.children.slice(0, 35) + "...";
+  let secureWebsite, shortenedLocation, buttonLight;
+  if (website.includes("https://") || website.includes("http://")) {
+    secureWebsite = website;
   } else {
-    shortenedLocation = location.props.children;
+    secureWebsite = `https://${website}`;
+  }
+  if (location.props) {
+    if (location.props.children.length > 35) {
+      shortenedLocation = location.props.children.slice(0, 35) + "...";
+    } else {
+      shortenedLocation = location.props.children;
+    }
+  } else {
+    if (location.length > 35) {
+      shortenedLocation = location.slice(0, 35) + "...";
+    } else {
+      shortenedLocation = location;
+    }
   }
   let linkPath, tipus, icon;
   if (type === "activity") {
@@ -41,6 +56,7 @@ const PublicSquareBox = ({
         <path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
       </svg>
     );
+    buttonLight = undefined;
   } else if (type === "place") {
     linkPath = "allotjaments";
     tipus = "Allotjament";
@@ -61,6 +77,17 @@ const PublicSquareBox = ({
         <path d="M3 7v11m0 -4h18m0 4v-8a2 2 0 0 0 -2 -2h-8v6" />
         <circle cx="7" cy="10" r="1" />
       </svg>
+    );
+    buttonLight = (
+      <a
+        href={secureWebsite}
+        title="Reservar"
+        className="buttonLight"
+        target="_blank"
+        rel="nofollow"
+      >
+        Reservar
+      </a>
     );
   }
   return (
@@ -115,16 +142,14 @@ const PublicSquareBox = ({
             </svg>
             {shortenedLocation}
           </p>
-          <div className={styles.buttons}>
-            <a href="#" title="Detalls" className={styles.buttonDark}>
-              Detalls
-            </a>
-            <a href="#" title="Reservar" className={styles.buttonLight}>
-              Reservar
-            </a>
-          </div>
         </a>
       </Link>
+      <div className={styles.buttons}>
+        <a href={`/${linkPath}/${slug}`} title="Detalls" className="buttonDark">
+          Llegir-ne més
+        </a>
+        {buttonLight}
+      </div>
     </div>
   );
 };
