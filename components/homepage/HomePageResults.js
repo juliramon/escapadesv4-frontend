@@ -376,7 +376,10 @@ const HomePageResults = ({ activities, places, stories }) => {
           <div className="listing">
             <div className="left">
               <div className="image">
-                <img src="" alt="" />
+                <img
+                  src="../../hotels-amb-encant-escapades-en-parella.png"
+                  alt=""
+                />
               </div>
             </div>
             <div className="right">
@@ -386,7 +389,7 @@ const HomePageResults = ({ activities, places, stories }) => {
           <div className="listing">
             <div className="left">
               <div className="image">
-                <img src="" alt="" />
+                <img src="../../apartamens-escapades-en-parella.png" alt="" />
               </div>
             </div>
             <div className="right">
@@ -396,17 +399,7 @@ const HomePageResults = ({ activities, places, stories }) => {
           <div className="listing">
             <div className="left">
               <div className="image">
-                <img src="" alt="" />
-              </div>
-            </div>
-            <div className="right">
-              <h3>Cabanyes</h3>
-            </div>
-          </div>
-          <div className="listing">
-            <div className="left">
-              <div className="image">
-                <img src="" alt="" />
+                <img src="../../cases-arbre-escapades-en-parella.png" alt="" />
               </div>
             </div>
             <div className="right">
@@ -416,7 +409,7 @@ const HomePageResults = ({ activities, places, stories }) => {
           <div className="listing">
             <div className="left">
               <div className="image">
-                <img src="" alt="" />
+                <img src="../../cases-rurals-escapades-en-parella.png" alt="" />
               </div>
             </div>
             <div className="right">
@@ -426,7 +419,7 @@ const HomePageResults = ({ activities, places, stories }) => {
           <div className="listing">
             <div className="left">
               <div className="image">
-                <img src="" alt="" />
+                <img src="../../carabanes-escapades-en-parella.png" alt="" />
               </div>
             </div>
             <div className="right">
@@ -436,7 +429,7 @@ const HomePageResults = ({ activities, places, stories }) => {
           <div className="listing">
             <div className="left">
               <div className="image">
-                <img src="" alt="" />
+                <img src="../../refugis-escapades-en-parella.png" alt="" />
               </div>
             </div>
             <div className="right">
