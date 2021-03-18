@@ -3,7 +3,7 @@ import Axios from "axios";
 class AuthService {
   constructor() {
     let service = Axios.create({
-      baseURL: process.env.API_URL,
+      baseURL: "https://escapadesenparella.herokuapp.com/api",
       withCredentials: true,
     });
     let error, response;
