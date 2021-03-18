@@ -355,21 +355,21 @@ const PlaceForm = () => {
                       <Form.Label>Categories</Form.Label>
                       <Form.Check
                         type="checkbox"
-                        name="romantic"
+                        name="romantica"
                         id="romantic"
                         label="Romàntica"
                         onChange={handleCheckCategory}
                       />
                       <Form.Check
                         type="checkbox"
-                        name="adventure"
+                        name="aventura"
                         id="adventure"
                         label="Aventura"
                         onChange={handleCheckCategory}
                       />
                       <Form.Check
                         type="checkbox"
-                        name="gastronomic"
+                        name="gastronomica"
                         id="gastronomic"
                         label="Gastronòmica"
                         onChange={handleCheckCategory}
