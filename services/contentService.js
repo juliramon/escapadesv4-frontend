@@ -5,6 +5,9 @@ class ContentService {
     let service = Axios.create({
       baseURL: "https://escapadesenparella.herokuapp.com/api",
       withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
     this.service = service;
   }
