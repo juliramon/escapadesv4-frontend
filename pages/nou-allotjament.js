@@ -354,21 +354,21 @@ const PlaceForm = () => {
                       <Form.Check
                         type="checkbox"
                         name="romantica"
-                        id="romantic"
+                        id="romantica"
                         label="Romàntica"
                         onChange={handleCheckCategory}
                       />
                       <Form.Check
                         type="checkbox"
                         name="aventura"
-                        id="adventure"
+                        id="aventura"
                         label="Aventura"
                         onChange={handleCheckCategory}
                       />
                       <Form.Check
                         type="checkbox"
                         name="gastronomica"
-                        id="gastronomic"
+                        id="gastronomica"
                         label="Gastronòmica"
                         onChange={handleCheckCategory}
                       />
@@ -394,28 +394,28 @@ const PlaceForm = () => {
                       <Form.Check
                         type="checkbox"
                         name="hivern"
-                        id="winter"
+                        id="hivern"
                         label="Hivern"
                         onChange={handleCheckSeason}
                       />
                       <Form.Check
                         type="checkbox"
                         name="primavera"
-                        id="spring"
+                        id="primavera"
                         label="Primavera"
                         onChange={handleCheckSeason}
                       />
                       <Form.Check
                         type="checkbox"
                         name="estiu"
-                        id="summer"
+                        id="estiu"
                         label="Estiu"
                         onChange={handleCheckSeason}
                       />
                       <Form.Check
                         type="checkbox"
                         name="tardor"
-                        id="autumn"
+                        id="tardor"
                         label="Tardor"
                         onChange={handleCheckSeason}
                       />
@@ -490,35 +490,35 @@ const PlaceForm = () => {
                         />
                         <Form.Check
                           type="radio"
-                          id="apartment"
+                          id="apartament"
                           label="Apartament"
                           name="placeType"
                           onChange={handleCheckPlaceType}
                         />
                         <Form.Check
                           type="radio"
-                          id="cabin"
+                          id="refugi"
                           label="Cabanya"
                           name="placeType"
                           onChange={handleCheckPlaceType}
                         />
                         <Form.Check
                           type="radio"
-                          id="treeHouse"
+                          id="casaarbre"
                           label="Casa-arbre"
                           name="placeType"
                           onChange={handleCheckPlaceType}
                         />
                         <Form.Check
                           type="radio"
-                          id="ruralHouse"
+                          id="casarural"
                           label="Casa rural"
                           name="placeType"
                           onChange={handleCheckPlaceType}
                         />
                         <Form.Check
                           type="radio"
-                          id="trailer"
+                          id="carabana"
                           label="Carabana"
                           name="placeType"
                           onChange={handleCheckPlaceType}
