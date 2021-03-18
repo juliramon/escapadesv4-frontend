@@ -393,28 +393,28 @@ const PlaceForm = () => {
                       <Form.Label>Estació de l'any</Form.Label>
                       <Form.Check
                         type="checkbox"
-                        name="winter"
+                        name="hivern"
                         id="winter"
                         label="Hivern"
                         onChange={handleCheckSeason}
                       />
                       <Form.Check
                         type="checkbox"
-                        name="spring"
+                        name="primavera"
                         id="spring"
                         label="Primavera"
                         onChange={handleCheckSeason}
                       />
                       <Form.Check
                         type="checkbox"
-                        name="summer"
+                        name="estiu"
                         id="summer"
                         label="Estiu"
                         onChange={handleCheckSeason}
                       />
                       <Form.Check
                         type="checkbox"
-                        name="autumn"
+                        name="tardor"
                         id="autumn"
                         label="Tardor"
                         onChange={handleCheckSeason}
