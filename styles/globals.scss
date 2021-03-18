@@ -649,11 +649,19 @@ nav {
       align-items: center;
       margin: 10px;
       .image {
-        width: 45px;
-        height: 45px;
-        background-color: orange;
+        width: 105px;
+        height: 105px;
+        background-color: #ffffff;
         border-radius: 8px;
         margin-right: 12px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        img {
+          width: 100%;
+          position: relative;
+        }
       }
       h3 {
         color: #000000;
