@@ -247,33 +247,33 @@ const PlaceList = ({ user }) => {
                       onChange={handleCheckType}
                     />
                     <Form.Check
-                      label="Apartments"
+                      label="Apartaments"
                       name="placeType"
-                      id="apartment"
+                      id="apartament"
                       onChange={handleCheckType}
                     />
                     <Form.Check
-                      label="Cabanyes"
+                      label="Refugis"
                       name="placeType"
-                      id="cabin"
+                      id="refugi"
                       onChange={handleCheckType}
                     />
                     <Form.Check
                       label="Cases-arbre"
                       name="placeType"
-                      id="treeHouse"
+                      id="casaarbre"
                       onChange={handleCheckType}
                     />
                     <Form.Check
                       label="Cases rurals"
                       name="placeType"
-                      id="ruralHouse"
+                      id="casarural"
                       onChange={handleCheckType}
                     />
                     <Form.Check
                       label="Carabanes"
                       name="placeType"
-                      id="trailer"
+                      id="carabana"
                       onChange={handleCheckType}
                     />
                   </div>
@@ -325,25 +325,25 @@ const PlaceList = ({ user }) => {
                   <div className="filter-block">
                     <span className="block-title">Categoria</span>
                     <Form.Check
-                      label="Romàntic"
+                      label="Romàntiques"
                       name="placeCategory"
-                      id="romantic"
+                      id="romantica"
                       onChange={handleCheckCategory}
                     />
                     <Form.Check
                       label="Aventura"
                       name="placeCategory"
-                      id="adventure"
+                      id="aventura"
                       onChange={handleCheckCategory}
                     />
                     <Form.Check
-                      label="Gastronòmic"
+                      label="Gastronòmiques"
                       name="placeCategory"
-                      id="gastronomic"
+                      id="gastronomica"
                       onChange={handleCheckCategory}
                     />
                     <Form.Check
-                      label="Cultural"
+                      label="Culturals"
                       name="placeCategory"
                       id="cultural"
                       onChange={handleCheckCategory}
@@ -360,25 +360,25 @@ const PlaceList = ({ user }) => {
                     <Form.Check
                       label="Hivern"
                       name="placeSeason"
-                      id="winter"
+                      id="hivern"
                       onChange={handleCheckSeason}
                     />
                     <Form.Check
                       label="Primavera"
                       name="placeSeason"
-                      id="spring"
+                      id="primavera"
                       onChange={handleCheckSeason}
                     />
                     <Form.Check
                       label="Estiu"
                       name="placeSeason"
-                      id="summer"
+                      id="estiu"
                       onChange={handleCheckSeason}
                     />
                     <Form.Check
-                      label="Tardo"
+                      label="Tardor"
                       name="placeSeason"
-                      id="autumn"
+                      id="tardor"
                       onChange={handleCheckSeason}
                     />
                   </div>

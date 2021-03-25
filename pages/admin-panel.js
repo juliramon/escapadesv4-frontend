@@ -449,6 +449,8 @@ const AdminPanel = () => {
           key={el._id}
           id={el._id}
           name={el.name}
+          pluralName={el.pluralName}
+          isPlace={el.isPlace}
           image={el.image}
           title={el.title}
           subtitle={el.subtitle}

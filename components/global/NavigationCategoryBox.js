@@ -1,8 +1,8 @@
 import Link from "next/link";
 import SVG from "react-inlinesvg";
 
-const NavigationCategoryBox = ({ icon, slug, name }) => {
-  const upperName = name.charAt(0).toUpperCase() + name.slice(1);
+const NavigationCategoryBox = ({ icon, slug, pluralName }) => {
+  const upperName = pluralName.charAt(0).toUpperCase() + pluralName.slice(1);
   const svgIcon = <SVG src={icon} />;
   return (
     <div className="content-bar---item">

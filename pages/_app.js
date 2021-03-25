@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-quill/dist/quill.bubble.css";
 import "react-photoswipe/lib/photoswipe.css";
 
-import Router, { useRouter } from "next/router";
+import Router from "next/router";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import UserContext from "../contexts/UserContext";

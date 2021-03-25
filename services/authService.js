@@ -3,7 +3,8 @@ import Axios from "axios";
 class AuthService {
   constructor() {
     let service = Axios.create({
-      baseURL: "https://api.escapadesenparella.cat/api",
+      // baseURL: "https://api.escapadesenparella.cat/api",
+      baseURL: "http://localhost:5000/api",
       withCredentials: true,
     });
     let error, response;
