@@ -220,25 +220,25 @@ const ActivityList = () => {
                   <div className="filter-block">
                     <span className="block-title">Categoria</span>
                     <Form.Check
-                      label="Romantic"
+                      label="Romàntiques"
                       name="activityCategory"
-                      id="romantic"
+                      id="romantica"
                       onChange={handleCheckCategory}
                     />
                     <Form.Check
-                      label="Adventure"
+                      label="Aventura"
                       name="activityCategory"
-                      id="adventure"
+                      id="aventura"
                       onChange={handleCheckCategory}
                     />
                     <Form.Check
-                      label="Gastronomic"
+                      label="Gastronòmiques"
                       name="activityCategory"
-                      id="gastronomic"
+                      id="gastronomica"
                       onChange={handleCheckCategory}
                     />
                     <Form.Check
-                      label="Cultural"
+                      label="Culturals"
                       name="activityCategory"
                       id="cultural"
                       onChange={handleCheckCategory}
@@ -253,27 +253,27 @@ const ActivityList = () => {
                   <div className="filter-block">
                     <span className="block-title">Temporada</span>
                     <Form.Check
-                      label="Winter"
+                      label="Hivern"
                       name="activitySeason"
-                      id="winter"
+                      id="hivern"
                       onChange={handleCheckSeason}
                     />
                     <Form.Check
-                      label="Spring"
+                      label="Primavera"
                       name="activitySeason"
-                      id="spring"
+                      id="primavera"
                       onChange={handleCheckSeason}
                     />
                     <Form.Check
-                      label="Summer"
+                      label="Estiu"
                       name="activitySeason"
-                      id="summer"
+                      id="estiu"
                       onChange={handleCheckSeason}
                     />
                     <Form.Check
-                      label="Autumn"
+                      label="Tardor"
                       name="activitySeason"
-                      id="autumn"
+                      id="tardor"
                       onChange={handleCheckSeason}
                     />
                   </div>
@@ -309,9 +309,9 @@ const ActivityList = () => {
                         defaultZoom={7}
                         options={getMapOptions}
                         yesIWantToUseGoogleMapApiInternals
-                        onGoogleApiLoaded={({ map, maps }) =>
-                          renderMarker(map, maps)
-                        }
+                        onGoogleApiLoaded={({ map, maps }) => {
+                          renderMarker(map, maps);
+                        }}
                       />
                     ) : null}
                   </div>

@@ -8,6 +8,8 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
 
   const initialState = {
     name: "",
+    pluralName: "",
+    isPlace: false,
     title: "",
     subtitle: "",
     image: "",
@@ -31,10 +33,17 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
     setCategory({ ...category, [e.target.name]: e.target.value });
   };
 
-  const handleCheck = (e) =>
-    e.target.checked
-      ? setCategory({ ...category, isSponsored: true })
-      : setCategory({ ...category, isSponsored: false });
+  const handleCheck = (e) => {
+    if (e.target.name === "isPlace") {
+      e.target.checked
+        ? setCategory({ ...category, isPlace: true })
+        : setCategory({ ...category, isPlace: false });
+    } else {
+      e.target.checked
+        ? setCategory({ ...category, isSponsored: true })
+        : setCategory({ ...category, isSponsored: false });
+    }
+  };
 
   const saveFileToStatus = (e) => {
     const fileToUpload = e.target.files[0];
@@ -70,7 +79,7 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
       ...category,
       cloudImage: uploadedImage.path,
       cloudImageUploaded: true,
-      cloudSponsorLogo: uploadedSponsorLogo.path,
+      cloudSponsorLogo: uploadedSponsorLogo ? uploadedSponsorLogo.path : null,
       cloudSponsorLogoUploaded: true,
     });
   };
@@ -83,6 +92,8 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
     const {
       isSponsored,
       name,
+      pluralName,
+      isPlace,
       title,
       subtitle,
       cloudImage,
@@ -97,6 +108,8 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
         isSponsored,
         slug,
         name,
+        pluralName,
+        isPlace,
         title,
         subtitle,
         cloudImage,
@@ -239,6 +252,23 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
           placeholder="Entra el nom de la categoria"
           name="name"
           onChange={handleChange}
+        />
+      </Form.Group>
+      <Form.Group controlId="categoryName">
+        <Form.Label>Nom en plural de la categoria</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Entra el nom en plural de la categoria"
+          name="pluralName"
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <Form.Group controlId="categoryIsSponsored">
+        <Form.Check
+          type="checkbox"
+          label="És categoria d'allotjament?"
+          onClick={handleCheck}
+          name="isPlace"
         />
       </Form.Group>
       <Form.Group controlId="categoryTitle">

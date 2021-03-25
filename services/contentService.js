@@ -3,7 +3,8 @@ const { default: Axios } = require("axios");
 class ContentService {
   constructor() {
     let service = Axios.create({
-      baseURL: "https://api.escapadesenparella.cat/api",
+      // baseURL: "https://api.escapadesenparella.cat/api",
+      baseURL: "http://localhost:5000/api",
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
@@ -381,6 +382,8 @@ class ContentService {
     isSponsored,
     slug,
     name,
+    pluralName,
+    isPlace,
     title,
     subtitle,
     image,
@@ -395,6 +398,8 @@ class ContentService {
         isSponsored,
         slug,
         name,
+        pluralName,
+        isPlace,
         title,
         subtitle,
         image,
@@ -418,6 +423,8 @@ class ContentService {
     id,
     slug,
     name,
+    pluralName,
+    isPlace,
     title,
     subtitle,
     image,
@@ -431,6 +438,8 @@ class ContentService {
     return this.service.put(`/categories/${id}`, {
       slug,
       name,
+      pluralName,
+      isPlace,
       title,
       subtitle,
       image,
@@ -449,6 +458,11 @@ class ContentService {
   getCategoryResults = (category) =>
     this.service
       .get(`/searchCategoryResults/${category}`)
+      .then((res) => res.data);
+
+  getPlaceTypeResults = (placeType) =>
+    this.service
+      .get(`/searchPlaceResults/${placeType}`)
       .then((res) => res.data);
 }
 

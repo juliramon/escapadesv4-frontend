@@ -8,6 +8,8 @@ const EditCategoryModal = ({
   hideModal,
   id,
   name,
+  pluralName,
+  isPlace,
   title,
   subtitle,
   image,
@@ -23,6 +25,8 @@ const EditCategoryModal = ({
   const initialState = {
     id: id,
     name: name,
+    pluralName: pluralName,
+    isPlace: isPlace,
     title: title,
     subtitle: subtitle,
     image: image,
@@ -47,10 +51,18 @@ const EditCategoryModal = ({
     setCategory({ ...category, [e.target.name]: e.target.value });
 
   const handleCheck = (e) => {
-    if (e.target.checked === true) {
-      setCategory({ ...category, isSponsored: true });
+    if (e.target.name === "isPlace") {
+      if (e.target.checked === true) {
+        setCategory({ ...category, isPlace: true });
+      } else {
+        setCategory({ ...category, isPlace: false });
+      }
     } else {
-      setCategory({ ...category, isSponsored: false });
+      if (e.target.checked === true) {
+        setCategory({ ...category, isSponsored: true });
+      } else {
+        setCategory({ ...category, isSponsored: false });
+      }
     }
   };
 
@@ -131,6 +143,8 @@ const EditCategoryModal = ({
     const {
       id,
       name,
+      pluralName,
+      isPlace,
       title,
       subtitle,
       image,
@@ -153,6 +167,8 @@ const EditCategoryModal = ({
         id,
         slug,
         name,
+        pluralName,
+        isPlace,
         title,
         subtitle,
         categoryImage,
@@ -229,6 +245,25 @@ const EditCategoryModal = ({
           name="name"
           onChange={handleChange}
           value={category.name}
+        />
+      </Form.Group>
+      <Form.Group controlId="categoryName">
+        <Form.Label>Nom en plural de la categoria</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="Entra el nom en plural de la categoria"
+          name="pluralName"
+          onChange={handleChange}
+          value={category.pluralName}
+        />
+      </Form.Group>
+      <Form.Group controlId="categoryIsPlace">
+        <Form.Check
+          type="checkbox"
+          label="És categoria d'allotjament?"
+          name="isPlace"
+          checked={category.isPlace}
+          onChange={handleCheck}
         />
       </Form.Group>
       <Form.Group controlId="categoryTitle">

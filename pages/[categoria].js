@@ -252,39 +252,39 @@ const CategoryPage = () => {
                   <div className="filter-block">
                     <span className="block-title">Classe d'allotjament</span>
                     <Form.Check
-                      label="Hotel"
+                      label="Hotels"
                       name="placeType"
                       id="hotel"
                       //   onChange={handleCheckType}
                     />
                     <Form.Check
-                      label="Apartament"
+                      label="Apartaments"
                       name="placeType"
-                      id="apartment"
+                      id="apartament"
                       //   onChange={handleCheckType}
                     />
                     <Form.Check
-                      label="Casa rural"
+                      label="Cases rurals"
                       name="placeType"
-                      id="ruralHouse"
+                      id="casarural"
                       //   onChange={handleCheckType}
                     />
                     <Form.Check
-                      label="Cabanya"
+                      label="Refugis"
                       name="placeType"
-                      id="cabin"
+                      id="refugi"
                       //   onChange={handleCheckType}
                     />
                     <Form.Check
-                      label="Casa-arbre"
+                      label="Cases-arbre"
                       name="placeType"
-                      id="treeHouse"
+                      id="casaarbre"
                       //   onChange={handleCheckType}
                     />
                     <Form.Check
-                      label="Carabana"
+                      label="Carabanes"
                       name="placeType"
-                      id="trailer"
+                      id="carabana"
                       //   onChange={handleCheckType}
                     />
                   </div>
