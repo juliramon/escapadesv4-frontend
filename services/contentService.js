@@ -3,8 +3,7 @@ const { default: Axios } = require("axios");
 class ContentService {
   constructor() {
     let service = Axios.create({
-      baseURL: "https://api.escapadesenparella.cat/api",
-      // baseURL: "http://localhost:5000/api",
+      baseURL: process.env.API_URL,
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",
