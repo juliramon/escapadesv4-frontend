@@ -54,7 +54,7 @@ const Homepage = (props) => {
   const title = (
     <>
       La vostra propera
-      <br /> <strong>escapada {span}</strong>
+      <br /> <strong>escapada en parella</strong>
       <br /> comença aquí
     </>
   );

@@ -5,6 +5,7 @@ import AuthService from "../../services/authService";
 import ContentService from "../../services/contentService";
 import Router, { useRouter } from "next/router";
 import UserContext from "../../contexts/UserContext";
+import Head from "next/head";
 
 const CompleteAccount = () => {
   const { user, refreshUserData } = useContext(UserContext);
@@ -168,193 +169,226 @@ const CompleteAccount = () => {
   }, [router]);
 
   return (
-    <section id="completeAccountPage">
-      <NavigationBar
-        logo_url={
-          "https://res.cloudinary.com/juligoodie/image/upload/c_scale,q_100,w_135/v1600008855/getaways-guru/static-files/logo-getaways-guru_vvbikk.svg"
-        }
-        user={user}
-        path={queryId}
-      />
-      <Container fluid className="mw-1600">
-        <Row>
-          <div className="box d-flex">
-            <div className="col left"></div>
-            <div className="col center">
-              <div className="top-nav-wrapper">
-                <h1 className="top-nav-title">Select topics to follow</h1>
-                <p className="top-nav-subtitle">
-                  Select which regions, categories or places are of most
-                  interest to you to get inspired.
-                  <br />
-                  You will later be ablet to modify your selection.
-                </p>
+    <>
+      <Head>
+        <title>Completa el teu compte - Escapadesenparella.cat</title>
+      </Head>
+      <section id="completeAccountPage">
+        <NavigationBar
+          logo_url={
+            "https://res.cloudinary.com/juligoodie/image/upload/c_scale,q_100,w_135/v1600008855/getaways-guru/static-files/logo-getaways-guru_vvbikk.svg"
+          }
+          user={user}
+          path={queryId}
+        />
+        <Container fluid className="mw-1600">
+          <Row>
+            <div className="box d-flex">
+              <div className="col left"></div>
+              <div className="col center">
+                <div className="top-nav-wrapper">
+                  <h1 className="top-nav-title">Selecciona temes d'interès</h1>
+                  <p className="top-nav-subtitle">
+                    Selecciona les regions, categories i allotjaments que més
+                    t'interessin per a mantenir-te inspirat!
+                    <br />
+                    Sempre podràs modificar la teva selecció des del teu compte.
+                  </p>
+                </div>
+                <div className="selection-box">
+                  <Form.Check
+                    label="Barcelona"
+                    name="region"
+                    id="barcelona"
+                    onChange={handleCheck}
+                  />
+                  <Form.Check
+                    label="Girona"
+                    name="region"
+                    id="girona"
+                    onChange={handleCheck}
+                  />
+                  <Form.Check
+                    label="Lleida"
+                    name="region"
+                    id="lleida"
+                    onChange={handleCheck}
+                  />
+                  <Form.Check
+                    label="Tarragona"
+                    name="region"
+                    id="tarragona"
+                    onChange={handleCheck}
+                  />
+                  <Form.Check
+                    label="Costa Brava"
+                    name="region"
+                    id="costaBrava"
+                    onChange={handleCheck}
+                  />
+                  <Form.Check
+                    label="Costa Daurada"
+                    name="region"
+                    id="costaDaurada"
+                    onChange={handleCheck}
+                  />
+                  <Form.Check
+                    label="Pirineus"
+                    name="region"
+                    id="pirineus"
+                    onChange={handleCheck}
+                  />
+                  <Form.Check
+                    label="Romàntiques"
+                    name="category"
+                    id="romantica"
+                    onChange={handleCheck}
+                  />
+                  <Form.Check
+                    label="Aventura"
+                    name="category"
+                    id="aventura"
+                    onChange={handleCheck}
+                  />
+                  <Form.Check
+                    label="Gastronòmiques"
+                    name="category"
+                    id="gastronomica"
+                    onChange={handleCheck}
+                  />
+                  <Form.Check
+                    label="Culturals"
+                    name="category"
+                    onChange={handleCheck}
+                    id="cultural"
+                  />
+                  <Form.Check
+                    label="Relax"
+                    name="category"
+                    onChange={handleCheck}
+                    id="relax"
+                  />
+                  <Form.Check
+                    label="A la neu"
+                    name="season"
+                    onChange={handleCheck}
+                    id="hivern"
+                  />
+                  <Form.Check
+                    label="Primavera"
+                    name="season"
+                    onChange={handleCheck}
+                    id="primavera"
+                  />
+                  <Form.Check
+                    label="Estiu"
+                    name="season"
+                    onChange={handleCheck}
+                    id="estiu"
+                  />
+                  <Form.Check
+                    label="Tardo"
+                    name="season"
+                    onChange={handleCheck}
+                    id="tardor"
+                  />
+                  <Form.Check
+                    label="Apartaments"
+                    name="type"
+                    onChange={handleCheck}
+                    id="apartament"
+                  />
+                  <Form.Check
+                    label="Refugis"
+                    name="type"
+                    id="refugi"
+                    onChange={handleCheck}
+                  />
+                  <Form.Check
+                    label="Cases-arbre"
+                    name="type"
+                    id="casaarbre"
+                    onChange={handleCheck}
+                  />
+                  <Form.Check
+                    label="Cases rurals"
+                    name="type"
+                    id="casarural"
+                    onChange={handleCheck}
+                  />
+                  <Form.Check
+                    label="Carabanes"
+                    name="type"
+                    id="carabana"
+                    onChange={handleCheck}
+                  />
+                  <Form.Check
+                    label="Hotels"
+                    name="type"
+                    id="hotel"
+                    onChange={handleCheck}
+                  />
+                </div>
               </div>
-              <div className="selection-box">
-                <Form.Check
-                  label="Barcelona"
-                  name="region"
-                  id="barcelona"
-                  onChange={handleCheck}
-                />
-                <Form.Check
-                  label="Girona"
-                  name="region"
-                  id="girona"
-                  onChange={handleCheck}
-                />
-                <Form.Check
-                  label="Lleida"
-                  name="region"
-                  id="lleida"
-                  onChange={handleCheck}
-                />
-                <Form.Check
-                  label="Tarragona"
-                  name="region"
-                  id="tarragona"
-                  onChange={handleCheck}
-                />
-                <Form.Check
-                  label="Costa Brava"
-                  name="region"
-                  id="costaBrava"
-                  onChange={handleCheck}
-                />
-                <Form.Check
-                  label="Costa Daurada"
-                  name="region"
-                  id="costaDaurada"
-                  onChange={handleCheck}
-                />
-                <Form.Check
-                  label="Pirineus"
-                  name="region"
-                  id="pirineus"
-                  onChange={handleCheck}
-                />
-                <Form.Check
-                  label="Romantic"
-                  name="category"
-                  id="romantic"
-                  onChange={handleCheck}
-                />
-                <Form.Check
-                  label="Adventure"
-                  name="category"
-                  id="adventure"
-                  onChange={handleCheck}
-                />
-                <Form.Check
-                  label="Gastronomic"
-                  name="category"
-                  id="gastronomic"
-                  onChange={handleCheck}
-                />
-                <Form.Check
-                  label="Cultural"
-                  name="category"
-                  onChange={handleCheck}
-                  id="cultural"
-                />
-                <Form.Check
-                  label="Relax"
-                  name="category"
-                  onChange={handleCheck}
-                  id="relax"
-                />
-                <Form.Check
-                  label="Winter"
-                  name="season"
-                  onChange={handleCheck}
-                  id="winter"
-                />
-                <Form.Check
-                  label="Spring"
-                  name="season"
-                  onChange={handleCheck}
-                  id="spring"
-                />
-                <Form.Check
-                  label="Summer"
-                  name="season"
-                  onChange={handleCheck}
-                  id="summer"
-                />
-                <Form.Check
-                  label="Autumn"
-                  name="season"
-                  onChange={handleCheck}
-                  id="autumn"
-                />
-                <Form.Check
-                  label="Summer"
-                  name="season"
-                  onChange={handleCheck}
-                  id="summer"
-                />
-                <Form.Check
-                  label="Apartment"
-                  name="type"
-                  onChange={handleCheck}
-                  id="apartment"
-                />
-                <Form.Check
-                  label="Cabin"
-                  name="type"
-                  id="cabin"
-                  onChange={handleCheck}
-                />
-                <Form.Check
-                  label="Tree house"
-                  name="type"
-                  id="treehouse"
-                  onChange={handleCheck}
-                />
-                <Form.Check
-                  label="Rural house"
-                  name="type"
-                  id="ruralhouse"
-                  onChange={handleCheck}
-                />
-                <Form.Check
-                  label="Trailer"
-                  name="type"
-                  id="trailer"
-                  onChange={handleCheck}
-                />
-                <Form.Check
-                  label="Hotel"
-                  name="type"
-                  id="hotel"
-                  onChange={handleCheck}
-                />
-              </div>
+              <div className="col left"></div>
             </div>
-            <div className="col left"></div>
-          </div>
-        </Row>
-      </Container>
-      <div className="progress-bar-outter">
-        <Container className="d-flex align-items-center">
-          <div className="col left"></div>
-          <div className="col center"></div>
-          <div className="col right">
-            <div className="buttons d-flex justify-space-between justify-content-end">
-              {state.isReadyToSubmit ? (
-                <Button type="submit" variant="none" onClick={handleSubmit}>
-                  Save & continue
-                </Button>
-              ) : (
-                <Button type="submit" variant="none" disabled>
-                  Save & continue
-                </Button>
-              )}
-            </div>
-          </div>
+          </Row>
         </Container>
-      </div>
-    </section>
+        <div className="progress-bar-outter">
+          <Container className="d-flex align-items-center">
+            <div className="col left"></div>
+            <div className="col center"></div>
+            <div className="col right">
+              <div className="buttons d-flex justify-space-between justify-content-end">
+                {state.isReadyToSubmit ? (
+                  <Button type="submit" variant="none" onClick={handleSubmit}>
+                    Continuar{" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-arrow-narrow-right"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#ffffff"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <line x1="15" y1="16" x2="19" y2="12" />
+                      <line x1="15" y1="8" x2="19" y2="12" />
+                    </svg>
+                  </Button>
+                ) : (
+                  <Button type="submit" variant="none" disabled>
+                    Continuar{" "}
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-arrow-narrow-right"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#ffffff"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <line x1="15" y1="16" x2="19" y2="12" />
+                      <line x1="15" y1="8" x2="19" y2="12" />
+                    </svg>
+                  </Button>
+                )}
+              </div>
+            </div>
+          </Container>
+        </div>
+      </section>
+    </>
   );
 };
 

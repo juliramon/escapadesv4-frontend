@@ -107,15 +107,12 @@ const Feed = () => {
       return (
         <PublickSquareBox
           key={el._id}
-          id={el._id}
           type={el.type}
-          cover_url={el.images[0]}
+          cover={el.cover}
           title={el.title}
           subtitle={el.subtitle}
-          rating={el.activity_rating || el.place_rating}
           location={location}
           website={el.website}
-          phone={el.phone}
         />
       );
     });

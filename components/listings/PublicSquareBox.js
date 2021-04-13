@@ -4,14 +4,11 @@ import styles from "../../styles/PublicSquareBox.module.scss";
 const PublicSquareBox = ({
   type,
   slug,
-  id,
   cover,
   title,
   subtitle,
-  rating,
   location,
   website,
-  phone,
 }) => {
   let shortenedSubtitle = subtitle.slice(0, 70);
   let secureWebsite, shortenedLocation, buttonLight;

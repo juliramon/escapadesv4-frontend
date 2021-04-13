@@ -176,7 +176,7 @@ const StoriesList = ({ user }) => {
                     <div className="attribution">
                       <div className="media-area">
                         <img
-                          src="https://res.cloudinary.com/juligoodie/image/upload/v1611854352/getaways-guru/static-files/avatars-juli-andrea_puojbq.png"
+                          src="https://res.cloudinary.com/juligoodie/image/upload/v1618330078/getaways-guru/static-files/avatars-juli-andrea_c6dio6.png"
                           alt="Andrea i Juli, credors d'Escapadesenparella.cat"
                         />
                       </div>

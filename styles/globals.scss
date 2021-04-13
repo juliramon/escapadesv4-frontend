@@ -136,6 +136,9 @@ a:active {
   a {
     padding-right: 8px !important;
   }
+  li:first-child a {
+    padding-left: 0 !important;
+  }
 }
 
 .form-control,
@@ -209,6 +212,7 @@ form button {
 
 .toast {
   min-width: 300px;
+  z-index: 1000;
   img.rounded.mr-2 {
     width: 20px;
     height: 20px;
@@ -294,48 +298,60 @@ nav {
     font-weight: bold;
   }
 
+  .nav-col.right .logged-user .nav-link,
   .nav-col.right #logged-user .nav-link {
     display: flex;
     align-items: center;
     padding: 0;
   }
-  #logged-user .avatar {
+  #logged-user .avatar,
+  .logged-user .avatar {
     margin-right: 8px;
   }
-  #logged-user .dropdown-toggle {
+  #logged-user .dropdown-toggle,
+  .logged-user .dropdown-toggle {
     display: flex !important;
     align-items: center !important;
   }
-  #logged-user .dropdown-toggle:after {
+  #logged-user .dropdown-toggle:after,
+  .logged-user .dropdown-toggle:after {
     content: none !important;
   }
-  #logged-user .dropdown-menu {
+  #logged-user .dropdown-menu,
+  .logged-user .dropdown-menu {
     padding: 0;
     right: 0;
     left: auto;
     width: 280px;
   }
-  #logged-user svg {
+  #logged-user svg,
+  .logged-user svg {
     width: 20px;
     height: 20px;
     margin: 0;
   }
-  #logged-user ul {
+  #logged-user ul,
+  .logged-user ul {
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  #logged-user ul li {
+  #logged-user ul li,
+  .logged-user ul li {
     margin: 6px 10px;
   }
-  #logged-user ul li:first-child {
+  #logged-user ul li:first-child,
+  .logged-user ul li:first-child {
     margin-top: 10px;
   }
-  #logged-user ul li:last-child {
+  #logged-user ul li:last-child,
+  .logged-user ul li:last-child {
     margin-bottom: 10px;
   }
   #logged-user ul li a,
-  #logged-user ul li button {
+  #logged-user ul li button,
+  .logged-user ul li a,
+  .logged-user ul li button {
     padding: 10px 15px !important;
     display: block !important;
     color: $dark-text !important;
@@ -344,12 +360,16 @@ nav {
     text-align: left;
   }
   #logged-user ul li a:hover,
-  #logged-user ul li button:hover {
+  #logged-user ul li button:hover,
+  .logged-user ul li a:hover,
+  .logged-user ul li button:hover {
     background-color: $input-background !important;
     border-radius: 8px;
   }
   #logged-user ul li a svg,
-  #logged-user ul li button svg {
+  #logged-user ul li button svg,
+  .logged-user ul li a svg,
+  .logged-user ul li button svg {
     margin-right: 10px;
   }
 }
@@ -925,6 +945,9 @@ nav {
       #listingSquareBox {
         margin: 10px;
         width: 23.3%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
       }
       .spinner {
         align-items: center;
@@ -1250,8 +1273,9 @@ nav {
 
 .toast.show {
   position: fixed;
-  top: 80px;
+  top: 120px;
   right: 20px;
+  z-index: 1005 !important;
 }
 
 /*---TOAST STYLES---*/
@@ -1552,6 +1576,9 @@ nav {
       max-width: 23.4% !important;
       margin: 10px;
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
   }
   .col.right {
@@ -1708,7 +1735,7 @@ nav {
       .media-area {
         margin-right: 10px;
         img {
-          width: 80px;
+          width: 100px;
         }
       }
       .text-area {
@@ -2989,9 +3016,9 @@ nav {
 
 .followBox {
   position: fixed;
-  width: 420px;
+  width: 450px;
   bottom: 20px;
-  left: 20px;
+  right: 20px;
   z-index: 1000;
   background-color: #ffffff;
   padding: 20px;
@@ -3077,6 +3104,7 @@ nav {
 .image-drop-zone input[type="file"] {
   display: none;
 }
+
 .images-wrapper {
   display: flex;
   align-items: center;
@@ -3149,7 +3177,7 @@ nav {
   }
 }
 
-.image-drop-zone img {
+.images-wrapper img:not(.images-wrapper .header-image img) {
   border: 7px solid #fff;
   border-radius: 8px;
   display: block;
