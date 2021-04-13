@@ -686,7 +686,7 @@ const PlaceForm = () => {
                   </div>
                 </div>
                 <div className="images">
-                  <span>Imatges d'aquesta història</span>
+                  <span>Imatges d'aquest allotjament</span>
                   <div className="images-wrapper">
                     <div className="top-bar">
                       <Form.Group>

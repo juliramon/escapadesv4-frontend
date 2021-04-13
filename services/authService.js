@@ -3,8 +3,8 @@ import Axios from "axios";
 class AuthService {
   constructor() {
     let service = Axios.create({
-      baseURL: "https://api.escapadesenparella.cat/api",
-      // baseURL: "http://localhost:5000/api",
+      // baseURL: "https://api.escapadesenparella.cat/api",
+      baseURL: "http://localhost:5000/api",
       withCredentials: true,
     });
     let error, response;
@@ -45,6 +45,13 @@ class AuthService {
     regionsToFollow,
     seasonsToFollow
   ) => {
+    console.log({
+      accountCompleted: accountCompleted,
+      typesToFollow: typesToFollow,
+      categoriesToFollow: categoriesToFollow,
+      regionsToFollow: regionsToFollow,
+      seasonsToFollow: seasonsToFollow,
+    });
     return this.service.put("/auth/complete-account", {
       accountCompleted,
       typesToFollow,
