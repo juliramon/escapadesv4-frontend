@@ -111,7 +111,7 @@ const PlaceListing = () => {
         ...state,
         isBookmarked: !state.isBookmarked,
         showBookmarkToast: true,
-        toastMessage: res.message || "Listing bookmarked!",
+        toastMessage: res.message || "Allotjament desat!",
       });
     });
   };

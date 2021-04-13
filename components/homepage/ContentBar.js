@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 import ContentService from "../../services/contentService";
 import NavigationCategoryBox from "../global/NavigationCategoryBox";
 
@@ -38,6 +38,18 @@ const ContentBar = (props) => {
         pluralName={el.pluralName}
       />
     ));
+  }
+
+  if (state.hasCategories === false) {
+    return (
+      <>
+        <Container className="spinner d-flex justify-space-between">
+          <Spinner animation="border" role="status" variant="primary">
+            <span className="sr-only">Carregant...</span>
+          </Spinner>
+        </Container>
+      </>
+    );
   }
 
   let contentBar;
