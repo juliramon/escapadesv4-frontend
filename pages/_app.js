@@ -62,7 +62,7 @@ function MyApp({ Component, pageProps }) {
     setState({ ...state, loggedUser: updatedUser });
   };
 
-  const gaTrackingId = "G-5ZXV1GBQSG";
+  const gaTrackingId = "UA-58771635-10";
 
   return (
     <UserContext.Provider
