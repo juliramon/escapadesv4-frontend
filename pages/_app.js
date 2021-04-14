@@ -9,6 +9,8 @@ import { useCookies } from "react-cookie";
 import UserContext from "../contexts/UserContext";
 import AuthService from "../services/authService";
 import Head from "next/head";
+import ReactGA from "react-ga";
+import GoogleAnalytics from "../components/global/GoogleAnalytics";
 
 function MyApp({ Component, pageProps }) {
   const [cookies, setCookie, removeCookie] = useCookies("");
@@ -74,24 +76,7 @@ function MyApp({ Component, pageProps }) {
         logOut: logOut,
       }}
     >
-      <Head>
-        <script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${gaTrackingId}`}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-          window.dataLayer = window.dataLayer || []
-          function gtag(){
-            dataLayer.push(arguments)
-          }
-          gtag('js', new Date())
-          gtag('config', '${gaTrackingId}')
-        `,
-          }}
-        />
-      </Head>
+      <GoogleAnalytics />
       <Component {...pageProps} />
     </UserContext.Provider>
   );
