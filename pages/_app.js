@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import UserContext from "../contexts/UserContext";
 import AuthService from "../services/authService";
+import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
   const [cookies, setCookie, removeCookie] = useCookies("");
@@ -61,6 +62,8 @@ function MyApp({ Component, pageProps }) {
     setState({ ...state, loggedUser: updatedUser });
   };
 
+  const gaTrackingId = "G-5ZXV1GBQSG";
+
   return (
     <UserContext.Provider
       value={{
@@ -71,6 +74,24 @@ function MyApp({ Component, pageProps }) {
         logOut: logOut,
       }}
     >
+      <Head>
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${gaTrackingId}`}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+          window.dataLayer = window.dataLayer || []
+          function gtag(){
+            dataLayer.push(arguments)
+          }
+          gtag('js', new Date())
+          gtag('config', ${gaTrackingId})
+        `,
+          }}
+        />
+      </Head>
       <Component {...pageProps} />
     </UserContext.Provider>
   );
