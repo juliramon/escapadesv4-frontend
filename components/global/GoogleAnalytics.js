@@ -1,7 +1,7 @@
 import Head from "next/head";
 
 const GoogleAnalytics = () => {
-  const GATrackingCode = "UA-58771635-10;";
+  const GATrackingCode = "G-RP3GSTG2SM";
   return (
     <>
       {process.browser ? (
