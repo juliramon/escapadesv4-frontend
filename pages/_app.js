@@ -3,16 +3,31 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "react-quill/dist/quill.bubble.css";
 import "react-photoswipe/lib/photoswipe.css";
 
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useCookies } from "react-cookie";
 import UserContext from "../contexts/UserContext";
 import AuthService from "../services/authService";
-import Head from "next/head";
-import ReactGA from "react-ga";
-import GoogleAnalytics from "../components/global/GoogleAnalytics";
+import * as ga from "../lib/ga";
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      ga.pageview(url);
+    };
+    //When the component is mounted, subscribe to router changes
+    //and log those page views
+    router.events.on("routeChangeComplete", handleRouteChange);
+
+    // If the component is unmounted, unsubscribe
+    // from the event with the `off` method
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
+
   const [cookies, setCookie, removeCookie] = useCookies("");
   let loggedData;
   if (cookies.loggedInUser && cookies.loggedInUser !== null) {
@@ -64,8 +79,6 @@ function MyApp({ Component, pageProps }) {
     setState({ ...state, loggedUser: updatedUser });
   };
 
-  const gaTrackingId = "UA-58771635-10";
-
   return (
     <UserContext.Provider
       value={{
@@ -76,7 +89,6 @@ function MyApp({ Component, pageProps }) {
         logOut: logOut,
       }}
     >
-      <GoogleAnalytics />
       <Component {...pageProps} />
     </UserContext.Provider>
   );
