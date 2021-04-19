@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import PublicSquareBox from "../../components/listings/PublicSquareBox";
-import ContentService from "../../services/contentService";
 import FeaturedStoryBox from "../listings/FeaturedStoryBox";
 
 const HomePageResults = ({ activities, places, stories, totals }) => {
@@ -16,8 +15,6 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
     stories: [],
   };
   const [state, setState] = useState(initialState);
-
-  const service = new ContentService();
 
   useEffect(() => {
     if (activities.length > 0 || places.length > 0 || stories.length > 0) {
@@ -37,19 +34,19 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
         let culturalGetaways = [];
         let mostRatedGetaways = [];
         getaways.forEach((el) => {
-          if (el.categories.includes("adventure")) {
+          if (el.categories.includes("aventura")) {
             adventureGetaways.push(el);
           }
-          if (el.categories.includes("romantic")) {
+          if (el.categories.includes("romantica")) {
             romanticGetaways.push(el);
           }
-          if (el.categories.includes("gastronomic")) {
+          if (el.categories.includes("gastronomica")) {
             gastronomicGetaways.push(el);
           }
           if (el.categories.includes("cultural")) {
             culturalGetaways.push(el);
           }
-          if (el.activity_rating > 4.5 || el.place_rating > 4.5) {
+          if (el.place_rating > 4.7) {
             mostRatedGetaways.push(el);
           }
         });
@@ -118,9 +115,15 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
     });
     mostRatedSection = (
       <section className="homepage-section">
+        {/* <div className="top-rated-badge">
+          <img
+            src="https://res.cloudinary.com/juligoodie/image/upload/v1618860678/getaways-guru/static-files/top-rated-posts_vszyhr.svg"
+            alt="Les escapades més ben valorades"
+          />
+        </div> */}
         <div className="homepage-section-title">
           <h2 className="uppercase">Les escapades més ben valorades</h2>
-          <p>Les millors escapades en parella us estan esperant</p>
+          <p>Allotjaments i escapades top per a parelles top</p>
         </div>
         <div className="section-listings">
           <div className="section-listings-wrapper">{mostRatedList}</div>
@@ -235,7 +238,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
       <section className="homepage-section">
         <div className="homepage-section-title">
           <h2 className="uppercase">L'aventura us crida</h2>
-          <p>Escapades d'aventura, ideals per cremar adrenalina</p>
+          <p>Escapades d'aventura, ideals per a gaudir de la natura</p>
         </div>
         <div className="section-listings">
           <div className="section-listings-wrapper">{adventureList}</div>
@@ -338,7 +341,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
     culturalGetawaysSection = (
       <section className="homepage-section">
         <h2 className="homepage-section-title uppercase">
-          Escapades que us distrauran
+          Escapades en parella per a desconnectar
         </h2>
         <p>Escapades culturals per fer volar la imaginació</p>
         <div className="section-listings">
