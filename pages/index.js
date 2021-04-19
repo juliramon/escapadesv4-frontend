@@ -27,30 +27,6 @@ const Homepage = (props) => {
     );
   }
 
-  const [span, setSpan] = useState("perfecta");
-
-  const headerSpans = [
-    "en parella",
-    "de cap de setmana",
-    "romàntica",
-    "gastronòmica",
-    "d'aventura",
-    "de relax",
-    "cultural",
-    "a la neu",
-    "d'estiu",
-    "de tardor",
-  ];
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      let selectedSpan =
-        headerSpans[Math.floor(headerSpans.length * Math.random())];
-      setSpan(selectedSpan);
-    }, 3500);
-    return () => clearInterval(interval);
-  });
-
   const title = (
     <>
       La vostra propera
@@ -131,6 +107,7 @@ const Homepage = (props) => {
           activities={props.activities}
           places={props.places}
           stories={props.stories}
+          totals={props.totals}
         />
         <FollowBox />
         <Footer
@@ -148,6 +125,7 @@ export async function getStaticProps() {
   const activities = await service.activities();
   const places = await service.getAllPlaces();
   const stories = await service.getAllStories();
+  const totals = await service.getCategoriesTotals();
   // const activities = [];
   // const places = [];
   // const stories = [];
@@ -156,6 +134,7 @@ export async function getStaticProps() {
       activities,
       places,
       stories,
+      totals,
     },
   };
 }

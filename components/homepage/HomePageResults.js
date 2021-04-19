@@ -4,7 +4,7 @@ import PublicSquareBox from "../../components/listings/PublicSquareBox";
 import ContentService from "../../services/contentService";
 import FeaturedStoryBox from "../listings/FeaturedStoryBox";
 
-const HomePageResults = ({ activities, places, stories }) => {
+const HomePageResults = ({ activities, places, stories, totals }) => {
   const initialState = {
     isFetching: false,
     romanticGetaways: [],
@@ -14,19 +14,10 @@ const HomePageResults = ({ activities, places, stories }) => {
     gastronomicGetaways: [],
     culturalGetaways: [],
     stories: [],
-    places: {},
   };
   const [state, setState] = useState(initialState);
 
   const service = new ContentService();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const totals = await service.getCategoriesTotals();
-      setState({ ...state, places: totals });
-    };
-    fetchData();
-  }, []);
 
   useEffect(() => {
     if (activities.length > 0 || places.length > 0 || stories.length > 0) {
@@ -70,6 +61,7 @@ const HomePageResults = ({ activities, places, stories }) => {
           culturalGetaways: culturalGetaways,
           mostRatedGetaways: mostRatedGetaways,
           stories: stories,
+          totals: totals,
           isFetching: hasGetaways,
         });
       }
@@ -136,6 +128,17 @@ const HomePageResults = ({ activities, places, stories }) => {
       </section>
     );
   }
+
+  let hotels, apartaments, casesrurals, casesarbre, refugis, carabanes;
+  if (state.totals !== undefined) {
+    hotels = state.totals.objPlaces.hotels;
+    apartaments = state.totals.objPlaces.apartaments;
+    casesrurals = state.totals.objPlaces.casesrurals;
+    casesarbre = state.totals.objPlaces.casesarbre;
+    refugis = state.totals.objPlaces.refugis;
+    carabanes = state.totals.objPlaces.carabanes;
+  }
+
   if (state.romanticGetaways.length > 0) {
     let romanticList = state.romanticGetaways.map((el, idx) => {
       while (state.romanticGetaways.indexOf(el) < 4) {
@@ -385,7 +388,12 @@ const HomePageResults = ({ activities, places, stories }) => {
       </div>
       <div className="section-listings">
         <div className="section-litings-wrapper">
-          <div className="listing">
+          <a
+            href={`/hotels-amb-encant`}
+            title="Hotels amb encant"
+            rel="follow"
+            className="listing"
+          >
             <div className="left">
               <div className="image">
                 <img
@@ -396,10 +404,35 @@ const HomePageResults = ({ activities, places, stories }) => {
             </div>
             <div className="right">
               <h3>Hotels amb encant</h3>
-              {/* <span>{hotels} hotels amb encant</span> */}
+              <span className="counter">{hotels} hotels amb encant</span>
+              <span className="cta">
+                Veure'ls tots{" "}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="icon icon-tabler icon-tabler-arrow-narrow-right"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="#2e6ae4"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <line x1="15" y1="16" x2="19" y2="12" />
+                  <line x1="15" y1="8" x2="19" y2="12" />
+                </svg>
+              </span>
             </div>
-          </div>
-          <div className="listing">
+          </a>
+          <a
+            href={`/apartaments-per-a-parelles`}
+            title="Apartaments de somni"
+            rel="nofollow"
+            className="listing"
+          >
             <div className="left">
               <div className="image">
                 <img src="../../apartamens-escapades-en-parella.png" alt="" />
@@ -407,10 +440,37 @@ const HomePageResults = ({ activities, places, stories }) => {
             </div>
             <div className="right">
               <h3>Apartaments de somni</h3>
-              {/* <span>{apartaments} apartaments de somni</span> */}
+              <span className="counter">
+                {apartaments} apartaments de somni
+              </span>
+              <span className="cta">
+                Veure'ls tots{" "}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="icon icon-tabler icon-tabler-arrow-narrow-right"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="#2e6ae4"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <line x1="15" y1="16" x2="19" y2="12" />
+                  <line x1="15" y1="8" x2="19" y2="12" />
+                </svg>
+              </span>
             </div>
-          </div>
-          <div className="listing">
+          </a>
+          <a
+            href={`/cabanyes-als-arbres`}
+            title="Cases-arbre"
+            rel="follow"
+            className="listing"
+          >
             <div className="left">
               <div className="image">
                 <img src="../../cases-arbre-escapades-en-parella.png" alt="" />
@@ -418,10 +478,35 @@ const HomePageResults = ({ activities, places, stories }) => {
             </div>
             <div className="right">
               <h3>Cases-arbre</h3>
-              {/* <span>{casesarbre} cases-arbre</span> */}
+              <span className="counter">{casesarbre} cases-arbre</span>
+              <span className="cta">
+                Veure'ls tots{" "}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="icon icon-tabler icon-tabler-arrow-narrow-right"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="#2e6ae4"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <line x1="15" y1="16" x2="19" y2="12" />
+                  <line x1="15" y1="8" x2="19" y2="12" />
+                </svg>
+              </span>
             </div>
-          </div>
-          <div className="listing">
+          </a>
+          <a
+            href={`/cases-rurals`}
+            title="Cases rurals"
+            rel="follow"
+            className="listing"
+          >
             <div className="left">
               <div className="image">
                 <img src="../../cases-rurals-escapades-en-parella.png" alt="" />
@@ -429,10 +514,35 @@ const HomePageResults = ({ activities, places, stories }) => {
             </div>
             <div className="right">
               <h3>Cases rurals</h3>
-              {/* <span>{casesrurals} cases rurals</span> */}
+              <span className="counter">{casesrurals} cases rurals</span>
+              <span className="cta">
+                Veure'ls tots{" "}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="icon icon-tabler icon-tabler-arrow-narrow-right"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="#2e6ae4"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <line x1="15" y1="16" x2="19" y2="12" />
+                  <line x1="15" y1="8" x2="19" y2="12" />
+                </svg>
+              </span>
             </div>
-          </div>
-          <div className="listing">
+          </a>
+          <a
+            href={`/carabanes`}
+            title="Carabanes"
+            rel="nofollow"
+            className="listing"
+          >
             <div className="left">
               <div className="image">
                 <img src="../../carabanes-escapades-en-parella.png" alt="" />
@@ -440,10 +550,35 @@ const HomePageResults = ({ activities, places, stories }) => {
             </div>
             <div className="right">
               <h3>Carabanes</h3>
-              {/* <span>{carabanes} carabanes</span> */}
+              <span className="counter">{carabanes} carabanes</span>
+              <span className="cta">
+                Veure'ls tots{" "}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="icon icon-tabler icon-tabler-arrow-narrow-right"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="#2e6ae4"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <line x1="15" y1="16" x2="19" y2="12" />
+                  <line x1="15" y1="8" x2="19" y2="12" />
+                </svg>
+              </span>
             </div>
-          </div>
-          <div className="listing">
+          </a>
+          <a
+            href={`/refugis`}
+            title="Refugis"
+            rel="nofollow"
+            className="listing"
+          >
             <div className="left">
               <div className="image">
                 <img src="../../refugis-escapades-en-parella.png" alt="" />
@@ -451,9 +586,29 @@ const HomePageResults = ({ activities, places, stories }) => {
             </div>
             <div className="right">
               <h3>Refugis</h3>
-              {/* <span>{refugis} refugis</span> */}
+              <span className="counter">{refugis} refugis</span>
+              <span className="cta">
+                Veure'ls tots{" "}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="icon icon-tabler icon-tabler-arrow-narrow-right"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="#2e6ae4"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <line x1="15" y1="16" x2="19" y2="12" />
+                  <line x1="15" y1="8" x2="19" y2="12" />
+                </svg>
+              </span>
             </div>
-          </div>
+          </a>
         </div>
       </div>
     </section>

@@ -673,7 +673,7 @@ nav {
         height: 105px;
         background-color: #ffffff;
         border-radius: 8px;
-        margin-right: 12px;
+        margin-right: 15px;
         overflow: hidden;
         display: flex;
         align-items: center;
@@ -689,6 +689,19 @@ nav {
         font-family: "Nunito";
         font-weight: 600;
         margin: 0;
+      }
+      .counter {
+        font-size: 1em;
+      }
+      .cta {
+        font-size: 14px;
+        color: #2e6ae4;
+        margin-top: 8px;
+        display: flex;
+        align-items: center;
+        svg {
+          margin-left: 6px;
+        }
       }
     }
   }
