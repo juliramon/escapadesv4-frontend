@@ -123,11 +123,12 @@ const Search = (props) => {
       return (
         <PublicContentBox
           key={el._id}
-          image={el.images[0]}
+          type={el.type}
+          slug={el.slug}
+          cover={el.cover}
           id={el._id}
           title={el.title}
           subtitle={el.subtitle}
-          type={el.type}
           location={location}
         />
       );
@@ -178,11 +179,12 @@ const Search = (props) => {
         return (
           <PublicContentBox
             key={el._id}
-            image={el.images[0]}
+            type={el.type}
+            slug={el.slug}
+            cover={el.cover}
             id={el._id}
             title={el.title}
             subtitle={el.subtitle}
-            type={el.type}
             location={location}
           />
         );

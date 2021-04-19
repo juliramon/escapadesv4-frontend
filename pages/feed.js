@@ -113,6 +113,7 @@ const Feed = () => {
           subtitle={el.subtitle}
           location={location}
           website={el.website}
+          slug={el.slug}
         />
       );
     });
