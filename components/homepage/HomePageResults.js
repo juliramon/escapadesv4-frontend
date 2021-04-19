@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import PublicSquareBox from "../../components/listings/PublicSquareBox";
+import ContentService from "../../services/contentService";
 import FeaturedStoryBox from "../listings/FeaturedStoryBox";
 
 const HomePageResults = ({ activities, places, stories }) => {
@@ -13,8 +14,19 @@ const HomePageResults = ({ activities, places, stories }) => {
     gastronomicGetaways: [],
     culturalGetaways: [],
     stories: [],
+    places: {},
   };
   const [state, setState] = useState(initialState);
+
+  const service = new ContentService();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const totals = await service.getCategoriesTotals();
+      setState({ ...state, places: totals });
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     if (activities.length > 0 || places.length > 0 || stories.length > 0) {
@@ -384,6 +396,7 @@ const HomePageResults = ({ activities, places, stories }) => {
             </div>
             <div className="right">
               <h3>Hotels amb encant</h3>
+              {/* <span>{hotels} hotels amb encant</span> */}
             </div>
           </div>
           <div className="listing">
@@ -394,6 +407,7 @@ const HomePageResults = ({ activities, places, stories }) => {
             </div>
             <div className="right">
               <h3>Apartaments de somni</h3>
+              {/* <span>{apartaments} apartaments de somni</span> */}
             </div>
           </div>
           <div className="listing">
@@ -404,6 +418,7 @@ const HomePageResults = ({ activities, places, stories }) => {
             </div>
             <div className="right">
               <h3>Cases-arbre</h3>
+              {/* <span>{casesarbre} cases-arbre</span> */}
             </div>
           </div>
           <div className="listing">
@@ -414,6 +429,7 @@ const HomePageResults = ({ activities, places, stories }) => {
             </div>
             <div className="right">
               <h3>Cases rurals</h3>
+              {/* <span>{casesrurals} cases rurals</span> */}
             </div>
           </div>
           <div className="listing">
@@ -424,6 +440,7 @@ const HomePageResults = ({ activities, places, stories }) => {
             </div>
             <div className="right">
               <h3>Carabanes</h3>
+              {/* <span>{carabanes} carabanes</span> */}
             </div>
           </div>
           <div className="listing">
@@ -434,6 +451,7 @@ const HomePageResults = ({ activities, places, stories }) => {
             </div>
             <div className="right">
               <h3>Refugis</h3>
+              {/* <span>{refugis} refugis</span> */}
             </div>
           </div>
         </div>

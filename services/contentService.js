@@ -463,6 +463,9 @@ class ContentService {
     this.service
       .get(`/searchPlaceResults/${placeType}`)
       .then((res) => res.data);
+
+  getCategoriesTotals = () =>
+    this.service.get(`/categoriesTotals`).then((res) => res.data);
 }
 
 export default ContentService;

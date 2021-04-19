@@ -344,22 +344,22 @@ const ActivityForm = () => {
                       <Form.Label>Categories</Form.Label>
                       <Form.Check
                         type="checkbox"
-                        name="romantic"
-                        id="romantic"
+                        name="romantica"
+                        id="romantica"
                         label="Romàntica"
                         onChange={handleCheckCategory}
                       />
                       <Form.Check
                         type="checkbox"
-                        name="adventure"
-                        id="adventure"
+                        name="aventura"
+                        id="aventura"
                         label="Aventura"
                         onChange={handleCheckCategory}
                       />
                       <Form.Check
                         type="checkbox"
-                        name="gastronomic"
-                        id="gastronomic"
+                        name="gastronomica"
+                        id="gastronomica"
                         label="Gastronòmica"
                         onChange={handleCheckCategory}
                       />
@@ -384,29 +384,29 @@ const ActivityForm = () => {
                       <Form.Label>Estació de l'any</Form.Label>
                       <Form.Check
                         type="checkbox"
-                        name="winter"
-                        id="winter"
+                        name="hivern"
+                        id="hivern"
                         label="Hivern"
                         onChange={handleCheckSeason}
                       />
                       <Form.Check
                         type="checkbox"
-                        name="spring"
-                        id="spring"
+                        name="primavera"
+                        id="primavera"
                         label="Primavera"
                         onChange={handleCheckSeason}
                       />
                       <Form.Check
                         type="checkbox"
-                        name="summer"
-                        id="summer"
+                        name="estiu"
+                        id="estiu"
                         label="Estiu"
                         onChange={handleCheckSeason}
                       />
                       <Form.Check
                         type="checkbox"
-                        name="autumn"
-                        id="autumn"
+                        name="tardor"
+                        id="tardor"
                         label="Tardor"
                         onChange={handleCheckSeason}
                       />
