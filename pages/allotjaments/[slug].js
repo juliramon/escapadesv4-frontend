@@ -9,6 +9,7 @@ import GoogleMapReact from "google-map-react";
 import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
 import ShareModal from "../../components/modals/ShareModal";
+import Footer from "../../components/global/Footer";
 
 const PlaceListing = () => {
   const { user } = useContext(UserContext);
@@ -661,6 +662,11 @@ const PlaceListing = () => {
             </Container>
           </article>
         </main>
+        <Footer
+          logo_url={
+            "https://res.cloudinary.com/juligoodie/image/upload/c_scale,q_100,w_135/v1600008855/getaways-guru/static-files/logo-getaways-guru_vvbikk.svg"
+          }
+        />
         <SignUpModal
           visibility={modalVisibility}
           hideModal={hideModalVisibility}

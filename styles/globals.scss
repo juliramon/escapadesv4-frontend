@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@600&family=Nunito:wght@400;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Nunito:wght@400;800&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lora:wght@600;700&display=swap");
 
 html,
@@ -102,7 +102,8 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Lora", serif;
+  font-family: "Inter", serif;
+  font-weight: 800 !important;
   color: $dark-text;
 }
 
@@ -3248,4 +3249,78 @@ nav {
       }
     }
   }
+}
+
+#legalTerms {
+  .box {
+    padding: 30px 0;
+    margin: 0 auto;
+    display: flex;
+  }
+  h2 {
+    font-size: 28px;
+    margin-top: 48px;
+  }
+  p,
+  ul {
+    font-family: "Inter";
+    font-size: 16px;
+    color: #6b7280;
+    line-height: 28px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    li:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+  .right {
+    width: 300px;
+    padding-right: 40px;
+    position: fixed;
+    top: 150px;
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      li.sidebar-list-header {
+        color: #000000;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+      li {
+        margin: 0;
+        line-height: 22px;
+        padding: 6px 0;
+        ul {
+          margin-left: 18px;
+          opacity: 0.5;
+          li {
+            line-height: 22px;
+            padding: 6px 0;
+          }
+        }
+      }
+    }
+  }
+  .left {
+    flex: 1;
+    margin-left: 300px;
+    .legal-terms-title-area {
+      p {
+        margin: 0;
+      }
+    }
+    .anchor {
+      display: block;
+      height: 101.14px;
+      margin-top: -92px;
+      visibility: hidden;
+    }
+  }
+}
+
+#legalTerms section p:last-child {
+  margin-bottom: 0;
 }
