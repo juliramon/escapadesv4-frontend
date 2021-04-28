@@ -29,7 +29,7 @@ const PoliticaPrivadesa = () => {
       </Head>
       <NavigationBar
         logo_url={
-          "https://res.cloudinary.com/juligoodie/image/upload/c_scale,q_100,w_135/v1600008855/getaways-guru/static-files/logo-getaways-guru_vvbikk.svg"
+          "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
         }
         user={user}
       />
@@ -476,7 +476,7 @@ const PoliticaPrivadesa = () => {
       </main>
       <Footer
         logo_url={
-          "https://res.cloudinary.com/juligoodie/image/upload/c_scale,q_100,w_135/v1600008855/getaways-guru/static-files/logo-getaways-guru_vvbikk.svg"
+          "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
         }
       />
     </>
