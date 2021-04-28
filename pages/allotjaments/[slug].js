@@ -573,7 +573,7 @@ const PlaceListing = () => {
                             </div>
                             <div className="buttons">
                               <a
-                                href={`http://${state.place.website}`}
+                                href={`${state.place.website}`}
                                 className="listing-Website buttonDark"
                                 title="Reservar"
                               >
