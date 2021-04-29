@@ -67,6 +67,7 @@ const StoryEditionForm = () => {
       type: "story",
       title: "",
       subtitle: "",
+      slug: "",
       cover: "",
       blopCover: "",
       updatedCover: false,
@@ -105,6 +106,7 @@ const StoryEditionForm = () => {
             type: storyDetails.type,
             title: storyDetails.title,
             subtitle: storyDetails.subtitle,
+            slug: storyDetails.slug,
             cover: storyDetails.cover,
             blopCover: "",
             updatedCover: false,
@@ -126,7 +128,7 @@ const StoryEditionForm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryId, router.query.slug]);
 
-  const { title, subtitle } = state.formData;
+  const { title, subtitle, slug } = state.formData;
 
   const saveFileToStatus = (e) => {
     const fileToUpload = e.target.files[0];
@@ -197,14 +199,15 @@ const StoryEditionForm = () => {
   }
 
   const submitStory = async () => {
-    const slug = await slugify(state.story.title, {
-      remove: /[*+~.,()'"!:@]/g,
-      lower: true,
-    });
+    // const slug = await slugify(state.story.title, {
+    //   remove: /[*+~.,()'"!:@]/g,
+    //   lower: true,
+    // });
     const {
       _id,
       title,
       subtitle,
+      slug,
       coverCloudImage,
       cloudImages,
     } = state.formData;
@@ -370,6 +373,16 @@ const StoryEditionForm = () => {
                     name="subtitle"
                     placeholder="Story subtitle"
                     value={subtitle}
+                    onChange={handleChange}
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Slug</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="slug"
+                    placeholder="Story slug"
+                    value={slug}
                     onChange={handleChange}
                   />
                 </Form.Group>

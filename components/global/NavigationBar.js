@@ -16,6 +16,7 @@ const NavigationBar = ({ logo_url, path }) => {
   const { user } = useContext(UserContext);
   const initialState = {
     searchQuery: "",
+    isResponsiveMenuOpen: false,
   };
   const [state, setState] = useState(initialState);
   const notLoggedHeader = {
@@ -28,6 +29,14 @@ const NavigationBar = ({ logo_url, path }) => {
     if (e.keyCode === 13) {
       e.preventDefault();
       Router.push(`/search?query=${searchQuery}`);
+    }
+  };
+
+  const handleResponsiveMenu = () => {
+    if (!state.isResponsiveMenuOpen) {
+      setState({ ...state, isResponsiveMenuOpen: true });
+    } else {
+      setState({ ...state, isResponsiveMenuOpen: false });
     }
   };
 
@@ -235,6 +244,125 @@ const NavigationBar = ({ logo_url, path }) => {
     );
   }
 
+  const responsiveMenu = (
+    <>
+      <div className="nav-responsive-wrapper">
+        <Nav className="search-box">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="icon icon-tabler icon-tabler-search"
+            width="44"
+            height="44"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="#2c3e50"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <circle cx="10" cy="10" r="7" />
+            <line x1="21" y1="21" x2="15" y2="15" />
+          </svg>
+          <Form>
+            <Form.Control
+              onKeyDown={handleKeyPress}
+              type="text"
+              placeholder="Cerca la vostra propera escapada..."
+            />
+
+            <span className="search-helper">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="icon icon-tabler icon-tabler-corner-down-left"
+                width="14"
+                height="14"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="#2c3e50"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <path d="M18 6v6a3 3 0 0 1 -3 3h-10l5 -5m0 10l-5 -5" />
+              </svg>
+              Prem "Enter" per cercar
+            </span>
+          </Form>
+        </Nav>
+        <Nav>
+          <Link href="/activitats">
+            <a>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="icon icon-tabler icon-tabler-route"
+                width="44"
+                height="44"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="#2c3e50"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <circle cx="6" cy="19" r="2" />
+                <circle cx="18" cy="5" r="2" />
+                <path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
+              </svg>
+              Activitats
+            </a>
+          </Link>
+          <Link href="/allotjaments">
+            <a>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="icon icon-tabler icon-tabler-bed"
+                width="44"
+                height="44"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="#2c3e50"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <path d="M3 7v11m0 -4h18m0 4v-8a2 2 0 0 0 -2 -2h-8v6" />
+                <circle cx="7" cy="10" r="1" />
+              </svg>
+              Allotjaments
+            </a>
+          </Link>
+          <Link href="/histories">
+            <a>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="icon icon-tabler icon-tabler-notebook"
+                width="44"
+                height="44"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="#2c3e50"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" />
+                <line x1="13" y1="8" x2="15" y2="8" />
+                <line x1="13" y1="12" x2="15" y2="12" />
+              </svg>
+              Històries
+            </a>
+          </Link>
+        </Nav>
+        {navRight}
+      </div>
+    </>
+  );
+
   let navBar;
   if (
     path === "/nova-activitat" ||
@@ -342,101 +470,131 @@ const NavigationBar = ({ logo_url, path }) => {
                   <img src={logo_url} alt="Logo Getaways.guru" />
                 </a>
               </Link>
-              <Nav>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="icon icon-tabler icon-tabler-search"
-                  width="44"
-                  height="44"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="#2c3e50"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" />
-                  <circle cx="10" cy="10" r="7" />
-                  <line x1="21" y1="21" x2="15" y2="15" />
-                </svg>
-                <Form>
-                  <Form.Control
-                    onKeyDown={handleKeyPress}
-                    type="text"
-                    placeholder="Cerca la vostra propera escapada..."
-                  />
-
-                  <span className="search-helper">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-corner-down-left"
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="#2c3e50"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <path d="M18 6v6a3 3 0 0 1 -3 3h-10l5 -5m0 10l-5 -5" />
-                    </svg>
-                    Prem "Enter" per cercar
-                  </span>
-                </Form>
-              </Nav>
             </div>
             <div className="nav-col right d-flex">
-              <Nav>
-                <Link href="/activitats">
-                  <a>
+              <div className="nav-col-right-wrapper">
+                <Nav className="search-box">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="icon icon-tabler icon-tabler-search"
+                    width="44"
+                    height="44"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="#2c3e50"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <circle cx="10" cy="10" r="7" />
+                    <line x1="21" y1="21" x2="15" y2="15" />
+                  </svg>
+                  <Form>
+                    <Form.Control
+                      onKeyDown={handleKeyPress}
+                      type="text"
+                      placeholder="Cerca la vostra propera escapada..."
+                    />
+
+                    <span className="search-helper">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-corner-down-left"
+                        width="14"
+                        height="14"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="#2c3e50"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <path d="M18 6v6a3 3 0 0 1 -3 3h-10l5 -5m0 10l-5 -5" />
+                      </svg>
+                      Prem "Enter" per cercar
+                    </span>
+                  </Form>
+                </Nav>
+                <Nav>
+                  <Link href="/activitats">
+                    <a>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-route"
+                        width="44"
+                        height="44"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="#2c3e50"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <circle cx="6" cy="19" r="2" />
+                        <circle cx="18" cy="5" r="2" />
+                        <path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
+                      </svg>
+                      Activitats
+                    </a>
+                  </Link>
+                  <Link href="/allotjaments">
+                    <a>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-bed"
+                        width="44"
+                        height="44"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="#2c3e50"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <path d="M3 7v11m0 -4h18m0 4v-8a2 2 0 0 0 -2 -2h-8v6" />
+                        <circle cx="7" cy="10" r="1" />
+                      </svg>
+                      Allotjaments
+                    </a>
+                  </Link>
+                  <Link href="/histories">
+                    <a>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-notebook"
+                        width="44"
+                        height="44"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="#2c3e50"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" />
+                        <line x1="13" y1="8" x2="15" y2="8" />
+                        <line x1="13" y1="12" x2="15" y2="12" />
+                      </svg>
+                      Històries
+                    </a>
+                  </Link>
+                </Nav>
+                {navRight}
+              </div>
+              <div className="nav-col-right-responsive">
+                <button
+                  className="hamb-btn"
+                  onClick={() => handleResponsiveMenu()}
+                >
+                  {state.isResponsiveMenuOpen ? (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-route"
-                      width="44"
-                      height="44"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="#2c3e50"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <circle cx="6" cy="19" r="2" />
-                      <circle cx="18" cy="5" r="2" />
-                      <path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
-                    </svg>
-                    Activitats
-                  </a>
-                </Link>
-                <Link href="/allotjaments">
-                  <a>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-bed"
-                      width="44"
-                      height="44"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="#2c3e50"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <path d="M3 7v11m0 -4h18m0 4v-8a2 2 0 0 0 -2 -2h-8v6" />
-                      <circle cx="7" cy="10" r="1" />
-                    </svg>
-                    Allotjaments
-                  </a>
-                </Link>
-                <Link href="/histories">
-                  <a>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-notebook"
+                      className="icon icon-tabler icon-tabler-x"
                       width="44"
                       height="44"
                       viewBox="0 0 24 24"
@@ -447,15 +605,31 @@ const NavigationBar = ({ logo_url, path }) => {
                       strokeLinejoin="round"
                     >
                       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" />
-                      <line x1="13" y1="8" x2="15" y2="8" />
-                      <line x1="13" y1="12" x2="15" y2="12" />
+                      <line x1="18" y1="6" x2="6" y2="18" />
+                      <line x1="6" y1="6" x2="18" y2="18" />
                     </svg>
-                    Històries
-                  </a>
-                </Link>
-              </Nav>
-              {navRight}
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-menu-2"
+                      width="50"
+                      height="50"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#2c3e50"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <line x1="4" y1="6" x2="20" y2="6" />
+                      <line x1="4" y1="12" x2="20" y2="12" />
+                      <line x1="4" y1="18" x2="20" y2="18" />
+                    </svg>
+                  )}
+                </button>
+                {state.isResponsiveMenuOpen ? responsiveMenu : null}
+              </div>
             </div>
           </Container>
         </Navbar>

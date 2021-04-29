@@ -57,7 +57,9 @@ const ContentBar = (props) => {
     <div className="content-bar">
       <Container fluid>
         <div className="content-bar---wrapper d-flex align-items-center">
-          {categoriesList}
+          <div className="content-bar---inner d-flex align-items-center">
+            {categoriesList}
+          </div>
         </div>
       </Container>
     </div>

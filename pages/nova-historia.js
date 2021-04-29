@@ -58,6 +58,7 @@ const StoryForm = () => {
       type: "story",
       title: "",
       subtitle: "",
+      slug: "",
       cover: "",
       blopCover: "",
       images: [],
@@ -134,14 +135,15 @@ const StoryForm = () => {
   const [description, setDescription] = useState("");
 
   const submitStory = async () => {
-    const slug = await slugify(state.formData.title, {
-      remove: /[*+~.,()'"!:@]/g,
-      lower: true,
-    });
+    // const slug = await slugify(state.formData.title, {
+    //   remove: /[*+~.,()'"!:@]/g,
+    //   lower: true,
+    // });
     const {
       type,
       title,
       subtitle,
+      slug,
       coverCloudImage,
       cloudImages,
     } = state.formData;
@@ -251,6 +253,16 @@ const StoryForm = () => {
                     placeholder="Subtítol de la història"
                     onChange={handleChange}
                     value={state.formData.subtitle}
+                  />
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label>Slug</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="slug"
+                    placeholder="Slug de la història"
+                    onChange={handleChange}
+                    value={state.formData.slug}
                   />
                 </Form.Group>
                 <div className="cover">
