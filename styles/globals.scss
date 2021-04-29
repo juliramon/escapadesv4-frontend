@@ -3073,9 +3073,11 @@ nav {
     justify-content: center;
     background-color: transparent;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 6px;
+    right: 30px;
     transition: 0.3s;
+    font-size: 13px;
+    text-decoration: underline;
   }
   button:hover {
     background-color: $active-tab-background;
