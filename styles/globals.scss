@@ -10,7 +10,7 @@ body {
 }
 
 a {
-  color: inherit;
+  color: #00206b !important;
   text-decoration: none;
   cursor: pointer !important;
 }
@@ -21,23 +21,24 @@ a {
 
 /*---GLOBAL STYLES---*/
 
-$dark-text: #0d1f44;
+$dark-text: #00206b;
+$medium-text: #3a4887;
 $soft-text: #abc3f4;
 $white-text: #ffffff;
 $red-text: #fd8281;
-$input-background: #eaf0fc;
+$input-background: #f2f7f9;
 $input-placeholder: #173572;
 $input-text: #173572;
-$input-focus-border: #2e6ae4;
-$dark-button-background: #2e6ae4;
-$dark-button-border: #2e6ae4;
+$input-focus-border: #3a4887;
+$dark-button-background: #3a4887;
+$dark-button-border: #3a4887;
 $dark-button-color: #ffffff;
 $soft-button-background: #ffffff;
-$soft-button-border: #2e6ae4;
-$soft-button-color: #2e6ae4;
-$links-color: #2e6ae4;
+$soft-button-border: #3a4887;
+$soft-button-color: #3a4887;
+$links-color: #3a4887;
 $active-tab-background: #abc3f4;
-$hover-tab-background: #eaf0fc;
+$hover-tab-background: #f2f7f9;
 
 .buttonDark,
 .buttonLight {
@@ -113,7 +114,7 @@ ul,
 ol,
 span {
   font-family: "Nunito", sans-serif;
-  color: $dark-text;
+  color: $medium-text;
 }
 
 a,
@@ -708,7 +709,7 @@ nav {
       }
       .cta {
         font-size: 14px;
-        color: #2e6ae4;
+        color: #3a4887;
         margin-top: 8px;
         display: flex;
         align-items: center;
@@ -719,7 +720,7 @@ nav {
     }
   }
   #introSection {
-    background-color: #eaf0fc;
+    background-color: #f2f7f9;
   }
   .homepage-section:last-child {
     padding-bottom: 60px;
@@ -864,7 +865,7 @@ nav {
   .social-signup .btn.facebook {
     padding-left: 20px;
     padding-right: 20px;
-    background-color: #eaf0fc;
+    background-color: #f2f7f9;
   }
   .signup-col-wrapper.right p.sub-h1 {
     font-size: 1.1em;
@@ -1218,8 +1219,8 @@ nav {
   .location-control:focus {
     outline: none !important;
     border: none !important;
-    background-color: #eaf0fc !important;
-    box-shadow: inset 0 0 0 3px #2e6ae4 !important;
+    background-color: #f2f7f9 !important;
+    box-shadow: inset 0 0 0 3px #3a4887 !important;
   }
 }
 
@@ -2229,6 +2230,7 @@ nav {
     .listing-description {
       font-size: 1.1em;
       line-height: 1.6em;
+      color: $medium-text;
     }
   }
   .listing-details-box {
@@ -2366,7 +2368,7 @@ nav {
       }
       .listing-bookmark {
         border: none;
-        background-color: #eaf0fc;
+        background-color: #f2f7f9;
         border-radius: 100px !important;
         width: 40px;
         height: 40px;
@@ -2991,7 +2993,7 @@ nav {
   .box .col.right .wrapper > .right {
     padding: 30px;
     margin-left: 15px;
-    border: 1px solid #eaf0fc;
+    border: 1px solid #f2f7f9;
   }
   .box .col.right .wrapper .right svg {
     margin-bottom: 12px;
@@ -3164,7 +3166,7 @@ nav {
       }
       svg {
         margin-right: 8px;
-        stroke: #0d1f44;
+        stroke: #00206b;
       }
     }
   }

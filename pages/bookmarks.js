@@ -69,10 +69,11 @@ const BookmarksList = () => {
           <PublicContentBox
             key={el._id}
             type={el.bookmarkActivityRef.type}
+            slug={el.bookmarkActivityRef.slug}
             id={el.bookmarkActivityRef._id}
             title={el.bookmarkActivityRef.title}
             subtitle={el.bookmarkActivityRef.subtitle}
-            image={el.bookmarkActivityRef.images[0]}
+            cover={el.bookmarkActivityRef.cover}
             location={`${
               el.bookmarkActivityRef.activity_locality === undefined
                 ? ""
@@ -90,10 +91,11 @@ const BookmarksList = () => {
           <PublicContentBox
             key={el._id}
             type={el.bookmarkPlaceRef.type}
+            slug={el.bookmarkPlaceRef.slug}
             id={el.bookmarkPlaceRef._id}
             title={el.bookmarkPlaceRef.title}
             subtitle={el.bookmarkPlaceRef.subtitle}
-            image={el.bookmarkPlaceRef.images[0]}
+            cover={el.bookmarkPlaceRef.cover}
             location={`${
               el.bookmarkPlaceRef.place_locality === undefined
                 ? ""

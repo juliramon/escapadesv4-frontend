@@ -61,7 +61,8 @@ function MyApp({ Component, pageProps }) {
     service
       .logout()
       .then(() => {
-        setCookie("loggedInUser", undefined, { expires: cookieExpirationDate });
+        // setCookie("loggedInUser", undefined, { expires: cookieExpirationDate });
+        setState({ ...state, loggedUser: undefined });
         removeCookie("loggedInUser");
         Router.push("/login");
       })

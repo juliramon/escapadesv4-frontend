@@ -253,8 +253,9 @@ const UserProfile = ({
           <PublicContentBox
             key={el._id}
             type={el.type}
+            slug={el.slug}
             id={el._id}
-            image={el.images[0]}
+            cover={el.cover}
             title={el.title}
             subtitle={el.subtitle}
             publicationDate={el.createdAt}
@@ -271,8 +272,9 @@ const UserProfile = ({
           <PublicContentBox
             key={el._id}
             type={el.type}
+            slug={el.slug}
             id={el._id}
-            image={el.images[0]}
+            cover={el.cover}
             title={el.title}
             subtitle={el.subtitle}
             publicationDate={el.createdAt}
@@ -289,8 +291,9 @@ const UserProfile = ({
           <PublicContentBox
             key={el._id}
             type={el.type}
+            slug={el.slug}
             id={el._id}
-            image={el.images[0]}
+            cover={el.cover}
             title={el.title}
             subtitle={el.subtitle}
             publicationDate={el.createdAt}
