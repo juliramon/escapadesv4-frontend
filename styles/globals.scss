@@ -3436,6 +3436,14 @@ nav {
     width: 100%;
     flex: 1;
   }
+  #homepage #hero .header-col.left .header-title {
+    font-size: 2rem;
+    line-height: 1.2em;
+    margin-bottom: 0;
+  }
+  #homepage #hero .header-col.left .header-subtitle {
+    margin-top: 15px;
+  }
   #homepage #hero .header-col.right {
     position: relative;
     top: 60px;
@@ -3481,6 +3489,7 @@ nav {
 
   #homepage .homepage-section .section-listings .section-listings-wrapper {
     flex-direction: column;
+    margin: 0;
   }
 
   #homepage
@@ -3505,6 +3514,7 @@ nav {
 
   #homepage #placesTypes .section-litings-wrapper {
     flex-direction: column;
+    margin: 0 5px;
   }
 
   #listing .listing-wrapper {
@@ -3522,6 +3532,9 @@ nav {
     right: 0px;
     left: 0px;
     margin: 0 auto;
+    svg {
+      stroke: $dark-text;
+    }
   }
 }
 
