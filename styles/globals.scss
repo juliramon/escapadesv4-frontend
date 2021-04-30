@@ -3538,6 +3538,46 @@ nav {
       stroke: $dark-text;
     }
   }
+
+  #signup {
+    .d-flex {
+      flex-direction: column;
+    }
+    .signup-col.left {
+      background-color: #ffffff;
+      height: 50px;
+      margin: 20px;
+      .title-area {
+        top: 0;
+        left: 0;
+      }
+      .title-area h2,
+      .graphic {
+        display: none;
+      }
+    }
+    .signup-col.right {
+      margin: 20px;
+      width: auto;
+      .signup-col-wrapper.right {
+        position: relative;
+        margin-top: 0;
+        .title-area h1 {
+          font-size: 2rem;
+        }
+        .navlink {
+          position: absolute;
+          top: auto;
+          left: 0;
+          bottom: -60px;
+          font-size: 0.95em;
+        }
+      }
+    }
+    form button {
+      width: 100%;
+    }
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
