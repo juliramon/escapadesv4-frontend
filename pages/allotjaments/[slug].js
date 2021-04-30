@@ -499,7 +499,9 @@ const PlaceListing = () => {
                           </div>
                         </div>
                         <div className="listing-cover d-flex justify-space-between">
-                          {coversList}
+                          <div className="listing-cover-wrapper">
+                            {coversList}
+                          </div>
                         </div>
                       </Col>
                     </div>
@@ -508,7 +510,7 @@ const PlaceListing = () => {
                 <section>
                   <Row>
                     <article className="listing-body">
-                      <Col lg={7}>
+                      <Col lg={7} sm={12} xs={12}>
                         <div className="listing-body-wrapper d-flex justify-content-between align-items-center">
                           <p className="listing-subtitle">{subtitle}</p>
                           <div className="listing-owner">
@@ -554,7 +556,7 @@ const PlaceListing = () => {
                         <div className="listing-description">{description}</div>
                       </Col>
                       <Col lg={1}></Col>
-                      <Col lg={4}>
+                      <Col lg={4} sm={12} xs={12}>
                         <aside>
                           <div className="listing-details-box">
                             <div className="listing-map">

@@ -3578,6 +3578,38 @@ nav {
       width: 100%;
     }
   }
+
+  #listingPage .listing-header {
+    flex-direction: column;
+    .col.right {
+      justify-content: flex-start;
+      margin-top: 20px;
+    }
+  }
+
+  #listingPage .listing-cover {
+    height: 330px;
+    overflow: hidden;
+    align-items: center;
+    border-radius: 8px;
+    .listing-cover-wrapper {
+      display: flex;
+      width: 100%;
+      flex-wrap: nowrap;
+      overflow-x: scroll;
+      margin: -5px;
+    }
+    .cover {
+      min-width: 85%;
+    }
+  }
+
+  #listingPage .listing-body {
+    flex-direction: column;
+    .listing-details-box {
+      margin-top: 20px;
+    }
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
