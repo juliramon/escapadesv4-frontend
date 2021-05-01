@@ -18,10 +18,28 @@ const Footer = ({ logo_url }) => {
               <span>
                 Escapadesenparella.cat és el recomanador especialista en
                 escapades en parella a Catalunya. Registra't per gaudir de tots
-                els beneficis de la plataforma.
+                els beneficis de la comunitat.
               </span>
               <span className="footer-copyright-timestamp">
-                Copyright © {copyrightDate}. Tots els drets reservats <br />
+                Copyright © {copyrightDate}. Tots els drets reservats. <br />
+                Codi i UI/UX:{" "}
+                <a
+                  href="https://github.com/juliramon"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <u>Juli Ramon</u>
+                </a>
+                <br />
+                Il·lutracions i diseny gràfic:{" "}
+                <a
+                  href="https://andreaprat.cat"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <u>Andrea Prat</u>
+                </a>
+                <br />
                 Desenvolupat i gestionat amb{" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -35,47 +53,63 @@ const Footer = ({ logo_url }) => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 >
-                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <path stroke="none" d="M0 0h24v24H0z"></path>
                   <path
                     fill="red"
                     stroke="none"
                     d="M12 20l-7 -7a4 4 0 0 1 6.5 -6a.9 .9 0 0 0 1 0a4 4 0 0 1 6.5 6l-7 7"
-                  />
-                </svg>
-                per
-                <br /> en{" "}
-                <a
-                  href="https://github.com/juliramon"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <u>Juli Ramon</u>
-                </a>{" "}
-                i l'
-                <a
-                  href="https://andreaprat.cat"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <u>Andrea Prat</u>
-                </a>{" "}
-                a Barcelona
+                  ></path>
+                </svg>{" "}
+                a Catalunya
               </span>
             </div>
           </Col>
-          <Col lg={2}></Col>
+          <Col lg={2}>
+            <div className="footer-content">
+              <h4 className="footer-header">Continguts</h4>
+              <ul>
+                <li>
+                  <Link href="#">Escapades romàntiques</Link>
+                </li>
+                <li>
+                  <Link href="#">Escapades culturals</Link>
+                </li>
+                <li>
+                  <Link href="#">Escapades gastronòmiques</Link>
+                </li>
+                <li>
+                  <Link href="#">Escapades d'aventura</Link>
+                </li>
+                <li>
+                  <Link href="#">Escapades de relax</Link>
+                </li>
+                <li>
+                  <Link href="#">Escapades a la neu</Link>
+                </li>
+                <li>
+                  <Link href="#">Escapades d'estiu</Link>
+                </li>
+                <li>
+                  <Link href="#">Escapades de cap de setmana</Link>
+                </li>
+              </ul>
+            </div>
+          </Col>
           <Col lg={2}>
             <div className="footer-about">
               <h4 className="footer-header">Nosaltres</h4>
               <ul>
                 <li>
+                  <Link href="/histories">Històries en parella</Link>
+                </li>
+                <li className="disabled">
                   <Link href="#">Qui som?</Link>
                 </li>
-                <li>
+                <li className="disabled">
                   <Link href="#">Què fem?</Link>
                 </li>
-                <li>
-                  <Link href="#">Blog</Link>
+                <li className="disabled">
+                  <Link href="#">Empreses</Link>
                 </li>
               </ul>
             </div>
@@ -104,13 +138,13 @@ const Footer = ({ logo_url }) => {
               <ul>
                 <li>
                   <a
-                    href="https://github.com/juliramon"
+                    href="mailto:social@escapadesenparella.com"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-brand-github"
+                      className="icon icon-tabler icon-tabler-mailbox"
                       width="22"
                       height="22"
                       viewBox="0 0 24 24"
@@ -120,21 +154,23 @@ const Footer = ({ logo_url }) => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <path d="M9 19c-4.286 1.35-4.286-2.55-6-3m12 5v-3.5c0-1 .099-1.405-.5-2 2.791-.3 5.5-1.366 5.5-6.04a4.567 4.567 0 0 0 -1.333 -3.21a4.192 4.192 0 0 0 -.08 -3.227s-1.05-.3-3.476 1.267a12.334 12.334 0 0 0 -6.222 0C6.462 2.723 5.413 3.023 5.413 3.023a4.192 4.192 0 0 0 -.08 3.227A4.566 4.566 0 0 0 4 9.486c0 4.64 2.709 5.68 5.5 6.014-.591.589-.56 1.183-.5 2V21" />
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M10 21v-6.5a3.5 3.5 0 0 0 -7 0v6.5h18v-6a4 4 0 0 0 -4 -4h-10.5" />
+                      <path d="M12 11v-8h4l2 2l-2 2h-4" />
+                      <path d="M6 15h1" />
                     </svg>
                     Correu
                   </a>
                 </li>
                 <li>
                   <a
-                    href="https://www.linkedin.com/in/juliramon/"
+                    href="https://www.instagram.com/escapadesenparella"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-brand-linkedin"
+                      className="icon icon-tabler icon-tabler-brand-instagram"
                       width="22"
                       height="22"
                       viewBox="0 0 24 24"
@@ -144,19 +180,17 @@ const Footer = ({ logo_url }) => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <rect x="4" y="4" width="16" height="16" rx="2" />
-                      <line x1="8" y1="11" x2="8" y2="16" />
-                      <line x1="8" y1="8" x2="8" y2="8.01" />
-                      <path d="M12 16v-5" />
-                      <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <rect x="4" y="4" width="16" height="16" rx="4" />
+                      <circle cx="12" cy="12" r="3" />
+                      <line x1="16.5" y1="7.5" x2="16.5" y2="7.501" />
                     </svg>
                     Instagram
                   </a>
                 </li>
                 <li>
                   <a
-                    href="https://twitter.com/juligoodie"
+                    href="https://twitter.com/escapaenparella"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -180,13 +214,13 @@ const Footer = ({ logo_url }) => {
                 </li>
                 <li>
                   <a
-                    href="mailto://hello@getaways.guru"
+                    href="https://facebook.com/escapadesenparella"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-at"
+                      className="icon icon-tabler icon-tabler-brand-facebook"
                       width="22"
                       height="22"
                       viewBox="0 0 24 24"
@@ -196,9 +230,8 @@ const Footer = ({ logo_url }) => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <circle cx="12" cy="12" r="4" />
-                      <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28" />
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
                     </svg>
                     Facebook
                   </a>

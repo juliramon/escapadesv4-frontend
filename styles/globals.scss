@@ -790,6 +790,9 @@ nav {
         }
       }
     }
+    li.disabled {
+      opacity: 0.5;
+    }
   }
 }
 
@@ -2172,6 +2175,12 @@ nav {
         width: auto;
       }
     }
+    .listing-cover-wrapper {
+      display: flex;
+      align-items: center;
+      flex-direction: row;
+      width: 100%;
+    }
   }
   .listing-body {
     display: flex;
@@ -3342,6 +3351,54 @@ nav {
   margin-bottom: 0;
 }
 
+#landingServices {
+  section:not(:first-child) {
+    padding: 40px 0;
+  }
+  .box {
+    margin: 0 auto;
+    padding: 30px 0;
+    .page-header-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .col-left {
+        max-width: 40%;
+      }
+      .page-header-title {
+        font-size: 1.9em;
+        margin-bottom: 7px;
+      }
+      .btn {
+        background-color: $dark-button-background;
+        color: $white-text !important;
+        padding: 12px 24px;
+        margin-top: 20px;
+      }
+    }
+    .services-signup-wrapper {
+      display: flex;
+      align-items: flex-start;
+      .col-left {
+        max-width: 40%;
+        ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          li {
+            display: flex;
+            align-items: center;
+            padding: 3px 0;
+            svg {
+              margin-right: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .content-bar .content-bar---wrapper {
@@ -3546,7 +3603,7 @@ nav {
     .signup-col.left {
       background-color: #ffffff;
       height: 50px;
-      margin: 20px;
+      margin: 15px;
       .title-area {
         top: 0;
         left: 0;
@@ -3557,7 +3614,7 @@ nav {
       }
     }
     .signup-col.right {
-      margin: 20px;
+      margin: 15px;
       width: auto;
       .signup-col-wrapper.right {
         position: relative;
@@ -3609,6 +3666,40 @@ nav {
     .listing-details-box {
       margin-top: 20px;
     }
+  }
+  #listingPage .listing-header .listing-meta-bar ul li.listing-location span {
+    white-space: nowrap;
+    max-width: 220px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  #listingPage .listing-body .listing-subtitle {
+    border-right: 1px solid #f2f7f9;
+    padding-right: 20px;
+    margin-right: 20px;
+    max-width: 265px;
+  }
+  #legalTerms .right {
+    display: none;
+  }
+  #legalTerms .left {
+    margin-left: 0;
+  }
+  #contentList .box .col.left,
+  #contentList .box .col.right {
+    display: none;
+  }
+  #contentList .box .col.center {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0 30px;
+  }
+  #contentList .box .col.center #listingSquareBox {
+    min-width: 100%;
+    margin: 0;
+  }
+  .top-nav-wrapper .top-nav-subtitle {
+    max-width: 100%;
   }
 }
 
