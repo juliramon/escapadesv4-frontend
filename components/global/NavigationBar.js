@@ -380,7 +380,7 @@ const NavigationBar = ({ logo_url, path }) => {
                 </a>
               </Link>
             </div>
-            <div className="nav-col right d-flex">{navRight}</div>
+            <div className="nav-col right d-flex simple-nav">{navRight}</div>
           </Container>
         </Navbar>
         <ContentBar user={user} />

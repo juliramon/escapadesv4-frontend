@@ -262,7 +262,7 @@ nav {
     width: 100%;
     position: relative;
   }
-  .nav-col.right {
+  .nav-col.right:not(.simple-nav) {
     flex: 1;
   }
 
@@ -3399,8 +3399,276 @@ nav {
   }
 }
 
+#landingServices.services-form {
+  .col-left {
+    max-width: 50% !important;
+  }
+  .col-right {
+    max-width: 40% !important;
+  }
+  .funnel-steps-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    ul {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      list-style: none;
+      text-align: center;
+      li.active {
+        font-weight: bold;
+        color: $dark-text;
+      }
+      li {
+        display: flex;
+        align-items: center;
+      }
+      li:after {
+        content: "";
+        display: inline-block;
+        width: 100px;
+        height: 1px;
+        background-color: #b2d3dd;
+        margin: 0 15px;
+      }
+      li:last-child:after {
+        content: none;
+      }
+    }
+  }
+  margin-top: 30px;
+  .page-header-uppercase {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 0.9em;
+    letter-spacing: 2px;
+    margin: 20px 0 5px 0;
+    color: #00206b;
+  }
+  .page-header-subtitle {
+    font-size: 1.3em;
+  }
+  .company-registration-form {
+    margin-top: 30px;
+    .form-label {
+      color: $dark-text;
+    }
+    .form-group-wrapper {
+      display: flex;
+      align-items: center;
+      .form-group-right {
+        flex: 1;
+        margin-left: 20px;
+      }
+    }
+    // .form-group-submit {
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: flex-end;
+    // }
+    .company-logo {
+      border: 5px solid #ffffff;
+      position: relative;
+      cursor: pointer;
+      max-height: 130px !important;
+      overflow: hidden;
+      border-radius: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      img {
+        width: 120px;
+        height: auto;
+        cursor: pointer;
+        min-width: 120px;
+        min-height: 120px;
+        background: white;
+      }
+    }
+    .company-logo-overlay {
+      position: absolute;
+      background: rgba(0, 0, 0, 0.4);
+      width: 100%;
+      height: 100%;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: flex;
+      -webkit-align-items: center;
+      -moz-box-align: center;
+      align-items: center;
+      -webkit-justify-content: center;
+      -moz-box-pack: center;
+      justify-content: center;
+    }
+    .btn-submit {
+      display: flex;
+      align-items: center;
+      svg {
+        margin-left: 8px;
+      }
+    }
+  }
+
+  .step2 {
+    .page-header-wrapper {
+      flex-direction: column;
+    }
+    .top {
+      text-align: center;
+    }
+    .bottom .cards-wrapper {
+      display: flex;
+      align-items: flex-start;
+      margin: 20px -15px -15px -15px;
+      .card {
+        max-width: 350px;
+        padding: 25px;
+        margin: 15px;
+        border-radius: 8px;
+        border: 1px solid #b2d3dd;
+        transition: 0.3s;
+        p {
+          font-size: 18px;
+          line-height: 24px;
+        }
+        .btn {
+          background-color: #ffffff;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid #b2d3dd !important;
+          color: #3a4887 !important;
+
+          svg {
+            margin-left: 8px;
+          }
+        }
+      }
+      .card:hover {
+        cursor: pointer;
+        background-color: #f2f7f9;
+        box-shadow: -3px 8px 20px rgba(0, 32, 107, 0.2);
+        .btn {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .step3 {
+    .form-group-wrapper {
+      display: block;
+    }
+  }
+
+  .step1.plans {
+    .page-header-wrapper {
+      flex-direction: column;
+    }
+    .plans-table {
+      max-width: 75%;
+      margin: 0 auto;
+    }
+    .plans-table-wrapper {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin: 10px -10px;
+      .plan-box {
+        width: 33.33%;
+        text-align: center;
+        border: 1px solid #b2d3dd;
+        border-radius: 8px;
+        margin: 10px;
+        padding: 25px 15px 15px 15px;
+        min-height: 161px;
+        .price-tag {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 7px;
+        }
+        .price-span {
+          font-size: 13px;
+          display: inline-block;
+          margin-left: 8px;
+        }
+        button {
+          width: 100%;
+          padding: 10px;
+          margin-top: 20px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          svg {
+            margin-left: 8px;
+          }
+        }
+        .btn-soft-blue {
+          background-color: #ddeef3;
+          color: #3a4887;
+        }
+        .btn-soft-orange {
+          background-color: #ffeedb;
+          color: #b8761a;
+        }
+        .btn-soft-red {
+          background-color: #ffe4df;
+          color: #ac402a;
+        }
+      }
+    }
+    .plans-comparison-grid {
+      margin-top: 30px;
+      h2 {
+        font-size: 22px;
+        text-align: center;
+      }
+      .plans-comparison-grid-wrapper {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+        .plans-comparison-grid-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-bottom: 1px solid #f2f7f9;
+          padding: 8px 0;
+          .plans-comparison-grid-title {
+            text-align: center;
+            width: 20%;
+            span {
+              border: 1px solid #abc3f4;
+              border-radius: 8px;
+              padding: 3px 12px;
+              display: inline-block;
+            }
+          }
+          .plans-comparison-grid-title:first-child {
+            width: 260px;
+            height: 20px;
+          }
+          .plans-comparison-feature-tag {
+            width: 260px;
+          }
+          .plans-comparison-feature-mark {
+            width: 20%;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+  header {
+    overflow: hidden;
+  }
   .content-bar .content-bar---wrapper {
     height: 50px;
     overflow: hidden;
@@ -3705,9 +3973,6 @@ nav {
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-  header {
-    overflow: hidden;
-  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */

@@ -83,6 +83,32 @@ class AuthService {
         }
       });
   };
+
+  createOrganization = (
+    orgName,
+    slug,
+    orgLogo,
+    VATNumber,
+    followers,
+    accountCompleted
+  ) => {
+    return this.service
+      .post("/auth/create-organization", {
+        orgName,
+        slug,
+        orgLogo,
+        VATNumber,
+        followers,
+        accountCompleted,
+      })
+      .then(() => {
+        if (this.error === undefined) {
+          return this.response;
+        } else {
+          return this.error;
+        }
+      });
+  };
 }
 
 export default AuthService;

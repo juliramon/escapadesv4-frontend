@@ -47,7 +47,12 @@ function MyApp({ Component, pageProps }) {
   const getNewUser = (user) => {
     setState({ ...state, userFetched: true });
     setCookie("loggedInUser", user, { expires: cookieExpirationDate });
-    Router.push("/signup/complete-account");
+    if (user !== undefined || user !== "null") {
+      if (router.components["/empreses/registre"]) {
+        router.push("/empreses/registre?step=1");
+      }
+      router.push("/signup/complete-account");
+    }
   };
 
   useEffect(() => {

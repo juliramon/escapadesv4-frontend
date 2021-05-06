@@ -119,7 +119,11 @@ const Login = () => {
   useEffect(() => {
     if (user) {
       if (user !== undefined || user !== "null") {
-        router.push("/feed");
+        if (router.components["/empreses/registre"]) {
+          router.push("/empreses/registre?step=1");
+        } else {
+          router.push("/feed");
+        }
       }
     } else {
       router.push("/login");

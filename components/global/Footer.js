@@ -102,14 +102,14 @@ const Footer = ({ logo_url }) => {
                 <li>
                   <Link href="/histories">Històries en parella</Link>
                 </li>
+                <li>
+                  <Link href="/empreses">Serveis empreses</Link>
+                </li>
                 <li className="disabled">
                   <Link href="#">Qui som?</Link>
                 </li>
                 <li className="disabled">
                   <Link href="#">Què fem?</Link>
-                </li>
-                <li className="disabled">
-                  <Link href="#">Empreses</Link>
                 </li>
               </ul>
             </div>

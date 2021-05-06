@@ -2,10 +2,12 @@ import Head from "next/head";
 import Link from "next/link";
 import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
+import { useCookies } from "react-cookie";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
 
-const Serveis = ({ user }) => {
+const Serveis = () => {
+  const [cookies, setCookie, removeCookie] = useCookies("");
   return (
     <>
       <Head>
@@ -19,7 +21,6 @@ const Serveis = ({ user }) => {
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
           }
-          user={user}
         />
         <Container className="mw-1200">
           <div className="box">
@@ -37,8 +38,13 @@ const Serveis = ({ user }) => {
                         recomanador especialista en escapades en parella a
                         Catalunya.
                       </p>
-                      <Link href={"/serveis/registre"}>
-                        <a className="btn">Publicar el meu negoci</a>
+                      <Link href={"/empreses/registre"}>
+                        <a
+                          className="btn"
+                          onClick={() => setCookie("funnelOrigin", "headerBtn")}
+                        >
+                          Publicar el meu negoci
+                        </a>
                       </Link>
                     </div>
                     <div className="col-right">
@@ -57,10 +63,11 @@ const Serveis = ({ user }) => {
                     <div className="col-left">
                       <h2 className="page-h2-title">Llista el teu negoci...</h2>
                       <p className="page-h2-subtitle">
-                        El teu negoci es veurá perfecte en qualsevol dispositiu.
+                        El teu negoci es veurà perfecte en qualsevol dispositiu.
                         <br />
                         Et donaràs a conèixer a nous clients, amb tota la
-                        informació que necessiten.
+                        informació que necessiten, i amb accés directe a
+                        reservar els teus serveis.
                       </p>
                       <ul>
                         <li>
