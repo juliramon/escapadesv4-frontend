@@ -90,7 +90,7 @@ class AuthService {
     orgLogo,
     VATNumber,
     followers,
-    accountCompleted
+    infoProvided
   ) => {
     return this.service
       .post("/auth/create-organization", {
@@ -99,7 +99,7 @@ class AuthService {
         orgLogo,
         VATNumber,
         followers,
-        accountCompleted,
+        infoProvided,
       })
       .then(() => {
         if (this.error === undefined) {

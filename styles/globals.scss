@@ -3571,6 +3571,26 @@ nav {
     .plans-table {
       max-width: 75%;
       margin: 0 auto;
+      .frequency-selector {
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
+        .frequency-selector-wrapper {
+          max-width: 400px;
+          border: 1px solid #3a4887;
+          border-radius: 8px;
+          padding: 3px;
+          .btn {
+            padding: 10px 25px;
+            font-size: 15px;
+            min-width: 180px;
+          }
+          .btn.active {
+            background-color: #00206b;
+            color: #ffffff;
+          }
+        }
+      }
     }
     .plans-table-wrapper {
       display: flex;
@@ -3590,11 +3610,17 @@ nav {
           align-items: center;
           justify-content: center;
           margin-top: 7px;
+          font-size: 2rem;
         }
         .price-span {
-          font-size: 13px;
+          font-size: 14px;
           display: inline-block;
           margin-left: 8px;
+          text-align: left;
+          .price-off {
+            opacity: 0.7;
+            text-decoration: line-through;
+          }
         }
         button {
           width: 100%;
@@ -3636,15 +3662,17 @@ nav {
           align-items: center;
           justify-content: space-between;
           border-bottom: 1px solid #f2f7f9;
-          padding: 8px 0;
+          padding: 10px 0;
           .plans-comparison-grid-title {
             text-align: center;
             width: 20%;
             span {
               border: 1px solid #abc3f4;
-              border-radius: 8px;
+              border-radius: 100px;
               padding: 3px 12px;
               display: inline-block;
+              font-weight: 600;
+              font-size: 13px;
             }
           }
           .plans-comparison-grid-title:first-child {
@@ -3653,6 +3681,12 @@ nav {
           }
           .plans-comparison-feature-tag {
             width: 260px;
+            span {
+              font-size: 14px;
+              font-weight: 600;
+              line-height: 1.5em !important;
+              display: inline-block;
+            }
           }
           .plans-comparison-feature-mark {
             width: 20%;

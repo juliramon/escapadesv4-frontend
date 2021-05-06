@@ -38,7 +38,7 @@ const Serveis = () => {
                         recomanador especialista en escapades en parella a
                         Catalunya.
                       </p>
-                      <Link href={"/empreses/registre"}>
+                      <Link href={"/empreses/registre?step=informacio-empresa"}>
                         <a
                           className="btn"
                           onClick={() => setCookie("funnelOrigin", "headerBtn")}

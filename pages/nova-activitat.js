@@ -311,7 +311,7 @@ const ActivityForm = () => {
           <Row>
             <Col lg={12} className="sided-shadow">
               <div className="form-composer">
-                <h1>Recomana una activitat</h1>
+                <h1>Potencia la visibilitat de la teva activitat</h1>
                 <p className="sub-h1">
                   Descriu l'activitat a recomanar perquè altres parelles la
                   puguin gaudir.

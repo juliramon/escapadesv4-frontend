@@ -10,6 +10,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@stripe/stripe-js": "^1.14.0",
     "axios": "^0.20.0",
     "bootstrap": "^4.5.2",
     "dotenv": "^8.2.0",
@@ -29,7 +30,8 @@
     "react-quill": "^2.0.0-beta.2",
     "reading-time": "^1.2.1",
     "sass": "^1.26.11",
-    "slugify": "^1.4.6"
+    "slugify": "^1.4.6",
+    "stripe": "^8.147.0"
   },
   "devDependencies": {
     "@editorjs/editorjs": "^2.19.1",
