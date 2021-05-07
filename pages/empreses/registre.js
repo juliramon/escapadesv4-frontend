@@ -158,6 +158,9 @@ const Registre = () => {
   }, [state]);
 
   useEffect(() => {
+    if (router.query.step === "informacio-empresa") {
+      setState({ ...state, step: "informacio-empresa" });
+    }
     if (
       router.query.step === "seleccio-pla" ||
       router.query.step === "seleccio-pla?canceled=true"
