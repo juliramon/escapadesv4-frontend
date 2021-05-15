@@ -210,6 +210,24 @@ form button {
   font-weight: bold !important;
 }
 
+.alert {
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  font-size: 1rem !important;
+  display: flex !important;
+  align-items: center !important;
+  svg {
+    margin-right: 6px !important;
+    min-width: 18px !important;
+    min-height: 18px !important;
+  }
+}
+.alert-danger {
+  color: #fff !important;
+  background-color: #e46c62 !important;
+  border: none !important;
+}
+
 /*---TOAST STYLES---*/
 
 .toast {
@@ -832,23 +850,6 @@ nav {
     display: flex;
     align-items: center;
     justify-content: center;
-    .alert {
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      svg {
-        margin-right: 6px;
-        min-width: 18px;
-        min-height: 18px;
-      }
-    }
-    .alert-danger {
-      color: #fff;
-      background-color: #e46c62;
-      border: none;
-    }
   }
   .signup-col-wrapper.right {
     max-width: 450px;
@@ -3458,7 +3459,7 @@ nav {
     }
     .form-group-wrapper {
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       .form-group-right {
         flex: 1;
         margin-left: 20px;

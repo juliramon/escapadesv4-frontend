@@ -90,8 +90,20 @@ class AuthService {
     orgLogo,
     VATNumber,
     followers,
-    infoProvided
+    infoProvided,
+    organization_full_address,
+    organization_streetNumber,
+    organization_street,
+    organization_locality,
+    organization_zipcode,
+    organization_province,
+    organization_state,
+    organization_country,
+    organization_lat,
+    organization_lng,
+    additionalInfo
   ) => {
+    console.log(organization_full_address);
     return this.service
       .post("/auth/create-organization", {
         orgName,
@@ -100,8 +112,20 @@ class AuthService {
         VATNumber,
         followers,
         infoProvided,
+        organization_full_address,
+        organization_streetNumber,
+        organization_street,
+        organization_locality,
+        organization_zipcode,
+        organization_province,
+        organization_state,
+        organization_country,
+        organization_lat,
+        organization_lng,
+        additionalInfo,
       })
-      .then(() => {
+      .then((res) => {
+        console.log(res);
         if (this.error === undefined) {
           return this.response;
         } else {

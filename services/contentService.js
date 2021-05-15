@@ -9,7 +9,20 @@ class ContentService {
         "Content-Type": "application/json",
       },
     });
+    // let error, response;
+    // service.interceptors.response.use((error) => {
+    //   if (error.response.status >= 400 && error.response.status <= 500) {
+    //     this.error = {
+    //       message: error.response.data.message,
+    //       status: error.response.status,
+    //     };
+    //   } else {
+    //     return Promise.reject(error);
+    //   }
+    // });
     this.service = service;
+    // this.error = error;
+    // this.response = response;
   }
 
   // ACTIVITIES ENDPOINTS
@@ -137,8 +150,16 @@ class ContentService {
 
   // FILES ENDPOINTS
 
-  uploadFile = (file) =>
-    this.service.post("/upload", file).then((res) => res.data);
+  uploadFile = (file) => {
+    return this.service.post("/upload", file).then((res) => {
+      return res.data;
+      // if (this.error === undefined) {
+      //   return this.response;
+      // } else {
+      //   return this.error;
+      // }
+    });
+  };
 
   // USERS ENDPOINTS
 

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { Router, useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useCookies } from "react-cookie";
 import slugify from "slugify";
 import UserContext from "../../contexts/UserContext";
@@ -9,6 +9,7 @@ import AuthService from "../../services/authService";
 import ContentService from "../../services/contentService";
 import { loadStripe } from "@stripe/stripe-js";
 import PaymentService from "../../services/paymentService";
+import Autocomplete from "react-google-autocomplete";
 
 const stripePromise = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_API_KEY}`);
 
@@ -80,9 +81,18 @@ const Registre = () => {
     followers: 0,
     formType: "",
     paymentFrequency: "annual",
+    organizationLocation: undefined,
+    isReadyToSubmit: false,
+    errorMessage: {
+      picture: "",
+      company: "",
+      VAT: "",
+      location: "",
+    },
   };
 
   const [state, setState] = useState(initialState);
+  const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -98,6 +108,17 @@ const Registre = () => {
     );
   }
 
+  useEffect(() => {
+    if (
+      state.orgName !== "" &&
+      state.VATNumber !== "" &&
+      state.blopOrgLogo !== "" &&
+      state.organizationLocation !== undefined
+    ) {
+      setIsReadyToSubmit(true);
+    }
+  }, [state]);
+
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
@@ -111,16 +132,55 @@ const Registre = () => {
     });
   };
 
+  let errorMessage;
+
+  if (state.errorMessage.picture) {
+    errorMessage = (
+      <Alert variant="danger">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="icon icon-tabler icon-tabler-shield-x"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="#fff"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" />
+          <path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" />
+          <path d="M10 10l4 4m0 -4l-4 4" />
+        </svg>
+        {state.errorMessage.picture}
+      </Alert>
+    );
+  } else {
+    null;
+  }
+
   const handleFileUpload = async (e) => {
     const orgLogo = state.orgLogo;
     const uploadData = new FormData();
     uploadData.append("imageUrl", orgLogo);
     const uploadedOrgLogo = await serviceContent.uploadFile(uploadData);
-    setState({
-      ...state,
-      orgLogoCloudImage: uploadedOrgLogo.path,
-      orgLogoCloudImageUploaded: true,
-    });
+    console.log("uploadedorglogo =>", uploadedOrgLogo);
+    if (uploadedOrgLogo.message) {
+      setState({
+        ...state,
+        errorMessage: {
+          ...state.errorMessage,
+          picture: uploadedOrgLogo.message,
+        },
+      });
+    } else {
+      setState({
+        ...state,
+        orgLogoCloudImage: uploadedOrgLogo.path,
+        orgLogoCloudImageUploaded: true,
+      });
+    }
   };
 
   const handleSubmit = (e) => {
@@ -134,6 +194,19 @@ const Registre = () => {
       lower: true,
     });
     const { orgName, orgLogoCloudImage, VATNumber, followers } = state;
+    const {
+      organization_full_address,
+      organization_streetNumber,
+      organization_street,
+      organization_locality,
+      organization_zipcode,
+      organization_province,
+      organization_state,
+      organization_country,
+      organization_lat,
+      organization_lng,
+      additionalInfo,
+    } = state.organizationLocation;
     const infoProvided = true;
     service
       .createOrganization(
@@ -142,7 +215,18 @@ const Registre = () => {
         orgLogoCloudImage,
         VATNumber,
         followers,
-        infoProvided
+        infoProvided,
+        organization_full_address,
+        organization_streetNumber,
+        organization_street,
+        organization_locality,
+        organization_zipcode,
+        organization_province,
+        organization_state,
+        organization_country,
+        organization_lat,
+        organization_lng,
+        additionalInfo
       )
       .then(() => {
         setState(initialState);
@@ -230,6 +314,7 @@ const Registre = () => {
                   <p className="page-header-subtitle">
                     Entra la informació bàsica de la teva empresa{" "}
                   </p>
+                  {errorMessage}
                   <div className="company-registration-form">
                     <Form>
                       <div className="form-group-wrapper">
@@ -285,7 +370,7 @@ const Registre = () => {
                             />
                           </Form.Group>
                           <Form.Group>
-                            <Form.Label>CIF/NIF</Form.Label>
+                            <Form.Label>CIF o NIF</Form.Label>
                             <Form.Control
                               name="VATNumber"
                               type="text"
@@ -293,33 +378,172 @@ const Registre = () => {
                               placeholder="Escriu el CIF o NIF de la teva empresa..."
                             />
                           </Form.Group>
+                          <Form.Group>
+                            <Form.Label>Direcció de facturació</Form.Label>
+                            <Autocomplete
+                              className="form-control"
+                              apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
+                              style={{ width: "100%" }}
+                              onPlaceSelected={(organization) => {
+                                console.log(organization);
+                                let organization_full_address,
+                                  organization_streetNumber,
+                                  organization_street,
+                                  organization_locality,
+                                  organization_zipcode,
+                                  organization_province,
+                                  organization_state,
+                                  organization_country,
+                                  organization_lat,
+                                  organization_lng;
+
+                                organization_full_address =
+                                  organization.formatted_address;
+
+                                organization.address_components.forEach(
+                                  (el) => {
+                                    if (el.types[0] === "street_number") {
+                                      organization_streetNumber = el.long_name;
+                                    }
+                                    if (el.types[0] === "route") {
+                                      organization_street = el.long_name;
+                                    }
+                                    if (el.types[0] === "locality") {
+                                      organization_locality = el.long_name;
+                                    }
+                                    if (el.types[0] === "postal_code") {
+                                      organization_zipcode = el.long_name;
+                                    }
+                                    if (
+                                      el.types[0] ===
+                                      "administrative_area_level_2"
+                                    ) {
+                                      organization_province = el.long_name;
+                                    }
+                                    if (
+                                      el.types[0] ===
+                                      "administrative_area_level_1"
+                                    ) {
+                                      organization_state = el.long_name;
+                                    }
+                                    if (el.types[0] === "country") {
+                                      organization_country = el.long_name;
+                                    }
+                                  }
+                                );
+
+                                if (organization.geometry.viewport) {
+                                  organization_lat = Object.values(
+                                    organization.geometry.viewport
+                                  )[0].i;
+                                  organization_lng = Object.values(
+                                    organization.geometry.viewport
+                                  )[1].i;
+                                }
+
+                                setState({
+                                  ...state,
+                                  organizationLocation: {
+                                    organization_full_address: organization_full_address,
+                                    organization_streetNumber: organization_streetNumber,
+                                    organization_street: organization_street,
+                                    organization_locality: organization_locality,
+                                    organization_zipcode: organization_zipcode,
+                                    organization_province: organization_province,
+                                    organization_state: organization_state,
+                                    organization_country: organization_country,
+                                    organization_lat: organization_lat,
+                                    organization_lng: organization_lng,
+                                  },
+                                });
+                              }}
+                              types={["address"]}
+                              placeholder={"Escriu la direcció de facturació"}
+                              fields={[
+                                "address_components",
+                                "formatted_address",
+                                "geometry",
+                              ]}
+                            />
+                          </Form.Group>
+                          <Form.Group>
+                            <Form.Control
+                              name="additionalLocationInfo"
+                              type="text"
+                              onChange={(e) =>
+                                setState({
+                                  ...state,
+                                  organizationLocation: {
+                                    ...state.organizationLocation,
+                                    additionalInfo: e.target.value,
+                                  },
+                                })
+                              }
+                              placeholder="Informació addicional de l'adreça de facturació"
+                            />
+                          </Form.Group>
                         </div>
                       </div>
                       <Form.Group className="form-group-submit">
-                        <Button
-                          className="btn btn-m btn-submit"
-                          type="submit"
-                          onClick={handleSubmit}
-                        >
-                          Continuar{" "}
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-arrow-narrow-right"
-                            width="22"
-                            height="22"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#ffffff"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
+                        {isReadyToSubmit ? (
+                          <Button
+                            className="btn btn-m btn-submit"
+                            type="submit"
+                            onClick={handleSubmit}
                           >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                            <line x1="15" y1="16" x2="19" y2="12" />
-                            <line x1="15" y1="8" x2="19" y2="12" />
-                          </svg>{" "}
-                        </Button>
+                            Continuar{" "}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="icon icon-tabler icon-tabler-arrow-narrow-right"
+                              width="22"
+                              height="22"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="#ffffff"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path
+                                stroke="none"
+                                d="M0 0h24v24H0z"
+                                fill="none"
+                              />
+                              <line x1="5" y1="12" x2="19" y2="12" />
+                              <line x1="15" y1="16" x2="19" y2="12" />
+                              <line x1="15" y1="8" x2="19" y2="12" />
+                            </svg>{" "}
+                          </Button>
+                        ) : (
+                          <Button
+                            className="btn btn-m btn-submit"
+                            type="submit"
+                            disabled
+                          >
+                            Continuar{" "}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="icon icon-tabler icon-tabler-arrow-narrow-right"
+                              width="22"
+                              height="22"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="#ffffff"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path
+                                stroke="none"
+                                d="M0 0h24v24H0z"
+                                fill="none"
+                              />
+                              <line x1="5" y1="12" x2="19" y2="12" />
+                              <line x1="15" y1="16" x2="19" y2="12" />
+                              <line x1="15" y1="8" x2="19" y2="12" />
+                            </svg>{" "}
+                          </Button>
+                        )}
                       </Form.Group>
                     </Form>
                   </div>
