@@ -103,7 +103,6 @@ class AuthService {
     organization_lng,
     additionalInfo
   ) => {
-    console.log(organization_full_address);
     return this.service
       .post("/auth/create-organization", {
         orgName,
@@ -125,7 +124,6 @@ class AuthService {
         additionalInfo,
       })
       .then((res) => {
-        console.log(res);
         if (this.error === undefined) {
           return this.response;
         } else {

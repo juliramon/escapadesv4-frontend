@@ -14,7 +14,7 @@ import Autocomplete from "react-google-autocomplete";
 const stripePromise = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_API_KEY}`);
 
 const Registre = () => {
-  const { user } = useContext(UserContext);
+  const { user, refreshUserData } = useContext(UserContext);
   const router = useRouter();
   const service = new AuthService();
   const serviceContent = new ContentService();
@@ -58,7 +58,13 @@ const Registre = () => {
     }
 
     const stripe = await stripePromise;
-    const response = await paymentService.stripeCheckout(priceId, productId);
+    let customerId = user.customerId ? user.customerId : null;
+    const response = await paymentService.stripeCheckout(
+      priceId,
+      productId,
+      customerId,
+      user.email
+    );
     // When the customer clicks on the button, redirect them to Checkout.
     const result = await stripe.redirectToCheckout({
       sessionId: response.id,
@@ -165,7 +171,6 @@ const Registre = () => {
     const uploadData = new FormData();
     uploadData.append("imageUrl", orgLogo);
     const uploadedOrgLogo = await serviceContent.uploadFile(uploadData);
-    console.log("uploadedorglogo =>", uploadedOrgLogo);
     if (uploadedOrgLogo.message) {
       setState({
         ...state,
@@ -241,6 +246,10 @@ const Registre = () => {
     }
   }, [state]);
 
+  const getUserUpdatedData = () => {
+    serviceContent.getUserProfile(user._id).then((res) => refreshUserData(res));
+  };
+
   useEffect(() => {
     if (router.query.step === "informacio-empresa") {
       setState({ ...state, step: "informacio-empresa" });
@@ -255,6 +264,7 @@ const Registre = () => {
       router.query.step === "seleccio-tipologia" ||
       router.query.step === "seleccio-tipologia?success=true"
     ) {
+      getUserUpdatedData();
       setState({ ...state, step: "seleccio-tipologia", formType: "activitat" });
       if (router.query.form === "activitat") {
         setState({ ...state, formType: "activitat" });
@@ -385,7 +395,6 @@ const Registre = () => {
                               apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
                               style={{ width: "100%" }}
                               onPlaceSelected={(organization) => {
-                                console.log(organization);
                                 let organization_full_address,
                                   organization_streetNumber,
                                   organization_street,
@@ -396,10 +405,8 @@ const Registre = () => {
                                   organization_country,
                                   organization_lat,
                                   organization_lng;
-
                                 organization_full_address =
                                   organization.formatted_address;
-
                                 organization.address_components.forEach(
                                   (el) => {
                                     if (el.types[0] === "street_number") {

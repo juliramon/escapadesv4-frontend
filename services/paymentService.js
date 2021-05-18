@@ -12,9 +12,14 @@ class PaymentService {
     this.service = service;
   }
 
-  stripeCheckout = (priceId, productId) => {
+  stripeCheckout = (priceId, productId, customerId, customerEmail) => {
     return this.service
-      .post("/payments/stripe-checkout", { priceId, productId })
+      .post("/payments/stripe-checkout", {
+        priceId,
+        productId,
+        customerId,
+        customerEmail,
+      })
       .then((res) => res.data);
   };
 }
