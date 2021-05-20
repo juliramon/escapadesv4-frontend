@@ -3400,45 +3400,46 @@ nav {
   }
 }
 
+.funnel-steps-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  margin-bottom: 30px;
+  ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style: none;
+    text-align: center;
+    li.active {
+      font-weight: bold;
+      color: $dark-text;
+    }
+    li {
+      display: flex;
+      align-items: center;
+    }
+    li:after {
+      content: "";
+      display: inline-block;
+      width: 100px;
+      height: 1px;
+      background-color: #b2d3dd;
+      margin: 0 15px;
+    }
+    li:last-child:after {
+      content: none;
+    }
+  }
+}
+
 #landingServices.services-form {
   .col-left {
     max-width: 50% !important;
   }
   .col-right {
     max-width: 40% !important;
-  }
-  .funnel-steps-wrapper {
-    max-width: 600px;
-    margin: 0 auto;
-    margin-bottom: 30px;
-    ul {
-      margin: 0;
-      padding: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      list-style: none;
-      text-align: center;
-      li.active {
-        font-weight: bold;
-        color: $dark-text;
-      }
-      li {
-        display: flex;
-        align-items: center;
-      }
-      li:after {
-        content: "";
-        display: inline-block;
-        width: 100px;
-        height: 1px;
-        background-color: #b2d3dd;
-        margin: 0 15px;
-      }
-      li:last-child:after {
-        content: none;
-      }
-    }
   }
   margin-top: 30px;
   .page-header-uppercase {

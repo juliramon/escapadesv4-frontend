@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useCookies } from "react-cookie";
@@ -265,7 +265,7 @@ const Registre = () => {
       router.query.step === "seleccio-tipologia?success=true"
     ) {
       getUserUpdatedData();
-      setState({ ...state, step: "seleccio-tipologia", formType: "activitat" });
+      setState({ ...state, step: "seleccio-tipologia" });
       if (router.query.form === "activitat") {
         setState({ ...state, formType: "activitat" });
       }
@@ -276,14 +276,14 @@ const Registre = () => {
   }, [router]);
 
   const handleActivityForm = () => {
-    router.push("/empreses/registre?step=seleccio-tipologia&form=activitat");
+    router.push("/nova-activitat?step=publicacio-fitxa");
   };
 
   const handlePlaceForm = () => {
-    router.push("/empreses/registre?step=seleccio-tipologia&form=allotjament");
+    router.push("/nou-allotjament?step=publicacio-fitxa");
   };
 
-  let step1, step2, step3, step4, funnelSteps;
+  let step1, step2, step3, funnelSteps;
 
   if (cookies.funnelOrigin === "headerBtn") {
     funnelSteps = (
@@ -1525,7 +1525,6 @@ const Registre = () => {
         </section>
       </>
     );
-    step4 = <>publish</>;
   } else {
     funnelSteps = (
       <>
@@ -1745,127 +1744,6 @@ const Registre = () => {
         </section>
       </>
     );
-    step3 = {
-      activitat: (
-        <>
-          <section className="page-header step3 activitat">
-            <Row>
-              <Col lg={12}>
-                <div className="page-header-wrapper">
-                  <div className="col-left">
-                    <h1 className="page-header-title">
-                      Potencia la visibilitat de la teva activitat
-                    </h1>
-                    <p className="page-header-subtitle">
-                      Arriba a parelles d'arreu de Catalunya amb els nostres
-                      plans
-                    </p>
-                    <div className="company-registration-form">
-                      <Form>
-                        <div className="form-group-wrapper">
-                          <Form.Group>
-                            <Form.Label>Nom de l'activitat</Form.Label>
-                            <Form.Control
-                              name="orgName"
-                              type="text"
-                              onChange={handleChange}
-                              placeholder="Ex. Excursió amb Rucs al Corredor"
-                            />
-                          </Form.Group>
-                          <Form.Group>
-                            <Form.Label>Subtítol</Form.Label>
-                            <Form.Control
-                              name="VATNumber"
-                              type="text"
-                              onChange={handleChange}
-                              placeholder="Ex. Fantàstica escapada amb rucs al Corredor. Us encantarà!"
-                            />
-                          </Form.Group>
-                        </div>
-                        <Form.Group className="form-group-submit">
-                          <Button
-                            className="btn btn-m btn-submit"
-                            type="submit"
-                            onClick={handleSubmit}
-                          >
-                            Publicar{" "}
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-arrow-narrow-right"
-                              width="22"
-                              height="22"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="#ffffff"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path
-                                stroke="none"
-                                d="M0 0h24v24H0z"
-                                fill="none"
-                              />
-                              <line x1="5" y1="12" x2="19" y2="12" />
-                              <line x1="15" y1="16" x2="19" y2="12" />
-                              <line x1="15" y1="8" x2="19" y2="12" />
-                            </svg>{" "}
-                          </Button>
-                        </Form.Group>
-                      </Form>
-                    </div>
-                  </div>
-                  <div className="col-right">
-                    <div className="header-infographic-wrapper">
-                      <img src="https://res.cloudinary.com/juligoodie/image/upload/v1619903999/getaways-guru/static-files/serveis-header-image_gaxysb.svg" />
-                    </div>
-                  </div>
-                </div>
-              </Col>
-            </Row>
-          </section>
-        </>
-      ),
-      allotjament: (
-        <>
-          <section className="page-header">
-            <Row>
-              <Col lg={12}>
-                <div className="page-header-wrapper">
-                  <div className="col-left">
-                    <h1 className="page-header-title">
-                      Potencia la visibilitat del teu allotjament
-                    </h1>
-                    <p className="page-header-subtitle">
-                      Arriba a parelles d'arreu de Catalunya amb els nostres
-                      plans
-                    </p>
-                    <div className="plans-table">
-                      <div className="plans-table-wrapper">
-                        <div className="plan-box">
-                          <div className="top">
-                            <span>Pla Bàsic</span>
-                            <h3>Gratuït</h3>
-                          </div>
-                          <div className="bottom">
-                            <button>Registra't</button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col-right">
-                    <div className="header-infographic-wrapper">
-                      <img src="https://res.cloudinary.com/juligoodie/image/upload/v1619903999/getaways-guru/static-files/serveis-header-image_gaxysb.svg" />
-                    </div>
-                  </div>
-                </div>
-              </Col>
-            </Row>
-          </section>
-        </>
-      ),
-    };
   }
 
   let contentPage;

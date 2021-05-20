@@ -1,4 +1,4 @@
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { useContext, useState } from "react";
 import {
   Navbar,
@@ -14,6 +14,7 @@ import UserContext from "../../contexts/UserContext";
 
 const NavigationBar = ({ logo_url, path }) => {
   const { user } = useContext(UserContext);
+  const router = useRouter();
   const initialState = {
     searchQuery: "",
     isResponsiveMenuOpen: false,
@@ -365,9 +366,11 @@ const NavigationBar = ({ logo_url, path }) => {
 
   let navBar;
   if (
-    path === "/nova-activitat" ||
-    path === "/nou-allotjament" ||
-    path === "/nova-historia"
+    router.pathname === "/nova-activitat" ||
+    router.pathname === "/nou-allotjament" ||
+    router.pathname === "/nova-activitat?step=publicacio-fitxa" ||
+    router.pathname === "/nou-allotjament?step=publicacio-fitxa" ||
+    router.pathname === "/nova-historia"
   ) {
     navBar = (
       <header style={styledHeader}>
@@ -383,7 +386,6 @@ const NavigationBar = ({ logo_url, path }) => {
             <div className="nav-col right d-flex simple-nav">{navRight}</div>
           </Container>
         </Navbar>
-        <ContentBar user={user} />
       </header>
     );
   } else if (path === "/signup/complete-account") {
