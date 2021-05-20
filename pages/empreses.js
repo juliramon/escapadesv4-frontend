@@ -5,6 +5,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useCookies } from "react-cookie";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
+import Plans from "../components/global/Plans";
 
 const Serveis = () => {
   const [cookies, setCookie, removeCookie] = useCookies("");
@@ -34,23 +35,43 @@ const Serveis = () => {
                         clients
                       </h1>
                       <p className="page-header-subtitle">
-                        Amplia la visibilitat del teu negoci llistant-lo al
-                        recomanador especialista en escapades en parella a
-                        Catalunya.
+                        Amplia la visibilitat del teu negoci llistant-lo
+                        <br /> al recomanador especialista en escapades
+                        <br /> en parella a Catalunya
                       </p>
-                      <Link href={"/empreses/registre?step=informacio-empresa"}>
+                      {/* <Link href={"/empreses/registre?step=informacio-empresa"}>
                         <a
                           className="btn"
                           onClick={() => setCookie("funnelOrigin", "headerBtn")}
                         >
                           Publicar el meu negoci
                         </a>
+                      </Link> */}
+                      <Link href={"mailto:social@escapadesenparella.cat"}>
+                        <a className="btn" style={{ padding: "12px 60px" }}>
+                          Contacta'ns
+                        </a>
                       </Link>
                     </div>
                     <div className="col-right">
                       <div className="header-infographic-wrapper">
-                        <img src="https://res.cloudinary.com/juligoodie/image/upload/v1619903999/getaways-guru/static-files/serveis-header-image_gaxysb.svg" />
+                        <img src="https://res.cloudinary.com/juligoodie/image/upload/v1621536007/getaways-guru/static-files/graphic-plans-3_lrey6s.png" />
                       </div>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            </section>
+            <section className="services-referrals">
+              <Row>
+                <Col lg={12}>
+                  <div className="services-referrals-wrapper">
+                    <h4>
+                      Alguns dels allotjaments i activitats que han confiat, i
+                      confien en nosaltres
+                    </h4>
+                    <div className="logos-bar">
+                      <img src="https://res.cloudinary.com/juligoodie/image/upload/v1621538629/getaways-guru/static-files/graphic-plans-4_luvtvr.png" />
                     </div>
                   </div>
                 </Col>
@@ -186,10 +207,17 @@ const Serveis = () => {
                         </li>
                       </ul>
                     </div>
-                    <div className="col-right"></div>
+                    <div className="col-right">
+                      <div class="media-area">
+                        <img src="https://res.cloudinary.com/juligoodie/image/upload/v1621535038/getaways-guru/static-files/graphic-plans-2_r3ffv2.png" />
+                      </div>
+                    </div>
                   </div>
                 </Col>
               </Row>
+            </section>
+            <section className="services-plans">
+              <Plans />
             </section>
           </div>
         </Container>
