@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { Button, Container, Form, Row } from "react-bootstrap";
 import NavigationBar from "../components/global/NavigationBar";
@@ -8,9 +9,7 @@ import ContentService from "../services/contentService";
 
 const CompleteAccount = () => {
   const { user, refreshUserData } = useContext(UserContext);
-
   const router = useRouter();
-
   if (user && user !== "null" && user.accountCompleted === true) {
     router.push("/feed");
   }
