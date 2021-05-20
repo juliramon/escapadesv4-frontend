@@ -7,9 +7,11 @@ import Autocomplete from "react-google-autocomplete";
 import UserContext from "../contexts/UserContext";
 import Head from "next/head";
 import slugify from "slugify";
+import { useCookies } from "react-cookie";
 
 const PlaceForm = () => {
   const { user } = useContext(UserContext);
+  const [cookies, setCookie, removeCookie] = useCookies("");
   const router = useRouter();
   useEffect(() => {
     if (!user) {
@@ -262,6 +264,7 @@ const PlaceForm = () => {
       state.formData.cloudImagesUploaded === true &&
       state.formData.coverCloudImageUploaded === true
     ) {
+      removeCookie("funnelOrigin");
       submitPlace();
     }
   }, [state.formData]);
@@ -302,10 +305,69 @@ const PlaceForm = () => {
     }
   }, [state.formData]);
 
+  useEffect(() => {
+    if (router.query.step === "publicacio-fitxa") {
+      setState({ ...state, step: "publicacio-fitxa" });
+    }
+  }, [router]);
+
+  let funnelSteps;
+
+  if (cookies.funnelOrigin === "headerBtn") {
+    funnelSteps = (
+      <>
+        <div className="funnel-steps-wrapper" style={{ marginTop: "60px" }}>
+          <ul>
+            <li
+              className={state.step === "informacio-empresa" ? "active" : null}
+            >
+              Pas 1
+            </li>
+            <li className={state.step === "seleccio-pla" ? "active" : null}>
+              Pas 2
+            </li>
+            <li
+              className={state.step === "seleccio-tipologia" ? "active" : null}
+            >
+              Pas 3
+            </li>
+            <li className={state.step === "publicacio-fitxa" ? "active" : null}>
+              Pas 4
+            </li>
+          </ul>
+        </div>
+      </>
+    );
+  } else {
+    funnelSteps = (
+      <>
+        <div className="funnel-steps-wrapper">
+          <ul>
+            <li
+              className={state.step === "informacio-empresa" ? "active" : null}
+            >
+              Pas 1
+            </li>
+            <li
+              className={state.step === "seleccio-tipologia" ? "active" : null}
+            >
+              Pas 2
+            </li>
+            <li className={state.step === "publicar-fitxa" ? "active" : null}>
+              Pas 3
+            </li>
+          </ul>
+        </div>
+      </>
+    );
+  }
+
   return (
     <>
       <Head>
-        <title>Recomana una allotjament - Escapadesenparella.cat</title>
+        <title>
+          Potencia la visibilitat del teu allotjament - Escapadesenparella.cat
+        </title>
       </Head>
 
       <div id="place" className="composer">
@@ -317,13 +379,18 @@ const PlaceForm = () => {
           path={queryId}
         />
         <Container className="mw-1600">
+          <section className="funnel-steps">
+            <Row>
+              <Col lg={12}>{funnelSteps}</Col>
+            </Row>
+          </section>
           <Row>
             <Col lg={12} className="sided-shadow">
               <div className="form-composer">
-                <h1>Recomana un allotjament</h1>
+                <h1>Potencia la visibilitat del teu allotjament</h1>
                 <p className="sub-h1">
-                  Descriu l'allotjament a recomanar perquè altres parelles el
-                  puguin gaudir.
+                  Descriu l'allotjament per arribar a parelles d'arreu de
+                  Catalunya
                 </p>
               </div>
               <Form>

@@ -83,6 +83,54 @@ class AuthService {
         }
       });
   };
+
+  createOrganization = (
+    orgName,
+    slug,
+    orgLogo,
+    VATNumber,
+    followers,
+    infoProvided,
+    organization_full_address,
+    organization_streetNumber,
+    organization_street,
+    organization_locality,
+    organization_zipcode,
+    organization_province,
+    organization_state,
+    organization_country,
+    organization_lat,
+    organization_lng,
+    additionalInfo
+  ) => {
+    return this.service
+      .post("/auth/create-organization", {
+        orgName,
+        slug,
+        orgLogo,
+        VATNumber,
+        followers,
+        infoProvided,
+        organization_full_address,
+        organization_streetNumber,
+        organization_street,
+        organization_locality,
+        organization_zipcode,
+        organization_province,
+        organization_state,
+        organization_country,
+        organization_lat,
+        organization_lng,
+        additionalInfo,
+      })
+      .then((res) => {
+        if (this.error === undefined) {
+          return this.response;
+        } else {
+          return this.error;
+        }
+      });
+  };
 }
 
 export default AuthService;
