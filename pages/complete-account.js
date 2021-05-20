@@ -8,9 +8,7 @@ import ContentService from "../services/contentService";
 
 const CompleteAccount = () => {
   const { user, refreshUserData } = useContext(UserContext);
-
   const router = useRouter();
-
   if (user && user !== "null" && user.accountCompleted === true) {
     router.push("/feed");
   }
