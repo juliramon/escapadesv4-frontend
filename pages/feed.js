@@ -26,6 +26,7 @@ const Feed = () => {
     hasPlaces: false,
     userCustomActivities: [],
     userCustomPlaces: [],
+    organizations: {},
   };
   const [state, setState] = useState(initialState);
 
@@ -40,7 +41,8 @@ const Feed = () => {
         setState({ ...state, isFetching: true });
         const userCustomActivities = await service.getUserCustomActivities();
         const userCustomPlaces = await service.getUserCustomPlaces();
-        let hasActivities, hasPlaces, hasListings;
+        const userOrganizations = await service.checkOrganizationsOwned();
+        let hasActivities, hasPlaces, hasListings, hasOrganizations;
         userCustomActivities.length > 0
           ? (hasActivities = true)
           : (hasActivities = false);
@@ -48,13 +50,18 @@ const Feed = () => {
         userCustomActivities.length > 0 && userCustomPlaces.length > 0
           ? (hasListings = true)
           : (hasListings = false);
+        userOrganizations.number > 0
+          ? (hasOrganizations = true)
+          : (hasOrganizations = false);
         setState({
           ...state,
           hasListings: hasListings,
           hasActivities: hasActivities,
           hasPlaces: hasPlaces,
+          hasOrganizations: hasOrganizations,
           userCustomActivities: userCustomActivities,
           userCustomPlaces: userCustomPlaces,
+          userOrganizations: userOrganizations,
         });
       };
       fetchData();
@@ -163,6 +170,43 @@ const Feed = () => {
     </li>
   ));
 
+  let organizationsList = [];
+  if (state.userOrganizations !== undefined) {
+    console.log(state.userOrganizations.organizations);
+    organizationsList = state.userOrganizations.organizations.map((el, idx) => (
+      <li key={idx}>
+        <Link href={`/empreses/${el.slug}`}>
+          <a>
+            <div className="organization-wrapper">
+              <div className="organization-left">
+                <div className="organization-logo">
+                  <img src={el.orgLogo} alt={el.orgName} />
+                </div>
+              </div>
+              <div className="organization-right">
+                <h3>{el.orgName}</h3>
+              </div>
+            </div>
+          </a>
+        </Link>
+      </li>
+    ));
+  }
+
+  let organizationsBlock;
+  if (state.userOrganizations) {
+    if (state.userOrganizations.number > 0) {
+      organizationsBlock = (
+        <div className="organizations">
+          <p>Les teves empreses ({state.userOrganizations.number})</p>
+          <ul className="menu-organizations">{organizationsList}</ul>
+        </div>
+      );
+    } else {
+      null;
+    }
+  }
+
   if (!user) {
     return (
       <Head>
@@ -204,36 +248,7 @@ const Feed = () => {
                     <p>Temes que segueixes</p>
                     <ul className="menu-topics">{topicsList}</ul>
                   </div>
-                  {/* <div className="content">
-										<p>Explora i descobreix</p>
-										<ul>
-											<li>
-												<Link href="/usuaris">
-													<a>
-														<svg
-															xmlns="http://www.w3.org/2000/svg"
-															className="icon icon-tabler icon-tabler-users"
-															width="28"
-															height="28"
-															viewBox="0 0 24 24"
-															strokeWidth="1.5"
-															stroke="#0D1F44"
-															fill="none"
-															strokeLinecap="round"
-															strokeLinejoin="round"
-														>
-															<path stroke="none" d="M0 0h24v24H0z" />
-															<circle cx="9" cy="7" r="4" />
-															<path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-															<path d="M16 3.13a4 4 0 0 1 0 7.75" />
-															<path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
-														</svg>
-														Comunitat
-													</a>
-												</Link>
-											</li>
-										</ul>
-									</div> */}
+                  {organizationsBlock}
                   <div className="links">
                     <p>Gestiona el teu compte</p>
                     <ul>

@@ -20,6 +20,7 @@ const ActivityListing = () => {
     activity: {},
     isActivityLoaded: false,
     owner: {},
+    organization: {},
     bookmarkDetails: {},
     isBookmarked: false,
     showBookmarkToast: false,
@@ -79,6 +80,7 @@ const ActivityListing = () => {
           activity: activityDetails,
           isActivityLoaded: isLoaded,
           owner: activityDetails.owner,
+          organization: activityDetails.organization,
           bookmarkDetails: bookmarkDetails,
           isBookmarked: isBookmarked,
         });
@@ -515,21 +517,25 @@ const ActivityListing = () => {
                       <Col lg={7}>
                         <div className="listing-body-wrapper d-flex justify-content-between align-items-center">
                           <p className="listing-subtitle">{subtitle}</p>
-                          <div className="listing-owner">
-                            <Link href={`/usuaris/${state.owner._id}`}>
-                              <a>
-                                <div className="avatar">
-                                  <img
-                                    src={state.owner.avatar}
-                                    alt={state.owner.fullName}
-                                  />
-                                </div>
-                                <p className="listing-owner-name">
-                                  {state.owner.fullName}
-                                </p>
-                              </a>
-                            </Link>
-                          </div>
+                          {state.organization ? (
+                            <div className="listing-owner">
+                              <Link
+                                href={`/empreses/${state.organization.slug}`}
+                              >
+                                <a>
+                                  <div className="avatar">
+                                    <img
+                                      src={state.organization.orgLogo}
+                                      alt={state.organization.orgName}
+                                    />
+                                  </div>
+                                  <p className="listing-owner-name">
+                                    {state.organization.orgName}
+                                  </p>
+                                </a>
+                              </Link>
+                            </div>
+                          ) : null}
                         </div>
                         <div className="listing-details-body d-flex">
                           <div className="listing-categories">

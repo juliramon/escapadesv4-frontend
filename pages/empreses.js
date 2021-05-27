@@ -1,14 +1,11 @@
 import Head from "next/head";
 import Link from "next/link";
-import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { useCookies } from "react-cookie";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
 import Plans from "../components/global/Plans";
 
 const Serveis = () => {
-  const [cookies, setCookie, removeCookie] = useCookies("");
   return (
     <>
       <Head>
@@ -39,18 +36,8 @@ const Serveis = () => {
                         <br /> al recomanador especialista en escapades
                         <br /> en parella a Catalunya
                       </p>
-                      {/* <Link href={"/empreses/registre?step=informacio-empresa"}>
-                        <a
-                          className="btn"
-                          onClick={() => setCookie("funnelOrigin", "headerBtn")}
-                        >
-                          Publicar el meu negoci
-                        </a>
-                      </Link> */}
-                      <Link href={"mailto:social@escapadesenparella.cat"}>
-                        <a className="btn" style={{ padding: "12px 60px" }}>
-                          Contacta'ns
-                        </a>
+                      <Link href={"/empreses/registre?step=informacio-empresa"}>
+                        <a className="btn">Publicar el meu negoci</a>
                       </Link>
                     </div>
                     <div className="col-right">

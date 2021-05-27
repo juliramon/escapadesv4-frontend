@@ -7,12 +7,9 @@ import Autocomplete from "react-google-autocomplete";
 import UserContext from "../contexts/UserContext";
 import Head from "next/head";
 import slugify from "slugify";
-import { useCookies } from "react-cookie";
 
 const ActivityForm = () => {
   const { user } = useContext(UserContext);
-  const [cookies, setCookie, removeCookie] = useCookies("");
-
   const router = useRouter();
   useEffect(() => {
     if (!user) {
@@ -59,6 +56,7 @@ const ActivityForm = () => {
       activity_opening_hours: "",
       duration: "",
       price: "",
+      organization: "",
       isReadyToSubmit: false,
     },
   };
@@ -70,6 +68,21 @@ const ActivityForm = () => {
     }
   }, [router]);
   const service = new ContentService();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const userOrganizations = await service.checkOrganizationsOwned();
+      let hasOrganizations;
+      userOrganizations.number > 0
+        ? (hasOrganizations = true)
+        : (hasOrganizations = false);
+      setState({
+        ...state,
+        formData: { ...state.formData, userOrganizations: userOrganizations },
+      });
+    };
+    fetchData();
+  }, []);
 
   const saveFileToStatus = (e) => {
     const fileToUpload = e.target.files[0];
@@ -175,6 +188,13 @@ const ActivityForm = () => {
     });
   };
 
+  const handleCheckOrganization = (e) => {
+    setState({
+      ...state,
+      formData: { ...state.formData, organization: e.target.id },
+    });
+  };
+
   const handleChange = (e) => {
     setState({
       ...state,
@@ -215,6 +235,7 @@ const ActivityForm = () => {
       activity_opening_hours,
       duration,
       price,
+      organization,
     } = state.formData;
     service
       .activity(
@@ -241,7 +262,8 @@ const ActivityForm = () => {
         activity_place_id,
         activity_opening_hours,
         duration,
-        price
+        price,
+        organization
       )
       .then(() => Router.push("/dashboard"))
       .catch((err) => console.error(err));
@@ -257,7 +279,6 @@ const ActivityForm = () => {
       state.formData.cloudImagesUploaded === true &&
       state.formData.coverCloudImageUploaded === true
     ) {
-      removeCookie("funnelOrigin");
       submitActivity();
     }
   }, [state.formData]);
@@ -277,6 +298,7 @@ const ActivityForm = () => {
       price,
       duration,
       description,
+      organization,
     } = state.formData;
 
     if (
@@ -292,7 +314,8 @@ const ActivityForm = () => {
       coverImage !== "" &&
       description &&
       duration &&
-      price
+      price &&
+      organization
     ) {
       setState((state) => ({ ...state, isReadyToSubmit: true }));
     }
@@ -305,8 +328,7 @@ const ActivityForm = () => {
   }, [router]);
 
   let funnelSteps;
-
-  if (cookies.funnelOrigin === "headerBtn") {
+  if (state.step) {
     funnelSteps = (
       <>
         <div className="funnel-steps-wrapper" style={{ marginTop: "60px" }}>
@@ -331,27 +353,33 @@ const ActivityForm = () => {
         </div>
       </>
     );
-  } else {
-    funnelSteps = (
-      <>
-        <div className="funnel-steps-wrapper">
-          <ul>
-            <li
-              className={state.step === "informacio-empresa" ? "active" : null}
-            >
-              Pas 1
-            </li>
-            <li
-              className={state.step === "seleccio-tipologia" ? "active" : null}
-            >
-              Pas 2
-            </li>
-            <li className={state.step === "publicar-fitxa" ? "active" : null}>
-              Pas 3
-            </li>
-          </ul>
-        </div>
-      </>
+  }
+
+  let organizationsList = [];
+  if (state.formData.userOrganizations !== undefined) {
+    console.log(state.formData.userOrganizations.organizations);
+    organizationsList = state.formData.userOrganizations.organizations.map(
+      (el, idx) => (
+        <label key={idx}>
+          <input
+            value={el.orgName}
+            name="orgName"
+            type="radio"
+            id={el._id}
+            onChange={handleCheckOrganization}
+          />
+          <div className="organization-wrapper">
+            <div className="organization-left">
+              <div className="organization-logo">
+                <img src={el.orgLogo} alt={el.orgName} />
+              </div>
+            </div>
+            <div className="organization-right">
+              <h3>{el.orgName}</h3>
+            </div>
+          </div>
+        </label>
+      )
     );
   }
 
@@ -386,6 +414,10 @@ const ActivityForm = () => {
                 </p>
               </div>
               <Form>
+                <Form.Group style={{ display: "inline-block" }}>
+                  <Form.Label>Empresa propietària</Form.Label>
+                  <div className="organizations-list">{organizationsList}</div>
+                </Form.Group>
                 <Form.Group>
                   <Form.Label>Títol</Form.Label>
                   <Form.Control

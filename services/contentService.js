@@ -51,7 +51,8 @@ class ContentService {
     activity_place_id,
     activity_opening_hours,
     duration,
-    price
+    price,
+    organization_id
   ) => {
     return this.service
       .post("/activity", {
@@ -79,6 +80,7 @@ class ContentService {
         activity_opening_hours,
         duration,
         price,
+        organization_id,
       })
       .then((res) => res.data);
   };
@@ -120,7 +122,8 @@ class ContentService {
     activity_place_id,
     activity_opening_hours,
     duration,
-    price
+    price,
+    organization
   ) =>
     this.service.put(`/activities/${_id}`, {
       slug,
@@ -146,6 +149,7 @@ class ContentService {
       activity_opening_hours,
       duration,
       price,
+      organization,
     });
 
   // FILES ENDPOINTS
@@ -224,7 +228,8 @@ class ContentService {
     place_rating,
     place_id,
     place_opening_hours,
-    price
+    price,
+    organization_id
   ) => {
     return this.service
       .post("/place", {
@@ -252,6 +257,7 @@ class ContentService {
         place_id,
         place_opening_hours,
         price,
+        organization_id,
       })
       .then((res) => {
         console.log(res.data);
@@ -292,7 +298,8 @@ class ContentService {
     place_rating,
     place_place_id,
     place_opening_hours,
-    price
+    price,
+    organization
   ) =>
     this.service.put(`/places/${_id}`, {
       slug,
@@ -318,6 +325,7 @@ class ContentService {
       place_place_id,
       place_opening_hours,
       price,
+      organization,
     });
 
   getUserPlaces = (id) =>
@@ -487,6 +495,9 @@ class ContentService {
 
   getCategoriesTotals = () =>
     this.service.get(`/categoriesTotals`).then((res) => res.data);
+
+  checkOrganizationsOwned = () =>
+    this.service.get("/checkOrganizationsOwned").then((res) => res.data);
 }
 
 export default ContentService;

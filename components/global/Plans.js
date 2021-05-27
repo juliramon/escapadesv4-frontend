@@ -3,6 +3,7 @@ import { Col, Row } from "react-bootstrap";
 import UserContext from "../../contexts/UserContext";
 import { loadStripe } from "@stripe/stripe-js";
 import PaymentService from "../../services/paymentService";
+import Link from "next/link";
 
 const stripePromise = loadStripe(`${process.env.NEXT_PUBLIC_STRIPE_API_KEY}`);
 
@@ -15,7 +16,6 @@ const Plans = () => {
   const [state, setState] = useState(initialState);
 
   const handleCheckoutClick = async (e) => {
-    console.log("handlecheckoutclick");
     let priceId, productId;
     if (state.paymentFrequency === "monthly") {
       if (e.target.name === "premium") {
@@ -107,27 +107,34 @@ const Plans = () => {
                   <h3 className="price-tag">Gratuït</h3>
                 </div>
                 <div className="bottom">
-                  <button className="btn-soft-red">
-                    {/* Continuar{" "}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-arrow-narrow-right"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="#ac402a"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <line x1="15" y1="16" x2="19" y2="12" />
-                      <line x1="15" y1="8" x2="19" y2="12" />
-                    </svg> */}
-                    Properament
-                  </button>
+                  <Link
+                    href={
+                      user === undefined || !user
+                        ? "/empreses/registre?step=informacio-empresa"
+                        : "/empreses/registre?step=seleccio-tipologia"
+                    }
+                  >
+                    <a className="btn-soft-red">
+                      Continuar{" "}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-arrow-narrow-right"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="#ac402a"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <line x1="15" y1="16" x2="19" y2="12" />
+                        <line x1="15" y1="8" x2="19" y2="12" />
+                      </svg>
+                    </a>
+                  </Link>
                 </div>
               </div>
               <div className="plan-box">
@@ -147,32 +154,37 @@ const Plans = () => {
                   </h3>
                 </div>
                 <div className="bottom">
-                  <button
-                    className="btn-soft-orange"
-                    type="button"
-                    name="premium"
-                    // onClick={handleCheckoutClick}
-                  >
-                    {/* Continuar{" "}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-arrow-narrow-right"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="#b8761a"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                  {user === undefined || !user ? (
+                    <Link href={"/empreses/registre?step=informacio-empresa"}>
+                      <a className="btn">Publicar el meu negoci</a>
+                    </Link>
+                  ) : (
+                    <button
+                      className="btn-soft-orange"
+                      type="button"
+                      name="premium"
+                      onClick={handleCheckoutClick}
                     >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <line x1="15" y1="16" x2="19" y2="12" />
-                      <line x1="15" y1="8" x2="19" y2="12" />
-                    </svg> */}
-                    Properament
-                  </button>
+                      Continuar{" "}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-arrow-narrow-right"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="#b8761a"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <line x1="15" y1="16" x2="19" y2="12" />
+                        <line x1="15" y1="8" x2="19" y2="12" />
+                      </svg>
+                    </button>
+                  )}
                 </div>
               </div>
               <div className="plan-box">
@@ -192,31 +204,37 @@ const Plans = () => {
                   </h3>
                 </div>
                 <div className="bottom">
-                  <button
-                    className="btn-soft-blue"
-                    name="superior"
-                    // onClick={handleCheckoutClick}
-                  >
-                    {/* Continuar{" "}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-arrow-narrow-right"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="#ac402a"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                  {user === undefined || !user ? (
+                    <Link href={"/empreses/registre?step=informacio-empresa"}>
+                      <a className="btn">Publicar el meu negoci</a>
+                    </Link>
+                  ) : (
+                    <button
+                      className="btn-soft-blue"
+                      type="button"
+                      name="superior"
+                      onClick={handleCheckoutClick}
                     >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <line x1="15" y1="16" x2="19" y2="12" />
-                      <line x1="15" y1="8" x2="19" y2="12" />
-                    </svg> */}
-                    Properament
-                  </button>
+                      Continuar{" "}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-arrow-narrow-right"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="#b8761a"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <line x1="15" y1="16" x2="19" y2="12" />
+                        <line x1="15" y1="8" x2="19" y2="12" />
+                      </svg>
+                    </button>
+                  )}
                 </div>
               </div>
             </div>
