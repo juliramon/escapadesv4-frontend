@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import NavigationBar from "../../../components/global/NavigationBar";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import ContentService from "../../../services/contentService";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Autocomplete from "react-google-autocomplete";
 import UserContext from "../../../contexts/UserContext";
 import Head from "next/head";

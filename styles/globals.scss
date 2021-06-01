@@ -412,6 +412,10 @@ nav {
   display: block;
   border-top: 1px solid #e8e8e8;
   border-bottom: 1px solid #e8e8e8;
+  .listings-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
   .container {
     padding: 0;
   }
@@ -1036,8 +1040,13 @@ nav {
 /*---FEED STYLES---*/
 /*---MODAL STYLES---*/
 
+.modal {
+  z-index: 1001 !important;
+}
+
 .modal-backdrop {
   background-color: rgb(13, 31, 68) !important;
+  z-index: 1001 !important;
 }
 
 .modal-open .modal {
@@ -1051,6 +1060,12 @@ nav {
 .modal-content {
   border-radius: 8px;
   border: none;
+}
+
+.editProfileModal.organization {
+  .modal-body .user-editor {
+    margin-top: 60px;
+  }
 }
 
 .publicationModal,
@@ -1319,6 +1334,7 @@ nav {
 .pac-container {
   border-radius: 8px;
   margin-bottom: -50px;
+  z-index: 1002;
 }
 .pac-item {
   padding: 5px 10px !important;

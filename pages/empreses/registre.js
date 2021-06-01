@@ -224,11 +224,10 @@ const Registre = () => {
     ) {
       setState({ ...state, step: "seleccio-pla" });
     }
-    if (
-      router.query.step === "seleccio-tipologia" ||
-      router.query.step === "seleccio-tipologia?success=true"
-    ) {
-      getUserUpdatedData();
+    if (router.query.step === "seleccio-tipologia") {
+      if (router.query.step === "seleccio-tipologia?success=true") {
+        getUserUpdatedData();
+      }
       setState({ ...state, step: "seleccio-tipologia" });
       if (router.query.form === "activitat") {
         setState({ ...state, formType: "activitat" });

@@ -498,6 +498,46 @@ class ContentService {
 
   checkOrganizationsOwned = () =>
     this.service.get("/checkOrganizationsOwned").then((res) => res.data);
+
+  organizationData = (slug) =>
+    this.service.get(`/organizationData/${slug}`).then((res) => res.data);
+
+  editOrganizationData = (
+    _id,
+    orgLogo,
+    orgName,
+    VATNumber,
+    slug,
+    organization_full_address,
+    organization_streetNumber,
+    organization_street,
+    organization_locality,
+    organization_zipcode,
+    organization_province,
+    organization_state,
+    organization_country,
+    organization_lat,
+    organization_lng,
+    additionalInfo
+  ) =>
+    this.service.put(`/editOrganizationData`, {
+      _id,
+      orgLogo,
+      orgName,
+      VATNumber,
+      slug,
+      organization_full_address,
+      organization_streetNumber,
+      organization_street,
+      organization_locality,
+      organization_zipcode,
+      organization_province,
+      organization_state,
+      organization_country,
+      organization_lat,
+      organization_lng,
+      additionalInfo,
+    });
 }
 
 export default ContentService;
