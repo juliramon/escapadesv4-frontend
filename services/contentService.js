@@ -187,6 +187,20 @@ class ContentService {
       phoneNumber,
     });
 
+  editUserPlan = (
+    _id,
+    hasSelectedPlan,
+    hasPublishedAnOrganization,
+    hasSelectedContentType,
+    hasPostedContent
+  ) =>
+    this.service.put(`/users/${_id}/editPlan`, {
+      hasSelectedPlan: hasSelectedPlan,
+      hasPublishedAnOrganization: hasPublishedAnOrganization,
+      hasSelectedContentType: hasSelectedContentType,
+      hasPostedContent: hasPostedContent,
+    });
+
   editUserName = (_id, userName) =>
     this.service.put(`/users/${_id}/username`, { userName });
 
@@ -538,6 +552,11 @@ class ContentService {
       organization_lng,
       additionalInfo,
     });
+
+  removeOrganization = (_id) =>
+    this.service
+      .put("/removeOrganization", { _id, isRemoved: true })
+      .then((res) => res.data);
 }
 
 export default ContentService;

@@ -115,6 +115,13 @@ const EditOrganizationModal = ({
         router.push(`/empreses/${slug}`);
       });
   };
+
+  const removeProfile = async () => {
+    const { _id } = organizationDetails;
+    service.removeOrganization(_id).then((res) => console.log(res.data));
+    router.push("/feed");
+  };
+
   return (
     <Modal
       show={visibility}
@@ -285,6 +292,9 @@ const EditOrganizationModal = ({
           <Form.Group>
             <Button variant="primary" type="submit">
               Guardar canvis
+            </Button>
+            <Button variant="warning" onClick={() => removeProfile()}>
+              Eliminar organització
             </Button>
           </Form.Group>
         </Form>

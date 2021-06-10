@@ -273,7 +273,11 @@ const PlaceForm = () => {
         price,
         organization
       )
-      .then(() => Router.push("/dashboard"))
+      .then(() => {
+        service.editUserPlan(user._id, true, true, true, true);
+        paymentService.editUserSubscription(1);
+        Router.push("/dashboard");
+      })
       .catch((err) => console.error(err));
   };
 

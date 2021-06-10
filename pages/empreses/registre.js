@@ -52,17 +52,18 @@ const Registre = () => {
   const [state, setState] = useState(initialState);
   const [isReadyToSubmit, setIsReadyToSubmit] = useState(false);
 
-  useEffect(() => {
-    if (router.route === "/empreses/registre") {
-      if (
-        router.query &&
-        Object.keys(router.query).length === 0 &&
-        router.query.constructor === Object
-      ) {
-        router.push("/empreses/registre?step=informacio-empresa");
-      }
-    }
-  }, [router]);
+  // useEffect(() => {
+  //   if (router.route === "/empreses/registre") {
+  //     if (
+  //       router.query &&
+  //       Object.keys(router.query).length === 0 &&
+  //       router.query.constructor === Object &&
+  //       !router.query.canceled
+  //     ) {
+  //       router.push("/empreses/registre?step=informacio-empresa");
+  //     }
+  //   }
+  // }, [router]);
 
   useEffect(() => {
     if (!user) {
@@ -126,6 +127,36 @@ const Registre = () => {
         {state.errorMessage.picture}
       </Alert>
     );
+  } else if (state.errorMessage.error400) {
+    errorMessage = (
+      <Alert variant="danger">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="icon icon-tabler icon-tabler-shield-x"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="#fff"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" />
+          <path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" />
+          <path d="M10 10l4 4m0 -4l-4 4" />
+        </svg>
+        {state.errorMessage.error400}.{" "}
+        <a
+          href="mailto:support@escapadesenparella.cat"
+          target="_blank"
+          title="Contacta'ns"
+        >
+          Contacta'ns
+        </a>{" "}
+        per a més informació.
+      </Alert>
+    );
   } else {
     null;
   }
@@ -148,6 +179,10 @@ const Registre = () => {
         ...state,
         orgLogoCloudImage: uploadedOrgLogo.path,
         orgLogoCloudImageUploaded: true,
+        errorMessage: {
+          ...state.errorMessage,
+          error400: undefined,
+        },
       });
     }
   };
@@ -197,15 +232,27 @@ const Registre = () => {
         organization_lng,
         additionalInfo
       )
-      .then(() => {
-        setState(initialState);
-        router.push("/empreses/registre?step=seleccio-pla");
+      .then((res) => {
+        if (res.message === "Aquesta empresa ja existeix") {
+          console.log("res =>", res);
+          setState({
+            ...state,
+            errorMessage: { ...state.errorMessage, error400: res.message },
+          });
+        } else {
+          setState(initialState);
+          serviceContent.editUserPlan(user._id, true, true, false, false);
+          router.push("/empreses/registre?step=seleccio-tipologia");
+        }
       })
       .catch((err) => console.error(err));
   };
 
   useEffect(() => {
-    if (state.orgLogoCloudImageUploaded === true) {
+    if (
+      state.orgLogoCloudImageUploaded === true &&
+      state.errorMessage.error400 !== "Aquesta empresa ja existeix"
+    ) {
       submitForm();
     }
   }, [state]);
@@ -218,10 +265,10 @@ const Registre = () => {
     if (router.query.step === "informacio-empresa") {
       setState({ ...state, step: "informacio-empresa" });
     }
-    if (
-      router.query.step === "seleccio-pla" ||
-      router.query.step === "seleccio-pla?canceled=true"
-    ) {
+    if (router.query.step === "seleccio-pla") {
+      if (router.query.canceled === "true") {
+        setState({ ...state, step: "seleccio-pla" });
+      }
       setState({ ...state, step: "seleccio-pla" });
     }
     if (router.query.step === "seleccio-tipologia") {
@@ -239,10 +286,12 @@ const Registre = () => {
   }, [router]);
 
   const handleActivityForm = () => {
+    serviceContent.editUserPlan(user._id, true, true, true, false);
     router.push("/nova-activitat?step=publicacio-fitxa");
   };
 
   const handlePlaceForm = () => {
+    serviceContent.editUserPlan(user._id, true, true, true, false);
     router.push("/nou-allotjament?step=publicacio-fitxa");
   };
 
@@ -252,10 +301,10 @@ const Registre = () => {
     <>
       <div className="funnel-steps-wrapper">
         <ul>
-          <li className={state.step === "informacio-empresa" ? "active" : null}>
+          <li className={state.step === "seleccio-pla" ? "active" : null}>
             Pas 1
           </li>
-          <li className={state.step === "seleccio-pla" ? "active" : null}>
+          <li className={state.step === "informacio-empresa" ? "active" : null}>
             Pas 2
           </li>
           <li className={state.step === "seleccio-tipologia" ? "active" : null}>
@@ -269,6 +318,11 @@ const Registre = () => {
     </>
   );
   step1 = (
+    <section className="services-plans">
+      <Plans />
+    </section>
+  );
+  step2 = (
     <>
       <section className="page-header">
         <Row>
@@ -277,7 +331,7 @@ const Registre = () => {
               <div className="col-left">
                 <h1 className="page-header-title">
                   Hola {user.fullName}!<br />
-                  Anem a crear el teu compte d'empresa.
+                  Anem a crear el teu perfil d'empresa.
                 </h1>
                 <p className="page-header-subtitle">
                   Entra la informació bàsica de la teva empresa{" "}
@@ -449,7 +503,7 @@ const Registre = () => {
                         <Button
                           className="btn btn-m btn-submit"
                           type="submit"
-                          onClick={handleSubmit}
+                          onClick={(e) => handleSubmit(e)}
                         >
                           Continuar{" "}
                           <svg
@@ -511,18 +565,13 @@ const Registre = () => {
       </section>
     </>
   );
-  step2 = (
-    <section className="services-plans">
-      <Plans />
-    </section>
-  );
   step3 = (
     <>
       <section className="page-header step2">
         <Row>
           <Col lg={12}>
             <div className="page-header-wrapper">
-              <div class="top">
+              <div className="top">
                 <h1 className="page-header-title">
                   Selecciona la tipologia
                   <br /> amb la que identifiques més
@@ -542,15 +591,15 @@ const Registre = () => {
                       Publicar activitat{" "}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="icon icon-tabler icon-tabler-arrow-narrow-right"
+                        className="icon icon-tabler icon-tabler-arrow-narrow-right"
                         width="22"
                         height="22"
                         viewBox="0 0 24 24"
-                        stroke-width="1.5"
+                        strokeWidth="1.5"
                         stroke="#3A4887"
                         fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       >
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <line x1="5" y1="12" x2="19" y2="12" />
@@ -569,15 +618,15 @@ const Registre = () => {
                       Publicar allotjament{" "}
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="icon icon-tabler icon-tabler-arrow-narrow-right"
+                        className="icon icon-tabler icon-tabler-arrow-narrow-right"
                         width="22"
                         height="22"
                         viewBox="0 0 24 24"
-                        stroke-width="1.5"
+                        strokeWidth="1.5"
                         stroke="#3A4887"
                         fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       >
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <line x1="5" y1="12" x2="19" y2="12" />
@@ -596,10 +645,10 @@ const Registre = () => {
   );
 
   let contentPage;
-  if (state.step === "informacio-empresa") {
+  if (state.step === "seleccio-pla") {
     contentPage = step1;
   }
-  if (state.step === "seleccio-pla") {
+  if (state.step === "informacio-empresa") {
     contentPage = step2;
   }
   if (state.step === "seleccio-tipologia") {

@@ -9,8 +9,9 @@ import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Error404 from "../../components/global/Error404";
 
-const UserProfile = ({ organizationData }) => {
+const OrganizationProfile = ({ organizationData }) => {
   const { user } = useContext(UserContext);
   const router = useRouter();
   const initialState = {
@@ -149,14 +150,31 @@ const UserProfile = ({ organizationData }) => {
 
   let mainButton, noresults;
   if (user && user !== "null") {
-    mainButton = (
-      <Button
-        className="btn btn-primary text-center sidebar"
-        onClick={() => handleModalVisibility()}
-      >
-        Editar perfil
-      </Button>
-    );
+    if (user._id === state.organizationProfile.owner) {
+      mainButton = (
+        <Button
+          className="btn btn-primary text-center sidebar"
+          onClick={() => handleModalVisibility()}
+        >
+          Editar perfil
+        </Button>
+      );
+      noresults = (
+        <div className="box empty d-flex">
+          <div className="media">
+            <img src="../../no-results.svg" alt="Graphic no results" />
+          </div>
+          <div className="text">
+            <p>
+              Oh no, this looks so empty.
+              <br />
+              Create your first {contentType} to inspire others.
+            </p>
+            {noResultsCTA}
+          </div>
+        </div>
+      );
+    }
     noresults = (
       <div className="box empty d-flex">
         <div className="media">
@@ -164,11 +182,13 @@ const UserProfile = ({ organizationData }) => {
         </div>
         <div className="text">
           <p>
-            Oh no, this looks so empty.
+            <span className="profile-owner-name">
+              {state.organizationProfile.orgName}
+            </span>{" "}
+            didn't publish any {contentType} yet.
             <br />
-            Create your first {contentType} to inspire others.
+            Come back later to check what's new.
           </p>
-          {noResultsCTA}
         </div>
       </div>
     );
@@ -288,6 +308,16 @@ const UserProfile = ({ organizationData }) => {
         </Container>
       </>
     );
+  }
+
+  if (state.organizationProfile) {
+    if (state.organizationProfile.isRemoved === true) {
+      return (
+        <>
+          <Error404 />
+        </>
+      );
+    }
   }
 
   return (
@@ -532,4 +562,4 @@ export async function getServerSideProps(req) {
   };
 }
 
-export default UserProfile;
+export default OrganizationProfile;

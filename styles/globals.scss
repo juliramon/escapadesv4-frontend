@@ -941,6 +941,10 @@ nav {
     h1 {
       font-size: 1.4em;
       margin-bottom: 0;
+      max-width: 250px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
   }
   .left-menu {
@@ -964,9 +968,9 @@ nav {
       padding: 0;
     }
     li {
-      padding: 10px 15px;
-      margin: 6px 0;
-      font-size: 1.2em;
+      padding: 5px;
+      margin: 2px;
+      font-size: 1em;
       text-transform: capitalize;
     }
     a {
@@ -986,10 +990,10 @@ nav {
       display: flex;
       align-items: center;
       .organization-logo {
-        max-width: 37px;
-        max-height: 37px;
-        width: 37px;
-        height: 37px;
+        max-width: 30px;
+        max-height: 30px;
+        width: 30px;
+        height: 30px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -1008,7 +1012,7 @@ nav {
         h3 {
           margin: 0;
           font-family: "Nunito", sans-serif;
-          font-size: 19.2px;
+          font-size: 1em;
           font-weight: 400 !important;
         }
       }

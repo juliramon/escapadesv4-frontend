@@ -36,7 +36,7 @@ const Serveis = () => {
                         <br /> al recomanador especialista en escapades
                         <br /> en parella a Catalunya
                       </p>
-                      <Link href={"/empreses/registre?step=informacio-empresa"}>
+                      <Link href={"/empreses/registre?step=seleccio-pla"}>
                         <a className="btn">
                           Publicar el meu negoci{" "}
                           <svg
@@ -214,7 +214,7 @@ const Serveis = () => {
                       </ul>
                     </div>
                     <div className="col-right">
-                      <div class="media-area">
+                      <div className="media-area">
                         <img src="https://res.cloudinary.com/juligoodie/image/upload/v1621535038/getaways-guru/static-files/graphic-plans-2_r3ffv2.png" />
                       </div>
                     </div>

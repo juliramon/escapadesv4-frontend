@@ -1,17 +1,17 @@
 import Head from "next/head";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-import { Button, Container, Row, Spinner } from "react-bootstrap";
+import { Container, Row, Spinner } from "react-bootstrap";
 import ContentService from "../services/contentService";
 import PublickSquareBox from "../components/listings/PublicSquareBox";
 import Link from "next/link";
 import NavigationBar from "../components/global/NavigationBar";
-import PublicationModal from "../components/modals/PublicationModal";
 import UserContext from "../contexts/UserContext";
+import PaymentService from "../services/paymentService";
+import ButtonSharePost from "../components/buttons/ButtonSharePost";
 
 const Feed = () => {
   const { user } = useContext(UserContext);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -26,14 +26,13 @@ const Feed = () => {
     hasPlaces: false,
     userCustomActivities: [],
     userCustomPlaces: [],
-    organizations: {},
+    userSubscription: {},
   };
+
   const [state, setState] = useState(initialState);
 
   const service = new ContentService();
-  const [modalVisibility, setModalVisibility] = useState(false);
-  const handleModalVisibility = () => setModalVisibility(true);
-  const hideModalVisibility = () => setModalVisibility(false);
+  const paymentService = new PaymentService();
 
   useEffect(() => {
     if (user) {
@@ -42,6 +41,7 @@ const Feed = () => {
         const userCustomActivities = await service.getUserCustomActivities();
         const userCustomPlaces = await service.getUserCustomPlaces();
         const userOrganizations = await service.checkOrganizationsOwned();
+        const userSubscription = await paymentService.checkUserSubscription();
         let hasActivities, hasPlaces, hasListings, hasOrganizations;
         userCustomActivities.length > 0
           ? (hasActivities = true)
@@ -62,6 +62,7 @@ const Feed = () => {
           userCustomActivities: userCustomActivities,
           userCustomPlaces: userCustomPlaces,
           userOrganizations: userOrganizations,
+          userSubscription: userSubscription,
         });
       };
       fetchData();
@@ -149,8 +150,8 @@ const Feed = () => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-hash"
-            width="28"
-            height="28"
+            width="22"
+            height="22"
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="#2c3e50"
@@ -172,7 +173,6 @@ const Feed = () => {
 
   let organizationsList = [];
   if (state.userOrganizations !== undefined) {
-    console.log(state.userOrganizations.organizations);
     organizationsList = state.userOrganizations.organizations.map((el, idx) => (
       <li key={idx}>
         <Link href={`/empreses/${el.slug}`}>
@@ -193,7 +193,7 @@ const Feed = () => {
     ));
   }
 
-  let organizationsBlock;
+  let organizationsBlock, recommendPostButton;
   if (state.userOrganizations) {
     if (state.userOrganizations.number > 0) {
       organizationsBlock = (
@@ -204,6 +204,27 @@ const Feed = () => {
       );
     } else {
       null;
+    }
+  }
+  if (state.userSubscription) {
+    if (
+      state.userSubscription.numberOfPublications === "0" &&
+      state.userSubscription.plan === "basic"
+    ) {
+      recommendPostButton = <ButtonSharePost canPublish={true} />;
+    } else {
+      recommendPostButton = <ButtonSharePost canPublish={false} />;
+    }
+    if (
+      state.userSubscription.numberOfPublications < 3 &&
+      state.userSubscription.plan === "premium"
+    ) {
+      recommendPostButton = <ButtonSharePost canPublish={true} />;
+    } else {
+      recommendPostButton = <ButtonSharePost canPublish={false} />;
+    }
+    if (state.userSubscription.plan === "superior") {
+      recommendPostButton = <ButtonSharePost canPublish={true} />;
     }
   }
 
@@ -258,8 +279,8 @@ const Feed = () => {
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               className="icon icon-tabler icon-tabler-layout-list"
-                              width="28"
-                              height="28"
+                              width="22"
+                              height="22"
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
                               stroke="#0D1F44"
@@ -281,8 +302,8 @@ const Feed = () => {
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               className="icon icon-tabler icon-tabler-bookmark"
-                              width="28"
-                              height="28"
+                              width="22"
+                              height="22"
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
                               stroke="#0D1F44"
@@ -303,8 +324,8 @@ const Feed = () => {
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               className="icon icon-tabler icon-tabler-user"
-                              width="28"
-                              height="28"
+                              width="22"
+                              height="22"
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
                               stroke="#0D1F44"
@@ -322,14 +343,7 @@ const Feed = () => {
                       </li>
                     </ul>
                   </div>
-                  <div className="new">
-                    <Button
-                      className="btn btn-primary text-center sidebar"
-                      onClick={handleModalVisibility}
-                    >
-                      Recomanar escapada
-                    </Button>
-                  </div>
+                  {recommendPostButton}
                 </div>
               </div>
               <div className="col center">
@@ -343,10 +357,6 @@ const Feed = () => {
             </div>
           </Row>
         </Container>
-        <PublicationModal
-          visibility={modalVisibility}
-          hideModal={hideModalVisibility}
-        />
       </div>
     </>
   );
