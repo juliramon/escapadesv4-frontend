@@ -8,6 +8,8 @@ import Link from "next/link";
 import Head from "next/head";
 import UserContext from "../contexts/UserContext";
 import { useRouter } from "next/router";
+import PaymentService from "../services/paymentService";
+import ButtonSharePost from "../components/buttons/ButtonSharePost";
 
 const Dashboard = () => {
   const { user } = useContext(UserContext);
@@ -45,6 +47,7 @@ const Dashboard = () => {
   const hideModalVisibility = () => setModalVisibility(false);
 
   const service = new ContentService();
+  const paymentService = new PaymentService();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,6 +55,7 @@ const Dashboard = () => {
       const userActivities = await service.userActivities(user._id);
       const userPlaces = await service.getUserPlaces(user._id);
       const userStories = await service.getUserStories(user._id);
+      const userSubscription = await paymentService.checkUserSubscription();
       let getAllListings = [];
       let hasListings, hasActivities, hasPlaces, hasStories;
       userActivities.length > 0
@@ -78,6 +82,7 @@ const Dashboard = () => {
         hasActivities: hasActivities,
         hasPlaces: hasPlaces,
         hasStories: hasStories,
+        userSubscription: userSubscription,
       });
     };
     fetchData();
@@ -354,6 +359,29 @@ const Dashboard = () => {
     color: "#0d1f44",
   };
 
+  let recommendPostButton;
+  if (state.userSubscription) {
+    if (
+      state.userSubscription.numberOfPublications === "0" &&
+      state.userSubscription.plan === "basic"
+    ) {
+      recommendPostButton = <ButtonSharePost canPublish={true} />;
+    } else {
+      recommendPostButton = <ButtonSharePost canPublish={false} />;
+    }
+    if (
+      state.userSubscription.numberOfPublications < 3 &&
+      state.userSubscription.plan === "premium"
+    ) {
+      recommendPostButton = <ButtonSharePost canPublish={true} />;
+    } else {
+      recommendPostButton = <ButtonSharePost canPublish={false} />;
+    }
+    if (state.userSubscription.plan === "superior") {
+      recommendPostButton = <ButtonSharePost canPublish={true} />;
+    }
+  }
+
   return (
     <>
       <Head>
@@ -477,14 +505,7 @@ const Dashboard = () => {
                 </ul>
                 <div className="new">
                   <ul>
-                    <li>
-                      <Button
-                        className="btn btn-primary text-center sidebar"
-                        onClick={handleModalVisibility}
-                      >
-                        Afegir publicació
-                      </Button>
-                    </li>
+                    <li>{recommendPostButton}</li>
                   </ul>
                 </div>
               </div>
