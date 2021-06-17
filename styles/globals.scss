@@ -1066,12 +1066,6 @@ nav {
   border: none;
 }
 
-.editProfileModal.organization {
-  .modal-body .user-editor {
-    margin-top: 60px;
-  }
-}
-
 .publicationModal,
 .editProfileModal {
   .modal-header {
@@ -2839,6 +2833,225 @@ nav {
 }
 
 /*---END USER PROFILE STYLES---*/
+/*---ORGANIZATION PROFILE---*/
+
+#organizationProfile {
+  .box {
+    width: 100%;
+    padding: 20px 0;
+  }
+  .box.bordered {
+    border: 1px solid #e8e8e8;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  .cover-background {
+    width: 100%;
+    height: 220px;
+    background-size: cover;
+    border-radius: 8px;
+    border: 1px solid #e8e8e8;
+    position: relative;
+    background-position: center center;
+    .edit-cover {
+      input {
+        display: none;
+      }
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 5px 10px;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      color: #ffffff !important;
+      transition: 0.3s;
+      border-radius: 8px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      margin-bottom: 0;
+      box-shadow: 1px 1px 11px rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.3);
+      svg {
+        margin-right: 8px;
+      }
+    }
+    .edit-cover:hover {
+      background: rgba(0, 0, 0, 0.6);
+    }
+  }
+  .header-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    border-radius: 8px;
+    position: relative;
+    width: 100%;
+    .header-top-bar {
+      display: flex;
+      align-items: flex-end;
+      width: 100%;
+      margin: -72px 0 0 0;
+      .left {
+        flex: 1;
+        display: flex;
+        align-items: flex-end;
+        .organization-logo {
+          width: 130px;
+          height: 130px;
+          min-width: 130px;
+          min-height: 130px;
+          overflow: hidden;
+          border: 1px solid #e8e8e8;
+          background-color: #ffffff;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 6px;
+          img {
+            min-width: 100%;
+            min-height: 100%;
+          }
+        }
+        .organization-meta {
+          margin-left: 22px;
+          margin-top: 0;
+          svg {
+            margin-right: -3px;
+          }
+          .organization-name {
+            font-size: 1.4em;
+            margin: 0 0 3px 0;
+          }
+          .organization-slug {
+            margin-bottom: 0;
+          }
+        }
+      }
+      .right {
+        .btn {
+          padding: 12px 35px;
+        }
+      }
+    }
+    .header-bottom-bar {
+      margin-top: 15px;
+      p {
+        font-size: 16px;
+        max-width: 65%;
+      }
+    }
+    .organization-meta {
+      width: 100%;
+      svg {
+        margin-right: 3px;
+        min-width: 18px;
+        min-height: 18px;
+      }
+      a {
+        margin-left: 4px;
+      }
+      .user-username svg {
+        margin-right: -4px !important;
+      }
+    }
+    .user-fullName {
+      font-size: 1.6em;
+      margin-bottom: 0;
+    }
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    ul li {
+      padding: 3px 0;
+    }
+    li span {
+      font-weight: bold;
+    }
+  }
+  .box .col.center {
+    flex: 1;
+    .filter-bar {
+      display: flex;
+      justify-content: space-between;
+      border-radius: 8px;
+      overflow: hidden;
+      button {
+        width: 100%;
+        padding: 10px 15px;
+        margin: 0 6px;
+        font-size: 1.2em;
+        font-weight: bold;
+      }
+      button:first-child {
+        margin-left: 0;
+      }
+      button:last-child {
+        margin-right: 0;
+      }
+      button.active {
+        background-color: $active-tab-background;
+        border-radius: 8px;
+        cursor: pointer;
+        color: $dark-text;
+        svg {
+          stroke: $dark-text;
+        }
+      }
+      button:hover:not(.active) {
+        background-color: $input-background;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+      button:focus {
+        box-shadow: none;
+      }
+      button svg {
+        margin-right: 8px;
+      }
+    }
+    .user-listings {
+      .title-area h2 {
+        font-family: "INTER";
+        font-size: 1.6em;
+        font-weight: bold;
+      }
+      .box.bordered {
+        padding: 10px 20px;
+        background: #e8e8e8;
+        margin-top: 20px;
+      }
+      .content.box {
+        margin: 20px 0;
+        border-radius: 8px;
+      }
+      .content.box:last-child {
+        margin-bottom: 0;
+      }
+    }
+    .box.empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-flow: column;
+      text-align: center;
+      .media img {
+        width: 280px;
+        height: auto;
+        margin-bottom: 25px;
+        max-height: 240px;
+      }
+      .profile-owner-name {
+        font-weight: bold;
+      }
+    }
+  }
+}
+/*---END ORGANIZATION PROFILE---*/
 /*---USERS LIST STYLES---*/
 
 #usersList {

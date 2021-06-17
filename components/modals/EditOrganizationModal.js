@@ -20,8 +20,10 @@ const EditOrganizationModal = ({
         formData: {
           orgLogo: organizationDetails.orgLogo,
           orgName: organizationDetails.orgName,
+          cover: organizationDetails.profileCover,
           VATNumber: organizationDetails.VATNumber,
           slug: organizationDetails.slug,
+          description: organizationDetails.description,
           organization_full_address:
             organizationDetails.organization_full_address,
           organization_streetNumber:
@@ -34,7 +36,7 @@ const EditOrganizationModal = ({
           organization_country: organizationDetails.organization_country,
           organization_lat: organizationDetails.organization_lat,
           organization_lng: organizationDetails.organization_lng,
-          additionalInfo: organizationDetails.organizationDetails,
+          additionalInfo: organizationDetails.additionalInfo,
         },
       };
     }
@@ -43,10 +45,21 @@ const EditOrganizationModal = ({
   const service = new ContentService();
 
   const handleChange = (e) => {
-    setState({
-      ...state,
-      formData: { ...state.formData, [e.target.name]: e.target.value },
-    });
+    if (e.target.name === "orgName") {
+      setState({
+        ...state,
+        formData: {
+          ...state.formData,
+          [e.target.name]: e.target.value,
+          slug: e.target.value,
+        },
+      });
+    } else {
+      setState({
+        ...state,
+        formData: { ...state.formData, [e.target.name]: e.target.value },
+      });
+    }
   };
 
   const handleFileUpload = (e) => {
@@ -64,7 +77,7 @@ const EditOrganizationModal = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     const { _id } = organizationDetails;
-    const { orgLogo, orgName, VATNumber, slug } = state.formData;
+    const { orgLogo, orgName, VATNumber, slug, description } = state.formData;
     let organization_full_address,
       organization_streetNumber,
       organization_street,
@@ -98,6 +111,7 @@ const EditOrganizationModal = ({
         orgName,
         VATNumber,
         slug,
+        description,
         organization_full_address,
         organization_streetNumber,
         organization_street,
@@ -135,6 +149,12 @@ const EditOrganizationModal = ({
         <Modal.Title>Editar informació</Modal.Title>
       </Modal.Header>
       <Modal.Body>
+        <div
+          className="cover-picture box bordered"
+          style={{
+            backgroundImage: `url("${state.formData.cover}")`,
+          }}
+        ></div>
         <Form onSubmit={handleSubmit} className="user-editor">
           <Form.Group className="user-avatar">
             <label>
@@ -196,13 +216,24 @@ const EditOrganizationModal = ({
             <Form.Control
               type="text"
               name="slug"
-              defaultValue={state.formData.slug}
+              value={state.formData.slug}
               onChange={handleChange}
               placeholder="Escriu l'URL del teu perfil"
             ></Form.Control>
           </Form.Group>
           <Form.Group>
-            <Form.Label>Direcció de facturació</Form.Label>
+            <Form.Label>Descripció de l'empresa</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              name="description"
+              defaultValue={state.formData.description}
+              onChange={handleChange}
+              placeholder="Descriu breument la teva empresa"
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Localització de l'empresa</Form.Label>
             <Autocomplete
               className="form-control"
               apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
@@ -269,8 +300,9 @@ const EditOrganizationModal = ({
                 });
               }}
               types={["address"]}
-              placeholder={"Escriu la direcció de facturació"}
+              placeholder={"Escriu la direcció de l'empresa"}
               fields={["address_components", "formatted_address", "geometry"]}
+              defaultValue={state.formData.organization_full_address}
             />
           </Form.Group>
           <Form.Group>
@@ -286,7 +318,8 @@ const EditOrganizationModal = ({
                   },
                 })
               }
-              placeholder="Informació addicional de l'adreça de facturació"
+              placeholder="Informació addicional de l'adreça de l'empresa"
+              defaultValue={state.formData.additionalInfo}
             />
           </Form.Group>
           <Form.Group>

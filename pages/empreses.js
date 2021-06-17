@@ -222,6 +222,7 @@ const Serveis = () => {
                 </Col>
               </Row>
             </section>
+            <span id="plans"></span>
             <section className="services-plans">
               <Plans />
             </section>

@@ -25,7 +25,7 @@ const OrganizationProfile = ({ organizationData }) => {
     hasActivities: false,
     hasPlaces: false,
     activeTab: "activities",
-    cover: "",
+    profileCover: "",
     isCoverReadyToUpload: false,
   };
 
@@ -129,11 +129,6 @@ const OrganizationProfile = ({ organizationData }) => {
           Add {contentType}
         </Link>
       );
-      break;
-    case "stories":
-      contentType = "story";
-      linkTo = "/story-composer";
-      noResultsCTA = undefined;
       break;
     default:
       contentType = "getaway";
@@ -280,15 +275,75 @@ const OrganizationProfile = ({ organizationData }) => {
     color: "#0d1f44",
   };
 
-  useEffect(() => {
-    const handleSubmit = () => {
-      const { _id } = user;
-      const { cover } = state;
-      service.editUserCover(_id, cover).then(() => {
-        refreshUser();
+  const handleFileUpload = async (e) => {
+    console.log("hello");
+    const fileToUpload = e.target.files[0];
+    const uploadData = new FormData();
+    uploadData.append("imageUrl", fileToUpload);
+    const uploadedFile = await service.uploadFile(uploadData);
+    setState({
+      ...state,
+      profileCover: uploadedFile.path,
+      isCoverReadyToUpload: true,
+    });
+  };
+
+  let editCoverButton;
+  if (user && user !== "null") {
+    if (state.organizationProfile) {
+      if (user._id === state.organizationProfile.owner) {
+        editCoverButton = (
+          <label className="edit-cover">
+            <input type="file" onChange={handleFileUpload} />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-photo"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="#ffffff"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" />
+              <line x1="15" y1="8" x2="15.01" y2="8" />
+              <rect x="4" y="4" width="16" height="16" rx="3" />
+              <path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
+              <path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
+            </svg>{" "}
+            Editar portada
+          </label>
+        );
+      }
+    }
+  }
+
+  const refreshOrganization = () => {
+    console.log("refresh organiastion");
+    service.organizationData(router.query.slug).then((res) => {
+      console.log(res);
+      setState({
+        ...state,
+        organizationProfile: res.organizationDetails,
+        isCoverReadyToUpload: false,
+      });
+    });
+  };
+
+  const handleSubmit = () => {
+    if (state.organizationProfile) {
+      const { _id } = state.organizationProfile;
+      const { profileCover } = state;
+      service.editOrganizationCover(_id, profileCover).then(() => {
+        refreshOrganization();
       });
       setState({ ...state, isCoverReadyToUpload: false });
-    };
+    }
+  };
+
+  useEffect(() => {
     if (state.isCoverReadyToUpload === true) {
       handleSubmit();
     }
@@ -373,7 +428,7 @@ const OrganizationProfile = ({ organizationData }) => {
           content="756319ea1956c99d055184c4cac47dbfa3c81808"
         />
       </Head>
-      <div id="userProfile">
+      <div id="organizationProfile">
         <NavigationBar
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
@@ -382,23 +437,31 @@ const OrganizationProfile = ({ organizationData }) => {
         />
         <main>
           <article>
-            <Container fluid className="mw-1600">
+            <Container fluid className="mw-1200">
               <Row>
-                <div className="box d-flex">
-                  <aside className="col left">
-                    <div className="user box bordered">
-                      <div className="avatar user-avatar">
-                        <img
-                          src={state.organizationProfile.orgLogo}
-                          alt={state.organizationProfile.orgName}
-                        />
-                      </div>
-                      <div className="user-meta">
-                        <h1 className="user-fullName">
-                          {state.organizationProfile.orgName}
-                        </h1>
-                        <ul>
-                          <li className="user-username">
+                <div className="box">
+                  <div
+                    className="cover-background"
+                    style={{
+                      backgroundImage: `url("${state.organizationProfile.profileCover}")`,
+                    }}
+                  >
+                    {editCoverButton}
+                  </div>
+                  <div className="header-box">
+                    <div className="header-top-bar">
+                      <div className="left">
+                        <div className="organization-logo">
+                          <img
+                            src={state.organizationProfile.orgLogo}
+                            alt={state.organizationProfile.orgName}
+                          />
+                        </div>
+                        <div className="organization-meta">
+                          <h1 className="organization-name">
+                            {state.organizationProfile.orgName}
+                          </h1>
+                          <p className="organization-slug">
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               className="icon icon-tabler icon-tabler-at"
@@ -415,60 +478,19 @@ const OrganizationProfile = ({ organizationData }) => {
                               <circle cx="12" cy="12" r="4" />
                               <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28" />
                             </svg>{" "}
-                            {state.organizationProfile.orgName || "slug"}
-                          </li>
-                          <hr />
-                          <li className="user-registration d-flex align-items-center">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-calendar"
-                              width="18"
-                              height="18"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="#2c3e50"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path stroke="none" d="M0 0h24v24H0z" />
-                              <rect x="4" y="5" width="16" height="16" rx="2" />
-                              <line x1="16" y1="3" x2="16" y2="7" />
-                              <line x1="8" y1="3" x2="8" y2="7" />
-                              <line x1="4" y1="11" x2="20" y2="11" />
-                              <line x1="11" y1="15" x2="12" y2="15" />
-                              <line x1="12" y1="15" x2="12" y2="18" />
-                            </svg>
-                            Creat el {state.joinedYear}
-                          </li>
-                          <li className="user-verified d-flex align-items-center">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-shield-check"
-                              width="18"
-                              height="18"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="#2c3e50"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path stroke="none" d="M0 0h24v24H0z" />
-                              <path d="M9 12l2 2l4 -4" />
-                              <path d="M12 3a12 12 0 0 0 8.5 3a12 12 0 0 1 -8.5 15a12 12 0 0 1 -8.5 -15a12 12 0 0 0 8.5 -3" />
-                            </svg>
+                            {state.organizationProfile.slug || "slug"} ·
                             Verificat
-                          </li>
-                        </ul>
-                        <div className="new">
-                          <ul>
-                            <li>{mainButton}</li>
-                          </ul>
+                          </p>
                         </div>
                       </div>
+                      <div className="right">
+                        <div className="main-button">{mainButton}</div>
+                      </div>
                     </div>
-                  </aside>
+                    <div className="header-bottom-bar">
+                      <p>{state.organizationProfile.description}</p>
+                    </div>
+                  </div>
                   <div className="col center">
                     <div className="filter-bar">
                       <Button

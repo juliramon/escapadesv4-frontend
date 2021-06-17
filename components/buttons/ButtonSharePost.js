@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Button } from "react-bootstrap";
 import PublicationModal from "../modals/PublicationModal";
+import UpgradeModal from "../modals/UpgradeModal";
 
 const ButtonSharePost = ({ canPublish }) => {
   console.log("can publish =>", canPublish);
@@ -9,12 +10,12 @@ const ButtonSharePost = ({ canPublish }) => {
   const hideModalVisibility = () => setModalVisibility(false);
   if (canPublish) {
     return (
-      <div className="new">
+      <div className="post-new-content-button">
         <Button
           className="btn btn-primary text-center sidebar"
           onClick={handleModalVisibility}
         >
-          Recomanar escapada
+          Anunciar nova escapada
         </Button>
         <PublicationModal
           visibility={modalVisibility}
@@ -24,7 +25,20 @@ const ButtonSharePost = ({ canPublish }) => {
       </div>
     );
   } else {
-    return "you cant publish";
+    return (
+      <div className="post-new-content-button">
+        <Button
+          className="btn btn-primary text-center sidebar"
+          onClick={handleModalVisibility}
+        >
+          Anunciar nova escapada
+        </Button>
+        <UpgradeModal
+          visibility={modalVisibility}
+          hideModal={hideModalVisibility}
+        />
+      </div>
+    );
   }
 };
 

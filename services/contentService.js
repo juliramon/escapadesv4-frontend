@@ -522,6 +522,7 @@ class ContentService {
     orgName,
     VATNumber,
     slug,
+    description,
     organization_full_address,
     organization_streetNumber,
     organization_street,
@@ -540,6 +541,7 @@ class ContentService {
       orgName,
       VATNumber,
       slug,
+      description,
       organization_full_address,
       organization_streetNumber,
       organization_street,
@@ -552,6 +554,9 @@ class ContentService {
       organization_lng,
       additionalInfo,
     });
+
+  editOrganizationCover = (_id, profileCover) =>
+    this.service.put(`/editOrganizationData/${_id}`, { profileCover });
 
   removeOrganization = (_id) =>
     this.service
