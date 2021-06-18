@@ -4,7 +4,7 @@ import { Container, Row, Button, Spinner } from "react-bootstrap";
 import ContentService from "../../services/contentService";
 import EditOrganizationModal from "../../components/modals/EditOrganizationModal";
 import Link from "next/link";
-import PublicSquareBox from "../../components/listings/PublicSquareBox";
+import PublicContentBox from "../../components/listings/PublicContentBox";
 import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
 import { useRouter } from "next/router";
@@ -219,7 +219,7 @@ const OrganizationProfile = ({ organizationData }) => {
     if (state.activeTab === "activities") {
       if (state.hasActivities === true) {
         listings = state.activities.map((el) => (
-          <PublicSquareBox
+          <PublicContentBox
             key={el._id}
             type={el.type}
             slug={el.slug}
@@ -243,7 +243,7 @@ const OrganizationProfile = ({ organizationData }) => {
     if (state.activeTab === "places") {
       if (state.hasPlaces === true) {
         listings = state.places.map((el) => (
-          <PublicSquareBox
+          <PublicContentBox
             key={el._id}
             type={el.type}
             slug={el.slug}
@@ -273,6 +273,7 @@ const OrganizationProfile = ({ organizationData }) => {
     borderRadius: "8px",
     cursor: "pointer",
     color: "#0d1f44",
+    fontWeight: "700",
   };
 
   const handleFileUpload = async (e) => {
@@ -437,124 +438,99 @@ const OrganizationProfile = ({ organizationData }) => {
         />
         <main>
           <article>
-            <Container fluid className="mw-1200">
+            <Container className="mw-1200">
               <Row>
                 <div className="box">
-                  <div
-                    className="cover-background"
-                    style={{
-                      backgroundImage: `url("${state.organizationProfile.profileCover}")`,
-                    }}
-                  >
-                    {editCoverButton}
-                  </div>
-                  <div className="header-box">
-                    <div className="header-top-bar">
-                      <div className="left">
-                        <div className="organization-logo">
-                          <img
-                            src={state.organizationProfile.orgLogo}
-                            alt={state.organizationProfile.orgName}
-                          />
+                  <div className="box-wrapper">
+                    <div className="col-left">
+                      <div
+                        className="cover-background"
+                        style={{
+                          backgroundImage: `url("${state.organizationProfile.profileCover}")`,
+                        }}
+                      >
+                        {editCoverButton}
+                      </div>
+                      <div className="header-box">
+                        <div className="header-top-bar">
+                          <div className="left">
+                            <div className="organization-logo">
+                              <img
+                                src={state.organizationProfile.orgLogo}
+                                alt={state.organizationProfile.orgName}
+                              />
+                            </div>
+                            <div className="organization-meta">
+                              <h1 className="organization-name">
+                                {state.organizationProfile.orgName}
+                              </h1>
+                              <p className="organization-slug">
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="icon icon-tabler icon-tabler-at"
+                                  width="18"
+                                  height="18"
+                                  viewBox="0 0 24 24"
+                                  strokeWidth="1.5"
+                                  stroke="#2c3e50"
+                                  fill="none"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                >
+                                  <path stroke="none" d="M0 0h24v24H0z" />
+                                  <circle cx="12" cy="12" r="4" />
+                                  <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28" />
+                                </svg>{" "}
+                                {state.organizationProfile.slug || "slug"} ·
+                                Verificat
+                              </p>
+                            </div>
+                          </div>
+                          <div className="right">
+                            <div className="main-button">{mainButton}</div>
+                          </div>
                         </div>
-                        <div className="organization-meta">
-                          <h1 className="organization-name">
-                            {state.organizationProfile.orgName}
-                          </h1>
-                          <p className="organization-slug">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-at"
-                              width="18"
-                              height="18"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="#2c3e50"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path stroke="none" d="M0 0h24v24H0z" />
-                              <circle cx="12" cy="12" r="4" />
-                              <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28" />
-                            </svg>{" "}
-                            {state.organizationProfile.slug || "slug"} ·
-                            Verificat
-                          </p>
+                        <div className="header-bottom-bar">
+                          <p>{state.organizationProfile.description}</p>
+                        </div>
+                        <div className="filter-bar">
+                          <Button
+                            className="d-flex align-items-center justify-content-center"
+                            variant="none"
+                            style={
+                              state.activeTab === "activities"
+                                ? activeTab
+                                : null
+                            }
+                            onClick={() =>
+                              setState({
+                                ...state,
+                                activeTab: "activities",
+                              })
+                            }
+                          >
+                            Activitats
+                          </Button>
+                          <Button
+                            variant="none"
+                            className="d-flex align-items-center justify-content-center"
+                            style={
+                              state.activeTab === "places" ? activeTab : null
+                            }
+                            onClick={() =>
+                              setState({ ...state, activeTab: "places" })
+                            }
+                          >
+                            Allotjaments
+                          </Button>
                         </div>
                       </div>
-                      <div className="right">
-                        <div className="main-button">{mainButton}</div>
+                      <div className="content-box">
+                        <div className="listings-wrapper">{listings}</div>
                       </div>
                     </div>
-                    <div className="header-bottom-bar">
-                      <p>{state.organizationProfile.description}</p>
-                    </div>
+                    <aside className="col-right"></aside>
                   </div>
-                  <div className="col center">
-                    <div className="filter-bar">
-                      <Button
-                        className="d-flex align-items-center justify-content-center"
-                        variant="none"
-                        style={
-                          state.activeTab === "activities" ? activeTab : null
-                        }
-                        onClick={() =>
-                          setState({ ...state, activeTab: "activities" })
-                        }
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-route"
-                          width="28"
-                          height="28"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="#2c3e50"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" />
-                          <circle cx="6" cy="19" r="2" />
-                          <circle cx="18" cy="5" r="2" />
-                          <path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
-                        </svg>
-                        Activitats
-                      </Button>
-                      <Button
-                        variant="none"
-                        className="d-flex align-items-center justify-content-center"
-                        style={state.activeTab === "places" ? activeTab : null}
-                        onClick={() =>
-                          setState({ ...state, activeTab: "places" })
-                        }
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-building-arch"
-                          width="28"
-                          height="28"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="#2c3e50"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" />
-                          <line x1="3" y1="21" x2="21" y2="21" />
-                          <path d="M4 21v-15a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v15" />
-                          <path d="M9 21v-8a3 3 0 0 1 6 0v8" />
-                        </svg>
-                        Allotjaments
-                      </Button>
-                    </div>
-                    <div className="content-bar">
-                      <div className="listings-wrapper">{listings}</div>
-                    </div>
-                  </div>
-                  <div className="col right"></div>
                 </div>
               </Row>
             </Container>
