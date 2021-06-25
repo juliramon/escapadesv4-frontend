@@ -212,19 +212,15 @@ const Feed = () => {
       state.userSubscription.plan === "basic"
     ) {
       recommendPostButton = <ButtonSharePost canPublish={true} />;
-    } else {
-      recommendPostButton = <ButtonSharePost canPublish={false} />;
-    }
-    if (
+    } else if (
       state.userSubscription.numberOfPublications < 3 &&
       state.userSubscription.plan === "premium"
     ) {
       recommendPostButton = <ButtonSharePost canPublish={true} />;
+    } else if (state.userSubscription.plan === "superior") {
+      recommendPostButton = <ButtonSharePost canPublish={true} />;
     } else {
       recommendPostButton = <ButtonSharePost canPublish={false} />;
-    }
-    if (state.userSubscription.plan === "superior") {
-      recommendPostButton = <ButtonSharePost canPublish={true} />;
     }
   }
 

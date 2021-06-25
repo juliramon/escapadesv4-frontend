@@ -3,6 +3,7 @@ import { Dropdown, Button } from "react-bootstrap";
 import Link from "next/link";
 import ContentService from "../../services/contentService";
 import ShareModal from "../modals/ShareModal";
+import PaymentService from "../../services/paymentService";
 
 const ContentBox = ({
   type,
@@ -16,11 +17,19 @@ const ContentBox = ({
 }) => {
   let shortenedSubtitle = subtitle.slice(0, 70);
   const service = new ContentService();
+  const paymentService = new PaymentService();
   const removeItem = () => {
     if (type === "activity") {
-      service.removeActivity(id).then(() => fetchData());
+      service.removeActivity(id).then(() => {
+        fetchData();
+        paymentService.editUserSubscription();
+      });
     } else if (type === "place") {
-      service.removePlace(id).then(() => fetchData());
+      service.removePlace(id).then(() => {
+        fetchData();
+        paymentService.editUserSubscription();
+      });
+      paymentService.editUserSubscription();
     } else if (type === "story") {
       service.removeStory(id).then(() => fetchData());
     }

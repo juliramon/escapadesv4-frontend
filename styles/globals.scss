@@ -51,8 +51,13 @@ $hover-tab-background: #f2f7f9;
   font-size: 14px;
 }
 
+.btn-light {
+  color: #ff8d76 !important;
+  background-color: #ffe4df !important;
+}
+
 .buttonDark {
-  background-color: $dark-button-background;
+  background-color: $dark-button-background !important;
   color: $white-text !important;
   transition: 0.3s;
 }
@@ -166,11 +171,6 @@ button:focus,
   outline: none !important;
   border: none !important;
   box-shadow: none !important;
-}
-
-button,
-.btn {
-  border: none !important;
 }
 
 form .form-label {
@@ -1138,6 +1138,14 @@ nav {
         }
       }
     }
+  }
+}
+
+.editProfileModal.organization {
+  .buttons-area {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 
@@ -2973,6 +2981,17 @@ nav {
       button {
         padding: 6px 35px;
       }
+    }
+  }
+  .box.empty {
+    flex-direction: column;
+    align-items: center;
+    .media img {
+      width: 300px;
+      margin-bottom: 30px;
+    }
+    .text p {
+      text-align: center;
     }
   }
   aside {
