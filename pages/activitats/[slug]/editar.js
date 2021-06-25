@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import NavigationBar from "../../../components/global/NavigationBar";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import ContentService from "../../../services/contentService";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Autocomplete from "react-google-autocomplete";
 import UserContext from "../../../contexts/UserContext";
 import Head from "next/head";
@@ -59,6 +59,7 @@ const ActivityEditionForm = () => {
       activity_opening_hours: "",
       duration: "",
       price: "",
+      userOrganizations: "",
       isReadyToSubmit: false,
     },
     isActivityLoaded: false,
@@ -77,11 +78,15 @@ const ActivityEditionForm = () => {
   useEffect(() => {
     if (router.query.slug !== undefined) {
       const fetchData = async () => {
+        const userOrganizations = await service.checkOrganizationsOwned();
+        let hasOrganizations;
+        userOrganizations.number > 0
+          ? (hasOrganizations = true)
+          : (hasOrganizations = false);
         let activityDetails = await service.activityDetails(router.query.slug);
         setState({
-          ...state,
           activity: activityDetails,
-          formdata: {
+          formData: {
             _id: activityDetails._id,
             type: activityDetails.type,
             title: activityDetails.title,
@@ -111,6 +116,7 @@ const ActivityEditionForm = () => {
             activity_opening_hours: "",
             duration: "",
             price: "",
+            userOrganizations: userOrganizations,
           },
           isActivityLoaded: true,
         });
@@ -185,6 +191,19 @@ const ActivityEditionForm = () => {
     );
   }
 
+  let selectedOrganization;
+  if (state.formData.userOrganizations) {
+    if (state.formData.userOrganizations.organizations) {
+      state.formData.userOrganizations.organizations.forEach((el) => {
+        if (state.activity.organization) {
+          if (el._id === state.activity.organization._id) {
+            selectedOrganization = state.activity.organization._id;
+          }
+        }
+      });
+    }
+  }
+
   let isRomantic,
     isAdventure,
     isGastronomic,
@@ -203,13 +222,13 @@ const ActivityEditionForm = () => {
     isPirineus;
 
   if (state.activity.categories) {
-    state.activity.categories.includes("romantic")
+    state.activity.categories.includes("romàntica")
       ? (isRomantic = true)
       : (isRomantic = false);
-    state.activity.categories.includes("adventure")
+    state.activity.categories.includes("aventura")
       ? (isAdventure = true)
       : (isAdventure = false);
-    state.activity.categories.includes("gastronomic")
+    state.activity.categories.includes("gastronòmica")
       ? (isGastronomic = true)
       : (isGastronomic = false);
     state.activity.categories.includes("cultural")
@@ -220,16 +239,16 @@ const ActivityEditionForm = () => {
       : (isRelax = false);
   }
   if (state.activity.seasons) {
-    state.activity.seasons.includes("winter")
+    state.activity.seasons.includes("hivern")
       ? (isWinter = true)
       : (isWinter = false);
-    state.activity.seasons.includes("spring")
+    state.activity.seasons.includes("primavera")
       ? (isSpring = true)
       : (isSpring = false);
-    state.activity.seasons.includes("summer")
+    state.activity.seasons.includes("estiu")
       ? (isSummer = true)
       : (isSummer = false);
-    state.activity.seasons.includes("autumn")
+    state.activity.seasons.includes("tardor")
       ? (isAutumn = true)
       : (isAutumn = false);
   }
@@ -299,6 +318,7 @@ const ActivityEditionForm = () => {
       price,
     } = state.activity;
     const { coverCloudImage, cloudImages } = state.formData;
+    const { organization } = state;
     let activityCover, activityImages;
     coverCloudImage !== ""
       ? (activityCover = coverCloudImage)
@@ -331,7 +351,8 @@ const ActivityEditionForm = () => {
         activity_place_id,
         activity_opening_hours,
         duration,
-        price
+        price,
+        organization
       )
       .then(() => router.push("/dashboard"));
   };
@@ -443,6 +464,13 @@ const ActivityEditionForm = () => {
     });
   };
 
+  const handleCheckOrganization = (e) => {
+    setState({
+      ...state,
+      organization: e.target.id,
+    });
+  };
+
   const handleChange = (e) =>
     setState({
       ...state,
@@ -467,6 +495,44 @@ const ActivityEditionForm = () => {
     }
   };
 
+  let organizationsList = [];
+  if (state.formData.userOrganizations !== undefined) {
+    if (state.formData.userOrganizations.organizations !== undefined) {
+      organizationsList = state.formData.userOrganizations.organizations.map(
+        (el, idx) => {
+          let isChecked;
+          if (!state.organization) {
+            if (selectedOrganization === el._id) {
+              isChecked = true;
+            }
+          }
+          return (
+            <label key={idx}>
+              <input
+                value={el.orgName}
+                name="orgName"
+                type="radio"
+                id={el._id}
+                onChange={handleCheckOrganization}
+                checked={isChecked}
+              />
+              <div className="organization-wrapper">
+                <div className="organization-left">
+                  <div className="organization-logo">
+                    <img src={el.orgLogo} alt={el.orgName} />
+                  </div>
+                </div>
+                <div className="organization-right">
+                  <h3>{el.orgName}</h3>
+                </div>
+              </div>
+            </label>
+          );
+        }
+      );
+    }
+  }
+
   return (
     <>
       <Head>
@@ -485,28 +551,32 @@ const ActivityEditionForm = () => {
           <Row>
             <Col lg={12} className="sided-shadow">
               <div className="form-composer">
-                <h1>Editar l'activitaty</h1>
+                <h1>Editar l'activitat</h1>
                 <p className="sub-h1">
-                  Edit and submit your activity so others start enjoying it.
+                  Edita i desa els canvis de la teva activitat
                 </p>
               </div>
               <Form onSubmit={handleSubmit}>
+                <Form.Group style={{ display: "inline-block" }}>
+                  <Form.Label>Empresa propietària</Form.Label>
+                  <div className="organizations-list">{organizationsList}</div>
+                </Form.Group>
                 <Form.Group>
-                  <Form.Label>Title</Form.Label>
+                  <Form.Label>Títol</Form.Label>
                   <Form.Control
                     type="text"
                     name="title"
-                    placeholder="Activity title"
+                    placeholder="Títol de l'activitat"
                     defaultValue={title}
                     onChange={handleChange}
                   />
                 </Form.Group>
                 <Form.Group>
-                  <Form.Label>Subtitle</Form.Label>
+                  <Form.Label>Subtítol</Form.Label>
                   <Form.Control
                     type="text"
                     name="subtitle"
-                    placeholder="Activity subtitle"
+                    placeholder="Subtítol de l'activitat"
                     defaultValue={subtitle}
                     onChange={handleChange}
                   />
@@ -514,29 +584,29 @@ const ActivityEditionForm = () => {
                 <Form.Row>
                   <Col lg={4}>
                     <Form.Group>
-                      <Form.Label>Activity Category</Form.Label>
+                      <Form.Label>Categoria d'activitat</Form.Label>
                       <Form.Check
                         type="checkbox"
-                        name="romantic"
-                        id="romantic"
-                        label="Romantic"
+                        name="romantica"
+                        id="romantica"
+                        label="Romàntica"
                         onChange={handleCheckCategory}
                         checked={isRomantic}
                       />
                       <Form.Check
                         type="checkbox"
-                        name="adventure"
-                        id="adventure"
-                        label="Adventure"
+                        name="aventura"
+                        id="aventura"
+                        label="Aventura"
                         onChange={handleCheckCategory}
                         checked={isAdventure}
                       />
 
                       <Form.Check
                         type="checkbox"
-                        name="gastronomic"
-                        id="gastronomic"
-                        label="Gastronomic"
+                        name="gastronomica"
+                        id="gastronomica"
+                        label="Gastronòmica"
                         onChange={handleCheckCategory}
                         checked={isGastronomic}
                       />
@@ -560,36 +630,36 @@ const ActivityEditionForm = () => {
                   </Col>
                   <Col lg={4}>
                     <Form.Group>
-                      <Form.Label>Activity Season</Form.Label>
+                      <Form.Label>Estació recomanada</Form.Label>
                       <Form.Check
                         type="checkbox"
-                        name="winter"
-                        id="winter"
-                        label="Winter"
+                        name="hivern"
+                        id="hivern"
+                        label="Hivern"
                         onChange={handleCheckSeason}
                         checked={isWinter}
                       />
                       <Form.Check
                         type="checkbox"
-                        name="spring"
-                        id="spring"
-                        label="Spring"
+                        name="primavera"
+                        id="primavera"
+                        label="Primavera"
                         onChange={handleCheckSeason}
                         checked={isSpring}
                       />
                       <Form.Check
                         type="checkbox"
-                        name="summer"
-                        id="summer"
-                        label="Summer"
+                        name="estiu"
+                        id="estiu"
+                        label="Estiu"
                         onChange={handleCheckSeason}
                         checked={isSummer}
                       />
                       <Form.Check
                         type="checkbox"
-                        name="autumn"
-                        id="autumn"
-                        label="Autumn"
+                        name="tardor"
+                        id="tardor"
+                        label="Tardor"
                         onChange={handleCheckSeason}
                         checked={isAutumn}
                       />
@@ -598,7 +668,7 @@ const ActivityEditionForm = () => {
                   <Col lg={4}>
                     <Form.Group>
                       <Form.Group>
-                        <Form.Label>Activity Region</Form.Label>
+                        <Form.Label>Regió de l'activitat</Form.Label>
                         <Form.Check
                           type="radio"
                           id="barcelona"
@@ -660,7 +730,7 @@ const ActivityEditionForm = () => {
                   </Col>
                 </Form.Row>
                 <Form.Group>
-                  <Form.Label>Location</Form.Label>
+                  <Form.Label>Localització</Form.Label>
                   <Autocomplete
                     className="location-control"
                     apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
@@ -729,7 +799,7 @@ const ActivityEditionForm = () => {
                       });
                     }}
                     types={["establishment"]}
-                    placeholder={"Type the activity address"}
+                    placeholder={"Escriu la localització de l'activitat"}
                     fields={[
                       "rating",
                       "place_id",
@@ -743,7 +813,7 @@ const ActivityEditionForm = () => {
                 <Form.Row>
                   <Col lg={6}>
                     <Form.Group>
-                      <Form.Label>Phone Number</Form.Label>
+                      <Form.Label>Número de telèfon</Form.Label>
                       <Form.Control
                         type="tel"
                         name="phone"
@@ -755,7 +825,7 @@ const ActivityEditionForm = () => {
                   </Col>
                   <Col lg={6}>
                     <Form.Group>
-                      <Form.Label>Website</Form.Label>
+                      <Form.Label>Pàgina web</Form.Label>
                       <Form.Control
                         type="url"
                         name="website"
@@ -769,7 +839,7 @@ const ActivityEditionForm = () => {
                 <Form.Row>
                   <Col lg={6}>
                     <Form.Group>
-                      <Form.Label>Price (€)</Form.Label>
+                      <Form.Label>Preu per persona (€)</Form.Label>
                       <Form.Control
                         type="number"
                         name="price"
@@ -781,7 +851,7 @@ const ActivityEditionForm = () => {
                   </Col>
                   <Col lg={6}>
                     <Form.Group>
-                      <Form.Label>Duration (h)</Form.Label>
+                      <Form.Label>Durada (h)</Form.Label>
                       <Form.Control
                         type="number"
                         name="duration"
@@ -883,7 +953,7 @@ const ActivityEditionForm = () => {
                   </div>
                 </div>
                 <Form.Group>
-                  <Form.Label>Description</Form.Label>
+                  <Form.Label>Descripció</Form.Label>
                   <Form.Control
                     as="textarea"
                     rows="5"

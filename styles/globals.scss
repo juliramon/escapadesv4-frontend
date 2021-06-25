@@ -412,6 +412,10 @@ nav {
   display: block;
   border-top: 1px solid #e8e8e8;
   border-bottom: 1px solid #e8e8e8;
+  .listings-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+  }
   .container {
     padding: 0;
   }
@@ -937,6 +941,10 @@ nav {
     h1 {
       font-size: 1.4em;
       margin-bottom: 0;
+      max-width: 250px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
   }
   .left-menu {
@@ -960,9 +968,9 @@ nav {
       padding: 0;
     }
     li {
-      padding: 10px 15px;
-      margin: 6px 0;
-      font-size: 1.2em;
+      padding: 5px;
+      margin: 2px;
+      font-size: 1em;
       text-transform: capitalize;
     }
     a {
@@ -977,6 +985,37 @@ nav {
       background-color: $input-background;
       border-radius: 8px;
       cursor: pointer;
+    }
+    .organization-wrapper {
+      display: flex;
+      align-items: center;
+      .organization-logo {
+        max-width: 30px;
+        max-height: 30px;
+        width: 30px;
+        height: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 8px;
+        border: 1px solid #cfcfcf;
+        border-radius: 8px;
+        padding: 5px;
+        background-color: white;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 8px;
+        }
+      }
+      .organization-right {
+        h3 {
+          margin: 0;
+          font-family: "Nunito", sans-serif;
+          font-size: 1em;
+          font-weight: 400 !important;
+        }
+      }
     }
   }
   .col.center {
@@ -1005,8 +1044,13 @@ nav {
 /*---FEED STYLES---*/
 /*---MODAL STYLES---*/
 
+.modal {
+  z-index: 1001 !important;
+}
+
 .modal-backdrop {
   background-color: rgb(13, 31, 68) !important;
+  z-index: 1001 !important;
 }
 
 .modal-open .modal {
@@ -1184,6 +1228,50 @@ nav {
   .sided-shadow {
     padding-bottom: 50px;
   }
+  form {
+    .organizations-list {
+      display: flex;
+      align-items: center;
+      margin: -16px -8px -8px -8px;
+      label {
+        display: flex;
+        align-items: center;
+        margin: 8px;
+      }
+    }
+    .organization-wrapper {
+      display: flex;
+      align-items: center;
+      margin: 8px;
+      .organization-logo {
+        max-width: 37px;
+        max-height: 37px;
+        width: 37px;
+        height: 37px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 8px;
+        border: 1px solid #cfcfcf;
+        border-radius: 8px;
+        padding: 5px;
+        background-color: white;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 8px;
+        }
+      }
+      .organization-right {
+        h3 {
+          margin: 0;
+          font-family: "Nunito", sans-serif;
+          font-size: 15px;
+          font-weight: 400 !important;
+        }
+      }
+    }
+  }
   .images,
   .cover {
     span {
@@ -1244,6 +1332,7 @@ nav {
 .pac-container {
   border-radius: 8px;
   margin-bottom: -50px;
+  z-index: 1002;
 }
 .pac-item {
   padding: 5px 10px !important;
@@ -2043,12 +2132,16 @@ nav {
     width: 230px;
     height: 130px;
     margin-right: 20px;
-    background: grey;
+    background: #ffffff;
+    border: 1px solid #abc3f4;
     border-radius: 8px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   .listing-cover img {
-    width: 230px;
+    width: 100%;
     height: auto;
   }
   .listing-content {
@@ -2205,6 +2298,10 @@ nav {
         width: 75px;
         height: 75px;
         overflow: hidden;
+        border: 1px solid #cfcfcf;
+        border-radius: 100px;
+        padding: 5px;
+        background-color: white;
         img {
           border-radius: 100px;
           width: 75px;
@@ -2740,6 +2837,184 @@ nav {
 }
 
 /*---END USER PROFILE STYLES---*/
+/*---ORGANIZATION PROFILE---*/
+
+#organizationProfile {
+  .box {
+    width: 100%;
+    padding: 20px 0;
+  }
+  .box-wrapper {
+    display: flex;
+    align-items: flex-start;
+  }
+  .col-left {
+    width: 70%;
+    margin-right: 20px;
+  }
+  .col-right {
+    flex: 1;
+  }
+  .header-box-wrapper {
+    box-shadow: 0px 2px 10px rgb(0 0 0 / 6%);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .box.bordered {
+    border: 1px solid #e8e8e8;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  .cover-background {
+    width: 100%;
+    height: 220px;
+    background-size: cover;
+    position: relative;
+    background-position: center center;
+    .edit-cover {
+      input {
+        display: none;
+      }
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      padding: 5px 10px;
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      color: #ffffff !important;
+      transition: 0.3s;
+      border-radius: 8px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      margin-bottom: 0;
+      box-shadow: 1px 1px 11px rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.3);
+      svg {
+        margin-right: 8px;
+      }
+    }
+    .edit-cover:hover {
+      background: rgba(0, 0, 0, 0.6);
+    }
+  }
+  .header-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    border-radius: 8px;
+    position: relative;
+    width: 100%;
+    border-top: none;
+    .header-top-bar {
+      display: flex;
+      align-items: flex-end;
+      width: 100%;
+      margin: -72px 0 0 0;
+      .left {
+        flex: 1;
+        display: flex;
+        align-items: flex-end;
+        .organization-logo {
+          width: 130px;
+          height: 130px;
+          min-width: 130px;
+          min-height: 130px;
+          overflow: hidden;
+          border: 1px solid #e8e8e8;
+          background-color: #ffffff;
+          border-radius: 8px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 3px;
+          img {
+            min-width: 100%;
+            min-height: 100%;
+            border-radius: 6px;
+          }
+        }
+        .organization-meta {
+          margin-left: 22px;
+          margin-top: 0;
+          svg {
+            margin-right: -3px;
+          }
+          .organization-name {
+            font-size: 1.4em;
+            margin: 0 0 3px 0;
+          }
+          .organization-slug {
+            margin-bottom: 0;
+          }
+        }
+      }
+      .right {
+        .btn {
+          padding: 12px 35px;
+        }
+      }
+    }
+    .header-bottom-bar {
+      margin-top: 15px;
+      max-width: 65%;
+      p {
+        font-size: 16px;
+        color: $dark-text;
+
+        margin-bottom: 0;
+      }
+    }
+    .filter-bar {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+      button {
+        padding: 6px 35px;
+      }
+    }
+  }
+  aside {
+    padding: 15px;
+    margin-top: 30px;
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #f2f7f9;
+      li {
+        margin-bottom: 5px;
+        a {
+          text-decoration: underline !important;
+        }
+        svg {
+          margin-right: 8px;
+        }
+      }
+      li:last-child {
+        margin-bottom: 0;
+      }
+    }
+    h3 {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .profile-map {
+      height: 220px;
+      width: 100%;
+      -webkit-border-radius: 8px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #f2f7f9;
+      margin: 15px 0;
+    }
+  }
+}
+/*---END ORGANIZATION PROFILE---*/
 /*---USERS LIST STYLES---*/
 
 #usersList {
@@ -3540,28 +3815,30 @@ nav {
             text-decoration: line-through;
           }
         }
-        button {
+        button,
+        a {
           width: 100%;
           padding: 10px;
           margin-top: 20px;
           display: flex;
           align-items: center;
           justify-content: center;
+          border-radius: 8px;
           svg {
             margin-left: 8px;
           }
         }
         .btn-soft-blue {
           background-color: #ddeef3;
-          color: #3a4887;
+          color: #3a4887 !important;
         }
         .btn-soft-orange {
           background-color: #ffeedb;
-          color: #b8761a;
+          color: #b8761a !important;
         }
         .btn-soft-red {
           background-color: #ffe4df;
-          color: #ac402a;
+          color: #ac402a !important;
         }
       }
     }

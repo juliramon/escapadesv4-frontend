@@ -1,14 +1,11 @@
 import Head from "next/head";
 import Link from "next/link";
-import React from "react";
 import { Col, Container, Row } from "react-bootstrap";
-import { useCookies } from "react-cookie";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
 import Plans from "../components/global/Plans";
 
 const Serveis = () => {
-  const [cookies, setCookie, removeCookie] = useCookies("");
   return (
     <>
       <Head>
@@ -39,17 +36,26 @@ const Serveis = () => {
                         <br /> al recomanador especialista en escapades
                         <br /> en parella a Catalunya
                       </p>
-                      {/* <Link href={"/empreses/registre?step=informacio-empresa"}>
-                        <a
-                          className="btn"
-                          onClick={() => setCookie("funnelOrigin", "headerBtn")}
-                        >
-                          Publicar el meu negoci
-                        </a>
-                      </Link> */}
-                      <Link href={"mailto:social@escapadesenparella.cat"}>
-                        <a className="btn" style={{ padding: "12px 60px" }}>
-                          Contacta'ns
+                      <Link href={"/empreses/registre?step=seleccio-pla"}>
+                        <a className="btn">
+                          Publicar el meu negoci{" "}
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="icon icon-tabler icon-tabler-arrow-narrow-right"
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="#ffffff"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <line x1="15" y1="16" x2="19" y2="12" />
+                            <line x1="15" y1="8" x2="19" y2="12" />
+                          </svg>
                         </a>
                       </Link>
                     </div>
@@ -208,7 +214,7 @@ const Serveis = () => {
                       </ul>
                     </div>
                     <div className="col-right">
-                      <div class="media-area">
+                      <div className="media-area">
                         <img src="https://res.cloudinary.com/juligoodie/image/upload/v1621535038/getaways-guru/static-files/graphic-plans-2_r3ffv2.png" />
                       </div>
                     </div>
@@ -216,6 +222,7 @@ const Serveis = () => {
                 </Col>
               </Row>
             </section>
+            <span id="plans"></span>
             <section className="services-plans">
               <Plans />
             </section>

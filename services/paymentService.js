@@ -22,6 +22,15 @@ class PaymentService {
       })
       .then((res) => res.data);
   };
+
+  createFreeBasicSubscription = () =>
+    this.service.post("/payments/createFreeBasicSubscription");
+
+  checkUserSubscription = () =>
+    this.service.get("/payments/checkUserSubscription").then((res) => res.data);
+
+  editUserSubscription = (value) =>
+    this.service.put("/payments/editUserSubscription", { value });
 }
 
 export default PaymentService;

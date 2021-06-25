@@ -120,7 +120,7 @@ const Login = () => {
     if (user) {
       if (user !== undefined || user !== "null") {
         if (router.components["/empreses/registre"]) {
-          router.push("/empreses/registre?step=informacio-empresa");
+          router.push("/empreses/registre?step=seleccio-pla");
         } else {
           router.push("/feed");
         }

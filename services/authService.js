@@ -44,13 +44,6 @@ class AuthService {
     regionsToFollow,
     seasonsToFollow
   ) => {
-    console.log({
-      accountCompleted: accountCompleted,
-      typesToFollow: typesToFollow,
-      categoriesToFollow: categoriesToFollow,
-      regionsToFollow: regionsToFollow,
-      seasonsToFollow: seasonsToFollow,
-    });
     return this.service.put("/auth/complete-account", {
       accountCompleted,
       typesToFollow,

@@ -7,12 +7,10 @@ import Autocomplete from "react-google-autocomplete";
 import UserContext from "../contexts/UserContext";
 import Head from "next/head";
 import slugify from "slugify";
-import { useCookies } from "react-cookie";
+import PaymentService from "../services/paymentService";
 
 const ActivityForm = () => {
   const { user } = useContext(UserContext);
-  const [cookies, setCookie, removeCookie] = useCookies("");
-
   const router = useRouter();
   useEffect(() => {
     if (!user) {
@@ -59,17 +57,37 @@ const ActivityForm = () => {
       activity_opening_hours: "",
       duration: "",
       price: "",
+      organization: "",
       isReadyToSubmit: false,
     },
   };
   const [state, setState] = useState(initialState);
   const [queryId, setQueryId] = useState(null);
+  const [stateStep, setStateStep] = useState({ step: "null" });
+
   useEffect(() => {
     if (router && router.route) {
       setQueryId(router.route);
     }
   }, [router]);
+
   const service = new ContentService();
+  const paymentService = new PaymentService();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const userOrganizations = await service.checkOrganizationsOwned();
+      let hasOrganizations;
+      userOrganizations.number > 0
+        ? (hasOrganizations = true)
+        : (hasOrganizations = false);
+      setState({
+        ...state,
+        formData: { ...state.formData, userOrganizations: userOrganizations },
+      });
+    };
+    fetchData();
+  }, []);
 
   const saveFileToStatus = (e) => {
     const fileToUpload = e.target.files[0];
@@ -175,6 +193,13 @@ const ActivityForm = () => {
     });
   };
 
+  const handleCheckOrganization = (e) => {
+    setState({
+      ...state,
+      formData: { ...state.formData, organization: e.target.id },
+    });
+  };
+
   const handleChange = (e) => {
     setState({
       ...state,
@@ -215,6 +240,7 @@ const ActivityForm = () => {
       activity_opening_hours,
       duration,
       price,
+      organization,
     } = state.formData;
     service
       .activity(
@@ -241,9 +267,14 @@ const ActivityForm = () => {
         activity_place_id,
         activity_opening_hours,
         duration,
-        price
+        price,
+        organization
       )
-      .then(() => Router.push("/dashboard"))
+      .then(() => {
+        service.editUserPlan(user._id, true, true, true, true);
+        paymentService.editUserSubscription(1);
+        Router.push("/dashboard");
+      })
       .catch((err) => console.error(err));
   };
 
@@ -257,7 +288,6 @@ const ActivityForm = () => {
       state.formData.cloudImagesUploaded === true &&
       state.formData.coverCloudImageUploaded === true
     ) {
-      removeCookie("funnelOrigin");
       submitActivity();
     }
   }, [state.formData]);
@@ -277,6 +307,7 @@ const ActivityForm = () => {
       price,
       duration,
       description,
+      organization,
     } = state.formData;
 
     if (
@@ -292,66 +323,79 @@ const ActivityForm = () => {
       coverImage !== "" &&
       description &&
       duration &&
-      price
+      price &&
+      organization
     ) {
       setState((state) => ({ ...state, isReadyToSubmit: true }));
     }
   }, [state.formData]);
 
   useEffect(() => {
-    if (router.query.step === "publicacio-fitxa") {
-      setState({ ...state, step: "publicacio-fitxa" });
+    if (router.query.step) {
+      setStateStep({ step: "publicacio-fitxa" });
     }
   }, [router]);
 
   let funnelSteps;
-
-  if (cookies.funnelOrigin === "headerBtn") {
+  if (stateStep.step === "publicacio-fitxa") {
     funnelSteps = (
       <>
         <div className="funnel-steps-wrapper" style={{ marginTop: "60px" }}>
           <ul>
             <li
-              className={state.step === "informacio-empresa" ? "active" : null}
+              className={
+                stateStep.step === "informacio-empresa" ? "active" : null
+              }
             >
               Pas 1
             </li>
-            <li className={state.step === "seleccio-pla" ? "active" : null}>
+            <li className={stateStep.step === "seleccio-pla" ? "active" : null}>
               Pas 2
             </li>
             <li
-              className={state.step === "seleccio-tipologia" ? "active" : null}
+              className={
+                stateStep.step === "seleccio-tipologia" ? "active" : null
+              }
             >
               Pas 3
             </li>
-            <li className={state.step === "publicacio-fitxa" ? "active" : null}>
+            <li
+              className={
+                stateStep.step === "publicacio-fitxa" ? "active" : null
+              }
+            >
               Pas 4
             </li>
           </ul>
         </div>
       </>
     );
-  } else {
-    funnelSteps = (
-      <>
-        <div className="funnel-steps-wrapper">
-          <ul>
-            <li
-              className={state.step === "informacio-empresa" ? "active" : null}
-            >
-              Pas 1
-            </li>
-            <li
-              className={state.step === "seleccio-tipologia" ? "active" : null}
-            >
-              Pas 2
-            </li>
-            <li className={state.step === "publicar-fitxa" ? "active" : null}>
-              Pas 3
-            </li>
-          </ul>
-        </div>
-      </>
+  }
+
+  let organizationsList = [];
+  if (state.formData.userOrganizations !== undefined) {
+    organizationsList = state.formData.userOrganizations.organizations.map(
+      (el, idx) => (
+        <label key={idx}>
+          <input
+            value={el.orgName}
+            name="orgName"
+            type="radio"
+            id={el._id}
+            onChange={handleCheckOrganization}
+          />
+          <div className="organization-wrapper">
+            <div className="organization-left">
+              <div className="organization-logo">
+                <img src={el.orgLogo} alt={el.orgName} />
+              </div>
+            </div>
+            <div className="organization-right">
+              <h3>{el.orgName}</h3>
+            </div>
+          </div>
+        </label>
+      )
     );
   }
 
@@ -386,6 +430,10 @@ const ActivityForm = () => {
                 </p>
               </div>
               <Form>
+                <Form.Group style={{ display: "inline-block" }}>
+                  <Form.Label>Empresa propietària</Form.Label>
+                  <div className="organizations-list">{organizationsList}</div>
+                </Form.Group>
                 <Form.Group>
                   <Form.Label>Títol</Form.Label>
                   <Form.Control

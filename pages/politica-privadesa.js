@@ -12,7 +12,6 @@ const PoliticaPrivadesa = () => {
     window.onscroll = () => handleScroll();
   });
   const handleScroll = () => {
-    console.log("scrolling =>", document.documentElement.scrollTop);
     if (document.documentElement.scrollTop > 4250) {
       setState({ stopFixed: true });
     } else {

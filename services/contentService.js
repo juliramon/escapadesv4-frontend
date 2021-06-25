@@ -51,7 +51,8 @@ class ContentService {
     activity_place_id,
     activity_opening_hours,
     duration,
-    price
+    price,
+    organization_id
   ) => {
     return this.service
       .post("/activity", {
@@ -79,6 +80,7 @@ class ContentService {
         activity_opening_hours,
         duration,
         price,
+        organization_id,
       })
       .then((res) => res.data);
   };
@@ -120,7 +122,8 @@ class ContentService {
     activity_place_id,
     activity_opening_hours,
     duration,
-    price
+    price,
+    organization
   ) =>
     this.service.put(`/activities/${_id}`, {
       slug,
@@ -146,6 +149,7 @@ class ContentService {
       activity_opening_hours,
       duration,
       price,
+      organization,
     });
 
   // FILES ENDPOINTS
@@ -181,6 +185,20 @@ class ContentService {
       gender,
       birthDate,
       phoneNumber,
+    });
+
+  editUserPlan = (
+    _id,
+    hasSelectedPlan,
+    hasPublishedAnOrganization,
+    hasSelectedContentType,
+    hasPostedContent
+  ) =>
+    this.service.put(`/users/${_id}/editPlan`, {
+      hasSelectedPlan: hasSelectedPlan,
+      hasPublishedAnOrganization: hasPublishedAnOrganization,
+      hasSelectedContentType: hasSelectedContentType,
+      hasPostedContent: hasPostedContent,
     });
 
   editUserName = (_id, userName) =>
@@ -224,7 +242,8 @@ class ContentService {
     place_rating,
     place_id,
     place_opening_hours,
-    price
+    price,
+    organization_id
   ) => {
     return this.service
       .post("/place", {
@@ -252,10 +271,9 @@ class ContentService {
         place_id,
         place_opening_hours,
         price,
+        organization_id,
       })
-      .then((res) => {
-        console.log(res.data);
-      });
+      .then((res) => {});
   };
 
   getAllPlaces = () => this.service.get("/places").then((res) => res.data);
@@ -292,7 +310,8 @@ class ContentService {
     place_rating,
     place_place_id,
     place_opening_hours,
-    price
+    price,
+    organization
   ) =>
     this.service.put(`/places/${_id}`, {
       slug,
@@ -318,6 +337,7 @@ class ContentService {
       place_place_id,
       place_opening_hours,
       price,
+      organization,
     });
 
   getUserPlaces = (id) =>
@@ -487,6 +507,63 @@ class ContentService {
 
   getCategoriesTotals = () =>
     this.service.get(`/categoriesTotals`).then((res) => res.data);
+
+  checkOrganizationsOwned = () =>
+    this.service.get("/checkOrganizationsOwned").then((res) => res.data);
+
+  organizationData = (slug) =>
+    this.service.get(`/organizationData/${slug}`).then((res) => res.data);
+
+  editOrganizationData = (
+    _id,
+    orgLogo,
+    orgName,
+    VATNumber,
+    slug,
+    description,
+    website,
+    phone,
+    organization_full_address,
+    organization_streetNumber,
+    organization_street,
+    organization_locality,
+    organization_zipcode,
+    organization_province,
+    organization_state,
+    organization_country,
+    organization_lat,
+    organization_lng,
+    additionalInfo
+  ) =>
+    this.service.put(`/editOrganizationData`, {
+      _id,
+      orgLogo,
+      orgName,
+      VATNumber,
+      slug,
+      description,
+      website,
+      phone,
+      organization_full_address,
+      organization_streetNumber,
+      organization_street,
+      organization_locality,
+      organization_zipcode,
+      organization_province,
+      organization_state,
+      organization_country,
+      organization_lat,
+      organization_lng,
+      additionalInfo,
+    });
+
+  editOrganizationCover = (_id, profileCover) =>
+    this.service.put(`/editOrganizationData/${_id}`, { profileCover });
+
+  removeOrganization = (_id) =>
+    this.service
+      .put("/removeOrganization", { _id, isRemoved: true })
+      .then((res) => res.data);
 }
 
 export default ContentService;

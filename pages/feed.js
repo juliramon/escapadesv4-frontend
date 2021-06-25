@@ -1,17 +1,17 @@
 import Head from "next/head";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-import { Button, Container, Row, Spinner } from "react-bootstrap";
+import { Container, Row, Spinner } from "react-bootstrap";
 import ContentService from "../services/contentService";
 import PublickSquareBox from "../components/listings/PublicSquareBox";
 import Link from "next/link";
 import NavigationBar from "../components/global/NavigationBar";
-import PublicationModal from "../components/modals/PublicationModal";
 import UserContext from "../contexts/UserContext";
+import PaymentService from "../services/paymentService";
+import ButtonSharePost from "../components/buttons/ButtonSharePost";
 
 const Feed = () => {
   const { user } = useContext(UserContext);
-
   const router = useRouter();
 
   useEffect(() => {
@@ -26,13 +26,13 @@ const Feed = () => {
     hasPlaces: false,
     userCustomActivities: [],
     userCustomPlaces: [],
+    userSubscription: {},
   };
+
   const [state, setState] = useState(initialState);
 
   const service = new ContentService();
-  const [modalVisibility, setModalVisibility] = useState(false);
-  const handleModalVisibility = () => setModalVisibility(true);
-  const hideModalVisibility = () => setModalVisibility(false);
+  const paymentService = new PaymentService();
 
   useEffect(() => {
     if (user) {
@@ -40,7 +40,9 @@ const Feed = () => {
         setState({ ...state, isFetching: true });
         const userCustomActivities = await service.getUserCustomActivities();
         const userCustomPlaces = await service.getUserCustomPlaces();
-        let hasActivities, hasPlaces, hasListings;
+        const userOrganizations = await service.checkOrganizationsOwned();
+        const userSubscription = await paymentService.checkUserSubscription();
+        let hasActivities, hasPlaces, hasListings, hasOrganizations;
         userCustomActivities.length > 0
           ? (hasActivities = true)
           : (hasActivities = false);
@@ -48,13 +50,19 @@ const Feed = () => {
         userCustomActivities.length > 0 && userCustomPlaces.length > 0
           ? (hasListings = true)
           : (hasListings = false);
+        userOrganizations.number > 0
+          ? (hasOrganizations = true)
+          : (hasOrganizations = false);
         setState({
           ...state,
           hasListings: hasListings,
           hasActivities: hasActivities,
           hasPlaces: hasPlaces,
+          hasOrganizations: hasOrganizations,
           userCustomActivities: userCustomActivities,
           userCustomPlaces: userCustomPlaces,
+          userOrganizations: userOrganizations,
+          userSubscription: userSubscription,
         });
       };
       fetchData();
@@ -142,8 +150,8 @@ const Feed = () => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-hash"
-            width="28"
-            height="28"
+            width="22"
+            height="22"
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="#2c3e50"
@@ -162,6 +170,63 @@ const Feed = () => {
       </Link>
     </li>
   ));
+
+  let organizationsList = [];
+  if (state.userOrganizations !== undefined) {
+    organizationsList = state.userOrganizations.organizations.map((el, idx) => (
+      <li key={idx}>
+        <Link href={`/empreses/${el.slug}`}>
+          <a>
+            <div className="organization-wrapper">
+              <div className="organization-left">
+                <div className="organization-logo">
+                  <img src={el.orgLogo} alt={el.orgName} />
+                </div>
+              </div>
+              <div className="organization-right">
+                <h3>{el.orgName}</h3>
+              </div>
+            </div>
+          </a>
+        </Link>
+      </li>
+    ));
+  }
+
+  let organizationsBlock, recommendPostButton;
+  if (state.userOrganizations) {
+    if (state.userOrganizations.number > 0) {
+      organizationsBlock = (
+        <div className="organizations">
+          <p>Les teves empreses ({state.userOrganizations.number})</p>
+          <ul className="menu-organizations">{organizationsList}</ul>
+        </div>
+      );
+    } else {
+      null;
+    }
+  }
+  if (state.userSubscription) {
+    if (
+      state.userSubscription.numberOfPublications === "0" &&
+      state.userSubscription.plan === "basic"
+    ) {
+      recommendPostButton = <ButtonSharePost canPublish={true} />;
+    } else {
+      recommendPostButton = <ButtonSharePost canPublish={false} />;
+    }
+    if (
+      state.userSubscription.numberOfPublications < 3 &&
+      state.userSubscription.plan === "premium"
+    ) {
+      recommendPostButton = <ButtonSharePost canPublish={true} />;
+    } else {
+      recommendPostButton = <ButtonSharePost canPublish={false} />;
+    }
+    if (state.userSubscription.plan === "superior") {
+      recommendPostButton = <ButtonSharePost canPublish={true} />;
+    }
+  }
 
   if (!user) {
     return (
@@ -204,36 +269,7 @@ const Feed = () => {
                     <p>Temes que segueixes</p>
                     <ul className="menu-topics">{topicsList}</ul>
                   </div>
-                  {/* <div className="content">
-										<p>Explora i descobreix</p>
-										<ul>
-											<li>
-												<Link href="/usuaris">
-													<a>
-														<svg
-															xmlns="http://www.w3.org/2000/svg"
-															className="icon icon-tabler icon-tabler-users"
-															width="28"
-															height="28"
-															viewBox="0 0 24 24"
-															strokeWidth="1.5"
-															stroke="#0D1F44"
-															fill="none"
-															strokeLinecap="round"
-															strokeLinejoin="round"
-														>
-															<path stroke="none" d="M0 0h24v24H0z" />
-															<circle cx="9" cy="7" r="4" />
-															<path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-															<path d="M16 3.13a4 4 0 0 1 0 7.75" />
-															<path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
-														</svg>
-														Comunitat
-													</a>
-												</Link>
-											</li>
-										</ul>
-									</div> */}
+                  {organizationsBlock}
                   <div className="links">
                     <p>Gestiona el teu compte</p>
                     <ul>
@@ -243,8 +279,8 @@ const Feed = () => {
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               className="icon icon-tabler icon-tabler-layout-list"
-                              width="28"
-                              height="28"
+                              width="22"
+                              height="22"
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
                               stroke="#0D1F44"
@@ -266,8 +302,8 @@ const Feed = () => {
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               className="icon icon-tabler icon-tabler-bookmark"
-                              width="28"
-                              height="28"
+                              width="22"
+                              height="22"
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
                               stroke="#0D1F44"
@@ -288,8 +324,8 @@ const Feed = () => {
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               className="icon icon-tabler icon-tabler-user"
-                              width="28"
-                              height="28"
+                              width="22"
+                              height="22"
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
                               stroke="#0D1F44"
@@ -307,14 +343,7 @@ const Feed = () => {
                       </li>
                     </ul>
                   </div>
-                  <div className="new">
-                    <Button
-                      className="btn btn-primary text-center sidebar"
-                      onClick={handleModalVisibility}
-                    >
-                      Recomanar escapada
-                    </Button>
-                  </div>
+                  {recommendPostButton}
                 </div>
               </div>
               <div className="col center">
@@ -328,10 +357,6 @@ const Feed = () => {
             </div>
           </Row>
         </Container>
-        <PublicationModal
-          visibility={modalVisibility}
-          hideModal={hideModalVisibility}
-        />
       </div>
     </>
   );
