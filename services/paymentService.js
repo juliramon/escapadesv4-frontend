@@ -29,8 +29,8 @@ class PaymentService {
   checkUserSubscription = () =>
     this.service.get("/payments/checkUserSubscription").then((res) => res.data);
 
-  editUserSubscription = (value) =>
-    this.service.put("/payments/editUserSubscription", { value });
+  editUserSubscription = () =>
+    this.service.put("/payments/editUserSubscription");
 }
 
 export default PaymentService;

@@ -114,19 +114,19 @@ const OrganizationProfile = ({ organizationData }) => {
 
   switch (state.activeTab) {
     case "activities":
-      contentType = "activity";
+      contentType = "activitat";
       linkTo = "/nova-activitat";
       noResultsCTA = (
-        <Link href={linkTo} className="btn btn-primary text-center">
-          <a>Add {contentType}</a>
+        <Link href={linkTo} className="buttonDark">
+          <a>Anunciar {contentType}</a>
         </Link>
       );
       break;
     case "places":
-      contentType = "place";
+      contentType = "allotjament";
       linkTo = "/place-composer";
       noResultsCTA = (
-        <Link to={linkTo} className="btn btn-primary text-center">
+        <Link to={linkTo} className="buttonDark">
           Add {contentType}
         </Link>
       );
@@ -139,7 +139,7 @@ const OrganizationProfile = ({ organizationData }) => {
           className="btn btn-primary text-center"
           onClick={() => handleModalVisibility()}
         >
-          Add getaway
+          Anunciar nova escapada
         </Button>
       );
   }
@@ -162,41 +162,34 @@ const OrganizationProfile = ({ organizationData }) => {
           </div>
           <div className="text">
             <p>
-              Oh no, this looks so empty.
+              Oh no, això està molt buit.
               <br />
-              Create your first {contentType} to inspire others.
+              Anuncia una {contentType} per a tenir més visibilitat.
             </p>
             {noResultsCTA}
           </div>
         </div>
       );
+    } else {
+      noresults = (
+        <div className="box empty d-flex">
+          <div className="media">
+            <img src="../../no-results.svg" alt="Graphic no results" />
+          </div>
+          <div className="text">
+            <p>
+              <span className="profile-owner-name">
+                <b>{state.organizationProfile.orgName}</b>
+              </span>{" "}
+              encara no ha publicat cap {contentType}.
+              <br />
+              Torna a intentar-ho més endavant.
+            </p>
+          </div>
+        </div>
+      );
     }
-    noresults = (
-      <div className="box empty d-flex">
-        <div className="media">
-          <img src="../../no-results.svg" alt="Graphic no results" />
-        </div>
-        <div className="text">
-          <p>
-            <span className="profile-owner-name">
-              {state.organizationProfile.orgName}
-            </span>{" "}
-            didn't publish any {contentType} yet.
-            <br />
-            Come back later to check what's new.
-          </p>
-        </div>
-      </div>
-    );
   } else {
-    mainButton = (
-      <Button
-        className="btn btn-primary text-center sidebar d-flex align-items-center"
-        onClick={() => handleModalVisibilityOffpage()}
-      >
-        Sign up
-      </Button>
-    );
     noresults = (
       <div className="box empty d-flex">
         <div className="media">
@@ -205,11 +198,11 @@ const OrganizationProfile = ({ organizationData }) => {
         <div className="text">
           <p>
             <span className="profile-owner-name">
-              {state.organizationProfile.orgName}
+              <b>{state.organizationProfile.orgName}</b>
             </span>{" "}
-            didn't publish any {contentType} yet.
+            encara no ha publicat cap {contentType}.
             <br />
-            Come back later to check what's new.
+            Torna a intentar-ho més endavant.
           </p>
         </div>
       </div>

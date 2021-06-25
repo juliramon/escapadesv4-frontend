@@ -150,7 +150,9 @@ const Dashboard = () => {
       linkTo = "/nova-activitat";
       noResultsCTA = (
         <Link href={linkTo}>
-          <a className="btn btn-primary text-center">Recomanar {contentType}</a>
+          <a className="btn btn-primary text-center">
+            Anunciar nova {contentType}
+          </a>
         </Link>
       );
       break;
@@ -159,7 +161,9 @@ const Dashboard = () => {
       linkTo = "/nou-allotjament";
       noResultsCTA = (
         <Link href={linkTo}>
-          <a className="btn btn-primary text-center">Recomanar {contentType}</a>
+          <a className="btn btn-primary text-center">
+            Anunciar nou {contentType}
+          </a>
         </Link>
       );
       break;
@@ -168,7 +172,9 @@ const Dashboard = () => {
       linkTo = "/nova-historia";
       noResultsCTA = (
         <Link href={linkTo}>
-          <a className="btn btn-primary text-center">Publicar {contentType}</a>
+          <a className="btn btn-primary text-center">
+            Publicar nova {contentType}
+          </a>
         </Link>
       );
       break;
@@ -366,19 +372,15 @@ const Dashboard = () => {
       state.userSubscription.plan === "basic"
     ) {
       recommendPostButton = <ButtonSharePost canPublish={true} />;
-    } else {
-      recommendPostButton = <ButtonSharePost canPublish={false} />;
-    }
-    if (
+    } else if (
       state.userSubscription.numberOfPublications < 3 &&
       state.userSubscription.plan === "premium"
     ) {
       recommendPostButton = <ButtonSharePost canPublish={true} />;
+    } else if (state.userSubscription.plan === "superior") {
+      recommendPostButton = <ButtonSharePost canPublish={true} />;
     } else {
       recommendPostButton = <ButtonSharePost canPublish={false} />;
-    }
-    if (state.userSubscription.plan === "superior") {
-      recommendPostButton = <ButtonSharePost canPublish={true} />;
     }
   }
 

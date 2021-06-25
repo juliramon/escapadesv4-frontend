@@ -272,7 +272,7 @@ const ActivityForm = () => {
       )
       .then(() => {
         service.editUserPlan(user._id, true, true, true, true);
-        paymentService.editUserSubscription(1);
+        paymentService.editUserSubscription();
         Router.push("/dashboard");
       })
       .catch((err) => console.error(err));

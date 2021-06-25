@@ -350,12 +350,14 @@ const EditOrganizationModal = ({
             />
           </Form.Group>
           <Form.Group>
-            <Button variant="primary" type="submit">
-              Guardar canvis
-            </Button>
-            <Button variant="warning" onClick={() => removeProfile()}>
-              Eliminar organització
-            </Button>
+            <div className="buttons-area">
+              <Button variant="light" onClick={() => removeProfile()}>
+                Eliminar organització
+              </Button>
+              <Button variant="primary" type="submit">
+                Guardar canvis
+              </Button>
+            </div>
           </Form.Group>
         </Form>
       </Modal.Body>
