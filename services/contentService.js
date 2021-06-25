@@ -273,9 +273,7 @@ class ContentService {
         price,
         organization_id,
       })
-      .then((res) => {
-        console.log(res.data);
-      });
+      .then((res) => {});
   };
 
   getAllPlaces = () => this.service.get("/places").then((res) => res.data);
@@ -523,6 +521,8 @@ class ContentService {
     VATNumber,
     slug,
     description,
+    website,
+    phone,
     organization_full_address,
     organization_streetNumber,
     organization_street,
@@ -542,6 +542,8 @@ class ContentService {
       VATNumber,
       slug,
       description,
+      website,
+      phone,
       organization_full_address,
       organization_streetNumber,
       organization_street,

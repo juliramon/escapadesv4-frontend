@@ -4,7 +4,6 @@ import PublicationModal from "../modals/PublicationModal";
 import UpgradeModal from "../modals/UpgradeModal";
 
 const ButtonSharePost = ({ canPublish }) => {
-  console.log("can publish =>", canPublish);
   const [modalVisibility, setModalVisibility] = useState(false);
   const handleModalVisibility = () => setModalVisibility(true);
   const hideModalVisibility = () => setModalVisibility(false);

@@ -10,6 +10,7 @@ import UserContext from "../../contexts/UserContext";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import Error404 from "../../components/global/Error404";
+import GoogleMapReact from "google-map-react";
 
 const OrganizationProfile = ({ organizationData }) => {
   const { user } = useContext(UserContext);
@@ -277,7 +278,6 @@ const OrganizationProfile = ({ organizationData }) => {
   };
 
   const handleFileUpload = async (e) => {
-    console.log("hello");
     const fileToUpload = e.target.files[0];
     const uploadData = new FormData();
     uploadData.append("imageUrl", fileToUpload);
@@ -322,9 +322,7 @@ const OrganizationProfile = ({ organizationData }) => {
   }
 
   const refreshOrganization = () => {
-    console.log("refresh organiastion");
     service.organizationData(router.query.slug).then((res) => {
-      console.log(res);
       setState({
         ...state,
         organizationProfile: res.organizationDetails,
@@ -375,6 +373,36 @@ const OrganizationProfile = ({ organizationData }) => {
       );
     }
   }
+
+  let center, getMapOptions, renderMarker;
+  let lat = parseFloat(state.organizationProfile.organization_lat);
+  let lng = parseFloat(state.organizationProfile.organization_lng);
+  if (lat && lng) {
+    center = {
+      lat: lat,
+      lng: lng,
+    };
+  }
+  getMapOptions = (maps) => {
+    return {
+      disableDefaultUI: true,
+      styles: [
+        {
+          featureType: "poi",
+          elementType: "labels",
+          styles: [{ visibility: "on" }],
+        },
+      ],
+    };
+  };
+
+  renderMarker = (map, maps) => {
+    const position = {
+      lat: lat,
+      lng: lng,
+    };
+    new maps.Marker({ position: position, map, title: "Hello" });
+  };
 
   return (
     <>
@@ -443,93 +471,190 @@ const OrganizationProfile = ({ organizationData }) => {
                 <div className="box">
                   <div className="box-wrapper">
                     <div className="col-left">
-                      <div
-                        className="cover-background"
-                        style={{
-                          backgroundImage: `url("${state.organizationProfile.profileCover}")`,
-                        }}
-                      >
-                        {editCoverButton}
-                      </div>
-                      <div className="header-box">
-                        <div className="header-top-bar">
-                          <div className="left">
-                            <div className="organization-logo">
-                              <img
-                                src={state.organizationProfile.orgLogo}
-                                alt={state.organizationProfile.orgName}
-                              />
+                      <div className="header-box-wrapper">
+                        <div
+                          className="cover-background"
+                          style={{
+                            backgroundImage: `url("${state.organizationProfile.profileCover}")`,
+                          }}
+                        >
+                          {editCoverButton}
+                        </div>
+                        <div className="header-box">
+                          <div className="header-top-bar">
+                            <div className="left">
+                              <div className="organization-logo">
+                                <img
+                                  src={state.organizationProfile.orgLogo}
+                                  alt={state.organizationProfile.orgName}
+                                />
+                              </div>
+                              <div className="organization-meta">
+                                <h1 className="organization-name">
+                                  {state.organizationProfile.orgName}
+                                </h1>
+                                <p className="organization-slug">
+                                  <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="icon icon-tabler icon-tabler-at"
+                                    width="18"
+                                    height="18"
+                                    viewBox="0 0 24 24"
+                                    strokeWidth="1.5"
+                                    stroke="#2c3e50"
+                                    fill="none"
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                  >
+                                    <path stroke="none" d="M0 0h24v24H0z" />
+                                    <circle cx="12" cy="12" r="4" />
+                                    <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28" />
+                                  </svg>{" "}
+                                  {state.organizationProfile.slug || "slug"} ·
+                                  Verificat
+                                </p>
+                              </div>
                             </div>
-                            <div className="organization-meta">
-                              <h1 className="organization-name">
-                                {state.organizationProfile.orgName}
-                              </h1>
-                              <p className="organization-slug">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="icon icon-tabler icon-tabler-at"
-                                  width="18"
-                                  height="18"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth="1.5"
-                                  stroke="#2c3e50"
-                                  fill="none"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                >
-                                  <path stroke="none" d="M0 0h24v24H0z" />
-                                  <circle cx="12" cy="12" r="4" />
-                                  <path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28" />
-                                </svg>{" "}
-                                {state.organizationProfile.slug || "slug"} ·
-                                Verificat
-                              </p>
+                            <div className="right">
+                              <div className="main-button">{mainButton}</div>
                             </div>
                           </div>
-                          <div className="right">
-                            <div className="main-button">{mainButton}</div>
+                          <div className="header-bottom-bar">
+                            <p>{state.organizationProfile.description}</p>
                           </div>
-                        </div>
-                        <div className="header-bottom-bar">
-                          <p>{state.organizationProfile.description}</p>
-                        </div>
-                        <div className="filter-bar">
-                          <Button
-                            className="d-flex align-items-center justify-content-center"
-                            variant="none"
-                            style={
-                              state.activeTab === "activities"
-                                ? activeTab
-                                : null
-                            }
-                            onClick={() =>
-                              setState({
-                                ...state,
-                                activeTab: "activities",
-                              })
-                            }
-                          >
-                            Activitats
-                          </Button>
-                          <Button
-                            variant="none"
-                            className="d-flex align-items-center justify-content-center"
-                            style={
-                              state.activeTab === "places" ? activeTab : null
-                            }
-                            onClick={() =>
-                              setState({ ...state, activeTab: "places" })
-                            }
-                          >
-                            Allotjaments
-                          </Button>
+                          <div className="filter-bar">
+                            <Button
+                              className="d-flex align-items-center justify-content-center"
+                              variant="none"
+                              style={
+                                state.activeTab === "activities"
+                                  ? activeTab
+                                  : null
+                              }
+                              onClick={() =>
+                                setState({
+                                  ...state,
+                                  activeTab: "activities",
+                                })
+                              }
+                            >
+                              Activitats ({state.activities.length || 0})
+                            </Button>
+                            <Button
+                              variant="none"
+                              className="d-flex align-items-center justify-content-center"
+                              style={
+                                state.activeTab === "places" ? activeTab : null
+                              }
+                              onClick={() =>
+                                setState({ ...state, activeTab: "places" })
+                              }
+                            >
+                              Allotjaments ({state.places.length || 0})
+                            </Button>
+                          </div>
                         </div>
                       </div>
                       <div className="content-box">
                         <div className="listings-wrapper">{listings}</div>
                       </div>
                     </div>
-                    <aside className="col-right"></aside>
+                    <aside className="col-right">
+                      <div className="box-right">
+                        <h3>Informació de contacte</h3>
+                        <ul>
+                          <li>
+                            <Link href={`${state.organizationProfile.website}`}>
+                              <a>
+                                <svg
+                                  xmlns="http://www.w3.org/2000/svg"
+                                  className="icon icon-tabler icon-tabler-device-laptop"
+                                  width="22"
+                                  height="22"
+                                  viewBox="0 0 24 24"
+                                  strokeWidth="1.5"
+                                  stroke="#3a4887"
+                                  fill="none"
+                                  strokeLinecap="round"
+                                  strokeLinejoin="round"
+                                >
+                                  <path
+                                    stroke="none"
+                                    d="M0 0h24v24H0z"
+                                    fill="none"
+                                  ></path>
+                                  <line x1="3" y1="19" x2="21" y2="19"></line>
+                                  <rect
+                                    x="5"
+                                    y="6"
+                                    width="14"
+                                    height="10"
+                                    rx="1"
+                                  ></rect>
+                                </svg>
+                                {state.organizationProfile.website}
+                              </a>
+                            </Link>
+                          </li>
+                          <li>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="icon icon-tabler icon-tabler-phone-call"
+                              width="22"
+                              height="22"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="#3a4887"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path stroke="none" d="M0 0h24v24H0z"></path>
+                              <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path>
+                              <path d="M15 7a2 2 0 0 1 2 2"></path>
+                              <path d="M15 3a6 6 0 0 1 6 6"></path>
+                            </svg>
+                            {state.organizationProfile.phone}
+                          </li>
+                          <li>
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="icon icon-tabler icon-tabler-map-pin"
+                              width="22"
+                              height="22"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="#2c3e50"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path stroke="none" d="M0 0h24v24H0z"></path>
+                              <circle cx="12" cy="11" r="3"></circle>
+                              <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"></path>
+                            </svg>
+                            {
+                              state.organizationProfile
+                                .organization_full_address
+                            }
+                          </li>
+                        </ul>
+                        <div className="profile-map">
+                          <GoogleMapReact
+                            bootstrapURLKeys={{
+                              key: `${process.env.GOOGLE_API_KEY}`,
+                            }}
+                            defaultCenter={center}
+                            defaultZoom={11}
+                            options={getMapOptions}
+                            yesIWantToUseGoogleMapApiInternals
+                            onGoogleApiLoaded={({ map, maps }) =>
+                              renderMarker(map, maps)
+                            }
+                          />
+                        </div>
+                      </div>
+                    </aside>
                   </div>
                 </div>
               </Row>

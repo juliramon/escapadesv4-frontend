@@ -2855,6 +2855,11 @@ nav {
   .col-right {
     flex: 1;
   }
+  .header-box-wrapper {
+    box-shadow: 0px 2px 10px rgb(0 0 0 / 6%);
+    border-radius: 8px;
+    overflow: hidden;
+  }
   .box.bordered {
     border: 1px solid #e8e8e8;
     padding: 20px;
@@ -2864,8 +2869,6 @@ nav {
     width: 100%;
     height: 220px;
     background-size: cover;
-    border-radius: 8px 8px 0 0;
-    border: 1px solid #e8e8e8;
     position: relative;
     background-position: center center;
     .edit-cover {
@@ -2903,8 +2906,6 @@ nav {
     border-radius: 8px;
     position: relative;
     width: 100%;
-    border-radius: 0 0 8px 8px;
-    border: 1px solid #e8e8e8;
     border-top: none;
     .header-top-bar {
       display: flex;
@@ -2972,6 +2973,44 @@ nav {
       button {
         padding: 6px 35px;
       }
+    }
+  }
+  aside {
+    padding: 15px;
+    margin-top: 30px;
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      margin-bottom: 15px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #f2f7f9;
+      li {
+        margin-bottom: 5px;
+        a {
+          text-decoration: underline !important;
+        }
+        svg {
+          margin-right: 8px;
+        }
+      }
+      li:last-child {
+        margin-bottom: 0;
+      }
+    }
+    h3 {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .profile-map {
+      height: 220px;
+      width: 100%;
+      -webkit-border-radius: 8px;
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid #f2f7f9;
+      margin: 15px 0;
     }
   }
 }

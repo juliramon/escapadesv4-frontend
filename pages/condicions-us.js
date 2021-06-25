@@ -12,7 +12,6 @@ const CondicionsUs = () => {
     window.onscroll = () => handleScroll();
   });
   const handleScroll = () => {
-    console.log("scrolling =>", document.documentElement.scrollTop);
     if (document.documentElement.scrollTop > 12000) {
       setState({ stopFixed: true });
     } else {

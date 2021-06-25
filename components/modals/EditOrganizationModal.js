@@ -24,6 +24,8 @@ const EditOrganizationModal = ({
           VATNumber: organizationDetails.VATNumber,
           slug: organizationDetails.slug,
           description: organizationDetails.description,
+          website: organizationDetails.website,
+          phone: organizationDetails.phone,
           organization_full_address:
             organizationDetails.organization_full_address,
           organization_streetNumber:
@@ -77,7 +79,10 @@ const EditOrganizationModal = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     const { _id } = organizationDetails;
-    const { orgLogo, orgName, VATNumber, slug, description } = state.formData;
+    const { orgLogo, orgName, VATNumber, slug, description, website, phone } =
+      state.formData;
+    let slugLowCase = slug;
+    slugLowCase = slugLowCase.toLowerCase();
     let organization_full_address,
       organization_streetNumber,
       organization_street,
@@ -110,8 +115,10 @@ const EditOrganizationModal = ({
         orgLogo,
         orgName,
         VATNumber,
-        slug,
+        slugLowCase,
         description,
+        website,
+        phone,
         organization_full_address,
         organization_streetNumber,
         organization_street,
@@ -126,13 +133,13 @@ const EditOrganizationModal = ({
       )
       .then(() => {
         hideModal();
-        router.push(`/empreses/${slug}`);
+        router.push(`/empreses/${slugLowCase}`);
       });
   };
 
   const removeProfile = async () => {
     const { _id } = organizationDetails;
-    service.removeOrganization(_id).then((res) => console.log(res.data));
+    service.removeOrganization(_id);
     router.push("/feed");
   };
 
@@ -227,9 +234,29 @@ const EditOrganizationModal = ({
               as="textarea"
               rows={3}
               name="description"
-              defaultValue={state.formData.description}
+              value={state.formData.description}
               onChange={handleChange}
               placeholder="Descriu breument la teva empresa"
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Pàgina web</Form.Label>
+            <Form.Control
+              type="text"
+              name="website"
+              value={state.formData.website}
+              onChange={handleChange}
+              placeholder="Escriu la pàgina web de l'empresa"
+            ></Form.Control>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Telèfon</Form.Label>
+            <Form.Control
+              type="text"
+              name="phone"
+              value={state.formData.phone}
+              onChange={handleChange}
+              placeholder="Escriu el telèfon de l'empresa"
             ></Form.Control>
           </Form.Group>
           <Form.Group>

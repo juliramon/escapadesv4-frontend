@@ -234,7 +234,6 @@ const Registre = () => {
       )
       .then((res) => {
         if (res.message === "Aquesta empresa ja existeix") {
-          console.log("res =>", res);
           setState({
             ...state,
             errorMessage: { ...state.errorMessage, error400: res.message },

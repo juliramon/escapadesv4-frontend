@@ -497,7 +497,6 @@ const ActivityEditionForm = () => {
 
   let organizationsList = [];
   if (state.formData.userOrganizations !== undefined) {
-    console.log(state.formData.userOrganizations.organizations);
     if (state.formData.userOrganizations.organizations !== undefined) {
       organizationsList = state.formData.userOrganizations.organizations.map(
         (el, idx) => {

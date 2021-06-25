@@ -369,7 +369,6 @@ const PlaceForm = () => {
 
   let organizationsList = [];
   if (state.formData.userOrganizations !== undefined) {
-    console.log(state.formData.userOrganizations.organizations);
     organizationsList = state.formData.userOrganizations.organizations.map(
       (el, idx) => (
         <label key={idx}>
