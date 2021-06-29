@@ -5,12 +5,14 @@ const PublicSquareBox = ({
   type,
   slug,
   cover,
+  placeType,
   title,
-  subtitle,
+  duration,
   location,
   website,
+  categoria,
+  rating,
 }) => {
-  let shortenedSubtitle = subtitle.slice(0, 70);
   let secureWebsite, shortenedLocation, buttonLight;
   if (website.includes("https://") || website.includes("http://")) {
     secureWebsite = website;
@@ -87,6 +89,83 @@ const PublicSquareBox = ({
       </a>
     );
   }
+
+  let categoryModified;
+  if (categoria) {
+    if (categoria[0].includes("romantica")) {
+      categoryModified = "romàntica";
+    } else if (categoria[0].includes("gastronomica")) {
+      categoryModified = "gastronòmica";
+    } else if (categoria[0].includes("aventura")) {
+      categoryModified = `d'aventura`;
+    } else if (categoria[0].includes("relax")) {
+      categoryModified = "de relax";
+    } else {
+      categoryModified = categoria;
+    }
+  }
+
+  let placeTypeModified;
+  if (placeType) {
+    if (placeType[0].includes("hotel")) {
+      placeTypeModified = "Hotel";
+    } else if (placeType[0].includes("casarural")) {
+      placeTypeModified = "Casa rural";
+    } else if (placeType[0].includes("apartament")) {
+      placeTypeModified = "Apartament";
+    } else if (placeType[0].includes("carabana")) {
+      placeTypeModified = "Carabana";
+    } else if (placeType[0].includes("casaarbre")) {
+      placeTypeModified = "Casa arbre";
+    } else if (placeType[0].includes("refugi")) {
+      placeTypeModified = "Refugi";
+    }
+  }
+
+  let additionalInfoRef, additionalInfoSVG;
+  if (duration) {
+    additionalInfoRef = `Activitat de ${duration} hores`;
+    additionalInfoSVG = (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="icon icon-tabler icon-tabler-alarm"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        strokeWidth="1.5"
+        stroke="#6376A0"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <circle cx="12" cy="13" r="7" />
+        <polyline points="12 10 12 13 14 13" />
+        <line x1="7" y1="4" x2="4.25" y2="6" />
+        <line x1="17" y1="4" x2="19.75" y2="6" />
+      </svg>
+    );
+  } else {
+    additionalInfoSVG = (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="icon icon-tabler icon-tabler-bed"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        strokeWidth="1.5"
+        stroke="#6376A0"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <path d="M3 7v11m0 -4h18m0 4v-8a2 2 0 0 0 -2 -2h-8v6" />
+        <circle cx="7" cy="10" r="1" />
+      </svg>
+    );
+    additionalInfoRef = placeTypeModified + " " + "amb encant";
+  }
   return (
     <div id="listingSquareBox" className={styles.listingSquareBox}>
       <Link href={`/${linkPath}/${slug}`}>
@@ -94,27 +173,15 @@ const PublicSquareBox = ({
           <div
             className={styles.listingCover}
             style={{ backgroundImage: `url('${cover}')` }}
-          ></div>
+          >
+            <div className={styles.listingRating}>{rating}</div>
+          </div>
           <h3 className={styles.listingTitle}>{title}</h3>
-          <p className={styles.listingSubtitle}>{shortenedSubtitle}...</p>
-          <p className={styles.listingLocation}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="icon icon-tabler icon-tabler-map-pin"
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="#00206B"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <circle cx="12" cy="11" r="3" />
-              <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
-            </svg>
-            {shortenedLocation}
+          <p className={styles.listingSubtitle}>
+            Escapada {categoryModified} a {shortenedLocation}
+          </p>
+          <p className={styles.listingAdditionalInfo}>
+            {additionalInfoSVG} {additionalInfoRef}
           </p>
         </a>
       </Link>

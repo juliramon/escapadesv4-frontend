@@ -41,11 +41,15 @@ const PlaceList = ({ user }) => {
         cover={el.cover}
         title={el.title}
         subtitle={el.subtitle}
-        location={`${el.place_locality === undefined ? "" : el.place_locality}${
-          el.place_locality === undefined ? "" : ","
-        } ${el.place_province || el.place_state}, ${el.place_country}`}
+        rating={el.activity_rating || el.place_rating}
+        placeType={el.placeType}
+        categoria={el.categories}
+        duration={el.duration}
         website={el.website}
         phone={el.phone}
+        location={`${
+          el.place_locality === undefined ? el.place_country : el.place_locality
+        }`}
       />
     ));
   }

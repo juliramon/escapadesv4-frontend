@@ -147,7 +147,7 @@ const UserProfile = ({
       linkTo = "/nova-activitat";
       noResultsCTA = (
         <Button
-          className="btn btn-primary text-center"
+          className="btn btn-m btn-dark text-center"
           onClick={() => handleModalVisibility()}
         >
           Add getaway
@@ -160,7 +160,7 @@ const UserProfile = ({
     if (state.userProfile._id === user._id) {
       mainButton = (
         <Button
-          className="btn btn-primary text-center sidebar"
+          className="btn btn-m btn-dark text-center sidebar"
           onClick={() => handleModalVisibility()}
         >
           Editar perfil
@@ -204,7 +204,7 @@ const UserProfile = ({
   } else {
     mainButton = (
       <Button
-        className="btn btn-primary text-center sidebar d-flex align-items-center"
+        className="btn btn-m btn-dark text-center sidebar d-flex align-items-center"
         onClick={() => handleModalVisibilityOffpage()}
       >
         Sign up

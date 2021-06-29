@@ -80,19 +80,17 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
         if (el.type === "activity") {
           location = (
             <span className="listing-location">{`${
-              el.activity_locality === undefined ? "" : el.activity_locality
-            }${el.activity_locality === undefined ? "" : ","} ${
-              el.activity_province || el.activity_state
-            }, ${el.activity_country}`}</span>
+              el.activity_locality === undefined
+                ? el.activity_state
+                : el.activity_locality
+            }`}</span>
           );
         }
         if (el.type === "place") {
           location = (
             <span className="listing-location">{`${
               el.place_locality === undefined ? "" : el.place_locality
-            }${el.place_locality === undefined ? "" : ","} ${
-              el.place_province || el.place_state
-            }, ${el.place_country}`}</span>
+            }`}</span>
           );
         }
         return (
@@ -105,6 +103,9 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
             title={el.title}
             subtitle={el.subtitle}
             rating={el.activity_rating || el.place_rating}
+            placeType={el.placeType}
+            categoria={el.categories}
+            duration={el.duration}
             location={location}
             website={el.website}
             phone={el.phone}
@@ -122,7 +123,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
           />
         </div>
         <div className="homepage-section-title">
-          <h2 className="uppercase">Les escapades més ben valorades</h2>
+          <h2 className="uppercase">Els allotjaments més ben valorades</h2>
         </div>
         <div className="section-listings">
           <div className="section-listings-wrapper">{mostRatedList}</div>
@@ -148,19 +149,17 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
         if (el.type === "activity") {
           location = (
             <span className="listing-location">{`${
-              el.activity_locality === undefined ? "" : el.activity_locality
-            }${el.activity_locality === undefined ? "" : ","} ${
-              el.activity_province || el.activity_state
-            }, ${el.activity_country}`}</span>
+              el.activity_locality === undefined
+                ? el.activity_state
+                : el.activity_locality
+            }`}</span>
           );
         }
         if (el.type === "place") {
           location = (
             <span className="listing-location">{`${
               el.place_locality === undefined ? "" : el.place_locality
-            }${el.place_locality === undefined ? "" : ","} ${
-              el.place_province || el.place_state
-            }, ${el.place_country}`}</span>
+            }`}</span>
           );
         }
         return (
@@ -173,6 +172,9 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
             title={el.title}
             subtitle={el.subtitle}
             rating={el.activity_rating || el.place_rating}
+            placeType={el.placeType}
+            categoria={el.categories}
+            duration={el.duration}
             location={location}
             website={el.website}
             phone={el.phone}
@@ -199,19 +201,17 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
         if (el.type === "activity") {
           location = (
             <span className="listing-location">{`${
-              el.activity_locality === undefined ? "" : el.activity_locality
-            }${el.activity_locality === undefined ? "" : ","} ${
-              el.activity_province || el.activity_state
-            }, ${el.activity_country}`}</span>
+              el.activity_locality === undefined
+                ? el.activity_state
+                : el.activity_locality
+            }`}</span>
           );
         }
         if (el.type === "place") {
           location = (
             <span className="listing-location">{`${
               el.place_locality === undefined ? "" : el.place_locality
-            }${el.place_locality === undefined ? "" : ","} ${
-              el.place_province || el.place_state
-            }, ${el.place_country}`}</span>
+            }`}</span>
           );
         }
         return (
@@ -224,6 +224,9 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
             title={el.title}
             subtitle={el.subtitle}
             rating={el.activity_rating || el.place_rating}
+            placeType={el.placeType}
+            categoria={el.categories}
+            duration={el.duration}
             location={location}
             website={el.website}
             phone={el.phone}
@@ -250,19 +253,17 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
         if (el.type === "activity") {
           location = (
             <span className="listing-location">{`${
-              el.activity_locality === undefined ? "" : el.activity_locality
-            }${el.activity_locality === undefined ? "" : ","} ${
-              el.activity_province || el.activity_state
-            }, ${el.activity_country}`}</span>
+              el.activity_locality === undefined
+                ? el.activity_state
+                : el.activity_locality
+            }`}</span>
           );
         }
         if (el.type === "place") {
           location = (
             <span className="listing-location">{`${
               el.place_locality === undefined ? "" : el.place_locality
-            }${el.place_locality === undefined ? "" : ","} ${
-              el.place_province || el.place_state
-            }, ${el.place_country}`}</span>
+            }`}</span>
           );
         }
         return (
@@ -275,6 +276,9 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
             title={el.title}
             subtitle={el.subtitle}
             rating={el.activity_rating || el.place_rating}
+            placeType={el.placeType}
+            categoria={el.categories}
+            duration={el.duration}
             location={location}
             website={el.website}
             phone={el.phone}
@@ -301,19 +305,17 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
         if (el.type === "activity") {
           location = (
             <span className="listing-location">{`${
-              el.activity_locality === undefined ? "" : el.activity_locality
-            }${el.activity_locality === undefined ? "" : ","} ${
-              el.activity_province || el.activity_state
-            }, ${el.activity_country}`}</span>
+              el.activity_locality === undefined
+                ? el.activity_state
+                : el.activity_locality
+            }`}</span>
           );
         }
         if (el.type === "place") {
           location = (
             <span className="listing-location">{`${
               el.place_locality === undefined ? "" : el.place_locality
-            }${el.place_locality === undefined ? "" : ","} ${
-              el.place_province || el.place_state
-            }, ${el.place_country}`}</span>
+            }`}</span>
           );
         }
         return (
@@ -326,6 +328,9 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
             title={el.title}
             subtitle={el.subtitle}
             rating={el.activity_rating || el.place_rating}
+            placeType={el.placeType}
+            categoria={el.categories}
+            duration={el.duration}
             location={location}
             website={el.website}
             phone={el.phone}

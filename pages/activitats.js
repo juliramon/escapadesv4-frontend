@@ -36,16 +36,20 @@ const ActivityList = () => {
         type={el.type}
         slug={el.slug}
         id={el._id}
-        cover={el.images[0]}
+        cover={el.cover}
         title={el.title}
         subtitle={el.subtitle}
-        location={`${
-          el.activity_locality === undefined ? "" : el.activity_locality
-        } ${el.activity_locality === undefined ? "" : ","} ${
-          el.activity_province || el.activity_state
-        }, ${el.activity_country}`}
+        rating={el.activity_rating || el.place_rating}
+        placeType={el.placeType}
+        categoria={el.categories}
+        duration={el.duration}
         website={el.website}
         phone={el.phone}
+        location={`${
+          el.activity_locality === undefined
+            ? el.activity_country
+            : el.activity_locality
+        }`}
       />
     ));
   }

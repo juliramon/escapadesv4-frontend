@@ -167,7 +167,7 @@ const Search = (props) => {
               Cerca de nou per obtenir altres resultats
             </p>
             <Link href={"/"}>
-              <a className="btn btn-primary text-center">Cercar de nou</a>
+              <a className="btn btn-m btn-dark text-center">Cercar de nou</a>
             </Link>
           </div>
         </div>

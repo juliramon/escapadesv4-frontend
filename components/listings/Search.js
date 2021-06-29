@@ -153,7 +153,7 @@ const Search = (props) => {
               <br />
               Refine your search to get better results.
             </p>
-            <Link to={"/"} className="btn btn-primary text-center">
+            <Link to={"/"} className="btn btn-m btn-dark text-center">
               Search again
             </Link>
           </div>

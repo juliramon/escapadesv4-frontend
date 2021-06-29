@@ -10,15 +10,16 @@
   overflow: hidden;
   display: flex;
   flex-flow: column nowrap;
-  min-height: 247px;
+  min-height: 235px;
 }
 
 .listingCover {
   border-radius: 8px;
-  height: 125px;
+  height: 130px;
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
+  position: relative;
 }
 
 .listingRatingWrapper {
@@ -36,31 +37,44 @@
 
 .listingRating {
   font-size: 0.8em;
-  font-weight: bold;
+  background-color: #ffffff;
+  display: inline-block;
+  padding: 2px 5px;
+  border-radius: 5px;
+  position: absolute;
+  right: 10px;
+  top: 8px;
+  color: #00206b;
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .listingTitle {
-  font-size: 1em;
-  font-weight: 600 !important;
-  margin: 15px 0 5px 0;
+  font-size: 0.95em;
+  margin: 12px 0 2px 0;
 }
 
-.listingSubtitle,
-.listingLocation {
-  font-size: 0.9em;
-  line-height: 1.4em;
-  margin-bottom: 3px;
+.listingSubtitle {
+  font-size: 0.85em;
+  margin: 0;
 }
 
 .listingLocation {
+  font-size: 0.82em;
+  margin: 0;
+}
+
+.listingAdditionalInfo {
   display: flex;
   align-items: center;
-  margin: 5px 0 0 0;
-  opacity: 0.7;
+  margin: 7px 0 0 0;
   font-size: 0.8em;
+  color: #6376a0 !important;
 }
 
-.listingLocation svg {
+.listingAdditionalInfo svg {
   margin-right: 3px;
 }
 
@@ -68,5 +82,5 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 10px -4px -4px -4px;
+  margin: 5px -4px -4px -4px;
 }

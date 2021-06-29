@@ -73,19 +73,19 @@ const CategoryPage = () => {
       if (el.type === "activity") {
         location = (
           <span className="listing-location">{`${
-            el.activity_locality === undefined ? "" : el.activity_locality
-          }${el.activity_locality === undefined ? "" : ","} ${
-            el.activity_province || el.activity_state
-          }, ${el.activity_country}`}</span>
+            el.activity_locality === undefined
+              ? el.activity_country
+              : el.activity_locality
+          }`}</span>
         );
       }
       if (el.type === "place") {
         location = (
           <span className="listing-location">{`${
-            el.place_locality === undefined ? "" : el.place_locality
-          }${el.place_locality === undefined ? "" : ","} ${
-            el.place_province || el.place_state
-          }, ${el.place_country}`}</span>
+            el.place_locality === undefined
+              ? el.place_country
+              : el.place_locality
+          }`}</span>
         );
       }
       return (
@@ -97,9 +97,13 @@ const CategoryPage = () => {
           cover={el.cover}
           title={el.title}
           subtitle={el.subtitle}
-          location={location}
+          rating={el.activity_rating || el.place_rating}
+          placeType={el.placeType}
+          categoria={el.categories}
+          duration={el.duration}
           website={el.website}
           phone={el.phone}
+          location={location}
         />
       );
     });
