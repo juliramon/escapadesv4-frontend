@@ -166,6 +166,10 @@ const PublicSquareBox = ({
     );
     additionalInfoRef = placeTypeModified + " " + "amb encant";
   }
+  let modRating;
+  if (rating && Number.isInteger(rating)) {
+    modRating = `${rating.toString()}.0`;
+  }
   return (
     <div id="listingSquareBox" className={styles.listingSquareBox}>
       <Link href={`/${linkPath}/${slug}`}>
@@ -174,7 +178,7 @@ const PublicSquareBox = ({
             className={styles.listingCover}
             style={{ backgroundImage: `url('${cover}')` }}
           >
-            <div className={styles.listingRating}>{rating}</div>
+            <div className={styles.listingRating}>{modRating || rating}</div>
           </div>
           <h3 className={styles.listingTitle}>{title}</h3>
           <p className={styles.listingSubtitle}>

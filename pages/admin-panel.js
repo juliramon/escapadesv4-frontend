@@ -206,6 +206,7 @@ const AdminPanel = () => {
       linkTo = "/nova-activitat";
       noResultsCTA = (
         <Button
+          variant="none"
           className="btn btn-m btn-dark text-center"
           onClick={handleModalVisibility}
         >
@@ -413,7 +414,11 @@ const AdminPanel = () => {
     if (state.activeTab === "categories") {
       filterBox = (
         <>
-          <Button onClick={handleCategoryModalVisibility}>
+          <Button
+            variant="none"
+            className="btn btn-m btn-dark"
+            onClick={handleCategoryModalVisibility}
+          >
             + Afegir nova categoria
           </Button>
           <br />

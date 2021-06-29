@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { Container, Row, Spinner } from "react-bootstrap";
 import ContentService from "../services/contentService";
-import PublickSquareBox from "../components/listings/PublicSquareBox";
+import PublicSquareBox from "../components/listings/PublicSquareBox";
 import Link from "next/link";
 import NavigationBar from "../components/global/NavigationBar";
 import UserContext from "../contexts/UserContext";
@@ -97,31 +97,37 @@ const Feed = () => {
       if (el.type === "activity") {
         location = (
           <span className="listing-location">{`${
-            el.activity_locality === undefined ? "" : el.activity_locality
-          }${el.activity_locality === undefined ? "" : ","} ${
-            el.activity_province || el.activity_state
-          }, ${el.activity_country}`}</span>
+            el.activity_locality === undefined
+              ? el.activity_country
+              : el.activity_locality
+          }`}</span>
         );
       }
       if (el.type === "place") {
         location = (
           <span className="listing-location">{`${
-            el.place_locality === undefined ? "" : el.place_locality
-          }${el.place_locality === undefined ? "" : ","} ${
-            el.place_province || el.place_state
-          }, ${el.place_country}`}</span>
+            el.place_locality === undefined
+              ? el.place_country
+              : el.place_locality
+          }`}</span>
         );
       }
       return (
-        <PublickSquareBox
+        <PublicSquareBox
           key={el._id}
           type={el.type}
+          slug={el.slug}
+          id={el._id}
           cover={el.cover}
           title={el.title}
           subtitle={el.subtitle}
-          location={location}
+          rating={el.activity_rating || el.place_rating}
+          placeType={el.placeType}
+          categoria={el.categories}
+          duration={el.duration}
           website={el.website}
-          slug={el.slug}
+          phone={el.phone}
+          location={location}
         />
       );
     });

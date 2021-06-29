@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import { Container, Form, Row } from "react-bootstrap";
+import Error404 from "../components/global/Error404";
 import FetchingSpinner from "../components/global/FetchingSpinner";
 import NavigationBar from "../components/global/NavigationBar";
 import PublicSquareBox from "../components/listings/PublicSquareBox";
@@ -33,34 +34,43 @@ const CategoryPage = () => {
   const service = new ContentService();
 
   useEffect(() => {
-    if (router.query.categoria !== undefined) {
-      const fetchData = async () => {
-        setState({ ...state, isFetching: true });
-        const categoryDetails = await service.getCategoryDetails(
-          router.query.categoria
-        );
-        let getResults;
-        if (categoryDetails) {
-          getResults = await service.getCategoryResults(categoryDetails.name);
-        }
-        let hasResults;
-        if (getResults.results.length > 0) {
-          hasResults = true;
+    const fetchData = async () => {
+      setState({ ...state, isFetching: true });
+      const getCategories = await service.getCategories();
+      getCategories.forEach(async (category) => {
+        if (category.slug === router.query.categoria) {
+          const categoryDetails = await service.getCategoryDetails(
+            router.query.categoria
+          );
+          let getResults;
+          if (categoryDetails) {
+            getResults = await service.getCategoryResults(categoryDetails.name);
+          }
+          let hasResults;
+          if (getResults.results.length > 0) {
+            hasResults = true;
+          } else {
+            hasResults = false;
+          }
+          setState({
+            ...state,
+            categoryDetails: categoryDetails,
+            results: getResults.results,
+            hasResults: hasResults,
+            isFetching: false,
+          });
         } else {
-          hasResults = false;
+          setState({ ...state, notFound: true });
         }
-        setState({
-          ...state,
-          categoryDetails: categoryDetails,
-          results: getResults.results,
-          hasResults: hasResults,
-          isFetching: false,
-        });
-      };
-      fetchData();
-    }
+      });
+    };
+    fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryId]);
+
+  if (state.notFound) {
+    return <Error404 />;
+  }
 
   if (state.isFetching) {
     return <FetchingSpinner />;

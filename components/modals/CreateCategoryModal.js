@@ -376,7 +376,13 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
       </Modal.Header>
       <Modal.Body>{categoryPublicationForm}</Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleSubmit}>Crear categoria</Button>
+        <Button
+          variant="none"
+          className="btn btn-m btn-dark"
+          onClick={handleSubmit}
+        >
+          Crear categoria
+        </Button>
       </Modal.Footer>
     </Modal>
   );

@@ -117,8 +117,8 @@ const OrganizationProfile = ({ organizationData }) => {
       contentType = "activitat";
       linkTo = "/nova-activitat";
       noResultsCTA = (
-        <Link href={linkTo} className="buttonDark">
-          <a>Anunciar {contentType}</a>
+        <Link href={linkTo}>
+          <a className="btn btn-m btn-dark">Anunciar {contentType}</a>
         </Link>
       );
       break;
@@ -126,8 +126,8 @@ const OrganizationProfile = ({ organizationData }) => {
       contentType = "allotjament";
       linkTo = "/place-composer";
       noResultsCTA = (
-        <Link to={linkTo} className="buttonDark">
-          Add {contentType}
+        <Link href={linkTo}>
+          <a className="btn btn-m btn-dark">Anunciar {contentType}</a>
         </Link>
       );
       break;
@@ -350,7 +350,7 @@ const OrganizationProfile = ({ organizationData }) => {
         </Head>
         <Container className="spinner d-flex justify-space-between">
           <Spinner animation="border" role="status" variant="primary">
-            <span className="sr-only">Loading...</span>
+            <span className="sr-only">Carregant...</span>
           </Spinner>
         </Container>
       </>

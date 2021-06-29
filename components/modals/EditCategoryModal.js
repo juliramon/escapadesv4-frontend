@@ -437,7 +437,13 @@ const EditCategoryModal = ({
       </Modal.Header>
       <Modal.Body>{categoryPublicationForm}</Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleSubmit}>Editar categoria</Button>
+        <Button
+          variant="none"
+          className="btn btn-m btn-dark"
+          onClick={handleSubmit}
+        >
+          Editar categoria
+        </Button>
       </Modal.Footer>
     </Modal>
   );
