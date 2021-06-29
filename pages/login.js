@@ -273,7 +273,13 @@ const Login = () => {
                     placeholder="6+ caràcters"
                   />
                 </Form.Group>
-                <Button type="submit">Iniciar sessió</Button>
+                <Button
+                  variant="none"
+                  type="submit"
+                  className="btn btn-m btn-dark"
+                >
+                  Iniciar sessió
+                </Button>
               </Form>
             </div>
           </div>

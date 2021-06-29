@@ -9,6 +9,7 @@ import GoogleMapReact from "google-map-react";
 import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
 import ShareModal from "../../components/modals/ShareModal";
+import AdSense from "react-adsense";
 
 const ActivityListing = () => {
   const { user } = useContext(UserContext);
@@ -313,7 +314,7 @@ const ActivityListing = () => {
               height="22"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
-              stroke="#2c3e50"
+              stroke="#00206B"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -336,7 +337,7 @@ const ActivityListing = () => {
 
   const activityCategories = state.activity.categories.map((category, idx) => (
     <li key={idx} className="activity-category">
-      {category} getaway
+      Escapada {category}
     </li>
   ));
 
@@ -434,7 +435,7 @@ const ActivityListing = () => {
                                     height="20"
                                     viewBox="0 0 24 24"
                                     strokeWidth="1.5"
-                                    stroke="#2c3e50"
+                                    stroke="#00206B"
                                     fill="none"
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -454,7 +455,7 @@ const ActivityListing = () => {
                                     height="20"
                                     viewBox="0 0 24 24"
                                     strokeWidth="1.5"
-                                    stroke="#2c3e50"
+                                    stroke="#00206B"
                                     fill="none"
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -472,7 +473,7 @@ const ActivityListing = () => {
                                     height="20"
                                     viewBox="0 0 24 24"
                                     strokeWidth="1.5"
-                                    stroke="#2c3e50"
+                                    stroke="#00206B"
                                     fill="none"
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -565,7 +566,6 @@ const ActivityListing = () => {
                         <div className="listing-description">{description}</div>
                       </Col>
                       <Col lg={1}></Col>
-
                       <Col lg={4}>
                         <aside>
                           <div className="listing-details-box">
@@ -586,7 +586,7 @@ const ActivityListing = () => {
                             <div className="buttons">
                               <a
                                 href={`http://${state.activity.website}`}
-                                className="listing-Website buttonDark"
+                                className="listing-Website btn btn-dark"
                                 title="Reservar"
                               >
                                 <svg
@@ -620,7 +620,7 @@ const ActivityListing = () => {
 
                               <a
                                 href={`tel:${state.activity.phone}`}
-                                className="listingPhone buttonLight"
+                                className="listingPhone btn btn-light"
                                 title="Trucar"
                               >
                                 <svg
@@ -653,7 +653,7 @@ const ActivityListing = () => {
                                   height="22"
                                   viewBox="0 0 24 24"
                                   strokeWidth="1.5"
-                                  stroke="#2c3e50"
+                                  stroke="#00206B"
                                   fill="none"
                                   strokeLinecap="round"
                                   strokeLinejoin="round"
@@ -666,6 +666,14 @@ const ActivityListing = () => {
                               </li>
                             </ul>
                           </div>
+                          <AdSense.Google
+                            client="ca-pub-6252269250624547"
+                            slot="9182372294"
+                            style={{ display: "block" }}
+                            format="auto"
+                            responsive="true"
+                            layoutKey="-gw-1+2a-9x+5c"
+                          />
                         </aside>
                       </Col>
                     </div>

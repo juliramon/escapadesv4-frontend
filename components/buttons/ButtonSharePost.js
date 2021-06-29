@@ -11,7 +11,7 @@ const ButtonSharePost = ({ canPublish }) => {
     return (
       <div className="post-new-content-button">
         <Button
-          className="btn btn-primary text-center sidebar"
+          className="btn btn-m btn-dark text-center sidebar"
           onClick={handleModalVisibility}
         >
           Anunciar nova escapada
@@ -27,7 +27,7 @@ const ButtonSharePost = ({ canPublish }) => {
     return (
       <div className="post-new-content-button">
         <Button
-          className="btn btn-primary text-center sidebar"
+          className="btn btn-m btn-dark text-center sidebar"
           onClick={handleModalVisibility}
         >
           Anunciar nova escapada

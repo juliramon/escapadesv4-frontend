@@ -1,16 +1,50 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Nunito:wght@400;800&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Lora:wght@600;700&display=swap");
+@font-face {
+  font-family: "MADETommySoft-Medium";
+  src: url("../fonts/made-tommy-soft-medium.eot");
+  src: url("../fonts/made-tommy-soft-medium.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/made-tommy-soft-medium.woff2") format("woff2"),
+    url("../fonts/made-tommy-soft-medium.woff") format("woff"),
+    url("../fonts/made-tommy-soft-medium.ttf") format("truetype"),
+    url("../fonts/made-tommy-soft-medium.svg#youworkforthem") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "MADETommySoft";
+  src: url("../fonts/made-tommy-soft-regular.eot");
+  src: url("../fonts/made-tommy-soft-regular.eot?#iefix")
+      format("embedded-opentype"),
+    url("../fonts/made-tommy-soft-regular.woff2") format("woff2"),
+    url("../fonts/made-tommy-soft-regular.woff") format("woff"),
+    url("../fonts/made-tommy-soft-regular.ttf") format("truetype"),
+    url("../fonts/made-tommy-soft-regular.svg#youworkforthem") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+$dark-blue: #00206b;
+$medium-blue: #3a4887;
+$soft-blue: #ebf1ff;
+$white: #ffffff;
+$dark-red: #fd8281;
+$electric-blue: #002b8f;
+$background-input: #f2f7f9;
 
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: "Nunito", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
+  color: $dark-blue !important;
+  font-size: 16px;
+  font-family: "MADETommySoft", -apple-system, BlinkMacSystemFont, Segoe UI,
+    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+    sans-serif !important;
 }
 
 a {
-  color: #00206b !important;
+  color: $electric-blue;
   text-decoration: none;
   cursor: pointer !important;
 }
@@ -21,45 +55,32 @@ a {
 
 /*---GLOBAL STYLES---*/
 
-$dark-text: #00206b;
-$medium-text: #3a4887;
-$soft-text: #abc3f4;
-$white-text: #ffffff;
-$red-text: #fd8281;
-$input-background: #f2f7f9;
-$input-placeholder: #173572;
-$input-text: #173572;
-$input-focus-border: #3a4887;
-$dark-button-background: #3a4887;
-$dark-button-border: #3a4887;
-$dark-button-color: #ffffff;
-$soft-button-background: #ffffff;
-$soft-button-border: #3a4887;
-$soft-button-color: #3a4887;
-$links-color: #3a4887;
-$active-tab-background: #abc3f4;
-$hover-tab-background: #f2f7f9;
+.btn {
+  border-radius: 8px !important;
+  transition: 0.3s;
+}
 
-.buttonDark,
-.buttonLight {
-  border-radius: 8px;
-  border: 1px solid $dark-button-background;
+.btn-m {
+  padding: 10px 14px !important;
+  font-size: 0.9em !important;
+}
+
+.btn-dark {
+  border: 1px solid $electric-blue !important;
+  background-color: $electric-blue !important;
+  color: $white !important;
   flex: 1;
-  margin: 4px;
-  text-align: center;
-  padding: 8px 10px;
-  font-size: 14px;
 }
 
 .btn-light {
-  color: #ff8d76 !important;
-  background-color: #ffe4df !important;
+  color: $electric-blue !important;
+  background-color: $white !important;
+  border: 1px solid $electric-blue !important;
+  flex: 1;
 }
 
-.buttonDark {
-  background-color: $dark-button-background !important;
-  color: $white-text !important;
-  transition: 0.3s;
+#listingSquareBox .btn {
+  margin: 4px;
 }
 
 .mw-1600 {
@@ -108,9 +129,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Inter", serif;
-  font-weight: 800 !important;
-  color: $dark-text;
+  color: $dark-blue;
+  font-family: "MADETommySoft-Medium", sans-serif;
+  letter-spacing: 0.2px;
 }
 
 p,
@@ -118,8 +139,8 @@ a,
 ul,
 ol,
 span {
-  font-family: "Nunito", sans-serif;
-  color: $medium-text;
+  color: $dark-blue;
+  letter-spacing: 0.1px;
 }
 
 a,
@@ -128,7 +149,7 @@ a:visited,
 a:hover,
 a:active {
   text-decoration: none !important;
-  color: $links-color;
+  color: $electric-blue;
 }
 
 .breadcrumb {
@@ -161,8 +182,8 @@ button,
 .form-control:focus {
   outline: none !important;
   border: none !important;
-  background-color: $input-background !important;
-  box-shadow: inset 0 0 0 3px $input-focus-border !important;
+  background-color: $soft-blue !important;
+  box-shadow: inset 0 0 0 3px $electric-blue !important;
 }
 
 button:focus,
@@ -175,15 +196,14 @@ button:focus,
 
 form .form-label {
   font-size: 0.9em;
-  font-weight: bold;
 }
 form .form-control {
   border: none;
-  background-color: $input-background;
-  color: $input-text;
+  background-color: $soft-blue;
+  color: $dark-blue;
 }
 form .form-control::placeholder {
-  color: $input-placeholder;
+  color: $medium-blue;
 }
 
 form button {
@@ -197,17 +217,15 @@ form button {
 
 .btn.sidebar {
   justify-content: center;
-  color: #ffffff;
+  color: #ffffff !important;
   padding: 12px 15px;
-  font-weight: bold;
   width: 100%;
   margin-top: 20px;
 }
 
 .btn-primary {
-  background-color: $dark-button-background !important;
-  color: $dark-button-color !important;
-  font-weight: bold !important;
+  background-color: $dark-blue !important;
+  color: $electric-blue !important;
 }
 
 .alert {
@@ -248,11 +266,8 @@ header {
   z-index: 1001;
   position: sticky;
   top: 0;
-  background-color: #ffffff;
-  // border-bottom: 1px solid #e8e8e8;
+  background-color: $white;
   border: none !important;
-  box-shadow: 0px 8px 10px rgb(0 0 0 / 6%) !important;
-  margin-bottom: 20px;
 }
 
 nav {
@@ -266,7 +281,7 @@ nav {
   }
   .nav-link,
   a:not(.navbar-brand) {
-    color: $dark-text !important;
+    color: $dark-blue;
     font-size: 0.95em;
     padding-left: 0.85rem !important;
     padding-right: 0.85rem !important;
@@ -295,7 +310,7 @@ nav {
 
   .nav-col.right .navbar-nav.search-box {
     align-items: center;
-    background-color: $input-background;
+    background-color: $background-input;
     padding-left: 10px;
     border-radius: 7px;
     margin: 0 30px;
@@ -315,7 +330,7 @@ nav {
     }
   }
   .nav-col.right .form-control {
-    background-color: $input-background;
+    background-color: $background-input;
     border: none;
     padding-left: 5px;
   }
@@ -325,12 +340,6 @@ nav {
   .nav-col.right .navbar-nav:first-child {
     flex: 1;
   }
-  .btn.signup {
-    background-color: $dark-button-background;
-    color: $dark-button-color !important;
-    font-weight: bold;
-  }
-
   .nav-col.right .logged-user .nav-link,
   .nav-col.right #logged-user .nav-link {
     display: flex;
@@ -387,7 +396,7 @@ nav {
   .logged-user ul li button {
     padding: 10px 15px !important;
     display: block !important;
-    color: $dark-text !important;
+    color: $dark-blue !important;
     background-color: transparent !important;
     width: 100%;
     text-align: left;
@@ -396,7 +405,7 @@ nav {
   #logged-user ul li button:hover,
   .logged-user ul li a:hover,
   .logged-user ul li button:hover {
-    background-color: $input-background !important;
+    background-color: $soft-blue !important;
     border-radius: 8px;
   }
   #logged-user ul li a svg,
@@ -487,17 +496,16 @@ nav {
       z-index: 1000;
       flex: 0.7;
       .header-title {
-        font-size: 2.5rem;
-        line-height: 1.25em;
-        color: $dark-text;
-        font-weight: bold;
+        font-size: 2.6rem;
+        line-height: 1.15em;
+        color: $dark-blue;
       }
       .header-subtitle {
         font-size: 1.2rem;
         max-width: 450px;
-        margin-top: 20px;
-        line-height: 1.3;
-        color: $dark-text;
+        margin-top: 15px;
+        line-height: 1.5em;
+        color: $medium-blue;
       }
       .search-form {
         margin-top: 35px;
@@ -510,22 +518,23 @@ nav {
             align-items: center;
           }
           button {
-            color: $dark-text;
+            color: $electric-blue;
             padding: 6px 12px;
-            border: 1px solid $dark-text !important;
+            border: 1px solid $electric-blue !important;
             margin-right: 5px;
             font-size: 0.9rem;
           }
           button.active {
-            background: $dark-text;
-            color: $white-text;
+            background: $electric-blue;
+            border: 1px solid $electric-blue;
+            color: $white;
           }
         }
         .header-form {
           margin-top: 15px;
           border-radius: 12px;
           box-shadow: 2px 5px 20px rgb(0 0 0 / 20%);
-          background-color: $white-text;
+          background-color: $white;
           padding: 10px;
           .form-group {
             position: relative;
@@ -539,7 +548,7 @@ nav {
               font-size: 1.05em;
               margin-bottom: 0;
               z-index: 100;
-              color: $dark-text;
+              color: $dark-blue;
             }
             .form-control {
               font-size: 0.99em;
@@ -547,8 +556,8 @@ nav {
               padding: 35px 15px 12px 15px;
               height: auto;
               border: none;
-              background-color: $white-text;
-              color: $dark-text;
+              background-color: $white;
+              color: $dark-blue;
               text-align: left;
               span {
                 padding: 4px 10px;
@@ -610,7 +619,7 @@ nav {
           .pac-item label {
             margin-left: 30px;
             font-size: 1.3em;
-            color: $dark-text;
+            color: $dark-blue;
             height: 100%;
             width: 100%;
             padding: 10px 15px;
@@ -622,7 +631,7 @@ nav {
           flex: 0;
         }
         .form-group .button-submit {
-          font-weight: bold;
+          color: $white !important;
           padding: 23px 15px;
           min-width: 100px;
           width: 100px;
@@ -671,16 +680,12 @@ nav {
   }
   .homepage-section {
     padding: 60px 0 0 0;
-    .uppercase {
-      text-transform: uppercase;
-      font-family: "Nunito";
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      font-size: 1.15rem;
+    h2 {
+      font-size: 1.6rem;
       margin-bottom: 2px;
     }
     p {
-      opacity: 0.7;
+      color: $medium-blue;
     }
     .section-listings {
       margin-top: 20px;
@@ -733,10 +738,8 @@ nav {
         }
       }
       h3 {
-        color: #000000;
+        color: #00206b;
         font-size: 1.2em;
-        font-family: "Nunito";
-        font-weight: 600;
         margin: 0;
       }
       .counter {
@@ -768,7 +771,7 @@ nav {
 
 #footer {
   padding: 60px 0;
-  border-top: 1px solid $hover-tab-background;
+  border-top: 1px solid $soft-blue;
   .footer-intro {
     display: flex;
     flex-flow: column nowrap;
@@ -786,9 +789,7 @@ nav {
     }
   }
   .footer-header {
-    font-family: "INTER";
     font-size: 1.2em;
-    font-weight: bold;
     margin-bottom: 20px;
   }
   ul {
@@ -796,18 +797,23 @@ nav {
     margin: 0;
     padding: 0;
     li {
-      padding: 2px 0;
+      padding: 4px 0;
+      font-size: 0.9em;
+      line-height: 1.2em;
+      li:last-child {
+        padding-bottom: 0;
+      }
       a {
-        color: $dark-text;
+        color: $dark-blue;
         transition: 0.3s;
         svg {
           margin-right: 8px;
         }
       }
       a:hover {
-        color: $soft-text;
+        color: $soft-blue;
         svg {
-          stroke: $soft-text;
+          stroke: $soft-blue;
           transition: 0.3s;
         }
       }
@@ -844,7 +850,6 @@ nav {
   }
   .signup-col.left .title-area h2 {
     font-size: 2em;
-    font-weight: bold;
     max-width: 330px;
     opacity: 0.4;
     margin-top: 50px;
@@ -869,9 +874,8 @@ nav {
     margin-top: 30px;
   }
   .social-signup .btn.google {
-    background: $dark-button-background;
-    color: $dark-button-color;
-    font-weight: bold;
+    background: $dark-blue;
+    color: $electric-blue;
     padding-left: 30px;
     padding-right: 30px;
     flex: 1;
@@ -890,14 +894,13 @@ nav {
   }
   .signup-col-wrapper.right p.sub-h1 {
     font-size: 1.1em;
-    color: $dark-text;
+    color: $dark-blue;
   }
   form {
     margin-top: 35px;
   }
   form .form-label {
     font-size: 0.9em;
-    font-weight: bold;
   }
   form .form-control {
     background-color: #f1f1f1ef;
@@ -976,13 +979,13 @@ nav {
     a {
       display: flex;
       align-items: center;
-      color: $dark-text;
+      color: $dark-blue;
     }
     svg {
       margin-right: 6px;
     }
     li:hover {
-      background-color: $input-background;
+      background-color: $soft-blue;
       border-radius: 8px;
       cursor: pointer;
     }
@@ -1011,9 +1014,7 @@ nav {
       .organization-right {
         h3 {
           margin: 0;
-          font-family: "Nunito", sans-serif;
           font-size: 1em;
-          font-weight: 400 !important;
         }
       }
     }
@@ -1080,7 +1081,7 @@ nav {
     }
     ul li {
       margin: 8px;
-      background-color: $hover-tab-background;
+      background-color: $soft-blue;
       border-radius: 8px;
       padding: 18px 10px;
       display: flex;
@@ -1115,7 +1116,7 @@ nav {
         display: none;
       }
       .avatar {
-        border: 5px solid $white-text;
+        border: 5px solid $white;
         position: relative;
         cursor: pointer;
         max-height: 130px !important;
@@ -1273,9 +1274,7 @@ nav {
       .organization-right {
         h3 {
           margin: 0;
-          font-family: "Nunito", sans-serif;
           font-size: 15px;
-          font-weight: 400 !important;
         }
       }
     }
@@ -1284,7 +1283,6 @@ nav {
   .cover {
     span {
       font-size: 0.9em;
-      font-weight: bold;
       display: inline-block;
       margin-bottom: 0.5rem;
     }
@@ -1297,17 +1295,17 @@ nav {
       cursor: pointer !important;
     }
     .image-drop-zone {
-      background-color: $input-background;
+      background-color: $soft-blue;
       width: 100%;
       height: 176px;
       display: flex;
       align-items: center;
       justify-content: center;
       border-radius: 8px;
-      border: 1px dashed $active-tab-background;
+      border: 1px dashed $electric-blue;
 
       svg {
-        stroke: $active-tab-background;
+        stroke: $electric-blue;
       }
     }
     input[type="file"] {
@@ -1315,7 +1313,7 @@ nav {
     }
   }
   .location-control {
-    background-color: $input-background;
+    background-color: $soft-blue;
     border: none;
     border-radius: 8px;
     display: block;
@@ -1323,8 +1321,7 @@ nav {
     height: calc(1.5em + 0.75rem + 2px);
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
-    font-weight: 400;
-    color: $input-text;
+    color: $dark-blue;
   }
   .location-control::placeholder {
     color: #173572;
@@ -1351,7 +1348,7 @@ nav {
 }
 
 .pac-item:hover {
-  background-color: $input-background;
+  background-color: $soft-blue;
   cursor: pointer;
 }
 
@@ -1370,19 +1367,19 @@ nav {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background: $white-text;
+  background: $white;
   border-top: 1px solid rgb(232, 232, 232);
   padding: 15px 0;
   .buttons button:last-child {
-    background-color: $dark-button-background;
-    color: $dark-button-color;
+    background-color: $dark-blue;
+    color: $electric-blue;
     padding: 12px 15px;
     min-width: 160px;
-    font-weight: bold;
   }
   .buttons button:disabled {
     opacity: 1;
-    background-color: $active-tab-background;
+    background-color: $medium-blue;
+    color: $white;
     cursor: not-allowed;
   }
   .col {
@@ -1395,16 +1392,16 @@ nav {
     max-width: 30%;
   }
   span {
-    color: $input-text;
+    color: $dark-blue;
     opacity: 0.6;
   }
   .progress {
-    background-color: $hover-tab-background;
+    background-color: $soft-blue;
     border-radius: 100px;
     height: 0.8rem;
   }
   .progress-bar {
-    background-color: $dark-button-background;
+    background-color: $dark-blue;
     border-radius: 100px;
   }
 }
@@ -1439,7 +1436,6 @@ nav {
     text-transform: uppercase;
     font-size: 0.8em;
     letter-spacing: 2px;
-    font-weight: bold;
     opacity: 0.7;
     margin-bottom: 15px;
   }
@@ -1447,22 +1443,21 @@ nav {
     padding: 10px 15px;
     margin: 6px 0;
     font-size: 1.2em;
-    font-weight: bold;
   }
   .col.left .list-item svg {
     margin-right: 6px;
   }
   .col.left .list-item.active {
-    background-color: $active-tab-background;
+    background-color: $electric-blue;
     border-radius: 8px;
     cursor: pointer;
-    color: $dark-text;
+    color: $dark-blue;
     svg {
-      stroke: $dark-text;
+      stroke: $dark-blue;
     }
   }
   .col.left .list-item:hover:not(.active) {
-    background-color: $input-background;
+    background-color: $soft-blue;
     border-radius: 8px;
     cursor: pointer;
   }
@@ -1478,7 +1473,6 @@ nav {
       margin: 35px 0 25px 0;
       text-align: center;
       font-size: 1.1em;
-      font-weight: bold;
     }
     a,
     button {
@@ -1531,7 +1525,7 @@ nav {
   background-color: #f1f1f1;
   border-bottom: 1px solid #cfcfcf;
   a {
-    color: $dark-text;
+    color: $dark-blue;
   }
   .image,
   .title,
@@ -1563,8 +1557,6 @@ nav {
   .title {
     font-size: 1.1em;
     margin: 0;
-    font-family: "INTER";
-    font-weight: bold;
     min-width: 437.5px;
     max-width: 437.5px;
     overflow: hidden;
@@ -1615,7 +1607,7 @@ nav {
     padding: 10px 15px !important;
     display: block !important;
     align-items: center;
-    color: $dark-text;
+    color: $dark-blue;
     font-size: 0.95em;
     text-align: left;
     width: 100%;
@@ -1623,7 +1615,7 @@ nav {
   }
   .dropdown-menu ul li a:hover,
   .dropdown-menu ul li button:hover {
-    background-color: $input-background;
+    background-color: $soft-blue;
     border-radius: 8px;
   }
   .dropdown-menu ul li a svg,
@@ -1740,7 +1732,6 @@ nav {
   }
 
   .block-title {
-    font-weight: bold;
     margin-bottom: 8px;
     display: block;
     font-size: 0.85em;
@@ -1799,7 +1790,7 @@ nav {
       bottom: 20px;
       margin: 0 25px;
       h3 {
-        color: $white-text;
+        color: $white;
         text-align: center;
       }
     }
@@ -1838,8 +1829,6 @@ nav {
   }
   .uppercase {
     text-transform: uppercase;
-    font-family: "Nunito";
-    font-weight: 600;
     letter-spacing: 0.5px;
   }
   .featured-stories {
@@ -1882,7 +1871,7 @@ nav {
       .text-area {
         font-size: 1em;
         line-height: 1.4em;
-        color: $dark-text;
+        color: $dark-blue;
         opacity: 0.7;
         margin: 0;
       }
@@ -1910,7 +1899,6 @@ nav {
             .index-ref {
               font-size: 2em;
               opacity: 0.3;
-              font-family: "Lora", serif;
               margin: 0;
               padding: 0;
               line-height: 0.9em;
@@ -1945,10 +1933,8 @@ nav {
             .listing-title {
               margin-right: 20px;
               h3 {
-                color: #000000;
+                color: #00206b;
                 font-size: 1.2em;
-                font-family: "Nunito";
-                font-weight: 600;
               }
             }
           }
@@ -2021,7 +2007,6 @@ nav {
               .author-name span {
                 font-size: 0.9em;
                 opacity: 0.5;
-                font-weight: bold;
               }
             }
             .listing-title {
@@ -2055,7 +2040,7 @@ nav {
         border: 1px solid #e8e8e8;
         border-radius: 8px;
         margin: 5px;
-        color: #000000;
+        color: #00206b;
         display: inline-flex;
         align-items: center;
       }
@@ -2141,7 +2126,6 @@ nav {
     height: 130px;
     margin-right: 20px;
     background: #ffffff;
-    border: 1px solid #abc3f4;
     border-radius: 8px;
     overflow: hidden;
     display: flex;
@@ -2155,8 +2139,6 @@ nav {
   .listing-content {
     .listing-title {
       font-size: 1.2em;
-      font-weight: bold;
-      font-family: "Nunito";
       margin-top: 0;
     }
     .listing-subtitle {
@@ -2173,7 +2155,6 @@ nav {
   }
   .listing-action a {
     padding: 15px 25px;
-    font-weight: 600;
   }
 }
 /*---LISTINGS BOX STYLES---*/
@@ -2220,14 +2201,12 @@ nav {
           }
         }
         li.listing-location span {
-          font-weight: bold;
           border-bottom: 2px solid #000;
         }
       }
     }
     .listing-title {
-      font-weight: bold;
-      font-size: 1.9em;
+      font-size: 2em;
       margin: 0 40px 0 0;
     }
     .listing-bookmark-wrapper {
@@ -2244,7 +2223,7 @@ nav {
     }
     .listing-bookmark {
       border: none;
-      background-color: $hover-tab-background;
+      background-color: $soft-blue;
       border-radius: 100px !important;
       width: 40px;
       height: 40px;
@@ -2255,7 +2234,7 @@ nav {
       transition: 0.3s;
     }
     .listing-bookmark:hover {
-      background-color: $active-tab-background;
+      background-color: $electric-blue;
     }
   }
   .listing-cover {
@@ -2291,8 +2270,7 @@ nav {
     .listing-subtitle {
       font-size: 1.2em;
       max-width: 450px;
-      color: $input-text;
-      font-weight: bold;
+      color: $dark-blue;
       line-height: 1.5em;
     }
     .listing-owner {
@@ -2318,18 +2296,17 @@ nav {
       }
       .listing-owner-name {
         margin-top: 6px;
-        font-weight: bold;
-        border-bottom: 2px solid #000000;
+        border-bottom: 2px solid #00206b;
       }
     }
     .listing-details-body {
-      border-top: 1px solid $hover-tab-background;
-      border-bottom: 1px solid $hover-tab-background;
+      border-top: 1px solid $soft-blue;
+      border-bottom: 1px solid $soft-blue;
       padding: 20px 0;
       margin: 25px 0;
       justify-content: space-between;
       span {
-        font-weight: bold;
+        font-family: "MADETommySoft-Medium";
         margin-right: 6px;
       }
       ul {
@@ -2358,11 +2335,12 @@ nav {
     .listing-description {
       font-size: 1.1em;
       line-height: 1.6em;
-      color: $medium-text;
+      color: $medium-blue;
     }
   }
   .listing-details-box {
-    box-shadow: 0px 8px 10px rgb(0 0 0 / 6%);
+    background-color: #ffffff;
+    border: 1px solid #d0d7e6;
     border-radius: 8px;
     padding: 20px;
     .buttons {
@@ -2375,6 +2353,9 @@ nav {
           margin-right: 15px;
         }
       }
+      a:first-child {
+        margin-bottom: 10px;
+      }
     }
   }
   .listing-map {
@@ -2382,14 +2363,13 @@ nav {
     width: 100%;
     border-radius: 8px;
     overflow: hidden;
-    border: 1px solid $hover-tab-background;
+    border: 1px solid $soft-blue;
     margin-bottom: 10px;
   }
   .listing-activity-hours {
     padding: 15px 0;
-    border-bottom: 1px solid $hover-tab-background;
+    border-bottom: 1px solid $soft-blue;
     li.header {
-      font-weight: bold;
       margin-bottom: 5px;
       display: flex;
       align-items: center;
@@ -2415,7 +2395,7 @@ nav {
     margin: 0;
     li {
       padding: 15px 0;
-      border-bottom: 1px solid $hover-tab-background;
+      border-bottom: 1px solid $soft-blue;
       display: flex;
       svg {
         margin-right: 6px;
@@ -2521,7 +2501,7 @@ nav {
       text-align: center;
       font-size: 0.8rem;
       margin: 12px 0;
-      color: $dark-text;
+      color: $dark-blue;
       opacity: 0.8;
     }
   }
@@ -2620,7 +2600,6 @@ nav {
     h2 {
       text-align: center;
       font-size: 1.9em;
-      font-weight: bold;
       line-height: 1.4em;
     }
     .link-instagram {
@@ -2631,7 +2610,6 @@ nav {
       display: flex;
       align-items: center;
       color: #f03e51;
-      font-weight: bold;
       letter-spacing: 0.8px;
       svg {
         margin-left: 12px;
@@ -2728,9 +2706,6 @@ nav {
     ul li {
       padding: 3px 0;
     }
-    li span {
-      font-weight: bold;
-    }
   }
   .box .col.center {
     flex: 1;
@@ -2777,7 +2752,6 @@ nav {
         padding: 10px 15px;
         margin: 0 6px;
         font-size: 1.2em;
-        font-weight: bold;
       }
       button:first-child {
         margin-left: 0;
@@ -2786,16 +2760,16 @@ nav {
         margin-right: 0;
       }
       button.active {
-        background-color: $active-tab-background;
+        background-color: $electric-blue;
         border-radius: 8px;
         cursor: pointer;
-        color: $dark-text;
+        color: $dark-blue;
         svg {
-          stroke: $dark-text;
+          stroke: $dark-blue;
         }
       }
       button:hover:not(.active) {
-        background-color: $input-background;
+        background-color: $soft-blue;
         border-radius: 8px;
         cursor: pointer;
       }
@@ -2808,9 +2782,7 @@ nav {
     }
     .user-listings {
       .title-area h2 {
-        font-family: "INTER";
         font-size: 1.6em;
-        font-weight: bold;
       }
       .box.bordered {
         padding: 10px 20px;
@@ -2836,9 +2808,6 @@ nav {
         height: auto;
         margin-bottom: 25px;
         max-height: 240px;
-      }
-      .profile-owner-name {
-        font-weight: bold;
       }
     }
   }
@@ -2969,7 +2938,7 @@ nav {
       max-width: 65%;
       p {
         font-size: 16px;
-        color: $dark-text;
+        color: $dark-blue;
 
         margin-bottom: 0;
       }
@@ -3019,7 +2988,6 @@ nav {
     }
     h3 {
       font-size: 16px;
-      font-weight: bold;
       margin-bottom: 10px;
     }
     .profile-map {
@@ -3068,10 +3036,6 @@ nav {
   ul li {
     padding: 3px 0;
   }
-  li span {
-    font-weight: bold;
-  }
-
   .col.right {
     .box.wrapper {
       margin: -15px;
@@ -3085,13 +3049,11 @@ nav {
         margin-bottom: 15px;
       }
       h3 {
-        font-family: "INTER";
         font-size: 1.2em;
-        font-weight: bold;
         margin-bottom: 0;
       }
       width: 22.6%;
-      border: 1px solid $active-tab-background;
+      border: 1px solid $electric-blue;
       border-radius: 8px;
       margin: 15px;
       .box-wrapper {
@@ -3135,9 +3097,6 @@ nav {
   ul li {
     padding: 3px 0;
   }
-  li span {
-    font-weight: bold;
-  }
   .box.empty {
     flex-flow: column nowrap;
     align-items: center;
@@ -3149,7 +3108,6 @@ nav {
       margin: 35px 0 25px 0;
       text-align: center;
       font-size: 1.1em;
-      font-weight: bold;
     }
     a,
     button {
@@ -3174,9 +3132,6 @@ nav {
   .box .col.center {
     .top-nav-wrapper .top-nav-subtitle {
       max-width: 100%;
-      span {
-        font-weight: bold;
-      }
     }
   }
   .box.empty {
@@ -3191,9 +3146,6 @@ nav {
       height: auto;
       margin-bottom: 25px;
       max-height: 240px;
-    }
-    .profile-owner-name {
-      font-weight: bold;
     }
   }
 }
@@ -3213,9 +3165,6 @@ nav {
   .box .col.center {
     .top-nav-wrapper .top-nav-subtitle {
       max-width: 100%;
-      span {
-        font-weight: bold;
-      }
     }
     .selection-box {
       padding: 30px 0;
@@ -3225,10 +3174,10 @@ nav {
       margin: -6px;
       .form-check {
         padding: 5px 12px;
-        background: $hover-tab-background;
+        background: $soft-blue;
         border-radius: 8px;
         margin: 6px;
-        color: $dark-text;
+        color: $dark-blue;
         display: flex;
         align-items: center;
         .form-check-input {
@@ -3276,23 +3225,22 @@ nav {
     padding: 10px 15px;
     margin: 6px 0;
     font-size: 1.2em;
-    font-weight: bold;
   }
 
   .col.left .list-item svg {
     margin-right: 6px;
   }
   .col.left .list-item.active {
-    background-color: $active-tab-background;
+    background-color: $electric-blue;
     border-radius: 8px;
     cursor: pointer;
-    color: $dark-text;
+    color: $dark-blue;
     svg {
-      stroke: $dark-text;
+      stroke: $dark-blue;
     }
   }
   .col.left .list-item:hover:not(.active) {
-    background-color: $input-background;
+    background-color: $soft-blue;
     border-radius: 8px;
     cursor: pointer;
   }
@@ -3330,7 +3278,6 @@ nav {
   .box .col.right .privacy p {
     margin: 0;
     font-size: 1.25em;
-    font-weight: bold;
   }
   .box .col.right .privacy .left {
     max-width: 80%;
@@ -3384,7 +3331,7 @@ nav {
     text-decoration: underline;
   }
   button:hover {
-    background-color: $active-tab-background;
+    background-color: $electric-blue;
 
     border-radius: 100px;
   }
@@ -3404,13 +3351,11 @@ nav {
     justify-content: space-between;
     height: 100%;
     h3 {
-      font-family: "Nunito";
-      font-weight: bold;
       font-size: 1.3rem;
       margin-bottom: 10px;
     }
     a {
-      color: $soft-button-color;
+      color: $electric-blue;
       display: flex;
       align-items: center;
       svg {
@@ -3430,14 +3375,12 @@ nav {
   font-size: 16px;
   color: #000 !important;
   font-style: normal !important;
-  font-family: "Nunito", sans-serif !important;
   left: 12px !important;
 }
 
 .ql-container,
 .ql-editor {
   font-size: 16px !important;
-  font-family: "Nunito", sans-serif !important;
 }
 
 .ql-editor p,
@@ -3472,7 +3415,6 @@ nav {
       .form-label {
         margin: 0;
         justify-content: flex-start;
-        font-weight: 400;
         background: #fff;
         border-radius: 3px;
         box-shadow: 0 0 0 1px rgba(50, 50, 93, 0.1),
@@ -3543,8 +3485,6 @@ nav {
   h2 {
     font-size: 14px;
     text-transform: uppercase;
-    font-family: "Nunito";
-    font-weight: bold;
     letter-spacing: 1px;
     margin-left: 15px;
   }
@@ -3584,11 +3524,9 @@ nav {
   }
   p,
   ul {
-    font-family: "Inter";
     font-size: 16px;
-    color: #6b7280;
+    color: $medium-blue;
     line-height: 28px;
-    font-weight: 400;
     margin-bottom: 20px;
     li:not(:last-child) {
       margin-bottom: 20px;
@@ -3604,19 +3542,20 @@ nav {
       padding: 0;
       list-style: none;
       li.sidebar-list-header {
-        color: #000000;
+        color: $dark-blue;
         text-transform: uppercase;
         font-size: 12px;
-        font-weight: 600;
         letter-spacing: 0.5px;
       }
       li {
         margin: 0;
         line-height: 22px;
         padding: 6px 0;
+        a {
+          color: $dark-blue;
+        }
         ul {
           margin-left: 18px;
-          opacity: 0.5;
           li {
             line-height: 22px;
             padding: 6px 0;
@@ -3678,8 +3617,8 @@ nav {
         margin-top: 15px;
       }
       .btn {
-        background-color: $dark-button-background;
-        color: $white-text !important;
+        background-color: $dark-blue;
+        color: $white !important;
         padding: 12px 24px;
         margin-top: 20px;
       }
@@ -3690,7 +3629,6 @@ nav {
         text-align: center;
         h4 {
           font-size: 1em;
-          font-weight: 500 !important;
           color: #3a4887;
         }
         .logos-bar {
@@ -3753,8 +3691,7 @@ nav {
     list-style: none;
     text-align: center;
     li.active {
-      font-weight: bold;
-      color: $dark-text;
+      color: $dark-blue;
     }
     li {
       display: flex;
@@ -3885,7 +3822,6 @@ nav {
               border-radius: 100px;
               padding: 3px 12px;
               display: inline-block;
-              font-weight: 600;
               font-size: 13px;
             }
           }
@@ -3897,7 +3833,6 @@ nav {
             width: 260px;
             span {
               font-size: 14px;
-              font-weight: 600;
               line-height: 1.5em !important;
               display: inline-block;
             }
@@ -3922,7 +3857,6 @@ nav {
   margin-top: 30px;
   .page-header-uppercase {
     text-transform: uppercase;
-    font-weight: bold;
     font-size: 0.9em;
     letter-spacing: 2px;
     margin: 20px 0 5px 0;
@@ -3934,7 +3868,7 @@ nav {
   .company-registration-form {
     margin-top: 30px;
     .form-label {
-      color: $dark-text;
+      color: $dark-blue;
     }
     .form-group-wrapper {
       display: flex;
@@ -4031,9 +3965,6 @@ nav {
         cursor: pointer;
         background-color: #f2f7f9;
         box-shadow: -3px 8px 20px rgba(0, 32, 107, 0.2);
-        .btn {
-          font-weight: bold;
-        }
       }
     }
   }
@@ -4094,7 +4025,7 @@ nav {
     top: 64px;
     background: white;
     padding: 20px;
-    border-bottom: 1px solid $dark-button-border;
+    border-bottom: 1px solid $electric-blue;
     .navbar-nav:nth-child(2) {
       display: flex;
       flex-direction: column !important;
@@ -4102,7 +4033,7 @@ nav {
       a {
         width: 100%;
         padding: 10px 0;
-        border-bottom: 1px solid $dark-button-border;
+        border-bottom: 1px solid $electric-blue;
       }
     }
     .navbar-nav:nth-child(3) {
@@ -4115,7 +4046,7 @@ nav {
         height: 36px;
       }
       a:first-child {
-        border: 1px solid $dark-button-border;
+        border: 1px solid $electric-blue;
         font-size: 0.95em;
         font-size: 0.95em;
         padding-left: 0.85rem !important;
@@ -4241,7 +4172,7 @@ nav {
     left: 0px;
     margin: 0 auto;
     svg {
-      stroke: $dark-text;
+      stroke: $dark-blue;
     }
   }
 

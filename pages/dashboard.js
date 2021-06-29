@@ -150,7 +150,7 @@ const Dashboard = () => {
       linkTo = "/nova-activitat";
       noResultsCTA = (
         <Link href={linkTo}>
-          <a className="btn btn-primary text-center">
+          <a className="btn btn-m btn-dark text-center">
             Anunciar nova {contentType}
           </a>
         </Link>
@@ -161,7 +161,7 @@ const Dashboard = () => {
       linkTo = "/nou-allotjament";
       noResultsCTA = (
         <Link href={linkTo}>
-          <a className="btn btn-primary text-center">
+          <a className="btn btn-m btn-dark text-center">
             Anunciar nou {contentType}
           </a>
         </Link>
@@ -172,7 +172,7 @@ const Dashboard = () => {
       linkTo = "/nova-historia";
       noResultsCTA = (
         <Link href={linkTo}>
-          <a className="btn btn-primary text-center">
+          <a className="btn btn-m btn-dark text-center">
             Publicar nova {contentType}
           </a>
         </Link>
@@ -183,7 +183,7 @@ const Dashboard = () => {
       linkTo = "/nova-activitat";
       noResultsCTA = (
         <Button
-          className="btn btn-primary text-center"
+          className="btn btn-m btn-dark text-center"
           onClick={handleModalVisibility}
         >
           Recomanar una escapada

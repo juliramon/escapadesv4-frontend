@@ -304,7 +304,7 @@ const configuracio = () => {
           <div className="buttons">
             <Button className="btn">Cancel·lar</Button>
             <Button
-              className="btn btn-primary"
+              className="btn btn-m btn-dark"
               type="submit"
               onClick={handleSubmit}
             >
@@ -380,7 +380,7 @@ const configuracio = () => {
           <div className="buttons">
             <Button className="btn">Cancel·lar</Button>
             <Button
-              className="btn btn-primary"
+              className="btn btn-m btn-dark"
               type="submit"
               onClick={handleSubmit}
             >
@@ -445,7 +445,7 @@ const configuracio = () => {
           <div className="buttons">
             <Button className="btn">Cancel·lar</Button>
             <Button
-              className="btn btn-primary"
+              className="btn btn-m btn-dark"
               type="submit"
               onClick={handleSubmit}
             >
@@ -525,7 +525,7 @@ const configuracio = () => {
           <div className="buttons">
             <Button className="btn">Cancel·lar</Button>
             <Button
-              className="btn btn-primary"
+              className="btn btn-m btn-dark"
               type="submit"
               onClick={handleSubmit}
             >
@@ -633,7 +633,7 @@ const configuracio = () => {
           <hr />
           <div className="buttons">
             <Button className="btn">Cancel·lar</Button>
-            <Button className="btn btn-primary">Guardar canvis</Button>
+            <Button className="btn btn-m btn-dark">Guardar canvis</Button>
           </div>
         </div>
         <div className="col right">
@@ -707,7 +707,7 @@ const configuracio = () => {
                             height="18"
                             viewBox="0 0 24 24"
                             strokeWidth="1.5"
-                            stroke="#2c3e50"
+                            stroke="#00206B"
                             fill="none"
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -736,7 +736,7 @@ const configuracio = () => {
                         height="28"
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
-                        stroke="#2c3e50"
+                        stroke="#00206B"
                         fill="none"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -765,7 +765,7 @@ const configuracio = () => {
                         height="28"
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
-                        stroke="#2c3e50"
+                        stroke="#00206B"
                         fill="none"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -788,7 +788,7 @@ const configuracio = () => {
                         height="28"
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
-                        stroke="#2c3e50"
+                        stroke="#00206B"
                         fill="none"
                         strokeLinecap="round"
                         strokeLinejoin="round"
@@ -815,7 +815,7 @@ const configuracio = () => {
                         height="28"
                         viewBox="0 0 24 24"
                         strokeWidth="1.5"
-                        stroke="#2c3e50"
+                        stroke="#00206B"
                         fill="none"
                         strokeLinecap="round"
                         strokeLinejoin="round"

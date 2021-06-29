@@ -115,15 +115,14 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
     });
     mostRatedSection = (
       <section className="homepage-section">
-        {/* <div className="top-rated-badge">
+        <div className="top-rated-badge">
           <img
             src="https://res.cloudinary.com/juligoodie/image/upload/v1618860678/getaways-guru/static-files/top-rated-posts_vszyhr.svg"
             alt="Les escapades més ben valorades"
           />
-        </div> */}
+        </div>
         <div className="homepage-section-title">
           <h2 className="uppercase">Les escapades més ben valorades</h2>
-          <p>Allotjaments i escapades top per a parelles top</p>
         </div>
         <div className="section-listings">
           <div className="section-listings-wrapper">{mostRatedList}</div>
@@ -186,7 +185,6 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
       <section className="homepage-section">
         <div className="homepage-section-title">
           <h2 className="uppercase">Escapades romàntiques per desconnectar </h2>
-          <p>Perquè us mereixeu gaudir sense preocupacions</p>
         </div>
         <div className="section-listings">
           <div className="section-listings-wrapper">{romanticList}</div>
@@ -238,7 +236,6 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
       <section className="homepage-section">
         <div className="homepage-section-title">
           <h2 className="uppercase">L'aventura us crida</h2>
-          <p>Escapades d'aventura, ideals per a gaudir de la natura</p>
         </div>
         <div className="section-listings">
           <div className="section-listings-wrapper">{adventureList}</div>
@@ -291,7 +288,6 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
         <h2 className="homepage-section-title uppercase">
           La millor cita, als millors restaurants
         </h2>
-        <p>Escapades gastronòmiques per a la cita ideal</p>
         <div className="section-listings">
           <div className="section-listings-wrapper">{gastronomicList}</div>
         </div>
@@ -343,7 +339,6 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
         <h2 className="homepage-section-title uppercase">
           Escapades en parella per a desconnectar
         </h2>
-        <p>Escapades culturals per fer volar la imaginació</p>
         <div className="section-listings">
           <div className="section-listings-wrapper">{culturalList}</div>
         </div>
@@ -373,10 +368,6 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
         <h2 className="homepage-section-title uppercase">
           Històries en parella
         </h2>
-        <p>
-          Històries en parella per a inspirar, descobrir nous llocs i fer-vos
-          venir ganes d'una escapada en parella per recordar
-        </p>
         <div className="section-listings">
           <div className="section-listings-wrapper">{culturalList}</div>
         </div>
@@ -387,7 +378,6 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
     <section className="homepage-section" id="placesTypes">
       <div className="homepage-section-title">
         <h2 className="uppercase">Allotjaments pensats per a parelles</h2>
-        <p>Escapeu-vos a allotjaments amb encant arreu de Catalunya</p>
       </div>
       <div className="section-listings">
         <div className="section-litings-wrapper">

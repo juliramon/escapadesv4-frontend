@@ -306,7 +306,7 @@ const SearchBar = () => {
         <Form.Group className="header-form---submit">
           <Button
             disabled={disabled}
-            className="button-submit"
+            className="button-submit btn-dark"
             type="submit"
             onClick={handleSubmit}
           >

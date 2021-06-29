@@ -42,7 +42,7 @@ const PublicSquareBox = ({
         height="16"
         viewBox="0 0 24 24"
         strokeWidth="1.5"
-        stroke="#2c3e50"
+        stroke="#00206B"
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -65,7 +65,7 @@ const PublicSquareBox = ({
         height="18"
         viewBox="0 0 24 24"
         strokeWidth="1.5"
-        stroke="#2c3e50"
+        stroke="#00206B"
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -79,7 +79,7 @@ const PublicSquareBox = ({
       <a
         href={secureWebsite}
         title="Reservar"
-        className="buttonLight"
+        className="btn btn-m btn-light"
         target="_blank"
         rel="nofollow"
       >
@@ -95,29 +95,6 @@ const PublicSquareBox = ({
             className={styles.listingCover}
             style={{ backgroundImage: `url('${cover}')` }}
           ></div>
-
-          {/* <div className={styles.listingRatingWrapper}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="icon icon-tabler icon-tabler-star"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="#2c3e50"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" />
-              <path
-                fill="#abc3f4"
-                stroke="none"
-                d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2l3.086 6.253 6.9 1.002-4.993 4.867 1.179 6.873z"
-              />
-            </svg>
-            <span className={styles.listingRating}>{rating}</span>
-          </div> */}
           <h3 className={styles.listingTitle}>{title}</h3>
           <p className={styles.listingSubtitle}>{shortenedSubtitle}...</p>
           <p className={styles.listingLocation}>
@@ -128,7 +105,7 @@ const PublicSquareBox = ({
               height="15"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
-              stroke="#2c3e50"
+              stroke="#00206B"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -142,7 +119,11 @@ const PublicSquareBox = ({
         </a>
       </Link>
       <div className={styles.buttons}>
-        <a href={`/${linkPath}/${slug}`} title="Detalls" className="buttonDark">
+        <a
+          href={`/${linkPath}/${slug}`}
+          title="Detalls"
+          className="btn btn-m btn-dark"
+        >
           Llegir-ne més
         </a>
         {buttonLight}

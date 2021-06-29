@@ -311,7 +311,7 @@ const PlaceListing = () => {
               height="22"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
-              stroke="#2c3e50"
+              stroke="#00206B"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -334,7 +334,7 @@ const PlaceListing = () => {
 
   const placeCategories = state.place.categories.map((category, idx) => (
     <li key={idx} className="place-category">
-      {category} getaway
+      Escapada {category}
     </li>
   ));
 
@@ -432,7 +432,7 @@ const PlaceListing = () => {
                                     height="20"
                                     viewBox="0 0 24 24"
                                     strokeWidth="1.5"
-                                    stroke="#2c3e50"
+                                    stroke="#00206B"
                                     fill="none"
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -452,7 +452,7 @@ const PlaceListing = () => {
                                     height="20"
                                     viewBox="0 0 24 24"
                                     strokeWidth="1.5"
-                                    stroke="#2c3e50"
+                                    stroke="#00206B"
                                     fill="none"
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -470,7 +470,7 @@ const PlaceListing = () => {
                                     height="20"
                                     viewBox="0 0 24 24"
                                     strokeWidth="1.5"
-                                    stroke="#2c3e50"
+                                    stroke="#00206B"
                                     fill="none"
                                     strokeLinecap="round"
                                     strokeLinejoin="round"
@@ -582,7 +582,7 @@ const PlaceListing = () => {
                             <div className="buttons">
                               <a
                                 href={`${state.place.website}`}
-                                className="listing-Website buttonDark"
+                                className="listing-Website btn btn-dark"
                                 title="Reservar"
                               >
                                 <svg
@@ -615,7 +615,7 @@ const PlaceListing = () => {
                               </a>
                               <a
                                 href={`tel:${state.place.phone}`}
-                                className="listingPhone buttonLight"
+                                className="listingPhone btn btn-light"
                                 title="Trucar"
                               >
                                 <svg
@@ -625,7 +625,7 @@ const PlaceListing = () => {
                                   height="22"
                                   viewBox="0 0 24 24"
                                   strokeWidth="1.5"
-                                  stroke="#2e6ae4"
+                                  stroke="#002b8f"
                                   fill="none"
                                   strokeLinecap="round"
                                   strokeLinejoin="round"
@@ -648,7 +648,7 @@ const PlaceListing = () => {
                                   height="22"
                                   viewBox="0 0 24 24"
                                   strokeWidth="1.5"
-                                  stroke="#2c3e50"
+                                  stroke="#00206B"
                                   fill="none"
                                   strokeLinecap="round"
                                   strokeLinejoin="round"
