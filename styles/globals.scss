@@ -1385,7 +1385,7 @@ nav {
   padding: 15px 0;
   .buttons button:last-child {
     background-color: $dark-blue;
-    color: $electric-blue;
+    color: $white;
     padding: 12px 15px;
     min-width: 160px;
   }
@@ -3992,6 +3992,22 @@ nav {
     .form-group-wrapper {
       display: block;
     }
+  }
+}
+
+/*ERROR PAGE*/
+.error-page {
+  text-align: center;
+  position: relative;
+  top: 100px;
+  h1 {
+    font-size: 7em;
+    margin-bottom: 0;
+  }
+  p {
+    font-size: 1.2em;
+    color: $medium-blue;
+    margin-bottom: 40px;
   }
 }
 

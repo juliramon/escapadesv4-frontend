@@ -13,6 +13,9 @@ import Error404 from "../../components/global/Error404";
 import GoogleMapReact from "google-map-react";
 
 const OrganizationProfile = ({ organizationData }) => {
+  if (organizationData.organizationDetails === null) {
+    return <Error404 />;
+  }
   const { user } = useContext(UserContext);
   const router = useRouter();
   const initialState = {
@@ -328,7 +331,7 @@ const OrganizationProfile = ({ organizationData }) => {
     if (state.organizationProfile) {
       const { _id } = state.organizationProfile;
       const { profileCover } = state;
-      service.editOrganizationCover(_id, profileCover).then(() => {
+      service.editOrganizationData(_id, profileCover).then(() => {
         refreshOrganization();
       });
       setState({ ...state, isCoverReadyToUpload: false });

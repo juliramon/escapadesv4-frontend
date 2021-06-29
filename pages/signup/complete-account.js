@@ -341,7 +341,12 @@ const CompleteAccount = () => {
             <div className="col right">
               <div className="buttons d-flex justify-space-between justify-content-end">
                 {state.isReadyToSubmit ? (
-                  <Button type="submit" variant="none" onClick={handleSubmit}>
+                  <Button
+                    type="submit"
+                    variant="none"
+                    className="btn btn-dark"
+                    onClick={handleSubmit}
+                  >
                     Continuar{" "}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -362,7 +367,12 @@ const CompleteAccount = () => {
                     </svg>
                   </Button>
                 ) : (
-                  <Button type="submit" variant="none" disabled>
+                  <Button
+                    type="submit"
+                    variant="none"
+                    className="btn btn-dark"
+                    disabled
+                  >
                     Continuar{" "}
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

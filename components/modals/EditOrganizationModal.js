@@ -79,8 +79,16 @@ const EditOrganizationModal = ({
   const handleSubmit = (e) => {
     e.preventDefault();
     const { _id } = organizationDetails;
-    const { orgLogo, orgName, VATNumber, slug, description, website, phone } =
-      state.formData;
+    const {
+      profileCover,
+      orgLogo,
+      orgName,
+      VATNumber,
+      slug,
+      description,
+      website,
+      phone,
+    } = state.formData;
     let slugLowCase = slug;
     slugLowCase = slugLowCase.toLowerCase();
     let organization_full_address,
@@ -112,6 +120,7 @@ const EditOrganizationModal = ({
     service
       .editOrganizationData(
         _id,
+        profileCover,
         orgLogo,
         orgName,
         VATNumber,
@@ -131,9 +140,18 @@ const EditOrganizationModal = ({
         organization_lng,
         additionalInfo
       )
-      .then(() => {
-        hideModal();
-        router.push(`/empreses/${slugLowCase}`);
+      .then((res) => {
+        console.log(res.data);
+        if (res.data.message === "Aquesta URL ja està en us") {
+          setState({
+            ...state,
+            availableURL: false,
+            errorMessage: res.data.message,
+          });
+        } else {
+          hideModal();
+          router.push(`/empreses/${slugLowCase}`);
+        }
       });
   };
 
@@ -227,6 +245,9 @@ const EditOrganizationModal = ({
               onChange={handleChange}
               placeholder="Escriu l'URL del teu perfil"
             ></Form.Control>
+            {!state.availableURL ? (
+              <p style={{ color: "red" }}>{state.errorMessage}</p>
+            ) : null}
           </Form.Group>
           <Form.Group>
             <Form.Label>Descripció de l'empresa</Form.Label>

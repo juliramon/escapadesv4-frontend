@@ -193,11 +193,13 @@ const Registre = () => {
   };
 
   const submitForm = async () => {
-    const slug = await slugify(state.orgName, {
+    const { orgName, orgLogoCloudImage, VATNumber, followers } = state;
+    const convertNameToSlug = await slugify(orgName, {
       remove: /[*+~.,()'"!:@]/g,
       lower: true,
     });
-    const { orgName, orgLogoCloudImage, VATNumber, followers } = state;
+    const randomNumber = Math.floor(Math.random() * (100000000000 - 1) + 1);
+    const slug = `${convertNameToSlug}-${randomNumber}`;
     const {
       organization_full_address,
       organization_streetNumber,
@@ -397,7 +399,7 @@ const Registre = () => {
                           />
                         </Form.Group>
                         <Form.Group>
-                          <Form.Label>Direcció de facturació</Form.Label>
+                          <Form.Label>Direcció de l'empresa</Form.Label>
                           <Autocomplete
                             className="form-control"
                             apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
@@ -451,7 +453,6 @@ const Registre = () => {
                                   organization.geometry.viewport
                                 )[1].i;
                               }
-
                               setState({
                                 ...state,
                                 organizationLocation: {

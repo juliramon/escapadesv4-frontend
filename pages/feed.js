@@ -34,8 +34,11 @@ const Feed = () => {
   const service = new ContentService();
   const paymentService = new PaymentService();
 
+  let recommendPostButton;
+
   useEffect(() => {
     if (user) {
+      recommendPostButton = null;
       const fetchData = async () => {
         setState({ ...state, isFetching: true });
         const userCustomActivities = await service.getUserCustomActivities();
@@ -199,7 +202,7 @@ const Feed = () => {
     ));
   }
 
-  let organizationsBlock, recommendPostButton;
+  let organizationsBlock;
   if (state.userOrganizations) {
     if (state.userOrganizations.number > 0) {
       organizationsBlock = (
@@ -212,21 +215,23 @@ const Feed = () => {
       null;
     }
   }
-  if (state.userSubscription) {
-    if (
-      state.userSubscription.numberOfPublications === "0" &&
-      state.userSubscription.plan === "basic"
-    ) {
-      recommendPostButton = <ButtonSharePost canPublish={true} />;
-    } else if (
-      state.userSubscription.numberOfPublications < 3 &&
-      state.userSubscription.plan === "premium"
-    ) {
-      recommendPostButton = <ButtonSharePost canPublish={true} />;
-    } else if (state.userSubscription.plan === "superior") {
-      recommendPostButton = <ButtonSharePost canPublish={true} />;
-    } else {
-      recommendPostButton = <ButtonSharePost canPublish={false} />;
+  if (!state.isFetching) {
+    if (state.userSubscription) {
+      if (
+        state.userSubscription.numberOfPublications === "0" &&
+        state.userSubscription.plan === "basic"
+      ) {
+        recommendPostButton = <ButtonSharePost canPublish={true} />;
+      } else if (
+        state.userSubscription.numberOfPublications < 3 &&
+        state.userSubscription.plan === "premium"
+      ) {
+        recommendPostButton = <ButtonSharePost canPublish={true} />;
+      } else if (state.userSubscription.plan === "superior") {
+        recommendPostButton = <ButtonSharePost canPublish={true} />;
+      } else {
+        recommendPostButton = <ButtonSharePost canPublish={false} />;
+      }
     }
   }
 

@@ -120,20 +120,24 @@ const UserProfile = ({
 
   switch (state.activeTab) {
     case "activities":
-      contentType = "activity";
+      contentType = "activitat";
       linkTo = "/nova-activitat";
       noResultsCTA = (
-        <Link href={linkTo} className="btn btn-m btn-dark text-center">
-          <a>Add {contentType}</a>
+        <Link href={linkTo}>
+          <a className="btn btn-m btn-dark text-center">
+            Anunciar {contentType}
+          </a>
         </Link>
       );
       break;
     case "places":
-      contentType = "place";
+      contentType = "allotjament";
       linkTo = "/place-composer";
       noResultsCTA = (
-        <Link to={linkTo} className="btn btn-m btn-dark text-center">
-          Add {contentType}
+        <Link href={linkTo}>
+          <a className="btn btn-m btn-dark text-center">
+            Anunciar {contentType}
+          </a>
         </Link>
       );
       break;
@@ -150,7 +154,7 @@ const UserProfile = ({
           className="btn btn-m btn-dark text-center"
           onClick={() => handleModalVisibility()}
         >
-          Add getaway
+          Anunciar nova escapada
         </Button>
       );
   }
@@ -173,9 +177,9 @@ const UserProfile = ({
           </div>
           <div className="text">
             <p>
-              Oh no, this looks so empty.
+              Oh no, això està molt buit.
               <br />
-              Create your first {contentType} to inspire others.
+              Anuncia una {contentType} per a tenir més visibilitat.
             </p>
             {noResultsCTA}
           </div>
@@ -193,9 +197,9 @@ const UserProfile = ({
               <span className="profile-owner-name">
                 {state.userProfile.fullName}
               </span>{" "}
-              didn't publish any {contentType} yet.
+              encara no ha publicat cap {contentType}.
               <br />
-              Come back later to check what's new.
+              Torna a intentar-ho més endavant.
             </p>
           </div>
         </div>
@@ -207,7 +211,7 @@ const UserProfile = ({
         className="btn btn-m btn-dark text-center sidebar d-flex align-items-center"
         onClick={() => handleModalVisibilityOffpage()}
       >
-        Sign up
+        Crear compte
       </Button>
     );
     noresults = (
@@ -220,9 +224,9 @@ const UserProfile = ({
             <span className="profile-owner-name">
               {state.userProfile.fullName}
             </span>{" "}
-            didn't publish any {contentType} yet.
+            encara no ha publicat cap {contentType}.
             <br />
-            Come back later to check what's new.
+            Torna a intentar-ho més endavant.
           </p>
         </div>
       </div>
@@ -396,6 +400,40 @@ const UserProfile = ({
         </Container>
       </>
     );
+  }
+
+  let buttonStories;
+
+  if (user) {
+    if (user.userType === "admin") {
+      buttonStories = (
+        <Button
+          variant="none"
+          className="d-flex align-items-center justify-content-center"
+          style={state.activeTab === "stories" ? activeTab : null}
+          onClick={() => setState({ ...state, activeTab: "stories" })}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="icon icon-tabler icon-tabler-notebook"
+            width="28"
+            height="28"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="#00206B"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" />
+            <line x1="13" y1="8" x2="15" y2="8" />
+            <line x1="13" y1="12" x2="15" y2="12" />
+          </svg>
+          Històries
+        </Button>
+      );
+    }
   }
 
   return (
@@ -635,33 +673,7 @@ const UserProfile = ({
                         </svg>
                         Allotjaments
                       </Button>
-                      <Button
-                        variant="none"
-                        className="d-flex align-items-center justify-content-center"
-                        style={state.activeTab === "stories" ? activeTab : null}
-                        onClick={() =>
-                          setState({ ...state, activeTab: "stories" })
-                        }
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-notebook"
-                          width="28"
-                          height="28"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="#00206B"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" />
-                          <path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" />
-                          <line x1="13" y1="8" x2="15" y2="8" />
-                          <line x1="13" y1="12" x2="15" y2="12" />
-                        </svg>
-                        Històries
-                      </Button>
+                      {buttonStories}
                     </div>
                     <div className="content-bar">{listings}</div>
                   </div>

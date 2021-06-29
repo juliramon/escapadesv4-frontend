@@ -19,14 +19,14 @@ const Error404 = () => {
           }
           user={user}
         />
-        <main>
+        <main className="error-page">
           <Container>
             <Row>
               <Col lg="12">
                 <h1>404</h1>
-                <p>Aquesta pàgina no existeix</p>
+                <p>Ep! Aquesta pàgina no existeix...</p>
                 <Link href="/feed">
-                  <a>Tornar al feed</a>
+                  <a className="btn btn-m btn-dark">Tornar al feed</a>
                 </Link>
               </Col>
             </Row>

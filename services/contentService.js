@@ -516,6 +516,7 @@ class ContentService {
 
   editOrganizationData = (
     _id,
+    profileCover,
     orgLogo,
     orgName,
     VATNumber,
@@ -535,8 +536,9 @@ class ContentService {
     organization_lng,
     additionalInfo
   ) =>
-    this.service.put(`/editOrganizationData`, {
+    this.service.put(`/editOrganizationData/${_id}`, {
       _id,
+      profileCover,
       orgLogo,
       orgName,
       VATNumber,
@@ -556,9 +558,6 @@ class ContentService {
       organization_lng,
       additionalInfo,
     });
-
-  editOrganizationCover = (_id, profileCover) =>
-    this.service.put(`/editOrganizationData/${_id}`, { profileCover });
 
   removeOrganization = (_id) =>
     this.service

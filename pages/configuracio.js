@@ -302,9 +302,12 @@ const configuracio = () => {
           </Form>
           <hr />
           <div className="buttons">
-            <Button className="btn">Cancel·lar</Button>
+            <Button variant="none" className="btn btn-m btn-light">
+              Cancel·lar
+            </Button>
             <Button
               className="btn btn-m btn-dark"
+              variant="none"
               type="submit"
               onClick={handleSubmit}
             >
@@ -378,8 +381,11 @@ const configuracio = () => {
           </Form>
           <hr />
           <div className="buttons">
-            <Button className="btn">Cancel·lar</Button>
+            <Button variant="none" className="btn btn-m btn-light">
+              Cancel·lar
+            </Button>
             <Button
+              variant="none"
               className="btn btn-m btn-dark"
               type="submit"
               onClick={handleSubmit}
@@ -443,8 +449,11 @@ const configuracio = () => {
           </Form>
           <hr />
           <div className="buttons">
-            <Button className="btn">Cancel·lar</Button>
+            <Button variant="none" className="btn btn-m btn-light">
+              Cancel·lar
+            </Button>
             <Button
+              variant="none"
               className="btn btn-m btn-dark"
               type="submit"
               onClick={handleSubmit}
@@ -523,8 +532,11 @@ const configuracio = () => {
           </Form>
           <hr />
           <div className="buttons">
-            <Button className="btn">Cancel·lar</Button>
+            <Button variant="none" className="btn btn-m btn-light">
+              Cancel·lar
+            </Button>
             <Button
+              variant="none"
               className="btn btn-m btn-dark"
               type="submit"
               onClick={handleSubmit}
@@ -632,8 +644,12 @@ const configuracio = () => {
           </Form>
           <hr />
           <div className="buttons">
-            <Button className="btn">Cancel·lar</Button>
-            <Button className="btn btn-m btn-dark">Guardar canvis</Button>
+            <Button variant="none" className="btn btn-m btn-light">
+              Cancel·lar
+            </Button>
+            <Button variant="none" className="btn btn-m btn-dark">
+              Guardar canvis
+            </Button>
           </div>
         </div>
         <div className="col right">
@@ -683,7 +699,7 @@ const configuracio = () => {
           }
         />
         <main>
-          <Container fluid className="top-nav mw-1600">
+          <Container fluid className="top-nav">
             <div className="top-nav-wrapper">
               <h1 className="top-nav-title db mw-1600">Configuració</h1>
             </div>
