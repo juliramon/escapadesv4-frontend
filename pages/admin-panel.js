@@ -173,7 +173,9 @@ const AdminPanel = () => {
       linkTo = "/nova-activitat";
       noResultsCTA = (
         <Link href={linkTo}>
-          <a className="btn btn-primary text-center">Recomanar {contentType}</a>
+          <a className="btn btn-m btn-dark text-center">
+            Recomanar {contentType}
+          </a>
         </Link>
       );
       break;
@@ -182,7 +184,9 @@ const AdminPanel = () => {
       linkTo = "/nou-allotjament";
       noResultsCTA = (
         <Link href={linkTo}>
-          <a className="btn btn-primary text-center">Recomanar {contentType}</a>
+          <a className="btn btn-m btn-dark text-center">
+            Recomanar {contentType}
+          </a>
         </Link>
       );
       break;
@@ -191,7 +195,9 @@ const AdminPanel = () => {
       linkTo = "/nova-historia";
       noResultsCTA = (
         <Link href={linkTo}>
-          <a className="btn btn-primary text-center">Publicar {contentType}</a>
+          <a className="btn btn-m btn-dark text-center">
+            Publicar {contentType}
+          </a>
         </Link>
       );
       break;
@@ -200,7 +206,7 @@ const AdminPanel = () => {
       linkTo = "/nova-activitat";
       noResultsCTA = (
         <Button
-          className="btn btn-primary text-center"
+          className="btn btn-m btn-dark text-center"
           onClick={handleModalVisibility}
         >
           Recomanar una escapada
@@ -666,7 +672,7 @@ const AdminPanel = () => {
                   <ul>
                     <li>
                       <Button
-                        className="btn btn-primary text-center sidebar"
+                        className="btn btn-m btn-dark text-center sidebar"
                         onClick={handleModalVisibility}
                       >
                         Afegir publicació

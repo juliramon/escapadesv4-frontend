@@ -15,7 +15,7 @@ const PublicationModal = ({ visibility, hideModal }) => {
           height="44"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
-          stroke="#2c3e50"
+          stroke="#00206B"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -35,7 +35,7 @@ const PublicationModal = ({ visibility, hideModal }) => {
       </div>
       <div className="col right">
         <Link href="/nova-historia">
-          <a className="btn btn-primary">Publicar</a>
+          <a className="btn btn-m btn-dark">Publicar</a>
         </Link>
       </div>
     </li>
@@ -63,7 +63,7 @@ const PublicationModal = ({ visibility, hideModal }) => {
                 height="44"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
-                stroke="#2c3e50"
+                stroke="#00206B"
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -84,7 +84,7 @@ const PublicationModal = ({ visibility, hideModal }) => {
             </div>
             <div className="col right">
               <Link href="/nova-activitat">
-                <a className="btn btn-primary">Publicar</a>
+                <a className="btn btn-m btn-dark">Publicar</a>
               </Link>
             </div>
           </li>
@@ -97,7 +97,7 @@ const PublicationModal = ({ visibility, hideModal }) => {
                 height="44"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
-                stroke="#2c3e50"
+                stroke="#00206B"
                 fill="none"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -117,7 +117,7 @@ const PublicationModal = ({ visibility, hideModal }) => {
             </div>
             <div className="col right">
               <Link href="/nou-allotjament">
-                <a className="btn btn-primary">Publicar</a>
+                <a className="btn btn-m btn-dark">Publicar</a>
               </Link>
             </div>
           </li>

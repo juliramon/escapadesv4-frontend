@@ -32,10 +32,8 @@ const CategoryBox = ({
   const handleShareModalVisibility = () => setShareModalVisibility(true);
   const hideShareModalVisibility = () => setShareModalVisibility(false);
 
-  const [
-    editCategoryModalVisibility,
-    setEditCategoryModalVisibility,
-  ] = useState(false);
+  const [editCategoryModalVisibility, setEditCategoryModalVisibility] =
+    useState(false);
   const handleEditCategoryModalVisibility = () =>
     setEditCategoryModalVisibility(true);
   const hideEditCategoryModalVisibility = () =>
@@ -62,7 +60,7 @@ const CategoryBox = ({
               height="28"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
-              stroke="#2c3e50"
+              stroke="#00206B"
               fill="none"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -85,7 +83,7 @@ const CategoryBox = ({
                       height="20"
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
-                      stroke="#2c3e50"
+                      stroke="#00206B"
                       fill="none"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -111,7 +109,7 @@ const CategoryBox = ({
                     height="20"
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
-                    stroke="#2c3e50"
+                    stroke="#00206B"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -132,7 +130,7 @@ const CategoryBox = ({
                     height="20"
                     viewBox="0 0 24 24"
                     strokeWidth="1.5"
-                    stroke="#2c3e50"
+                    stroke="#00206B"
                     fill="none"
                     strokeLinecap="round"
                     strokeLinejoin="round"

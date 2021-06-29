@@ -244,7 +244,13 @@ const Signup = () => {
                     placeholder="6+ caràcters"
                   />
                 </Form.Group>
-                <Button type="submit">Crear el meu compte</Button>
+                <Button
+                  variant="none"
+                  type="submit"
+                  className="btn btn-m btn-dark"
+                >
+                  Crear el meu compte
+                </Button>
               </Form>
             </div>
           </div>

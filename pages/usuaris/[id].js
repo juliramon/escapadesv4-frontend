@@ -123,7 +123,7 @@ const UserProfile = ({
       contentType = "activity";
       linkTo = "/nova-activitat";
       noResultsCTA = (
-        <Link href={linkTo} className="btn btn-primary text-center">
+        <Link href={linkTo} className="btn btn-m btn-dark text-center">
           <a>Add {contentType}</a>
         </Link>
       );
@@ -132,7 +132,7 @@ const UserProfile = ({
       contentType = "place";
       linkTo = "/place-composer";
       noResultsCTA = (
-        <Link to={linkTo} className="btn btn-primary text-center">
+        <Link to={linkTo} className="btn btn-m btn-dark text-center">
           Add {contentType}
         </Link>
       );
@@ -482,7 +482,7 @@ const UserProfile = ({
                               height="18"
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
-                              stroke="#2c3e50"
+                              stroke="#00206B"
                               fill="none"
                               strokeLinecap="round"
                               strokeLinejoin="round"
@@ -507,7 +507,7 @@ const UserProfile = ({
                               height="18"
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
-                              stroke="#2c3e50"
+                              stroke="#00206B"
                               fill="none"
                               strokeLinecap="round"
                               strokeLinejoin="round"
@@ -526,7 +526,7 @@ const UserProfile = ({
                               height="18"
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
-                              stroke="#2c3e50"
+                              stroke="#00206B"
                               fill="none"
                               strokeLinecap="round"
                               strokeLinejoin="round"
@@ -549,7 +549,7 @@ const UserProfile = ({
                               height="18"
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
-                              stroke="#2c3e50"
+                              stroke="#00206B"
                               fill="none"
                               strokeLinecap="round"
                               strokeLinejoin="round"
@@ -596,7 +596,7 @@ const UserProfile = ({
                           height="28"
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
-                          stroke="#2c3e50"
+                          stroke="#00206B"
                           fill="none"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -623,7 +623,7 @@ const UserProfile = ({
                           height="28"
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
-                          stroke="#2c3e50"
+                          stroke="#00206B"
                           fill="none"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -650,7 +650,7 @@ const UserProfile = ({
                           height="28"
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
-                          stroke="#2c3e50"
+                          stroke="#00206B"
                           fill="none"
                           strokeLinecap="round"
                           strokeLinejoin="round"
