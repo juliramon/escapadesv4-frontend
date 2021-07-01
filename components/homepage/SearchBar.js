@@ -266,21 +266,21 @@ const SearchBar = () => {
             </Dropdown.Toggle>
             <Dropdown.Menu className="pac-container">
               <Form.Check
-                label="Romantic"
+                label="Romàntica"
                 name="activityCategory"
                 id="romantic"
                 className="pac-item"
                 onClick={handleCheckActivityCategory}
               />
               <Form.Check
-                label="Adventure"
+                label="Aventura"
                 name="activityCategory"
                 id="adventure"
                 className="pac-item"
                 onClick={handleCheckActivityCategory}
               />
               <Form.Check
-                label="Gastronomic"
+                label="Gastronòmica"
                 name="activityCategory"
                 id="gastronomic"
                 className="pac-item"
@@ -310,6 +310,22 @@ const SearchBar = () => {
             type="submit"
             onClick={handleSubmit}
           >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-search"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="#ffffff"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <circle cx="10" cy="10" r="7" />
+              <line x1="21" y1="21" x2="15" y2="15" />
+            </svg>
             Cercar
           </Button>
         </Form.Group>
@@ -397,35 +413,35 @@ const SearchBar = () => {
                 onClick={handleCheckType}
               />
               <Form.Check
-                label="Apartment"
+                label="Apartament"
                 name="placeType"
                 id="apartment"
                 className="pac-item"
                 onClick={handleCheckType}
               />
               <Form.Check
-                label="Cabin"
+                label="Refugi"
                 name="placeType"
                 id="cabin"
                 className="pac-item"
                 onClick={handleCheckType}
               />
               <Form.Check
-                label="Treehouse"
+                label="Casa-arbre"
                 name="placeType"
                 id="treehouse"
                 className="pac-item"
                 onClick={handleCheckType}
               />
               <Form.Check
-                label="Ruralhouse"
+                label="Casa rural"
                 name="placeType"
                 id="ruralhouse"
                 className="pac-item"
                 onClick={handleCheckType}
               />
               <Form.Check
-                label="Trailer"
+                label="Carabana"
                 name="placeType"
                 id="trailer"
                 className="pac-item"
@@ -442,21 +458,21 @@ const SearchBar = () => {
             </Dropdown.Toggle>
             <Dropdown.Menu className="pac-container">
               <Form.Check
-                label="Romantic"
+                label="Romàntica"
                 name="placeCategory"
                 id="romantic"
                 className="pac-item"
                 onClick={handleCheckPlaceCategory}
               />
               <Form.Check
-                label="Adventure"
+                label="Aventura"
                 name="placeCategory"
                 id="adventure"
                 className="pac-item"
                 onClick={handleCheckPlaceCategory}
               />
               <Form.Check
-                label="Gastronomic"
+                label="Gastronòmica"
                 name="placeCategory"
                 id="gastronomic"
                 className="pac-item"
@@ -486,6 +502,22 @@ const SearchBar = () => {
             type="submit"
             onClick={handleSubmit}
           >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-search"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="#ffffff"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <circle cx="10" cy="10" r="7" />
+              <line x1="21" y1="21" x2="15" y2="15" />
+            </svg>
             Cercar
           </Button>
         </Form.Group>
@@ -499,7 +531,9 @@ const SearchBar = () => {
         <ul>
           <li>
             <Button
-              className={state.activeTab === "activities" ? "active" : null}
+              className={
+                state.activeTab === "activities" ? "active" : "btn-light"
+              }
               variant="none"
               id="activities"
               onClick={handleTabClick}
@@ -509,7 +543,7 @@ const SearchBar = () => {
           </li>
           <li>
             <Button
-              className={state.activeTab === "places" ? "active" : null}
+              className={state.activeTab === "places" ? "active" : "btn-light"}
               variant="none"
               id="places"
               onClick={handleTabClick}

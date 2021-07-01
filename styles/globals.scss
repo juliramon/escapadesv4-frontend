@@ -450,6 +450,8 @@ nav {
     line-height: 1.2em;
     font-size: 0.9em;
     margin: 0;
+    white-space: nowrap;
+    white-space: nowrap;
   }
 }
 
@@ -498,192 +500,229 @@ nav {
 
 #homepage {
   #hero {
-    padding: 80px 0;
+    background-image: url("https://res.cloudinary.com/juligoodie/image/upload/v1625130431/getaways-guru/static-files/niklas-weiss-S12w8AZ1jrQ-unsplash_fmicdr.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
     position: relative;
-    z-index: 1000;
-    .header-col.left {
-      position: inherit;
-      z-index: 1000;
-      flex: 0.7;
-      .header-title {
-        font-size: 2.6rem;
-        line-height: 1.15em;
-        color: $dark-blue;
+    .overlay {
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.5) 10%,
+        rgba(0, 0, 0, 0.5) 30%
+      );
+      opacity: 0.3;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .hero-wrapper {
+      padding: 140px 0 180px 0;
+    }
+    .header-title {
+      font-size: 2.6rem;
+      line-height: 1.15em;
+      color: $white;
+      margin: 0 auto;
+      text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.5);
+    }
+    .header-subtitle {
+      font-size: 1.15rem;
+      margin-top: 15px;
+      line-height: 1.6em;
+      color: $white;
+      text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.5);
+    }
+    .credits-bar {
+      position: absolute;
+      bottom: 20px;
+      width: 100%;
+      .credits-bar-wrapper {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        margin: 0 20px;
+        font-size: 0.8em;
       }
-      .header-subtitle {
-        font-size: 1.2rem;
-        max-width: 450px;
-        margin-top: 15px;
-        line-height: 1.5em;
-        color: $medium-blue;
+      p,
+      a {
+        margin: 0;
+        color: $white;
       }
-      .search-form {
-        margin-top: 35px;
-        .tab-bar {
-          ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-          }
-          button {
-            color: $electric-blue;
-            padding: 6px 12px;
-            border: 1px solid $electric-blue !important;
-            margin-right: 5px;
-            font-size: 0.9rem;
-          }
-          button.active {
-            background: $electric-blue;
-            border: 1px solid $electric-blue;
-            color: $white;
-          }
-        }
-        .header-form {
-          margin-top: 15px;
-          border-radius: 12px;
-          box-shadow: 2px 5px 20px rgb(0 0 0 / 20%);
-          background-color: $white;
-          padding: 10px;
-          .form-group {
-            position: relative;
-            flex: 1;
-            margin: 0;
-            border-right: 1px solid rgba(0, 0, 0, 0.1);
-            .input-label {
-              position: absolute;
-              top: 8px;
-              left: 15px;
-              font-size: 1.05em;
-              margin-bottom: 0;
-              z-index: 100;
-              color: $dark-blue;
-            }
-            .form-control {
-              font-size: 0.99em;
-              letter-spacing: 0.5px;
-              padding: 35px 15px 12px 15px;
-              height: auto;
-              border: none;
-              background-color: $white;
-              color: $dark-blue;
-              text-align: left;
-              span {
-                padding: 4px 10px;
-                background-color: aliceblue;
-                border-radius: 8px;
-                font-size: 0.9em;
-                margin-right: 8px;
-              }
-            }
-          }
-        }
-        .form-group:last-child,
-        .places .form-group:nth-child(3),
-        .activities .form-group:nth-child(2) {
-          border-right: 0;
-        }
-
-        .form-control:focus {
-          background-color: rgba(0, 0, 0, 0.05);
-        }
-        .dropdown .dropdown-toggle {
-          width: 100%;
-          display: flex;
-          align-items: center;
-          margin: 0;
-          border: none;
-          padding: 0;
-          max-height: 70px;
-          overflow: hidden;
-          border-radius: 8px;
-          .form-control {
-            overflow-x: scroll;
-            max-height: 70px;
-            max-width: 28.73em;
-            min-height: 90px;
-            position: relative;
-            top: 12px;
-          }
-        }
-        .dropdown .dropdown-toggle::after {
-          content: none !important;
-        }
-        .dropdown .dropdown-menu {
-          width: 100%;
-          padding: 0;
-          z-index: 1000;
-          .pac-item {
-            display: flex;
-            align-items: center;
-            padding: 0 15px !important;
-          }
-          .form-check-input {
-            margin: 0;
-            width: 18px;
-            height: 18px;
-            display: block;
-            position: relative;
-          }
-          .pac-item label {
-            margin-left: 30px;
-            font-size: 1.3em;
-            color: $dark-blue;
-            height: 100%;
-            width: 100%;
-            padding: 10px 15px;
-            margin: 0;
-            cursor: pointer;
-          }
-        }
-        .form-group.header-form---submit {
-          flex: 0;
-        }
-        .form-group .button-submit {
-          color: $white !important;
-          padding: 23px 15px;
-          min-width: 100px;
-          width: 100px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border: none;
+      span {
+        color: $white;
+        opacity: 0.75;
+      }
+      .block-right {
+        max-width: 250px;
+        text-align: right;
+        line-height: 1.4em;
+        img {
+          max-width: 150px;
         }
       }
     }
-    .header-col.right {
-      position: absolute;
-      z-index: 0;
-      right: 15px;
-      display: flex;
-      .header-image {
-        width: 250px;
+    .search-form {
+      margin-top: 35px;
+      width: 100%;
+      .tab-bar {
+        ul {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+          display: inline-flex;
+          align-items: center;
+          background-color: $white;
+          border: 1px solid #e7ebf5;
+          padding: 2px;
+          border-radius: 18px 18px 4px 4px;
+        }
+        li {
+          margin-right: 2px;
+        }
+        li:first-child button {
+          border-radius: 18px 4px 4px 4px !important;
+        }
+        li:last-child button {
+          border-radius: 4px 18px 4px 4px !important;
+        }
+        button {
+          color: $electric-blue;
+          padding: 6px 10px;
+          border: none !important;
+          font-size: 0.9rem;
+        }
+        button.active {
+          background: $electric-blue;
+          border: 1px solid $electric-blue;
+          color: $white;
+        }
+        li:last-child {
+          margin-right: 0;
+        }
+      }
+      .header-form {
+        margin-top: 4px;
+        border-radius: 4px 4px 25px 25px;
+        background-color: $white;
+        border: 1px solid #e7ebf5;
+        padding: 4px;
+        .form-group {
+          position: relative;
+          flex: 1;
+          margin: 0;
+          border-right: 1px solid rgba(0, 0, 0, 0.1);
+          padding-right: 4px;
+          .input-label {
+            position: absolute;
+            top: 8px;
+            left: 15px;
+            font-size: 1.05em;
+            margin-bottom: 0;
+            z-index: 100;
+            color: $dark-blue;
+          }
+          .form-control {
+            font-size: 0.99em;
+            letter-spacing: 0.5px;
+            padding: 35px 15px 12px 15px;
+            height: auto;
+            border: none;
+            background-color: $white;
+            color: $dark-blue;
+            text-align: left;
+            border-radius: 4px 4px 4px 20px !important;
+            span {
+              padding: 4px 10px;
+              background-color: aliceblue;
+              border-radius: 8px;
+              font-size: 0.9em;
+              margin-right: 8px;
+            }
+          }
+        }
+      }
+      .form-group:last-child,
+      .places .form-group:nth-child(3),
+      .activities .form-group:nth-child(2) {
+        border-right: 0;
+        padding-right: 0;
+      }
+
+      .form-control:focus {
+        background-color: rgba(0, 0, 0, 0.05);
+      }
+      .dropdown .dropdown-toggle {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin: 0;
+        border: none;
+        padding: 0;
+        max-height: 70px;
         overflow: hidden;
         border-radius: 8px;
-        img {
-          width: 100%;
-          height: auto;
+        .form-control {
+          overflow-x: scroll;
+          max-height: 70px;
+          max-width: 28.73em;
+          min-height: 90px;
+          position: relative;
+          top: 12px;
         }
       }
-      .left {
-        margin-right: 30px;
-        position: relative;
-        top: 30px;
-        .header-image {
-          margin-bottom: 30px;
-        }
+      .dropdown .dropdown-toggle::after {
+        content: none !important;
       }
-      .right {
-        .header-image {
-          height: 500px;
+      .dropdown .dropdown-menu {
+        width: 100%;
+        padding: 0;
+        z-index: 1000;
+        .pac-item {
           display: flex;
           align-items: center;
-          justify-content: center;
-          img {
-            height: 100%;
-            width: auto;
-          }
+          padding: 0 15px !important;
+        }
+        .form-check-input {
+          margin: 0;
+          width: 18px;
+          height: 18px;
+          display: block;
+          position: relative;
+        }
+        .pac-item label {
+          margin-left: 30px;
+          font-size: 1.3em;
+          color: $dark-blue;
+          height: 100%;
+          width: 100%;
+          padding: 10px 15px;
+          margin: 0;
+          cursor: pointer;
+        }
+      }
+      .form-group.header-form---submit {
+        flex: 0;
+      }
+      .form-group .button-submit:disabled {
+        cursor: not-allowed;
+      }
+      .form-group .button-submit {
+        color: $white !important;
+        padding: 23px 15px;
+        min-width: 100px;
+        width: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: none;
+        border-radius: 4px 4px 20px 4px !important;
+        svg {
+          margin-right: 5px;
+          width: 20px;
+          height: 20px;
         }
       }
     }

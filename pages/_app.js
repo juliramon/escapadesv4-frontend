@@ -2,6 +2,8 @@ import "../styles/globals.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-quill/dist/quill.bubble.css";
 import "react-photoswipe/lib/photoswipe.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import Router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";

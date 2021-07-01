@@ -123,7 +123,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
           />
         </div>
         <div className="homepage-section-title">
-          <h2 className="uppercase">Els allotjaments més ben valorades</h2>
+          <h2 className="uppercase">Els allotjaments més ben valorats</h2>
         </div>
         <div className="section-listings">
           <div className="section-listings-wrapper">{mostRatedList}</div>
