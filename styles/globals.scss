@@ -79,6 +79,14 @@ a {
   flex: 1;
 }
 
+.btn-no-flex {
+  flex: none;
+}
+
+.btn-no-border {
+  border: none !important;
+}
+
 #listingSquareBox .btn {
   margin: 4px;
 }
@@ -500,7 +508,7 @@ nav {
 
 #homepage {
   #hero {
-    background-image: url("https://res.cloudinary.com/juligoodie/image/upload/v1625130431/getaways-guru/static-files/niklas-weiss-S12w8AZ1jrQ-unsplash_fmicdr.jpg");
+    background-image: url("https://res.cloudinary.com/juligoodie/image/upload/v1625123270/getaways-guru/static-files/hero-2_ze74gz.jpg");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -565,7 +573,7 @@ nav {
       }
     }
     .search-form {
-      margin-top: 35px;
+      margin-top: 55px;
       width: 100%;
       .tab-bar {
         ul {
@@ -604,7 +612,7 @@ nav {
         }
       }
       .header-form {
-        margin-top: 4px;
+        margin-top: 5px;
         border-radius: 4px 4px 25px 25px;
         background-color: $white;
         border: 1px solid #e7ebf5;

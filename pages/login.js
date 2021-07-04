@@ -1,11 +1,11 @@
 import Head from "next/head";
-import Router from "next/router";
 import Link from "next/link";
 import { useContext, useEffect, useState } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 import AuthService from "../services/authService";
 import { useRouter } from "next/router";
 import UserContext from "../contexts/UserContext";
+import ForgotPasswordModal from "../components/modals/ForgotPasswordModal";
 
 const Login = () => {
   const { user, saveUserDetails } = useContext(UserContext);
@@ -19,6 +19,10 @@ const Login = () => {
     errorMessage: {},
   };
   const [state, setState] = useState(initialState);
+  const [modalVisibility, setModalVisibility] = useState(false);
+  const handleModalVisibility = () => setModalVisibility(true);
+  const hideModalVisibility = () => setModalVisibility(false);
+
   const service = new AuthService();
   const handleChange = (e) => {
     setState({
@@ -273,18 +277,31 @@ const Login = () => {
                     placeholder="6+ caràcters"
                   />
                 </Form.Group>
-                <Button
-                  variant="none"
-                  type="submit"
-                  className="btn btn-m btn-dark"
-                >
-                  Iniciar sessió
-                </Button>
+                <div className="d-flex justify-content-between">
+                  <Button
+                    variant="none"
+                    type="submit"
+                    className="btn btn-m btn-dark btn-no-flex"
+                  >
+                    Iniciar sessió
+                  </Button>
+                  <Button
+                    variant="none"
+                    className="btn btn-m btn-light btn-no-flex btn-no-border"
+                    onClick={() => handleModalVisibility()}
+                  >
+                    Recuperar contrassenya
+                  </Button>
+                </div>
               </Form>
             </div>
           </div>
         </div>
       </section>
+      <ForgotPasswordModal
+        visibility={modalVisibility}
+        hideModal={hideModalVisibility}
+      />
     </>
   );
 };
