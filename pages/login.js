@@ -211,7 +211,7 @@ const Login = () => {
                 Encara no tens un compte? <Link href="/signup">Registra't</Link>
               </div>
               <div className="title-area">
-                <h1>Inicia sessió a Escapadesenparella.cat</h1>
+                <h1>Inicia sessió</h1>
                 <p className="sub-h1">
                   Accedeix al teu compte per cercar, descobrir i gaudir de la
                   teva propera escapada en parella.

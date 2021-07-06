@@ -1,18 +1,31 @@
 import { useState } from "react";
-import { Alert, Button, Form, Modal } from "react-bootstrap";
-import AuthService from "../../services/authService";
+import { Alert, Button, Form, Modal, Toast } from "react-bootstrap";
+import EmailService from "../../services/emailService";
 
 const ForgotPasswordModal = ({ visibility, hideModal }) => {
-  const authService = new AuthService();
+  const emailService = new EmailService();
   const [serverMessage, setServerMessage] = useState(undefined);
-  const [email, setEmail] = useState(undefined);
-  const handleChange = (e) => setEmail(e.target.value);
+  const [email, setEmail] = useState("");
+  const [showToast, setShowToast] = useState(false);
+  const [toastText, setToastText] = useState(undefined);
+  const handleChange = (e) => {
+    if (email !== "") {
+      setServerMessage(undefined);
+    }
+    setEmail(e.target.value);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email === undefined) {
+    if (email === "") {
       setServerMessage("Escriu el teu correu electrònic");
     } else {
-      authService.resetPassword(email).then((res) => console.log(res));
+      emailService.sendResetPasswordEmail(email).then((res) => {
+        console.log(res);
+        setToastText(res.message);
+        hideModal();
+        setShowToast(true);
+        setEmail("");
+      });
     }
   };
   let errorMessage;
@@ -40,50 +53,65 @@ const ForgotPasswordModal = ({ visibility, hideModal }) => {
     );
   }
   return (
-    <Modal
-      show={visibility}
-      onHide={hideModal}
-      size="lg"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-      className="forgotPasswordModal"
-    >
-      <Modal.Header closeButton>
-        <div className="header-wrapper">
-          <h1 className="modal-title">Recupera la teva contrassenya</h1>
-          <p className="modal-subtitle">
-            Escriu el correu electrònic associat al teu compte i t'enviarem
-            l'enllaç per recuperar la teva contrassenya.
-          </p>
-        </div>
-      </Modal.Header>
-      <Modal.Body>
-        <div className="body-wrapper">
-          <Form>
-            {errorMessage}
-            <Form.Group>
-              <Form.Label>Correu electrònic</Form.Label>
-              <Form.Control
-                type="email"
-                name="email"
-                onChange={handleChange}
-                placeholder="Escriu el teu correu electrònic"
-              ></Form.Control>
-            </Form.Group>
-            <Form.Group>
-              <Button
-                type="submit"
-                onClick={handleSubmit}
-                variant="none"
-                className="btn btn-m btn-dark"
-              >
-                Enviar
-              </Button>
-            </Form.Group>
-          </Form>
-        </div>
-      </Modal.Body>
-    </Modal>
+    <>
+      <Modal
+        show={visibility}
+        onHide={hideModal}
+        size="lg"
+        aria-labelledby="contained-modal-title-vcenter"
+        centered
+        className="forgotPasswordModal"
+      >
+        <Modal.Header closeButton>
+          <div className="header-wrapper">
+            <h1 className="modal-title">Recupera la teva contrassenya</h1>
+            <p className="modal-subtitle">
+              Escriu el correu electrònic associat al teu compte i t'enviarem
+              l'enllaç per recuperar la teva contrassenya.
+            </p>
+          </div>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="body-wrapper">
+            <Form>
+              {errorMessage}
+              <Form.Group>
+                <Form.Label>Correu electrònic</Form.Label>
+                <Form.Control
+                  type="email"
+                  name="email"
+                  value={email}
+                  onChange={handleChange}
+                  placeholder="Escriu el teu correu electrònic"
+                ></Form.Control>
+              </Form.Group>
+              <Form.Group>
+                <Button
+                  type="submit"
+                  onClick={handleSubmit}
+                  variant="none"
+                  className="btn btn-m btn-dark"
+                >
+                  Enviar
+                </Button>
+              </Form.Group>
+            </Form>
+          </div>
+        </Modal.Body>
+      </Modal>
+      <Toast
+        onClose={() => setShowToast(false)}
+        show={showToast}
+        delay={5000}
+        autohide
+      >
+        <Toast.Header>
+          <img src="holder.js/20x20?text=%20" className="rounded me-2" alt="" />
+          <strong className="me-auto">Escapadesenparella.cat</strong>
+        </Toast.Header>
+        <Toast.Body>{toastText}</Toast.Body>
+      </Toast>
+    </>
   );
 };
 
