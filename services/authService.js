@@ -65,6 +65,16 @@ class AuthService {
 
   logout = () => this.service.post("/auth/logout", {}).then((res) => res.data);
 
+  resetPassword = (email) =>
+    this.service.post("/auth/reset-password", { email }).then(() => {
+      console.log("email =>", email);
+      if (this.error === undefined) {
+        return this.response;
+      } else {
+        return this.error;
+      }
+    });
+
   googleAuth = (fullName, email, imageUrl) => {
     return this.service
       .post("/auth/googlesignup", { fullName, email, imageUrl })

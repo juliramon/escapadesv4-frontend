@@ -24,6 +24,9 @@
   font-style: normal;
 }
 
+$font-bold: "MADETommySoft-Medium";
+$font-regular: "MADETommySoft";
+
 $dark-blue: #00206b;
 $medium-blue: #6376a0;
 $soft-blue: #ebf1ff;
@@ -1106,6 +1109,11 @@ nav {
   z-index: 1001 !important;
 }
 
+.modal-header,
+.modal-body {
+  padding: 1.55rem !important;
+}
+
 .modal-backdrop {
   background-color: rgb(13, 31, 68) !important;
   z-index: 1001 !important;
@@ -1120,8 +1128,8 @@ nav {
 }
 
 .modal-content {
-  border-radius: 8px;
-  border: none;
+  border-radius: 8px !important;
+  border: none !important;
 }
 
 .publicationModal,
@@ -1273,6 +1281,32 @@ nav {
         margin: 0 6px;
       }
     }
+  }
+}
+
+.forgotPasswordModal {
+  .modal-header {
+    border: none;
+    padding-bottom: 0 !important;
+    .modal-title {
+      font-size: 1.2em;
+      margin-bottom: 15px;
+    }
+    .modal-subtitle {
+      font-size: 0.9em;
+      margin: 0;
+    }
+  }
+  form {
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .form-label {
+    font-family: $font-bold;
+  }
+  .btn {
+    width: 150px;
   }
 }
 
