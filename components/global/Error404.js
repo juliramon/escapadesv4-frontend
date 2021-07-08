@@ -7,6 +7,20 @@ import NavigationBar from "./NavigationBar";
 
 const Error404 = () => {
   const { user } = useContext(UserContext);
+  let button;
+  if (!user) {
+    button = (
+      <Link href="/">
+        <a className="btn btn-m btn-dark">Tornar al començament</a>
+      </Link>
+    );
+  } else {
+    button = (
+      <Link href="/feed">
+        <a className="btn btn-m btn-dark">Tornar al feed</a>
+      </Link>
+    );
+  }
   return (
     <>
       <Head>
@@ -25,9 +39,7 @@ const Error404 = () => {
               <Col lg="12">
                 <h1>404</h1>
                 <p>Ep! Aquesta pàgina no existeix...</p>
-                <Link href="/feed">
-                  <a className="btn btn-m btn-dark">Tornar al feed</a>
-                </Link>
+                {button}
               </Col>
             </Row>
           </Container>

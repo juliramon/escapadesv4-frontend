@@ -20,7 +20,6 @@ const ForgotPasswordModal = ({ visibility, hideModal }) => {
       setServerMessage("Escriu el teu correu electrònic");
     } else {
       emailService.sendResetPasswordEmail(email).then((res) => {
-        console.log(res);
         setToastText(res.message);
         hideModal();
         setShowToast(true);

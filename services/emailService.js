@@ -19,6 +19,12 @@ class EmailService {
       })
       .then((res) => res.data);
   };
+
+  sendWelcomeEmail = (email) => {
+    return this.service
+      .post("/email/welcomeEmail", { email })
+      .then((res) => res.data);
+  };
 }
 
 export default EmailService;
