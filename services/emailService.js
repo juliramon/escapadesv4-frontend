@@ -20,9 +20,9 @@ class EmailService {
       .then((res) => res.data);
   };
 
-  sendWelcomeEmail = (email) => {
+  sendWelcomeEmail = (userName, email) => {
     return this.service
-      .post("/email/welcomeEmail", { email })
+      .post("/email/welcomeEmail", { userName, email })
       .then((res) => res.data);
   };
 }
