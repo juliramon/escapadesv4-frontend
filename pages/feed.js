@@ -12,11 +12,20 @@ import ButtonSharePost from "../components/buttons/ButtonSharePost";
 
 const Feed = () => {
   const { user } = useContext(UserContext);
+
+  console.log("USER =>", user);
+
   const router = useRouter();
 
   useEffect(() => {
     if (!user) {
       router.push("/login");
+    }
+    if (user.accountCompleted === false) {
+      router.push("/signup/confirmacio-correu");
+    }
+    if (user.hasConfirmedEmail === false) {
+      router.push("/signup/confirmacio-correu");
     }
   }, [user]);
 

@@ -7,7 +7,8 @@ import "slick-carousel/slick/slick-theme.css";
 
 import Router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
+// import { useCookies } from "react-cookie";
+import Cookies from "js-cookie";
 import UserContext from "../contexts/UserContext";
 import AuthService from "../services/authService";
 import * as ga from "../lib/ga";
@@ -25,10 +26,10 @@ function MyApp({ Component, pageProps }) {
     };
   }, [router.events]);
 
-  const [cookies, setCookie, removeCookie] = useCookies("");
+  // const [cookies, setCookie, removeCookie] = useCookies("");
   let loggedData;
-  if (cookies.loggedInUser && cookies.loggedInUser !== null) {
-    loggedData = cookies.loggedInUser;
+  if (Cookies.get("loggedInUser") && Cookies.get("loggedInUser") !== null) {
+    loggedData = Cookies.get("loggedInUser");
   }
   const initialState = {
     loggedUser: loggedData,
@@ -42,13 +43,15 @@ function MyApp({ Component, pageProps }) {
 
   const getLoggedUser = (user) => {
     setState({ ...state, userFetched: true });
-    setCookie("loggedInUser", user, { expires: cookieExpirationDate });
+    Cookies.set("loggedInUser", JSON.parse(user), {
+      expires: cookieExpirationDate,
+    });
     Router.push("/feed");
   };
 
   const getNewUser = (user) => {
     setState({ ...state, userFetched: true });
-    setCookie("loggedInUser", user, { expires: cookieExpirationDate });
+    Cookies.set("loggedInUser", user, { expires: cookieExpirationDate });
     if (user !== undefined || user !== "null") {
       if (router.components["/empreses/registre"]) {
         router.push("/empreses/registre?step=informacio-empresa");
@@ -59,9 +62,12 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     if (state.userFetched) {
-      setState({ ...state, loggedUser: cookies.loggedInUser });
+      setState({
+        ...state,
+        loggedUser: JSON.parse(Cookies.get("loggedInUser")),
+      });
     }
-  }, [cookies]);
+  }, [Cookies]);
 
   const logOut = () => {
     const service = new AuthService();
@@ -70,15 +76,16 @@ function MyApp({ Component, pageProps }) {
       .then(() => {
         // setCookie("loggedInUser", undefined, { expires: cookieExpirationDate });
         setState({ ...state, loggedUser: undefined });
-        removeCookie("loggedInUser");
+        Cookies.remove("loggedInUser");
         Router.push("/login");
       })
       .catch((err) => console.error(err));
   };
 
   const refreshUserData = (updatedUser) => {
-    removeCookie("loggedInUser");
-    setCookie("loggedInUser", updatedUser, { expires: cookieExpirationDate });
+    console.log("REFERSHING USER DATA =>", updatedUser);
+    Cookies.remove("loggedInUser");
+    Cookies.set("loggedInUser", updatedUser, { expires: cookieExpirationDate });
     setState({ ...state, loggedUser: updatedUser });
   };
 

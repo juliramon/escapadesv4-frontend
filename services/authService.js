@@ -5,6 +5,9 @@ class AuthService {
     let service = Axios.create({
       baseURL: process.env.API_URL,
       withCredentials: true,
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
     let error, response;
     service.interceptors.response.use(
@@ -68,6 +71,18 @@ class AuthService {
   resetPassword = (id, password, token) => {
     return this.service
       .post("/auth/reset-password", { id, password, token })
+      .then(() => {
+        if (this.error === undefined) {
+          return this.response;
+        } else {
+          return this.error;
+        }
+      });
+  };
+
+  confirmEmail = (id, isEmailConfirmed) => {
+    return this.service
+      .put("/auth/confirm-email", { id, isEmailConfirmed })
       .then(() => {
         if (this.error === undefined) {
           return this.response;

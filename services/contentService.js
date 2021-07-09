@@ -170,8 +170,15 @@ class ContentService {
   getUserProfile = (id) =>
     this.service.get(`/users/${id}`).then((res) => res.data);
 
-  getUserData = (token) =>
-    this.service.get(`/users/${token}`).then((res) => res.data);
+  getUserData = (token) => {
+    console.log(token.ct);
+    if (token.ct) {
+      const confirmToken = token.ct;
+      return this.service.get(`/users/${confirmToken}`).then((res) => res.data);
+    } else {
+      return this.service.get(`/users/${token}`).then((res) => res.data);
+    }
+  };
 
   editProfile = (_id, avatar, fullName, username, bio, location) =>
     this.service.put(`/users/${_id}`, {

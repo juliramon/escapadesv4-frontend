@@ -111,7 +111,8 @@ const Signup = () => {
         </Alert>
       );
     } else if (
-      state.errorMessage.message === "Email already exists. Choose another one"
+      state.errorMessage.message ===
+      "Aquest correu ja existeix. Tria'n un altre."
     ) {
       errorMessage = (
         <Alert variant="danger">

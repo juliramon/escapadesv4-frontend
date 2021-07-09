@@ -9,6 +9,8 @@ import Head from "next/head";
 
 const CompleteAccount = () => {
   const { user, refreshUserData } = useContext(UserContext);
+
+  console.log("USER =>", user);
   const router = useRouter();
 
   const initialState = {
@@ -22,11 +24,29 @@ const CompleteAccount = () => {
     hasSeasons: false,
     accountCompleted: false,
     isReadyToSubmit: false,
+    updatedUser: {},
   };
 
   const [state, setState] = useState(initialState);
   const authService = new AuthService();
   const service = new ContentService();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      console.log("USER =>", user._id);
+      const isEmailConfirmed = true;
+      const userWithConfirmedEmail = await authService.confirmEmail(
+        user._id,
+        isEmailConfirmed
+      );
+      console.log("updated user =>", userWithConfirmedEmail);
+      setState({
+        ...state,
+        updatedUser: userWithConfirmedEmail.updateUser,
+      });
+    };
+    fetchData();
+  }, [user]);
 
   const handleCheck = (e) => {
     let regions = state.regionsToFollow;
@@ -114,6 +134,7 @@ const CompleteAccount = () => {
 
   const getUserUpdatedData = () => {
     service.getUserProfile(user._id).then((res) => {
+      console.log("res =>", res);
       refreshUserData(res);
     });
   };
