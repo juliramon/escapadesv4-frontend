@@ -12,17 +12,23 @@ class EmailService {
     this.service = service;
   }
 
-  sendResetPasswordEmail = (email) => {
+  sendConfirmEmail = (userName, email) => {
     return this.service
-      .post("/email/resetPassword", {
-        email,
-      })
+      .post("/email/confirmEmail", { userName, email })
       .then((res) => res.data);
   };
 
   sendWelcomeEmail = (userName, email) => {
     return this.service
       .post("/email/welcomeEmail", { userName, email })
+      .then((res) => res.data);
+  };
+
+  sendResetPasswordEmail = (email) => {
+    return this.service
+      .post("/email/resetPassword", {
+        email,
+      })
       .then((res) => res.data);
   };
 }

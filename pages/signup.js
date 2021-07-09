@@ -51,7 +51,7 @@ const Signup = () => {
       } else {
         setState(initialState);
         getNewUser(res);
-        emailService.sendWelcomeEmail(fullName, email);
+        emailService.sendConfirmEmail(fullName, email);
       }
     });
   };

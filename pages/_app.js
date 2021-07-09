@@ -53,7 +53,7 @@ function MyApp({ Component, pageProps }) {
       if (router.components["/empreses/registre"]) {
         router.push("/empreses/registre?step=informacio-empresa");
       }
-      router.push("/signup/complete-account");
+      router.push("/signup/confirmacio-correu");
     }
   };
 
