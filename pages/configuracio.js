@@ -5,9 +5,37 @@ import { Button, Col, Container, Form, Row, Toast } from "react-bootstrap";
 import NavigationBar from "../components/global/NavigationBar";
 import UserContext from "../contexts/UserContext";
 import ContentService from "../services/contentService";
+import { useRouter } from "next/router";
 
 const configuracio = () => {
   const { user, refreshUserData } = useContext(UserContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!user || user === "null" || user === undefined) {
+      router.push("/login");
+    } else {
+      if (user) {
+        if (user.accountCompleted === false) {
+          router.push("/signup/complete-account");
+        }
+        if (user.hasConfirmedEmail === false) {
+          router.push("/signup/confirmacio-correu");
+        }
+        if (user.userType !== "admin" || !user.userType) {
+          router.push("/feed");
+        }
+      }
+    }
+  }, [user]);
+
+  if (!user) {
+    return (
+      <Head>
+        <title>Carregant...</title>
+      </Head>
+    );
+  }
 
   let initialState;
   useState(() => {
@@ -160,20 +188,6 @@ const configuracio = () => {
     cursor: "pointer",
     color: "#0d1f44",
   };
-
-  useEffect(() => {
-    if (!user) {
-      router.push("/login");
-    }
-  }, [user]);
-
-  if (!user) {
-    return (
-      <Head>
-        <title>Carregant...</title>
-      </Head>
-    );
-  }
 
   let errorInput = {
     background: "red",

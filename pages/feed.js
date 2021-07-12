@@ -12,22 +12,33 @@ import ButtonSharePost from "../components/buttons/ButtonSharePost";
 
 const Feed = () => {
   const { user } = useContext(UserContext);
-
-  console.log("USER =>", user);
-
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) {
+    if (!user || user === "null" || user === undefined) {
       router.push("/login");
-    }
-    if (user.accountCompleted === false) {
-      router.push("/signup/confirmacio-correu");
-    }
-    if (user.hasConfirmedEmail === false) {
-      router.push("/signup/confirmacio-correu");
+    } else {
+      if (user) {
+        if (user.accountCompleted === false) {
+          router.push("/signup/complete-account");
+        }
+        if (user.hasConfirmedEmail === false) {
+          router.push("/signup/confirmacio-correu");
+        }
+        if (user.userType !== "admin" || !user.userType) {
+          router.push("/feed");
+        }
+      }
     }
   }, [user]);
+
+  if (!user) {
+    return (
+      <Head>
+        <title>Carregant...</title>
+      </Head>
+    );
+  }
 
   const initialState = {
     hasListings: false,

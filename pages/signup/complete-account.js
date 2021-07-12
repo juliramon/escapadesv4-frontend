@@ -9,9 +9,33 @@ import Head from "next/head";
 
 const CompleteAccount = () => {
   const { user, refreshUserData } = useContext(UserContext);
-
-  console.log("USER =>", user);
   const router = useRouter();
+
+  useEffect(() => {
+    if (!user || user === "null" || user === undefined) {
+      router.push("/login");
+    } else {
+      if (user) {
+        if (user.accountCompleted === false) {
+          router.push("/signup/complete-account");
+        }
+        if (user.hasConfirmedEmail === false) {
+          router.push("/signup/confirmacio-correu");
+        }
+        if (user.userType !== "admin" || !user.userType) {
+          router.push("/feed");
+        }
+      }
+    }
+  }, [user]);
+
+  if (!user) {
+    return (
+      <Head>
+        <title>Carregant...</title>
+      </Head>
+    );
+  }
 
   const initialState = {
     typesToFollow: [],
@@ -24,7 +48,8 @@ const CompleteAccount = () => {
     hasSeasons: false,
     accountCompleted: false,
     isReadyToSubmit: false,
-    updatedUser: {},
+    updatedUser: undefined,
+    isUserStateUpdated: false,
   };
 
   const [state, setState] = useState(initialState);
@@ -32,21 +57,31 @@ const CompleteAccount = () => {
   const service = new ContentService();
 
   useEffect(() => {
-    const fetchData = async () => {
-      console.log("USER =>", user._id);
-      const isEmailConfirmed = true;
-      const userWithConfirmedEmail = await authService.confirmEmail(
-        user._id,
-        isEmailConfirmed
-      );
-      console.log("updated user =>", userWithConfirmedEmail);
-      setState({
-        ...state,
-        updatedUser: userWithConfirmedEmail.updateUser,
-      });
-    };
-    fetchData();
-  }, [user]);
+    if (!state.isUserStateUpdated) {
+      const fetchData = async () => {
+        console.log("USER =>", user._id);
+        const isEmailConfirmed = true;
+        const userWithConfirmedEmail = await authService.confirmEmail(
+          user._id,
+          isEmailConfirmed
+        );
+        console.log("updated user =>", userWithConfirmedEmail);
+        setState({
+          ...state,
+          updatedUser: userWithConfirmedEmail.updateUser,
+          isUserStateUpdated: true,
+        });
+      };
+      fetchData();
+    }
+  }, [user, state]);
+
+  useEffect(() => {
+    if (state.isUserStateUpdated) {
+      refreshUserData(state.updatedUser);
+      console.log("user updated");
+    }
+  }, [state]);
 
   const handleCheck = (e) => {
     let regions = state.regionsToFollow;
