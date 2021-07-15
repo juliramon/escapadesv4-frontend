@@ -171,7 +171,7 @@ class ContentService {
     this.service.get(`/users/${id}`).then((res) => res.data);
 
   getUserData = (token) => {
-    console.log(token.ct);
+    console.log("token =>", token);
     if (token.ct) {
       const confirmToken = token.ct;
       return this.service.get(`/users/${confirmToken}`).then((res) => res.data);
