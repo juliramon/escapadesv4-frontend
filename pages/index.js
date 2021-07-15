@@ -29,8 +29,9 @@ const Homepage = (props) => {
 
   const title = (
     <>
-      La vostra propera escapada
-      <br /> en parella comença aquí
+      La vostra propera
+      <br /> escapada en parella
+      <br /> comença aquí
     </>
   );
 
