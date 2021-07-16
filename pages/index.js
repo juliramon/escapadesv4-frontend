@@ -121,9 +121,6 @@ export async function getStaticProps() {
   const places = await service.getAllPlaces();
   const stories = await service.getAllStories();
   const totals = await service.getCategoriesTotals();
-  // const activities = [];
-  // const places = [];
-  // const stories = [];
   return {
     props: {
       activities,

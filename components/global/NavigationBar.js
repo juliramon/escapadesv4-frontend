@@ -408,7 +408,10 @@ const NavigationBar = ({ logo_url, path }) => {
         </Navbar>
       </header>
     );
-  } else if (path === "/signup/complete-account") {
+  } else if (
+    path === "/signup/complete-account" ||
+    path === "/signup/confirmacio-correu"
+  ) {
     navBar = (
       <header style={styledHeader}>
         <Navbar>
@@ -420,7 +423,7 @@ const NavigationBar = ({ logo_url, path }) => {
                 </a>
               </Link>
             </div>
-            <div className="nav-col right d-flex">
+            <div className="nav-col right d-flex simple-nav">
               <Nav className="logged-user">
                 <Dropdown>
                   <Dropdown.Toggle variant="none" id="dropdown-basic">
@@ -478,7 +481,6 @@ const NavigationBar = ({ logo_url, path }) => {
             </div>
           </Container>
         </Navbar>
-        <ContentBar user={user} />
       </header>
     );
   } else {

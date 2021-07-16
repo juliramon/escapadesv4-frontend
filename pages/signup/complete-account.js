@@ -7,7 +7,8 @@ import Router, { useRouter } from "next/router";
 import UserContext from "../../contexts/UserContext";
 import Head from "next/head";
 
-const CompleteAccount = () => {
+const CompleteAccount = ({ userWithConfirmedEmail }) => {
+  console.log("user =>", userWithConfirmedEmail);
   const { user, refreshUserData } = useContext(UserContext);
   const router = useRouter();
 
@@ -15,16 +16,8 @@ const CompleteAccount = () => {
     if (!user || user === "null" || user === undefined) {
       router.push("/login");
     } else {
-      if (user) {
-        if (user.accountCompleted === false) {
-          router.push("/signup/complete-account");
-        }
-        if (user.hasConfirmedEmail === false) {
-          router.push("/signup/confirmacio-correu");
-        }
-        if (user.userType !== "admin" || !user.userType) {
-          router.push("/feed");
-        }
+      if (user.accountCompleted) {
+        router.push("/feed");
       }
     }
   }, [user]);
@@ -75,13 +68,6 @@ const CompleteAccount = () => {
       fetchData();
     }
   }, [user, state]);
-
-  useEffect(() => {
-    if (state.isUserStateUpdated) {
-      refreshUserData(state.updatedUser);
-      console.log("user updated");
-    }
-  }, [state]);
 
   const handleCheck = (e) => {
     let regions = state.regionsToFollow;
@@ -223,6 +209,13 @@ const CompleteAccount = () => {
       setQueryId(router.route);
     }
   }, [router]);
+
+  useEffect(() => {
+    if (state.isUserStateUpdated) {
+      refreshUserData(state.updatedUser);
+      console.log("user updated");
+    }
+  }, [state]);
 
   return (
     <>

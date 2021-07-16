@@ -18,17 +18,17 @@ const Feed = () => {
     if (!user || user === "null" || user === undefined) {
       router.push("/login");
     } else {
-      if (user) {
-        if (user.accountCompleted === false) {
-          router.push("/signup/complete-account");
+      setTimeout(() => {
+        if (user) {
+          if (user.hasConfirmedEmail === true) {
+            if (user.accountCompleted === false) {
+              router.push("/signup/complete-account");
+            }
+          } else {
+            router.push("/signup/confirmacio-correu");
+          }
         }
-        if (user.hasConfirmedEmail === false) {
-          router.push("/signup/confirmacio-correu");
-        }
-        if (user.userType !== "admin" || !user.userType) {
-          router.push("/feed");
-        }
-      }
+      }, 4000);
     }
   }, [user]);
 

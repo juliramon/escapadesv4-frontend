@@ -5,7 +5,7 @@ const Hero = ({ title, subtitle }) => {
   return (
     <section id="hero">
       <div className="overlay"></div>
-      <Container className="mw-1200" fluid>
+      <Container className="mw-1600" fluid>
         <Row>
           <Col lg={12}>
             <div className="wrapper d-flex">
