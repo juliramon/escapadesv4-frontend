@@ -30,17 +30,12 @@ const Homepage = (props) => {
   const title = (
     <>
       La vostra propera
-      <br /> <strong>escapada en parella</strong>
+      <br /> escapada en parella
       <br /> comença aquí
     </>
   );
 
-  const subtitle = (
-    <>
-      Perquè la vida en parella pot ser avorrida, o no. Cerca una activitat o
-      allotjament on escapar-vos.
-    </>
-  );
+  const subtitle = <>Cerca una activitat o allotjament on escapar-vos.</>;
 
   return (
     <>
@@ -126,9 +121,6 @@ export async function getStaticProps() {
   const places = await service.getAllPlaces();
   const stories = await service.getAllStories();
   const totals = await service.getCategoriesTotals();
-  // const activities = [];
-  // const places = [];
-  // const stories = [];
   return {
     props: {
       activities,

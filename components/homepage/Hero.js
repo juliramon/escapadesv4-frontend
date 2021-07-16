@@ -4,7 +4,8 @@ import SearchBar from "../homepage/SearchBar";
 const Hero = ({ title, subtitle }) => {
   return (
     <section id="hero">
-      <Container className="mw-1200" fluid>
+      <div className="overlay"></div>
+      <Container className="mw-1600" fluid>
         <Row>
           <Col lg={12}>
             <div className="wrapper d-flex">
@@ -12,6 +13,28 @@ const Hero = ({ title, subtitle }) => {
                 <h1 className="header-title">{title}</h1>
                 <p className="header-subtitle">{subtitle}</p>
                 <SearchBar />
+                <div className="credits-bar">
+                  <div className="credits-bar-wrapper">
+                    <div className="sponsor-block">
+                      <span>Amb el suport de:</span>
+                      <a
+                        href="#"
+                        title="LassDive"
+                        target="_blank"
+                        rel="nofollow noopener"
+                      >
+                        <img
+                          src="https://files.123inventatuweb.com/acens227517/image/lassdive-groc100.gif"
+                          alt="LassDive"
+                        />
+                        <p>
+                          LassDive | Centre i escola d'esports aquàtics i
+                          activitats d'ventura a la Costa Brava i Barcelona
+                        </p>
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div className="header-col right">
                 <div className="left">

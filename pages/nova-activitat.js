@@ -12,9 +12,22 @@ import PaymentService from "../services/paymentService";
 const ActivityForm = () => {
   const { user } = useContext(UserContext);
   const router = useRouter();
+
   useEffect(() => {
-    if (!user) {
+    if (!user || user === "null" || user === undefined) {
       router.push("/login");
+    } else {
+      if (user) {
+        if (user.accountCompleted === false) {
+          router.push("/signup/complete-account");
+        }
+        if (user.hasConfirmedEmail === false) {
+          router.push("/signup/confirmacio-correu");
+        }
+        if (user.userType !== "admin" || !user.userType) {
+          router.push("/feed");
+        }
+      }
     }
   }, [user]);
 
@@ -25,6 +38,7 @@ const ActivityForm = () => {
       </Head>
     );
   }
+
   const initialState = {
     formData: {
       emptyForm: true,

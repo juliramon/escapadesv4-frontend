@@ -2,10 +2,11 @@ import "../styles/globals.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-quill/dist/quill.bubble.css";
 import "react-photoswipe/lib/photoswipe.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import Router, { useRouter } from "next/router";
 import { useEffect, useState } from "react";
-import { useCookies } from "react-cookie";
 import UserContext from "../contexts/UserContext";
 import AuthService from "../services/authService";
 import * as ga from "../lib/ga";
@@ -23,61 +24,85 @@ function MyApp({ Component, pageProps }) {
     };
   }, [router.events]);
 
-  const [cookies, setCookie, removeCookie] = useCookies("");
+  // const [cookies, setCookie, removeCookie] = useCookies("");
+
   let loggedData;
-  if (cookies.loggedInUser && cookies.loggedInUser !== null) {
-    loggedData = cookies.loggedInUser;
+  if (typeof window !== "undefined") {
+    let getLoggedUser = JSON.parse(window.localStorage.getItem("loggedInUser"));
+    console.log("get logged user =>", getLoggedUser);
+    if (getLoggedUser && getLoggedUser !== null) {
+      console.log("SAVING LOGGED DATA");
+      loggedData = getLoggedUser;
+    }
   }
+
   const initialState = {
     loggedUser: loggedData,
   };
 
   const [state, setState] = useState(initialState);
 
-  let cookieCreationDate = new Date();
-  let cookieExpirationDate = new Date();
-  cookieExpirationDate.setFullYear(cookieCreationDate.getFullYear() + 1);
+  // let cookieCreationDate = new Date();
+  // let cookieExpirationDate = new Date();
+  // cookieExpirationDate.setFullYear(cookieCreationDate.getFullYear() + 1);
 
   const getLoggedUser = (user) => {
-    setState({ ...state, userFetched: true });
-    setCookie("loggedInUser", user, { expires: cookieExpirationDate });
-    Router.push("/feed");
+    if (typeof window !== "undefined") {
+      setState({ ...state, userFetched: true });
+      window.localStorage.setItem("loggedInUser", JSON.stringify(user));
+      console.log("GETTING LOGGED USER =>", user);
+      Router.push("/feed");
+    }
   };
 
   const getNewUser = (user) => {
-    setState({ ...state, userFetched: true });
-    setCookie("loggedInUser", user, { expires: cookieExpirationDate });
-    if (user !== undefined || user !== "null") {
-      if (router.components["/empreses/registre"]) {
-        router.push("/empreses/registre?step=informacio-empresa");
+    if (typeof window !== "undefined") {
+      setState({ ...state, userFetched: true });
+      window.localStorage.setItem("loggedInUser", JSON.stringify(user));
+      if (user !== undefined || user !== "null") {
+        if (router.components["/empreses/registre"]) {
+          router.push("/empreses/registre?step=informacio-empresa");
+        }
+        router.push("/signup/confirmacio-correu");
       }
-      router.push("/signup/complete-account");
     }
   };
 
   useEffect(() => {
     if (state.userFetched) {
-      setState({ ...state, loggedUser: cookies.loggedInUser });
+      console.log("saving to state");
+      let loggedInUser = JSON.parse(
+        window.localStorage.getItem("loggedInUser")
+      );
+      setState({
+        ...state,
+        loggedUser: loggedInUser,
+        userFetched: false,
+      });
     }
-  }, [cookies]);
+  }, [state]);
 
   const logOut = () => {
-    const service = new AuthService();
-    service
-      .logout()
-      .then(() => {
-        // setCookie("loggedInUser", undefined, { expires: cookieExpirationDate });
-        setState({ ...state, loggedUser: undefined });
-        removeCookie("loggedInUser");
-        Router.push("/login");
-      })
-      .catch((err) => console.error(err));
+    if (typeof window !== "undefined") {
+      const service = new AuthService();
+      service
+        .logout()
+        .then(() => {
+          setState({ ...state, loggedUser: undefined });
+          window.localStorage.removeItem("loggedInUser");
+          Router.push("/login");
+        })
+        .catch((err) => console.error(err));
+    }
   };
 
   const refreshUserData = (updatedUser) => {
-    removeCookie("loggedInUser");
-    setCookie("loggedInUser", updatedUser, { expires: cookieExpirationDate });
-    setState({ ...state, loggedUser: updatedUser });
+    if (typeof window !== "undefined") {
+      console.log("REFERSHING USER DATA =>", updatedUser);
+      window.localStorage.removeItem("loggedInUser");
+      window.localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
+      setState({ ...state, loggedUser: updatedUser });
+    }
   };
 
   return (

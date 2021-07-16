@@ -7,9 +7,28 @@ import Router, { useRouter } from "next/router";
 import UserContext from "../../contexts/UserContext";
 import Head from "next/head";
 
-const CompleteAccount = () => {
+const CompleteAccount = ({ userWithConfirmedEmail }) => {
+  console.log("user =>", userWithConfirmedEmail);
   const { user, refreshUserData } = useContext(UserContext);
   const router = useRouter();
+
+  useEffect(() => {
+    if (!user || user === "null" || user === undefined) {
+      router.push("/login");
+    } else {
+      if (user.accountCompleted) {
+        router.push("/feed");
+      }
+    }
+  }, [user]);
+
+  if (!user) {
+    return (
+      <Head>
+        <title>Carregant...</title>
+      </Head>
+    );
+  }
 
   const initialState = {
     typesToFollow: [],
@@ -22,11 +41,33 @@ const CompleteAccount = () => {
     hasSeasons: false,
     accountCompleted: false,
     isReadyToSubmit: false,
+    updatedUser: undefined,
+    isUserStateUpdated: false,
   };
 
   const [state, setState] = useState(initialState);
   const authService = new AuthService();
   const service = new ContentService();
+
+  useEffect(() => {
+    if (!state.isUserStateUpdated) {
+      const fetchData = async () => {
+        console.log("USER =>", user._id);
+        const isEmailConfirmed = true;
+        const userWithConfirmedEmail = await authService.confirmEmail(
+          user._id,
+          isEmailConfirmed
+        );
+        console.log("updated user =>", userWithConfirmedEmail);
+        setState({
+          ...state,
+          updatedUser: userWithConfirmedEmail.updateUser,
+          isUserStateUpdated: true,
+        });
+      };
+      fetchData();
+    }
+  }, [user, state]);
 
   const handleCheck = (e) => {
     let regions = state.regionsToFollow;
@@ -114,6 +155,7 @@ const CompleteAccount = () => {
 
   const getUserUpdatedData = () => {
     service.getUserProfile(user._id).then((res) => {
+      console.log("res =>", res);
       refreshUserData(res);
     });
   };
@@ -167,6 +209,13 @@ const CompleteAccount = () => {
       setQueryId(router.route);
     }
   }, [router]);
+
+  useEffect(() => {
+    if (state.isUserStateUpdated) {
+      refreshUserData(state.updatedUser);
+      console.log("user updated");
+    }
+  }, [state]);
 
   return (
     <>

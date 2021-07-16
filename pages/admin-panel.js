@@ -17,17 +17,24 @@ import FetchingSpinner from "../components/global/FetchingSpinner";
 const AdminPanel = () => {
   const { user } = useContext(UserContext);
   const router = useRouter();
-  useEffect(() => {
-    if (!user) {
-      router.push("/login");
-    }
-  }, [user]);
 
   useEffect(() => {
-    if (user.userType !== "admin") {
-      router.push("/feed");
+    if (!user || user === "null" || user === undefined) {
+      router.push("/login");
+    } else {
+      if (user) {
+        if (user.accountCompleted === false) {
+          router.push("/signup/complete-account");
+        }
+        if (user.hasConfirmedEmail === false) {
+          router.push("/signup/confirmacio-correu");
+        }
+        if (user.userType !== "admin" || !user.userType) {
+          router.push("/feed");
+        }
+      }
     }
-  });
+  }, [user]);
 
   if (!user) {
     return (

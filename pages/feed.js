@@ -15,10 +15,30 @@ const Feed = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (!user) {
+    if (!user || user === "null" || user === undefined) {
       router.push("/login");
+    } else {
+      setTimeout(() => {
+        if (user) {
+          if (user.hasConfirmedEmail === true) {
+            if (user.accountCompleted === false) {
+              router.push("/signup/complete-account");
+            }
+          } else {
+            router.push("/signup/confirmacio-correu");
+          }
+        }
+      }, 4000);
     }
   }, [user]);
+
+  if (!user) {
+    return (
+      <Head>
+        <title>Carregant...</title>
+      </Head>
+    );
+  }
 
   const initialState = {
     hasListings: false,

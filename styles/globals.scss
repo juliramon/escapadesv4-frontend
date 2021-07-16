@@ -24,6 +24,9 @@
   font-style: normal;
 }
 
+$font-bold: "MADETommySoft-Medium";
+$font-regular: "MADETommySoft";
+
 $dark-blue: #00206b;
 $medium-blue: #6376a0;
 $soft-blue: #ebf1ff;
@@ -77,6 +80,14 @@ a {
   background-color: $white !important;
   border: 1px solid $electric-blue !important;
   flex: 1;
+}
+
+.btn-no-flex {
+  flex: none;
+}
+
+.btn-no-border {
+  border: none !important;
 }
 
 #listingSquareBox .btn {
@@ -230,7 +241,7 @@ form button {
 .alert {
   padding: 8px 12px !important;
   border-radius: 8px !important;
-  font-size: 1rem !important;
+  font-size: 0.85rem !important;
   display: flex !important;
   align-items: center !important;
   svg {
@@ -294,6 +305,7 @@ nav {
     width: 100%;
     position: relative;
   }
+
   .nav-col.right:not(.simple-nav) {
     flex: 1;
   }
@@ -450,6 +462,8 @@ nav {
     line-height: 1.2em;
     font-size: 0.9em;
     margin: 0;
+    white-space: nowrap;
+    white-space: nowrap;
   }
 }
 
@@ -461,6 +475,10 @@ nav {
   background-image: url("https://res.cloudinary.com/juligoodie/image/upload/v1624975618/getaways-guru/static-files/background-pattern_jgpvmh.svg");
   background-repeat: repeat-x;
   background-size: 18%;
+  border-bottom: 1px solid #e7ebf5;
+}
+
+.navbar-light {
   border-bottom: 1px solid #e7ebf5;
 }
 
@@ -498,9 +516,14 @@ nav {
 
 #homepage {
   #hero {
-    padding: 80px 0;
+    padding: 50px 0 10px 0;
     position: relative;
     z-index: 1000;
+    .wrapper {
+      background: #fef8f2;
+      border-radius: 10px;
+      padding: 60px 80px;
+    }
     .header-col.left {
       position: inherit;
       z-index: 1000;
@@ -651,11 +674,45 @@ nav {
           border: none;
         }
       }
+      .credits-bar {
+        width: 100%;
+        margin-top: 20px;
+        .credits-bar-wrapper {
+          display: flex;
+
+          font-size: 0.8em;
+        }
+        p,
+        a {
+          margin: 0;
+        }
+        span {
+          opacity: 0.6;
+          display: inline-block;
+          margin-bottom: 10px;
+        }
+        .sponsor-block {
+          text-align: left;
+          line-height: 1.4em;
+          a {
+            display: flex;
+            align-items: center;
+            img {
+              max-width: 150px;
+              margin-right: 20px;
+            }
+            p {
+              max-width: 250px;
+            }
+          }
+        }
+      }
     }
+
     .header-col.right {
       position: absolute;
       z-index: 0;
-      right: 15px;
+      right: 80px;
       display: flex;
       .header-image {
         width: 250px;
@@ -671,12 +728,12 @@ nav {
         position: relative;
         top: 30px;
         .header-image {
-          margin-bottom: 30px;
+          margin-bottom: 15px;
         }
       }
       .right {
         .header-image {
-          height: 500px;
+          height: 451px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -1059,6 +1116,11 @@ nav {
   z-index: 1001 !important;
 }
 
+.modal-header,
+.modal-body {
+  padding: 1.55rem !important;
+}
+
 .modal-backdrop {
   background-color: rgb(13, 31, 68) !important;
   z-index: 1001 !important;
@@ -1073,8 +1135,8 @@ nav {
 }
 
 .modal-content {
-  border-radius: 8px;
-  border: none;
+  border-radius: 8px !important;
+  border: none !important;
 }
 
 .publicationModal,
@@ -1226,6 +1288,32 @@ nav {
         margin: 0 6px;
       }
     }
+  }
+}
+
+.forgotPasswordModal {
+  .modal-header {
+    border: none;
+    padding-bottom: 0 !important;
+    .modal-title {
+      font-size: 1.2em;
+      margin-bottom: 5px;
+    }
+    .modal-subtitle {
+      font-size: 0.9em;
+      margin: 0;
+    }
+  }
+  form {
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .form-label {
+    font-family: $font-bold;
+  }
+  .btn {
+    width: 150px;
   }
 }
 
@@ -3213,6 +3301,32 @@ nav {
 }
 
 /*---END COMPLETE REGISTRATION PAGE---*/
+/*---CONFIRM EMAIL PAGE---*/
+
+#emailConfirmation {
+  .content-wrapper {
+    padding: 100px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 300px;
+      height: auto;
+    }
+    h1 {
+      margin-top: 20px;
+    }
+    .sub-h1 {
+      margin-top: 8px;
+    }
+    button {
+      margin-top: 25px;
+    }
+  }
+}
+
+/*---END CONFIRM EMAIL PAGE---*/
 /*---SETTINGS---*/
 #settings {
   .user-meta-wrapper {

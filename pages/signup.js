@@ -6,6 +6,7 @@ import AuthService from "../services/authService";
 import Router, { useRouter } from "next/router";
 import UserContext from "../contexts/UserContext";
 import slugify from "slugify";
+import EmailService from "../services/emailService";
 
 const Signup = () => {
   const { user, getNewUser } = useContext(UserContext);
@@ -25,6 +26,7 @@ const Signup = () => {
   };
   const [state, setState] = useState(initialState);
   const service = new AuthService();
+  const emailService = new EmailService();
   const handleChange = (e) => {
     setState({
       ...state,
@@ -49,6 +51,7 @@ const Signup = () => {
       } else {
         setState(initialState);
         getNewUser(res);
+        emailService.sendConfirmEmail(fullName, email);
       }
     });
   };
@@ -108,7 +111,8 @@ const Signup = () => {
         </Alert>
       );
     } else if (
-      state.errorMessage.message === "Email already exists. Choose another one"
+      state.errorMessage.message ===
+      "Aquest correu ja existeix. Tria'n un altre."
     ) {
       errorMessage = (
         <Alert variant="danger">

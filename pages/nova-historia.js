@@ -40,11 +40,25 @@ const formats = [
 const StoryForm = () => {
   const { user } = useContext(UserContext);
   const router = useRouter();
+
   useEffect(() => {
-    if (!user) {
+    if (!user || user === "null" || user === undefined) {
       router.push("/login");
+    } else {
+      if (user) {
+        if (user.accountCompleted === false) {
+          router.push("/signup/complete-account");
+        }
+        if (user.hasConfirmedEmail === false) {
+          router.push("/signup/confirmacio-correu");
+        }
+        if (user.userType !== "admin" || !user.userType) {
+          router.push("/feed");
+        }
+      }
     }
   }, [user]);
+
   if (!user) {
     return (
       <Head>
@@ -52,6 +66,7 @@ const StoryForm = () => {
       </Head>
     );
   }
+
   const initialState = {
     formData: {
       emptyForm: true,
@@ -139,14 +154,8 @@ const StoryForm = () => {
     //   remove: /[*+~.,()'"!:@]/g,
     //   lower: true,
     // });
-    const {
-      type,
-      title,
-      subtitle,
-      slug,
-      coverCloudImage,
-      cloudImages,
-    } = state.formData;
+    const { type, title, subtitle, slug, coverCloudImage, cloudImages } =
+      state.formData;
     service
       .story(
         type,
