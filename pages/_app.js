@@ -29,9 +29,7 @@ function MyApp({ Component, pageProps }) {
   let loggedData;
   if (typeof window !== "undefined") {
     let getLoggedUser = JSON.parse(window.localStorage.getItem("loggedInUser"));
-    console.log("get logged user =>", getLoggedUser);
     if (getLoggedUser && getLoggedUser !== null) {
-      console.log("SAVING LOGGED DATA");
       loggedData = getLoggedUser;
     }
   }
@@ -50,7 +48,6 @@ function MyApp({ Component, pageProps }) {
     if (typeof window !== "undefined") {
       setState({ ...state, userFetched: true });
       window.localStorage.setItem("loggedInUser", JSON.stringify(user));
-      console.log("GETTING LOGGED USER =>", user);
       Router.push("/feed");
     }
   };
@@ -70,7 +67,6 @@ function MyApp({ Component, pageProps }) {
 
   useEffect(() => {
     if (state.userFetched) {
-      console.log("saving to state");
       let loggedInUser = JSON.parse(
         window.localStorage.getItem("loggedInUser")
       );
@@ -98,7 +94,6 @@ function MyApp({ Component, pageProps }) {
 
   const refreshUserData = (updatedUser) => {
     if (typeof window !== "undefined") {
-      console.log("REFERSHING USER DATA =>", updatedUser);
       window.localStorage.removeItem("loggedInUser");
       window.localStorage.setItem("loggedInUser", JSON.stringify(updatedUser));
       setState({ ...state, loggedUser: updatedUser });

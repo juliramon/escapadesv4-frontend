@@ -141,7 +141,6 @@ const EditOrganizationModal = ({
         additionalInfo
       )
       .then((res) => {
-        console.log(res.data);
         if (res.data.message === "Aquesta URL ja està en us") {
           setState({
             ...state,

@@ -8,7 +8,6 @@ import UserContext from "../../contexts/UserContext";
 import Head from "next/head";
 
 const CompleteAccount = ({ userWithConfirmedEmail }) => {
-  console.log("user =>", userWithConfirmedEmail);
   const { user, refreshUserData } = useContext(UserContext);
   const router = useRouter();
 
@@ -52,13 +51,11 @@ const CompleteAccount = ({ userWithConfirmedEmail }) => {
   useEffect(() => {
     if (!state.isUserStateUpdated) {
       const fetchData = async () => {
-        console.log("USER =>", user._id);
         const isEmailConfirmed = true;
         const userWithConfirmedEmail = await authService.confirmEmail(
           user._id,
           isEmailConfirmed
         );
-        console.log("updated user =>", userWithConfirmedEmail);
         setState({
           ...state,
           updatedUser: userWithConfirmedEmail.updateUser,
@@ -155,7 +152,6 @@ const CompleteAccount = ({ userWithConfirmedEmail }) => {
 
   const getUserUpdatedData = () => {
     service.getUserProfile(user._id).then((res) => {
-      console.log("res =>", res);
       refreshUserData(res);
     });
   };
@@ -213,7 +209,6 @@ const CompleteAccount = ({ userWithConfirmedEmail }) => {
   useEffect(() => {
     if (state.isUserStateUpdated) {
       refreshUserData(state.updatedUser);
-      console.log("user updated");
     }
   }, [state]);
 
