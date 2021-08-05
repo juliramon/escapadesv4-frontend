@@ -30,7 +30,6 @@ const ActivityList = ({ user }) => {
   let activitiesList;
   if (state.hasActivities) {
     activitiesList = state.activities.map((el) => {
-      console.log(el);
       <PublicContentBox
         key={el._id}
         type={el.type}
