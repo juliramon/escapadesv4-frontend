@@ -26,10 +26,13 @@ const Dashboard = () => {
         if (user.hasConfirmedEmail === false) {
           router.push("/signup/confirmacio-correu");
         }
-        if (user.userType !== "admin" || !user.userType) {
-          router.push("/feed");
-        }
       }
+    }
+
+    if (router.pathname.includes("editar")) {
+      document.querySelector("body").classList.add("composer");
+    } else {
+      document.querySelector("body").classList.remove("composer");
     }
   }, [user]);
 
@@ -379,23 +382,24 @@ const Dashboard = () => {
   };
 
   let recommendPostButton;
-  if (state.userSubscription) {
-    if (
-      state.userSubscription.numberOfPublications === "0" &&
-      state.userSubscription.plan === "basic"
-    ) {
-      recommendPostButton = <ButtonSharePost canPublish={true} />;
-    } else if (
-      state.userSubscription.numberOfPublications < 3 &&
-      state.userSubscription.plan === "premium"
-    ) {
-      recommendPostButton = <ButtonSharePost canPublish={true} />;
-    } else if (state.userSubscription.plan === "superior") {
-      recommendPostButton = <ButtonSharePost canPublish={true} />;
-    } else {
-      recommendPostButton = <ButtonSharePost canPublish={false} />;
-    }
-  }
+  recommendPostButton = <ButtonSharePost canPublish={true} />;
+  // if (state.userSubscription) {
+  //   if (
+  //     state.userSubscription.numberOfPublications === "0" &&
+  //     state.userSubscription.plan === "basic"
+  //   ) {
+  //     recommendPostButton = <ButtonSharePost canPublish={true} />;
+  //   } else if (
+  //     state.userSubscription.numberOfPublications < 3 &&
+  //     state.userSubscription.plan === "premium"
+  //   ) {
+  //     recommendPostButton = <ButtonSharePost canPublish={true} />;
+  //   } else if (state.userSubscription.plan === "superior") {
+  //     recommendPostButton = <ButtonSharePost canPublish={true} />;
+  //   } else {
+  //     recommendPostButton = <ButtonSharePost canPublish={false} />;
+  //   }
+  // }
 
   return (
     <>

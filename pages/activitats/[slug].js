@@ -356,23 +356,23 @@ const ActivityListing = () => {
   return (
     <>
       <Head>
-        <title>{state.activity.title} - Escapadesenparella.cat</title>
+        <title>{state.activity.metaTitle} - Escapadesenparella.cat</title>
         <link rel="icon" href="/favicon.ico" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta
           name="description"
-          content={`${state.activity.title}, una escapada que us encantarà! Descobreix ${state.activity.title} amb nosaltres i sorprèn a la teva parella. Fes clic aquí!`}
+          content={`${state.activity.metaDescription}`}
         />
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
-          content={`${state.activity.title} - Escapadesenparella.cat`}
+          content={`${state.activity.metaTitle} - Escapadesenparella.cat`}
         />
         <meta
           property="og:description"
-          content={`${state.activity.title}, una escapada que us encantarà! Descobreix ${state.activity.title} amb nosaltres i sorprèn a la teva parella. Fes clic aquí!`}
+          content={`${state.activity.metaDescription}`}
         />
         <meta
           property="url"
@@ -383,11 +383,11 @@ const ActivityListing = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content={`${state.activity.title} - Escapadesenparella.cat`}
+          content={`${state.activity.metaTitle} - Escapadesenparella.cat`}
         />
         <meta
           name="twitter:description"
-          content={`${state.activity.title}, una escapada que us encantarà! Descobreix ${state.activity.title} amb nosaltres i sorprèn a la teva parella. Fes clic aquí!`}
+          content={`${state.activity.metaDescription}`}
         />
         <meta name="twitter:image" content={state.activity.images[0]} />
         <meta property="og:image" content={state.activity.images[0]} />

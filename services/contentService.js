@@ -52,7 +52,9 @@ class ContentService {
     activity_opening_hours,
     duration,
     price,
-    organization_id
+    organization_id,
+    metaTitle,
+    metaDescription
   ) => {
     return this.service
       .post("/activity", {
@@ -81,6 +83,8 @@ class ContentService {
         duration,
         price,
         organization_id,
+        metaTitle,
+        metaDescription,
       })
       .then((res) => res.data);
   };
@@ -123,7 +127,9 @@ class ContentService {
     activity_opening_hours,
     duration,
     price,
-    organization
+    organization,
+    metaTitle,
+    metaDescription
   ) =>
     this.service.put(`/activities/${_id}`, {
       slug,
@@ -150,6 +156,8 @@ class ContentService {
       duration,
       price,
       organization,
+      metaTitle,
+      metaDescription,
     });
 
   // FILES ENDPOINTS
@@ -254,7 +262,9 @@ class ContentService {
     place_id,
     place_opening_hours,
     price,
-    organization_id
+    organization_id,
+    metaTitle,
+    metaDescription
   ) => {
     return this.service
       .post("/place", {
@@ -283,6 +293,8 @@ class ContentService {
         place_opening_hours,
         price,
         organization_id,
+        metaTitle,
+        metaDescription,
       })
       .then((res) => {});
   };
@@ -322,7 +334,9 @@ class ContentService {
     place_place_id,
     place_opening_hours,
     price,
-    organization
+    organization,
+    metaTitle,
+    metaDescription
   ) =>
     this.service.put(`/places/${_id}`, {
       slug,
@@ -349,6 +363,8 @@ class ContentService {
       place_opening_hours,
       price,
       organization,
+      metaTitle,
+      metaDescription,
     });
 
   getUserPlaces = (id) =>
@@ -366,6 +382,8 @@ class ContentService {
         cover,
         image,
         description,
+        metaTitle,
+        metaDescription,
       })
       .then((res) => res.data);
   };
@@ -386,6 +404,8 @@ class ContentService {
       cover,
       images,
       description,
+      metaTitle,
+      metaDescription,
     });
 
   removeStory = (id) =>

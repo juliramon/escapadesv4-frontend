@@ -1321,11 +1321,72 @@ nav {
 /*---COMPOSER STYLES---*/
 
 .composer {
+  background-color: #f2f7f9;
   .form-composer {
-    padding-top: 40px;
+    padding: 30px 0 50px 0;
+    .form-composer__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .form-composer__header-right button {
+        background-color: #002b8f;
+        color: #ffffff;
+        padding: 10px 20px;
+        font-size: 0.9em;
+      }
+    }
+    .form-composer__body {
+      .form-composer__tab-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-radius: 8px !important;
+        overflow: hidden;
+        border: 1px solid #e7ebf5;
+        margin: 0 0 15px 0;
+        background-color: #ffffff;
+        box-shadow: 0 0 0 0.5px rgb(49 49 93 / 3%),
+          0 2px 5px 0 rgb(49 49 93 / 10%), 0 1px 2px 0 rgb(0 0 0 / 8%);
+        .form-composer__tab {
+          flex: 1;
+          border: none;
+          background: none;
+          padding: 10px 15px;
+          border-radius: 0 !important;
+          color: #00206b;
+        }
+        .form-composer__tab.active {
+          border-top: 3px solid #3a4887 !important;
+        }
+        .form-composer__tab:first-child {
+          border-right: 1px solid #e8e8e8;
+        }
+      }
+      .form-composer__post-content,
+      .form-composer__seo {
+        background-color: #ffffff;
+        border-radius: 8px;
+        padding: 20px;
+        border: 1px solid #e7ebf5;
+        box-shadow: 0 0 0 0.5px rgb(49 49 93 / 3%),
+          0 2px 5px 0 rgb(49 49 93 / 10%), 0 1px 2px 0 rgb(0 0 0 / 8%);
+        label {
+          font-weight: bold;
+          font-size: 1em;
+        }
+        .form-composer__label-description {
+          display: block;
+          font-size: 0.9em;
+          color: #6376a0;
+        }
+        .form-group:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
   }
   h1 {
-    font-size: 2.1rem;
+    font-size: 2rem;
   }
   form button {
     width: 100%;

@@ -16,7 +16,12 @@ const ActivityEditionForm = () => {
     if (!user) {
       router.push("/login");
     }
-  }, [user]);
+    if (router.pathname.includes("editar")) {
+      document.querySelector("body").classList.add("composer");
+    } else {
+      document.querySelector("body").classList.remove("composer");
+    }
+  }, [user, router]);
 
   if (!user) {
     return (
@@ -61,10 +66,13 @@ const ActivityEditionForm = () => {
       price: "",
       userOrganizations: "",
       isReadyToSubmit: false,
+      metaTitle: "",
+      metaDescription: "",
     },
     isActivityLoaded: false,
   };
   const [state, setState] = useState(initialState);
+  const [activeTab, setActiveTab] = useState("main");
 
   const [queryId, setQueryId] = useState(null);
   useEffect(() => {
@@ -116,6 +124,8 @@ const ActivityEditionForm = () => {
             activity_opening_hours: "",
             duration: "",
             price: "",
+            metaTitle: activityDetails.metaTitle,
+            metaDescription: activityDetails.metaDescription,
             userOrganizations: userOrganizations,
           },
           isActivityLoaded: true,
@@ -285,6 +295,8 @@ const ActivityEditionForm = () => {
     price,
     duration,
     description,
+    metaTitle,
+    metaDescription,
   } = state.activity;
 
   const submitActivity = async () => {
@@ -316,6 +328,8 @@ const ActivityEditionForm = () => {
       activity_opening_hours,
       duration,
       price,
+      metaTitle,
+      metaDescription,
     } = state.activity;
     const { coverCloudImage, cloudImages } = state.formData;
     const { organization } = state;
@@ -352,7 +366,9 @@ const ActivityEditionForm = () => {
         activity_opening_hours,
         duration,
         price,
-        organization
+        organization,
+        metaTitle,
+        metaDescription
       )
       .then(() => router.push("/dashboard"));
   };
@@ -538,8 +554,7 @@ const ActivityEditionForm = () => {
       <Head>
         <title>Edita l'activitat - Escapadesenparella.cat</title>
       </Head>
-
-      <div id="activity" className="composer">
+      <div id="activity">
         <NavigationBar
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
@@ -549,449 +564,511 @@ const ActivityEditionForm = () => {
         />
         <Container className="mw-1600">
           <Row>
-            <Col lg={12} className="sided-shadow">
+            <Col lg={12}>
               <div className="form-composer">
-                <h1>Editar l'activitat</h1>
-                <p className="sub-h1">
-                  Edita i desa els canvis de la teva activitat
-                </p>
+                <div className="form-composer__header">
+                  <div className="form-composer__header-left">
+                    <h1>Editar l'activitat</h1>
+                    <p className="sub-h1">
+                      Edita i desa els canvis de la teva activitat
+                    </p>
+                  </div>
+                  <div className="form-composer__header-right">
+                    <Button type="submit" variant="none" onClick={handleSubmit}>
+                      Guardar canvis
+                    </Button>
+                  </div>
+                </div>
+                <div className="form-composer__body">
+                  <div className="form-composer__tab-bar">
+                    <button
+                      className={
+                        activeTab === "main"
+                          ? "form-composer__tab active"
+                          : "form-composer__tab"
+                      }
+                      onClick={() => setActiveTab("main")}
+                    >
+                      Contingut principal
+                    </button>
+                    <button
+                      className={
+                        activeTab === "seo"
+                          ? "form-composer__tab active"
+                          : "form-composer__tab"
+                      }
+                      onClick={() => setActiveTab("seo")}
+                    >
+                      SEO
+                    </button>
+                  </div>
+                  {activeTab === "main" ? (
+                    <div className="form-composer__post-content">
+                      <Form onSubmit={handleSubmit}>
+                        <Form.Group style={{ display: "inline-block" }}>
+                          <Form.Label>Empresa propietària</Form.Label>
+                          <div className="organizations-list">
+                            {organizationsList}
+                          </div>
+                        </Form.Group>
+                        <Form.Group>
+                          <Form.Label>Títol</Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="title"
+                            placeholder="Títol de l'activitat"
+                            defaultValue={title}
+                            onChange={handleChange}
+                          />
+                        </Form.Group>
+                        <Form.Group>
+                          <Form.Label>Subtítol</Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="subtitle"
+                            placeholder="Subtítol de l'activitat"
+                            defaultValue={subtitle}
+                            onChange={handleChange}
+                          />
+                        </Form.Group>
+                        <Form.Row>
+                          <Col lg={4}>
+                            <Form.Group>
+                              <Form.Label>Categoria d'activitat</Form.Label>
+                              <Form.Check
+                                type="checkbox"
+                                name="romantica"
+                                id="romantica"
+                                label="Romàntica"
+                                onChange={handleCheckCategory}
+                                checked={isRomantic}
+                              />
+                              <Form.Check
+                                type="checkbox"
+                                name="aventura"
+                                id="aventura"
+                                label="Aventura"
+                                onChange={handleCheckCategory}
+                                checked={isAdventure}
+                              />
+
+                              <Form.Check
+                                type="checkbox"
+                                name="gastronomica"
+                                id="gastronomica"
+                                label="Gastronòmica"
+                                onChange={handleCheckCategory}
+                                checked={isGastronomic}
+                              />
+                              <Form.Check
+                                type="checkbox"
+                                name="cultural"
+                                id="cultural"
+                                label="Cultural"
+                                onChange={handleCheckCategory}
+                                checked={isCultural}
+                              />
+                              <Form.Check
+                                type="checkbox"
+                                name="relax"
+                                id="relax"
+                                label="Relax"
+                                onChange={handleCheckCategory}
+                                checked={isRelax}
+                              />
+                            </Form.Group>
+                          </Col>
+                          <Col lg={4}>
+                            <Form.Group>
+                              <Form.Label>Estació recomanada</Form.Label>
+                              <Form.Check
+                                type="checkbox"
+                                name="hivern"
+                                id="hivern"
+                                label="Hivern"
+                                onChange={handleCheckSeason}
+                                checked={isWinter}
+                              />
+                              <Form.Check
+                                type="checkbox"
+                                name="primavera"
+                                id="primavera"
+                                label="Primavera"
+                                onChange={handleCheckSeason}
+                                checked={isSpring}
+                              />
+                              <Form.Check
+                                type="checkbox"
+                                name="estiu"
+                                id="estiu"
+                                label="Estiu"
+                                onChange={handleCheckSeason}
+                                checked={isSummer}
+                              />
+                              <Form.Check
+                                type="checkbox"
+                                name="tardor"
+                                id="tardor"
+                                label="Tardor"
+                                onChange={handleCheckSeason}
+                                checked={isAutumn}
+                              />
+                            </Form.Group>
+                          </Col>
+                          <Col lg={4}>
+                            <Form.Group>
+                              <Form.Group>
+                                <Form.Label>Regió de l'activitat</Form.Label>
+                                <Form.Check
+                                  type="radio"
+                                  id="barcelona"
+                                  label="Barcelona"
+                                  name="activitySeason"
+                                  onChange={handleCheckRegion}
+                                  checked={isBarcelona}
+                                />
+                                <Form.Check
+                                  type="radio"
+                                  id="tarragona"
+                                  label="Tarragona"
+                                  name="activitySeason"
+                                  onChange={handleCheckRegion}
+                                  checked={isTarragona}
+                                />
+                                <Form.Check
+                                  type="radio"
+                                  id="girona"
+                                  label="Girona"
+                                  name="activitySeason"
+                                  onChange={handleCheckRegion}
+                                  checked={isGirona}
+                                />
+                                <Form.Check
+                                  type="radio"
+                                  id="lleida"
+                                  label="Lleida"
+                                  name="activitySeason"
+                                  onChange={handleCheckRegion}
+                                  checked={isLleida}
+                                />
+                                <Form.Check
+                                  type="radio"
+                                  id="costaBrava"
+                                  label="Costa Brava"
+                                  name="activitySeason"
+                                  onChange={handleCheckRegion}
+                                  checked={isCostaBrava}
+                                />
+                                <Form.Check
+                                  type="radio"
+                                  id="costaDaurada"
+                                  label="Costa Daurada"
+                                  name="activitySeason"
+                                  onChange={handleCheckRegion}
+                                  checked={isCostaDaurada}
+                                />
+                                <Form.Check
+                                  type="radio"
+                                  id="pirineus"
+                                  label="Pirineus"
+                                  name="activitySeason"
+                                  onChange={handleCheckRegion}
+                                  checked={isPirineus}
+                                />
+                              </Form.Group>
+                            </Form.Group>
+                          </Col>
+                        </Form.Row>
+                        <Form.Group>
+                          <Form.Label>Localització</Form.Label>
+                          <Autocomplete
+                            className="location-control"
+                            apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
+                            style={{ width: "100%" }}
+                            defaultValue={activity_full_address}
+                            onPlaceSelected={(activity) => {
+                              let activity_full_address,
+                                activity_locality,
+                                activity_province,
+                                activity_state,
+                                activity_country,
+                                activity_lat,
+                                activity_lng,
+                                activity_rating,
+                                activity_id,
+                                activity_opening_hours;
+
+                              activity_full_address =
+                                activity.formatted_address;
+                              activity.address_components.forEach((el) => {
+                                if (el.types[0] === "locality") {
+                                  activity_locality = el.long_name;
+                                }
+                                if (
+                                  el.types[0] === "administrative_area_level_2"
+                                ) {
+                                  activity_province = el.long_name;
+                                }
+                                if (
+                                  el.types[0] === "administrative_area_level_1"
+                                ) {
+                                  activity_state = el.long_name;
+                                }
+                                if (el.types[0] === "country") {
+                                  activity_country = el.long_name;
+                                }
+                              });
+
+                              if (activity.geometry.viewport) {
+                                activity_lat = Object.values(
+                                  activity.geometry.viewport
+                                )[0].i;
+                                activity_lng = Object.values(
+                                  activity.geometry.viewport
+                                )[1].i;
+                              }
+
+                              activity_rating = activity.rating;
+                              activity_id = activity.place_id;
+
+                              if (activity.opening_hours) {
+                                activity_opening_hours =
+                                  activity.opening_hours.weekday_text;
+                              }
+
+                              setState({
+                                ...state,
+                                activity: {
+                                  ...state.activity,
+                                  activity_full_address: activity_full_address,
+                                  activity_locality: activity_locality,
+                                  activity_province: activity_province,
+                                  activity_state: activity_state,
+                                  activity_country: activity_country,
+                                  activity_lat: activity_lat,
+                                  activity_lng: activity_lng,
+                                  activity_rating: activity_rating,
+                                  activity_id: activity_id,
+                                  activity_opening_hours:
+                                    activity_opening_hours,
+                                },
+                              });
+                            }}
+                            types={["establishment"]}
+                            placeholder={
+                              "Escriu la localització de l'activitat"
+                            }
+                            fields={[
+                              "rating",
+                              "place_id",
+                              "opening_hours",
+                              "address_components",
+                              "formatted_address",
+                              "geometry",
+                            ]}
+                          />
+                        </Form.Group>
+                        <Form.Row>
+                          <Col lg={6}>
+                            <Form.Group>
+                              <Form.Label>Número de telèfon</Form.Label>
+                              <Form.Control
+                                type="tel"
+                                name="phone"
+                                placeholder="Phone number for contact details"
+                                onChange={handleChange}
+                                value={phone}
+                              />
+                            </Form.Group>
+                          </Col>
+                          <Col lg={6}>
+                            <Form.Group>
+                              <Form.Label>Pàgina web</Form.Label>
+                              <Form.Control
+                                type="url"
+                                name="website"
+                                placeholder="Activity website"
+                                onChange={handleChange}
+                                value={website}
+                              />
+                            </Form.Group>
+                          </Col>
+                        </Form.Row>
+                        <Form.Row>
+                          <Col lg={6}>
+                            <Form.Group>
+                              <Form.Label>Preu per persona (€)</Form.Label>
+                              <Form.Control
+                                type="number"
+                                name="price"
+                                placeholder="Activity price"
+                                onChange={handleChange}
+                                value={price}
+                              />
+                            </Form.Group>
+                          </Col>
+                          <Col lg={6}>
+                            <Form.Group>
+                              <Form.Label>Durada (h)</Form.Label>
+                              <Form.Control
+                                type="number"
+                                name="duration"
+                                placeholder="Activity duration"
+                                onChange={handleChange}
+                                value={duration}
+                              />
+                            </Form.Group>
+                          </Col>
+                        </Form.Row>
+                        <div className="cover">
+                          <span>Imatge de portada</span>
+                          <div className="images-wrapper">
+                            <div className="top-bar">
+                              <Form.Group>
+                                <div className="image-drop-zone">
+                                  <Form.Label>
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      className="icon icon-tabler icon-tabler-camera-plus"
+                                      width="22"
+                                      height="22"
+                                      viewBox="0 0 24 24"
+                                      strokeWidth="1.5"
+                                      stroke="#0d1f44"
+                                      fill="none"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    >
+                                      <path
+                                        stroke="none"
+                                        d="M0 0h24v24H0z"
+                                        fill="none"
+                                      />
+                                      <circle cx="12" cy="13" r="3" />
+                                      <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+                                      <line x1="15" y1="6" x2="21" y2="6" />
+                                      <line x1="18" y1="3" x2="18" y2="9" />
+                                    </svg>
+                                    {state.formData.cover
+                                      ? "Canviar imatge"
+                                      : "Seleccionar imatge"}
+
+                                    <Form.Control
+                                      type="file"
+                                      name="cover"
+                                      onChange={saveFileToStatus}
+                                    />
+                                  </Form.Label>
+                                </div>
+                              </Form.Group>
+                            </div>
+                            <div className="images-list-wrapper">
+                              <div className="image-wrapper">{coverImage}</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="images">
+                          <span>Imatges d'aquesta història</span>
+                          <div className="images-wrapper">
+                            <div className="top-bar">
+                              <Form.Group>
+                                <div className="image-drop-zone">
+                                  <Form.Label>
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      className="icon icon-tabler icon-tabler-camera-plus"
+                                      width="22"
+                                      height="22"
+                                      viewBox="0 0 24 24"
+                                      strokeWidth="1.5"
+                                      stroke="#0d1f44"
+                                      fill="none"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    >
+                                      <path
+                                        stroke="none"
+                                        d="M0 0h24v24H0z"
+                                        fill="none"
+                                      />
+                                      <circle cx="12" cy="13" r="3" />
+                                      <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+                                      <line x1="15" y1="6" x2="21" y2="6" />
+                                      <line x1="18" y1="3" x2="18" y2="9" />
+                                    </svg>
+                                    Seleccionar imatges
+                                    <Form.Control
+                                      type="file"
+                                      onChange={saveFileToStatus}
+                                    />
+                                  </Form.Label>
+                                </div>
+                              </Form.Group>
+                            </div>
+                            <div className="images-list-wrapper">
+                              <div className="image-wrapper">{imagesList}</div>
+                            </div>
+                          </div>
+                        </div>
+                        <Form.Group>
+                          <Form.Label>Descripció</Form.Label>
+                          <Form.Control
+                            as="textarea"
+                            rows="5"
+                            type="text"
+                            name="description"
+                            placeholder="Activity description"
+                            defaultValue={description}
+                            onChange={handleChange}
+                          />
+                        </Form.Group>
+                      </Form>
+                    </div>
+                  ) : (
+                    <div className="form-composer__seo">
+                      <Form onSubmit={handleSubmit}>
+                        <Form.Group>
+                          <Form.Label>
+                            Meta títol{" "}
+                            <span className="form-composer__label-description">
+                              Cada publicació hauria de tenir un meta títol
+                              únic, idealment de menys de 60 caràcters de
+                              llargada
+                            </span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="metaTitle"
+                            placeholder="Meta títol"
+                            defaultValue={metaTitle}
+                            onChange={handleChange}
+                          />
+                        </Form.Group>
+                        <Form.Group>
+                          <Form.Label>
+                            Meta descripció{" "}
+                            <span className="form-composer__label-description">
+                              Cada publicació hauria de tenir una meta
+                              descripció única, idealment de menys de 160
+                              caràcters de llargada
+                            </span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="metaDescription"
+                            placeholder="Meta descripció"
+                            defaultValue={metaDescription}
+                            onChange={handleChange}
+                          />
+                        </Form.Group>
+                      </Form>
+                    </div>
+                  )}
+                </div>
               </div>
-              <Form onSubmit={handleSubmit}>
-                <Form.Group style={{ display: "inline-block" }}>
-                  <Form.Label>Empresa propietària</Form.Label>
-                  <div className="organizations-list">{organizationsList}</div>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Títol</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="title"
-                    placeholder="Títol de l'activitat"
-                    defaultValue={title}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Subtítol</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="subtitle"
-                    placeholder="Subtítol de l'activitat"
-                    defaultValue={subtitle}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Form.Row>
-                  <Col lg={4}>
-                    <Form.Group>
-                      <Form.Label>Categoria d'activitat</Form.Label>
-                      <Form.Check
-                        type="checkbox"
-                        name="romantica"
-                        id="romantica"
-                        label="Romàntica"
-                        onChange={handleCheckCategory}
-                        checked={isRomantic}
-                      />
-                      <Form.Check
-                        type="checkbox"
-                        name="aventura"
-                        id="aventura"
-                        label="Aventura"
-                        onChange={handleCheckCategory}
-                        checked={isAdventure}
-                      />
-
-                      <Form.Check
-                        type="checkbox"
-                        name="gastronomica"
-                        id="gastronomica"
-                        label="Gastronòmica"
-                        onChange={handleCheckCategory}
-                        checked={isGastronomic}
-                      />
-                      <Form.Check
-                        type="checkbox"
-                        name="cultural"
-                        id="cultural"
-                        label="Cultural"
-                        onChange={handleCheckCategory}
-                        checked={isCultural}
-                      />
-                      <Form.Check
-                        type="checkbox"
-                        name="relax"
-                        id="relax"
-                        label="Relax"
-                        onChange={handleCheckCategory}
-                        checked={isRelax}
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col lg={4}>
-                    <Form.Group>
-                      <Form.Label>Estació recomanada</Form.Label>
-                      <Form.Check
-                        type="checkbox"
-                        name="hivern"
-                        id="hivern"
-                        label="Hivern"
-                        onChange={handleCheckSeason}
-                        checked={isWinter}
-                      />
-                      <Form.Check
-                        type="checkbox"
-                        name="primavera"
-                        id="primavera"
-                        label="Primavera"
-                        onChange={handleCheckSeason}
-                        checked={isSpring}
-                      />
-                      <Form.Check
-                        type="checkbox"
-                        name="estiu"
-                        id="estiu"
-                        label="Estiu"
-                        onChange={handleCheckSeason}
-                        checked={isSummer}
-                      />
-                      <Form.Check
-                        type="checkbox"
-                        name="tardor"
-                        id="tardor"
-                        label="Tardor"
-                        onChange={handleCheckSeason}
-                        checked={isAutumn}
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col lg={4}>
-                    <Form.Group>
-                      <Form.Group>
-                        <Form.Label>Regió de l'activitat</Form.Label>
-                        <Form.Check
-                          type="radio"
-                          id="barcelona"
-                          label="Barcelona"
-                          name="activitySeason"
-                          onChange={handleCheckRegion}
-                          checked={isBarcelona}
-                        />
-                        <Form.Check
-                          type="radio"
-                          id="tarragona"
-                          label="Tarragona"
-                          name="activitySeason"
-                          onChange={handleCheckRegion}
-                          checked={isTarragona}
-                        />
-                        <Form.Check
-                          type="radio"
-                          id="girona"
-                          label="Girona"
-                          name="activitySeason"
-                          onChange={handleCheckRegion}
-                          checked={isGirona}
-                        />
-                        <Form.Check
-                          type="radio"
-                          id="lleida"
-                          label="Lleida"
-                          name="activitySeason"
-                          onChange={handleCheckRegion}
-                          checked={isLleida}
-                        />
-                        <Form.Check
-                          type="radio"
-                          id="costaBrava"
-                          label="Costa Brava"
-                          name="activitySeason"
-                          onChange={handleCheckRegion}
-                          checked={isCostaBrava}
-                        />
-                        <Form.Check
-                          type="radio"
-                          id="costaDaurada"
-                          label="Costa Daurada"
-                          name="activitySeason"
-                          onChange={handleCheckRegion}
-                          checked={isCostaDaurada}
-                        />
-                        <Form.Check
-                          type="radio"
-                          id="pirineus"
-                          label="Pirineus"
-                          name="activitySeason"
-                          onChange={handleCheckRegion}
-                          checked={isPirineus}
-                        />
-                      </Form.Group>
-                    </Form.Group>
-                  </Col>
-                </Form.Row>
-                <Form.Group>
-                  <Form.Label>Localització</Form.Label>
-                  <Autocomplete
-                    className="location-control"
-                    apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
-                    style={{ width: "100%" }}
-                    defaultValue={activity_full_address}
-                    onPlaceSelected={(activity) => {
-                      let activity_full_address,
-                        activity_locality,
-                        activity_province,
-                        activity_state,
-                        activity_country,
-                        activity_lat,
-                        activity_lng,
-                        activity_rating,
-                        activity_id,
-                        activity_opening_hours;
-
-                      activity_full_address = activity.formatted_address;
-                      activity.address_components.forEach((el) => {
-                        if (el.types[0] === "locality") {
-                          activity_locality = el.long_name;
-                        }
-                        if (el.types[0] === "administrative_area_level_2") {
-                          activity_province = el.long_name;
-                        }
-                        if (el.types[0] === "administrative_area_level_1") {
-                          activity_state = el.long_name;
-                        }
-                        if (el.types[0] === "country") {
-                          activity_country = el.long_name;
-                        }
-                      });
-
-                      if (activity.geometry.viewport) {
-                        activity_lat = Object.values(
-                          activity.geometry.viewport
-                        )[0].i;
-                        activity_lng = Object.values(
-                          activity.geometry.viewport
-                        )[1].i;
-                      }
-
-                      activity_rating = activity.rating;
-                      activity_id = activity.place_id;
-
-                      if (activity.opening_hours) {
-                        activity_opening_hours =
-                          activity.opening_hours.weekday_text;
-                      }
-
-                      setState({
-                        ...state,
-                        activity: {
-                          ...state.activity,
-                          activity_full_address: activity_full_address,
-                          activity_locality: activity_locality,
-                          activity_province: activity_province,
-                          activity_state: activity_state,
-                          activity_country: activity_country,
-                          activity_lat: activity_lat,
-                          activity_lng: activity_lng,
-                          activity_rating: activity_rating,
-                          activity_id: activity_id,
-                          activity_opening_hours: activity_opening_hours,
-                        },
-                      });
-                    }}
-                    types={["establishment"]}
-                    placeholder={"Escriu la localització de l'activitat"}
-                    fields={[
-                      "rating",
-                      "place_id",
-                      "opening_hours",
-                      "address_components",
-                      "formatted_address",
-                      "geometry",
-                    ]}
-                  />
-                </Form.Group>
-                <Form.Row>
-                  <Col lg={6}>
-                    <Form.Group>
-                      <Form.Label>Número de telèfon</Form.Label>
-                      <Form.Control
-                        type="tel"
-                        name="phone"
-                        placeholder="Phone number for contact details"
-                        onChange={handleChange}
-                        value={phone}
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col lg={6}>
-                    <Form.Group>
-                      <Form.Label>Pàgina web</Form.Label>
-                      <Form.Control
-                        type="url"
-                        name="website"
-                        placeholder="Activity website"
-                        onChange={handleChange}
-                        value={website}
-                      />
-                    </Form.Group>
-                  </Col>
-                </Form.Row>
-                <Form.Row>
-                  <Col lg={6}>
-                    <Form.Group>
-                      <Form.Label>Preu per persona (€)</Form.Label>
-                      <Form.Control
-                        type="number"
-                        name="price"
-                        placeholder="Activity price"
-                        onChange={handleChange}
-                        value={price}
-                      />
-                    </Form.Group>
-                  </Col>
-                  <Col lg={6}>
-                    <Form.Group>
-                      <Form.Label>Durada (h)</Form.Label>
-                      <Form.Control
-                        type="number"
-                        name="duration"
-                        placeholder="Activity duration"
-                        onChange={handleChange}
-                        value={duration}
-                      />
-                    </Form.Group>
-                  </Col>
-                </Form.Row>
-                <div className="cover">
-                  <span>Imatge de portada</span>
-                  <div className="images-wrapper">
-                    <div className="top-bar">
-                      <Form.Group>
-                        <div className="image-drop-zone">
-                          <Form.Label>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-camera-plus"
-                              width="22"
-                              height="22"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="#0d1f44"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path
-                                stroke="none"
-                                d="M0 0h24v24H0z"
-                                fill="none"
-                              />
-                              <circle cx="12" cy="13" r="3" />
-                              <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
-                              <line x1="15" y1="6" x2="21" y2="6" />
-                              <line x1="18" y1="3" x2="18" y2="9" />
-                            </svg>
-                            {state.formData.cover
-                              ? "Canviar imatge"
-                              : "Seleccionar imatge"}
-
-                            <Form.Control
-                              type="file"
-                              name="cover"
-                              onChange={saveFileToStatus}
-                            />
-                          </Form.Label>
-                        </div>
-                      </Form.Group>
-                    </div>
-                    <div className="images-list-wrapper">
-                      <div className="image-wrapper">{coverImage}</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="images">
-                  <span>Imatges d'aquesta història</span>
-                  <div className="images-wrapper">
-                    <div className="top-bar">
-                      <Form.Group>
-                        <div className="image-drop-zone">
-                          <Form.Label>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-camera-plus"
-                              width="22"
-                              height="22"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="#0d1f44"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path
-                                stroke="none"
-                                d="M0 0h24v24H0z"
-                                fill="none"
-                              />
-                              <circle cx="12" cy="13" r="3" />
-                              <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
-                              <line x1="15" y1="6" x2="21" y2="6" />
-                              <line x1="18" y1="3" x2="18" y2="9" />
-                            </svg>
-                            Seleccionar imatges
-                            <Form.Control
-                              type="file"
-                              onChange={saveFileToStatus}
-                            />
-                          </Form.Label>
-                        </div>
-                      </Form.Group>
-                    </div>
-                    <div className="images-list-wrapper">
-                      <div className="image-wrapper">{imagesList}</div>
-                    </div>
-                  </div>
-                </div>
-                <Form.Group>
-                  <Form.Label>Descripció</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows="5"
-                    type="text"
-                    name="description"
-                    placeholder="Activity description"
-                    defaultValue={description}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-              </Form>
             </Col>
           </Row>
         </Container>
-        <div className="progress-bar-outter">
-          <Container className="d-flex align-items-center">
-            <div className="col left">{/* <span>Section 1 of 7 </span> */}</div>
-            <div className="col center">
-              {/* <div className="progress">
-							<div
-								className="progress-bar"
-								role="progressbar"
-								style={{width: "33%"}}
-								aria-valuenow="25"
-								aria-valuemin="0"
-								aria-valuemax="100"
-							></div>
-						</div> */}
-            </div>
-            <div className="col right">
-              <div className="buttons d-flex justify-space-between justify-content-end">
-                <Button type="submit" variant="none" onClick={handleSubmit}>
-                  Save changes
-                </Button>
-              </div>
-            </div>
-          </Container>
-        </div>
       </div>
     </>
   );
