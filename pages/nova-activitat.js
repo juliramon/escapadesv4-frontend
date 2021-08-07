@@ -28,7 +28,7 @@ const ActivityForm = () => {
     }
     if (
       router.pathname.includes("editar") ||
-      router.pathname.includes("/nova-activitat") ||
+      router.pathname.includes("nova-activitat") ||
       router.pathname.includes("nou-allotjament") ||
       router.pathname.includes("nova-historia")
     ) {
@@ -882,7 +882,7 @@ const ActivityForm = () => {
                           <Form.Label>Descripció</Form.Label>
                           <Form.Control
                             as="textarea"
-                            rows="5"
+                            rows="10"
                             type="text"
                             name="description"
                             placeholder="Descripció de l'activitat"

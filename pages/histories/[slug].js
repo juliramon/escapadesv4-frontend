@@ -163,18 +163,21 @@ const StoryListing = () => {
   return (
     <>
       <Head>
-        <title>{state.story.title} - Escapadesenparella.cat</title>
+        <title>{state.story.metaTitle} - Escapadesenparella.cat</title>
         <link rel="icon" href="/favicon.ico" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta name="description" content={`${state.story.subtitle}`} />
+        <meta name="description" content={`${state.story.metaDescription}`} />
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
-          content={`${state.story.title} - Escapadesenparella.cat`}
+          content={`${state.story.metaTitle} - Escapadesenparella.cat`}
         />
-        <meta property="og:description" content={`${state.story.subtitle}`} />
+        <meta
+          property="og:description"
+          content={`${state.story.metaDescription}`}
+        />
         <meta
           property="url"
           content={`https://escapadesenparella.cat${router.asPath}`}
@@ -184,9 +187,12 @@ const StoryListing = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content={`${state.story.title} - Escapadesenparella.cat`}
+          content={`${state.story.metaTitle} - Escapadesenparella.cat`}
         />
-        <meta name="twitter:description" content={`${state.story.subtitle}`} />
+        <meta
+          name="twitter:description"
+          content={`${state.story.metaDescription}`}
+        />
         <meta name="twitter:image" content={state.story.images[0]} />
         <meta property="og:image" content={state.story.images[0]} />
         <meta property="og:image:width" content="1200" />

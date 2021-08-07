@@ -16,7 +16,12 @@ const ActivityEditionForm = () => {
     if (!user) {
       router.push("/login");
     }
-    if (router.pathname.includes("editar")) {
+    if (
+      router.pathname.includes("editar") ||
+      router.pathname.includes("nova-activitat") ||
+      router.pathname.includes("nou-allotjament") ||
+      router.pathname.includes("nova-historia")
+    ) {
       document.querySelector("body").classList.add("composer");
     } else {
       document.querySelector("body").classList.remove("composer");
@@ -71,9 +76,9 @@ const ActivityEditionForm = () => {
     isPlaceLoaded: false,
   };
   const [state, setState] = useState(initialState);
+  const [queryId, setQueryId] = useState(null);
   const [activeTab, setActiveTab] = useState("main");
 
-  const [queryId, setQueryId] = useState(null);
   useEffect(() => {
     if (router && router.query) {
       setQueryId(router.query.id);
@@ -120,8 +125,8 @@ const ActivityEditionForm = () => {
             place_opening_hours: "",
             price: "",
             metaTitle: "",
-            metaDescription: "",
-            isReadyToSubmit: false,
+            metaTitle: placeDetails.metaTitle,
+            metaDescription: placeDetails.metaDescription,
           },
           isPlaceLoaded: true,
         });
@@ -212,13 +217,13 @@ const ActivityEditionForm = () => {
     isHotel;
 
   if (state.place.categories) {
-    state.place.categories.includes("romantic")
+    state.place.categories.includes("romantica")
       ? (isRomantic = true)
       : (isRomantic = false);
-    state.place.categories.includes("adventure")
+    state.place.categories.includes("aventura")
       ? (isAdventure = true)
       : (isAdventure = false);
-    state.place.categories.includes("gastronomic")
+    state.place.categories.includes("gastronomica")
       ? (isGastronomic = true)
       : (isGastronomic = false);
     state.place.categories.includes("cultural")
@@ -229,16 +234,16 @@ const ActivityEditionForm = () => {
       : (isRelax = false);
   }
   if (state.place.seasons) {
-    state.place.seasons.includes("winter")
+    state.place.seasons.includes("hivern")
       ? (isWinter = true)
       : (isWinter = false);
-    state.place.seasons.includes("spring")
+    state.place.seasons.includes("primavera")
       ? (isSpring = true)
       : (isSpring = false);
-    state.place.seasons.includes("summer")
+    state.place.seasons.includes("estiu")
       ? (isSummer = true)
       : (isSummer = false);
-    state.place.seasons.includes("autumn")
+    state.place.seasons.includes("tardor")
       ? (isAutumn = true)
       : (isAutumn = false);
   }
@@ -266,19 +271,19 @@ const ActivityEditionForm = () => {
       : (isPirineus = false);
   }
   if (state.place.placeType) {
-    state.place.placeType.includes("apartment")
+    state.place.placeType.includes("apartament")
       ? (isApartment = true)
       : (isApartment = false);
-    state.place.placeType.includes("cabin")
+    state.place.placeType.includes("refugi")
       ? (isCabin = true)
       : (isCabin = false);
-    state.place.placeType.includes("treeHouse")
+    state.place.placeType.includes("casaarbre")
       ? (isTreehouse = true)
       : (isTreehouse = false);
-    state.place.placeType.includes("ruralHouse")
+    state.place.placeType.includes("casarural")
       ? (isRuralHouse = true)
       : (isRuralHouse = false);
-    state.place.placeType.includes("trailer")
+    state.place.placeType.includes("carabana")
       ? (isTrailer = true)
       : (isTrailer = false);
     state.place.placeType.includes("hotel")
@@ -565,21 +570,21 @@ const ActivityEditionForm = () => {
                     <div className="form-composer__post-content">
                       <Form onSubmit={handleSubmit}>
                         <Form.Group>
-                          <Form.Label>Title</Form.Label>
+                          <Form.Label>Títol</Form.Label>
                           <Form.Control
                             type="text"
                             name="title"
-                            placeholder="Activity title"
+                            placeholder="Títol de l'allotjament"
                             defaultValue={title}
                             onChange={handleChange}
                           />
                         </Form.Group>
                         <Form.Group>
-                          <Form.Label>Subtitle</Form.Label>
+                          <Form.Label>Subtítol</Form.Label>
                           <Form.Control
                             type="text"
                             name="subtitle"
-                            placeholder="Activity subtitle"
+                            placeholder="Subtítol de l'allotjament"
                             defaultValue={subtitle}
                             onChange={handleChange}
                           />
@@ -587,29 +592,29 @@ const ActivityEditionForm = () => {
                         <Form.Row>
                           <Col lg={3}>
                             <Form.Group>
-                              <Form.Label>Activity Category</Form.Label>
+                              <Form.Label>Categories d'escapada</Form.Label>
                               <Form.Check
                                 type="checkbox"
-                                name="romantic"
-                                id="romantic"
-                                label="Romantic"
+                                name="romantica"
+                                id="romantica"
+                                label="Romàntica"
                                 onChange={handleCheckCategory}
                                 checked={isRomantic}
                               />
                               <Form.Check
                                 type="checkbox"
-                                name="adventure"
-                                id="adventure"
-                                label="Adventure"
+                                name="aventura"
+                                id="aventura "
+                                label="Aventura"
                                 onChange={handleCheckCategory}
                                 checked={isAdventure}
                               />
 
                               <Form.Check
                                 type="checkbox"
-                                name="gastronomic"
-                                id="gastronomic"
-                                label="Gastronomic"
+                                name="gastronomica"
+                                id="gastronomica"
+                                label="Gastronòmica"
                                 onChange={handleCheckCategory}
                                 checked={isGastronomic}
                               />
@@ -633,36 +638,36 @@ const ActivityEditionForm = () => {
                           </Col>
                           <Col lg={3}>
                             <Form.Group>
-                              <Form.Label>Activity Season</Form.Label>
+                              <Form.Label>Estació de l'any</Form.Label>
                               <Form.Check
                                 type="checkbox"
-                                name="winter"
-                                id="winter"
-                                label="Winter"
+                                name="hivern"
+                                id="hivern"
+                                label="Hivern"
                                 onChange={handleCheckSeason}
                                 checked={isWinter}
                               />
                               <Form.Check
                                 type="checkbox"
-                                name="spring"
-                                id="spring"
-                                label="Spring"
+                                name="primavera"
+                                id="primavera"
+                                label="Primavera"
                                 onChange={handleCheckSeason}
                                 checked={isSpring}
                               />
                               <Form.Check
                                 type="checkbox"
-                                name="summer"
-                                id="summer"
-                                label="Summer"
+                                name="estiu"
+                                id="estiu"
+                                label="Estiu"
                                 onChange={handleCheckSeason}
                                 checked={isSummer}
                               />
                               <Form.Check
                                 type="checkbox"
-                                name="autumn"
-                                id="autumn"
-                                label="Autumn"
+                                name="tardor"
+                                id="tardor"
+                                label="Tardor"
                                 onChange={handleCheckSeason}
                                 checked={isAutumn}
                               />
@@ -671,7 +676,7 @@ const ActivityEditionForm = () => {
                           <Col lg={3}>
                             <Form.Group>
                               <Form.Group>
-                                <Form.Label>Activity Region</Form.Label>
+                                <Form.Label>Regió</Form.Label>
                                 <Form.Check
                                   type="radio"
                                   id="barcelona"
@@ -734,7 +739,7 @@ const ActivityEditionForm = () => {
                           <Col lg={3}>
                             <Form.Group>
                               <Form.Group>
-                                <Form.Label>Place Type</Form.Label>
+                                <Form.Label>Tipus d'allotjament</Form.Label>
                                 <Form.Check
                                   type="radio"
                                   id="hotel"
@@ -745,40 +750,40 @@ const ActivityEditionForm = () => {
                                 />
                                 <Form.Check
                                   type="radio"
-                                  id="apartment"
-                                  label="Apartment"
+                                  id="apartament"
+                                  label="Apartament"
                                   name="placeType"
                                   onChange={handleCheckPlaceType}
                                   checked={isApartment}
                                 />
                                 <Form.Check
                                   type="radio"
-                                  id="cabin"
-                                  label="Cabin"
+                                  id="refugi"
+                                  label="Refugi"
                                   name="placeType"
                                   onChange={handleCheckPlaceType}
                                   checked={isCabin}
                                 />
                                 <Form.Check
                                   type="radio"
-                                  id="treeHouse"
-                                  label="Treehouse"
+                                  id="casaarbre"
+                                  label="Casa-arbre"
                                   name="placeType"
                                   onChange={handleCheckPlaceType}
                                   checked={isTreehouse}
                                 />
                                 <Form.Check
                                   type="radio"
-                                  id="ruralHouse"
-                                  label="Rural house"
+                                  id="casarural"
+                                  label="Casa rural"
                                   name="placeType"
                                   onChange={handleCheckPlaceType}
                                   checked={isRuralHouse}
                                 />
                                 <Form.Check
                                   type="radio"
-                                  id="trailer"
-                                  label="Trailer"
+                                  id="carabana"
+                                  label="Carabana"
                                   name="placeType"
                                   onChange={handleCheckPlaceType}
                                   checked={isTrailer}
@@ -788,7 +793,7 @@ const ActivityEditionForm = () => {
                           </Col>
                         </Form.Row>
                         <Form.Group>
-                          <Form.Label>Location</Form.Label>
+                          <Form.Label>Localització</Form.Label>
                           <Autocomplete
                             className="location-control"
                             apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
@@ -861,7 +866,7 @@ const ActivityEditionForm = () => {
                               });
                             }}
                             types={["establishment"]}
-                            placeholder={"Type the activity address"}
+                            placeholder={"Escriu la direcció de l'allotjament"}
                             fields={[
                               "rating",
                               "place_id",
@@ -875,11 +880,11 @@ const ActivityEditionForm = () => {
                         <Form.Row>
                           <Col lg={4}>
                             <Form.Group>
-                              <Form.Label>Phone Number</Form.Label>
+                              <Form.Label>Telèfon</Form.Label>
                               <Form.Control
                                 type="tel"
                                 name="phone"
-                                placeholder="Phone number for contact details"
+                                placeholder="Número de telèfon de contacte"
                                 onChange={handleChange}
                                 value={phone}
                               />
@@ -887,11 +892,13 @@ const ActivityEditionForm = () => {
                           </Col>
                           <Col lg={4}>
                             <Form.Group>
-                              <Form.Label>Website</Form.Label>
+                              <Form.Label>
+                                Pàgina web de reserva o contacte
+                              </Form.Label>
                               <Form.Control
                                 type="url"
                                 name="website"
-                                placeholder="Place website"
+                                placeholder="Pàgina web de reserva o contacte"
                                 onChange={handleChange}
                                 value={website}
                               />
@@ -899,11 +906,11 @@ const ActivityEditionForm = () => {
                           </Col>
                           <Col lg={4}>
                             <Form.Group>
-                              <Form.Label>Price per night (€)</Form.Label>
+                              <Form.Label>Preu per nit (€)</Form.Label>
                               <Form.Control
                                 type="number"
                                 name="price"
-                                placeholder="Place price"
+                                placeholder="Preu per nit de l'allotjament"
                                 onChange={handleChange}
                                 value={price}
                               />
@@ -958,7 +965,7 @@ const ActivityEditionForm = () => {
                           </div>
                         </div>
                         <div className="images">
-                          <span>Imatges d'aquesta història</span>
+                          <span>Imatges d'aquest allotjament</span>
                           <div className="images-wrapper">
                             <div className="top-bar">
                               <Form.Group>
@@ -1001,13 +1008,13 @@ const ActivityEditionForm = () => {
                           </div>
                         </div>
                         <Form.Group>
-                          <Form.Label>Description</Form.Label>
+                          <Form.Label>Descripció</Form.Label>
                           <Form.Control
                             as="textarea"
-                            rows="5"
+                            rows="10"
                             type="text"
                             name="description"
-                            placeholder="Activity description"
+                            placeholder="Descripció de l'allotjament"
                             defaultValue={description}
                             onChange={handleChange}
                           />

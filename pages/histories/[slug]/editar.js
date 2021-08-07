@@ -6,7 +6,6 @@ import NavigationBar from "../../../components/global/NavigationBar";
 import UserContext from "../../../contexts/UserContext";
 import ContentService from "../../../services/contentService";
 import dynamic from "next/dynamic";
-import slugify from "slugify";
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
   ssr: false,
@@ -21,14 +20,10 @@ const modules = {
     ["link", "image"],
   ],
   clipboard: {
-    // toggle to add extra line breaks when pasting HTML:
     matchVisual: false,
   },
 };
-/*
- * Quill editor formats
- * See https://quilljs.com/docs/formats/
- */
+
 const formats = [
   "header",
   "bold",
@@ -49,6 +44,16 @@ const StoryEditionForm = () => {
   useEffect(() => {
     if (!user) {
       router.push("/login");
+    }
+    if (
+      router.pathname.includes("editar") ||
+      router.pathname.includes("nova-activitat") ||
+      router.pathname.includes("nou-allotjament") ||
+      router.pathname.includes("nova-historia")
+    ) {
+      document.querySelector("body").classList.add("composer");
+    } else {
+      document.querySelector("body").classList.remove("composer");
     }
   }, [user]);
 
@@ -79,12 +84,15 @@ const StoryEditionForm = () => {
       isReadyToSubmit: false,
       cloudImagesUploaded: false,
       coverCloudImageUploaded: false,
+      metaTitle: "",
+      metaDescription: "",
     },
     isStoryLoaded: false,
   };
   const [state, setState] = useState(initialState);
   const [queryId, setQueryId] = useState(null);
   const [description, setDescription] = useState("");
+  const [activeTab, setActiveTab] = useState("main");
 
   useEffect(() => {
     if (router && router.query) {
@@ -118,6 +126,8 @@ const StoryEditionForm = () => {
             isReadyToSubmit: false,
             cloudImagesUploaded: false,
             coverCloudImageUploaded: false,
+            metaTitle: storyDetails.metaTitle,
+            metaDescription: storyDetails.metaDescription,
           },
           isStoryLoaded: true,
         });
@@ -128,7 +138,7 @@ const StoryEditionForm = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryId, router.query.slug]);
 
-  const { title, subtitle, slug } = state.formData;
+  const { title, subtitle, slug, metaTitle, metaDescription } = state.formData;
 
   const saveFileToStatus = (e) => {
     const fileToUpload = e.target.files[0];
@@ -199,10 +209,6 @@ const StoryEditionForm = () => {
   }
 
   const submitStory = async () => {
-    // const slug = await slugify(state.story.title, {
-    //   remove: /[*+~.,()'"!:@]/g,
-    //   lower: true,
-    // });
     const {
       _id,
       title,
@@ -210,6 +216,8 @@ const StoryEditionForm = () => {
       slug,
       coverCloudImage,
       cloudImages,
+      metaTitle,
+      metaDescription,
     } = state.formData;
     const { cover, images } = state.story;
     let storyCover, storyImages;
@@ -227,7 +235,9 @@ const StoryEditionForm = () => {
         subtitle,
         storyCover,
         storyImages,
-        description
+        description,
+        metaTitle,
+        metaDescription
       )
       .then(() => router.push("/dashboard"))
       .catch((err) => console.error(err));
@@ -337,8 +347,7 @@ const StoryEditionForm = () => {
       <Head>
         <title>Edita la història - Escapadesenparella.cat</title>
       </Head>
-
-      <div id="editStory" className="composer">
+      <div id="editStory">
         <NavigationBar
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
@@ -348,174 +357,228 @@ const StoryEditionForm = () => {
         />
         <Container className="mw-1600">
           <Row>
-            <Col lg={12} className="sided-shadow">
+            <Col lg={12}>
               <div className="form-composer">
-                <h1>Editar la història</h1>
-                <p className="sub-h1">
-                  Edit and submit your story so others start enjoying it.
-                </p>
-              </div>
-              <Form onSubmit={handleSubmit}>
-                <Form.Group>
-                  <Form.Label>Títol</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="title"
-                    placeholder="Story title"
-                    value={title}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Subtitle</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="subtitle"
-                    placeholder="Story subtitle"
-                    value={subtitle}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Slug</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="slug"
-                    placeholder="Story slug"
-                    value={slug}
-                    onChange={handleChange}
-                  />
-                </Form.Group>
-                <div className="cover">
-                  <span>Imatge de portada</span>
-                  <div className="images-wrapper">
-                    <div className="top-bar">
-                      <Form.Group>
-                        <div className="image-drop-zone">
-                          <Form.Label>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-camera-plus"
-                              width="22"
-                              height="22"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="#0d1f44"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path
-                                stroke="none"
-                                d="M0 0h24v24H0z"
-                                fill="none"
-                              />
-                              <circle cx="12" cy="13" r="3" />
-                              <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
-                              <line x1="15" y1="6" x2="21" y2="6" />
-                              <line x1="18" y1="3" x2="18" y2="9" />
-                            </svg>
-                            {state.formData.cover
-                              ? "Canviar imatge"
-                              : "Seleccionar imatge"}
+                <div className="form-composer__header">
+                  <div className="form-composer__header-left">
+                    <h1>Editar la història</h1>
+                    <p className="sub-h1">
+                      Edit and submit your story so others start enjoying it.
+                    </p>
+                  </div>
+                  <div className="form-composer__header-right">
+                    <Button type="submit" variant="none" onClick={handleSubmit}>
+                      Guardar canvis
+                    </Button>
+                  </div>
+                </div>
+                <div className="form-composer__body">
+                  <div className="form-composer__tab-bar">
+                    <button
+                      className={
+                        activeTab === "main"
+                          ? "form-composer__tab active"
+                          : "form-composer__tab"
+                      }
+                      onClick={() => setActiveTab("main")}
+                    >
+                      Contingut principal
+                    </button>
+                    <button
+                      className={
+                        activeTab === "seo"
+                          ? "form-composer__tab active"
+                          : "form-composer__tab"
+                      }
+                      onClick={() => setActiveTab("seo")}
+                    >
+                      SEO
+                    </button>
+                  </div>
+                  {activeTab === "main" ? (
+                    <div className="form-composer__post-content">
+                      <Form onSubmit={handleSubmit}>
+                        <Form.Group>
+                          <Form.Label>Títol</Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="title"
+                            placeholder="Story title"
+                            value={title}
+                            onChange={handleChange}
+                          />
+                        </Form.Group>
+                        <Form.Group>
+                          <Form.Label>Subtitle</Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="subtitle"
+                            placeholder="Story subtitle"
+                            value={subtitle}
+                            onChange={handleChange}
+                          />
+                        </Form.Group>
+                        <Form.Group>
+                          <Form.Label>Slug</Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="slug"
+                            placeholder="Story slug"
+                            value={slug}
+                            onChange={handleChange}
+                          />
+                        </Form.Group>
+                        <div className="cover">
+                          <span>Imatge de portada</span>
+                          <div className="images-wrapper">
+                            <div className="top-bar">
+                              <Form.Group>
+                                <div className="image-drop-zone">
+                                  <Form.Label>
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      className="icon icon-tabler icon-tabler-camera-plus"
+                                      width="22"
+                                      height="22"
+                                      viewBox="0 0 24 24"
+                                      strokeWidth="1.5"
+                                      stroke="#0d1f44"
+                                      fill="none"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    >
+                                      <path
+                                        stroke="none"
+                                        d="M0 0h24v24H0z"
+                                        fill="none"
+                                      />
+                                      <circle cx="12" cy="13" r="3" />
+                                      <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+                                      <line x1="15" y1="6" x2="21" y2="6" />
+                                      <line x1="18" y1="3" x2="18" y2="9" />
+                                    </svg>
+                                    {state.formData.cover
+                                      ? "Canviar imatge"
+                                      : "Seleccionar imatge"}
 
-                            <Form.Control
-                              type="file"
-                              name="cover"
-                              onChange={saveFileToStatus}
-                            />
-                          </Form.Label>
+                                    <Form.Control
+                                      type="file"
+                                      name="cover"
+                                      onChange={saveFileToStatus}
+                                    />
+                                  </Form.Label>
+                                </div>
+                              </Form.Group>
+                            </div>
+                            <div className="images-list-wrapper">
+                              <div className="image-wrapper">{coverImage}</div>
+                            </div>
+                          </div>
                         </div>
-                      </Form.Group>
+                        <div className="images">
+                          <span>Imatges d'aquesta història</span>
+                          <div className="images-wrapper">
+                            <div className="top-bar">
+                              <Form.Group>
+                                <div className="image-drop-zone">
+                                  <Form.Label>
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      className="icon icon-tabler icon-tabler-camera-plus"
+                                      width="22"
+                                      height="22"
+                                      viewBox="0 0 24 24"
+                                      strokeWidth="1.5"
+                                      stroke="#0d1f44"
+                                      fill="none"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    >
+                                      <path
+                                        stroke="none"
+                                        d="M0 0h24v24H0z"
+                                        fill="none"
+                                      />
+                                      <circle cx="12" cy="13" r="3" />
+                                      <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+                                      <line x1="15" y1="6" x2="21" y2="6" />
+                                      <line x1="18" y1="3" x2="18" y2="9" />
+                                    </svg>
+                                    Seleccionar imatges
+                                    <Form.Control
+                                      type="file"
+                                      onChange={saveFileToStatus}
+                                    />
+                                  </Form.Label>
+                                </div>
+                              </Form.Group>
+                            </div>
+                            <div className="images-list-wrapper">
+                              <div className="image-wrapper">{imagesList}</div>
+                            </div>
+                          </div>
+                        </div>
+                        <Form.Group>
+                          <Form.Label>Descripció</Form.Label>
+                          <QuillNoSSRWrapper
+                            className="form-control"
+                            modules={modules}
+                            formats={formats}
+                            theme="bubble"
+                            placeholder={
+                              "Comença a descriure la teva historia..."
+                            }
+                            value={description}
+                            onChange={setDescription}
+                          />
+                        </Form.Group>
+                      </Form>
                     </div>
-                    <div className="images-list-wrapper">
-                      <div className="image-wrapper">{coverImage}</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="images">
-                  <span>Imatges d'aquesta història</span>
-                  <div className="images-wrapper">
-                    <div className="top-bar">
-                      <Form.Group>
-                        <div className="image-drop-zone">
+                  ) : (
+                    <div className="form-composer__seo">
+                      <Form onSubmit={handleSubmit}>
+                        <Form.Group>
                           <Form.Label>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-camera-plus"
-                              width="22"
-                              height="22"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="#0d1f44"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path
-                                stroke="none"
-                                d="M0 0h24v24H0z"
-                                fill="none"
-                              />
-                              <circle cx="12" cy="13" r="3" />
-                              <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
-                              <line x1="15" y1="6" x2="21" y2="6" />
-                              <line x1="18" y1="3" x2="18" y2="9" />
-                            </svg>
-                            Seleccionar imatges
-                            <Form.Control
-                              type="file"
-                              onChange={saveFileToStatus}
-                            />
+                            Meta títol{" "}
+                            <span className="form-composer__label-description">
+                              Cada publicació hauria de tenir un meta títol
+                              únic, idealment de menys de 60 caràcters de
+                              llargada
+                            </span>
                           </Form.Label>
-                        </div>
-                      </Form.Group>
+                          <Form.Control
+                            type="text"
+                            name="metaTitle"
+                            placeholder="Meta títol"
+                            defaultValue={metaTitle}
+                            onChange={handleChange}
+                          />
+                        </Form.Group>
+                        <Form.Group>
+                          <Form.Label>
+                            Meta descripció{" "}
+                            <span className="form-composer__label-description">
+                              Cada publicació hauria de tenir una meta
+                              descripció única, idealment de menys de 160
+                              caràcters de llargada
+                            </span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="metaDescription"
+                            placeholder="Meta descripció"
+                            defaultValue={metaDescription}
+                            onChange={handleChange}
+                          />
+                        </Form.Group>
+                      </Form>
                     </div>
-                    <div className="images-list-wrapper">
-                      <div className="image-wrapper">{imagesList}</div>
-                    </div>
-                  </div>
+                  )}
                 </div>
-                <Form.Group>
-                  <Form.Label>Descripció</Form.Label>
-                  <QuillNoSSRWrapper
-                    className="form-control"
-                    modules={modules}
-                    formats={formats}
-                    theme="bubble"
-                    placeholder={"Comença a descriure la teva historia..."}
-                    value={description}
-                    onChange={setDescription}
-                  />
-                </Form.Group>
-              </Form>
+              </div>
             </Col>
           </Row>
         </Container>
-        <div className="progress-bar-outter">
-          <Container className="d-flex align-items-center">
-            <div className="col left">{/* <span>Section 1 of 7 </span> */}</div>
-            <div className="col center">
-              {/* <div className="progress">
-							<div
-								className="progress-bar"
-								role="progressbar"
-								style={{width: "33%"}}
-								aria-valuenow="25"
-								aria-valuemin="0"
-								aria-valuemax="100"
-							></div>
-						</div> */}
-            </div>
-            <div className="col right">
-              <div className="buttons d-flex justify-space-between justify-content-end">
-                <Button type="submit" variant="none" onClick={handleSubmit}>
-                  Save changes
-                </Button>
-              </div>
-            </div>
-          </Container>
-        </div>
       </div>
     </>
   );

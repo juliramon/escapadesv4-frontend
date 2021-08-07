@@ -16,7 +16,12 @@ const ActivityEditionForm = () => {
     if (!user) {
       router.push("/login");
     }
-    if (router.pathname.includes("editar")) {
+    if (
+      router.pathname.includes("editar") ||
+      router.pathname.includes("nova-activitat") ||
+      router.pathname.includes("nou-allotjament") ||
+      router.pathname.includes("nova-historia")
+    ) {
       document.querySelector("body").classList.add("composer");
     } else {
       document.querySelector("body").classList.remove("composer");
@@ -72,9 +77,9 @@ const ActivityEditionForm = () => {
     isActivityLoaded: false,
   };
   const [state, setState] = useState(initialState);
+  const [queryId, setQueryId] = useState(null);
   const [activeTab, setActiveTab] = useState("main");
 
-  const [queryId, setQueryId] = useState(null);
   useEffect(() => {
     if (router && router.query) {
       setQueryId(router.query.slug);
@@ -634,7 +639,7 @@ const ActivityEditionForm = () => {
                         <Form.Row>
                           <Col lg={4}>
                             <Form.Group>
-                              <Form.Label>Categoria d'activitat</Form.Label>
+                              <Form.Label>Categoria d'escapada</Form.Label>
                               <Form.Check
                                 type="checkbox"
                                 name="romantica"
@@ -1014,7 +1019,7 @@ const ActivityEditionForm = () => {
                           <Form.Label>Descripció</Form.Label>
                           <Form.Control
                             as="textarea"
-                            rows="5"
+                            rows="10"
                             type="text"
                             name="description"
                             placeholder="Activity description"

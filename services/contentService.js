@@ -372,7 +372,17 @@ class ContentService {
 
   // STORIES ENDPOINTS
 
-  story = (type, slug, title, subtitle, cover, image, description) => {
+  story = (
+    type,
+    slug,
+    title,
+    subtitle,
+    cover,
+    image,
+    description,
+    metaTitle,
+    metaDescription
+  ) => {
     return this.service
       .post("/story", {
         type,
@@ -396,7 +406,17 @@ class ContentService {
   getUserStories = (id) =>
     this.service.get(`/users/${id}/stories`).then((res) => res.data);
 
-  editStory = (_id, slug, title, subtitle, cover, images, description) =>
+  editStory = (
+    _id,
+    slug,
+    title,
+    subtitle,
+    cover,
+    images,
+    description,
+    metaTitle,
+    metaDescription
+  ) =>
     this.service.put(`/stories/${_id}`, {
       slug,
       title,

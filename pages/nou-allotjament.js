@@ -27,7 +27,7 @@ const PlaceForm = () => {
     }
     if (
       router.pathname.includes("editar") ||
-      router.pathname.includes("/nova-activitat") ||
+      router.pathname.includes("nova-activitat") ||
       router.pathname.includes("nou-allotjament") ||
       router.pathname.includes("nova-historia")
     ) {
@@ -521,7 +521,7 @@ const PlaceForm = () => {
                         <Form.Row>
                           <Col lg={3}>
                             <Form.Group>
-                              <Form.Label>Categories</Form.Label>
+                              <Form.Label>Categories d'escapada</Form.Label>
                               <Form.Check
                                 type="checkbox"
                                 name="romantica"
@@ -669,7 +669,7 @@ const PlaceForm = () => {
                                 <Form.Check
                                   type="radio"
                                   id="refugi"
-                                  label="Cabanya"
+                                  label="Refugi"
                                   name="placeType"
                                   onChange={handleCheckPlaceType}
                                 />
@@ -912,7 +912,7 @@ const PlaceForm = () => {
                           <Form.Label>Descripció</Form.Label>
                           <Form.Control
                             as="textarea"
-                            rows="5"
+                            rows="10"
                             type="text"
                             name="description"
                             placeholder="Descripció de l'allotjament"

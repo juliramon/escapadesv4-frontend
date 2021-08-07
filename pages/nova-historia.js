@@ -5,7 +5,6 @@ import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import NavigationBar from "../components/global/NavigationBar";
 import UserContext from "../contexts/UserContext";
 import ContentService from "../services/contentService";
-import slugify from "slugify";
 import dynamic from "next/dynamic";
 
 const QuillNoSSRWrapper = dynamic(import("react-quill"), {
@@ -57,7 +56,17 @@ const StoryForm = () => {
         }
       }
     }
-  }, [user]);
+    if (
+      router.pathname.includes("editar") ||
+      router.pathname.includes("nova-activitat") ||
+      router.pathname.includes("nou-allotjament") ||
+      router.pathname.includes("nova-historia")
+    ) {
+      document.querySelector("body").classList.add("composer");
+    } else {
+      document.querySelector("body").classList.remove("composer");
+    }
+  }, [user, router]);
 
   if (!user) {
     return (
@@ -83,10 +92,14 @@ const StoryForm = () => {
       isReadyToSubmit: false,
       cloudImagesUploaded: false,
       coverCloudImageUploaded: false,
+      metaTitle: "",
+      metaDescription: "",
     },
   };
   const [state, setState] = useState(initialState);
   const [queryId, setQueryId] = useState(null);
+  const [activeTab, setActiveTab] = useState("main");
+
   useEffect(() => {
     if (router && router.route) {
       setQueryId(router.route);
@@ -150,12 +163,16 @@ const StoryForm = () => {
   const [description, setDescription] = useState("");
 
   const submitStory = async () => {
-    // const slug = await slugify(state.formData.title, {
-    //   remove: /[*+~.,()'"!:@]/g,
-    //   lower: true,
-    // });
-    const { type, title, subtitle, slug, coverCloudImage, cloudImages } =
-      state.formData;
+    const {
+      type,
+      title,
+      subtitle,
+      slug,
+      coverCloudImage,
+      cloudImages,
+      metaTitle,
+      metaDescription,
+    } = state.formData;
     service
       .story(
         type,
@@ -164,7 +181,9 @@ const StoryForm = () => {
         subtitle,
         coverCloudImage,
         cloudImages,
-        description
+        description,
+        metaTitle,
+        metaDescription
       )
       .then(() => router.push("/dashboard"))
       .catch((err) => console.error(err));
@@ -216,7 +235,15 @@ const StoryForm = () => {
   useEffect(() => {
     const { title, subtitle, images } = state.formData;
 
-    if (title && subtitle && coverImage && images && description) {
+    if (
+      title &&
+      subtitle &&
+      coverImage &&
+      images &&
+      description &&
+      metaTitle &&
+      metaDescription
+    ) {
       setState((state) => ({ ...state, isReadyToSubmit: true }));
     }
   }, [state.formData, description]);
@@ -226,7 +253,7 @@ const StoryForm = () => {
       <Head>
         <title>Comparteix una nova història - Escapadesenparella.cat</title>
       </Head>
-      <div id="storyForm" className="composer">
+      <div id="storyForm">
         <NavigationBar
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
@@ -234,180 +261,228 @@ const StoryForm = () => {
           user={user}
           path={queryId}
         />
-        <Container className="mw-1600" fluid>
+        <Container className="mw-1600">
           <Row>
-            <Col lg={7} className="sided-shadow">
+            <Col lg={12}>
               <div className="form-composer">
-                <h1>Comparteix una història</h1>
-                <p className="sub-h1">
-                  Escriu una nova història per inspirar a altres parelles.
-                </p>
+                <div className="form-composer__header">
+                  <div className="form-composer__header-left">
+                    <h1>Comparteix una història</h1>
+                    <p className="sub-h1">
+                      Escriu una nova història per inspirar a altres parelles.
+                    </p>
+                  </div>
+                  <div className="form-composer__header-right">
+                    <Button type="submit" variant="none" onClick={handleSubmit}>
+                      Publicar
+                    </Button>
+                  </div>
+                </div>
+                <div className="form-composer__body">
+                  <div className="form-composer__tab-bar">
+                    <button
+                      className={
+                        activeTab === "main"
+                          ? "form-composer__tab active"
+                          : "form-composer__tab"
+                      }
+                      onClick={() => setActiveTab("main")}
+                    >
+                      Contingut principal
+                    </button>
+                    <button
+                      className={
+                        activeTab === "seo"
+                          ? "form-composer__tab active"
+                          : "form-composer__tab"
+                      }
+                      onClick={() => setActiveTab("seo")}
+                    >
+                      SEO
+                    </button>
+                  </div>
+                  {activeTab === "main" ? (
+                    <div className="form-composer__post-content">
+                      <Form>
+                        <Form.Group>
+                          <Form.Label>Títol</Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="title"
+                            placeholder="Títol de la història"
+                            onChange={handleChange}
+                            value={state.formData.title}
+                          />
+                        </Form.Group>
+                        <Form.Group>
+                          <Form.Label>Subtítol</Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="subtitle"
+                            placeholder="Subtítol de la història"
+                            onChange={handleChange}
+                            value={state.formData.subtitle}
+                          />
+                        </Form.Group>
+                        <Form.Group>
+                          <Form.Label>Slug</Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="slug"
+                            placeholder="Slug de la història"
+                            onChange={handleChange}
+                            value={state.formData.slug}
+                          />
+                        </Form.Group>
+                        <div className="cover">
+                          <span>Imatge de portada</span>
+                          <div className="images-wrapper">
+                            <div className="top-bar">
+                              <Form.Group>
+                                <div className="image-drop-zone">
+                                  <Form.Label>
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      className="icon icon-tabler icon-tabler-camera-plus"
+                                      width="22"
+                                      height="22"
+                                      viewBox="0 0 24 24"
+                                      strokeWidth="1.5"
+                                      stroke="#0d1f44"
+                                      fill="none"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    >
+                                      <path
+                                        stroke="none"
+                                        d="M0 0h24v24H0z"
+                                        fill="none"
+                                      />
+                                      <circle cx="12" cy="13" r="3" />
+                                      <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+                                      <line x1="15" y1="6" x2="21" y2="6" />
+                                      <line x1="18" y1="3" x2="18" y2="9" />
+                                    </svg>
+                                    Afegir imatge
+                                    <Form.Control
+                                      type="file"
+                                      name="cover"
+                                      onChange={saveFileToStatus}
+                                      max="1"
+                                    />
+                                  </Form.Label>
+                                </div>
+                              </Form.Group>
+                            </div>
+                            <div className="images-list-wrapper">
+                              <div className="image-wrapper">{coverImage}</div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="images">
+                          <span>Imatges d'aquesta història</span>
+                          <div className="images-wrapper">
+                            <div className="top-bar">
+                              <Form.Group>
+                                <div className="image-drop-zone">
+                                  <Form.Label>
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      className="icon icon-tabler icon-tabler-camera-plus"
+                                      width="22"
+                                      height="22"
+                                      viewBox="0 0 24 24"
+                                      strokeWidth="1.5"
+                                      stroke="#0d1f44"
+                                      fill="none"
+                                      strokeLinecap="round"
+                                      strokeLinejoin="round"
+                                    >
+                                      <path
+                                        stroke="none"
+                                        d="M0 0h24v24H0z"
+                                        fill="none"
+                                      />
+                                      <circle cx="12" cy="13" r="3" />
+                                      <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+                                      <line x1="15" y1="6" x2="21" y2="6" />
+                                      <line x1="18" y1="3" x2="18" y2="9" />
+                                    </svg>
+                                    Afegir imatge
+                                    <Form.Control
+                                      type="file"
+                                      onChange={saveFileToStatus}
+                                    />
+                                  </Form.Label>
+                                </div>
+                              </Form.Group>
+                            </div>
+                            <div className="images-list-wrapper">
+                              <div className="image-wrapper">{imagesList}</div>
+                            </div>
+                          </div>
+                        </div>
+                        <Form.Group>
+                          <Form.Label>Descripció</Form.Label>
+                          <QuillNoSSRWrapper
+                            className="form-control"
+                            modules={modules}
+                            formats={formats}
+                            theme="bubble"
+                            placeholder={
+                              "Comença a descriure la teva historia..."
+                            }
+                            value={description}
+                            onChange={setDescription}
+                          />
+                        </Form.Group>
+                      </Form>
+                    </div>
+                  ) : (
+                    <div className="form-composer__seo">
+                      <Form onSubmit={handleSubmit}>
+                        <Form.Group>
+                          <Form.Label>
+                            Meta títol{" "}
+                            <span className="form-composer__label-description">
+                              Cada publicació hauria de tenir un meta títol
+                              únic, idealment de menys de 60 caràcters de
+                              llargada
+                            </span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="metaTitle"
+                            placeholder="Meta títol"
+                            defaultValue={state.formData.metaTitle}
+                            onChange={handleChange}
+                          />
+                        </Form.Group>
+                        <Form.Group>
+                          <Form.Label>
+                            Meta descripció{" "}
+                            <span className="form-composer__label-description">
+                              Cada publicació hauria de tenir una meta
+                              descripció única, idealment de menys de 160
+                              caràcters de llargada
+                            </span>
+                          </Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="metaDescription"
+                            placeholder="Meta descripció"
+                            defaultValue={state.formData.metaDescription}
+                            onChange={handleChange}
+                          />
+                        </Form.Group>
+                      </Form>
+                    </div>
+                  )}
+                </div>
               </div>
-              <Form>
-                <Form.Group>
-                  <Form.Label>Títol</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="title"
-                    placeholder="Títol de la història"
-                    onChange={handleChange}
-                    value={state.formData.title}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Subtítol</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="subtitle"
-                    placeholder="Subtítol de la història"
-                    onChange={handleChange}
-                    value={state.formData.subtitle}
-                  />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Slug</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="slug"
-                    placeholder="Slug de la història"
-                    onChange={handleChange}
-                    value={state.formData.slug}
-                  />
-                </Form.Group>
-                <div className="cover">
-                  <span>Imatge de portada</span>
-                  <div className="images-wrapper">
-                    <div className="top-bar">
-                      <Form.Group>
-                        <div className="image-drop-zone">
-                          <Form.Label>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-camera-plus"
-                              width="22"
-                              height="22"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="#0d1f44"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path
-                                stroke="none"
-                                d="M0 0h24v24H0z"
-                                fill="none"
-                              />
-                              <circle cx="12" cy="13" r="3" />
-                              <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
-                              <line x1="15" y1="6" x2="21" y2="6" />
-                              <line x1="18" y1="3" x2="18" y2="9" />
-                            </svg>
-                            Afegir imatge
-                            <Form.Control
-                              type="file"
-                              name="cover"
-                              onChange={saveFileToStatus}
-                              max="1"
-                            />
-                          </Form.Label>
-                        </div>
-                      </Form.Group>
-                    </div>
-                    <div className="images-list-wrapper">
-                      <div className="image-wrapper">{coverImage}</div>
-                    </div>
-                  </div>
-                </div>
-                <div className="images">
-                  <span>Imatges d'aquesta història</span>
-                  <div className="images-wrapper">
-                    <div className="top-bar">
-                      <Form.Group>
-                        <div className="image-drop-zone">
-                          <Form.Label>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-camera-plus"
-                              width="22"
-                              height="22"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="#0d1f44"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path
-                                stroke="none"
-                                d="M0 0h24v24H0z"
-                                fill="none"
-                              />
-                              <circle cx="12" cy="13" r="3" />
-                              <path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
-                              <line x1="15" y1="6" x2="21" y2="6" />
-                              <line x1="18" y1="3" x2="18" y2="9" />
-                            </svg>
-                            Afegir imatge
-                            <Form.Control
-                              type="file"
-                              onChange={saveFileToStatus}
-                            />
-                          </Form.Label>
-                        </div>
-                      </Form.Group>
-                    </div>
-                    <div className="images-list-wrapper">
-                      <div className="image-wrapper">{imagesList}</div>
-                    </div>
-                  </div>
-                </div>
-                <Form.Group>
-                  <Form.Label>Descripció</Form.Label>
-                  <QuillNoSSRWrapper
-                    className="form-control"
-                    modules={modules}
-                    formats={formats}
-                    theme="bubble"
-                    placeholder={"Comença a descriure la teva historia..."}
-                    value={description}
-                    onChange={setDescription}
-                  />
-                </Form.Group>
-              </Form>
             </Col>
           </Row>
         </Container>
-        <div className="progress-bar-outter">
-          <Container className="d-flex align-items-center">
-            <div className="col left">{/* <span>Section 1 of 7 </span> */}</div>
-            <div className="col center">
-              {/* <div className="progress">
-							<div
-								className="progress-bar"
-								role="progressbar"
-								style={{width: "33%"}}
-								aria-valuenow="25"
-								aria-valuemin="0"
-								aria-valuemax="100"
-							></div>
-						</div> */}
-            </div>
-            <div className="col right">
-              <div className="buttons d-flex justify-space-between justify-content-end">
-                {state.isReadyToSubmit ? (
-                  <Button type="submit" variant="none" onClick={handleSubmit}>
-                    Publicar
-                  </Button>
-                ) : (
-                  <Button type="submit" variant="none" disabled>
-                    Publicar
-                  </Button>
-                )}
-              </div>
-            </div>
-          </Container>
-        </div>
       </div>
     </>
   );
