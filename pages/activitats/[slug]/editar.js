@@ -291,19 +291,6 @@ const ActivityEditionForm = () => {
       : (isPirineus = false);
   }
 
-  const {
-    title,
-    subtitle,
-    activity_full_address,
-    phone,
-    website,
-    price,
-    duration,
-    description,
-    metaTitle,
-    metaDescription,
-  } = state.activity;
-
   const submitActivity = async () => {
     const slug = await slugify(state.activity.title, {
       remove: /[*+~.,()'"!:@]/g,
@@ -333,10 +320,9 @@ const ActivityEditionForm = () => {
       activity_opening_hours,
       duration,
       price,
-      metaTitle,
-      metaDescription,
     } = state.activity;
-    const { coverCloudImage, cloudImages } = state.formData;
+    const { coverCloudImage, cloudImages, metaTitle, metaDescription } =
+      state.formData;
     const { organization } = state;
     let activityCover, activityImages;
     coverCloudImage !== ""
@@ -495,7 +481,7 @@ const ActivityEditionForm = () => {
   const handleChange = (e) =>
     setState({
       ...state,
-      activity: { ...state.activity, [e.target.name]: e.target.value },
+      formData: { ...state.formData, [e.target.name]: e.target.value },
     });
 
   useEffect(() => {
@@ -622,7 +608,7 @@ const ActivityEditionForm = () => {
                             type="text"
                             name="title"
                             placeholder="Títol de l'activitat"
-                            defaultValue={title}
+                            value={state.formData.title}
                             onChange={handleChange}
                           />
                         </Form.Group>
@@ -632,7 +618,7 @@ const ActivityEditionForm = () => {
                             type="text"
                             name="subtitle"
                             placeholder="Subtítol de l'activitat"
-                            defaultValue={subtitle}
+                            value={state.formData.subtitle}
                             onChange={handleChange}
                           />
                         </Form.Group>
@@ -790,7 +776,7 @@ const ActivityEditionForm = () => {
                             className="location-control"
                             apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
                             style={{ width: "100%" }}
-                            defaultValue={activity_full_address}
+                            defaultValue={state.formData.activity_full_address}
                             onPlaceSelected={(activity) => {
                               let activity_full_address,
                                 activity_locality,
@@ -882,7 +868,7 @@ const ActivityEditionForm = () => {
                                 name="phone"
                                 placeholder="Phone number for contact details"
                                 onChange={handleChange}
-                                value={phone}
+                                value={state.formData.phone}
                               />
                             </Form.Group>
                           </Col>
@@ -894,7 +880,7 @@ const ActivityEditionForm = () => {
                                 name="website"
                                 placeholder="Activity website"
                                 onChange={handleChange}
-                                value={website}
+                                value={state.formData.website}
                               />
                             </Form.Group>
                           </Col>
@@ -908,7 +894,7 @@ const ActivityEditionForm = () => {
                                 name="price"
                                 placeholder="Activity price"
                                 onChange={handleChange}
-                                value={price}
+                                value={state.formData.price}
                               />
                             </Form.Group>
                           </Col>
@@ -920,7 +906,7 @@ const ActivityEditionForm = () => {
                                 name="duration"
                                 placeholder="Activity duration"
                                 onChange={handleChange}
-                                value={duration}
+                                value={state.formData.duration}
                               />
                             </Form.Group>
                           </Col>
@@ -1023,7 +1009,7 @@ const ActivityEditionForm = () => {
                             type="text"
                             name="description"
                             placeholder="Activity description"
-                            defaultValue={description}
+                            defaultValue={state.formData.description}
                             onChange={handleChange}
                           />
                         </Form.Group>
@@ -1045,7 +1031,7 @@ const ActivityEditionForm = () => {
                             type="text"
                             name="metaTitle"
                             placeholder="Meta títol"
-                            defaultValue={metaTitle}
+                            value={state.formData.metaTitle}
                             onChange={handleChange}
                           />
                         </Form.Group>
@@ -1062,8 +1048,8 @@ const ActivityEditionForm = () => {
                             type="text"
                             name="metaDescription"
                             placeholder="Meta descripció"
-                            defaultValue={metaDescription}
                             onChange={handleChange}
+                            value={state.formData.metaDescription}
                           />
                         </Form.Group>
                       </Form>
