@@ -56,6 +56,13 @@ a {
   box-sizing: border-box;
 }
 
+:focus-visible {
+  border: none !important;
+  outline: none !important;
+  -webkit-appearance: none !important;
+  box-shadow: none !important;
+}
+
 /*---GLOBAL STYLES---*/
 
 .btn {
@@ -432,6 +439,7 @@ nav {
   display: block;
   border-top: 1px solid #e7ebf5;
   border-bottom: 1px solid #e7ebf5;
+  margin-top: -1px;
   .listings-wrapper {
     display: flex;
     flex-wrap: wrap;
@@ -1775,6 +1783,7 @@ nav {
     text-align: left;
     width: 100%;
     background: transparent;
+    border: none;
   }
   .dropdown-menu ul li a:hover,
   .dropdown-menu ul li button:hover {

@@ -7,8 +7,23 @@ import FeaturedStoryBox from "../components/listings/FeaturedStoryBox";
 import PopularStoryBox from "../components/listings/PopularStoryBox";
 import Link from "next/link";
 import RegularStoryBox from "../components/listings/RegularStoryBox";
+import { useRouter } from "next/router";
 
 const StoriesList = ({ user }) => {
+  const router = useRouter();
+  useEffect(() => {
+    if (
+      router.pathname.includes("editar") ||
+      router.pathname.includes("nova-activitat") ||
+      router.pathname.includes("nou-allotjament") ||
+      router.pathname.includes("nova-historia")
+    ) {
+      document.querySelector("body").classList.add("composer");
+    } else {
+      document.querySelector("body").classList.remove("composer");
+    }
+  }, [router]);
+
   const initialState = {
     loggedUser: user,
     stories: [],

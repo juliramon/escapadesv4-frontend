@@ -15,6 +15,19 @@ const CategoryPage = () => {
   const { user } = useContext(UserContext);
   const router = useRouter();
 
+  useEffect(() => {
+    if (
+      router.pathname.includes("editar") ||
+      router.pathname.includes("nova-activitat") ||
+      router.pathname.includes("nou-allotjament") ||
+      router.pathname.includes("nova-historia")
+    ) {
+      document.querySelector("body").classList.add("composer");
+    } else {
+      document.querySelector("body").classList.remove("composer");
+    }
+  }, [router]);
+
   const initialState = {
     categoryDetails: {},
     results: [],
@@ -58,6 +71,7 @@ const CategoryPage = () => {
             results: getResults.results,
             hasResults: hasResults,
             isFetching: false,
+            notFound: false,
           });
         } else {
           setState({ ...state, notFound: true });
@@ -68,7 +82,11 @@ const CategoryPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryId]);
 
-  if (state.notFound) {
+  if (
+    state.notFound &&
+    !state.isFetching &&
+    Object.keys(state.categoryDetails).length === 0
+  ) {
     return <Error404 />;
   }
 

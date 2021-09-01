@@ -9,6 +9,18 @@ import Head from "next/head";
 
 const Search = (props) => {
   const router = useRouter();
+  useEffect(() => {
+    if (
+      router.pathname.includes("editar") ||
+      router.pathname.includes("nova-activitat") ||
+      router.pathname.includes("nou-allotjament") ||
+      router.pathname.includes("nova-historia")
+    ) {
+      document.querySelector("body").classList.add("composer");
+    } else {
+      document.querySelector("body").classList.remove("composer");
+    }
+  }, [router]);
   const searchQuery = router.asPath.slice(7);
   const initialState = {
     loggedUser: props.user,

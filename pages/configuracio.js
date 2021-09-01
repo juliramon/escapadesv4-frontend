@@ -22,12 +22,19 @@ const configuracio = () => {
         if (user.hasConfirmedEmail === false) {
           router.push("/signup/confirmacio-correu");
         }
-        if (user.userType !== "admin" || !user.userType) {
-          router.push("/feed");
-        }
       }
     }
-  }, [user]);
+    if (
+      router.pathname.includes("editar") ||
+      router.pathname.includes("nova-activitat") ||
+      router.pathname.includes("nou-allotjament") ||
+      router.pathname.includes("nova-historia")
+    ) {
+      document.querySelector("body").classList.add("composer");
+    } else {
+      document.querySelector("body").classList.remove("composer");
+    }
+  }, [user, router]);
 
   if (!user) {
     return (
