@@ -35,13 +35,16 @@ const StoriesList = ({ user }) => {
   useEffect(() => {
     const fetchData = async () => {
       const stories = await service.getAllStories("/stories");
+      const sortedStories = stories.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
       let isLoaded;
       if (stories.length > 0) {
         isLoaded = true;
       } else {
         isLoaded = false;
       }
-      setState({ ...state, stories: stories, hasStories: isLoaded });
+      setState({ ...state, stories: sortedStories, hasStories: isLoaded });
     };
     fetchData();
   }, []);
@@ -77,6 +80,7 @@ const StoriesList = ({ user }) => {
       ));
     storiesList = state.stories
       .slice(9)
+
       .map((el) => (
         <RegularStoryBox
           key={el._id}

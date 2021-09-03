@@ -233,7 +233,8 @@ const StoryForm = () => {
   }, [state.formData]);
 
   useEffect(() => {
-    const { title, subtitle, images } = state.formData;
+    const { title, subtitle, images, description, metaTitle, metaDescription } =
+      state.formData;
 
     if (
       title &&
