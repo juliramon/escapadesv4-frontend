@@ -60,6 +60,7 @@ const ContentBar = (props) => {
           <div className="content-bar---inner d-flex align-items-center">
             {categoriesList}
           </div>
+          <div className="content-bar---overlay"></div>
         </div>
       </Container>
     </div>

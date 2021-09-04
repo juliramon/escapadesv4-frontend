@@ -172,7 +172,7 @@ const StoriesList = ({ user }) => {
           }
           user={user}
         />
-        <Container fluid className="mw-1600">
+        <Container fluid className="mw-1200">
           <Row>
             <Col lg={12}>
               <div className="box d-flex featured-stories">
@@ -218,7 +218,7 @@ const StoriesList = ({ user }) => {
           </Row>
         </Container>
         <section id="popularStories">
-          <Container className="mw-1600" fluid>
+          <Container className="mw-1200" fluid>
             <Row className="popular-stories">
               <Col lg={12}>
                 <div className="col">
@@ -240,7 +240,7 @@ const StoriesList = ({ user }) => {
           </Container>
         </section>
         <section id="regularStories">
-          <Container className="mw-1600" fluid>
+          <Container className="mw-1200" fluid>
             <Row>
               <div className="box d-flex">
                 <div className="col center">

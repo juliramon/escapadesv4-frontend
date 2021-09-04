@@ -4512,6 +4512,32 @@ nav {
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+  .content-bar .content-bar---wrapper {
+    margin: 0 -8px;
+    height: 40px;
+    overflow: hidden;
+  }
+  .content-bar .content-bar---inner {
+    height: 60px;
+    overflow-x: scroll;
+  }
+  .content-bar---overlay {
+    width: 70px;
+    background: linear-gradient(
+      to left,
+      rgba(255, 255, 255, 1) 30%,
+      rgba(255, 255, 255, 0)
+    );
+    position: absolute;
+    height: 40px;
+    right: 0;
+  }
+  #contentList .box .col.center #listingSquareBox {
+    min-width: 31.2%;
+  }
+  #storiesList #popularStories .listings-list .popular-listing {
+    width: 28.07%;
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
