@@ -291,18 +291,6 @@ const ActivityEditionForm = () => {
       : (isHotel = false);
   }
 
-  const {
-    title,
-    subtitle,
-    place_full_address,
-    phone,
-    website,
-    price,
-    description,
-    metaTitle,
-    metaDescription,
-  } = state.place;
-
   const submitPlace = async () => {
     const slug = await slugify(state.place.title, {
       remove: /[*+~.,()'"!:@]/g,
@@ -575,7 +563,7 @@ const ActivityEditionForm = () => {
                             type="text"
                             name="title"
                             placeholder="Títol de l'allotjament"
-                            defaultValue={title}
+                            value={state.place.title}
                             onChange={handleChange}
                           />
                         </Form.Group>
@@ -585,7 +573,7 @@ const ActivityEditionForm = () => {
                             type="text"
                             name="subtitle"
                             placeholder="Subtítol de l'allotjament"
-                            defaultValue={subtitle}
+                            value={state.place.subtitle}
                             onChange={handleChange}
                           />
                         </Form.Group>
@@ -798,7 +786,7 @@ const ActivityEditionForm = () => {
                             className="location-control"
                             apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
                             style={{ width: "100%" }}
-                            defaultValue={place_full_address}
+                            value={state.place.place_full_address}
                             onPlaceSelected={(place) => {
                               let place_full_address,
                                 place_locality,
@@ -886,7 +874,7 @@ const ActivityEditionForm = () => {
                                 name="phone"
                                 placeholder="Número de telèfon de contacte"
                                 onChange={handleChange}
-                                value={phone}
+                                value={state.place.phone}
                               />
                             </Form.Group>
                           </Col>
@@ -900,7 +888,7 @@ const ActivityEditionForm = () => {
                                 name="website"
                                 placeholder="Pàgina web de reserva o contacte"
                                 onChange={handleChange}
-                                value={website}
+                                value={state.place.website}
                               />
                             </Form.Group>
                           </Col>
@@ -912,7 +900,7 @@ const ActivityEditionForm = () => {
                                 name="price"
                                 placeholder="Preu per nit de l'allotjament"
                                 onChange={handleChange}
-                                value={price}
+                                value={state.place.price}
                               />
                             </Form.Group>
                           </Col>
@@ -1015,7 +1003,7 @@ const ActivityEditionForm = () => {
                             type="text"
                             name="description"
                             placeholder="Descripció de l'allotjament"
-                            defaultValue={description}
+                            value={state.place.description}
                             onChange={handleChange}
                           />
                         </Form.Group>
@@ -1037,7 +1025,7 @@ const ActivityEditionForm = () => {
                             type="text"
                             name="metaTitle"
                             placeholder="Meta títol"
-                            defaultValue={metaTitle}
+                            value={state.place.metaTitle}
                             onChange={handleChange}
                           />
                         </Form.Group>
@@ -1054,7 +1042,7 @@ const ActivityEditionForm = () => {
                             type="text"
                             name="metaDescription"
                             placeholder="Meta descripció"
-                            defaultValue={metaDescription}
+                            value={state.place.metaDescription}
                             onChange={handleChange}
                           />
                         </Form.Group>
