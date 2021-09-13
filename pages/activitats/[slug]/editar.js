@@ -43,6 +43,7 @@ const ActivityEditionForm = () => {
       type: "activity",
       title: "",
       subtitle: "",
+      slug: "slug",
       categories: [],
       seasons: [],
       region: "",
@@ -104,6 +105,7 @@ const ActivityEditionForm = () => {
             type: activityDetails.type,
             title: activityDetails.title,
             subtitle: activityDetails.subtitle,
+            slug: activityDetails.slug,
             categories: activityDetails.categories,
             seasons: activityDetails.seasons,
             region: activityDetails.region,
@@ -292,10 +294,6 @@ const ActivityEditionForm = () => {
   }
 
   const submitActivity = async () => {
-    const slug = await slugify(state.activity.title, {
-      remove: /[*+~.,()'"!:@]/g,
-      lower: true,
-    });
     const {
       _id,
       title,
@@ -321,7 +319,7 @@ const ActivityEditionForm = () => {
       duration,
       price,
     } = state.activity;
-    const { coverCloudImage, cloudImages, metaTitle, metaDescription } =
+    const { slug, coverCloudImage, cloudImages, metaTitle, metaDescription } =
       state.formData;
     const { organization } = state;
     let activityCover, activityImages;
@@ -1050,6 +1048,16 @@ const ActivityEditionForm = () => {
                             placeholder="Meta descripció"
                             onChange={handleChange}
                             value={state.formData.metaDescription}
+                          />
+                        </Form.Group>
+                        <Form.Group>
+                          <Form.Label>Slug</Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="slug"
+                            placeholder="Slug de l'activitat"
+                            value={state.formData.slug}
+                            onChange={handleChange}
                           />
                         </Form.Group>
                       </Form>

@@ -43,6 +43,7 @@ const ActivityEditionForm = () => {
       type: "place",
       title: "",
       subtitle: "",
+      slug: "slug",
       categories: [],
       seasons: [],
       region: "",
@@ -99,6 +100,7 @@ const ActivityEditionForm = () => {
             type: placeDetails.type,
             title: placeDetails.title,
             subtitle: placeDetails.subtitle,
+            slug: placeDetails.slug,
             categories: placeDetails.categories,
             seasons: placeDetails.seasons,
             region: placeDetails.region,
@@ -292,10 +294,6 @@ const ActivityEditionForm = () => {
   }
 
   const submitPlace = async () => {
-    const slug = await slugify(state.place.title, {
-      remove: /[*+~.,()'"!:@]/g,
-      lower: true,
-    });
     const {
       _id,
       title,
@@ -320,6 +318,7 @@ const ActivityEditionForm = () => {
       place_id,
       place_opening_hours,
       price,
+      slug,
       metaTitle,
       metaDescription,
     } = state.place;
@@ -1043,6 +1042,16 @@ const ActivityEditionForm = () => {
                             name="metaDescription"
                             placeholder="Meta descripció"
                             value={state.place.metaDescription}
+                            onChange={handleChange}
+                          />
+                        </Form.Group>
+                        <Form.Group>
+                          <Form.Label>Slug</Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="slug"
+                            placeholder="Slug de l'allotjament"
+                            value={state.place.slug}
                             onChange={handleChange}
                           />
                         </Form.Group>

@@ -325,16 +325,6 @@ const StoryForm = () => {
                             value={state.formData.subtitle}
                           />
                         </Form.Group>
-                        <Form.Group>
-                          <Form.Label>Slug</Form.Label>
-                          <Form.Control
-                            type="text"
-                            name="slug"
-                            placeholder="Slug de la història"
-                            onChange={handleChange}
-                            value={state.formData.slug}
-                          />
-                        </Form.Group>
                         <div className="cover">
                           <span>Imatge de portada</span>
                           <div className="images-wrapper">
@@ -474,6 +464,16 @@ const StoryForm = () => {
                             placeholder="Meta descripció"
                             defaultValue={state.formData.metaDescription}
                             onChange={handleChange}
+                          />
+                        </Form.Group>
+                        <Form.Group>
+                          <Form.Label>Slug</Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="slug"
+                            placeholder="Slug de la història"
+                            onChange={handleChange}
+                            value={state.formData.slug}
                           />
                         </Form.Group>
                       </Form>

@@ -80,7 +80,6 @@ const StoriesList = ({ user }) => {
       ));
     storiesList = state.stories
       .slice(9)
-
       .map((el) => (
         <RegularStoryBox
           key={el._id}
