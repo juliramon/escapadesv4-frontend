@@ -126,7 +126,6 @@ const ActivityEditionForm = () => {
             place_id: "",
             place_opening_hours: "",
             price: "",
-            metaTitle: "",
             metaTitle: placeDetails.metaTitle,
             metaDescription: placeDetails.metaDescription,
           },

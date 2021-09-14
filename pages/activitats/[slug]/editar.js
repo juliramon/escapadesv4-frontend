@@ -105,6 +105,7 @@ const ActivityEditionForm = () => {
             type: activityDetails.type,
             title: activityDetails.title,
             subtitle: activityDetails.subtitle,
+            description: activityDetails.description,
             slug: activityDetails.slug,
             categories: activityDetails.categories,
             seasons: activityDetails.seasons,
