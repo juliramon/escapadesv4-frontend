@@ -418,16 +418,6 @@ const StoryEditionForm = () => {
                             onChange={handleChange}
                           />
                         </Form.Group>
-                        <Form.Group>
-                          <Form.Label>Slug</Form.Label>
-                          <Form.Control
-                            type="text"
-                            name="slug"
-                            placeholder="Story slug"
-                            value={slug}
-                            onChange={handleChange}
-                          />
-                        </Form.Group>
                         <div className="cover">
                           <span>Imatge de portada</span>
                           <div className="images-wrapper">
@@ -550,7 +540,7 @@ const StoryEditionForm = () => {
                             type="text"
                             name="metaTitle"
                             placeholder="Meta títol"
-                            defaultValue={metaTitle}
+                            value={metaTitle}
                             onChange={handleChange}
                           />
                         </Form.Group>
@@ -567,7 +557,17 @@ const StoryEditionForm = () => {
                             type="text"
                             name="metaDescription"
                             placeholder="Meta descripció"
-                            defaultValue={metaDescription}
+                            value={metaDescription}
+                            onChange={handleChange}
+                          />
+                        </Form.Group>
+                        <Form.Group>
+                          <Form.Label>Slug</Form.Label>
+                          <Form.Control
+                            type="text"
+                            name="slug"
+                            placeholder="Slug de la història"
+                            value={slug}
                             onChange={handleChange}
                           />
                         </Form.Group>
