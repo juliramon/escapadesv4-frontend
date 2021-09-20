@@ -109,18 +109,6 @@ const ListForm = () => {
           cover: fileToUpload,
         },
       });
-    } else {
-      setState({
-        ...state,
-        formData: {
-          ...state.formData,
-          blopImages: [
-            ...state.formData.blopImages,
-            URL.createObjectURL(fileToUpload),
-          ],
-          images: [...state.formData.images, fileToUpload],
-        },
-      });
     }
   };
 
@@ -143,6 +131,59 @@ const ListForm = () => {
       </div>
     );
   }
+
+  const handleFileUpload = async (e) => {
+    const cover = state.formData.cover;
+    const uploadData = new FormData();
+    uploadData.append("imageUrl", cover);
+    const uploadedCover = await service.uploadFile(uploadData);
+    setState({
+      ...state,
+      formData: {
+        ...state.formData,
+        coverCloudImage: uploadedCover.path,
+        coverCloudImageUploaded: true,
+      },
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    handleFileUpload();
+  };
+
+  useEffect(() => {
+    if (state.formData.coverCloudImageUploaded === true) {
+      submitList();
+    }
+  }, [state.formData]);
+
+  const submitList = async () => {
+    const {
+      type,
+      title,
+      subtitle,
+      coverCloudImage,
+      metaTitle,
+      metaDescription,
+      slug,
+    } = state.formData;
+    service
+      .list(
+        type,
+        title,
+        subtitle,
+        coverCloudImage,
+        metaTitle,
+        metaDescription,
+        slug,
+        editorData
+      )
+      .then(() => {
+        Router.push("/dashboard");
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <>
@@ -169,7 +210,7 @@ const ListForm = () => {
                     </p>
                   </div>
                   <div className="form-composer__header-right">
-                    <Button type="submit" variant="none">
+                    <Button type="submit" variant="none" onClick={handleSubmit}>
                       Publicar
                     </Button>
                   </div>
@@ -274,7 +315,7 @@ const ListForm = () => {
                     </div>
                   ) : (
                     <div className="form-composer__seo">
-                      <Form>
+                      <Form onSubmit={handleSubmit}>
                         <Form.Group>
                           <Form.Label>
                             Meta títol{" "}

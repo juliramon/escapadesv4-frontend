@@ -612,6 +612,41 @@ class ContentService {
     this.service
       .put("/removeOrganization", { _id, isRemoved: true })
       .then((res) => res.data);
+
+  list = (
+    type,
+    title,
+    subtitle,
+    coverCloudImage,
+    metaTitle,
+    metaDescription,
+    slug,
+    editorData
+  ) => {
+    console.log({
+      type,
+      title,
+      subtitle,
+      coverCloudImage,
+      metaTitle,
+      metaDescription,
+      slug,
+      editorData,
+    });
+
+    return this.service
+      .post("/postList", {
+        type,
+        title,
+        subtitle,
+        coverCloudImage,
+        metaTitle,
+        metaDescription,
+        slug,
+        editorData,
+      })
+      .then((res) => res.data);
+  };
 }
 
 export default ContentService;
