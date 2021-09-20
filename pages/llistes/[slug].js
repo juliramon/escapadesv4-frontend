@@ -9,8 +9,7 @@ import ShareModal from "../../components/modals/ShareModal";
 import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
 import ContentService from "../../services/contentService";
-import parse from "html-react-parser";
-import readingTime from "reading-time";
+import ReactHtmlParser from "react-html-parser";
 
 const ListView = () => {
   const { user } = useContext(UserContext);
@@ -252,10 +251,9 @@ const ListView = () => {
                     <article className="listing-body">
                       <Col lg={12}>
                         <div className="listing-body-wrapper d-flex justify-content-between align-items-center"></div>
-                        <div
-                          className="listing-description"
-                          dangerouslySetInnerHTML={{ __html: description }}
-                        ></div>
+                        <div className="listing-description">
+                          {ReactHtmlParser(description)}
+                        </div>
                       </Col>
                     </article>
                   </Row>
