@@ -633,7 +633,6 @@ class ContentService {
       slug,
       editorData,
     });
-
     return this.service
       .post("/postList", {
         type,
