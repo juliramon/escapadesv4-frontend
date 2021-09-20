@@ -4,7 +4,7 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import EditorNavbar from "../components/editor/EditorNavbar";
 import StarterKit from "@tiptap/starter-kit";
 import UserContext from "../contexts/UserContext";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import NavigationBar from "../components/global/NavigationBar";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Image from "@tiptap/extension-image";
@@ -177,7 +177,7 @@ const ListForm = () => {
         metaTitle,
         metaDescription,
         slug,
-        editorData
+        editorData.html
       )
       .then(() => {
         Router.push("/dashboard");

@@ -634,7 +634,7 @@ class ContentService {
       editorData,
     });
     return this.service
-      .post("/postList", {
+      .post("/list", {
         type,
         title,
         subtitle,
@@ -646,6 +646,11 @@ class ContentService {
       })
       .then((res) => res.data);
   };
+
+  lists = () => this.service.get("/lists").then((res) => res.data);
+
+  getListDetails = (id) =>
+    this.service.get(`/lists/${id}`).then((res) => res.data);
 }
 
 export default ContentService;
