@@ -647,7 +647,7 @@ class ContentService {
       .then((res) => res.data);
   };
 
-  lists = () => this.service.get("/lists").then((res) => res.data);
+  getLists = () => this.service.get("/lists").then((res) => res.data);
 
   getListDetails = (id) =>
     this.service.get(`/lists/${id}`).then((res) => res.data);
