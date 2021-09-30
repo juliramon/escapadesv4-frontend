@@ -651,6 +651,14 @@ class ContentService {
 
   getListDetails = (id) =>
     this.service.get(`/lists/${id}`).then((res) => res.data);
+
+  getUserLists = (id) =>
+    this.service.get(`/users/${id}/lists`).then((res) => res.data);
+
+  removeList = (id) =>
+    this.service
+      .put(`/lists/${id}`, { isRemoved: true })
+      .then((res) => res.data);
 }
 
 export default ContentService;

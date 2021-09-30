@@ -49,11 +49,13 @@ const Dashboard = () => {
     activities: [],
     places: [],
     stories: [],
+    lists: [],
     isFetching: false,
     hasListings: false,
     hasActivities: false,
     hasPlaces: false,
     hasStories: false,
+    hasLists: false,
     sortedTitle: false,
     activeTab: "all",
   };
@@ -71,33 +73,39 @@ const Dashboard = () => {
       const userActivities = await service.userActivities(user._id);
       const userPlaces = await service.getUserPlaces(user._id);
       const userStories = await service.getUserStories(user._id);
+      const userLists = await service.getUserLists(user._id);
       const userSubscription = await paymentService.checkUserSubscription();
       let getAllListings = [];
-      let hasListings, hasActivities, hasPlaces, hasStories;
+      let hasListings, hasActivities, hasPlaces, hasStories, hasLists;
       userActivities.length > 0
         ? (hasActivities = true)
         : (hasActivities = false);
       userPlaces.length > 0 ? (hasPlaces = true) : (hasPlaces = false);
       userStories.length > 0 ? (hasStories = true) : (hasStories = false);
+      userLists.length > 0 ? (hasLists = true) : (hasLists = false);
       userActivities.length > 0 ||
       userPlaces.length > 0 ||
-      userStories.length > 0
+      userStories.length > 0 ||
+      hasLists.length > 0
         ? (hasListings = true)
         : (hasListings = false);
       userActivities.map((el) => getAllListings.push(el));
       userPlaces.map((el) => getAllListings.push(el));
       userStories.map((el) => getAllListings.push(el));
+      userLists.map((el) => getAllListings.push(el));
       setState({
         ...state,
         allListings: getAllListings,
         activities: userActivities,
         places: userPlaces,
         stories: userStories,
+        lists: userLists,
         isFetching: false,
         hasListings: hasListings,
         hasActivities: hasActivities,
         hasPlaces: hasPlaces,
         hasStories: hasStories,
+        hasLists: hasLists,
         userSubscription: userSubscription,
       });
     };
@@ -110,30 +118,38 @@ const Dashboard = () => {
     const userActivities = await service.userActivities(user._id);
     const userPlaces = await service.getUserPlaces(user._id);
     const userStories = await service.getUserStories(user._id);
-    let hasListings, hasActivities, hasPlaces, hasStories;
+    const userLists = await service.getUserLists(user._id);
+    let getAllListings = [];
+    let hasListings, hasActivities, hasPlaces, hasStories, hasLists;
     userActivities.length > 0
       ? (hasActivities = true)
       : (hasActivities = false);
     userPlaces.length > 0 ? (hasPlaces = true) : (hasPlaces = false);
     userStories.length > 0 ? (hasStories = true) : (hasStories = false);
-    userActivities.length > 0 || userPlaces.length > 0 || userStories.length > 0
+    userLists.length > 0 ? (hasLists = true) : (hasLists = false);
+    userActivities.length > 0 ||
+    userPlaces.length > 0 ||
+    userStories.length > 0 ||
+    hasLists.length > 0
       ? (hasListings = true)
       : (hasListings = false);
-    let getAllListings = [];
     userActivities.map((el) => getAllListings.push(el));
     userPlaces.map((el) => getAllListings.push(el));
     userStories.map((el) => getAllListings.push(el));
+    userLists.map((el) => getAllListings.push(el));
     setState({
       ...state,
       allListings: getAllListings,
       activities: userActivities,
       places: userPlaces,
       stories: userStories,
+      lists: userLists,
       isFetching: false,
       hasListings: hasListings,
       hasActivities: hasActivities,
       hasPlaces: hasPlaces,
       hasStories: hasStories,
+      hasLists: hasLists,
     });
   }, [service, state]);
 
@@ -186,6 +202,17 @@ const Dashboard = () => {
     case "stories":
       contentType = "història";
       linkTo = "/nova-historia";
+      noResultsCTA = (
+        <Link href={linkTo}>
+          <a className="btn btn-m btn-dark text-center">
+            Publicar nova {contentType}
+          </a>
+        </Link>
+      );
+      break;
+    case "lists":
+      contentType = "llista";
+      linkTo = "/nova-llista";
       noResultsCTA = (
         <Link href={linkTo}>
           <a className="btn btn-m btn-dark text-center">
@@ -369,6 +396,27 @@ const Dashboard = () => {
         listings = noresults;
       }
     }
+    if (state.activeTab === "llistes") {
+      if (state.hasLists === true) {
+        arrToSort = state.lists;
+        listings = state.lists.map((el) => (
+          <ContentBox
+            key={el._id}
+            type={el.type}
+            slug={el.slug}
+            id={el._id}
+            image={el.cover}
+            title={el.title}
+            subtitle={el.subtitle}
+            publicationDate={el.createdAt}
+            fetchData={fetchData}
+          />
+        ));
+      } else {
+        filterBox = null;
+        listings = noresults;
+      }
+    }
   } else {
     filterBox = null;
     listings = noresults;
@@ -520,6 +568,29 @@ const Dashboard = () => {
                       <line x1="13" y1="12" x2="15" y2="12" />
                     </svg>
                     Històries
+                  </li>
+                  <li
+                    className="list-item"
+                    style={state.activeTab === "llistes" ? activeTab : null}
+                    onClick={() => setState({ ...state, activeTab: "llistes" })}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-layout-list"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#00206B"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <rect x="4" y="4" width="16" height="6" rx="2"></rect>
+                      <rect x="4" y="14" width="16" height="6" rx="2"></rect>
+                    </svg>
+                    Llistes
                   </li>
                 </ul>
                 <div className="new">
