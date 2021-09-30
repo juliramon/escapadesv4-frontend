@@ -181,143 +181,120 @@ const ListView = () => {
           content="756319ea1956c99d055184c4cac47dbfa3c81808"
         />
       </Head>
-      <div className id="listingPage" className="list">
+      <div id="listingPage" className="list">
         <NavigationBar
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
           }
           user={user}
         />
-        <main>
-          <article>
-            <Container className="mw-1200">
-              <div className="box">
+        <main className="list-wrapper">
+          <Container>
+            <Row>
+              <Col lg={9}>
                 <section>
-                  <Row>
-                    <div className="listing-header-wrapper">
-                      <Col lg={12}>
-                        <div className="listing-header">
-                          <h1 className="listing-title">{title}</h1>
-                          <p className="listing-subtitle">{subtitle}</p>
-                        </div>
-                        <div className="listing-header-meta">
-                          <div className="col left">
-                            <div className="listing-owner">
-                              <Link href={`/usuaris/${state.owner._id}`}>
-                                <a>
-                                  <div className="avatar">
-                                    <img
-                                      src={state.owner.avatar}
-                                      alt={state.owner.fullName}
-                                    />
-                                  </div>
-                                  <p className="listing-owner-name">
-                                    {state.owner.fullName}
-                                  </p>
-                                </a>
-                              </Link>
-                            </div>
-                          </div>
-                          <div className="col right">{shareButton}</div>
-                        </div>
-                      </Col>
+                  <div className="listing-header-wrapper">
+                    <div className="listing-header">
+                      <h1 className="listing-title">{title}</h1>
+                      <p className="listing-subtitle">{subtitle}</p>
                     </div>
-                  </Row>
-                  <Row>
-                    <Col lg={12}>
-                      <div className="listing-cover">
-                        {cover}
-                        <p className="cover-text">
-                          Foto d' <u>Andrea Prat</u> i <u>Juli Ramon</u> per
-                          Escapadesenparella.cat
-                        </p>
+                    <div className="listing-header-meta">
+                      <div className="col left">
+                        <div className="listing-owner">
+                          <Link href={`/usuaris/${state.owner._id}`}>
+                            <a>
+                              <div className="avatar">
+                                <img
+                                  src={state.owner.avatar}
+                                  alt={state.owner.fullName}
+                                />
+                              </div>
+                              <p className="listing-owner-name">
+                                {state.owner.fullName}
+                                <span>@escapadesenparella</span>
+                              </p>
+                            </a>
+                          </Link>
+                        </div>
                       </div>
-                    </Col>
-                  </Row>
+                      <div className="col right">{shareButton}</div>
+                    </div>
+                  </div>
+                  <div className="listing-cover">
+                    {cover}
+                    <p className="cover-text">
+                      Foto d' <u>Andrea Prat</u> i <u>Juli Ramon</u> per
+                      Escapadesenparella.cat
+                    </p>
+                  </div>
                 </section>
                 <section>
-                  <Row>
-                    <Col lg="12">
-                      <div className="separator-body">
-                        <div className="separator-body-wrapper">
-                          <span>•</span>
-                          <span>•</span>
-                          <span>•</span>
-                        </div>
-                      </div>
-                    </Col>
-                  </Row>
-                  <Row>
-                    <article className="listing-body">
-                      <Col lg={12}>
-                        <div className="listing-body-wrapper d-flex justify-content-between align-items-center"></div>
-                        <div className="listing-description">
-                          {ReactHtmlParser(description)}
-                        </div>
-                      </Col>
-                    </article>
-                  </Row>
+                  <div className="separator-body">
+                    <div className="separator-body-wrapper">
+                      <span>•</span>
+                      <span>•</span>
+                      <span>•</span>
+                    </div>
+                  </div>
+                  <article className="listing-body">
+                    <div className="listing-body-wrapper d-flex justify-content-between align-items-center"></div>
+                    <div className="listing-description">
+                      {ReactHtmlParser(description)}
+                    </div>
+                  </article>
                 </section>
                 <section>
-                  <Row>
-                    <Col lg={12}>
-                      <div className="cta-instagram-footer">
-                        <h2>
-                          Descobreix més escapades com aquesta.
-                          <br /> Segueix-nos a Instagram!
-                        </h2>
-                        <div className="link-instagram">
-                          <a
-                            href="https://instagram.com/escapadesenparella"
-                            title="Segueix Escapadesenparella.cat a Instagram"
-                            rel="nofollow"
-                            target="_blank"
-                          >
-                            @escapadesenparella.cat{" "}
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-arrow-narrow-right"
-                              width="30"
-                              height="30"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="#F03E51"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path
-                                stroke="none"
-                                d="M0 0h24v24H0z"
-                                fill="none"
-                              />
-                              <line x1="5" y1="12" x2="19" y2="12" />
-                              <line x1="15" y1="16" x2="19" y2="12" />
-                              <line x1="15" y1="8" x2="19" y2="12" />
-                            </svg>
-                          </a>
-                        </div>
-                        <div className="banner-wrapper">
-                          <div className="left">
-                            <img
-                              src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-comes-rubio_luuish.jpg"
-                              alt=""
-                            />
-                          </div>
-                          <div className="right">
-                            <img
-                              src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-tossa-mar_m2lvdz.jpg"
-                              alt=""
-                            />
-                          </div>
-                        </div>
+                  <div className="cta-instagram-footer">
+                    <h2>
+                      Descobreix més escapades com aquesta.
+                      <br /> Segueix-nos a Instagram!
+                    </h2>
+                    <div className="link-instagram">
+                      <a
+                        href="https://instagram.com/escapadesenparella"
+                        title="Segueix Escapadesenparella.cat a Instagram"
+                        rel="nofollow"
+                        target="_blank"
+                      >
+                        @escapadesenparella.cat{" "}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="icon icon-tabler icon-tabler-arrow-narrow-right"
+                          width="30"
+                          height="30"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="#F03E51"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                          <line x1="15" y1="16" x2="19" y2="12" />
+                          <line x1="15" y1="8" x2="19" y2="12" />
+                        </svg>
+                      </a>
+                    </div>
+                    <div className="banner-wrapper">
+                      <div className="left">
+                        <img
+                          src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-comes-rubio_luuish.jpg"
+                          alt=""
+                        />
                       </div>
-                    </Col>
-                  </Row>
+                      <div className="right">
+                        <img
+                          src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-tossa-mar_m2lvdz.jpg"
+                          alt=""
+                        />
+                      </div>
+                    </div>
+                  </div>
                 </section>
-              </div>
-            </Container>
-          </article>
+              </Col>
+            </Row>
+          </Container>
         </main>
         <SignUpModal
           visibility={modalVisibility}

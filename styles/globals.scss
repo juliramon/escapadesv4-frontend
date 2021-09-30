@@ -2433,7 +2433,6 @@ nav {
       }
     }
   }
-
   aside.sidebar-right {
     width: 40%;
     max-width: 40%;
@@ -2445,7 +2444,6 @@ nav {
         letter-spacing: 0.5px;
       }
     }
-
     .cloud-tags {
       margin: 10px -5px -5px -5px;
       display: flex;
@@ -3028,6 +3026,186 @@ nav {
 }
 
 /*---STORY PAGE DETAILS---*/
+/*---LIST PAGE DETAILS---*/
+
+#listingPage.list {
+  .list-wrapper {
+    padding: 60px 0;
+  }
+  .listing-header-wrapper {
+    padding: 0 0 30px 0;
+    .listing-header {
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 0;
+      .listing-title {
+        font-size: 2em;
+        margin: 0 40px 0 0;
+      }
+      .listing-subtitle {
+        margin-top: 10px;
+        font-size: 1.2rem;
+      }
+    }
+    .listing-header-meta {
+      display: flex;
+      align-items: center;
+      margin-top: 12px;
+      .col {
+        padding: 0;
+        display: flex;
+        align-items: center;
+      }
+      .col.left {
+        .listing-owner {
+          .avatar {
+            max-height: 50px;
+            height: 50px;
+            width: 50px;
+            max-width: 50px;
+          }
+          a {
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            .listing-owner-name {
+              margin: 0;
+              display: flex;
+              flex-direction: column;
+              span {
+                opacity: 0.7;
+                font-size: 0.9em;
+              }
+            }
+          }
+        }
+      }
+      .col.right {
+        justify-content: flex-end;
+        .listing-bookmark-wrapper {
+          display: -webkit-flex;
+          display: -moz-box;
+          display: flex;
+          -webkit-align-items: center;
+          -moz-box-align: center;
+          align-items: center;
+          .listing-bookmark {
+            border: none;
+            background-color: #f2f7f9;
+            border-radius: 100px !important;
+            width: 40px;
+            height: 40px;
+            margin-right: 12px;
+            display: -webkit-flex;
+            display: -moz-box;
+            display: flex;
+            -webkit-align-items: center;
+            -moz-box-align: center;
+            align-items: center;
+            -webkit-justify-content: center;
+            -moz-box-pack: center;
+            justify-content: center;
+            -webkit-transition: 0.3s;
+            -moz-transition: 0.3s;
+            transition: 0.3s;
+          }
+          span {
+            display: block;
+            border-bottom: 2px solid #00206b;
+          }
+        }
+      }
+    }
+  }
+  .listing-cover {
+    .cover {
+      margin: 0;
+    }
+    .cover-text {
+      text-align: center;
+      font-size: 0.8rem;
+      margin: 12px 0;
+      color: #00206b;
+      opacity: 0.8;
+    }
+  }
+
+  .separator-body {
+    text-align: center;
+    margin: 40px 0;
+    .separator-body-wrapper {
+      max-width: 80px;
+      display: -webkit-flex;
+      display: -moz-box;
+      display: flex;
+      -webkit-align-items: center;
+      -moz-box-align: center;
+      align-items: center;
+      -webkit-justify-content: space-between;
+      -moz-box-pack: justify;
+      justify-content: space-between;
+      margin: 0 auto;
+      span {
+        display: block;
+        font-size: 0.7rem;
+      }
+    }
+  }
+
+  .cta-instagram-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px 0 60px 0;
+    border-top: 1px solid #e7ebf5;
+    padding-top: 40px;
+    h2 {
+      text-align: center;
+      font-size: 1.9em;
+      line-height: 1.4em;
+    }
+    .link-instagram {
+      margin: 15px 0 5px 0;
+    }
+    .link-instagram a {
+      font-size: 1.3em;
+      display: flex;
+      align-items: center;
+      color: #f03e51;
+      letter-spacing: 0.8px;
+      svg {
+        margin-left: 12px;
+      }
+    }
+    .banner-wrapper {
+      display: flex;
+      align-items: center;
+      margin-top: 40px;
+      .left,
+      .right {
+        position: relative;
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.2);
+      }
+      .left {
+        transform: rotate(-7deg);
+        z-index: 1;
+        left: 25px;
+      }
+      .right {
+        transform: rotate(3deg);
+        z-index: 0;
+      }
+      img {
+        width: 290px;
+        border: 5px solid #ffffff;
+      }
+    }
+  }
+}
+
+/*---END LIST PAGE DETAILS---*/
 /*---USER PROFILE STYLES---*/
 
 .spinner {
