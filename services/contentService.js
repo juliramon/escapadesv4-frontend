@@ -647,6 +647,28 @@ class ContentService {
       .then((res) => res.data);
   };
 
+  editList = (
+    id,
+    type,
+    title,
+    subtitle,
+    coverCloudImage,
+    metaTitle,
+    metaDescription,
+    slug,
+    description
+  ) =>
+    this.service.put(`/lists/${id}`, {
+      type,
+      title,
+      subtitle,
+      coverCloudImage,
+      metaTitle,
+      metaDescription,
+      slug,
+      description,
+    });
+
   getLists = () => this.service.get("/lists").then((res) => res.data);
 
   getListDetails = (id) =>

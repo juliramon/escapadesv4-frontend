@@ -47,7 +47,7 @@ const ContentBox = ({
     path = "llistes";
   }
 
-  const urlToShare = `https://escapadesenparella.cat/${path}/${id}`;
+  const urlToShare = `https://escapadesenparella.cat/${path}/${slug}`;
 
   const transformDate = (unformattedDate) => {
     let modpublicationDate = new Date(unformattedDate);
