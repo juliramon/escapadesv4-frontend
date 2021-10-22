@@ -32,6 +32,8 @@ const ContentBox = ({
       paymentService.editUserSubscription();
     } else if (type === "story") {
       service.removeStory(id).then(() => fetchData());
+    } else if (type === "list") {
+      service.removeList(id).then(() => fetchData());
     }
   };
   let path;
@@ -41,9 +43,11 @@ const ContentBox = ({
     path = "allotjaments";
   } else if (type === "story") {
     path = "histories";
+  } else if (type === "list") {
+    path = "llistes";
   }
 
-  const urlToShare = `https://escapadesenparella.cat/${path}/${id}`;
+  const urlToShare = `https://escapadesenparella.cat/${path}/${slug}`;
 
   const transformDate = (unformattedDate) => {
     let modpublicationDate = new Date(unformattedDate);

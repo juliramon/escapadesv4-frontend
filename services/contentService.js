@@ -612,6 +612,75 @@ class ContentService {
     this.service
       .put("/removeOrganization", { _id, isRemoved: true })
       .then((res) => res.data);
+
+  list = (
+    type,
+    title,
+    subtitle,
+    coverCloudImage,
+    metaTitle,
+    metaDescription,
+    slug,
+    editorData
+  ) => {
+    console.log({
+      type,
+      title,
+      subtitle,
+      coverCloudImage,
+      metaTitle,
+      metaDescription,
+      slug,
+      editorData,
+    });
+    return this.service
+      .post("/list", {
+        type,
+        title,
+        subtitle,
+        coverCloudImage,
+        metaTitle,
+        metaDescription,
+        slug,
+        editorData,
+      })
+      .then((res) => res.data);
+  };
+
+  editList = (
+    id,
+    type,
+    title,
+    subtitle,
+    coverCloudImage,
+    metaTitle,
+    metaDescription,
+    slug,
+    description
+  ) =>
+    this.service.put(`/lists/${id}`, {
+      type,
+      title,
+      subtitle,
+      coverCloudImage,
+      metaTitle,
+      metaDescription,
+      slug,
+      description,
+    });
+
+  getLists = () => this.service.get("/lists").then((res) => res.data);
+
+  getListDetails = (id) =>
+    this.service.get(`/lists/${id}`).then((res) => res.data);
+
+  getUserLists = (id) =>
+    this.service.get(`/users/${id}/lists`).then((res) => res.data);
+
+  removeList = (id) =>
+    this.service
+      .put(`/lists/${id}`, { isRemoved: true })
+      .then((res) => res.data);
 }
 
 export default ContentService;
