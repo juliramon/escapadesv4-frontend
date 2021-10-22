@@ -67,6 +67,7 @@ const ListsList = ({ user }) => {
   let listsList, featuredList;
   if (state.hasLists === true) {
     featuredList = state.lists
+      .reverse()
       .slice(0, 1)
       .map((el) => (
         <FeaturedListBox
@@ -81,6 +82,7 @@ const ListsList = ({ user }) => {
         />
       ));
     listsList = state.lists
+      .reverse()
       .slice(1)
       .map((el) => (
         <RegularListBox
