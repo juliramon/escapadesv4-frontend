@@ -661,12 +661,12 @@ const NavigationBar = ({ logo_url, path }) => {
                   {state.isResponsiveMenuOpen ? (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-x"
+                      className="icon icon-tabler icon-tabler-x open"
                       width="44"
                       height="44"
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
-                      stroke="#00206B"
+                      stroke="#ffffff"
                       fill="none"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -695,10 +695,10 @@ const NavigationBar = ({ logo_url, path }) => {
                     </svg>
                   )}
                 </button>
-                {state.isResponsiveMenuOpen ? responsiveMenu : null}
               </div>
             </div>
           </Container>
+          {state.isResponsiveMenuOpen ? responsiveMenu : null}
         </Navbar>
         <ContentBar />
       </header>

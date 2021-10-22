@@ -316,6 +316,7 @@ nav {
 
   .nav-col.right:not(.simple-nav) {
     flex: 1;
+    position: relative;
   }
 
   .nav-col.right .nav-col-right-wrapper {
@@ -3931,13 +3932,16 @@ nav {
     border-radius: 100px;
   }
   .image-area {
-    width: 120px;
-    height: 100%;
+    width: 110px;
+    height: 100px;
     overflow: hidden;
     border-radius: 10px;
     margin-right: 20px;
     img {
       width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
   }
   .text-area {
@@ -4589,9 +4593,6 @@ nav {
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  header {
-    overflow: hidden;
-  }
   .content-bar .content-bar---wrapper {
     height: 50px;
     overflow: hidden;
@@ -4619,6 +4620,12 @@ nav {
     .hamb-btn {
       padding: 0;
       background: none;
+      border: none;
+      .open {
+        stroke: #ffffff;
+        position: relative;
+        z-index: 1000;
+      }
       svg {
         height: 30px;
         width: 30px;
@@ -4628,23 +4635,33 @@ nav {
   }
 
   .nav-responsive-wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+    width: 75%;
+    height: 100vh;
     position: absolute;
-    left: 0;
-    top: 64px;
-    background: white;
-    padding: 20px;
+    right: 0;
+    top: 0;
+    background: #002b8f;
+    padding: 70px 20px 20px;
     border-bottom: 1px solid $electric-blue;
+    .search-box {
+      background-color: #ebf1ff;
+      border-radius: 8px;
+      padding: 0 0 0 12px;
+    }
     .navbar-nav:nth-child(2) {
       display: flex;
       flex-direction: column !important;
-      margin-top: 10px;
+      margin-top: 25px;
       a {
+        display: flex;
         width: 100%;
         padding: 10px 0;
         border-bottom: 1px solid $electric-blue;
+        color: white;
+        svg {
+          stroke: white;
+          margin-right: 12px;
+        }
       }
     }
     .navbar-nav:nth-child(3) {
@@ -4654,16 +4671,15 @@ nav {
         flex: 1;
         text-align: center;
         margin: 5px;
-        height: 36px;
+        border: 1px solid $white !important;
+        padding: 0.5rem 0.75rem;
       }
       a:first-child {
-        border: 1px solid $electric-blue;
+        border: 1px solid $white;
         font-size: 0.95em;
         font-size: 0.95em;
-        padding-left: 0.85rem !important;
-        padding-right: 0.85rem !important;
-        padding: 0.375rem 0.75rem;
         border-radius: 8px !important;
+        background-color: $white;
       }
     }
     .search-box {
@@ -4896,6 +4912,10 @@ nav {
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
+  .followBox .image-area {
+    width: 140px;
+    height: 120px;
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
