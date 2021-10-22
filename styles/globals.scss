@@ -3918,18 +3918,12 @@ nav {
   border-radius: 10px;
   box-shadow: 3px 3px 26px rgb(23 50 105 / 30%);
   button {
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: transparent;
     position: absolute;
     top: 6px;
-    right: 30px;
+    right: 6px;
     transition: 0.3s;
-    font-size: 13px;
-    text-decoration: underline;
+    border: none;
   }
   button:hover {
     background-color: $electric-blue;
