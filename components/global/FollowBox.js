@@ -42,10 +42,17 @@ const FollowBox = () => {
         </button>
         <div className="col-left">
           <div className="image-area">
-            <img
-              src="./cover-instagram-escapadesenparella.jpg"
-              alt="Segueix @escapadesenparella a Instagram"
-            />
+            <picture>
+              <source srcset="./cover-instagram-escapadesenparella.jpg" />
+              <img
+                src="./cover-instagram-escapadesenparella.jpg"
+                data-src="./cover-instagram-escapadesenparella.jpg"
+                alt="Segueix @escapadesenparella a Instagram"
+                width="110"
+                height="110"
+                loading="lazy"
+              />
+            </picture>
           </div>
         </div>
         <div className="col-right">

@@ -23,10 +23,17 @@ const Hero = ({ title, subtitle }) => {
                         target="_blank"
                         rel="nofollow noopener"
                       >
-                        <img
-                          src="https://files.123inventatuweb.com/acens227517/image/lassdive-groc100.gif"
-                          alt="LassDive"
-                        />
+                        <picture>
+                          <source srcset="https://files.123inventatuweb.com/acens227517/image/lassdive-groc100.gif" />
+                          <img
+                            src="https://files.123inventatuweb.com/acens227517/image/lassdive-groc100.gif"
+                            data-src="https://files.123inventatuweb.com/acens227517/image/lassdive-groc100.gif"
+                            alt="LassDive"
+                            width="400"
+                            height="300"
+                            loading="lazy"
+                          />
+                        </picture>
                         <p>
                           LassDive | Centre i escola d'esports aquàtics i
                           activitats d'ventura a la Costa Brava i Barcelona
@@ -40,28 +47,43 @@ const Hero = ({ title, subtitle }) => {
                 <div className="left">
                   <div className="images-wrapper">
                     <div className="header-image">
-                      <img
-                        src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-comes-rubio_luuish.jpg"
-                        alt=""
-                      />
+                      <picture>
+                        <source srcset="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-comes-rubio_luuish.jpg" />
+                        <img
+                          src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-comes-rubio_luuish.jpg"
+                          data-src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-comes-rubio_luuish.jpg"
+                          alt="Escapadesenparella.cat"
+                          loading="lazy"
+                        />
+                      </picture>
                     </div>
                   </div>
                   <div className="images-wrapper">
                     <div className="header-image">
-                      <img
-                        src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-tossa-mar_m2lvdz.jpg"
-                        alt=""
-                      />
+                      <picture>
+                        <source srcset="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-tossa-mar_m2lvdz.jpg" />
+                        <img
+                          src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-tossa-mar_m2lvdz.jpg"
+                          data-src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-tossa-mar_m2lvdz.jpg"
+                          alt="Escapadesenparella.cat"
+                          loading="lazy"
+                        />
+                      </picture>
                     </div>
                   </div>
                 </div>
                 <div className="right">
                   <div className="images-wrapper">
                     <div className="header-image">
-                      <img
-                        src="https://res.cloudinary.com/juligoodie/image/upload/v1612464648/getaways-guru/static-files/IMGP8453_icqjwe.jpg"
-                        alt=""
-                      />
+                      <picture>
+                        <source srcset="https://res.cloudinary.com/juligoodie/image/upload/v1612464648/getaways-guru/static-files/IMGP8453_icqjwe.jpg" />
+                        <img
+                          src="https://res.cloudinary.com/juligoodie/image/upload/v1612464648/getaways-guru/static-files/IMGP8453_icqjwe.jpg"
+                          data-src="https://res.cloudinary.com/juligoodie/image/upload/v1612464648/getaways-guru/static-files/IMGP8453_icqjwe.jpg"
+                          alt="Escapadesenparella.cat"
+                          loading="lazy"
+                        />
+                      </picture>
                     </div>
                   </div>
                 </div>

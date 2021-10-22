@@ -289,13 +289,13 @@ header {
 }
 
 nav {
-  svg {
-    height: 25px;
-    width: 25px;
-    margin-right: 6px;
-  }
   .navbar-nav {
     align-items: center;
+    svg {
+      height: 25px;
+      width: 25px;
+      margin-right: 6px;
+    }
   }
   .nav-link,
   a:not(.navbar-brand) {
@@ -306,6 +306,7 @@ nav {
   }
   .navbar-brand img {
     width: 135px;
+    height: auto;
   }
 
   .nav-col.left .navbar-nav,
@@ -707,8 +708,12 @@ nav {
           a {
             display: flex;
             align-items: center;
+            width: 100%;
             img {
-              max-width: 150px;
+              object-fit: contain;
+              object-position: center;
+              width: 150px;
+              height: auto;
               margin-right: 20px;
             }
             p {
@@ -781,7 +786,7 @@ nav {
     left: -50px;
     top: 75px;
     z-index: -100;
-    img {
+    svg {
       width: 100px;
       height: 100px;
       opacity: 0.3;
@@ -810,8 +815,10 @@ nav {
         align-items: center;
         justify-content: center;
         img {
+          object-fit: cover;
+          object-position: center;
           width: 100%;
-          position: relative;
+          height: 100%;
         }
       }
       h3 {
@@ -1961,7 +1968,7 @@ nav {
         }
       }
       position: absolute;
-      bottom: 20px;
+      bottom: 40px;
       margin: 0 25px;
       h3 {
         color: $white;
@@ -1970,8 +1977,8 @@ nav {
     }
   }
   .listing-cover {
-    min-height: 420px;
-    height: 420px;
+    min-height: 280px;
+    height: 280px;
     width: 100%;
     margin-right: 0;
     display: flex;
@@ -2279,6 +2286,21 @@ nav {
     }
     .listing-wrapper {
       flex-direction: column;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  #listing.featured {
+    .listing-cover {
+      min-height: 450px;
+      height: 450px;
+      width: 100%;
+      margin-right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
   }
 }
@@ -4692,11 +4714,12 @@ nav {
   }
 
   #homepage #hero {
-    padding: 30px 0 50px 0;
+    padding: 20px 0 0 0;
     overflow: hidden;
   }
   #homepage #hero .wrapper {
     flex-direction: column;
+    padding: 25px 20px;
   }
   #homepage #hero .header-col.left {
     width: 100%;
@@ -4711,9 +4734,7 @@ nav {
     margin-top: 15px;
   }
   #homepage #hero .header-col.right {
-    position: relative;
-    top: 60px;
-    right: 60px;
+    display: none;
   }
 
   #homepage #hero .header-col.left .search-form .tab-bar ul {
@@ -4751,6 +4772,10 @@ nav {
     .form-group
     .button-submit {
     width: 100%;
+  }
+
+  #homepage .homepage-section {
+    padding: 50px 0 0 0;
   }
 
   #homepage .homepage-section .section-listings .section-listings-wrapper {
