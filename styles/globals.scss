@@ -289,13 +289,13 @@ header {
 }
 
 nav {
-  svg {
-    height: 25px;
-    width: 25px;
-    margin-right: 6px;
-  }
   .navbar-nav {
     align-items: center;
+    svg {
+      height: 25px;
+      width: 25px;
+      margin-right: 6px;
+    }
   }
   .nav-link,
   a:not(.navbar-brand) {
@@ -306,6 +306,7 @@ nav {
   }
   .navbar-brand img {
     width: 135px;
+    height: auto;
   }
 
   .nav-col.left .navbar-nav,
@@ -316,6 +317,7 @@ nav {
 
   .nav-col.right:not(.simple-nav) {
     flex: 1;
+    position: relative;
   }
 
   .nav-col.right .nav-col-right-wrapper {
@@ -706,8 +708,12 @@ nav {
           a {
             display: flex;
             align-items: center;
+            width: 100%;
             img {
-              max-width: 150px;
+              object-fit: contain;
+              object-position: center;
+              width: 150px;
+              height: auto;
               margin-right: 20px;
             }
             p {
@@ -727,9 +733,12 @@ nav {
         width: 250px;
         overflow: hidden;
         border-radius: 8px;
+        height: auto;
         img {
           width: 100%;
           height: auto;
+          object-fit: cover;
+          object-position: center;
         }
       }
       .left {
@@ -743,12 +752,11 @@ nav {
       .right {
         .header-image {
           height: 451px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
           img {
             height: 100%;
             width: auto;
+            object-fit: cover;
+            object-position: center;
           }
         }
       }
@@ -780,7 +788,7 @@ nav {
     left: -50px;
     top: 75px;
     z-index: -100;
-    img {
+    svg {
       width: 100px;
       height: 100px;
       opacity: 0.3;
@@ -809,8 +817,10 @@ nav {
         align-items: center;
         justify-content: center;
         img {
+          object-fit: cover;
+          object-position: center;
           width: 100%;
-          position: relative;
+          height: 100%;
         }
       }
       h3 {
@@ -1960,7 +1970,7 @@ nav {
         }
       }
       position: absolute;
-      bottom: 20px;
+      bottom: 40px;
       margin: 0 25px;
       h3 {
         color: $white;
@@ -1969,8 +1979,8 @@ nav {
     }
   }
   .listing-cover {
-    min-height: 420px;
-    height: 420px;
+    min-height: 280px;
+    height: 280px;
     width: 100%;
     margin-right: 0;
     display: flex;
@@ -2278,6 +2288,21 @@ nav {
     }
     .listing-wrapper {
       flex-direction: column;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  #listing.featured {
+    .listing-cover {
+      min-height: 450px;
+      height: 450px;
+      width: 100%;
+      margin-right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
     }
   }
 }
@@ -3931,13 +3956,16 @@ nav {
     border-radius: 100px;
   }
   .image-area {
-    width: 120px;
-    height: 100%;
+    width: 110px;
+    height: 100px;
     overflow: hidden;
     border-radius: 10px;
     margin-right: 20px;
     img {
       width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
     }
   }
   .text-area {
@@ -4589,9 +4617,6 @@ nav {
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-  header {
-    overflow: hidden;
-  }
   .content-bar .content-bar---wrapper {
     height: 50px;
     overflow: hidden;
@@ -4619,6 +4644,12 @@ nav {
     .hamb-btn {
       padding: 0;
       background: none;
+      border: none;
+      .open {
+        stroke: #ffffff;
+        position: relative;
+        z-index: 1000;
+      }
       svg {
         height: 30px;
         width: 30px;
@@ -4628,23 +4659,33 @@ nav {
   }
 
   .nav-responsive-wrapper {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+    width: 75%;
+    height: 100vh;
     position: absolute;
-    left: 0;
-    top: 64px;
-    background: white;
-    padding: 20px;
+    right: 0;
+    top: 0;
+    background: #002b8f;
+    padding: 70px 20px 20px;
     border-bottom: 1px solid $electric-blue;
+    .search-box {
+      background-color: #ebf1ff;
+      border-radius: 8px;
+      padding: 0 0 0 12px;
+    }
     .navbar-nav:nth-child(2) {
       display: flex;
       flex-direction: column !important;
-      margin-top: 10px;
+      margin-top: 25px;
       a {
+        display: flex;
         width: 100%;
         padding: 10px 0;
         border-bottom: 1px solid $electric-blue;
+        color: white;
+        svg {
+          stroke: white;
+          margin-right: 12px;
+        }
       }
     }
     .navbar-nav:nth-child(3) {
@@ -4654,16 +4695,15 @@ nav {
         flex: 1;
         text-align: center;
         margin: 5px;
-        height: 36px;
+        border: 1px solid $white !important;
+        padding: 0.5rem 0.75rem;
       }
       a:first-child {
-        border: 1px solid $electric-blue;
+        border: 1px solid $white;
         font-size: 0.95em;
         font-size: 0.95em;
-        padding-left: 0.85rem !important;
-        padding-right: 0.85rem !important;
-        padding: 0.375rem 0.75rem;
         border-radius: 8px !important;
+        background-color: $white;
       }
     }
     .search-box {
@@ -4676,11 +4716,13 @@ nav {
   }
 
   #homepage #hero {
-    padding: 30px 0 50px 0;
+    padding: 20px 0 0 0;
     overflow: hidden;
   }
   #homepage #hero .wrapper {
     flex-direction: column;
+    padding: 0;
+    background-color: #ffffff;
   }
   #homepage #hero .header-col.left {
     width: 100%;
@@ -4695,9 +4737,7 @@ nav {
     margin-top: 15px;
   }
   #homepage #hero .header-col.right {
-    position: relative;
-    top: 60px;
-    right: 60px;
+    display: none;
   }
 
   #homepage #hero .header-col.left .search-form .tab-bar ul {
@@ -4735,6 +4775,10 @@ nav {
     .form-group
     .button-submit {
     width: 100%;
+  }
+
+  #homepage .homepage-section {
+    padding: 50px 0 0 0;
   }
 
   #homepage .homepage-section .section-listings .section-listings-wrapper {
@@ -4896,6 +4940,10 @@ nav {
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
+  .followBox .image-area {
+    width: 140px;
+    height: 120px;
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */

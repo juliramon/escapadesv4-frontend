@@ -117,10 +117,70 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
     mostRatedSection = (
       <section className="homepage-section">
         <div className="top-rated-badge">
-          <img
-            src="https://res.cloudinary.com/juligoodie/image/upload/v1618860678/getaways-guru/static-files/top-rated-posts_vszyhr.svg"
-            alt="Les escapades més ben valorades"
-          />
+          <svg width="128px" height="128px" viewBox="0 0 206 206" version="1.1">
+            <title>Group 2</title>
+            <g
+              id="Page-1"
+              stroke="none"
+              strokeWidth="1"
+              fill="none"
+              fillRule="evenodd"
+            >
+              <g id="Group-2" transform="translate(3.678325, 3.000000)">
+                <path
+                  d="M0,111.709813 C5.79798792,161.420663 48.0544879,200 99.3216749,200 C150.426343,200 192.577363,161.66487 198.587112,112.182231 M198.59881,87.9144754 C192.63227,38.3850857 150.459631,0 99.3216749,0 C48.1434059,0 5.94459472,38.4456289 0.0304970376,88.0316311"
+                  id="Shape"
+                  stroke="#2E6AE4"
+                  strokeWidth="5"
+                  fill-opacity="0"
+                  fill="#D8D8D8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M35.4452,112.096521 C41.1137637,142.214616 67.5568135,165 99.3216749,165 C131.12058,165 157.58626,142.165749 163.216304,111.99966 M163.281647,88.355957 C157.793976,58.0138882 131.245416,35 99.3216749,35 C67.4626248,35 40.9569935,57.9207104 35.3953234,88.1715887"
+                  id="Shape"
+                  stroke="#2E6AE4"
+                  strokeWidth="5"
+                  fill-opacity="0"
+                  fill="#D8D8D8"
+                  stroke-linecap="round"
+                  stroke-linejoin="bevel"
+                ></path>
+                <g id="Group" transform="translate(50.321675, 51.000000)">
+                  <polygon id="Path" points="0 0 98 0 98 98 0 98"></polygon>
+                  <polygon
+                    id="Path"
+                    stroke="#2E6AE4"
+                    strokeWidth="5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    points="48.0287402 72.8443637 22.6880633 86 27.5287402 58.1359975 7 38.4045701 35.3296615 34.3504449 48 9 60.6703385 34.3504449 89 38.4045701 68.4712598 58.1359975 73.3119367 86"
+                  ></polygon>
+                </g>
+                <line
+                  x1="35.4452"
+                  y1="100"
+                  x2="-1.0658141e-14"
+                  y2="100"
+                  id="Path-2"
+                  stroke="#2E6AE4"
+                  strokeWidth="5"
+                  stroke-linecap="round"
+                ></line>
+                <line
+                  x1="198.4452"
+                  y1="100"
+                  x2="163"
+                  y2="100"
+                  id="Path-2-Copy"
+                  stroke="#2E6AE4"
+                  strokeWidth="5"
+                  stroke-linecap="round"
+                ></line>
+              </g>
+            </g>
+          </svg>
         </div>
         <div className="homepage-section-title">
           <h2 className="uppercase">Els allotjaments més ben valorats</h2>
@@ -394,10 +454,17 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
           >
             <div className="left">
               <div className="image">
-                <img
-                  src="../../hotels-amb-encant-escapades-en-parella.png"
-                  alt=""
-                />
+                <picture>
+                  <source srcset="../../hotels-amb-encant-escapades-en-parella.png" />
+                  <img
+                    src="../../hotels-amb-encant-escapades-en-parella.png"
+                    data-src="../../hotels-amb-encant-escapades-en-parella.png"
+                    alt="Hotels amb encant"
+                    width="400"
+                    height="300"
+                    loading="lazy"
+                  />
+                </picture>
               </div>
             </div>
             <div className="right">
@@ -433,7 +500,17 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
           >
             <div className="left">
               <div className="image">
-                <img src="../../apartamens-escapades-en-parella.png" alt="" />
+                <picture>
+                  <source srcset="../../apartamens-escapades-en-parella.png" />
+                  <img
+                    src="../../apartamens-escapades-en-parella.png"
+                    data-src="../../apartamens-escapades-en-parella.png"
+                    alt="Apartaments de somni"
+                    width="400"
+                    height="300"
+                    loading="lazy"
+                  />
+                </picture>
               </div>
             </div>
             <div className="right">
@@ -471,7 +548,17 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
           >
             <div className="left">
               <div className="image">
-                <img src="../../cases-arbre-escapades-en-parella.png" alt="" />
+                <picture>
+                  <source srcset="../../cases-arbre-escapades-en-parella.png" />
+                  <img
+                    src="../../cases-arbre-escapades-en-parella.png"
+                    data-src="../../cases-arbre-escapades-en-parella.png"
+                    alt="Cases-arbre"
+                    width="400"
+                    height="300"
+                    loading="lazy"
+                  />
+                </picture>
               </div>
             </div>
             <div className="right">
@@ -507,7 +594,17 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
           >
             <div className="left">
               <div className="image">
-                <img src="../../cases-rurals-escapades-en-parella.png" alt="" />
+                <picture>
+                  <source srcset="../../cases-rurals-escapades-en-parella.png" />
+                  <img
+                    src="../../cases-rurals-escapades-en-parella.png"
+                    data-src="../../cases-rurals-escapades-en-parella.png"
+                    alt="Cases rurals"
+                    width="400"
+                    height="300"
+                    loading="lazy"
+                  />
+                </picture>
               </div>
             </div>
             <div className="right">
@@ -543,7 +640,17 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
           >
             <div className="left">
               <div className="image">
-                <img src="../../carabanes-escapades-en-parella.png" alt="" />
+                <picture>
+                  <source srcset="../../carabanes-escapades-en-parella.png" />
+                  <img
+                    src="../../carabanes-escapades-en-parella.png"
+                    data-src="../../carabanes-escapades-en-parella.png"
+                    alt="Carabanes"
+                    width="400"
+                    height="300"
+                    loading="lazy"
+                  />
+                </picture>
               </div>
             </div>
             <div className="right">
@@ -579,7 +686,17 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
           >
             <div className="left">
               <div className="image">
-                <img src="../../refugis-escapades-en-parella.png" alt="" />
+                <picture>
+                  <source srcset="../../refugis-escapades-en-parella.png" />
+                  <img
+                    src="../../refugis-escapades-en-parella.png"
+                    data-src="../../refugis-escapades-en-parella.png"
+                    alt="Refugis"
+                    width="400"
+                    height="300"
+                    loading="lazy"
+                  />
+                </picture>
               </div>
             </div>
             <div className="right">

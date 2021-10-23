@@ -15,11 +15,16 @@
 
 .listingCover {
   border-radius: 8px;
-  height: 130px;
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+  height: 180px;
   position: relative;
+}
+
+.listingCoverImg {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
 }
 
 .listingRatingWrapper {
