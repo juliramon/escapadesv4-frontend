@@ -1960,12 +1960,13 @@ nav {
           border-radius: 100px;
           overflow: hidden;
           border: 2px solid white;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          margin-right: 0;
+          display: block;
           img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
           }
         }
       }
