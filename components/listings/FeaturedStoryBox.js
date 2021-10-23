@@ -29,7 +29,17 @@ const FeaturedStoryBox = ({ slug, cover, title, avatar, owner }) => {
               <h3 className="listing-title">{title}</h3>
               <div className="author-details">
                 <div className="avatar">
-                  <img src={avatar} alt={owner} />
+                  <picture>
+                    <source srcset={avatar} />
+                    <img
+                      src={avatar}
+                      data-src={avatar}
+                      alt={owner}
+                      width="60"
+                      height="60"
+                      loading="lazy"
+                    />
+                  </picture>
                 </div>
               </div>
             </div>
