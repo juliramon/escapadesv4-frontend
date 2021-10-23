@@ -733,9 +733,12 @@ nav {
         width: 250px;
         overflow: hidden;
         border-radius: 8px;
+        height: auto;
         img {
           width: 100%;
           height: auto;
+          object-fit: cover;
+          object-position: center;
         }
       }
       .left {
@@ -749,12 +752,11 @@ nav {
       .right {
         .header-image {
           height: 451px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
           img {
             height: 100%;
             width: auto;
+            object-fit: cover;
+            object-position: center;
           }
         }
       }
@@ -4719,7 +4721,8 @@ nav {
   }
   #homepage #hero .wrapper {
     flex-direction: column;
-    padding: 25px 20px;
+    padding: 0;
+    background-color: #ffffff;
   }
   #homepage #hero .header-col.left {
     width: 100%;

@@ -170,16 +170,21 @@ const PublicSquareBox = ({
   if (rating && Number.isInteger(rating)) {
     modRating = `${rating.toString()}.0`;
   }
+
+  const coverPath = cover.substring(0, 51);
+  const imageId = cover.substring(63);
+  const coverImg = `${coverPath}w_246,h_180,c_fill/${imageId}`;
+
   return (
     <div id="listingSquareBox" className={styles.listingSquareBox}>
       <Link href={`/${linkPath}/${slug}`}>
         <a className={styles.listingBoxWrapper}>
           <div className={styles.listingCover}>
             <picture>
-              <source srcset={cover} />
+              <source srcset={coverImg} />
               <img
-                src={cover}
-                data-src={cover}
+                src={coverImg}
+                data-src={coverImg}
                 alt={title}
                 loading="lazy"
                 width="400"
