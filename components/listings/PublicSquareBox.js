@@ -181,7 +181,7 @@ const PublicSquareBox = ({
         <a className={styles.listingBoxWrapper}>
           <div className={styles.listingCover}>
             <picture>
-              <source srcset={coverImg} />
+              <source srcSet={coverImg} />
               <img
                 src={coverImg}
                 data-src={coverImg}

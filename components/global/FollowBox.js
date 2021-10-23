@@ -43,7 +43,7 @@ const FollowBox = () => {
         <div className="col-left">
           <div className="image-area">
             <picture>
-              <source srcset="./cover-instagram-escapadesenparella.jpg" />
+              <source srcSet="./cover-instagram-escapadesenparella.jpg" />
               <img
                 src="./cover-instagram-escapadesenparella.jpg"
                 data-src="./cover-instagram-escapadesenparella.jpg"

@@ -24,7 +24,7 @@ const Hero = ({ title, subtitle }) => {
                         rel="nofollow noopener"
                       >
                         <picture>
-                          <source srcset="https://files.123inventatuweb.com/acens227517/image/lassdive-groc100.gif" />
+                          <source srcSet="https://files.123inventatuweb.com/acens227517/image/lassdive-groc100.gif" />
                           <img
                             src="https://files.123inventatuweb.com/acens227517/image/lassdive-groc100.gif"
                             data-src="https://files.123inventatuweb.com/acens227517/image/lassdive-groc100.gif"
@@ -48,7 +48,7 @@ const Hero = ({ title, subtitle }) => {
                   <div className="images-wrapper">
                     <div className="header-image">
                       <picture>
-                        <source srcset="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-comes-rubio_luuish.jpg" />
+                        <source srcSet="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-comes-rubio_luuish.jpg" />
                         <img
                           src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-comes-rubio_luuish.jpg"
                           data-src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-comes-rubio_luuish.jpg"
@@ -61,7 +61,7 @@ const Hero = ({ title, subtitle }) => {
                   <div className="images-wrapper">
                     <div className="header-image">
                       <picture>
-                        <source srcset="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-tossa-mar_m2lvdz.jpg" />
+                        <source srcSet="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-tossa-mar_m2lvdz.jpg" />
                         <img
                           src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-tossa-mar_m2lvdz.jpg"
                           data-src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-tossa-mar_m2lvdz.jpg"
@@ -76,7 +76,7 @@ const Hero = ({ title, subtitle }) => {
                   <div className="images-wrapper">
                     <div className="header-image">
                       <picture>
-                        <source srcset="https://res.cloudinary.com/juligoodie/image/upload/v1612464648/getaways-guru/static-files/IMGP8453_icqjwe.jpg" />
+                        <source srcSet="https://res.cloudinary.com/juligoodie/image/upload/v1612464648/getaways-guru/static-files/IMGP8453_icqjwe.jpg" />
                         <img
                           src="https://res.cloudinary.com/juligoodie/image/upload/v1612464648/getaways-guru/static-files/IMGP8453_icqjwe.jpg"
                           data-src="https://res.cloudinary.com/juligoodie/image/upload/v1612464648/getaways-guru/static-files/IMGP8453_icqjwe.jpg"

@@ -132,20 +132,20 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
                   id="Shape"
                   stroke="#2E6AE4"
                   strokeWidth="5"
-                  fill-opacity="0"
+                  fillOpacity="0"
                   fill="#D8D8D8"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 ></path>
                 <path
                   d="M35.4452,112.096521 C41.1137637,142.214616 67.5568135,165 99.3216749,165 C131.12058,165 157.58626,142.165749 163.216304,111.99966 M163.281647,88.355957 C157.793976,58.0138882 131.245416,35 99.3216749,35 C67.4626248,35 40.9569935,57.9207104 35.3953234,88.1715887"
                   id="Shape"
                   stroke="#2E6AE4"
                   strokeWidth="5"
-                  fill-opacity="0"
+                  fillOpacity="0"
                   fill="#D8D8D8"
-                  stroke-linecap="round"
-                  stroke-linejoin="bevel"
+                  strokeLinecap="round"
+                  strokeLinejoin="bevel"
                 ></path>
                 <g id="Group" transform="translate(50.321675, 51.000000)">
                   <polygon id="Path" points="0 0 98 0 98 98 0 98"></polygon>
@@ -153,8 +153,8 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
                     id="Path"
                     stroke="#2E6AE4"
                     strokeWidth="5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     points="48.0287402 72.8443637 22.6880633 86 27.5287402 58.1359975 7 38.4045701 35.3296615 34.3504449 48 9 60.6703385 34.3504449 89 38.4045701 68.4712598 58.1359975 73.3119367 86"
                   ></polygon>
                 </g>
@@ -166,7 +166,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
                   id="Path-2"
                   stroke="#2E6AE4"
                   strokeWidth="5"
-                  stroke-linecap="round"
+                  strokeLinecap="round"
                 ></line>
                 <line
                   x1="198.4452"
@@ -176,7 +176,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
                   id="Path-2-Copy"
                   stroke="#2E6AE4"
                   strokeWidth="5"
-                  stroke-linecap="round"
+                  strokeLinecap="round"
                 ></line>
               </g>
             </g>
@@ -455,7 +455,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
             <div className="left">
               <div className="image">
                 <picture>
-                  <source srcset="../../hotels-amb-encant-escapades-en-parella.png" />
+                  <source srcSet="../../hotels-amb-encant-escapades-en-parella.png" />
                   <img
                     src="../../hotels-amb-encant-escapades-en-parella.png"
                     data-src="../../hotels-amb-encant-escapades-en-parella.png"
@@ -501,7 +501,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
             <div className="left">
               <div className="image">
                 <picture>
-                  <source srcset="../../apartamens-escapades-en-parella.png" />
+                  <source srcSet="../../apartamens-escapades-en-parella.png" />
                   <img
                     src="../../apartamens-escapades-en-parella.png"
                     data-src="../../apartamens-escapades-en-parella.png"
@@ -549,7 +549,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
             <div className="left">
               <div className="image">
                 <picture>
-                  <source srcset="../../cases-arbre-escapades-en-parella.png" />
+                  <source srcSet="../../cases-arbre-escapades-en-parella.png" />
                   <img
                     src="../../cases-arbre-escapades-en-parella.png"
                     data-src="../../cases-arbre-escapades-en-parella.png"
@@ -595,7 +595,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
             <div className="left">
               <div className="image">
                 <picture>
-                  <source srcset="../../cases-rurals-escapades-en-parella.png" />
+                  <source srcSet="../../cases-rurals-escapades-en-parella.png" />
                   <img
                     src="../../cases-rurals-escapades-en-parella.png"
                     data-src="../../cases-rurals-escapades-en-parella.png"
@@ -641,7 +641,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
             <div className="left">
               <div className="image">
                 <picture>
-                  <source srcset="../../carabanes-escapades-en-parella.png" />
+                  <source srcSet="../../carabanes-escapades-en-parella.png" />
                   <img
                     src="../../carabanes-escapades-en-parella.png"
                     data-src="../../carabanes-escapades-en-parella.png"
@@ -687,7 +687,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
             <div className="left">
               <div className="image">
                 <picture>
-                  <source srcset="../../refugis-escapades-en-parella.png" />
+                  <source srcSet="../../refugis-escapades-en-parella.png" />
                   <img
                     src="../../refugis-escapades-en-parella.png"
                     data-src="../../refugis-escapades-en-parella.png"

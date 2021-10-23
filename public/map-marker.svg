@@ -15,7 +15,7 @@
         <g id="Group" transform="translate(3.000000, 1.000000)">
             <polygon id="Path" points="0 1 30 1 30 34 0 34"></polygon>
             <g id="Combined-Shape">
-                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <use fill="black" fillOpacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
                 <use fill="#0091FF" fill-rule="evenodd" xlink:href="#path-1"></use>
             </g>
         </g>

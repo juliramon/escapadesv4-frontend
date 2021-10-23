@@ -4617,7 +4617,7 @@ nav {
 }
 
 /* Extra small devices (phones, 600px and down) */
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
   .content-bar .content-bar---wrapper {
     height: 50px;
     overflow: hidden;
@@ -4864,6 +4864,7 @@ nav {
           left: 0;
           bottom: -60px;
           font-size: 0.95em;
+          text-align: center;
         }
       }
     }
@@ -4949,6 +4950,19 @@ nav {
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+  .content-bar .content-bar---wrapper {
+    height: 50px;
+    overflow: hidden;
+  }
+
+  .content-bar .content-bar---wrapper .content-bar---inner {
+    overflow-x: scroll;
+    height: 70px;
+  }
+
+  .content-bar .content-bar---wrapper .content-bar---inner p {
+    white-space: nowrap;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */

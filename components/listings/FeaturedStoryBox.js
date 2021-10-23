@@ -15,7 +15,7 @@ const FeaturedStoryBox = ({ slug, cover, title, avatar, owner }) => {
           <div className="listing-cover">
             <div className="overlay"></div>
             <picture>
-              <source srcset={cover} />
+              <source srcSet={cover} />
               <img
                 src={cover}
                 data-src={cover}
@@ -30,7 +30,7 @@ const FeaturedStoryBox = ({ slug, cover, title, avatar, owner }) => {
               <div className="author-details">
                 <div className="avatar">
                   <picture>
-                    <source srcset={avatar} />
+                    <source srcSet={avatar} />
                     <img
                       src={avatar}
                       data-src={avatar}
