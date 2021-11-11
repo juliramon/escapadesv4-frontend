@@ -4939,6 +4939,72 @@ nav {
   .top-nav-wrapper .top-nav-subtitle {
     max-width: 100%;
   }
+
+  // HISTORIES
+  #storiesList .box {
+    flex-wrap: wrap;
+  }
+  #storiesList .box .left,
+  #storiesList .box .right {
+    width: 100%;
+    padding: 0;
+  }
+  #storiesList .top-nav-wrapper .top-nav-subtitle {
+    max-width: 100%;
+  }
+  #storiesList .featured-listings {
+    margin-top: 20px;
+  }
+  #storiesList .featured-listings .listings-list {
+    flex-wrap: wrap;
+    margin: 0;
+  }
+  #listing.featured a img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  #storiesList #popularStories .listings-list .popular-listing {
+    width: 100%;
+    margin: 20px 0;
+  }
+  #storiesList #regularStories .col.center {
+    width: 100%;
+    max-width: 100%;
+  }
+  #storiesList #regularStories .listings-list #listing .listing-wrapper {
+    flex-direction: column;
+  }
+  #storiesList
+    #regularStories
+    .listings-list
+    #listing
+    .listing-wrapper
+    .listing-cover {
+    margin-left: 0;
+    width: 100%;
+    height: 250px;
+  }
+  #storiesList
+    #regularStories
+    .listings-list
+    #listing
+    .listing-wrapper
+    .listing-content {
+    max-width: 100%;
+  }
+  #storiesList #regularStories aside.sidebar-right .cloud-tags {
+    flex-direction: column;
+    a {
+      width: 100%;
+    }
+  }
+  #storiesList #regularStories aside.sidebar-right {
+    width: 100%;
+    max-width: 100%;
+    padding: 15px;
+    margin: 30px 0 0 0;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */

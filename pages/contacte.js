@@ -1,8 +1,6 @@
 import React, { useContext, useEffect } from "react";
-import "tailwindcss/tailwind.css";
 import UserContext from "../contexts/UserContext";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import NavigationBar from "../components/global/NavigationBar";
 
 const Contacte = () => {
@@ -35,7 +33,7 @@ const Contacte = () => {
               </p>
               <form>
                 <div className="flex flex-wrap">
-                  <label>Nom i cognom</label>
+                  <label className="text-red flex">Nom i cognom</label>
                   <input
                     type="text"
                     name="name"
@@ -43,15 +41,15 @@ const Contacte = () => {
                   />
                 </div>
                 <div className="flex flex-wrap">
-                  <label>Correu electrònic</label>
+                  <label className="text-cyan-500">Correu electrònic</label>
                   <input
                     type="email"
                     name="email"
                     placeholder="Escriu el teu correu electrònic"
                   />
                 </div>
-                <div className="flex flex-wrap">
-                  <label>Número de telèfon</label>
+                <div className="flex flex-wrap items-center">
+                  <label className="text-base">Número de telèfon</label>
                   <input
                     type="text"
                     name="phone"
