@@ -24,7 +24,9 @@
   font-style: normal;
 }
 
-$font-bold: "MADETommySoft-Medium";
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&display=swap");
+
+$font-bold: "Playfair Display";
 $font-regular: "MADETommySoft";
 
 $dark-blue: #00206b;
@@ -148,6 +150,7 @@ h5,
 h6 {
   color: $dark-blue;
   font-family: $font-bold;
+  font-weight: 600 !important;
   letter-spacing: 0.2px;
 }
 
@@ -540,7 +543,7 @@ nav {
       z-index: 1000;
       flex: 0.7;
       .header-title {
-        font-size: 2.6rem;
+        font-size: 2.9rem;
         line-height: 1.15em;
         color: $dark-blue;
       }
@@ -1937,14 +1940,22 @@ nav {
 
 #listing.featured {
   border-bottom: none !important;
-  width: 33.33%;
+  width: 50%;
   margin: 10px;
   overflow: hidden;
   a {
     width: 100%;
-    img {
-      height: 100%;
-      width: auto;
+    height: 100%;
+    display: block !important;
+    .listing-cover {
+      width: 100%;
+      height: 400px;
+      min-height: unset;
+      img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
     }
     .listing-content {
       .author-details {
@@ -1985,7 +1996,6 @@ nav {
     width: 100%;
     margin-right: 0;
     display: flex;
-    align-items: center;
     justify-content: center;
     position: relative;
     .overlay {
@@ -2132,7 +2142,6 @@ nav {
               overflow: hidden;
               border-radius: 100px;
               display: flex;
-              align-items: center;
               justify-content: center;
               img {
                 width: auto;
@@ -2159,7 +2168,6 @@ nav {
             min-width: 250px;
             width: 250px;
             display: flex;
-            align-items: center;
             justify-content: center;
             margin-left: 30px;
             img {
@@ -2301,7 +2309,6 @@ nav {
       width: 100%;
       margin-right: 0;
       display: flex;
-      align-items: center;
       justify-content: center;
       position: relative;
     }
@@ -2380,7 +2387,6 @@ nav {
           overflow: hidden;
           height: 300px;
           display: flex;
-          align-items: center;
           justify-content: center;
           margin-bottom: 20px;
           img {
@@ -2429,7 +2435,6 @@ nav {
             height: 120px;
             max-height: 120px;
             display: flex;
-            align-items: center;
             justify-content: center;
             margin-left: 30px;
             overflow: hidden;
@@ -2537,7 +2542,6 @@ nav {
     border-radius: 8px;
     overflow: hidden;
     display: flex;
-    align-items: center;
     justify-content: center;
   }
   .listing-cover img {
@@ -2546,14 +2550,15 @@ nav {
   }
   .listing-content {
     .listing-title {
-      font-size: 1.2em;
+      font-size: 1.5em;
       margin-top: 0;
     }
     .listing-subtitle {
-      margin-bottom: 10px;
+      margin: 12px 0;
     }
     .listing-location {
       margin: 0;
+      opacity: 068;
     }
     .listing-subtitle,
     .listing-location {
@@ -2747,10 +2752,11 @@ nav {
       max-width: 100%;
       img {
         width: 100%;
-        height: 600px;
+        height: 350px;
         object-fit: cover;
         object-position: center;
         border-radius: 8px;
+        margin-top: 30px;
       }
     }
   }
@@ -4719,7 +4725,7 @@ nav {
   #homepage #hero {
     padding: 20px 0 0 0;
     overflow: hidden;
-    min-height: 673px;
+    min-height: 681px;
   }
   #homepage #hero .wrapper {
     flex-direction: column;

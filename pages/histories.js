@@ -67,7 +67,7 @@ const StoriesList = ({ user }) => {
   let storiesList, featuredStories, popularStories;
   if (state.hasStories === true) {
     featuredStories = state.stories
-      .slice(0, 3)
+      .slice(0, 2)
       .map((el) => (
         <FeaturedStoryBox
           key={el._id}
@@ -92,7 +92,7 @@ const StoriesList = ({ user }) => {
         />
       ));
     popularStories = state.stories
-      .slice(3, 9)
+      .slice(2, 9)
       .map((el, idx) => (
         <PopularStoryBox
           key={el._id}
@@ -171,7 +171,7 @@ const StoriesList = ({ user }) => {
           }
           user={user}
         />
-        <Container fluid className="mw-1200">
+        <Container>
           <Row>
             <Col lg={12}>
               <div className="box d-flex featured-stories">
@@ -217,7 +217,7 @@ const StoriesList = ({ user }) => {
           </Row>
         </Container>
         <section id="popularStories">
-          <Container className="mw-1200" fluid>
+          <Container>
             <Row className="popular-stories">
               <Col lg={12}>
                 <div className="col">
@@ -229,17 +229,15 @@ const StoriesList = ({ user }) => {
             </Row>
             <Row>
               <Col lg={12}>
-                <div className="col">
-                  <div className="listings-wrapper">
-                    <div className="listings-list">{popularStories}</div>
-                  </div>
+                <div className="listings-wrapper">
+                  <div className="listings-list">{popularStories}</div>
                 </div>
               </Col>
             </Row>
           </Container>
         </section>
         <section id="regularStories">
-          <Container className="mw-1200" fluid>
+          <Container>
             <Row>
               <div className="box d-flex">
                 <div className="col center">
