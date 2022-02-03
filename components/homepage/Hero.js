@@ -43,51 +43,6 @@ const Hero = ({ title, subtitle }) => {
                   </div>
                 </div>
               </div>
-              <div className="header-col right">
-                <div className="left">
-                  <div className="images-wrapper">
-                    <div className="header-image">
-                      <picture>
-                        <source srcSet="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-comes-rubio_luuish.jpg" />
-                        <img
-                          src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-comes-rubio_luuish.jpg"
-                          data-src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-comes-rubio_luuish.jpg"
-                          alt="Escapadesenparella.cat"
-                          loading="lazy"
-                        />
-                      </picture>
-                    </div>
-                  </div>
-                  <div className="images-wrapper">
-                    <div className="header-image">
-                      <picture>
-                        <source srcSet="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-tossa-mar_m2lvdz.jpg" />
-                        <img
-                          src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-tossa-mar_m2lvdz.jpg"
-                          data-src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-tossa-mar_m2lvdz.jpg"
-                          alt="Escapadesenparella.cat"
-                          loading="lazy"
-                        />
-                      </picture>
-                    </div>
-                  </div>
-                </div>
-                <div className="right">
-                  <div className="images-wrapper">
-                    <div className="header-image">
-                      <picture>
-                        <source srcSet="https://res.cloudinary.com/juligoodie/image/upload/v1612464648/getaways-guru/static-files/IMGP8453_icqjwe.jpg" />
-                        <img
-                          src="https://res.cloudinary.com/juligoodie/image/upload/v1612464648/getaways-guru/static-files/IMGP8453_icqjwe.jpg"
-                          data-src="https://res.cloudinary.com/juligoodie/image/upload/v1612464648/getaways-guru/static-files/IMGP8453_icqjwe.jpg"
-                          alt="Escapadesenparella.cat"
-                          loading="lazy"
-                        />
-                      </picture>
-                    </div>
-                  </div>
-                </div>
-              </div>
             </div>
           </Col>
         </Row>

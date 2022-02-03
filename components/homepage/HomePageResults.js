@@ -75,7 +75,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
     storiesSection;
   if (state.mostRatedGetaways.length > 0) {
     let mostRatedList = state.mostRatedGetaways.map((el, idx) => {
-      while (state.mostRatedGetaways.indexOf(el) < 4) {
+      while (state.mostRatedGetaways.indexOf(el) < 3) {
         let location;
         if (el.type === "activity") {
           location = (
@@ -204,7 +204,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
 
   if (state.romanticGetaways.length > 0) {
     let romanticList = state.romanticGetaways.map((el, idx) => {
-      while (state.romanticGetaways.indexOf(el) < 4) {
+      while (state.romanticGetaways.indexOf(el) < 3) {
         let location;
         if (el.type === "activity") {
           location = (
@@ -256,7 +256,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
   }
   if (state.adventureGetaways.length > 0) {
     let adventureList = state.adventureGetaways.map((el) => {
-      while (state.adventureGetaways.indexOf(el) < 4) {
+      while (state.adventureGetaways.indexOf(el) < 3) {
         let location;
         if (el.type === "activity") {
           location = (
@@ -308,7 +308,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
   }
   if (state.gastronomicGetaways.length > 0) {
     let gastronomicList = state.gastronomicGetaways.map((el) => {
-      while (state.gastronomicGetaways.indexOf(el) < 4) {
+      while (state.gastronomicGetaways.indexOf(el) < 3) {
         let location;
         if (el.type === "activity") {
           location = (
@@ -360,7 +360,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
   }
   if (state.culturalGetaways.length > 0) {
     let culturalList = state.culturalGetaways.map((el) => {
-      while (state.culturalGetaways.indexOf(el) < 4) {
+      while (state.culturalGetaways.indexOf(el) < 3) {
         let location;
         if (el.type === "activity") {
           location = (
@@ -412,7 +412,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
   }
   if (state.stories.length > 0) {
     let culturalList = state.stories.map((el) => {
-      while (state.stories.indexOf(el) < 4) {
+      while (state.stories.indexOf(el) < 3) {
         return (
           <FeaturedStoryBox
             key={el._id}
