@@ -8,8 +8,10 @@ import PopularStoryBox from "../components/listings/PopularStoryBox";
 import Link from "next/link";
 import RegularStoryBox from "../components/listings/RegularStoryBox";
 import { useRouter } from "next/router";
+import AdSense from "react-adsense";
+import Footer from "../components/global/Footer";
 
-const StoriesList = ({ user }) => {
+const StoriesList = ({ user, stories }) => {
   const router = useRouter();
   useEffect(() => {
     if (
@@ -34,7 +36,7 @@ const StoriesList = ({ user }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const stories = await service.getAllStories("/stories");
+      //const stories = await service.getAllStories("/stories");
       const sortedStories = stories.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
@@ -67,7 +69,7 @@ const StoriesList = ({ user }) => {
   let storiesList, featuredStories, popularStories;
   if (state.hasStories === true) {
     featuredStories = state.stories
-      .slice(0, 3)
+      .slice(0, 2)
       .map((el) => (
         <FeaturedStoryBox
           key={el._id}
@@ -308,7 +310,16 @@ const StoriesList = ({ user }) => {
                     </Link>
                   </div>
                   <div className="ad-wrapper">
-                    <div className="ad-block"></div>
+                    <div className="ad-block">
+                      <AdSense.Google
+                        client="ca-pub-6252269250624547"
+                        slot="9182372294"
+                        style={{ display: "block" }}
+                        format="auto"
+                        responsive="true"
+                        layoutKey="-gw-1+2a-9x+5c"
+                      />
+                    </div>
                   </div>
                   <div className="legal-links">
                     <ul>
@@ -360,8 +371,23 @@ const StoriesList = ({ user }) => {
           </Container>
         </section>
       </main>
+      <Footer
+        logo_url={
+          "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
+        }
+      />
     </>
   );
 };
+
+export async function getStaticProps() {
+  const service = new ContentService();
+  const stories = await service.getAllStories("/stories");
+  return {
+    props: {
+      stories,
+    },
+  };
+}
 
 export default StoriesList;

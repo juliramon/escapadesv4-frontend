@@ -7,8 +7,10 @@ import { useRouter } from "next/router";
 import FeaturedListBox from "../components/listings/FeaturedListBox";
 import RegularListBox from "../components/listings/RegularListBox";
 import ShareBar from "../components/social/ShareBar";
+import AdSense from "react-adsense";
+import Footer from "../components/global/Footer";
 
-const ListsList = ({ user }) => {
+const ListsList = ({ user, lists }) => {
   const router = useRouter();
 
   const urlToShare = `https://escapadesenparella.cat/llistes`;
@@ -36,7 +38,7 @@ const ListsList = ({ user }) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const lists = await service.getLists();
+      //const lists = await service.getLists();
       let isLoaded;
       if (lists.length > 0) {
         isLoaded = true;
@@ -105,18 +107,18 @@ const ListsList = ({ user }) => {
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta
           name="description"
-          content={`Històries en parella per a inspirar, descobrir nous llocs i, en definitiva, fer-vos venir ganes d'una escapada en parella per recordar.`}
+          content={`Llistes d'escapades per a inspirar, descobrir nous llocs i, en definitiva, fer-vos venir ganes d'una escapada en parella per recordar.`}
         />
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
         <meta property="og:type" content="website" />
         <meta
           property="og:title"
-          content={`$Històries en parella - Escapadesenparella.cat`}
+          content={`Llistes d'escapades - Escapadesenparella.cat`}
         />
         <meta
           property="og:description"
-          content={`Històries en parella per a inspirar, descobrir nous llocs i, en definitiva, fer-vos venir ganes d'una escapada en parella per recordar.`}
+          content={`Llistes d'escapades per a inspirar, descobrir nous llocs i, en definitiva, fer-vos venir ganes d'una escapada en parella per recordar.`}
         />
         <meta
           property="url"
@@ -127,11 +129,11 @@ const ListsList = ({ user }) => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta
           name="twitter:title"
-          content={`$Històries en parella - Escapadesenparella.cat`}
+          content={`Llistes d'escapades - Escapadesenparella.cat`}
         />
         <meta
           name="twitter:description"
-          content={`Històries en parella per a inspirar, descobrir nous llocs i, en definitiva, fer-vos venir ganes d'una escapada en parella per recordar.`}
+          content={`Llistes d'escapades per a inspirar, descobrir nous llocs i, en definitiva, fer-vos venir ganes d'una escapada en parella per recordar.`}
         />
         <meta
           name="twitter:image"
@@ -187,7 +189,16 @@ const ListsList = ({ user }) => {
                     <ShareBar url={urlToShare} />
                   </div>
                   <div className="ad-wrapper">
-                    <div className="ad-block"></div>
+                    <div className="ad-block">
+                      <AdSense.Google
+                        client="ca-pub-6252269250624547"
+                        slot="9182372294"
+                        style={{ display: "block" }}
+                        format="auto"
+                        responsive="true"
+                        layoutKey="-gw-1+2a-9x+5c"
+                      />
+                    </div>
                   </div>
                   <div className="legal-links">
                     <ul>
@@ -239,8 +250,23 @@ const ListsList = ({ user }) => {
           </Row>
         </Container>
       </main>
+      <Footer
+        logo_url={
+          "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
+        }
+      />
     </>
   );
 };
+
+export async function getStaticProps() {
+  const service = new ContentService();
+  const lists = await service.getLists();
+  return {
+    props: {
+      lists,
+    },
+  };
+}
 
 export default ListsList;

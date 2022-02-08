@@ -10,6 +10,7 @@ import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
 import ShareModal from "../../components/modals/ShareModal";
 import AdSense from "react-adsense";
+import Footer from "../../components/global/Footer";
 
 const ActivityListing = () => {
   const { user } = useContext(UserContext);
@@ -695,6 +696,11 @@ const ActivityListing = () => {
               </div>
             </Container>
           </article>
+          <Footer
+            logo_url={
+              "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
+            }
+          />
         </main>
         <SignUpModal
           visibility={modalVisibility}

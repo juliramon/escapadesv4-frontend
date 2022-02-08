@@ -11,7 +11,7 @@ import PublicSquareBox from "../components/listings/PublicSquareBox";
 import UserContext from "../contexts/UserContext";
 import ContentService from "../services/contentService";
 
-const CategoryPage = () => {
+const CategoryPage = ({ categoryDetails, categoryResults }) => {
   const { user } = useContext(UserContext);
   const router = useRouter();
 
@@ -36,51 +36,64 @@ const CategoryPage = () => {
   };
 
   const [state, setState] = useState(initialState);
-  const [queryId, setQueryId] = useState(null);
+  // const [queryId, setQueryId] = useState(null);
+
+  // useEffect(() => {
+  //   if (router && router.query) {
+  //     setQueryId(router.query.categoria);
+  //   }
+  // }, [router]);
+
+  // const service = new ContentService();
 
   useEffect(() => {
-    if (router && router.query) {
-      setQueryId(router.query.categoria);
-    }
-  }, [router]);
-
-  const service = new ContentService();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setState({ ...state, isFetching: true });
-      const getCategories = await service.getCategories();
-      getCategories.forEach(async (category) => {
-        if (category.slug === router.query.categoria) {
-          const categoryDetails = await service.getCategoryDetails(
-            router.query.categoria
-          );
-          let getResults;
-          if (categoryDetails) {
-            getResults = await service.getCategoryResults(categoryDetails.name);
-          }
-          let hasResults;
-          if (getResults.results.length > 0) {
-            hasResults = true;
-          } else {
-            hasResults = false;
-          }
-          setState({
-            ...state,
-            categoryDetails: categoryDetails,
-            results: getResults.results,
-            hasResults: hasResults,
-            isFetching: false,
-            notFound: false,
-          });
-        } else {
-          setState({ ...state, notFound: true });
-        }
+    if (categoryDetails) {
+      setState({
+        ...state,
+        categoryDetails: categoryDetails,
+        results: categoryResults.results,
+        hasResults: categoryResults.results.length > 0 ? true : false,
+        isFetching: false,
+        notFound: false,
       });
-    };
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [queryId]);
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     setState({ ...state, isFetching: true });
+  //     const getCategories = await service.getCategories();
+  //     getCategories.forEach(async (category) => {
+  //       if (category.slug === router.query.categoria) {
+  //         const categoryDetails = await service.getCategoryDetails(
+  //           router.query.categoria
+  //         );
+  //         let getResults;
+  //         if (categoryDetails) {
+  //           getResults = await service.getCategoryResults(categoryDetails.name);
+  //         }
+  //         let hasResults;
+  //         if (getResults.results.length > 0) {
+  //           hasResults = true;
+  //         } else {
+  //           hasResults = false;
+  //         }
+  //         setState({
+  //           ...state,
+  //           categoryDetails: categoryDetails,
+  //           results: getResults.results,
+  //           hasResults: hasResults,
+  //           isFetching: false,
+  //           notFound: false,
+  //         });
+  //       } else {
+  //         setState({ ...state, notFound: true });
+  //       }
+  //     });
+  //   };
+  //   fetchData();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [queryId]);
 
   if (
     state.notFound &&
@@ -279,7 +292,7 @@ const CategoryPage = () => {
         <Container fluid>
           <Row>
             <div className="box d-flex">
-              <div className="col left">
+              {/* <div className="col left">
                 <div className="filter-list">
                   <div className="filter-block">
                     <span className="block-title">Classe d'allotjament</span>
@@ -393,7 +406,7 @@ const CategoryPage = () => {
                     />
                   </div>
                 </div>
-              </div>
+              </div> */}
               <div className="col center">
                 <div className="top-nav-wrapper">
                   <h1 className="top-nav-title">
@@ -435,5 +448,36 @@ const CategoryPage = () => {
     </>
   );
 };
+
+export async function getStaticPaths() {
+  const service = new ContentService();
+
+  // Call an external API endpoint to get posts
+  const categories = await service.getCategories();
+
+  const paths = categories.map((categoria) => ({
+    params: { categoria: categoria.slug },
+  }));
+
+  console.log(paths);
+
+  return { paths, fallback: true };
+}
+
+export async function getStaticProps({ params }) {
+  console.log("params =>", params);
+  const service = new ContentService();
+  const categoryDetails = await service.getCategoryDetails(params.categoria);
+  const categoryResults = await service.getCategoryResults(
+    categoryDetails.name
+  );
+
+  return {
+    props: {
+      categoryDetails,
+      categoryResults,
+    },
+  };
+}
 
 export default CategoryPage;

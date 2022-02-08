@@ -13,7 +13,7 @@ import readingTime from "reading-time";
 import { PhotoSwipeGallery } from "react-photoswipe";
 import Footer from "../../components/global/Footer";
 
-const StoryListing = () => {
+const StoryListing = ({ storyDetails }) => {
   const { user } = useContext(UserContext);
   const router = useRouter();
 
@@ -58,7 +58,7 @@ const StoryListing = () => {
   useEffect(() => {
     if (router.query.slug !== undefined) {
       const fetchData = async () => {
-        const storyDetails = await service.getStoryDetails(router.query.slug);
+        //const storyDetails = await service.getStoryDetails(router.query.slug);
         let isLoaded;
         if (storyDetails.type) {
           isLoaded = true;
@@ -383,5 +383,31 @@ const StoryListing = () => {
     </>
   );
 };
+
+export async function getStaticPaths() {
+  const service = new ContentService();
+
+  // Call an external API endpoint to get posts
+  const stories = await service.getAllStories("/stories");
+
+  // Get the paths we want to pre-render based on posts
+  const paths = stories.map((story) => ({
+    params: { slug: story.slug },
+  }));
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: false } means other routes should 404.
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+  const service = new ContentService();
+  const storyDetails = await service.getStoryDetails(params.slug);
+  return {
+    props: {
+      storyDetails,
+    },
+  };
+}
 
 export default StoryListing;

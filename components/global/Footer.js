@@ -5,7 +5,7 @@ const Footer = ({ logo_url }) => {
   let copyrightDate = new Date();
   copyrightDate = copyrightDate.getFullYear();
   return (
-    <section id="footer">
+    <footer id="footer">
       <Container className="mw-1200">
         <Row>
           <Col lg={4}>
@@ -296,7 +296,7 @@ const Footer = ({ logo_url }) => {
           </Col>
         </Row>
       </Container>
-    </section>
+    </footer>
   );
 };
 
