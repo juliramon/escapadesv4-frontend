@@ -96,9 +96,10 @@ const CategoryPage = ({ categoryDetails, categoryResults }) => {
   // }, [queryId]);
 
   if (
-    state.notFound &&
-    !state.isFetching &&
-    Object.keys(state.categoryDetails).length === 0
+    (state.notFound &&
+      !state.isFetching &&
+      Object.keys(state.categoryDetails).length === 0) ||
+    categoryResults == null
   ) {
     return <Error404 />;
   }
@@ -468,10 +469,14 @@ export async function getStaticProps({ params }) {
   console.log("params =>", params);
   const service = new ContentService();
   const categoryDetails = await service.getCategoryDetails(params.categoria);
-  const categoryResults = await service.getCategoryResults(
-    categoryDetails.name
-  );
-
+  let categoryResults;
+  if (categoryDetails !== null) {
+    console.log("not null =>", categoryDetails);
+    categoryResults = await service.getCategoryResults(categoryDetails.name);
+  } else {
+    console.log("null =>", categoryDetails);
+    categoryResults = null;
+  }
   return {
     props: {
       categoryDetails,

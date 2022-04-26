@@ -25,6 +25,7 @@ const Error404 = () => {
     <>
       <Head>
         <title>404 | Escapadesenparella.cat</title>
+        <meta name="robots" content="noindex">
       </Head>
       <div>
         <NavigationBar
