@@ -52,12 +52,19 @@ const ContentBar = (props) => {
     );
   }
 
+  const handleScroll = (e) => {
+    e.currentTarget.scrollLeft += e.deltaX || e.deltaY;
+  };
+
   let contentBar;
   contentBar = (
     <div className="content-bar">
       <Container fluid>
         <div className="content-bar---wrapper d-flex align-items-center">
-          <div className="content-bar---inner d-flex align-items-center">
+          <div
+            className="content-bar---inner d-flex align-items-center"
+            onWheel={(e) => handleScroll(e)}
+          >
             {categoriesList}
           </div>
           <div className="content-bar---overlay"></div>
