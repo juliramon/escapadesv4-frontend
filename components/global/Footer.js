@@ -141,6 +141,9 @@ const Footer = ({ logo_url }) => {
                 <li className="disabled">
                   <Link href="#">Què fem?</Link>
                 </li>
+                <li className="">
+                  <Link href="/contacte">Contacte</Link>
+                </li>
               </ul>
             </div>
           </Col>
