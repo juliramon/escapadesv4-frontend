@@ -1,10 +1,106 @@
 import Head from "next/head";
-import React from "react";
+import React, { useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
+import ToastNotification from "../components/toasts/ToastNotification";
 
 const Contacte = ({ user }) => {
+  const initialState = {
+    name: "",
+    email: "",
+    phone: "",
+    website: "",
+    message: "",
+  };
+
+  const [toastState, setToastState] = useState({
+    isVisible: false,
+    duration: 0,
+  });
+  const [alertState, setAlertState] = useState({
+    isVisible: false,
+    message: "Sisplau, omple tots els camps per enviar el formulari",
+  });
+  const [formsState, setFormState] = useState(initialState);
+
+  const handleChange = (e) =>
+    setFormState({ ...formsState, [e.target.name]: e.target.value });
+
+  const validateForm = (e) => {
+    e.preventDefault();
+    const { name, phone, email, website, message } = formsState;
+    if (
+      name !== "" &&
+      phone !== "" &&
+      email !== "" &&
+      website !== "" &&
+      message !== ""
+    ) {
+      // handleSubmit(name, phone, email, website, message);
+      console.log("submitt!");
+    } else {
+      setAlertState({ ...alertState, isVisible: true });
+      setTimeout(
+        () => setAlertState({ ...alertState, isVisible: false }),
+        5000
+      );
+    }
+  };
+
+  // const handleSubmit = (name, phone, email, website, message) => {
+  //   axios
+  //     .post("/services/emailService/", {
+  //       name: name,
+  //       phone: phone,
+  //       email: email,
+  //       website: website,
+  //       message: message,
+  //     })
+  //     .then((res) => {
+  //       if (res.data.status === 200) {
+  //         setFormState({
+  //           name: "",
+  //           phone: "",
+  //           email: "",
+  //           website: "",
+  //           message: "",
+  //           serverMessage: `El teu missatge ha sigut enviat correctament.
+  //             Ens posarem en contacte amb tu el més aviat possible.`,
+  //         });
+  //         setToastState({ ...formsState, isVisible: true, duration: 5000 });
+  //       }
+  //     })
+  //     .catch((error) => console.log(error));
+  // };
+
+  const notification = toastState.isVisible ? (
+    <ToastNotification message={formsState.serverMessage} />
+  ) : null;
+
+  const alertContainer = alertState.isVisible ? (
+    <div className="w-full rounded-md bg-tertiary-100 text-secondary-100 py-3 px-3 transition-all duration-300 ease-in-out flex items-center text-sm">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="icon icon-tabler icon-tabler-alert-circle mr-2"
+        width="22"
+        height="22"
+        viewBox="0 0 24 24"
+        strokeWidth="1.5"
+        stroke="#ffffff"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <circle cx="12" cy="12" r="9" />
+        <line x1="12" y1="8" x2="12" y2="12" />
+        <line x1="12" y1="16" x2="12.01" y2="16" />
+      </svg>
+      {alertState.message}
+    </div>
+  ) : null;
+
   return (
     <>
       <Head>
@@ -20,7 +116,7 @@ const Contacte = ({ user }) => {
         <section className="relative overflow-hidden">
           <div className="box flex flex-wrap">
             <div className="w-full md:w-2/3 py-8 md:py-16 px-12 lg:px-20 h-full">
-              <div className="w-full lg:w-9/12 xl:w-7/12 mx-auto">
+              <div className="w-full lg:w-11/12 xl:w-7/12 mx-auto">
                 <div className="w-full lg:w-10/12">
                   <h1 className="mt-0">Contacte</h1>
                   <p>
@@ -28,9 +124,10 @@ const Contacte = ({ user }) => {
                     o activitat? Tens dubtes sobre com podem donar a conèixer la
                     teva marca? No saps on escapar-te? Contacta'ns! 👇{" "}
                   </p>
+                  {alertContainer}
                   <form name="" id="" className="mt-8">
                     <fieldset className="form-group">
-                      <label for="name" className="form-label">
+                      <label htmlFor="name" className="form-label">
                         Nom i cognom
                       </label>
                       <input
@@ -38,11 +135,13 @@ const Contacte = ({ user }) => {
                         name="name"
                         placeholder="Escriu el teu nom i cognom"
                         className="form-control"
+                        onChange={handleChange}
+                        value={formsState.name}
                         required
                       />
                     </fieldset>
                     <fieldset className="form-group">
-                      <label for="email" className="form-label">
+                      <label htmlFor="email" className="form-label">
                         Correu electrònic
                       </label>
                       <input
@@ -50,11 +149,13 @@ const Contacte = ({ user }) => {
                         name="email"
                         placeholder="Escriu el teu correu electrònic"
                         className="form-control"
+                        onChange={handleChange}
+                        value={formsState.email}
                         required
                       />
                     </fieldset>
                     <fieldset className="form-group">
-                      <label for="phone" className="form-label">
+                      <label htmlFor="phone" className="form-label">
                         Telèfon
                       </label>
                       <input
@@ -62,25 +163,43 @@ const Contacte = ({ user }) => {
                         name="phone"
                         placeholder="Escriu el teu nom i cognom"
                         className="form-control"
+                        onChange={handleChange}
+                        value={formsState.phone}
                         required
                       />
                     </fieldset>
                     <fieldset className="form-group">
-                      <label for="name" className="form-label">
+                      <label htmlFor="name" className="form-label">
                         Pàgina web
                       </label>
                       <input
                         type="url"
-                        name="name"
+                        name="website"
                         placeholder="Escriu la pàgina web del teu negoci"
                         className="form-control"
+                        onChange={handleChange}
+                        value={formsState.website}
                         required
                       />
+                    </fieldset>
+                    <fieldset className="form-group">
+                      <label htmlFor="message" className="form-label">
+                        Missatge
+                      </label>
+                      <textarea
+                        name="message"
+                        placeholder="En què et podem ajudar?"
+                        className="form-control"
+                        onChange={handleChange}
+                        value={formsState.message}
+                        required
+                      ></textarea>
                     </fieldset>
                     <fieldset className="form-group mt-4">
                       <button
                         type="submit"
                         className="button button__primary button__med px-12 lg:px-16"
+                        onClick={validateForm}
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -108,13 +227,17 @@ const Contacte = ({ user }) => {
               <picture>
                 <img
                   src="https://res.cloudinary.com/juligoodie/image/upload/v1651513521/getaways-guru/contacta-amb-nosaltres_sg47zn.jpg"
-                  alt="Contacta amb nosaltres"
+                  alt="Escapadesenparella.cat a la platja d'Itzurun, Zumaia, País Basc"
                   className="w-full h-full object-cover"
                   width={400}
                   height={300}
                   loading="lazy"
                 />
               </picture>
+              <figcaption className="absolute bottom-2.5 left-3 text-xs text-white">
+                Andrea i Juli, Platja d'Itzurun, Zumaia (País Basc) / ©
+                Escapadesenparella.cat
+              </figcaption>
             </div>
           </div>
         </section>
