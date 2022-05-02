@@ -206,6 +206,11 @@
   "resolved" "https://registry.npmjs.org/@stripe/stripe-js/-/stripe-js-1.14.0.tgz"
   "version" "1.14.0"
 
+"@tailwindcss/aspect-ratio@^0.4.0":
+  "integrity" "sha512-WJu0I4PpqNPuutpaA9zDUq2JXR+lorZ7PbLcKNLmb6GL9/HLfC7w3CRsMhJF4BbYd/lkY6CfXOvkYpuGnZfkpQ=="
+  "resolved" "https://registry.npmjs.org/@tailwindcss/aspect-ratio/-/aspect-ratio-0.4.0.tgz"
+  "version" "0.4.0"
+
 "@tiptap/core@^2.0.0-beta.1", "@tiptap/core@^2.0.0-beta.105":
   "integrity" "sha512-ut0ts9hrJXUJlSXZIN8iEt2TPbqYLFBanucUAr0ENLjIlpyyNVXz9IhS3bBEmo7vWExirZmY8O9oidQztesf2A=="
   "resolved" "https://registry.npmjs.org/@tiptap/core/-/core-2.0.0-beta.105.tgz"
@@ -2257,7 +2262,7 @@
   "resolved" "https://registry.npmjs.org/tabler-icons-react/-/tabler-icons-react-1.35.0.tgz"
   "version" "1.35.0"
 
-"tailwindcss@^3.0.23":
+"tailwindcss@^3.0.23", "tailwindcss@>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1":
   "integrity" "sha512-H3uMmZNWzG6aqmg9q07ZIRNIawoiEcNFKDfL+YzOPuPsXuDXxJxB9icqzLgdzKNwjG3SAro2h9SYav8ewXNgig=="
   "resolved" "https://registry.npmjs.org/tailwindcss/-/tailwindcss-3.0.24.tgz"
   "version" "3.0.24"

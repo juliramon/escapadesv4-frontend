@@ -673,7 +673,7 @@ const NavigationBar = ({ logo_url, path }) => {
                 </Nav>
                 <Nav>
                   <Link href="/activitats">
-                    <a>
+                    <a className="flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="icon icon-tabler icon-tabler-route"
@@ -695,7 +695,7 @@ const NavigationBar = ({ logo_url, path }) => {
                     </a>
                   </Link>
                   <Link href="/allotjaments">
-                    <a>
+                    <a className="flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="icon icon-tabler icon-tabler-bed"
@@ -716,7 +716,7 @@ const NavigationBar = ({ logo_url, path }) => {
                     </a>
                   </Link>
                   <Link href="/histories">
-                    <a>
+                    <a className="flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="icon icon-tabler icon-tabler-notebook"
@@ -738,7 +738,7 @@ const NavigationBar = ({ logo_url, path }) => {
                     </a>
                   </Link>
                   <Link href="/llistes">
-                    <a>
+                    <a className="flex items-center">
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         className="icon icon-tabler icon-tabler-layout-list"

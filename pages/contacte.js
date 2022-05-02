@@ -17,17 +17,16 @@ const Contacte = ({ user }) => {
           }
           user={user}
         />
-        <section>
-          <div className="box flex items-stretch">
-            <div className="left w-full lg:w-1/3 bg-red-100"></div>
-            <div className="right w-full lg:w-2/3 py-8 md:py-16 px-20">
-              <div className="w-full lg:w-7/12 mx-auto">
+        <section className="relative overflow-hidden">
+          <div className="box flex flex-wrap">
+            <div className="w-full md:w-2/3 py-8 md:py-16 px-12 lg:px-20 h-full">
+              <div className="w-full lg:w-9/12 xl:w-7/12 mx-auto">
                 <div className="w-full lg:w-10/12">
                   <h1 className="mt-0">Contacte</h1>
                   <p>
                     Vols que col·laborem per donar a conèixer el teu allotjament
-                    o activitat? Tens dubtes sobre com donar a conèixer la teva
-                    marca? Contacta'ns!{" "}
+                    o activitat? Tens dubtes sobre com podem donar a conèixer la
+                    teva marca? No saps on escapar-te? Contacta'ns! 👇{" "}
                   </p>
                   <form name="" id="" className="mt-8">
                     <fieldset className="form-group">
@@ -78,10 +77,10 @@ const Contacte = ({ user }) => {
                         required
                       />
                     </fieldset>
-                    <fieldset className="form-group">
+                    <fieldset className="form-group mt-4">
                       <button
                         type="submit"
-                        className="btn btn-m btn-dark btn-no-flex btn btn-none px-12 lg:px-16 flex flex-nowrap items-center"
+                        className="button button__primary button__med px-12 lg:px-16"
                       >
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -104,6 +103,18 @@ const Contacte = ({ user }) => {
                   </form>
                 </div>
               </div>
+            </div>
+            <div className="w-full md:w-1/3 md:absolute right-0 top-0 max-h-96 md:max-h-full md:h-full bg-red-100 order-last lg:order-none">
+              <picture>
+                <img
+                  src="https://res.cloudinary.com/juligoodie/image/upload/v1651513521/getaways-guru/contacta-amb-nosaltres_sg47zn.jpg"
+                  alt="Contacta amb nosaltres"
+                  className="w-full h-full object-cover"
+                  width={400}
+                  height={300}
+                  loading="lazy"
+                />
+              </picture>
             </div>
           </div>
         </section>

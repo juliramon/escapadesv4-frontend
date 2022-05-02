@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "components/buttons.sass";
+
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Work+Sans:wght@400;500&display=swap");
 
 $font-bold: "Merriweather";
@@ -43,38 +45,6 @@ a {
 }
 
 /*---GLOBAL STYLES---*/
-
-.btn {
-  border-radius: 8px !important;
-  transition: 0.3s;
-}
-
-.btn-m {
-  padding: 10px 14px !important;
-  font-size: 0.85em !important;
-}
-
-.btn-dark {
-  border: 1px solid $electric-blue !important;
-  background-color: $electric-blue !important;
-  color: $white !important;
-  flex: 1;
-}
-
-.btn-light {
-  color: $electric-blue !important;
-  background-color: $white !important;
-  border: 1px solid $electric-blue !important;
-  flex: 1;
-}
-
-.btn-no-flex {
-  flex: none;
-}
-
-.btn-no-border {
-  border: none !important;
-}
 
 #listingSquareBox .btn {
   margin: 4px;

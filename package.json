@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@stripe/stripe-js": "^1.14.0",
+    "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tiptap/extension-image": "^2.0.0-beta.15",
     "@tiptap/react": "^2.0.0-beta.66",
     "@tiptap/starter-kit": "^2.0.0-beta.104",
