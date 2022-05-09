@@ -1,0 +1,45 @@
+$dark-blue: #00206b
+$medium-blue: #6376a0
+$soft-blue: #ebf1ff
+$white: #ffffff
+$dark-red: #fd8281
+$electric-blue: #002b8f
+$background-input: #f2f7f9
+    
+
+.button
+    @apply rounded-lg transition-all duration-300 ease-in-out inline-flex
+
+.button__primary
+    @apply flex items-center bg-primary-200 text-secondary-100
+    &:hover
+        @apply bg-primary-300
+
+.button__med
+    @apply py-2.5 px-3.5 text-sm
+
+.btn
+  border-radius: 8px !important
+  transition: 0.3s
+
+.btn-m
+  padding: 10px 14px !important
+  font-size: 0.85em !important
+
+.btn-dark
+  border: 1px solid $electric-blue !important
+  background-color: $electric-blue !important
+  color: $white !important
+  flex: 1
+
+.btn-light
+  color: $electric-blue !important
+  background-color: $white !important
+  border: 1px solid $electric-blue !important
+  flex: 1
+
+.btn-no-flex
+  flex: none
+
+.btn-no-border
+  border: none !important
