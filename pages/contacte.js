@@ -4,6 +4,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
 import ToastNotification from "../components/toasts/ToastNotification";
+import EmailService from "../services/emailService";
 
 const Contacte = ({ user }) => {
   const initialState = {
@@ -37,7 +38,7 @@ const Contacte = ({ user }) => {
       website !== "" &&
       message !== ""
     ) {
-      // handleSubmit(name, phone, email, website, message);
+      handleSubmit(name, phone, email, website, message);
       console.log("submitt!");
     } else {
       setAlertState({ ...alertState, isVisible: true });
@@ -48,31 +49,30 @@ const Contacte = ({ user }) => {
     }
   };
 
-  // const handleSubmit = (name, phone, email, website, message) => {
-  //   axios
-  //     .post("/services/emailService/", {
-  //       name: name,
-  //       phone: phone,
-  //       email: email,
-  //       website: website,
-  //       message: message,
-  //     })
-  //     .then((res) => {
-  //       if (res.data.status === 200) {
-  //         setFormState({
-  //           name: "",
-  //           phone: "",
-  //           email: "",
-  //           website: "",
-  //           message: "",
-  //           serverMessage: `El teu missatge ha sigut enviat correctament.
-  //             Ens posarem en contacte amb tu el més aviat possible.`,
-  //         });
-  //         setToastState({ ...formsState, isVisible: true, duration: 5000 });
-  //       }
-  //     })
-  //     .catch((error) => console.log(error));
-  // };
+  const emailService = new EmailService();
+
+  const handleSubmit = (name, phone, email, website, message) => {
+    emailService
+      .sendContactFormEmail(name, phone, email, website, message)
+      .then((res) => {
+        if (res.status === 200) {
+          setFormState({
+            name: "",
+            phone: "",
+            email: "",
+            website: "",
+            message: "",
+            serverMessage: res.message,
+          });
+          setToastState({ ...formsState, isVisible: true, duration: 5000 });
+          setTimeout(
+            () => setToastState({ ...toastState, isVisible: false }),
+            5000
+          );
+        }
+      })
+      .catch((error) => console.log(error));
+  };
 
   const notification = toastState.isVisible ? (
     <ToastNotification message={formsState.serverMessage} />
@@ -241,6 +241,7 @@ const Contacte = ({ user }) => {
             </div>
           </div>
         </section>
+        {notification}
       </main>
       <Footer
         logo_url={

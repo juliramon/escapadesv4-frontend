@@ -31,6 +31,18 @@ class EmailService {
       })
       .then((res) => res.data);
   };
+
+  sendContactFormEmail = (name, phone, email, website, message) => {
+    return this.service
+      .post("/email/contactFormEmail", {
+        name,
+        phone,
+        email,
+        website,
+        message,
+      })
+      .then((res) => res.data);
+  };
 }
 
 export default EmailService;
