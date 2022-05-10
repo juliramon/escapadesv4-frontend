@@ -117,7 +117,7 @@ const Contacte = ({ user }) => {
           <div className="box flex flex-wrap">
             <div className="w-full md:w-2/3 py-8 md:py-16 px-12 lg:px-20 h-full">
               <div className="w-full lg:w-11/12 xl:w-7/12 mx-auto">
-                <div className="w-full lg:w-10/12">
+                <div className="w-full lg:w-9/12 mx-auto">
                   <h1 className="mt-0">Contacte</h1>
                   <p>
                     Vols que col·laborem per donar a conèixer el teu allotjament
