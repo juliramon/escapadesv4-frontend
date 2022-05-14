@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Col, Container, Row } from "react-bootstrap";
 import PublicSquareBox from "../../components/listings/PublicSquareBox";
@@ -65,6 +66,10 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const date = new Date();
+  const foundationYears = date.getFullYear() - 2015;
+
   let mostRatedSection,
     romanticGetawaysSection,
     adventureGetawaysSection,
@@ -115,7 +120,11 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
       return undefined;
     });
     mostRatedSection = (
-      <section className="homepage-section pt-16">
+      <section className="homepage-section pt-16 relative">
+        <span
+          id="featuredPlaces"
+          className="absolute -top-24 left-0 w-full block"
+        ></span>
         <div className="homepage-section-title">
           <h2>Els allotjaments més ben valorats</h2>
         </div>
@@ -366,7 +375,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
       <section className="homepage-section pt-16">
         <h2 className="homepage-section-title">Històries en parella</h2>
         <div className="section-listings">
-          <div className="flex items-center justify-between -mx-4">
+          <div className="flex flex-wrap items-stretch justify-between -m-3">
             {culturalList}
           </div>
         </div>
@@ -379,12 +388,12 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
         <h2 className="">Allotjaments pensats per a parelles</h2>
       </div>
       <div className="section-listings">
-        <div className="section-litings-wrapper">
+        <div className="flex flex-wrap items-center justify-between -m-4">
           <a
             href={`/hotels-amb-encant`}
             title="Hotels amb encant"
             rel="follow"
-            className="listing"
+            className="listing flex items-center w-full md:w-1/2 lg:w-1/3 px-4"
           >
             <div className="left">
               <div className="image">
@@ -430,7 +439,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
             href={`/apartaments-per-a-parelles`}
             title="Apartaments de somni"
             rel="nofollow"
-            className="listing"
+            className="listing flex items-center w-full md:w-1/2 lg:w-1/3 px-4"
           >
             <div className="left">
               <div className="image">
@@ -478,7 +487,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
             href={`/cabanyes-als-arbres`}
             title="Cases-arbre"
             rel="follow"
-            className="listing"
+            className="listing flex items-center w-full md:w-1/2 lg:w-1/3 p-4"
           >
             <div className="left">
               <div className="image">
@@ -524,7 +533,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
             href={`/cases-rurals`}
             title="Cases rurals"
             rel="follow"
-            className="listing"
+            className="listing flex items-center w-full md:w-1/2 lg:w-1/3 px-4"
           >
             <div className="left">
               <div className="image">
@@ -570,7 +579,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
             href={`/carabanes`}
             title="Carabanes"
             rel="nofollow"
-            className="listing"
+            className="listing flex items-center w-full md:w-1/2 lg:w-1/3 px-4"
           >
             <div className="left">
               <div className="image">
@@ -616,7 +625,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
             href={`/refugis`}
             title="Refugis"
             rel="nofollow"
-            className="listing"
+            className="listing flex items-center w-full md:w-1/2 lg:w-1/3 px-4"
           >
             <div className="left">
               <div className="image">
@@ -663,56 +672,77 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
     </section>
   );
   introSection = (
-    <div id="introSection" className="py-16">
+    <section id="introSection" className="homepage-section mt-36 py-16">
       <div className="container">
-        <div className="w-full">
-          <section className="homepage-section">
+        <div className="w-full flex flex-wrap items-start">
+          <div className="w-full lg:w-1/2 -mt-44">
+            <picture>
+              <img
+                src="https://res.cloudinary.com/juligoodie/image/upload/v1652535865/getaways-guru/about-home_mikxom.jpg"
+                alt="Escapades en parella, i molt més"
+                className="w-full h-full object-cover object-center rounded-lg"
+                width={300}
+                height={400}
+                loading="lazy"
+              ></img>
+            </picture>
+            <figcaption className="text-xs mt-2.5">
+              Andrea i Juli, Castell de Rocabruna (Ripollès) / ©
+              Escapadesenparella.cat
+            </figcaption>
+          </div>
+          <div className="w-full lg:w-1/2 pt-12 lg:pt-0 lg:pl-16">
             <div className="homepage-section-title">
-              <h2 className="uppercase">Escapades en parella, i molt més</h2>
-              <p>Nota de l'Andrea i en Juli</p>
+              <h2 className="">Escapades en parella, i molt més</h2>
             </div>
-            <div className="homepage-section-content">
+            <div className="homepage-section-content mt-4">
               <p>
                 Hola, som l'Andrea i en Juli, i et volem donar la benvinguda a
                 Escapadesenparella.cat, el recomanador d'escapades en parella de
-                referència a Catalunya. Busques escapades en parella? No saps
-                què fer aquest cap de setmana amb la teva parella? Cansat de fer
+                referència a Catalunya. Busques{" "}
+                <strong>escapades en parella</strong>? No sabeu&nbsp;
+                <strong>què fer aquest cap de setmana</strong>? Cansats de fer
                 sempre el mateix? A Escapadesenparella.cat tenim la sol·lució!
               </p>
               <p>
-                Ja fa tres anys que vam decidir començar a compartir les
-                escapades en parella que fem arreu de Catalunya, amb l'objectiu
-                de motivar i donar a conèixer llocs únics per viure en parella,
-                com ara hotels amb encant, escapades de cap de setmana de somni,
-                escapades romàntiques per no oblidar, escapades gastronòmiques
-                ideals per a una cita, etc. En definitiva, compartir tot allò
-                que es pot fer amb la teva parella, perquè hi ha vida més enllà
-                d'anar al cinema o veure Netflix al sofà. Ep! I us ho diu dos
-                fans de Netflix!
+                Fa {foundationYears} anys vam començar a compartir les escapades
+                en parella que fèiem arreu de Catalunya, amb l'objectiu de
+                motivar a sortir a <strong>descobrir Catalunya</strong>, i donar
+                a conèixer llocs únics per gaudir en parella, perquè crèiem, i
+                seguim creient, que hi ha vida més enllà d'anar al cinema o
+                veure Netflix al sofà.
               </p>
               <p>
-                De fet, Escapadesenparella.cat ens ha permès, i ens segueix
-                permetent, descobrir molt més que escapades en parella. Al llarg
-                d'aquest temps hem conegut racons únics a Catalunya que mai
-                oblidarem, hem parlat amb persones abans desconegudes, que s'han
-                convertit en bons amics, i sobretot, hem rigut, après i
-                compartit.
+                A dia d'avui estem encantats de poder seguir compartint amb tots
+                vosaltres les{" "}
+                <strong>millors escapades en parella a Catalunya</strong>, així
+                que gràcies per ser aquí llegint aquesta nota. Perquè per
+                nosaltres, Escapadesenparella.cat és molt més que escapades en
+                parella; esperem transmetre't aquest sentiment!
               </p>
-              <p>
-                Per acabar, no podríem estar més agraïts de tenir aquesta
-                oportunitat de seguir compartint amb tots vosaltres les millors
-                escapades en parella a Catalunya, gràcies per ser aquí llegint
-                aquesta nota. Perquè per nosaltres, Escapadesenparella.cat és
-                molt més que escapades en parella, esperem transmetre't aquest
-                sentiment!
-              </p>
-              <p>Ens veiem a la propera escapada!</p>
+              <div className="flex flex-wrap items-center -mx-2 mt-4">
+                <div className="px-2">
+                  <Link href="#">
+                    <a className="button button__primary button__lg inline-flex">
+                      Conèix-nos millor
+                    </a>
+                  </Link>
+                </div>
+                <div className="px-2">
+                  <Link href="/contacte">
+                    <a className="button button__secondary button__lg inline-flex">
+                      Contacta'ns
+                    </a>
+                  </Link>
+                </div>
+              </div>
             </div>
-          </section>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
+
   return (
     <div id="homePageResults" className="relative z-40">
       <div className="container">

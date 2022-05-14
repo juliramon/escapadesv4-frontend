@@ -3,12 +3,15 @@ import Link from "next/link";
 
 const FeaturedStoryBox = ({ slug, cover, title, avatar, owner }) => {
   return (
-    <div id="listing" className="featured">
+    <div className="w-full md:w-1/2 lg:w-1/3 p-3 border-none">
       <Link href={`/histories/${slug}`}>
-        <a title={title} className="">
-          <div className="listing-cover">
-            <div className="overlay"></div>
-            <picture className="w-full h-full">
+        <a
+          title={title}
+          className="block w-full h-full overflow-hidden rounded-lg"
+        >
+          <div className="relative w-full h-full aspect-w-3 aspect-h-4">
+            <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40 z-30"></div>
+            <picture className="w-full h-full absolute top-0 left-0">
               <source srcSet={cover} />
               <img
                 src={cover}
@@ -20,22 +23,27 @@ const FeaturedStoryBox = ({ slug, cover, title, avatar, owner }) => {
                 alt={title}
               />
             </picture>
-            <div className="listing-content">
-              <h3 className="listing-title">{title}</h3>
-              <div className="author-details">
-                <div className="avatar">
-                  <picture>
-                    <source srcSet={avatar} />
-                    <img
-                      src={avatar}
-                      data-src={avatar}
-                      alt={owner}
-                      width="60"
-                      height="60"
-                      loading="lazy"
-                    />
-                  </picture>
+            <div className="absolute top-0 left-0 w-full h-full z-40">
+              <div className="absolute bottom-0 px-5 pb-10">
+                <div className="author-details text-secondary-100 text-center">
+                  <div className="w-14 h-14 mb-3 rounded-full border-2 border-secondary-100 p-1 overflow-hidden mx-auto">
+                    <picture>
+                      <source srcSet={avatar} />
+                      <img
+                        src={avatar}
+                        data-src={avatar}
+                        alt={owner}
+                        className="w-full h-full object-cover object-center rounded-full"
+                        width="60"
+                        height="60"
+                        loading="lazy"
+                      />
+                    </picture>
+                  </div>
                 </div>
+                <h3 className="text-secondary-100 text-center text-xl h-24">
+                  {title}
+                </h3>
               </div>
             </div>
           </div>
