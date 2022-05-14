@@ -6,9 +6,9 @@ const Footer = ({ logo_url }) => {
   copyrightDate = copyrightDate.getFullYear();
   return (
     <footer id="footer">
-      <Container className="mw-1200">
-        <Row>
-          <Col lg={4}>
+      <div className="container">
+        <div className="w-full flex flex-wrap items-start">
+          <div className="w-full md:w-1/2 lg:w-4/12">
             <div className="footer-intro">
               <svg
                 width="135px"
@@ -93,13 +93,15 @@ const Footer = ({ logo_url }) => {
                 a Catalunya
               </span>
             </div>
-          </Col>
-          <Col lg={2}>
+          </div>
+          <div className="w-full md:w-1/2 lg:w-2/12">
             <div className="footer-content">
               <h4 className="footer-header">Continguts</h4>
               <ul>
                 <li>
-                  <Link href="#">Escapades romàntiques</Link>
+                  <Link href="#">
+                    <a>Escapades romàntiques</a>
+                  </Link>
                 </li>
                 <li>
                   <Link href="#">Escapades culturals</Link>
@@ -124,8 +126,8 @@ const Footer = ({ logo_url }) => {
                 </li>
               </ul>
             </div>
-          </Col>
-          <Col lg={2}>
+          </div>
+          <div className="w-full md:w-1/2 lg:w-2/12">
             <div className="footer-about">
               <h4 className="footer-header">Nosaltres</h4>
               <ul>
@@ -146,8 +148,8 @@ const Footer = ({ logo_url }) => {
                 </li>
               </ul>
             </div>
-          </Col>
-          <Col lg={2}>
+          </div>
+          <div className="w-full md:w-1/2 lg:w-2/12">
             <div className="footer-support">
               <h4 className="footer-header">Ajuda</h4>
               <ul>
@@ -164,8 +166,8 @@ const Footer = ({ logo_url }) => {
                 </li>
               </ul>
             </div>
-          </Col>
-          <Col lg={2}>
+          </div>
+          <div className="w-full md:w-1/2 lg:w-2/12">
             <div className="footer-connect">
               <h4 className="footer-header">Contacta'ns</h4>
               <ul>
@@ -173,6 +175,7 @@ const Footer = ({ logo_url }) => {
                   <a
                     href="mailto:social@escapadesenparella.com"
                     target="_blank"
+                    className="flex items-center"
                     rel="noopener noreferrer"
                   >
                     <svg
@@ -199,6 +202,7 @@ const Footer = ({ logo_url }) => {
                   <a
                     href="https://www.instagram.com/escapadesenparella"
                     target="_blank"
+                    className="flex items-center"
                     rel="noopener noreferrer"
                   >
                     <svg
@@ -225,6 +229,7 @@ const Footer = ({ logo_url }) => {
                   <a
                     href="https://twitter.com/escapaenparella"
                     target="_blank"
+                    className="flex items-center"
                     rel="noopener noreferrer"
                   >
                     <svg
@@ -249,6 +254,7 @@ const Footer = ({ logo_url }) => {
                   <a
                     href="https://facebook.com/escapadesenparella"
                     target="_blank"
+                    className="flex items-center"
                     rel="noopener noreferrer"
                   >
                     <svg
@@ -273,6 +279,7 @@ const Footer = ({ logo_url }) => {
                   <a
                     href="tel:633178499"
                     target="_blank"
+                    className="flex items-center"
                     rel="noopener noreferrer"
                   >
                     <svg
@@ -296,9 +303,9 @@ const Footer = ({ logo_url }) => {
                 </li>
               </ul>
             </div>
-          </Col>
-        </Row>
-      </Container>
+          </div>
+        </div>
+      </div>
     </footer>
   );
 };

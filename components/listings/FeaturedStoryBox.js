@@ -3,22 +3,17 @@ import Link from "next/link";
 
 const FeaturedStoryBox = ({ slug, cover, title, avatar, owner }) => {
   return (
-    <div
-      id="listing"
-      className="d-flex align-items-center justify-content-between featured"
-    >
+    <div id="listing" className="featured">
       <Link href={`/histories/${slug}`}>
-        <a
-          title={title}
-          className="listing-wrapper d-flex flex-column align-items-center"
-        >
+        <a title={title} className="">
           <div className="listing-cover">
             <div className="overlay"></div>
-            <picture>
+            <picture className="w-full h-full">
               <source srcSet={cover} />
               <img
                 src={cover}
                 data-src={cover}
+                className="w-full h-full object-cover object-center"
                 width="400"
                 height="300"
                 loading="lazy"

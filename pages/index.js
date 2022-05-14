@@ -84,7 +84,7 @@ const Homepage = (props) => {
           content="756319ea1956c99d055184c4cac47dbfa3c81808"
         />
       </Head>
-      <div id="homepage">
+      <main id="homepage">
         <NavigationBar
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
@@ -92,7 +92,7 @@ const Homepage = (props) => {
         />
         <Hero
           background_url={
-            "https://res.cloudinary.com/juligoodie/image/upload/v1612464648/getaways-guru/static-files/IMGP8453_icqjwe.jpg"
+            "https://res.cloudinary.com/juligoodie/image/upload/v1652527292/getaways-guru/IMGP9489-s_izgty6.jpg"
           }
           title={title}
           subtitle={subtitle}
@@ -103,13 +103,12 @@ const Homepage = (props) => {
           stories={props.stories}
           totals={props.totals}
         />
-        <FollowBox />
         <Footer
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
           }
         />
-      </div>
+      </main>
     </>
   );
 };

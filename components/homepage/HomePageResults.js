@@ -115,75 +115,9 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
       return undefined;
     });
     mostRatedSection = (
-      <section className="homepage-section">
-        <div className="top-rated-badge">
-          <svg width="128px" height="128px" viewBox="0 0 206 206" version="1.1">
-            <title>Group 2</title>
-            <g
-              id="Page-1"
-              stroke="none"
-              strokeWidth="1"
-              fill="none"
-              fillRule="evenodd"
-            >
-              <g id="Group-2" transform="translate(3.678325, 3.000000)">
-                <path
-                  d="M0,111.709813 C5.79798792,161.420663 48.0544879,200 99.3216749,200 C150.426343,200 192.577363,161.66487 198.587112,112.182231 M198.59881,87.9144754 C192.63227,38.3850857 150.459631,0 99.3216749,0 C48.1434059,0 5.94459472,38.4456289 0.0304970376,88.0316311"
-                  id="Shape"
-                  stroke="#2E6AE4"
-                  strokeWidth="5"
-                  fillOpacity="0"
-                  fill="#D8D8D8"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                ></path>
-                <path
-                  d="M35.4452,112.096521 C41.1137637,142.214616 67.5568135,165 99.3216749,165 C131.12058,165 157.58626,142.165749 163.216304,111.99966 M163.281647,88.355957 C157.793976,58.0138882 131.245416,35 99.3216749,35 C67.4626248,35 40.9569935,57.9207104 35.3953234,88.1715887"
-                  id="Shape"
-                  stroke="#2E6AE4"
-                  strokeWidth="5"
-                  fillOpacity="0"
-                  fill="#D8D8D8"
-                  strokeLinecap="round"
-                  strokeLinejoin="bevel"
-                ></path>
-                <g id="Group" transform="translate(50.321675, 51.000000)">
-                  <polygon id="Path" points="0 0 98 0 98 98 0 98"></polygon>
-                  <polygon
-                    id="Path"
-                    stroke="#2E6AE4"
-                    strokeWidth="5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    points="48.0287402 72.8443637 22.6880633 86 27.5287402 58.1359975 7 38.4045701 35.3296615 34.3504449 48 9 60.6703385 34.3504449 89 38.4045701 68.4712598 58.1359975 73.3119367 86"
-                  ></polygon>
-                </g>
-                <line
-                  x1="35.4452"
-                  y1="100"
-                  x2="-1.0658141e-14"
-                  y2="100"
-                  id="Path-2"
-                  stroke="#2E6AE4"
-                  strokeWidth="5"
-                  strokeLinecap="round"
-                ></line>
-                <line
-                  x1="198.4452"
-                  y1="100"
-                  x2="163"
-                  y2="100"
-                  id="Path-2-Copy"
-                  stroke="#2E6AE4"
-                  strokeWidth="5"
-                  strokeLinecap="round"
-                ></line>
-              </g>
-            </g>
-          </svg>
-        </div>
+      <section className="homepage-section pt-16">
         <div className="homepage-section-title">
-          <h2 className="uppercase">Els allotjaments més ben valorats</h2>
+          <h2>Els allotjaments més ben valorats</h2>
         </div>
         <div className="section-listings">
           <div className="section-listings-wrapper">{mostRatedList}</div>
@@ -244,9 +178,9 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
       return undefined;
     });
     romanticGetawaysSection = (
-      <section className="homepage-section">
+      <section className="homepage-section pt-16">
         <div className="homepage-section-title">
-          <h2 className="uppercase">Escapades romàntiques per desconnectar </h2>
+          <h2 className="">Escapades romàntiques per desconnectar </h2>
         </div>
         <div className="section-listings">
           <div className="section-listings-wrapper">{romanticList}</div>
@@ -296,9 +230,9 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
       return undefined;
     });
     adventureGetawaysSection = (
-      <section className="homepage-section">
+      <section className="homepage-section pt-16">
         <div className="homepage-section-title">
-          <h2 className="uppercase">L'aventura us crida</h2>
+          <h2 className="">L'aventura us crida</h2>
         </div>
         <div className="section-listings">
           <div className="section-listings-wrapper">{adventureList}</div>
@@ -348,8 +282,8 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
       return undefined;
     });
     gastronomicGetawaysSection = (
-      <section className="homepage-section">
-        <h2 className="homepage-section-title uppercase">
+      <section className="homepage-section pt-16">
+        <h2 className="homepage-section-title">
           La millor cita, als millors restaurants
         </h2>
         <div className="section-listings">
@@ -400,8 +334,8 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
       return undefined;
     });
     culturalGetawaysSection = (
-      <section className="homepage-section">
-        <h2 className="homepage-section-title uppercase">
+      <section className="homepage-section pt-16">
+        <h2 className="homepage-section-title">
           Escapades en parella per a desconnectar
         </h2>
         <div className="section-listings">
@@ -429,20 +363,20 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
       return undefined;
     });
     storiesSection = (
-      <section className="homepage-section">
-        <h2 className="homepage-section-title uppercase">
-          Històries en parella
-        </h2>
+      <section className="homepage-section pt-16">
+        <h2 className="homepage-section-title">Històries en parella</h2>
         <div className="section-listings">
-          <div className="section-listings-wrapper">{culturalList}</div>
+          <div className="flex items-center justify-between -mx-4">
+            {culturalList}
+          </div>
         </div>
       </section>
     );
   }
   placeTypeSection = (
-    <section className="homepage-section" id="placesTypes">
+    <section className="homepage-section pt-16" id="placesTypes">
       <div className="homepage-section-title">
-        <h2 className="uppercase">Allotjaments pensats per a parelles</h2>
+        <h2 className="">Allotjaments pensats per a parelles</h2>
       </div>
       <div className="section-listings">
         <div className="section-litings-wrapper">
@@ -729,74 +663,69 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
     </section>
   );
   introSection = (
-    <div id="introSection">
-      <Container className="mw-1200" fluid>
-        <Row>
-          <Col lg={12}>
-            <section className="homepage-section">
-              <div className="homepage-section-title">
-                <h2 className="uppercase">Escapades en parella, i molt més</h2>
-                <p>Nota de l'Andrea i en Juli</p>
-              </div>
-              <div className="homepage-section-content">
-                <p>
-                  Hola, som l'Andrea i en Juli, i et volem donar la benvinguda a
-                  Escapadesenparella.cat, el recomanador d'escapades en parella
-                  de referència a Catalunya. Busques escapades en parella? No
-                  saps què fer aquest cap de setmana amb la teva parella? Cansat
-                  de fer sempre el mateix? A Escapadesenparella.cat tenim la
-                  sol·lució!
-                </p>
-                <p>
-                  Ja fa tres anys que vam decidir començar a compartir les
-                  escapades en parella que fem arreu de Catalunya, amb
-                  l'objectiu de motivar i donar a conèixer llocs únics per viure
-                  en parella, com ara hotels amb encant, escapades de cap de
-                  setmana de somni, escapades romàntiques per no oblidar,
-                  escapades gastronòmiques ideals per a una cita, etc. En
-                  definitiva, compartir tot allò que es pot fer amb la teva
-                  parella, perquè hi ha vida més enllà d'anar al cinema o veure
-                  Netflix al sofà. Ep! I us ho diu dos fans de Netflix!
-                </p>
-                <p>
-                  De fet, Escapadesenparella.cat ens ha permès, i ens segueix
-                  permetent, descobrir molt més que escapades en parella. Al
-                  llarg d'aquest temps hem conegut racons únics a Catalunya que
-                  mai oblidarem, hem parlat amb persones abans desconegudes, que
-                  s'han convertit en bons amics, i sobretot, hem rigut, après i
-                  compartit.
-                </p>
-                <p>
-                  Per acabar, no podríem estar més agraïts de tenir aquesta
-                  oportunitat de seguir compartint amb tots vosaltres les
-                  millors escapades en parella a Catalunya, gràcies per ser aquí
-                  llegint aquesta nota. Perquè per nosaltres,
-                  Escapadesenparella.cat és molt més que escapades en parella,
-                  esperem transmetre't aquest sentiment!
-                </p>
-                <p>Ens veiem a la propera escapada!</p>
-              </div>
-            </section>
-          </Col>
-        </Row>
-      </Container>
+    <div id="introSection" className="py-16">
+      <div className="container">
+        <div className="w-full">
+          <section className="homepage-section">
+            <div className="homepage-section-title">
+              <h2 className="uppercase">Escapades en parella, i molt més</h2>
+              <p>Nota de l'Andrea i en Juli</p>
+            </div>
+            <div className="homepage-section-content">
+              <p>
+                Hola, som l'Andrea i en Juli, i et volem donar la benvinguda a
+                Escapadesenparella.cat, el recomanador d'escapades en parella de
+                referència a Catalunya. Busques escapades en parella? No saps
+                què fer aquest cap de setmana amb la teva parella? Cansat de fer
+                sempre el mateix? A Escapadesenparella.cat tenim la sol·lució!
+              </p>
+              <p>
+                Ja fa tres anys que vam decidir començar a compartir les
+                escapades en parella que fem arreu de Catalunya, amb l'objectiu
+                de motivar i donar a conèixer llocs únics per viure en parella,
+                com ara hotels amb encant, escapades de cap de setmana de somni,
+                escapades romàntiques per no oblidar, escapades gastronòmiques
+                ideals per a una cita, etc. En definitiva, compartir tot allò
+                que es pot fer amb la teva parella, perquè hi ha vida més enllà
+                d'anar al cinema o veure Netflix al sofà. Ep! I us ho diu dos
+                fans de Netflix!
+              </p>
+              <p>
+                De fet, Escapadesenparella.cat ens ha permès, i ens segueix
+                permetent, descobrir molt més que escapades en parella. Al llarg
+                d'aquest temps hem conegut racons únics a Catalunya que mai
+                oblidarem, hem parlat amb persones abans desconegudes, que s'han
+                convertit en bons amics, i sobretot, hem rigut, après i
+                compartit.
+              </p>
+              <p>
+                Per acabar, no podríem estar més agraïts de tenir aquesta
+                oportunitat de seguir compartint amb tots vosaltres les millors
+                escapades en parella a Catalunya, gràcies per ser aquí llegint
+                aquesta nota. Perquè per nosaltres, Escapadesenparella.cat és
+                molt més que escapades en parella, esperem transmetre't aquest
+                sentiment!
+              </p>
+              <p>Ens veiem a la propera escapada!</p>
+            </div>
+          </section>
+        </div>
+      </div>
     </div>
   );
   return (
-    <div id="homePageResults">
-      <Container className="mw-1200" fluid>
-        <Row>
-          <Col lg={12}>
-            {mostRatedSection}
-            {romanticGetawaysSection}
-            {placeTypeSection}
-            {adventureGetawaysSection}
-            {gastronomicGetawaysSection}
-            {storiesSection}
-            {culturalGetawaysSection}
-          </Col>
-        </Row>
-      </Container>
+    <div id="homePageResults" className="relative z-40">
+      <div className="container">
+        <div className="w-full">
+          {mostRatedSection}
+          {romanticGetawaysSection}
+          {placeTypeSection}
+          {adventureGetawaysSection}
+          {gastronomicGetawaysSection}
+          {storiesSection}
+          {culturalGetawaysSection}
+        </div>
+      </div>
       {introSection}
     </div>
   );
