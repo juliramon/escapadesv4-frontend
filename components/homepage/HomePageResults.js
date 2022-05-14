@@ -128,7 +128,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
           <h2>Els allotjaments més ben valorats</h2>
         </div>
         <div className="section-listings">
-          <div className="flex flex-wrap items-start -mx-3">
+          <div className="flex flex-wrap items-start -mx-2">
             {mostRatedList}
           </div>
         </div>
@@ -193,7 +193,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
           <h2 className="">Escapades romàntiques per desconnectar </h2>
         </div>
         <div className="section-listings">
-          <div className="section-listings-wrapper">{romanticList}</div>
+          <div className="flex flex-wrap items-start -mx-2">{romanticList}</div>
         </div>
       </section>
     );
@@ -245,7 +245,9 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
           <h2 className="">L'aventura us crida</h2>
         </div>
         <div className="section-listings">
-          <div className="section-listings-wrapper">{adventureList}</div>
+          <div className="flex flex-wrap items-start -mx-2">
+            {adventureList}
+          </div>
         </div>
       </section>
     );
@@ -297,7 +299,9 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
           La millor cita, als millors restaurants
         </h2>
         <div className="section-listings">
-          <div className="section-listings-wrapper">{gastronomicList}</div>
+          <div className="flex flex-wrap items-start -mx-2">
+            {gastronomicList}
+          </div>
         </div>
       </section>
     );
@@ -349,7 +353,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
           Escapades en parella per a desconnectar
         </h2>
         <div className="section-listings">
-          <div className="section-listings-wrapper">{culturalList}</div>
+          <div className="flex flex-wrap items-start -mx-2">{culturalList}</div>
         </div>
       </section>
     );
@@ -376,7 +380,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
       <section className="homepage-section pt-16">
         <h2 className="homepage-section-title">Històries en parella</h2>
         <div className="section-listings">
-          <div className="flex flex-wrap items-stretch justify-between -m-3">
+          <div className="flex flex-wrap items-stretch justify-between -m-2">
             {culturalList}
           </div>
         </div>

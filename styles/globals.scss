@@ -4,7 +4,7 @@
 
 @import "components/buttons.sass";
 @import "components/scrolldown.sass";
-@import "components/listing-box.sass";
+@import "components/listingsquarebox.sass";
 @import "layout/forms.sass";
 @import "layout/footer.sass";
 
@@ -495,7 +495,7 @@ nav {
   #hero {
     height: 100%;
     @screen lg {
-      height: calc(100vh - 110px);
+      height: calc(100vh - 63.59px);
     }
     .wrapper {
       background: #fef8f2;

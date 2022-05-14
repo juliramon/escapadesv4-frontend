@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const FeaturedStoryBox = ({ slug, cover, title, avatar, owner }) => {
   return (
-    <div className="w-full md:w-1/2 lg:w-1/3 p-3 border-none">
+    <div className="w-full md:w-1/2 lg:w-1/3 p-2 border-none">
       <Link href={`/histories/${slug}`}>
         <a
           title={title}
