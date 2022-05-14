@@ -1,5 +1,4 @@
 import Link from "next/link";
-import styles from "../../styles/PublicSquareBox.module.scss";
 
 const PublicSquareBox = ({
   type,
@@ -81,7 +80,7 @@ const PublicSquareBox = ({
       <a
         href={secureWebsite}
         title="Reservar"
-        className="btn btn-m btn-light"
+        className="button button__secondary button__med w-full justify-center"
         target="_blank"
         rel="nofollow"
       >
@@ -176,42 +175,61 @@ const PublicSquareBox = ({
   const coverImg = `${coverPath}w_246,h_180,c_fill/${imageId}`;
 
   return (
-    <div id="listingSquareBox" className={styles.listingSquareBox}>
-      <Link href={`/${linkPath}/${slug}`}>
-        <a className={styles.listingBoxWrapper}>
-          <div className={styles.listingCover}>
-            <picture>
-              <source srcSet={coverImg} />
-              <img
-                src={coverImg}
-                data-src={coverImg}
-                alt={title}
-                loading="lazy"
-                width="400"
-                height="300"
-                className={styles.listingCoverImg}
-              />
-            </picture>
-            <div className={styles.listingRating}>{modRating || rating}</div>
+    <div className="w-full md:w-1/2 lg:w-1/3 p-3">
+      <div className="shadow-sm rounded-t-md rounded-b-md overflow-hidden">
+        <Link href={`/${linkPath}/${slug}`}>
+          <a className="relative">
+            <div className="aspect-w-16 aspect-h-9 relative">
+              <picture className="w-full h-full">
+                <source srcSet={coverImg} />
+                <img
+                  src={coverImg}
+                  data-src={coverImg}
+                  alt={title}
+                  className="w-full h-full object-cover object-center"
+                  loading="lazy"
+                  width="400"
+                  height="300"
+                />
+              </picture>
+            </div>
+            <div className="absolute top-2 right-2 bg-secondary-100 inline-block w-auto h-auto rounded-md text-primary-300 px-2 py-1 text-sm">
+              {modRating || rating}
+            </div>
+          </a>
+        </Link>
+        <div className="p-3 box-description flex flex-col justify-between">
+          <Link href={`/${linkPath}/${slug}`}>
+            <a>
+              <h3 className="text-lg mt-0 mb-0">{title}</h3>
+              <p className="text-sm my-0">
+                Escapada {categoryModified} a {shortenedLocation}
+              </p>
+              <p className="my-1 flex items-center">
+                <span className="mr-1.5">{additionalInfoSVG}</span>
+                {additionalInfoRef}
+              </p>
+            </a>
+          </Link>
+          <div
+            className={
+              type !== "activity"
+                ? "flex lex-wrap items-center -mx-1.5 mt-3 w-full"
+                : "flex-wrap items-center -mx-1.5 mt-3 w-full"
+            }
+          >
+            <div className="px-1.5 flex-1">
+              <a
+                href={`/${linkPath}/${slug}`}
+                title="Detalls"
+                className="button button__primary button__med w-full justify-center"
+              >
+                Llegir-ne més
+              </a>
+            </div>
+            <div className="px-1.5 flex-1">{buttonLight}</div>
           </div>
-          <h3 className={styles.listingTitle}>{title}</h3>
-          <p className={styles.listingSubtitle}>
-            Escapada {categoryModified} a {shortenedLocation}
-          </p>
-          <p className={styles.listingAdditionalInfo}>
-            {additionalInfoSVG} {additionalInfoRef}
-          </p>
-        </a>
-      </Link>
-      <div className={styles.buttons}>
-        <a
-          href={`/${linkPath}/${slug}`}
-          title="Detalls"
-          className="btn btn-m btn-dark"
-        >
-          Llegir-ne més
-        </a>
-        {buttonLight}
+        </div>
       </div>
     </div>
   );

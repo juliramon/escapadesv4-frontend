@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { useEffect } from "react";
 import SearchBar from "../homepage/SearchBar";
 
 const Hero = ({ background_url, title, subtitle }) => {

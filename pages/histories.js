@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import ContentService from "../services/contentService";
 import NavigationBar from "../components/global/NavigationBar";
 import { Container, Row, Spinner, Col, Breadcrumb } from "react-bootstrap";

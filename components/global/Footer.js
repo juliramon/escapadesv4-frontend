@@ -5,19 +5,18 @@ const Footer = ({ logo_url }) => {
   let copyrightDate = new Date();
   copyrightDate = copyrightDate.getFullYear();
   return (
-    <footer id="footer">
+    <footer id="footer" className="py-12 lg:pt-16 lg:pb-10">
       <div className="container">
         <div className="w-full flex flex-wrap items-start">
-          <div className="w-full md:w-1/2 lg:w-4/12">
-            <div className="footer-intro">
+          <div className="w-full md:w-1/2 lg:w-4/12 md:pr-5 lg:pr-10">
+            <div className="flex flex-col flex-wrap items-start">
               <svg
                 width="135px"
                 height="auto"
                 viewBox="0 0 638 173"
                 version="1.1"
-                className="footer-logo"
+                className="mb-3 w-36 h-auto"
               >
-                <title>Group</title>
                 <g
                   id="Page-1"
                   stroke="none"
@@ -45,12 +44,12 @@ const Footer = ({ logo_url }) => {
                   </g>
                 </g>
               </svg>
-              <span>
+              <span className="text-sm">
                 Escapadesenparella.cat és el recomanador especialista en
                 escapades en parella a Catalunya. Registra't per gaudir de tots
                 els beneficis de la comunitat.
               </span>
-              <span className="footer-copyright-timestamp">
+              <span className="opacity-70 text-xs block mt-4">
                 Copyright © {copyrightDate}. Tots els drets reservats. <br />
                 Codi i UI/UX:{" "}
                 <a
@@ -73,7 +72,7 @@ const Footer = ({ logo_url }) => {
                 Desenvolupat i gestionat amb{" "}
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="icon icon-tabler icon-tabler-heart"
+                  className="icon icon-tabler icon-tabler-heart inline relative -top-0.5"
                   width="18"
                   height="18"
                   viewBox="0 0 24 24"
@@ -94,84 +93,66 @@ const Footer = ({ logo_url }) => {
               </span>
             </div>
           </div>
-          <div className="w-full md:w-1/2 lg:w-2/12">
+          <div className="w-full md:w-1/2 lg:w-3/12">
             <div className="footer-content">
-              <h4 className="footer-header">Continguts</h4>
-              <ul>
-                <li>
+              <h4 className="footer-header text-xl mb-4">Continguts</h4>
+              <ul className="list-none m-0 p-0">
+                <li className="py-1 text-sm leading-tight">
                   <Link href="#">
                     <a>Escapades romàntiques</a>
                   </Link>
                 </li>
-                <li>
+                <li className="py-1 text-sm leading-tight">
                   <Link href="#">Escapades culturals</Link>
                 </li>
-                <li>
+                <li className="py-1 text-sm leading-tight">
                   <Link href="#">Escapades gastronòmiques</Link>
                 </li>
-                <li>
+                <li className="py-1 text-sm leading-tight">
                   <Link href="#">Escapades d'aventura</Link>
                 </li>
-                <li>
+                <li className="py-1 text-sm leading-tight">
                   <Link href="#">Escapades de relax</Link>
                 </li>
-                <li>
+                <li className="py-1 text-sm leading-tight">
                   <Link href="#">Escapades a la neu</Link>
                 </li>
-                <li>
+                <li className="py-1 text-sm leading-tight">
                   <Link href="#">Escapades d'estiu</Link>
                 </li>
-                <li>
+                <li className="pt-1 text-sm leading-tight">
                   <Link href="#">Escapades de cap de setmana</Link>
                 </li>
               </ul>
             </div>
           </div>
-          <div className="w-full md:w-1/2 lg:w-2/12">
+          <div className="w-full md:w-1/2 lg:w-3/12">
             <div className="footer-about">
-              <h4 className="footer-header">Nosaltres</h4>
-              <ul>
-                <li>
+              <h4 className="footer-header text-xl mb-4">Nosaltres</h4>
+              <ul className="list-none m-0 p-0">
+                <li className="py-1 text-sm leading-tight">
                   <Link href="/histories">Històries en parella</Link>
                 </li>
-                <li>
+                <li className="py-1 text-sm leading-tight">
                   <Link href="/empreses">Serveis empreses</Link>
                 </li>
-                <li className="disabled">
+                <li className="disabled py-1 text-sm leading-tight">
                   <Link href="#">Qui som?</Link>
                 </li>
-                <li className="disabled">
+                <li className="disabled py-1 text-sm leading-tight">
                   <Link href="#">Què fem?</Link>
                 </li>
-                <li className="">
+                <li className="pt-1 text-sm leading-tight">
                   <Link href="/contacte">Contacte</Link>
                 </li>
               </ul>
             </div>
           </div>
           <div className="w-full md:w-1/2 lg:w-2/12">
-            <div className="footer-support">
-              <h4 className="footer-header">Ajuda</h4>
-              <ul>
-                <li>
-                  <Link href="/politica-privadesa">Política de privadesa</Link>
-                </li>
-                <li>
-                  <Link href="/condicions-us">Condicions d'ús</Link>
-                </li>
-                <li>
-                  <Link href="/politica-privadesa#politicacookies">
-                    Política de cookies
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="w-full md:w-1/2 lg:w-2/12">
             <div className="footer-connect">
-              <h4 className="footer-header">Contacta'ns</h4>
-              <ul>
-                <li>
+              <h4 className="footer-header text-xl mb-4">Contacta'ns</h4>
+              <ul className="list-none m-0 p-0">
+                <li className="py-1 text-sm leading-tight">
                   <a
                     href="mailto:social@escapadesenparella.com"
                     target="_blank"
@@ -198,7 +179,7 @@ const Footer = ({ logo_url }) => {
                     Correu
                   </a>
                 </li>
-                <li>
+                <li className="py-1 text-sm leading-tight">
                   <a
                     href="https://www.instagram.com/escapadesenparella"
                     target="_blank"
@@ -225,7 +206,7 @@ const Footer = ({ logo_url }) => {
                     Instagram
                   </a>
                 </li>
-                <li>
+                <li className="py-1 text-sm leading-tight">
                   <a
                     href="https://twitter.com/escapaenparella"
                     target="_blank"
@@ -250,7 +231,7 @@ const Footer = ({ logo_url }) => {
                     Twitter
                   </a>
                 </li>
-                <li>
+                <li className="py-1 text-sm leading-tight">
                   <a
                     href="https://facebook.com/escapadesenparella"
                     target="_blank"
@@ -275,7 +256,7 @@ const Footer = ({ logo_url }) => {
                     Facebook
                   </a>
                 </li>
-                <li>
+                <li className="py-1 text-sm leading-tight">
                   <a
                     href="tel:633178499"
                     target="_blank"
@@ -303,6 +284,25 @@ const Footer = ({ logo_url }) => {
                 </li>
               </ul>
             </div>
+          </div>
+          <div className="w-full mt-14">
+            <ul className="list-none flex items-center -mx-3 justify-center">
+              <li className="px-3 text-sm">
+                <Link href="/politica-privadesa">
+                  <a>Política de privadesa</a>
+                </Link>
+              </li>
+              <li className="px-3 text-sm">
+                <Link href="/condicions-us">
+                  <a>Condicions d'ús</a>
+                </Link>
+              </li>
+              <li className="px-3 text-sm">
+                <Link href="/politica-privadesa#politicacookies">
+                  <a>Política de cookies</a>
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
       </div>

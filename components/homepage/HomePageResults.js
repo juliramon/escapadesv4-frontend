@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
 import PublicSquareBox from "../../components/listings/PublicSquareBox";
 import FeaturedStoryBox from "../listings/FeaturedStoryBox";
 
@@ -129,7 +128,9 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
           <h2>Els allotjaments més ben valorats</h2>
         </div>
         <div className="section-listings">
-          <div className="section-listings-wrapper">{mostRatedList}</div>
+          <div className="flex flex-wrap items-start -mx-3">
+            {mostRatedList}
+          </div>
         </div>
       </section>
     );
@@ -672,10 +673,13 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
     </section>
   );
   introSection = (
-    <section id="introSection" className="homepage-section mt-36 py-16">
+    <section
+      id="introSection"
+      className="homepage-section mt-16 xl:mt-36 py-16"
+    >
       <div className="container">
         <div className="w-full flex flex-wrap items-start">
-          <div className="w-full lg:w-1/2 -mt-44">
+          <div className="w-full lg:w-1/2 -mt-32 xl:-mt-44">
             <picture>
               <img
                 src="https://res.cloudinary.com/juligoodie/image/upload/v1652535865/getaways-guru/about-home_mikxom.jpg"
