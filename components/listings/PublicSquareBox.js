@@ -214,8 +214,8 @@ const PublicSquareBox = ({
           <div
             className={
               type !== "activity"
-                ? "flex lex-wrap items-center -mx-1.5 mt-3 w-full"
-                : "flex-wrap items-center -mx-1.5 mt-3 w-full"
+                ? "flex lex-wrap items-center -mx-1.5 mt-3"
+                : "flex-wrap items-center -mx-1.5 mt-3"
             }
           >
             <div className="px-1.5 flex-1">
