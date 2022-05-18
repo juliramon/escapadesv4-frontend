@@ -521,6 +521,9 @@ nav {
       }
       .search-form {
         margin-top: 35px;
+        .tabs-dropdown {
+          z-index: 1000;
+        }
         .tab-bar {
           ul {
             list-style: none;
@@ -543,7 +546,7 @@ nav {
           }
         }
         .header-form {
-          margin-top: 15px;
+          margin-top: 8px;
           border-radius: 12px;
           box-shadow: 2px 5px 20px rgb(0 0 0 / 20%);
           background-color: $white;

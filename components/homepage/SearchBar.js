@@ -16,6 +16,8 @@ const SearchBar = () => {
   };
   const [state, setState] = useState(initialState);
 
+  const [dropdownState, setDropdownState] = useState(false);
+
   const handleTabClick = (e) => {
     if (e.target.id === "activities") {
       setState({
@@ -31,6 +33,7 @@ const SearchBar = () => {
         activeTab: "places",
       });
     }
+    setDropdownState(false);
   };
 
   const handleCheckActivityCategory = (e) => {
@@ -525,33 +528,54 @@ const SearchBar = () => {
     );
   }
 
+  const dropdownTab = (
+    <div className="absolute z-50 bg-white rounded-md shadow-md mt-1.5 overflow-hidden">
+      <ul className="list-none m-0 p-0">
+        <li
+          className="px-3 py-1.5 hover:bg-gray-100 cursor-pointer transition-all duration-300 ease-in-out"
+          onClick={handleTabClick}
+          id="activities"
+        >
+          Activitats
+        </li>
+        <li
+          className="px-3 py-1.5 hover:bg-gray-100 cursor-pointer transition-all duration-300 ease-in-out"
+          onClick={handleTabClick}
+          id="allotjaments"
+        >
+          Allotjaments
+        </li>
+      </ul>
+    </div>
+  );
+
   return (
     <div className="search-form">
-      <div className="tab-bar">
-        <ul>
-          <li>
-            <Button
-              className={
-                state.activeTab === "activities" ? "active" : "btn-light"
-              }
-              variant="none"
-              id="activities"
-              onClick={handleTabClick}
-            >
-              Activitats
-            </Button>
-          </li>
-          <li>
-            <Button
-              className={state.activeTab === "places" ? "active" : "btn-light"}
-              variant="none"
-              id="places"
-              onClick={handleTabClick}
-            >
-              Allotjaments
-            </Button>
-          </li>
-        </ul>
+      <div className="tabs-dropdown relative text-left">
+        <span
+          onClick={() => setDropdownState(!dropdownState)}
+          className="text-white inline-flex items-center cursor-pointer"
+        >
+          {state.activeTab === "activities" ? "Activitats" : "Allotjaments"}{" "}
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className={`icon icon-tabler icon-tabler-chevron-down ml-0.5 transition-all duration-300 ease-in-out ${
+              dropdownState === true ? "rotate-180" : "rotate-0"
+            }`}
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            strokeWidth="1.8"
+            stroke="#ffffff"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </span>
+        {dropdownState === true ? dropdownTab : null}
       </div>
       {selectedForm}
     </div>
