@@ -7,7 +7,6 @@ const MapModal = ({
   getMapOptions,
   renderMarker,
 }) => {
-  console.log("map!");
   return (
     <div className="modal__wrapper block p-8 w-full h-full fixed top-0 left-0 z-50">
       <div className="modal__overlay bg-black bg-opacity-50 absolute top-0 left-0 w-full h-full"></div>

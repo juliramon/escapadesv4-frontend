@@ -297,7 +297,7 @@ const ActivityList = () => {
                   <span>Filtrar activitats</span>
                 </button>
                 {stateDropdownFilters === true ? (
-                  <div className="absolute z-50 bg-white rounded-md shadow-lg mt-1.5 overflow-hidden">
+                  <div className="absolute z-50 bg-white rounded-md shadow-lg top-14 overflow-hidden">
                     <div className="flex items-start -m-5">
                       <div className="p-5">
                         <span className="text-lg font-bold mb-2 block">
