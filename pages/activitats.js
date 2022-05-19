@@ -167,7 +167,7 @@ const ActivityList = () => {
           }
         />
         <main>
-          <section className="py-8 md:py-20 relative bg-gradient-to-tr from-white to-slate-100">
+          <section className="py-8 md:py-20 relative bg-gradient-to-tr from-slate-100 to-white">
             <div className="container">
               <div className="flex flex-wrap justify-start">
                 <div className="w-full md:w-6/12">
