@@ -529,7 +529,7 @@ const SearchBar = () => {
   }
 
   const dropdownTab = (
-    <div className="absolute z-50 bg-white rounded-md shadow-md mt-1.5 overflow-hidden">
+    <div className="absolute z-50 bg-white rounded-md shadow-lg mt-1.5 overflow-hidden">
       <ul className="list-none m-0 p-0">
         <li
           className="px-3 py-1.5 hover:bg-gray-100 cursor-pointer transition-all duration-300 ease-in-out"

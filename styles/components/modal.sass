@@ -1,0 +1,13 @@
+.modal__wrapper
+    @apply block p-8 w-full h-full fixed top-0 left-0 z-50
+    z-index: 1002
+    
+    &__overlay
+        @apply bg-black bg-opacity-50 absolute top-0 left-0 w-full h-full
+
+    &__container
+        @apply w-full h-full relative z-50 border-4 border-white rounded-lg
+
+    &__close
+        @apply absolute z-50 right-3 top-3
+    

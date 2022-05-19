@@ -1,4 +1,4 @@
-import "../styles/globals.scss";
+import "../styles/app.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-quill/dist/quill.bubble.css";
 import "react-photoswipe/lib/photoswipe.css";

@@ -1,11 +1,12 @@
 import { useEffect, useCallback, useState } from "react";
 import ContentService from "../services/contentService";
 import NavigationBar from "../components/global/NavigationBar";
-import { Container, Row, Form } from "react-bootstrap";
-import GoogleMapReact from "google-map-react";
+import { Form } from "react-bootstrap";
 import Head from "next/head";
 import PublicSquareBox from "../components/listings/PublicSquareBox";
 import { useRouter } from "next/router";
+import Footer from "../components/global/Footer";
+import MapModal from "../components/modals/MapModal";
 
 const ActivityList = () => {
   const router = useRouter();
@@ -32,6 +33,10 @@ const ActivityList = () => {
   };
 
   const [state, setState] = useState(initialState);
+
+  const [stateDropdownFilters, setStateDropdownFilters] = useState(false);
+  const [stateModalMap, setStateModalMap] = useState(false);
+
   const service = new ContentService();
   const getAllActivities = useCallback(() => {
     service.activities("/activities").then((res) => {
@@ -43,31 +48,6 @@ const ActivityList = () => {
     });
   }, [state, service]);
   useEffect(getAllActivities, []);
-  let activitiesList;
-  if (state.hasActivities) {
-    activitiesList = state.activities.map((el) => (
-      <PublicSquareBox
-        key={el._id}
-        type={el.type}
-        slug={el.slug}
-        id={el._id}
-        cover={el.cover}
-        title={el.title}
-        subtitle={el.subtitle}
-        rating={el.activity_rating || el.place_rating}
-        placeType={el.placeType}
-        categoria={el.categories}
-        duration={el.duration}
-        website={el.website}
-        phone={el.phone}
-        location={`${
-          el.activity_locality === undefined
-            ? el.activity_country
-            : el.activity_locality
-        }`}
-      />
-    ));
-  }
 
   const handleCheckRegion = (e) => {
     let query = state.queryActivityRegion;
@@ -173,7 +153,7 @@ const ActivityList = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.updateSearch]);
 
-  const listingsCount = state.activities.length;
+  const textareaFooter = "";
 
   return (
     <>
@@ -186,160 +166,320 @@ const ActivityList = () => {
             "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
           }
         />
-        <Container fluid>
-          <Row>
-            <div className="box d-flex">
-              <div className="col left">
-                <div className="filter-list">
-                  <div className="filter-block">
-                    <span className="block-title">Regió</span>
-                    <Form.Check
-                      label="Barcelona"
-                      name="activityRegion"
-                      id="barcelona"
-                      onChange={handleCheckRegion}
-                    />
-                    <Form.Check
-                      label="Girona"
-                      name="activityRegion"
-                      id="girona"
-                      onChange={handleCheckRegion}
-                    />
-                    <Form.Check
-                      label="Lleida"
-                      name="activityRegion"
-                      id="lleida"
-                      onChange={handleCheckRegion}
-                    />
-                    <Form.Check
-                      label="Tarragona"
-                      name="activityRegion"
-                      id="tarragona"
-                      onChange={handleCheckRegion}
-                    />
-                    <Form.Check
-                      label="Costa Brava"
-                      name="activityRegion"
-                      id="costaBrava"
-                      onChange={handleCheckRegion}
-                    />
-                    <Form.Check
-                      label="Costa Daurada"
-                      name="activityRegion"
-                      id="costaDaurada"
-                      onChange={handleCheckRegion}
-                    />
-                    <Form.Check
-                      label="Pirineus"
-                      name="activityRegion"
-                      id="pirineus"
-                      onChange={handleCheckRegion}
-                    />
-                  </div>
-                  <div className="filter-block">
-                    <span className="block-title">Categoria</span>
-                    <Form.Check
-                      label="Romàntiques"
-                      name="activityCategory"
-                      id="romantica"
-                      onChange={handleCheckCategory}
-                    />
-                    <Form.Check
-                      label="Aventura"
-                      name="activityCategory"
-                      id="aventura"
-                      onChange={handleCheckCategory}
-                    />
-                    <Form.Check
-                      label="Gastronòmiques"
-                      name="activityCategory"
-                      id="gastronomica"
-                      onChange={handleCheckCategory}
-                    />
-                    <Form.Check
-                      label="Culturals"
-                      name="activityCategory"
-                      id="cultural"
-                      onChange={handleCheckCategory}
-                    />
-                    <Form.Check
-                      label="Relax"
-                      name="activityCategory"
-                      id="relax"
-                      onChange={handleCheckCategory}
-                    />
-                  </div>
-                  <div className="filter-block">
-                    <span className="block-title">Temporada</span>
-                    <Form.Check
-                      label="Hivern"
-                      name="activitySeason"
-                      id="hivern"
-                      onChange={handleCheckSeason}
-                    />
-                    <Form.Check
-                      label="Primavera"
-                      name="activitySeason"
-                      id="primavera"
-                      onChange={handleCheckSeason}
-                    />
-                    <Form.Check
-                      label="Estiu"
-                      name="activitySeason"
-                      id="estiu"
-                      onChange={handleCheckSeason}
-                    />
-                    <Form.Check
-                      label="Tardor"
-                      name="activitySeason"
-                      id="tardor"
-                      onChange={handleCheckSeason}
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="col center">
-                <div className="top-nav-wrapper">
-                  <h1 className="top-nav-title">Activitats</h1>
-                  <p className="top-nav-subtitle">
-                    Calceu-vos les vostres millors botes, poseu-vos el banyador,
-                    prepareu-vos la motxilla o despengeu l'anorac; aquí trobareu
-                    les millors activitats en parella a Catalunya! Escapeu-vos i
-                    gaudir d'activitats per a tots els gustos.
-                  </p>
-                  <div className="listings-counter">
-                    <b>{listingsCount}</b> activitats publicades
-                  </div>
-                </div>
-                <div className="listings-wrapper">
-                  <div className="listings-list">{activitiesList}</div>
-                </div>
-              </div>
-              <div className="col right">
-                <div className="map-wrapper">
-                  <div className="map-block">
-                    {state.hasActivities ? (
-                      <GoogleMapReact
-                        bootstrapURLKeys={{
-                          key: `${process.env.GOOGLE_API_KEY}`,
-                        }}
-                        center={center}
-                        defaultCenter={center}
-                        defaultZoom={7}
-                        options={getMapOptions}
-                        yesIWantToUseGoogleMapApiInternals
-                        onGoogleApiLoaded={({ map, maps }) => {
-                          renderMarker(map, maps);
-                        }}
-                      />
-                    ) : null}
+        <main>
+          <section className="py-8 md:py-20 relative bg-gradient-to-tr from-white to-slate-100">
+            <div className="container">
+              <div className="flex flex-wrap justify-start">
+                <div className="w-full md:w-6/12">
+                  <div className="w-full md:w-9/12">
+                    <h1 className="text-2xl md:text-3xl mt-0 mb-1.5">
+                      Activitats{" "}
+                      <span className="bg-amber-100">per fer en parella</span>
+                    </h1>
+                    <strong className="uppercase text-xs tracking-widest">
+                      Activitats a Catalunya
+                    </strong>
+                    <p className="mt-3">
+                      Calceu-vos les botes, poseu-vos el banyador, prepareu-vos
+                      la motxilla o despengeu l'anorac; aquí trobareu les
+                      millors <strong>activitats en parella</strong> a
+                      Catalunya!
+                    </p>
+                    <div className="flex flex-wrap items-center mt-4 -mx-3 opacity-70">
+                      <div className="inline-flex items-center px-3">
+                        <span className="text-sm">
+                          <b>{state.activities.length}</b> activitats
+                          disponibles
+                        </span>
+                      </div>
+                      <span className="text-primary-100">|</span>
+                      <div className="inline-flex items-center px-3">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="icon icon-tabler icon-tabler-map-2 mr-2"
+                          width="22"
+                          height="22"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="#6376a0"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <line x1="18" y1="6" x2="18" y2="6.01" />
+                          <path d="M18 13l-3.5 -5a4 4 0 1 1 7 0l-3.5 5" />
+                          <polyline points="10.5 4.75 9 4 3 7 3 20 9 17 15 20 21 17 21 15" />
+                          <line x1="9" y1="4" x2="9" y2="17" />
+                          <line x1="15" y1="15" x2="15" y2="20" />
+                        </svg>
+                        <button
+                          className="text-sm underline"
+                          onClick={() => setStateModalMap(!stateModalMap)}
+                        >
+                          Veure-les al mapa
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </Row>
-        </Container>
+            <div className="relative md:absolute inset-y-0 right-0 w-full md:w-6/12 h-full">
+              <picture>
+                <img
+                  src="https://res.cloudinary.com/juligoodie/image/upload/v1652983702/getaways-guru/activitats-en-parella_unz7x4.jpg"
+                  alt=""
+                  className="w-full h-full object-cover object-center"
+                  width={400}
+                  height={300}
+                  loading="eager"
+                />
+              </picture>
+              <figcaption className="text-xs text-secondary-100 absolute bottom-8 right-12 z-40 text-right">
+                Escapada al Santuari de Cabrera (Osona)
+                <br />© Escapadesenparella.cat
+              </figcaption>
+            </div>
+          </section>
+          <section className="md:pt-6 pb-10 md:pb-16">
+            <div className="container">
+              <div className="pb-3 relative flex items-center justify-end">
+                <button
+                  className={`button button__secondary button__med ${
+                    stateDropdownFilters == true ? "active" : null
+                  }`}
+                  onClick={() => setStateDropdownFilters(!stateDropdownFilters)}
+                >
+                  {stateDropdownFilters == true ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-x mr-1.5"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#000000"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <line x1="18" y1="6" x2="6" y2="18" />
+                      <line x1="6" y1="6" x2="18" y2="18" />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-adjustments mr-1.5"
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#000000"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <circle cx="6" cy="10" r="2" />
+                      <line x1="6" y1="4" x2="6" y2="8" />
+                      <line x1="6" y1="12" x2="6" y2="20" />
+                      <circle cx="12" cy="16" r="2" />
+                      <line x1="12" y1="4" x2="12" y2="14" />
+                      <line x1="12" y1="18" x2="12" y2="20" />
+                      <circle cx="18" cy="7" r="2" />
+                      <line x1="18" y1="4" x2="18" y2="5" />
+                      <line x1="18" y1="9" x2="18" y2="20" />
+                    </svg>
+                  )}
+
+                  <span>Filtrar activitats</span>
+                </button>
+                {stateDropdownFilters === true ? (
+                  <div className="absolute z-50 bg-white rounded-md shadow-lg mt-1.5 overflow-hidden">
+                    <div className="flex items-start -m-5">
+                      <div className="p-5">
+                        <span className="text-lg font-bold mb-2 block">
+                          Regió
+                        </span>
+                        <Form.Check
+                          label="Barcelona"
+                          name="activityRegion"
+                          id="barcelona"
+                          onChange={handleCheckRegion}
+                          className="py-1"
+                        />
+                        <Form.Check
+                          label="Girona"
+                          name="activityRegion"
+                          id="girona"
+                          onChange={handleCheckRegion}
+                          className="py-1"
+                        />
+                        <Form.Check
+                          label="Lleida"
+                          name="activityRegion"
+                          id="lleida"
+                          onChange={handleCheckRegion}
+                          className="py-1"
+                        />
+                        <Form.Check
+                          label="Tarragona"
+                          name="activityRegion"
+                          id="tarragona"
+                          onChange={handleCheckRegion}
+                          className="py-1"
+                        />
+                        <Form.Check
+                          label="Costa Brava"
+                          name="activityRegion"
+                          id="costaBrava"
+                          onChange={handleCheckRegion}
+                          className="py-1"
+                        />
+                        <Form.Check
+                          label="Costa Daurada"
+                          name="activityRegion"
+                          id="costaDaurada"
+                          onChange={handleCheckRegion}
+                          className="py-1"
+                        />
+                        <Form.Check
+                          label="Pirineus"
+                          name="activityRegion"
+                          id="pirineus"
+                          onChange={handleCheckRegion}
+                          className="py-1"
+                        />
+                      </div>
+                      <div className="p-5">
+                        <span className="text-lg font-bold mb-2 block">
+                          Categoria
+                        </span>
+                        <Form.Check
+                          label="Romàntiques"
+                          name="activityCategory"
+                          id="romantica"
+                          onChange={handleCheckCategory}
+                          className="py-1"
+                        />
+                        <Form.Check
+                          label="Aventura"
+                          name="activityCategory"
+                          id="aventura"
+                          onChange={handleCheckCategory}
+                          className="py-1"
+                        />
+                        <Form.Check
+                          label="Gastronòmiques"
+                          name="activityCategory"
+                          id="gastronomica"
+                          onChange={handleCheckCategory}
+                          className="py-1"
+                        />
+                        <Form.Check
+                          label="Culturals"
+                          name="activityCategory"
+                          id="cultural"
+                          onChange={handleCheckCategory}
+                          className="py-1"
+                        />
+                        <Form.Check
+                          label="Relax"
+                          name="activityCategory"
+                          id="relax"
+                          onChange={handleCheckCategory}
+                          className="py-1"
+                        />
+                      </div>
+                      <div className="p-5">
+                        <span className="text-lg font-bold mb-2 block">
+                          Temporada
+                        </span>
+                        <Form.Check
+                          label="Hivern"
+                          name="activitySeason"
+                          id="hivern"
+                          onChange={handleCheckSeason}
+                          className="py-1"
+                        />
+                        <Form.Check
+                          label="Primavera"
+                          name="activitySeason"
+                          id="primavera"
+                          onChange={handleCheckSeason}
+                          className="py-1"
+                        />
+                        <Form.Check
+                          label="Estiu"
+                          name="activitySeason"
+                          id="estiu"
+                          onChange={handleCheckSeason}
+                          className="py-1"
+                        />
+                        <Form.Check
+                          label="Tardor"
+                          name="activitySeason"
+                          id="tardor"
+                          onChange={handleCheckSeason}
+                          className="py-1"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+
+              <div className="flex flex-wrap items-start -mx-2">
+                {state.hasActivities
+                  ? state.activities.map((el) => (
+                      <PublicSquareBox
+                        key={el._id}
+                        type={el.type}
+                        slug={el.slug}
+                        id={el._id}
+                        cover={el.cover}
+                        title={el.title}
+                        subtitle={el.subtitle}
+                        rating={el.activity_rating || el.place_rating}
+                        placeType={el.placeType}
+                        categoria={el.categories}
+                        duration={el.duration}
+                        website={el.website}
+                        phone={el.phone}
+                        location={`${
+                          el.activity_locality === undefined
+                            ? el.activity_country
+                            : el.activity_locality
+                        }`}
+                      />
+                    ))
+                  : null}
+              </div>
+            </div>
+          </section>
+          {textareaFooter !== "" ? (
+            <section className="pb-16">
+              <div className="container">
+                <div className="w-full md:w-2/4 md:mx-auto">
+                  {textareaFooter}
+                </div>
+              </div>
+            </section>
+          ) : null}
+        </main>
       </div>
+      <Footer />
+      {stateModalMap == true ? (
+        <MapModal
+          visibility={stateModalMap}
+          hideModal={setStateModalMap}
+          center={center}
+          getMapOptions={getMapOptions}
+          renderMarker={renderMarker}
+        />
+      ) : null}
     </>
   );
 };
