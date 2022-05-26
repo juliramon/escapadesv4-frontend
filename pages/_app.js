@@ -1,5 +1,5 @@
 import "../styles/app.scss";
-import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
 import "react-quill/dist/quill.bubble.css";
 import "react-photoswipe/lib/photoswipe.css";
 import "slick-carousel/slick/slick.css";

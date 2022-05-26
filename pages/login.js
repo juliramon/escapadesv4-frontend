@@ -148,8 +148,8 @@ const Login = () => {
           name="description"
           content={`Accedeix al teu compte per cercar, descobrir i gaudir de la teva propera escapada en parella.`}
         />
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="googlebot" content="noindex, nofollow" />
         <meta property="og:type" content="website" />
         <meta
           property="og:title"

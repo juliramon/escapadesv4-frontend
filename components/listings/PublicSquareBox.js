@@ -132,7 +132,7 @@ const PublicSquareBox = ({
         height="18"
         viewBox="0 0 24 24"
         strokeWidth="1.5"
-        stroke="#6376A0"
+        stroke="currentColor"
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -153,7 +153,7 @@ const PublicSquareBox = ({
         height="18"
         viewBox="0 0 24 24"
         strokeWidth="1.5"
-        stroke="#6376A0"
+        stroke="currentColor"
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -175,11 +175,11 @@ const PublicSquareBox = ({
   const coverImg = `${coverPath}w_246,h_180,c_fill/${imageId}`;
 
   return (
-    <div className="w-full md:w-1/2 lg:w-1/4 p-2">
-      <div className="shadow-sm rounded-t-md rounded-b-md overflow-hidden">
+    <div className="w-full md:w-1/2 lg:w-1/4 px-2 py-4 product__item">
+      <div className="overflow-hidden">
         <Link href={`/${linkPath}/${slug}`}>
           <a className="relative">
-            <div className="aspect-w-16 aspect-h-9 relative">
+            <div className="aspect-w-4 aspect-h-3 relative rounded overflow-hidden">
               <picture className="w-full h-full">
                 <source srcSet={coverImg} />
                 <img
@@ -193,43 +193,21 @@ const PublicSquareBox = ({
                 />
               </picture>
             </div>
-            <div className="absolute top-2 right-2 bg-secondary-100 inline-block w-auto h-auto rounded-md text-primary-300 px-2 py-1 text-sm">
+            <div className="absolute top-2 right-2 bg-white inline-block w-auto h-auto rounded-md text-primary-900 px-2 py-1 text-sm">
               {modRating || rating}
             </div>
-          </a>
-        </Link>
-        <div className="p-3 box-description flex flex-col justify-between">
-          <Link href={`/${linkPath}/${slug}`}>
-            <a>
-              <h3 className="text-lg mt-0 mb-0">{title}</h3>
-              <p className="text-sm my-0">
+            <div className="pt-3 flex flex-col justify-between">
+              <h3 className="mt-0 mb-0 text-primary-600">{title}</h3>
+              <p className="text-sm my-0 text-primary-500">
                 Escapada {categoryModified} a {shortenedLocation}
               </p>
-              <p className="my-1 flex items-center">
+              <p className="mt-4 mb-1 flex items-center text-sm text-primary-500">
                 <span className="mr-1.5">{additionalInfoSVG}</span>
                 {additionalInfoRef}
               </p>
-            </a>
-          </Link>
-          <div
-            className={
-              type !== "activity"
-                ? "flex lex-wrap items-center -mx-1.5 mt-3"
-                : "flex-wrap items-center -mx-1.5 mt-3"
-            }
-          >
-            <div className="px-1.5 flex-1">
-              <a
-                href={`/${linkPath}/${slug}`}
-                title="Detalls"
-                className="button button__primary button__med w-full justify-center"
-              >
-                Llegir-ne més
-              </a>
             </div>
-            <div className="px-1.5 flex-1">{buttonLight}</div>
-          </div>
-        </div>
+          </a>
+        </Link>
       </div>
     </div>
   );

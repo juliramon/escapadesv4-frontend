@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "vendors/tailwind.sass";
 
 @import "components/buttons.sass";
 @import "components/scrolldown.sass";
@@ -8,11 +6,12 @@
 @import "components/modal.sass";
 @import "layout/forms.sass";
 @import "layout/footer.sass";
+@import "layout/navigation.sass";
 
-@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Work+Sans:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Unna:wght@400;700&family=Work+Sans:wght@400;600;700&display=swap");
 
-$font-bold: "Merriweather";
-$font-regular: "Work Sans";
+$font-bold: "Unna", serif;
+$font-regular: "Work Sans", sans-serif;
 
 $dark-blue: #00206b;
 $medium-blue: #6376a0;
@@ -21,28 +20,6 @@ $white: #ffffff;
 $dark-red: #fd8281;
 $electric-blue: #002b8f;
 $background-input: #f2f7f9;
-
-html,
-body {
-  scroll-behavior: smooth;
-  padding: 0;
-  margin: 0;
-  color: $dark-blue !important;
-  font-size: 16px;
-  font-family: "Work Sans", -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-    Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif !important;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-:focus-visible {
-  border: none !important;
-  outline: none !important;
-  -webkit-appearance: none !important;
-  box-shadow: none !important;
-}
 
 /*---GLOBAL STYLES---*/
 
@@ -87,46 +64,6 @@ body {
 .avatar-s {
   width: 50px;
   height: 50px;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: $dark-blue;
-  font-family: $font-bold;
-  letter-spacing: 0.2px;
-  font-weight: 600;
-}
-
-h3,
-h4,
-h5,
-h6 {
-  color: $dark-blue;
-  font-family: $font-regular;
-  font-weight: 500 !important;
-  letter-spacing: 0.1px;
-}
-
-p,
-a,
-ul,
-ol,
-span {
-  color: $dark-blue;
-  letter-spacing: 0.1px;
-}
-
-a,
-a:focus,
-a:visited,
-a:hover,
-a:active {
-  text-decoration: none !important;
-  cursor: pointer;
 }
 
 .breadcrumb {
@@ -256,13 +193,6 @@ nav {
       width: 25px;
       margin-right: 6px;
     }
-  }
-  .nav-link,
-  a:not(.navbar-brand) {
-    color: $dark-blue;
-    font-size: 0.95em;
-    padding-left: 0.85rem !important;
-    padding-right: 0.85rem !important;
   }
   .navbar-brand img {
     width: 135px;
@@ -453,11 +383,11 @@ nav {
   background-image: url("https://res.cloudinary.com/juligoodie/image/upload/v1624975618/getaways-guru/static-files/background-pattern_jgpvmh.svg");
   background-repeat: repeat-x;
   background-size: 18%;
-  border-bottom: 1px solid #e7ebf5;
+  //border-bottom: 1px solid #e7ebf5;
 }
 
 .navbar-light {
-  border-bottom: 1px solid #e7ebf5;
+  //border-bottom: 1px solid #e7ebf5;
 }
 
 .top-nav-wrapper {
@@ -496,7 +426,7 @@ nav {
   #hero {
     height: 100%;
     @screen lg {
-      height: calc(100vh - 63.59px);
+      height: calc(80vh - 63.59px);
     }
     .wrapper {
       background: #fef8f2;

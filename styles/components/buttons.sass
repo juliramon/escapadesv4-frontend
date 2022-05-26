@@ -5,49 +5,55 @@ $white: #ffffff
 $dark-red: #fd8281
 $electric-blue: #002b8f
 $background-input: #f2f7f9
-    
+		
 
 .button
-    @apply rounded-lg transition-all duration-300 ease-in-out inline-flex
+	@apply rounded transition-all duration-300 ease-in-out inline-flex
 
 .button__primary
-    @apply inline-flex items-center bg-primary-200 text-secondary-100
-    &:hover
-        @apply bg-primary-300 text-secondary-100
+	@apply inline-flex items-center bg-primary-600 text-white
+	&:hover
+		@apply bg-primary-800 text-white
 
 .button__secondary
-    @apply inline-flex items-center bg-secondary-100 text-primary-200 border border-primary-200
-    &:hover
-        @apply bg-primary-100 border-primary-100 text-secondary-100
+	@apply inline-flex items-center bg-secondary-100 text-primary-200 border border-primary-200
+	&:hover
+		@apply bg-primary-100 border-primary-100 text-secondary-100
+
+.button__ghost
+	@apply inline-flex items-center bg-transparent text-primary-400 border border-primary-300  
+	&:hover
+		@apply bg-primary-500 border-primary-500 text-white
+	
 
 .button__lg
- @apply py-4 px-5 text-sm
+	@apply py-4 px-5 text-sm
 
 .button__med
-    @apply py-2.5 px-3.5 text-sm
+	@apply py-2.5 px-3.5 text-sm
 
 .btn
-  border-radius: 8px !important
-  transition: 0.3s
+	border-radius: 8px !important
+	transition: 0.3s
 
 .btn-m
-  padding: 10px 14px !important
-  font-size: 0.85em !important
+	padding: 10px 14px !important
+	font-size: 0.85em !important
 
 .btn-dark
-  border: 1px solid $electric-blue !important
-  background-color: $electric-blue !important
-  color: $white !important
-  flex: 1
+	border: 1px solid $electric-blue !important
+	background-color: $electric-blue !important
+	color: $white !important
+	flex: 1
 
 .btn-light
-  color: $electric-blue !important
-  background-color: $white !important
-  border: 1px solid $electric-blue !important
-  flex: 1
+	color: $electric-blue !important
+	background-color: $white !important
+	border: 1px solid $electric-blue !important
+	flex: 1
 
 .btn-no-flex
-  flex: none
+	flex: none
 
 .btn-no-border
-  border: none !important
+	border: none !important

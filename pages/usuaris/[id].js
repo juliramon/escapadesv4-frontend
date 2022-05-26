@@ -459,8 +459,8 @@ const UserProfile = ({
           name="description"
           content={`${state.userProfile.fullName}, una escapada que us encantarà! Descobreix ${state.userProfile.fullName} amb nosaltres i sorprèn a la teva parella. Fes clic aquí!`}
         />
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
+        <meta name="robots" content="noindex, nofollow" />
+        <meta name="googlebot" content="noindex, nofollow" />
         <meta property="og:type" content="website" />
         <meta
           property="og:title"

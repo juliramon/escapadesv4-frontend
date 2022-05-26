@@ -1,0 +1,11 @@
+@layer components
+
+    .menu
+        &__item
+            @apply text-primary-900 text-sm px-3 transition-all duration-300 ease-in-out
+            svg
+                @apply transition-all duration-300 ease-in-out text-primary-900
+        &__item:hover
+            @apply text-primary-600
+            svg
+                @apply stroke-primary-600
