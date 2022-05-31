@@ -237,19 +237,16 @@ const PlaceList = ({ user }) => {
         />
 
         <main>
-          <section className="py-8 md:py-20 relative bg-gradient-to-tr from-slate-100 to-white">
-            <div className="container">
-              <div className="flex flex-wrap justify-start">
-                <div className="w-full md:w-6/12">
-                  <div className="w-full md:w-9/12">
-                    <h1 className="text-2xl md:text-3xl mt-0 mb-1.5">
-                      Allotjaments{" "}
-                      <span className="bg-amber-100">amb encant</span>
-                    </h1>
-                    <strong className="uppercase text-xs tracking-widest">
+          <section className="pt-6 pb-8">
+            <div className="container relative">
+              <div className="flex flex-wrap items-center justify-start relative rounded overflow-hidden bg-primary-50">
+                <div className="w-full md:w-5/12 relative z-30 py-24">
+                  <div className="max-w-xl mx-auto px-20">
+                    <strong className="uppercase text-sm tracking-wider text-primary-900">
                       Allotjaments a Catalunya
                     </strong>
-                    <p className="mt-3">
+                    <h1 className="mt-4 mb-0">Allotjaments amb encant</h1>
+                    <p className="mt-6 text-base leading-relaxed">
                       Des d'<strong>hotels amb encant</strong> únics a
                       Catalunya, a <strong>cabanes acollidaroes</strong> i{" "}
                       <strong>cases-arbre</strong>, passant per{" "}
@@ -257,301 +254,315 @@ const PlaceList = ({ user }) => {
                       gaudir de l'escapada, aquí trobaràs els millors
                       allotjaments a Catalunya per a una escapada perfecta!
                     </p>
-                    <div className="flex flex-wrap items-center mt-4 -mx-3 opacity-70">
+                    <div className="flex flex-wrap items-center mt-4 -mx-3">
                       <div className="inline-flex items-center px-3">
                         <span className="text-sm">
                           <b>{state.places.length}</b> allotjaments disponibles
                         </span>
                       </div>
-                      <span className="text-primary-100">|</span>
-                      <div className="inline-flex items-center px-3">
+                    </div>
+                  </div>
+                </div>
+                <div className="w-full md:w-7/12 absolute top-0 right-0 h-full">
+                  <picture>
+                    <img
+                      src="https://res.cloudinary.com/juligoodie/image/upload/v1652991721/getaways-guru/allotjaments_qmoyui.jpg"
+                      alt="Allotjaments amb encant a Catalunya"
+                      className="w-full h-full object-cover object-center"
+                      width={400}
+                      height={300}
+                      loading="eager"
+                    />
+                  </picture>
+                  <figcaption className="text-xs text-white absolute bottom-5 right-5 z-40 text-right">
+                    Escapada a Mas Farner (Llívia)
+                    <br />© Escapadesenparella.cat
+                  </figcaption>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section className="bg-slate-50 px-8 py-8 w-6/12 mx-auto relative rounded">
+            <span className="text-10 uppercase text-primary-400 tracking-wider absolute top-3 right-3">
+              Publicitat
+            </span>
+            <div className="ad-block h-20 w-full"></div>
+          </section>
+
+          <section className="pt-6 pb-8 md:pt-12 md:pb-16">
+            <div className="container">
+              <div className="md:w-10/12 mx-auto">
+                <div className="w-full flex flex-wrap items-center justify-between pb-6">
+                  <div class="w-full md:w-1/2">
+                    <h2>Allotjaments per a parelles</h2>
+                    <p className="mt-2.5">
+                      Descobreix els millors allotjaments amb encant a Catalunya
+                    </p>
+                  </div>
+                  <div className="relative flex items-center justify-end w-full md:w-1/2">
+                    <button
+                      className="text-sm inline-flex flex-nowrap items-center text-white button button__ghost button__med mr-3"
+                      onClick={() => setStateModalMap(!stateModalMap)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-map-2 mr-2"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <line x1="18" y1="6" x2="18" y2="6.01" />
+                        <path d="M18 13l-3.5 -5a4 4 0 1 1 7 0l-3.5 5" />
+                        <polyline points="10.5 4.75 9 4 3 7 3 20 9 17 15 20 21 17 21 15" />
+                        <line x1="9" y1="4" x2="9" y2="17" />
+                        <line x1="15" y1="15" x2="15" y2="20" />
+                      </svg>
+                      Veure'ls al mapa
+                    </button>
+                    <button
+                      className={`button button__ghost button__med ${
+                        stateDropdownFilters == true ? "active" : null
+                      }`}
+                      onClick={() =>
+                        setStateDropdownFilters(!stateDropdownFilters)
+                      }
+                    >
+                      {stateDropdownFilters == true ? (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-map-2 mr-2"
-                          width="22"
-                          height="22"
+                          className="icon icon-tabler icon-tabler-x mr-2"
+                          width="18"
+                          height="18"
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
-                          stroke="#6376a0"
+                          stroke="currentColor"
                           fill="none"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         >
                           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <line x1="18" y1="6" x2="18" y2="6.01" />
-                          <path d="M18 13l-3.5 -5a4 4 0 1 1 7 0l-3.5 5" />
-                          <polyline points="10.5 4.75 9 4 3 7 3 20 9 17 15 20 21 17 21 15" />
-                          <line x1="9" y1="4" x2="9" y2="17" />
-                          <line x1="15" y1="15" x2="15" y2="20" />
+                          <line x1="18" y1="6" x2="6" y2="18" />
+                          <line x1="6" y1="6" x2="18" y2="18" />
                         </svg>
-                        <button
-                          className="text-sm underline"
-                          onClick={() => setStateModalMap(!stateModalMap)}
+                      ) : (
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="icon icon-tabler icon-tabler-adjustments mr-2"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         >
-                          Veure'ls al mapa
-                        </button>
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <circle cx="6" cy="10" r="2" />
+                          <line x1="6" y1="4" x2="6" y2="8" />
+                          <line x1="6" y1="12" x2="6" y2="20" />
+                          <circle cx="12" cy="16" r="2" />
+                          <line x1="12" y1="4" x2="12" y2="14" />
+                          <line x1="12" y1="18" x2="12" y2="20" />
+                          <circle cx="18" cy="7" r="2" />
+                          <line x1="18" y1="4" x2="18" y2="5" />
+                          <line x1="18" y1="9" x2="18" y2="20" />
+                        </svg>
+                      )}
+                      <span>Filtrar allotjaments</span>
+                    </button>
+                    {stateDropdownFilters === true ? (
+                      <div className="absolute z-50 bg-white rounded-md shadow-lg top-14 overflow-hidden p-7">
+                        <div className="flex items-start -m-5">
+                          <div className="p-5">
+                            <span className="text-lg mb-2 block">
+                              Tipologia
+                            </span>
+                            <Form.Check
+                              label="Hotels"
+                              name="placeType"
+                              id="hotel"
+                              onChange={handleCheckType}
+                            />
+                            <Form.Check
+                              label="Apartaments"
+                              name="placeType"
+                              id="apartament"
+                              onChange={handleCheckType}
+                            />
+                            <Form.Check
+                              label="Refugis"
+                              name="placeType"
+                              id="refugi"
+                              onChange={handleCheckType}
+                            />
+                            <Form.Check
+                              label="Cases-arbre"
+                              name="placeType"
+                              id="casaarbre"
+                              onChange={handleCheckType}
+                            />
+                            <Form.Check
+                              label="Cases rurals"
+                              name="placeType"
+                              id="casarural"
+                              onChange={handleCheckType}
+                            />
+                            <Form.Check
+                              label="Carabanes"
+                              name="placeType"
+                              id="carabana"
+                              onChange={handleCheckType}
+                            />
+                          </div>
+                          <div className="p-5">
+                            <span className="text-lg mb-2 block">Regió</span>
+                            <Form.Check
+                              label="Barcelona"
+                              name="placeRegion"
+                              id="barcelona"
+                              onChange={handleCheckRegion}
+                            />
+                            <Form.Check
+                              label="Girona"
+                              name="placeRegion"
+                              id="girona"
+                              onChange={handleCheckRegion}
+                            />
+                            <Form.Check
+                              label="Lleida"
+                              name="placeRegion"
+                              id="lleida"
+                              onChange={handleCheckRegion}
+                            />
+                            <Form.Check
+                              label="Tarragona"
+                              name="placeRegion"
+                              id="tarragona"
+                              onChange={handleCheckRegion}
+                            />
+                            <Form.Check
+                              label="Costa Brava"
+                              name="placeRegion"
+                              id="costaBrava"
+                              onChange={handleCheckRegion}
+                            />
+                            <Form.Check
+                              label="Costa Daurada"
+                              name="placeRegion"
+                              id="costaDaurada"
+                              onChange={handleCheckRegion}
+                            />
+                            <Form.Check
+                              label="Pirineus"
+                              name="placeRegion"
+                              id="pirineus"
+                              onChange={handleCheckRegion}
+                            />
+                          </div>
+                          <div className="p-5">
+                            <span className="text-lg mb-2 block">
+                              Categoria
+                            </span>
+                            <Form.Check
+                              label="Romàntiques"
+                              name="placeCategory"
+                              id="romantica"
+                              onChange={handleCheckCategory}
+                            />
+                            <Form.Check
+                              label="Aventura"
+                              name="placeCategory"
+                              id="aventura"
+                              onChange={handleCheckCategory}
+                            />
+                            <Form.Check
+                              label="Gastronòmiques"
+                              name="placeCategory"
+                              id="gastronomica"
+                              onChange={handleCheckCategory}
+                            />
+                            <Form.Check
+                              label="Culturals"
+                              name="placeCategory"
+                              id="cultural"
+                              onChange={handleCheckCategory}
+                            />
+                            <Form.Check
+                              label="Relax"
+                              name="placeCategory"
+                              id="relax"
+                              onChange={handleCheckCategory}
+                            />
+                          </div>
+                          <div className="p-5">
+                            <span className="text-lg mb-2 block">
+                              Temporada
+                            </span>
+                            <Form.Check
+                              label="Hivern"
+                              name="placeSeason"
+                              id="hivern"
+                              onChange={handleCheckSeason}
+                            />
+                            <Form.Check
+                              label="Primavera"
+                              name="placeSeason"
+                              id="primavera"
+                              onChange={handleCheckSeason}
+                            />
+                            <Form.Check
+                              label="Estiu"
+                              name="placeSeason"
+                              id="estiu"
+                              onChange={handleCheckSeason}
+                            />
+                            <Form.Check
+                              label="Tardor"
+                              name="placeSeason"
+                              id="tardor"
+                              onChange={handleCheckSeason}
+                            />
+                          </div>
+                        </div>
                       </div>
-                    </div>
+                    ) : null}
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="relative md:absolute inset-y-0 right-0 w-full md:w-6/12 h-full">
-              <picture>
-                <img
-                  src="https://res.cloudinary.com/juligoodie/image/upload/v1652991721/getaways-guru/allotjaments_qmoyui.jpg"
-                  alt="Allotjaments amb encant a Catalunya"
-                  className="w-full h-full object-cover object-center"
-                  width={400}
-                  height={300}
-                  loading="eager"
-                />
-              </picture>
-              <figcaption className="text-xs text-secondary-100 absolute bottom-8 right-12 z-40 text-right">
-                Escapada a Mas Farner (Llívia)
-                <br />© Escapadesenparella.cat
-              </figcaption>
-            </div>
-          </section>
-          <section className="md:pt-6 pb-10 md:pb-16">
-            <div className="container">
-              <div className="pb-3 relative flex items-center justify-end">
-                <button
-                  className={`button button__secondary button__med ${
-                    stateDropdownFilters == true ? "active" : null
-                  }`}
-                  onClick={() => setStateDropdownFilters(!stateDropdownFilters)}
-                >
-                  {stateDropdownFilters == true ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-x mr-1.5"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="#000000"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <line x1="18" y1="6" x2="6" y2="18" />
-                      <line x1="6" y1="6" x2="18" y2="18" />
-                    </svg>
-                  ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-adjustments mr-1.5"
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="#000000"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <circle cx="6" cy="10" r="2" />
-                      <line x1="6" y1="4" x2="6" y2="8" />
-                      <line x1="6" y1="12" x2="6" y2="20" />
-                      <circle cx="12" cy="16" r="2" />
-                      <line x1="12" y1="4" x2="12" y2="14" />
-                      <line x1="12" y1="18" x2="12" y2="20" />
-                      <circle cx="18" cy="7" r="2" />
-                      <line x1="18" y1="4" x2="18" y2="5" />
-                      <line x1="18" y1="9" x2="18" y2="20" />
-                    </svg>
-                  )}
 
-                  <span>Filtrar allotjaments</span>
-                </button>
-                {stateDropdownFilters === true ? (
-                  <div className="absolute z-50 bg-white rounded-md shadow-lg top-14 overflow-hidden">
-                    <div className="flex items-start -m-5">
-                      <div className="p-5">
-                        <span className="text-lg font-bold mb-2 block">
-                          Tipologia
-                        </span>
-                        <Form.Check
-                          label="Hotels"
-                          name="placeType"
-                          id="hotel"
-                          onChange={handleCheckType}
+                <div className="flex flex-wrap items-start -mx-2">
+                  {state.hasPlaces
+                    ? state.places.map((el) => (
+                        <PublicSquareBox
+                          key={el._id}
+                          type={el.type}
+                          slug={el.slug}
+                          id={el._id}
+                          cover={el.cover}
+                          title={el.title}
+                          subtitle={el.subtitle}
+                          rating={el.activity_rating || el.place_rating}
+                          placeType={el.placeType}
+                          categoria={el.categories}
+                          duration={el.duration}
+                          website={el.website}
+                          phone={el.phone}
+                          location={`${
+                            el.place_locality === undefined
+                              ? el.place_country
+                              : el.place_locality
+                          }`}
                         />
-                        <Form.Check
-                          label="Apartaments"
-                          name="placeType"
-                          id="apartament"
-                          onChange={handleCheckType}
-                        />
-                        <Form.Check
-                          label="Refugis"
-                          name="placeType"
-                          id="refugi"
-                          onChange={handleCheckType}
-                        />
-                        <Form.Check
-                          label="Cases-arbre"
-                          name="placeType"
-                          id="casaarbre"
-                          onChange={handleCheckType}
-                        />
-                        <Form.Check
-                          label="Cases rurals"
-                          name="placeType"
-                          id="casarural"
-                          onChange={handleCheckType}
-                        />
-                        <Form.Check
-                          label="Carabanes"
-                          name="placeType"
-                          id="carabana"
-                          onChange={handleCheckType}
-                        />
-                      </div>
-                      <div className="p-5">
-                        <span className="text-lg font-bold mb-2 block">
-                          Regió
-                        </span>
-                        <Form.Check
-                          label="Barcelona"
-                          name="placeRegion"
-                          id="barcelona"
-                          onChange={handleCheckRegion}
-                        />
-                        <Form.Check
-                          label="Girona"
-                          name="placeRegion"
-                          id="girona"
-                          onChange={handleCheckRegion}
-                        />
-                        <Form.Check
-                          label="Lleida"
-                          name="placeRegion"
-                          id="lleida"
-                          onChange={handleCheckRegion}
-                        />
-                        <Form.Check
-                          label="Tarragona"
-                          name="placeRegion"
-                          id="tarragona"
-                          onChange={handleCheckRegion}
-                        />
-                        <Form.Check
-                          label="Costa Brava"
-                          name="placeRegion"
-                          id="costaBrava"
-                          onChange={handleCheckRegion}
-                        />
-                        <Form.Check
-                          label="Costa Daurada"
-                          name="placeRegion"
-                          id="costaDaurada"
-                          onChange={handleCheckRegion}
-                        />
-                        <Form.Check
-                          label="Pirineus"
-                          name="placeRegion"
-                          id="pirineus"
-                          onChange={handleCheckRegion}
-                        />
-                      </div>
-                      <div className="p-5">
-                        <span className="text-lg font-bold mb-2 block">
-                          Categoria
-                        </span>
-                        <Form.Check
-                          label="Romàntiques"
-                          name="placeCategory"
-                          id="romantica"
-                          onChange={handleCheckCategory}
-                        />
-                        <Form.Check
-                          label="Aventura"
-                          name="placeCategory"
-                          id="aventura"
-                          onChange={handleCheckCategory}
-                        />
-                        <Form.Check
-                          label="Gastronòmiques"
-                          name="placeCategory"
-                          id="gastronomica"
-                          onChange={handleCheckCategory}
-                        />
-                        <Form.Check
-                          label="Culturals"
-                          name="placeCategory"
-                          id="cultural"
-                          onChange={handleCheckCategory}
-                        />
-                        <Form.Check
-                          label="Relax"
-                          name="placeCategory"
-                          id="relax"
-                          onChange={handleCheckCategory}
-                        />
-                      </div>
-                      <div className="p-5">
-                        <span className="text-lg font-bold mb-2 block">
-                          Temporada
-                        </span>
-                        <Form.Check
-                          label="Hivern"
-                          name="placeSeason"
-                          id="hivern"
-                          onChange={handleCheckSeason}
-                        />
-                        <Form.Check
-                          label="Primavera"
-                          name="placeSeason"
-                          id="primavera"
-                          onChange={handleCheckSeason}
-                        />
-                        <Form.Check
-                          label="Estiu"
-                          name="placeSeason"
-                          id="estiu"
-                          onChange={handleCheckSeason}
-                        />
-                        <Form.Check
-                          label="Tardor"
-                          name="placeSeason"
-                          id="tardor"
-                          onChange={handleCheckSeason}
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ) : null}
-              </div>
-
-              <div className="flex flex-wrap items-start -mx-2">
-                {state.hasPlaces
-                  ? state.places.map((el) => (
-                      <PublicSquareBox
-                        key={el._id}
-                        type={el.type}
-                        slug={el.slug}
-                        id={el._id}
-                        cover={el.cover}
-                        title={el.title}
-                        subtitle={el.subtitle}
-                        rating={el.activity_rating || el.place_rating}
-                        placeType={el.placeType}
-                        categoria={el.categories}
-                        duration={el.duration}
-                        website={el.website}
-                        phone={el.phone}
-                        location={`${
-                          el.place_locality === undefined
-                            ? el.place_country
-                            : el.place_locality
-                        }`}
-                      />
-                    ))
-                  : null}
+                      ))
+                    : null}
+                </div>
               </div>
             </div>
           </section>

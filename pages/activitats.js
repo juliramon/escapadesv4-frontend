@@ -160,7 +160,7 @@ const ActivityList = () => {
       <Head>
         <title>Activitats en parella - Escapadesenparella.cat</title>
       </Head>
-      <div id="contentList" className="activity">
+      <div id="contentList" className="activity relative">
         <NavigationBar
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
@@ -169,13 +169,13 @@ const ActivityList = () => {
         <main>
           <section className="pt-6 pb-8">
             <div className="container relative">
-              <div className="flex flex-wrap justify-start pb-8 md:pb-14 relative">
-                <div className="w-full md:w-5/12 relative pt-14 z-30">
-                  <div className="max-w-lg pr-12">
-                    <span className="uppercase text-base tracking-wider text-primary-900">
+              <div className="flex flex-wrap items-center justify-start relative rounded overflow-hidden bg-primary-50">
+                <div className="w-full md:w-5/12 relative z-30 py-24">
+                  <div className="max-w-xl mx-auto px-20">
+                    <span className="uppercase text-sm tracking-wider text-primary-900">
                       Activitats a Catalunya
                     </span>
-                    <h1 className="mt-4 mb-0 ">
+                    <h1 className="mt-4 mb-0">
                       Activitats per fer en parella a Catalunya
                     </h1>
                     <p className="mt-6 text-base leading-relaxed">
@@ -191,38 +191,10 @@ const ActivityList = () => {
                           disponibles
                         </span>
                       </div>
-                      <span className="text-primary-100">|</span>
-                      <div className="inline-flex items-center px-3">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-map-2 mr-2"
-                          width="22"
-                          height="22"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <line x1="18" y1="6" x2="18" y2="6.01" />
-                          <path d="M18 13l-3.5 -5a4 4 0 1 1 7 0l-3.5 5" />
-                          <polyline points="10.5 4.75 9 4 3 7 3 20 9 17 15 20 21 17 21 15" />
-                          <line x1="9" y1="4" x2="9" y2="17" />
-                          <line x1="15" y1="15" x2="15" y2="20" />
-                        </svg>
-                        <button
-                          className="text-sm underline"
-                          onClick={() => setStateModalMap(!stateModalMap)}
-                        >
-                          Veure-les al mapa
-                        </button>
-                      </div>
                     </div>
                   </div>
                 </div>
-                <div className="w-full md:w-7/12 relative rounded overflow-hidden">
+                <div className="w-full md:w-7/12 absolute top-0 right-0 h-full">
                   <picture>
                     <img
                       src="https://res.cloudinary.com/juligoodie/image/upload/v1652983702/getaways-guru/activitats-en-parella_unz7x4.jpg"
@@ -233,32 +205,59 @@ const ActivityList = () => {
                       loading="eager"
                     />
                   </picture>
-                  <figcaption className="text-xs text-white absolute top-4 right-4 z-40 text-right bg-slate-500 bg-opacity-40 py-1.5 px-2 rounded">
-                    📍 Escapada al Santuari de Cabrera (Osona)
+                  <figcaption className="text-xs text-white absolute bottom-5 right-5 z-40 text-right">
+                    Escapada al Santuari de Cabrera (Osona)
+                    <br /> ©Escapadesenparella.cat
                   </figcaption>
                 </div>
-              </div>
-              <div className="absolute -bottom-14 bg-slate-50 px-8 py-8 w-7/12 transform left-1/2 -translate-x-1/2 rounded">
-                <span className="text-10 uppercase text-primary-400 tracking-wider absolute top-3 right-3">
-                  Publicitat
-                </span>
-                <div className="ad-block h-20 w-full"></div>
               </div>
             </div>
           </section>
 
-          <section className="py-12 md:py-24">
+          <section className="bg-slate-50 px-8 py-8 w-6/12 mx-auto relative rounded">
+            <span className="text-10 uppercase text-primary-400 tracking-wider absolute top-3 right-3">
+              Publicitat
+            </span>
+            <div className="ad-block h-20 w-full"></div>
+          </section>
+
+          <section className="pt-6 pb-8 md:pt-12 md:pb-16">
             <div className="container">
               <div className="md:w-10/12 mx-auto">
                 <div className="w-full flex flex-wrap items-center justify-between pb-6">
-                  <div class="w-full md:w-3/4">
+                  <div class="w-full md:w-1/2">
                     <h2>Activitats destacades</h2>
                     <p className="mt-2.5">
                       Descobreix activitats i escapades d'aventura per fer
                       Catalunya
                     </p>
                   </div>
-                  <div className="relative flex items-center justify-end w-full md:w-1/4">
+                  <div className="relative flex items-center justify-end w-full md:w-1/2">
+                    <button
+                      className="text-sm inline-flex flex-nowrap items-center text-white button button__ghost button__med mr-3"
+                      onClick={() => setStateModalMap(!stateModalMap)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-map-2 mr-2"
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        stroke="currentColor"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <line x1="18" y1="6" x2="18" y2="6.01" />
+                        <path d="M18 13l-3.5 -5a4 4 0 1 1 7 0l-3.5 5" />
+                        <polyline points="10.5 4.75 9 4 3 7 3 20 9 17 15 20 21 17 21 15" />
+                        <line x1="9" y1="4" x2="9" y2="17" />
+                        <line x1="15" y1="15" x2="15" y2="20" />
+                      </svg>
+                      Veure-les al mapa
+                    </button>
                     <button
                       className={`button button__ghost button__med ${
                         stateDropdownFilters == true ? "active" : null
@@ -270,12 +269,12 @@ const ActivityList = () => {
                       {stateDropdownFilters == true ? (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-x mr-1.5"
+                          className="icon icon-tabler icon-tabler-x mr-2"
                           width="18"
                           height="18"
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
-                          stroke="#000000"
+                          stroke="currentColor"
                           fill="none"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -287,12 +286,12 @@ const ActivityList = () => {
                       ) : (
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-adjustments mr-1.5"
+                          className="icon icon-tabler icon-tabler-adjustments mr-2"
                           width="18"
                           height="18"
                           viewBox="0 0 24 24"
                           strokeWidth="1.5"
-                          stroke="#000000"
+                          stroke="currentColor"
                           fill="none"
                           strokeLinecap="round"
                           strokeLinejoin="round"
@@ -309,16 +308,13 @@ const ActivityList = () => {
                           <line x1="18" y1="9" x2="18" y2="20" />
                         </svg>
                       )}
-
                       <span>Filtrar activitats</span>
                     </button>
                     {stateDropdownFilters === true ? (
-                      <div className="absolute z-50 bg-white rounded-md shadow-lg top-14 overflow-hidden">
+                      <div className="absolute z-50 bg-white rounded-md shadow-lg top-14 overflow-hidden p-7">
                         <div className="flex items-start -m-5">
                           <div className="p-5">
-                            <span className="text-lg font-bold mb-2 block">
-                              Regió
-                            </span>
+                            <span className="text-lg mb-2 block">Regió</span>
                             <Form.Check
                               label="Barcelona"
                               name="activityRegion"
@@ -370,7 +366,7 @@ const ActivityList = () => {
                             />
                           </div>
                           <div className="p-5">
-                            <span className="text-lg font-bold mb-2 block">
+                            <span className="text-lg mb-2 block">
                               Categoria
                             </span>
                             <Form.Check
@@ -410,7 +406,7 @@ const ActivityList = () => {
                             />
                           </div>
                           <div className="p-5">
-                            <span className="text-lg font-bold mb-2 block">
+                            <span className="text-lg mb-2 block">
                               Temporada
                             </span>
                             <Form.Check
