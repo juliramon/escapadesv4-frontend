@@ -1,8 +1,7 @@
 import { useEffect, useCallback, useState } from "react";
 import ContentService from "../services/contentService";
 import NavigationBar from "../components/global/NavigationBar";
-import { Container, Row, Form } from "react-bootstrap";
-import GoogleMapReact from "google-map-react";
+import { Form } from "react-bootstrap";
 import PublicSquareBox from "../components/listings/PublicSquareBox";
 import Head from "next/head";
 import { useRouter } from "next/router";

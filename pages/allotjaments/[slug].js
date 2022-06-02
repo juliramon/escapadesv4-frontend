@@ -194,18 +194,18 @@ const PlaceListing = () => {
   } else {
     bookmarkButton = (
       <div
-        className="listing-bookmark-wrapper"
+        className="flex items-center px-5"
         onClick={() => handleModalVisibility()}
       >
         <button className="listing-bookmark">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="icon icon-tabler icon-tabler-bookmark"
-            width="44"
-            height="44"
+            className="icon icon-tabler icon-tabler-bookmark mr-2"
+            width="28"
+            height="28"
             viewBox="0 0 24 24"
             strokeWidth="1.5"
-            stroke="#0d1f44"
+            stroke="currentColor"
             fill="none"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -221,18 +221,18 @@ const PlaceListing = () => {
 
   const shareButton = (
     <div
-      className="listing-bookmark-wrapper"
+      className="flex items-center px-5"
       onClick={() => handleShareModalVisibility()}
     >
-      <button className="listing-bookmark">
+      <button className="flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="icon icon-tabler icon-tabler-share"
-          width="44"
-          height="44"
+          className="icon icon-tabler icon-tabler-share mr-2"
+          width="28"
+          height="28"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
-          stroke="#0d1f44"
+          stroke="currentColor"
           fill="none"
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -298,11 +298,9 @@ const PlaceListing = () => {
   let coversList;
   if (state.placeLoaded === true) {
     coversList = state.place.images.map((cover, idx) => (
-      <div
-        key={idx}
-        className="cover"
-        style={{ backgroundImage: `url(${cover})` }}
-      ></div>
+      <picture key={idx}>
+        <img src={cover} className="w-full h-fullobject-cover" />
+      </picture>
     ));
   }
 
@@ -314,9 +312,9 @@ const PlaceListing = () => {
       </li>
     ));
     hasOpeningHours = (
-      <div className="listing-activity-hours">
+      <div className="mt-5">
         <ul className="listing-activity-hours-list">
-          <li className="header">
+          <li className="flex items-center font-bold">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="icon icon-tabler icon-tabler-calendar"
@@ -419,142 +417,177 @@ const PlaceListing = () => {
           user={user}
         />
         <main>
+          {state.showBookmarkToast ? toast : null}
           <article>
-            <Container className="mw-1200">
-              {state.showBookmarkToast ? toast : null}
-              <div className="box">
-                <section>
-                  <Row>
-                    <div className="listing-header-wrapper">
-                      <Col lg={12}>
-                        <div className="listing-header">
-                          <div className="col left">
-                            <div className="listing-title-wrapper">
-                              <h1 className="listing-title">{title}</h1>
-                            </div>
-                            <div className="listing-meta-bar">
-                              <ul>
-                                <li className="listing-type">
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="icon icon-tabler icon-tabler-route"
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth="1.5"
-                                    stroke="#00206B"
-                                    fill="none"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  >
-                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                    <circle cx="6" cy="19" r="2" />
-                                    <circle cx="18" cy="5" r="2" />
-                                    <path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
-                                  </svg>
-                                  <span>{state.place.type}</span>
-                                </li>
-                                <li className="listing-rating">
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="icon icon-tabler icon-tabler-star"
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth="1.5"
-                                    stroke="#00206B"
-                                    fill="none"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  >
-                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                    <path d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2l3.086 6.253 6.9 1.002-4.993 4.867 1.179 6.873z" />
-                                  </svg>
-                                  <span>{state.place.place_rating}</span>
-                                </li>
-                                <li className="listing-location">
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="icon icon-tabler icon-tabler-map-pin"
-                                    width="20"
-                                    height="20"
-                                    viewBox="0 0 24 24"
-                                    strokeWidth="1.5"
-                                    stroke="#00206B"
-                                    fill="none"
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                  >
-                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                    <circle cx="12" cy="11" r="3" />
-                                    <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
-                                  </svg>
-                                  <span>{`${
-                                    state.place.place_locality === undefined
-                                      ? ""
-                                      : state.place.place_locality
-                                  }${
-                                    state.place.place_locality === undefined
-                                      ? ""
-                                      : ","
-                                  } ${
-                                    state.place.place_province ||
-                                    state.place.place_state
-                                  }, ${state.place.place_country}`}</span>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                          <div className="col right">
-                            {bookmarkButton}
-                            {shareButton}
-                          </div>
-                        </div>
-                        <div className="listing-cover d-flex justify-space-between">
-                          <div className="listing-cover-wrapper">
-                            {coversList}
-                          </div>
-                        </div>
-                      </Col>
+            {/* Listing header */}
+            <section className="pt-12 md:pt-16">
+              <div className="container">
+                <div className="w-full lg:w-9/12 mx-auto flex flex-wrap items-center">
+                  <div className="w-full md:w-1/2">
+                    <h1>{title}</h1>
+                    <ul className="flex flex-wrap items-center -mx-2 mt-2">
+                      <li class="flex flex-wrap items-center px-2">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="icon icon-tabler icon-tabler-route mr-2"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" />
+                          <circle cx="6" cy="19" r="2" />
+                          <circle cx="18" cy="5" r="2" />
+                          <path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
+                        </svg>
+                        <span>{state.place.type}</span>
+                      </li>
+                      <li className="flex flex-wrap items-center px-2">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="icon icon-tabler icon-tabler-star mr-2"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" />
+                          <path d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2l3.086 6.253 6.9 1.002-4.993 4.867 1.179 6.873z" />
+                        </svg>
+                        <span>{state.place.place_rating}</span>
+                      </li>
+                      <li className="flex flex-wrap items-center px-2">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="icon icon-tabler icon-tabler-map-pin mr-2"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" />
+                          <circle cx="12" cy="11" r="3" />
+                          <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
+                        </svg>
+                        <span className="border-b-2 border-primary-500">{`${
+                          state.place.place_locality === undefined
+                            ? ""
+                            : state.place.place_locality
+                        }${
+                          state.place.place_locality === undefined ? "" : ","
+                        } ${
+                          state.place.place_province || state.place.place_state
+                        }, ${state.place.place_country}`}</span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="w-full md:w-1/2">
+                    <div className="flex flex-wrap justify-end items-center -mx-5">
+                      {bookmarkButton}
+                      {shareButton}
                     </div>
-                  </Row>
-                </section>
-                <section>
-                  <Row>
-                    <article className="listing-body">
-                      <Col lg={7} sm={12} xs={12}>
-                        <div className="listing-body-wrapper d-flex justify-content-between align-items-center">
-                          <p className="listing-subtitle">{subtitle}</p>
-                          {state.organization ? (
-                            <div className="listing-owner">
-                              <Link
-                                href={`/empreses/${state.organization.slug}`}
-                              >
-                                <a>
-                                  <div className="avatar">
-                                    <img
-                                      src={state.organization.orgLogo}
-                                      alt={state.organization.orgName}
-                                    />
-                                  </div>
-                                  <p className="listing-owner-name">
-                                    {state.organization.orgName}
-                                  </p>
-                                </a>
-                              </Link>
-                            </div>
-                          ) : null}
-                        </div>
-                        <div className="listing-details-body d-flex">
-                          <div className="listing-categories">
+                  </div>
+                  <div className="w-full mt-8">
+                    <div className="grid grid-cols-4 grid-rows-2 gap-2.5 rounded overflow-hidden">
+                      <div className="row-start-1 col-start-1 row-span-2 col-span-2 rounded-l overflow-hidden">
+                        <picture>
+                          <img
+                            src={state.place.images[0]}
+                            className="w-full h-full object-cover"
+                          />
+                        </picture>
+                      </div>
+                      <div className="row-start-1 col-start-3 row-span-1 col-span-1 overflow-hidden">
+                        <picture>
+                          <img
+                            src={state.place.images[1]}
+                            className="w-full h-full object-cover"
+                          />
+                        </picture>
+                      </div>
+                      <div className="row-start-1 col-start-4 row-span-1 col-span-1 rounded-tr overflow-hidden">
+                        <picture>
+                          <img
+                            src={state.place.images[1]}
+                            className="w-full h-full object-cover"
+                          />
+                        </picture>
+                      </div>
+                      <div className="row-start-2 col-start-3 row-span-1 col-span-1 overflow-hidden">
+                        <picture>
+                          <img
+                            src={state.place.images[2]}
+                            className="w-full h-full object-cover"
+                          />
+                        </picture>
+                      </div>
+                      <div className="row-start-2 col-start-4 row-span-1 col-span-1 rounded-br overflow-hidden">
+                        <picture>
+                          <img
+                            src={state.place.images[2]}
+                            className="w-full h-full object-cover"
+                          />
+                        </picture>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <section className="pt-10 pb-12 md:pb-16">
+              <div className="container">
+                <div className="w-full lg:w-9/12 mx-auto ">
+                  <div className="flex flex-wrap items-start -mx-6">
+                    <div className="w-full lg:w-8/12 px-6 mx-auto">
+                      <div className="border-b border-primary-200 pb-5 mb-5">
+                        <h2 className="w-9/12 font-body font-bold text-3xl">
+                          {subtitle}
+                        </h2>
+                        {state.organization ? (
+                          <div className="listing-owner">
+                            <Link href={`/empreses/${state.organization.slug}`}>
+                              <a>
+                                <div className="avatar">
+                                  <img
+                                    src={state.organization.orgLogo}
+                                    alt={state.organization.orgName}
+                                  />
+                                </div>
+                                <p className="listing-owner-name">
+                                  {state.organization.orgName}
+                                </p>
+                              </a>
+                            </Link>
+                          </div>
+                        ) : null}
+                      </div>
+                      <div className="flex flex-wrap items-stretch justify-between -mx-2">
+                        <div className="px-2 flex-auto">
+                          <div className="listing-categories rounded border border-primary-200 p-5 h-full">
                             <span>Ideal per a...</span>
                             <ul>{placeCategories}</ul>
                           </div>
-                          <div className="listing-seasons">
+                        </div>
+                        <div className="px-2 flex-auto">
+                          <div className="listing-seasons rounded border border-primary-200 p-5 h-full">
                             <span>Estació recomanada...</span>
                             <ul>{placeSeasons}</ul>
                           </div>
-                          <div className="d-flex right">
+                        </div>
+                        <div className="px-2 flex-auto">
+                          <div className="rounded border border-primary-200 p-5 h-full">
                             <div className="listing-type">
                               <span>L'allotjament és un</span>
                               <ul>{state.place.placeType}</ul>
@@ -569,115 +602,108 @@ const PlaceListing = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="listing-description">{description}</div>
-                      </Col>
-                      <Col lg={1}></Col>
-                      <Col lg={4} sm={12} xs={12}>
-                        <aside>
-                          <div className="listing-details-box">
-                            <div className="listing-map">
-                              <GoogleMapReact
-                                bootstrapURLKeys={{
-                                  key: `${process.env.GOOGLE_API_KEY}`,
-                                }}
-                                defaultCenter={center}
-                                defaultZoom={11}
-                                options={getMapOptions}
-                                yesIWantToUseGoogleMapApiInternals
-                                onGoogleApiLoaded={({ map, maps }) =>
-                                  renderMarker(map, maps)
-                                }
+                      </div>
+                      <div className="border-t border-primary-200 pt-5 mt-5 ">
+                        {description}
+                      </div>
+                    </div>
+                    <aside className="w-full lg:w-4/12 px-6 static top-0">
+                      <div className="p-5 rounded border border-primary-200">
+                        <div className="w-full h-56 rounded overflow-hidden">
+                          <GoogleMapReact
+                            bootstrapURLKeys={{
+                              key: `${process.env.GOOGLE_API_KEY}`,
+                            }}
+                            defaultCenter={center}
+                            defaultZoom={11}
+                            options={getMapOptions}
+                            yesIWantToUseGoogleMapApiInternals
+                            onGoogleApiLoaded={({ map, maps }) =>
+                              renderMarker(map, maps)
+                            }
+                          />
+                        </div>
+                        <div className="flex flex-col w-full mt-5">
+                          <a
+                            href={`${state.place.website}`}
+                            className="button button__primary button__med justify-center mb-2.5"
+                            title="Reservar"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="icon icon-tabler icon-tabler-device-laptop"
+                              width="22"
+                              height="22"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path
+                                stroke="none"
+                                d="M0 0h24v24H0z"
+                                fill="none"
                               />
-                            </div>
-                            <div className="buttons">
-                              <a
-                                href={`${state.place.website}`}
-                                className="listing-Website btn btn-dark"
-                                title="Reservar"
-                              >
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="icon icon-tabler icon-tabler-device-laptop"
-                                  width="22"
-                                  height="22"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth="1.5"
-                                  stroke="#ffffff"
-                                  fill="none"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                >
-                                  <path
-                                    stroke="none"
-                                    d="M0 0h24v24H0z"
-                                    fill="none"
-                                  />
-                                  <line x1="3" y1="19" x2="21" y2="19" />
-                                  <rect
-                                    x="5"
-                                    y="6"
-                                    width="14"
-                                    height="10"
-                                    rx="1"
-                                  />
-                                </svg>
-                                Reservar
-                              </a>
-                              <a
-                                href={`tel:${state.place.phone}`}
-                                className="listingPhone btn btn-light"
-                                title="Trucar"
-                              >
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="icon icon-tabler icon-tabler-phone-call"
-                                  width="22"
-                                  height="22"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth="1.5"
-                                  stroke="#002b8f"
-                                  fill="none"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                >
-                                  <path stroke="none" d="M0 0h24v24H0z" />
-                                  <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
-                                  <path d="M15 7a2 2 0 0 1 2 2" />
-                                  <path d="M15 3a6 6 0 0 1 6 6" />
-                                </svg>
-                                Trucar
-                              </a>
-                            </div>
-                            {hasOpeningHours}
-                            <ul className="listing-details-list">
-                              <li className="listing-location">
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="icon icon-tabler icon-tabler-map-pin"
-                                  width="22"
-                                  height="22"
-                                  viewBox="0 0 24 24"
-                                  strokeWidth="1.5"
-                                  stroke="#00206B"
-                                  fill="none"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                >
-                                  <path stroke="none" d="M0 0h24v24H0z" />
-                                  <circle cx="12" cy="11" r="3" />
-                                  <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
-                                </svg>
-                                {state.place.place_full_address}
-                              </li>
-                            </ul>
-                          </div>
-                        </aside>
-                      </Col>
-                    </article>
-                  </Row>
-                </section>
+                              <line x1="3" y1="19" x2="21" y2="19" />
+                              <rect x="5" y="6" width="14" height="10" rx="1" />
+                            </svg>
+                            Reservar
+                          </a>
+                          <a
+                            href={`tel:${state.place.phone}`}
+                            className="button button__ghost button__med justify-center"
+                            title="Trucar"
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="icon icon-tabler icon-tabler-phone-call"
+                              width="22"
+                              height="22"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path stroke="none" d="M0 0h24v24H0z" />
+                              <path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
+                              <path d="M15 7a2 2 0 0 1 2 2" />
+                              <path d="M15 3a6 6 0 0 1 6 6" />
+                            </svg>
+                            Trucar
+                          </a>
+                        </div>
+                        {hasOpeningHours}
+                        <ul className="listing-details-list">
+                          <li className="listing-location">
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="icon icon-tabler icon-tabler-map-pin"
+                              width="22"
+                              height="22"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="#00206B"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path stroke="none" d="M0 0h24v24H0z" />
+                              <circle cx="12" cy="11" r="3" />
+                              <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
+                            </svg>
+                            {state.place.place_full_address}
+                          </li>
+                        </ul>
+                      </div>
+                    </aside>
+                  </div>
+                </div>
               </div>
-            </Container>
+            </section>
           </article>
         </main>
         <Footer
