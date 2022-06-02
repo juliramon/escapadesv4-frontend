@@ -356,7 +356,10 @@ const PlaceListing = () => {
   ));
 
   const placeRegion = state.place.region.map((region, idx) => (
-    <li key={idx} className="place-region">
+    <li
+      key={idx}
+      className="border border-primary-200 py-2 px-3 rounded capitalize mr-3"
+    >
       {region}
     </li>
   ));
@@ -555,6 +558,38 @@ const PlaceListing = () => {
                         <h2 className="w-9/12 font-body font-bold text-3xl">
                           {subtitle}
                         </h2>
+
+                        <ul className="flex flex-wrap items-center w-full mt-4">
+                          <li className="border border-primary-200 py-2 px-3 rounded capitalize mr-3">
+                            {state.place.placeType}
+                          </li>
+                          {placeRegion}
+                          <li className="border border-primary-200 py-2 px-3 rounded capitalize flex items-center">
+                            {state.place.price}{" "}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="icon icon-tabler icon-tabler-currency-euro ml-0.5"
+                              width="18"
+                              height="18"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path
+                                stroke="none"
+                                d="M0 0h24v24H0z"
+                                fill="none"
+                              />
+                              <path d="M17.2 7a6 7 0 1 0 0 10" />
+                              <path d="M13 10h-8m0 4h8" />
+                            </svg>
+                            / nit
+                          </li>
+                        </ul>
+
                         {state.organization ? (
                           <div className="listing-owner">
                             <Link href={`/empreses/${state.organization.slug}`}>
@@ -576,30 +611,18 @@ const PlaceListing = () => {
                       <div className="flex flex-wrap items-stretch justify-between -mx-2">
                         <div className="px-2 flex-auto">
                           <div className="listing-categories rounded border border-primary-200 p-5 h-full">
-                            <span>Ideal per a...</span>
+                            <span className="font-semibold">
+                              Ideal per a...
+                            </span>
                             <ul>{placeCategories}</ul>
                           </div>
                         </div>
                         <div className="px-2 flex-auto">
                           <div className="listing-seasons rounded border border-primary-200 p-5 h-full">
-                            <span>Estació recomanada...</span>
+                            <span className="font-semibold">
+                              Estació recomanada...
+                            </span>
                             <ul>{placeSeasons}</ul>
-                          </div>
-                        </div>
-                        <div className="px-2 flex-auto">
-                          <div className="rounded border border-primary-200 p-5 h-full">
-                            <div className="listing-type">
-                              <span>L'allotjament és un</span>
-                              <ul>{state.place.placeType}</ul>
-                            </div>
-                            <div className="listing-region">
-                              <span>Es troba a</span>
-                              <ul>{placeRegion}</ul>
-                            </div>
-                            <div className="listing-price">
-                              <span>Preu per nit</span>
-                              {state.place.price} €
-                            </div>
                           </div>
                         </div>
                       </div>
