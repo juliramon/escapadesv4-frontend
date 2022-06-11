@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import ContentService from "../services/contentService";
 import NavigationBar from "../components/global/NavigationBar";
-import { Container, Row, Spinner, Col, Breadcrumb } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 import Head from "next/head";
 import FeaturedStoryBox from "../components/listings/FeaturedStoryBox";
 import PopularStoryBox from "../components/listings/PopularStoryBox";
-import Link from "next/link";
 import RegularStoryBox from "../components/listings/RegularStoryBox";
 import { useRouter } from "next/router";
 import AdSense from "react-adsense";
@@ -190,7 +189,7 @@ const StoriesList = ({ user, stories }) => {
               </ul>
             </div>
           </div>
-          <section className="py-6 md:py-12">
+          <section className="py-6 md:py-16">
             <div className="container relative">
               <div className="flex flex-wrap items-center justify-between">
                 <div className="w-full md:w-4/12">
@@ -227,7 +226,7 @@ const StoriesList = ({ user, stories }) => {
               </div>
             </div>
           </section>
-          <section className="bg-primary-100">
+          <section className="py-6 md:py-16 bg-primary-100">
             <div className="container">
               <h2>Històries més populars</h2>
               <div className="flex flex-wrap items-center mt-8 -mx-6 -mb-6">
@@ -235,7 +234,7 @@ const StoriesList = ({ user, stories }) => {
               </div>
             </div>
           </section>
-          <section className="py-6 md:py-12">
+          <section className="py-6 md:py-16">
             <div className="container">
               <div className="w-full border-b border-primary-300 pb-6 mb-8">
                 <h2>Més històries per a inspirar-vos</h2>

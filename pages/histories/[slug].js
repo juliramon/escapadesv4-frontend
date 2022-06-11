@@ -229,7 +229,58 @@ const StoryListing = ({ storyDetails }) => {
           user={user}
         />
         <main>
-          <article>
+          <div className="pt-6">
+            <div className="container">
+              <ul className="breadcrumb">
+                <li className="breadcrumb__item">
+                  <a href="/" title="Inici" className="breadcrumb__link">
+                    Inici
+                  </a>
+                </li>
+                <li className="breadcrumb__item">
+                  <a href="/histories" className="breadcrumb__link">
+                    Històries en parella
+                  </a>
+                </li>
+                <li class="breadcrumb__item">
+                  <span className="breadcrumb__link active">{title}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <article className="py-6 md:py-12">
+            <div className="container">
+              <div className="w-full md:w-6/12 md:mx-auto">
+                <h1 className="listing-title">{title}</h1>
+                <p className="listing-subtitle">{subtitle}</p>
+                <div className="mt-6">
+                  <Link href={`/usuaris/${state.owner._id}`}>
+                    <a className="flex items-center">
+                      <div className="rounded-full overflow-hidden w-16 h-16">
+                        <picture>
+                          <img
+                            src={state.owner.avatar}
+                            alt={state.owner.fullName}
+                            width={64}
+                            height={64}
+                            className="w-full h-full object-cover"
+                            loadgin="eager"
+                          />
+                        </picture>
+                      </div>
+                      <span className="listing-owner-name">
+                        {state.owner.fullName}
+                      </span>
+                      <div className="reading-time">
+                        <p>{readingTimeIndicator.words} minut de lectura</p>
+                      </div>
+                    </a>
+                  </Link>
+                  <div className="col right">{shareButton}</div>
+                </div>
+              </div>
+            </div>
+
             <Container className="mw-1200">
               <div className="box">
                 <section>
