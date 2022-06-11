@@ -25,8 +25,8 @@ const FeaturedStoryBox = ({ slug, cover, title, avatar, owner }) => {
             </picture>
             <div className="absolute top-0 left-0 w-full h-full z-40">
               <div className="absolute bottom-0 px-5 pb-10">
-                <div className="author-details text-secondary-100 text-center">
-                  <div className="w-14 h-14 mb-3 rounded-full border-2 border-secondary-100 p-1 overflow-hidden mx-auto">
+                <div className="author-details text-white text-center">
+                  <div className="w-14 h-14 mb-3 rounded-full border-2 border-white p-1 overflow-hidden mx-auto">
                     <picture>
                       <source srcSet={avatar} />
                       <img
@@ -41,9 +41,7 @@ const FeaturedStoryBox = ({ slug, cover, title, avatar, owner }) => {
                     </picture>
                   </div>
                 </div>
-                <h3 className="text-secondary-100 text-center text-xl h-24">
-                  {title}
-                </h3>
+                <h3 className="text-white text-center text-xl h-24">{title}</h3>
               </div>
             </div>
           </div>

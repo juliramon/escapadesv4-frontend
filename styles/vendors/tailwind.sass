@@ -4,10 +4,10 @@
 
 @layer base
     body
-        @apply text-primary-500 font-normal leading-normal font-body
+        @apply text-primary-400 font-normal leading-normal font-body
 
     h1, h2
-        @apply text-primary-900 font-bold font-headings 
+        @apply text-primary-500 font-bold font-headings 
 
     h1 
         @apply text-3xl leading-snug 
@@ -15,12 +15,17 @@
             @apply text-5xl
 
     h2
-        @apply text-2xl leading-normal tracking-wide
+        @apply text-2xl leading-normal
         @screen md
-            @apply text-4xl
+            @apply text-3xl
+
+    h3
+        @apply text-lg leading-normal
+        @screen md
+            @apply text-xl
 
     h3, h4
-        @apply font-body font-semibold text-primary-900
+        @apply font-body font-semibold text-primary-500
 
     a
-        @apply cursor-pointer no-underline text-primary-600
+        @apply cursor-pointer no-underline text-primary-500

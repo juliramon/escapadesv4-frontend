@@ -69,7 +69,7 @@ const StoriesList = ({ user, stories }) => {
   let storiesList, featuredStories, popularStories;
   if (state.hasStories === true) {
     featuredStories = state.stories
-      .slice(0, 2)
+      .slice(0, 3)
       .map((el) => (
         <FeaturedStoryBox
           key={el._id}
@@ -166,149 +166,91 @@ const StoriesList = ({ user, stories }) => {
           content="756319ea1956c99d055184c4cac47dbfa3c81808"
         />
       </Head>
-      <main id="storiesList" className="stories">
+      <div id="storiesList" className="stories">
         <NavigationBar
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
           }
           user={user}
         />
-        <Container fluid className="mw-1200">
-          <Row>
-            <Col lg={12}>
-              <div className="box d-flex featured-stories">
-                <div className="col left">
-                  <div className="top-nav-wrapper">
-                    <Breadcrumb>
-                      <Breadcrumb.Item href="/" rel="follow">
-                        Inici
-                      </Breadcrumb.Item>
-                      <Breadcrumb.Item active>
-                        Històries en parella
-                      </Breadcrumb.Item>
-                    </Breadcrumb>
-                    <h1 className="top-nav-title">Històries en parella</h1>
-                    <p className="top-nav-subtitle">
+        <main>
+          <div className="pt-6">
+            <div className="container">
+              <ul className="breadcrumb">
+                <li className="breadcrumb__item">
+                  <a href="/" title="Inici" className="breadcrumb__link">
+                    Inici
+                  </a>
+                </li>
+                <li className="breadcrumb__item">
+                  <span className="breadcrumb__link active">
+                    Històries en parella
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <section className="py-6 md:py-12">
+            <div className="container relative">
+              <div className="flex flex-wrap items-center justify-between">
+                <div className="w-full md:w-4/12">
+                  <div className="md:pr-10">
+                    <h1>Històries en parella</h1>
+                    <p className="mt-4">
                       Històries en parella per a inspirar, descobrir nous llocs
                       i, en definitiva, fer-vos venir ganes d'una escapada en
                       parella per recordar.
                     </p>
-                    <div className="attribution">
-                      <div className="media-area">
+                  </div>
+                  <div className="mt-5 flex flex-wrap items-center">
+                    <div className="w-24 h-auto mr-4">
+                      <picture>
                         <img
                           src="https://res.cloudinary.com/juligoodie/image/upload/v1618330078/getaways-guru/static-files/avatars-juli-andrea_c6dio6.png"
                           alt="Andrea i Juli, credors d'Escapadesenparella.cat"
+                          className="w-full h-auto"
+                          loading="eager"
                         />
-                      </div>
-                      <p className="text-area">
-                        De la mà de l'<b>Andrea i en Juli</b>,<br /> creadors
-                        d'Escapadesenparella.cat
-                      </p>
+                      </picture>
                     </div>
+                    <span className="text-sm text-primary-400 relative -top-1">
+                      De la mà de l'<b>Andrea i en Juli</b>,<br /> creadors
+                      d'Escapadesenparella.cat
+                    </span>
                   </div>
                 </div>
-                <div className="col right">
-                  <div className="featured-listings listings-wrapper">
-                    <div className="listings-list d-flex">
-                      {featuredStories}
-                    </div>
+                <div className="w-full md:w-8/12">
+                  <div className="flex flex-wrap items-center">
+                    {featuredStories}
                   </div>
                 </div>
               </div>
-            </Col>
-          </Row>
-        </Container>
-        <section id="popularStories">
-          <Container className="mw-1200" fluid>
-            <Row className="popular-stories">
-              <Col lg={12}>
-                <div className="col">
-                  <div className="box">
-                    <h2 className="uppercase small">Històries més populars</h2>
-                  </div>
+            </div>
+          </section>
+          <section className="bg-primary-100">
+            <div className="container">
+              <h2>Històries més populars</h2>
+              <div className="flex flex-wrap items-center mt-8 -mx-6 -mb-6">
+                {popularStories}
+              </div>
+            </div>
+          </section>
+          <section className="py-6 md:py-12">
+            <div className="container">
+              <div className="w-full border-b border-primary-300 pb-6 mb-8">
+                <h2>Més històries per a inspirar-vos</h2>
+                <p className="mt-4">
+                  Des del Delta de l'Ebre fins al Cap de Creus, passant pels
+                  cims més alts dels Pirineus.
+                  <br /> Aquí t'expliquem les nostres aventures en parella a
+                  Catalunya.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-start">
+                <div className="w-full md:w-8/12 -mt-3 -mb-6">
+                  {storiesList}
                 </div>
-              </Col>
-            </Row>
-            <Row>
-              <Col lg={12}>
-                <div className="col">
-                  <div className="listings-wrapper">
-                    <div className="listings-list">{popularStories}</div>
-                  </div>
-                </div>
-              </Col>
-            </Row>
-          </Container>
-        </section>
-        <section id="regularStories">
-          <Container className="mw-1200" fluid>
-            <Row>
-              <div className="box d-flex">
-                <div className="col center">
-                  <div className="title-area">
-                    <h2 className="uppercase small">
-                      Més històries per a inspirar-vos
-                    </h2>
-                    <p>
-                      Des del Delta de l'Ebre fins al Cap de Creus, passant pels
-                      cims més alts dels Pirineus.
-                      <br /> Aquí t'expliquem les nostres aventures en parella a
-                      Catalunya.
-                    </p>
-                  </div>
-                  <div className="listings-wrapper">
-                    <div className="listings-list">{storiesList}</div>
-                  </div>
-                </div>
-                <aside className="sidebar-right">
-                  <h2 className="uppercase small">
-                    Descobreix més escapades interessants
-                  </h2>
-                  <div className="cloud-tags">
-                    <Link href="/">
-                      <a
-                        href="/activitats"
-                        title="Activitats"
-                        className="cloud-tag"
-                      >
-                        Activitats
-                      </a>
-                    </Link>
-                    <Link href="/allotjaments">
-                      <a
-                        href="/allotjaments"
-                        title="Allotjaments"
-                        className="cloud-tag"
-                      >
-                        Allotjaments
-                      </a>
-                    </Link>
-                    <Link href="/search?query=">
-                      <a
-                        href="/search?query="
-                        title="Cercador d'escapades"
-                        className="cloud-tag"
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-search"
-                          width="18"
-                          height="18"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="#00206B"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <circle cx="10" cy="10" r="7" />
-                          <line x1="21" y1="21" x2="15" y2="15" />
-                        </svg>
-                        Cercador d'escapades
-                      </a>
-                    </Link>
-                  </div>
+                <aside className="w-full md:w-4/12">
                   <div className="ad-wrapper">
                     <div className="ad-block">
                       <AdSense.Google
@@ -321,56 +263,12 @@ const StoriesList = ({ user, stories }) => {
                       />
                     </div>
                   </div>
-                  <div className="legal-links">
-                    <ul>
-                      <li>Qui som?</li>
-                      <li>Què fem?</li>
-                      <li>Blog</li>
-                      <li>Política de Privacitat</li>
-                      <li>Condicions d'Ús</li>
-                      <li>Política de Cookies</li>
-                    </ul>
-                    <ul>
-                      <li>
-                        <b>Segueix-nos a:</b>
-                      </li>
-                      <li>Instagram</li>
-                      <li>Facebook</li>
-                      <li>Twitter</li>
-                    </ul>
-                    <span className="copyright">
-                      Copyright © 2021. Tots els drets reservats.
-                      <br />
-                      Desenvolupat i gestionat amb{" "}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="icon icon-tabler icon-tabler-heart"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="#00206B"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z"></path>
-                        <path
-                          fill="red"
-                          stroke="none"
-                          d="M12 20l-7 -7a4 4 0 0 1 6.5 -6a.9 .9 0 0 0 1 0a4 4 0 0 1 6.5 6l-7 7"
-                        ></path>
-                      </svg>{" "}
-                      per en <u>Juli Ramon</u> i l'<u>Andrea Prat</u> a
-                      Barcelona
-                    </span>
-                  </div>
                 </aside>
               </div>
-            </Row>
-          </Container>
-        </section>
-      </main>
+            </div>
+          </section>
+        </main>
+      </div>
       <Footer
         logo_url={
           "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"

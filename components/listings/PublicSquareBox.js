@@ -193,11 +193,11 @@ const PublicSquareBox = ({
                 />
               </picture>
             </div>
-            <div className="absolute top-2 right-2 bg-white inline-block w-auto h-auto rounded-md text-primary-900 px-2 py-1 text-sm">
+            <div className="absolute top-2 right-2 bg-white inline-block w-auto h-auto rounded-md text-primary-500 px-2 py-1 text-sm">
               {modRating || rating}
             </div>
             <div className="pt-3 flex flex-col justify-between">
-              <h3 className="mt-0 mb-0 text-primary-600">{title}</h3>
+              <h3 className="mt-0 mb-0 text-primary-500">{title}</h3>
               <p className="text-sm my-0 text-primary-500">
                 Escapada {categoryModified} a {shortenedLocation}
               </p>

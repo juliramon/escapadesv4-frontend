@@ -1,0 +1,13 @@
+.breadcrumb
+    @apply text-sm flex flex-wrap items-center -mx-2
+    &__item
+        @apply px-2 flex items-center
+    &__item:not(:last-child)::after
+        content: "/"
+        @apply mx-0.5 block text-primary-400 
+    &__link
+        @apply text-primary-400
+    &__link:hover
+        @apply underline
+    &__link.active
+        @apply text-primary-500 font-medium no-underline
