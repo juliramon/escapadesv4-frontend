@@ -186,7 +186,7 @@ const ActivityList = () => {
           <section className="py-6 md:py-12">
             <div className="container relative">
               <div className="flex flex-wrap items-center justify-start">
-                <div className="w-full md:w-5/12">
+                <div className="w-full md:w-8/12 xl:w-5/12">
                   <h1 className="my-0">
                     <span className="text-secondary-500">Activitats</span> per
                     fer en parella a Catalunya

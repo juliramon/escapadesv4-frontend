@@ -243,27 +243,29 @@ const StoryListing = ({ storyDetails }) => {
                 <h1 className="mb-4">{title}</h1>
                 <p className="text-lg md:text-xl pr-16">{subtitle}</p>
                 <div className="mt-6 flex flex-wrap items-center justify-between">
-                  <Link href={`/usuaris/${state.owner._id}`}>
-                    <a className="flex items-center">
-                      <div className="rounded-full overflow-hidden w-12 h-12 mr-3">
-                        <picture>
-                          <img
-                            src={state.owner.avatar}
-                            alt={state.owner.fullName}
-                            width={48}
-                            height={48}
-                            className="w-full h-full object-cover"
-                            loadgin="eager"
-                          />
-                        </picture>
-                      </div>
-                      <span className="listing-owner-name">
-                        {state.owner.fullName}
-                      </span>
-                      <span className="mx-2">·</span>
-                      <span>{readingTimeIndicator.words} minut de lectura</span>
-                    </a>
-                  </Link>
+                  <div className="flex flex-wrap items-center">
+                    <Link href={`/usuaris/${state.owner._id}`}>
+                      <a className="flex items-center">
+                        <div className="rounded-full overflow-hidden w-12 h-12 mr-3">
+                          <picture>
+                            <img
+                              src={state.owner.avatar}
+                              alt={state.owner.fullName}
+                              width={48}
+                              height={48}
+                              className="w-full h-full object-cover"
+                              loadgin="eager"
+                            />
+                          </picture>
+                        </div>
+                        <span className="listing-owner-name">
+                          {state.owner.fullName}
+                        </span>
+                      </a>
+                    </Link>
+                    <span className="mx-2">·</span>
+                    <span>{readingTimeIndicator.words} minut de lectura</span>
+                  </div>
                   {shareButton}
                 </div>
               </div>

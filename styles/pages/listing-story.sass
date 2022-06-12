@@ -1,30 +1,36 @@
 .listing-story
-  .pswp-thumbnails
-    @apply flex items-stretch flex-wrap -mx-2 mb-6
-  .pswp-thumbnail
-    @apply p-2 w-full md:w-1/3 overflow-hidden flex items-center justify-center
-  .pswp-thumbnail img
-    @apply w-full h-full object-cover rounded
-    
-  .cta-instagram-footer
-    .link-instagram a
-      font-size: 1.3em
-      display: flex
-      align-items: center
-      color: #f03e51
-      letter-spacing: 0.8px
-    .banner-wrapper
-      .left,
-      .right
-        box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.2)
-      .left
-        transform: rotate(-7deg)
-        z-index: 1
-        left: 25px
-      .right
-        transform: rotate(3deg)
-        z-index: 0
-      img
-        width: 290px
-        border: 5px solid #ffffff
+	p:first-child
+		@apply mt-0 mb-5
+	p
+		@apply my-5
+	blockquote
+		@apply mb-8 border-l border-primary-500 bg-opacity-50 pl-7 text-lg font-medium
 
+	.pswp-thumbnails
+		@apply flex items-stretch flex-wrap -mx-2 mb-6
+	.pswp-thumbnail
+		@apply p-2 w-full md:w-1/3 overflow-hidden flex items-center justify-center
+	.pswp-thumbnail img
+		@apply w-full h-full object-cover rounded
+	
+	.cta-instagram-footer
+		.link-instagram a
+			font-size: 1.3em
+			display: flex
+			align-items: center
+			color: #f03e51
+			letter-spacing: 0.8px
+		.banner-wrapper
+			.left,
+			.right
+				box-shadow: 2px 4px 15px rgba(0, 0, 0, 0.2)
+			.left
+				transform: rotate(-7deg)
+				z-index: 1
+				left: 25px
+			.right
+				transform: rotate(3deg)
+				z-index: 0
+			img
+				width: 290px
+				border: 5px solid #ffffff
