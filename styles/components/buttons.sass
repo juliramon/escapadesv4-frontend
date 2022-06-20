@@ -6,26 +6,26 @@ $dark-red: #fd8281
 $electric-blue: #002b8f
 $background-input: #f2f7f9
 		
+@layer components
+	.button
+		@apply rounded transition-all duration-300 ease-in-out inline-flex
 
-.button
-	@apply rounded transition-all duration-300 ease-in-out inline-flex
+	.button__primary
+		@apply inline-flex items-center bg-primary-500 text-white
+		&:hover
+			@apply bg-primary-500 text-white
 
-.button__primary
-	@apply inline-flex items-center bg-primary-500 text-white
-	&:hover
-		@apply bg-primary-500 text-white
+	.button__secondary
+		@apply inline-flex items-center bg-secondary-100 text-primary-200 border border-primary-200
+		&:hover
+			@apply bg-primary-100 border-primary-100 text-secondary-100
 
-.button__secondary
-	@apply inline-flex items-center bg-secondary-100 text-primary-200 border border-primary-200
-	&:hover
-		@apply bg-primary-100 border-primary-100 text-secondary-100
-
-.button__ghost
-	@apply inline-flex items-center bg-transparent text-primary-400 border border-primary-300  
-	&:hover
-		@apply bg-primary-500 border-primary-500 text-white
-	&.active
-		@apply bg-primary-500 text-white border-primary-500
+	.button__ghost
+		@apply inline-flex items-center bg-transparent text-primary-400 border border-primary-300  
+		&:hover
+			@apply bg-primary-500 border-primary-500 text-white
+		&.active
+			@apply bg-primary-500 text-white border-primary-500
 	
 
 .button__lg

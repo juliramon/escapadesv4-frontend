@@ -10,6 +10,7 @@ import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
 import ContentService from "../../services/contentService";
 import ReactHtmlParser from "react-html-parser";
+import FooterHistoria from "../../components/global/FooterHistoria";
 
 const ListView = () => {
   const { user } = useContext(UserContext);
@@ -95,43 +96,31 @@ const ListView = () => {
 
   const shareButton = (
     <div
-      className="listing-bookmark-wrapper"
+      className="flex items-center justify-center button button__ghost button__med cursor-pointer mt-5 md:mt-0 w-full md:w-auto"
       onClick={() => handleShareModalVisibility()}
     >
-      <button className="listing-bookmark">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="icon icon-tabler icon-tabler-share"
-          width="44"
-          height="44"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="#0d1f44"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <circle cx="6" cy="12" r="3" />
-          <circle cx="18" cy="6" r="3" />
-          <circle cx="18" cy="18" r="3" />
-          <line x1="8.7" y1="10.7" x2="15.3" y2="7.3" />
-          <line x1="8.7" y1="13.3" x2="15.3" y2="16.7" />
-        </svg>
-      </button>
-      <span>Compartir</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="icon icon-tabler icon-tabler-share mr-3"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        strokeWidth="1.5"
+        stroke="currentColor"
+        fill="none"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+        <circle cx="6" cy="12" r="3" />
+        <circle cx="18" cy="6" r="3" />
+        <circle cx="18" cy="18" r="3" />
+        <line x1="8.7" y1="10.7" x2="15.3" y2="7.3" />
+        <line x1="8.7" y1="13.3" x2="15.3" y2="16.7" />
+      </svg>
+      <span className="text-sm">Compartir</span>
     </div>
   );
-
-  let cover;
-  if (state.listLoaded === true) {
-    cover = (
-      <div
-        className="cover"
-        style={{ backgroundImage: `url(${state.list.cover})` }}
-      ></div>
-    );
-  }
 
   return (
     <>
@@ -181,121 +170,103 @@ const ListView = () => {
           content="756319ea1956c99d055184c4cac47dbfa3c81808"
         />
       </Head>
-      <div id="listingPage" className="list">
+      <div className="listing-list">
         <NavigationBar
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
           }
           user={user}
         />
-        <main className="list-wrapper">
-          <Container>
-            <Row>
-              <Col lg={9}>
-                <section>
-                  <div className="listing-header-wrapper">
-                    <div className="listing-header">
-                      <h1 className="listing-title">{title}</h1>
-                      <p className="listing-subtitle">{subtitle}</p>
-                    </div>
-                    <div className="listing-header-meta">
-                      <div className="col left">
-                        <div className="listing-owner">
-                          <Link href={`/usuaris/${state.owner._id}`}>
-                            <a>
-                              <div className="avatar">
-                                <img
-                                  src={state.owner.avatar}
-                                  alt={state.owner.fullName}
-                                />
-                              </div>
-                              <p className="listing-owner-name">
-                                {state.owner.fullName}
-                                <span>@escapadesenparella</span>
-                              </p>
-                            </a>
-                          </Link>
+        <main>
+          <div className="pt-6">
+            <div className="container">
+              <ul className="breadcrumb">
+                <li className="breadcrumb__item">
+                  <a href="/" title="Inici" className="breadcrumb__link">
+                    Inici
+                  </a>
+                </li>
+                <li className="breadcrumb__item">
+                  <a href="/llistes" className="breadcrumb__link">
+                    Llistes
+                  </a>
+                </li>
+                <li class="breadcrumb__item">
+                  <span className="breadcrumb__link active">{title}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <article className="pt-6 md:pt-12 pb-4">
+            <div className="container">
+              <div className="max-w-2xl mx-auto">
+                <h1 className="mb-4">{title}</h1>
+                <p className="text-lg md:text-xl md:pr-16">{subtitle}</p>
+                <div className="mt-6 flex flex-wrap items-center justify-between">
+                  <div className="flex flex-wrap items-center">
+                    <Link href={`/usuaris/${state.owner._id}`}>
+                      <a className="flex items-center">
+                        <div className="rounded-full overflow-hidden w-12 h-12 mr-3">
+                          <picture>
+                            <img
+                              src={state.owner.avatar}
+                              alt={state.owner.fullName}
+                              width={48}
+                              height={48}
+                              className="w-full h-full object-cover"
+                              loadgin="eager"
+                            />
+                          </picture>
                         </div>
-                      </div>
-                      <div className="col right">{shareButton}</div>
-                    </div>
-                  </div>
-                  <div className="listing-cover">
-                    {cover}
-                    <p className="cover-text">
-                      Foto d' <u>Andrea Prat</u> i <u>Juli Ramon</u> per
-                      Escapadesenparella.cat
-                    </p>
-                  </div>
-                </section>
-                <section>
-                  <div className="separator-body">
-                    <div className="separator-body-wrapper">
-                      <span>•</span>
-                      <span>•</span>
-                      <span>•</span>
-                    </div>
-                  </div>
-                  <article className="listing-body">
-                    <div className="listing-body-wrapper d-flex justify-content-between align-items-center"></div>
-                    <div className="listing-description">
-                      {ReactHtmlParser(description)}
-                    </div>
-                  </article>
-                </section>
-                <section>
-                  <div className="cta-instagram-footer">
-                    <h2>
-                      Descobreix més escapades com aquesta.
-                      <br /> Segueix-nos a Instagram!
-                    </h2>
-                    <div className="link-instagram">
-                      <a
-                        href="https://instagram.com/escapadesenparella"
-                        title="Segueix Escapadesenparella.cat a Instagram"
-                        rel="nofollow"
-                        target="_blank"
-                      >
-                        @escapadesenparella.cat{" "}
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-arrow-narrow-right"
-                          width="30"
-                          height="30"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="#F03E51"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <line x1="5" y1="12" x2="19" y2="12" />
-                          <line x1="15" y1="16" x2="19" y2="12" />
-                          <line x1="15" y1="8" x2="19" y2="12" />
-                        </svg>
+                        <span className="listing-owner-name">
+                          {state.owner.fullName}
+                        </span>
                       </a>
-                    </div>
-                    <div className="banner-wrapper">
-                      <div className="left">
-                        <img
-                          src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-comes-rubio_luuish.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div className="right">
-                        <img
-                          src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-tossa-mar_m2lvdz.jpg"
-                          alt=""
-                        />
-                      </div>
-                    </div>
+                    </Link>
                   </div>
-                </section>
-              </Col>
-            </Row>
-          </Container>
+                  {shareButton}
+                </div>
+              </div>
+              {state.listLoaded === true ? (
+                <div className="w-full md:w-10/12 md:mx-auto mt-10">
+                  <div className="aspect-w-16 aspect-h-9 rounded overflow-hidden">
+                    <picture>
+                      <img
+                        src={state.list.cover}
+                        alt={state.list.title}
+                        width={400}
+                        height={300}
+                        className="w-full h-full object-cover"
+                        loading="eager"
+                      />
+                    </picture>
+                  </div>
+                  <figcaption className="text-sm text-center mt-4">
+                    {state.list.title}
+                  </figcaption>
+                </div>
+              ) : null}
+              <div className="text-center mx-10 py-10">
+                <div className="flex items-center justify-center -mx-3">
+                  <span className="text-xs px-3">•</span>
+                  <span className="text-xs px-3">•</span>
+                  <span className="text-xs px-3">•</span>
+                </div>
+              </div>
+              <div className="max-w-2xl mx-auto">
+                <div className="list__description">
+                  {ReactHtmlParser(description)}
+                </div>
+              </div>
+            </div>
+          </article>
         </main>
+        <section>
+          <div className="container">
+            <FooterHistoria />
+          </div>
+        </section>
+
         <SignUpModal
           visibility={modalVisibility}
           hideModal={hideModalVisibility}

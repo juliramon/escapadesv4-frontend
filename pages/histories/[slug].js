@@ -148,7 +148,9 @@ const StoryListing = ({ storyDetails }) => {
   );
 
   const welcomeText = (
-    <h2>{title}: Benvinguts a l'escapada de la setmana, ens hi acompanyes?</h2>
+    <h2 className="mb-8">
+      {title}: Benvinguts a l'escapada de la setmana, ens hi acompanyes?
+    </h2>
   );
 
   if (description) {

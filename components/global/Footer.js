@@ -8,7 +8,7 @@ const Footer = ({ logo_url }) => {
     <footer id="footer" className="py-12 lg:pt-16 lg:pb-10">
       <div className="container">
         <div className="w-full flex flex-wrap items-start">
-          <div className="w-full md:w-1/2 lg:w-4/12 md:pr-5 lg:pr-10">
+          <div className="w-full md:w-1/2 lg:w-4/12 mb-6 lg:mb-0 md:pr-5 lg:pr-10">
             <div className="flex flex-col flex-wrap items-start">
               <svg
                 width="135px"
@@ -93,7 +93,7 @@ const Footer = ({ logo_url }) => {
               </span>
             </div>
           </div>
-          <div className="w-full md:w-1/2 lg:w-3/12">
+          <div className="w-full md:w-1/2 lg:w-3/12 mb-6 lg:mb-0">
             <div className="footer-content">
               <h4 className="footer-header text-xl mb-4">Continguts</h4>
               <ul className="list-none m-0 p-0">

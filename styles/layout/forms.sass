@@ -1,2 +1,13 @@
-textarea
-    min-height: 92px
+@layer components
+    .form
+        @apply -m-1.5
+        &__group
+            @apply p-1.5
+        &__label
+            @apply block mb-2 text-xs font-medium text-primary-400
+        &__control
+            @apply bg-primary-100 border border-primary-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
+        button
+            @apply mx-1.5
+        textarea
+            min-height: 92px

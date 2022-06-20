@@ -79,7 +79,7 @@ const Contacte = ({ user }) => {
   ) : null;
 
   const alertContainer = alertState.isVisible ? (
-    <div className="w-full rounded-md bg-tertiary-100 text-secondary-100 py-3 px-3 transition-all duration-300 ease-in-out flex items-center text-sm">
+    <div className="w-full rounded-md bg-secondary-100 text-secondary-900 py-3 px-3 transition-all duration-300 ease-in-out flex items-center text-sm">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         className="icon icon-tabler icon-tabler-alert-circle mr-2"
@@ -87,7 +87,7 @@ const Contacte = ({ user }) => {
         height="22"
         viewBox="0 0 24 24"
         strokeWidth="1.5"
-        stroke="#ffffff"
+        stroke="currentColor"
         fill="none"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -114,82 +114,96 @@ const Contacte = ({ user }) => {
           user={user}
         />
         <section className="relative overflow-hidden">
+          <div className="pt-6">
+            <div className="container">
+              <ul className="breadcrumb">
+                <li className="breadcrumb__item">
+                  <a href="/" title="Inici" className="breadcrumb__link">
+                    Inici
+                  </a>
+                </li>
+                <li className="breadcrumb__item">
+                  <span className="breadcrumb__link active">Contacte</span>
+                </li>
+              </ul>
+            </div>
+          </div>
           <div className="box flex flex-wrap">
-            <div className="w-full md:w-2/3 py-8 md:py-16 px-12 lg:px-20 h-full">
+            <div className="w-full md:w-2/3 pt-6 pb-12 md:py-16 px-6 lg:px-20 h-full">
               <div className="w-full lg:w-11/12 xl:w-7/12 mx-auto">
                 <div className="w-full lg:w-9/12 mx-auto">
-                  <h1 className="mt-0">Contacte</h1>
-                  <p>
+                  <h1 className="mt-0 mb-3">Contacte</h1>
+                  <p className="mb-5">
                     Vols que col·laborem per donar a conèixer el teu allotjament
                     o activitat? Tens dubtes sobre com podem donar a conèixer la
                     teva marca? No saps on escapar-te? Contacta'ns! 👇{" "}
                   </p>
                   {alertContainer}
-                  <form name="" id="" className="mt-8">
-                    <fieldset className="form-group">
-                      <label htmlFor="name" className="form-label">
+                  <form name="" id="" className="mt-8 form">
+                    <fieldset className="form__group">
+                      <label htmlFor="name" className="form__label">
                         Nom i cognom
                       </label>
                       <input
                         type="text"
                         name="name"
                         placeholder="Escriu el teu nom i cognom"
-                        className="form-control"
+                        className="form__control"
                         onChange={handleChange}
                         value={formsState.name}
                         required
                       />
                     </fieldset>
-                    <fieldset className="form-group">
-                      <label htmlFor="email" className="form-label">
+                    <fieldset className="form__group">
+                      <label htmlFor="email" className="form__label">
                         Correu electrònic
                       </label>
                       <input
                         type="email"
                         name="email"
                         placeholder="Escriu el teu correu electrònic"
-                        className="form-control"
+                        className="form__control"
                         onChange={handleChange}
                         value={formsState.email}
                         required
                       />
                     </fieldset>
-                    <fieldset className="form-group">
-                      <label htmlFor="phone" className="form-label">
+                    <fieldset className="form__group">
+                      <label htmlFor="phone" className="form__label">
                         Telèfon
                       </label>
                       <input
                         type="phone"
                         name="phone"
                         placeholder="Escriu el teu nom i cognom"
-                        className="form-control"
+                        className="form__control"
                         onChange={handleChange}
                         value={formsState.phone}
                         required
                       />
                     </fieldset>
-                    <fieldset className="form-group">
-                      <label htmlFor="name" className="form-label">
+                    <fieldset className="form__group">
+                      <label htmlFor="name" className="form__label">
                         Pàgina web
                       </label>
                       <input
                         type="url"
                         name="website"
                         placeholder="Escriu la pàgina web del teu negoci"
-                        className="form-control"
+                        className="form__control"
                         onChange={handleChange}
                         value={formsState.website}
                         required
                       />
                     </fieldset>
-                    <fieldset className="form-group">
-                      <label htmlFor="message" className="form-label">
+                    <fieldset className="form__group">
+                      <label htmlFor="message" className="form__label">
                         Missatge
                       </label>
                       <textarea
                         name="message"
                         placeholder="En què et podem ajudar?"
-                        className="form-control"
+                        className="form__control"
                         onChange={handleChange}
                         value={formsState.message}
                         required
