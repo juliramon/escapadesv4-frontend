@@ -195,7 +195,7 @@ const StoriesList = ({ user, stories }) => {
                 <div className="w-full md:w-4/12">
                   <div className="md:pr-10">
                     <h1>Històries en parella</h1>
-                    <p className="mt-4">
+                    <p className="mt-4 text-lg">
                       Històries en parella per a inspirar, descobrir nous llocs
                       i, en definitiva, fer-vos venir ganes d'una escapada en
                       parella per recordar.

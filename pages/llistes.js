@@ -156,30 +156,41 @@ const ListsList = ({ user, lists }) => {
           content="756319ea1956c99d055184c4cac47dbfa3c81808"
         />
       </Head>
-      <main id="lists" className="lists">
+      <div className="lists">
         <NavigationBar
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
           }
           user={user}
         />
-        <Container>
-          <Row>
-            <Col lg={12}>
-              <div className="box d-flex">
-                <section className="listings-wrapper">
-                  <div className="listings-list featured">{featuredList}</div>
-                  <div className="listings-list regular">
-                    <div className="title-area">
-                      <h3 className="uppercase small">Darreres</h3>
-                    </div>
-                    <div className="listings-list-wrapper">{listsList}</div>
+        <main>
+          <div className="pt-6">
+            <div className="container">
+              <ul className="breadcrumb">
+                <li className="breadcrumb__item">
+                  <a href="/" title="Inici" className="breadcrumb__link">
+                    Inici
+                  </a>
+                </li>
+                <li className="breadcrumb__item">
+                  <span className="breadcrumb__link active">Llistes</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <section className="py-6 lg:py-16">
+            <div className="container">
+              <div className="flex flex-wrap items-start -mx-6">
+                <div className="w-full lg:w-3/5 px-6 order-2 lg:order-none">
+                  <div className="lists__featured">{featuredList}</div>
+                  <div className="flex flex-wrap items-start pt-10">
+                    <div className="w-full -mt-3 -mb-6">{listsList}</div>
                   </div>
-                </section>
-                <aside className="sidebar-right">
+                </div>
+                <aside className="w-full lg:w-2/5 px-6 lg:sticky top-28 order-1 lg:order-none">
                   <div className="title-area">
-                    <h2>Llistes</h2>
-                    <p>
+                    <h1>Llistes</h1>
+                    <p className="text-lg mt-4">
                       Descobreix les millors escapades en parella a Catalunya a
                       través de llistes gestionades 100% per l'equip d'
                       <u>escapadesenparella</u>.
@@ -188,8 +199,8 @@ const ListsList = ({ user, lists }) => {
                   <div className="cloud-tags">
                     <ShareBar url={urlToShare} />
                   </div>
-                  <div className="ad-wrapper">
-                    <div className="ad-block">
+                  <div className="ad-wrapper border-t border-primary-200 mt-5 pt-5 ">
+                    <div className="ad-block hidden lg:block">
                       <AdSense.Google
                         client="ca-pub-6252269250624547"
                         slot="9182372294"
@@ -200,56 +211,12 @@ const ListsList = ({ user, lists }) => {
                       />
                     </div>
                   </div>
-                  <div className="legal-links">
-                    <ul>
-                      <li>Qui som?</li>
-                      <li>Què fem?</li>
-                      <li>Blog</li>
-                      <li>Política de Privacitat</li>
-                      <li>Condicions d'Ús</li>
-                      <li>Política de Cookies</li>
-                    </ul>
-                    <ul>
-                      <li>
-                        <b>Segueix-nos a:</b>
-                      </li>
-                      <li>Instagram</li>
-                      <li>Facebook</li>
-                      <li>Twitter</li>
-                    </ul>
-                    <span className="copyright">
-                      Copyright © 2021. Tots els drets reservats.
-                      <br />
-                      Desenvolupat i gestionat amb{" "}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="icon icon-tabler icon-tabler-heart"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="#00206B"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z"></path>
-                        <path
-                          fill="red"
-                          stroke="none"
-                          d="M12 20l-7 -7a4 4 0 0 1 6.5 -6a.9 .9 0 0 0 1 0a4 4 0 0 1 6.5 6l-7 7"
-                        ></path>
-                      </svg>{" "}
-                      per en <u>Juli Ramon</u> i l'<u>Andrea Prat</u> a
-                      Barcelona
-                    </span>
-                  </div>
                 </aside>
               </div>
-            </Col>
-          </Row>
-        </Container>
-      </main>
+            </div>
+          </section>
+        </main>
+      </div>
       <Footer
         logo_url={
           "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
