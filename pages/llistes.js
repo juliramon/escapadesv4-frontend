@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ContentService from "../services/contentService";
 import NavigationBar from "../components/global/NavigationBar";
-import { Container, Row, Spinner, Col, Breadcrumb } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import FeaturedListBox from "../components/listings/FeaturedListBox";

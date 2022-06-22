@@ -1,6 +1,5 @@
 import Head from "next/head";
 import React, { useState } from "react";
-import { Col, Container, Row } from "react-bootstrap";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
 import ToastNotification from "../components/toasts/ToastNotification";

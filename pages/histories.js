@@ -9,6 +9,10 @@ import RegularStoryBox from "../components/listings/RegularStoryBox";
 import { useRouter } from "next/router";
 import AdSense from "react-adsense";
 import Footer from "../components/global/Footer";
+import { Navigation } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
 
 const StoriesList = ({ user, stories }) => {
   const router = useRouter();
@@ -63,49 +67,6 @@ const StoriesList = ({ user, stories }) => {
         </Container>
       </>
     );
-  }
-
-  let storiesList, featuredStories, popularStories;
-  if (state.hasStories === true) {
-    featuredStories = state.stories
-      .slice(0, 3)
-      .map((el) => (
-        <FeaturedStoryBox
-          key={el._id}
-          slug={el.slug}
-          cover={el.cover}
-          title={el.title}
-          avatar={el.owner.avatar}
-          owner={el.owner.fullName}
-        />
-      ));
-    storiesList = state.stories
-      .slice(9)
-      .map((el) => (
-        <RegularStoryBox
-          key={el._id}
-          slug={el.slug}
-          cover={el.cover}
-          title={el.title}
-          subtitle={el.subtitle}
-          avatar={el.owner.avatar}
-          owner={el.owner.fullName}
-        />
-      ));
-    popularStories = state.stories
-      .slice(3, 9)
-      .map((el, idx) => (
-        <PopularStoryBox
-          key={el._id}
-          slug={el.slug}
-          title={el.title}
-          subtitle={el.subtitle}
-          avatar={el.owner.avatar}
-          owner={el.owner.fullName}
-          cover={el.cover}
-          idx={`0${idx + 1}`}
-        />
-      ));
   }
 
   return (
@@ -191,37 +152,102 @@ const StoriesList = ({ user, stories }) => {
           </div>
           <section className="py-6 md:py-16">
             <div className="container relative">
-              <div className="flex flex-wrap items-center justify-between">
-                <div className="w-full md:w-4/12">
-                  <div className="md:pr-10">
-                    <h1>Històries en parella</h1>
-                    <p className="mt-4 text-lg">
-                      Històries en parella per a inspirar, descobrir nous llocs
-                      i, en definitiva, fer-vos venir ganes d'una escapada en
-                      parella per recordar.
-                    </p>
+              <div className="w-full md:w-8/12 lg:w-6/12 md:mx-auto text-center">
+                <h1>Històries en parella</h1>
+                <p className="mt-4 text-lg">
+                  Històries en parella per a inspirar, descobrir nous llocs i,
+                  en definitiva, fer-vos venir ganes d'una escapada en parella
+                  per recordar.
+                </p>
+                <div className="mt-5 flex flex-wrap items-center justify-center">
+                  <div className="w-24 h-auto mr-4">
+                    <picture>
+                      <img
+                        src="https://res.cloudinary.com/juligoodie/image/upload/v1618330078/getaways-guru/static-files/avatars-juli-andrea_c6dio6.png"
+                        alt="Andrea i Juli, credors d'Escapadesenparella.cat"
+                        className="w-full h-auto"
+                        loading="eager"
+                      />
+                    </picture>
                   </div>
-                  <div className="mt-5 flex flex-wrap items-center">
-                    <div className="w-24 h-auto mr-4">
-                      <picture>
-                        <img
-                          src="https://res.cloudinary.com/juligoodie/image/upload/v1618330078/getaways-guru/static-files/avatars-juli-andrea_c6dio6.png"
-                          alt="Andrea i Juli, credors d'Escapadesenparella.cat"
-                          className="w-full h-auto"
-                          loading="eager"
-                        />
-                      </picture>
-                    </div>
-                    <span className="text-sm text-primary-400 relative -top-1">
-                      De la mà de l'<b>Andrea i en Juli</b>,<br /> creadors
-                      d'Escapadesenparella.cat
-                    </span>
-                  </div>
+                  <span className="text-sm text-primary-400 relative -top-1">
+                    De la mà de l'<b>Andrea i en Juli</b>,<br /> creadors
+                    d'Escapadesenparella.cat
+                  </span>
                 </div>
-                <div className="w-full md:w-8/12">
-                  <div className="flex flex-wrap items-center">
-                    {featuredStories}
-                  </div>
+              </div>
+              <div className="w-full mt-10 px-10">
+                <div className="flex flex-wrap items-center relative">
+                  <Swiper
+                    modules={[Navigation]}
+                    spaceBetween={4}
+                    slidesPerView={4}
+                    navigation={{
+                      nextEl: ".swiper-prev",
+                      prevEl: ".swiper-next",
+                    }}
+                    breakpoints={{
+                      768: {
+                        width: 640,
+                        slidesPerView: 2,
+                      },
+                      1024: {
+                        width: 1024,
+                        slidesPerView: 3,
+                      },
+                    }}
+                  >
+                    {state.stories.slice(0, 8).map((el) => (
+                      <SwiperSlide>
+                        <FeaturedStoryBox
+                          key={el._id}
+                          slug={el.slug}
+                          cover={el.cover}
+                          title={el.title}
+                          avatar={el.owner.avatar}
+                          owner={el.owner.fullName}
+                        />
+                      </SwiperSlide>
+                    ))}
+                  </Swiper>
+                  <button className="bg-white shadow-xl w-10 h-10 flex items-center justify-center swiper-next absolute top-1/2 -left-4 z-40 transform -translate-y-1/2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-arrow-narrow-left text-primary-500"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <line x1="5" y1="12" x2="9" y2="16" />
+                      <line x1="5" y1="12" x2="9" y2="8" />
+                    </svg>
+                  </button>
+                  <button className="bg-white shadow-xl w-10 h-10 flex items-center justify-center swiper-prev absolute top-1/2 -right-4 z-40 transform -translate-y-1/2">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-arrow-narrow-right text-primary-500"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="currentColor"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <line x1="5" y1="12" x2="19" y2="12" />
+                      <line x1="15" y1="16" x2="19" y2="12" />
+                      <line x1="15" y1="8" x2="19" y2="12" />
+                    </svg>
+                  </button>
                 </div>
               </div>
             </div>
@@ -230,7 +256,18 @@ const StoriesList = ({ user, stories }) => {
             <div className="container">
               <h2>Històries més populars</h2>
               <div className="flex flex-wrap items-center mt-8 -mx-6 -mb-6">
-                {popularStories}
+                {state.stories.slice(3, 9).map((el, idx) => (
+                  <PopularStoryBox
+                    key={el._id}
+                    slug={el.slug}
+                    title={el.title}
+                    subtitle={el.subtitle}
+                    avatar={el.owner.avatar}
+                    owner={el.owner.fullName}
+                    cover={el.cover}
+                    idx={`0${idx + 1}`}
+                  />
+                ))}
               </div>
             </div>
           </section>
@@ -247,7 +284,17 @@ const StoriesList = ({ user, stories }) => {
               </div>
               <div className="flex flex-wrap items-start">
                 <div className="w-full md:w-8/12 -mt-3 -mb-6">
-                  {storiesList}
+                  {state.stories.slice(9).map((el) => (
+                    <RegularStoryBox
+                      key={el._id}
+                      slug={el.slug}
+                      cover={el.cover}
+                      title={el.title}
+                      subtitle={el.subtitle}
+                      avatar={el.owner.avatar}
+                      owner={el.owner.fullName}
+                    />
+                  ))}
                 </div>
                 <aside className="w-full md:w-4/12">
                   <div className="ad-wrapper">

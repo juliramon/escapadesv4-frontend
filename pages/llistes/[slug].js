@@ -2,7 +2,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
-import { Col, Container, Row, Spinner } from "react-bootstrap";
+import { Container, Spinner } from "react-bootstrap";
 import Footer from "../../components/global/Footer";
 import NavigationBar from "../../components/global/NavigationBar";
 import ShareModal from "../../components/modals/ShareModal";

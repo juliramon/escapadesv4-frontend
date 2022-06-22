@@ -1,7 +1,6 @@
-import { Container, Row, Col } from "react-bootstrap";
 import Link from "next/link";
 
-const Footer = ({ logo_url }) => {
+const Footer = () => {
   let copyrightDate = new Date();
   copyrightDate = copyrightDate.getFullYear();
   return (
