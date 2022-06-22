@@ -176,24 +176,25 @@ const StoriesList = ({ user, stories }) => {
                   </span>
                 </div>
               </div>
-              <div className="w-full mt-10 px-10">
+              <div className="w-full mt-10">
                 <div className="flex flex-wrap items-center relative">
                   <Swiper
                     modules={[Navigation]}
                     spaceBetween={4}
-                    slidesPerView={4}
+                    slidesPerView={1}
                     navigation={{
                       nextEl: ".swiper-prev",
                       prevEl: ".swiper-next",
                     }}
                     breakpoints={{
                       768: {
-                        width: 640,
                         slidesPerView: 2,
                       },
                       1024: {
-                        width: 1024,
                         slidesPerView: 3,
+                      },
+                      1280: {
+                        slidesPerView: 4,
                       },
                     }}
                   >
