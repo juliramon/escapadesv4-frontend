@@ -137,16 +137,13 @@ const PlaceListing = () => {
   if (user && user !== "null") {
     if (state.isBookmarked === false) {
       bookmarkButton = (
-        <div
-          className="listing-bookmark-wrapper"
-          onClick={() => bookmarkListing()}
-        >
-          <button className="listing-bookmark">
+        <div className="px-4" onClick={() => bookmarkListing()}>
+          <button className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="icon icon-tabler icon-tabler-bookmark"
-              width="44"
-              height="44"
+              className="icon icon-tabler icon-tabler-bookmark mr-1"
+              width="30"
+              height="30"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="#0d1f44"
@@ -157,22 +154,19 @@ const PlaceListing = () => {
               <path stroke="none" d="M0 0h24v24H0z" />
               <path d="M9 4h6a2 2 0 0 1 2 2v14l-5-3l-5 3v-14a2 2 0 0 1 2 -2" />
             </svg>
+            <span>Desar</span>
           </button>
-          <span>Bookmark</span>
         </div>
       );
     } else {
       bookmarkButton = (
-        <div
-          className="listing-bookmark-wrapper"
-          onClick={() => bookmarkListing()}
-        >
-          <button className="listing-bookmark">
+        <div className="px-4" onClick={() => bookmarkListing()}>
+          <button className="flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="icon icon-tabler icon-tabler-bookmark"
-              width="44"
-              height="44"
+              className="icon icon-tabler icon-tabler-bookmark mr-1"
+              width="30"
+              height="30"
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="#0d1f44"
@@ -186,23 +180,20 @@ const PlaceListing = () => {
                 d="M9 4h6a2 2 0 0 1 2 2v14l-5-3l-5 3v-14a2 2 0 0 1 2 -2"
               />
             </svg>
+            <span>Esborrar</span>
           </button>
-          <span>Unbookmark</span>
         </div>
       );
     }
   } else {
     bookmarkButton = (
-      <div
-        className="flex items-center px-5"
-        onClick={() => handleModalVisibility()}
-      >
-        <button className="listing-bookmark">
+      <div className="px-4" onClick={() => handleModalVisibility()}>
+        <button className="flex items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="icon icon-tabler icon-tabler-bookmark mr-2"
-            width="28"
-            height="28"
+            className="icon icon-tabler icon-tabler-bookmark mr-1"
+            width="30"
+            height="30"
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"
@@ -213,23 +204,20 @@ const PlaceListing = () => {
             <path stroke="none" d="M0 0h24v24H0z" />
             <path d="M9 4h6a2 2 0 0 1 2 2v14l-5-3l-5 3v-14a2 2 0 0 1 2 -2" />
           </svg>
+          <span>Desar</span>
         </button>
-        <span>Bookmark</span>
       </div>
     );
   }
 
   const shareButton = (
-    <div
-      className="flex items-center px-5"
-      onClick={() => handleShareModalVisibility()}
-    >
+    <div className="px-4" onClick={() => handleShareModalVisibility()}>
       <button className="flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="icon icon-tabler icon-tabler-share mr-2"
-          width="28"
-          height="28"
+          className="icon icon-tabler icon-tabler-share mr-1"
+          width="30"
+          height="30"
           viewBox="0 0 24 24"
           strokeWidth="1.5"
           stroke="currentColor"
@@ -244,8 +232,8 @@ const PlaceListing = () => {
           <line x1="8.7" y1="10.7" x2="15.3" y2="7.3" />
           <line x1="8.7" y1="13.3" x2="15.3" y2="16.7" />
         </svg>
+        <span>Compartir</span>
       </button>
-      <span>Compartir</span>
     </div>
   );
 
@@ -497,7 +485,7 @@ const PlaceListing = () => {
                     </ul>
                   </div>
                   <div className="w-full md:w-1/2">
-                    <div className="flex flex-wrap justify-end items-center -mx-5">
+                    <div className="flex flex-wrap justify-end items-center -mx-4">
                       {bookmarkButton}
                       {shareButton}
                     </div>
