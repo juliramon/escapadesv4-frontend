@@ -178,7 +178,7 @@ const ListsList = ({ user, lists }) => {
               </ul>
             </div>
           </div>
-          <section className="py-6 lg:py-16">
+          <section className="py-6 lg:pt-10 lg:pb-16">
             <div className="container">
               <div className="flex flex-wrap items-start -mx-6">
                 <div className="w-full lg:w-3/5 px-6 order-2 lg:order-none">

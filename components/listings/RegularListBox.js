@@ -39,7 +39,7 @@ const RegularListBox = ({
                 </picture>
               </div>
               <div className="flex items-center">
-                <span class="text-sm inline-block">{owner}</span>
+                <span className="text-sm inline-block">{owner}</span>
                 <span className="mx-2 opacity-40 inline-block">–</span>
                 <span className="text-sm inline-block opacity-40">
                   {publicationDate}

@@ -59,17 +59,17 @@ const ContentBar = (props) => {
   let contentBar;
   contentBar = (
     <div className="content-bar">
-      <Container fluid>
-        <div className="content-bar---wrapper d-flex align-items-center">
+      <div className="w-full px-6">
+        <div className="content-bar---wrapper flex items-center">
           <div
-            className="content-bar---inner d-flex align-items-center"
+            className="content-bar---inner flex items-center"
             onWheel={(e) => handleScroll(e)}
           >
             {categoriesList}
           </div>
           <div className="content-bar---overlay"></div>
         </div>
-      </Container>
+      </div>
     </div>
   );
 

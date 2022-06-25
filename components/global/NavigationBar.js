@@ -268,13 +268,36 @@ const NavigationBar = ({ logo_url, path }) => {
 
   const responsiveMenu = (
     <>
-      <div className="nav-responsive-wrapper">
+      <div
+        className={`menu__responsive ${
+          state.isResponsiveMenuOpen ? "open" : null
+        }`}
+      >
+        <button className="menu__close" onClick={() => handleResponsiveMenu()}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="icon icon-tabler icon-tabler-x"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="#00206B"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+
         <Nav className="search-box">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             className="icon icon-tabler icon-tabler-search"
-            width="44"
-            height="44"
+            width="15"
+            height="15"
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="#00206B"
@@ -286,41 +309,41 @@ const NavigationBar = ({ logo_url, path }) => {
             <circle cx="10" cy="10" r="7" />
             <line x1="21" y1="21" x2="15" y2="15" />
           </svg>
-          <Form>
+          <Form className="form">
             <Form.Control
               onKeyDown={handleKeyPress}
+              className="form__control"
               type="text"
               placeholder="Cerca la vostra propera escapada..."
             />
-
-            <span className="search-helper">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="icon icon-tabler icon-tabler-corner-down-left"
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="#00206B"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <path d="M18 6v6a3 3 0 0 1 -3 3h-10l5 -5m0 10l-5 -5" />
-              </svg>
-              Prem "Enter" per cercar
-            </span>
           </Form>
         </Nav>
-        <Nav>
+        <span className="flex items-center text-xs mt-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="icon icon-tabler icon-tabler-corner-down-left"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="#00206B"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <path d="M18 6v6a3 3 0 0 1 -3 3h-10l5 -5m0 10l-5 -5" />
+          </svg>
+          Prem "Enter" per cercar
+        </span>
+        <Nav className="mt-8">
           <Link href="/activitats">
-            <a>
+            <a className="menu__link flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="icon icon-tabler icon-tabler-route"
-                width="44"
-                height="44"
+                className="icon icon-tabler icon-tabler-route mr-2"
+                width="25"
+                height="25"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="#00206B"
@@ -337,12 +360,12 @@ const NavigationBar = ({ logo_url, path }) => {
             </a>
           </Link>
           <Link href="/allotjaments">
-            <a>
+            <a className="menu__link flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="icon icon-tabler icon-tabler-bed"
-                width="44"
-                height="44"
+                className="icon icon-tabler icon-tabler-tent mr-2"
+                width="25"
+                height="25"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="#00206B"
@@ -350,20 +373,19 @@ const NavigationBar = ({ logo_url, path }) => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <path d="M3 7v11m0 -4h18m0 4v-8a2 2 0 0 0 -2 -2h-8v6" />
-                <circle cx="7" cy="10" r="1" />
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" />
               </svg>
               Allotjaments
             </a>
           </Link>
           <Link href="/histories">
-            <a>
+            <a className="menu__link flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="icon icon-tabler icon-tabler-notebook"
-                width="44"
-                height="44"
+                className="icon icon-tabler icon-tabler-notebook mr-2"
+                width="25"
+                height="25"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="#00206B"
@@ -380,12 +402,12 @@ const NavigationBar = ({ logo_url, path }) => {
             </a>
           </Link>
           <Link href="/llistes">
-            <a>
+            <a className="menu__link flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="icon icon-tabler icon-tabler-layout-list"
-                width="44"
-                height="44"
+                className="icon icon-tabler icon-tabler-layout-list mr-2"
+                width="25"
+                height="25"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="#00206B"
@@ -401,7 +423,7 @@ const NavigationBar = ({ logo_url, path }) => {
             </a>
           </Link>
         </Nav>
-        {navRight}
+        {/* {navRight} */}
       </div>
     </>
   );
@@ -461,7 +483,7 @@ const NavigationBar = ({ logo_url, path }) => {
                 </a>
               </Link>
             </div>
-            <div className="nav-col right d-flex simple-nav">{navRight}</div>
+            {/* <div className="nav-col right d-flex simple-nav">{navRight}</div> */}
           </Container>
         </Navbar>
       </header>
@@ -581,7 +603,7 @@ const NavigationBar = ({ logo_url, path }) => {
     navBar = (
       <header style={styledHeader}>
         <nav className="px-6 py-3 menu">
-          <div className="w-full flex flex-wrap items-center">
+          <div className="w-full flex flex-wrap items-center justify-between lg:justify-start">
             <Link href={logoLink}>
               <a className="mr-5 px-0 menu__item">
                 <svg
@@ -623,8 +645,8 @@ const NavigationBar = ({ logo_url, path }) => {
                 </svg>
               </a>
             </Link>
-            <div className="flex flex-wrap items-center flex-auto">
-              <form className="flex-auto flex items-center bg-primary-100 mr-5 relative rounded overflow-hidden">
+            <div className="flex flex-wrap items-center lg:flex-auto">
+              <form className="hidden lg:flex flex-auto items-center bg-primary-100 mr-5 relative rounded overflow-hidden">
                 <input
                   onKeyDown={handleKeyPress}
                   type="text"
@@ -648,7 +670,7 @@ const NavigationBar = ({ logo_url, path }) => {
                   <line x1="21" y1="21" x2="15" y2="15" />
                 </svg>
               </form>
-              <div className="flex flex-wrap items-center mr-5">
+              <div className="hidden lg:flex flex-wrap items-center">
                 <Link href="/activitats">
                   <a className="flex items-center menu__item">
                     <svg
@@ -675,19 +697,18 @@ const NavigationBar = ({ logo_url, path }) => {
                   <a className="flex items-center menu__item">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-bed text-primary-500 mr-1.5"
+                      className="icon icon-tabler icon-tabler-tent mr-1.5"
                       width="22"
                       height="22"
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
-                      stroke="currentColor"
+                      stroke="#00206B"
                       fill="none"
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <path d="M3 7v11m0 -4h18m0 4v-8a2 2 0 0 0 -2 -2h-8v6" />
-                      <circle cx="7" cy="10" r="1" />
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" />
                     </svg>
                     Allotjaments
                   </a>
@@ -736,52 +757,33 @@ const NavigationBar = ({ logo_url, path }) => {
                   </a>
                 </Link>
               </div>
-              {navRight}
-              <div className="block lg:hidden">
+              {/* {navRight} */}
+              <div className="flex items-center lg:hidden">
                 <button className="" onClick={() => handleResponsiveMenu()}>
-                  {state.isResponsiveMenuOpen ? (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-x open"
-                      width="44"
-                      height="44"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="#ffffff"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <line x1="18" y1="6" x2="6" y2="18" />
-                      <line x1="6" y1="6" x2="18" y2="18" />
-                    </svg>
-                  ) : (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="icon icon-tabler icon-tabler-menu-2"
-                      width="50"
-                      height="50"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.5"
-                      stroke="#00206B"
-                      fill="none"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <line x1="4" y1="6" x2="20" y2="6" />
-                      <line x1="4" y1="12" x2="20" y2="12" />
-                      <line x1="4" y1="18" x2="20" y2="18" />
-                    </svg>
-                  )}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="icon icon-tabler icon-tabler-menu-2"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="#00206B"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <line x1="4" y1="6" x2="20" y2="6" />
+                    <line x1="4" y1="12" x2="20" y2="12" />
+                    <line x1="4" y1="18" x2="20" y2="18" />
+                  </svg>
                 </button>
               </div>
             </div>
           </div>
           {state.isResponsiveMenuOpen ? responsiveMenu : null}
         </nav>
-        {/* <ContentBar /> */}
+        <ContentBar />
       </header>
     );
   }

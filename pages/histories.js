@@ -13,9 +13,13 @@ import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
+import ShareBar from "../components/social/ShareBar";
 
 const StoriesList = ({ user, stories }) => {
   const router = useRouter();
+
+  const urlToShare = `https://escapadesenparella.cat/histories`;
+
   useEffect(() => {
     if (
       router.pathname.includes("editar") ||
@@ -126,7 +130,7 @@ const StoriesList = ({ user, stories }) => {
           content="756319ea1956c99d055184c4cac47dbfa3c81808"
         />
       </Head>
-      <div id="storiesList" className="stories">
+      <div className="stories">
         <NavigationBar
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
@@ -150,7 +154,7 @@ const StoriesList = ({ user, stories }) => {
               </ul>
             </div>
           </div>
-          <section className="py-6 md:py-16">
+          <section className="py-6 md:pt-10 md:pb-16">
             <div className="container relative">
               <div className="w-full md:w-8/12 lg:w-6/12 md:mx-auto text-center">
                 <h1>Històries en parella</h1>
@@ -199,9 +203,8 @@ const StoriesList = ({ user, stories }) => {
                     }}
                   >
                     {state.stories.slice(0, 8).map((el) => (
-                      <SwiperSlide>
+                      <SwiperSlide key={el._id}>
                         <FeaturedStoryBox
-                          key={el._id}
                           slug={el.slug}
                           cover={el.cover}
                           title={el.title}
@@ -283,8 +286,8 @@ const StoriesList = ({ user, stories }) => {
                   Catalunya.
                 </p>
               </div>
-              <div className="flex flex-wrap items-start">
-                <div className="w-full md:w-8/12 -mt-3 -mb-6">
+              <div className="flex flex-wrap items-start -mx-6">
+                <div className="w-full lg:w-3/5 px-6 order-2 lg:order-none">
                   {state.stories.slice(9).map((el) => (
                     <RegularStoryBox
                       key={el._id}
@@ -294,11 +297,15 @@ const StoriesList = ({ user, stories }) => {
                       subtitle={el.subtitle}
                       avatar={el.owner.avatar}
                       owner={el.owner.fullName}
+                      date={el.createdAt}
                     />
                   ))}
                 </div>
-                <aside className="w-full md:w-4/12">
-                  <div className="ad-wrapper">
+                <aside className="w-full lg:w-2/5 px-6 lg:sticky top-28 order-2 lg:order-none">
+                  <div className="cloud-tags">
+                    <ShareBar url={urlToShare} />
+                  </div>
+                  <div className="ad-wrapper border-t border-primary-200 mt-5 pt-5">
                     <div className="ad-block">
                       <AdSense.Google
                         client="ca-pub-6252269250624547"
