@@ -123,47 +123,45 @@ const PublicSquareBox = ({
 
   let additionalInfoRef, additionalInfoSVG;
   if (duration) {
-    additionalInfoRef = `Activitat de ${duration} hores`;
+    additionalInfoRef = `${duration} hores`;
     additionalInfoSVG = (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="icon icon-tabler icon-tabler-alarm"
-        width="18"
-        height="18"
+        class="icon icon-tabler icon-tabler-route"
+        width="16"
+        height="16"
         viewBox="0 0 24 24"
-        strokeWidth="1.5"
+        stroke-width="1.5"
         stroke="currentColor"
         fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <circle cx="12" cy="13" r="7" />
-        <polyline points="12 10 12 13 14 13" />
-        <line x1="7" y1="4" x2="4.25" y2="6" />
-        <line x1="17" y1="4" x2="19.75" y2="6" />
+        <path stroke="none" d="M0 0h24v24H0z"></path>
+        <circle cx="6" cy="19" r="2"></circle>
+        <circle cx="18" cy="5" r="2"></circle>
+        <path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5"></path>
       </svg>
     );
   } else {
     additionalInfoSVG = (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="icon icon-tabler icon-tabler-bed"
-        width="18"
-        height="18"
+        class="icon icon-tabler icon-tabler-tent"
+        width="16"
+        height="16"
         viewBox="0 0 24 24"
-        strokeWidth="1.5"
+        stroke-width="1.5"
         stroke="currentColor"
         fill="none"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        stroke-linecap="round"
+        stroke-linejoin="round"
       >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-        <path d="M3 7v11m0 -4h18m0 4v-8a2 2 0 0 0 -2 -2h-8v6" />
-        <circle cx="7" cy="10" r="1" />
+        <path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" />
       </svg>
     );
-    additionalInfoRef = placeTypeModified + " " + "amb encant";
+    additionalInfoRef = placeTypeModified;
   }
   let modRating;
   if (rating && Number.isInteger(rating)) {
@@ -194,16 +192,35 @@ const PublicSquareBox = ({
               </picture>
             </div>
             <div className="absolute top-2 right-2 bg-white inline-block w-auto h-auto rounded-md text-primary-500 px-2 py-1 text-sm">
-              {modRating || rating}
+              <div className="flex items-center justify-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-star mr-1"
+                  width="15"
+                  height="15"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="#fbbf24"
+                  fill="#fbbf24"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+                </svg>
+                {modRating || rating}
+              </div>
             </div>
-            <div className="pt-3 flex flex-col justify-between">
-              <h3 className="mt-0 mb-0 text-primary-500">{title}</h3>
-              <p className="text-sm my-0 text-primary-500">
+            <div className="pt-4 flex flex-col justify-between">
+              <div className="mb-1 flex items-center text-xs tracking-wider text-secondary-500">
+                <div className="mr-1">{additionalInfoSVG}</div>
+                <span className="uppercase">{tipus}</span>
+                <span className="mx-1">·</span>
+                <span className="uppercase">{additionalInfoRef}</span>
+              </div>
+              <h3 className="mt-0 mb-0 text-primary-600">{title}</h3>
+              <p className="text-base my-0 text-primary-500">
                 Escapada {categoryModified} a {shortenedLocation}
-              </p>
-              <p className="mt-4 mb-1 flex items-center text-sm text-primary-500">
-                <span className="mr-1.5">{additionalInfoSVG}</span>
-                {additionalInfoRef}
               </p>
             </div>
           </a>

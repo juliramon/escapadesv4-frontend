@@ -1358,26 +1358,6 @@ nav {
       display: none;
     }
   }
-  .location-control {
-    background-color: $soft-blue;
-    border: none;
-    border-radius: 8px;
-    display: block;
-    width: 100%;
-    height: calc(1.5em + 0.75rem + 2px);
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    color: $dark-blue;
-  }
-  .location-control::placeholder {
-    color: #173572;
-  }
-  .location-control:focus {
-    outline: none !important;
-    border: none !important;
-    background-color: #f2f7f9 !important;
-    box-shadow: inset 0 0 0 3px #3a4887 !important;
-  }
 }
 
 .pac-container {

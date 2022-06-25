@@ -200,7 +200,7 @@ const ListsList = ({ user, lists }) => {
                     <ShareBar url={urlToShare} />
                   </div>
                   <div className="ad-wrapper border-t border-primary-200 mt-5 pt-5 ">
-                    <div className="ad-block hidden lg:block">
+                    <div className="ad-block">
                       <AdSense.Google
                         client="ca-pub-6252269250624547"
                         slot="9182372294"

@@ -1,13 +1,23 @@
 @layer components
-    .form
-        @apply -m-1.5
-        &__group
-            @apply p-1.5
-        &__label
-            @apply block mb-2 text-xs font-medium text-primary-400
-        &__control
-            @apply bg-primary-100 border border-primary-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
-        button
-            @apply mx-1.5
-        textarea
-            min-height: 92px
+	.form
+		@apply -m-1.5
+		&__group
+			@apply p-1.5
+		&__label
+			@apply block mb-2 text-xs font-medium text-primary-400
+		&__control
+			@apply bg-primary-100 border border-primary-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
+  
+		.location-control::placeholder
+			color: #173572
+  
+		.location-control:focus
+			outline: none !important
+			border: none !important
+			background-color: #f2f7f9 !important
+			box-shadow: inset 0 0 0 3px #3a4887 !important
+  
+		button
+			@apply mx-1.5
+		textarea
+			min-height: 92px

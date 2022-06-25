@@ -193,10 +193,7 @@ const SearchBar = () => {
   let selectedForm;
   if (state.activeTab === "activities") {
     selectedForm = (
-      <Form
-        key={1}
-        className="header-form d-flex align-items-center activities"
-      >
+      <Form key={1} className="header-form flex items-center activities">
         <Form.Group>
           <Form.Label className="input-label">Localització</Form.Label>
           <Autocomplete
@@ -336,7 +333,7 @@ const SearchBar = () => {
     );
   } else {
     selectedForm = (
-      <Form key={2} className="header-form d-flex align-items-center places">
+      <Form key={2} className="header-form flex items-center places">
         <Form.Group>
           <Form.Label className="input-label">Localització</Form.Label>
           <Autocomplete

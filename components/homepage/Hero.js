@@ -5,7 +5,7 @@ const Hero = ({ background_url, title, subtitle }) => {
   return (
     <section
       id="hero"
-      className="relative flex items-center justify-center py-16 lg:py-0 rounded mt-6 mx-6 overflow-hidden"
+      className="relative flex items-center justify-center py-16 lg:py-0 rounded-md mt-6 mx-6 overflow-hidden shadow-xl"
     >
       <div className="absolute top-0 left-0 w-full h-full">
         <div className="absolute top-0 left-0 w-full h-full bg-primary-900 bg-opacity-30 z-30"></div>
@@ -43,7 +43,7 @@ const Hero = ({ background_url, title, subtitle }) => {
             </svg>
           </a>
         </Link>
-        <figcaption className="text-xs text-secondary-100 absolute bottom-8 right-12 z-40 text-right">
+        <figcaption className="text-xs text-white absolute bottom-8 right-12 z-40 text-right">
           Escapada al Pic del Campirme, 2.633m (Pallars Sobirà)
           <br />© Escapadesenparella.cat
         </figcaption>
@@ -52,7 +52,7 @@ const Hero = ({ background_url, title, subtitle }) => {
         <div className="w-full">
           <div className="header-col left text-center">
             <h1 className="text-white">{title}</h1>
-            <p className="text-white">{subtitle}</p>
+            <p className="text-white mt-5 text-2xl">{subtitle}</p>
             <SearchBar />
             <div className="credits-bar w-full mt-4">
               <div className="credits-bar-wrapper text-xs">
