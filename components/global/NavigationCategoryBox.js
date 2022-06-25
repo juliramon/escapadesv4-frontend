@@ -1,4 +1,3 @@
-import Link from "next/link";
 import SVG from "react-inlinesvg";
 
 const NavigationCategoryBox = ({ icon, slug, pluralName }) => {
@@ -6,14 +5,12 @@ const NavigationCategoryBox = ({ icon, slug, pluralName }) => {
   const svgIcon = <SVG src={icon} />;
   return (
     <div className="content-bar---item">
-      <Link href={`/${slug}`}>
-        <a>
-          <div className="content-bar---col left">{svgIcon}</div>
-          <div className="content-bar---col right">
-            <p>{upperName}</p>
-          </div>
-        </a>
-      </Link>
+      <a href={`/${slug}`}>
+        <div className="content-bar---col left">{svgIcon}</div>
+        <div className="content-bar---col right">
+          <p>{upperName}</p>
+        </div>
+      </a>
     </div>
   );
 };

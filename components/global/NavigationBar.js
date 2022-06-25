@@ -437,7 +437,7 @@ const NavigationBar = ({ logo_url, path }) => {
     router.pathname === "/nova-historia"
   ) {
     navBar = (
-      <header style={styledHeader}>
+      <header style={styledHeader} className="z-40">
         <Navbar>
           <Container fluid className="align-items-center">
             <div className="nav-col left d-flex">
@@ -493,7 +493,7 @@ const NavigationBar = ({ logo_url, path }) => {
     path === "/signup/confirmacio-correu"
   ) {
     navBar = (
-      <header style={styledHeader}>
+      <header style={styledHeader} className="z-40">
         <Navbar>
           <Container fluid className="align-items-center">
             <div className="nav-col left d-flex">
@@ -601,7 +601,7 @@ const NavigationBar = ({ logo_url, path }) => {
     );
   } else {
     navBar = (
-      <header style={styledHeader}>
+      <header style={styledHeader} className="z-40">
         <nav className="px-6 py-3 menu">
           <div className="w-full flex flex-wrap items-center justify-between lg:justify-start">
             <Link href={logoLink}>

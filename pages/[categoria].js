@@ -1,13 +1,13 @@
-import GoogleMapReact from "google-map-react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
-import { Container, Form, Row } from "react-bootstrap";
 import Error404 from "../components/global/Error404";
 import FetchingSpinner from "../components/global/FetchingSpinner";
+import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
 import PublicSquareBox from "../components/listings/PublicSquareBox";
+import MapModal from "../components/modals/MapModal";
 import UserContext from "../contexts/UserContext";
 import ContentService from "../services/contentService";
 
@@ -36,6 +36,7 @@ const CategoryPage = ({ categoryDetails, categoryResults }) => {
   };
 
   const [state, setState] = useState(initialState);
+  const [stateModalMap, setStateModalMap] = useState(false);
   // const [queryId, setQueryId] = useState(null);
 
   // useEffect(() => {
@@ -283,169 +284,186 @@ const CategoryPage = ({ categoryDetails, categoryResults }) => {
           content="756319ea1956c99d055184c4cac47dbfa3c81808"
         />
       </Head>
-      <div id="contentList" className="category">
+      <div id="contentList" className="category relative">
         <NavigationBar
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
           }
           user={user}
         />
-        <Container fluid>
-          <Row>
-            <div className="box d-flex">
-              {/* <div className="col left">
-                <div className="filter-list">
-                  <div className="filter-block">
-                    <span className="block-title">Classe d'allotjament</span>
-                    <Form.Check
-                      label="Hotels"
-                      name="placeType"
-                      id="hotel"
-                      //   onChange={handleCheckType}
-                    />
-                    <Form.Check
-                      label="Apartaments"
-                      name="placeType"
-                      id="apartament"
-                      //   onChange={handleCheckType}
-                    />
-                    <Form.Check
-                      label="Cases rurals"
-                      name="placeType"
-                      id="casarural"
-                      //   onChange={handleCheckType}
-                    />
-                    <Form.Check
-                      label="Refugis"
-                      name="placeType"
-                      id="refugi"
-                      //   onChange={handleCheckType}
-                    />
-                    <Form.Check
-                      label="Cases-arbre"
-                      name="placeType"
-                      id="casaarbre"
-                      //   onChange={handleCheckType}
-                    />
-                    <Form.Check
-                      label="Carabanes"
-                      name="placeType"
-                      id="carabana"
-                      //   onChange={handleCheckType}
-                    />
-                  </div>
-                  <div className="filter-block">
-                    <span className="block-title">Regió</span>
-                    <Form.Check
-                      label="Barcelona"
-                      name="placeRegion"
-                      id="barcelona"
-                      //   onChange={handleCheckRegion}
-                    />
-                    <Form.Check
-                      label="Girona"
-                      name="placeRegion"
-                      id="girona"
-                      //   onChange={handleCheckRegion}
-                    />
-                    <Form.Check
-                      label="Lleida"
-                      name="placeRegion"
-                      id="lleida"
-                      //   onChange={handleCheckRegion}
-                    />
-                    <Form.Check
-                      label="Tarragona"
-                      name="placeRegion"
-                      id="tarragona"
-                      //   onChange={handleCheckRegion}
-                    />
-                    <Form.Check
-                      label="Costa Brava"
-                      name="placeRegion"
-                      id="costaBrava"
-                      //   onChange={handleCheckRegion}
-                    />
-                    <Form.Check
-                      label="Costa Daurada"
-                      name="placeRegion"
-                      id="costaDaurada"
-                      //   onChange={handleCheckRegion}
-                    />
-                    <Form.Check
-                      label="Pirineus"
-                      name="placeRegion"
-                      id="pirineus"
-                      //   onChange={handleCheckRegion}
-                    />
-                  </div>
-                  <div className="filter-block">
-                    <span className="block-title">Estació de l'any</span>
-                    <Form.Check
-                      label="Hivern"
-                      name="placeSeason"
-                      id="winter"
-                      //   onChange={handleCheckSeason}
-                    />
-                    <Form.Check
-                      label="Primavera"
-                      name="placeSeason"
-                      id="spring"
-                      //   onChange={handleCheckSeason}
-                    />
-                    <Form.Check
-                      label="Estiu"
-                      name="placeSeason"
-                      id="summer"
-                      //   onChange={handleCheckSeason}
-                    />
-                    <Form.Check
-                      label="Tardor"
-                      name="placeSeason"
-                      id="autumn"
-                      //   onChange={handleCheckSeason}
-                    />
-                  </div>
-                </div>
-              </div> */}
-              <div className="col center">
-                <div className="top-nav-wrapper">
-                  <h1 className="top-nav-title">
+        <main>
+          <div className="pt-6">
+            <div className="container">
+              <ul className="breadcrumb">
+                <li className="breadcrumb__item">
+                  <a href="/" title="Inici" className="breadcrumb__link">
+                    Inici
+                  </a>
+                </li>
+                <li className="breadcrumb__item">
+                  <span className="breadcrumb__link active">
                     {state.categoryDetails.title}
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <section className="py-6 md:py-12">
+            <div className="container relative">
+              <div className="flex flex-wrap items-center justify-start">
+                <div className="w-full md:w-8/12 xl:w-5/12">
+                  <h1 className="my-0">
+                    Escapades{" "}
+                    <span className="text-secondary-500">
+                      {state.categoryDetails.pluralName}
+                    </span>
                   </h1>
-                  <p className="top-nav-subtitle">
-                    {state.categoryDetails.seoText}
-                  </p>
-                  {sponsorBlock}
                 </div>
-                <div className="listings-wrapper">
-                  <div className="listings-list">{resultsList}</div>
-                </div>
-              </div>
-              <div className="col right">
-                <div className="map-wrapper">
-                  <div className="map-block">
-                    {state.hasResults ? (
-                      <GoogleMapReact
-                        bootstrapURLKeys={{
-                          key: `${process.env.GOOGLE_API_KEY}`,
-                        }}
-                        defaultCenter={center}
-                        defaultZoom={7}
-                        options={getMapOptions}
-                        yesIWantToUseGoogleMapApiInternals
-                        onGoogleApiLoaded={({ map, maps }) =>
-                          renderMarker(map, maps)
-                        }
-                      />
-                    ) : null}
+                <div className="w-full mt-8">
+                  <div className="grid grid-cols-4 grid-rows-2 gap-2.5 rounded overflow-hidden">
+                    <div className="row-start-1 col-start-1 row-span-2 col-span-2 rounded-l overflow-hidden">
+                      <picture>
+                        <img
+                          src="https://res.cloudinary.com/juligoodie/image/upload/v1652983702/getaways-guru/activitats-en-parella_unz7x4.jpg"
+                          alt=""
+                          className="w-full h-full object-cover object-center"
+                          width={400}
+                          height={300}
+                          loading="eager"
+                        />
+                      </picture>
+                    </div>
+                    <div className="row-start-1 col-start-3 row-span-1 col-span-1 overflow-hidden">
+                      <picture>
+                        <img
+                          src="https://res.cloudinary.com/juligoodie/image/upload/v1652983702/getaways-guru/activitats-en-parella_unz7x4.jpg"
+                          alt=""
+                          className="w-full h-full object-cover object-center"
+                          width={400}
+                          height={300}
+                          loading="eager"
+                        />
+                      </picture>
+                    </div>
+                    <div className="row-start-1 col-start-4 row-span-1 col-span-1 rounded-tr overflow-hidden">
+                      <picture>
+                        <img
+                          src="https://res.cloudinary.com/juligoodie/image/upload/v1652983702/getaways-guru/activitats-en-parella_unz7x4.jpg"
+                          alt=""
+                          className="w-full h-full object-cover object-center"
+                          width={400}
+                          height={300}
+                          loading="eager"
+                        />
+                      </picture>
+                    </div>
+                    <div className="row-start-2 col-start-3 row-span-1 col-span-1 overflow-hidden">
+                      <picture>
+                        <img
+                          src="https://res.cloudinary.com/juligoodie/image/upload/v1652983702/getaways-guru/activitats-en-parella_unz7x4.jpg"
+                          alt=""
+                          className="w-full h-full object-cover object-center"
+                          width={400}
+                          height={300}
+                          loading="eager"
+                        />
+                      </picture>
+                    </div>
+                    <div className="row-start-2 col-start-4 row-span-1 col-span-1 rounded-br overflow-hidden">
+                      <picture>
+                        <img
+                          src="https://res.cloudinary.com/juligoodie/image/upload/v1652983702/getaways-guru/activitats-en-parella_unz7x4.jpg"
+                          alt=""
+                          className="w-full h-full object-cover object-center"
+                          width={400}
+                          height={300}
+                          loading="eager"
+                        />
+                      </picture>
+                    </div>
                   </div>
+                </div>
+                <div className="w-full mt-3">
+                  <figcaption className="text-xs text-primary-400 text-right">
+                    Escapada al Santuari de Cabrera (Osona) / ©
+                    Escapadesenparella.cat
+                  </figcaption>
                 </div>
               </div>
             </div>
-          </Row>
-        </Container>
+          </section>
+          <section className="pt-6 pb-8 md:pt-12 md:pb-16">
+            <div className="container">
+              {state.results.length > 0 ? (
+                <>
+                  <div className="w-full flex flex-wrap items-center justify-between pb-6">
+                    <div className="w-full md:w-1/2">
+                      <h2 className="max-w-xl">
+                        Descobreix {state.results.length}{" "}
+                        {!state.categoryDetails.isPlace ? "escapades" : null}{" "}
+                        {state.categoryDetails.pluralName}{" "}
+                        {state.categoryDetails.isPlace ? "amb encant" : null} a
+                        Catalunya
+                      </h2>
+                      {sponsorBlock}
+                    </div>
+                    <div className="relative flex items-center justify-end w-full md:w-1/2">
+                      <button
+                        className="text-sm inline-flex flex-nowrap items-center button button__ghost button__med mr-3"
+                        onClick={() => setStateModalMap(!stateModalMap)}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="icon icon-tabler icon-tabler-map-2 mr-2"
+                          width="18"
+                          height="18"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="currentColor"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <line x1="18" y1="6" x2="18" y2="6.01" />
+                          <path d="M18 13l-3.5 -5a4 4 0 1 1 7 0l-3.5 5" />
+                          <polyline points="10.5 4.75 9 4 3 7 3 20 9 17 15 20 21 17 21 15" />
+                          <line x1="9" y1="4" x2="9" y2="17" />
+                          <line x1="15" y1="15" x2="15" y2="20" />
+                        </svg>
+                        Veure-les al mapa
+                      </button>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap items-start -mx-2">
+                    {resultsList}
+                  </div>
+                  <div className="border-t border-primary-100 pt-10 mt-10">
+                    <div className="w-full md:w-8/12 xl:w-5/12 md:mx-auto">
+                      {state.categoryDetails.seoText}
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <p className="text-center mx-auto text-lg">
+                  No s'han trobat escapades per aquesta categoria.
+                  <br /> Torna-ho a provar més endavant.
+                </p>
+              )}
+            </div>
+          </section>
+        </main>
       </div>
+      <Footer />
+      {stateModalMap == true ? (
+        <MapModal
+          visibility={stateModalMap}
+          hideModal={setStateModalMap}
+          center={center}
+          getMapOptions={getMapOptions}
+          renderMarker={renderMarker}
+        />
+      ) : null}
     </>
   );
 };
@@ -460,21 +478,16 @@ export async function getStaticPaths() {
     params: { categoria: categoria.slug },
   }));
 
-  console.log(paths);
-
   return { paths, fallback: true };
 }
 
 export async function getStaticProps({ params }) {
-  console.log("params =>", params);
   const service = new ContentService();
   const categoryDetails = await service.getCategoryDetails(params.categoria);
   let categoryResults;
   if (categoryDetails !== null) {
-    console.log("not null =>", categoryDetails);
     categoryResults = await service.getCategoryResults(categoryDetails.name);
   } else {
-    console.log("null =>", categoryDetails);
     categoryResults = null;
   }
   return {
