@@ -293,7 +293,7 @@ const ActivityList = () => {
                 </div>
                 <div className="relative flex items-center justify-end w-full md:w-1/2">
                   <button
-                    className="text-sm inline-flex flex-nowrap items-center text-white button button__ghost button__med mr-3"
+                    className="text-sm inline-flex flex-nowrap items-center button button__ghost button__med mr-3"
                     onClick={() => setStateModalMap(!stateModalMap)}
                   >
                     <svg
@@ -370,7 +370,7 @@ const ActivityList = () => {
                     <span>Filtrar activitats</span>
                   </button>
                   {stateDropdownFilters === true ? (
-                    <div className="absolute z-50 bg-white rounded-md shadow-lg top-14 overflow-hidden p-7">
+                    <div className="absolute z-30 bg-white rounded-md shadow-lg top-14 overflow-hidden p-7">
                       <div className="flex items-start -m-5">
                         <div className="p-5">
                           <span className="text-lg mb-2 block">Regió</span>

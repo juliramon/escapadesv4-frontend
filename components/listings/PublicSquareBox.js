@@ -176,7 +176,7 @@ const PublicSquareBox = ({
     <div className="w-full md:w-1/2 lg:w-1/4 px-2 py-4 product__item">
       <div className="overflow-hidden">
         <Link href={`/${linkPath}/${slug}`}>
-          <a className="relative">
+          <a className="relative block">
             <div className="aspect-w-4 aspect-h-3 relative rounded overflow-hidden">
               <picture className="w-full h-full">
                 <source srcSet={coverImg} />
@@ -191,7 +191,7 @@ const PublicSquareBox = ({
                 />
               </picture>
             </div>
-            <div className="absolute top-2 right-2 bg-white inline-block w-auto h-auto rounded-md text-primary-500 px-2 py-1 text-sm">
+            <div className="absolute top-3 right-3 bg-white inline-block w-auto h-auto rounded-md text-primary-500 px-2 py-1 text-sm">
               <div className="flex items-center justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

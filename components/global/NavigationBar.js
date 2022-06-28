@@ -601,7 +601,7 @@ const NavigationBar = ({ logo_url, path }) => {
     );
   } else {
     navBar = (
-      <header style={styledHeader} className="z-40">
+      <header style={styledHeader} className="z-50">
         <nav className="px-6 py-3 menu">
           <div className="w-full flex flex-wrap items-center justify-between lg:justify-start">
             <Link href={logoLink}>

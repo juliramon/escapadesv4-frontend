@@ -8,7 +8,7 @@ const Hero = ({ background_url, title, subtitle }) => {
       className="relative flex items-center justify-center py-16 lg:py-0 rounded-md mt-6 mx-6 overflow-hidden shadow-xl"
     >
       <div className="absolute top-0 left-0 w-full h-full">
-        <div className="absolute top-0 left-0 w-full h-full bg-primary-900 bg-opacity-30 z-30"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-primary-400 bg-opacity-20 z-30"></div>
         <div className="absolute top-0 left-0 w-full h-full">
           <picture>
             <img

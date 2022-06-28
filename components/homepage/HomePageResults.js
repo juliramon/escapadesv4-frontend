@@ -726,10 +726,10 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
           {culturalGetawaysSection}
         </div>
       </div>
-      <section className="mt-16 xl:mt-36 pt-12 pb-20 lg:pb-28 bg-primary-100">
+      <section className="py-12 md:py-24 bg-primary-100">
         <div className="container">
-          <div className="w-full flex flex-wrap items-stretch">
-            <div className="w-full lg:w-1/2 -mt-32 xl:-mt-44">
+          <div className="w-full xl:w-10/12 2xl:w-3/4 xl:mx-auto flex flex-wrap items-stretch justify-center">
+            <div className="w-full md:w-1/2 lg:w-1/3">
               <picture>
                 <img
                   src="https://res.cloudinary.com/juligoodie/image/upload/v1652535865/getaways-guru/about-home_mikxom.jpg"
@@ -745,51 +745,48 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
                 Escapadesenparella.cat
               </figcaption>
             </div>
-            <div className="w-full lg:w-1/2 pt-16 lg:pt-0 lg:pl-24 flex items-center">
-              <div className="max-w-lg mx-auto">
-                <div className="mb-8">
-                  <h2>Escapades en parella, i molt més</h2>
+            <div className="w-full md:w-1/2 lg:w-2/3 md:pl-6 lg:pl-10 xl:pl-20 flex justify-center flex-col mt-14 md:mt-0">
+              <div className="mb-4 lg:mb-8">
+                <h2>Escapades en parella, i molt més</h2>
+              </div>
+              <p>
+                Hola, som l'Andrea i en Juli, i et volem donar la benvinguda a
+                Escapadesenparella.cat, el recomanador d'escapades en parella de
+                referència a Catalunya. Busques{" "}
+                <strong>escapades en parella</strong>? No sabeu&nbsp;
+                <strong>què fer aquest cap de setmana</strong>? Cansats de fer
+                sempre el mateix? A Escapadesenparella.cat tenim la sol·lució!
+              </p>
+              <p className="mt-5">
+                Fa {foundationYears} anys vam començar a compartir les escapades
+                en parella que fèiem arreu de Catalunya, amb l'objectiu de
+                motivar a sortir a <strong>descobrir Catalunya</strong>, i donar
+                a conèixer llocs únics per gaudir en parella, perquè crèiem, i
+                seguim creient, que hi ha vida més enllà d'anar al cinema o
+                veure Netflix al sofà.
+              </p>
+              <p className="mt-5">
+                A dia d'avui estem encantats de poder seguir compartint amb tots
+                vosaltres les{" "}
+                <strong>millors escapades en parella a Catalunya</strong>, així
+                que gràcies per ser aquí llegint aquesta nota. Perquè per
+                nosaltres, Escapadesenparella.cat és molt més que escapades en
+                parella; esperem transmetre't aquest sentiment!
+              </p>
+              <div className="flex flex-wrap items-center -mx-2 mt-8">
+                <div className="px-2">
+                  <Link href="#">
+                    <a className="button button__primary button__lg inline-flex">
+                      Conèix-nos millor
+                    </a>
+                  </Link>
                 </div>
-                <p>
-                  Hola, som l'Andrea i en Juli, i et volem donar la benvinguda a
-                  Escapadesenparella.cat, el recomanador d'escapades en parella
-                  de referència a Catalunya. Busques{" "}
-                  <strong>escapades en parella</strong>? No sabeu&nbsp;
-                  <strong>què fer aquest cap de setmana</strong>? Cansats de fer
-                  sempre el mateix? A Escapadesenparella.cat tenim la sol·lució!
-                </p>
-                <p className="mt-5">
-                  Fa {foundationYears} anys vam començar a compartir les
-                  escapades en parella que fèiem arreu de Catalunya, amb
-                  l'objectiu de motivar a sortir a{" "}
-                  <strong>descobrir Catalunya</strong>, i donar a conèixer llocs
-                  únics per gaudir en parella, perquè crèiem, i seguim creient,
-                  que hi ha vida més enllà d'anar al cinema o veure Netflix al
-                  sofà.
-                </p>
-                <p className="mt-5">
-                  A dia d'avui estem encantats de poder seguir compartint amb
-                  tots vosaltres les{" "}
-                  <strong>millors escapades en parella a Catalunya</strong>,
-                  així que gràcies per ser aquí llegint aquesta nota. Perquè per
-                  nosaltres, Escapadesenparella.cat és molt més que escapades en
-                  parella; esperem transmetre't aquest sentiment!
-                </p>
-                <div className="flex flex-wrap items-center -mx-2 mt-8">
-                  <div className="px-2">
-                    <Link href="#">
-                      <a className="button button__primary button__lg inline-flex">
-                        Conèix-nos millor
-                      </a>
-                    </Link>
-                  </div>
-                  <div className="px-2">
-                    <Link href="/contacte">
-                      <a className="button button__secondary button__lg inline-flex">
-                        Contacta'ns
-                      </a>
-                    </Link>
-                  </div>
+                <div className="px-2">
+                  <Link href="/contacte">
+                    <a className="button button__secondary button__lg inline-flex">
+                      Contacta'ns
+                    </a>
+                  </Link>
                 </div>
               </div>
             </div>

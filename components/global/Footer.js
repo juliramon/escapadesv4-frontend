@@ -125,7 +125,7 @@ const Footer = () => {
               </ul>
             </div>
           </div>
-          <div className="w-full md:w-1/2 lg:w-3/12">
+          <div className="w-full md:w-1/2 lg:w-3/12 mb-6 lg:mb-0 ">
             <div className="footer-about">
               <h4 className="footer-header text-xl mb-4">Nosaltres</h4>
               <ul className="list-none m-0 p-0">

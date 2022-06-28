@@ -358,7 +358,7 @@ const PlaceList = ({ user }) => {
                 </div>
                 <div className="relative flex items-center justify-end w-full md:w-1/2">
                   <button
-                    className="text-sm inline-flex flex-nowrap items-center text-white button button__ghost button__med mr-3"
+                    className="text-sm inline-flex flex-nowrap items-center button button__ghost button__med mr-3"
                     onClick={() => setStateModalMap(!stateModalMap)}
                   >
                     <svg
@@ -435,124 +435,232 @@ const PlaceList = ({ user }) => {
                     <span>Filtrar allotjaments</span>
                   </button>
                   {stateDropdownFilters === true ? (
-                    <div className="absolute z-50 bg-white rounded-md shadow-lg top-14 overflow-hidden p-7">
+                    <div className="absolute z-30 bg-white rounded-md shadow-lg top-14 overflow-hidden p-7">
                       <div className="flex items-start -m-5">
                         <div className="p-5">
                           <span className="text-lg mb-2 block">Tipologia</span>
-                          <Form.Check
-                            label="Hotels"
-                            name="placeType"
-                            id="hotel"
-                            onChange={handleCheckType}
-                          />
-                          <Form.Check
-                            label="Apartaments"
-                            name="placeType"
-                            id="apartament"
-                            onChange={handleCheckType}
-                          />
-                          <Form.Check
-                            label="Refugis"
-                            name="placeType"
-                            id="refugi"
-                            onChange={handleCheckType}
-                          />
-                          <Form.Check
-                            label="Cases-arbre"
-                            name="placeType"
-                            id="casaarbre"
-                            onChange={handleCheckType}
-                          />
-                          <Form.Check
-                            label="Cases rurals"
-                            name="placeType"
-                            id="casarural"
-                            onChange={handleCheckType}
-                          />
-                          <Form.Check
-                            label="Carabanes"
-                            name="placeType"
-                            id="carabana"
-                            onChange={handleCheckType}
-                          />
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeType"
+                                id="hotel"
+                                onChange={handleCheckType}
+                                className="mr-2"
+                              />
+                              Hotels
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeType"
+                                id="apartament"
+                                onChange={handleCheckType}
+                                className="mr-2"
+                              />
+                              Apartaments
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeType"
+                                id="refugi"
+                                onChange={handleCheckType}
+                                className="mr-2"
+                              />
+                              Refugis
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeType"
+                                id="casaarbre"
+                                onChange={handleCheckType}
+                                className="mr-2"
+                              />
+                              Cases-arbre
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeType"
+                                id="casarural"
+                                onChange={handleCheckType}
+                                className="mr-2"
+                              />
+                              Cases rurals
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeType"
+                                id="carabana"
+                                onChange={handleCheckType}
+                                className="mr-2"
+                              />
+                              Carabanes
+                            </label>
+                          </fieldset>
                         </div>
                         <div className="p-5">
                           <span className="text-lg mb-2 block">Regió</span>
-                          <Form.Check
-                            label="Barcelona"
-                            name="placeRegion"
-                            id="barcelona"
-                            onChange={handleCheckRegion}
-                          />
-                          <Form.Check
-                            label="Girona"
-                            name="placeRegion"
-                            id="girona"
-                            onChange={handleCheckRegion}
-                          />
-                          <Form.Check
-                            label="Lleida"
-                            name="placeRegion"
-                            id="lleida"
-                            onChange={handleCheckRegion}
-                          />
-                          <Form.Check
-                            label="Tarragona"
-                            name="placeRegion"
-                            id="tarragona"
-                            onChange={handleCheckRegion}
-                          />
-                          <Form.Check
-                            label="Costa Brava"
-                            name="placeRegion"
-                            id="costaBrava"
-                            onChange={handleCheckRegion}
-                          />
-                          <Form.Check
-                            label="Costa Daurada"
-                            name="placeRegion"
-                            id="costaDaurada"
-                            onChange={handleCheckRegion}
-                          />
-                          <Form.Check
-                            label="Pirineus"
-                            name="placeRegion"
-                            id="pirineus"
-                            onChange={handleCheckRegion}
-                          />
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeRegion"
+                                id="barcelona"
+                                onChange={handleCheckRegion}
+                                className="mr-2"
+                              />
+                              Barcelona
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeRegion"
+                                id="girona"
+                                onChange={handleCheckRegion}
+                                className="mr-2"
+                              />
+                              Girona
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeRegion"
+                                id="lleida"
+                                onChange={handleCheckRegion}
+                                className="mr-2"
+                              />
+                              Lleida
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeRegion"
+                                id="tarragona"
+                                onChange={handleCheckRegion}
+                                className="mr-2"
+                              />
+                              Tarragona
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeRegion"
+                                id="costaBrava"
+                                onChange={handleCheckRegion}
+                                className="mr-2"
+                              />
+                              Costa Brava
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeRegion"
+                                id="costaDaurada"
+                                onChange={handleCheckRegion}
+                                className="mr-2"
+                              />
+                              Costa Daurada
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeRegion"
+                                id="pirineus"
+                                onChange={handleCheckRegion}
+                                className="mr-2"
+                              />
+                              Pirineus
+                            </label>
+                          </fieldset>
                         </div>
                         <div className="p-5">
                           <span className="text-lg mb-2 block">Categoria</span>
-                          <Form.Check
-                            label="Romàntiques"
-                            name="placeCategory"
-                            id="romantica"
-                            onChange={handleCheckCategory}
-                          />
-                          <Form.Check
-                            label="Aventura"
-                            name="placeCategory"
-                            id="aventura"
-                            onChange={handleCheckCategory}
-                          />
-                          <Form.Check
-                            label="Gastronòmiques"
-                            name="placeCategory"
-                            id="gastronomica"
-                            onChange={handleCheckCategory}
-                          />
-                          <Form.Check
-                            label="Culturals"
-                            name="placeCategory"
-                            id="cultural"
-                            onChange={handleCheckCategory}
-                          />
-                          <Form.Check
-                            label="Relax"
-                            name="placeCategory"
-                            id="relax"
-                            onChange={handleCheckCategory}
-                          />
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeCategory"
+                                id="romantica"
+                                onChange={handleCheckCategory}
+                                className="mr-2"
+                              />
+                              Romàntiques
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeCategory"
+                                id="aventura"
+                                onChange={handleCheckCategory}
+                                className="mr-2"
+                              />
+                              Aventura
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeCategory"
+                                id="gastronomica"
+                                onChange={handleCheckCategory}
+                                className="mr-2"
+                              />
+                              Gastronòmiques
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeCategory"
+                                id="cultural"
+                                onChange={handleCheckCategory}
+                                className="mr-2"
+                              />
+                              Culturals
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeCategory"
+                                id="relax"
+                                onChange={handleCheckCategory}
+                                className="mr-2"
+                              />
+                              Relax
+                            </label>
+                          </fieldset>
                         </div>
                         <div className="p-5">
                           <span className="text-lg mb-2 block">Temporada</span>
