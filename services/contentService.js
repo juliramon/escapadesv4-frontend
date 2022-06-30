@@ -681,6 +681,22 @@ class ContentService {
     this.service
       .put(`/lists/${id}`, { isRemoved: true })
       .then((res) => res.data);
+
+  // Pagination + filter functions
+
+  getFeaturedActivities = () =>
+    this.service.get("/featured-activities").then((res) => res.data);
+
+  getMostRatedPlaces = () =>
+    this.service.get("/most-rated-places").then((res) => res.data);
+
+  getMostRecentStories = () =>
+    this.service.get("/most-recent-stories").then((res) => res.data);
+
+  getFeaturedGetawaysByCategory = (category) =>
+    this.service
+      .get(`/featured-getaways-category?category=${category}`)
+      .then((res) => res.data);
 }
 
 export default ContentService;

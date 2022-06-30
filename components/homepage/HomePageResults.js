@@ -2,70 +2,52 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
 import PublicSquareBox from "../../components/listings/PublicSquareBox";
 import FeaturedStoryBox from "../listings/FeaturedStoryBox";
+import "swiper/css";
+import "swiper/css/navigation";
 
-const HomePageResults = ({ activities, places, stories, totals }) => {
+const HomePageResults = ({
+  featuredActivities,
+  mostRatedPlaces,
+  mostRecentStories,
+  featuredRomanticGetaways,
+  featuredAdventureGetaways,
+  featuredGastronomicGetaways,
+  featuredRelaxGetaways,
+  totals,
+}) => {
   const initialState = {
-    isFetching: false,
-    romanticGetaways: [],
-    popularRegions: [],
-    adventureGetaways: [],
     mostRatedGetaways: [],
-    gastronomicGetaways: [],
-    culturalGetaways: [],
-    stories: [],
+    mostRecentStories: [],
+    featuredRomanticGetaways: [],
+    featuredAdventureGetaways: [],
+    featuredGastronomicGetaways: [],
+    featuredRelaxGetaways: [],
+    popularRegions: [],
   };
   const [state, setState] = useState(initialState);
 
   useEffect(() => {
-    if (activities.length > 0 || places.length > 0 || stories.length > 0) {
-      let getaways = [];
-      if (activities.length > 0) {
-        activities.forEach((el) => getaways.push(el));
-      }
-      if (places.length > 0) {
-        places.forEach((el) => getaways.push(el));
-      }
-      let hasGetaways;
-      getaways.length > 0 ? (hasGetaways = true) : (hasGetaways = false);
-      if (hasGetaways) {
-        let romanticGetaways = [];
-        let adventureGetaways = [];
-        let gastronomicGetaways = [];
-        let culturalGetaways = [];
-        let mostRatedGetaways = [];
-        getaways.forEach((el) => {
-          if (el.categories.includes("aventura")) {
-            adventureGetaways.push(el);
-          }
-          if (el.categories.includes("romantica")) {
-            romanticGetaways.push(el);
-          }
-          if (el.categories.includes("gastronomica")) {
-            gastronomicGetaways.push(el);
-          }
-          if (el.categories.includes("cultural")) {
-            culturalGetaways.push(el);
-          }
-          if (el.place_rating > 4.7) {
-            mostRatedGetaways.push(el);
-          }
-        });
-        setState({
-          ...state,
-          romanticGetaways: romanticGetaways,
-          adventureGetaways: adventureGetaways,
-          gastronomicGetaways: gastronomicGetaways,
-          culturalGetaways: culturalGetaways,
-          mostRatedGetaways: mostRatedGetaways,
-          stories: stories,
-          totals: totals,
-          isFetching: hasGetaways,
-        });
-      }
+    if (
+      featuredActivities.length > 0 ||
+      mostRatedPlaces.length > 0 ||
+      mostRecentStories.length > 0 ||
+      featuredRomanticGetaways.length > 0 ||
+      featuredAdventureGetaways.length > 0 ||
+      featuredGastronomicGetaways.length > 0 ||
+      featuredRelaxGetaways.length > 0
+    ) {
+      setState({
+        ...state,
+        mostRatedGetaways: mostRatedPlaces,
+        mostRecentStories: mostRecentStories,
+        featuredRomanticGetaways: featuredRomanticGetaways,
+        featuredAdventureGetaways: featuredAdventureGetaways,
+        featuredGastronomicGetaways: featuredGastronomicGetaways,
+        featuredRelaxGetaways: featuredRelaxGetaways,
+        totals: totals,
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -77,7 +59,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
     romanticGetawaysSection,
     adventureGetawaysSection,
     gastronomicGetawaysSection,
-    culturalGetawaysSection,
+    relaxGetawaysSection,
     placeTypeSection;
 
   if (state.mostRatedGetaways.length > 0) {
@@ -141,9 +123,9 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
     carabanes = state.totals.objPlaces.carabanes;
   }
 
-  if (state.romanticGetaways.length > 0) {
-    let romanticList = state.romanticGetaways.map((el, idx) => {
-      while (state.romanticGetaways.indexOf(el) < 4) {
+  if (state.featuredRomanticGetaways.length > 0) {
+    let romanticList = state.featuredRomanticGetaways.map((el, idx) => {
+      while (state.featuredRomanticGetaways.indexOf(el) < 4) {
         let location;
         if (el.type === "activity") {
           location = (
@@ -191,9 +173,9 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
       </section>
     );
   }
-  if (state.adventureGetaways.length > 0) {
-    let adventureList = state.adventureGetaways.map((el) => {
-      while (state.adventureGetaways.indexOf(el) < 4) {
+  if (state.featuredAdventureGetaways.length > 0) {
+    let adventureList = state.featuredAdventureGetaways.map((el) => {
+      while (state.featuredAdventureGetaways.indexOf(el) < 4) {
         let location;
         if (el.type === "activity") {
           location = (
@@ -241,9 +223,9 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
       </section>
     );
   }
-  if (state.gastronomicGetaways.length > 0) {
-    let gastronomicList = state.gastronomicGetaways.map((el) => {
-      while (state.gastronomicGetaways.indexOf(el) < 4) {
+  if (state.featuredGastronomicGetaways.length > 0) {
+    let gastronomicList = state.featuredGastronomicGetaways.map((el) => {
+      while (state.featuredGastronomicGetaways.indexOf(el) < 4) {
         let location;
         if (el.type === "activity") {
           location = (
@@ -291,9 +273,9 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
       </section>
     );
   }
-  if (state.culturalGetaways.length > 0) {
-    let culturalList = state.culturalGetaways.map((el) => {
-      while (state.culturalGetaways.indexOf(el) < 4) {
+  if (state.featuredRelaxGetaways.length > 0) {
+    let relaxlIST = state.featuredRelaxGetaways.map((el) => {
+      while (state.featuredRelaxGetaways.indexOf(el) < 4) {
         let location;
         if (el.type === "activity") {
           location = (
@@ -332,12 +314,10 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
       }
       return undefined;
     });
-    culturalGetawaysSection = (
+    relaxGetawaysSection = (
       <section className="pt-16 pb-16">
         <h2>Escapades en parella per a desconnectar</h2>
-        <div className="flex flex-wrap items-start -mx-2 mt-2">
-          {culturalList}
-        </div>
+        <div className="flex flex-wrap items-start -mx-2 mt-2">{relaxlIST}</div>
       </section>
     );
   }
@@ -670,7 +650,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
                   },
                 }}
               >
-                {state.stories.slice(0, 8).map((el) => (
+                {state.mostRecentStories.map((el) => (
                   <SwiperSlide>
                     <FeaturedStoryBox
                       key={el._id}
@@ -723,7 +703,7 @@ const HomePageResults = ({ activities, places, stories, totals }) => {
               </button>
             </div>
           </section>
-          {culturalGetawaysSection}
+          {relaxGetawaysSection}
         </div>
       </div>
       <section className="py-12 md:py-24 bg-primary-100">

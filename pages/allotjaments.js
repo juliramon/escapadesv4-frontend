@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import Footer from "../components/global/Footer";
 import MapModal from "../components/modals/MapModal";
 
-const PlaceList = ({ user }) => {
+const PlaceList = ({ user, placesResults }) => {
   const router = useRouter();
   useEffect(() => {
     if (
@@ -38,17 +38,12 @@ const PlaceList = ({ user }) => {
   const [stateModalMap, setStateModalMap] = useState(false);
 
   const service = new ContentService();
-  const getAllPlaces = useCallback(() => {
-    service.getAllPlaces("/places").then((res) => {
-      let hasPlaces;
-      if (res.length > 0) {
-        hasPlaces = true;
-      }
-      setState({ ...state, places: res, hasPlaces: hasPlaces });
-    });
-  }, [state, service]);
 
-  useEffect(getAllPlaces, []);
+  useEffect(() => {
+    if (placesResults) {
+      setState({ ...state, places: placesResults, hasPlaces: true });
+    }
+  }, []);
 
   const handleCheckType = (e) => {
     let query = state.queryPlaceType;
@@ -134,11 +129,17 @@ const PlaceList = ({ user }) => {
         lat: parseFloat(place.place_lat),
         lng: parseFloat(place.place_lng),
       };
-      const contentString =
-        `<div id="infoview-wrapper">` +
-        `<h1 id="firstHeading" class="firstHeading">${place.title}</h1>` +
-        `<p>${place.subtitle}</p>` +
-        `</div>`;
+      const contentString = `<a href="/activitats/${place.slug}" title="${place.title}" class="gmaps-infobox" target="_blank">
+        <div class="gmaps-infobox__picture">
+          <picture>
+            <img src="${place.images[0]}" alt="${place.title}" class="object-cover w-full h-full" width="80" height="80">
+          </picture>
+        </div>
+        <div class="gmaps-infobox__text">
+          <span class="gmaps-infobox__title">${place.title}</span>
+          <span class="gmaps-infobox__intro">${place.subtitle}</span>
+        </div>
+        </a>`;
       const infowindow = new maps.InfoWindow({
         content: contentString,
       });
@@ -769,5 +770,15 @@ const PlaceList = ({ user }) => {
     </>
   );
 };
+
+export async function getStaticProps({ params }) {
+  const service = new ContentService();
+  const placesResults = await service.getAllPlaces();
+  return {
+    props: {
+      placesResults,
+    },
+  };
+}
 
 export default PlaceList;

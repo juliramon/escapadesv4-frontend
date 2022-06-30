@@ -1,0 +1,21 @@
+.gmaps-infobox
+    @apply bg-white rounded shadow-xl flex items-stretch pl-2 pt-1.5 pb-3 pr-3
+    &__picture
+        @apply mr-4 w-24 mt-1 rounded overflow-hidden
+        min-width: 90px
+    &__text
+        @apply pr-1
+    &__title
+        @apply text-lg mb-0.5 font-semibold block transition-all duration-300 ease-in-out
+    &__title:hover
+        @apply text-primary-400
+    &__intro
+        @apply text-sm block font-normal
+
+.gm-ui-hover-effect
+    @apply top-0 right-1.5 #{!important}
+    span
+        @apply w-5 h-5 #{!important}
+
+.gm-style-iw.gm-style-iw-c
+    max-width: 420px !important

@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import ContentService from "../services/contentService";
 import NavigationBar from "../components/global/NavigationBar";
 import Head from "next/head";
@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import Footer from "../components/global/Footer";
 import MapModal from "../components/modals/MapModal";
 
-const ActivityList = () => {
+const ActivityList = ({ activityResults }) => {
   const router = useRouter();
   useEffect(() => {
     if (
@@ -37,16 +37,12 @@ const ActivityList = () => {
   const [stateModalMap, setStateModalMap] = useState(false);
 
   const service = new ContentService();
-  const getAllActivities = useCallback(() => {
-    service.activities("/activities").then((res) => {
-      let hasActivities;
-      if (res.length > 0) {
-        hasActivities = true;
-      }
-      setState({ ...state, activities: res, hasActivities: hasActivities });
-    });
-  }, [state, service]);
-  useEffect(getAllActivities, []);
+
+  useEffect(() => {
+    if (activityResults) {
+      setState({ ...state, activities: activityResults, hasActivities: true });
+    }
+  }, []);
 
   const handleCheckRegion = (e) => {
     let query = state.queryActivityRegion;
@@ -118,11 +114,17 @@ const ActivityList = () => {
         lat: parseFloat(activity.activity_lat),
         lng: parseFloat(activity.activity_lng),
       };
-      const contentString =
-        `<div id="infoview-wrapper">` +
-        `<h1 id="firstHeading" class="firstHeading">${activity.title}</h1>` +
-        `<p>${activity.subtitle}</p>` +
-        `</div>`;
+      const contentString = `<a href="/activitats/${activity.slug}" title="${activity.title}" class="gmaps-infobox" target="_blank">
+        <div class="gmaps-infobox__picture">
+          <picture>
+            <img src="${activity.images[0]}" alt="${activity.title}" class="object-cover w-full h-full" width="80" height="80">
+          </picture>
+        </div>
+        <div class="gmaps-infobox__text">
+          <span class="gmaps-infobox__title">${activity.title}</span>
+          <span class="gmaps-infobox__intro">${activity.subtitle}</span>
+        </div>
+        </a>`;
       const infowindow = new maps.InfoWindow({
         content: contentString,
       });
@@ -629,5 +631,15 @@ const ActivityList = () => {
     </>
   );
 };
+
+export async function getStaticProps({ params }) {
+  const service = new ContentService();
+  const activityResults = await service.activities();
+  return {
+    props: {
+      activityResults,
+    },
+  };
+}
 
 export default ActivityList;

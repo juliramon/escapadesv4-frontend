@@ -1,6 +1,6 @@
 import Head from "next/head";
 import ContentService from "../services/contentService";
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import Hero from "../components/homepage/Hero";
 import NavigationBar from "../components/global/NavigationBar";
 import Footer from "../components/global/Footer";
@@ -98,9 +98,13 @@ const Homepage = (props) => {
           subtitle={subtitle}
         />
         <HomePageResults
-          activities={props.activities}
-          places={props.places}
-          stories={props.stories}
+          featuredActivities={props.featuredActivities}
+          mostRatedPlaces={props.mostRatedPlaces}
+          mostRecentStories={props.mostRecentStories}
+          featuredRomanticGetaways={props.featuredRomanticGetaways}
+          featuredAdventureGetaways={props.featuredAdventureGetaways}
+          featuredGastronomicGetaways={props.featuredGastronomicGetaways}
+          featuredRelaxGetaways={props.featuredRelaxGetaways}
           totals={props.totals}
         />
         <Footer
@@ -115,15 +119,32 @@ const Homepage = (props) => {
 
 export async function getStaticProps() {
   const service = new ContentService();
-  const activities = await service.activities();
-  const places = await service.getAllPlaces();
-  const stories = await service.getAllStories();
+  const featuredActivities = await service.getFeaturedActivities();
+  const mostRatedPlaces = await service.getMostRatedPlaces();
+  const mostRecentStories = await service.getMostRecentStories();
+  const featuredRomanticGetaways = await service.getFeaturedGetawaysByCategory(
+    "romantica"
+  );
+  const featuredAdventureGetaways = await service.getFeaturedGetawaysByCategory(
+    "aventura"
+  );
+  const featuredGastronomicGetaways =
+    await service.getFeaturedGetawaysByCategory("gastronomica");
+  const featuredRelaxGetaways = await service.getFeaturedGetawaysByCategory(
+    "relax"
+  );
+
   const totals = await service.getCategoriesTotals();
+
   return {
     props: {
-      activities,
-      places,
-      stories,
+      featuredActivities,
+      mostRatedPlaces,
+      mostRecentStories,
+      featuredRomanticGetaways,
+      featuredAdventureGetaways,
+      featuredGastronomicGetaways,
+      featuredRelaxGetaways,
       totals,
     },
   };

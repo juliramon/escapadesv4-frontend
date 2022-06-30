@@ -37,15 +37,6 @@ const CategoryPage = ({ categoryDetails, categoryResults }) => {
 
   const [state, setState] = useState(initialState);
   const [stateModalMap, setStateModalMap] = useState(false);
-  // const [queryId, setQueryId] = useState(null);
-
-  // useEffect(() => {
-  //   if (router && router.query) {
-  //     setQueryId(router.query.categoria);
-  //   }
-  // }, [router]);
-
-  // const service = new ContentService();
 
   useEffect(() => {
     if (categoryDetails) {
@@ -59,42 +50,6 @@ const CategoryPage = ({ categoryDetails, categoryResults }) => {
       });
     }
   }, []);
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     setState({ ...state, isFetching: true });
-  //     const getCategories = await service.getCategories();
-  //     getCategories.forEach(async (category) => {
-  //       if (category.slug === router.query.categoria) {
-  //         const categoryDetails = await service.getCategoryDetails(
-  //           router.query.categoria
-  //         );
-  //         let getResults;
-  //         if (categoryDetails) {
-  //           getResults = await service.getCategoryResults(categoryDetails.name);
-  //         }
-  //         let hasResults;
-  //         if (getResults.results.length > 0) {
-  //           hasResults = true;
-  //         } else {
-  //           hasResults = false;
-  //         }
-  //         setState({
-  //           ...state,
-  //           categoryDetails: categoryDetails,
-  //           results: getResults.results,
-  //           hasResults: hasResults,
-  //           isFetching: false,
-  //           notFound: false,
-  //         });
-  //       } else {
-  //         setState({ ...state, notFound: true });
-  //       }
-  //     });
-  //   };
-  //   fetchData();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [queryId]);
 
   if (
     (state.notFound &&
@@ -209,12 +164,17 @@ const CategoryPage = ({ categoryDetails, categoryResults }) => {
         };
         path = "/allotjaments";
       }
-      const contentString =
-        `<div id="infoview-wrapper">` +
-        `<h1 id="firstHeading" class="firstHeading">${result.title}</h1>` +
-        `<p>${result.subtitle}</p>` +
-        `<a href="${path}/${result.slug}" title="${result.title}" target="_blank">Veure l'escapada</>` +
-        `</div>`;
+      const contentString = `<a href="${path}/${result.slug}" title="${result.title}" class="gmaps-infobox" target="_blank">
+        <div class="gmaps-infobox__picture">
+          <picture>
+            <img src="${result.images[0]}" alt="${result.title}" class="object-cover w-full h-full" width="80" height="80">
+          </picture>
+        </div>
+        <div class="gmaps-infobox__text">
+          <span class="gmaps-infobox__title">${result.title}</span>
+          <span class="gmaps-infobox__intro">${result.subtitle}</span>
+        </div>
+        </a>`;
       const infowindow = new maps.InfoWindow({
         content: contentString,
       });
