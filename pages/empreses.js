@@ -37,7 +37,7 @@ const Serveis = () => {
                         <br /> en parella a Catalunya
                       </p>
                       <Link href={"/empreses/registre?step=seleccio-pla"}>
-                        <a className="btn">
+                        <a className="btn inline-flex items-center">
                           Publicar el meu negoci{" "}
                           <svg
                             xmlns="http://www.w3.org/2000/svg"

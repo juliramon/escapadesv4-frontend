@@ -3,13 +3,12 @@ import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import NavigationBar from "../../components/global/NavigationBar";
 import ContentService from "../../services/contentService";
-import { Container, Row, Spinner, Toast, Col } from "react-bootstrap";
+import { Container, Spinner, Toast } from "react-bootstrap";
 import Link from "next/link";
 import GoogleMapReact from "google-map-react";
 import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
 import ShareModal from "../../components/modals/ShareModal";
-import AdSense from "react-adsense";
 import Footer from "../../components/global/Footer";
 
 const ActivityListing = () => {
@@ -353,7 +352,10 @@ const ActivityListing = () => {
   ));
 
   const activityRegion = state.activity.region.map((region, idx) => (
-    <li key={idx} className="activity-region">
+    <li
+      key={idx}
+      className="border border-primary-200 py-2 px-3 rounded capitalize mr-3"
+    >
       {region}
     </li>
   ));
@@ -502,7 +504,7 @@ const ActivityListing = () => {
                     </div>
                   </div>
                   <div className="w-full mt-8">
-                    <div className="grid grid-cols-4 grid-rows-2 gap-2.5 rounded overflow-hidden">
+                    <div className="grid grid-cols-4 grid-rows-1 gap-2.5 rounded overflow-hidden">
                       <div className="row-start-1 col-start-1 row-span-2 col-span-2 rounded-l overflow-hidden">
                         <picture>
                           <img
@@ -557,6 +559,37 @@ const ActivityListing = () => {
                         <h2 className="w-9/12 font-body font-bold text-3xl">
                           {subtitle}
                         </h2>
+                        <ul className="flex flex-wrap items-center w-full mt-4">
+                          <li className="border border-primary-200 py-2 px-3 rounded capitalize mr-3">
+                            {state.activity.duration}{" "}
+                            {state.activity.duration > 1 ? "hores" : "hora"}
+                          </li>
+                          {activityRegion}
+                          <li className="border border-primary-200 py-2 px-3 rounded capitalize flex items-center">
+                            {state.activity.price}{" "}
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="icon icon-tabler icon-tabler-currency-euro ml-0.5"
+                              width="18"
+                              height="18"
+                              viewBox="0 0 24 24"
+                              strokeWidth="1.5"
+                              stroke="currentColor"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path
+                                stroke="none"
+                                d="M0 0h24v24H0z"
+                                fill="none"
+                              />
+                              <path d="M17.2 7a6 7 0 1 0 0 10" />
+                              <path d="M13 10h-8m0 4h8" />
+                            </svg>
+                            / nit
+                          </li>
+                        </ul>
                         {state.organization ? (
                           <div className="listing-owner mt-4">
                             <Link href={`/empreses/${state.organization.slug}`}>
@@ -603,31 +636,12 @@ const ActivityListing = () => {
                             <ul>{activitySeasons}</ul>
                           </div>
                         </div>
-                        <div className="px-2 flex-auto">
-                          <div className="listing-seasons rounded border border-primary-200 p-5 h-full">
-                            <span className="font-semibold">Es troba a</span>
-                            <ul>{activityRegion}</ul>
-                          </div>
-                        </div>
-                        <div className="px-2 flex-auto">
-                          <div className="listing-seasons rounded border border-primary-200 p-5 h-full">
-                            <span>Durada</span>
-                            {state.activity.duration}{" "}
-                            {state.activity.duration > 1 ? "hores" : "hora"}
-                          </div>
-                        </div>
-                        <div className="px-2 flex-auto">
-                          <div className="listing-seasons rounded border border-primary-200 p-5 h-full">
-                            <span>Preu</span>
-                            {state.activity.price} €
-                          </div>
-                        </div>
                       </div>
                       <div className="border-t border-primary-200 pt-5 mt-5 ">
                         {description}
                       </div>
                     </div>
-                    <aside className="w-full lg:w-4/12 px-6 static top-0">
+                    <aside className="w-full lg:w-4/12 px-6 static top-0 mt-5 md:mt-0">
                       <div className="p-5 rounded border border-primary-200">
                         <div className="w-full h-56 rounded overflow-hidden">
                           <GoogleMapReact

@@ -3,7 +3,7 @@ import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import NavigationBar from "../../components/global/NavigationBar";
 import ContentService from "../../services/contentService";
-import { Container, Row, Spinner, Toast, Col } from "react-bootstrap";
+import { Container, Spinner, Toast } from "react-bootstrap";
 import Link from "next/link";
 import GoogleMapReact from "google-map-react";
 import SignUpModal from "../../components/modals/SignUpModal";
@@ -491,7 +491,7 @@ const PlaceListing = () => {
                     </div>
                   </div>
                   <div className="w-full mt-8">
-                    <div className="grid grid-cols-4 grid-rows-2 gap-2.5 rounded overflow-hidden">
+                    <div className="grid grid-cols-4 grid-rows-1 gap-2.5 rounded overflow-hidden">
                       <div className="row-start-1 col-start-1 row-span-2 col-span-2 rounded-l overflow-hidden">
                         <picture>
                           <img
@@ -618,7 +618,7 @@ const PlaceListing = () => {
                         {description}
                       </div>
                     </div>
-                    <aside className="w-full lg:w-4/12 px-6 static top-0">
+                    <aside className="w-full lg:w-4/12 px-6 static top-0 mt-5 md:mt-0">
                       <div className="p-5 rounded border border-primary-200">
                         <div className="w-full h-56 rounded overflow-hidden">
                           <GoogleMapReact
