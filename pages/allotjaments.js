@@ -1,7 +1,6 @@
 import { useEffect, useCallback, useState } from "react";
 import ContentService from "../services/contentService";
 import NavigationBar from "../components/global/NavigationBar";
-import { Form } from "react-bootstrap";
 import PublicSquareBox from "../components/listings/PublicSquareBox";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -664,30 +663,54 @@ const PlaceList = ({ user }) => {
                         </div>
                         <div className="p-5">
                           <span className="text-lg mb-2 block">Temporada</span>
-                          <Form.Check
-                            label="Hivern"
-                            name="placeSeason"
-                            id="hivern"
-                            onChange={handleCheckSeason}
-                          />
-                          <Form.Check
-                            label="Primavera"
-                            name="placeSeason"
-                            id="primavera"
-                            onChange={handleCheckSeason}
-                          />
-                          <Form.Check
-                            label="Estiu"
-                            name="placeSeason"
-                            id="estiu"
-                            onChange={handleCheckSeason}
-                          />
-                          <Form.Check
-                            label="Tardor"
-                            name="placeSeason"
-                            id="tardor"
-                            onChange={handleCheckSeason}
-                          />
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeSeason"
+                                id="hivern"
+                                onChange={handleCheckSeason}
+                                className="mr-2"
+                              />
+                              Hivern
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeSeason"
+                                id="primavera"
+                                onChange={handleCheckSeason}
+                                className="mr-2"
+                              />
+                              Primavera
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeSeason"
+                                id="estiu"
+                                onChange={handleCheckSeason}
+                                className="mr-2"
+                              />
+                              Estiu
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeSeason"
+                                id="tardor"
+                                onChange={handleCheckSeason}
+                                className="mr-2"
+                              />
+                              Tardor
+                            </label>
+                          </fieldset>
                         </div>
                       </div>
                     </div>

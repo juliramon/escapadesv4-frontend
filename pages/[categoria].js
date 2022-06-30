@@ -308,92 +308,23 @@ const CategoryPage = ({ categoryDetails, categoryResults }) => {
               </ul>
             </div>
           </div>
-          <section className="py-6 md:py-12">
-            <div className="container relative">
-              <div className="flex flex-wrap items-center justify-start">
-                <div className="w-full md:w-8/12 xl:w-5/12">
-                  <h1 className="my-0">
-                    Escapades{" "}
-                    <span className="text-secondary-500">
-                      {state.categoryDetails.pluralName}
-                    </span>
-                  </h1>
-                </div>
-                <div className="w-full mt-8">
-                  <div className="grid grid-cols-4 grid-rows-2 gap-2.5 rounded overflow-hidden">
-                    <div className="row-start-1 col-start-1 row-span-2 col-span-2 rounded-l overflow-hidden">
-                      <picture>
-                        <img
-                          src="https://res.cloudinary.com/juligoodie/image/upload/v1652983702/getaways-guru/activitats-en-parella_unz7x4.jpg"
-                          alt=""
-                          className="w-full h-full object-cover object-center"
-                          width={400}
-                          height={300}
-                          loading="eager"
-                        />
-                      </picture>
-                    </div>
-                    <div className="row-start-1 col-start-3 row-span-1 col-span-1 overflow-hidden">
-                      <picture>
-                        <img
-                          src="https://res.cloudinary.com/juligoodie/image/upload/v1652983702/getaways-guru/activitats-en-parella_unz7x4.jpg"
-                          alt=""
-                          className="w-full h-full object-cover object-center"
-                          width={400}
-                          height={300}
-                          loading="eager"
-                        />
-                      </picture>
-                    </div>
-                    <div className="row-start-1 col-start-4 row-span-1 col-span-1 rounded-tr overflow-hidden">
-                      <picture>
-                        <img
-                          src="https://res.cloudinary.com/juligoodie/image/upload/v1652983702/getaways-guru/activitats-en-parella_unz7x4.jpg"
-                          alt=""
-                          className="w-full h-full object-cover object-center"
-                          width={400}
-                          height={300}
-                          loading="eager"
-                        />
-                      </picture>
-                    </div>
-                    <div className="row-start-2 col-start-3 row-span-1 col-span-1 overflow-hidden">
-                      <picture>
-                        <img
-                          src="https://res.cloudinary.com/juligoodie/image/upload/v1652983702/getaways-guru/activitats-en-parella_unz7x4.jpg"
-                          alt=""
-                          className="w-full h-full object-cover object-center"
-                          width={400}
-                          height={300}
-                          loading="eager"
-                        />
-                      </picture>
-                    </div>
-                    <div className="row-start-2 col-start-4 row-span-1 col-span-1 rounded-br overflow-hidden">
-                      <picture>
-                        <img
-                          src="https://res.cloudinary.com/juligoodie/image/upload/v1652983702/getaways-guru/activitats-en-parella_unz7x4.jpg"
-                          alt=""
-                          className="w-full h-full object-cover object-center"
-                          width={400}
-                          height={300}
-                          loading="eager"
-                        />
-                      </picture>
-                    </div>
-                  </div>
-                </div>
-                <div className="w-full mt-3">
-                  <figcaption className="text-xs text-primary-400 text-right">
-                    Escapada al Santuari de Cabrera (Osona) / ©
-                    Escapadesenparella.cat
-                  </figcaption>
-                </div>
-              </div>
-            </div>
-          </section>
-          <section className="pt-6 pb-8 md:pt-12 md:pb-16">
+
+          <section className="py-6 pb-8 md:pt-12 md:pb-16">
             <div className="container">
+              <div className="w-full md:w-8/12 xl:w-5/12 mb-5">
+                <h1 className="my-0">
+                  <span className="capitalize">
+                    {!state.categoryDetails.isPlace
+                      ? "Escapades"
+                      : state.categoryDetails.pluralName}{" "}
+                  </span>
+                  <span className="text-secondary-500 lowercase">
+                    {state.categoryDetails.isPlace
+                      ? "amb encant"
+                      : state.categoryDetails.pluralName}
+                  </span>
+                </h1>
+              </div>
               {state.results.length > 0 ? (
                 <>
                   <div className="w-full flex flex-wrap items-center justify-between pb-6">

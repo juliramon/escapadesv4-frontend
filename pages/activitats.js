@@ -1,7 +1,6 @@
 import { useEffect, useCallback, useState } from "react";
 import ContentService from "../services/contentService";
 import NavigationBar from "../components/global/NavigationBar";
-import { Form } from "react-bootstrap";
 import Head from "next/head";
 import PublicSquareBox from "../components/listings/PublicSquareBox";
 import { useRouter } from "next/router";
@@ -374,124 +373,204 @@ const ActivityList = () => {
                       <div className="flex items-start -m-5">
                         <div className="p-5">
                           <span className="text-lg mb-2 block">Regió</span>
-                          <Form.Check
-                            label="Barcelona"
-                            name="activityRegion"
-                            id="barcelona"
-                            onChange={handleCheckRegion}
-                            className="py-1"
-                          />
-                          <Form.Check
-                            label="Girona"
-                            name="activityRegion"
-                            id="girona"
-                            onChange={handleCheckRegion}
-                            className="py-1"
-                          />
-                          <Form.Check
-                            label="Lleida"
-                            name="activityRegion"
-                            id="lleida"
-                            onChange={handleCheckRegion}
-                            className="py-1"
-                          />
-                          <Form.Check
-                            label="Tarragona"
-                            name="activityRegion"
-                            id="tarragona"
-                            onChange={handleCheckRegion}
-                            className="py-1"
-                          />
-                          <Form.Check
-                            label="Costa Brava"
-                            name="activityRegion"
-                            id="costaBrava"
-                            onChange={handleCheckRegion}
-                            className="py-1"
-                          />
-                          <Form.Check
-                            label="Costa Daurada"
-                            name="activityRegion"
-                            id="costaDaurada"
-                            onChange={handleCheckRegion}
-                            className="py-1"
-                          />
-                          <Form.Check
-                            label="Pirineus"
-                            name="activityRegion"
-                            id="pirineus"
-                            onChange={handleCheckRegion}
-                            className="py-1"
-                          />
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="activityRegion"
+                                id="barcelona"
+                                onChange={handleCheckRegion}
+                                className="mr-2"
+                              />
+                              Barcelona
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="activityRegion"
+                                id="girona"
+                                onChange={handleCheckRegion}
+                                className="mr-2"
+                              />
+                              Girona
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="activityRegion"
+                                id="lleida"
+                                onChange={handleCheckRegion}
+                                className="mr-2"
+                              />
+                              Lleida
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="activityRegion"
+                                id="tarragona"
+                                onChange={handleCheckRegion}
+                                className="mr-2"
+                              />
+                              Tarragona
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="activityRegion"
+                                id="costaBrava"
+                                onChange={handleCheckRegion}
+                                className="mr-2"
+                              />
+                              Costa Brava
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="activityRegion"
+                                id="costaDaurada"
+                                onChange={handleCheckRegion}
+                                className="mr-2"
+                              />
+                              Costa Daurada
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="activityRegion"
+                                id="pirineus"
+                                onChange={handleCheckRegion}
+                                className="mr-2"
+                              />
+                              Pirineus
+                            </label>
+                          </fieldset>
                         </div>
                         <div className="p-5">
                           <span className="text-lg mb-2 block">Categoria</span>
-                          <Form.Check
-                            label="Romàntiques"
-                            name="activityCategory"
-                            id="romantica"
-                            onChange={handleCheckCategory}
-                            className="py-1"
-                          />
-                          <Form.Check
-                            label="Aventura"
-                            name="activityCategory"
-                            id="aventura"
-                            onChange={handleCheckCategory}
-                            className="py-1"
-                          />
-                          <Form.Check
-                            label="Gastronòmiques"
-                            name="activityCategory"
-                            id="gastronomica"
-                            onChange={handleCheckCategory}
-                            className="py-1"
-                          />
-                          <Form.Check
-                            label="Culturals"
-                            name="activityCategory"
-                            id="cultural"
-                            onChange={handleCheckCategory}
-                            className="py-1"
-                          />
-                          <Form.Check
-                            label="Relax"
-                            name="activityCategory"
-                            id="relax"
-                            onChange={handleCheckCategory}
-                            className="py-1"
-                          />
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="activityCategory"
+                                id="romantica"
+                                onChange={handleCheckCategory}
+                                className="mr-2"
+                              />
+                              Romàntiques
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="activityCategory"
+                                id="aventura"
+                                onChange={handleCheckCategory}
+                                className="mr-2"
+                              />
+                              Aventura
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="activityCategory"
+                                id="gastronomica"
+                                onChange={handleCheckCategory}
+                                className="mr-2"
+                              />
+                              Gastronòmiques
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="activityCategory"
+                                id="cultural"
+                                onChange={handleCheckCategory}
+                                className="mr-2"
+                              />
+                              Culturals
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="activityCategory"
+                                id="relax"
+                                onChange={handleCheckCategory}
+                                className="mr-2"
+                              />
+                              Relax
+                            </label>
+                          </fieldset>
                         </div>
                         <div className="p-5">
                           <span className="text-lg mb-2 block">Temporada</span>
-                          <Form.Check
-                            label="Hivern"
-                            name="activitySeason"
-                            id="hivern"
-                            onChange={handleCheckSeason}
-                            className="py-1"
-                          />
-                          <Form.Check
-                            label="Primavera"
-                            name="activitySeason"
-                            id="primavera"
-                            onChange={handleCheckSeason}
-                            className="py-1"
-                          />
-                          <Form.Check
-                            label="Estiu"
-                            name="activitySeason"
-                            id="estiu"
-                            onChange={handleCheckSeason}
-                            className="py-1"
-                          />
-                          <Form.Check
-                            label="Tardor"
-                            name="activitySeason"
-                            id="tardor"
-                            onChange={handleCheckSeason}
-                            className="py-1"
-                          />
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="activitySeason"
+                                id="hivern"
+                                onChange={handleCheckSeason}
+                                className="mr-2"
+                              />
+                              Hivern
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="activitySeason"
+                                id="primavera"
+                                onChange={handleCheckSeason}
+                                className="mr-2"
+                              />
+                              Primavera
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="activitySeason"
+                                id="estiu"
+                                onChange={handleCheckSeason}
+                                className="mr-2"
+                              />
+                              Estiu
+                            </label>
+                          </fieldset>
+                          <fieldset>
+                            <label className="cursor-pointer">
+                              <input
+                                type="checkbox"
+                                name="placeSeason"
+                                id="tardor"
+                                onChange={handleCheckSeason}
+                                className="mr-2"
+                              />
+                              Tardor
+                            </label>
+                          </fieldset>
                         </div>
                       </div>
                     </div>
