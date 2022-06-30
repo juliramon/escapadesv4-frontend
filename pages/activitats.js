@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ContentService from "../services/contentService";
 import NavigationBar from "../components/global/NavigationBar";
 import Head from "next/head";
@@ -7,7 +7,7 @@ import { useRouter } from "next/router";
 import Footer from "../components/global/Footer";
 import MapModal from "../components/modals/MapModal";
 
-const ActivityList = ({ activityResults }) => {
+const ActivityList = ({ activities }) => {
   const router = useRouter();
   useEffect(() => {
     if (
@@ -39,8 +39,8 @@ const ActivityList = ({ activityResults }) => {
   const service = new ContentService();
 
   useEffect(() => {
-    if (activityResults) {
-      setState({ ...state, activities: activityResults, hasActivities: true });
+    if (activities) {
+      setState({ ...state, activities: activities, hasActivities: true });
     }
   }, []);
 
@@ -155,6 +155,15 @@ const ActivityList = ({ activityResults }) => {
   }, [state.updateSearch]);
 
   const textareaFooter = "";
+
+  const [page, setPage] = useState(1);
+
+  const loadMoreResults = async (page) => {
+    const { activities } = await service.paginateActivities(page);
+    setState({ ...state, activities: [...state.activities, ...activities] });
+    console.log(activities);
+    setPage(++page);
+  };
 
   return (
     <>
@@ -605,6 +614,30 @@ const ActivityList = ({ activityResults }) => {
                     ))
                   : null}
               </div>
+              <div className="w-full mt-10 flex justify-center">
+                <button
+                  className="button button__primary button__lg"
+                  onClick={() => loadMoreResults(page)}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="icon icon-tabler icon-tabler-plus mr-2"
+                    width={20}
+                    height={20}
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <line x1={12} y1={5} x2={12} y2={19}></line>
+                    <line x1={5} y1={12} x2={19} y2={12}></line>
+                  </svg>
+                  Veure'n més
+                </button>
+              </div>
             </div>
           </section>
           {textareaFooter !== "" ? (
@@ -634,10 +667,10 @@ const ActivityList = ({ activityResults }) => {
 
 export async function getStaticProps({ params }) {
   const service = new ContentService();
-  const activityResults = await service.activities();
+  const { activities } = await service.activities();
   return {
     props: {
-      activityResults,
+      activities,
     },
   };
 }

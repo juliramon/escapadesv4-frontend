@@ -91,6 +91,9 @@ class ContentService {
 
   activities = () => this.service.get("/activities").then((res) => res.data);
 
+  paginateActivities = (page) =>
+    this.service.get(`/activities?page=${page}`).then((res) => res.data);
+
   userActivities = (id) =>
     this.service.get(`/users/${id}/activities`).then((res) => res.data);
 
