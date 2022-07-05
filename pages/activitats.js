@@ -225,7 +225,7 @@ const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
                       }}
                     >
                       <div
-                        className="row-start-1 col-start-1 row-span-1 col-span-2 md:col-span-4 md:row-span-2 rounded-t-md md:rounded-l-md overflow-hidden cursor-pointer"
+                        className="row-start-1 col-start-1 row-span-1 col-span-2 md:row-span-2 rounded-t-md md:rounded-tr-none md:rounded-l-md overflow-hidden cursor-pointer"
                         data-fancybox="gallery"
                         data-src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.49.44_czmgpl.jpg"
                       >
@@ -279,7 +279,7 @@ const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
                         </div>
                       </div>
                       <div
-                        className="row-start-3 col-start-1 md:col-start-3 row-span-1 col-span-1 overflow-hidden cursor-pointer"
+                        className="row-start-3 col-start-1 md:col-start-3 md:row-start-2 row-span-1 col-span-1 overflow-hidden cursor-pointer"
                         data-fancybox="gallery"
                         data-src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.31_qxwmps.jpg"
                       >
