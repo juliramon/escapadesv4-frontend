@@ -427,7 +427,7 @@ const ActivityListing = () => {
                   <div className="w-full md:w-1/2">
                     <h1>{title}</h1>
                     <ul className="flex flex-wrap items-center -mx-2 mt-2">
-                      <li class="flex flex-wrap items-center px-2">
+                      <li className="flex flex-wrap items-center px-2">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="icon icon-tabler icon-tabler-route mr-2"

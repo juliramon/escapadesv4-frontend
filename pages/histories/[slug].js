@@ -233,7 +233,7 @@ const StoryListing = ({ storyDetails }) => {
                     Històries en parella
                   </a>
                 </li>
-                <li class="breadcrumb__item">
+                <li className="breadcrumb__item">
                   <span className="breadcrumb__link active">{title}</span>
                 </li>
               </ul>

@@ -127,15 +127,15 @@ const PublicSquareBox = ({
     additionalInfoSVG = (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="icon icon-tabler icon-tabler-route"
+        className="icon icon-tabler icon-tabler-route"
         width="16"
         height="16"
         viewBox="0 0 24 24"
-        stroke-width="1.5"
+        strokeWidth="1.5"
         stroke="currentColor"
         fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <path stroke="none" d="M0 0h24v24H0z"></path>
         <circle cx="6" cy="19" r="2"></circle>
@@ -147,15 +147,15 @@ const PublicSquareBox = ({
     additionalInfoSVG = (
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="icon icon-tabler icon-tabler-tent"
+        className="icon icon-tabler icon-tabler-tent"
         width="16"
         height="16"
         viewBox="0 0 24 24"
         stroke-width="1.5"
         stroke="currentColor"
         fill="none"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       >
         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
         <path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" />
@@ -195,15 +195,15 @@ const PublicSquareBox = ({
               <div className="flex items-center justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="icon icon-tabler icon-tabler-star mr-1"
+                  className="icon icon-tabler icon-tabler-star mr-1"
                   width="15"
                   height="15"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="#fbbf24"
                   fill="#fbbf24"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />

@@ -38,7 +38,7 @@ const MapModal = ({
               key: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
             }}
             defaultCenter={center}
-            defaultZoom={7}
+            defaultZoom={8}
             options={getMapOptions}
             yesIWantToUseGoogleMapApiInternals
             onGoogleApiLoaded={({ map, maps }) => renderMarker(map, maps)}

@@ -53,7 +53,7 @@ const FeaturedListBox = ({
               </picture>
             </div>
             <div className="flex flex-wrap items-center">
-              <span class="text-sm inline-block">{owner}</span>
+              <span className="text-sm inline-block">{owner}</span>
               <span className="mx-2 inline-block">–</span>
               <span className="text-sm inline-block">{publicationDate}</span>
             </div>
