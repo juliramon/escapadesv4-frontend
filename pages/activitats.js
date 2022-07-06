@@ -746,6 +746,7 @@ export async function getStaticProps({ params }) {
 
   return {
     props: {
+      totalItems,
       activities,
       allActivities,
       numPages,
