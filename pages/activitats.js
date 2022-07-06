@@ -741,16 +741,11 @@ const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
 
 export async function getStaticProps({ params }) {
   const service = new ContentService();
-  let totalItems, activities, allActivities, numPages;
-  const objectActivities = await service.activities();
-  totalItems = objectActivities.totalItems;
-  activities = objectActivities.activities;
-  allActivities = objectActivities.allActivities;
-  numPages = objectActivities.numPages;
+  const { totalItems, activities, allActivities, numPages } =
+    await service.activities();
 
   return {
     props: {
-      totalItems,
       activities,
       allActivities,
       numPages,
