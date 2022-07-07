@@ -332,10 +332,10 @@ export async function getStaticPaths() {
   const service = new ContentService();
 
   // Call an external API endpoint to get posts
-  const stories = await service.getAllStories("/stories");
+  const { allStories } = await service.getAllStories("/all-stories");
 
   // Get the paths we want to pre-render based on posts
-  const paths = stories.map((story) => ({
+  const paths = allStories.map((story) => ({
     params: { slug: story.slug },
   }));
 

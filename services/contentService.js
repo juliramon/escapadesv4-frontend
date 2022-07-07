@@ -402,7 +402,13 @@ class ContentService {
       .then((res) => res.data);
   };
 
-  getAllStories = () => this.service.get("/stories").then((res) => res.data);
+  getStories = () => this.service.get("/stories").then((res) => res.data);
+
+  getAllStories = () =>
+    this.service.get("/all-stories").then((res) => res.data);
+
+  paginateStories = (page) =>
+    this.service.get(`/stories?page=${page}`).then((res) => res.data);
 
   getStoryDetails = (id) =>
     this.service.get(`/stories/${id}`).then((res) => res.data);

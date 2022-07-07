@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ContentService from "../services/contentService";
 import NavigationBar from "../components/global/NavigationBar";
-import { Container, Spinner } from "react-bootstrap";
+import FetchingSpinner from "../components/global/FetchingSpinner";
 import Head from "next/head";
 import FeaturedStoryBox from "../components/listings/FeaturedStoryBox";
 import PopularStoryBox from "../components/listings/PopularStoryBox";
@@ -15,7 +15,14 @@ import "swiper/css";
 import "swiper/css/navigation";
 import ShareBar from "../components/social/ShareBar";
 
-const StoriesList = ({ user, stories }) => {
+const StoriesList = ({
+  user,
+  mostRecentStories,
+  totalItems,
+  stories,
+  featuredStories,
+  numPages,
+}) => {
   const router = useRouter();
 
   const urlToShare = `https://escapadesenparella.cat/histories`;
@@ -35,43 +42,47 @@ const StoriesList = ({ user, stories }) => {
 
   const initialState = {
     loggedUser: user,
+    mostRecentStories: [],
     stories: [],
+    featuredStories: [],
     hasStories: false,
+    isFetching: false,
+    numActivities: 0,
+    numPages: 0,
+    currentPage: 1,
   };
+
   const [state, setState] = useState(initialState);
   const service = new ContentService();
 
   useEffect(() => {
-    const fetchData = async () => {
-      //const stories = await service.getAllStories("/stories");
-      const sortedStories = stories.sort(
-        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
-      );
-      let isLoaded;
-      if (stories.length > 0) {
-        isLoaded = true;
-      } else {
-        isLoaded = false;
-      }
-      setState({ ...state, stories: sortedStories, hasStories: isLoaded });
-    };
-    fetchData();
+    if (stories) {
+      setState({
+        ...state,
+        mostRecentStories: mostRecentStories,
+        stories: stories,
+        featuredStories: featuredStories,
+        hasStories: true,
+        numStories: totalItems,
+        numPages: numPages,
+      });
+    }
   }, []);
 
-  if (state.hasStories === false) {
-    return (
-      <>
-        <Head>
-          <title>Carregant...</title>
-        </Head>
-        <Container className="spinner d-flex justify-space-between">
-          <Spinner animation="border" role="status" variant="primary">
-            <span className="sr-only">Carregant...</span>
-          </Spinner>
-        </Container>
-      </>
-    );
+  if (!state.hasStories) {
+    return <FetchingSpinner />;
   }
+
+  const loadMoreResults = async (page) => {
+    setState({ ...state, isFetching: true });
+    const { stories } = await service.paginateStories(page);
+    setState({
+      ...state,
+      stories: [...state.stories, ...stories],
+      isFetching: false,
+      currentPage: ++state.currentPage,
+    });
+  };
 
   return (
     <>
@@ -202,7 +213,7 @@ const StoriesList = ({ user, stories }) => {
                       },
                     }}
                   >
-                    {state.stories.slice(0, 8).map((el) => (
+                    {state.mostRecentStories.map((el) => (
                       <SwiperSlide key={el._id}>
                         <FeaturedStoryBox
                           slug={el.slug}
@@ -258,20 +269,22 @@ const StoriesList = ({ user, stories }) => {
           </section>
           <section className="py-6 md:py-16 bg-primary-100">
             <div className="container">
-              <h2>Històries més populars</h2>
+              <h2>Històries destacades</h2>
               <div className="flex flex-wrap items-center mt-8 -mx-6 -mb-6">
-                {state.stories.slice(3, 9).map((el, idx) => (
-                  <PopularStoryBox
-                    key={el._id}
-                    slug={el.slug}
-                    title={el.title}
-                    subtitle={el.subtitle}
-                    avatar={el.owner.avatar}
-                    owner={el.owner.fullName}
-                    cover={el.cover}
-                    idx={`0${idx + 1}`}
-                  />
-                ))}
+                {state.hasStories
+                  ? state.featuredStories.map((el, idx) => (
+                      <PopularStoryBox
+                        key={el._id}
+                        slug={el.slug}
+                        title={el.title}
+                        subtitle={el.subtitle}
+                        avatar={el.owner.avatar}
+                        owner={el.owner.fullName}
+                        cover={el.cover}
+                        idx={`0${idx + 1}`}
+                      />
+                    ))
+                  : null}
               </div>
             </div>
           </section>
@@ -288,7 +301,7 @@ const StoriesList = ({ user, stories }) => {
               </div>
               <div className="flex flex-wrap items-start -mx-6">
                 <div className="w-full lg:w-3/5 px-6 order-2 lg:order-none">
-                  {state.stories.slice(9).map((el) => (
+                  {state.stories.map((el) => (
                     <RegularStoryBox
                       key={el._id}
                       slug={el.slug}
@@ -300,6 +313,62 @@ const StoriesList = ({ user, stories }) => {
                       date={el.createdAt}
                     />
                   ))}
+                  <div>
+                    {state.currentPage !== state.numPages ? (
+                      <div className="w-full mt-10 flex justify-center">
+                        {!state.isFetching ? (
+                          <button
+                            className="button button__primary button__lg"
+                            onClick={() => loadMoreResults(state.currentPage)}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              className="icon icon-tabler icon-tabler-plus mr-2"
+                              width={20}
+                              height={20}
+                              viewBox="0 0 24 24"
+                              strokeWidth="2"
+                              stroke="currentColor"
+                              fill="none"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <path
+                                stroke="none"
+                                d="M0 0h24v24H0z"
+                                fill="none"
+                              ></path>
+                              <line x1={12} y1={5} x2={12} y2={19}></line>
+                              <line x1={5} y1={12} x2={19} y2={12}></line>
+                            </svg>
+                            Veure'n més
+                          </button>
+                        ) : (
+                          <button className="button button__primary button__lg">
+                            <svg
+                              role="status"
+                              className="w-5 h-5 mr-2.5 text-primary-400 animate-spin dark:text-gray-600 fill-white"
+                              viewBox="0 0 100 101"
+                              fill="none"
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                                fill="currentColor"
+                              />
+                              <path
+                                d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                                fill="currentFill"
+                              />
+                            </svg>
+                            Carregant
+                          </button>
+                        )}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </div>
                 <aside className="w-full lg:w-2/5 px-6 lg:sticky top-28 order-2 lg:order-none">
                   <div className="cloud-tags">
@@ -334,10 +403,16 @@ const StoriesList = ({ user, stories }) => {
 
 export async function getStaticProps() {
   const service = new ContentService();
-  const stories = await service.getAllStories("/stories");
+  const { totalItems, stories, featuredStories, numPages } =
+    await service.getStories();
+  const mostRecentStories = await service.getMostRecentStories();
   return {
     props: {
+      mostRecentStories,
+      totalItems,
       stories,
+      featuredStories,
+      numPages,
     },
   };
 }
