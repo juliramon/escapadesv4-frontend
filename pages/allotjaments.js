@@ -6,8 +6,9 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import Footer from "../components/global/Footer";
 import MapModal from "../components/modals/MapModal";
+import Fancybox from "../utils/Fancybox";
 
-const PlaceList = ({ user, placesResults }) => {
+const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
   const router = useRouter();
   useEffect(() => {
     if (
@@ -25,13 +26,18 @@ const PlaceList = ({ user, placesResults }) => {
   const initialState = {
     loggedUser: user,
     places: [],
+    allPlaces: [],
     queryPlaceType: [],
     queryPlaceRegion: [],
     queryPlaceCategory: [],
     queryPlaceSeason: [],
     updateSearch: false,
     hasPlaces: false,
+    isFetching: false,
+    numPlaces: 0,
+    currentPage: 1,
   };
+
   const [state, setState] = useState(initialState);
 
   const [stateDropdownFilters, setStateDropdownFilters] = useState(false);
@@ -40,8 +46,15 @@ const PlaceList = ({ user, placesResults }) => {
   const service = new ContentService();
 
   useEffect(() => {
-    if (placesResults) {
-      setState({ ...state, places: placesResults, hasPlaces: true });
+    if (places) {
+      setState({
+        ...state,
+        places: places,
+        allPlaces: allPlaces,
+        hasPlaces: true,
+        numPlaces: totalItems,
+        numPages: numPages,
+      });
     }
   }, []);
 
@@ -124,12 +137,12 @@ const PlaceList = ({ user, placesResults }) => {
   };
 
   let renderMarker = (map, maps) => {
-    state.places.forEach((place) => {
+    state.allPlaces.forEach((place) => {
       const position = {
         lat: parseFloat(place.place_lat),
         lng: parseFloat(place.place_lng),
       };
-      const contentString = `<a href="/activitats/${place.slug}" title="${place.title}" class="gmaps-infobox" target="_blank">
+      const contentString = `<a href="/allotjaments/${place.slug}" title="${place.title}" class="gmaps-infobox" target="_blank">
         <div class="gmaps-infobox__picture">
           <picture>
             <img src="${place.images[0]}" alt="${place.title}" class="object-cover w-full h-full" width="80" height="80">
@@ -169,6 +182,17 @@ const PlaceList = ({ user, placesResults }) => {
   }, [state.updateSearch]);
 
   const textareaFooter = "";
+
+  const loadMoreResults = async (page) => {
+    setState({ ...state, isFetching: true });
+    const { places } = await service.paginatePlaces(page);
+    setState({
+      ...state,
+      places: [...state.places, ...places],
+      isFetching: false,
+      currentPage: ++state.currentPage,
+    });
+  };
 
   return (
     <>
@@ -261,82 +285,126 @@ const PlaceList = ({ user, placesResults }) => {
                     encant
                   </h1>
                 </div>
-                <div className="w-full mt-8">
-                  <div className="grid grid-cols-4 grid-rows-2 gap-2.5 rounded overflow-hidden">
-                    <div className="row-start-1 col-start-1 row-span-2 col-span-2 rounded-l overflow-hidden">
-                      <picture>
-                        <img
-                          src="https://res.cloudinary.com/juligoodie/image/upload/v1652991721/getaways-guru/allotjaments_qmoyui.jpg"
-                          alt="Allotjaments amb encant a Catalunya"
-                          className="w-full h-full object-cover object-center"
-                          width={400}
-                          height={300}
-                          loading="eager"
-                        />
-                      </picture>
-                    </div>
-                    <div className="row-start-1 col-start-3 row-span-1 col-span-1 overflow-hidden">
-                      <picture>
-                        <img
-                          src="https://res.cloudinary.com/juligoodie/image/upload/v1652991721/getaways-guru/allotjaments_qmoyui.jpg"
-                          alt="Allotjaments amb encant a Catalunya"
-                          className="w-full h-full object-cover object-center"
-                          width={400}
-                          height={300}
-                          loading="eager"
-                        />
-                      </picture>
-                    </div>
-                    <div className="row-start-1 col-start-4 row-span-1 col-span-1 rounded-tr overflow-hidden">
-                      <picture>
-                        <img
-                          src="https://res.cloudinary.com/juligoodie/image/upload/v1652991721/getaways-guru/allotjaments_qmoyui.jpg"
-                          alt="Allotjaments amb encant a Catalunya"
-                          className="w-full h-full object-cover object-center"
-                          width={400}
-                          height={300}
-                          loading="eager"
-                        />
-                      </picture>
-                    </div>
-                    <div className="row-start-2 col-start-3 row-span-1 col-span-1 overflow-hidden">
-                      <picture>
-                        <img
-                          src="https://res.cloudinary.com/juligoodie/image/upload/v1652991721/getaways-guru/allotjaments_qmoyui.jpg"
-                          alt="Allotjaments amb encant a Catalunya"
-                          className="w-full h-full object-cover object-center"
-                          width={400}
-                          height={300}
-                          loading="eager"
-                        />
-                      </picture>
-                    </div>
-                    <div className="row-start-2 col-start-4 row-span-1 col-span-1 rounded-br overflow-hidden">
-                      <picture>
-                        <img
-                          src="https://res.cloudinary.com/juligoodie/image/upload/v1652991721/getaways-guru/allotjaments_qmoyui.jpg"
-                          alt="Allotjaments amb encant a Catalunya"
-                          className="w-full h-full object-cover object-center"
-                          width={400}
-                          height={300}
-                          loading="eager"
-                        />
-                      </picture>
-                    </div>
+                <div className="w-full mt-5">
+                  <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-3 md:grid-rows-2 gap-1.5 rounded-md overflow-hidden">
+                    <Fancybox
+                      options={{
+                        infinite: true,
+                      }}
+                    >
+                      <div
+                        className="row-start-1 col-start-1 row-span-1 col-span-2 md:row-span-2 rounded-t-md md:rounded-tr-none md:rounded-l-md overflow-hidden cursor-pointer"
+                        data-fancybox="gallery"
+                        data-src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.49.44_czmgpl.jpg"
+                      >
+                        <div className="aspect-w-4 aspect-h-3 h-full w-full">
+                          <picture>
+                            <img
+                              src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.49.44_czmgpl.jpg"
+                              alt=""
+                              className="w-full h-full object-cover object-center"
+                              width={400}
+                              height={300}
+                              loading="eager"
+                            />
+                          </picture>
+                        </div>
+                      </div>
+                      <div
+                        className="row-start-2 md:row-start-1 col-start-1 md:col-start-3 row-span-1 col-span-1 md:rounded-none overflow-hidden cursor-pointer"
+                        data-fancybox="gallery"
+                        data-src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.34_qprzdh.jpg"
+                      >
+                        <div className="aspect-w-4 aspect-h-3 h-full w-full">
+                          <picture>
+                            <img
+                              src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.34_qprzdh.jpg"
+                              alt=""
+                              className="w-full h-full object-cover object-center"
+                              width={400}
+                              height={300}
+                              loading="eager"
+                            />
+                          </picture>
+                        </div>
+                      </div>
+                      <div
+                        className="row-start-2 md:row-start-1 col-start-2 md:col-start-4 row-span-1 col-span-1 md:rounded-tr-md overflow-hidden cursor-pointer"
+                        data-fancybox="gallery"
+                        data-src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.39_f6r96x.jpg"
+                      >
+                        <div className="aspect-w-4 aspect-h-3 h-full w-full">
+                          <picture>
+                            <img
+                              src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.39_f6r96x.jpg"
+                              alt=""
+                              className="w-full h-full object-cover object-center"
+                              width={400}
+                              height={300}
+                              loading="eager"
+                            />
+                          </picture>
+                        </div>
+                      </div>
+                      <div
+                        className="row-start-3 col-start-1 md:col-start-3 md:row-start-2 row-span-1 col-span-1 overflow-hidden cursor-pointer"
+                        data-fancybox="gallery"
+                        data-src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.31_qxwmps.jpg"
+                      >
+                        <div className="aspect-w-4 aspect-h-3 h-full w-full">
+                          <picture>
+                            <img
+                              src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.31_qxwmps.jpg"
+                              alt=""
+                              className="w-full h-full object-cover object-center"
+                              width={400}
+                              height={300}
+                              loading="eager"
+                            />
+                          </picture>
+                        </div>
+                      </div>
+                      <div
+                        className="row-start-3 md:row-start-2 col-start-2 md:col-start-4 row-span-1 col-span-1 rounded-br-md overflow-hidden cursor-pointer"
+                        data-fancybox="gallery"
+                        data-src="https://res.cloudinary.com/juligoodie/image/upload/v1657047006/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.38_zsnyc7.jpg"
+                      >
+                        <div className="aspect-w-4 aspect-h-3 h-full w-full">
+                          <picture>
+                            <img
+                              src="https://res.cloudinary.com/juligoodie/image/upload/v1657047006/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.38_zsnyc7.jpg"
+                              alt=""
+                              className="w-full h-full object-cover object-bottom"
+                              width={400}
+                              height={300}
+                              loading="eager"
+                            />
+                          </picture>
+                        </div>
+                      </div>
+                    </Fancybox>
                   </div>
                 </div>
                 <div className="w-full mt-3">
                   <figcaption className="text-xs text-primary-400 text-right">
-                    Escapada a Mas Farner (Llívia) / © Escapadesenparella.cat
+                    Allotjaments amb encant visitats per en Juli i l'Andrea
+                    arreu de Catalunya / © Escapadesenparella.cat
                   </figcaption>
                 </div>
-                <div className="w-full mt-5">
+              </div>
+            </div>
+          </section>
+
+          <section className="pb-8 md:pb-16">
+            <div className="container">
+              <div className="w-full flex flex-wrap items-end justify-between pt-8 pb-2 md:pt-12">
+                <div class="w-full md:w-1/2">
                   <div className="max-w-xl">
                     <h2>
-                      Descobreix {state.places.length} allotjaments amb encant
-                      per a una escapada en parella increïble a Catalunya
+                      Descobreix {state.numPlaces} allotjaments amb encant per a
+                      una escapada en parella increïble a Catalunya
                     </h2>
-                    <p className="mt-6 text-lg leading-relaxed">
+                    <p className="mt-3 md:mt-6 text-base leading-relaxed">
                       Des d'<strong>hotels amb encant</strong> únics a
                       Catalunya, a <strong>cabanes acollidaroes</strong> i{" "}
                       <strong>cases-arbre</strong>, passant per{" "}
@@ -345,16 +413,6 @@ const PlaceList = ({ user, placesResults }) => {
                       allotjaments a Catalunya per a una escapada perfecta!
                     </p>
                   </div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section className="pt-6 pb-8 md:pt-12 md:pb-16">
-            <div className="container">
-              <div className="w-full flex flex-wrap items-center justify-between pb-6">
-                <div class="w-full md:w-1/2">
-                  <h2>Allotjaments per a parelles</h2>
                 </div>
                 <div className="relative flex items-center justify-end w-full md:w-1/2">
                   <button
@@ -744,6 +802,60 @@ const PlaceList = ({ user, placesResults }) => {
                     ))
                   : null}
               </div>
+              {state.currentPage !== state.numPages ? (
+                <div className="w-full mt-10 flex justify-center">
+                  {!state.isFetching ? (
+                    <button
+                      className="button button__primary button__lg"
+                      onClick={() => loadMoreResults(state.currentPage)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="icon icon-tabler icon-tabler-plus mr-2"
+                        width={20}
+                        height={20}
+                        viewBox="0 0 24 24"
+                        strokeWidth="2"
+                        stroke="currentColor"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
+                        <path
+                          stroke="none"
+                          d="M0 0h24v24H0z"
+                          fill="none"
+                        ></path>
+                        <line x1={12} y1={5} x2={12} y2={19}></line>
+                        <line x1={5} y1={12} x2={19} y2={12}></line>
+                      </svg>
+                      Veure'n més
+                    </button>
+                  ) : (
+                    <button className="button button__primary button__lg">
+                      <svg
+                        role="status"
+                        className="w-5 h-5 mr-2.5 text-primary-400 animate-spin dark:text-gray-600 fill-white"
+                        viewBox="0 0 100 101"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+                          fill="currentColor"
+                        />
+                        <path
+                          d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+                          fill="currentFill"
+                        />
+                      </svg>
+                      Carregant
+                    </button>
+                  )}
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           </section>
           {textareaFooter !== "" ? (
@@ -773,10 +885,14 @@ const PlaceList = ({ user, placesResults }) => {
 
 export async function getStaticProps({ params }) {
   const service = new ContentService();
-  const placesResults = await service.getAllPlaces();
+  const { totalItems, places, allPlaces, numPages } =
+    await service.getAllPlaces();
   return {
     props: {
-      placesResults,
+      totalItems,
+      places,
+      allPlaces,
+      numPages,
     },
   };
 }

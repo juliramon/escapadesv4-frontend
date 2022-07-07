@@ -304,6 +304,9 @@ class ContentService {
 
   getAllPlaces = () => this.service.get("/places").then((res) => res.data);
 
+  paginatePlaces = (page) =>
+    this.service.get(`/places?page=${page}`).then((res) => res.data);
+
   getPlaceDetails = (id) =>
     this.service.get(`/places/${id}`).then((res) => res.data);
 
