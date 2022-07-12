@@ -683,6 +683,9 @@ class ContentService {
 
   getLists = () => this.service.get("/lists").then((res) => res.data);
 
+  paginateLists = (page) =>
+    this.service.get(`/lists?page=${page}`).then((res) => res.data);
+
   getListDetails = (id) =>
     this.service.get(`/lists/${id}`).then((res) => res.data);
 
