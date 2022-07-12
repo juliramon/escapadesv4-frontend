@@ -556,6 +556,11 @@ class ContentService {
   getCategoryDetails = (slug) =>
     this.service.get(`/categories/${slug}`).then((res) => res.data);
 
+  paginateCategory = (category, page) =>
+    this.service
+      .get(`/searchCategoryResults/${category}?page=${page}`)
+      .then((res) => res.data);
+
   getCategoryResults = (category) =>
     this.service
       .get(`/searchCategoryResults/${category}`)
