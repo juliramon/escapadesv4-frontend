@@ -4,20 +4,20 @@
 
 @layer base
     body
-        @apply text-primary-400 font-normal leading-normal font-body
+        @apply text-base text-primary-400 font-normal leading-normal font-body
 
     h1, h2
         @apply text-primary-500 font-bold font-headings 
 
     h1 
-        @apply text-3xl leading-tight 
+        @apply text-3xl leading-tight mt-0
         @screen md
             @apply text-5xl leading-snug
 
     h2
-        @apply text-2xl leading-tight
+        @apply text-2xl leading-tight mb-3
         @screen md
-            @apply text-3xl leading-snug
+            @apply text-3xl leading-snug mb-3
 
     h3
         @apply text-lg leading-normal
@@ -29,3 +29,9 @@
 
     a
         @apply cursor-pointer no-underline text-primary-500
+
+    p 
+        @apply mb-5 leading-relaxed
+
+    ol, ul, menu
+        @apply list-disc pl-5 mb-5 leading-relaxed

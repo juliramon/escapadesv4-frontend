@@ -3382,72 +3382,12 @@ nav {
   }
 }
 
-#legalTerms {
-  .box {
-    padding: 30px 0;
-    margin: 0 auto;
-    display: flex;
-  }
-  h2 {
-    font-size: 28px;
-    margin-top: 48px;
-  }
-  p,
-  ul {
-    font-size: 16px;
-    color: $medium-blue;
-    line-height: 28px;
-    margin-bottom: 20px;
-    li:not(:last-child) {
-      margin-bottom: 20px;
-    }
-  }
-  .right {
-    width: 300px;
-    padding-right: 40px;
-    position: fixed;
-    top: 150px;
-    ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      li.sidebar-list-header {
-        color: $dark-blue;
-        text-transform: uppercase;
-        font-size: 12px;
-        letter-spacing: 0.5px;
-      }
-      li {
-        margin: 0;
-        line-height: 22px;
-        padding: 6px 0;
-        a {
-          color: $dark-blue;
-        }
-        ul {
-          margin-left: 18px;
-          li {
-            line-height: 22px;
-            padding: 6px 0;
-          }
-        }
-      }
-    }
-  }
-  .left {
-    flex: 1;
-    margin-left: 300px;
-    .legal-terms-title-area {
-      p {
-        margin: 0;
-      }
-    }
-    .anchor {
-      display: block;
-      height: 101.14px;
-      margin-top: -92px;
-      visibility: hidden;
-    }
+.legal-terms {
+  .anchor {
+    display: block;
+    height: 101.14px;
+    margin-top: -92px;
+    visibility: hidden;
   }
 }
 
