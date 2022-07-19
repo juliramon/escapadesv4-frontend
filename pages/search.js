@@ -6,6 +6,7 @@ import PublicContentBox from "../components/listings/PublicContentBox";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import FetchingSpinner from "../components/global/FetchingSpinner";
 
 const Search = (props) => {
   const router = useRouter();
@@ -95,18 +96,7 @@ const Search = (props) => {
   }, [state.searchQuery, router]);
 
   if (state.isFetching) {
-    return (
-      <>
-        <Head>
-          <title>Carregant... - Escapadesenparella.cat</title>
-        </Head>
-        <Container className="spinner d-flex justify-space-between">
-          <Spinner animation="border" role="status" variant="primary">
-            <span className="sr-only">Carregant...</span>
-          </Spinner>
-        </Container>
-      </>
-    );
+    return <FetchingSpinner />;
   }
 
   let searchResultsList;

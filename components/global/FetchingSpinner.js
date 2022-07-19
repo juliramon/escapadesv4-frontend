@@ -6,10 +6,10 @@ const FetchingSpinner = () => {
       <Head>
         <title>Carregant...</title>
       </Head>
-      <div className="container flex items-center justify-center">
+      <div className="h-screen w-screen flex items-center justify-center">
         <svg
           role="status"
-          className="w-12 h-12 mr-2.5 text-primary-400 animate-spin dark:text-gray-600 fill-white"
+          className="w-12 h-12 text-blue-600 animate-spin dark:text-gray-600 fill-white"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +23,6 @@ const FetchingSpinner = () => {
             fill="currentFill"
           />
         </svg>
-        Carregant
       </div>
     </>
   );
