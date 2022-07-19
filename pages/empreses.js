@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Link from "next/link";
-import { Col, Container, Row } from "react-bootstrap";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
 import Plans from "../components/global/Plans";
@@ -14,220 +13,225 @@ const Serveis = () => {
           Escpadesenparella.cat
         </title>
       </Head>
-      <main id="landingServices" className="services">
-        <NavigationBar
-          logo_url={
-            "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
-          }
-        />
-        <Container className="mw-1200">
-          <div className="box">
-            <section className="page-header">
-              <Row>
-                <Col lg={12}>
-                  <div className="page-header-wrapper">
-                    <div className="col-left">
-                      <h1 className="page-header-title">
-                        Multiplica la teva presència online... i els teus
-                        clients
-                      </h1>
-                      <p className="page-header-subtitle">
-                        Amplia la visibilitat del teu negoci llistant-lo
-                        <br /> al recomanador especialista en escapades
-                        <br /> en parella a Catalunya
-                      </p>
-                      <Link href={"/empreses/registre?step=seleccio-pla"}>
-                        <a className="btn inline-flex items-center">
-                          Publicar el meu negoci{" "}
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-arrow-narrow-right"
-                            width="20"
-                            height="20"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#ffffff"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <line x1="5" y1="12" x2="19" y2="12" />
-                            <line x1="15" y1="16" x2="19" y2="12" />
-                            <line x1="15" y1="8" x2="19" y2="12" />
-                          </svg>
-                        </a>
-                      </Link>
-                    </div>
-                    <div className="col-right">
-                      <div className="header-infographic-wrapper">
-                        <img src="https://res.cloudinary.com/juligoodie/image/upload/v1621536007/getaways-guru/static-files/graphic-plans-3_lrey6s.png" />
-                      </div>
-                    </div>
+      <NavigationBar
+        logo_url={
+          "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
+        }
+      />
+      <main className="services w-full xl:w-8/12 mx-auto">
+        <section className="py-12 md:pt-24">
+          <div className="container">
+            <div className="flex flex-wrap items-start">
+              <div className="w-full">
+                <div className="flex flex-wrap items-center">
+                  <div className="w-full md:w-1/2">
+                    <h1 className="mb-4">
+                      Multiplica la teva presència online... i els teus clients
+                    </h1>
+                    <p className="text-xl">
+                      Amplia la visibilitat del teu negoci llistant-lo al
+                      recomanador especialista en escapades en parella a
+                      Catalunya
+                    </p>
+                    <Link href={"/empreses/registre?step=seleccio-pla"}>
+                      <a className="button button__primary button__lg mt-4">
+                        Publicar el meu negoci{" "}
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="icon icon-tabler icon-tabler-arrow-narrow-right"
+                          width="20"
+                          height="20"
+                          viewBox="0 0 24 24"
+                          strokeWidth="1.5"
+                          stroke="#ffffff"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <line x1="5" y1="12" x2="19" y2="12" />
+                          <line x1="15" y1="16" x2="19" y2="12" />
+                          <line x1="15" y1="8" x2="19" y2="12" />
+                        </svg>
+                      </a>
+                    </Link>
                   </div>
-                </Col>
-              </Row>
-            </section>
-            <section className="services-referrals">
-              <Row>
-                <Col lg={12}>
-                  <div className="services-referrals-wrapper">
-                    <h4>
-                      Alguns dels allotjaments i activitats que han confiat, i
-                      confien en nosaltres
-                    </h4>
-                    <div className="logos-bar">
-                      <img src="https://res.cloudinary.com/juligoodie/image/upload/v1621538629/getaways-guru/static-files/graphic-plans-4_luvtvr.png" />
-                    </div>
+                  <div className="w-full md:w-1/2 mt-5 lg:mt-0">
+                    <picture>
+                      <img
+                        src="https://res.cloudinary.com/juligoodie/image/upload/v1621536007/getaways-guru/static-files/graphic-plans-3_lrey6s.png"
+                        className="w-full h-full object-cover"
+                        loading="eager"
+                      />
+                    </picture>
                   </div>
-                </Col>
-              </Row>
-            </section>
-            <section className="services-signup">
-              <Row>
-                <Col lg={12}>
-                  <div className="services-signup-wrapper">
-                    <div className="col-left">
-                      <h2 className="page-h2-title">Llista el teu negoci...</h2>
-                      <p className="page-h2-subtitle">
-                        El teu negoci es veurà perfecte en qualsevol dispositiu.
-                        <br />
-                        Et donaràs a conèixer a nous clients, amb tota la
-                        informació que necessiten, i amb accés directe a
-                        reservar els teus serveis.
-                      </p>
-                      <ul>
-                        <li>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-circle-check"
-                            width="22"
-                            height="22"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#FF8D76"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <circle cx="12" cy="12" r="9" />
-                            <path d="M9 12l2 2l4 -4" />
-                          </svg>
-                          Gal·leria d'imatges
-                        </li>
-                        <li>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-circle-check"
-                            width="22"
-                            height="22"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#FF8D76"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <circle cx="12" cy="12" r="9" />
-                            <path d="M9 12l2 2l4 -4" />
-                          </svg>
-                          Descripció del negoci
-                        </li>
-                        <li>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-circle-check"
-                            width="22"
-                            height="22"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#FF8D76"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <circle cx="12" cy="12" r="9" />
-                            <path d="M9 12l2 2l4 -4" />
-                          </svg>
-                          Serveis i preus
-                        </li>
-                        <li>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-circle-check"
-                            width="22"
-                            height="22"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#FF8D76"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <circle cx="12" cy="12" r="9" />
-                            <path d="M9 12l2 2l4 -4" />
-                          </svg>
-                          Telèfon i mail de contacte
-                        </li>
-                        <li>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-circle-check"
-                            width="22"
-                            height="22"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#FF8D76"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <circle cx="12" cy="12" r="9" />
-                            <path d="M9 12l2 2l4 -4" />
-                          </svg>
-                          Reserves
-                        </li>
-                        <li>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="icon icon-tabler icon-tabler-circle-check"
-                            width="22"
-                            height="22"
-                            viewBox="0 0 24 24"
-                            strokeWidth="1.5"
-                            stroke="#FF8D76"
-                            fill="none"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <circle cx="12" cy="12" r="9" />
-                            <path d="M9 12l2 2l4 -4" />
-                          </svg>
-                          Xarxes social
-                        </li>
-                      </ul>
-                    </div>
-                    <div className="col-right">
-                      <div className="media-area">
-                        <img src="https://res.cloudinary.com/juligoodie/image/upload/v1621535038/getaways-guru/static-files/graphic-plans-2_r3ffv2.png" />
-                      </div>
-                    </div>
-                  </div>
-                </Col>
-              </Row>
-            </section>
-            <span id="plans"></span>
-            <section className="services-plans">
-              <Plans />
-            </section>
+                </div>
+              </div>
+            </div>
           </div>
-        </Container>
+        </section>
+
+        <section className="py-12">
+          <div className="container">
+            <div className="flex flex-wrap items-start">
+              <div className="w-full">
+                <h3 className="text-center max-w-lg mx-auto">
+                  Alguns dels allotjaments i activitats que han confiat,
+                  <br />i confien en nosaltres
+                </h3>
+                <div className="logos-bar mt-5">
+                  <img src="https://res.cloudinary.com/juligoodie/image/upload/v1621538629/getaways-guru/static-files/graphic-plans-4_luvtvr.png" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="services__signup py-12">
+          <div className="container">
+            <div className="flex flex-wrap items-start">
+              <div className="w-full md:w-1/2">
+                <h2 className="">Llista el teu negoci...</h2>
+                <p className="max-w-xl">
+                  El teu negoci es veurà perfecte en qualsevol dispositiu.
+                  <br />
+                  Et donaràs a conèixer a nous clients, amb tota la informació
+                  que necessiten, i amb accés directe a reservar els teus
+                  serveis.
+                </p>
+                <ul>
+                  <li>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-circle-check"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#FF8D76"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M9 12l2 2l4 -4" />
+                    </svg>
+                    Gal·leria d'imatges
+                  </li>
+                  <li>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-circle-check"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#FF8D76"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M9 12l2 2l4 -4" />
+                    </svg>
+                    Descripció del negoci
+                  </li>
+                  <li>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-circle-check"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#FF8D76"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M9 12l2 2l4 -4" />
+                    </svg>
+                    Serveis i preus
+                  </li>
+                  <li>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-circle-check"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#FF8D76"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M9 12l2 2l4 -4" />
+                    </svg>
+                    Telèfon i mail de contacte
+                  </li>
+                  <li>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-circle-check"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#FF8D76"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M9 12l2 2l4 -4" />
+                    </svg>
+                    Reserves
+                  </li>
+                  <li>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-circle-check"
+                      width="22"
+                      height="22"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#FF8D76"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <circle cx="12" cy="12" r="9" />
+                      <path d="M9 12l2 2l4 -4" />
+                    </svg>
+                    Xarxes social
+                  </li>
+                </ul>
+              </div>
+              <div className="w-full md:w-1/2 mt-5 lg:mt-0">
+                <picture>
+                  <img
+                    src="https://res.cloudinary.com/juligoodie/image/upload/v1621535038/getaways-guru/static-files/graphic-plans-2_r3ffv2.png"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </picture>
+              </div>
+            </div>
+          </div>
+        </section>
+        <span id="plans"></span>
+        <section className="services__plans">
+          <Plans />
+        </section>
       </main>
       <Footer
         logo_url={

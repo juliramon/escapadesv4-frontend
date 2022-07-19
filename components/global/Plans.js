@@ -476,13 +476,13 @@ const Plans = () => {
   }
 
   return (
-    <section className="page-header step1 plans">
+    <section className="page-header step1 plans py-12 md:pb-24">
       <Row>
         <Col lg={12}>
-          <div className="page-header-wrapper">
-            <h1 className="page-header-title">
+          <div className="page-header-wrapper text-center">
+            <h2 className="page-header-title mb-0 text-center">
               Potencia la visibilitat del teu negoci
-            </h1>
+            </h2>
             <p className="page-header-subtitle">
               Selecciona un dels nostres plans per arribar a parelles d'arreu de
               Catalunya

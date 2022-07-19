@@ -12,6 +12,7 @@
 @import "pages/layout-lists.sass";
 @import "pages/layout-stories.sass";
 @import "pages/layout-story.sass";
+@import "pages/layout-empreses.sass";
 @import "base/global.sass";
 
 @import "vendors/tailwind.sass";
@@ -3510,7 +3511,7 @@ nav {
 }
 
 //COMPONENT PLANS
-.services-plans {
+.services__plans {
   .step1.plans {
     .page-header-wrapper {
       flex-direction: column;
@@ -3541,10 +3542,13 @@ nav {
     }
     .plans-table-wrapper {
       display: flex;
-      align-items: flex-start;
+      align-items: stretch;
       justify-content: space-between;
       margin: 10px -10px;
       .plan-box {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         width: 33.33%;
         text-align: center;
         border: 1px solid #b2d3dd;
@@ -3638,6 +3642,9 @@ nav {
           .plans-comparison-feature-mark {
             width: 20%;
             text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
           }
         }
       }

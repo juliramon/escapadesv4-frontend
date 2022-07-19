@@ -49,7 +49,7 @@ module.exports = {
       },
       fontSize: {
         10: "10px",
-        base: "16px",
+        base: "17px",
       },
       fontFamily: {
         body: ["CircularStd", "sans-serif"],
