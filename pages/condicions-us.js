@@ -18,6 +18,20 @@ const CondicionsUs = () => {
         user={user}
       />
       <main className="legal-terms py-12 w-full xl:w-8/12 mx-auto">
+        <div className="pt-6">
+          <div className="container">
+            <ul className="breadcrumb">
+              <li className="breadcrumb__item">
+                <a href="/" title="Inici" className="breadcrumb__link">
+                  Inici
+                </a>
+              </li>
+              <li className="breadcrumb__item">
+                <span className="breadcrumb__link active">Condicions d'ús</span>
+              </li>
+            </ul>
+          </div>
+        </div>
         <div className="container">
           <div className="flex flex-wrap items-start">
             <aside className="w-full md:w-1/4 relative md:sticky md:top-36 pr-12">

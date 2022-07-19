@@ -19,6 +19,20 @@ const Serveis = () => {
         }
       />
       <main className="services w-full xl:w-8/12 mx-auto">
+        <div className="pt-6">
+          <div className="container">
+            <ul className="breadcrumb">
+              <li className="breadcrumb__item">
+                <a href="/" title="Inici" className="breadcrumb__link">
+                  Inici
+                </a>
+              </li>
+              <li className="breadcrumb__item">
+                <span className="breadcrumb__link active">Empreses</span>
+              </li>
+            </ul>
+          </div>
+        </div>
         <section className="py-12 md:pt-24">
           <div className="container">
             <div className="flex flex-wrap items-start">
