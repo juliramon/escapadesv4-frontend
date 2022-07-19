@@ -7,10 +7,11 @@
 @import "layout/forms.sass";
 @import "layout/footer.sass";
 @import "layout/navigation.sass";
+@import "pages/layout-legal.sass";
+@import "pages/layout-list.sass";
+@import "pages/layout-lists.sass";
 @import "pages/layout-stories.sass";
 @import "pages/layout-story.sass";
-@import "pages/layout-lists.sass";
-@import "pages/layout-list.sass";
 @import "base/global.sass";
 
 @import "vendors/tailwind.sass";
@@ -3380,19 +3381,6 @@ nav {
       }
     }
   }
-}
-
-.legal-terms {
-  .anchor {
-    display: block;
-    height: 101.14px;
-    margin-top: -92px;
-    visibility: hidden;
-  }
-}
-
-#legalTerms section p:last-child {
-  margin-bottom: 0;
 }
 
 #landingServices {

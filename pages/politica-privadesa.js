@@ -140,7 +140,7 @@ const PoliticaPrivadesa = () => {
                   <p className="mt-1">Darrera actualització el 20/04/2021</p>
                 </div>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="engeneral"></span>
                 <h2>En general</h2>
                 <p>
@@ -150,7 +150,7 @@ const PoliticaPrivadesa = () => {
                   personal.
                 </p>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="finalitatstractament"></span>
                 <h2>Finalitats del tractament i base jurídica</h2>
                 <p>
@@ -193,7 +193,7 @@ const PoliticaPrivadesa = () => {
                   subscripció del sistema.
                 </p>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="categoriesdades"></span>
                 <h2>Categories de dades</h2>
                 <p>
@@ -209,7 +209,7 @@ const PoliticaPrivadesa = () => {
                   qualsevol modificació o canvi.
                 </p>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="presadecisions"></span>
                 <h2>Presa de decisions automàtica</h2>
                 <p>
@@ -220,7 +220,7 @@ const PoliticaPrivadesa = () => {
                   propòsits enumerats en anterioritat.
                 </p>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="configuracionsprivacitat"></span>
                 <h2>Configuracions de privacitat i seguretat</h2>
                 <p>
@@ -258,7 +258,7 @@ const PoliticaPrivadesa = () => {
                   sigui necessari per al compliment d’una obligació legal.
                 </p>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="destinataris"></span>
                 <h2>Destinataris i transferències de dades personals</h2>
                 <p>
@@ -286,7 +286,7 @@ const PoliticaPrivadesa = () => {
                   </li>
                 </ul>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="dretsusuaris"></span>
                 <h2>Drets dels usuaris</h2>
                 <p>
@@ -303,7 +303,7 @@ const PoliticaPrivadesa = () => {
                   reclamació davant una autoritat de control.
                 </p>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="politicacookies"></span>
                 <h2>Política de cookies</h2>
                 <p>
@@ -316,7 +316,7 @@ const PoliticaPrivadesa = () => {
                   següents.
                 </p>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="quesoncookies"></span>
                 <h2>Què són les cookies</h2>
                 <p>
@@ -382,7 +382,7 @@ const PoliticaPrivadesa = () => {
                   </li>
                 </ul>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="controlcookies"></span>
                 <h2>Control de cookies</h2>
                 <p>
@@ -409,7 +409,7 @@ const PoliticaPrivadesa = () => {
                   comprovar-la de tant en tant.
                 </p>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="quinescookiesutilitzem"></span>
                 <h2>Quines cookies utilitza Escapadesenparella.cat?</h2>
                 <p>
@@ -432,7 +432,7 @@ const PoliticaPrivadesa = () => {
                   </li>
                 </ul>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="cookiestercers"></span>
                 <h2>Política de cookies de tercers</h2>
                 <p>

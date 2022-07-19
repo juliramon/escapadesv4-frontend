@@ -180,7 +180,7 @@ const CondicionsUs = () => {
                   <p className="mt-1">Darrera actualització el 20/04/2021</p>
                 </div>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="termescondicions"></span>
                 <h2>1. Termes i condicions</h2>
                 <p>
@@ -218,7 +218,7 @@ const CondicionsUs = () => {
                   </li>
                 </ul>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="sobreserveis"></span>
                 <h2>2. Sobre els serveis</h2>
                 <p>
@@ -457,7 +457,7 @@ const CondicionsUs = () => {
                   protecció de dades.
                 </p>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="accesweb"></span>
                 <h2>3. Accés al lloc web</h2>
                 <p>
@@ -501,7 +501,7 @@ const CondicionsUs = () => {
                   l’error o la futilitat dels llocs enllaçats.
                 </p>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="comptes"></span>
                 <h2>4. Comptes i inscripcions</h2>
                 <p>
@@ -597,7 +597,7 @@ const CondicionsUs = () => {
                   aquest període, l’usuari pot exercir el dret de desistiment.
                 </p>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="politicacookies"></span>
                 <h2>5. Política de cookies</h2>
                 <p>
@@ -606,7 +606,7 @@ const CondicionsUs = () => {
                   “Política de cookies”.
                 </p>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="propietatindustrial"></span>
                 <h2>6. Propietat industrial i intel·lectual</h2>
                 <p>
@@ -693,7 +693,7 @@ const CondicionsUs = () => {
                   l’usuari o empresa final.
                 </p>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="exempcioresponsabilitat"></span>
                 <h2>7. Exempció de responsabilitat</h2>
                 <p>
@@ -940,7 +940,7 @@ const CondicionsUs = () => {
                   </li>
                 </ul>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="confidencialitat"></span>
                 <h2>8. Confidencialitat</h2>
                 <p>
@@ -966,7 +966,7 @@ const CondicionsUs = () => {
                   d’aquesta recomanació pels usuaris.
                 </p>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="lleiaplicable"></span>
                 <h2>9. Llei aplicable i jurisdicció</h2>
                 <p>
@@ -976,7 +976,7 @@ const CondicionsUs = () => {
                 </p>
                 <p>La llei espanyola serà la llei reguladora.</p>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="politicaprivacitat"></span>
                 <h2>10. Política de privacitat</h2>
                 <p>
@@ -985,7 +985,7 @@ const CondicionsUs = () => {
                   “Política de privacitat”.
                 </p>
               </section>
-              <section className="legal-terms-block">
+              <section className="legal-terms__block">
                 <span className="anchor" id="propietat"></span>
                 <h2>11. Propietat</h2>
                 <p>
