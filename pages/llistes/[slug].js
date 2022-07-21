@@ -279,7 +279,7 @@ export async function getStaticPaths() {
   const service = new ContentService();
 
   // Call an external API endpoint to get posts
-  const { totalItems, lists, numPages, allLists } = await service.getLists();
+  const allLists = await service.getAllLists();
 
   // Get the paths we want to pre-render based on posts
   const paths = allLists.map((list) => ({
