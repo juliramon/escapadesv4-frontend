@@ -6,6 +6,7 @@ const PublicSquareBox = ({
   cover,
   placeType,
   title,
+  subtitle,
   duration,
   location,
   website,
@@ -212,15 +213,39 @@ const PublicSquareBox = ({
               </div>
             </div>
             <div className="pt-3 flex flex-col justify-between">
-              <h3 className="my-0 text-primary-600">{title}</h3>
-              <p className="text-15 my-0 text-primary-400 font-light">
-                Escapada {categoryModified} a {shortenedLocation}
+              <span className="flex items-center text-sm">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="icon icon-tabler icon-tabler-brand-safari text-secondary-500 mr-1.5"
+                  width={20}
+                  height={20}
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <polyline points="8 16 10 10 16 8 14 14 8 16"></polyline>
+                  <circle cx={12} cy={12} r={9}></circle>
+                </svg>
+                <span class="text-primary-400 opacity-80">
+                  {shortenedLocation}
+                </span>
+              </span>
+              <h3 className="mt-2 mb-1 text-primary-600">{title}</h3>
+              <p className="text-15 my-0 text-primary-400 font-light leading-normal line-clamp-1">
+                {subtitle}
               </p>
               <div className="mt-3 flex items-center text-xs tracking-wider text-secondary-500">
-                <span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 mr-1">
+                <span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 mr-1 capitalize">
+                  {categoryModified}
+                </span>
+                <span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 mr-1 capitalize">
                   {tipus}
                 </span>
-                <span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1">
+                <span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 capitalize">
                   {additionalInfoRef}
                 </span>
               </div>
