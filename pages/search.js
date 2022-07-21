@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Container, Row, Spinner } from "react-bootstrap";
 import NavigationBar from "../components/global/NavigationBar";
 import ContentService from "../services/contentService";
 import PublicContentBox from "../components/listings/PublicContentBox";
@@ -221,24 +220,20 @@ const Search = (props) => {
           }
           user={props.user}
         />
-        <Container fluid className="mw-1600">
-          <Row>
-            <div className="box d-flex">
-              <div className="col left"></div>
-              <div className="col center">
-                <div className="top-nav-wrapper">
-                  <h1 className="top-nav-title">Resultats de cerca</h1>
-                  <p className="top-nav-subtitle">
-                    Hem trobat <span>{searchResultsLength} resultats</span> en
-                    base a la teva cerca "{browsedText}"
-                  </p>
-                </div>
-                {searchResultsList}
+        <main>
+          <section className="py-12">
+            <div className="container">
+              <div className="w-full lg:w-6/12 lg:mx-auto">
+                <h1 className="text-2xl md:text-3xl">Resultats de cerca</h1>
+                <p className="mt-2">
+                  Hem trobat <span>{searchResultsLength} resultats</span> en
+                  base a la teva cerca <b>"{browsedText}"</b>:
+                </p>
+                <div class="flex flex-col">{searchResultsList}</div>
               </div>
-              <div className="col left"></div>
             </div>
-          </Row>
-        </Container>
+          </section>
+        </main>
       </div>
     </>
   );

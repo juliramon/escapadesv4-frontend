@@ -11,23 +11,40 @@ const PublicContentBox = ({ type, slug, cover, title, subtitle, location }) => {
     path = "histories";
   }
   return (
-    <div
-      id="listing"
-      className="d-flex align-items-center justify-content-between"
-    >
+    <article className="flex flex-wrap items-center product__item">
       <Link href={`/${path}/${slug}`}>
-        <a title={title} className="listing-wrapper d-flex align-items-center">
-          <div className="listing-cover">
-            <img src={cover} alt={title} />
+        <a
+          title={title}
+          className="p-5 rounded-md border border-primary-200 flex flex-wrap items-center mb-3 flex-1"
+        >
+          <div className="w-full md:w-1/3">
+            <div className="rounded-md aspect-w-3 aspect-h-2 overflow-hidden">
+              <picture>
+                <img
+                  src={cover}
+                  alt={title}
+                  className="w-full h-full object-cover"
+                />
+              </picture>
+            </div>
           </div>
-          <div className="listing-content">
-            <h3 className="listing-title">{title}</h3>
-            <p className="listing-subtitle">{shortenedSubtitle}...</p>
-            <p className="listing-location">{location}</p>
+          <div className="w-full md:w-2/3 pt-4 md:pt-0 md:pl-5 lg:pl-10">
+            <h3 className="my-0 text-primary-600">{title}</h3>
+            <p className="text-15 my-0 text-primary-400 font-light">
+              {shortenedSubtitle}...
+            </p>
+            <div
+              className="mt-3 flex items-center text-xs tracking-wider
+            text-secondary-500"
+            >
+              <span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 mr-1">
+                {location}
+              </span>
+            </div>
           </div>
         </a>
       </Link>
-    </div>
+    </article>
   );
 };
 

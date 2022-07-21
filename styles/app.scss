@@ -525,10 +525,6 @@ nav {
 
 #homepage {
   #hero {
-    height: 100%;
-    @screen lg {
-      height: calc(80vh - 63.59px);
-    }
     .wrapper {
       background: #fef8f2;
       border-radius: 10px;

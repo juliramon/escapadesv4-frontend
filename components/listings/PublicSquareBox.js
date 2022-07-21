@@ -176,7 +176,7 @@ const PublicSquareBox = ({
     <div className="w-full md:w-1/2 lg:w-1/4 px-2 py-4 product__item">
       <div className="overflow-hidden">
         <Link href={`/${linkPath}/${slug}`}>
-          <a className="relative block">
+          <a title={title} className="relative block">
             <div className="aspect-w-4 aspect-h-3 relative rounded overflow-hidden">
               <picture className="w-full h-full">
                 <source srcSet={coverImg} />
@@ -211,17 +211,19 @@ const PublicSquareBox = ({
                 {modRating || rating}
               </div>
             </div>
-            <div className="pt-4 flex flex-col justify-between">
-              <div className="mb-1 flex items-center text-xs tracking-wider text-secondary-500">
-                <div className="mr-1">{additionalInfoSVG}</div>
-                <span className="uppercase">{tipus}</span>
-                <span className="mx-1">·</span>
-                <span className="uppercase">{additionalInfoRef}</span>
-              </div>
-              <h3 className="mt-0 mb-0 text-primary-600">{title}</h3>
-              <p className="text-base my-0 text-primary-500">
+            <div className="pt-3 flex flex-col justify-between">
+              <h3 className="my-0 text-primary-600">{title}</h3>
+              <p className="text-15 my-0 text-primary-400 font-light">
                 Escapada {categoryModified} a {shortenedLocation}
               </p>
+              <div className="mt-3 flex items-center text-xs tracking-wider text-secondary-500">
+                <span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 mr-1">
+                  {tipus}
+                </span>
+                <span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1">
+                  {additionalInfoRef}
+                </span>
+              </div>
             </div>
           </a>
         </Link>

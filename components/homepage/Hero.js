@@ -5,10 +5,10 @@ const Hero = ({ background_url, title, subtitle }) => {
   return (
     <section
       id="hero"
-      className="relative flex items-center justify-center py-16 lg:py-0 rounded-md mt-6 mx-6 overflow-hidden shadow-xl"
+      className="relative flex items-center justify-center py-20 rounded-md mt-6 mx-6 overflow-hidden shadow-2xl"
     >
       <div className="absolute top-0 left-0 w-full h-full">
-        <div className="absolute top-0 left-0 w-full h-full bg-primary-400 bg-opacity-20 z-30"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-primary-500 bg-opacity-30 z-30"></div>
         <div className="absolute top-0 left-0 w-full h-full">
           <picture>
             <img
@@ -51,8 +51,8 @@ const Hero = ({ background_url, title, subtitle }) => {
       <div className="container relative z-40">
         <div className="w-full">
           <div className="header-col left text-center">
-            <h1 className="text-white">{title}</h1>
-            <p className="text-white mt-5 text-2xl">{subtitle}</p>
+            <h1 className="text-white text-4xl">{title}</h1>
+            <p className="text-white mt-5 text-xl">{subtitle}</p>
             <SearchBar />
             <div className="credits-bar w-full mt-4">
               <div className="credits-bar-wrapper text-xs">

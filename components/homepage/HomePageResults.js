@@ -725,8 +725,8 @@ const HomePageResults = ({
                 Escapadesenparella.cat
               </figcaption>
             </div>
-            <div className="w-full md:w-1/2 lg:w-2/3 md:pl-6 lg:pl-10 xl:pl-20 flex justify-center flex-col mt-14 md:mt-0">
-              <div className="mb-4 lg:mb-8">
+            <div className="w-full md:w-1/2 lg:w-2/3 md:pl-6 lg:pl-10 xl:pl-20 py-8 xl:py-16 flex justify-center flex-col mt-14 md:mt-0">
+              <div className="mb-4">
                 <h2>Escapades en parella, i molt més</h2>
               </div>
               <p>
@@ -737,7 +737,7 @@ const HomePageResults = ({
                 <strong>què fer aquest cap de setmana</strong>? Cansats de fer
                 sempre el mateix? A Escapadesenparella.cat tenim la sol·lució!
               </p>
-              <p className="mt-5">
+              <p>
                 Fa {foundationYears} anys vam començar a compartir les escapades
                 en parella que fèiem arreu de Catalunya, amb l'objectiu de
                 motivar a sortir a <strong>descobrir Catalunya</strong>, i donar
@@ -745,7 +745,7 @@ const HomePageResults = ({
                 seguim creient, que hi ha vida més enllà d'anar al cinema o
                 veure Netflix al sofà.
               </p>
-              <p className="mt-5">
+              <p>
                 A dia d'avui estem encantats de poder seguir compartint amb tots
                 vosaltres les{" "}
                 <strong>millors escapades en parella a Catalunya</strong>, així
@@ -753,7 +753,7 @@ const HomePageResults = ({
                 nosaltres, Escapadesenparella.cat és molt més que escapades en
                 parella; esperem transmetre't aquest sentiment!
               </p>
-              <div className="flex flex-wrap items-center -mx-2 mt-8">
+              <div className="flex flex-wrap items-center -mx-2 mt-5">
                 <div className="px-2">
                   <Link href="#">
                     <a className="button button__primary button__lg inline-flex">

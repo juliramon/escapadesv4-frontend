@@ -208,7 +208,7 @@ const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
               </ul>
             </div>
           </div>
-          <section className="pt-6 md:pt-12">
+          <section className="pt-6">
             <div className="container relative">
               <div className="flex flex-wrap items-center justify-start">
                 <div className="w-full md:w-8/12 xl:w-5/12">
@@ -217,8 +217,8 @@ const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
                     fer en parella a Catalunya
                   </h1>
                 </div>
-                <div className="w-full mt-5 md:mt-8">
-                  <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-3 md:grid-rows-2 gap-1.5 rounded-md overflow-hidden">
+                <div className="w-full mt-6">
+                  <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-3 md:grid-rows-2 gap-0.5 rounded-md overflow-hidden">
                     <Fancybox
                       options={{
                         infinite: true,
@@ -329,15 +329,15 @@ const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
 
           <section className="pb-8 md:pb-16">
             <div className="container">
-              <div className="w-full flex flex-wrap items-end justify-between pt-8 pb-2 md:pt-12">
+              <div className="w-full flex flex-wrap items-end justify-between pt-8 pb-2">
                 <div className="w-full md:w-1/2">
                   <div className="max-w-xl">
-                    <h2 className="mt-0">
+                    <h2 className="my-0">
                       Descobreix {state.numActivities} activitats, excursions,
                       gastronomia i paratges extraordinaris per a una escapada
                       en parella de somni a Catalunya
                     </h2>
-                    <p className="mt-3 md:mt-6 text-base leading-relaxed">
+                    <p className="mt-4 text-xl leading-snug">
                       Calceu-vos les botes, poseu-vos el banyador, prepareu-vos
                       la motxilla o despengeu l'anorac; aquí trobareu les
                       millors <strong>activitats en parella</strong> a

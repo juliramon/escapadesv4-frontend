@@ -49,6 +49,7 @@ module.exports = {
       },
       fontSize: {
         10: "10px",
+        15: "15px",
         base: "17px",
       },
       fontFamily: {
@@ -59,6 +60,7 @@ module.exports = {
         350: "350px",
       },
       lineHeight: {
+        1.1: "1.1",
         12: "3.2",
       },
     },

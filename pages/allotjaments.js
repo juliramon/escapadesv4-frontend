@@ -258,7 +258,6 @@ const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
           }
           user={user}
         />
-
         <main>
           <div className="pt-6">
             <div className="container">
@@ -276,7 +275,7 @@ const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
               </ul>
             </div>
           </div>
-          <section className="py-6 md:py-12">
+          <section className="pt-6">
             <div className="container relative">
               <div className="flex flex-wrap items-start justify-start">
                 <div className="w-full md:w-8/12 xl:w-5/12">
@@ -285,8 +284,8 @@ const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
                     encant
                   </h1>
                 </div>
-                <div className="w-full mt-5">
-                  <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-3 md:grid-rows-2 gap-1.5 rounded-md overflow-hidden">
+                <div className="w-full mt-6">
+                  <div className="grid grid-cols-2 md:grid-cols-4 grid-rows-3 md:grid-rows-2 gap-0.5 rounded-md overflow-hidden">
                     <Fancybox
                       options={{
                         infinite: true,
@@ -397,14 +396,14 @@ const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
 
           <section className="pb-8 md:pb-16">
             <div className="container">
-              <div className="w-full flex flex-wrap items-end justify-between pt-8 pb-2 md:pt-12">
+              <div className="w-full flex flex-wrap items-end justify-between pt-8 pb-2">
                 <div class="w-full md:w-1/2">
                   <div className="max-w-xl">
-                    <h2>
+                    <h2 className="my-0">
                       Descobreix {state.numPlaces} allotjaments amb encant per a
                       una escapada en parella increïble a Catalunya
                     </h2>
-                    <p className="mt-3 md:mt-6 text-base leading-relaxed">
+                    <p className="mt-4 text-xl leading-snug">
                       Des d'<strong>hotels amb encant</strong> únics a
                       Catalunya, a <strong>cabanes acollidaroes</strong> i{" "}
                       <strong>cases-arbre</strong>, passant per{" "}
