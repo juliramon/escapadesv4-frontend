@@ -11,7 +11,7 @@ import UserContext from "../../contexts/UserContext";
 import ShareModal from "../../components/modals/ShareModal";
 import Footer from "../../components/global/Footer";
 
-const PlaceListing = () => {
+const PlaceListing = ({ placeDetails }) => {
   const { user } = useContext(UserContext);
   const router = useRouter();
 
@@ -65,13 +65,8 @@ const PlaceListing = () => {
         if (user && user !== "null") {
           userBookmarks = await service.getUserAllBookmarks();
         }
-        const placeDetails = await service.getPlaceDetails(router.query.slug);
-        let bookmarkDetails, isBookmarked, isLoaded;
-        if (placeDetails.type) {
-          isLoaded = true;
-        } else {
-          isLoaded = false;
-        }
+        let bookmarkDetails, isBookmarked;
+
         if (userBookmarks) {
           userBookmarks.forEach((el) => {
             if (
@@ -90,7 +85,7 @@ const PlaceListing = () => {
         setState({
           ...state,
           place: placeDetails,
-          placeLoaded: isLoaded,
+          placeLoaded: placeDetails.type ? true : false,
           owner: placeDetails.owner,
           organization: placeDetails.organization,
           bookmarkDetails: userBookmarks,
@@ -735,5 +730,31 @@ const PlaceListing = () => {
     </>
   );
 };
+
+export async function getStaticPaths() {
+  const service = new ContentService();
+
+  // Call an external API endpoint to get posts
+  const { allPlaces } = await service.getAllPlaces();
+
+  // Get the paths we want to pre-render based on posts
+  const paths = allPlaces.map((place) => ({
+    params: { slug: place.slug },
+  }));
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: false } means other routes should 404.
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+  const service = new ContentService();
+  const placeDetails = await service.getPlaceDetails(params.slug);
+  return {
+    props: {
+      placeDetails,
+    },
+  };
+}
 
 export default PlaceListing;

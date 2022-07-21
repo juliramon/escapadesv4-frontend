@@ -12,7 +12,7 @@ import ContentService from "../../services/contentService";
 import ReactHtmlParser from "react-html-parser";
 import FooterHistoria from "../../components/global/FooterHistoria";
 
-const ListView = () => {
+const ListView = ({ listDetails }) => {
   const { user } = useContext(UserContext);
   const router = useRouter();
 
@@ -56,26 +56,15 @@ const ListView = () => {
   const hideShareModalVisibility = () => setShareModalVisibility(false);
 
   useEffect(() => {
-    if (router.query.slug !== undefined) {
-      const fetchData = async () => {
-        const listDetails = await service.getListDetails(router.query.slug);
-        let isLoaded;
-        if (listDetails.type) {
-          isLoaded = true;
-        } else {
-          isLoaded = false;
-        }
-        setState({
-          ...state,
-          list: listDetails,
-          listLoaded: isLoaded,
-          owner: listDetails.owner,
-        });
-      };
-      fetchData();
+    if (listDetails !== undefined) {
+      setState({
+        ...state,
+        list: listDetails,
+        listLoaded: listDetails.type ? true : false,
+        owner: listDetails.owner,
+      });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [queryId]);
+  }, []);
 
   if (state.listLoaded === false) {
     return (
@@ -285,5 +274,31 @@ const ListView = () => {
     </>
   );
 };
+
+export async function getStaticPaths() {
+  const service = new ContentService();
+
+  // Call an external API endpoint to get posts
+  const { allLists } = await service.getLists();
+
+  // Get the paths we want to pre-render based on posts
+  const paths = allLists.map((list) => ({
+    params: { slug: list.slug },
+  }));
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: false } means other routes should 404.
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+  const service = new ContentService();
+  const listDetails = await service.getListDetails(params.slug);
+  return {
+    props: {
+      listDetails,
+    },
+  };
+}
 
 export default ListView;

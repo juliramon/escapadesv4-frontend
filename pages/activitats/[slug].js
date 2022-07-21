@@ -11,7 +11,7 @@ import UserContext from "../../contexts/UserContext";
 import ShareModal from "../../components/modals/ShareModal";
 import Footer from "../../components/global/Footer";
 
-const ActivityListing = () => {
+const ActivityListing = ({ activityDetails }) => {
   const { user } = useContext(UserContext);
   const router = useRouter();
 
@@ -42,6 +42,7 @@ const ActivityListing = () => {
   };
   const [state, setState] = useState(initialState);
   const [queryId, setQueryId] = useState(null);
+
   useEffect(() => {
     if (router && router.query) {
       setQueryId(router.query.slug);
@@ -65,15 +66,8 @@ const ActivityListing = () => {
         if (user && user !== "null") {
           userBookmarks = await service.getUserAllBookmarks();
         }
-        const activityDetails = await service.activityDetails(
-          router.query.slug
-        );
-        let bookmarkDetails, isBookmarked, isLoaded;
-        if (activityDetails.type) {
-          isLoaded = true;
-        } else {
-          isLoaded = false;
-        }
+        let bookmarkDetails, isBookmarked;
+
         if (userBookmarks) {
           userBookmarks.forEach((el) => {
             if (
@@ -92,7 +86,7 @@ const ActivityListing = () => {
         setState({
           ...state,
           activity: activityDetails,
-          isActivityLoaded: isLoaded,
+          isActivityLoaded: activityDetails.type ? true : false,
           owner: activityDetails.owner,
           organization: activityDetails.organization,
           bookmarkDetails: bookmarkDetails,
@@ -504,7 +498,7 @@ const ActivityListing = () => {
                     </div>
                   </div>
                   <div className="w-full mt-8">
-                    <div className="grid grid-cols-4 grid-rows-1 gap-2.5 rounded overflow-hidden">
+                    <div className="grid grid-cols-4 grid-rows-1 gap-0.5 rounded overflow-hidden">
                       <div className="row-start-1 col-start-1 row-span-2 col-span-2 rounded-l overflow-hidden">
                         <picture>
                           <img
@@ -758,5 +752,31 @@ const ActivityListing = () => {
     </>
   );
 };
+
+export async function getStaticPaths() {
+  const service = new ContentService();
+
+  // Call an external API endpoint to get posts
+  const { allActivities } = await service.activities();
+
+  // Get the paths we want to pre-render based on posts
+  const paths = allActivities.map((activity) => ({
+    params: { slug: activity.slug },
+  }));
+
+  // We'll pre-render only these paths at build time.
+  // { fallback: false } means other routes should 404.
+  return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+  const service = new ContentService();
+  const activityDetails = await service.activityDetails(params.slug);
+  return {
+    props: {
+      activityDetails,
+    },
+  };
+}
 
 export default ActivityListing;

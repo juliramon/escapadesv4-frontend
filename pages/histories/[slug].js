@@ -13,6 +13,7 @@ import readingTime from "reading-time";
 import { PhotoSwipeGallery } from "react-photoswipe";
 import Footer from "../../components/global/Footer";
 import FooterHistoria from "../../components/global/FooterHistoria";
+import FetchingSpinner from "../../components/global/FetchingSpinner";
 
 const StoryListing = ({ storyDetails }) => {
   const { user } = useContext(UserContext);
@@ -57,40 +58,18 @@ const StoryListing = ({ storyDetails }) => {
   const hideShareModalVisibility = () => setShareModalVisibility(false);
 
   useEffect(() => {
-    if (router.query.slug !== undefined) {
-      const fetchData = async () => {
-        //const storyDetails = await service.getStoryDetails(router.query.slug);
-        let isLoaded;
-        if (storyDetails.type) {
-          isLoaded = true;
-        } else {
-          isLoaded = false;
-        }
-        setState({
-          ...state,
-          story: storyDetails,
-          storyLoaded: isLoaded,
-          owner: storyDetails.owner,
-        });
-      };
-      fetchData();
+    if (storyDetails !== undefined) {
+      setState({
+        ...state,
+        story: storyDetails,
+        storyLoaded: storyDetails !== undefined ? true : false,
+        owner: storyDetails.owner,
+      });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [queryId]);
+  }, []);
 
   if (state.storyLoaded === false) {
-    return (
-      <>
-        <Head>
-          <title>Carregant...</title>
-        </Head>
-        <Container className="spinner d-flex justify-space-between">
-          <Spinner animation="border" role="status" variant="primary">
-            <span className="sr-only">Carregant...</span>
-          </Spinner>
-        </Container>
-      </>
-    );
+    return <FetchingSpinner />;
   }
 
   let { title, subtitle, description } = state.story;
