@@ -171,7 +171,7 @@ const PublicSquareBox = ({
 
   const coverPath = cover.substring(0, 51);
   const imageId = cover.substring(63);
-  const coverImg = `${coverPath}w_246,h_180,c_fill/${imageId}`;
+  const coverImg = `${coverPath}w_400,h_300,c_fill/${imageId}`;
 
   return (
     <div className="w-full md:w-1/2 lg:w-1/4 px-2 py-4 product__item">

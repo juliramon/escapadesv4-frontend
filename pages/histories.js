@@ -168,7 +168,7 @@ const StoriesList = ({
           <section className="py-6 md:pt-10 md:pb-16">
             <div className="container relative">
               <div className="w-full md:w-8/12 lg:w-6/12 md:mx-auto text-center">
-                <h1>Històries en parella</h1>
+                <h1 className="font-display">Històries en parella</h1>
                 <p className="mt-4 text-lg">
                   Històries en parella per a inspirar, descobrir nous llocs i,
                   en definitiva, fer-vos venir ganes d'una escapada en parella

@@ -279,7 +279,7 @@ const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
             <div className="container relative">
               <div className="flex flex-wrap items-start justify-start">
                 <div className="w-full md:w-8/12 xl:w-5/12">
-                  <h1 className="my-0">
+                  <h1 className="my-0 font-display">
                     <span className="text-secondary-500">Allotjaments</span> amb
                     encant
                   </h1>

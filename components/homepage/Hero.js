@@ -51,7 +51,7 @@ const Hero = ({ background_url, title, subtitle }) => {
       <div className="container relative z-40">
         <div className="w-full">
           <div className="header-col left text-center">
-            <h1 className="text-white text-4xl">{title}</h1>
+            <h1 className="text-white">{title}</h1>
             <p className="text-white mt-5 text-xl">{subtitle}</p>
             <SearchBar />
             <div className="credits-bar w-full mt-4">

@@ -246,7 +246,7 @@ const ListsList = ({ user, totalItems, lists, numPages }) => {
                 </div>
                 <aside className="w-full lg:w-2/5 px-6 lg:sticky top-28 order-1 lg:order-none">
                   <div className="title-area">
-                    <h1>Llistes</h1>
+                    <h1 className="font-display">Llistes</h1>
                     <p className="text-lg mt-4">
                       Descobreix les millors escapades en parella a Catalunya a
                       través de llistes gestionades 100% per l'equip d'

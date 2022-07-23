@@ -3,13 +3,14 @@ import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import NavigationBar from "../../components/global/NavigationBar";
 import ContentService from "../../services/contentService";
-import { Container, Spinner, Toast } from "react-bootstrap";
+import { Toast } from "react-bootstrap";
 import Link from "next/link";
 import GoogleMapReact from "google-map-react";
 import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
 import ShareModal from "../../components/modals/ShareModal";
 import Footer from "../../components/global/Footer";
+import FetchingSpinner from "../../components/global/FetchingSpinner";
 
 const PlaceListing = ({ placeDetails }) => {
   const { user } = useContext(UserContext);
@@ -98,18 +99,7 @@ const PlaceListing = ({ placeDetails }) => {
   }, [queryId]);
 
   if (state.placeLoaded === false) {
-    return (
-      <>
-        <Head>
-          <title>Carregant...</title>
-        </Head>
-        <Container className="spinner d-flex justify-space-between">
-          <Spinner animation="border" role="status" variant="primary">
-            <span className="sr-only">Carregant...</span>
-          </Spinner>
-        </Container>
-      </>
-    );
+    return <FetchingSpinner />;
   }
 
   let { title, subtitle, description } = state.place;
@@ -327,24 +317,23 @@ const PlaceListing = ({ placeDetails }) => {
   }
 
   const placeCategories = state.place.categories.map((category, idx) => (
-    <li key={idx} className="place-category">
-      Escapada {category}
+    <li key={idx} className="flex flex-wrap items-center px-1">
+      <span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 mr-1 capitalize text-sm">
+        Escapada {category}
+      </span>
     </li>
   ));
 
   const placeSeasons = state.place.seasons.map((season, idx) => (
-    <li key={idx} className="place-season">
-      {season}
+    <li key={idx} className="flex flex-wrap items-center px-1">
+      <span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 mr-1 capitalize text-sm">
+        {season}
+      </span>
     </li>
   ));
 
   const placeRegion = state.place.region.map((region, idx) => (
-    <li
-      key={idx}
-      className="border border-primary-200 py-2 px-3 rounded capitalize mr-3"
-    >
-      {region}
-    </li>
+    <span>{region}</span>
   ));
 
   return (
@@ -408,66 +397,56 @@ const PlaceListing = ({ placeDetails }) => {
             {/* Listing header */}
             <section className="pt-12 md:pt-16">
               <div className="container">
-                <div className="w-full lg:w-9/12 mx-auto flex flex-wrap items-center">
+                <div className="w-full flex flex-wrap items-center">
                   <div className="w-full md:w-1/2">
                     <h1>{title}</h1>
-                    <ul className="flex flex-wrap items-center -mx-2 mt-2">
+                    <ul className="flex flex-wrap items-center p-0 -mx-2 mt-3">
                       <li className="flex flex-wrap items-center px-2">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-route mr-2"
-                          width="20"
-                          height="20"
+                          className="icon icon-tabler icon-tabler-star mr-1.5"
+                          width={20}
+                          height={20}
                           viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          fill="none"
+                          stroke-width={2}
+                          stroke="#fbbf24"
+                          fill="#fbbf24"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         >
-                          <path stroke="none" d="M0 0h24v24H0z" />
-                          <circle cx="6" cy="19" r="2" />
-                          <circle cx="18" cy="5" r="2" />
-                          <path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
+                          <path
+                            stroke="none"
+                            d="M0 0h24v24H0z"
+                            fill="none"
+                          ></path>
+                          <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
                         </svg>
-                        <span>{state.place.type}</span>
+                        <span className="text-primary-400 opacity-80">
+                          {state.place.place_rating}
+                        </span>
                       </li>
                       <li className="flex flex-wrap items-center px-2">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-star mr-2"
-                          width="20"
-                          height="20"
+                          className="icon icon-tabler icon-tabler-brand-safari text-secondary-500 mr-1.5"
+                          width={20}
+                          height={20}
                           viewBox="0 0 24 24"
-                          strokeWidth="1.5"
+                          strokeWidth="2"
                           stroke="currentColor"
                           fill="none"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         >
-                          <path stroke="none" d="M0 0h24v24H0z" />
-                          <path d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2l3.086 6.253 6.9 1.002-4.993 4.867 1.179 6.873z" />
+                          <path
+                            stroke="none"
+                            d="M0 0h24v24H0z"
+                            fill="none"
+                          ></path>
+                          <polyline points="8 16 10 10 16 8 14 14 8 16"></polyline>
+                          <circle cx={12} cy={12} r={9}></circle>
                         </svg>
-                        <span>{state.place.place_rating}</span>
-                      </li>
-                      <li className="flex flex-wrap items-center px-2">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-map-pin mr-2"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" />
-                          <circle cx="12" cy="11" r="3" />
-                          <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
-                        </svg>
-                        <span className="border-b-2 border-primary-500">{`${
+                        <span className="text-primary-400 opacity-80">{`${
                           state.place.place_locality === undefined
                             ? ""
                             : state.place.place_locality
@@ -485,8 +464,8 @@ const PlaceListing = ({ placeDetails }) => {
                       {shareButton}
                     </div>
                   </div>
-                  <div className="w-full mt-8">
-                    <div className="grid grid-cols-4 grid-rows-1 gap-2.5 rounded overflow-hidden">
+                  <div className="w-full mt-1">
+                    <div className="grid grid-cols-4 grid-rows-1 gap-0.5 rounded-lg overflow-hidden">
                       <div className="row-start-1 col-start-1 row-span-2 col-span-2 rounded-l overflow-hidden">
                         <picture>
                           <img
@@ -506,7 +485,7 @@ const PlaceListing = ({ placeDetails }) => {
                       <div className="row-start-1 col-start-4 row-span-1 col-span-1 rounded-tr overflow-hidden">
                         <picture>
                           <img
-                            src={state.place.images[1]}
+                            src={state.place.images[2]}
                             className="w-full h-full object-cover"
                           />
                         </picture>
@@ -514,7 +493,7 @@ const PlaceListing = ({ placeDetails }) => {
                       <div className="row-start-2 col-start-3 row-span-1 col-span-1 overflow-hidden">
                         <picture>
                           <img
-                            src={state.place.images[2]}
+                            src={state.place.images[3]}
                             className="w-full h-full object-cover"
                           />
                         </picture>
@@ -522,7 +501,7 @@ const PlaceListing = ({ placeDetails }) => {
                       <div className="row-start-2 col-start-4 row-span-1 col-span-1 rounded-br overflow-hidden">
                         <picture>
                           <img
-                            src={state.place.images[2]}
+                            src={state.place.images[4]}
                             className="w-full h-full object-cover"
                           />
                         </picture>
@@ -537,42 +516,63 @@ const PlaceListing = ({ placeDetails }) => {
                 <div className="w-full lg:w-9/12 mx-auto ">
                   <div className="flex flex-wrap items-start -mx-6">
                     <div className="w-full lg:w-8/12 px-6 mx-auto">
-                      <div className="border-b border-primary-200 pb-5 mb-5">
-                        <h2 className="w-9/12 font-body font-bold text-3xl">
-                          {subtitle}
-                        </h2>
+                      <div className="pb-5">
+                        <h2 className="w-9/12">{subtitle}</h2>
+                        <div className="border-y border-primary-200 my-8 py-5">
+                          <div className="flex flex-wrap items-start">
+                            <div className="pb-6">
+                              <p className="text-base text-primary-500 font-semibold mb-0.5">
+                                L'
+                                {state.place.type == "place"
+                                  ? "allotjament"
+                                  : "activitat"}{" "}
+                                està catalogat com a {state.place.placeType}
+                              </p>
+                              <p className="text-sm mb-0 opacity-70">
+                                Els allotjaments i les activitats recomanades a
+                                Escapadesenparella.cat estan pensades per a que
+                                les parelles gaudeixin al màxim de les seves
+                                escapades
+                              </p>
+                            </div>
+                            <div className="pb-5">
+                              <p className="text-base text-primary-500 font-semibold mb-0.5">
+                                L'
+                                {state.place.type == "place"
+                                  ? "allotjament"
+                                  : "activitat"}{" "}
+                                es troba a la província de {placeRegion}
+                              </p>
+                            </div>
+                            <div className="pb-5">
+                              <p className="text-base text-primary-500 font-semibold mb-0.5">
+                                L'
+                                {state.place.type == "place"
+                                  ? "allotjament"
+                                  : "activitat"}{" "}
+                                té un preu aproximat de {state.place.price} € la
+                                nit
+                              </p>
+                            </div>
+                          </div>
+                        </div>
 
-                        <ul className="flex flex-wrap items-center w-full mt-4">
-                          <li className="border border-primary-200 py-2 px-3 rounded capitalize mr-3">
-                            {state.place.placeType}
-                          </li>
-                          {placeRegion}
-                          <li className="border border-primary-200 py-2 px-3 rounded capitalize flex items-center">
-                            {state.place.price}{" "}
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-currency-euro ml-0.5"
-                              width="18"
-                              height="18"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="currentColor"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path
-                                stroke="none"
-                                d="M0 0h24v24H0z"
-                                fill="none"
-                              />
-                              <path d="M17.2 7a6 7 0 1 0 0 10" />
-                              <path d="M13 10h-8m0 4h8" />
-                            </svg>
-                            / nit
-                          </li>
-                        </ul>
-
+                        <div className="mt-4">
+                          <h3 className="font-normal text-xl text-primary-500 opacity-60">
+                            Ideal per a una...
+                          </h3>
+                          <ul className="flex flex-wrap items-center w-full mt-3 -mx-1 p-0 mb-0">
+                            {placeCategories}
+                          </ul>
+                        </div>
+                        <div className="mt-4">
+                          <h3 className="font-normal text-xl text-primary-500 opacity-60">
+                            Estació de l'any recomanada
+                          </h3>
+                          <ul className="flex flex-wrap items-center w-full mt-3 -mx-1 p-0 mb-0">
+                            {placeSeasons}
+                          </ul>
+                        </div>
                         {state.organization ? (
                           <div className="listing-owner">
                             <Link href={`/empreses/${state.organization.slug}`}>
@@ -591,30 +591,10 @@ const PlaceListing = ({ placeDetails }) => {
                           </div>
                         ) : null}
                       </div>
-                      <div className="flex flex-wrap items-stretch justify-between -mx-2">
-                        <div className="px-2 flex-auto">
-                          <div className="listing-categories rounded border border-primary-200 p-5 h-full">
-                            <span className="font-semibold">
-                              Ideal per a...
-                            </span>
-                            <ul>{placeCategories}</ul>
-                          </div>
-                        </div>
-                        <div className="px-2 flex-auto">
-                          <div className="listing-seasons rounded border border-primary-200 p-5 h-full">
-                            <span className="font-semibold">
-                              Estació recomanada...
-                            </span>
-                            <ul>{placeSeasons}</ul>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="border-t border-primary-200 pt-5 mt-5 ">
-                        {description}
-                      </div>
+                      <div className="mt-8">{description}</div>
                     </div>
                     <aside className="w-full lg:w-4/12 px-6 static top-0 mt-5 md:mt-0">
-                      <div className="p-5 rounded border border-primary-200">
+                      <div className="p-5 rounded-md shadow-lg shadow-primary-300">
                         <div className="w-full h-56 rounded overflow-hidden">
                           <GoogleMapReact
                             bootstrapURLKeys={{

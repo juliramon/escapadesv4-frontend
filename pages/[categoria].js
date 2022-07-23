@@ -296,7 +296,7 @@ const CategoryPage = ({
           <section className="py-6 pb-8 md:pt-12 md:pb-16">
             <div className="container">
               <div className="w-full md:w-8/12 xl:w-5/12 mb-5">
-                <h1 className="my-0">
+                <h1 className="my-0 font-display">
                   <span className="capitalize">
                     {!state.categoryDetails.isPlace
                       ? "Escapades"
