@@ -8,8 +8,8 @@ import Link from "next/link";
 import GoogleMapReact from "google-map-react";
 import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
-import ShareModal from "../../components/modals/ShareModal";
 import Footer from "../../components/global/Footer";
+import Fancybox from "../../utils/Fancybox";
 
 const ActivityListing = ({ activityDetails }) => {
   const { user } = useContext(UserContext);
@@ -54,10 +54,6 @@ const ActivityListing = ({ activityDetails }) => {
   const [modalVisibility, setModalVisibility] = useState(false);
   const handleModalVisibility = () => setModalVisibility(true);
   const hideModalVisibility = () => setModalVisibility(false);
-
-  const [shareModalVisibility, setShareModalVisibility] = useState(false);
-  const handleShareModalVisibility = () => setShareModalVisibility(true);
-  const hideShareModalVisibility = () => setShareModalVisibility(false);
 
   useEffect(() => {
     if (router.query.slug !== undefined) {
@@ -209,32 +205,7 @@ const ActivityListing = ({ activityDetails }) => {
     );
   }
 
-  const shareButton = (
-    <div className="px-4" onClick={() => handleShareModalVisibility()}>
-      <button className="flex items-center">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="icon icon-tabler icon-tabler-share mr-1"
-          width="30"
-          height="30"
-          viewBox="0 0 24 24"
-          strokeWidth="1.5"
-          stroke="currentColor"
-          fill="none"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-          <circle cx="6" cy="12" r="3" />
-          <circle cx="18" cy="6" r="3" />
-          <circle cx="18" cy="18" r="3" />
-          <line x1="8.7" y1="10.7" x2="15.3" y2="7.3" />
-          <line x1="8.7" y1="13.3" x2="15.3" y2="16.7" />
-        </svg>
-        <span>Compartir</span>
-      </button>
-    </div>
-  );
+  bookmarkButton = null; //Temporarily disable bookmark button
 
   const toast = (
     <Toast
@@ -302,30 +273,13 @@ const ActivityListing = ({ activityDetails }) => {
       </li>
     ));
     hasOpeningHours = (
-      <div className="listing-activity-hours">
-        <ul className="listing-activity-hours-list">
-          <li className="header">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="icon icon-tabler icon-tabler-calendar"
-              width="22"
-              height="22"
-              viewBox="0 0 24 24"
-              strokeWidth="1.5"
-              stroke="#00206B"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" />
-              <rect x="4" y="5" width="16" height="16" rx="2" />
-              <line x1="16" y1="3" x2="16" y2="7" />
-              <line x1="8" y1="3" x2="8" y2="7" />
-              <line x1="4" y1="11" x2="20" y2="11" />
-              <line x1="11" y1="15" x2="12" y2="15" />
-              <line x1="12" y1="15" x2="12" y2="18" />
-            </svg>
-            Horari d'obertura
+      <div className="mt-7">
+        <ul className="list-none p-0 m-0">
+          <li className="flex flex-wrap items-center mb-3">
+            <span className="block w-full">Horari d'atenció al públic </span>
+            <span className="block w-full text-xs opacity-80 -mt-0.5">
+              Font: Google
+            </span>
           </li>
           {activityHours}
         </ul>
@@ -346,12 +300,7 @@ const ActivityListing = ({ activityDetails }) => {
   ));
 
   const activityRegion = state.activity.region.map((region, idx) => (
-    <li
-      key={idx}
-      className="border border-primary-200 py-2 px-3 rounded capitalize mr-3"
-    >
-      {region}
-    </li>
+    <span key={idx}>{region}</span>
   ));
 
   return (
@@ -415,68 +364,83 @@ const ActivityListing = ({ activityDetails }) => {
         <main>
           <article>
             {state.showBookmarkToast ? toast : null}
-            <section className="pt-12 md:pt-16">
+            <div className="pt-6">
               <div className="container">
-                <div className="w-full lg:w-9/12 mx-auto flex flex-wrap items-center">
+                <ul className="breadcrumb">
+                  <li className="breadcrumb__item">
+                    <a href="/" title="Inici" className="breadcrumb__link">
+                      Inici
+                    </a>
+                  </li>
+                  <li className="breadcrumb__item">
+                    <a
+                      href="/activitats"
+                      title="Activitats"
+                      className="breadcrumb__link"
+                    >
+                      Activitats
+                    </a>
+                  </li>
+                  <li className="breadcrumb__item">
+                    <span className="breadcrumb__link active">{title}</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <section className="pt-8">
+              <div className="container">
+                <div className="w-full flex flex-wrap items-center">
                   <div className="w-full md:w-1/2">
                     <h1>{title}</h1>
-                    <ul className="flex flex-wrap items-center -mx-2 mt-2">
-                      <li className="flex flex-wrap items-center px-2">
+                    <ul className="flex flex-wrap items-center p-0 -mx-3 mt-2 mb-0 md:mb-5">
+                      {state.activity.place_rating !== undefined ? (
+                        <li className="flex flex-wrap items-center px-2">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="icon icon-tabler icon-tabler-star mr-1.5"
+                            width={20}
+                            height={20}
+                            viewBox="0 0 24 24"
+                            stroke-width={2}
+                            stroke="#fbbf24"
+                            fill="#fbbf24"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path
+                              stroke="none"
+                              d="M0 0h24v24H0z"
+                              fill="none"
+                            ></path>
+                            <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
+                          </svg>
+                          <span className="text-primary-400 opacity-80">
+                            {state.activity.place_rating}
+                          </span>
+                        </li>
+                      ) : null}
+                      <li className="flex flex-wrap items-center px-3">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-route mr-2"
-                          width="20"
-                          height="20"
+                          className="icon icon-tabler icon-tabler-brand-safari text-secondary-500 mr-1.5"
+                          width={20}
+                          height={20}
                           viewBox="0 0 24 24"
-                          strokeWidth="1.5"
+                          strokeWidth="2"
                           stroke="currentColor"
                           fill="none"
                           strokeLinecap="round"
                           strokeLinejoin="round"
                         >
-                          <path stroke="none" d="M0 0h24v24H0z" />
-                          <circle cx="6" cy="19" r="2" />
-                          <circle cx="18" cy="5" r="2" />
-                          <path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
+                          <path
+                            stroke="none"
+                            d="M0 0h24v24H0z"
+                            fill="none"
+                          ></path>
+                          <polyline points="8 16 10 10 16 8 14 14 8 16"></polyline>
+                          <circle cx={12} cy={12} r={9}></circle>
                         </svg>
-                        <span>{state.activity.type}</span>
-                      </li>
-                      <li className="flex flex-wrap items-center px-2">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-star mr-2"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" />
-                          <path d="M12 17.75l-6.172 3.245 1.179-6.873-4.993-4.867 6.9-1.002L12 2l3.086 6.253 6.9 1.002-4.993 4.867 1.179 6.873z" />
-                        </svg>
-                        <span>{state.activity.place_rating}</span>
-                      </li>
-                      <li className="flex flex-wrap items-center px-2">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="icon icon-tabler icon-tabler-map-pin mr-2"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          strokeWidth="1.5"
-                          stroke="currentColor"
-                          fill="none"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path stroke="none" d="M0 0h24v24H0z" />
-                          <circle cx="12" cy="11" r="3" />
-                          <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
-                        </svg>
-                        <span className="border-b-2 border-primary-500">{`${
+                        <span className="text-primary-400 opacity-80">{`${
                           state.activity.activity_locality === undefined
                             ? ""
                             : state.activity.activity_locality
@@ -491,54 +455,213 @@ const ActivityListing = ({ activityDetails }) => {
                       </li>
                     </ul>
                   </div>
-                  <div className="w-full md:w-1/2">
-                    <div className="flex flex-wrap justify-end items-center -mx-4">
+                  <div className="w-full md:w-1/2 mt-3 md:mt-0">
+                    <div className="flex flex-wrap justify-start md:justify-end items-center">
                       {bookmarkButton}
-                      {shareButton}
+                      <div className="flex flex-wrap items-center -mx-2 opacity-60">
+                        <a
+                          href={`http://www.facebook.com/sharer.php?u=${urlToShare}`}
+                          title="Compartir a Facebook"
+                          className="px-2"
+                          target="_blank"
+                          rel="nofollow noopenner noreferrer"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="icon icon-tabler icon-tabler-brand-facebook"
+                            width={24}
+                            height={24}
+                            viewBox="0 0 24 24"
+                            stroke-width={2}
+                            stroke="currentColor"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path
+                              stroke="none"
+                              d="M0 0h24v24H0z"
+                              fill="none"
+                            ></path>
+                            <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"></path>
+                          </svg>
+                        </a>
+                        <a
+                          href={`https://twitter.com/intent/tweet?urlToShare=${urlToShare}`}
+                          title="Compartir a Twitter"
+                          className="px-2"
+                          target="_blank"
+                          rel="nofollow noopenner noreferrer"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="icon icon-tabler icon-tabler-brand-twitter"
+                            width={24}
+                            height={24}
+                            viewBox="0 0 24 24"
+                            stroke-width={2}
+                            stroke="currentColor"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path
+                              stroke="none"
+                              d="M0 0h24v24H0z"
+                              fill="none"
+                            ></path>
+                            <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
+                          </svg>
+                        </a>
+                        <a
+                          href={`mailto:?subject=Mira%20aquesta%20escapada%20a%20Escapadesenparella.cat&body=${urlToShare}`}
+                          title="Compartir per correu"
+                          className="px-2"
+                          rel="nofollow noopenner noreferrer"
+                          target="_blank"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="icon icon-tabler icon-tabler-mail"
+                            width={24}
+                            height={24}
+                            viewBox="0 0 24 24"
+                            stroke-width={2}
+                            stroke="currentColor"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path
+                              stroke="none"
+                              d="M0 0h24v24H0z"
+                              fill="none"
+                            ></path>
+                            <rect
+                              x={3}
+                              y={5}
+                              width={18}
+                              height={14}
+                              rx={2}
+                            ></rect>
+                            <polyline points="3 7 12 13 21 7"></polyline>
+                          </svg>
+                        </a>
+                      </div>
                     </div>
                   </div>
-                  <div className="w-full mt-8">
-                    <div className="grid grid-cols-4 grid-rows-1 gap-0.5 rounded overflow-hidden">
-                      <div className="row-start-1 col-start-1 row-span-2 col-span-2 rounded-l overflow-hidden">
-                        <picture>
-                          <img
-                            src={state.activity.images[0]}
-                            className="w-full h-full object-cover"
-                          />
-                        </picture>
-                      </div>
-                      <div className="row-start-1 col-start-3 row-span-1 col-span-1 overflow-hidden">
-                        <picture>
-                          <img
-                            src={state.activity.images[1]}
-                            className="w-full h-full object-cover"
-                          />
-                        </picture>
-                      </div>
-                      <div className="row-start-1 col-start-4 row-span-1 col-span-1 rounded-tr overflow-hidden">
-                        <picture>
-                          <img
-                            src={state.activity.images[1]}
-                            className="w-full h-full object-cover"
-                          />
-                        </picture>
-                      </div>
-                      <div className="row-start-2 col-start-3 row-span-1 col-span-1 overflow-hidden">
-                        <picture>
-                          <img
-                            src={state.activity.images[2]}
-                            className="w-full h-full object-cover"
-                          />
-                        </picture>
-                      </div>
-                      <div className="row-start-2 col-start-4 row-span-1 col-span-1 rounded-br overflow-hidden">
-                        <picture>
-                          <img
-                            src={state.activity.images[2]}
-                            className="w-full h-full object-cover"
-                          />
-                        </picture>
-                      </div>
+                  <div className="w-full mt-7 md:mt-0">
+                    <div className="flex flex-wrap items-stretch rounded-2xl overflow-hidden -m-0.5 relative">
+                      <button
+                        data-fancybox-trigger="gallery"
+                        className="inline-flex items-center absolute bottom-3 right-3 text-white bg-slate-800 bg-opacity-80 text-xs py-2 px-3"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="icon icon-tabler icon-tabler-photo mr-1.5"
+                          width={19}
+                          height={19}
+                          viewBox="0 0 24 24"
+                          stroke-width={2}
+                          stroke="currentColor"
+                          fill="none"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <path
+                            stroke="none"
+                            d="M0 0h24v24H0z"
+                            fill="none"
+                          ></path>
+                          <line x1={15} y1={8} x2="15.01" y2={8}></line>
+                          <rect
+                            x={4}
+                            y={4}
+                            width={16}
+                            height={16}
+                            rx={3}
+                          ></rect>
+                          <path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5"></path>
+                          <path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2"></path>
+                        </svg>
+                        Veure {state.activity.images.length} imatges
+                      </button>
+                      <Fancybox
+                        options={{
+                          infinite: true,
+                        }}
+                      >
+                        <div
+                          className="w-full lg:w-1/2 p-0.5 h-80 lg:h-50vh"
+                          data-fancybox="gallery"
+                          data-src={state.activity.images[0]}
+                        >
+                          <picture>
+                            <img
+                              src={state.activity.images[0]}
+                              className="w-full h-full object-cover"
+                            />
+                          </picture>
+                        </div>
+                        <div className="w-full lg:w-1/2 flex flex-wrap h-40 lg:h-50vh">
+                          {state.activity.images[1] !== undefined ? (
+                            <div
+                              className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
+                              data-fancybox="gallery"
+                              data-src={state.activity.images[1]}
+                            >
+                              <picture>
+                                <img
+                                  src={state.activity.images[1]}
+                                  className="w-full h-full object-cover"
+                                />
+                              </picture>
+                            </div>
+                          ) : null}
+                          {state.activity.images[2] !== undefined ? (
+                            <div
+                              className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
+                              data-fancybox="gallery"
+                              data-src={state.activity.images[2]}
+                            >
+                              <picture>
+                                <img
+                                  src={state.activity.images[2]}
+                                  className="w-full h-full object-cover"
+                                />
+                              </picture>
+                            </div>
+                          ) : null}
+                          {state.activity.images[3] !== undefined ? (
+                            <div
+                              className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
+                              data-fancybox="gallery"
+                              data-src={state.activity.images[3]}
+                            >
+                              <picture>
+                                <img
+                                  src={state.activity.images[3]}
+                                  className="w-full h-full object-cover"
+                                />
+                              </picture>
+                            </div>
+                          ) : null}
+                          {state.activity.images[4] !== undefined ? (
+                            <div
+                              className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
+                              data-fancybox="gallery"
+                              data-src={state.activity.images[4]}
+                            >
+                              <picture>
+                                <img
+                                  src={state.activity.images[4]}
+                                  className="w-full h-full object-cover"
+                                />
+                              </picture>
+                            </div>
+                          ) : null}
+                        </div>
+                      </Fancybox>
                     </div>
                   </div>
                 </div>
@@ -546,98 +669,217 @@ const ActivityListing = ({ activityDetails }) => {
             </section>
             <section className="pt-10 pb-12 md:pb-16">
               <div className="container">
-                <div className="w-full lg:w-9/12 mx-auto ">
-                  <div className="flex flex-wrap items-start -mx-6">
-                    <div className="w-full lg:w-8/12 px-6 mx-auto">
-                      <div className="border-b border-primary-200 pb-5 mb-5">
-                        <h2 className="w-9/12 font-body font-bold text-3xl">
-                          {subtitle}
-                        </h2>
-                        <ul className="flex flex-wrap items-center w-full mt-4">
-                          <li className="border border-primary-200 py-2 px-3 rounded capitalize mr-3">
-                            {state.activity.duration}{" "}
-                            {state.activity.duration > 1 ? "hores" : "hora"}
-                          </li>
-                          {activityRegion}
-                          <li className="border border-primary-200 py-2 px-3 rounded capitalize flex items-center">
-                            {state.activity.price}{" "}
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-currency-euro ml-0.5"
-                              width="18"
-                              height="18"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="currentColor"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path
-                                stroke="none"
-                                d="M0 0h24v24H0z"
+                <div className="w-full lg:w-10/12 2xl:w-9/12 mx-auto">
+                  <div className="flex flex-wrap items-start xl:-mx-6">
+                    <div className="w-full xl:w-8/12 xl:px-6 mx-auto">
+                      <h2 className="w-9/12">{subtitle}</h2>
+                      {state.organization ? (
+                        <div className="listing-owner mt-4">
+                          <Link href={`/empreses/${state.organization.slug}`}>
+                            <a className="flex items-center">
+                              <div className="rounded-full w-14 h-14 border border-primary-200 p-1 overflow-hidden mr-4">
+                                <picture>
+                                  <img
+                                    src={state.organization.orgLogo}
+                                    alt={state.organization.orgName}
+                                    className="w-full h-full object-cover"
+                                    width={96}
+                                    height96
+                                    loading="lazy"
+                                  />
+                                </picture>
+                              </div>
+                              <div className="text-primary-500 opacity-80">
+                                <span className="block text-xs">
+                                  Gestionat per:
+                                </span>
+                                <span className="text-base">
+                                  {state.organization.orgName}
+                                </span>
+                              </div>
+                            </a>
+                          </Link>
+                        </div>
+                      ) : null}
+                      <div className="border-y border-primary-200 my-8 py-5">
+                        <div className="flex flex-wrap items-start">
+                          <div className="pb-6 flex items-start">
+                            <div className="w-6 h-6 flex items-center justify-center">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="icon icon-tabler icon-tabler-tag mt-0.5 block"
+                                width={24}
+                                height={24}
+                                viewBox="0 0 24 24"
+                                stroke-width={2}
+                                stroke="currentColor"
                                 fill="none"
-                              />
-                              <path d="M17.2 7a6 7 0 1 0 0 10" />
-                              <path d="M13 10h-8m0 4h8" />
-                            </svg>
-                            / nit
-                          </li>
-                        </ul>
-                        {state.organization ? (
-                          <div className="listing-owner mt-4">
-                            <Link href={`/empreses/${state.organization.slug}`}>
-                              <a className="flex items-center">
-                                <div className="rounded-full w-14 h-14 border border-primary-200 p-1 overflow-hidden mr-4">
-                                  <picture>
-                                    <img
-                                      src={state.organization.orgLogo}
-                                      alt={state.organization.orgName}
-                                      className="w-full h-full object-cover"
-                                      width={96}
-                                      height96
-                                      loading="lazy"
-                                    />
-                                  </picture>
-                                </div>
-                                <div className="listing-owner-name">
-                                  <span className="block text-xs">
-                                    Gestionat per:
-                                  </span>
-                                  <span className="text-lg">
-                                    {state.organization.orgName}
-                                  </span>
-                                </div>
-                              </a>
-                            </Link>
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                ></path>
+                                <circle
+                                  cx="8.5"
+                                  cy="8.5"
+                                  r={1}
+                                  fill="currentColor"
+                                ></circle>
+                                <path d="M4 7v3.859c0 .537 .213 1.052 .593 1.432l8.116 8.116a2.025 2.025 0 0 0 2.864 0l4.834 -4.834a2.025 2.025 0 0 0 0 -2.864l-8.117 -8.116a2.025 2.025 0 0 0 -1.431 -.593h-3.859a3 3 0 0 0 -3 3z"></path>
+                              </svg>
+                            </div>
+                            <div className="pl-4">
+                              <p className="text-base text-primary-500 font-semibold mb-0.5">
+                                L'
+                                {state.activity.type == "activitat"
+                                  ? "allotjament"
+                                  : "activitat"}{" "}
+                                està catalogada com a escapada&nbsp;
+                                {state.activity.categories[0]}
+                              </p>
+                              <p className="text-sm mb-0 opacity-70">
+                                Els allotjaments i les activitats recomanades a
+                                Escapadesenparella.cat estan pensades per a que
+                                les parelles gaudeixin al màxim de les seves
+                                escapades.
+                              </p>
+                            </div>
                           </div>
-                        ) : null}
-                      </div>
-                      <div className="flex flex-wrap items-stretch justify-between -mx-2">
-                        <div className="px-2 flex-auto">
-                          <div className="listing-categories rounded border border-primary-200 p-5 h-full">
-                            <span className="font-semibold">
-                              Ideal per a...
-                            </span>
-                            <ul>{activityCategories}</ul>
+                          <div className="pb-6 flex items-start">
+                            <div className="w-6 h-6 flex items-center justify-center">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="icon icon-tabler icon-tabler-alarm mt-0.5 block"
+                                width={24}
+                                height={24}
+                                viewBox="0 0 24 24"
+                                stroke-width={2}
+                                stroke="currentColor"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                ></path>
+                                <circle cx={12} cy={13} r={7}></circle>
+                                <polyline points="12 10 12 13 14 13"></polyline>
+                                <line x1={7} y1={4} x2="4.25" y2={6}></line>
+                                <line x1={17} y1={4} x2="19.75" y2={6}></line>
+                              </svg>
+                            </div>
+                            <div className="pl-4">
+                              <p className="text-base text-primary-500 font-semibold mb-0.5">
+                                L'
+                                {state.activity.type == "activitat"
+                                  ? "allotjament"
+                                  : "activitat"}{" "}
+                                té una durada aproximada de{" "}
+                                {state.activity.duration}{" "}
+                                {state.activity.duration > 1 ? "hores" : "hora"}
+                              </p>
+                              <p className="text-sm mb-0 opacity-70">
+                                Hem calculat que la durada mitjana aproximada
+                                per aquesta activitat sol ser de{" "}
+                                {state.activity.duration}{" "}
+                                {state.activity.duration > 1 ? "hores" : "hora"}
+                                .
+                              </p>
+                            </div>
+                          </div>
+
+                          <div className="pb-6 flex items-start">
+                            <div className="w-6 h-6 flex items-center justify-center">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="icon icon-tabler icon-tabler-map-pin mt-0.5 block"
+                                width={24}
+                                height={24}
+                                viewBox="0 0 24 24"
+                                stroke-width={2}
+                                stroke="currentColor"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                ></path>
+                                <circle cx={12} cy={11} r={3}></circle>
+                                <path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
+                              </svg>
+                            </div>
+                            <div className="pl-4">
+                              <p className="text-base text-primary-500 font-semibold mb-0.5">
+                                L'
+                                {state.activity.type == "activitat"
+                                  ? "allotjament"
+                                  : "activitat"}{" "}
+                                es troba a la província/zona de{" "}
+                                <span className="capitalize">
+                                  {activityRegion}
+                                </span>
+                              </p>
+                              <p className="text-sm mb-0 opacity-70">
+                                L'adreça completa de l'allotjament és{" "}
+                                {state.activity.activity_full_address}.
+                              </p>
+                            </div>
+                          </div>
+                          <div className="flex items-start">
+                            <div className="w-6 h-6 flex items-center justify-center">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="icon icon-tabler icon-tabler-currency-euro mt-0.5"
+                                width={24}
+                                height={24}
+                                viewBox="0 0 24 24"
+                                stroke-width={2}
+                                stroke="currentColor"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path
+                                  stroke="none"
+                                  d="M0 0h24v24H0z"
+                                  fill="none"
+                                ></path>
+                                <path d="M17.2 7a6 7 0 1 0 0 10"></path>
+                                <path d="M13 10h-8m0 4h8"></path>
+                              </svg>
+                            </div>
+                            <div className="pl-4">
+                              <p className="text-base text-primary-500 font-semibold mb-0.5">
+                                L'
+                                {state.activity.type == "activitat"
+                                  ? "allotjament"
+                                  : "activitat"}{" "}
+                                té un preu aproximat de {state.activity.price} €
+                              </p>
+                              <p className="text-sm mb-0 opacity-70">
+                                Tot i que els preus poden variar i no estiguin
+                                constantment actualitzats, hem calculat que el
+                                preu mitjà per persona per aquesta activitat és
+                                de {state.activity.price} €.
+                              </p>
+                            </div>
                           </div>
                         </div>
-                        <div className="px-2 flex-auto">
-                          <div className="listing-seasons rounded border border-primary-200 p-5 h-full">
-                            <span className="font-semibold">
-                              Estació recomanada...
-                            </span>
-                            <ul>{activitySeasons}</ul>
-                          </div>
-                        </div>
                       </div>
-                      <div className="border-t border-primary-200 pt-5 mt-5 ">
-                        {description}
-                      </div>
+                      <h2 className="text-2xl">Sobre {title}</h2>
+                      <div className="mt-4">{description}</div>
                     </div>
-                    <aside className="w-full lg:w-4/12 px-6 static top-0 mt-5 md:mt-0">
-                      <div className="p-5 rounded border border-primary-200">
-                        <div className="w-full h-56 rounded overflow-hidden">
+                    <aside className="w-full xl:w-4/12 xl:px-6 relative xl:sticky xl:top-36 mt-7 xl:mt-0">
+                      <div className="p-5 rounded-md shadow-lg shadow-primary-300">
+                        <div className="w-full h-56 rounded-lg overflow-hidden">
                           <GoogleMapReact
                             bootstrapURLKeys={{
                               key: `${process.env.GOOGLE_API_KEY}`,
@@ -659,7 +901,7 @@ const ActivityListing = ({ activityDetails }) => {
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-device-laptop"
+                              className="icon icon-tabler icon-tabler-device-laptop mr-2"
                               width="22"
                               height="22"
                               viewBox="0 0 24 24"
@@ -681,12 +923,12 @@ const ActivityListing = ({ activityDetails }) => {
                           </a>
                           <a
                             href={`tel:${state.activity.phone}`}
-                            className="button button__ghost button__med justify-center"
+                            className="button button__ghost button__med justify-center "
                             title="Trucar"
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-phone-call"
+                              className="icon icon-tabler icon-tabler-phone-call mr-2"
                               width="22"
                               height="22"
                               viewBox="0 0 24 24"
@@ -705,25 +947,30 @@ const ActivityListing = ({ activityDetails }) => {
                           </a>
                         </div>
                         {hasOpeningHours}
-                        <ul className="listing-details-list">
-                          <li className="listing-location">
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-map-pin"
-                              width="22"
-                              height="22"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="#00206B"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path stroke="none" d="M0 0h24v24H0z" />
-                              <circle cx="12" cy="11" r="3" />
-                              <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
-                            </svg>
-                            {state.activity.activity_full_address}
+                        <ul className="list-none mt-4 mb-0 px-0 pt-4 border-t border-primary-200">
+                          <li className="flex items-start">
+                            <div className="w-5 h-5 mr-2">
+                              <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="icon icon-tabler icon-tabler-map-pin text-secondary-500 mt-0.5"
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                strokeWidth="2"
+                                stroke="currentColor"
+                                fill="none"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              >
+                                <path stroke="none" d="M0 0h24v24H0z" />
+                                <circle cx="12" cy="11" r="3" />
+                                <path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
+                              </svg>
+                            </div>
+
+                            <span className="text-15 opacity-80">
+                              {state.activity.activity_full_address}
+                            </span>
                           </li>
                         </ul>
                       </div>
@@ -742,11 +989,6 @@ const ActivityListing = ({ activityDetails }) => {
         <SignUpModal
           visibility={modalVisibility}
           hideModal={hideModalVisibility}
-        />
-        <ShareModal
-          visibility={shareModalVisibility}
-          hideModal={hideShareModalVisibility}
-          url={urlToShare}
         />
       </div>
     </>

@@ -258,7 +258,12 @@ const PlaceListing = ({ placeDetails }) => {
     hasOpeningHours = (
       <div className="mt-7">
         <ul className="list-none p-0 m-0">
-          <li className="flex items-center mb-2">Horari d'obertura</li>
+          <li className="flex flex-wrap items-center mb-3">
+            <span className="block w-full">Horari d'atenció al públic </span>
+            <span className="block w-full text-xs opacity-80 -mt-0.5">
+              Font: Google
+            </span>
+          </li>
           {placeHours}
         </ul>
       </div>
@@ -282,7 +287,7 @@ const PlaceListing = ({ placeDetails }) => {
   ));
 
   const placeRegion = state.place.region.map((region, idx) => (
-    <span>{region}</span>
+    <span key={idx}>{region}</span>
   ));
 
   return (
@@ -644,10 +649,38 @@ const PlaceListing = ({ placeDetails }) => {
             </section>
             <section className="pt-10 pb-12 md:pb-16">
               <div className="container">
-                <div className="w-full lg:w-10/12 2xl:w-9/12 mx-auto ">
+                <div className="w-full lg:w-10/12 2xl:w-9/12 mx-auto">
                   <div className="flex flex-wrap items-start xl:-mx-6">
                     <div className="w-full xl:w-8/12 xl:px-6 mx-auto">
                       <h2 className="w-9/12">{subtitle}</h2>
+                      {state.organization ? (
+                        <div className="listing-owner mt-4">
+                          <Link href={`/empreses/${state.organization.slug}`}>
+                            <a className="flex items-center">
+                              <div className="rounded-full w-14 h-14 border border-primary-200 p-1 overflow-hidden mr-4">
+                                <picture>
+                                  <img
+                                    src={state.organization.orgLogo}
+                                    alt={state.organization.orgName}
+                                    className="w-full h-full object-cover"
+                                    width={96}
+                                    height96
+                                    loading="lazy"
+                                  />
+                                </picture>
+                              </div>
+                              <div className="text-primary-500 opacity-80">
+                                <span className="block text-xs">
+                                  Gestionat per:
+                                </span>
+                                <span className="text-base">
+                                  {state.organization.orgName}
+                                </span>
+                              </div>
+                            </a>
+                          </Link>
+                        </div>
+                      ) : null}
                       <div className="border-y border-primary-200 my-8 py-5">
                         <div className="flex flex-wrap items-start">
                           <div className="pb-6 flex items-start">
@@ -776,25 +809,6 @@ const PlaceListing = ({ placeDetails }) => {
                           </div>
                         </div>
                       </div>
-
-                      {state.organization ? (
-                        <div className="listing-owner">
-                          <Link href={`/empreses/${state.organization.slug}`}>
-                            <a>
-                              <div className="avatar">
-                                <img
-                                  src={state.organization.orgLogo}
-                                  alt={state.organization.orgName}
-                                />
-                              </div>
-                              <p className="listing-owner-name">
-                                {state.organization.orgName}
-                              </p>
-                            </a>
-                          </Link>
-                        </div>
-                      ) : null}
-
                       <h2 className="text-2xl">Sobre {title}</h2>
                       <div className="mt-4">{description}</div>
                     </div>
