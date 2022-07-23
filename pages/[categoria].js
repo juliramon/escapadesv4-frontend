@@ -293,7 +293,7 @@ const CategoryPage = ({
             </div>
           </div>
 
-          <section className="py-6 pb-8 md:pt-12 md:pb-16">
+          <section className="py-8 md:pb-16">
             <div className="container">
               <div className="w-full md:w-8/12 xl:w-5/12 mb-5">
                 <h1 className="my-0 font-display">
@@ -311,7 +311,7 @@ const CategoryPage = ({
               </div>
               {state.results.length > 0 ? (
                 <>
-                  <div className="w-full flex flex-wrap items-center justify-between pb-6">
+                  <div className="w-full flex flex-wrap items-center justify-between">
                     <div className="w-full md:w-1/2">
                       <h2 className="max-w-xl">
                         Descobreix {state.allResults.length}{" "}

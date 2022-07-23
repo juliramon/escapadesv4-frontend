@@ -253,18 +253,6 @@ const ActivityListing = ({ activityDetails }) => {
     new maps.Marker({ position: position, map, title: "Hello" });
   };
 
-  let coversList;
-
-  if (state.isActivityLoaded === true) {
-    coversList = state.activity.images.map((cover, idx) => (
-      <div
-        key={idx}
-        className="cover"
-        style={{ backgroundImage: `url(${cover})` }}
-      ></div>
-    ));
-  }
-
   let activityHours, hasOpeningHours;
   if (state.activity.activity_opening_hours.length > 0) {
     activityHours = state.activity.activity_opening_hours.map((hour, idx) => (

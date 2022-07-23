@@ -208,7 +208,7 @@ const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
               </ul>
             </div>
           </div>
-          <section className="pt-6">
+          <section className="pt-8">
             <div className="container relative">
               <div className="flex flex-wrap items-center justify-start">
                 <div className="w-full md:w-8/12 xl:w-5/12">
