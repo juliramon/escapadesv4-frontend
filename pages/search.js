@@ -221,7 +221,23 @@ const Search = (props) => {
           user={props.user}
         />
         <main>
-          <section className="py-12">
+          <div className="pt-6">
+            <div className="container">
+              <ul className="breadcrumb">
+                <li className="breadcrumb__item">
+                  <a href="/" title="Inici" className="breadcrumb__link">
+                    Inici
+                  </a>
+                </li>
+                <li className="breadcrumb__item">
+                  <span className="breadcrumb__link active">
+                    Resultats de cerca
+                  </span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <section className="pt-6 pb-12">
             <div className="container">
               <div className="w-full lg:w-6/12 lg:mx-auto">
                 <h1 className="text-2xl md:text-3xl">Resultats de cerca</h1>
