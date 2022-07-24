@@ -345,9 +345,9 @@ const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
                     </p>
                   </div>
                 </div>
-                <div className="relative flex items-center justify-between md:justify-end w-full md:w-1/2 mt-8 md:mb-0">
+                <div className="relative flex flex-wrap items-center justify-between md:justify-end w-full md:w-1/2 mt-5 md:mb-0">
                   <button
-                    className="text-sm inline-flex flex-nowrap items-center button button__ghost button__med mr-3"
+                    className="text-sm inline-flex flex-nowrap items-center justify-center button button__ghost button__med w-full md:w-auto mb-3 md:mb-0 md:mr-3"
                     onClick={() => setStateModalMap(!stateModalMap)}
                   >
                     <svg
@@ -372,7 +372,7 @@ const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
                     Veure-les al mapa
                   </button>
                   <button
-                    className={`button button__ghost button__med ${
+                    className={`button button__ghost button__med justify-center w-full md:w-auto ${
                       stateDropdownFilters == true ? "active" : null
                     }`}
                     onClick={() =>
