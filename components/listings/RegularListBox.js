@@ -47,7 +47,7 @@ const RegularListBox = ({
               </div>
             </div>
           </div>
-          <div className="rounded w-full md:w-1/2 h-auto overflow-hidden order-first md:order-none mb-6 md:mb-0">
+          <div className="rounded-xl w-full md:w-1/2 h-auto overflow-hidden order-first md:order-none mb-6 md:mb-0">
             <div className="aspect-w-3 aspect-h-2">
               <picture>
                 <img

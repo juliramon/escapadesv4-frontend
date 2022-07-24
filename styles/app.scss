@@ -548,7 +548,7 @@ nav {
         color: $medium-blue;
       }
       .search-form {
-        margin-top: 35px;
+        margin-top: 20px;
         .tabs-dropdown {
           z-index: 1000;
         }
@@ -588,7 +588,7 @@ nav {
               position: absolute;
               top: 8px;
               left: 15px;
-              font-size: 1.05em;
+              font-size: 15px;
               margin-bottom: 0;
               z-index: 100;
               color: $dark-blue;
@@ -596,7 +596,7 @@ nav {
             .form-control {
               font-size: 0.99em;
               letter-spacing: 0.5px;
-              padding: 35px 15px 12px 15px;
+              padding: 30px 15px 10px 15px;
               height: auto;
               border: none;
               background-color: $white;
@@ -3938,7 +3938,16 @@ nav {
     width: 100%;
     border: 1px solid #f2f7f9;
     border-radius: 7px;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
+  }
+
+  #homepage
+    #hero
+    .header-col.left
+    .search-form
+    .header-form
+    .form-group:last-child {
+    margin-bottom: 0;
   }
 
   #homepage

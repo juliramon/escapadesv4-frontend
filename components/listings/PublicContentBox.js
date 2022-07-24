@@ -15,10 +15,10 @@ const PublicContentBox = ({ type, slug, cover, title, subtitle, location }) => {
       <Link href={`/${path}/${slug}`}>
         <a
           title={title}
-          className="p-5 rounded-md border border-primary-200 flex flex-wrap items-center mb-3 flex-1"
+          className="p-2 rounded-xl border border-primary-200 flex flex-wrap items-center mb-3 flex-1"
         >
           <div className="w-full md:w-1/3">
-            <div className="rounded-md aspect-w-3 aspect-h-2 overflow-hidden">
+            <div className="rounded-xl aspect-w-3 aspect-h-2 overflow-hidden">
               <picture>
                 <img
                   src={cover}

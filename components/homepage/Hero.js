@@ -5,7 +5,7 @@ const Hero = ({ background_url, title, subtitle }) => {
   return (
     <section
       id="hero"
-      className="relative flex items-center justify-center py-20 rounded-md mt-6 mx-6 overflow-hidden shadow-2xl"
+      className="relative flex items-center justify-center pt-8 pb-8 lg:py-20 rounded-b-xl lg:rounded-xl lg:mt-6 lg:mx-6 overflow-hidden shadow-2xl"
     >
       <div className="absolute top-0 left-0 w-full h-full">
         <div className="absolute top-0 left-0 w-full h-full bg-primary-500 bg-opacity-30 z-30"></div>
@@ -22,7 +22,7 @@ const Hero = ({ background_url, title, subtitle }) => {
           </picture>
         </div>
         <Link href="#featuredPlaces">
-          <a className="absolute z-40 left-1/2 bottom-12 transform -translate-x-1/2 scrolldown-button">
+          <a className="hidden md:block absolute z-40 left-1/2 bottom-12 transform -translate-x-1/2 scrolldown-button">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="icon icon-tabler icon-tabler-arrow-down-circle"
@@ -43,7 +43,7 @@ const Hero = ({ background_url, title, subtitle }) => {
             </svg>
           </a>
         </Link>
-        <figcaption className="text-xs text-white absolute bottom-8 right-12 z-40 text-right">
+        <figcaption className="text-xs text-white absolute bottom-8 right-6 md:right-12 z-40 text-right">
           Escapada al Pic del Campirme, 2.633m (Pallars Sobirà)
           <br />© Escapadesenparella.cat
         </figcaption>
@@ -51,10 +51,14 @@ const Hero = ({ background_url, title, subtitle }) => {
       <div className="container relative z-40">
         <div className="w-full">
           <div className="header-col left text-center">
-            <h1 className="text-white">{title}</h1>
-            <p className="text-white mt-5 text-xl">{subtitle}</p>
+            <h1 className="text-white text-2xl leading-tight md:leading-1.1 md:text-5xl">
+              {title}
+            </h1>
+            <p className="text-white mt-5 hidden md:block text-xl">
+              {subtitle}
+            </p>
             <SearchBar />
-            <div className="credits-bar w-full mt-4">
+            <div className="credits-bar w-full mt-4 pb-14 md:pb-0">
               <div className="credits-bar-wrapper text-xs">
                 <div className="sponsor-block text-left">
                   <span className="text-white block mb-2.5">
@@ -79,7 +83,7 @@ const Hero = ({ background_url, title, subtitle }) => {
                         loading="lazy"
                       />
                     </picture>
-                    <p className="text-white w-52">
+                    <p className="text-white w-52 pl-5 md:pl-0 mb-0 leading-tight">
                       LassDive | Centre i escola d'esports aquàtics i activitats
                       d'ventura a la Costa Brava i Barcelona
                     </p>

@@ -494,7 +494,7 @@ const SearchBar = () => {
             </Dropdown.Menu>
           </Dropdown>
         </Form.Group>
-        <Form.Group className="header-form---submit">
+        <Form.Group className="header-form---submit mb-0">
           <Button
             disabled={disabled}
             className="button-submit"
@@ -550,7 +550,7 @@ const SearchBar = () => {
       <div className="tabs-dropdown relative text-left">
         <span
           onClick={() => setDropdownState(!dropdownState)}
-          className="text-white inline-flex items-center cursor-pointer"
+          className="text-white inline-flex items-center cursor-pointer text-15 md:text-base"
         >
           {state.activeTab === "activities" ? "Activitats" : "Allotjaments"}{" "}
           <svg

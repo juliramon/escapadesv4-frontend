@@ -104,7 +104,7 @@ const HomePageResults = ({
       return undefined;
     });
     mostRatedSection = (
-      <section className="pt-24">
+      <section className="pt-12 md:pt-20">
         <h2>Els allotjaments més ben valorats</h2>
         <div className="flex flex-wrap items-start -mx-2 mt-2">
           {mostRatedList}
@@ -165,7 +165,7 @@ const HomePageResults = ({
       return undefined;
     });
     romanticGetawaysSection = (
-      <section className="pt-16">
+      <section className="pt-12">
         <h2>Escapades romàntiques per desconnectar </h2>
         <div className="flex flex-wrap items-start -mx-2 mt-2">
           {romanticList}
@@ -215,7 +215,7 @@ const HomePageResults = ({
       return undefined;
     });
     adventureGetawaysSection = (
-      <section className="pt-16">
+      <section className="pt-12">
         <h2>L'aventura us crida</h2>
         <div className="flex flex-wrap items-start -mx-2 mt-2">
           {adventureList}
@@ -265,7 +265,7 @@ const HomePageResults = ({
       return undefined;
     });
     gastronomicGetawaysSection = (
-      <section className="pt-16">
+      <section className="pt-12">
         <h2>La millor cita, als millors restaurants</h2>
         <div className="flex flex-wrap items-start -mx-2 mt-2">
           {gastronomicList}
@@ -315,14 +315,14 @@ const HomePageResults = ({
       return undefined;
     });
     relaxGetawaysSection = (
-      <section className="pt-16 pb-16">
+      <section className="pt-12 pb-12">
         <h2>Escapades en parella per a desconnectar</h2>
         <div className="flex flex-wrap items-start -mx-2 mt-2">{relaxlIST}</div>
       </section>
     );
   }
   placeTypeSection = (
-    <section className="pt-16" id="placesTypes">
+    <section className="pt-12" id="placesTypes">
       <div className="">
         <h2 className="">Allotjaments pensats per a parelles</h2>
       </div>
@@ -627,7 +627,7 @@ const HomePageResults = ({
           {placeTypeSection}
           {adventureGetawaysSection}
           {gastronomicGetawaysSection}
-          <section className="pt-16">
+          <section className="pt-12">
             <h2>Darreres històries en parella</h2>
             <div className="flex flex-wrap items-center relative mt-3 -mx-1.5">
               <Swiper

@@ -20,7 +20,7 @@ const FeaturedListBox = ({
     <Link href={`/llistes/${slug}`}>
       <a
         title={title}
-        className="block relative rounded overflow-hidden px-8 pt-24 lg:pt-48 pb-8 text-white"
+        className="block relative rounded-xl overflow-hidden px-8 pt-24 lg:pt-48 pb-8 text-white"
       >
         <div className="bg-primary-500 bg-opacity-40 absolute top-0 left-0 w-full h-full z-40"></div>
         <div className="absolute top-0 left-0 w-full h-full">
