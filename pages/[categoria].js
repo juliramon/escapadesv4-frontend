@@ -458,18 +458,28 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   const service = new ContentService();
   const categoryDetails = await service.getCategoryDetails(params.categoria);
-  let { allResults, paginatedResults, totalItems, numPages } =
-    await service.getCategoryResults(categoryDetails.name);
+  let error404 = categoryDetails == undefined ? true : false;
 
-  return {
-    props: {
-      categoryDetails,
-      allResults,
-      paginatedResults,
-      totalItems,
-      numPages,
-    },
-  };
+  if (categoryDetails == undefined) {
+    return {
+      props: {
+        error404,
+      },
+    };
+  } else {
+    let { allResults, paginatedResults, totalItems, numPages } =
+      await service.getCategoryResults(categoryDetails.name);
+
+    return {
+      props: {
+        categoryDetails,
+        allResults,
+        paginatedResults,
+        totalItems,
+        numPages,
+      },
+    };
+  }
 }
 
 export default CategoryPage;

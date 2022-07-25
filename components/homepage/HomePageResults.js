@@ -708,8 +708,8 @@ const HomePageResults = ({
       </div>
       <section className="py-12 md:py-24 bg-primary-100">
         <div className="container">
-          <div className="w-full xl:w-10/12 2xl:w-3/4 xl:mx-auto flex flex-wrap items-stretch justify-center">
-            <div className="w-full md:w-1/2 lg:w-1/3">
+          <div className="w-full flex flex-wrap items-stretch justify-center">
+            <div className="w-full md:w-1/3">
               <picture>
                 <img
                   src="https://res.cloudinary.com/juligoodie/image/upload/v1652535865/getaways-guru/about-home_mikxom.jpg"
@@ -725,7 +725,7 @@ const HomePageResults = ({
                 Escapadesenparella.cat
               </figcaption>
             </div>
-            <div className="w-full md:w-1/2 lg:w-2/3 md:pl-6 lg:pl-10 xl:pl-20 py-8 xl:py-16 flex justify-center flex-col mt-14 md:mt-0">
+            <div className="w-full md:w-1/2 md:pl-6 lg:pl-10 xl:pl-20 py-8 xl:py-16 flex justify-center flex-col mt-14 md:mt-0">
               <div className="mb-4">
                 <h2>Escapades en parella, i molt més</h2>
               </div>

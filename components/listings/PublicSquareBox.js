@@ -230,7 +230,7 @@ const PublicSquareBox = ({
                   <polyline points="8 16 10 10 16 8 14 14 8 16"></polyline>
                   <circle cx={12} cy={12} r={9}></circle>
                 </svg>
-                <span class="text-primary-400 opacity-80">
+                <span className="text-primary-400 opacity-80">
                   {shortenedLocation}
                 </span>
               </span>

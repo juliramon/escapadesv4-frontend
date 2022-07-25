@@ -245,7 +245,7 @@ const Search = (props) => {
                   Hem trobat <span>{searchResultsLength} resultats</span> en
                   base a la teva cerca <b>"{browsedText}"</b>:
                 </p>
-                <div class="flex flex-col">{searchResultsList}</div>
+                <div className="flex flex-col">{searchResultsList}</div>
               </div>
             </div>
           </section>
