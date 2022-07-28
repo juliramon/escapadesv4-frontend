@@ -342,8 +342,8 @@ const HomePageResults = ({
                     src="../../hotels-amb-encant-escapades-en-parella.png"
                     data-src="../../hotels-amb-encant-escapades-en-parella.png"
                     alt="Hotels amb encant"
-                    width="400"
-                    height="300"
+                    width="160"
+                    height="160"
                     loading="lazy"
                   />
                 </picture>
@@ -390,8 +390,8 @@ const HomePageResults = ({
                     src="../../apartamens-escapades-en-parella.png"
                     data-src="../../apartamens-escapades-en-parella.png"
                     alt="Apartaments de somni"
-                    width="400"
-                    height="300"
+                    width="160"
+                    height="160"
                     loading="lazy"
                   />
                 </picture>
@@ -438,8 +438,8 @@ const HomePageResults = ({
                     src="../../cases-arbre-escapades-en-parella.png"
                     data-src="../../cases-arbre-escapades-en-parella.png"
                     alt="Cases-arbre"
-                    width="400"
-                    height="300"
+                    width="160"
+                    height="160"
                     loading="lazy"
                   />
                 </picture>
@@ -486,8 +486,8 @@ const HomePageResults = ({
                     src="../../cases-rurals-escapades-en-parella.png"
                     data-src="../../cases-rurals-escapades-en-parella.png"
                     alt="Cases rurals"
-                    width="400"
-                    height="300"
+                    width="160"
+                    height="160"
                     loading="lazy"
                   />
                 </picture>
@@ -534,8 +534,8 @@ const HomePageResults = ({
                     src="../../carabanes-escapades-en-parella.png"
                     data-src="../../carabanes-escapades-en-parella.png"
                     alt="Carabanes"
-                    width="400"
-                    height="300"
+                    width="160"
+                    height="160"
                     loading="lazy"
                   />
                 </picture>
@@ -582,8 +582,8 @@ const HomePageResults = ({
                     src="../../refugis-escapades-en-parella.png"
                     data-src="../../refugis-escapades-en-parella.png"
                     alt="Refugis"
-                    width="400"
-                    height="300"
+                    width="160"
+                    height="160"
                     loading="lazy"
                   />
                 </picture>

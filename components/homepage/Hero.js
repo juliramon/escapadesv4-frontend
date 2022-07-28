@@ -15,7 +15,7 @@ const Hero = ({ background_url, background_url_mob, title, subtitle }) => {
             <source srcSet={background_url} media="(min-width: 768px)" />
             <img
               src={background_url}
-              dataSrc={background_url}
+              datasrc={background_url}
               alt={title}
               className="w-full h-full object-cover object-center"
               width={375}

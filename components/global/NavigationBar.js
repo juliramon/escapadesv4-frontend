@@ -783,7 +783,7 @@ const NavigationBar = ({ logo_url, path }) => {
           </div>
           {state.isResponsiveMenuOpen ? responsiveMenu : null}
         </nav>
-        <ContentBar />
+        {/* <ContentBar /> */}
       </header>
     );
   }
