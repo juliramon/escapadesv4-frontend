@@ -15,8 +15,9 @@
 @import "pages/layout-empreses.sass";
 @import "base/global.sass";
 
-@import "vendors/tailwind.sass";
+@import "vendors/cookie-consent.sass";
 @import "vendors/swiper.sass";
+@import "vendors/tailwind.sass";
 
 /* CircularStd @font-face kit */
 @font-face {
@@ -548,7 +549,6 @@ nav {
         color: $medium-blue;
       }
       .search-form {
-        margin-top: 20px;
         .tabs-dropdown {
           z-index: 1000;
         }
@@ -575,7 +575,7 @@ nav {
         }
         .header-form {
           margin-top: 8px;
-          border-radius: 12px;
+          border-radius: 8px;
           box-shadow: 2px 5px 20px rgb(0 0 0 / 20%);
           background-color: $white;
           padding: 4px;

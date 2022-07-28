@@ -7,7 +7,7 @@ const FeaturedStoryBox = ({ slug, cover, title, avatar, owner }) => {
       <Link href={`/histories/${slug}`}>
         <a
           title={title}
-          className="block w-full h-full overflow-hidden rounded-xl"
+          className="block w-full h-full overflow-hidden rounded-md"
         >
           <div className="relative w-full h-full aspect-w-3 aspect-h-4">
             <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40 z-30"></div>

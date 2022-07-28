@@ -178,7 +178,7 @@ const PublicSquareBox = ({
       <div className="overflow-hidden">
         <Link href={`/${linkPath}/${slug}`}>
           <a title={title} className="relative block">
-            <div className="aspect-w-4 aspect-h-3 relative rounded-xl overflow-hidden">
+            <div className="aspect-w-4 aspect-h-3 relative rounded-md overflow-hidden">
               <picture className="w-full h-full">
                 <source srcSet={coverImg} />
                 <img
