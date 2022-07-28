@@ -109,6 +109,11 @@ $background-input: #f2f7f9;
 
 /*---GLOBAL STYLES---*/
 
+#__next,
+main {
+  min-height: 900px;
+}
+
 #listingSquareBox .btn {
   margin: 4px;
 }
@@ -509,8 +514,10 @@ nav {
 
 #homepage {
   #hero {
-    min-height: 419px;
-    min-width: auto;
+    .hero-wrapper {
+      min-height: 419px;
+      min-width: auto;
+    }
     .wrapper {
       background: #fef8f2;
       border-radius: 10px;
@@ -522,17 +529,7 @@ nav {
       position: inherit;
       z-index: 1000;
       flex: 0.7;
-      .header-title {
-        font-size: 2.6rem;
-        line-height: 1.35em;
-        color: $dark-blue;
-      }
-      .header-subtitle {
-        font-size: 1.2rem;
-        margin-top: 15px;
-        line-height: 1.5em;
-        color: $medium-blue;
-      }
+
       .search-form {
         .tabs-dropdown {
           z-index: 1000;
@@ -671,38 +668,6 @@ nav {
       }
     }
   }
-  .homepage-section {
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 2px;
-    }
-    p {
-      color: $medium-blue;
-    }
-    .section-listings {
-      margin-top: 20px;
-      .section-listings-wrapper {
-        display: flex;
-        align-items: baseline;
-        margin: -10px;
-        #listingSquareBox {
-          margin: 10px;
-        }
-      }
-    }
-  }
-  .top-rated-badge {
-    position: absolute;
-    left: -50px;
-    top: 75px;
-    z-index: -100;
-    svg {
-      width: 100px;
-      height: 100px;
-      opacity: 0.3;
-      transform: rotate(-20deg);
-    }
-  }
   #placesTypes {
     .section-litings-wrapper {
       display: flex;
@@ -746,12 +711,6 @@ nav {
         }
       }
     }
-  }
-  #introSection {
-    background-color: #f2f7f9;
-  }
-  .homepage-section:last-child {
-    padding-bottom: 60px;
   }
 
   .header-form.places .dropdown .dropdown-toggle .form-control {

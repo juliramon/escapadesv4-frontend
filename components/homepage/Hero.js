@@ -10,7 +10,7 @@ const Hero = ({ background_url, background_url_mob, title, subtitle }) => {
       <div className="absolute top-0 left-0 w-full h-full">
         <div className="absolute top-0 left-0 w-full h-full bg-primary-500 bg-opacity-30 z-30"></div>
         <div className="absolute top-0 left-0 w-full h-full">
-          {/* <picture>
+          <picture>
             <source srcSet={background_url_mob} media="(max-width: 768px)" />
             <source srcSet={background_url} media="(min-width: 768px)" />
             <img
@@ -23,7 +23,7 @@ const Hero = ({ background_url, background_url_mob, title, subtitle }) => {
               fetchpriority={"hight"}
               loading="eager"
             ></img>
-          </picture> */}
+          </picture>
         </div>
         <Link href="#homePageResults">
           <a className="hidden md:block absolute z-40 left-1/2 bottom-12 transform -translate-x-1/2 scrolldown-button">
