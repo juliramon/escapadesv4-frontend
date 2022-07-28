@@ -627,7 +627,7 @@ const HomePageResults = ({
           {placeTypeSection}
           {adventureGetawaysSection}
           {gastronomicGetawaysSection}
-          <section className="pt-12">
+          {/* <section className="pt-12">
             <h2>Darreres històries en parella</h2>
             <div className="flex flex-wrap items-center relative mt-3 -mx-1.5">
               <Swiper
@@ -702,7 +702,7 @@ const HomePageResults = ({
                 </svg>
               </button>
             </div>
-          </section>
+          </section> */}
           {relaxGetawaysSection}
         </div>
       </div>
