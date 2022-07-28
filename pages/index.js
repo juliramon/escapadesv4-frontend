@@ -83,6 +83,11 @@ const Homepage = (props) => {
           name="B-verify"
           content="756319ea1956c99d055184c4cac47dbfa3c81808"
         />
+        <link
+          rel="preload"
+          href="https://res.cloudinary.com/juligoodie/image/upload/w_375,h_425,c_fill/getaways-guru/IMGP9489-s_izgty6.jpg"
+          as="image"
+        />
       </Head>
       <main id="homepage">
         <NavigationBar
