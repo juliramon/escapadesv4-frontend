@@ -20,7 +20,7 @@ const Hero = ({ background_url, background_url_mob, title, subtitle }) => {
               className="w-full h-full object-cover object-center"
               width={375}
               height={425}
-              fetchPriority={"hight"}
+              fetchpriority={"hight"}
               loading="eager"
             ></img>
           </picture>
