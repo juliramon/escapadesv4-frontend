@@ -1,7 +1,7 @@
 import Link from "next/link";
 import SearchBar from "../homepage/SearchBar";
 
-const Hero = ({ background_url, title, subtitle }) => {
+const Hero = ({ background_url, background_url_mob, title, subtitle }) => {
   return (
     <section
       id="hero"
@@ -11,8 +11,11 @@ const Hero = ({ background_url, title, subtitle }) => {
         <div className="absolute top-0 left-0 w-full h-full bg-primary-500 bg-opacity-30 z-30"></div>
         <div className="absolute top-0 left-0 w-full h-full">
           <picture>
+            <source srcSet={background_url_mob} media="(max-width: 768px)" />
+            <source srcSet={background_url} media="(min-width: 768px)" />
             <img
               src={background_url}
+              dataSrc={background_url}
               alt={title}
               className="w-full h-full object-cover object-center"
               width={400}
@@ -55,7 +58,7 @@ const Hero = ({ background_url, title, subtitle }) => {
               {title}
             </h1>
             <SearchBar />
-            <div className="w-full mt-4 text-xs text-left">
+            {/* <div className="w-full mt-4 text-xs text-left">
               <span className="text-white block mb-2.5">Amb el suport de:</span>
               <a
                 href="#"
@@ -81,7 +84,7 @@ const Hero = ({ background_url, title, subtitle }) => {
                   d'ventura a la Costa Brava i Barcelona
                 </p>
               </a>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

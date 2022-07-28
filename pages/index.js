@@ -94,6 +94,9 @@ const Homepage = (props) => {
           background_url={
             "https://res.cloudinary.com/juligoodie/image/upload/v1652527292/getaways-guru/IMGP9489-s_izgty6.jpg"
           }
+          background_url_mob={
+            "https://res.cloudinary.com/juligoodie/image/upload/w_400,h_300,c_fill/getaways-guru/IMGP9489-s_izgty6.jpg"
+          }
           title={title}
           subtitle={subtitle}
         />
