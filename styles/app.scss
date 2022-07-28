@@ -22,29 +22,6 @@
 /* CircularStd @font-face kit */
 @font-face {
   font-family: "CircularStd";
-  src: url("../fonts/CircularStd-Black.eot");
-  src: url("../fonts/CircularStd-Black.eot?#iefix") format("embedded-opentype"),
-    url("../fonts/CircularStd-Black.woff") format("woff"),
-    url("../fonts/CircularStd-Black.ttf") format("truetype"),
-    url("../fonts/CircularStd-Black.svg#bcc26993292869431e54c666aafa8fcd")
-      format("svg");
-  font-weight: 800;
-  font-style: normal;
-}
-@font-face {
-  font-family: "CircularStd";
-  src: url("../fonts/CircularStd-BlackItalic.eot");
-  src: url("../fonts/CircularStd-BlackItalic.eot?#iefix")
-      format("embedded-opentype"),
-    url("../fonts/CircularStd-BlackItalic.woff") format("woff"),
-    url("../fonts/CircularStd-BlackItalic.ttf") format("truetype"),
-    url("../fonts/CircularStd-BlackItalic.svg#bcc26993292869431e54c666aafa8fcd")
-      format("svg");
-  font-weight: 800;
-  font-style: italic;
-}
-@font-face {
-  font-family: "CircularStd";
   src: url("../fonts/CircularStd-Bold.eot");
   src: url("../fonts/CircularStd-Bold.eot?#iefix") format("embedded-opentype"),
     url("../fonts/CircularStd-Bold.woff") format("woff"),
@@ -53,6 +30,7 @@
       format("svg");
   font-weight: 600;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: "CircularStd";
@@ -65,6 +43,7 @@
       format("svg");
   font-weight: 600;
   font-style: italic;
+  font-display: swap;
 }
 @font-face {
   font-family: "CircularStd";
@@ -76,6 +55,7 @@
       format("svg");
   font-weight: 500;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: "CircularStd";
@@ -88,6 +68,7 @@
       format("svg");
   font-weight: 500;
   font-style: italic;
+  font-display: swap;
 }
 @font-face {
   font-family: "CircularStd";
@@ -99,6 +80,7 @@
       format("svg");
   font-weight: 400;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: "CircularStd";
@@ -111,6 +93,7 @@
       format("svg");
   font-weight: 400;
   font-style: italic;
+  font-display: swap;
 }
 
 $font-bold: "Unna", serif;

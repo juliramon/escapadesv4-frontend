@@ -18,8 +18,8 @@ const Hero = ({ background_url, background_url_mob, title, subtitle }) => {
               dataSrc={background_url}
               alt={title}
               className="w-full h-full object-cover object-center"
-              width={400}
-              height={300}
+              width={375}
+              height={425}
               loading="eager"
             ></img>
           </picture>
