@@ -184,6 +184,8 @@ const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
     <>
       <Head>
         <title>Activitats en parella - Escapadesenparella.cat</title>
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
       </Head>
       <div id="contentList" className="activity relative">
         <NavigationBar

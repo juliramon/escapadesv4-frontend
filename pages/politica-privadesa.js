@@ -10,6 +10,8 @@ const PoliticaPrivadesa = () => {
     <>
       <Head>
         <title>Política de privadesa – Escapadesenparella.cat</title>
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
       </Head>
       <NavigationBar
         logo_url={

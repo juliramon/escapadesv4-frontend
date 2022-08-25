@@ -204,8 +204,8 @@ const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
           name="description"
           content={`Allotjaments amb encant a Catalunya. Busques hotels amb encant o cases rurals a Catalunya? Aquí trobaràs els millors els millors.`}
         />
-        <meta name="robots" content="noindex, nofollow" />
-        <meta name="googlebot" content="noindex, nofollow" />
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
         <meta property="og:type" content="website" />
         <meta
           property="og:title"

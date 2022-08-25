@@ -12,6 +12,8 @@ const Serveis = () => {
           Multiplica la teva presencia online... i els teus clients –
           Escpadesenparella.cat
         </title>
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
       </Head>
       <NavigationBar
         logo_url={

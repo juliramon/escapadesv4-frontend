@@ -297,8 +297,8 @@ const PlaceListing = ({ placeDetails }) => {
         <link rel="icon" href="/favicon.ico" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <meta name="description" content={`${state.place.metaDescription}`} />
-        <meta name="robots" content="noindex, nofollow" />
-        <meta name="googlebot" content="noindex, nofollow" />
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
         <meta property="og:type" content="website" />
         <meta
           property="og:title"

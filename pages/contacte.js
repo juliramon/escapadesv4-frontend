@@ -104,6 +104,8 @@ const Contacte = ({ user }) => {
     <>
       <Head>
         <title>Contacta amb nosaltres - Escapadesenparella.cat</title>
+        <meta name="robots" content="index, follow" />
+        <meta name="googlebot" content="index, follow" />
       </Head>
       <main>
         <NavigationBar
