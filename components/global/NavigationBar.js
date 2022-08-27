@@ -4,6 +4,7 @@ import { Navbar, Nav, Container, Form, Dropdown } from "react-bootstrap";
 import ContentBar from "../homepage/ContentBar";
 import Link from "next/link";
 import UserContext from "../../contexts/UserContext";
+import AdSense from "react-adsense";
 
 const NavigationBar = ({ logo_url, path }) => {
   const { user } = useContext(UserContext);
@@ -494,7 +495,7 @@ const NavigationBar = ({ logo_url, path }) => {
   ) {
     navBar = (
       <header style={styledHeader} className="z-40">
-        <div className="ad-wrapper border-t border-primary-200 mt-5 pt-5">
+        <div className="ad-wrapper">
           <div className="ad-block">
             <AdSense.Google
               client="ca-pub-6252269250624547"
@@ -614,7 +615,7 @@ const NavigationBar = ({ logo_url, path }) => {
   } else {
     navBar = (
       <header style={styledHeader} className="z-50">
-        <div className="ad-wrapper border-t border-primary-200 mt-5 pt-5">
+        <div className="ad-wrapper">
           <div className="ad-block">
             <AdSense.Google
               client="ca-pub-6252269250624547"
