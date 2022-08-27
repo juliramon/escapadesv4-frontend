@@ -495,7 +495,7 @@ const NavigationBar = ({ logo_url, path }) => {
   ) {
     navBar = (
       <>
-        <div className="ad-wrapper flex items-center justify-center">
+        <div className="ad-wrapper">
           <div className="ad-block">
             <AdSense.Google
               client="ca-pub-6252269250624547"
@@ -617,7 +617,7 @@ const NavigationBar = ({ logo_url, path }) => {
   } else {
     navBar = (
       <>
-        <div className="ad-wrapper flex items-center justify-center">
+        <div className="ad-wrapper">
           <div className="ad-block">
             <AdSense.Google
               client="ca-pub-6252269250624547"
