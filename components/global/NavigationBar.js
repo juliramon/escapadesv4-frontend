@@ -494,6 +494,18 @@ const NavigationBar = ({ logo_url, path }) => {
   ) {
     navBar = (
       <header style={styledHeader} className="z-40">
+        <div className="ad-wrapper border-t border-primary-200 mt-5 pt-5">
+          <div className="ad-block">
+            <AdSense.Google
+              client="ca-pub-6252269250624547"
+              slot="1462489200"
+              style={{ display: "block" }}
+              format="auto"
+              responsive="true"
+              layoutKey="-gw-1+2a-9x+5c"
+            />
+          </div>
+        </div>
         <Navbar>
           <Container fluid className="align-items-center">
             <div className="nav-col left d-flex">
@@ -602,6 +614,18 @@ const NavigationBar = ({ logo_url, path }) => {
   } else {
     navBar = (
       <header style={styledHeader} className="z-50">
+        <div className="ad-wrapper border-t border-primary-200 mt-5 pt-5">
+          <div className="ad-block">
+            <AdSense.Google
+              client="ca-pub-6252269250624547"
+              slot="1462489200"
+              style={{ display: "block" }}
+              format="auto"
+              responsive="true"
+              layoutKey="-gw-1+2a-9x+5c"
+            />
+          </div>
+        </div>
         <nav className="px-6 py-3 menu">
           <div className="w-full flex flex-wrap items-center justify-between lg:justify-start">
             <Link href={logoLink}>
