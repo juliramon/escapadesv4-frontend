@@ -1,16 +1,29 @@
-import Head from "next/head";
 import { useContext } from "react";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
+import GlobalMetas from "../components/head/GlobalMetas";
+import Breadcrumb from "../components/richsnippets/Breadcrumb";
 import UserContext from "../contexts/UserContext";
 
 const CondicionsUs = () => {
   const { user } = useContext(UserContext);
   return (
     <>
-      <Head>
-        <title>Condicions d'ús – Escapadesenparella.cat</title>
-      </Head>
+      {/* Browser metas  */}
+      <GlobalMetas
+        title="Condicions d'ús"
+        description="Condicions d’ús pel lloc web Escapadesenparella.cat Darrera actualització el 20/04/2021."
+        url="https://escapadesenparella.cat/condicions-us"
+        image="https://res.cloudinary.com/juligoodie/image/upload/v1632416196/getaways-guru/zpdiudqa0bk8sc3wfyue.jpg"
+        canonical="https://escapadesenparella.cat/condicions-us"
+      />
+      {/* Rich snippets */}
+      <Breadcrumb
+        page1Title="Inici"
+        page1Url="https://escapadesenparella.cat"
+        page2Title="Condicions d'ús"
+        page2Url={`https://escapadesenparella.cat/condicions-us`}
+      />
       <NavigationBar
         logo_url={
           "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"

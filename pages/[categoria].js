@@ -1,12 +1,13 @@
-import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import Error404 from "../components/global/Error404";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
+import GlobalMetas from "../components/head/GlobalMetas";
 import PublicSquareBox from "../components/listings/PublicSquareBox";
 import MapModal from "../components/modals/MapModal";
+import Breadcrumb from "../components/richsnippets/Breadcrumb";
 import UserContext from "../contexts/UserContext";
 import ContentService from "../services/contentService";
 
@@ -213,61 +214,21 @@ const CategoryPage = ({
 
   return (
     <>
-      <Head>
-        <title>{state.categoryDetails.title} - Escapadesenparella.cat</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta
-          name="description"
-          content={`Històries en parella per a inspirar, descobrir nous llocs i, en definitiva, fer-vos venir ganes d'una escapada en parella per recordar.`}
-        />
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content={`${state.categoryDetails.title} - Escapadesenparella.cat`}
-        />
-        <meta
-          property="og:description"
-          content={`Històries en parella per a inspirar, descobrir nous llocs i, en definitiva, fer-vos venir ganes d'una escapada en parella per recordar.`}
-        />
-        <meta
-          property="url"
-          content={`https://escapadesenparella.cat/histories`}
-        />
-        <meta property="og:site_name" content="Escapadesenparella.cat" />
-        <meta property="og:locale" content="ca_ES" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content={`${state.categoryDetails.title} - Escapadesenparella.cat`}
-        />
-        <meta
-          name="twitter:description"
-          content={`Històries en parella per a inspirar, descobrir nous llocs i, en definitiva, fer-vos venir ganes d'una escapada en parella per recordar.`}
-        />
-        <meta
-          name="twitter:image"
-          content={`https://escapadesenparella.cat/img/containers/main/img/og-histories.png/69081998ba0dfcb1465f7f878cbc7912.png`}
-        />
-        <meta
-          property="og:image"
-          content={`https://escapadesenparella.cat/img/containers/main/img/og-histories.png/69081998ba0dfcb1465f7f878cbc7912.png`}
-        />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:heigth" content="1200" />
-        <link
-          rel="canonical"
-          href={`https://escapadesenparella.cat/histories`}
-        />
-        <link href={`https://escapadesenparella.cat`} rel="home" />
-        <meta property="fb:pages" content="1725186064424579" />
-        <meta
-          name="B-verify"
-          content="756319ea1956c99d055184c4cac47dbfa3c81808"
-        />
-      </Head>
+      {/* Browser metas  */}
+      <GlobalMetas
+        title={state.categoryDetails.title}
+        description={state.categoryDetails.subtitle}
+        url={`https://escapadesenparella.cat/${state.categoryDetails.slug}`}
+        image={state.categoryDetails.image}
+        canonical={`https://escapadesenparella.cat/${state.categoryDetails.slug}`}
+      />
+      {/* Rich snippets */}
+      <Breadcrumb
+        page1Title="Inici"
+        page1Url="https://escapadesenparella.cat"
+        page2Title={state.categoryDetails.title}
+        page2Url={`https://escapadesenparella.cat/${state.categoryDetails.slug}`}
+      />
       <div id="contentList" className="category relative">
         <NavigationBar
           logo_url={

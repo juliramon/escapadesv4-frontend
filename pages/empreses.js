@@ -1,20 +1,28 @@
-import Head from "next/head";
 import Link from "next/link";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
 import Plans from "../components/global/Plans";
+import GlobalMetas from "../components/head/GlobalMetas";
+import Breadcrumb from "../components/richsnippets/Breadcrumb";
 
 const Serveis = () => {
   return (
     <>
-      <Head>
-        <title>
-          Multiplica la teva presencia online... i els teus clients –
-          Escpadesenparella.cat
-        </title>
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-      </Head>
+      {/* Browser metas  */}
+      <GlobalMetas
+        title="Empreses"
+        description="Multiplica la teva presència online... i els teus clients amb Escapadesenparella.cat. Clica per veure com et podem ajudar."
+        url="https://escapadesenparella.cat/empreses"
+        image="https://res.cloudinary.com/juligoodie/image/upload/v1621536007/getaways-guru/static-files/graphic-plans-3_lrey6s.png"
+        canonical="https://escapadesenparella.cat/empreses"
+      />
+      {/* Rich snippets */}
+      <Breadcrumb
+        page1Title="Inici"
+        page1Url="https://escapadesenparella.cat"
+        page2Title="Empreses"
+        page2Url={`https://escapadesenparella.cat/empreses`}
+      />
       <NavigationBar
         logo_url={
           "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"

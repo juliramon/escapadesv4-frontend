@@ -1,12 +1,13 @@
-import Head from "next/head";
 import Link from "next/link";
-import { useContext, useEffect, useState } from "react";
-import { Form, Button, Alert, Container, Spinner } from "react-bootstrap";
+import { useContext, useState } from "react";
+import { Form, Button, Alert } from "react-bootstrap";
 import AuthService from "../services/authService";
-import Router, { useRouter } from "next/router";
+import { useRouter } from "next/router";
 import UserContext from "../contexts/UserContext";
 import slugify from "slugify";
 import EmailService from "../services/emailService";
+import GlobalMetas from "../components/head/GlobalMetas";
+import Breadcrumb from "../components/richsnippets/Breadcrumb";
 
 const Signup = () => {
   const { user, getNewUser } = useContext(UserContext);
@@ -142,53 +143,21 @@ const Signup = () => {
 
   return (
     <>
-      <Head>
-        <title>Crea el teu compte - Escapadesenparella.cat</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta httpEquiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta
-          name="description"
-          content={`Crea el teu compte gratuït per guardar i planificar la teva propera escapada en parella ideal!`}
-        />
-        <meta name="robots" content="noindex, nofollow" />
-        <meta name="googlebot" content="noindex, nofollow" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content={`Crea el teu compte - Escapadesenparella.cat`}
-        />
-        <meta
-          property="og:description"
-          content={`Crea el teu compte gratuït per guardar i planificar la teva propera escapada en parella ideal!`}
-        />
-        <meta
-          property="url"
-          content={`https://escapadesenparella.cat${router.asPath}`}
-        />
-        <meta property="og:site_name" content="Escapadesenparella.cat" />
-        <meta property="og:locale" content="ca_ES" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content={`Crea el teu compte - Escapadesenparella.cat`}
-        />
-        <meta
-          name="twitter:description"
-          content={`Crea el teu compte gratuït per guardar i planificar la teva propera escapada en parella ideal!`}
-        />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:heigth" content="1200" />
-        <link
-          rel="canonical"
-          href={`https://escapadesenparella.cat${router.asPath}`}
-        />
-        <link href={`https://escapadesenparella.cat`} rel="home" />
-        <meta property="fb:pages" content="1725186064424579" />
-        <meta
-          name="B-verify"
-          content="756319ea1956c99d055184c4cac47dbfa3c81808"
-        />
-      </Head>
+      {/* Browser metas  */}
+      <GlobalMetas
+        title="Crea el teu compte"
+        description="Crea el teu compte gratuït per guardar i planificar la teva propera escapada en parella ideal!"
+        url="https://escapadesenparella.cat/signup"
+        image="https://res.cloudinary.com/juligoodie/image/upload/v1632416196/getaways-guru/zpdiudqa0bk8sc3wfyue.jpg"
+        canonical="https://escapadesenparella.cat/signup"
+      />
+      {/* Rich snippets */}
+      <Breadcrumb
+        page1Title="Inici"
+        page1Url="https://escapadesenparella.cat"
+        page2Title="Crea el teu compte"
+        page2Url={`https://escapadesenparella.cat/signup`}
+      />
       <section id="signup">
         <div className="d-flex">
           <div className="signup-col left">

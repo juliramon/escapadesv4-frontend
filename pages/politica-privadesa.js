@@ -1,18 +1,29 @@
-import Head from "next/head";
 import { useContext } from "react";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
+import GlobalMetas from "../components/head/GlobalMetas";
+import Breadcrumb from "../components/richsnippets/Breadcrumb";
 import UserContext from "../contexts/UserContext";
 
 const PoliticaPrivadesa = () => {
   const { user } = useContext(UserContext);
   return (
     <>
-      <Head>
-        <title>Política de privadesa – Escapadesenparella.cat</title>
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-      </Head>
+      {/* Browser metas  */}
+      <GlobalMetas
+        title="Política de privadesa"
+        description="Política de privadesa pel lloc web Escapadesenparella.cat. Darrera actualització el 20/04/2021."
+        url="https://escapadesenparella.cat/politica-privadesa"
+        image="https://res.cloudinary.com/juligoodie/image/upload/v1632416196/getaways-guru/zpdiudqa0bk8sc3wfyue.jpg"
+        canonical="https://escapadesenparella.cat/politica-privadesa"
+      />
+      {/* Rich snippets */}
+      <Breadcrumb
+        page1Title="Inici"
+        page1Url="https://escapadesenparella.cat"
+        page2Title="Política de privadesa"
+        page2Url={`https://escapadesenparella.cat/politica-privadesa`}
+      />
       <NavigationBar
         logo_url={
           "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"

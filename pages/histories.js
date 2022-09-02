@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import ContentService from "../services/contentService";
 import NavigationBar from "../components/global/NavigationBar";
 import FetchingSpinner from "../components/global/FetchingSpinner";
-import Head from "next/head";
 import FeaturedStoryBox from "../components/listings/FeaturedStoryBox";
 import PopularStoryBox from "../components/listings/PopularStoryBox";
 import RegularStoryBox from "../components/listings/RegularStoryBox";
@@ -14,6 +13,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import ShareBar from "../components/social/ShareBar";
+import GlobalMetas from "../components/head/GlobalMetas";
+import Breadcrumb from "../components/richsnippets/Breadcrumb";
 
 const StoriesList = ({
   user,
@@ -86,61 +87,21 @@ const StoriesList = ({
 
   return (
     <>
-      <Head>
-        <title>Històries en parella - Escapadesenparella.cat</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta
-          name="description"
-          content={`Històries en parella per a inspirar, descobrir nous llocs i, en definitiva, fer-vos venir ganes d'una escapada en parella per recordar.`}
-        />
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content={`$Històries en parella - Escapadesenparella.cat`}
-        />
-        <meta
-          property="og:description"
-          content={`Històries en parella per a inspirar, descobrir nous llocs i, en definitiva, fer-vos venir ganes d'una escapada en parella per recordar.`}
-        />
-        <meta
-          property="url"
-          content={`https://escapadesenparella.cat/histories`}
-        />
-        <meta property="og:site_name" content="Escapadesenparella.cat" />
-        <meta property="og:locale" content="ca_ES" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content={`$Històries en parella - Escapadesenparella.cat`}
-        />
-        <meta
-          name="twitter:description"
-          content={`Històries en parella per a inspirar, descobrir nous llocs i, en definitiva, fer-vos venir ganes d'una escapada en parella per recordar.`}
-        />
-        <meta
-          name="twitter:image"
-          content={`https://escapadesenparella.cat/img/containers/main/img/og-histories.png/69081998ba0dfcb1465f7f878cbc7912.png`}
-        />
-        <meta
-          property="og:image"
-          content={`https://escapadesenparella.cat/img/containers/main/img/og-histories.png/69081998ba0dfcb1465f7f878cbc7912.png`}
-        />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:heigth" content="1200" />
-        <link
-          rel="canonical"
-          href={`https://escapadesenparella.cat/histories`}
-        />
-        <link href={`https://escapadesenparella.cat`} rel="home" />
-        <meta property="fb:pages" content="1725186064424579" />
-        <meta
-          name="B-verify"
-          content="756319ea1956c99d055184c4cac47dbfa3c81808"
-        />
-      </Head>
+      {/* Browser metas  */}
+      <GlobalMetas
+        title="Històries en parella"
+        description="Històries en parella per a inspirar, descobrir nous llocs i, en definitiva, fer-vos venir ganes d'una escapada en parella per recordar."
+        url="https://escapadesenparella.cat/histories"
+        image="https://escapadesenparella.cat/img/containers/main/img/og-histories.png/69081998ba0dfcb1465f7f878cbc7912.png"
+        canonical="https://escapadesenparella.cat/histories"
+      />
+      {/* Rich snippets */}
+      <Breadcrumb
+        page1Title="Inici"
+        page1Url="https://escapadesenparella.cat"
+        page2Title="Històries en parella"
+        page2Url={`https://escapadesenparella.cat/histories`}
+      />
       <div className="stories">
         <NavigationBar
           logo_url={

@@ -1,6 +1,13 @@
 import Head from "next/head";
 
-const Breadcrumb = ({ page1Title, page1Url, page2Title, page2Url }) => {
+const Breadcrumb = ({
+  page1Title,
+  page1Url,
+  page2Title,
+  page2Url,
+  page3Title,
+  page3Url,
+}) => {
   return (
     <Head>
       <script
@@ -20,6 +27,11 @@ const Breadcrumb = ({ page1Title, page1Url, page2Title, page2Url }) => {
 				"position": 2, 
 				"name": "${page2Title}",
 				"item": "${page2Url}"  
+			}, {
+				"@type": "ListItem", 
+				"position": 3, 
+				"name": "${page3Title}",
+				"item": "${page3Url}"  
 			}]
 			}
 	`,

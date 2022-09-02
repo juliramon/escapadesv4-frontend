@@ -8,6 +8,7 @@ import Footer from "../components/global/Footer";
 import MapModal from "../components/modals/MapModal";
 import Fancybox from "../utils/Fancybox";
 import Breadcrumb from "../components/richsnippets/Breadcrumb";
+import GlobalMetas from "../components/head/GlobalMetas";
 
 const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
   const router = useRouter();
@@ -183,6 +184,21 @@ const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
 
   return (
     <>
+      {/* Browser metas  */}
+      <GlobalMetas
+        title="Activitats en parella"
+        description="Activitats en parella a Catalunya. Troba les millors excursions, activitats d'aventura i plans per fer en parella a Catalunya."
+        url="https://escapadesenparella.cat/activitats"
+        image="https://escapadesenparella.cat/img/containers/main/img/og-histories.png/69081998ba0dfcb1465f7f878cbc7912.png"
+        canonical="https://escapadesenparella.cat/activitats"
+      />
+      {/* Rich snippets */}
+      <Breadcrumb
+        page1Title="Inici"
+        page1Url="https://escapadesenparella.cat"
+        page2Title="Activitats en parella"
+        page2Url={`https://escapadesenparella.cat/activitats`}
+      />
       <Head>
         <title>Activitats en parella - Escapadesenparella.cat</title>
         <meta name="robots" content="index, follow" />

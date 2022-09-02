@@ -11,6 +11,8 @@ import UserContext from "../../contexts/UserContext";
 import Footer from "../../components/global/Footer";
 import Fancybox from "../../utils/Fancybox";
 import FooterLinksInterest from "../../components/ads/FooterLinksInterest";
+import GlobalMetas from "../../components/head/GlobalMetas";
+import Breadcrumb from "../../components/richsnippets/Breadcrumb";
 
 const ActivityListing = ({ activityDetails }) => {
   const { user } = useContext(UserContext);
@@ -294,55 +296,23 @@ const ActivityListing = ({ activityDetails }) => {
 
   return (
     <>
-      <Head>
-        <title>{state.activity.metaTitle} - Escapadesenparella.cat</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta
-          name="description"
-          content={`${state.activity.metaDescription}`}
-        />
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content={`${state.activity.metaTitle} - Escapadesenparella.cat`}
-        />
-        <meta
-          property="og:description"
-          content={`${state.activity.metaDescription}`}
-        />
-        <meta
-          property="url"
-          content={`https://escapadesenparella.cat${router.asPath}`}
-        />
-        <meta property="og:site_name" content="Escapadesenparella.cat" />
-        <meta property="og:locale" content="ca_ES" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content={`${state.activity.metaTitle} - Escapadesenparella.cat`}
-        />
-        <meta
-          name="twitter:description"
-          content={`${state.activity.metaDescription}`}
-        />
-        <meta name="twitter:image" content={state.activity.images[0]} />
-        <meta property="og:image" content={state.activity.images[0]} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:heigth" content="1200" />
-        <link
-          rel="canonical"
-          href={`https://escapadesenparella.cat${router.asPath}`}
-        />
-        <link href={`https://escapadesenparella.cat`} rel="home" />
-        <meta property="fb:pages" content="1725186064424579" />
-        <meta
-          name="B-verify"
-          content="756319ea1956c99d055184c4cac47dbfa3c81808"
-        />
-      </Head>
+      {/* Browser metas  */}
+      <GlobalMetas
+        title={state.activity.metaTitle}
+        description={state.activity.metaDescription}
+        url={`https://escapadesenparella.cat/activitats/${state.activity.slug}`}
+        image={state.activity.cover}
+        canonical={`https://escapadesenparella.cat/activitats/${state.activity.slug}`}
+      />
+      {/* Rich snippets */}
+      <Breadcrumb
+        page1Title="Inici"
+        page1Url="https://escapadesenparella.cat"
+        page2Title="Activitats"
+        page2Url="https://escapadesenparella.cat/activitats"
+        page3Title={state.activity.metaTitle}
+        page3Url={`https://escapadesenparella.cat/activitats/${state.activity.slug}`}
+      />
       <div id="listingPage">
         <NavigationBar
           logo_url={

@@ -1,13 +1,13 @@
-import { useEffect, useCallback, useState } from "react";
+import { useEffect, useState } from "react";
 import ContentService from "../services/contentService";
 import NavigationBar from "../components/global/NavigationBar";
 import PublicSquareBox from "../components/listings/PublicSquareBox";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import Footer from "../components/global/Footer";
 import MapModal from "../components/modals/MapModal";
 import Fancybox from "../utils/Fancybox";
 import Breadcrumb from "../components/richsnippets/Breadcrumb";
+import GlobalMetas from "../components/head/GlobalMetas";
 
 const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
   const router = useRouter();
@@ -197,61 +197,15 @@ const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
 
   return (
     <>
-      <Head>
-        <title>Allotjaments amb encant - Escapadesenparella.cat</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta
-          name="description"
-          content={`Allotjaments amb encant a Catalunya. Busques hotels amb encant o cases rurals a Catalunya? Aquí trobaràs els millors els millors.`}
-        />
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content={`Allotjaments amb encant - Escapadesenparella.cat`}
-        />
-        <meta
-          property="og:description"
-          content={`Allotjaments amb encant a Catalunya. Busques hotels amb encant o cases rurals a Catalunya? Aquí trobaràs els millors els millors.`}
-        />
-        <meta
-          property="url"
-          content={`https://escapadesenparella.cat/histories`}
-        />
-        <meta property="og:site_name" content="Escapadesenparella.cat" />
-        <meta property="og:locale" content="ca_ES" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content={`Allotjaments amb encant - Escapadesenparella.cat`}
-        />
-        <meta
-          name="twitter:description"
-          content={`Allotjaments amb encant a Catalunya. Busques hotels amb encant o cases rurals a Catalunya? Aquí trobaràs els millors els millors.`}
-        />
-        <meta
-          name="twitter:image"
-          content={`https://escapadesenparella.cat/img/containers/main/img/og-histories.png/69081998ba0dfcb1465f7f878cbc7912.png`}
-        />
-        <meta
-          property="og:image"
-          content={`https://escapadesenparella.cat/img/containers/main/img/og-histories.png/69081998ba0dfcb1465f7f878cbc7912.png`}
-        />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:heigth" content="1200" />
-        <link
-          rel="canonical"
-          href={`https://escapadesenparella.cat/histories`}
-        />
-        <link href={`https://escapadesenparella.cat`} rel="home" />
-        <meta property="fb:pages" content="1725186064424579" />
-        <meta
-          name="B-verify"
-          content="756319ea1956c99d055184c4cac47dbfa3c81808"
-        />
-      </Head>
+      {/* Browser metas  */}
+      <GlobalMetas
+        title="Allotjaments amb encant"
+        description="Allotjaments amb encant a Catalunya. Busques hotels amb encant o cases rurals a Catalunya? Aquí trobaràs els millors els millors."
+        url="https://escapadesenparella.cat/allotjaments"
+        image="https://escapadesenparella.cat/img/containers/main/img/og-histories.png/69081998ba0dfcb1465f7f878cbc7912.png"
+        canonical="https://escapadesenparella.cat/allotjaments"
+      />
+      {/* Rich snippets */}
       <Breadcrumb
         page1Title="Inici"
         page1Url="https://escapadesenparella.cat"

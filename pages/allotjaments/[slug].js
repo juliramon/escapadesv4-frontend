@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import NavigationBar from "../../components/global/NavigationBar";
@@ -13,6 +12,7 @@ import FetchingSpinner from "../../components/global/FetchingSpinner";
 import Fancybox from "../../utils/Fancybox";
 import FooterLinksInterest from "../../components/ads/FooterLinksInterest";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
+import GlobalMetas from "../../components/head/GlobalMetas";
 
 const PlaceListing = ({ placeDetails }) => {
   const { user } = useContext(UserContext);
@@ -294,52 +294,23 @@ const PlaceListing = ({ placeDetails }) => {
 
   return (
     <>
-      <Head>
-        <title>{state.place.metaTitle} - Escapadesenparella.cat</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta name="description" content={`${state.place.metaDescription}`} />
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content={`${state.place.metaTitle} - Escapadesenparella.cat`}
-        />
-        <meta
-          property="og:description"
-          content={`${state.place.metaDescription}`}
-        />
-        <meta
-          property="url"
-          content={`https://escapadesenparella.cat${router.asPath}`}
-        />
-        <meta property="og:site_name" content="Escapadesenparella.cat" />
-        <meta property="og:locale" content="ca_ES" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content={`${state.place.metaTitle} - Escapadesenparella.cat`}
-        />
-        <meta
-          name="twitter:description"
-          content={`${state.place.metaDescription}`}
-        />
-        <meta name="twitter:image" content={state.place.images[0]} />
-        <meta property="og:image" content={state.place.images[0]} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:heigth" content="1200" />
-        <link
-          rel="canonical"
-          href={`https://escapadesenparella.cat${router.asPath}`}
-        />
-        <link href={`https://escapadesenparella.cat`} rel="home" />
-        <meta property="fb:pages" content="1725186064424579" />
-        <meta
-          name="B-verify"
-          content="756319ea1956c99d055184c4cac47dbfa3c81808"
-        />
-      </Head>
+      {/* Browser metas  */}
+      <GlobalMetas
+        title={state.place.metaTitle}
+        description={state.place.metaDescription}
+        url={`https://escapadesenparella.cat/allotjaments/${state.place.slug}`}
+        image={state.place.cover}
+        canonical={`https://escapadesenparella.cat/allotjaments/${state.place.slug}`}
+      />
+      {/* Rich snippets */}
+      <Breadcrumb
+        page1Title="Inici"
+        page1Url="https://escapadesenparella.cat"
+        page2Title="Allotjaments"
+        page2Url="https://escapadesenparella.cat/allotjaments"
+        page3Title={state.place.metaTitle}
+        page3Url={`https://escapadesenparella.cat/allotjaments/${state.place.slug}`}
+      />
       <div id="listingPage">
         <NavigationBar
           logo_url={

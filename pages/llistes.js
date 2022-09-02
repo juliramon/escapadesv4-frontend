@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import ContentService from "../services/contentService";
 import NavigationBar from "../components/global/NavigationBar";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import FeaturedListBox from "../components/listings/FeaturedListBox";
 import RegularListBox from "../components/listings/RegularListBox";
@@ -9,6 +8,8 @@ import ShareBar from "../components/social/ShareBar";
 import AdSense from "react-adsense";
 import Footer from "../components/global/Footer";
 import FetchingSpinner from "../components/global/FetchingSpinner";
+import GlobalMetas from "../components/head/GlobalMetas";
+import Breadcrumb from "../components/richsnippets/Breadcrumb";
 
 const ListsList = ({ user, totalItems, lists, numPages }) => {
   const router = useRouter();
@@ -70,61 +71,21 @@ const ListsList = ({ user, totalItems, lists, numPages }) => {
 
   return (
     <>
-      <Head>
-        <title>Llistes d'escapades - Escapadesenparella.cat</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta
-          name="description"
-          content={`Llistes d'escapades per a inspirar, descobrir nous llocs i, en definitiva, fer-vos venir ganes d'una escapada en parella per recordar.`}
-        />
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content={`Llistes d'escapades - Escapadesenparella.cat`}
-        />
-        <meta
-          property="og:description"
-          content={`Llistes d'escapades per a inspirar, descobrir nous llocs i, en definitiva, fer-vos venir ganes d'una escapada en parella per recordar.`}
-        />
-        <meta
-          property="url"
-          content={`https://escapadesenparella.cat/histories`}
-        />
-        <meta property="og:site_name" content="Escapadesenparella.cat" />
-        <meta property="og:locale" content="ca_ES" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content={`Llistes d'escapades - Escapadesenparella.cat`}
-        />
-        <meta
-          name="twitter:description"
-          content={`Llistes d'escapades per a inspirar, descobrir nous llocs i, en definitiva, fer-vos venir ganes d'una escapada en parella per recordar.`}
-        />
-        <meta
-          name="twitter:image"
-          content={`https://escapadesenparella.cat/img/containers/main/img/og-histories.png/69081998ba0dfcb1465f7f878cbc7912.png`}
-        />
-        <meta
-          property="og:image"
-          content={`https://escapadesenparella.cat/img/containers/main/img/og-histories.png/69081998ba0dfcb1465f7f878cbc7912.png`}
-        />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:heigth" content="1200" />
-        <link
-          rel="canonical"
-          href={`https://escapadesenparella.cat/histories`}
-        />
-        <link href={`https://escapadesenparella.cat`} rel="home" />
-        <meta property="fb:pages" content="1725186064424579" />
-        <meta
-          name="B-verify"
-          content="756319ea1956c99d055184c4cac47dbfa3c81808"
-        />
-      </Head>
+      {/* Browser metas  */}
+      <GlobalMetas
+        title="Llistes d'escapades"
+        description="Llistes d'escapades per a inspirar, descobrir nous llocs i, en definitiva, fer-vos venir ganes d'una escapada en parella per recordar."
+        url="https://escapadesenparella.cat/llistes"
+        image="https://res.cloudinary.com/juligoodie/image/upload/v1632416196/getaways-guru/zpdiudqa0bk8sc3wfyue.jpg"
+        canonical="https://escapadesenparella.cat/llistes"
+      />
+      {/* Rich snippets */}
+      <Breadcrumb
+        page1Title="Inici"
+        page1Url="https://escapadesenparella.cat"
+        page2Title="Llistes d'escapades"
+        page2Url={`https://escapadesenparella.cat/llistes`}
+      />
       <div className="lists">
         <NavigationBar
           logo_url={

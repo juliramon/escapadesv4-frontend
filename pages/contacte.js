@@ -1,9 +1,10 @@
-import Head from "next/head";
 import React, { useState } from "react";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
+import GlobalMetas from "../components/head/GlobalMetas";
 import ToastNotification from "../components/toasts/ToastNotification";
 import EmailService from "../services/emailService";
+import Breadcrumb from "../components/richsnippets/Breadcrumb";
 
 const Contacte = ({ user }) => {
   const initialState = {
@@ -102,11 +103,21 @@ const Contacte = ({ user }) => {
 
   return (
     <>
-      <Head>
-        <title>Contacta amb nosaltres - Escapadesenparella.cat</title>
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-      </Head>
+      {/* Browser metas  */}
+      <GlobalMetas
+        title="Contacte"
+        description="Vols que col·laborem per donar a conèixer el teu allotjament o activitat? Tens dubtes? No saps on escapar-te? Contacta'ns!"
+        url="https://escapadesenparella.cat/contacte"
+        image="https://res.cloudinary.com/juligoodie/image/upload/v1651513521/getaways-guru/contacta-amb-nosaltres_sg47zn.jpg"
+        canonical="https://escapadesenparella.cat/contacte"
+      />
+      {/* Rich snippets */}
+      <Breadcrumb
+        page1Title="Inici"
+        page1Url="https://escapadesenparella.cat"
+        page2Title="Contacte"
+        page2Url={`https://escapadesenparella.cat/contacte`}
+      />
       <main>
         <NavigationBar
           logo_url={

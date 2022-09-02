@@ -11,6 +11,8 @@ import UserContext from "../../contexts/UserContext";
 import ContentService from "../../services/contentService";
 import ReactHtmlParser from "react-html-parser";
 import FooterHistoria from "../../components/global/FooterHistoria";
+import GlobalMetas from "../../components/head/GlobalMetas";
+import Breadcrumb from "../../components/richsnippets/Breadcrumb";
 
 const ListView = ({ listDetails }) => {
   const { user } = useContext(UserContext);
@@ -113,52 +115,23 @@ const ListView = ({ listDetails }) => {
 
   return (
     <>
-      <Head>
-        <title>{state.list.metaTitle} - Escapadesenparella.cat</title>
-        <link rel="icon" href="/favicon.ico" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-        <meta name="description" content={`${state.list.metaDescription}`} />
-        <meta name="robots" content="index, follow" />
-        <meta name="googlebot" content="index, follow" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:title"
-          content={`${state.list.metaTitle} - Escapadesenparella.cat`}
-        />
-        <meta
-          property="og:description"
-          content={`${state.list.metaDescription}`}
-        />
-        <meta
-          property="url"
-          content={`https://escapadesenparella.cat${router.asPath}`}
-        />
-        <meta property="og:site_name" content="Escapadesenparella.cat" />
-        <meta property="og:locale" content="ca_ES" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          name="twitter:title"
-          content={`${state.list.metaTitle} - Escapadesenparella.cat`}
-        />
-        <meta
-          name="twitter:description"
-          content={`${state.list.metaDescription}`}
-        />
-        <meta name="twitter:image" content={state.list.cover} />
-        <meta property="og:image" content={state.list.cover} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:heigth" content="1200" />
-        <link
-          rel="canonical"
-          href={`https://escapadesenparella.cat${router.asPath}`}
-        />
-        <link href={`https://escapadesenparella.cat`} rel="home" />
-        <meta property="fb:pages" content="1725186064424579" />
-        <meta
-          name="B-verify"
-          content="756319ea1956c99d055184c4cac47dbfa3c81808"
-        />
-      </Head>
+      {/* Browser metas  */}
+      <GlobalMetas
+        title={state.list.metaTitle}
+        description={state.list.metaDescription}
+        url={`https://escapadesenparella.cat/llistes/${state.list.slug}`}
+        image={state.list.cover}
+        canonical={`https://escapadesenparella.cat/llistes/${state.list.slug}`}
+      />
+      {/* Rich snippets */}
+      <Breadcrumb
+        page1Title="Inici"
+        page1Url="https://escapadesenparella.cat"
+        page2Title="Llistes"
+        page2Url="https://escapadesenparella.cat/llistes"
+        page3Title={state.list.metaTitle}
+        page3Url={`https://escapadesenparella.cat/llistes/${state.list.slug}`}
+      />
       <div className="listing-list">
         <NavigationBar
           logo_url={
