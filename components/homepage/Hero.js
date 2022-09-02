@@ -1,7 +1,6 @@
-import Link from "next/link";
 import SearchBar from "../homepage/SearchBar";
 
-const Hero = ({ background_url, background_url_mob, title, subtitle }) => {
+const Hero = ({ background_url, title, subtitle }) => {
   return (
     <>
       <section
@@ -19,7 +18,10 @@ const Hero = ({ background_url, background_url_mob, title, subtitle }) => {
           </div>
         </div>
       </section>
-      <div className="opacity-25" id="animate-area"></div>
+      <div
+        id="animate-area"
+        style={{ backgroundImage: `url(${background_url})` }}
+      ></div>
     </>
   );
 };
