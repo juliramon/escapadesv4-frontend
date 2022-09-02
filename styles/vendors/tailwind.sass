@@ -44,3 +44,22 @@
 
     ol, ul, menu
         @apply list-disc pl-5 mb-5 leading-relaxed
+
+
+    #animate-area
+        background-image: url('https://res.cloudinary.com/juligoodie/image/upload/v1662157137/branding/background-main-2_dk7lzk.png')
+        width: 100%
+        height: 442px
+        background-position: 0
+        background-size: cover
+        animation: horizontalSlide 40s linear 1s infinite
+        margin-top: -170px
+
+    @keyframes horizontalSlide
+        0% 
+            background-position: 0 0
+        50% 
+            background-position: -250px 0
+        100% 
+            background-position: -500px 0
+    
