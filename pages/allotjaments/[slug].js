@@ -12,6 +12,7 @@ import Footer from "../../components/global/Footer";
 import FetchingSpinner from "../../components/global/FetchingSpinner";
 import Fancybox from "../../utils/Fancybox";
 import FooterLinksInterest from "../../components/ads/FooterLinksInterest";
+import Breadcrumb from "../../components/richsnippets/Breadcrumb";
 
 const PlaceListing = ({ placeDetails }) => {
   const { user } = useContext(UserContext);

@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import Footer from "../components/global/Footer";
 import MapModal from "../components/modals/MapModal";
 import Fancybox from "../utils/Fancybox";
+import Breadcrumb from "../components/richsnippets/Breadcrumb";
 
 const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
   const router = useRouter();
@@ -249,6 +250,12 @@ const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
         <meta
           name="B-verify"
           content="756319ea1956c99d055184c4cac47dbfa3c81808"
+        />
+        <Breadcrumb
+          page1Title="Inici"
+          page1Url="https://escapadesenparella.cat"
+          page2Title="Allotjaments amb encant"
+          page2Url={`https://escapadesenparella.cat/allotjaments`}
         />
       </Head>
       <div id="contentList" className="place">
