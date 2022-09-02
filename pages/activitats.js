@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import Footer from "../components/global/Footer";
 import MapModal from "../components/modals/MapModal";
 import Fancybox from "../utils/Fancybox";
+import Breadcrumb from "../components/richsnippets/Breadcrumb";
 
 const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
   const router = useRouter();
