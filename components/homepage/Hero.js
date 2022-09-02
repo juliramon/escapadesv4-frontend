@@ -5,7 +5,7 @@ const Hero = ({ background_url, background_url_mob, title, subtitle }) => {
   return (
     <section
       id="hero"
-      className="relative flex items-center justify-center pt-8 pb-8 lg:py-36"
+      className="relative flex items-center justify-center pt-8 pb-8 lg:py-40"
     >
       <div className="absolute top-0 left-0 w-full h-full">
         <div className="absolute top-0 left-0 w-full h-full bg-primary-500 bg-opacity-30 z-30"></div>
@@ -25,7 +25,7 @@ const Hero = ({ background_url, background_url_mob, title, subtitle }) => {
             ></img>
           </picture>
         </div>
-        <Link href="#homePageResults">
+        {/* <Link href="#homePageResults">
           <a className="hidden md:block absolute z-40 left-1/2 bottom-12 transform -translate-x-1/2 scrolldown-button">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +46,7 @@ const Hero = ({ background_url, background_url_mob, title, subtitle }) => {
               <line x1="16" y1="12" x2="12" y2="16" />
             </svg>
           </a>
-        </Link>
+        </Link> */}
         <figcaption className="hidden lg:block text-xs text-white absolute bottom-8 right-6 md:right-12 z-40 text-right">
           Escapada al Pic del Campirme, 2.633m (Pallars Sobirà)
           <br />© Escapadesenparella.cat

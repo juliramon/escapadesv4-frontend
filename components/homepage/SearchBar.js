@@ -546,7 +546,7 @@ const SearchBar = () => {
   );
 
   return (
-    <div className="search-form mt-8 lg:mt-14">
+    <div className="search-form mt-8">
       <div className="tabs-dropdown relative text-left">
         <span
           onClick={() => setDropdownState(!dropdownState)}
