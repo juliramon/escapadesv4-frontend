@@ -11,6 +11,7 @@ import UserContext from "../../contexts/UserContext";
 import Footer from "../../components/global/Footer";
 import FetchingSpinner from "../../components/global/FetchingSpinner";
 import Fancybox from "../../utils/Fancybox";
+import AdSense from "react-adsense";
 
 const PlaceListing = ({ placeDetails }) => {
   const { user } = useContext(UserContext);
@@ -915,6 +916,21 @@ const PlaceListing = ({ placeDetails }) => {
             </section>
           </article>
         </main>
+        <section className="py-12 md:pt-16 md:pb-24">
+          <div className="container">
+            <h2>Enllaços d'interès</h2>
+            <div className="mt-5">
+              <AdSense.Google
+                client="ca-pub-6252269250624547"
+                slot="9222117584"
+                style={{ display: "block" }}
+                format="auto"
+                responsive="true"
+                layoutKey="-gw-1+2a-9x+5c"
+              />
+            </div>
+          </div>
+        </section>
         <Footer
           logo_url={
             "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
