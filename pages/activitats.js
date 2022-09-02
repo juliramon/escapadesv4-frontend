@@ -186,6 +186,12 @@ const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
         <title>Activitats en parella - Escapadesenparella.cat</title>
         <meta name="robots" content="index, follow" />
         <meta name="googlebot" content="index, follow" />
+        <Breadcrumb
+          page1Title="Inici"
+          page1Url="https://escapadesenparella.cat"
+          page2Title="Activitats en parella"
+          page2Url={`https://escapadesenparella.cat/activitats`}
+        />
       </Head>
       <div id="contentList" className="activity relative">
         <NavigationBar

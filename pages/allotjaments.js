@@ -251,13 +251,13 @@ const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
           name="B-verify"
           content="756319ea1956c99d055184c4cac47dbfa3c81808"
         />
-        <Breadcrumb
-          page1Title="Inici"
-          page1Url="https://escapadesenparella.cat"
-          page2Title="Allotjaments amb encant"
-          page2Url={`https://escapadesenparella.cat/allotjaments`}
-        />
       </Head>
+      <Breadcrumb
+        page1Title="Inici"
+        page1Url="https://escapadesenparella.cat"
+        page2Title="Allotjaments amb encant"
+        page2Url={`https://escapadesenparella.cat/allotjaments`}
+      />
       <div id="contentList" className="place">
         <NavigationBar
           logo_url={

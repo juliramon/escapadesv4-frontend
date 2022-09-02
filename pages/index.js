@@ -8,6 +8,7 @@ import HomePageResults from "../components/homepage/HomePageResults";
 import { useRouter } from "next/router";
 import UserContext from "../contexts/UserContext";
 import FollowBox from "../components/global/FollowBox";
+import LocalBusiness from "../components/richsnippets/LocalBusiness";
 
 const Homepage = (props) => {
   const { user } = useContext(UserContext);
@@ -89,6 +90,7 @@ const Homepage = (props) => {
           as="image"
         />
       </Head>
+      <LocalBusiness />
       <main id="homepage">
         <NavigationBar
           logo_url={

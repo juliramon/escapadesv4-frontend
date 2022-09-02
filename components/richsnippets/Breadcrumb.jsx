@@ -1,9 +1,12 @@
+import Head from "next/head";
+
 const Breadcrumb = ({ page1Title, page1Url, page2Title, page2Url }) => {
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{
-        __html: `
+    <Head>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: `
 		{
 			"@context": "https://schema.org/", 
 			"@type": "BreadcrumbList", 
@@ -20,8 +23,9 @@ const Breadcrumb = ({ page1Title, page1Url, page2Title, page2Url }) => {
 			}]
 			}
 	`,
-      }}
-    ></script>
+        }}
+      ></script>
+    </Head>
   );
 };
 
