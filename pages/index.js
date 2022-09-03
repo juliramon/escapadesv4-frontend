@@ -29,12 +29,7 @@ const Homepage = (props) => {
     );
   }
 
-  const title = (
-    <>
-      La vostra propera escapada
-      <br /> en parella comença aquí
-    </>
-  );
+  const title = <>La vostra propera escapada en parella comença aquí.</>;
 
   const subtitle = <>Cerca una activitat o allotjament on escapar-vos.</>;
 
