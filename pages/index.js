@@ -29,12 +29,7 @@ const Homepage = (props) => {
     );
   }
 
-  const title = (
-    <>
-      La vostra propera escapada
-      <br /> en parella comença aquí
-    </>
-  );
+  const title = <>La vostra propera escapada en parella comença aquí.</>;
 
   const subtitle = <>Cerca una activitat o allotjament on escapar-vos.</>;
 
@@ -58,10 +53,10 @@ const Homepage = (props) => {
         />
         <Hero
           background_url={
-            "https://res.cloudinary.com/juligoodie/image/upload/v1652527292/getaways-guru/IMGP9489-s_izgty6.jpg"
+            "https://res.cloudinary.com/juligoodie/image/upload/v1662240594/branding/grid-escapades_ycrouf.png"
           }
           background_url_mob={
-            "https://res.cloudinary.com/juligoodie/image/upload/w_375,h_425,c_fill/getaways-guru/IMGP9489-s_izgty6.jpg"
+            "https://res.cloudinary.com/juligoodie/image/upload/v1662240594/branding/grid-escapades_ycrouf.png"
           }
           title={title}
           subtitle={subtitle}
