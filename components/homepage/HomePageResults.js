@@ -71,6 +71,45 @@ const HomePageResults = ({
     <div id="homePageResults" className="relative z-40">
       <div className="container">
         <div className="w-full">
+          {/* Featured categories */}
+          <section className="pt-10">
+            <h2 className="text-center">Escapades a Catalunya</h2>
+            <p className="text-center max-w-sm mx-auto">
+              Exploreu tots els racons de casa nostra; descobriu les millors
+              escapades en parella a Catalunya.
+            </p>
+            <div className="flex flex-wrap items-start -mx-2 mt-2">
+              <div className="w-full md:w-1/3 lg:w-1/5 px-2 py-4">
+                <div className="rounded-md overflow-hidden">
+                  <picture>
+                    <img
+                      src="https://res.cloudinary.com/juligoodie/image/upload/v1662309120/branding/categoria-costa-brava-cover_ycixtm.jpg"
+                      alt=""
+                      className="w-full h-full object-cover"
+                      width=""
+                      height=""
+                      loading="lazy"
+                    />
+                  </picture>
+                </div>
+              </div>
+              <div className="w-full md:w-1/3 lg:w-1/5 px-2 py-4">
+                <div className="rounded-md overflow-hidden">
+                  <picture>
+                    <img
+                      src="https://res.cloudinary.com/juligoodie/image/upload/v1662309120/branding/categoria-pirineus-cover_foidwx.jpg"
+                      alt=""
+                      className="w-full h-full object-cover"
+                      width=""
+                      height=""
+                      loading="lazy"
+                    />
+                  </picture>
+                </div>
+              </div>
+            </div>
+          </section>
+
           {/* Most rated getaways */}
           <section className="pt-12 md:pt-20">
             <h2>Els allotjaments més ben valorats</h2>
