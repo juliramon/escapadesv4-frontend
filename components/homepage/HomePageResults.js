@@ -77,33 +77,96 @@ const HomePageResults = ({
       <div className="container">
         <div className="w-full">
           {/* Featured regions */}
+
           <section className="pt-12">
             <h2 className="">Escapades per Catalunya</h2>
             <p className="">
               Exploreu tots els racons de casa nostra; descobriu les millors
               escapades en parella per Catalunya
             </p>
-            <div className="flex flex-wrap items-start -mx-2 mt-2">
-              {state.featuredRegions.length > 0
-                ? state.featuredRegions.map((el) => {
-                    while (state.featuredRegions.indexOf(el) < 4) {
-                      return (
-                        <FeaturedRegionBox
-                          key={el._id}
-                          slug={el.slug}
-                          id={el._id}
-                          image={el.image}
-                          title={el.title}
-                        />
-                      );
-                    }
-                  })
-                : null}
+
+            <div className="flex flex-wrap items-center relative mt-3 -mx-1.5">
+              <Swiper
+                modules={[Navigation]}
+                spaceBetween={0}
+                slidesPerView={1}
+                navigation={{
+                  nextEl: ".swiper-prev",
+                  prevEl: ".swiper-next",
+                }}
+                breakpoints={{
+                  768: {
+                    slidesPerView: 2,
+                  },
+                  1024: {
+                    slidesPerView: 3,
+                  },
+                  1280: {
+                    slidesPerView: 4,
+                  },
+                }}
+              >
+                {state.featuredRegions.length > 0
+                  ? state.featuredRegions.map((el) => {
+                      while (state.featuredRegions.indexOf(el) < 6) {
+                        return (
+                          <SwiperSlide>
+                            <FeaturedRegionBox
+                              key={el._id}
+                              slug={el.slug}
+                              id={el._id}
+                              image={el.image}
+                              title={el.title}
+                            />
+                          </SwiperSlide>
+                        );
+                      }
+                    })
+                  : null}
+              </Swiper>
+              <button className="bg-white shadow-xl w-10 h-10 flex items-center justify-center swiper-next absolute top-1/2 -left-4 z-40 transform -translate-y-1/2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="icon icon-tabler icon-tabler-arrow-narrow-left text-primary-500"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <line x1="5" y1="12" x2="9" y2="16" />
+                  <line x1="5" y1="12" x2="9" y2="8" />
+                </svg>
+              </button>
+              <button className="bg-white shadow-xl w-10 h-10 flex items-center justify-center swiper-prev absolute top-1/2 -right-4 z-40 transform -translate-y-1/2">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="icon icon-tabler icon-tabler-arrow-narrow-right text-primary-500"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <line x1="15" y1="16" x2="19" y2="12" />
+                  <line x1="15" y1="8" x2="19" y2="12" />
+                </svg>
+              </button>
             </div>
           </section>
 
           {/* Most rated getaways */}
-          <section className="pt-12">
+          <section className="pt-14">
             <h2>Els allotjaments més ben valorats</h2>
             <div className="flex flex-wrap items-start -mx-2 mt-2">
               {state.mostRatedGetaways.length > 0

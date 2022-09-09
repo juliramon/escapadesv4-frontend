@@ -2,18 +2,24 @@ import React from "react";
 
 const FeaturedRegionBox = ({ image, name, slug }) => {
   return (
-    <div className="w-full md:w-1/3 lg:w-1/5 px-2 py-4">
-      <a href={slug} className="rounded-md overflow-hidden block">
-        <picture>
-          <img
-            src={image}
-            alt={name}
-            className="w-full h-full object-cover"
-            width=""
-            height=""
-            loading="lazy"
-          />
-        </picture>
+    <div className="w-full p-2 border-none">
+      <a
+        href={`escapades-per-catalunya/${slug}`}
+        className="block w-full h-full overflow-hidden rounded-md"
+        title={name}
+      >
+        <div className="relative w-full h-full aspect-w-3 aspect-h-4">
+          <picture>
+            <img
+              src={image}
+              alt={name}
+              className="w-full h-full object-cover"
+              width="300"
+              height="400"
+              loading="lazy"
+            />
+          </picture>
+        </div>
       </a>
     </div>
   );
