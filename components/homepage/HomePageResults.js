@@ -4,11 +4,13 @@ import { Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import PublicSquareBox from "../../components/listings/PublicSquareBox";
 import FeaturedStoryBox from "../listings/FeaturedStoryBox";
+import FeaturedRegionBox from "../listings/FeaturedRegionBox";
 
 import "swiper/css";
 import "swiper/css/navigation";
 
 const HomePageResults = ({
+  featuredRegions,
   featuredActivities,
   mostRatedPlaces,
   mostRecentStories,
@@ -19,6 +21,7 @@ const HomePageResults = ({
   totals,
 }) => {
   const initialState = {
+    featuredRegions: [],
     mostRatedGetaways: [],
     mostRecentStories: [],
     featuredRomanticGetaways: [],
@@ -32,6 +35,7 @@ const HomePageResults = ({
 
   useEffect(() => {
     if (
+      featuredRegions.length > 0 ||
       featuredActivities.length > 0 ||
       mostRatedPlaces.length > 0 ||
       mostRecentStories.length > 0 ||
@@ -42,6 +46,7 @@ const HomePageResults = ({
     ) {
       setState({
         ...state,
+        featuredRegions: featuredRegions,
         mostRatedGetaways: mostRatedPlaces,
         mostRecentStories: mostRecentStories,
         featuredRomanticGetaways: featuredRomanticGetaways,
@@ -71,47 +76,34 @@ const HomePageResults = ({
     <div id="homePageResults" className="relative z-40">
       <div className="container">
         <div className="w-full">
-          {/* Featured categories */}
-          <section className="pt-10">
-            <h2 className="text-center">Escapades a Catalunya</h2>
-            <p className="text-center max-w-sm mx-auto">
+          {/* Featured regions */}
+          <section className="pt-12">
+            <h2 className="">Escapades per Catalunya</h2>
+            <p className="">
               Exploreu tots els racons de casa nostra; descobriu les millors
-              escapades en parella a Catalunya.
+              escapades en parella per Catalunya
             </p>
             <div className="flex flex-wrap items-start -mx-2 mt-2">
-              <div className="w-full md:w-1/3 lg:w-1/5 px-2 py-4">
-                <div className="rounded-md overflow-hidden">
-                  <picture>
-                    <img
-                      src="https://res.cloudinary.com/juligoodie/image/upload/v1662309120/branding/categoria-costa-brava-cover_ycixtm.jpg"
-                      alt=""
-                      className="w-full h-full object-cover"
-                      width=""
-                      height=""
-                      loading="lazy"
-                    />
-                  </picture>
-                </div>
-              </div>
-              <div className="w-full md:w-1/3 lg:w-1/5 px-2 py-4">
-                <div className="rounded-md overflow-hidden">
-                  <picture>
-                    <img
-                      src="https://res.cloudinary.com/juligoodie/image/upload/v1662309120/branding/categoria-pirineus-cover_foidwx.jpg"
-                      alt=""
-                      className="w-full h-full object-cover"
-                      width=""
-                      height=""
-                      loading="lazy"
-                    />
-                  </picture>
-                </div>
-              </div>
+              {state.featuredRegions.length > 0
+                ? state.featuredRegions.map((el) => {
+                    while (state.featuredRegions.indexOf(el) < 4) {
+                      return (
+                        <FeaturedRegionBox
+                          key={el._id}
+                          slug={el.slug}
+                          id={el._id}
+                          image={el.image}
+                          title={el.title}
+                        />
+                      );
+                    }
+                  })
+                : null}
             </div>
           </section>
 
           {/* Most rated getaways */}
-          <section className="pt-12 md:pt-20">
+          <section className="pt-12">
             <h2>Els allotjaments més ben valorats</h2>
             <div className="flex flex-wrap items-start -mx-2 mt-2">
               {state.mostRatedGetaways.length > 0

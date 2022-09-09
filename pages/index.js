@@ -62,6 +62,7 @@ const Homepage = (props) => {
           subtitle={subtitle}
         />
         <HomePageResults
+          featuredRegions={props.featuredRegions}
           featuredActivities={props.featuredActivities}
           mostRatedPlaces={props.mostRatedPlaces}
           mostRecentStories={props.mostRecentStories}
@@ -83,6 +84,7 @@ const Homepage = (props) => {
 
 export async function getStaticProps() {
   const service = new ContentService();
+  const featuredRegions = await service.getFeaturedRegions();
   const featuredActivities = await service.getFeaturedActivities();
   const mostRatedPlaces = await service.getMostRatedPlaces();
   const mostRecentStories = await service.getMostRecentStories();
@@ -102,6 +104,7 @@ export async function getStaticProps() {
 
   return {
     props: {
+      featuredRegions,
       featuredActivities,
       mostRatedPlaces,
       mostRecentStories,

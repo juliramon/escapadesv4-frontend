@@ -479,7 +479,94 @@ class ContentService {
   getUserCustomPlaces = () =>
     this.service.get("/searchUserCustomPlaces").then((res) => res.data);
 
+  // Regions
+  createRegion = (
+    isFeatured,
+    isSponsored,
+    slug,
+    name,
+    pluralName,
+    title,
+    subtitle,
+    image,
+    seoText,
+    sponsorURL,
+    sponsorLogo,
+    sponsorClaim
+  ) => {
+    return this.service
+      .post("/region", {
+        isFeatured,
+        isSponsored,
+        slug,
+        name,
+        pluralName,
+        title,
+        subtitle,
+        image,
+        seoText,
+        sponsorURL,
+        sponsorLogo,
+        sponsorClaim,
+      })
+      .then((res) => res.data);
+  };
+
+  getRegions = () => this.service.get("/regions").then((res) => res.data);
+
+  getFeaturedRegions = () =>
+    this.service.get("/featured-regions").then((res) => res.data);
+
+  removeRegion = (id) =>
+    this.service
+      .put(`/regions/${id}`, { isRemoved: true })
+      .then((res) => res.data);
+
+  editRegion = (
+    id,
+    slug,
+    name,
+    pluralName,
+    title,
+    subtitle,
+    image,
+    seoText,
+    isSponsored,
+    isFeatured,
+    sponsorURL,
+    sponsorLogo,
+    sponsorClaim
+  ) => {
+    return this.service.put(`/categories/${id}`, {
+      slug,
+      name,
+      pluralName,
+      title,
+      subtitle,
+      image,
+      seoText,
+      isSponsored,
+      isFeatured,
+      sponsorURL,
+      sponsorLogo,
+      sponsorClaim,
+    });
+  };
+
+  getRegionDetails = (slug) =>
+    this.service.get(`/regions/${slug}`).then((res) => res.data);
+
+  paginateRegion = (region, page) =>
+    this.service
+      .get(`/searchRegionResults/${region}?page=${page}`)
+      .then((res) => res.data);
+
+  getRegionResults = (region) =>
+    this.service.get(`/searchRegionResults/${region}`).then((res) => res.data);
+
+  // Categories
   createCategory = (
+    isFeatured,
     isSponsored,
     slug,
     name,
@@ -496,6 +583,7 @@ class ContentService {
   ) => {
     return this.service
       .post("/category", {
+        isFeatured,
         isSponsored,
         slug,
         name,
@@ -515,6 +603,9 @@ class ContentService {
 
   getCategories = () => this.service.get("/categories").then((res) => res.data);
 
+  getFeaturedCategories = () =>
+    this.service.get("/featuredCategories").then((res) => res.data);
+
   removeCategory = (id) =>
     this.service
       .put(`/categories/${id}`, { isRemoved: true })
@@ -532,6 +623,7 @@ class ContentService {
     icon,
     seoText,
     isSponsored,
+    isFeatured,
     sponsorURL,
     sponsorLogo,
     sponsorClaim
@@ -547,6 +639,7 @@ class ContentService {
       icon,
       seoText,
       isSponsored,
+      isFeatured,
       sponsorURL,
       sponsorLogo,
       sponsorClaim,

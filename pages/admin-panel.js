@@ -13,6 +13,7 @@ import CategoryBox from "../components/dashboard/CategoryBox";
 import MetricsBox from "../components/dashboard/MetricsBox";
 import UserBox from "../components/dashboard/UserBox";
 import FetchingSpinner from "../components/global/FetchingSpinner";
+import CreateRegionModal from "../components/modals/CreateRegionModal";
 
 const AdminPanel = () => {
   const { user } = useContext(UserContext);
@@ -63,11 +64,16 @@ const AdminPanel = () => {
   const [state, setState] = useState(initialState);
   const [modalVisibility, setModalVisibility] = useState(false);
   const [categoryModalVisibility, setCategoryModalVisibility] = useState(false);
+  const [regionModalVisibility, setRegionModalVisibility] = useState(false);
+
   const handleModalVisibility = () => setModalVisibility(true);
   const hideModalVisibility = () => setModalVisibility(false);
 
   const handleCategoryModalVisibility = () => setCategoryModalVisibility(true);
   const hideCategoryModalVisibility = () => setCategoryModalVisibility(false);
+
+  const handleRegionModalVisibility = () => setRegionModalVisibility(true);
+  const hideRegionModalVisibility = () => setRegionModalVisibility(false);
 
   const service = new ContentService();
 
@@ -79,17 +85,20 @@ const AdminPanel = () => {
       const stories = await service.getAllStories();
       const users = await service.getAllUsers();
       const categories = await service.getCategories();
+      const regions = await service.getRegions();
       let hasListings,
         hasActivities,
         hasPlaces,
         hasStories,
         hasUsers,
-        hasCategories;
+        hasCategories,
+        hasRegions;
       activities.length > 0 ||
       places.length > 0 ||
       stories.length > 0 ||
       users.length > 0 ||
-      categories.length > 0
+      categories.length > 0 ||
+      regions.length > 0
         ? (hasListings = true)
         : (hasListings = false);
       activities.length > 0 ? (hasActivities = true) : (hasActivities = false);
@@ -97,6 +106,7 @@ const AdminPanel = () => {
       stories.length > 0 ? (hasStories = true) : (hasStories = false);
       users.length > 0 ? (hasUsers = true) : (hasUsers = false);
       categories.length > 0 ? (hasCategories = true) : (hasCategories = false);
+      regions.length > 0 ? (hasRegions = true) : (hasRegions = false);
       setState({
         ...state,
         activities: activities,
@@ -104,6 +114,7 @@ const AdminPanel = () => {
         stories: stories,
         users: users,
         categories: categories,
+        regions: regions,
         isFetching: false,
         hasListings: hasListings,
         hasActivities: hasActivities,
@@ -111,6 +122,7 @@ const AdminPanel = () => {
         hasStories: hasStories,
         hasUsers: hasUsers,
         hasCategories: hasCategories,
+        hasRegions: hasRegions,
       });
     };
     fetchData();
@@ -124,17 +136,20 @@ const AdminPanel = () => {
     const stories = await service.getAllStories();
     const users = await service.getAllUsers();
     const categories = await service.getCategories();
+    const regions = await service.getRegions();
     let hasListings,
       hasActivities,
       hasPlaces,
       hasStories,
       hasUsers,
-      hasCategories;
+      hasCategories,
+      hasRegions;
     activities.length > 0 ||
     places.length > 0 ||
     stories.length > 0 ||
     users.length > 0 ||
-    categories.length > 0
+    categories.length > 0 ||
+    regions.length > 0
       ? (hasListings = true)
       : (hasListings = false);
     activities.length > 0 ? (hasActivities = true) : (hasActivities = false);
@@ -142,6 +157,7 @@ const AdminPanel = () => {
     stories.length > 0 ? (hasStories = true) : (hasStories = false);
     users.length > 0 ? (hasUsers = true) : (hasUsers = false);
     categories.length > 0 ? (hasCategories = true) : (hasCategories = false);
+    regions.length > 0 ? (hasRegions = true) : (hasRegions = false);
     setState({
       ...state,
       activities: activities,
@@ -149,6 +165,7 @@ const AdminPanel = () => {
       stories: stories,
       users: users,
       categories: categories,
+      regions: regions,
       isFetching: false,
       hasListings: hasListings,
       hasActivities: hasActivities,
@@ -156,6 +173,7 @@ const AdminPanel = () => {
       hasStories: hasStories,
       hasUsers: hasUsers,
       hasCategories: hasCategories,
+      hasRegions: hasRegions,
     });
   }, [service, state]);
 
@@ -488,6 +506,74 @@ const AdminPanel = () => {
     listings = noresults;
   }
 
+  if (state.activeTab === "regions") {
+    filterBox = (
+      <>
+        <Button
+          variant="none"
+          className="btn btn-m btn-dark"
+          onClick={handleRegionModalVisibility}
+        >
+          + Afegir nova regió
+        </Button>
+        <br />
+        <br />
+        <div className="filter-box d-flex align-items-center justify-content-between">
+          <Button variant="none">Imatge</Button>
+          <Button
+            variant="none"
+            className="filter"
+            onClick={() => sortTitle(arrToSort, listToSort)}
+          >
+            Títol
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="icon icon-tabler icon-tabler-arrows-sort"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="#212529"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" />
+              <path d="M3 9l4-4l4 4m-4 -4v14" />
+              <path d="M21 15l-4 4l-4-4m4 4v-14" />
+            </svg>
+          </Button>
+          <Button variant="none" className="filter">
+            Subtítol
+          </Button>
+          <Button variant="none">Accions</Button>
+        </div>
+      </>
+    );
+    listings = state.regions.map((el) => (
+      <CategoryBox
+        key={el._id}
+        id={el._id}
+        name={el.name}
+        pluralName={el.pluralName}
+        image={el.image}
+        title={el.title}
+        subtitle={el.subtitle}
+        slug={el.slug}
+        seoText={el.seoText}
+        icon={el.icon}
+        isSponsored={el.isSponsored}
+        sponsorURL={el.sponsorURL}
+        sponsorLogo={el.sponsorLogo}
+        sponsorClaim={el.sponsorClaim}
+        fetchData={fetchData}
+      />
+    ));
+  } else {
+    filterBox = null;
+    listings = noresults;
+  }
+
   const activeTab = {
     backgroundColor: "#abc3f4",
     borderRadius: "8px",
@@ -517,6 +603,10 @@ const AdminPanel = () => {
       {
         name: "Categories",
         value: state.categories.length,
+      },
+      {
+        name: "Regions",
+        value: state.regions.length,
       },
     ];
     metricsList = metrics.map((el) => (
@@ -656,6 +746,29 @@ const AdminPanel = () => {
                   </li>
                   <li
                     className="list-item"
+                    style={state.activeTab === "regions" ? activeTab : null}
+                    onClick={() => setState({ ...state, activeTab: "regions" })}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="icon icon-tabler icon-tabler-tag"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 24 24"
+                      strokeWidth="1.5"
+                      stroke="#0d1f44"
+                      fill="none"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                      <path d="M11 3l9 9a1.5 1.5 0 0 1 0 2l-6 6a1.5 1.5 0 0 1 -2 0l-9 -9v-4a4 4 0 0 1 4 -4h4" />
+                      <circle cx="9" cy="9" r="2" />
+                    </svg>
+                    Regions
+                  </li>
+                  <li
+                    className="list-item"
                     style={state.activeTab === "users" ? activeTab : null}
                     onClick={() => setState({ ...state, activeTab: "users" })}
                   >
@@ -707,6 +820,11 @@ const AdminPanel = () => {
         <CreateCategoryModal
           visibility={categoryModalVisibility}
           hideModal={hideCategoryModalVisibility}
+          fetchData={fetchData}
+        />
+        <CreateRegionModal
+          visibility={regionModalVisibility}
+          hideModal={hideRegionModalVisibility}
           fetchData={fetchData}
         />
       </div>
