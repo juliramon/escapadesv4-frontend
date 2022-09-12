@@ -77,7 +77,6 @@ const HomePageResults = ({
       <div className="container">
         <div className="w-full">
           {/* Featured regions */}
-
           <section className="pt-12">
             <h2 className="">Escapades per Catalunya</h2>
             <p className="">
@@ -96,13 +95,13 @@ const HomePageResults = ({
                 }}
                 breakpoints={{
                   768: {
-                    slidesPerView: 2,
-                  },
-                  1024: {
                     slidesPerView: 3,
                   },
-                  1280: {
+                  1024: {
                     slidesPerView: 4,
+                  },
+                  1280: {
+                    slidesPerView: 5,
                   },
                 }}
               >

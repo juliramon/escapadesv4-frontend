@@ -4,7 +4,7 @@ const FeaturedRegionBox = ({ image, name, slug }) => {
   return (
     <div className="w-full p-2 border-none">
       <a
-        href={`escapades-per-catalunya/${slug}`}
+        href={`escapades-catalunya/${slug}`}
         className="block w-full h-full overflow-hidden rounded-md"
         title={name}
       >

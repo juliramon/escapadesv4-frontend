@@ -79,8 +79,10 @@ const CreateRegionModal = ({ visibility, hideModal, fetchData }) => {
     });
   };
 
+  const concatSlug = `escapades-${region.name}`;
+
   const submitRegion = async () => {
-    const slug = await slugify(region.title, {
+    const slug = await slugify(concatSlug, {
       remove: /[*+~.,()'"!:@]/g,
       lower: true,
     });

@@ -106,7 +106,7 @@ const RegioPage = ({
           subtitle={el.subtitle}
           rating={el.activity_rating || el.place_rating}
           placeType={el.placeType}
-          regio={el.regio}
+          categoria={el.categories}
           duration={el.duration}
           website={el.website}
           phone={el.phone}
@@ -258,15 +258,9 @@ const RegioPage = ({
             <div className="container">
               <div className="w-full md:w-8/12 xl:w-5/12 mb-5">
                 <h1 className="my-0 font-display">
-                  <span className="capitalize">
-                    {!state.regioDetails.isPlace
-                      ? "Escapades"
-                      : state.regioDetails.pluralName}{" "}
-                  </span>
-                  <span className="text-secondary-500 lowercase">
-                    {state.regioDetails.isPlace
-                      ? "amb encant"
-                      : state.regioDetails.pluralName}
+                  <span className="capitalize">Escapades </span>
+                  <span className="text-secondary-500">
+                    {state.regioDetails.pluralName}
                   </span>
                 </h1>
               </div>
@@ -276,10 +270,9 @@ const RegioPage = ({
                     <div className="w-full md:w-1/2">
                       <h2 className="max-w-xl">
                         Descobreix {state.allResults.length}{" "}
-                        {!state.regioDetails.isPlace ? "escapades" : null}{" "}
-                        {state.regioDetails.pluralName}{" "}
-                        {state.regioDetails.isPlace ? "amb encant" : null} a
-                        Catalunya
+                        <span className="lowercase">
+                          {state.regioDetails.title}
+                        </span>
                       </h2>
                       {sponsorBlock}
                     </div>
