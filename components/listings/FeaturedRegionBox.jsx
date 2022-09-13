@@ -5,10 +5,10 @@ const FeaturedRegionBox = ({ image, name, slug }) => {
     <div className="w-full p-2 border-none">
       <a
         href={`escapades-catalunya/${slug}`}
-        className="block w-full h-full overflow-hidden rounded-md"
+        className="block w-full h-full rounded-md overflow-hidden group"
         title={name}
       >
-        <div className="relative w-full h-full aspect-w-3 aspect-h-4">
+        <div className="relative w-full h-full aspect-w-3 aspect-h-4 scale-100 group-hover:scale-110 transition-all duration-500 ease-in-out">
           <picture>
             <img
               src={image}

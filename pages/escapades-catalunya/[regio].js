@@ -254,9 +254,9 @@ const RegioPage = ({
             </div>
           </div>
 
-          <section className="py-8 md:pb-16">
+          <section className="pt-4 pb-8 md:pb-16">
             <div className="container">
-              <div className="w-full md:w-8/12 xl:w-5/12 mb-5">
+              <div className="w-full md:w-8/12 xl:w-5/12 mb-3">
                 <h1 className="my-0 font-display">
                   <span className="capitalize">Escapades </span>
                   <span className="text-secondary-500">
@@ -268,11 +268,10 @@ const RegioPage = ({
                 <>
                   <div className="w-full flex flex-wrap items-center justify-between">
                     <div className="w-full md:w-1/2">
-                      <h2 className="max-w-xl">
-                        Descobreix {state.allResults.length}{" "}
-                        <span className="lowercase">
-                          {state.regioDetails.title}
-                        </span>
+                      <h2 className="max-w-2xl text-3xl font-medium">
+                        {state.regioDetails.title}. Descobreix{" "}
+                        {state.allResults.length} escapades{" "}
+                        {state.regioDetails.name} per gaudir com mai en parella.
                       </h2>
                       {sponsorBlock}
                     </div>

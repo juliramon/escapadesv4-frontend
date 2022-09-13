@@ -123,7 +123,7 @@ const HomePageResults = ({
                     })
                   : null}
               </Swiper>
-              <button className="bg-white shadow-xl w-10 h-10 flex items-center justify-center swiper-next absolute top-1/2 -left-4 z-40 transform -translate-y-1/2">
+              <button className="bg-white shadow-xl w-10 h-10 flex items-center justify-center swiper-next absolute top-1/2 -left-4 z-40 transform -translate-y-1/2 swiper-button">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="icon icon-tabler icon-tabler-arrow-narrow-left text-primary-500"
@@ -142,7 +142,7 @@ const HomePageResults = ({
                   <line x1="5" y1="12" x2="9" y2="8" />
                 </svg>
               </button>
-              <button className="bg-white shadow-xl w-10 h-10 flex items-center justify-center swiper-prev absolute top-1/2 -right-4 z-40 transform -translate-y-1/2">
+              <button className="bg-white shadow-xl w-10 h-10 flex items-center justify-center swiper-prev absolute top-1/2 -right-4 z-40 transform -translate-y-1/2 swiper-button">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="icon icon-tabler icon-tabler-arrow-narrow-right text-primary-500"

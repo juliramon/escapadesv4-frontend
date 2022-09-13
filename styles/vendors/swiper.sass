@@ -1,10 +1,16 @@
 .swiper-container 
-  width: 480px
-  
+	width: 480px
+	
 @media screen and (min-width: 640px) 
-  .swiper-container 
-    width: 640px
-  
+	.swiper-container 
+		width: 640px
+	
 @media screen and (min-width: 768px) 
-  .swiper-container 
-    width: 768px
+	.swiper-container 
+		width: 768px
+
+.swiper-button
+	@apply opacity-100 transition-all duration-300 ease-in-out
+	
+	&-disabled
+		@apply opacity-0
