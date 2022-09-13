@@ -3,17 +3,15 @@ import { Modal, Button, Form } from "react-bootstrap";
 import slugify from "slugify";
 import ContentService from "../../services/contentService";
 
-const EditCategoryModal = ({
+const EditRegionModal = ({
   visibility,
   hideModal,
   id,
   name,
   pluralName,
-  isPlace,
   title,
   subtitle,
   image,
-  icon,
   seoText,
   isSponsored,
   isFeatured,
@@ -27,14 +25,12 @@ const EditCategoryModal = ({
     id: id,
     name: name,
     pluralName: pluralName,
-    isPlace: isPlace,
     title: title,
     subtitle: subtitle,
     image: image,
     blopImage: "",
     cloudImage: "",
     cloudImageUploaded: false,
-    icon: icon,
     seoText: seoText,
     isSponsored: isSponsored,
     isFeatured: isFeatured,
@@ -47,46 +43,32 @@ const EditCategoryModal = ({
     updatedImage: false,
   };
 
-  const [category, setCategory] = useState(initialState);
+  const [region, setRegion] = useState(initialState);
 
   const handleChange = (e) =>
-    setCategory({ ...category, [e.target.name]: e.target.value });
+    setRegion({ ...region, [e.target.name]: e.target.value });
 
   const handleCheck = (e) => {
-    if (e.target.name === "isPlace") {
-      if (e.target.checked === true) {
-        setCategory({ ...category, isPlace: true });
-      } else {
-        setCategory({ ...category, isPlace: false });
-      }
-    } else {
-      if (e.target.checked === true) {
-        setCategory({ ...category, isSponsored: true });
-      } else {
-        setCategory({ ...category, isSponsored: false });
-      }
-    }
-
     if (e.target.name === "isFeatured") {
       e.target.checked
-        ? setCategory({ ...category, isFeatured: true })
-        : setCategory({ ...category, isFeatured: false });
+        ? setRegion({ ...region, isFeatured: true })
+        : setRegion({ ...region, isFeatured: false });
     }
   };
 
   const saveFileToStatus = (e) => {
     const fileToUpload = e.target.files[0];
     if (e.target.name === "image") {
-      setCategory({
-        ...category,
+      setRegion({
+        ...region,
         blopImage: URL.createObjectURL(fileToUpload),
         image: fileToUpload,
         updatedImage: true,
       });
     }
     if (e.target.name === "sponsorLogo") {
-      setCategory({
-        ...category,
+      setRegion({
+        ...region,
         blopSponsorLogo: URL.createObjectURL(fileToUpload),
         sponsorLogo: fileToUpload,
         updatedSponsorLogo: true,
@@ -95,33 +77,33 @@ const EditCategoryModal = ({
   };
 
   const handleFileUpload = async (e) => {
-    if (category.updatedImage && !category.updatedSponsorLogo) {
-      const image = category.image;
+    if (region.updatedImage && !region.updatedSponsorLogo) {
+      const image = region.image;
       const uploadData = new FormData();
       uploadData.append("imageUrl", image);
       service.uploadFile(uploadData).then((res) => {
-        setCategory({
-          ...category,
+        setRegion({
+          ...region,
           cloudImage: res.path,
           cloudImageUploaded: true,
         });
       });
     }
-    if (category.updatedSponsorLogo && !category.updatedImage) {
-      const sponsorLogo = category.sponsorLogo;
+    if (region.updatedSponsorLogo && !region.updatedImage) {
+      const sponsorLogo = region.sponsorLogo;
       const uploadData = new FormData();
       uploadData.append("imageUrl", sponsorLogo);
       service.uploadFile(uploadData).then((res) => {
-        setCategory({
-          ...category,
+        setRegion({
+          ...region,
           cloudSponsorLogo: res.path,
           cloudSponsorLogoUploaded: true,
         });
       });
     }
-    if (category.updatedImage && category.updatedSponsorLogo) {
-      const image = category.image;
-      const sponsorLogo = category.sponsorLogo;
+    if (region.updatedImage && region.updatedSponsorLogo) {
+      const image = region.image;
+      const sponsorLogo = region.sponsorLogo;
       let uploadedImage, uploadedSponsorLogo;
       const uploadData = new FormData();
       uploadData.append("imageUrl", image);
@@ -131,8 +113,8 @@ const EditCategoryModal = ({
         uploadData.append("imageUrl", sponsorLogo);
         service.uploadFile(uploadData).then((res) => {
           uploadedSponsorLogo = res.path;
-          setCategory({
-            ...category,
+          setRegion({
+            ...region,
             cloudImage: uploadedImage,
             cloudImageUploaded: true,
             cloudSponsorLogo: uploadedSponsorLogo,
@@ -143,8 +125,8 @@ const EditCategoryModal = ({
     }
   };
 
-  const submitCategory = async () => {
-    const slug = await slugify(category.title, {
+  const submitRegion = async () => {
+    const slug = await slugify(region.title, {
       remove: /[*+~.,()'"!:@]/g,
       lower: true,
     });
@@ -152,39 +134,35 @@ const EditCategoryModal = ({
       id,
       name,
       pluralName,
-      isPlace,
       title,
       subtitle,
       image,
       cloudImage,
-      icon,
       seoText,
       isSponsored,
       sponsorURL,
       sponsorLogo,
       cloudSponsorLogo,
       sponsorClaim,
-    } = category;
-    let categoryImage, categorySponsorLogo;
-    cloudImage !== "" ? (categoryImage = cloudImage) : (categoryImage = image);
+    } = region;
+    let regionImage, regionSponsorLogo;
+    cloudImage !== "" ? (regionImage = cloudImage) : (regionImage = image);
     cloudSponsorLogo !== ""
-      ? (categorySponsorLogo = cloudSponsorLogo)
-      : (categorySponsorLogo = sponsorLogo);
+      ? (regionSponsorLogo = cloudSponsorLogo)
+      : (regionSponsorLogo = sponsorLogo);
     service
       .editCategory(
         id,
         slug,
         name,
         pluralName,
-        isPlace,
         title,
         subtitle,
-        categoryImage,
-        icon,
+        regionImage,
         seoText,
         isSponsored,
         sponsorURL,
-        categorySponsorLogo,
+        regionSponsorLogo,
         sponsorClaim
       )
       .then(() => {
@@ -195,107 +173,107 @@ const EditCategoryModal = ({
   };
 
   useEffect(() => {
-    if (category.cloudImageUploaded || category.cloudSponsorLogoUploaded) {
-      submitCategory();
+    if (region.cloudImageUploaded || region.cloudSponsorLogoUploaded) {
+      submitRegion();
     }
-  }, [category]);
+  }, [region]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (category.updatedImage || category.updatedSponsorLogo) {
+    if (region.updatedImage || region.updatedSponsorLogo) {
       handleFileUpload();
     } else {
-      submitCategory();
+      submitRegion();
     }
   };
 
   let imagePreview, sponsorLogoPreview;
-  if (category.blopImage) {
+  if (region.blopImage) {
     imagePreview = (
       <div className="image">
-        <img src={category.blopImage} />
+        <img src={region.blopImage} />
       </div>
     );
   } else {
     imagePreview = (
       <div className="image">
-        <img src={category.image} />
+        <img src={region.image} />
       </div>
     );
   }
 
-  if (category.blopSponsorLogo) {
+  if (region.blopSponsorLogo) {
     sponsorLogoPreview = (
       <div className="image">
-        <img src={category.blopSponsorLogo} />
+        <img src={region.blopSponsorLogo} />
       </div>
     );
   } else {
     sponsorLogoPreview = (
       <div className="image">
-        <img src={category.sponsorLogo} />
+        <img src={region.sponsorLogo} />
       </div>
     );
   }
 
   let isChecked;
-  if (category.isSponsored === true) {
+  if (region.isSponsored === true) {
     isChecked = "checked";
   }
 
-  const categoryPublicationForm = (
+  const regionPublicationForm = (
     <Form>
-      <Form.Group controlId="categoryName">
-        <Form.Label>Nom de la categoria</Form.Label>
+      <Form.Group controlId="regionName">
+        <Form.Label>Nom de la regió</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Entra el nom de la categoria"
+          placeholder="Entra el nom de la regió"
           name="name"
           onChange={handleChange}
-          value={category.name}
+          value={region.name}
         />
       </Form.Group>
-      <Form.Group controlId="categoryName">
-        <Form.Label>Nom en plural de la categoria</Form.Label>
+      <Form.Group controlId="regionName">
+        <Form.Label>Nom en plural de la regió</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Entra el nom en plural de la categoria"
+          placeholder="Entra el nom en plural de la regió"
           name="pluralName"
           onChange={handleChange}
-          value={category.pluralName}
+          value={region.pluralName}
         />
       </Form.Group>
-      <Form.Group controlId="categoryIsPlace">
+      <Form.Group controlId="regionIsPlace">
         <Form.Check
           type="checkbox"
-          label="És categoria d'allotjament?"
+          label="És regió d'allotjament?"
           name="isPlace"
-          checked={category.isPlace}
+          checked={region.isPlace}
           onChange={handleCheck}
         />
       </Form.Group>
-      <Form.Group controlId="categoryTitle">
-        <Form.Label>Títol de la categoria</Form.Label>
+      <Form.Group controlId="regionTitle">
+        <Form.Label>Títol de la regió</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Entra el títol de la categoria"
+          placeholder="Entra el títol de la regió"
           name="title"
           onChange={handleChange}
-          value={category.title}
+          value={region.title}
         />
       </Form.Group>
-      <Form.Group controlId="categorySubtitle">
-        <Form.Label>Subtítol de la categoria</Form.Label>
+      <Form.Group controlId="regionSubtitle">
+        <Form.Label>Subtítol de la regió</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Entra el subtítol de la categoria"
+          placeholder="Entra el subtítol de la regió"
           name="subtitle"
           onChange={handleChange}
-          value={category.subtitle}
+          value={region.subtitle}
         />
       </Form.Group>
       <div className="image">
-        <span>Imatge de la categoria</span>
+        <span>Imatge de la regió</span>
         <div className="images-wrapper">
           <div className="top-bar">
             <Form.Group>
@@ -335,56 +313,44 @@ const EditCategoryModal = ({
           </div>
         </div>
       </div>
-      <Form.Group controlId="categoryIcon">
-        <Form.Label>Icona de la categoria</Form.Label>
-        <textarea
-          rows="3"
-          cols="3"
-          placeholder="Entra text svg de l'icona de la categoria"
-          className="form-control"
-          name="icon"
-          onChange={handleChange}
-          value={category.icon}
-        ></textarea>
-      </Form.Group>
-      <Form.Group controlId="categorySeoText">
-        <Form.Label>Text SEO de la categoria</Form.Label>
+      <Form.Group controlId="regionSeoText">
+        <Form.Label>Text SEO de la regió</Form.Label>
         <textarea
           rows="6"
           cols="30"
-          placeholder="Entra el text SEO per a la categoria"
+          placeholder="Entra el text SEO per a la regió"
           className="form-control"
           name="seoText"
           onChange={handleChange}
-          value={category.seoText}
+          value={region.seoText}
         ></textarea>
       </Form.Group>
-      <Form.Group controlId="categoryIsFeatured">
+      <Form.Group controlId="regionIsFeatured">
         <Form.Check
           type="checkbox"
-          label="Categoria destacada?"
+          label="Regió destacada?"
           name="isFeatured"
           checked={isFeatured}
           onChange={handleCheck}
         />
       </Form.Group>
-      <Form.Group controlId="categoryIsSponsored">
+      <Form.Group controlId="regionIsSponsored">
         <Form.Check
           type="checkbox"
-          label="Categoria patrocinada?"
+          label="Regió patrocinada?"
           name="isSponsored"
           checked={isChecked}
           onChange={handleCheck}
         />
       </Form.Group>
-      <Form.Group controlId="categorySponsorURL">
+      <Form.Group controlId="regionSponsorURL">
         <Form.Label>URL del patrocinador</Form.Label>
         <Form.Control
           type="url"
           placeholder="Entra la URL del patrocinador"
           name="sponsorURL"
           onChange={handleChange}
-          value={category.sponsorURL}
+          value={region.sponsorURL}
         />
       </Form.Group>
       <div className="image">
@@ -428,14 +394,14 @@ const EditCategoryModal = ({
           </div>
         </div>
       </div>
-      <Form.Group controlId="categorySponsorClaim">
+      <Form.Group controlId="regionSponsorClaim">
         <Form.Label>Claim del patrocinador</Form.Label>
         <Form.Control
           type="text"
           placeholder="Entra el claim del patrocinador"
           name="sponsorClaim"
           onChange={handleChange}
-          value={category.sponsorClaim}
+          value={region.sponsorClaim}
         />
       </Form.Group>
     </Form>
@@ -447,23 +413,23 @@ const EditCategoryModal = ({
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      className="categoryPublicationModal"
+      className="regionPublicationModal"
     >
       <Modal.Header closeButton>
-        <Modal.Title>Edita la categoria</Modal.Title>
+        <Modal.Title>Edita la regió</Modal.Title>
       </Modal.Header>
-      <Modal.Body>{categoryPublicationForm}</Modal.Body>
+      <Modal.Body>{regionPublicationForm}</Modal.Body>
       <Modal.Footer>
         <Button
           variant="none"
           className="btn btn-m btn-dark"
           onClick={handleSubmit}
         >
-          Editar categoria
+          Editar regió
         </Button>
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default EditCategoryModal;
+export default EditRegionModal;

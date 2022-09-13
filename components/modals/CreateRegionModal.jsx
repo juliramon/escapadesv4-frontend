@@ -3,20 +3,18 @@ import { Button, Form, Modal } from "react-bootstrap";
 import slugify from "slugify";
 import ContentService from "../../services/contentService";
 
-const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
+const CreateRegionModal = ({ visibility, hideModal, fetchData }) => {
   const service = new ContentService();
 
   const initialState = {
     name: "",
     pluralName: "",
-    isPlace: false,
     title: "",
     subtitle: "",
     image: "",
     blopImage: "",
     cloudImage: "",
     cloudImageUploaded: false,
-    icon: "",
     seoText: "",
     isFeatured: false,
     isSponsored: false,
@@ -28,41 +26,32 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
     sponsorClaim: "",
   };
 
-  const [category, setCategory] = useState(initialState);
+  const [region, setRegion] = useState(initialState);
 
   const handleChange = (e) => {
-    setCategory({ ...category, [e.target.name]: e.target.value });
+    setRegion({ ...region, [e.target.name]: e.target.value });
   };
 
   const handleCheck = (e) => {
-    if (e.target.name === "isPlace") {
-      e.target.checked
-        ? setCategory({ ...category, isPlace: true })
-        : setCategory({ ...category, isPlace: false });
-    } else {
-      e.target.checked
-        ? setCategory({ ...category, isSponsored: true })
-        : setCategory({ ...category, isSponsored: false });
-    }
     if (e.target.name === "isFeatured") {
       e.target.checked
-        ? setCategory({ ...category, isFeatured: true })
-        : setCategory({ ...category, isFeatured: false });
+        ? setRegion({ ...region, isFeatured: true })
+        : setRegion({ ...region, isFeatured: false });
     }
   };
 
   const saveFileToStatus = (e) => {
     const fileToUpload = e.target.files[0];
     if (e.target.name === "image") {
-      setCategory({
-        ...category,
+      setRegion({
+        ...region,
         blopImage: URL.createObjectURL(fileToUpload),
         image: fileToUpload,
       });
     }
     if (e.target.name === "sponsorLogo") {
-      setCategory({
-        ...category,
+      setRegion({
+        ...region,
         blopSponsorLogo: URL.createObjectURL(fileToUpload),
         sponsorLogo: fileToUpload,
       });
@@ -70,19 +59,19 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
   };
 
   const handleFileUpload = async (e) => {
-    const image = category.image;
+    const image = region.image;
     let uploadedSponsorLogo;
     const uploadData = new FormData();
     uploadData.append("imageUrl", image);
     const uploadedImage = await service.uploadFile(uploadData);
-    if (category.isSponsored && category.sponsorLogo !== "") {
-      const sponsorLogo = category.sponsorLogo;
+    if (region.isSponsored && region.sponsorLogo !== "") {
+      const sponsorLogo = region.sponsorLogo;
       const uploadData = new FormData();
       uploadData.append("imageUrl", sponsorLogo);
       uploadedSponsorLogo = await service.uploadFile(uploadData);
     }
-    setCategory({
-      ...category,
+    setRegion({
+      ...region,
       cloudImage: uploadedImage.path,
       cloudImageUploaded: true,
       cloudSponsorLogo: uploadedSponsorLogo ? uploadedSponsorLogo.path : null,
@@ -90,8 +79,10 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
     });
   };
 
-  const submitCategory = async () => {
-    const slug = await slugify(category.title, {
+  const concatSlug = `escapades-${region.name}`;
+
+  const submitRegion = async () => {
+    const slug = await slugify(concatSlug, {
       remove: /[*+~.,()'"!:@]/g,
       lower: true,
     });
@@ -100,28 +91,24 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
       isSponsored,
       name,
       pluralName,
-      isPlace,
       title,
       subtitle,
       cloudImage,
-      icon,
       seoText,
       sponsorURL,
       cloudSponsorLogo,
       sponsorClaim,
-    } = category;
+    } = region;
     service
-      .createCategory(
+      .createRegion(
         isFeatured,
         isSponsored,
         slug,
         name,
         pluralName,
-        isPlace,
         title,
         subtitle,
         cloudImage,
-        icon,
         seoText,
         sponsorURL,
         cloudSponsorLogo,
@@ -141,25 +128,25 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
 
   useEffect(() => {
     if (
-      category.cloudImageUploaded === true ||
-      category.cloudSponsorLogoUploaded === true ||
-      (category.cloudImageUploaded === true &&
-        category.cloudSponsorLogoUploaded === true)
+      region.cloudImageUploaded === true ||
+      region.cloudSponsorLogoUploaded === true ||
+      (region.cloudImageUploaded === true &&
+        region.cloudSponsorLogoUploaded === true)
     ) {
-      submitCategory();
+      submitRegion();
     }
-  }, [category]);
+  }, [region]);
 
   useEffect(() => {
-    if (!category.isSponsored) {
+    if (!region.isSponsored) {
       if (
-        category.sponsorURL !== "" ||
-        category.sponsorLogo !== "" ||
-        category.blopSponsorLogo !== "" ||
-        category.sponsorClaim !== ""
+        region.sponsorURL !== "" ||
+        region.sponsorLogo !== "" ||
+        region.blopSponsorLogo !== "" ||
+        region.sponsorClaim !== ""
       ) {
-        setCategory({
-          ...category,
+        setRegion({
+          ...region,
           sponsorURL: "",
           sponsorLogo: "",
           blopSponsorLogo: "",
@@ -170,26 +157,26 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
   });
 
   let imagePreview, sponsorLogoPreview;
-  if (category.blopImage) {
+  if (region.blopImage) {
     imagePreview = (
       <div className="image">
-        <img src={category.blopImage} />
+        <img src={region.blopImage} />
       </div>
     );
   }
 
-  if (category.blopSponsorLogo) {
+  if (region.blopSponsorLogo) {
     sponsorLogoPreview = (
       <div className="image">
-        <img src={category.blopSponsorLogo} />
+        <img src={region.blopSponsorLogo} />
       </div>
     );
   }
 
-  const sponsorBlock = category.isSponsored ? (
+  const sponsorBlock = region.isSponsored ? (
     <>
       {" "}
-      <Form.Group controlId="categorySponsorURL">
+      <Form.Group controlId="regionSponsorURL">
         <Form.Label>URL del patrocinador</Form.Label>
         <Form.Control
           type="url"
@@ -239,7 +226,7 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
           </div>
         </div>
       </div>
-      <Form.Group controlId="categorySponsorClaim">
+      <Form.Group controlId="regionSponsorClaim">
         <Form.Label>Claim del patrocinador</Form.Label>
         <Form.Control
           type="text"
@@ -251,54 +238,46 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
     </>
   ) : null;
 
-  const categoryPublicationForm = (
+  const regionPublicationForm = (
     <Form>
-      <Form.Group controlId="categoryName">
-        <Form.Label>Nom de la categoria</Form.Label>
+      <Form.Group controlId="regionName">
+        <Form.Label>Nom de la regió</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Entra el nom de la categoria"
+          placeholder="Entra el nom de la regió"
           name="name"
           onChange={handleChange}
         />
       </Form.Group>
-      <Form.Group controlId="categoryName">
-        <Form.Label>Nom en plural de la categoria</Form.Label>
+      <Form.Group controlId="regionName">
+        <Form.Label>Nom en plural de la regió</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Entra el nom en plural de la categoria"
+          placeholder="Entra el nom en plural de la regió"
           name="pluralName"
           onChange={handleChange}
         />
       </Form.Group>
-      <Form.Group controlId="categoryIsSponsored">
-        <Form.Check
-          type="checkbox"
-          label="És categoria d'allotjament?"
-          onClick={handleCheck}
-          name="isPlace"
-        />
-      </Form.Group>
-      <Form.Group controlId="categoryTitle">
-        <Form.Label>Títol de la categoria</Form.Label>
+      <Form.Group controlId="regionTitle">
+        <Form.Label>Títol de la regió</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Entra el títol de la categoria"
+          placeholder="Entra el títol de la regió"
           name="title"
           onChange={handleChange}
         />
       </Form.Group>
-      <Form.Group controlId="categorySubtitle">
-        <Form.Label>Subtítol de la categoria</Form.Label>
+      <Form.Group controlId="regionSubtitle">
+        <Form.Label>Subtítol de la regió</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Entra el subtítol de la categoria"
+          placeholder="Entra el subtítol de la regió"
           name="subtitle"
           onChange={handleChange}
         />
       </Form.Group>
       <div className="image">
-        <span>Imatge de la categoria</span>
+        <span>Imatge de la regió</span>
         <div className="images-wrapper">
           <div className="top-bar">
             <Form.Group>
@@ -338,40 +317,29 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
           </div>
         </div>
       </div>
-      <Form.Group controlId="categoryIcon">
-        <Form.Label>Icona de la categoria</Form.Label>
-        <textarea
-          rows="3"
-          cols="3"
-          placeholder="Entra text svg de l'icona de la categoria"
-          className="form-control"
-          name="icon"
-          onChange={handleChange}
-        ></textarea>
-      </Form.Group>
-      <Form.Group controlId="categorySeoText">
-        <Form.Label>Text SEO de la categoria</Form.Label>
+      <Form.Group controlId="regionSeoText">
+        <Form.Label>Text SEO de la regió</Form.Label>
         <textarea
           rows="6"
           cols="30"
-          placeholder="Entra el text SEO per a la categoria"
+          placeholder="Entra el text SEO per a la regió"
           className="form-control"
           name="seoText"
           onChange={handleChange}
         ></textarea>
       </Form.Group>
-      <Form.Group controlId="categoryIsSponsored">
+      <Form.Group controlId="regionIsSponsored">
         <Form.Check
           type="checkbox"
-          label="Categoria patrocinada?"
+          label="Regió patrocinada?"
           onClick={handleCheck}
         />
       </Form.Group>
-      <Form.Group controlId="categoryIsFeatured">
+      <Form.Group controlId="regionIsFeatured">
         <Form.Check
           type="checkbox"
           name="isFeatured"
-          label="Categoria destacada?"
+          label="Regió destacada?"
           onClick={handleCheck}
         />
       </Form.Group>
@@ -385,23 +353,23 @@ const CreateCategoryModal = ({ visibility, hideModal, fetchData }) => {
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
       centered
-      className="categoryPublicationModal"
+      className="regionPublicationModal"
     >
       <Modal.Header closeButton>
-        <Modal.Title>Crea una nova categoria</Modal.Title>
+        <Modal.Title>Crea una nova regió</Modal.Title>
       </Modal.Header>
-      <Modal.Body>{categoryPublicationForm}</Modal.Body>
+      <Modal.Body>{regionPublicationForm}</Modal.Body>
       <Modal.Footer>
         <Button
           variant="none"
           className="btn btn-m btn-dark"
           onClick={handleSubmit}
         >
-          Crear categoria
+          Crear regió
         </Button>
       </Modal.Footer>
     </Modal>
   );
 };
 
-export default CreateCategoryModal;
+export default CreateRegionModal;
