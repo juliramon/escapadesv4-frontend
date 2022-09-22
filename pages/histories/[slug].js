@@ -8,12 +8,12 @@ import UserContext from "../../contexts/UserContext";
 import ShareModal from "../../components/modals/ShareModal";
 import parse from "html-react-parser";
 import readingTime from "reading-time";
-import { PhotoSwipeGallery } from "react-photoswipe";
 import Footer from "../../components/global/Footer";
 import FooterHistoria from "../../components/global/FooterHistoria";
 import FetchingSpinner from "../../components/global/FetchingSpinner";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
+import Fancybox from "../../utils/fancybox";
 
 const StoryListing = ({ storyDetails }) => {
   const { user } = useContext(UserContext);
@@ -106,25 +106,23 @@ const StoryListing = ({ storyDetails }) => {
   );
 
   const stateImages = [...state.story.images];
-  const stateImagesList = stateImages.map((el, idx) => ({
-    src: el,
-    thumbnail: el,
-    w: 1200,
-    h: 800,
-    title: state.story.title,
-  }));
+  // const stateImagesList = stateImages.map((el, idx) => ({
+  //   src: el,
+  //   thumbnail: el,
+  //   title: state.story.title,
+  // }));
 
-  const getThumbnailContent = (item) => {
-    return <img src={item.thumbnail} width={120} height={90} />;
-  };
+  // const getThumbnailContent = (item) => {
+  //   return <img src={item.thumbnail} width={120} height={90} />;
+  // };
 
-  const photoSwipeGallery = (
-    <PhotoSwipeGallery
-      items={stateImagesList}
-      thumbnailContent={getThumbnailContent}
-      options={{ history: false }}
-    />
-  );
+  // const photoSwipeGallery = (
+  //   <PhotoSwipeGallery
+  //     items={stateImagesList}
+  //     thumbnailContent={getThumbnailContent}
+  //     options={{ history: false }}
+  //   />
+  // );
 
   const welcomeText = (
     <h2 className="mb-8">
@@ -138,7 +136,7 @@ const StoryListing = ({ storyDetails }) => {
     readingTimeIndicator = readingTime(parsedDescriptionArray);
     parsedDescriptionArray.map((el) => slicedDescription.push(el));
     if (slicedDescription[0].length > 1) {
-      slicedDescription[0].splice(4, 0, photoSwipeGallery);
+      // slicedDescription[0].splice(4, 0, photoSwipeGallery);
       slicedDescription[0].splice(1, 0, welcomeText);
     }
   }
@@ -250,6 +248,27 @@ const StoryListing = ({ storyDetails }) => {
               </div>
               <div className="max-w-2xl mx-auto">
                 <div className="listing-description">{slicedDescription}</div>
+
+                <div className="flex items-center">
+                  {stateImages.map((el, idx) => {
+                    return (
+                      <Fancybox>
+                        <a
+                          key={idx}
+                          data-fancybox="gallery"
+                          href={el}
+                          className="aspect-w-16 aspect-h-9 rounded overflow-hidden w-full h-full"
+                        >
+                          <img
+                            alt=""
+                            src={el}
+                            className="w-full h-full object-cover"
+                          />
+                        </a>
+                      </Fancybox>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </article>
