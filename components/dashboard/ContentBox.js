@@ -62,18 +62,22 @@ const ContentBox = ({
 	const hideShareModalVisibility = () => setShareModalVisibility(false);
 
 	return (
-		<div className="content rounded box flex items-center w-full bg-primary-100 border border-primary-300 mb-2.5">
+		<div className="content rounded box flex items-center w-full bg-primary-100 bg-opacity-50 border border-primary-300 mb-2.5 px-5 py-2.5">
 			<Link href={`/${path}/${slug}`}>
 				<a className="flex items-center">
-					<div className="image">
-						<img src={image} alt={title} />
+					<div className="flex items-center justify-center bg-white overflow-hidden h-12 w-12 rounded-md p-0 mr-2.5 border border-primary-300">
+						<img
+							src={image}
+							alt={title}
+							className="w-full h-full object-cover"
+						/>
 					</div>
 					<h1 className="title">{title}</h1>
 					<p className="subtitle">{shortenedSubtitle}...</p>
 					<p className="date">{transformDate(publicationDate)}</p>
 				</a>
 			</Link>
-			<div className="crud-buttons dropdown relative">
+			<div className="crud-buttons dropdown relative hidden">
 				<button>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
