@@ -285,115 +285,112 @@ const Feed = () => {
           }
           user={user}
         />
-        <Container fluid className="mw-1600">
-          <Row>
-            <div className="box d-flex">
-              <div className="col left">
-                <div className="user-meta">
-                  <div className="user-meta-wrapper">
-                    <div className="avatar avatar-s">
-                      <img src={user.avatar} alt={user.fullName} />
-                    </div>
-                    <div className="user-text">
-                      <p>Benvingut,</p>
-                      <h1>{user.fullName}</h1>
-                    </div>
+        <div className="pt-4 px-6">
+          <div className="flex flex-wrap items-stretch">
+            <div className="w-2/12 h-screen pr-6">
+              <div className="user-meta">
+                <div className="user-meta-wrapper">
+                  <div className="avatar avatar-s">
+                    <img src={user.avatar} alt={user.fullName} />
                   </div>
-                </div>
-                <div className="weather-meta"></div>
-                <div className="left-menu">
-                  <div className="topics">
-                    <p>Temes que segueixes</p>
-                    <ul className="menu-topics">{topicsList}</ul>
+                  <div className="user-text">
+                    <p>Benvingut,</p>
+                    <h1>{user.fullName}</h1>
                   </div>
-                  {organizationsBlock}
-                  <div className="links">
-                    <p>Gestiona el teu compte</p>
-                    <ul>
-                      <li>
-                        <Link href="/dashboard">
-                          <a>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-layout-list"
-                              width="22"
-                              height="22"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="#0D1F44"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path stroke="none" d="M0 0h24v24H0z" />
-                              <rect x="4" y="4" width="16" height="6" rx="2" />
-                              <rect x="4" y="14" width="16" height="6" rx="2" />
-                            </svg>
-                            Gestor
-                          </a>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href={`/bookmarks`}>
-                          <a>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-bookmark"
-                              width="22"
-                              height="22"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="#0D1F44"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path stroke="none" d="M0 0h24v24H0z" />
-                              <path d="M9 4h6a2 2 0 0 1 2 2v14l-5-3l-5 3v-14a2 2 0 0 1 2 -2" />
-                            </svg>
-                            Desats
-                          </a>
-                        </Link>
-                      </li>
-                      <li>
-                        <Link href={`/usuaris/${user._id}`}>
-                          <a>
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="icon icon-tabler icon-tabler-user"
-                              width="22"
-                              height="22"
-                              viewBox="0 0 24 24"
-                              strokeWidth="1.5"
-                              stroke="#0D1F44"
-                              fill="none"
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                            >
-                              <path stroke="none" d="M0 0h24v24H0z" />
-                              <circle cx="12" cy="7" r="4" />
-                              <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                            </svg>
-                            Perfil
-                          </a>
-                        </Link>
-                      </li>
-                    </ul>
-                  </div>
-                  {recommendPostButton}
                 </div>
               </div>
-              <div className="col center">
-                <div className="col-title">
-                  <p className="small">
-                    Resultats basats en els temes que segueixes
-                  </p>
+              <div className="left-menu">
+                <div className="topics">
+                  <p>Temes que segueixes</p>
+                  <ul className="menu-topics">{topicsList}</ul>
                 </div>
-                <div className="col-results">{resultsList}</div>
+                {organizationsBlock}
+                <div className="links">
+                  <p>Gestiona el teu compte</p>
+                  <ul>
+                    <li>
+                      <Link href="/dashboard">
+                        <a>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="icon icon-tabler icon-tabler-layout-list"
+                            width="22"
+                            height="22"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="#0D1F44"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path stroke="none" d="M0 0h24v24H0z" />
+                            <rect x="4" y="4" width="16" height="6" rx="2" />
+                            <rect x="4" y="14" width="16" height="6" rx="2" />
+                          </svg>
+                          Gestor
+                        </a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href={`/bookmarks`}>
+                        <a>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="icon icon-tabler icon-tabler-bookmark"
+                            width="22"
+                            height="22"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="#0D1F44"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path stroke="none" d="M0 0h24v24H0z" />
+                            <path d="M9 4h6a2 2 0 0 1 2 2v14l-5-3l-5 3v-14a2 2 0 0 1 2 -2" />
+                          </svg>
+                          Desats
+                        </a>
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href={`/usuaris/${user._id}`}>
+                        <a>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="icon icon-tabler icon-tabler-user"
+                            width="22"
+                            height="22"
+                            viewBox="0 0 24 24"
+                            strokeWidth="1.5"
+                            stroke="#0D1F44"
+                            fill="none"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <path stroke="none" d="M0 0h24v24H0z" />
+                            <circle cx="12" cy="7" r="4" />
+                            <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                          </svg>
+                          Perfil
+                        </a>
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+                {recommendPostButton}
               </div>
             </div>
-          </Row>
-        </Container>
+            <div className="w-10/12">
+              <div className="col-title">
+                <span class="text-sm">
+                  Resultats basats en els temes que segueixes
+                </span>
+              </div>
+              <div className="flex flex-wrap items-start">{resultsList}</div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -212,11 +212,6 @@ form .form-control::placeholder {
   color: $medium-blue;
 }
 
-form button {
-  padding-left: 40px;
-  padding-right: 40px;
-}
-
 .dropdown-menu {
   border-radius: 8px !important;
 }
@@ -735,102 +730,7 @@ nav {
 }
 
 /*---HERO STYLES---*/
-/*---SIGNUP STYLES---*/
 
-#signup {
-  position: relative;
-  .signup-col.left {
-    width: 27%;
-    background-color: rgb(218, 222, 255);
-    height: 100vh;
-  }
-  .signup-col.left .graphic {
-    position: absolute;
-    bottom: 100px;
-    left: 25px;
-  }
-  .signup-col.left .title-area {
-    position: relative;
-    top: 30px;
-    left: 30px;
-  }
-  .signup-col.left .title-area img {
-    width: 135px;
-    cursor: pointer;
-  }
-  .signup-col.left .title-area h2 {
-    font-size: 2em;
-    max-width: 330px;
-    opacity: 0.4;
-    margin-top: 50px;
-  }
-  .signup-col.right {
-    width: 73%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .signup-col-wrapper.right {
-    max-width: 450px;
-    margin-top: -60px;
-  }
-  .signup-col-wrapper.right .navlink {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-    font-size: 0.95em;
-  }
-  .social-signup {
-    margin-top: 30px;
-  }
-  .social-signup .btn.google {
-    background: $dark-blue;
-    color: $electric-blue;
-    padding-left: 30px;
-    padding-right: 30px;
-    flex: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 16px;
-  }
-  .social-signup .btn.google svg {
-    margin-right: 8px;
-  }
-  .social-signup .btn.facebook {
-    padding-left: 20px;
-    padding-right: 20px;
-    background-color: #f2f7f9;
-  }
-  .signup-col-wrapper.right p.sub-h1 {
-    font-size: 1.1em;
-    color: $dark-blue;
-  }
-  form {
-    margin-top: 35px;
-  }
-  form .form-label {
-    font-size: 0.9em;
-  }
-  form .form-control {
-    background-color: #f1f1f1ef;
-    border: none;
-  }
-  form .d-flex {
-    margin: 0 -8px;
-  }
-  form .d-flex .form-group {
-    flex: 1;
-    margin: 0 8px;
-    margin-bottom: 1rem;
-  }
-  form button {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-}
-
-/*---SIGNUP STYLES---*/
 /*---FEED STYLES---*/
 
 #feed {
@@ -1230,9 +1130,6 @@ nav {
   }
   h1 {
     font-size: 2rem;
-  }
-  form button {
-    width: 100%;
   }
   .box {
     position: sticky;

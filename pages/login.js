@@ -149,117 +149,82 @@ const Login = () => {
         canonical="https://escapadesenparella.cat/login"
       />
       {/* Rich snippets */}
-      <Breadcrumb
-        page1Title="Inici"
-        page1Url="https://escapadesenparella.cat"
-        page2Title="Inicia sessió"
-        page2Url={`https://escapadesenparella.cat/login`}
-      />
-      <section id="signup">
-        <div className="d-flex">
-          <div className="signup-col left">
-            <div className="title-area">
+      <section className="relative">
+        <div className="flex flex-wrap items-stretch">
+          <div className="w-3/12 h-screen bg-primary-300">
+            <div className="relative top-7 left-7">
               <Link href="/">
                 <img
                   src="https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
-                  alt=""
+                  className="w-32 cursor-pointer"
+                  alt="Escapadesenparella.cat"
                 />
               </Link>
-              <h2>Descobreix les millors escapades en parella a Catalunya.</h2>
+              <h2 className="mt-12">
+                Descobreix les millors escapades en parella a Catalunya.
+              </h2>
             </div>
-            <div className="graphic">
-              <img src="../../signup-graphic.svg" alt="" />
+            <div className="absolute bottom-24 left-6">
+              <img
+                src="../../signup-graphic.svg"
+                alt="Esacpadesenparella.cat"
+                loading="eager"
+              />
             </div>
           </div>
-          <div className="signup-col right">
-            <div className="signup-col-wrapper right">
-              <div className="navlink">
+          <div className="w-9/12 h-screen flex items-center justify-center">
+            <div className="max-w-md -mt-14">
+              <div className="absolute top-7 right-7 text-15">
                 Encara no tens un compte? <Link href="/signup">Registra't</Link>
               </div>
               <div className="title-area">
                 <h1>Inicia sessió</h1>
-                <p className="sub-h1">
+                <p className="text-lg">
                   Accedeix al teu compte per cercar, descobrir i gaudir de la
                   teva propera escapada en parella.
                 </p>
               </div>
-              {/* <div className="social-signup d-flex align-items-center">
-							<button type="submit" className="btn google">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									className="icon icon-tabler icon-tabler-brand-google"
-									width="18"
-									height="18"
-									viewBox="0 0 24 24"
-									strokeWidth="3"
-									stroke="#ffffff"
-									fill="none"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								>
-									<path stroke="none" d="M0 0h24v24H0z" />
-									<path d="M17.788 5.108A9 9 0 1021 12h-8" />
-								</svg>
-								Log in with Google
-							</button>
-							<button type="submit" className="btn facebook">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									className="icon icon-tabler icon-tabler-brand-facebook"
-									width="25"
-									height="25"
-									viewBox="0 0 24 24"
-									strokeWidth="1.5"
-									stroke="none"
-									fill="none"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								>
-									<path stroke="none" d="M0 0h24v24H0z" />
-									<path
-										d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"
-										style={{fill: "#666666"}}
-									/>
-								</svg>
-							</button>
-						</div> */}
-              <Form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} className="form mt-8">
                 {errorMessage}
-                <Form.Group>
-                  <Form.Label>Correu electrònic</Form.Label>
-                  <Form.Control
+                <div className="form__group">
+                  <label className="form__label" htmlFor="email">
+                    Correu electrònic
+                  </label>
+                  <input
                     type="email"
                     name="email"
                     onChange={handleChange}
+                    className="form__control"
                     placeholder="Escriu el teu correu electrònic"
                   />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Contrassenya</Form.Label>
-                  <Form.Control
+                </div>
+                <div className="form__group">
+                  <label className="form__label" htmlFor="password">
+                    Correu electrònic
+                  </label>
+                  <input
                     type="password"
                     name="password"
                     onChange={handleChange}
+                    className="form__control"
                     placeholder="6+ caràcters"
                   />
-                </Form.Group>
-                <div className="d-flex justify-content-between">
-                  <Button
-                    variant="none"
+                </div>
+                <div className="form__group flex items-center justify-between">
+                  <button
                     type="submit"
-                    className="btn btn-m btn-dark btn-no-flex"
+                    className="button button__primary button__lg flex-none"
                   >
                     Iniciar sessió
-                  </Button>
-                  <Button
-                    variant="none"
-                    className="btn btn-m btn-light btn-no-flex btn-no-border"
+                  </button>
+                  <button
+                    className="flex-none text-sm"
                     onClick={() => handleModalVisibility()}
                   >
                     Recuperar contrassenya
-                  </Button>
+                  </button>
                 </div>
-              </Form>
+              </form>
             </div>
           </div>
         </div>

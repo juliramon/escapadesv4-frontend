@@ -152,79 +152,89 @@ const Signup = () => {
         canonical="https://escapadesenparella.cat/signup"
       />
       {/* Rich snippets */}
-      <Breadcrumb
-        page1Title="Inici"
-        page1Url="https://escapadesenparella.cat"
-        page2Title="Crea el teu compte"
-        page2Url={`https://escapadesenparella.cat/signup`}
-      />
-      <section id="signup">
-        <div className="d-flex">
-          <div className="signup-col left">
-            <div className="title-area">
+
+      <section id="signup" className="relative">
+        <div className="flex flex-wrap items-stretch">
+          <div className="w-3/12 h-screen bg-primary-300">
+            <div className="relative top-7 left-7">
               <Link href="/">
                 <img
                   src="https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
-                  alt=""
+                  className="w-32 cursor-pointer"
+                  alt="Escapadesenparella.cat"
                 />
               </Link>
-              <h2>Descobreix les millors escapades en parella a Catalunya.</h2>
+              <h2 className="mt-12">
+                Descobreix les millors escapades en parella a Catalunya.
+              </h2>
             </div>
-            <div className="graphic">
-              <img src="../../signup-graphic.svg" alt="" />
+            <div className="absolute bottom-24 left-6">
+              <img
+                src="../../signup-graphic.svg"
+                alt="Esacpadesenparella.cat"
+                loading="eager"
+              />
             </div>
           </div>
-          <div className="signup-col right">
-            <div className="signup-col-wrapper right">
-              <div className="navlink">
+          <div className="w-9/12 h-screen flex items-center justify-center">
+            <div className="max-w-md -mt-14">
+              <div className="absolute top-7 right-7 text-15">
                 Ja tens un compte? <Link href="/login">Inicia sessió</Link>
               </div>
               <div className="title-area">
                 <h1>Registra't a Escapadesenparella.cat</h1>
-                <p className="sub-h1">
+                <p className="text-lg">
                   Crea el teu compte per descobrir, guardar i gaudir de la teva
                   propera escapada en parella.
                 </p>
               </div>
-              <Form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit} className="form mt-8">
                 {errorMessage}
-                <div className="d-flex">
-                  <Form.Group>
-                    <Form.Label>Nom</Form.Label>
-                    <Form.Control
-                      type="text"
-                      name="fullName"
-                      onChange={handleChange}
-                      placeholder="Escriu el teu nom i cognom"
-                    />
-                  </Form.Group>
+                <div className="form__group">
+                  <label className="form__label" for="fullName">
+                    Nom i cognom
+                  </label>
+                  <input
+                    type="text"
+                    name="fullName"
+                    onChange={handleChange}
+                    className="form__control"
+                    placeholder="Escriu el teu nom i cognom"
+                  />
                 </div>
-                <Form.Group>
-                  <Form.Label>Correu electrònic</Form.Label>
-                  <Form.Control
+                <div className="form__group">
+                  <label className="form__label" for="email">
+                    Correu electrònic
+                  </label>
+                  <input
                     type="email"
                     name="email"
                     onChange={handleChange}
+                    className="form__control"
                     placeholder="Escriu el teu correu electrònic"
                   />
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Contrassenya</Form.Label>
-                  <Form.Control
+                </div>
+                <div className="form__group">
+                  <label className="form__label" for="password">
+                    Contrassenya
+                  </label>
+                  <input
                     type="password"
                     name="password"
                     onChange={handleChange}
+                    className="form__control"
                     placeholder="6+ caràcters"
                   />
-                </Form.Group>
-                <Button
-                  variant="none"
-                  type="submit"
-                  className="btn btn-m btn-dark"
-                >
-                  Crear el meu compte
-                </Button>
-              </Form>
+                </div>
+                <div className="form__group flex items-center justify-between">
+                  <button
+                    type="submit"
+                    className="button button__primary button__lg flex-none"
+                  >
+                    Crear el meu compte
+                  </button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
