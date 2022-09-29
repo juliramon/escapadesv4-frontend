@@ -15,7 +15,9 @@ const ContentBox = ({
 	publicationDate,
 	fetchData,
 }) => {
-	let shortenedSubtitle = subtitle.slice(0, 70);
+	const [dropdownVisibility, setDropdownVisibility] = useState(false);
+
+	const shortenedSubtitle = subtitle.slice(0, 70);
 	const service = new ContentService();
 	const paymentService = new PaymentService();
 	const removeItem = () => {
@@ -62,26 +64,30 @@ const ContentBox = ({
 	const hideShareModalVisibility = () => setShareModalVisibility(false);
 
 	return (
-		<div className="content rounded box flex items-center w-full bg-primary-100 bg-opacity-50 border border-primary-300 mb-2.5 px-5 py-2.5">
+		<div className="content rounded box flex items-center w-full bg-primary-100 bg-opacity-50 border border-primary-300 mb-2.5 px-5 py-4">
 			<Link href={`/${path}/${slug}`}>
-				<a className="flex items-center">
-					<div className="flex items-center justify-center bg-white overflow-hidden h-12 w-12 rounded-md p-0 mr-2.5 border border-primary-300">
+				<a className="flex items-center justify-between w-full">
+					<div className="flex items-center justify-center bg-white overflow-hidden h-12 w-12 rounded-md p-0 mr-5 border border-primary-300">
 						<img
 							src={image}
 							alt={title}
 							className="w-full h-full object-cover"
 						/>
 					</div>
-					<h1 className="title">{title}</h1>
-					<p className="subtitle">{shortenedSubtitle}...</p>
-					<p className="date">{transformDate(publicationDate)}</p>
+					<h3 className="text-lg m-0 pr-5 w-96">{title}</h3>
+					<span className="m-0 pr-16 text-sm flex-1">
+						{shortenedSubtitle}...
+					</span>
+					<span className="m-0 text-sm pr-5 block w-32">
+						{transformDate(publicationDate)}
+					</span>
 				</a>
 			</Link>
-			<div className="crud-buttons dropdown relative hidden">
-				<button>
+			<div className={`dropdown ${dropdownVisibility ? "open" : ""}`}>
+				<button onClick={() => setDropdownVisibility(!dropdownVisibility)}>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
-						className="icon icon-tabler icon-tabler-dots"
+						className="dropdown__icon"
 						width="28"
 						height="28"
 						viewBox="0 0 24 24"
@@ -97,14 +103,17 @@ const ContentBox = ({
 						<circle cx="19" cy="12" r="1" />
 					</svg>
 				</button>
-
-				<ul className="dropdown__menu list-none m-0 bg-white rounded border border-primary-300 w-36">
+				<ul
+					className={`dropdown__menu ${
+						dropdownVisibility ? "block" : "hidden"
+					}`}
+				>
 					<li className="border-b border-primary-300 w-full">
 						<Link href={`/${path}/${slug}`}>
-							<a className="flex items-center px-2.5 py-2 w-full text-15">
+							<a className="dropdown__menu_item">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
-									className="mr-2"
+									className="dropdown__menu_icon"
 									width="20"
 									height="20"
 									viewBox="0 0 24 24"
@@ -125,10 +134,10 @@ const ContentBox = ({
 					</li>
 					<li className="border-b border-primary-300 w-full">
 						<Link href={`/${path}/${slug}/editar`}>
-							<a className="flex items-center px-2.5 py-2 w-full text-15">
+							<a className="dropdown__menu_item">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
-									className="mr-2"
+									className="dropdown__menu_icon"
 									width="20"
 									height="20"
 									viewBox="0 0 24 24"
@@ -149,11 +158,11 @@ const ContentBox = ({
 					<li className="border-b border-primary-300 w-full">
 						<button
 							onClick={() => handleShareModalVisibility()}
-							className="flex items-center px-2.5 py-2 w-full text-15"
+							className="dropdown__menu_item"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								className="mr-2"
+								className="dropdown__menu_icon"
 								width="20"
 								height="20"
 								viewBox="0 0 24 24"
@@ -174,13 +183,10 @@ const ContentBox = ({
 						</button>
 					</li>
 					<li>
-						<button
-							onClick={removeItem}
-							className="flex items-center px-2.5 py-2 w-full text-15"
-						>
+						<button onClick={removeItem} className="dropdown__menu_item">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
-								className="mr-2"
+								className="dropdown__menu_icon"
 								width="20"
 								height="20"
 								viewBox="0 0 24 24"

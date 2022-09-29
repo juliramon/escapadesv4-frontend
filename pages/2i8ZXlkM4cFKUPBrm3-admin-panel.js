@@ -2,15 +2,20 @@ import { useEffect, useState, useContext } from "react";
 import NavigationBar from "../components/global/NavigationBar";
 import ContentService from "../services/contentService";
 import ContentBox from "../components/dashboard/ContentBox";
-import Link from "next/link";
 import Head from "next/head";
 import UserContext from "../contexts/UserContext";
-import { useRouter } from "next/router";
 import FetchingSpinner from "../components/global/FetchingSpinner";
 
 const AdminPanel = () => {
+	// Validate if user is allowed to access this view
 	const { user } = useContext(UserContext);
-	const router = useRouter();
+	const [grantAccess, setGrantAccess] = useState(false);
+	useEffect(() => {
+		if (user && user.userType == "admin") {
+			setGrantAccess(true);
+		}
+	}, []);
+	// End validation
 
 	const service = new ContentService();
 
@@ -94,6 +99,10 @@ const AdminPanel = () => {
 	const isActive =
 		"bg-primary-500 border-primary-500 text-white hover:bg-primary-700";
 
+	if (!grantAccess) {
+		return <FetchingSpinner />;
+	}
+
 	return (
 		<>
 			<Head>
@@ -109,7 +118,7 @@ const AdminPanel = () => {
 			<main className="bg-primary-100 p-6">
 				<div className="bg-white rounded border border-primary-300 p-5">
 					<h1 className="text-2xl">Panell d'administració</h1>
-					<div className="mt-6 flex items-center -mx-2">
+					<div className="mt-4 flex items-center -mx-2">
 						<div className="px-2 w-1/6">
 							<div className="p-6 border border-primary-300 rounded text-center flex flex-col justify-center">
 								<div className="text-2xl">
@@ -211,7 +220,7 @@ const AdminPanel = () => {
 							<h2 className="uppercase text-sm font-normal tracking-wider">
 								Menú
 							</h2>
-							<ul className="list-none mt-5 mx-0 mb-0 p-0">
+							<ul className="list-none mt-3 mx-0 mb-0 p-0">
 								<li>
 									<button
 										className={`py-2.5 px-4 border  transition-all duration-300 ease-in-out mb-2 rounded cursor-pointer w-full text-left text-sm ${
@@ -258,7 +267,7 @@ const AdminPanel = () => {
 							<h2 className="uppercase text-sm font-normal tracking-wider">
 								Llista de resultats
 							</h2>
-							<div className="w-full mt-5 flex flex-col items-center justify-center">
+							<div className="w-full mt-3 flex flex-col items-center justify-center">
 								{listResults}
 							</div>
 						</div>
