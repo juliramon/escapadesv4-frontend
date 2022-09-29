@@ -227,77 +227,23 @@ const ActivityEditionForm = () => {
 		}
 	}
 
-	let isRomantic,
-		isAdventure,
-		isGastronomic,
-		isCultural,
-		isRelax,
-		isWinter,
-		isSpring,
-		isSummer,
-		isAutumn,
-		isBarcelona,
-		isTarragona,
-		isGirona,
-		isLleida,
-		isCostaBrava,
-		isCostaDaurada,
-		isPirineus;
+	const checkIfCategoryChecked = (val) => {
+		if (state.activity.categories) {
+			return state.activity.categories.includes(val) ? true : false;
+		}
+	};
 
-	if (state.activity.categories) {
-		state.activity.categories.includes("romantica")
-			? (isRomantic = true)
-			: (isRomantic = false);
-		state.activity.categories.includes("aventura")
-			? (isAdventure = true)
-			: (isAdventure = false);
-		state.activity.categories.includes("gastronomica")
-			? (isGastronomic = true)
-			: (isGastronomic = false);
-		state.activity.categories.includes("cultural")
-			? (isCultural = true)
-			: (isCultural = false);
-		state.activity.categories.includes("relax")
-			? (isRelax = true)
-			: (isRelax = false);
-	}
-	if (state.activity.seasons) {
-		state.activity.seasons.includes("hivern")
-			? (isWinter = true)
-			: (isWinter = false);
-		state.activity.seasons.includes("primavera")
-			? (isSpring = true)
-			: (isSpring = false);
-		state.activity.seasons.includes("estiu")
-			? (isSummer = true)
-			: (isSummer = false);
-		state.activity.seasons.includes("tardor")
-			? (isAutumn = true)
-			: (isAutumn = false);
-	}
-	if (state.activity.region) {
-		state.activity.region.includes("barcelona")
-			? (isBarcelona = true)
-			: (isBarcelona = false);
-		state.activity.region.includes("tarragona")
-			? (isTarragona = true)
-			: (isTarragona = false);
-		state.activity.region.includes("girona")
-			? (isGirona = true)
-			: (isGirona = false);
-		state.activity.region.includes("lleida")
-			? (isLleida = true)
-			: (isLleida = false);
-		state.activity.region.includes("costaBrava")
-			? (isCostaBrava = true)
-			: (isCostaBrava = false);
-		state.activity.region.includes("costaDaurada")
-			? (isCostaDaurada = true)
-			: (isCostaDaurada = false);
-		state.activity.region.includes("pirineus")
-			? (isPirineus = true)
-			: (isPirineus = false);
-	}
+	const checkIfSeasonChecked = (val) => {
+		if (state.activity.seasons) {
+			return state.activity.seasons.includes(val) ? true : false;
+		}
+	};
+
+	const checkIfRegionChecked = (val) => {
+		if (state.activity.region) {
+			return state.activity.region.includes(val) ? true : false;
+		}
+	};
 
 	const submitActivity = async () => {
 		const {
@@ -661,7 +607,7 @@ const ActivityEditionForm = () => {
 															id="romantica"
 															className="mr-2"
 															onChange={handleCheckCategory}
-															checked={isRomantic}
+															checked={checkIfCategoryChecked("romantica")}
 														/>
 														Romàntica
 													</label>
@@ -675,7 +621,7 @@ const ActivityEditionForm = () => {
 															id="aventura"
 															className="mr-2"
 															onChange={handleCheckCategory}
-															checked={isAdventure}
+															checked={checkIfCategoryChecked("aventura")}
 														/>
 														Aventura
 													</label>
@@ -689,7 +635,7 @@ const ActivityEditionForm = () => {
 															id="gastronomica"
 															className="mr-2"
 															onChange={handleCheckCategory}
-															checked={isGastronomic}
+															checked={checkIfCategoryChecked("gastronomica")}
 														/>
 														Gastronòmica
 													</label>
@@ -703,7 +649,7 @@ const ActivityEditionForm = () => {
 															id="cultural"
 															className="mr-2"
 															onChange={handleCheckCategory}
-															checked={isCultural}
+															checked={checkIfCategoryChecked("cultural")}
 														/>
 														Cultural
 													</label>
@@ -717,7 +663,7 @@ const ActivityEditionForm = () => {
 															id="relax"
 															className="mr-2"
 															onChange={handleCheckCategory}
-															checked={isRelax}
+															checked={checkIfCategoryChecked("relax")}
 														/>
 														Relax
 													</label>
@@ -736,7 +682,7 @@ const ActivityEditionForm = () => {
 															id="hivern"
 															className="mr-2"
 															onChange={handleCheckSeason}
-															checked={isWinter}
+															checked={checkIfSeasonChecked("hivern")}
 														/>
 														Hivern
 													</label>
@@ -750,7 +696,7 @@ const ActivityEditionForm = () => {
 															id="primavera"
 															className="mr-2"
 															onChange={handleCheckSeason}
-															checked={isSpring}
+															checked={checkIfSeasonChecked("primavera")}
 														/>
 														Primavera
 													</label>
@@ -764,7 +710,7 @@ const ActivityEditionForm = () => {
 															id="estiu"
 															className="mr-2"
 															onChange={handleCheckSeason}
-															checked={isSummer}
+															checked={checkIfSeasonChecked("estiu")}
 														/>
 														Estiu
 													</label>
@@ -778,7 +724,7 @@ const ActivityEditionForm = () => {
 															id="tardor"
 															className="mr-2"
 															onChange={handleCheckSeason}
-															checked={isAutumn}
+															checked={checkIfSeasonChecked("tardor")}
 														/>
 														Tardor
 													</label>
@@ -797,7 +743,7 @@ const ActivityEditionForm = () => {
 															id="barcelona"
 															className="mr-2"
 															onChange={handleCheckRegion}
-															checked={isBarcelona}
+															checked={checkIfRegionChecked("barcelona")}
 														/>
 														Barcelona
 													</label>
@@ -811,7 +757,7 @@ const ActivityEditionForm = () => {
 															id="tarragona"
 															className="mr-2"
 															onChange={handleCheckRegion}
-															checked={isTarragona}
+															checked={checkIfRegionChecked("tarragona")}
 														/>
 														Tarragona
 													</label>
@@ -825,7 +771,7 @@ const ActivityEditionForm = () => {
 															id="girona"
 															className="mr-2"
 															onChange={handleCheckRegion}
-															checked={isGirona}
+															checked={checkIfRegionChecked("girona")}
 														/>
 														Girona
 													</label>
@@ -839,7 +785,7 @@ const ActivityEditionForm = () => {
 															id="lleida"
 															className="mr-2"
 															onChange={handleCheckRegion}
-															checked={isLleida}
+															checked={checkIfRegionChecked("lleida")}
 														/>
 														Lleida
 													</label>
@@ -850,10 +796,10 @@ const ActivityEditionForm = () => {
 														<input
 															type="radio"
 															name="activityRegion"
-															id="costabrava"
+															id="costaBrava"
 															className="mr-2"
 															onChange={handleCheckRegion}
-															checked={isCostaBrava}
+															checked={checkIfRegionChecked("costabrava")}
 														/>
 														Costa Brava
 													</label>
@@ -867,7 +813,7 @@ const ActivityEditionForm = () => {
 															id="costaDaurada"
 															className="mr-2"
 															onChange={handleCheckRegion}
-															checked={isCostaDaurada}
+															checked={checkIfRegionChecked("costaDaurada")}
 														/>
 														Costa Daurada
 													</label>
@@ -881,7 +827,7 @@ const ActivityEditionForm = () => {
 															id="pirineus"
 															className="mr-2"
 															onChange={handleCheckRegion}
-															checked={isPirineus}
+															checked={checkIfRegionChecked("pirineus")}
 														/>
 														Pirineus
 													</label>
@@ -1042,6 +988,7 @@ const ActivityEditionForm = () => {
 															<label className="form__label m-0 bg-white rounded shadow py-3 px-5 inline-flex items-center cursor-pointer">
 																<input
 																	type="file"
+																	className="hidden"
 																	name="cover"
 																	onChange={saveFileToStatus}
 																/>
