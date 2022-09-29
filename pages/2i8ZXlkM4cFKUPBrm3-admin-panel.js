@@ -9,10 +9,10 @@ import FetchingSpinner from "../components/global/FetchingSpinner";
 const AdminPanel = () => {
 	// Validate if user is allowed to access this view
 	const { user } = useContext(UserContext);
-	const [grantAccess, setGrantAccess] = useState(false);
+	const [loadPage, setLoadPage] = useState(false);
 	useEffect(() => {
 		if (user && user.userType == "admin") {
-			setGrantAccess(true);
+			setLoadPage(true);
 		}
 	}, []);
 	// End validation
@@ -99,7 +99,7 @@ const AdminPanel = () => {
 	const isActive =
 		"bg-primary-500 border-primary-500 text-white hover:bg-primary-700";
 
-	if (!grantAccess) {
+	if (!loadPage) {
 		return <FetchingSpinner />;
 	}
 

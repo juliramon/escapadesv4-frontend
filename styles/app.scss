@@ -185,21 +185,6 @@ button,
 	position: relative;
 }
 
-.form-control:focus {
-	outline: none !important;
-	border: none !important;
-	background-color: $soft-blue !important;
-	box-shadow: inset 0 0 0 3px $electric-blue !important;
-}
-
-button:focus,
-.btn.focus,
-.btn:focus {
-	outline: none !important;
-	border: none !important;
-	box-shadow: none !important;
-}
-
 form .form-label {
 	font-size: 0.9em;
 }
@@ -1065,102 +1050,6 @@ nav {
 /*---COMPOSER STYLES---*/
 
 .composer {
-	background-color: #f2f7f9;
-	.form-composer {
-		padding: 30px 0 50px 0;
-		.form-composer__header {
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			.form-composer__header-right button {
-				background-color: #002b8f;
-				color: #ffffff;
-				padding: 10px 20px;
-				font-size: 0.9em;
-			}
-		}
-		.form-composer__body {
-			.form-composer__tab-bar {
-				display: flex;
-				align-items: center;
-				justify-content: space-between;
-				border-radius: 8px !important;
-				overflow: hidden;
-				border: 1px solid #e7ebf5;
-				margin: 0 0 15px 0;
-				background-color: #ffffff;
-				box-shadow: 0 0 0 0.5px rgb(49 49 93 / 3%),
-					0 2px 5px 0 rgb(49 49 93 / 10%), 0 1px 2px 0 rgb(0 0 0 / 8%);
-				.form-composer__tab {
-					flex: 1;
-					border: none;
-					background: none;
-					padding: 10px 15px;
-					border-radius: 0 !important;
-					color: #00206b;
-				}
-				.form-composer__tab.active {
-					border-top: 3px solid #3a4887 !important;
-				}
-				.form-composer__tab:first-child {
-					border-right: 1px solid #e8e8e8;
-				}
-			}
-		}
-	}
-	h1 {
-		font-size: 2rem;
-	}
-	.box {
-		position: sticky;
-		top: 120px;
-		z-index: 1000;
-	}
-	.sided-shadow {
-		padding-bottom: 50px;
-	}
-	form {
-		.organizations-list {
-			display: flex;
-			align-items: center;
-			margin: -16px -8px -8px -8px;
-			label {
-				display: flex;
-				align-items: center;
-				margin: 8px;
-			}
-		}
-		.organization-wrapper {
-			display: flex;
-			align-items: center;
-			margin: 8px;
-			.organization-logo {
-				max-width: 37px;
-				max-height: 37px;
-				width: 37px;
-				height: 37px;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				margin-right: 8px;
-				border: 1px solid #cfcfcf;
-				border-radius: 8px;
-				padding: 5px;
-				background-color: white;
-				img {
-					width: 100%;
-					height: 100%;
-					border-radius: 8px;
-				}
-			}
-			.organization-right {
-				h3 {
-					margin: 0;
-					font-size: 15px;
-				}
-			}
-		}
-	}
 	.images,
 	.cover {
 		span {
@@ -3045,77 +2934,6 @@ nav {
 .cover input[type="file"],
 .image-drop-zone input[type="file"] {
 	display: none;
-}
-
-.images-wrapper {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	max-width: 100%;
-	margin-bottom: 16px;
-	.top-bar {
-		background: #ffffff;
-		border: 1px solid #e7ebf5;
-		border-radius: 8px 8px 0 0;
-		width: 100%;
-		.image-drop-zone {
-			background-color: #ffffff;
-			border: none;
-			height: auto;
-			padding: 16px;
-			justify-content: flex-start;
-			.form-label {
-				margin: 0;
-				justify-content: flex-start;
-				background: #fff;
-				border-radius: 3px;
-				box-shadow: 0 0 0 1px rgba(50, 50, 93, 0.1),
-					0 2px 5px 0 rgba(50, 50, 93, 0.08), 0 1px 1.5px 0 rgba(0, 0, 0, 0.07),
-					0 1px 2px 0 rgba(0, 0, 0, 0.08), 0 0 0 0 transparent;
-				height: 32px;
-				padding: 0 20px;
-				line-height: 32px;
-				width: auto;
-			}
-			svg {
-				margin-right: 8px;
-				stroke: #00206b;
-			}
-		}
-	}
-	.images-list-wrapper {
-		width: 100%;
-		border: 1px solid #e7ebf5;
-		border-radius: 0 0 8px 8px;
-		margin-top: -1px;
-		padding: 16px;
-		display: flex;
-		.image-wrapper {
-			margin: -10px;
-			display: flex;
-			flex-wrap: wrap;
-			align-items: center;
-		}
-		.image {
-			margin: 10px;
-			position: relative;
-			button {
-				width: auto;
-				padding: 0;
-				background: rgba(0, 0, 0, 0.65);
-				border-radius: 100px !important;
-				position: absolute;
-				top: 12px;
-				right: 12px;
-				svg {
-					padding: 5px;
-				}
-			}
-		}
-	}
-	.form-group {
-		margin: 0 !important;
-	}
 }
 
 .images-wrapper img:not(.images-wrapper .header-image img) {

@@ -1,15 +1,24 @@
 import { useState, useEffect, useContext } from "react";
 import NavigationBar from "../../../components/global/NavigationBar";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Col, Form } from "react-bootstrap";
 import ContentService from "../../../services/contentService";
 import { useRouter } from "next/router";
 import Autocomplete from "react-google-autocomplete";
 import UserContext from "../../../contexts/UserContext";
 import Head from "next/head";
-import slugify from "slugify";
+import FetchingSpinner from "../../../components/global/FetchingSpinner";
 
 const ActivityEditionForm = () => {
+	// Validate if user is allowed to access this view
 	const { user } = useContext(UserContext);
+	const [loadPage, setLoadPage] = useState(false);
+	useEffect(() => {
+		if (user) {
+			setLoadPage(true);
+		}
+	}, []);
+	// End validation
+
 	const router = useRouter();
 
 	useEffect(() => {
@@ -22,19 +31,11 @@ const ActivityEditionForm = () => {
 			router.pathname.includes("nou-allotjament") ||
 			router.pathname.includes("nova-historia")
 		) {
-			document.querySelector("body").classList.add("composer");
+			document.querySelector("body").classList.add("bg-primary-100");
 		} else {
-			document.querySelector("body").classList.remove("composer");
+			document.querySelector("body").classList.remove("bg-primary-100");
 		}
 	}, [user, router]);
-
-	if (!user) {
-		return (
-			<Head>
-				<title>Carregant...</title>
-			</Head>
-		);
-	}
 
 	const initialState = {
 		activity: {},
@@ -120,7 +121,7 @@ const ActivityEditionForm = () => {
 						coverCloudImageUploaded: false,
 						phone: activityDetails.phone,
 						website: activityDetails.website,
-						activity_full_address: activityDetails.activity_full_address,
+						activity_full_address: "",
 						activity_locality: "",
 						activity_province: "",
 						activity_state: "",
@@ -185,8 +186,12 @@ const ActivityEditionForm = () => {
 			: (stateImages = state.activity.images);
 		if (stateImages) {
 			imagesList = stateImages.map((el, idx) => (
-				<div className="image" key={idx}>
+				<div
+					className="m-2 relative w-48 h-auto overflow-hidden rounded-md border-8 border-white shadow"
+					key={idx}
+				>
 					<img src={el} />
+					<button className="w-auto p-0 bg-black bg-opacity-60 rounded-full absolute top-3 right-3"></button>
 				</div>
 			));
 		}
@@ -202,9 +207,9 @@ const ActivityEditionForm = () => {
 			? (stateCover = state.formData.blopCover)
 			: (stateCover = state.activity.cover);
 		coverImage = (
-			<div className="image">
+			<div className="m-2 relative w-48 h-auto overflow-hidden rounded-md border-8 border-white shadow">
 				<img src={stateCover} />
-				<button></button>
+				<button className="w-auto p-0 bg-black bg-opacity-60 rounded-full absolute top-3 right-3"></button>
 			</div>
 		);
 	}
@@ -240,13 +245,13 @@ const ActivityEditionForm = () => {
 		isPirineus;
 
 	if (state.activity.categories) {
-		state.activity.categories.includes("romàntica")
+		state.activity.categories.includes("romantica")
 			? (isRomantic = true)
 			: (isRomantic = false);
 		state.activity.categories.includes("aventura")
 			? (isAdventure = true)
 			: (isAdventure = false);
-		state.activity.categories.includes("gastronòmica")
+		state.activity.categories.includes("gastronomica")
 			? (isGastronomic = true)
 			: (isGastronomic = false);
 		state.activity.categories.includes("cultural")
@@ -297,16 +302,11 @@ const ActivityEditionForm = () => {
 	const submitActivity = async () => {
 		const {
 			_id,
-			title,
-			subtitle,
 			categories,
 			seasons,
 			region,
 			cover,
 			images,
-			description,
-			phone,
-			website,
 			activity_full_address,
 			activity_locality,
 			activity_province,
@@ -317,11 +317,21 @@ const ActivityEditionForm = () => {
 			activity_rating,
 			activity_place_id,
 			activity_opening_hours,
+		} = state.activity;
+		const {
+			title,
+			subtitle,
+			slug,
+			coverCloudImage,
+			cloudImages,
+			metaTitle,
+			metaDescription,
+			description,
+			phone,
+			website,
 			duration,
 			price,
-		} = state.activity;
-		const { slug, coverCloudImage, cloudImages, metaTitle, metaDescription } =
-			state.formData;
+		} = state.formData;
 		const { organization } = state;
 		let activityCover, activityImages;
 		coverCloudImage !== ""
@@ -513,7 +523,7 @@ const ActivityEditionForm = () => {
 						}
 					}
 					return (
-						<label key={idx}>
+						<label key={idx} className="flex items-center m-2">
 							<input
 								value={el.orgName}
 								name="orgName"
@@ -522,21 +532,25 @@ const ActivityEditionForm = () => {
 								onChange={handleCheckOrganization}
 								checked={isChecked}
 							/>
-							<div className="organization-wrapper">
-								<div className="organization-left">
-									<div className="organization-logo">
-										<img src={el.orgLogo} alt={el.orgName} />
-									</div>
+							<div className="flex items-center p-2">
+								<div className="rounded-md w-10 h-10 border border-primary-300 overflow-hidden mr-2">
+									<img
+										src={el.orgLogo}
+										alt={el.orgName}
+										className="w-full h-full object-cover"
+									/>
 								</div>
-								<div className="organization-right">
-									<span className="text-base">{el.orgName}</span>
-								</div>
+								<span className="text-sm">{el.orgName}</span>
 							</div>
 						</label>
 					);
 				}
 			);
 		}
+	}
+
+	if (!loadPage) {
+		return <FetchingSpinner />;
 	}
 
 	return (
@@ -555,538 +569,638 @@ const ActivityEditionForm = () => {
 
 				<section>
 					<div className="container">
-						<div className="w-full">
-							<div className="form-composer">
-								<div className="form-composer__header">
-									<div className="form-composer__header-left">
-										<h1>Editar l'activitat</h1>
-										<p className="sub-h1">
-											Edita i desa els canvis de la teva activitat
-										</p>
-									</div>
-									<div className="form-composer__header-right">
-										<Button type="submit" variant="none" onClick={handleSubmit}>
-											Guardar canvis
-										</Button>
-									</div>
+						<div className="pt-7 pb-12">
+							<div className="flex items-center justify-between">
+								<div className="w-full lg:w-1/2">
+									<h1 className="text-3xl">Editar l'activitat</h1>
+									<p className="text-base">
+										Edita i desa els canvis de la teva activitat
+									</p>
 								</div>
-								<div className="form-composer__body">
-									<div className="form-composer__tab-bar">
-										<button
-											className={
-												activeTab === "main"
-													? "form-composer__tab active"
-													: "form-composer__tab"
-											}
-											onClick={() => setActiveTab("main")}
-										>
-											Contingut principal
-										</button>
-										<button
-											className={
-												activeTab === "seo"
-													? "form-composer__tab active"
-													: "form-composer__tab"
-											}
-											onClick={() => setActiveTab("seo")}
-										>
-											SEO
-										</button>
-									</div>
-									{activeTab === "main" ? (
-										<div className="form__wrapper">
-											<form className="form" onSubmit={handleSubmit}>
-												<div className="form__group">
-													<label className="form__label">
-														Empresa propietària
-													</label>
-													<div className="organizations-list">
-														{organizationsList}
-													</div>
+								<div className="w-full lg:w-1/2 flex justify-end">
+									<button
+										className="button__primary button__lg"
+										type="submit"
+										onClick={handleSubmit}
+									>
+										Guardar canvis
+									</button>
+								</div>
+							</div>
+							<div className="form-composer__body">
+								<div className="flex items-center justify-between overflow-hidden border border-primary-300 mb-4 bg-white shadow rounded-md">
+									<button
+										className={`flex-1 bg-none px-4 py-4 text-primary-500 !rounded-none focus:border-t-4 focus:border-primary-500 text-sm ${
+											activeTab === "main"
+												? "border-t-4 border-primary-500"
+												: ""
+										}`}
+										onClick={() => setActiveTab("main")}
+									>
+										Contingut principal
+									</button>
+									<button
+										className={`flex-1 bg-none px-4 py-4 text-primary-500 !rounded-none focus:border-t-4 focus:border-primary-500 text-sm ${
+											activeTab === "seo" ? "border-t-4 border-primary-500" : ""
+										}`}
+										onClick={() => setActiveTab("seo")}
+									>
+										SEO
+									</button>
+								</div>
+								{activeTab === "main" ? (
+									<div className="form__wrapper">
+										<form className="form" onSubmit={handleSubmit}>
+											<div className="form__group">
+												<label className="form__label">
+													Empresa propietària
+												</label>
+												<div className="flex items-center -mt-4 -mx-2 -mb-2">
+													{organizationsList}
 												</div>
-												<div className="form__group">
-													<label htmlFor="title" className="form__label">
-														Títol
+											</div>
+											<div className="form__group">
+												<label htmlFor="title" className="form__label">
+													Títol
+												</label>
+												<input
+													type="text"
+													name="title"
+													placeholder="Títol de l'activitat"
+													className="form__control"
+													value={state.formData.title}
+													onChange={handleChange}
+												/>
+											</div>
+											<div className="form__group">
+												<label htmlFor="subtitle" className="form__label">
+													Subtítol
+												</label>
+												<input
+													type="text"
+													name="subtitle"
+													placeholder="Subtítol de l'activitat"
+													className="form__control"
+													value={state.formData.subtitle}
+													onChange={handleChange}
+												/>
+											</div>
+
+											<div className="flex flex-wrap items-stretch mt-2">
+												<div className="form__group w-3/12">
+													<label htmlFor="categoria" className="form__label">
+														Categoria d'escapada
 													</label>
-													<input
-														type="text"
-														name="title"
-														placeholder="Títol de l'activitat"
-														className="form__control"
-														value={state.formData.title}
-														onChange={handleChange}
-													/>
+													<label
+														htmlFor="romantica"
+														className="form__label flex items-center"
+													>
+														<input
+															type="checkbox"
+															name="romantica"
+															id="romantica"
+															className="mr-2"
+															onChange={handleCheckCategory}
+															checked={isRomantic}
+														/>
+														Romàntica
+													</label>
+													<label
+														htmlFor="aventura"
+														className="form__label flex items-center"
+													>
+														<input
+															type="checkbox"
+															name="aventura"
+															id="aventura"
+															className="mr-2"
+															onChange={handleCheckCategory}
+															checked={isAdventure}
+														/>
+														Aventura
+													</label>
+													<label
+														htmlFor="gastronomica"
+														className="form__label flex items-center"
+													>
+														<input
+															type="checkbox"
+															name="gastronomica"
+															id="gastronomica"
+															className="mr-2"
+															onChange={handleCheckCategory}
+															checked={isGastronomic}
+														/>
+														Gastronòmica
+													</label>
+													<label
+														htmlFor="cultural"
+														className="form__label flex items-center"
+													>
+														<input
+															type="checkbox"
+															name="cultural"
+															id="cultural"
+															className="mr-2"
+															onChange={handleCheckCategory}
+															checked={isCultural}
+														/>
+														Cultural
+													</label>
+													<label
+														htmlFor="relax"
+														className="form__label flex items-center"
+													>
+														<input
+															type="checkbox"
+															name="relax"
+															id="relax"
+															className="mr-2"
+															onChange={handleCheckCategory}
+															checked={isRelax}
+														/>
+														Relax
+													</label>
 												</div>
-												<div className="form__group">
-													<label htmlFor="subtitle" className="form__label">
-														Subtítol
+												<div className="form__group w-3/12">
+													<label htmlFor="categoria" className="form__label">
+														Estació recomanada
 													</label>
-													<input
-														type="text"
-														name="subtitle"
-														placeholder="Subtítol de l'activitat"
-														className="form__control"
-														value={state.formData.subtitle}
-														onChange={handleChange}
-													/>
+													<label
+														htmlFor="hivern"
+														className="form__label flex items-center"
+													>
+														<input
+															type="checkbox"
+															name="hivern"
+															id="hivern"
+															className="mr-2"
+															onChange={handleCheckSeason}
+															checked={isWinter}
+														/>
+														Hivern
+													</label>
+													<label
+														htmlFor="primavera"
+														className="form__label flex items-center"
+													>
+														<input
+															type="checkbox"
+															name="primavera"
+															id="primavera"
+															className="mr-2"
+															onChange={handleCheckSeason}
+															checked={isSpring}
+														/>
+														Primavera
+													</label>
+													<label
+														htmlFor="romantica"
+														className="form__label flex items-center"
+													>
+														<input
+															type="checkbox"
+															name="estiu"
+															id="estiu"
+															className="mr-2"
+															onChange={handleCheckSeason}
+															checked={isSummer}
+														/>
+														Estiu
+													</label>
+													<label
+														htmlFor="romantica"
+														className="form__label flex items-center"
+													>
+														<input
+															type="checkbox"
+															name="tardor"
+															id="tardor"
+															className="mr-2"
+															onChange={handleCheckSeason}
+															checked={isAutumn}
+														/>
+														Tardor
+													</label>
 												</div>
-
-												<Form.Row>
-													<Col lg={4}>
-														<Form.Group>
-															<Form.Label>Categoria d'escapada</Form.Label>
-															<Form.Check
-																type="checkbox"
-																name="romantica"
-																id="romantica"
-																label="Romàntica"
-																onChange={handleCheckCategory}
-																checked={isRomantic}
-															/>
-															<Form.Check
-																type="checkbox"
-																name="aventura"
-																id="aventura"
-																label="Aventura"
-																onChange={handleCheckCategory}
-																checked={isAdventure}
-															/>
-
-															<Form.Check
-																type="checkbox"
-																name="gastronomica"
-																id="gastronomica"
-																label="Gastronòmica"
-																onChange={handleCheckCategory}
-																checked={isGastronomic}
-															/>
-															<Form.Check
-																type="checkbox"
-																name="cultural"
-																id="cultural"
-																label="Cultural"
-																onChange={handleCheckCategory}
-																checked={isCultural}
-															/>
-															<Form.Check
-																type="checkbox"
-																name="relax"
-																id="relax"
-																label="Relax"
-																onChange={handleCheckCategory}
-																checked={isRelax}
-															/>
-														</Form.Group>
-													</Col>
-													<Col lg={4}>
-														<Form.Group>
-															<Form.Label>Estació recomanada</Form.Label>
-															<Form.Check
-																type="checkbox"
-																name="hivern"
-																id="hivern"
-																label="Hivern"
-																onChange={handleCheckSeason}
-																checked={isWinter}
-															/>
-															<Form.Check
-																type="checkbox"
-																name="primavera"
-																id="primavera"
-																label="Primavera"
-																onChange={handleCheckSeason}
-																checked={isSpring}
-															/>
-															<Form.Check
-																type="checkbox"
-																name="estiu"
-																id="estiu"
-																label="Estiu"
-																onChange={handleCheckSeason}
-																checked={isSummer}
-															/>
-															<Form.Check
-																type="checkbox"
-																name="tardor"
-																id="tardor"
-																label="Tardor"
-																onChange={handleCheckSeason}
-																checked={isAutumn}
-															/>
-														</Form.Group>
-													</Col>
-													<Col lg={4}>
-														<Form.Group>
-															<Form.Group>
-																<Form.Label>Regió de l'activitat</Form.Label>
-																<Form.Check
-																	type="radio"
-																	id="barcelona"
-																	label="Barcelona"
-																	name="activitySeason"
-																	onChange={handleCheckRegion}
-																	checked={isBarcelona}
-																/>
-																<Form.Check
-																	type="radio"
-																	id="tarragona"
-																	label="Tarragona"
-																	name="activitySeason"
-																	onChange={handleCheckRegion}
-																	checked={isTarragona}
-																/>
-																<Form.Check
-																	type="radio"
-																	id="girona"
-																	label="Girona"
-																	name="activitySeason"
-																	onChange={handleCheckRegion}
-																	checked={isGirona}
-																/>
-																<Form.Check
-																	type="radio"
-																	id="lleida"
-																	label="Lleida"
-																	name="activitySeason"
-																	onChange={handleCheckRegion}
-																	checked={isLleida}
-																/>
-																<Form.Check
-																	type="radio"
-																	id="costaBrava"
-																	label="Costa Brava"
-																	name="activitySeason"
-																	onChange={handleCheckRegion}
-																	checked={isCostaBrava}
-																/>
-																<Form.Check
-																	type="radio"
-																	id="costaDaurada"
-																	label="Costa Daurada"
-																	name="activitySeason"
-																	onChange={handleCheckRegion}
-																	checked={isCostaDaurada}
-																/>
-																<Form.Check
-																	type="radio"
-																	id="pirineus"
-																	label="Pirineus"
-																	name="activitySeason"
-																	onChange={handleCheckRegion}
-																	checked={isPirineus}
-																/>
-															</Form.Group>
-														</Form.Group>
-													</Col>
-												</Form.Row>
-												<div className="form__group">
-													<label htmlFor="loaction" className="form__label">
-														Localització
+												<div className="form__group w-3/12">
+													<label htmlFor="categoria" className="form__label">
+														Regió de l'activitat
 													</label>
-													<Autocomplete
-														className="form__control"
-														apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
-														style={{ width: "100%" }}
-														defaultValue={state.formData.activity_full_address}
-														onPlaceSelected={(activity) => {
-															let activity_full_address,
-																activity_locality,
-																activity_province,
-																activity_state,
-																activity_country,
-																activity_lat,
-																activity_lng,
-																activity_rating,
-																activity_id,
-																activity_opening_hours;
+													<label
+														htmlFor="barcelona"
+														className="form__label flex items-center"
+													>
+														<input
+															type="radio"
+															name="activityRegion"
+															id="barcelona"
+															className="mr-2"
+															onChange={handleCheckRegion}
+															checked={isBarcelona}
+														/>
+														Barcelona
+													</label>
+													<label
+														htmlFor="tarragona"
+														className="form__label flex items-center"
+													>
+														<input
+															type="radio"
+															name="activityRegion"
+															id="tarragona"
+															className="mr-2"
+															onChange={handleCheckRegion}
+															checked={isTarragona}
+														/>
+														Tarragona
+													</label>
+													<label
+														htmlFor="girona"
+														className="form__label flex items-center"
+													>
+														<input
+															type="radio"
+															name="activityRegion"
+															id="girona"
+															className="mr-2"
+															onChange={handleCheckRegion}
+															checked={isGirona}
+														/>
+														Girona
+													</label>
+													<label
+														htmlFor="lleida"
+														className="form__label flex items-center"
+													>
+														<input
+															type="radio"
+															name="activityRegion"
+															id="lleida"
+															className="mr-2"
+															onChange={handleCheckRegion}
+															checked={isLleida}
+														/>
+														Lleida
+													</label>
+													<label
+														htmlFor="costabrava"
+														className="form__label flex items-center"
+													>
+														<input
+															type="radio"
+															name="activityRegion"
+															id="costabrava"
+															className="mr-2"
+															onChange={handleCheckRegion}
+															checked={isCostaBrava}
+														/>
+														Costa Brava
+													</label>
+													<label
+														htmlFor="costaDaurada"
+														className="form__label flex items-center"
+													>
+														<input
+															type="radio"
+															name="activityRegion"
+															id="costaDaurada"
+															className="mr-2"
+															onChange={handleCheckRegion}
+															checked={isCostaDaurada}
+														/>
+														Costa Daurada
+													</label>
+													<label
+														htmlFor="pirineus"
+														className="form__label flex items-center"
+													>
+														<input
+															type="radio"
+															name="activityRegion"
+															id="pirineus"
+															className="mr-2"
+															onChange={handleCheckRegion}
+															checked={isPirineus}
+														/>
+														Pirineus
+													</label>
+												</div>
+											</div>
 
-															activity_full_address =
-																activity.formatted_address;
-															activity.address_components.forEach((el) => {
-																if (el.types[0] === "locality") {
-																	activity_locality = el.long_name;
-																}
-																if (
-																	el.types[0] === "administrative_area_level_2"
-																) {
-																	activity_province = el.long_name;
-																}
-																if (
-																	el.types[0] === "administrative_area_level_1"
-																) {
-																	activity_state = el.long_name;
-																}
-																if (el.types[0] === "country") {
-																	activity_country = el.long_name;
-																}
-															});
+											<div className="form__group">
+												<label htmlFor="loaction" className="form__label">
+													Localització
+												</label>
+												<Autocomplete
+													className="form__control"
+													apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
+													style={{ width: "100%" }}
+													defaultValue={state.formData.activity_full_address}
+													onPlaceSelected={(activity) => {
+														let activity_full_address,
+															activity_locality,
+															activity_province,
+															activity_state,
+															activity_country,
+															activity_lat,
+															activity_lng,
+															activity_rating,
+															activity_id,
+															activity_opening_hours;
 
-															if (activity.geometry.viewport) {
-																activity_lat = Object.values(
-																	activity.geometry.viewport
-																)[0].i;
-																activity_lng = Object.values(
-																	activity.geometry.viewport
-																)[1].i;
+														activity_full_address = activity.formatted_address;
+														activity.address_components.forEach((el) => {
+															if (el.types[0] === "locality") {
+																activity_locality = el.long_name;
 															}
-
-															activity_rating = activity.rating;
-															activity_id = activity.place_id;
-
-															if (activity.opening_hours) {
-																activity_opening_hours =
-																	activity.opening_hours.weekday_text;
+															if (
+																el.types[0] === "administrative_area_level_2"
+															) {
+																activity_province = el.long_name;
 															}
+															if (
+																el.types[0] === "administrative_area_level_1"
+															) {
+																activity_state = el.long_name;
+															}
+															if (el.types[0] === "country") {
+																activity_country = el.long_name;
+															}
+														});
 
-															setState({
-																...state,
-																activity: {
-																	...state.activity,
-																	activity_full_address: activity_full_address,
-																	activity_locality: activity_locality,
-																	activity_province: activity_province,
-																	activity_state: activity_state,
-																	activity_country: activity_country,
-																	activity_lat: activity_lat,
-																	activity_lng: activity_lng,
-																	activity_rating: activity_rating,
-																	activity_id: activity_id,
-																	activity_opening_hours:
-																		activity_opening_hours,
-																},
-															});
-														}}
-														types={["establishment"]}
-														placeholder={
-															"Escriu la localització de l'activitat"
+														if (activity.geometry.viewport) {
+															activity_lat = Object.values(
+																activity.geometry.viewport
+															)[0].hi;
+															activity_lng = Object.values(
+																activity.geometry.viewport
+															)[1].hi;
 														}
-														fields={[
-															"rating",
-															"place_id",
-															"opening_hours",
-															"address_components",
-															"formatted_address",
-															"geometry",
-														]}
-													/>
-												</div>
 
-												<div className="flex flex-wrap items-center">
-													<div className="form__group w-3/12">
-														<label htmlFor="phone" className="form__label">
-															Número de telèfon
-														</label>
-														<input
-															type="tel"
-															name="phone"
-															placeholder="Número de telèfon de l'activitat"
-															className="form__control"
-															value={state.formData.phone}
-															onChange={handleChange}
-														/>
-													</div>
+														activity_rating = activity.rating;
+														activity_id = activity.place_id;
 
-													<div className="form__group w-3/12">
-														<label htmlFor="website" className="form__label">
-															Pàgina web
-														</label>
-														<input
-															type="url"
-															name="website"
-															placeholder="Pàgina web de l'activitat"
-															className="form__control"
-															value={state.formData.website}
-															onChange={handleChange}
-														/>
-													</div>
+														if (activity.opening_hours) {
+															activity_opening_hours =
+																activity.opening_hours.weekday_text;
+														}
 
-													<div className="form__group w-3/12">
-														<label htmlFor="price" className="form__label">
-															Preu per persona (€)
-														</label>
-														<input
-															type="number"
-															name="price"
-															placeholder="Preu de l'activitat"
-															className="form__control"
-															value={state.formData.price}
-															onChange={handleChange}
-														/>
-													</div>
+														setState({
+															...state,
+															activity: {
+																...state.activity,
+																activity_full_address: activity_full_address,
+																activity_locality: activity_locality,
+																activity_province: activity_province,
+																activity_state: activity_state,
+																activity_country: activity_country,
+																activity_lat: activity_lat,
+																activity_lng: activity_lng,
+																activity_rating: activity_rating,
+																activity_id: activity_id,
+																activity_opening_hours: activity_opening_hours,
+															},
+														});
+													}}
+													types={["establishment"]}
+													placeholder={"Escriu la localització de l'activitat"}
+													fields={[
+														"rating",
+														"place_id",
+														"opening_hours",
+														"address_components",
+														"formatted_address",
+														"geometry",
+													]}
+												/>
+											</div>
 
-													<div className="form__group w-3/12">
-														<label htmlFor="price" className="form__label">
-															Durada (h)
-														</label>
-														<input
-															type="number"
-															name="duration"
-															placeholder="Durada de l'activitat"
-															className="form__control"
-															value={state.formData.duration}
-															onChange={handleChange}
-														/>
-													</div>
-												</div>
-
-												<div className="cover">
-													<span>Imatge de portada</span>
-													<div className="images-wrapper">
-														<div className="top-bar">
-															<Form.Group>
-																<div className="image-drop-zone">
-																	<Form.Label>
-																		<svg
-																			xmlns="http://www.w3.org/2000/svg"
-																			className="icon icon-tabler icon-tabler-camera-plus"
-																			width="22"
-																			height="22"
-																			viewBox="0 0 24 24"
-																			strokeWidth="1.5"
-																			stroke="#0d1f44"
-																			fill="none"
-																			strokeLinecap="round"
-																			strokeLinejoin="round"
-																		>
-																			<path
-																				stroke="none"
-																				d="M0 0h24v24H0z"
-																				fill="none"
-																			/>
-																			<circle cx="12" cy="13" r="3" />
-																			<path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
-																			<line x1="15" y1="6" x2="21" y2="6" />
-																			<line x1="18" y1="3" x2="18" y2="9" />
-																		</svg>
-																		{state.formData.cover
-																			? "Canviar imatge"
-																			: "Seleccionar imatge"}
-
-																		<Form.Control
-																			type="file"
-																			name="cover"
-																			onChange={saveFileToStatus}
-																		/>
-																	</Form.Label>
-																</div>
-															</Form.Group>
-														</div>
-														<div className="images-list-wrapper">
-															<div className="image-wrapper">{coverImage}</div>
-														</div>
-													</div>
-												</div>
-
-												<div className="images">
-													<span>Imatges d'aquesta història</span>
-													<div className="images-wrapper">
-														<div className="top-bar">
-															<Form.Group>
-																<div className="image-drop-zone">
-																	<Form.Label>
-																		<svg
-																			xmlns="http://www.w3.org/2000/svg"
-																			className="icon icon-tabler icon-tabler-camera-plus"
-																			width="22"
-																			height="22"
-																			viewBox="0 0 24 24"
-																			strokeWidth="1.5"
-																			stroke="#0d1f44"
-																			fill="none"
-																			strokeLinecap="round"
-																			strokeLinejoin="round"
-																		>
-																			<path
-																				stroke="none"
-																				d="M0 0h24v24H0z"
-																				fill="none"
-																			/>
-																			<circle cx="12" cy="13" r="3" />
-																			<path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
-																			<line x1="15" y1="6" x2="21" y2="6" />
-																			<line x1="18" y1="3" x2="18" y2="9" />
-																		</svg>
-																		Seleccionar imatges
-																		<Form.Control
-																			type="file"
-																			onChange={saveFileToStatus}
-																		/>
-																	</Form.Label>
-																</div>
-															</Form.Group>
-														</div>
-														<div className="images-list-wrapper">
-															<div className="image-wrapper">{imagesList}</div>
-														</div>
-													</div>
-												</div>
-
-												<div className="form__group">
-													<label htmlFor="description" className="form__label">
-														Descripció
+											<div className="flex flex-wrap items-center">
+												<div className="form__group w-3/12">
+													<label htmlFor="phone" className="form__label">
+														Número de telèfon
 													</label>
-													<textarea
-														name="description"
-														rows={10}
-														placeholder="Descripció de l'activitat"
+													<input
+														type="tel"
+														name="phone"
+														placeholder="Número de telèfon de l'activitat"
 														className="form__control"
-														defaultValue={state.formData.description}
+														value={state.formData.phone}
 														onChange={handleChange}
-													></textarea>
+													/>
 												</div>
-											</form>
-										</div>
-									) : (
-										<div className="form__wrapper">
-											<Form onSubmit={handleSubmit}>
-												<Form.Group>
-													<Form.Label>
-														Meta títol{" "}
-														<span className="form-composer__label-description">
-															Cada publicació hauria de tenir un meta títol
-															únic, idealment de menys de 60 caràcters de
-															llargada
-														</span>
-													</Form.Label>
-													<Form.Control
-														type="text"
-														name="metaTitle"
-														placeholder="Meta títol"
-														value={state.formData.metaTitle}
+
+												<div className="form__group w-3/12">
+													<label htmlFor="website" className="form__label">
+														Pàgina web
+													</label>
+													<input
+														type="url"
+														name="website"
+														placeholder="Pàgina web de l'activitat"
+														className="form__control"
+														value={state.formData.website}
 														onChange={handleChange}
 													/>
-												</Form.Group>
-												<Form.Group>
-													<Form.Label>
-														Meta descripció{" "}
-														<span className="form-composer__label-description">
-															Cada publicació hauria de tenir una meta
-															descripció única, idealment de menys de 160
-															caràcters de llargada
-														</span>
-													</Form.Label>
-													<Form.Control
-														type="text"
-														name="metaDescription"
-														placeholder="Meta descripció"
-														onChange={handleChange}
-														value={state.formData.metaDescription}
-													/>
-												</Form.Group>
-												<Form.Group>
-													<Form.Label>Slug</Form.Label>
-													<Form.Control
-														type="text"
-														name="slug"
-														placeholder="Slug de l'activitat"
-														value={state.formData.slug}
+												</div>
+
+												<div className="form__group w-3/12">
+													<label htmlFor="price" className="form__label">
+														Preu per persona (€)
+													</label>
+													<input
+														type="number"
+														name="price"
+														placeholder="Preu de l'activitat"
+														className="form__control"
+														value={state.formData.price}
 														onChange={handleChange}
 													/>
-												</Form.Group>
-											</Form>
-										</div>
-									)}
-								</div>
+												</div>
+
+												<div className="form__group w-3/12">
+													<label htmlFor="price" className="form__label">
+														Durada (h)
+													</label>
+													<input
+														type="number"
+														name="duration"
+														placeholder="Durada de l'activitat"
+														className="form__control"
+														value={state.formData.duration}
+														onChange={handleChange}
+													/>
+												</div>
+											</div>
+
+											<div className="cover">
+												<span className="form__label">Imatge de portada</span>
+												<div className="flex items-center flex-col max-w-full mb-4">
+													<div className="bg-white border border-primary-300 rounded-tl-md rounded-tr-md w-full">
+														<div className="bg-white border-none h-auto p-4 justify-start">
+															<label className="form__label m-0 bg-white rounded shadow py-3 px-5 inline-flex items-center cursor-pointer">
+																<input
+																	type="file"
+																	name="cover"
+																	onChange={saveFileToStatus}
+																/>
+																<svg
+																	xmlns="http://www.w3.org/2000/svg"
+																	className="mr-2"
+																	width="22"
+																	height="22"
+																	viewBox="0 0 24 24"
+																	strokeWidth="1.5"
+																	stroke="#0d1f44"
+																	fill="none"
+																	strokeLinecap="round"
+																	strokeLinejoin="round"
+																>
+																	<path
+																		stroke="none"
+																		d="M0 0h24v24H0z"
+																		fill="none"
+																	/>
+																	<circle cx="12" cy="13" r="3" />
+																	<path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+																	<line x1="15" y1="6" x2="21" y2="6" />
+																	<line x1="18" y1="3" x2="18" y2="9" />
+																</svg>
+																{state.formData.cover
+																	? "Canviar imatge"
+																	: "Seleccionar imatge"}
+															</label>
+														</div>
+													</div>
+													<div className="w-full border border-primary-300 rounded-br-md rounded-bl-md -mt-px p-4 flex">
+														<div className="-m-2.5 flex flex-wrap items-center">
+															{coverImage}
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div className="images">
+												<span className="form__label">
+													Imatges d'aquesta història
+												</span>
+												<div className="flex items-center flex-col max-w-full mb-4">
+													<div className="bg-white border border-primary-300 rounded-tl-md rounded-tr-md w-full">
+														<div className="bg-white border-none h-auto p-4 justify-start">
+															<label className="form__label m-0 bg-white rounded shadow py-3 px-5 inline-flex items-center cursor-pointer">
+																<svg
+																	xmlns="http://www.w3.org/2000/svg"
+																	className="mr-2"
+																	width="22"
+																	height="22"
+																	viewBox="0 0 24 24"
+																	strokeWidth="1.5"
+																	stroke="#0d1f44"
+																	fill="none"
+																	strokeLinecap="round"
+																	strokeLinejoin="round"
+																>
+																	<path
+																		stroke="none"
+																		d="M0 0h24v24H0z"
+																		fill="none"
+																	/>
+																	<circle cx="12" cy="13" r="3" />
+																	<path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+																	<line x1="15" y1="6" x2="21" y2="6" />
+																	<line x1="18" y1="3" x2="18" y2="9" />
+																</svg>
+																Seleccionar imatges
+																<input
+																	type="file"
+																	className="hidden"
+																	onChange={saveFileToStatus}
+																/>
+															</label>
+														</div>
+													</div>
+													<div className="w-full border border-primary-300 rounded-br-md rounded-bl-md -mt-px p-4 flex">
+														<div className="-m-2.5 flex flex-wrap items-center">
+															{imagesList}
+														</div>
+													</div>
+												</div>
+											</div>
+
+											<div className="form__group">
+												<label htmlFor="description" className="form__label">
+													Descripció
+												</label>
+												<textarea
+													name="description"
+													rows={10}
+													placeholder="Descripció de l'activitat"
+													className="form__control"
+													value={state.formData.description}
+													onChange={handleChange}
+												></textarea>
+											</div>
+										</form>
+									</div>
+								) : (
+									<div className="form__wrapper">
+										<form className="form" onSubmit={handleSubmit}>
+											<div className="form__group">
+												<label htmlFor="metaTitle" className="form__label">
+													Meta títol{" "}
+												</label>
+												<input
+													type="text"
+													name="metaTitle"
+													placeholder="Meta títol"
+													className="form__control"
+													value={state.formData.metaTitle}
+													onChange={handleChange}
+												/>
+												<span className="form__text_info">
+													Cada publicació hauria de tenir un meta títol únic,
+													idealment de menys de 60 caràcters de llargada
+												</span>
+											</div>
+
+											<div className="form__group">
+												<label
+													htmlFor="metaDescription"
+													className="form__label"
+												>
+													Meta descripció{" "}
+												</label>
+												<input
+													type="text"
+													name="metaDescription"
+													placeholder="Meta descripció"
+													className="form__control"
+													value={state.formData.metaDescription}
+													onChange={handleChange}
+												/>
+												<span className="form__text_info">
+													Cada publicació hauria de tenir una meta descripció
+													única, idealment de menys de 160 caràcters de llargada
+												</span>
+											</div>
+
+											<div className="form__group">
+												<label htmlFor="slug" className="form__label">
+													Slug{" "}
+												</label>
+												<input
+													type="text"
+													name="slug"
+													placeholder="Slug de l'activitat"
+													className="form__control"
+													value={state.formData.slug}
+													onChange={handleChange}
+												/>
+											</div>
+										</form>
+									</div>
+								)}
 							</div>
 						</div>
 					</div>
