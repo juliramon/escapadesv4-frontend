@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import NavigationBar from "../../../components/global/NavigationBar";
-import { Col, Form } from "react-bootstrap";
 import ContentService from "../../../services/contentService";
 import { useRouter } from "next/router";
 import Autocomplete from "react-google-autocomplete";
@@ -701,7 +700,7 @@ const ActivityEditionForm = () => {
 														Primavera
 													</label>
 													<label
-														htmlFor="romantica"
+														htmlFor="estiu"
 														className="form__label flex items-center"
 													>
 														<input
@@ -715,7 +714,7 @@ const ActivityEditionForm = () => {
 														Estiu
 													</label>
 													<label
-														htmlFor="romantica"
+														htmlFor="tardor"
 														className="form__label flex items-center"
 													>
 														<input
