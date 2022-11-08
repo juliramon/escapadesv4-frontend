@@ -36,9 +36,10 @@ const PlaceForm = () => {
 		}
 		if (
 			router.pathname.includes("editar") ||
-			router.pathname.includes("nova'allotjament") ||
+			router.pathname.includes("nova-activitat") ||
 			router.pathname.includes("nou-allotjament") ||
-			router.pathname.includes("nova-historia")
+			router.pathname.includes("nova-historia") ||
+			router.pathname.includes("nova-llista")
 		) {
 			document.querySelector("body").classList.add("bg-primary-100");
 		} else {
@@ -141,7 +142,10 @@ const PlaceForm = () => {
 	};
 
 	const imagesList = state.formData.blopImages.map((el, idx) => (
-		<div className="image" key={idx}>
+		<div
+			className="m-2 relative w-48 h-auto overflow-hidden rounded-md border-8 border-white shadow"
+			key={idx}
+		>
 			<img src={el} />
 		</div>
 	));
@@ -337,7 +341,7 @@ const PlaceForm = () => {
 
 				// service.editUserPlan(user._id, true, true, true, true);
 				// paymentService.editUserSubscription();
-				Router.push("/dashboard");
+				Router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel");
 			})
 			.catch((err) => console.error(err));
 	};
