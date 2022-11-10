@@ -313,22 +313,6 @@ const StoryListing = ({ storyDetails }) => {
 	);
 };
 
-export async function getStaticPaths() {
-	const service = new ContentService();
-
-	// Call an external API endpoint to get posts
-	const { allStories } = await service.getAllStories("/all-stories");
-
-	// Get the paths we want to pre-render based on posts
-	const paths = allStories.map((story) => ({
-		params: { slug: story.slug },
-	}));
-
-	// We'll pre-render only these paths at build time.
-	// { fallback: false } means other routes should 404.
-	return { paths, fallback: false };
-}
-
 export async function getServerSideProps({ params }) {
 	const service = new ContentService();
 	const storyDetails = await service.getStoryDetails(params.slug);

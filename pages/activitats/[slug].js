@@ -955,22 +955,6 @@ const ActivityListing = ({ activityDetails }) => {
 	);
 };
 
-export async function getStaticPaths() {
-	const service = new ContentService();
-
-	// Call an external API endpoint to get posts
-	const { allActivities } = await service.activities();
-
-	// Get the paths we want to pre-render based on posts
-	const paths = allActivities.map((activity) => ({
-		params: { slug: activity.slug },
-	}));
-
-	// We'll pre-render only these paths at build time.
-	// { fallback: false } means other routes should 404.
-	return { paths, fallback: false };
-}
-
 export async function getServerSideProps({ params }) {
 	const service = new ContentService();
 	const activityDetails = await service.activityDetails(params.slug);

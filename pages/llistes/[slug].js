@@ -248,22 +248,6 @@ const ListView = ({ listDetails }) => {
 	);
 };
 
-export async function getStaticPaths() {
-	const service = new ContentService();
-
-	// Call an external API endpoint to get posts
-	const allLists = await service.getAllLists();
-
-	// Get the paths we want to pre-render based on posts
-	const paths = allLists.map((list) => ({
-		params: { slug: list.slug },
-	}));
-
-	// We'll pre-render only these paths at build time.
-	// { fallback: false } means other routes should 404.
-	return { paths, fallback: false };
-}
-
 export async function getServerSideProps({ params }) {
 	const service = new ContentService();
 	const listDetails = await service.getListDetails(params.slug);
