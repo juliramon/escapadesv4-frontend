@@ -14,6 +14,9 @@ import FetchingSpinner from "../../components/global/FetchingSpinner";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
 import Fancybox from "../../utils/fancybox";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
 
 const StoryListing = ({ storyDetails }) => {
   const { user } = useContext(UserContext);
@@ -132,12 +135,24 @@ const StoryListing = ({ storyDetails }) => {
 
   if (description) {
     parsedDescription = parse(description);
-    let parsedDescriptionArray = [parsedDescription];
-    readingTimeIndicator = readingTime(parsedDescriptionArray);
-    parsedDescriptionArray.map((el) => slicedDescription.push(el));
-    if (slicedDescription[0].length > 1) {
+
+    const maxSliders = 3;
+    const slidesPerSlider = stateImages.length / maxSliders;
+
+    const totalDescriptionElements = parsedDescription.length; // ex. 21
+
+    console.log(totalDescriptionElements);
+    for (let i = 1; i < totalDescriptionElements; i++) {
+      if (totalDescriptionElements % i == 0) {
+        console.log(i);
+      }
+    }
+
+    readingTimeIndicator = readingTime(parsedDescription);
+    parsedDescription.map((el) => slicedDescription.push(el));
+    if (slicedDescription.length > 1) {
       // slicedDescription[0].splice(4, 0, photoSwipeGallery);
-      slicedDescription[0].splice(1, 0, welcomeText);
+      slicedDescription.splice(1, 0, welcomeText);
     }
   }
 
@@ -248,28 +263,29 @@ const StoryListing = ({ storyDetails }) => {
               </div>
               <div className="max-w-2xl mx-auto">
                 <div className="listing-description">{slicedDescription}</div>
-
-                <div className="flex items-center">
-                  {stateImages.map((el, idx) => {
-                    return (
-                      <Fancybox>
-                        <a
-                          key={idx}
-                          data-fancybox="gallery"
-                          href={el}
-                          className="aspect-w-16 aspect-h-9 rounded overflow-hidden w-full h-full"
-                        >
-                          <img
-                            alt=""
-                            src={el}
-                            className="w-full h-full object-cover"
-                          />
-                        </a>
-                      </Fancybox>
-                    );
-                  })}
-                </div>
               </div>
+            </div>
+            <div className="max-w-4xl my-10 ml-4 lg:mx-auto">
+              <Swiper spaceBetween={10} slidesPerView={1.15}>
+                {stateImages.map((el, idx) => (
+                  <SwiperSlide key={el._id}>
+                    <Fancybox>
+                      <a
+                        key={idx}
+                        data-fancybox="gallery"
+                        href={el}
+                        className="block aspect-w-16 aspect-h-9 rounded overflow-hidden w-full h-full"
+                      >
+                        <img
+                          alt=""
+                          src={el}
+                          className="w-full h-full object-cover"
+                        />
+                      </a>
+                    </Fancybox>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
           </article>
         </main>

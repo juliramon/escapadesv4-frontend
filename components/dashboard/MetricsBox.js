@@ -2,10 +2,10 @@ import React from "react";
 
 const MetricsBox = ({ integer, metricName }) => {
   return (
-    <div className="metric-box">
-      <div className="metric-wrapper">
+    <div className="rounded border border-primary-200 flex-1">
+      <div className="metric-wrapper p-5">
         <h3>{integer}</h3>
-        <p>{metricName}</p>
+        <p className="mb-0">{metricName}</p>
       </div>
     </div>
   );
