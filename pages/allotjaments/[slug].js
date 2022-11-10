@@ -9,7 +9,7 @@ import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
 import Footer from "../../components/global/Footer";
 import FetchingSpinner from "../../components/global/FetchingSpinner";
-import Fancybox from "../../utils/Fancybox";
+import FancyboxUtil from "../../utils/FancyboxUtils";
 import FooterLinksInterest from "../../components/ads/FooterLinksInterest";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
 import GlobalMetas from "../../components/head/GlobalMetas";
@@ -539,7 +539,7 @@ const PlaceListing = ({ placeDetails }) => {
 												</svg>
 												Veure {state.place.images.length} imatges
 											</button>
-											<Fancybox
+											<FancyboxUtil
 												options={{
 													infinite: true,
 												}}
@@ -614,7 +614,7 @@ const PlaceListing = ({ placeDetails }) => {
 														</div>
 													) : null}
 												</div>
-											</Fancybox>
+											</FancyboxUtil>
 										</div>
 									</div>
 								</div>
