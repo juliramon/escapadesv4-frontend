@@ -329,7 +329,7 @@ export async function getStaticPaths() {
 	return { paths, fallback: false };
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
 	const service = new ContentService();
 	const storyDetails = await service.getStoryDetails(params.slug);
 	return {

@@ -922,7 +922,7 @@ export async function getStaticPaths() {
 	return { paths, fallback: false };
 }
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
 	const service = new ContentService();
 	const placeDetails = await service.getPlaceDetails(params.slug);
 	return {
