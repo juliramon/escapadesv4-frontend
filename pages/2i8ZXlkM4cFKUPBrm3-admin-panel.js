@@ -5,6 +5,7 @@ import ContentBox from "../components/dashboard/ContentBox";
 import Head from "next/head";
 import UserContext from "../contexts/UserContext";
 import FetchingSpinner from "../components/global/FetchingSpinner";
+import { useRouter } from "next/router";
 
 const AdminPanel = () => {
 	// Validate if user is allowed to access this view
@@ -16,6 +17,14 @@ const AdminPanel = () => {
 		}
 	}, []);
 	// End validation
+
+	const router = useRouter();
+
+	useEffect(() => {
+		if (!user || user === "null" || user === undefined) {
+			router.push("/login");
+		}
+	}, [user]);
 
 	const service = new ContentService();
 
@@ -108,6 +117,7 @@ const AdminPanel = () => {
 			<Head>
 				<title>Panell d'administració - Escapadesenparella.cat</title>
 				<link rel="icon" href="/favicon.ico" />
+				<link meta="robots" rel="noindex,nofollow" />
 			</Head>
 			<NavigationBar
 				logo_url={
