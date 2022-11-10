@@ -53,10 +53,10 @@ const Homepage = (props) => {
 				/>
 				<Hero
 					background_url={
-						"https://res.cloudinary.com/juligoodie/image/upload/v1662240594/branding/grid-escapades_ycrouf.png"
+						"https://res.cloudinary.com/juligoodie/image/upload/f_webp/v1668118437/branding/grid-escapades_osv6xt.png"
 					}
 					background_url_mob={
-						"https://res.cloudinary.com/juligoodie/image/upload/v1662240594/branding/grid-escapades_ycrouf.png"
+						"https://res.cloudinary.com/juligoodie/image/upload/f_webp/v1668118437/branding/grid-escapades_osv6xt.png"
 					}
 					title={title}
 					subtitle={subtitle}
