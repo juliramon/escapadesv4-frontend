@@ -1,7 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import NavigationBar from "../components/global/NavigationBar";
 import UserContext from "../contexts/UserContext";
 import ContentService from "../services/contentService";
@@ -431,7 +430,6 @@ const StoryForm = () => {
 													</div>
 												</div>
 											</div>
-
 											<div className="form__group">
 												<label className="form__label">Descripció</label>
 												<QuillNoSSRWrapper

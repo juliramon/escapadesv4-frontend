@@ -843,7 +843,7 @@ const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
 	);
 };
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
 	const service = new ContentService();
 	const { totalItems, places, allPlaces, numPages } =
 		await service.getAllPlaces();
