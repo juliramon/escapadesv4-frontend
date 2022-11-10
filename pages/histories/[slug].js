@@ -13,7 +13,7 @@ import FooterHistoria from "../../components/global/FooterHistoria";
 import FetchingSpinner from "../../components/global/FetchingSpinner";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
-import FancyboxUtil from "../../utils/fancybox";
+import FancyboxUtil from "../../utils/FancyboxUtils";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";

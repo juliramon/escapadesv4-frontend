@@ -5,7 +5,7 @@ import PublicSquareBox from "../components/listings/PublicSquareBox";
 import { useRouter } from "next/router";
 import Footer from "../components/global/Footer";
 import MapModal from "../components/modals/MapModal";
-import Fancybox from "../utils/Fancybox";
+import Fancybox from "../utils/FancyboxUtils";
 import Breadcrumb from "../components/richsnippets/Breadcrumb";
 import GlobalMetas from "../components/head/GlobalMetas";
 
