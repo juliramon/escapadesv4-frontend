@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Dropdown, Button, DropdownButton } from "react-bootstrap";
 import Link from "next/link";
 import ContentService from "../../services/contentService";
 import ShareModal from "../modals/ShareModal";
@@ -63,9 +62,11 @@ const ContentBox = ({
 	const handleShareModalVisibility = () => setShareModalVisibility(true);
 	const hideShareModalVisibility = () => setShareModalVisibility(false);
 
+	console.log(type);
+
 	return (
 		<div className="content rounded box flex items-center w-full bg-primary-100 bg-opacity-50 border border-primary-300 mb-2.5 px-5 py-4">
-			<Link href={`/${path}/${slug}`}>
+			<Link href={type != "category" ? `/${path}/${slug}` : `/${slug}`}>
 				<a className="flex items-center justify-between w-full">
 					<div className="flex items-center justify-center bg-white overflow-hidden h-12 w-12 rounded-md p-0 mr-5 border border-primary-300">
 						<img

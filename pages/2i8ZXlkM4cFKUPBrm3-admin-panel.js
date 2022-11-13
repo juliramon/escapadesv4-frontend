@@ -6,6 +6,7 @@ import Head from "next/head";
 import UserContext from "../contexts/UserContext";
 import FetchingSpinner from "../components/global/FetchingSpinner";
 import { useRouter } from "next/router";
+import CategoryBox from "../components/dashboard/CategoryBox";
 
 const AdminPanel = () => {
 	// Validate if user is allowed to access this view
@@ -37,6 +38,7 @@ const AdminPanel = () => {
 	};
 
 	const [state, setState] = useState(initialState);
+	const [categoryModalVisibility, setCategoryModalVisibility] = useState(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -44,12 +46,14 @@ const AdminPanel = () => {
 			const activities = await service.activities();
 			const places = await service.getAllPlaces();
 			const stories = await service.getAllStories();
+			const categories = await service.getCategories();
 
 			setState({
 				...state,
 				activities: activities.allActivities,
 				places: places.allPlaces,
 				stories: stories.allStories,
+				categories: categories,
 				isFetching: false,
 			});
 		};
@@ -96,6 +100,20 @@ const AdminPanel = () => {
 					type={el.type}
 					id={el.id}
 					image={el.images[0]}
+					title={el.title}
+					subtitle={el.subtitle}
+					publicationDate={el.createdAt}
+					slug={el.slug}
+				/>
+			));
+		}
+		if (state.activeTab === "categories") {
+			listResults = state.categories.map((el, idx) => (
+				<CategoryBox
+					key={idx}
+					type={"category"}
+					id={el.id}
+					image={el.image}
 					title={el.title}
 					subtitle={el.subtitle}
 					publicationDate={el.createdAt}
@@ -267,6 +285,20 @@ const AdminPanel = () => {
 										onClick={() => setState({ ...state, activeTab: "stories" })}
 									>
 										Històries
+									</button>
+								</li>
+								<li>
+									<button
+										className={`py-2.5 px-4 border transition-all duration-300 ease-in-out mb-2 rounded cursor-pointer w-full text-left text-sm ${
+											state.activeTab == "categories"
+												? isActive
+												: "border-primary-300 bg-white hover:bg-primary-100"
+										}`}
+										onClick={() =>
+											setState({ ...state, activeTab: "categories" })
+										}
+									>
+										Categories
 									</button>
 								</li>
 							</ul>
