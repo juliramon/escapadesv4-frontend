@@ -77,6 +77,7 @@ const Homepage = (props) => {
 						"https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
 					}
 				/>
+				<FollowBox />
 			</main>
 		</>
 	);

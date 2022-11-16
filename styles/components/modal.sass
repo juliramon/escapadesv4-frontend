@@ -1,13 +1,33 @@
-.modal__wrapper
-    @apply block p-8 w-full h-full fixed top-0 left-0 z-50
-    z-index: 1002
+.modal
+    @apply hidden fixed inset-0 z-50
+
+    &.active
+        @apply flex items-center justify-center
     
-    &__overlay
-        @apply bg-black bg-opacity-50 absolute top-0 left-0 w-full h-full
+    &.active::before
+        content: ""
+        @apply bg-primary-900 bg-opacity-80 fixed inset-0 w-full h-full
+
+    &__wrapper
+        @apply block bg-white w-11/12 lg:w-6/12 mx-auto shadow-xl  rounded-lg
+        z-index: 1002
+        max-height: 80vh
 
     &__container
         @apply w-full h-full relative z-50 border-4 border-white rounded-lg
 
-    &__close
-        @apply absolute z-50 right-3 top-3
+    &__header, &__body, &__footer
+        @apply p-5
+
+    &__header
+        @apply border-b border-primary-300 relative flex items-center justify-between
+
+        span
+            @apply text-xl
     
+    &__body
+        @apply overflow-scroll
+        max-height: 60vh
+
+    &__footer
+        @apply border-t border-primary-300 flex items-center justify-end

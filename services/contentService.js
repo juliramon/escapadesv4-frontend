@@ -647,7 +647,6 @@ class ContentService {
 	};
 
 	getCategoryDetails = (slug) => {
-		console.log("slug =>", slug);
 		return this.service.get(`/categories/${slug}`).then((res) => res.data);
 	};
 

@@ -219,16 +219,9 @@ const PlaceForm = () => {
 	};
 
 	const handleCheckCategory = (e) => {
-		let categories = state.formData.categories;
-		if (e.target.checked === true) {
-			categories.push(e.target.id);
-		} else {
-			let index = categories.indexOf(e.target.id);
-			categories.splice(index, 1);
-		}
 		setState({
 			...state,
-			formData: { ...state.formData, categories: categories },
+			formData: { ...state.formData, categories: e.target.id },
 		});
 	};
 
@@ -588,15 +581,15 @@ const PlaceForm = () => {
 											<div className="flex flex-wrap items-stretch mt-2">
 												<div className="form__group w-3/12">
 													<label htmlFor="categoria" className="form__label">
-														Categories d'escapada
+														Categoria d'escapada
 													</label>
 													<label
 														htmlFor="romantica"
 														className="form__label flex items-center"
 													>
 														<input
-															type="checkbox"
-															name="romantica"
+															type="radio"
+															name="placeCategory"
 															id="romantica"
 															className="mr-2"
 															onChange={handleCheckCategory}
@@ -609,8 +602,8 @@ const PlaceForm = () => {
 														className="form__label flex items-center"
 													>
 														<input
-															type="checkbox"
-															name="aventura"
+															type="radio"
+															name="placeCategory"
 															id="aventura"
 															className="mr-2"
 															onChange={handleCheckCategory}
@@ -623,8 +616,8 @@ const PlaceForm = () => {
 														className="form__label flex items-center"
 													>
 														<input
-															type="checkbox"
-															name="gastronomica"
+															type="radio"
+															name="placeCategory"
 															id="gastronomica"
 															className="mr-2"
 															onChange={handleCheckCategory}
@@ -637,8 +630,8 @@ const PlaceForm = () => {
 														className="form__label flex items-center"
 													>
 														<input
-															type="checkbox"
-															name="cultural"
+															type="radio"
+															name="placeCategory"
 															id="cultural"
 															className="mr-2"
 															onChange={handleCheckCategory}
@@ -651,8 +644,8 @@ const PlaceForm = () => {
 														className="form__label flex items-center"
 													>
 														<input
-															type="checkbox"
-															name="relax"
+															type="radio"
+															name="placeCategory"
 															id="relax"
 															className="mr-2"
 															onChange={handleCheckCategory}

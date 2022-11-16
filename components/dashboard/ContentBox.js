@@ -62,8 +62,6 @@ const ContentBox = ({
 	const handleShareModalVisibility = () => setShareModalVisibility(true);
 	const hideShareModalVisibility = () => setShareModalVisibility(false);
 
-	console.log(type);
-
 	return (
 		<div className="content rounded box flex items-center w-full bg-primary-100 bg-opacity-50 border border-primary-300 mb-2.5 px-5 py-4">
 			<Link href={type != "category" ? `/${path}/${slug}` : `/${slug}`}>

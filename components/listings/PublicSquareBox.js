@@ -101,9 +101,13 @@ const PublicSquareBox = ({
 			linkPath = "escapades-aventura";
 		} else if (categoria[0].includes("relax")) {
 			categoryModified = "de relax";
-			linkPath = "escapades-relax";
+			linkPath = "escapades-de-relax";
+		} else if (categoria[0].includes("neu")) {
+			categoryModified = "a la neu";
+			linkPath = "escapades-a-la-neu";
 		} else {
-			categoryModified = categoria;
+			categoryModified = "culturals";
+			linkPath = "escapades-culturals";
 		}
 	}
 
@@ -219,8 +223,8 @@ const PublicSquareBox = ({
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									className="icon icon-tabler icon-tabler-brand-safari text-secondary-500 mr-1.5"
-									width={20}
-									height={20}
+									width={16}
+									height={16}
 									viewBox="0 0 24 24"
 									strokeWidth="2"
 									stroke="currentColor"
@@ -236,15 +240,17 @@ const PublicSquareBox = ({
 									{shortenedLocation}
 								</span>
 							</span>
-							<h3 className="mt-2 mb-1 text-primary-600">{title}</h3>
-							<p className="text-15 my-0 text-primary-400 font-light leading-normal line-clamp-1">
+							<h3 className="mt-2 mb-1 text-primary-600 text-base font-semibold">
+								{title}
+							</h3>
+							<p className="text-15 my-0 text-primary-400 font-light leading-normal line-clamp-2">
 								{subtitle}
 							</p>
-							<div className="mt-3 flex items-center text-xs tracking-wider text-secondary-500">
-								<span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 mr-1 capitalize">
+							<div className="mt-5 flex items-center text-xs tracking-wider text-secondary-500">
+								<span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 mr-2.5 capitalize">
 									{categoryModified}
 								</span>
-								<span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 mr-1 capitalize">
+								<span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 mr-2.5 capitalize">
 									{tipus}
 								</span>
 								<span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 capitalize">
