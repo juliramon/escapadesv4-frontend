@@ -13,6 +13,7 @@ import ReactHtmlParser from "react-html-parser";
 import FooterHistoria from "../../components/global/FooterHistoria";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
+import FetchingSpinner from "../../components/global/FetchingSpinner";
 
 const ListView = ({ listDetails }) => {
 	const { user } = useContext(UserContext);
@@ -68,50 +69,21 @@ const ListView = ({ listDetails }) => {
 		}
 	}, []);
 
-	if (state.listLoaded === false) {
-		return (
-			<>
-				<Head>
-					<title>Carregant...</title>
-				</Head>
-				<Container className="spinner d-flex justify-space-between">
-					<Spinner animation="border" role="status" variant="primary">
-						<span className="sr-only">Carregant...</span>
-					</Spinner>
-				</Container>
-			</>
-		);
+	if (!state.listLoaded) {
+		return <FetchingSpinner />;
 	}
 
-	let { title, subtitle, description } = state.list;
-
-	const shareButton = (
-		<div
-			className="flex items-center justify-center button button__ghost button__med cursor-pointer mt-5 md:mt-0 w-full md:w-auto"
-			onClick={() => handleShareModalVisibility()}
-		>
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				className="icon icon-tabler icon-tabler-share mr-3"
-				width="24"
-				height="24"
-				viewBox="0 0 24 24"
-				strokeWidth="1.5"
-				stroke="currentColor"
-				fill="none"
-				strokeLinecap="round"
-				strokeLinejoin="round"
-			>
-				<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-				<circle cx="6" cy="12" r="3" />
-				<circle cx="18" cy="6" r="3" />
-				<circle cx="18" cy="18" r="3" />
-				<line x1="8.7" y1="10.7" x2="15.3" y2="7.3" />
-				<line x1="8.7" y1="13.3" x2="15.3" y2="16.7" />
-			</svg>
-			<span className="text-sm">Compartir</span>
-		</div>
-	);
+	let { title, subtitle, description, createdAt, updatedAt } = state.list;
+	let publicationDate = new Date(createdAt).toLocaleDateString("ca-es", {
+		year: "numeric",
+		month: "short",
+		day: "numeric",
+	});
+	let updatedDate = new Date(updatedAt).toLocaleDateString("ca-es", {
+		year: "numeric",
+		month: "short",
+		day: "numeric",
+	});
 
 	return (
 		<>
@@ -159,39 +131,78 @@ const ListView = ({ listDetails }) => {
 							</ul>
 						</div>
 					</div>
-					<article className="pt-6 md:pt-12 pb-4">
+					<article className="pt-2 md:pt-12 pb-4">
 						<div className="container">
-							<div className="max-w-2xl mx-auto">
-								<h1 className="mb-4">{title}</h1>
-								<p className="text-lg md:text-xl md:pr-16">{subtitle}</p>
-								<div className="mt-6 flex flex-wrap items-center justify-between">
-									<div className="flex flex-wrap items-center">
-										<Link href={`/usuaris/${state.owner._id}`}>
-											<a className="flex items-center">
-												<div className="rounded-full overflow-hidden w-12 h-12 mr-3">
-													<picture>
-														<img
-															src={state.owner.avatar}
-															alt={state.owner.fullName}
-															width={48}
-															height={48}
-															className="w-full h-full object-cover"
-															loadgin="eager"
-														/>
-													</picture>
-												</div>
-												<span className="listing-owner-name">
-													{state.owner.fullName}
-												</span>
-											</a>
-										</Link>
+							<div className="flex flex-col-reverse md:flex-col">
+								<div className="w-full xl:w-9/12 xl:mx-auto">
+									<div className="w-full xl:w-8/12 lg:pl-12 lg:pr-20 pb-8 lg:border-l border-primary-300">
+										<h1 className="mt-4 mb-4 md:mt-0">{title}</h1>
+										<div className="mt-6 flex flex-wrap items-center justify-between">
+											<div className="flex flex-wrap items-center">
+												<Link href={`/usuaris/${state.owner._id}`}>
+													<a className="flex flex-wrap items-center">
+														<div className="rounded-full overflow-hidden w-12 h-12 mr-3">
+															<picture>
+																<img
+																	src={state.owner.avatar}
+																	alt={state.owner.fullName}
+																	width={48}
+																	height={48}
+																	className="w-full h-full object-cover"
+																	loadgin="eager"
+																/>
+															</picture>
+														</div>
+														<span className="listing-owner-name">
+															{state.owner.fullName}
+														</span>
+														<span className="mx-2 opacity-40 inline-block">
+															–
+														</span>
+														<span className="text-sm inline-block opacity-40">
+															{publicationDate}
+														</span>
+														<div className="hidden md:inline-flex md:items-center">
+															<span className="mx-2 opacity-40 inline-block">
+																/
+															</span>
+															<span className="text-sm inline-block opacity-40">
+																Actualitzat el {updatedDate}
+															</span>
+														</div>
+													</a>
+												</Link>
+											</div>
+											{/* <div
+											className="flex items-center justify-center button button__secondary button__med cursor-pointer mt-5 md:mt-0 w-full md:w-auto"
+											onClick={() => handleShareModalVisibility()}
+										>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												className="icon icon-tabler icon-tabler-share mr-3"
+												width="24"
+												height="24"
+												viewBox="0 0 24 24"
+												strokeWidth="1.5"
+												stroke="currentColor"
+												fill="none"
+												strokeLinecap="round"
+												strokeLinejoin="round"
+											>
+												<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+												<circle cx="6" cy="12" r="3" />
+												<circle cx="18" cy="6" r="3" />
+												<circle cx="18" cy="18" r="3" />
+												<line x1="8.7" y1="10.7" x2="15.3" y2="7.3" />
+												<line x1="8.7" y1="13.3" x2="15.3" y2="16.7" />
+											</svg>
+											<span className="text-sm">Compartir</span>
+										</div> */}
+										</div>
 									</div>
-									{shareButton}
 								</div>
-							</div>
-							{state.listLoaded === true ? (
-								<div className="w-full md:w-10/12 md:mx-auto mt-10">
-									<div className="aspect-w-16 aspect-h-9 rounded overflow-hidden">
+								<div className="w-full ">
+									<div className="aspect-w-16 aspect-h-9 rounded-md overflow-hidden">
 										<picture>
 											<img
 												src={state.list.cover}
@@ -203,21 +214,21 @@ const ListView = ({ listDetails }) => {
 											/>
 										</picture>
 									</div>
-									<figcaption className="text-sm text-center mt-4">
+									<figcaption className="text-xs mt-2.5 lg:text-right">
 										{state.list.title}
 									</figcaption>
 								</div>
-							) : null}
-							<div className="text-center mx-10 py-10">
-								<div className="flex items-center justify-center -mx-3">
-									<span className="text-xs px-3">•</span>
-									<span className="text-xs px-3">•</span>
-									<span className="text-xs px-3">•</span>
-								</div>
 							</div>
-							<div className="max-w-2xl mx-auto">
-								<div className="list__description">
-									{ReactHtmlParser(description)}
+
+							<div className="flex flex-wrap items-stretch w-full xl:w-9/12 xl:mx-auto">
+								<div className="w-full xl:w-8/12 lg:pl-12 lg:pr-20 py-8 md:pt-20 lg:border-l md:border-primary-300 -mt-7">
+									<p className="md:text-lg max-w-2xl">{subtitle}</p>
+									<div className="list__description">
+										{ReactHtmlParser(description)}
+									</div>
+								</div>
+								<div className="w-full xl:w-4/12 py-8 md:pt-20 -mt-7 ">
+									<div className="bg-red-500 p-4 sticky top-36"></div>
 								</div>
 							</div>
 						</div>

@@ -19,7 +19,7 @@
         @apply text-primary-500 font-semibold font-headings
 
     h1 
-        @apply text-3xl leading-tight mt-0
+        @apply text-2xl leading-tight mt-0
         @screen md
             @apply text-4xl leading-1.1
 
@@ -40,10 +40,12 @@
         @apply cursor-pointer no-underline text-primary-500
 
     p 
-        @apply mb-5 leading-relaxed
+        @apply mb-5 leading-normal text-16
+        @screen md
+            @apply text-base
 
     ol, ul, menu
-        @apply list-disc pl-5 mb-5 leading-relaxed
+        @apply list-disc pl-5 mb-5 leading-normal
 
 
     #animate-area
