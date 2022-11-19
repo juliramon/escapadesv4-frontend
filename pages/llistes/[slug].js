@@ -14,6 +14,7 @@ import FooterHistoria from "../../components/global/FooterHistoria";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
 import FetchingSpinner from "../../components/global/FetchingSpinner";
+import AdSkyScrapper from "../../components/ads/AdSkyScrapper";
 
 const ListView = ({ listDetails }) => {
 	const { user } = useContext(UserContext);
@@ -131,12 +132,12 @@ const ListView = ({ listDetails }) => {
 							</ul>
 						</div>
 					</div>
-					<article className="pt-2 md:pt-12 pb-4">
+					<article className="pt-2 md:pt-6 lg:pt-12 pb-4">
 						<div className="container">
 							<div className="flex flex-col-reverse md:flex-col">
-								<div className="w-full xl:w-9/12 xl:mx-auto">
-									<div className="w-full xl:w-8/12 lg:pl-12 lg:pr-20 pb-8 lg:border-l border-primary-300">
-										<h1 className="mt-4 mb-4 md:mt-0">{title}</h1>
+								<div className="w-full max-w-4xl mx-auto">
+									<div className="w-full lg:w-8/12 lg:pl-12 lg:pr-20 pb-8 lg:border-l border-primary-300">
+										<h1 className="mt-4 mb-4 md:mt-0 font-display">{title}</h1>
 										<div className="mt-6 flex flex-wrap items-center justify-between">
 											<div className="flex flex-wrap items-center">
 												<Link href={`/usuaris/${state.owner._id}`}>
@@ -160,7 +161,7 @@ const ListView = ({ listDetails }) => {
 															–
 														</span>
 														<span className="text-sm inline-block opacity-40">
-															{publicationDate}
+															Publicat el {publicationDate}
 														</span>
 														<div className="hidden md:inline-flex md:items-center">
 															<span className="mx-2 opacity-40 inline-block">
@@ -201,7 +202,7 @@ const ListView = ({ listDetails }) => {
 										</div>
 									</div>
 								</div>
-								<div className="w-full ">
+								<div className="w-full">
 									<div className="aspect-w-16 aspect-h-9 rounded-md overflow-hidden">
 										<picture>
 											<img
@@ -220,15 +221,17 @@ const ListView = ({ listDetails }) => {
 								</div>
 							</div>
 
-							<div className="flex flex-wrap items-stretch w-full xl:w-9/12 xl:mx-auto">
-								<div className="w-full xl:w-8/12 lg:pl-12 lg:pr-20 py-8 md:pt-20 lg:border-l md:border-primary-300 -mt-7">
-									<p className="md:text-lg max-w-2xl">{subtitle}</p>
+							<div className="flex flex-wrap items-stretch w-full max-w-4xl mx-auto">
+								<div className="w-full lg:w-8/12 lg:pl-12 lg:pr-20 py-8 md:pt-20 lg:border-l md:border-primary-300 -mt-7">
+									<p className="md:text-lg max-w-2xl mb-10">{subtitle}</p>
 									<div className="list__description">
 										{ReactHtmlParser(description)}
 									</div>
 								</div>
-								<div className="w-full xl:w-4/12 py-8 md:pt-20 -mt-7 ">
-									<div className="bg-red-500 p-4 sticky top-36"></div>
+								<div className="w-full lg:w-4/12 py-8 md:pt-20 -mt-7 ">
+									<div className="bg-red-500 p-4 sticky top-36">
+										<AdSkyScrapper />
+									</div>
 								</div>
 							</div>
 						</div>
