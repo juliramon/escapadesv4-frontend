@@ -135,8 +135,8 @@ const ListView = ({ listDetails }) => {
 					<article className="pt-2 md:pt-6 lg:pt-12 pb-4">
 						<div className="container">
 							<div className="flex flex-col-reverse md:flex-col">
-								<div className="w-full max-w-4xl mx-auto">
-									<div className="w-full lg:w-8/12 lg:pl-12 lg:pr-20 pb-8 lg:border-l border-primary-300">
+								<div className="w-full max-w-5xl mx-auto">
+									<div className="w-full lg:pl-12 lg:pr-20 pb-8 lg:border-l border-primary-300">
 										<h1 className="mt-4 mb-4 md:mt-0 font-display">{title}</h1>
 										<div className="mt-6 flex flex-wrap items-center justify-between">
 											<div className="flex flex-wrap items-center">
@@ -221,14 +221,14 @@ const ListView = ({ listDetails }) => {
 								</div>
 							</div>
 
-							<div className="flex flex-wrap items-stretch w-full max-w-4xl mx-auto">
-								<div className="w-full lg:w-8/12 lg:pl-12 lg:pr-20 py-8 md:pt-20 lg:border-l md:border-primary-300 -mt-7">
+							<div className="flex flex-wrap items-stretch w-full max-w-5xl mx-auto">
+								<div className="w-full lg:w-9/12 lg:pl-12 lg:pr-20 py-8 md:pt-20 lg:border-l md:border-primary-300 -mt-7">
 									<p className="md:text-lg max-w-2xl mb-10">{subtitle}</p>
 									<div className="list__description">
 										{ReactHtmlParser(description)}
 									</div>
 								</div>
-								<div className="w-full lg:w-4/12 py-8 md:pt-20 -mt-7 ">
+								<div className="w-full lg:w-3/12 py-8 md:pt-20 -mt-7 ">
 									<div className="bg-red-500 p-4 sticky top-36">
 										<AdSkyScrapper />
 									</div>
