@@ -229,7 +229,7 @@ const ListView = ({ listDetails }) => {
 									</div>
 								</div>
 								<div className="w-full lg:w-3/12 py-8 md:pt-20 -mt-7 ">
-									<div className="bg-red-500 p-4 sticky top-36">
+									<div className="p-4 sticky top-36 flex items-center justify-center">
 										<AdSkyScrapper />
 									</div>
 								</div>
