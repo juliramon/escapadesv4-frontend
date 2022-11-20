@@ -763,6 +763,7 @@ class ContentService {
 		type,
 		title,
 		subtitle,
+		isFeatured,
 		coverCloudImage,
 		metaTitle,
 		metaDescription,
@@ -773,6 +774,7 @@ class ContentService {
 			type,
 			title,
 			subtitle,
+			isFeatured,
 			coverCloudImage,
 			metaTitle,
 			metaDescription,
@@ -813,6 +815,9 @@ class ContentService {
 		this.service
 			.get(`/featured-getaways-category?category=${category}`)
 			.then((res) => res.data);
+
+	getFeaturedList = () =>
+		this.service.get("/featured-list").then((res) => res.data);
 }
 
 export default ContentService;

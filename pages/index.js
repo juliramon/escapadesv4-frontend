@@ -64,6 +64,7 @@ const Homepage = (props) => {
 				<HomePageResults
 					featuredRegions={props.featuredRegions}
 					featuredActivities={props.featuredActivities}
+					featuredList={props.featuredList}
 					mostRatedPlaces={props.mostRatedPlaces}
 					mostRecentStories={props.mostRecentStories}
 					featuredRomanticGetaways={props.featuredRomanticGetaways}
@@ -100,6 +101,7 @@ export async function getServerSideProps() {
 	const featuredRelaxGetaways = await service.getFeaturedGetawaysByCategory(
 		"relax"
 	);
+	const featuredList = await service.getFeaturedList();
 
 	const totals = await service.getCategoriesTotals();
 
@@ -113,6 +115,7 @@ export async function getServerSideProps() {
 			featuredAdventureGetaways,
 			featuredGastronomicGetaways,
 			featuredRelaxGetaways,
+			featuredList,
 			totals,
 		},
 	};
