@@ -58,7 +58,7 @@ const ContentBar = (props) => {
 
 	let contentBar;
 	contentBar = (
-		<div className="content-bar hidden lg:block">
+		<div className="content-bar">
 			<div className="w-full px-6">
 				<div className="content-bar---wrapper flex items-center">
 					<div

@@ -241,56 +241,12 @@ form .form-control::placeholder {
 /*---END TOAST STYLES---*/
 
 /*---GLOBAL STYLES---*/
-/*---HEADER STYLES---*/
-
-.content-bar {
-	padding: 3px 0;
-	border-top: 1px solid #e7ebf5;
-	border-bottom: 1px solid #e7ebf5;
-	margin-top: -1px;
-	.listings-wrapper {
-		display: flex;
-		flex-wrap: wrap;
-	}
-	.container {
-		padding: 0;
-	}
-
-	.content-bar---wrapper {
-		overflow-x: hidden;
-		margin: 0 -8px;
-		touch-action: pan-y;
-	}
-	.content-bar---wrapper .content-bar---inner {
-		overflow-x: hidden;
-		touch-action: pan-y;
-	}
-	.content-bar---item a {
-		display: flex;
-		align-items: center;
-		padding: 8px 0;
-		margin: 0 10px 0 8px;
-		.content-bar---col.left {
-			display: flex;
-		}
-	}
-	.content-bar---item svg {
-		width: 21px;
-		height: 21px;
-	}
-	.content-bar---item .right {
-		margin-left: 7px;
-	}
-	.content-bar---item .right p {
-		line-height: 1.2em;
-		font-size: 0.9em;
-		margin: 0;
-		white-space: nowrap;
-		white-space: nowrap;
+.content-bar a {
+	svg {
+		width: 18px;
+		height: 18px;
 	}
 }
-
-/*---HEADER STYLES---*/
 /*---TOP NAV---*/
 
 .top-nav {
