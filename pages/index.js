@@ -29,10 +29,6 @@ const Homepage = (props) => {
 		);
 	}
 
-	const title = <>La vostra propera escapada en parella comença aquí.</>;
-
-	const subtitle = <>Cerca una activitat o allotjament on escapar-vos.</>;
-
 	return (
 		<>
 			{/* Browser metas  */}
@@ -51,16 +47,7 @@ const Homepage = (props) => {
 						"https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
 					}
 				/>
-				<Hero
-					background_url={
-						"https://res.cloudinary.com/juligoodie/image/upload/f_webp/v1668118437/branding/grid-escapades_osv6xt.png"
-					}
-					background_url_mob={
-						"https://res.cloudinary.com/juligoodie/image/upload/f_webp/v1668118437/branding/grid-escapades_osv6xt.png"
-					}
-					title={title}
-					subtitle={subtitle}
-				/>
+				<Hero />
 				<HomePageResults
 					featuredRegions={props.featuredRegions}
 					featuredActivities={props.featuredActivities}

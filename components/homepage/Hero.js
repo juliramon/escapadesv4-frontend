@@ -1,6 +1,6 @@
 import SearchBar from "../homepage/SearchBar";
 
-const Hero = ({ background_url, title, subtitle }) => {
+const Hero = () => {
 	return (
 		<>
 			<section id="hero" className="relative py-8 lg:py-20">
@@ -8,21 +8,21 @@ const Hero = ({ background_url, title, subtitle }) => {
 				<div className="container relative z-40">
 					<div className="w-full lg:w-10/12 xl:w-8/12 lg:mx-auto">
 						<div className="header-col left">
-							<h1 className="text-2xl leading-tight md:leading-1.1 md:text-5xl">
+							<h1 className="text-2xl md:text-5xl">
 								<span className="text-secondary-500 ">
 									Escapadesenparella.cat.{" "}
 								</span>
-								{title}
+								La vostra propera escapada en parella comença aquí.
 							</h1>
+							{/* <span className="text-2xl md:text-5xl">
+								Escapadesenparella.cat. La vostra propera escapada en parella
+								comença aquí.
+							</span> */}
 							<SearchBar />
 						</div>
 					</div>
 				</div>
 				<div className="bg-white absolute bottom-0 w-full h-20 z-30 hero__gradient"></div>
-				{/* <div
-          id="animate-area"
-          style={{ backgroundImage: `url(${background_url})` }}
-        ></div> */}
 			</section>
 		</>
 	);

@@ -111,7 +111,7 @@ const ListEditionForm = () => {
 						type: listDetails.type,
 						title: listDetails.title,
 						subtitle: listDetails.subtitle,
-						isFeatured: false,
+						isFeatured: listDetails.isFeatured,
 						cover: "",
 						blopCover: "",
 						coverCloudImage: "",
