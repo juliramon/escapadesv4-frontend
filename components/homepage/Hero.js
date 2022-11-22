@@ -14,10 +14,6 @@ const Hero = () => {
 								</span>
 								La vostra propera escapada en parella comença aquí.
 							</h1>
-							{/* <span className="text-2xl md:text-5xl">
-								Escapadesenparella.cat. La vostra propera escapada en parella
-								comença aquí.
-							</span> */}
 							<SearchBar />
 						</div>
 					</div>
