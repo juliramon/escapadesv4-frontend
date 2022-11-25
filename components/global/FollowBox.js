@@ -52,7 +52,8 @@ const FollowBox = () => {
 							className="w-full h-full object-cover"
 							width="110"
 							height="110"
-							loading="lazy"
+							loading="eager"
+							fetchpriority="high"
 						/>
 					</picture>
 				</div>

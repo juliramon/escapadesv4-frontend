@@ -10,11 +10,8 @@ class MyDocument extends Document {
 		return (
 			<Html lang="ca">
 				<Head>
-					<link
-						rel="preload"
-						href="http://localhost:3000/_next/static/media/CircularStd-Medium.ca529cd6.woff2"
-						as="font"
-					/>
+					<link rel="preload" href="fonts/CircularStd-Medium.woff2" as="font" />
+					<link rel="preload" href="fonts/CircularStd-Book.woff2" as="font" />
 					<script
 						async
 						cookie-consent="tracking"
