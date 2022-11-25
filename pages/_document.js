@@ -30,12 +30,12 @@ class MyDocument extends Document {
           `,
 						}}
 					/>
-					<script
+					{/* <script
 						type="text/javascript"
 						src="https://www.termsfeed.com/public/cookie-consent/4.0.0/cookie-consent.js"
 						charSet="UTF-8"
 						defer
-					></script>
+					></script> */}
 					<script
 						type="text/javascript"
 						charSet="UTF-8"
