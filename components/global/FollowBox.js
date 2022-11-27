@@ -23,6 +23,7 @@ const FollowBox = () => {
 				<button
 					onClick={() => closeBox()}
 					className="absolute top-0 -translate-y-1/2 right-0 translate-x-1/2 bg-white rounded-full p-0.5 shadow-lg"
+					aria-label="Tancar pop-up"
 				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"

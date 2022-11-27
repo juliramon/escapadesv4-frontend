@@ -45,7 +45,11 @@ const NavigationBar = ({ logo_url, path }) => {
 					state.isResponsiveMenuOpen ? "open" : null
 				}`}
 			>
-				<button className="menu__close" onClick={() => handleResponsiveMenu()}>
+				<button
+					className="menu__close"
+					aria-label="Botó tancar menu"
+					onClick={() => handleResponsiveMenu()}
+				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						Name="icon icon-tabler icon-tabler-x"
@@ -361,7 +365,11 @@ const NavigationBar = ({ logo_url, path }) => {
 						</div>
 						{/* {navRight} */}
 						<div className="flex items-center lg:hidden">
-							<button className="" onClick={() => handleResponsiveMenu()}>
+							<button
+								className=""
+								aria-label="Botó obrir menú"
+								onClick={() => handleResponsiveMenu()}
+							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									className="icon icon-tabler icon-tabler-menu-2"
