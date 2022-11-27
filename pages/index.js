@@ -71,7 +71,7 @@ const Homepage = (props) => {
 	);
 };
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
 	const service = new ContentService();
 	const featuredRegions = await service.getFeaturedRegions();
 	const featuredActivities = await service.getFeaturedActivities();
@@ -89,7 +89,6 @@ export async function getServerSideProps() {
 		"relax"
 	);
 	const featuredList = await service.getFeaturedList();
-
 	const totals = await service.getCategoriesTotals();
 
 	return {
