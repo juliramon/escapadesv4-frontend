@@ -886,8 +886,13 @@ const HomePageResults = ({
 					<div className="w-full flex flex-wrap items-stretch justify-center">
 						<div className="w-full md:w-1/3">
 							<picture>
+								<source
+									srcSet="../../cover-about-home.webp"
+									type="image/webp"
+								/>
 								<img
-									src="https://res.cloudinary.com/juligoodie/image/upload/v1652535865/getaways-guru/about-home_mikxom.jpg"
+									src="../../cover-about-home.jpg"
+									data-src="../../cover-about-home.jpg"
 									alt="Escapades en parella, i molt més"
 									className="w-full h-full object-cover object-center rounded-lg"
 									width={300}
