@@ -36,7 +36,7 @@ class MyDocument extends Document {
 						charSet="UTF-8"
 						defer
 					></script> */}
-					<script
+					{/* <script
 						type="text/javascript"
 						charSet="UTF-8"
 						dangerouslySetInnerHTML={{
@@ -54,7 +54,7 @@ class MyDocument extends Document {
                 "https://escapadesenparella.cat/politica-privadesa",
             })}});`,
 						}}
-					/>
+					/> */}
 				</Head>
 				<body>
 					<Main />

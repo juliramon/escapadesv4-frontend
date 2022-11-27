@@ -1,6 +1,6 @@
 import Router, { useRouter } from "next/router";
 import { useContext, useState } from "react";
-import { Navbar, Nav, Container, Form, Dropdown } from "react-bootstrap";
+import { Nav, Container, Form, Dropdown } from "react-bootstrap";
 import ContentBar from "../homepage/ContentBar";
 import Link from "next/link";
 import UserContext from "../../contexts/UserContext";
@@ -201,7 +201,7 @@ const NavigationBar = ({ logo_url, path }) => {
 	);
 
 	return (
-		<header className="z-50 bg-white sticky top-0 shadow-md">
+		<header className="z-50 bg-white fixed w-full top-0 shadow-md">
 			<nav className="px-6 py-3 menu">
 				<div className="w-full flex flex-wrap items-center justify-between lg:justify-start">
 					<Link href={logoLink}>
@@ -385,7 +385,7 @@ const NavigationBar = ({ logo_url, path }) => {
 				</div>
 				{state.isResponsiveMenuOpen ? responsiveMenu : null}
 			</nav>
-			{/* <ContentBar /> */}
+			<ContentBar />
 		</header>
 	);
 };

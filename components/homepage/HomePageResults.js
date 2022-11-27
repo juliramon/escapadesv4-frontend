@@ -125,8 +125,9 @@ const HomePageResults = ({
 											);
 										}
 								  })
-								: state.emptyBlocksPerRow.map((el) => (
+								: state.emptyBlocksPerRow.map((el, idx) => (
 										<div
+											key={idx}
 											className="w-full md:w-1/2 lg:w-1/4 px-2"
 											role="status"
 										>
@@ -135,7 +136,7 @@ const HomePageResults = ({
 													<svg
 														className="w-12 h-12 text-gray-200"
 														xmlns="http://www.w3.org/2000/svg"
-														ariaHidden="true"
+														aria-hidden="true"
 														fill="currentColor"
 														viewBox="0 0 640 512"
 													>
@@ -156,9 +157,14 @@ const HomePageResults = ({
 							<div className="flex flex-wrap items-center justify-end overflow-hidden relative rounded-md py-12 px-10 lg:py-20 lg:pr-20 mt-4">
 								<div className="absolute inset-0 rounded-md overflow-hidden">
 									<picture>
+										<source
+											srcSet="../../bg-home-llista-nadal-s.webp"
+											type="image/webp"
+										/>
 										<img
 											src="../../bg-home-llista-nadal-s.jpg"
-											alt=""
+											data-src="../../bg-home-llista-nadal-s.jpg"
+											alt="La llista destacada"
 											className="w-full lg:w-8/12 h-full object-cover rounded-md overflow-hidden"
 											width=""
 											height=""
@@ -339,7 +345,10 @@ const HomePageResults = ({
 									<div className="left">
 										<div className="w-40 h-auto mr-5">
 											<picture>
-												<source srcSet="../../hotels-amb-encant-escapades-en-parella.png" />
+												<source
+													srcSet="../../hotels-amb-encant-escapades-en-parella.webp"
+													type="image/webp"
+												/>
 												<img
 													src="../../hotels-amb-encant-escapades-en-parella.png"
 													data-src="../../hotels-amb-encant-escapades-en-parella.png"
@@ -387,7 +396,10 @@ const HomePageResults = ({
 									<div className="left">
 										<div className="w-40 h-auto mr-5">
 											<picture>
-												<source srcSet="../../apartamens-escapades-en-parella.png" />
+												<source
+													srcSet="../../apartamens-escapades-en-parella.webp"
+													type="image/webp"
+												/>
 												<img
 													src="../../apartamens-escapades-en-parella.png"
 													data-src="../../apartamens-escapades-en-parella.png"
@@ -435,7 +447,10 @@ const HomePageResults = ({
 									<div className="left">
 										<div className="w-40 h-auto mr-5">
 											<picture>
-												<source srcSet="../../cases-arbre-escapades-en-parella.png" />
+												<source
+													srcSet="../../cases-arbre-escapades-en-parella.webp"
+													type="image/webp"
+												/>
 												<img
 													src="../../cases-arbre-escapades-en-parella.png"
 													data-src="../../cases-arbre-escapades-en-parella.png"
@@ -483,7 +498,10 @@ const HomePageResults = ({
 									<div className="left">
 										<div className="w-40 h-auto mr-5">
 											<picture>
-												<source srcSet="../../cases-rurals-escapades-en-parella.png" />
+												<source
+													srcSet="../../cases-rurals-escapades-en-parella.webp"
+													type="image/webp"
+												/>
 												<img
 													src="../../cases-rurals-escapades-en-parella.png"
 													data-src="../../cases-rurals-escapades-en-parella.png"
@@ -531,7 +549,10 @@ const HomePageResults = ({
 									<div className="left">
 										<div className="w-40 h-auto mr-5">
 											<picture>
-												<source srcSet="../../carabanes-escapades-en-parella.png" />
+												<source
+													srcSet="../../carabanes-escapades-en-parella.webp"
+													type="image/webp"
+												/>
 												<img
 													src="../../carabanes-escapades-en-parella.png"
 													data-src="../../carabanes-escapades-en-parella.png"
@@ -579,7 +600,10 @@ const HomePageResults = ({
 									<div className="left">
 										<div className="w-40 h-auto mr-5">
 											<picture>
-												<source srcSet="../../refugis-escapades-en-parella.png" />
+												<source
+													srcSet="../../refugis-escapades-en-parella.webp"
+													type="image/webp"
+												/>
 												<img
 													src="../../refugis-escapades-en-parella.png"
 													data-src="../../refugis-escapades-en-parella.png"

@@ -44,7 +44,10 @@ const FollowBox = () => {
 
 				<div className="w-28 h-28 rounded-md overflow-hidden">
 					<picture>
-						<source srcSet="./cover-instagram-escapadesenparella.jpg" />
+						<source
+							srcSet="./cover-instagram-escapadesenparella.webp"
+							type="image/webp"
+						/>
 						<img
 							src="./cover-instagram-escapadesenparella.jpg"
 							data-src="./cover-instagram-escapadesenparella.jpg"

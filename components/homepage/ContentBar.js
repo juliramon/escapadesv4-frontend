@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Container, Spinner } from "react-bootstrap";
+import FetchingSpinner from "../global/FetchingSpinner";
 import ContentService from "../../services/contentService";
 import NavigationCategoryBox from "../global/NavigationCategoryBox";
 
-const ContentBar = (props) => {
+const ContentBar = () => {
 	const service = new ContentService();
 	const initialState = {
 		categories: [],
@@ -28,52 +28,28 @@ const ContentBar = (props) => {
 		fetchData();
 	}, []);
 
-	let categoriesList = [];
-	if (state.hasCategories) {
-		categoriesList = state.categories.map((el) => (
-			<NavigationCategoryBox
-				key={el._id}
-				icon={el.icon}
-				slug={el.slug}
-				pluralName={el.pluralName}
-			/>
-		));
-	}
-
 	if (state.hasCategories === false) {
-		return (
-			<>
-				<Container className="spinner d-flex justify-space-between">
-					<Spinner animation="border" role="status" variant="primary">
-						<span className="sr-only">Carregant...</span>
-					</Spinner>
-				</Container>
-			</>
-		);
+		return <FetchingSpinner />;
 	}
 
-	const handleScroll = (e) => {
-		e.currentTarget.scrollLeft += e.deltaX || e.deltaY;
-	};
-
-	let contentBar;
-	contentBar = (
-		<div className="content-bar">
+	return (
+		<div className="content-bar min-h-[40px]">
 			<div className="w-full px-6">
-				<div className="content-bar---wrapper flex items-center">
-					<div
-						className="content-bar---inner flex items-center"
-						onWheel={(e) => handleScroll(e)}
-					>
-						{categoriesList}
-					</div>
-					<div className="content-bar---overlay"></div>
+				<div className="flex items-center -mx-2.5 overflow-x-auto h-10">
+					{state.hasCategories
+						? state.categories.map((el) => (
+								<NavigationCategoryBox
+									key={el._id}
+									icon={el.icon}
+									slug={el.slug}
+									pluralName={el.pluralName}
+								/>
+						  ))
+						: ""}
 				</div>
 			</div>
 		</div>
 	);
-
-	return <>{contentBar}</>;
 };
 
 export default ContentBar;
