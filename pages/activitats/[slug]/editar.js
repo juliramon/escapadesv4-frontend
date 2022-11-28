@@ -217,9 +217,9 @@ const ActivityEditionForm = () => {
 	if (state.formData.userOrganizations) {
 		if (state.formData.userOrganizations.organizations) {
 			state.formData.userOrganizations.organizations.forEach((el) => {
-				if (state.activity.organization) {
-					if (el._id === state.activity.organization._id) {
-						selectedOrganization = state.activity.organization._id;
+				if (state.formData.organization) {
+					if (el._id === state.formData.organization._id) {
+						selectedOrganization = state.formData.organization._id;
 					}
 				}
 			});
@@ -227,20 +227,20 @@ const ActivityEditionForm = () => {
 	}
 
 	const checkIfCategoryChecked = (val) => {
-		if (state.activity.categories) {
-			return state.activity.categories.includes(val) ? true : false;
+		if (state.formData.categories) {
+			return state.formData.categories.includes(val) ? true : false;
 		}
 	};
 
 	const checkIfSeasonChecked = (val) => {
-		if (state.activity.seasons) {
-			return state.activity.seasons.includes(val) ? true : false;
+		if (state.formData.seasons) {
+			return state.formData.seasons.includes(val) ? true : false;
 		}
 	};
 
 	const checkIfRegionChecked = (val) => {
-		if (state.activity.region) {
-			return state.activity.region.includes(val) ? true : false;
+		if (state.formData.region) {
+			return state.formData.region.includes(val) ? true : false;
 		}
 	};
 
@@ -399,7 +399,7 @@ const ActivityEditionForm = () => {
 		}
 		setState({
 			...state,
-			activity: { ...state.activity, categories: categories },
+			formData: { ...state.formData, categories: categories },
 		});
 	};
 
@@ -414,14 +414,14 @@ const ActivityEditionForm = () => {
 		}
 		setState({
 			...state,
-			activity: { ...state.activity, seasons: seasons },
+			formData: { ...state.formData, seasons: seasons },
 		});
 	};
 
 	const handleCheckRegion = (e) => {
 		setState({
 			...state,
-			activity: { ...state.activity, region: e.target.id },
+			formData: { ...state.formData, region: e.target.id },
 		});
 	};
 
@@ -789,7 +789,7 @@ const ActivityEditionForm = () => {
 														Lleida
 													</label>
 													<label
-														htmlFor="costabrava"
+														htmlFor="costaBrava"
 														className="form__label flex items-center"
 													>
 														<input
@@ -798,7 +798,7 @@ const ActivityEditionForm = () => {
 															id="costaBrava"
 															className="mr-2"
 															onChange={handleCheckRegion}
-															checked={checkIfRegionChecked("costabrava")}
+															checked={checkIfRegionChecked("costaBrava")}
 														/>
 														Costa Brava
 													</label>

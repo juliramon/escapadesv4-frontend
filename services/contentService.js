@@ -655,10 +655,12 @@ class ContentService {
 			.get(`/searchCategoryResults/${category}?page=${page}`)
 			.then((res) => res.data);
 
-	getCategoryResults = (category) =>
-		this.service
+	getCategoryResults = (category) => {
+		console.log(category);
+		return this.service
 			.get(`/searchCategoryResults/${category}`)
 			.then((res) => res.data);
+	};
 
 	getPlaceTypeResults = (placeType) =>
 		this.service

@@ -403,26 +403,10 @@ const CategoryPage = ({
 	);
 };
 
-export async function getStaticPaths() {
-	const service = new ContentService();
-
-	// Call an external API endpoint to get posts
-	const categories = await service.getCategories();
-
-	const paths = categories.map((categoria) => ({
-		params: { categoria: categoria.slug },
-	}));
-
-	return { paths, fallback: true };
-}
-
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
 	const service = new ContentService();
 	const categoryDetails = await service.getCategoryDetails(params.categoria);
 	let error404 = categoryDetails == undefined ? true : false;
-
-	console.log(categoryDetails);
-
 	if (categoryDetails == undefined) {
 		return {
 			props: {
