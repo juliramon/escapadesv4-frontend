@@ -257,7 +257,7 @@ const CategoryPage = ({
 					<section className="py-8 md:pb-16">
 						<div className="container">
 							<div className="w-full md:w-8/12 xl:w-5/12 mb-5">
-								<h1 className="my-0 font-display">
+								<h1 className="mt-0 mb-2">
 									<span className="capitalize">
 										{!state.categoryDetails.isPlace
 											? "Escapades"
@@ -269,20 +269,19 @@ const CategoryPage = ({
 											: state.categoryDetails.pluralName}
 									</span>
 								</h1>
+								<p className="max-w-xl text-xl">
+									Descobreix {state.allResults.length}{" "}
+									{!state.categoryDetails.isPlace ? "escapades" : null}{" "}
+									{state.categoryDetails.pluralName}{" "}
+									{state.categoryDetails.isPlace ? "amb encant" : null} a
+									Catalunya
+								</p>
+								{sponsorBlock}
 							</div>
 							{state.results.length > 0 ? (
 								<>
 									<div className="w-full flex flex-wrap items-center justify-between">
-										<div className="w-full md:w-1/2">
-											<h2 className="max-w-xl">
-												Descobreix {state.allResults.length}{" "}
-												{!state.categoryDetails.isPlace ? "escapades" : null}{" "}
-												{state.categoryDetails.pluralName}{" "}
-												{state.categoryDetails.isPlace ? "amb encant" : null} a
-												Catalunya
-											</h2>
-											{sponsorBlock}
-										</div>
+										<div className="w-full md:w-1/2"></div>
 										<div className="relative flex items-center justify-end w-full md:w-1/2">
 											<button
 												className="text-sm inline-flex flex-nowrap items-center button button__ghost button__med mr-3"

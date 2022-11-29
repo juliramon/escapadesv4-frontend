@@ -76,7 +76,7 @@ const HomePageResults = ({
 	}
 
 	return (
-		<div id="homePageResults" className="relative z-40">
+		<div id="homePageResults" className="relative z-30">
 			<div className="container">
 				<div className="w-full">
 					{/* Most rated getaways */}

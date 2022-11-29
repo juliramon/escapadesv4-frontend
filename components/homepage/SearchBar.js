@@ -548,11 +548,11 @@ const SearchBar = () => {
 	);
 
 	return (
-		<div className="search-form">
+		<div className="search-form mt-8">
 			<div className="tabs-dropdown relative text-left">
 				<span
 					onClick={() => setDropdownState(!dropdownState)}
-					className="text-white inline-flex items-center cursor-pointer text-15 md:text-base"
+					className="text-primary-400 inline-flex items-center cursor-pointer text-15"
 				>
 					{state.activeTab === "activities" ? "Activitats" : "Allotjaments"}{" "}
 					<svg
@@ -564,7 +564,7 @@ const SearchBar = () => {
 						height="22"
 						viewBox="0 0 24 24"
 						strokeWidth="1.8"
-						stroke="#ffffff"
+						stroke="#435A8C"
 						fill="none"
 						strokeLinecap="round"
 						strokeLinejoin="round"
