@@ -228,7 +228,6 @@ const StoryForm = () => {
 
 	useEffect(() => {
 		if (
-			state.formData.cloudImagesUploaded === true &&
 			state.formData.coverCloudImageUploaded === true &&
 			state.formData.coverCloudImage.length > 0
 		) {
@@ -237,14 +236,13 @@ const StoryForm = () => {
 	}, [state.formData]);
 
 	useEffect(() => {
-		const { title, subtitle, images, description, metaTitle, metaDescription } =
+		const { title, subtitle, description, metaTitle, metaDescription } =
 			state.formData;
 
 		if (
 			title &&
 			subtitle &&
 			coverImage &&
-			images &&
 			description &&
 			metaTitle &&
 			metaDescription

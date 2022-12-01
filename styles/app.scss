@@ -29,7 +29,7 @@
 		url("../fonts/CircularStd-Bold.ttf") format("truetype"),
 		url("../fonts/CircularStd-Bold.svg#bcc26993292869431e54c666aafa8fcd")
 			format("svg");
-	font-weight: 600;
+	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
 }
@@ -42,7 +42,7 @@
 		url("../fonts/CircularStd-BoldItalic.ttf") format("truetype"),
 		url("../fonts/CircularStd-BoldItalic.svg#bcc26993292869431e54c666aafa8fcd")
 			format("svg");
-	font-weight: 600;
+	font-weight: 700;
 	font-style: italic;
 	font-display: swap;
 }
@@ -96,9 +96,6 @@
 	font-style: italic;
 	font-display: swap;
 }
-
-$font-bold: "Unna", serif;
-$font-regular: "Work Sans", sans-serif;
 
 $dark-blue: #00206b;
 $medium-blue: #6376a0;
@@ -822,9 +819,6 @@ form .form-control::placeholder {
 		.form-group:last-child {
 			margin-bottom: 0;
 		}
-	}
-	.form-label {
-		font-family: $font-bold;
 	}
 	.btn {
 		width: 150px;
