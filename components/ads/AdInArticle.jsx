@@ -6,9 +6,8 @@ const AdInArticle = () => {
 			client="ca-pub-6252269250624547"
 			slot="7638377836"
 			style={{ display: "block" }}
+			layout="in-article"
 			format="fluid"
-			responsive="true"
-			layoutKey="-gw-1+2a-9x+5c"
 		/>
 	);
 };
