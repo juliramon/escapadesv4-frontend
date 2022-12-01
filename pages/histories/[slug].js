@@ -2,20 +2,15 @@ import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import NavigationBar from "../../components/global/NavigationBar";
 import ContentService from "../../services/contentService";
-import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
-import ShareModal from "../../components/modals/ShareModal";
 import parse from "html-react-parser";
 import Footer from "../../components/global/Footer";
 import FooterHistoria from "../../components/global/FooterHistoria";
 import FetchingSpinner from "../../components/global/FetchingSpinner";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
-import FancyboxUtil from "../../utils/FancyboxUtils";
+import Article from "../../components/richsnippets/Article";
 import AdSkyScrapperHoritzontal728x90 from "../../components/ads/AdSkyScrapperHoritzontal728x90";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
 import AdInArticle from "../../components/ads/AdInArticle";
 
 const StoryListing = ({ storyDetails }) => {
@@ -140,6 +135,14 @@ const StoryListing = ({ storyDetails }) => {
 				page3Title={state.story.metaTitle}
 				page3Url={`https://escapadesenparella.cat/histories/${state.story.slug}`}
 			/>
+			<Article
+				headline={state.story.title}
+				summary={state.story.subtitle}
+				image={state.story.cover}
+				author={state.owner.fullName}
+				publicationDate={state.story.createdAt}
+				modificationDate={state.story.updatedAt}
+			/>
 			<div className="listing-story">
 				<NavigationBar
 					logo_url={
@@ -147,7 +150,7 @@ const StoryListing = ({ storyDetails }) => {
 					}
 					user={user}
 				/>
-				<div className="pt-2 md:pt-3 px-6">
+				<div className="pt-3 px-6">
 					<div className="w-full">
 						<ul className="breadcrumb">
 							<li className="breadcrumb__item">
