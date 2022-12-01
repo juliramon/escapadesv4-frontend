@@ -12,10 +12,11 @@ import FetchingSpinner from "../../components/global/FetchingSpinner";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
 import FancyboxUtil from "../../utils/FancyboxUtils";
+import AdSkyScrapperHoritzontal728x90 from "../../components/ads/AdSkyScrapperHoritzontal728x90";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import AdSkyScrapperHoritzontal728x90 from "../../components/ads/AdSkyScrapperHoritzontal728x90";
+import AdInArticle from "../../components/ads/AdInArticle";
 
 const StoryListing = ({ storyDetails }) => {
 	const { user } = useContext(UserContext);
@@ -34,8 +35,6 @@ const StoryListing = ({ storyDetails }) => {
 		}
 	}, [router]);
 
-	const urlToShare = `https://escapadesenparella.cat/histories/${router.query.slug}`;
-
 	const initialState = {
 		story: {},
 		storyLoaded: false,
@@ -43,21 +42,12 @@ const StoryListing = ({ storyDetails }) => {
 	};
 	const [state, setState] = useState(initialState);
 	const [queryId, setQueryId] = useState(null);
+
 	useEffect(() => {
 		if (router && router.query) {
 			setQueryId(router.query.slug);
 		}
 	}, [router]);
-
-	const service = new ContentService();
-
-	const [modalVisibility, setModalVisibility] = useState(false);
-	const handleModalVisibility = () => setModalVisibility(true);
-	const hideModalVisibility = () => setModalVisibility(false);
-
-	const [shareModalVisibility, setShareModalVisibility] = useState(false);
-	const handleShareModalVisibility = () => setShareModalVisibility(true);
-	const hideShareModalVisibility = () => setShareModalVisibility(false);
 
 	useEffect(() => {
 		if (storyDetails !== undefined) {
@@ -80,28 +70,16 @@ const StoryListing = ({ storyDetails }) => {
 	let slicedDescription = [];
 
 	const stateImages = [...state.story.images];
-	// const stateImagesList = stateImages.map((el, idx) => ({
-	//   src: el,
-	//   thumbnail: el,
-	//   title: state.story.title,
-	// }));
-
-	// const getThumbnailContent = (item) => {
-	//   return <img src={item.thumbnail} width={120} height={90} />;
-	// };
-
-	// const photoSwipeGallery = (
-	//   <PhotoSwipeGallery
-	//     items={stateImagesList}
-	//     thumbnailContent={getThumbnailContent}
-	//     options={{ history: false }}
-	//   />
-	// );
 
 	const welcomeText = (
-		<h2 className="mb-8">
-			{title}: Benvinguts a l'escapada de la setmana, ens hi acompanyes?
-		</h2>
+		<>
+			<div className="mb-8">
+				<h2 className="mb-8">
+					{title}: Benvinguts a l'escapada de la setmana, ens hi acompanyes?
+				</h2>
+				<AdInArticle />
+			</div>
+		</>
 	);
 
 	if (description) {
@@ -125,7 +103,7 @@ const StoryListing = ({ storyDetails }) => {
 		}
 	}
 
-	let publicationDate = new Date(storyDetails.createdAt).toLocaleDateString(
+	const publicationDate = new Date(storyDetails.createdAt).toLocaleDateString(
 		"ca-es",
 		{
 			year: "numeric",
@@ -134,7 +112,7 @@ const StoryListing = ({ storyDetails }) => {
 		}
 	);
 
-	let updatedDate = new Date(storyDetails.updatedAt).toLocaleDateString(
+	const updatedDate = new Date(storyDetails.updatedAt).toLocaleDateString(
 		"ca-es",
 		{
 			year: "numeric",
@@ -169,7 +147,7 @@ const StoryListing = ({ storyDetails }) => {
 					}
 					user={user}
 				/>
-				<div className="pt-3 px-6">
+				<div className="pt-2 md:pt-3 px-6">
 					<div className="w-full">
 						<ul className="breadcrumb">
 							<li className="breadcrumb__item">
@@ -194,9 +172,9 @@ const StoryListing = ({ storyDetails }) => {
 				<main>
 					<article className="pt-4 md:pt-8 pb-4">
 						<div className="container">
-							<div className="max-w-2xl mx-auto">
+							<div className="max-w-full md:max-w-2xl mx-auto">
 								<h1 className="text-center">{title}</h1>
-								<p className="text-lg md:text-xl text-center px-16 mt-2.5">
+								<p className="text-lg md:text-xl text-center md:px-16 mt-2.5">
 									{subtitle}
 								</p>
 								<div className="mt-3 flex flex-wrap items-center justify-center">
@@ -229,7 +207,7 @@ const StoryListing = ({ storyDetails }) => {
 								</div>
 							</div>
 							{state.storyLoaded === true ? (
-								<div className="w-full max-w-3xl md:mx-auto mt-6">
+								<div className="w-full max-w-full md:max-w-3xl md:mx-auto mt-6">
 									<div className="aspect-w-16 aspect-h-9 rounded overflow-hidden">
 										<picture>
 											<img
@@ -248,7 +226,7 @@ const StoryListing = ({ storyDetails }) => {
 									</figcaption>
 								</div>
 							) : null}
-							<div className="max-w-xl mx-auto pt-8">
+							<div className="w-full max-w-full md:max-w-xl mx-auto pt-8">
 								<div className="text-center text-tertiary-500 text-opacity-80 text-sm py-4 mb-8 bg-tertiary-100 bg-opacity-50 flex items-center justify-center rounded-md">
 									<span className="inline-block">
 										Darrera actualització:{" "}
@@ -260,28 +238,6 @@ const StoryListing = ({ storyDetails }) => {
 								<div className="listing-description">{slicedDescription}</div>
 							</div>
 						</div>
-						<div className="max-w-4xl my-10 ml-4 lg:mx-auto">
-							<Swiper spaceBetween={10} slidesPerView={1.15}>
-								{stateImages.map((el, idx) => (
-									<SwiperSlide key={el._id}>
-										<FancyboxUtil>
-											<a
-												key={idx}
-												data-fancybox="gallery"
-												href={el}
-												className="block aspect-w-16 aspect-h-9 rounded overflow-hidden w-full h-full"
-											>
-												<img
-													alt=""
-													src={el}
-													className="w-full h-full object-cover"
-												/>
-											</a>
-										</FancyboxUtil>
-									</SwiperSlide>
-								))}
-							</Swiper>
-						</div>
 					</article>
 				</main>
 				<section>
@@ -289,15 +245,6 @@ const StoryListing = ({ storyDetails }) => {
 						<FooterHistoria />
 					</div>
 				</section>
-				<SignUpModal
-					visibility={modalVisibility}
-					hideModal={hideModalVisibility}
-				/>
-				<ShareModal
-					visibility={shareModalVisibility}
-					hideModal={hideShareModalVisibility}
-					url={urlToShare}
-				/>
 			</div>
 			<Footer
 				logo_url={
