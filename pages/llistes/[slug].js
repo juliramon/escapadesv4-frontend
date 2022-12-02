@@ -169,7 +169,7 @@ const ListView = ({ listDetails }) => {
 										</div>
 									</div>
 								</div>
-								<div className="w-full">
+								<div className="w-full max-w-6xl mx-auto">
 									<div className="aspect-w-16 aspect-h-9 rounded-md overflow-hidden">
 										<picture>
 											<img
@@ -182,14 +182,14 @@ const ListView = ({ listDetails }) => {
 											/>
 										</picture>
 									</div>
-									<figcaption className="text-xs mt-2 text-primary-400 text-opacity-80">
+									<figcaption className="text-xs mt-2 text-primary-400 text-opacity-80 md:text-right">
 										{state.list.title}
 									</figcaption>
 								</div>
 							</div>
 							<div className="flex flex-wrap items-stretch w-full max-w-5xl mx-auto">
-								<div className="w-full md:mt-8 lg:w-9/12 lg:pl-12 lg:pr-20 pt-6 pb-8 md:py-8 lg:border-l md:border-primary-300">
-									<div className="text-center text-tertiary-500 text-opacity-80 text-sm py-4 mb-5 md:mb-8 bg-tertiary-100 bg-opacity-50 flex items-center justify-center rounded-md">
+								<div className="w-full lg:w-9/12 lg:pl-12 lg:pr-20 -mt-6 pt-10 pb-8 lg:border-l md:border-primary-300">
+									<div className="text-center text-tertiary-500 text-opacity-80 text-sm py-4 mb-5 md:mb-6 bg-tertiary-100 bg-opacity-50 flex items-center justify-center rounded-md">
 										<span className="inline-block">
 											Actualitzat el{" "}
 											<time datetime={updatedDate}>
@@ -197,7 +197,7 @@ const ListView = ({ listDetails }) => {
 											</time>
 										</span>
 									</div>
-									<p className="md:text-lg max-w-2xl mb-6 md:mb-10">
+									<p className="md:text-lg max-w-2xl mb-6 md:mb-8">
 										{subtitle}
 									</p>
 									<div className="list__description">
