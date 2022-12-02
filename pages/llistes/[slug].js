@@ -1,8 +1,6 @@
-import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
-import { Container, Spinner } from "react-bootstrap";
 import Footer from "../../components/global/Footer";
 import NavigationBar from "../../components/global/NavigationBar";
 import ShareModal from "../../components/modals/ShareModal";
@@ -15,6 +13,7 @@ import GlobalMetas from "../../components/head/GlobalMetas";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
 import FetchingSpinner from "../../components/global/FetchingSpinner";
 import AdSkyScrapper from "../../components/ads/AdSkyScrapper";
+import AdSkyScrapperHoritzontal728x90 from "../../components/ads/AdSkyScrapperHoritzontal728x90";
 
 const ListView = ({ listDetails }) => {
 	const { user } = useContext(UserContext);
@@ -112,93 +111,61 @@ const ListView = ({ listDetails }) => {
 					}
 					user={user}
 				/>
-				<main>
-					<div className="pt-6">
-						<div className="container">
-							<ul className="breadcrumb">
-								<li className="breadcrumb__item">
-									<a href="/" title="Inici" className="breadcrumb__link">
-										Inici
-									</a>
-								</li>
-								<li className="breadcrumb__item">
-									<a href="/llistes" className="breadcrumb__link">
-										Llistes
-									</a>
-								</li>
-								<li className="breadcrumb__item">
-									<span className="breadcrumb__link active">{title}</span>
-								</li>
-							</ul>
-						</div>
+				<div className="pt-3 px-4">
+					<div className="w-full">
+						<ul className="breadcrumb">
+							<li className="breadcrumb__item">
+								<a href="/" title="Inici" className="breadcrumb__link">
+									Inici
+								</a>
+							</li>
+							<li className="breadcrumb__item">
+								<a href="/llistes" className="breadcrumb__link">
+									Llistes
+								</a>
+							</li>
+							<li className="breadcrumb__item">
+								<span className="breadcrumb__link active">{title}</span>
+							</li>
+						</ul>
 					</div>
-					<article className="pt-2 md:pt-6 lg:pt-12 pb-4">
+				</div>
+				<div className="bg-primary-100 py-4">
+					<AdSkyScrapperHoritzontal728x90 />
+				</div>
+				<main>
+					<article className="pt-8 pb-4">
 						<div className="container">
-							<div className="flex flex-col-reverse md:flex-col">
+							<div className="flex flex-wrap">
 								<div className="w-full max-w-5xl mx-auto">
-									<div className="w-full lg:pl-12 lg:pr-20 pb-8 lg:border-l border-primary-300">
-										<h1 className="mt-4 mb-4 md:mt-0 font-display">{title}</h1>
-										<div className="mt-6 flex flex-wrap items-center justify-between">
+									<div className="w-full pb-6 lg:pl-12 lg:pr-20 lg:border-l border-primary-300">
+										<h1 className=" max-w-2xl">{title}</h1>
+										<div className="mt-3 flex flex-wrap items-center">
 											<div className="flex flex-wrap items-center">
-												<Link href={`/usuaris/${state.owner._id}`}>
-													<a className="flex flex-wrap items-center">
-														<div className="rounded-full overflow-hidden w-12 h-12 mr-3">
-															<picture>
-																<img
-																	src={state.owner.avatar}
-																	alt={state.owner.fullName}
-																	width={48}
-																	height={48}
-																	className="w-full h-full object-cover"
-																	loadgin="eager"
-																/>
-															</picture>
-														</div>
-														<span className="listing-owner-name">
-															{state.owner.fullName}
-														</span>
-														<span className="mx-2 opacity-40 inline-block">
-															–
-														</span>
-														<span className="text-sm inline-block opacity-40">
-															Publicat el {publicationDate}
-														</span>
-														<div className="hidden md:inline-flex md:items-center">
-															<span className="mx-2 opacity-40 inline-block">
-																/
-															</span>
-															<span className="text-sm inline-block opacity-40">
-																Actualitzat el {updatedDate}
-															</span>
-														</div>
-													</a>
-												</Link>
+												<div className="flex flex-wrap items-center">
+													<div className="rounded-full overflow-hidden w-8 h-8 mr-2.5">
+														<picture>
+															<img
+																src={state.owner.avatar}
+																alt={state.owner.fullName}
+																width={32}
+																height={32}
+																className="w-full h-full object-cover"
+																loadgin="eager"
+															/>
+														</picture>
+													</div>
+													<span className="text-sm text-primary-400 text-opacity-80">
+														{state.owner.fullName}
+													</span>
+													<span className="mx-2 text-sm text-primary-400 text-opacity-80">
+														·
+													</span>
+													<span className="text-sm text-primary-400 text-opacity-80">
+														Publicat el {publicationDate}
+													</span>
+												</div>
 											</div>
-											{/* <div
-											className="flex items-center justify-center button button__secondary button__med cursor-pointer mt-5 md:mt-0 w-full md:w-auto"
-											onClick={() => handleShareModalVisibility()}
-										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												className="icon icon-tabler icon-tabler-share mr-3"
-												width="24"
-												height="24"
-												viewBox="0 0 24 24"
-												strokeWidth="1.5"
-												stroke="currentColor"
-												fill="none"
-												strokeLinecap="round"
-												strokeLinejoin="round"
-											>
-												<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-												<circle cx="6" cy="12" r="3" />
-												<circle cx="18" cy="6" r="3" />
-												<circle cx="18" cy="18" r="3" />
-												<line x1="8.7" y1="10.7" x2="15.3" y2="7.3" />
-												<line x1="8.7" y1="13.3" x2="15.3" y2="16.7" />
-											</svg>
-											<span className="text-sm">Compartir</span>
-										</div> */}
 										</div>
 									</div>
 								</div>
@@ -215,15 +182,24 @@ const ListView = ({ listDetails }) => {
 											/>
 										</picture>
 									</div>
-									<figcaption className="text-xs mt-2.5 lg:text-right">
+									<figcaption className="text-xs mt-2 text-primary-400 text-opacity-80">
 										{state.list.title}
 									</figcaption>
 								</div>
 							</div>
-
 							<div className="flex flex-wrap items-stretch w-full max-w-5xl mx-auto">
-								<div className="w-full lg:w-9/12 lg:pl-12 lg:pr-20 py-8 md:pt-20 lg:border-l md:border-primary-300 -mt-7">
-									<p className="md:text-lg max-w-2xl mb-10">{subtitle}</p>
+								<div className="w-full md:mt-8 lg:w-9/12 lg:pl-12 lg:pr-20 pt-6 pb-8 md:py-8 lg:border-l md:border-primary-300">
+									<div className="text-center text-tertiary-500 text-opacity-80 text-sm py-4 mb-5 md:mb-8 bg-tertiary-100 bg-opacity-50 flex items-center justify-center rounded-md">
+										<span className="inline-block">
+											Actualitzat el{" "}
+											<time datetime={updatedDate}>
+												<u>{updatedDate}</u>
+											</time>
+										</span>
+									</div>
+									<p className="md:text-lg max-w-2xl mb-6 md:mb-10">
+										{subtitle}
+									</p>
 									<div className="list__description">
 										{ReactHtmlParser(description)}
 									</div>

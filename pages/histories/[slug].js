@@ -150,7 +150,7 @@ const StoryListing = ({ storyDetails }) => {
 					}
 					user={user}
 				/>
-				<div className="pt-3 px-6">
+				<div className="pt-3 px-4">
 					<div className="w-full">
 						<ul className="breadcrumb">
 							<li className="breadcrumb__item">
@@ -176,11 +176,11 @@ const StoryListing = ({ storyDetails }) => {
 					<article className="pt-8 pb-4">
 						<div className="container">
 							<div className="max-w-full md:max-w-2xl mx-auto">
-								<h1 className="text-center">{title}</h1>
-								<p className="text-lg md:text-xl text-center md:px-16 mt-2.5">
+								<h1 className="md:text-center">{title}</h1>
+								<p className="text-lg md:text-xl md:text-center md:px-16 mt-2.5">
 									{subtitle}
 								</p>
-								<div className="mt-3 flex flex-wrap items-center justify-center">
+								<div className="mt-3 flex flex-wrap items-center md:justify-center">
 									<div className="flex flex-wrap items-center">
 										<div className="rounded-full overflow-hidden w-8 h-8 mr-2.5">
 											<picture>

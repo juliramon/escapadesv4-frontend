@@ -206,7 +206,7 @@ const NavigationBar = ({ logo_url, path }) => {
 
 	return (
 		<header className="z-50 bg-white fixed w-full top-0 shadow-md">
-			<nav className="px-6 py-3 menu">
+			<nav className="px-4 py-3 menu">
 				<div className="w-full flex flex-wrap items-center justify-between lg:justify-start">
 					<Link href={logoLink}>
 						<a className="mr-5 px-0 menu__item">
