@@ -61,8 +61,8 @@ const FollowBox = () => {
 					<span className="text-sm inline-block">Sorteig Instagram</span>
 					<h3 className="text-base font-normal max-w-[350px]">
 						{/* Les millors escapades en parella també a Instagram */}
-						Sortegem una ruleta hardcore de l'Hòstia, perquè els dinars familiar
-						amb ratafia us passin molt millor!
+						Sortegem una ruleta hardcore de l'Hòstia, perquè els dinars
+						familiars amb ratafia us passin molt millor!
 					</h3>
 					<a
 						href="https://www.instagram.com/p/ClzIxtMNJlZ/"
