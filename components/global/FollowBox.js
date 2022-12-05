@@ -45,13 +45,8 @@ const FollowBox = () => {
 
 				<div className="w-28 h-28 rounded-md overflow-hidden">
 					<picture>
-						<source
-							srcSet="./cover-instagram-escapadesenparella.webp"
-							type="image/webp"
-						/>
 						<img
-							src="./cover-instagram-escapadesenparella.jpg"
-							data-src="./cover-instagram-escapadesenparella.jpg"
+							src="https://res.cloudinary.com/juligoodie/image/upload/v1670272708/branding/318145880_208189281668279_8087065994636565968_n_go63hn.jpg"
 							alt="Segueix @escapadesenparella a Instagram"
 							className="w-full h-full object-cover"
 							width="110"
@@ -63,18 +58,21 @@ const FollowBox = () => {
 				</div>
 
 				<div className="ml-5 flex-1">
-					<h3 className="text-base font-normal max-w-[250px]">
-						Les millors escapades en parella també a Instagram
+					<span className="text-sm inline-block">Sorteig Instagram</span>
+					<h3 className="text-base font-normal max-w-[350px]">
+						{/* Les millors escapades en parella també a Instagram */}
+						Sortegem una ruleta hardcore de l'Hòstia, perquè els dinars familiar
+						amb ratafia us passin molt millor!
 					</h3>
 					<a
-						href="https://instagram.com/escapadesenparella"
+						href="https://www.instagram.com/p/ClzIxtMNJlZ/"
 						title="Segueix-nos a Instagram"
 						className="bg-primary-300 hover:bg-primary-500 hover:text-white transition-all duration-300 ease-in-out py-2 px-4 text-sm mt-3 inline-flex items-center rounded-md"
 						onClick={() => closeBox()}
 						rel="nofollow noreferrer"
 						target="_blank"
 					>
-						<svg
+						{/* <svg
 							xmlns="http://www.w3.org/2000/svg"
 							className="mr-1.5"
 							width={24}
@@ -90,8 +88,8 @@ const FollowBox = () => {
 							<rect x={4} y={4} width={16} height={16} rx={4}></rect>
 							<circle cx={12} cy={12} r={3}></circle>
 							<line x1="16.5" y1="7.5" x2="16.5" y2="7.501"></line>
-						</svg>
-						Segueix-nos
+						</svg> */}
+						👉 Participa-hi
 					</a>
 				</div>
 			</div>

@@ -66,6 +66,25 @@ const StoryListing = ({ storyDetails }) => {
 
 	const stateImages = [...state.story.images];
 
+	if (description) {
+		parsedDescription = parse(description);
+
+		const maxSliders = 3;
+		const slidesPerSlider = stateImages.length / maxSliders;
+
+		const totalDescriptionElements = parsedDescription.length; // ex. 21
+
+		console.log(parseInt(stateImages.length));
+		console.log(parseInt(slidesPerSlider));
+		console.log(parseInt(totalDescriptionElements));
+
+		parsedDescription.map((el) => slicedDescription.push(el));
+		if (slicedDescription.length > 1) {
+			// slicedDescription[0].splice(4, 0, photoSwipeGallery);
+			slicedDescription.splice(1, 0, welcomeText);
+		}
+	}
+
 	const welcomeText = (
 		<>
 			<div className="mb-8">
@@ -76,27 +95,6 @@ const StoryListing = ({ storyDetails }) => {
 			</div>
 		</>
 	);
-
-	if (description) {
-		parsedDescription = parse(description);
-
-		const maxSliders = 3;
-		const slidesPerSlider = stateImages.length / maxSliders;
-
-		const totalDescriptionElements = parsedDescription.length; // ex. 21
-
-		for (let i = 1; i < totalDescriptionElements; i++) {
-			if (totalDescriptionElements % i == 0) {
-				console.log(i);
-			}
-		}
-
-		parsedDescription.map((el) => slicedDescription.push(el));
-		if (slicedDescription.length > 1) {
-			// slicedDescription[0].splice(4, 0, photoSwipeGallery);
-			slicedDescription.splice(1, 0, welcomeText);
-		}
-	}
 
 	const publicationDate = new Date(storyDetails.createdAt).toLocaleDateString(
 		"ca-es",
@@ -202,7 +200,7 @@ const StoryListing = ({ storyDetails }) => {
 										</span>
 										<span className="text-sm text-primary-400 text-opacity-80">
 											Publicat el{" "}
-											<time datetime={storyDetails.createdAt}>
+											<time dateTime={storyDetails.createdAt}>
 												<u>{publicationDate}</u>
 											</time>
 										</span>
@@ -233,7 +231,7 @@ const StoryListing = ({ storyDetails }) => {
 								<div className="text-center text-tertiary-500 text-opacity-80 text-sm py-4 mb-5 md:mb-8 bg-tertiary-100 bg-opacity-50 flex items-center justify-center rounded-md">
 									<span className="inline-block">
 										Darrera actualització:{" "}
-										<time datetime={updatedDate}>
+										<time dateTime={updatedDate}>
 											<u>{updatedDate}</u>
 										</time>
 									</span>

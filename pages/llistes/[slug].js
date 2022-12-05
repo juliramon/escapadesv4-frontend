@@ -162,7 +162,10 @@ const ListView = ({ listDetails }) => {
 														·
 													</span>
 													<span className="text-sm text-primary-400 text-opacity-80">
-														Publicat el {publicationDate}
+														Publicat el{" "}
+														<time dateTime={publicationDate}>
+															<u>{publicationDate}</u>
+														</time>
 													</span>
 												</div>
 											</div>
@@ -192,7 +195,7 @@ const ListView = ({ listDetails }) => {
 									<div className="text-center text-tertiary-500 text-opacity-80 text-sm py-4 mb-5 md:mb-6 bg-tertiary-100 bg-opacity-50 flex items-center justify-center rounded-md">
 										<span className="inline-block">
 											Actualitzat el{" "}
-											<time datetime={updatedDate}>
+											<time dateTime={updatedDate}>
 												<u>{updatedDate}</u>
 											</time>
 										</span>
