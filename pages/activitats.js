@@ -6,9 +6,9 @@ import PublicSquareBox from "../components/listings/PublicSquareBox";
 import { useRouter } from "next/router";
 import Footer from "../components/global/Footer";
 import MapModal from "../components/modals/MapModal";
-import Fancybox from "../utils/FancyboxUtils";
 import Breadcrumb from "../components/richsnippets/Breadcrumb";
 import GlobalMetas from "../components/head/GlobalMetas";
+import ListingHeader from "../components/headers/ListingHeader";
 
 const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
 	const router = useRouter();
@@ -169,7 +169,11 @@ const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [state.updateSearch]);
 
-	const textareaFooter = "";
+	const textareaFooter = `<p>Calceu-vos les botes, poseu-vos el banyador, prepareu-vos la motxilla o despengeu l'anorac; aquí trobareu les millors <strong>activitats en parella</strong> a Catalunya!</p>
+	<p>Catalunya és un destí ideal per a realitzar activitats en parella. Amb la seva meravellosa costa mediterrània, pobles encantadors i rica història cultural, ens ofereix un vetall de possibilitats infinits per a realitzar activitats en parella de tots tipus.</p>
+	<p>Un dels llocs imperdibles per a fer activitats en parella és Barcelona. Amb la seva arquitectura icònica, museus de classe mundial i vida nocturna vibrant; sempre hi trobareu alguna cosa a fer a la ciutat.</p>
+	<p>Per a activitats en parella d'aventura, als Pirineus hi trobareu mil i una opcions, ja sigui realitzant sortides de senderisme o esquí, entre d'altres activitats. Sabíes que la regió és seu d'alguns dels millors resorts d'esquí d'Espanya? El paisatge és espectacular!</p>
+	<p>Per últim, per a activitats de relax, activitats en parella culturals, o activitats en parella gastronòmiques, no dubtis en visitar la Costa Brava, la Costa Daurada, el Camp de Tarragona o el Delta de l'Ebre. Aquestes regions ofereixen propostes que s'adapten a cada parella.</p>`;
 
 	const loadMoreResults = async (page) => {
 		setState({ ...state, isFetching: true });
@@ -189,7 +193,7 @@ const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
 				title="Activitats en parella"
 				description="Activitats en parella a Catalunya. Troba les millors excursions, activitats d'aventura i plans per fer en parella a Catalunya."
 				url="https://escapadesenparella.cat/activitats"
-				image="https://escapadesenparella.cat/img/containers/main/img/og-histories.png/69081998ba0dfcb1465f7f878cbc7912.png"
+				image="https://res.cloudinary.com/juligoodie/image/upload/v1657047006/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.38_zsnyc7.jpg"
 				canonical="https://escapadesenparella.cat/activitats"
 			/>
 			{/* Rich snippets */}
@@ -233,142 +237,21 @@ const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
 							</ul>
 						</div>
 					</div>
-					<section className="pt-8">
-						<div className="container relative">
-							<div className="flex flex-wrap items-center justify-start">
-								<div className="w-full md:w-8/12 xl:w-5/12">
-									<h1 className="my-0 font-display">
-										<span className="text-secondary-500">Activitats</span> per
-										fer en parella a Catalunya
-									</h1>
-								</div>
-								<div className="w-full mt-6">
-									<div className="grid grid-cols-2 md:grid-cols-4 grid-rows-3 md:grid-rows-2 gap-0.5 rounded-md overflow-hidden">
-										<Fancybox
-											options={{
-												infinite: true,
-											}}
-										>
-											<div
-												className="row-start-1 col-start-1 row-span-1 col-span-2 md:row-span-2 rounded-t-md md:rounded-tr-none md:rounded-l-md overflow-hidden cursor-pointer"
-												data-fancybox="gallery"
-												data-src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.49.44_czmgpl.jpg"
-											>
-												<div className="aspect-w-4 aspect-h-3 h-full w-full">
-													<picture>
-														<img
-															src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.49.44_czmgpl.jpg"
-															alt=""
-															className="w-full h-full object-cover object-center"
-															width={400}
-															height={300}
-															loading="eager"
-														/>
-													</picture>
-												</div>
-											</div>
-											<div
-												className="row-start-2 md:row-start-1 col-start-1 md:col-start-3 row-span-1 col-span-1 md:rounded-none overflow-hidden cursor-pointer"
-												data-fancybox="gallery"
-												data-src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.34_qprzdh.jpg"
-											>
-												<div className="aspect-w-4 aspect-h-3 h-full w-full">
-													<picture>
-														<img
-															src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.34_qprzdh.jpg"
-															alt=""
-															className="w-full h-full object-cover object-center"
-															width={400}
-															height={300}
-															loading="eager"
-														/>
-													</picture>
-												</div>
-											</div>
-											<div
-												className="row-start-2 md:row-start-1 col-start-2 md:col-start-4 row-span-1 col-span-1 md:rounded-tr-md overflow-hidden cursor-pointer"
-												data-fancybox="gallery"
-												data-src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.39_f6r96x.jpg"
-											>
-												<div className="aspect-w-4 aspect-h-3 h-full w-full">
-													<picture>
-														<img
-															src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.39_f6r96x.jpg"
-															alt=""
-															className="w-full h-full object-cover object-center"
-															width={400}
-															height={300}
-															loading="eager"
-														/>
-													</picture>
-												</div>
-											</div>
-											<div
-												className="row-start-3 col-start-1 md:col-start-3 md:row-start-2 row-span-1 col-span-1 overflow-hidden cursor-pointer"
-												data-fancybox="gallery"
-												data-src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.31_qxwmps.jpg"
-											>
-												<div className="aspect-w-4 aspect-h-3 h-full w-full">
-													<picture>
-														<img
-															src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.31_qxwmps.jpg"
-															alt=""
-															className="w-full h-full object-cover object-center"
-															width={400}
-															height={300}
-															loading="eager"
-														/>
-													</picture>
-												</div>
-											</div>
-											<div
-												className="row-start-3 md:row-start-2 col-start-2 md:col-start-4 row-span-1 col-span-1 rounded-br-md overflow-hidden cursor-pointer"
-												data-fancybox="gallery"
-												data-src="https://res.cloudinary.com/juligoodie/image/upload/v1657047006/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.38_zsnyc7.jpg"
-											>
-												<div className="aspect-w-4 aspect-h-3 h-full w-full">
-													<picture>
-														<img
-															src="https://res.cloudinary.com/juligoodie/image/upload/v1657047006/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.38_zsnyc7.jpg"
-															alt=""
-															className="w-full h-full object-cover object-bottom"
-															width={400}
-															height={300}
-															loading="eager"
-														/>
-													</picture>
-												</div>
-											</div>
-										</Fancybox>
-									</div>
-								</div>
-								<div className="w-full mt-3">
-									<figcaption className="text-xs text-primary-400 text-right">
-										Activitats en parella realitzades per en Juli i l'Andrea
-										arreu de Catalunya / © Escapadesenparella.cat
-									</figcaption>
-								</div>
-							</div>
-						</div>
-					</section>
+
+					<ListingHeader
+						title={`<span class="text-secondary-500">Activitats</span> per fer en parella a Catalunya`}
+						subtitle={`Descobreix <span class="inline-block bg-tertiary-100 px-2">${state.numActivities} activitats en parella</span>, excursions, restaurants i paratges extraordinaris per a una escapada en parella de somni a Catalunya`}
+						figCaption={`📍 Escapada a les Basses de Coll de Nargó (Alt Urgell) / © Escapadesenparella.cat`}
+						image={
+							"https://res.cloudinary.com/juligoodie/image/upload/v1657047006/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.38_zsnyc7.jpg"
+						}
+					/>
 
 					<section className="pb-8 md:pb-16">
 						<div className="container">
-							<div className="w-full flex flex-wrap items-end justify-between pt-8 pb-2">
+							<div className="w-full flex flex-wrap items-end justify-between py-2">
 								<div className="w-full md:w-1/2">
-									<div className="max-w-xl">
-										<h2 className="my-0">
-											Descobreix {state.numActivities} activitats, excursions,
-											gastronomia i paratges extraordinaris per a una escapada
-											en parella de somni a Catalunya
-										</h2>
-										<p className="mt-4 text-xl leading-snug">
-											Calceu-vos les botes, poseu-vos el banyador, prepareu-vos
-											la motxilla o despengeu l'anorac; aquí trobareu les
-											millors <strong>activitats en parella</strong> a
-											Catalunya!
-										</p>
-									</div>
+									<div className="max-w-xl"></div>
 								</div>
 								<div className="relative flex flex-wrap items-center justify-between md:justify-end w-full md:w-1/2 mt-5 md:mb-0">
 									<button
@@ -737,17 +620,16 @@ const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
 							) : (
 								""
 							)}
+							{textareaFooter !== "" ? (
+								<div className="border-t border-primary-100 pt-10 mt-10">
+									<div
+										className="w-full md:w-8/12 xl:w-5/12 md:mx-auto"
+										dangerouslySetInnerHTML={{ __html: textareaFooter }}
+									></div>
+								</div>
+							) : null}
 						</div>
 					</section>
-					{textareaFooter !== "" ? (
-						<section className="pb-16">
-							<div className="container">
-								<div className="w-full md:w-2/4 md:mx-auto">
-									{textareaFooter}
-								</div>
-							</div>
-						</section>
-					) : null}
 				</main>
 			</div>
 			<Footer />

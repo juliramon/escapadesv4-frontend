@@ -5,9 +5,9 @@ import PublicSquareBox from "../components/listings/PublicSquareBox";
 import { useRouter } from "next/router";
 import Footer from "../components/global/Footer";
 import MapModal from "../components/modals/MapModal";
-import Fancybox from "../utils/FancyboxUtils";
 import Breadcrumb from "../components/richsnippets/Breadcrumb";
 import GlobalMetas from "../components/head/GlobalMetas";
+import ListingHeader from "../components/headers/ListingHeader";
 
 const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
 	const router = useRouter();
@@ -182,7 +182,9 @@ const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [state.updateSearch]);
 
-	const textareaFooter = "";
+	const textareaFooter = `<p>Des d'<strong>hotels amb encant</strong> únics a Catalunya, a <strong>cabanes acollidaroes</strong> i <strong>cases-arbre</strong>, passant per <strong>apartaments de somni</strong> i carabanes per gaudir de l'escapada, aquí trobaràs els millors allotjaments a Catalunya per a una escapada perfecta!</p>
+	<p>Catalunya és una destinació perfecta per a gaudir d'allotjaments amb encant, com ara hotels boutique, apartaments de disseny, cases rurals de somni, cabanes als arbres, etc.</p>
+	<p>No importa el que estiguis buscant per a una escapada a un allotjament a Catalunya; aquí trobaràs la millor selecció d'allotjaments per gaudir de la vostra propera escapada.</p>`;
 
 	const loadMoreResults = async (page) => {
 		setState({ ...state, isFetching: true });
@@ -236,144 +238,19 @@ const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
 							</ul>
 						</div>
 					</div>
-					<section className="pt-8">
-						<div className="container relative">
-							<div className="flex flex-wrap items-start justify-start">
-								<div className="w-full md:w-8/12 xl:w-5/12">
-									<h1 className="my-0 font-display">
-										<span className="text-secondary-500">Allotjaments</span> amb
-										encant
-									</h1>
-								</div>
-								<div className="w-full mt-6">
-									<div className="grid grid-cols-2 md:grid-cols-4 grid-rows-3 md:grid-rows-2 gap-0.5 rounded-md overflow-hidden">
-										<Fancybox
-											options={{
-												infinite: true,
-											}}
-										>
-											<div
-												className="row-start-1 col-start-1 row-span-1 col-span-2 md:row-span-2 rounded-t-md md:rounded-tr-none md:rounded-l-md overflow-hidden cursor-pointer"
-												data-fancybox="gallery"
-												data-src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.49.44_czmgpl.jpg"
-											>
-												<div className="aspect-w-4 aspect-h-3 h-full w-full">
-													<picture>
-														<img
-															src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.49.44_czmgpl.jpg"
-															alt=""
-															className="w-full h-full object-cover object-center"
-															width={400}
-															height={300}
-															loading="eager"
-														/>
-													</picture>
-												</div>
-											</div>
-											<div
-												className="row-start-2 md:row-start-1 col-start-1 md:col-start-3 row-span-1 col-span-1 md:rounded-none overflow-hidden cursor-pointer"
-												data-fancybox="gallery"
-												data-src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.34_qprzdh.jpg"
-											>
-												<div className="aspect-w-4 aspect-h-3 h-full w-full">
-													<picture>
-														<img
-															src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.34_qprzdh.jpg"
-															alt=""
-															className="w-full h-full object-cover object-center"
-															width={400}
-															height={300}
-															loading="eager"
-														/>
-													</picture>
-												</div>
-											</div>
-											<div
-												className="row-start-2 md:row-start-1 col-start-2 md:col-start-4 row-span-1 col-span-1 md:rounded-tr-md overflow-hidden cursor-pointer"
-												data-fancybox="gallery"
-												data-src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.39_f6r96x.jpg"
-											>
-												<div className="aspect-w-4 aspect-h-3 h-full w-full">
-													<picture>
-														<img
-															src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.39_f6r96x.jpg"
-															alt=""
-															className="w-full h-full object-cover object-center"
-															width={400}
-															height={300}
-															loading="eager"
-														/>
-													</picture>
-												</div>
-											</div>
-											<div
-												className="row-start-3 col-start-1 md:col-start-3 md:row-start-2 row-span-1 col-span-1 overflow-hidden cursor-pointer"
-												data-fancybox="gallery"
-												data-src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.31_qxwmps.jpg"
-											>
-												<div className="aspect-w-4 aspect-h-3 h-full w-full">
-													<picture>
-														<img
-															src="https://res.cloudinary.com/juligoodie/image/upload/v1657047005/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.31_qxwmps.jpg"
-															alt=""
-															className="w-full h-full object-cover object-center"
-															width={400}
-															height={300}
-															loading="eager"
-														/>
-													</picture>
-												</div>
-											</div>
-											<div
-												className="row-start-3 md:row-start-2 col-start-2 md:col-start-4 row-span-1 col-span-1 rounded-br-md overflow-hidden cursor-pointer"
-												data-fancybox="gallery"
-												data-src="https://res.cloudinary.com/juligoodie/image/upload/v1657047006/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.38_zsnyc7.jpg"
-											>
-												<div className="aspect-w-4 aspect-h-3 h-full w-full">
-													<picture>
-														<img
-															src="https://res.cloudinary.com/juligoodie/image/upload/v1657047006/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.38_zsnyc7.jpg"
-															alt=""
-															className="w-full h-full object-cover object-bottom"
-															width={400}
-															height={300}
-															loading="eager"
-														/>
-													</picture>
-												</div>
-											</div>
-										</Fancybox>
-									</div>
-								</div>
-								<div className="w-full mt-3">
-									<figcaption className="text-xs text-primary-400 text-right">
-										Allotjaments amb encant visitats per en Juli i l'Andrea
-										arreu de Catalunya / © Escapadesenparella.cat
-									</figcaption>
-								</div>
-							</div>
-						</div>
-					</section>
+
+					<ListingHeader
+						title={`<span class="text-secondary-500">Allotjaments</span> amb encant a Catalunya`}
+						subtitle={`Descobreix <span class="inline-block bg-tertiary-100 px-2">${state.numPlaces} allotjaments amb encant</span>, hotels boutique, apartaments, cabanyes als arbres i cases rurals de somni per a una escapada en parella increïble a Catalunya`}
+						figCaption={`📍 Escapada a Mas Farner, hotel rural a Llívia (Cerdanya) / © Escapadesenparella.cat`}
+						image={
+							"https://res.cloudinary.com/juligoodie/image/upload/v1664908197/getaways-guru/chlfg0bnkyyydrgtr6tp.jpg"
+						}
+					/>
 
 					<section className="pb-8 md:pb-16">
 						<div className="container">
-							<div className="w-full flex flex-wrap items-end justify-between pt-8 pb-2">
-								<div className="w-full md:w-1/2">
-									<div className="max-w-xl">
-										<h2 className="my-0">
-											Descobreix {state.numPlaces} allotjaments amb encant per a
-											una escapada en parella increïble a Catalunya
-										</h2>
-										<p className="mt-4 text-xl leading-snug">
-											Des d'<strong>hotels amb encant</strong> únics a
-											Catalunya, a <strong>cabanes acollidaroes</strong> i{" "}
-											<strong>cases-arbre</strong>, passant per{" "}
-											<strong>apartaments de somni</strong> i carabanes per
-											gaudir de l'escapada, aquí trobaràs els millors
-											allotjaments a Catalunya per a una escapada perfecta!
-										</p>
-									</div>
-								</div>
+							<div className="w-full flex flex-wrap items-end justify-end py-2">
 								<div className="relative flex flex-wrap items-center justify-between md:justify-end w-full md:w-1/2 mt-5 md:mb-0">
 									<button
 										className="text-sm inline-flex flex-nowrap items-center justify-center button button__ghost button__med w-full md:w-auto mb-3 md:mb-0 md:mr-3"
@@ -816,17 +693,16 @@ const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
 							) : (
 								""
 							)}
+							{textareaFooter !== "" ? (
+								<div className="border-t border-primary-100 pt-10 mt-10">
+									<div
+										className="w-full md:w-8/12 xl:w-5/12 md:mx-auto"
+										dangerouslySetInnerHTML={{ __html: textareaFooter }}
+									></div>
+								</div>
+							) : null}
 						</div>
 					</section>
-					{textareaFooter !== "" ? (
-						<section className="pb-16">
-							<div className="container">
-								<div className="w-full md:w-2/4 md:mx-auto">
-									{textareaFooter}
-								</div>
-							</div>
-						</section>
-					) : null}
 				</main>
 			</div>
 			<Footer />
