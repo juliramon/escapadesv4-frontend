@@ -7,6 +7,9 @@ import UserContext from "../contexts/UserContext";
 import Head from "next/head";
 import PaymentService from "../services/paymentService";
 import FetchingSpinner from "../components/global/FetchingSpinner";
+import EditorNavbar from "../components/editor/EditorNavbar";
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 
 const ActivityForm = () => {
 	// Validate if user is allowed to access this view
@@ -65,7 +68,6 @@ const ActivityForm = () => {
 			coverCloudImage: "",
 			cloudImagesUploaded: false,
 			coverCloudImageUploaded: false,
-			description: "",
 			phone: "",
 			website: "",
 			activity_full_address: "",
@@ -91,6 +93,7 @@ const ActivityForm = () => {
 	const [queryId, setQueryId] = useState(null);
 	const [stateStep, setStateStep] = useState({ step: "null" });
 	const [activeTab, setActiveTab] = useState("main");
+	const [description, setDescription] = useState({});
 
 	useEffect(() => {
 		if (router && router.route) {
@@ -115,6 +118,22 @@ const ActivityForm = () => {
 		};
 		fetchData();
 	}, []);
+
+	const editor = useEditor({
+		extensions: [StarterKit],
+		content: description !== "" ? description : "",
+		onUpdate: (props) => {
+			const data = {
+				html: props.editor.getHTML(),
+				text: props.editor.state.doc.textContent,
+			};
+			setDescription(data.html);
+		},
+		autofocus: false,
+		parseOptions: {
+			preserveWhitespace: true,
+		},
+	});
 
 	const saveFileToStatus = (e) => {
 		const fileToUpload = e.target.files[0];
@@ -263,7 +282,6 @@ const ActivityForm = () => {
 			region,
 			coverCloudImage,
 			cloudImages,
-			description,
 			phone,
 			website,
 			activity_full_address,
@@ -355,7 +373,6 @@ const ActivityForm = () => {
 			images,
 			price,
 			duration,
-			description,
 			organization,
 			metaTitle,
 			metaDescription,
@@ -437,11 +454,11 @@ const ActivityForm = () => {
 					path={queryId}
 				/>
 
-				<section>
+				<section className="pb-10">
 					<div className="container">
 						<div className="pt-7 pb-12">
-							<div className="flex items-center justify-between">
-								<div className="mb-5">
+							<div className="flex flex-wrap items-center justify-between">
+								<div className="w-full mb-5">
 									{state.step ? (
 										<div
 											className="funnel-steps-wrapper max-w-xl mx-auto mb-7"
@@ -496,15 +513,6 @@ const ActivityForm = () => {
 										Descriu l'activitat per arribar a parelles d'arreu de
 										Catalunya
 									</p>
-								</div>
-								<div className="w-full lg:w-1/2 flex justify-end">
-									<button
-										className="button__primary button__lg"
-										type="submit"
-										onClick={handleSubmit}
-									>
-										Guardar canvis
-									</button>
 								</div>
 							</div>
 							<div className="form-composer__body">
@@ -1046,19 +1054,15 @@ const ActivityForm = () => {
 													</div>
 												</div>
 											</div>
-
 											<div className="form__group">
 												<label htmlFor="description" className="form__label">
 													Descripció
 												</label>
-												<textarea
-													name="description"
-													rows={10}
-													placeholder="Descripció de l'activitat"
-													className="form__control"
-													value={state.formData.description}
-													onChange={handleChange}
-												></textarea>
+												<EditorNavbar editor={editor} />
+												<EditorContent
+													editor={editor}
+													className="form-composer__editor"
+												/>
 											</div>
 										</form>
 									</div>
@@ -1124,6 +1128,20 @@ const ActivityForm = () => {
 						</div>
 					</div>
 				</section>
+
+				<div className="w-full fixed bottom-0 inset-x-0 bg-white border-t border-primary-200 py-2.5">
+					<div className="container flex items-center justify-end">
+						<div className="px-5">
+							<button
+								className="button__primary button__lg"
+								type="submit"
+								onClick={handleSubmit}
+							>
+								Guardar canvis
+							</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</>
 	);

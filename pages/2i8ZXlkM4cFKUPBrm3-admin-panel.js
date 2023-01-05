@@ -154,10 +154,13 @@ const AdminPanel = () => {
 					name={el.name}
 					pluralName={el.pluralName}
 					isPlace={el.isPlace}
+					illustration={el.illustration}
 					image={el.image}
+					imageCaption={el.imageCaption}
 					title={el.title}
 					subtitle={el.subtitle}
 					slug={el.slug}
+					seoTextHeader={el.seoTextHeader}
 					seoText={el.seoText}
 					icon={el.icon}
 					isSponsored={el.isSponsored}

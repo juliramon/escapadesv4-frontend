@@ -8,6 +8,7 @@
 @import "layout/forms.sass";
 @import "layout/footer.sass";
 @import "layout/navigation.sass";
+@import "pages/layout-category.sass";
 @import "pages/layout-legal.sass";
 @import "pages/layout-list.sass";
 @import "pages/layout-lists.sass";
@@ -182,7 +183,7 @@ form .form-label {
 form .form-control,
 .ProseMirror {
 	border: none;
-	background-color: $soft-blue;
+	background-color: #f2f7f9;
 	color: $dark-blue;
 }
 form .form-control::placeholder {

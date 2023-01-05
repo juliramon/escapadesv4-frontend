@@ -242,7 +242,7 @@ const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
 					<ListingHeader
 						title={`<span class="text-secondary-500">Allotjaments</span> amb encant a Catalunya`}
 						subtitle={`Descobreix <span class="inline-block bg-tertiary-100 px-2">${state.numPlaces} allotjaments amb encant</span>, hotels boutique, apartaments, cabanyes als arbres i cases rurals de somni per a una escapada en parella increïble a Catalunya`}
-						figCaption={`📍 Escapada a Mas Farner, hotel rural a Llívia (Cerdanya) / © Escapadesenparella.cat`}
+						figCaption={`📍 Escapada a Mas Farner, hotel rural a Llívia (Cerdanya)`}
 						image={
 							"https://res.cloudinary.com/juligoodie/image/upload/v1664908197/getaways-guru/chlfg0bnkyyydrgtr6tp.jpg"
 						}
@@ -250,369 +250,6 @@ const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
 
 					<section className="pb-8 md:pb-16">
 						<div className="container">
-							<div className="w-full flex flex-wrap items-end justify-end py-2">
-								<div className="relative flex flex-wrap items-center justify-between md:justify-end w-full md:w-1/2 mt-5 md:mb-0">
-									<button
-										className="text-sm inline-flex flex-nowrap items-center justify-center button button__ghost button__med w-full md:w-auto mb-3 md:mb-0 md:mr-3"
-										onClick={() => setStateModalMap(!stateModalMap)}
-									>
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											className="icon icon-tabler icon-tabler-map-2 mr-2"
-											width="18"
-											height="18"
-											viewBox="0 0 24 24"
-											strokeWidth="1.5"
-											stroke="currentColor"
-											fill="none"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										>
-											<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-											<line x1="18" y1="6" x2="18" y2="6.01" />
-											<path d="M18 13l-3.5 -5a4 4 0 1 1 7 0l-3.5 5" />
-											<polyline points="10.5 4.75 9 4 3 7 3 20 9 17 15 20 21 17 21 15" />
-											<line x1="9" y1="4" x2="9" y2="17" />
-											<line x1="15" y1="15" x2="15" y2="20" />
-										</svg>
-										Veure'ls al mapa
-									</button>
-									<button
-										className={`bbutton button__ghost button__med justify-center w-full md:w-auto ${
-											stateDropdownFilters == true ? "active" : null
-										}`}
-										onClick={() =>
-											setStateDropdownFilters(!stateDropdownFilters)
-										}
-									>
-										{stateDropdownFilters == true ? (
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												className="icon icon-tabler icon-tabler-x mr-2"
-												width="18"
-												height="18"
-												viewBox="0 0 24 24"
-												strokeWidth="1.5"
-												stroke="currentColor"
-												fill="none"
-												strokeLinecap="round"
-												strokeLinejoin="round"
-											>
-												<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-												<line x1="18" y1="6" x2="6" y2="18" />
-												<line x1="6" y1="6" x2="18" y2="18" />
-											</svg>
-										) : (
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												className="icon icon-tabler icon-tabler-adjustments mr-2"
-												width="18"
-												height="18"
-												viewBox="0 0 24 24"
-												strokeWidth="1.5"
-												stroke="currentColor"
-												fill="none"
-												strokeLinecap="round"
-												strokeLinejoin="round"
-											>
-												<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-												<circle cx="6" cy="10" r="2" />
-												<line x1="6" y1="4" x2="6" y2="8" />
-												<line x1="6" y1="12" x2="6" y2="20" />
-												<circle cx="12" cy="16" r="2" />
-												<line x1="12" y1="4" x2="12" y2="14" />
-												<line x1="12" y1="18" x2="12" y2="20" />
-												<circle cx="18" cy="7" r="2" />
-												<line x1="18" y1="4" x2="18" y2="5" />
-												<line x1="18" y1="9" x2="18" y2="20" />
-											</svg>
-										)}
-										<span>Filtrar allotjaments</span>
-									</button>
-									{stateDropdownFilters === true ? (
-										<div className="absolute z-30 bg-white rounded-md shadow-lg top-14 overflow-hidden p-7">
-											<div className="flex items-start -m-5">
-												<div className="p-5">
-													<span className="text-lg mb-2 block">Tipologia</span>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeType"
-																id="hotel"
-																onChange={handleCheckType}
-																className="mr-2"
-															/>
-															Hotels
-														</label>
-													</fieldset>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeType"
-																id="apartament"
-																onChange={handleCheckType}
-																className="mr-2"
-															/>
-															Apartaments
-														</label>
-													</fieldset>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeType"
-																id="refugi"
-																onChange={handleCheckType}
-																className="mr-2"
-															/>
-															Refugis
-														</label>
-													</fieldset>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeType"
-																id="casaarbre"
-																onChange={handleCheckType}
-																className="mr-2"
-															/>
-															Cases-arbre
-														</label>
-													</fieldset>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeType"
-																id="casarural"
-																onChange={handleCheckType}
-																className="mr-2"
-															/>
-															Cases rurals
-														</label>
-													</fieldset>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeType"
-																id="carabana"
-																onChange={handleCheckType}
-																className="mr-2"
-															/>
-															Carabanes
-														</label>
-													</fieldset>
-												</div>
-												<div className="p-5">
-													<span className="text-lg mb-2 block">Regió</span>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeRegion"
-																id="barcelona"
-																onChange={handleCheckRegion}
-																className="mr-2"
-															/>
-															Barcelona
-														</label>
-													</fieldset>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeRegion"
-																id="girona"
-																onChange={handleCheckRegion}
-																className="mr-2"
-															/>
-															Girona
-														</label>
-													</fieldset>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeRegion"
-																id="lleida"
-																onChange={handleCheckRegion}
-																className="mr-2"
-															/>
-															Lleida
-														</label>
-													</fieldset>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeRegion"
-																id="tarragona"
-																onChange={handleCheckRegion}
-																className="mr-2"
-															/>
-															Tarragona
-														</label>
-													</fieldset>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeRegion"
-																id="costaBrava"
-																onChange={handleCheckRegion}
-																className="mr-2"
-															/>
-															Costa Brava
-														</label>
-													</fieldset>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeRegion"
-																id="costaDaurada"
-																onChange={handleCheckRegion}
-																className="mr-2"
-															/>
-															Costa Daurada
-														</label>
-													</fieldset>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeRegion"
-																id="pirineus"
-																onChange={handleCheckRegion}
-																className="mr-2"
-															/>
-															Pirineus
-														</label>
-													</fieldset>
-												</div>
-												<div className="p-5">
-													<span className="text-lg mb-2 block">Categoria</span>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeCategory"
-																id="romantica"
-																onChange={handleCheckCategory}
-																className="mr-2"
-															/>
-															Romàntiques
-														</label>
-													</fieldset>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeCategory"
-																id="aventura"
-																onChange={handleCheckCategory}
-																className="mr-2"
-															/>
-															Aventura
-														</label>
-													</fieldset>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeCategory"
-																id="gastronomica"
-																onChange={handleCheckCategory}
-																className="mr-2"
-															/>
-															Gastronòmiques
-														</label>
-													</fieldset>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeCategory"
-																id="cultural"
-																onChange={handleCheckCategory}
-																className="mr-2"
-															/>
-															Culturals
-														</label>
-													</fieldset>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeCategory"
-																id="relax"
-																onChange={handleCheckCategory}
-																className="mr-2"
-															/>
-															Relax
-														</label>
-													</fieldset>
-												</div>
-												<div className="p-5">
-													<span className="text-lg mb-2 block">Temporada</span>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeSeason"
-																id="hivern"
-																onChange={handleCheckSeason}
-																className="mr-2"
-															/>
-															Hivern
-														</label>
-													</fieldset>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeSeason"
-																id="primavera"
-																onChange={handleCheckSeason}
-																className="mr-2"
-															/>
-															Primavera
-														</label>
-													</fieldset>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeSeason"
-																id="estiu"
-																onChange={handleCheckSeason}
-																className="mr-2"
-															/>
-															Estiu
-														</label>
-													</fieldset>
-													<fieldset>
-														<label className="cursor-pointer">
-															<input
-																type="checkbox"
-																name="placeSeason"
-																id="tardor"
-																onChange={handleCheckSeason}
-																className="mr-2"
-															/>
-															Tardor
-														</label>
-													</fieldset>
-												</div>
-											</div>
-										</div>
-									) : null}
-								</div>
-							</div>
 							<div className="flex flex-wrap items-start -mx-2">
 								{state.hasPlaces
 									? state.places.map((el) => (
@@ -704,6 +341,365 @@ const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
 						</div>
 					</section>
 				</main>
+			</div>
+			<div className="fixed bottom-5 left-1/2 -translate-x-1/2 flex items-center justify-center space-x-4">
+				<button
+					className="text-sm inline-flex flex-nowrap items-center bg-white shadow-xl px-4 py-3 !rounded-full z-10"
+					onClick={() => setStateModalMap(!stateModalMap)}
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						className="icon icon-tabler icon-tabler-map-2 mr-2"
+						width="18"
+						height="18"
+						viewBox="0 0 24 24"
+						strokeWidth="1.5"
+						stroke="currentColor"
+						fill="none"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+					>
+						<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+						<line x1="18" y1="6" x2="18" y2="6.01" />
+						<path d="M18 13l-3.5 -5a4 4 0 1 1 7 0l-3.5 5" />
+						<polyline points="10.5 4.75 9 4 3 7 3 20 9 17 15 20 21 17 21 15" />
+						<line x1="9" y1="4" x2="9" y2="17" />
+						<line x1="15" y1="15" x2="15" y2="20" />
+					</svg>
+					Veure'ls al mapa
+				</button>
+				<button
+					className={`text-sm inline-flex flex-nowrap items-center bg-white shadow-xl px-4 py-3 !rounded-full z-10 ${
+						stateDropdownFilters == true ? "active" : null
+					}`}
+					onClick={() => setStateDropdownFilters(!stateDropdownFilters)}
+				>
+					{stateDropdownFilters == true ? (
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className="icon icon-tabler icon-tabler-x mr-2"
+							width="18"
+							height="18"
+							viewBox="0 0 24 24"
+							strokeWidth="1.5"
+							stroke="currentColor"
+							fill="none"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						>
+							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+							<line x1="18" y1="6" x2="6" y2="18" />
+							<line x1="6" y1="6" x2="18" y2="18" />
+						</svg>
+					) : (
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className="icon icon-tabler icon-tabler-adjustments mr-2"
+							width="18"
+							height="18"
+							viewBox="0 0 24 24"
+							strokeWidth="1.5"
+							stroke="currentColor"
+							fill="none"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						>
+							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+							<circle cx="6" cy="10" r="2" />
+							<line x1="6" y1="4" x2="6" y2="8" />
+							<line x1="6" y1="12" x2="6" y2="20" />
+							<circle cx="12" cy="16" r="2" />
+							<line x1="12" y1="4" x2="12" y2="14" />
+							<line x1="12" y1="18" x2="12" y2="20" />
+							<circle cx="18" cy="7" r="2" />
+							<line x1="18" y1="4" x2="18" y2="5" />
+							<line x1="18" y1="9" x2="18" y2="20" />
+						</svg>
+					)}
+					<span>Filtrar allotjaments</span>
+				</button>
+				{stateDropdownFilters === true ? (
+					<div className="absolute z-30 bg-white rounded-md shadow-lg top-14 overflow-hidden p-7">
+						<div className="flex items-start -m-5">
+							<div className="p-5">
+								<span className="text-lg mb-2 block">Tipologia</span>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeType"
+											id="hotel"
+											onChange={handleCheckType}
+											className="mr-2"
+										/>
+										Hotels
+									</label>
+								</fieldset>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeType"
+											id="apartament"
+											onChange={handleCheckType}
+											className="mr-2"
+										/>
+										Apartaments
+									</label>
+								</fieldset>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeType"
+											id="refugi"
+											onChange={handleCheckType}
+											className="mr-2"
+										/>
+										Refugis
+									</label>
+								</fieldset>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeType"
+											id="casaarbre"
+											onChange={handleCheckType}
+											className="mr-2"
+										/>
+										Cases-arbre
+									</label>
+								</fieldset>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeType"
+											id="casarural"
+											onChange={handleCheckType}
+											className="mr-2"
+										/>
+										Cases rurals
+									</label>
+								</fieldset>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeType"
+											id="carabana"
+											onChange={handleCheckType}
+											className="mr-2"
+										/>
+										Carabanes
+									</label>
+								</fieldset>
+							</div>
+							<div className="p-5">
+								<span className="text-lg mb-2 block">Regió</span>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeRegion"
+											id="barcelona"
+											onChange={handleCheckRegion}
+											className="mr-2"
+										/>
+										Barcelona
+									</label>
+								</fieldset>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeRegion"
+											id="girona"
+											onChange={handleCheckRegion}
+											className="mr-2"
+										/>
+										Girona
+									</label>
+								</fieldset>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeRegion"
+											id="lleida"
+											onChange={handleCheckRegion}
+											className="mr-2"
+										/>
+										Lleida
+									</label>
+								</fieldset>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeRegion"
+											id="tarragona"
+											onChange={handleCheckRegion}
+											className="mr-2"
+										/>
+										Tarragona
+									</label>
+								</fieldset>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeRegion"
+											id="costaBrava"
+											onChange={handleCheckRegion}
+											className="mr-2"
+										/>
+										Costa Brava
+									</label>
+								</fieldset>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeRegion"
+											id="costaDaurada"
+											onChange={handleCheckRegion}
+											className="mr-2"
+										/>
+										Costa Daurada
+									</label>
+								</fieldset>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeRegion"
+											id="pirineus"
+											onChange={handleCheckRegion}
+											className="mr-2"
+										/>
+										Pirineus
+									</label>
+								</fieldset>
+							</div>
+							<div className="p-5">
+								<span className="text-lg mb-2 block">Categoria</span>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeCategory"
+											id="romantica"
+											onChange={handleCheckCategory}
+											className="mr-2"
+										/>
+										Romàntiques
+									</label>
+								</fieldset>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeCategory"
+											id="aventura"
+											onChange={handleCheckCategory}
+											className="mr-2"
+										/>
+										Aventura
+									</label>
+								</fieldset>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeCategory"
+											id="gastronomica"
+											onChange={handleCheckCategory}
+											className="mr-2"
+										/>
+										Gastronòmiques
+									</label>
+								</fieldset>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeCategory"
+											id="cultural"
+											onChange={handleCheckCategory}
+											className="mr-2"
+										/>
+										Culturals
+									</label>
+								</fieldset>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeCategory"
+											id="relax"
+											onChange={handleCheckCategory}
+											className="mr-2"
+										/>
+										Relax
+									</label>
+								</fieldset>
+							</div>
+							<div className="p-5">
+								<span className="text-lg mb-2 block">Temporada</span>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeSeason"
+											id="hivern"
+											onChange={handleCheckSeason}
+											className="mr-2"
+										/>
+										Hivern
+									</label>
+								</fieldset>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeSeason"
+											id="primavera"
+											onChange={handleCheckSeason}
+											className="mr-2"
+										/>
+										Primavera
+									</label>
+								</fieldset>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeSeason"
+											id="estiu"
+											onChange={handleCheckSeason}
+											className="mr-2"
+										/>
+										Estiu
+									</label>
+								</fieldset>
+								<fieldset>
+									<label className="cursor-pointer">
+										<input
+											type="checkbox"
+											name="placeSeason"
+											id="tardor"
+											onChange={handleCheckSeason}
+											className="mr-2"
+										/>
+										Tardor
+									</label>
+								</fieldset>
+							</div>
+						</div>
+					</div>
+				) : null}
 			</div>
 			<Footer />
 			{stateModalMap == true ? (

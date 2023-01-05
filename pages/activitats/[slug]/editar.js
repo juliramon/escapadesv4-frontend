@@ -6,6 +6,9 @@ import Autocomplete from "react-google-autocomplete";
 import UserContext from "../../../contexts/UserContext";
 import Head from "next/head";
 import FetchingSpinner from "../../../components/global/FetchingSpinner";
+import EditorNavbar from "../../../components/editor/EditorNavbar";
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 
 const ActivityEditionForm = () => {
 	// Validate if user is allowed to access this view
@@ -55,7 +58,6 @@ const ActivityEditionForm = () => {
 			coverCloudImage: "",
 			cloudImagesUploaded: false,
 			coverCloudImageUploaded: false,
-			description: "",
 			phone: "",
 			website: "",
 			activity_full_address: "",
@@ -80,6 +82,7 @@ const ActivityEditionForm = () => {
 	const [state, setState] = useState(initialState);
 	const [queryId, setQueryId] = useState(null);
 	const [activeTab, setActiveTab] = useState("main");
+	const [description, setDescription] = useState("");
 
 	useEffect(() => {
 		if (router && router.query) {
@@ -105,7 +108,6 @@ const ActivityEditionForm = () => {
 						type: activityDetails.type,
 						title: activityDetails.title,
 						subtitle: activityDetails.subtitle,
-						description: activityDetails.description,
 						slug: activityDetails.slug,
 						categories: activityDetails.categories,
 						seasons: activityDetails.seasons,
@@ -138,11 +140,30 @@ const ActivityEditionForm = () => {
 					},
 					isActivityLoaded: true,
 				});
+				if (editor) {
+					editor.commands.setContent(activityDetails.description);
+				}
 			};
 			fetchData();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [queryId]);
+
+	const editor = useEditor({
+		extensions: [StarterKit],
+		content: description !== "" ? description : "",
+		onUpdate: (props) => {
+			const data = {
+				html: props.editor.getHTML(),
+				text: props.editor.state.doc.textContent,
+			};
+			setDescription(data.html);
+		},
+		autofocus: false,
+		parseOptions: {
+			preserveWhitespace: true,
+		},
+	});
 
 	const saveFileToStatus = (e) => {
 		const fileToUpload = e.target.files[0];
@@ -271,7 +292,6 @@ const ActivityEditionForm = () => {
 			cloudImages,
 			metaTitle,
 			metaDescription,
-			description,
 			phone,
 			website,
 			duration,
@@ -285,37 +305,36 @@ const ActivityEditionForm = () => {
 		cloudImages.length > 0
 			? (activityImages = cloudImages)
 			: (activityImages = images);
-		service
-			.editActivity(
-				_id,
-				slug,
-				title,
-				subtitle,
-				categories,
-				seasons,
-				region,
-				activityCover,
-				activityImages,
-				description,
-				phone,
-				website,
-				activity_full_address,
-				activity_locality,
-				activity_province,
-				activity_state,
-				activity_country,
-				activity_lat,
-				activity_lng,
-				activity_rating,
-				activity_place_id,
-				activity_opening_hours,
-				duration,
-				price,
-				organization,
-				metaTitle,
-				metaDescription
-			)
-			.then(() => router.push("/dashboard"));
+		service.editActivity(
+			_id,
+			slug,
+			title,
+			subtitle,
+			categories,
+			seasons,
+			region,
+			activityCover,
+			activityImages,
+			description,
+			phone,
+			website,
+			activity_full_address,
+			activity_locality,
+			activity_province,
+			activity_state,
+			activity_country,
+			activity_lat,
+			activity_lng,
+			activity_rating,
+			activity_place_id,
+			activity_opening_hours,
+			duration,
+			price,
+			organization,
+			metaTitle,
+			metaDescription
+		);
+		// .then(() => router.push("/dashboard"));
 	};
 
 	const handleFileUpload = (e) => {
@@ -390,16 +409,9 @@ const ActivityEditionForm = () => {
 	};
 
 	const handleCheckCategory = (e) => {
-		let categories = state.activity.categories;
-		if (e.target.checked === true) {
-			categories.push(e.target.id);
-		} else {
-			let index = categories.indexOf(e.target.id);
-			categories.splice(index, 1);
-		}
 		setState({
 			...state,
-			formData: { ...state.formData, categories: categories },
+			formData: { ...state.formData, categories: e.target.id },
 		});
 	};
 
@@ -512,24 +524,15 @@ const ActivityEditionForm = () => {
 					path={queryId}
 				/>
 
-				<section>
+				<section className="pb-10">
 					<div className="container">
 						<div className="pt-7 pb-12">
-							<div className="flex items-center justify-between">
+							<div className="flex flex-wrap items-center justify-between">
 								<div className="w-full lg:w-1/2">
 									<h1 className="text-3xl">Editar l'activitat</h1>
 									<p className="text-base">
 										Edita i desa els canvis de la teva activitat
 									</p>
-								</div>
-								<div className="w-full lg:w-1/2 flex justify-end">
-									<button
-										className="button__primary button__lg"
-										type="submit"
-										onClick={handleSubmit}
-									>
-										Guardar canvis
-									</button>
 								</div>
 							</div>
 							<div className="form-composer__body">
@@ -601,8 +604,8 @@ const ActivityEditionForm = () => {
 														className="form__label flex items-center"
 													>
 														<input
-															type="checkbox"
-															name="romantica"
+															type="radio"
+															name="activityCategory"
 															id="romantica"
 															className="mr-2"
 															onChange={handleCheckCategory}
@@ -615,8 +618,8 @@ const ActivityEditionForm = () => {
 														className="form__label flex items-center"
 													>
 														<input
-															type="checkbox"
-															name="aventura"
+															type="radio"
+															name="activityCategory"
 															id="aventura"
 															className="mr-2"
 															onChange={handleCheckCategory}
@@ -629,8 +632,8 @@ const ActivityEditionForm = () => {
 														className="form__label flex items-center"
 													>
 														<input
-															type="checkbox"
-															name="gastronomica"
+															type="radio"
+															name="activityCategory"
 															id="gastronomica"
 															className="mr-2"
 															onChange={handleCheckCategory}
@@ -643,8 +646,8 @@ const ActivityEditionForm = () => {
 														className="form__label flex items-center"
 													>
 														<input
-															type="checkbox"
-															name="cultural"
+															type="radio"
+															name="activityCategory"
 															id="cultural"
 															className="mr-2"
 															onChange={handleCheckCategory}
@@ -657,8 +660,8 @@ const ActivityEditionForm = () => {
 														className="form__label flex items-center"
 													>
 														<input
-															type="checkbox"
-															name="relax"
+															type="radio"
+															name="activityCategory"
 															id="relax"
 															className="mr-2"
 															onChange={handleCheckCategory}
@@ -1078,14 +1081,11 @@ const ActivityEditionForm = () => {
 												<label htmlFor="description" className="form__label">
 													Descripció
 												</label>
-												<textarea
-													name="description"
-													rows={10}
-													placeholder="Descripció de l'activitat"
-													className="form__control"
-													value={state.formData.description}
-													onChange={handleChange}
-												></textarea>
+												<EditorNavbar editor={editor} />
+												<EditorContent
+													editor={editor}
+													className="form-composer__editor"
+												/>
 											</div>
 										</form>
 									</div>
@@ -1151,6 +1151,20 @@ const ActivityEditionForm = () => {
 						</div>
 					</div>
 				</section>
+
+				<div className="w-full fixed bottom-0 inset-x-0 bg-white border-t border-primary-200 py-2.5">
+					<div className="container flex items-center justify-end">
+						<div className="px-5">
+							<button
+								className="button__primary button__lg"
+								type="submit"
+								onClick={handleSubmit}
+							>
+								Guardar canvis
+							</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</>
 	);

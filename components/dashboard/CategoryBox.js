@@ -9,10 +9,13 @@ const CategoryBox = ({
 	name,
 	pluralName,
 	isPlace,
+	illustration,
 	image,
+	imageCaption,
 	title,
 	subtitle,
 	slug,
+	seoTextHeader,
 	seoText,
 	icon,
 	isSponsored,
@@ -175,8 +178,11 @@ const CategoryBox = ({
 				isPlace={isPlace}
 				title={title}
 				subtitle={subtitle}
+				illustration={illustration}
 				image={image}
+				imageCaption={imageCaption}
 				icon={icon}
+				seoTextHeader={seoTextHeader}
 				seoText={seoText}
 				isSponsored={isSponsored}
 				sponsorURL={sponsorURL}

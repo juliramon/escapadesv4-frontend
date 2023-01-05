@@ -5,6 +5,7 @@ import Error404 from "../components/global/Error404";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
 import GlobalMetas from "../components/head/GlobalMetas";
+import ListingHeader from "../components/headers/ListingHeader";
 import PublicSquareBox from "../components/listings/PublicSquareBox";
 import MapModal from "../components/modals/MapModal";
 import Breadcrumb from "../components/richsnippets/Breadcrumb";
@@ -18,9 +19,17 @@ const CategoryPage = ({
 	totalItems,
 	numPages,
 }) => {
+	// Validate if user is allowed to access this view
 	const { user } = useContext(UserContext);
+	const [loadPage, setLoadPage] = useState(false);
+	useEffect(() => {
+		if (user) {
+			setLoadPage(true);
+		}
+	}, []);
+	// End validation
+
 	const router = useRouter();
-	const service = new ContentService();
 
 	useEffect(() => {
 		if (
@@ -29,9 +38,9 @@ const CategoryPage = ({
 			router.pathname.includes("nou-allotjament") ||
 			router.pathname.includes("nova-historia")
 		) {
-			document.querySelector("body").classList.add("composer");
+			document.querySelector("body").classList.add("bg-primary-100");
 		} else {
-			document.querySelector("body").classList.remove("composer");
+			document.querySelector("body").classList.remove("bg-primary-100");
 		}
 	}, [router]);
 
@@ -49,6 +58,8 @@ const CategoryPage = ({
 	const [state, setState] = useState(initialState);
 	const [stateModalMap, setStateModalMap] = useState(false);
 
+	const service = new ContentService();
+
 	useEffect(() => {
 		if (categoryDetails && paginatedResults) {
 			setState({
@@ -63,15 +74,6 @@ const CategoryPage = ({
 			});
 		}
 	}, []);
-
-	if (
-		(state.notFound &&
-			!state.isFetching &&
-			Object.keys(state.categoryDetails).length === 0) ||
-		paginatedResults == null
-	) {
-		return <Error404 />;
-	}
 
 	let resultsList;
 	if (state.hasResults) {
@@ -212,6 +214,15 @@ const CategoryPage = ({
 		});
 	};
 
+	if (
+		(state.notFound &&
+			!state.isFetching &&
+			Object.keys(state.categoryDetails).length === 0) ||
+		paginatedResults == null
+	) {
+		return <Error404 />;
+	}
+
 	return (
 		<>
 			{/* Browser metas  */}
@@ -254,62 +265,36 @@ const CategoryPage = ({
 						</div>
 					</div>
 
-					<section className="py-8 md:pb-16">
+					<ListingHeader
+						title={`<span class="capitalize">${
+							!state.categoryDetails.isPlace
+								? "Escapades"
+								: state.categoryDetails.pluralName
+						}</span> <span class="text-secondary-500 lowercase">${
+							state.categoryDetails.isPlace
+								? "amb encant"
+								: state.categoryDetails.pluralName
+						}</span>`}
+						subtitle={`Descobreix <span class="inline-block bg-tertiary-100 px-2">${
+							state.allResults.length
+						} ${!state.categoryDetails.isPlace ? "escapades" : ""} ${
+							state.categoryDetails.pluralName
+						} ${
+							state.categoryDetails.isPlace ? "amb encant" : ""
+						}</span> a Catalunya. ${
+							state.categoryDetails.seoTextHeader
+								? state.categoryDetails.seoTextHeader
+								: ""
+						}`}
+						figCaption={categoryDetails.imageCaption}
+						image={categoryDetails.image}
+						sponsorData={sponsorBlock}
+					/>
+
+					<section className="pb-8 md:pb-16">
 						<div className="container">
-							<div className="w-full md:w-8/12 xl:w-5/12 mb-5">
-								<h1 className="mt-0 mb-2">
-									<span className="capitalize">
-										{!state.categoryDetails.isPlace
-											? "Escapades"
-											: state.categoryDetails.pluralName}{" "}
-									</span>
-									<span className="text-secondary-500 lowercase">
-										{state.categoryDetails.isPlace
-											? "amb encant"
-											: state.categoryDetails.pluralName}
-									</span>
-								</h1>
-								<p className="max-w-xl text-xl">
-									Descobreix {state.allResults.length}{" "}
-									{!state.categoryDetails.isPlace ? "escapades" : null}{" "}
-									{state.categoryDetails.pluralName}{" "}
-									{state.categoryDetails.isPlace ? "amb encant" : null} a
-									Catalunya
-								</p>
-								{sponsorBlock}
-							</div>
 							{state.results.length > 0 ? (
 								<>
-									<div className="w-full flex flex-wrap items-center justify-between">
-										<div className="w-full md:w-1/2"></div>
-										<div className="relative flex items-center justify-end w-full md:w-1/2">
-											<button
-												className="text-sm inline-flex flex-nowrap items-center button button__ghost button__med mr-3"
-												onClick={() => setStateModalMap(!stateModalMap)}
-											>
-												<svg
-													xmlns="http://www.w3.org/2000/svg"
-													className="icon icon-tabler icon-tabler-map-2 mr-2"
-													width="18"
-													height="18"
-													viewBox="0 0 24 24"
-													strokeWidth="1.5"
-													stroke="currentColor"
-													fill="none"
-													strokeLinecap="round"
-													strokeLinejoin="round"
-												>
-													<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-													<line x1="18" y1="6" x2="18" y2="6.01" />
-													<path d="M18 13l-3.5 -5a4 4 0 1 1 7 0l-3.5 5" />
-													<polyline points="10.5 4.75 9 4 3 7 3 20 9 17 15 20 21 17 21 15" />
-													<line x1="9" y1="4" x2="9" y2="17" />
-													<line x1="15" y1="15" x2="15" y2="20" />
-												</svg>
-												Veure-les al mapa
-											</button>
-										</div>
-									</div>
 									<div className="flex flex-wrap items-start -mx-2">
 										{resultsList}
 									</div>
@@ -373,9 +358,12 @@ const CategoryPage = ({
 										""
 									)}
 									<div className="border-t border-primary-100 pt-10 mt-10">
-										<div className="w-full md:w-8/12 xl:w-5/12 md:mx-auto">
-											{state.categoryDetails.seoText}
-										</div>
+										<div
+											className="w-full md:w-8/12 xl:w-5/12 md:mx-auto"
+											dangerouslySetInnerHTML={{
+												__html: state.categoryDetails.seoText,
+											}}
+										></div>
 									</div>
 								</>
 							) : (
@@ -387,6 +375,33 @@ const CategoryPage = ({
 						</div>
 					</section>
 				</main>
+			</div>
+			<div className="fixed bottom-5 left-1/2 -translate-x-1/2">
+				<button
+					className="text-sm inline-flex flex-nowrap items-center bg-white shadow-xl px-4 py-3 !rounded-full z-10"
+					onClick={() => setStateModalMap(!stateModalMap)}
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						className="icon icon-tabler icon-tabler-map-2 mr-2"
+						width="18"
+						height="18"
+						viewBox="0 0 24 24"
+						strokeWidth="1.5"
+						stroke="currentColor"
+						fill="none"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+					>
+						<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+						<line x1="18" y1="6" x2="18" y2="6.01" />
+						<path d="M18 13l-3.5 -5a4 4 0 1 1 7 0l-3.5 5" />
+						<polyline points="10.5 4.75 9 4 3 7 3 20 9 17 15 20 21 17 21 15" />
+						<line x1="9" y1="4" x2="9" y2="17" />
+						<line x1="15" y1="15" x2="15" y2="20" />
+					</svg>
+					Veure-les al mapa
+				</button>
 			</div>
 			<Footer />
 			{stateModalMap == true ? (

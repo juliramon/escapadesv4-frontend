@@ -6,7 +6,6 @@ import UserContext from "../../../contexts/UserContext";
 import Router, { useRouter } from "next/router";
 import EditorNavbar from "../../../components/editor/EditorNavbar";
 import NavigationBar from "../../../components/global/NavigationBar";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import Image from "@tiptap/extension-image";
 import ContentService from "../../../services/contentService";
 import FetchingSpinner from "../../../components/global/FetchingSpinner";

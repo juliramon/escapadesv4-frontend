@@ -1,8 +1,10 @@
 @layer components
 	.form
 		@apply -m-1.5
+		
 		&__wrapper
 			@apply bg-white rounded-md p-5 shadow border border-primary-300
+		
 		&__group
 			@apply p-1.5 flex flex-col
 
@@ -24,5 +26,8 @@
 			background-color: #f2f7f9 !important
 			box-shadow: inset 0 0 0 3px #3a4887 !important
   
-		textarea
+		textarea, &-composer__editor .ProseMirror
 			min-height: 92px
+
+		&-composer__editor, &-composer__editor *
+			@apply text-sm bg-primary-100

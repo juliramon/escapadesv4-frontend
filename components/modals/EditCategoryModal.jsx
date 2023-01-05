@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import ContentService from "../../services/contentService";
+import EditorNavbar from "../../components/editor/EditorNavbar";
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 
 const EditCategoryModal = ({
 	visibility,
@@ -10,8 +13,11 @@ const EditCategoryModal = ({
 	isPlace,
 	title,
 	subtitle,
+	illustration,
 	image,
+	imageCaption,
 	icon,
+	seoTextHeader,
 	seoText,
 	slug,
 	isSponsored,
@@ -29,11 +35,17 @@ const EditCategoryModal = ({
 		isPlace: isPlace,
 		title: title,
 		subtitle: subtitle,
+		illustration: illustration,
+		blopIllustration: "",
+		cloudIllustration: "",
+		cloudIllustrationUploaded: false,
 		image: image,
 		blopImage: "",
 		cloudImage: "",
 		cloudImageUploaded: false,
+		imageCaption: imageCaption,
 		icon: icon,
+		seoTextHeader: seoTextHeader,
 		seoText: seoText,
 		slug: slug,
 		isSponsored: isSponsored,
@@ -45,9 +57,46 @@ const EditCategoryModal = ({
 		cloudSponsorLogoUploaded: false,
 		sponsorClaim: sponsorClaim,
 		updatedImage: false,
+		updatedIllustration: false,
+		updatedSponsorLogo: false,
+		isSubmitable: false,
 	};
 
 	const [category, setCategory] = useState(initialState);
+	const [editorDataHeader, setEditorDataHeader] = useState(seoTextHeader);
+	const [editorData, setEditorData] = useState(seoText);
+
+	const editor = useEditor({
+		extensions: [StarterKit, Image],
+		content: seoText !== "" ? seoText : "",
+		onUpdate: (props) => {
+			const data = {
+				html: props.editor.getHTML(),
+				text: props.editor.state.doc.textContent,
+			};
+			setEditorData(data.html);
+		},
+		autofocus: false,
+		parseOptions: {
+			preserveWhitespace: true,
+		},
+	});
+
+	const editorHeader = useEditor({
+		extensions: [StarterKit, Image],
+		content: seoTextHeader !== "" ? seoTextHeader : "",
+		onUpdate: (props) => {
+			const data = {
+				html: props.editor.getHTML(),
+				text: props.editor.state.doc.textContent,
+			};
+			setEditorDataHeader(data.html);
+		},
+		autofocus: false,
+		parseOptions: {
+			preserveWhitespace: true,
+		},
+	});
 
 	const handleChange = (e) =>
 		setCategory({ ...category, [e.target.name]: e.target.value });
@@ -76,6 +125,14 @@ const EditCategoryModal = ({
 
 	const saveFileToStatus = (e) => {
 		const fileToUpload = e.target.files[0];
+		if (e.target.name === "illustration") {
+			setCategory({
+				...category,
+				blopIllustration: URL.createObjectURL(fileToUpload),
+				illustration: fileToUpload,
+				updatedIllustration: true,
+			});
+		}
 		if (e.target.name === "image") {
 			setCategory({
 				...category,
@@ -94,53 +151,41 @@ const EditCategoryModal = ({
 		}
 	};
 
+	let imageUploaded, sponsorLogoUploaded, illustrationUploaded;
+
 	const handleFileUpload = async (e) => {
-		if (category.updatedImage && !category.updatedSponsorLogo) {
+		if (category.updatedImage) {
 			const image = category.image;
 			const uploadData = new FormData();
 			uploadData.append("imageUrl", image);
-			service.uploadFile(uploadData).then((res) => {
-				setCategory({
-					...category,
-					cloudImage: res.path,
-					cloudImageUploaded: true,
-				});
-			});
+			imageUploaded = await service.uploadFile(uploadData);
 		}
-		if (category.updatedSponsorLogo && !category.updatedImage) {
+		if (category.updatedSponsorLogo) {
 			const sponsorLogo = category.sponsorLogo;
 			const uploadData = new FormData();
 			uploadData.append("imageUrl", sponsorLogo);
-			service.uploadFile(uploadData).then((res) => {
-				setCategory({
-					...category,
-					cloudSponsorLogo: res.path,
-					cloudSponsorLogoUploaded: true,
-				});
-			});
+			sponsorLogoUploaded = await service.uploadFile(uploadData);
 		}
-		if (category.updatedImage && category.updatedSponsorLogo) {
-			const image = category.image;
-			const sponsorLogo = category.sponsorLogo;
-			let uploadedImage, uploadedSponsorLogo;
+		if (category.updatedIllustration) {
+			const illustration = category.illustration;
 			const uploadData = new FormData();
-			uploadData.append("imageUrl", image);
-			service.uploadFile(uploadData).then((res) => {
-				uploadedImage = res.path;
-				const uploadData = new FormData();
-				uploadData.append("imageUrl", sponsorLogo);
-				service.uploadFile(uploadData).then((res) => {
-					uploadedSponsorLogo = res.path;
-					setCategory({
-						...category,
-						cloudImage: uploadedImage,
-						cloudImageUploaded: true,
-						cloudSponsorLogo: uploadedSponsorLogo,
-						cloudSponsorLogoUploaded: true,
-					});
-				});
-			});
+			uploadData.append("imageUrl", illustration);
+			illustrationUploaded = await service.uploadFile(uploadData);
 		}
+
+		setCategory({
+			...category,
+			cloudImage: imageUploaded != undefined ? imageUploaded.path : "",
+			cloudImageUploaded: imageUploaded != undefined ? true : false,
+			cloudSponsorLogo:
+				sponsorLogoUploaded != undefined ? sponsorLogoUploaded.path : "",
+			cloudSponsorLogoUploaded: sponsorLogoUploaded != undefined ? true : false,
+			cloudIllustration:
+				illustrationUploaded != undefined ? illustrationUploaded.path : "",
+			cloudIllustrationUploaded:
+				illustrationUploaded != undefined ? true : false,
+			isSubmitable: true,
+		});
 	};
 
 	const submitCategory = async () => {
@@ -151,18 +196,24 @@ const EditCategoryModal = ({
 			isPlace,
 			title,
 			subtitle,
+			illustration,
+			cloudIllustration,
 			image,
 			cloudImage,
+			imageCaption,
 			icon,
-			seoText,
 			slug,
 			isSponsored,
+			isFeatured,
 			sponsorURL,
 			sponsorLogo,
 			cloudSponsorLogo,
 			sponsorClaim,
 		} = category;
-		let categoryImage, categorySponsorLogo;
+		let categoryIllustration, categoryImage, categorySponsorLogo;
+		cloudIllustration !== ""
+			? (categoryIllustration = cloudIllustration)
+			: (categoryIllustration = illustration);
 		cloudImage !== "" ? (categoryImage = cloudImage) : (categoryImage = image);
 		cloudSponsorLogo !== ""
 			? (categorySponsorLogo = cloudSponsorLogo)
@@ -176,10 +227,14 @@ const EditCategoryModal = ({
 				isPlace,
 				title,
 				subtitle,
+				categoryIllustration,
 				categoryImage,
+				imageCaption,
 				icon,
-				seoText,
+				editorDataHeader,
+				editorData,
 				isSponsored,
+				isFeatured,
 				sponsorURL,
 				categorySponsorLogo,
 				sponsorClaim
@@ -192,21 +247,39 @@ const EditCategoryModal = ({
 	};
 
 	useEffect(() => {
-		if (category.cloudImageUploaded || category.cloudSponsorLogoUploaded) {
+		if (category.isSubmitable) {
 			submitCategory();
 		}
 	}, [category]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		if (category.updatedImage || category.updatedSponsorLogo) {
+		if (
+			category.updatedIllustration ||
+			category.updatedImage ||
+			category.updatedSponsorLogo
+		) {
 			handleFileUpload();
 		} else {
 			submitCategory();
 		}
 	};
 
-	let imagePreview, sponsorLogoPreview;
+	let illustrationPreview, imagePreview, sponsorLogoPreview;
+	if (category.blopIllustration) {
+		illustrationPreview = (
+			<div className="m-2 relative w-48 h-auto overflow-hidden rounded-md border-8 border-white shadow">
+				<img src={category.blopIllustration} />
+			</div>
+		);
+	} else {
+		illustrationPreview = (
+			<div className="m-2 relative w-48 h-auto overflow-hidden rounded-md border-8 border-white shadow">
+				<img src={category.illustration} />
+			</div>
+		);
+	}
+
 	if (category.blopImage) {
 		imagePreview = (
 			<div className="m-2 relative w-48 h-auto overflow-hidden rounded-md border-8 border-white shadow">
@@ -321,7 +394,60 @@ const EditCategoryModal = ({
 								onChange={handleChange}
 							/>
 						</div>
-						<div className="image">
+						<div className="form__group">
+							<label htmlFor="textSeo" className="form__label">
+								Text SEO header de la categoria
+							</label>
+							<EditorNavbar editor={editorHeader} />
+							<EditorContent
+								editor={editorHeader}
+								className="form-composer__editor"
+							/>
+						</div>
+						<div className="form__group">
+							<span className="form__label">Il·lustració de la catagoria</span>
+							<div className="flex items-center flex-col max-w-full mb-4">
+								<div className="bg-white border border-primary-300 rounded-tl-md rounded-tr-md w-full">
+									<div className="bg-white border-none h-auto p-4 justify-start">
+										<label className="form__label m-0 bg-white rounded shadow py-3 px-5 inline-flex items-center cursor-pointer">
+											<input
+												type="file"
+												className="hidden"
+												name="illustration"
+												onChange={saveFileToStatus}
+											/>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												className="mr-2"
+												width="22"
+												height="22"
+												viewBox="0 0 24 24"
+												strokeWidth="1.5"
+												stroke="#0d1f44"
+												fill="none"
+												strokeLinecap="round"
+												strokeLinejoin="round"
+											>
+												<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+												<circle cx="12" cy="13" r="3" />
+												<path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
+												<line x1="15" y1="6" x2="21" y2="6" />
+												<line x1="18" y1="3" x2="18" y2="9" />
+											</svg>
+											{category.illustration
+												? "Canviar imatge"
+												: "Seleccionar imatge"}
+										</label>
+									</div>
+								</div>
+								<div className="w-full border border-primary-300 rounded-br-md rounded-bl-md -mt-px p-4 flex">
+									<div className="-m-2.5 flex flex-wrap items-center">
+										{illustrationPreview}
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className="form__group">
 							<span className="form__label">Imatge de la catagoria</span>
 							<div className="flex items-center flex-col max-w-full mb-4">
 								<div className="bg-white border border-primary-300 rounded-tl-md rounded-tr-md w-full">
@@ -363,6 +489,19 @@ const EditCategoryModal = ({
 							</div>
 						</div>
 						<div className="form__group">
+							<label htmlFor="subtitle" className="form__label">
+								Image caption de la categoria
+							</label>
+							<input
+								type="text"
+								name="imageCaption"
+								placeholder="Entra la image caption de la categoria"
+								className="form__control"
+								value={category.imageCaption}
+								onChange={handleChange}
+							/>
+						</div>
+						<div className="form__group">
 							<label htmlFor="title" className="form__label">
 								Icona de la categoria
 							</label>
@@ -377,18 +516,14 @@ const EditCategoryModal = ({
 							></textarea>
 						</div>
 						<div className="form__group">
-							<label htmlFor="seoText" className="form__label">
+							<label htmlFor="textSeo" className="form__label">
 								Text SEO de la categoria
 							</label>
-							<textarea
-								rows="6"
-								cols="30"
-								placeholder="Entra el text SEO per a la categoria"
-								className="form__control"
-								name="seoText"
-								onChange={handleChange}
-								value={category.seoText}
-							></textarea>
+							<EditorNavbar editor={editor} />
+							<EditorContent
+								editor={editor}
+								className="form-composer__editor"
+							/>
 						</div>
 						<div className="form__group">
 							<label htmlFor="slug" className="form__label">
