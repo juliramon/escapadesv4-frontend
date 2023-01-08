@@ -296,7 +296,9 @@ const PlaceListing = ({ placeDetails }) => {
 		<>
 			{/* Browser metas  */}
 			<GlobalMetas
-				title={state.place.metaTitle}
+				title={
+					state.place.metaTitle ? state.place.metaTitle : state.place.title
+				}
 				description={state.place.metaDescription}
 				url={`https://escapadesenparella.cat/allotjaments/${state.place.slug}`}
 				image={state.place.cover}

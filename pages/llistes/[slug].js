@@ -14,6 +14,7 @@ import Breadcrumb from "../../components/richsnippets/Breadcrumb";
 import FetchingSpinner from "../../components/global/FetchingSpinner";
 import AdSkyScrapper from "../../components/ads/AdSkyScrapper";
 import AdSkyScrapperHoritzontal728x90 from "../../components/ads/AdSkyScrapperHoritzontal728x90";
+import Article from "../../components/richsnippets/Article";
 
 const ListView = ({ listDetails }) => {
 	const { user } = useContext(UserContext);
@@ -103,6 +104,14 @@ const ListView = ({ listDetails }) => {
 				page2Url="https://escapadesenparella.cat/llistes"
 				page3Title={state.list.metaTitle}
 				page3Url={`https://escapadesenparella.cat/llistes/${state.list.slug}`}
+			/>
+			<Article
+				headline={state.list.title}
+				summary={state.list.subtitle}
+				image={state.list.cover}
+				author={state.owner.fullName}
+				publicationDate={state.list.createdAt}
+				modificationDate={state.list.updatedAt}
 			/>
 			<div className="listing-list">
 				<NavigationBar

@@ -298,7 +298,11 @@ const ActivityListing = ({ activityDetails }) => {
 		<>
 			{/* Browser metas  */}
 			<GlobalMetas
-				title={state.activity.metaTitle}
+				title={
+					state.activity.metaTitle
+						? state.activity.metaTitle
+						: state.activity.title
+				}
 				description={state.activity.metaDescription}
 				url={`https://escapadesenparella.cat/activitats/${state.activity.slug}`}
 				image={state.activity.cover}
