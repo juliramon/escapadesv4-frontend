@@ -55,46 +55,29 @@ const StoryListing = ({ storyDetails }) => {
 		}
 	}, []);
 
-	if (state.storyLoaded === false) {
-		return <FetchingSpinner />;
-	}
-
 	let { title, subtitle, description } = state.story;
 
 	let parsedDescription;
 	let slicedDescription = [];
 
-	const stateImages = [...state.story.images];
+	const welcomeText = (
+		<div className="mb-8">
+			<h2 className="mb-5">
+				{title}: Benvinguts a l'escapada de la setmana, ens hi acompanyes?
+			</h2>
+			<div className="bg-primary-100">
+				<AdInArticle />
+			</div>
+		</div>
+	);
 
 	if (description) {
 		parsedDescription = parse(description);
-
-		const maxSliders = 3;
-		const slidesPerSlider = stateImages.length / maxSliders;
-
-		const totalDescriptionElements = parsedDescription.length; // ex. 21
-
-		console.log(parseInt(stateImages.length));
-		console.log(parseInt(slidesPerSlider));
-		console.log(parseInt(totalDescriptionElements));
-
 		parsedDescription.map((el) => slicedDescription.push(el));
 		if (slicedDescription.length > 1) {
-			// slicedDescription[0].splice(4, 0, photoSwipeGallery);
 			slicedDescription.splice(1, 0, welcomeText);
 		}
 	}
-
-	const welcomeText = (
-		<>
-			<div className="mb-8">
-				<h2 className="mb-8">
-					{title}: Benvinguts a l'escapada de la setmana, ens hi acompanyes?
-				</h2>
-				<AdInArticle />
-			</div>
-		</>
-	);
 
 	const publicationDate = new Date(storyDetails.createdAt).toLocaleDateString(
 		"ca-es",
@@ -113,6 +96,10 @@ const StoryListing = ({ storyDetails }) => {
 			day: "numeric",
 		}
 	);
+
+	if (state.storyLoaded === false) {
+		return <FetchingSpinner />;
+	}
 
 	return (
 		<>
