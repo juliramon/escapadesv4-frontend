@@ -285,10 +285,6 @@ const PlaceListing = ({ placeDetails }) => {
 		<span key={idx}>{region}</span>
 	));
 
-	if (state.placeLoaded === false) {
-		return <FetchingSpinner />;
-	}
-
 	return (
 		<>
 			{/* Browser metas  */}
