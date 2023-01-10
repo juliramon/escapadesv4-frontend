@@ -30,12 +30,6 @@ const StoryListing = ({ storyDetails }) => {
 		}
 	}, [router]);
 
-	const initialState = {
-		story: {},
-		storyLoaded: false,
-		owner: {},
-	};
-	const [state, setState] = useState(initialState);
 	const [queryId, setQueryId] = useState(null);
 
 	useEffect(() => {
@@ -44,26 +38,14 @@ const StoryListing = ({ storyDetails }) => {
 		}
 	}, [router]);
 
-	useEffect(() => {
-		if (storyDetails !== undefined) {
-			setState({
-				...state,
-				story: storyDetails,
-				storyLoaded: storyDetails !== undefined ? true : false,
-				owner: storyDetails.owner,
-			});
-		}
-	}, []);
-
-	let { title, subtitle, description } = state.story;
-
 	let parsedDescription;
 	let slicedDescription = [];
 
 	const welcomeText = (
 		<div className="mb-8">
 			<h2 className="mb-5">
-				{title}: Benvinguts a l'escapada de la setmana, ens hi acompanyes?
+				{storyDetails.title}: Benvinguts a l'escapada de la setmana, ens hi
+				acompanyes?
 			</h2>
 			<div className="bg-primary-100">
 				<AdInArticle />
@@ -71,8 +53,8 @@ const StoryListing = ({ storyDetails }) => {
 		</div>
 	);
 
-	if (description) {
-		parsedDescription = parse(description);
+	if (storyDetails.description) {
+		parsedDescription = parse(storyDetails.description);
 		parsedDescription.map((el) => slicedDescription.push(el));
 		if (slicedDescription.length > 1) {
 			slicedDescription.splice(1, 0, welcomeText);
@@ -97,19 +79,15 @@ const StoryListing = ({ storyDetails }) => {
 		}
 	);
 
-	if (state.storyLoaded === false) {
-		return <FetchingSpinner />;
-	}
-
 	return (
 		<>
 			{/* Browser metas  */}
 			<GlobalMetas
-				title={state.story.metaTitle}
-				description={state.story.metaDescription}
-				url={`https://escapadesenparella.cat/histories/${state.story.slug}`}
-				image={state.story.cover}
-				canonical={`https://escapadesenparella.cat/histories/${state.story.slug}`}
+				title={storyDetails.metaTitle}
+				description={storyDetails.metaDescription}
+				url={`https://escapadesenparella.cat/histories/${storyDetails.slug}`}
+				image={storyDetails.cover}
+				canonical={`https://escapadesenparella.cat/histories/${storyDetails.slug}`}
 			/>
 			{/* Rich snippets */}
 			<Breadcrumb
@@ -117,16 +95,16 @@ const StoryListing = ({ storyDetails }) => {
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Històries"
 				page2Url="https://escapadesenparella.cat/histories"
-				page3Title={state.story.metaTitle}
-				page3Url={`https://escapadesenparella.cat/histories/${state.story.slug}`}
+				page3Title={storyDetails.metaTitle}
+				page3Url={`https://escapadesenparella.cat/histories/${storyDetails.slug}`}
 			/>
 			<Article
-				headline={state.story.title}
-				summary={state.story.subtitle}
-				image={state.story.cover}
-				author={state.owner.fullName}
-				publicationDate={state.story.createdAt}
-				modificationDate={state.story.updatedAt}
+				headline={storyDetails.title}
+				summary={storyDetails.subtitle}
+				image={storyDetails.cover}
+				author={storyDetails.owner.fullName}
+				publicationDate={storyDetails.createdAt}
+				modificationDate={storyDetails.updatedAt}
 			/>
 			<div className="listing-story">
 				<NavigationBar
@@ -149,7 +127,9 @@ const StoryListing = ({ storyDetails }) => {
 								</a>
 							</li>
 							<li className="breadcrumb__item">
-								<span className="breadcrumb__link active">{title}</span>
+								<span className="breadcrumb__link active">
+									{storyDetails.title}
+								</span>
 							</li>
 						</ul>
 					</div>
@@ -161,17 +141,17 @@ const StoryListing = ({ storyDetails }) => {
 					<article className="pt-8 pb-4">
 						<div className="container">
 							<div className="max-w-full md:max-w-2xl mx-auto">
-								<h1 className="md:text-center">{title}</h1>
+								<h1 className="md:text-center">{storyDetails.title}</h1>
 								<p className="text-lg md:text-xl md:text-center md:px-16 mt-2.5">
-									{subtitle}
+									{storyDetails.subtitle}
 								</p>
 								<div className="mt-3 flex flex-wrap items-center md:justify-center">
 									<div className="flex flex-wrap items-center">
 										<div className="rounded-full overflow-hidden w-8 h-8 mr-2.5">
 											<picture>
 												<img
-													src={state.owner.avatar}
-													alt={state.owner.fullName}
+													src={storyDetails.owner.avatar}
+													alt={storyDetails.owner.fullName}
 													width={32}
 													height={32}
 													className="w-full h-full object-cover"
@@ -180,7 +160,7 @@ const StoryListing = ({ storyDetails }) => {
 											</picture>
 										</div>
 										<span className="text-sm text-primary-400 text-opacity-80">
-											{state.owner.fullName}
+											{storyDetails.owner.fullName}
 										</span>
 										<span className="mx-2 text-sm text-primary-400 text-opacity-80">
 											·
@@ -194,26 +174,26 @@ const StoryListing = ({ storyDetails }) => {
 									</div>
 								</div>
 							</div>
-							{state.storyLoaded === true ? (
-								<div className="w-full max-w-full md:max-w-3xl md:mx-auto mt-6">
-									<div className="aspect-w-16 aspect-h-9 rounded overflow-hidden">
-										<picture>
-											<img
-												src={state.story.cover}
-												alt={title}
-												width={400}
-												height={300}
-												className="w-full h-full object-cover"
-												loading="eager"
-											/>
-										</picture>
-									</div>
-									<figcaption className="text-xs mt-2 text-primary-400 text-opacity-80">
-										Foto d' <u>Andrea Prat</u> i <u>Juli Ramon</u> per
-										Escapadesenparella.cat
-									</figcaption>
+
+							<div className="w-full max-w-full md:max-w-3xl md:mx-auto mt-6">
+								<div className="aspect-w-16 aspect-h-9 rounded overflow-hidden">
+									<picture>
+										<img
+											src={storyDetails.cover}
+											alt={storyDetails.title}
+											width={400}
+											height={300}
+											className="w-full h-full object-cover"
+											loading="eager"
+										/>
+									</picture>
 								</div>
-							) : null}
+								<figcaption className="text-xs mt-2 text-primary-400 text-opacity-80">
+									Foto d' <u>Andrea Prat</u> i <u>Juli Ramon</u> per
+									Escapadesenparella.cat
+								</figcaption>
+							</div>
+
 							<div className="w-full max-w-full md:max-w-xl mx-auto pt-8">
 								<div className="text-center text-tertiary-500 text-opacity-80 text-sm py-4 mb-5 md:mb-8 bg-tertiary-100 bg-opacity-50 flex items-center justify-center rounded-md">
 									<span className="inline-block">
