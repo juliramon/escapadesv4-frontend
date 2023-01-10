@@ -785,7 +785,10 @@ const PlaceListing = ({ placeDetails }) => {
 												</div>
 											</div>
 											<h2 className="text-2xl">Sobre {title}</h2>
-											<div className="mt-4">{description}</div>
+											<div
+												className="mt-4"
+												dangerouslySetInnerHTML={{ __html: description }}
+											></div>
 										</div>
 										<aside className="w-full xl:w-4/12 xl:px-6 relative xl:sticky xl:top-36 mt-7 xl:mt-0">
 											<div className="p-5 rounded-md shadow-lg shadow-primary-300">

@@ -7,6 +7,9 @@ import Autocomplete from "react-google-autocomplete";
 import UserContext from "../contexts/UserContext";
 import Head from "next/head";
 import FetchingSpinner from "../components/global/FetchingSpinner";
+import EditorNavbar from "../components/editor/EditorNavbar";
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 
 const PlaceForm = () => {
 	// Validate if user is allowed to access this view
@@ -66,7 +69,6 @@ const PlaceForm = () => {
 			coverCloudImage: "",
 			cloudImagesUploaded: false,
 			coverCloudImageUploaded: false,
-			description: "",
 			phone: "",
 			website: "",
 			place_full_address: "",
@@ -90,6 +92,7 @@ const PlaceForm = () => {
 	const [state, setState] = useState(initialState);
 	const [queryId, setQueryId] = useState(null);
 	const [activeTab, setActiveTab] = useState("main");
+	const [description, setDescription] = useState({});
 
 	useEffect(() => {
 		if (router && router.route) {
@@ -114,6 +117,22 @@ const PlaceForm = () => {
 		};
 		fetchData();
 	}, []);
+
+	const editor = useEditor({
+		extensions: [StarterKit],
+		content: description !== "" ? description : "",
+		onUpdate: (props) => {
+			const data = {
+				html: props.editor.getHTML(),
+				text: props.editor.state.doc.textContent,
+			};
+			setDescription(data.html);
+		},
+		autofocus: false,
+		parseOptions: {
+			preserveWhitespace: true,
+		},
+	});
 
 	const saveFileToStatus = (e) => {
 		const fileToUpload = e.target.files[0];
@@ -277,7 +296,6 @@ const PlaceForm = () => {
 			placeType,
 			coverCloudImage,
 			cloudImages,
-			description,
 			phone,
 			website,
 			place_full_address,
@@ -368,7 +386,6 @@ const PlaceForm = () => {
 			coverImage,
 			images,
 			price,
-			description,
 			organization,
 			metaTitle,
 			metaDescription,
@@ -1139,14 +1156,11 @@ const PlaceForm = () => {
 												<label htmlFor="description" className="form__label">
 													Descripció
 												</label>
-												<textarea
-													name="description"
-													rows={10}
-													placeholder="Descripció de l'allotjament"
-													className="form__control"
-													value={state.formData.description}
-													onChange={handleChange}
-												></textarea>
+												<EditorNavbar editor={editor} />
+												<EditorContent
+													editor={editor}
+													className="form-composer__editor"
+												/>
 											</div>
 										</form>
 									</div>
