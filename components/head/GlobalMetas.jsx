@@ -1,14 +1,27 @@
 import Head from "next/head";
 
-const GlobalMetas = ({ title, description, url, image, canonical }) => {
+const GlobalMetas = ({
+	title,
+	description,
+	url,
+	image,
+	canonical,
+	index = true,
+}) => {
 	return (
 		<Head>
 			<title>{title} - Escapadesenparella.cat</title>
 			<link rel="icon" href="/favicon.ico" />
 			<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 			<meta name="description" content={description} />
-			<meta name="robots" content="index, follow" />
-			<meta name="googlebot" content="index, follow" />
+			<meta
+				name="robots"
+				content={index == true ? "index, follow" : "noindex, nofollow"}
+			/>
+			<meta
+				name="googlebot"
+				content={index == true ? "index, follow" : "noindex, nofollow"}
+			/>
 			<meta property="og:type" content="website" />
 			<meta
 				property="og:title"

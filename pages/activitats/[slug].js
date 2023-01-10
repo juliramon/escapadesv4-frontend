@@ -307,6 +307,7 @@ const ActivityListing = ({ activityDetails }) => {
 				url={`https://escapadesenparella.cat/activitats/${state.activity.slug}`}
 				image={state.activity.cover}
 				canonical={`https://escapadesenparella.cat/activitats/${state.activity.slug}`}
+				index={false}
 			/>
 			{/* Rich snippets */}
 			<Breadcrumb

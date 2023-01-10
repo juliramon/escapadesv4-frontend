@@ -1,9 +1,8 @@
-import Head from "next/head";
 import { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import NavigationBar from "../../components/global/NavigationBar";
 import ContentService from "../../services/contentService";
-import { Container, Spinner, Toast } from "react-bootstrap";
+import { Toast } from "react-bootstrap";
 import Link from "next/link";
 import GoogleMapReact from "google-map-react";
 import SignUpModal from "../../components/modals/SignUpModal";
@@ -13,7 +12,6 @@ import FancyboxUtil from "../../utils/FancyboxUtils";
 import FooterLinksInterest from "../../components/ads/FooterLinksInterest";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
-import FetchingSpinner from "../../components/global/FetchingSpinner";
 
 const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 	const { user } = useContext(UserContext);
@@ -37,10 +35,6 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 			const urlToShare = `https://escapadesenparella.cat/${categoryDetails.slug}/${router.query.slug}`;
 
 			const initialState = {
-				activity: {},
-				isActivityLoaded: false,
-				owner: {},
-				organization: {},
 				bookmarkDetails: {},
 				isBookmarked: false,
 				showBookmarkToast: false,
@@ -87,10 +81,6 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 						}
 						setState({
 							...state,
-							activity: getawayDetails,
-							isActivityLoaded: getawayDetails.type ? true : false,
-							owner: getawayDetails.owner,
-							organization: getawayDetails.organization,
 							bookmarkDetails: bookmarkDetails,
 							isBookmarked: isBookmarked,
 						});
@@ -100,11 +90,9 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 				// eslint-disable-next-line react-hooks/exhaustive-deps
 			}, [queryId]);
 
-			let { title, subtitle, description } = state.activity;
-
 			const bookmarkListing = () => {
-				const listingId = state.activity._id;
-				const listingType = state.activity.type;
+				const listingId = getawayDetails._id;
+				const listingType = getawayDetails.type;
 				service.bookmark(listingId, listingType).then((res) => {
 					setState({
 						...state,
@@ -219,8 +207,8 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 			);
 
 			const center = {
-				lat: parseFloat(state.activity.activity_lat),
-				lng: parseFloat(state.activity.activity_lng),
+				lat: parseFloat(getawayDetails.activity_lat),
+				lng: parseFloat(getawayDetails.activity_lng),
 			};
 
 			const getMapOptions = (maps) => {
@@ -238,15 +226,15 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 
 			const renderMarker = (map, maps) => {
 				const position = {
-					lat: parseFloat(state.activity.activity_lat),
-					lng: parseFloat(state.activity.activity_lng),
+					lat: parseFloat(getawayDetails.activity_lat),
+					lng: parseFloat(getawayDetails.activity_lng),
 				};
 				new maps.Marker({ position: position, map, title: "Hello" });
 			};
 
 			let activityHours, hasOpeningHours;
-			if (state.activity.activity_opening_hours.length > 0) {
-				activityHours = state.activity.activity_opening_hours.map(
+			if (getawayDetails.activity_opening_hours.length > 0) {
+				activityHours = getawayDetails.activity_opening_hours.map(
 					(hour, idx) => (
 						<li key={idx} className="activity-hour">
 							{hour}
@@ -270,7 +258,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 				);
 			}
 
-			const activityCategories = state.activity.categories.map(
+			const activityCategories = getawayDetails.categories.map(
 				(category, idx) => (
 					<li key={idx} className="activity-category">
 						Escapada {category}
@@ -278,13 +266,13 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 				)
 			);
 
-			const activitySeasons = state.activity.seasons.map((season, idx) => (
+			const activitySeasons = getawayDetails.seasons.map((season, idx) => (
 				<li key={idx} className="activity-season">
 					{season}
 				</li>
 			));
 
-			const activityRegion = state.activity.region.map((region, idx) => (
+			const activityRegion = getawayDetails.region.map((region, idx) => (
 				<span key={idx}>{region}</span>
 			));
 
@@ -292,11 +280,11 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 				<>
 					{/* Browser metas  */}
 					<GlobalMetas
-						title={state.activity.metaTitle}
-						description={state.activity.metaDescription}
-						url={`https://escapadesenparella.cat/${categoryDetails.slug}/${state.activity.slug}`}
-						image={state.activity.cover}
-						canonical={`https://escapadesenparella.cat/${categoryDetails.slug}/${state.activity.slug}`}
+						title={getawayDetails.metaTitle}
+						description={getawayDetails.metaDescription}
+						url={`https://escapadesenparella.cat/${categoryDetails.slug}/${getawayDetails.slug}`}
+						image={getawayDetails.cover}
+						canonical={`https://escapadesenparella.cat/${categoryDetails.slug}/${getawayDetails.slug}`}
 					/>
 					{/* Rich snippets */}
 					<Breadcrumb
@@ -304,8 +292,8 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 						page1Url="https://escapadesenparella.cat"
 						page2Title={categoryDetails.title}
 						page2Url={`https://escapadesenparella.cat/${categoryDetails.slug}`}
-						page3Title={state.activity.metaTitle}
-						page3Url={`https://escapadesenparella.cat/${categoryDetails.slug}/${state.activity.slug}`}
+						page3Title={getawayDetails.metaTitle}
+						page3Url={`https://escapadesenparella.cat/${categoryDetails.slug}/${getawayDetails.slug}`}
 					/>
 					<div id="listingPage">
 						<NavigationBar
@@ -335,7 +323,9 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 												</a>
 											</li>
 											<li className="breadcrumb__item">
-												<span className="breadcrumb__link active">{title}</span>
+												<span className="breadcrumb__link active">
+													{getawayDetails.title}
+												</span>
 											</li>
 										</ul>
 									</div>
@@ -344,9 +334,9 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 									<div className="container">
 										<div className="w-full flex flex-wrap items-center">
 											<div className="w-full md:w-1/2">
-												<h1>{title}</h1>
+												<h1>{getawayDetails.title}</h1>
 												<ul className="flex flex-wrap items-center p-0 -mx-3 mt-2 mb-0 md:mb-5">
-													{state.activity.place_rating !== undefined ? (
+													{getawayDetails.place_rating !== undefined ? (
 														<li className="flex flex-wrap items-center px-2">
 															<svg
 																xmlns="http://www.w3.org/2000/svg"
@@ -368,7 +358,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																<path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
 															</svg>
 															<span className="text-primary-400 opacity-80">
-																{state.activity.place_rating}
+																{getawayDetails.place_rating}
 															</span>
 														</li>
 													) : null}
@@ -394,17 +384,17 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 															<circle cx={12} cy={12} r={9}></circle>
 														</svg>
 														<span className="text-primary-400 opacity-80">{`${
-															state.activity.activity_locality === undefined
+															getawayDetails.activity_locality === undefined
 																? ""
-																: state.activity.activity_locality
+																: getawayDetails.activity_locality
 														}${
-															state.activity.activity_locality === undefined
+															getawayDetails.activity_locality === undefined
 																? ""
 																: ","
 														} ${
-															state.activity.pactivity_province ||
-															state.activity.activity_state
-														}, ${state.activity.activity_country}`}</span>
+															getawayDetails.pactivity_province ||
+															getawayDetails.activity_state
+														}, ${getawayDetails.activity_country}`}</span>
 													</li>
 												</ul>
 											</div>
@@ -537,7 +527,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 															<path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5"></path>
 															<path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2"></path>
 														</svg>
-														Veure {state.activity.images.length} imatges
+														Veure {getawayDetails.images.length} imatges
 													</button>
 													<FancyboxUtil
 														options={{
@@ -547,67 +537,67 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 														<div
 															className="w-full lg:w-1/2 p-0.5 h-80 lg:h-50vh"
 															data-fancybox="gallery"
-															data-src={state.activity.images[0]}
+															data-src={getawayDetails.images[0]}
 														>
 															<picture>
 																<img
-																	src={state.activity.images[0]}
+																	src={getawayDetails.images[0]}
 																	className="w-full h-full object-cover"
 																/>
 															</picture>
 														</div>
 														<div className="w-full lg:w-1/2 flex flex-wrap h-40 lg:h-50vh">
-															{state.activity.images[1] !== undefined ? (
+															{getawayDetails.images[1] !== undefined ? (
 																<div
 																	className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
 																	data-fancybox="gallery"
-																	data-src={state.activity.images[1]}
+																	data-src={getawayDetails.images[1]}
 																>
 																	<picture>
 																		<img
-																			src={state.activity.images[1]}
+																			src={getawayDetails.images[1]}
 																			className="w-full h-full object-cover"
 																		/>
 																	</picture>
 																</div>
 															) : null}
-															{state.activity.images[2] !== undefined ? (
+															{getawayDetails.images[2] !== undefined ? (
 																<div
 																	className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
 																	data-fancybox="gallery"
-																	data-src={state.activity.images[2]}
+																	data-src={getawayDetails.images[2]}
 																>
 																	<picture>
 																		<img
-																			src={state.activity.images[2]}
+																			src={getawayDetails.images[2]}
 																			className="w-full h-full object-cover"
 																		/>
 																	</picture>
 																</div>
 															) : null}
-															{state.activity.images[3] !== undefined ? (
+															{getawayDetails.images[3] !== undefined ? (
 																<div
 																	className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
 																	data-fancybox="gallery"
-																	data-src={state.activity.images[3]}
+																	data-src={getawayDetails.images[3]}
 																>
 																	<picture>
 																		<img
-																			src={state.activity.images[3]}
+																			src={getawayDetails.images[3]}
 																			className="w-full h-full object-cover"
 																		/>
 																	</picture>
 																</div>
 															) : null}
-															{state.activity.images[4] !== undefined ? (
+															{getawayDetails.images[4] !== undefined ? (
 																<div
 																	className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
 																	data-fancybox="gallery"
-																	data-src={state.activity.images[4]}
+																	data-src={getawayDetails.images[4]}
 																>
 																	<picture>
 																		<img
-																			src={state.activity.images[4]}
+																			src={getawayDetails.images[4]}
 																			className="w-full h-full object-cover"
 																		/>
 																	</picture>
@@ -625,7 +615,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 										<div className="w-full lg:w-10/12 2xl:w-9/12 mx-auto">
 											<div className="flex flex-wrap items-start xl:-mx-6">
 												<div className="w-full xl:w-8/12 xl:px-6 mx-auto">
-													<h2 className="w-9/12">{subtitle}</h2>
+													<h2 className="w-9/12">{getawayDetails.subtitle}</h2>
 													{state.organization ? (
 														<div className="listing-owner mt-4">
 															<Link
@@ -689,11 +679,11 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																<div className="pl-4">
 																	<p className="text-base text-primary-500 font-semibold mb-0.5">
 																		L'
-																		{state.activity.type == "activitat"
+																		{getawayDetails.type == "activitat"
 																			? "allotjament"
 																			: "activitat"}{" "}
 																		està catalogada com a escapada&nbsp;
-																		{state.activity.categories[0]}
+																		{getawayDetails.categories[0]}
 																	</p>
 																	<p className="text-sm mb-0 opacity-70">
 																		Els allotjaments i les activitats
@@ -736,20 +726,20 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																<div className="pl-4">
 																	<p className="text-base text-primary-500 font-semibold mb-0.5">
 																		L'
-																		{state.activity.type == "activitat"
+																		{getawayDetails.type == "activitat"
 																			? "allotjament"
 																			: "activitat"}{" "}
 																		té una durada aproximada de{" "}
-																		{state.activity.duration}{" "}
-																		{state.activity.duration > 1
+																		{getawayDetails.duration}{" "}
+																		{getawayDetails.duration > 1
 																			? "hores"
 																			: "hora"}
 																	</p>
 																	<p className="text-sm mb-0 opacity-70">
 																		Hem calculat que la durada mitjana
 																		aproximada per aquesta activitat sol ser de{" "}
-																		{state.activity.duration}{" "}
-																		{state.activity.duration > 1
+																		{getawayDetails.duration}{" "}
+																		{getawayDetails.duration > 1
 																			? "hores"
 																			: "hora"}
 																		.
@@ -783,7 +773,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																<div className="pl-4">
 																	<p className="text-base text-primary-500 font-semibold mb-0.5">
 																		L'
-																		{state.activity.type == "activitat"
+																		{getawayDetails.type == "activitat"
 																			? "allotjament"
 																			: "activitat"}{" "}
 																		es troba a la província/zona de{" "}
@@ -793,7 +783,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																	</p>
 																	<p className="text-sm mb-0 opacity-70">
 																		L'adreça completa de l'allotjament és{" "}
-																		{state.activity.activity_full_address}.
+																		{getawayDetails.activity_full_address}.
 																	</p>
 																</div>
 															</div>
@@ -823,25 +813,32 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																<div className="pl-4">
 																	<p className="text-base text-primary-500 font-semibold mb-0.5">
 																		L'
-																		{state.activity.type == "activitat"
+																		{getawayDetails.type == "activitat"
 																			? "allotjament"
 																			: "activitat"}{" "}
 																		té un preu aproximat de{" "}
-																		{state.activity.price} €
+																		{getawayDetails.price} €
 																	</p>
 																	<p className="text-sm mb-0 opacity-70">
 																		Tot i que els preus poden variar i no
 																		estiguin constantment actualitzats, hem
 																		calculat que el preu mitjà per persona per
 																		aquesta activitat és de{" "}
-																		{state.activity.price} €.
+																		{getawayDetails.price} €.
 																	</p>
 																</div>
 															</div>
 														</div>
 													</div>
-													<h2 className="text-2xl">Sobre {title}</h2>
-													<div className="mt-4">{description}</div>
+													<h2 className="text-2xl">
+														Sobre {getawayDetails.title}
+													</h2>
+													<div
+														className="mt-4"
+														dangerouslySetInnerHTML={{
+															__html: getawayDetails.description,
+														}}
+													></div>
 												</div>
 												<aside className="w-full xl:w-4/12 xl:px-6 relative xl:sticky xl:top-36 mt-7 xl:mt-0">
 													<div className="p-5 rounded-md shadow-lg shadow-primary-300">
@@ -861,7 +858,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 														</div>
 														<div className="flex flex-col w-full mt-5">
 															<a
-																href={`${state.activity.website}`}
+																href={`${getawayDetails.website}`}
 																className="button button__primary button__med justify-center mb-2.5"
 																title="Reservar"
 															>
@@ -894,7 +891,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																Reservar
 															</a>
 															<a
-																href={`tel:${state.activity.phone}`}
+																href={`tel:${getawayDetails.phone}`}
 																className="button button__ghost button__med justify-center "
 																title="Trucar"
 															>
@@ -941,7 +938,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																</div>
 
 																<span className="text-15 opacity-80">
-																	{state.activity.activity_full_address}
+																	{getawayDetails.activity_full_address}
 																</span>
 															</li>
 														</ul>

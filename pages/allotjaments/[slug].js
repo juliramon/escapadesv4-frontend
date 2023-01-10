@@ -295,6 +295,7 @@ const PlaceListing = ({ placeDetails }) => {
 				url={`https://escapadesenparella.cat/allotjaments/${state.place.slug}`}
 				image={state.place.cover}
 				canonical={`https://escapadesenparella.cat/allotjaments/${state.place.slug}`}
+				index={false}
 			/>
 			{/* Rich snippets */}
 			<Breadcrumb
