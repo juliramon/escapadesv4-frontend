@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";
 import Footer from "../../components/global/Footer";
@@ -7,11 +6,9 @@ import ShareModal from "../../components/modals/ShareModal";
 import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
 import ContentService from "../../services/contentService";
-import ReactHtmlParser from "react-html-parser";
 import FooterHistoria from "../../components/global/FooterHistoria";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
-import FetchingSpinner from "../../components/global/FetchingSpinner";
 import AdSkyScrapper from "../../components/ads/AdSkyScrapper";
 import AdSkyScrapperHoritzontal728x90 from "../../components/ads/AdSkyScrapperHoritzontal728x90";
 import Article from "../../components/richsnippets/Article";
@@ -35,21 +32,13 @@ const ListView = ({ listDetails }) => {
 
 	const urlToShare = `https://escapadesenparella.cat/llistes/${router.query.slug}`;
 
-	const initialState = {
-		list: {},
-		listLoaded: false,
-		owner: {},
-	};
-
-	const [state, setState] = useState(initialState);
 	const [queryId, setQueryId] = useState(null);
+
 	useEffect(() => {
 		if (router && router.query) {
 			setQueryId(router.query.slug);
 		}
 	}, [router]);
-
-	const service = new ContentService();
 
 	const [modalVisibility, setModalVisibility] = useState(false);
 	const handleModalVisibility = () => setModalVisibility(true);
@@ -59,42 +48,32 @@ const ListView = ({ listDetails }) => {
 	const handleShareModalVisibility = () => setShareModalVisibility(true);
 	const hideShareModalVisibility = () => setShareModalVisibility(false);
 
-	useEffect(() => {
-		if (listDetails !== undefined) {
-			setState({
-				...state,
-				list: listDetails,
-				listLoaded: listDetails.type ? true : false,
-				owner: listDetails.owner,
-			});
+	let publicationDate = new Date(listDetails.createdAt).toLocaleDateString(
+		"ca-es",
+		{
+			year: "numeric",
+			month: "short",
+			day: "numeric",
 		}
-	}, []);
-
-	if (!state.listLoaded) {
-		return <FetchingSpinner />;
-	}
-
-	let { title, subtitle, description, createdAt, updatedAt } = state.list;
-	let publicationDate = new Date(createdAt).toLocaleDateString("ca-es", {
-		year: "numeric",
-		month: "short",
-		day: "numeric",
-	});
-	let updatedDate = new Date(updatedAt).toLocaleDateString("ca-es", {
-		year: "numeric",
-		month: "short",
-		day: "numeric",
-	});
+	);
+	let updatedDate = new Date(listDetails.updatedAt).toLocaleDateString(
+		"ca-es",
+		{
+			year: "numeric",
+			month: "short",
+			day: "numeric",
+		}
+	);
 
 	return (
 		<>
 			{/* Browser metas  */}
 			<GlobalMetas
-				title={state.list.metaTitle}
-				description={state.list.metaDescription}
-				url={`https://escapadesenparella.cat/llistes/${state.list.slug}`}
-				image={state.list.cover}
-				canonical={`https://escapadesenparella.cat/llistes/${state.list.slug}`}
+				title={listDetails.metaTitle}
+				description={listDetails.metaDescription}
+				url={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
+				image={listDetails.cover}
+				canonical={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
 			/>
 			{/* Rich snippets */}
 			<Breadcrumb
@@ -102,16 +81,16 @@ const ListView = ({ listDetails }) => {
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Llistes"
 				page2Url="https://escapadesenparella.cat/llistes"
-				page3Title={state.list.metaTitle}
-				page3Url={`https://escapadesenparella.cat/llistes/${state.list.slug}`}
+				page3Title={listDetails.metaTitle}
+				page3Url={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
 			/>
 			<Article
-				headline={state.list.title}
-				summary={state.list.subtitle}
-				image={state.list.cover}
-				author={state.owner.fullName}
-				publicationDate={state.list.createdAt}
-				modificationDate={state.list.updatedAt}
+				headline={listDetails.title}
+				summary={listDetails.subtitle}
+				image={listDetails.cover}
+				author={listDetails.owner.fullName}
+				publicationDate={listDetails.createdAt}
+				modificationDate={listDetails.updatedAt}
 			/>
 			<div className="listing-list">
 				<NavigationBar
@@ -134,7 +113,9 @@ const ListView = ({ listDetails }) => {
 								</a>
 							</li>
 							<li className="breadcrumb__item">
-								<span className="breadcrumb__link active">{title}</span>
+								<span className="breadcrumb__link active">
+									{listDetails.title}
+								</span>
 							</li>
 						</ul>
 					</div>
@@ -148,15 +129,15 @@ const ListView = ({ listDetails }) => {
 							<div className="flex flex-wrap">
 								<div className="w-full max-w-5xl mx-auto">
 									<div className="w-full pb-6 lg:pl-12 lg:pr-20 lg:border-l border-primary-300">
-										<h1 className=" max-w-2xl">{title}</h1>
+										<h1 className=" max-w-2xl">{listDetails.title}</h1>
 										<div className="mt-3 flex flex-wrap items-center">
 											<div className="flex flex-wrap items-center">
 												<div className="flex flex-wrap items-center">
 													<div className="rounded-full overflow-hidden w-8 h-8 mr-2.5">
 														<picture>
 															<img
-																src={state.owner.avatar}
-																alt={state.owner.fullName}
+																src={listDetails.owner.avatar}
+																alt={listDetails.owner.fullName}
 																width={32}
 																height={32}
 																className="w-full h-full object-cover"
@@ -165,7 +146,7 @@ const ListView = ({ listDetails }) => {
 														</picture>
 													</div>
 													<span className="text-sm text-primary-400 text-opacity-80">
-														{state.owner.fullName}
+														{listDetails.owner.fullName}
 													</span>
 													<span className="mx-2 text-sm text-primary-400 text-opacity-80">
 														·
@@ -185,8 +166,8 @@ const ListView = ({ listDetails }) => {
 									<div className="aspect-w-16 aspect-h-9 rounded-md overflow-hidden">
 										<picture>
 											<img
-												src={state.list.cover}
-												alt={state.list.title}
+												src={listDetails.cover}
+												alt={listDetails.title}
 												width={400}
 												height={300}
 												className="w-full h-full object-cover"
@@ -195,7 +176,7 @@ const ListView = ({ listDetails }) => {
 										</picture>
 									</div>
 									<figcaption className="text-xs mt-2 text-primary-400 text-opacity-80 md:text-right">
-										{state.list.title}
+										{listDetails.title}
 									</figcaption>
 								</div>
 							</div>
@@ -210,11 +191,14 @@ const ListView = ({ listDetails }) => {
 										</span>
 									</div>
 									<p className="md:text-lg max-w-2xl mb-6 md:mb-8">
-										{subtitle}
+										{listDetails.subtitle}
 									</p>
-									<div className="list__description">
-										{ReactHtmlParser(description)}
-									</div>
+									<div
+										className="list__description"
+										dangerouslySetInnerHTML={{
+											__html: listDetails.description,
+										}}
+									></div>
 								</div>
 								<div className="w-full lg:w-3/12 py-8 md:pt-20 -mt-7 ">
 									<div className="p-4 sticky top-36">

@@ -6,7 +6,6 @@ import UserContext from "../../contexts/UserContext";
 import parse from "html-react-parser";
 import Footer from "../../components/global/Footer";
 import FooterHistoria from "../../components/global/FooterHistoria";
-import FetchingSpinner from "../../components/global/FetchingSpinner";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
 import Article from "../../components/richsnippets/Article";
