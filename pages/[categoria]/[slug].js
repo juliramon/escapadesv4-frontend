@@ -100,21 +100,6 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 				// eslint-disable-next-line react-hooks/exhaustive-deps
 			}, [queryId]);
 
-			if (state.isActivityLoaded === false) {
-				return (
-					<>
-						<Head>
-							<title>Carregant...</title>
-						</Head>
-						<Container className="spinner d-flex justify-space-between">
-							<Spinner animation="border" role="status" variant="primary">
-								<span className="sr-only">Carregant...</span>
-							</Spinner>
-						</Container>
-					</>
-				);
-			}
-
 			let { title, subtitle, description } = state.activity;
 
 			const bookmarkListing = () => {
@@ -1000,17 +985,15 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 			const urlToShare = `https://escapadesenparella.cat/${categoryDetails.slug}/${router.query.slug}`;
 
 			const initialState = {
-				place: {},
-				placeLoaded: false,
-				owner: {},
-				organization: {},
 				bookmarkDetails: {},
 				isBookmarked: false,
 				showBookmarkToast: false,
 				toastMessage: "",
 			};
+
 			const [state, setState] = useState(initialState);
 			const [queryId, setQueryId] = useState(null);
+
 			useEffect(() => {
 				if (router && router.query) {
 					setQueryId(router.query.slug);
@@ -1048,11 +1031,6 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 							isBookmarked = false;
 						}
 						setState({
-							...state,
-							place: getawayDetails,
-							placeLoaded: getawayDetails.type ? true : false,
-							owner: getawayDetails.owner,
-							organization: getawayDetails.organization,
 							bookmarkDetails: userBookmarks,
 							isBookmarked: isBookmarked,
 						});
@@ -1062,15 +1040,9 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 				// eslint-disable-next-line react-hooks/exhaustive-deps
 			}, [queryId]);
 
-			if (state.placeLoaded === false) {
-				return <FetchingSpinner />;
-			}
-
-			let { title, subtitle, description } = state.place;
-
 			const bookmarkListing = () => {
-				const listingId = state.place._id;
-				const listingType = state.place.type;
+				const listingId = getawayDetails._id;
+				const listingType = getawayDetails.type;
 				service.bookmark(listingId, listingType).then((res) => {
 					setState({
 						...state,
@@ -1182,8 +1154,8 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 			);
 
 			const center = {
-				lat: parseFloat(state.place.place_lat),
-				lng: parseFloat(state.place.place_lng),
+				lat: parseFloat(getawayDetails.place_lat),
+				lng: parseFloat(getawayDetails.place_lng),
 			};
 
 			const getMapOptions = (maps) => {
@@ -1201,74 +1173,79 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 
 			const renderMarker = (map, maps) => {
 				const position = {
-					lat: parseFloat(state.place.place_lat),
-					lng: parseFloat(state.place.place_lng),
+					lat: parseFloat(getawayDetails.place_lat),
+					lng: parseFloat(getawayDetails.place_lng),
 				};
 				new maps.Marker({ position: position, map, title: "Hello" });
 			};
 
-			let coversList;
+			let coversList,
+				placeHours,
+				hasOpeningHours,
+				placeCategories,
+				placeSeasons,
+				placeRegion;
+
 			if (state.placeLoaded === true) {
-				coversList = state.place.images.map((cover, idx) => (
+				coversList = getawayDetails.images.map((cover, idx) => (
 					<picture key={idx}>
 						<img src={cover} className="w-full h-fullobject-cover" />
 					</picture>
 				));
-			}
 
-			let placeHours, hasOpeningHours;
-			if (state.place.place_opening_hours.length > 0) {
-				placeHours = state.place.place_opening_hours.map((hour, idx) => (
-					<li key={idx} className="capitalize text-15 opacity-80">
-						{hour}
+				if (getawayDetails.place_opening_hours.length > 0) {
+					placeHours = getawayDetails.place_opening_hours.map((hour, idx) => (
+						<li key={idx} className="capitalize text-15 opacity-80">
+							{hour}
+						</li>
+					));
+					hasOpeningHours = (
+						<div className="mt-7">
+							<ul className="list-none p-0 m-0">
+								<li className="flex flex-wrap items-center mb-3">
+									<span className="block w-full">
+										Horari d'atenció al públic{" "}
+									</span>
+									<span className="block w-full text-xs opacity-80 -mt-0.5">
+										Font: Google
+									</span>
+								</li>
+								{placeHours}
+							</ul>
+						</div>
+					);
+				}
+
+				placeCategories = getawayDetails.categories.map((category, idx) => (
+					<li key={idx} className="flex flex-wrap items-center px-1">
+						<span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 mr-1 capitalize text-sm">
+							Escapada {category}
+						</span>
 					</li>
 				));
-				hasOpeningHours = (
-					<div className="mt-7">
-						<ul className="list-none p-0 m-0">
-							<li className="flex flex-wrap items-center mb-3">
-								<span className="block w-full">
-									Horari d'atenció al públic{" "}
-								</span>
-								<span className="block w-full text-xs opacity-80 -mt-0.5">
-									Font: Google
-								</span>
-							</li>
-							{placeHours}
-						</ul>
-					</div>
-				);
+
+				placeSeasons = getawayDetails.seasons.map((season, idx) => (
+					<li key={idx} className="flex flex-wrap items-center px-1">
+						<span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 mr-1 capitalize text-sm">
+							{season}
+						</span>
+					</li>
+				));
+
+				placeRegion = getawayDetails.region.map((region, idx) => (
+					<span key={idx}>{region}</span>
+				));
 			}
-
-			const placeCategories = state.place.categories.map((category, idx) => (
-				<li key={idx} className="flex flex-wrap items-center px-1">
-					<span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 mr-1 capitalize text-sm">
-						Escapada {category}
-					</span>
-				</li>
-			));
-
-			const placeSeasons = state.place.seasons.map((season, idx) => (
-				<li key={idx} className="flex flex-wrap items-center px-1">
-					<span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 mr-1 capitalize text-sm">
-						{season}
-					</span>
-				</li>
-			));
-
-			const placeRegion = state.place.region.map((region, idx) => (
-				<span key={idx}>{region}</span>
-			));
 
 			return (
 				<>
 					{/* Browser metas  */}
 					<GlobalMetas
-						title={state.place.metaTitle}
-						description={state.place.metaDescription}
-						url={`https://escapadesenparella.cat/${categoryDetails.slug}/${state.place.slug}`}
-						image={state.place.cover}
-						canonical={`https://escapadesenparella.cat/${categoryDetails.slug}/${state.place.slug}`}
+						title={getawayDetails.metaTitle}
+						description={getawayDetails.metaDescription}
+						url={`https://escapadesenparella.cat/${categoryDetails.slug}/${getawayDetails.slug}`}
+						image={getawayDetails.cover}
+						canonical={`https://escapadesenparella.cat/${categoryDetails.slug}/${getawayDetails.slug}`}
 					/>
 					{/* Rich snippets */}
 					<Breadcrumb
@@ -1276,8 +1253,8 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 						page1Url="https://escapadesenparella.cat"
 						page2Title={categoryDetails.title}
 						page2Url={`https://escapadesenparella.cat/${categoryDetails.slug}`}
-						page3Title={state.place.metaTitle}
-						page3Url={`https://escapadesenparella.cat/allotjaments/${state.place.slug}`}
+						page3Title={getawayDetails.metaTitle}
+						page3Url={`https://escapadesenparella.cat/allotjaments/${getawayDetails.slug}`}
 					/>
 					<div id="listingPage">
 						<NavigationBar
@@ -1306,7 +1283,9 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 											</a>
 										</li>
 										<li className="breadcrumb__item">
-											<span className="breadcrumb__link active">{title}</span>
+											<span className="breadcrumb__link active">
+												{getawayDetails.title}
+											</span>
 										</li>
 									</ul>
 								</div>
@@ -1317,7 +1296,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 									<div className="container">
 										<div className="w-full flex flex-wrap items-center">
 											<div className="w-full md:w-1/2">
-												<h1>{title}</h1>
+												<h1>{getawayDetails.title}</h1>
 												<ul className="flex flex-wrap items-center p-0 -mx-3 mt-2 mb-0 md:mb-5">
 													<li className="flex flex-wrap items-center px-3">
 														<svg
@@ -1340,7 +1319,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 															<path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
 														</svg>
 														<span className="text-primary-400 opacity-80">
-															{state.place.place_rating}
+															{getawayDetails.place_rating}
 														</span>
 													</li>
 													<li className="flex flex-wrap items-center px-3">
@@ -1365,17 +1344,17 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 															<circle cx={12} cy={12} r={9}></circle>
 														</svg>
 														<span className="text-primary-400 opacity-80">{`${
-															state.place.place_locality === undefined
+															getawayDetails.place_locality === undefined
 																? ""
-																: state.place.place_locality
+																: getawayDetails.place_locality
 														}${
-															state.place.place_locality === undefined
+															getawayDetails.place_locality === undefined
 																? ""
 																: ","
 														} ${
-															state.place.place_province ||
-															state.place.place_state
-														}, ${state.place.place_country}`}</span>
+															getawayDetails.place_province ||
+															getawayDetails.place_state
+														}, ${getawayDetails.place_country}`}</span>
 													</li>
 												</ul>
 											</div>
@@ -1508,7 +1487,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 															<path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5"></path>
 															<path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2"></path>
 														</svg>
-														Veure {state.place.images.length} imatges
+														Veure {getawayDetails.images.length} imatges
 													</button>
 													<FancyboxUtil
 														options={{
@@ -1518,67 +1497,67 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 														<div
 															className="w-full lg:w-1/2 p-0.5 h-80 lg:h-50vh"
 															data-fancybox="gallery"
-															data-src={state.place.images[0]}
+															data-src={getawayDetails.images[0]}
 														>
 															<picture>
 																<img
-																	src={state.place.images[0]}
+																	src={getawayDetails.images[0]}
 																	className="w-full h-full object-cover"
 																/>
 															</picture>
 														</div>
 														<div className="w-full lg:w-1/2 flex flex-wrap h-40 lg:h-50vh">
-															{state.place.images[1] !== undefined ? (
+															{getawayDetails.images[1] !== undefined ? (
 																<div
 																	className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
 																	data-fancybox="gallery"
-																	data-src={state.place.images[1]}
+																	data-src={getawayDetails.images[1]}
 																>
 																	<picture>
 																		<img
-																			src={state.place.images[1]}
+																			src={getawayDetails.images[1]}
 																			className="w-full h-full object-cover"
 																		/>
 																	</picture>
 																</div>
 															) : null}
-															{state.place.images[2] !== undefined ? (
+															{getawayDetails.images[2] !== undefined ? (
 																<div
 																	className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
 																	data-fancybox="gallery"
-																	data-src={state.place.images[2]}
+																	data-src={getawayDetails.images[2]}
 																>
 																	<picture>
 																		<img
-																			src={state.place.images[2]}
+																			src={getawayDetails.images[2]}
 																			className="w-full h-full object-cover"
 																		/>
 																	</picture>
 																</div>
 															) : null}
-															{state.place.images[3] !== undefined ? (
+															{getawayDetails.images[3] !== undefined ? (
 																<div
 																	className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
 																	data-fancybox="gallery"
-																	data-src={state.place.images[3]}
+																	data-src={getawayDetails.images[3]}
 																>
 																	<picture>
 																		<img
-																			src={state.place.images[3]}
+																			src={getawayDetails.images[3]}
 																			className="w-full h-full object-cover"
 																		/>
 																	</picture>
 																</div>
 															) : null}
-															{state.place.images[4] !== undefined ? (
+															{getawayDetails.images[4] !== undefined ? (
 																<div
 																	className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
 																	data-fancybox="gallery"
-																	data-src={state.place.images[4]}
+																	data-src={getawayDetails.images[4]}
 																>
 																	<picture>
 																		<img
-																			src={state.place.images[4]}
+																			src={getawayDetails.images[4]}
 																			className="w-full h-full object-cover"
 																		/>
 																	</picture>
@@ -1596,7 +1575,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 										<div className="w-full lg:w-10/12 2xl:w-9/12 mx-auto">
 											<div className="flex flex-wrap items-start xl:-mx-6">
 												<div className="w-full xl:w-8/12 xl:px-6 mx-auto">
-													<h2 className="w-9/12">{subtitle}</h2>
+													<h2 className="w-9/12">{getawayDetails.subtitle}</h2>
 													{state.organization ? (
 														<div className="listing-owner mt-4">
 															<Link
@@ -1660,10 +1639,11 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																<div className="pl-4">
 																	<p className="text-base text-primary-500 font-semibold mb-0.5">
 																		L'
-																		{state.place.type == "place"
+																		{getawayDetails.type == "place"
 																			? "allotjament"
 																			: "activitat"}{" "}
-																		està catalogat com a {state.place.placeType}
+																		està catalogat com a{" "}
+																		{getawayDetails.placeType}
 																	</p>
 																	<p className="text-sm mb-0 opacity-70">
 																		Els allotjaments i les activitats
@@ -1699,7 +1679,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																<div className="pl-4">
 																	<p className="text-base text-primary-500 font-semibold mb-0.5">
 																		L'
-																		{state.place.type == "place"
+																		{getawayDetails.type == "place"
 																			? "allotjament"
 																			: "activitat"}{" "}
 																		es troba a la província/zona de{" "}
@@ -1709,7 +1689,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																	</p>
 																	<p className="text-sm mb-0 opacity-70">
 																		L'adreça completa de l'allotjament és{" "}
-																		{state.place.place_full_address}.
+																		{getawayDetails.place_full_address}.
 																	</p>
 																</div>
 															</div>
@@ -1739,25 +1719,32 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																<div className="pl-4">
 																	<p className="text-base text-primary-500 font-semibold mb-0.5">
 																		L'
-																		{state.place.type == "place"
+																		{getawayDetails.type == "place"
 																			? "allotjament"
 																			: "activitat"}{" "}
-																		té un preu aproximat de {state.place.price}{" "}
-																		€ la nit
+																		té un preu aproximat de{" "}
+																		{getawayDetails.price} € la nit
 																	</p>
 																	<p className="text-sm mb-0 opacity-70">
 																		Tot i que els preus poden variar i no
 																		estiguin constantment actualitzats, hem
 																		calculat que el preu mitjà per persona per
-																		aquest allotjament és de {state.place.price}{" "}
-																		€ la nit.
+																		aquest allotjament és de{" "}
+																		{getawayDetails.price} € la nit.
 																	</p>
 																</div>
 															</div>
 														</div>
 													</div>
-													<h2 className="text-2xl">Sobre {title}</h2>
-													<div className="mt-4">{description}</div>
+													<h2 className="text-2xl">
+														Sobre {getawayDetails.title}
+													</h2>
+													<div
+														className="mt-4"
+														dangerouslySetInnerHTML={{
+															__html: getawayDetails.description,
+														}}
+													></div>
 												</div>
 												<aside className="w-full xl:w-4/12 xl:px-6 relative xl:sticky xl:top-36 mt-7 xl:mt-0">
 													<div className="p-5 rounded-md shadow-lg shadow-primary-300">
@@ -1777,7 +1764,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 														</div>
 														<div className="flex flex-col w-full mt-5">
 															<a
-																href={`${state.place.website}`}
+																href={`${getawayDetails.website}`}
 																className="button button__primary button__med justify-center mb-2.5"
 																title="Reservar"
 																rel="nofollow noreferrer"
@@ -1812,7 +1799,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																Reservar
 															</a>
 															<a
-																href={`tel:${state.place.phone}`}
+																href={`tel:${getawayDetails.phone}`}
 																className="button button__ghost button__med justify-center"
 																title="Trucar"
 																rel="nofollow noreferrer"
@@ -1859,7 +1846,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																	</svg>
 																</div>
 																<span className="text-15 opacity-80">
-																	{state.place.place_full_address}
+																	{getawayDetails.place_full_address}
 																</span>
 															</li>
 														</ul>

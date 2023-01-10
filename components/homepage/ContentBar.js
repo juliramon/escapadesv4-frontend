@@ -28,10 +28,6 @@ const ContentBar = () => {
 		fetchData();
 	}, []);
 
-	if (state.hasCategories === false) {
-		return <FetchingSpinner />;
-	}
-
 	return (
 		<div className="content-bar min-h-[40px]">
 			<div className="w-full px-6">

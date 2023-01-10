@@ -8,7 +8,6 @@ import GoogleMapReact from "google-map-react";
 import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
 import Footer from "../../components/global/Footer";
-import FetchingSpinner from "../../components/global/FetchingSpinner";
 import FancyboxUtil from "../../utils/FancyboxUtils";
 import FooterLinksInterest from "../../components/ads/FooterLinksInterest";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
