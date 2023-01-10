@@ -34,10 +34,10 @@ const PlaceListing = ({ placeDetails }) => {
 	const urlToShare = `https://escapadesenparella.cat/allotjaments/${router.query.slug}`;
 
 	const initialState = {
-		place: {},
-		placeLoaded: false,
-		owner: {},
-		organization: {},
+		place: placeDetails,
+		placeLoaded: placeDetails.type ? true : false,
+		owner: placeDetails.owner,
+		organization: placeDetails.organization,
 		bookmarkDetails: {},
 		isBookmarked: false,
 		showBookmarkToast: false,
@@ -45,6 +45,7 @@ const PlaceListing = ({ placeDetails }) => {
 	};
 	const [state, setState] = useState(initialState);
 	const [queryId, setQueryId] = useState(null);
+
 	useEffect(() => {
 		if (router && router.query) {
 			setQueryId(router.query.slug);
@@ -83,10 +84,6 @@ const PlaceListing = ({ placeDetails }) => {
 				}
 				setState({
 					...state,
-					place: placeDetails,
-					placeLoaded: placeDetails.type ? true : false,
-					owner: placeDetails.owner,
-					organization: placeDetails.organization,
 					bookmarkDetails: userBookmarks,
 					isBookmarked: isBookmarked,
 				});
@@ -95,10 +92,6 @@ const PlaceListing = ({ placeDetails }) => {
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [queryId]);
-
-	if (state.placeLoaded === false) {
-		return <FetchingSpinner />;
-	}
 
 	let { title, subtitle, description } = state.place;
 
@@ -291,6 +284,10 @@ const PlaceListing = ({ placeDetails }) => {
 	const placeRegion = state.place.region.map((region, idx) => (
 		<span key={idx}>{region}</span>
 	));
+
+	if (state.placeLoaded === false) {
+		return <FetchingSpinner />;
+	}
 
 	return (
 		<>
