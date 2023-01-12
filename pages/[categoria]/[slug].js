@@ -843,7 +843,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 														}}
 													></div>
 												</div>
-												<aside className="w-full xl:w-4/12 xl:px-6 relative xl:sticky xl:top-36 mt-7 xl:mt-0">
+												<aside className="w-full xl:w-4/12 xl:px-6 relative xl:sticky xl:top-36">
 													<div className="p-5 rounded-md shadow-lg shadow-primary-300">
 														<div className="w-full h-56 rounded-lg overflow-hidden">
 															<GoogleMapReact
