@@ -1,11 +1,12 @@
 import Fancybox from "../../utils/FancyboxUtils";
+import AdSkyScrapperHoritzontal from "../../components/ads/AdSkyScrapperHoritzontal728x90";
 
 const ListingHeader = ({ title, subtitle, figCaption, image, sponsorData }) => {
 	return (
 		<section className="pt-2">
 			<div className="container relative">
 				<div className="flex flex-wrap items-center justify-between bg-primary-100 rounded-lg overflow-hidden">
-					<div className="w-full md:w-8/12 xl:w-7/12 py-8 px-16">
+					<div className="w-full md:w-8/12 xl:w-7/12 p-8 md:py-8 md:px-16">
 						<div className="max-w-xl">
 							<h1
 								className="my-0 font-display"
@@ -76,6 +77,7 @@ const ListingHeader = ({ title, subtitle, figCaption, image, sponsorData }) => {
 						) : null}
 					</div>
 				</div>
+				<AdSkyScrapperHoritzontal />
 			</div>
 		</section>
 	);
