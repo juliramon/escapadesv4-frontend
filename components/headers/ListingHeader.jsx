@@ -77,7 +77,9 @@ const ListingHeader = ({ title, subtitle, figCaption, image, sponsorData }) => {
 						) : null}
 					</div>
 				</div>
-				<AdSkyScrapperHoritzontal />
+				<div className="mt-4">
+					<AdSkyScrapperHoritzontal />
+				</div>
 			</div>
 		</section>
 	);
