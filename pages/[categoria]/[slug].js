@@ -303,34 +303,35 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 							user={user}
 						/>
 						<main>
-							<article>
-								{state.showBookmarkToast ? toast : null}
-								<div className="pt-6">
-									<div className="container">
-										<ul className="breadcrumb">
-											<li className="breadcrumb__item">
-												<a href="/" title="Inici" className="breadcrumb__link">
-													Inici
-												</a>
-											</li>
-											<li className="breadcrumb__item">
-												<a
-													href={`/${categoryDetails.slug}`}
-													title={categoryDetails.title}
-													className="breadcrumb__link"
-												>
-													{categoryDetails.title}
-												</a>
-											</li>
-											<li className="breadcrumb__item">
-												<span className="breadcrumb__link active">
-													{getawayDetails.title}
-												</span>
-											</li>
-										</ul>
-									</div>
+							{state.showBookmarkToast ? toast : null}
+							<div className="pt-6">
+								<div className="container">
+									<ul className="breadcrumb">
+										<li className="breadcrumb__item">
+											<a href="/" title="Inici" className="breadcrumb__link">
+												Inici
+											</a>
+										</li>
+										<li className="breadcrumb__item">
+											<a
+												href={`/${categoryDetails.slug}`}
+												title={categoryDetails.title}
+												className="breadcrumb__link"
+											>
+												{categoryDetails.title}
+											</a>
+										</li>
+										<li className="breadcrumb__item">
+											<span className="breadcrumb__link active">
+												{getawayDetails.title}
+											</span>
+										</li>
+									</ul>
 								</div>
-								<section className="pt-5">
+							</div>
+							<article>
+								{/* Listing header */}
+								<section className="pt-2 md:pt-5">
 									<div className="container">
 										<div className="w-full flex flex-wrap items-center">
 											<div className="w-full md:w-1/2">
@@ -398,7 +399,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 													</li>
 												</ul>
 											</div>
-											<div className="w-full md:w-1/2 mt-3 md:mt-0">
+											<div className="hidden md:block w-full md:w-1/2 mt-3 md:mt-0">
 												<div className="flex flex-wrap justify-start md:justify-end items-center">
 													{bookmarkButton}
 													<div className="flex flex-wrap items-center -mx-2 opacity-60">
@@ -493,7 +494,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 													</div>
 												</div>
 											</div>
-											<div className="w-full mt-7 md:mt-0">
+											<div className="w-full mt-5 md:mt-0">
 												<div className="flex flex-wrap items-stretch rounded-2xl overflow-hidden -m-0.5 relative">
 													<button
 														data-fancybox-trigger="gallery"
@@ -610,7 +611,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 										</div>
 									</div>
 								</section>
-								<section className="pt-10 pb-12 md:pb-16">
+								<section className="pt-5 pb-12 md:pb-16">
 									<div className="container">
 										<div className="w-full lg:w-10/12 2xl:w-9/12 mx-auto">
 											<div className="flex flex-wrap items-start xl:-mx-6">
@@ -648,7 +649,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 															</Link>
 														</div>
 													) : null}
-													<div className="border-y border-primary-200 my-8 py-5">
+													<div className="border-y border-primary-200 my-4 md:my-8 py-5">
 														<div className="flex flex-wrap items-start">
 															<div className="pb-6 flex items-start">
 																<div className="w-6 h-6 flex items-center justify-center">
@@ -858,63 +859,20 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																}
 															/>
 														</div>
-														<div className="flex flex-col w-full mt-5">
-															<a
-																href={`${getawayDetails.website}`}
-																className="button button__primary button__med justify-center mb-2.5"
-																title="Reservar"
-															>
-																<svg
-																	xmlns="http://www.w3.org/2000/svg"
-																	className="icon icon-tabler icon-tabler-device-laptop mr-2"
-																	width="22"
-																	height="22"
-																	viewBox="0 0 24 24"
-																	strokeWidth="1.5"
-																	stroke="currentColor"
-																	fill="none"
-																	strokeLinecap="round"
-																	strokeLinejoin="round"
-																>
-																	<path
-																		stroke="none"
-																		d="M0 0h24v24H0z"
-																		fill="none"
-																	/>
-																	<line x1="3" y1="19" x2="21" y2="19" />
-																	<rect
-																		x="5"
-																		y="6"
-																		width="14"
-																		height="10"
-																		rx="1"
-																	/>
-																</svg>
-																Reservar
-															</a>
+														<div className="fixed z-50 lg:z-auto bottom-0 inset-x-0 lg:bottom-auto lg:inset-x-auto lg:relative flex flex-row items-stretch lg:flex-col w-full mt-5 bg-white py-3 px-4 lg:p-0 border-t border-primary-200 lg:border-none">
 															<a
 																href={`tel:${getawayDetails.phone}`}
-																className="button button__ghost button__med justify-center "
+																className="button button__ghost button__med justify-center mr-2 lg:mr-0 flex-1"
 																title="Trucar"
 															>
-																<svg
-																	xmlns="http://www.w3.org/2000/svg"
-																	className="icon icon-tabler icon-tabler-phone-call mr-2"
-																	width="22"
-																	height="22"
-																	viewBox="0 0 24 24"
-																	strokeWidth="1.5"
-																	stroke="currentColor"
-																	fill="none"
-																	strokeLinecap="round"
-																	strokeLinejoin="round"
-																>
-																	<path stroke="none" d="M0 0h24v24H0z" />
-																	<path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
-																	<path d="M15 7a2 2 0 0 1 2 2" />
-																	<path d="M15 3a6 6 0 0 1 6 6" />
-																</svg>
 																Trucar
+															</a>
+															<a
+																href={`${getawayDetails.website}`}
+																className="button button__primary button__med justify-center ml-2 lg:ml-0 lg:mb-2.5 flex-1"
+																title="Reservar"
+															>
+																Reservar
 															</a>
 														</div>
 														{hasOpeningHours}
