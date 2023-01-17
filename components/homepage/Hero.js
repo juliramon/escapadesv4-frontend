@@ -1,9 +1,10 @@
+import AdSkyScrapperHoritzontal728x90 from "../ads/AdSkyScrapperHoritzontal728x90";
 import SearchBar from "../homepage/SearchBar";
 
 const Hero = () => {
 	return (
 		<>
-			<section id="hero" className="relative py-8 lg:py-20 z-40">
+			<section id="hero" className="relative pt-8 lg:pt-20 z-40">
 				<div className="absolute top-0 left-0 w-full h-full hero__bg opacity-40"></div>
 				<div className="container relative z-40">
 					<div className="w-full lg:w-10/12 xl:w-8/12 lg:mx-auto">
@@ -15,6 +16,9 @@ const Hero = () => {
 								La vostra propera escapada en parella comença aquí.
 							</h1>
 							<SearchBar />
+							<div className="mt-4 md:mt-8">
+								<AdSkyScrapperHoritzontal728x90 />
+							</div>
 						</div>
 					</div>
 				</div>
