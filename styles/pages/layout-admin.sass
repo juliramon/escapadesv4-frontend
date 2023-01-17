@@ -1,0 +1,13 @@
+#floatingPublishPanel
+    #floatingPublishButton
+        @apply h-0 overflow-hidden transition-all duration-300 ease-in-out
+
+    .icon
+        @apply rotate-0 transition-all duration-300 ease-in-out
+
+    &.show
+        #floatingPublishButton
+            @apply h-auto overflow-auto
+
+        .icon
+            @apply rotate-45

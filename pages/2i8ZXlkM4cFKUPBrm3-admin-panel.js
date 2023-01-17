@@ -39,6 +39,7 @@ const AdminPanel = () => {
 	};
 
 	const [state, setState] = useState(initialState);
+	const [toggleButton, setToggleButton] = useState(false);
 	const [categoryModalVisibility, setCategoryModalVisibility] = useState(false);
 
 	useEffect(() => {
@@ -193,7 +194,7 @@ const AdminPanel = () => {
 				}
 				user={user}
 			/>
-			<main className="bg-primary-100 p-6">
+			<main className="bg-primary-100 p-6 relative">
 				<div className="bg-white rounded border border-primary-300 p-5">
 					<h1 className="text-2xl">Panell d'administració</h1>
 					<div className="mt-4 flex items-center -mx-2">
@@ -438,6 +439,69 @@ const AdminPanel = () => {
 							</div>
 						</div>
 					</div>
+				</div>
+				<div
+					id="floatingPublishPanel"
+					className={`fixed bottom-5 right-4 flex flex-col items-end ${
+						toggleButton ? "show" : ""
+					}`}
+				>
+					<div id="floatingPublishButton" className={`flex flex-col items-end`}>
+						<a
+							href="/nova-activitat"
+							title="Publicar nova activitat"
+							target="_blank"
+							className="bg-white hover:bg-primary-100 border-primary-200 rounded-md py-2.5 px-4 mb-1.5 shadow-lg text-sm"
+						>
+							Publicar nova activitat
+						</a>
+						<a
+							href="/nou-allotjament"
+							title="Publicar nou allotjament"
+							target="_blank"
+							className="bg-white hover:bg-primary-100 border-primary-200 rounded-md py-2.5 px-4 mb-1.5 shadow-lg text-sm"
+						>
+							Publicar nou allotjament
+						</a>
+						<a
+							href="/nova-historia"
+							title="Publicar nova història"
+							target="_blank"
+							className="bg-white hover:bg-primary-100 border-primary-200 rounded-md py-2.5 px-4 mb-1.5 shadow-lg text-sm"
+						>
+							Publicar nova història
+						</a>
+						<a
+							href="/nova-llista"
+							title="Publicar nova llista"
+							target="_blank"
+							className="bg-white hover:bg-primary-100 border-primary-200 rounded-md py-2.5 px-4 mb-1.5 shadow-lg text-sm"
+						>
+							Publicar nova llista
+						</a>
+					</div>
+					<button
+						className="button button__primary button__med shadow-xl"
+						onClick={() => setToggleButton(!toggleButton)}
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className={`mr-2 icon`}
+							width={24}
+							height={24}
+							viewBox="0 0 24 24"
+							strokeWidth="2"
+							stroke="currentColor"
+							fill="none"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						>
+							<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+							<line x1={12} y1={5} x2={12} y2={19}></line>
+							<line x1={5} y1={12} x2={19} y2={12}></line>
+						</svg>
+						Nou post
+					</button>
 				</div>
 			</main>
 		</>
