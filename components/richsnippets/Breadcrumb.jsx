@@ -1,19 +1,19 @@
 import Head from "next/head";
 
 const Breadcrumb = ({
-  page1Title,
-  page1Url,
-  page2Title,
-  page2Url,
-  page3Title,
-  page3Url,
+	page1Title,
+	page1Url,
+	page2Title,
+	page2Url,
+	page3Title,
+	page3Url,
 }) => {
-  return (
-    <Head>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: `
+	return (
+		<Head>
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{
+					__html: `
 		{
 			"@context": "https://schema.org/", 
 			"@type": "BreadcrumbList", 
@@ -27,18 +27,23 @@ const Breadcrumb = ({
 				"position": 2, 
 				"name": "${page2Title}",
 				"item": "${page2Url}"  
-			}, {
+			},
+			${
+				page3Title && page3Url
+					? `, {
 				"@type": "ListItem", 
 				"position": 3, 
 				"name": "${page3Title}",
 				"item": "${page3Url}"  
+			}`
+					: ""
 			}]
 			}
 	`,
-        }}
-      ></script>
-    </Head>
-  );
+				}}
+			></script>
+		</Head>
+	);
 };
 
 export default Breadcrumb;
