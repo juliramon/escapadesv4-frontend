@@ -4,38 +4,9 @@ import React, { useContext, useEffect, useState } from "react";
 import NavigationBar from "../components/global/NavigationBar";
 import UserContext from "../contexts/UserContext";
 import ContentService from "../services/contentService";
-import dynamic from "next/dynamic";
-
-// Quill configuration
-const QuillNoSSRWrapper = dynamic(import("react-quill"), {
-	ssr: false,
-	loading: () => <p>Loading ...</p>,
-});
-
-const modules = {
-	toolbar: [
-		[{ header: "1" }, { header: "2" }],
-		["bold", "italic", "underline", "strike", "blockquote"],
-		[{ list: "ordered" }, { list: "bullet" }],
-		["link"],
-	],
-	clipboard: {
-		matchVisual: false,
-	},
-};
-
-const formats = [
-	"header",
-	"bold",
-	"italic",
-	"underline",
-	"strike",
-	"blockquote",
-	"list",
-	"bullet",
-	"link",
-];
-// End Quill configuration
+import EditorNavbar from "../components/editor/EditorNavbar";
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 
 const StoryForm = () => {
 	// Validate if user is allowed to access this view
@@ -100,6 +71,7 @@ const StoryForm = () => {
 	const [state, setState] = useState(initialState);
 	const [queryId, setQueryId] = useState(null);
 	const [activeTab, setActiveTab] = useState("main");
+	const [description, setDescription] = useState({});
 
 	useEffect(() => {
 		if (router && router.route) {
@@ -108,6 +80,22 @@ const StoryForm = () => {
 	}, [router]);
 
 	const service = new ContentService();
+
+	const editor = useEditor({
+		extensions: [StarterKit],
+		content: description !== "" ? description : "",
+		onUpdate: (props) => {
+			const data = {
+				html: props.editor.getHTML(),
+				text: props.editor.state.doc.textContent,
+			};
+			setDescription(data.html);
+		},
+		autofocus: false,
+		parseOptions: {
+			preserveWhitespace: true,
+		},
+	});
 
 	const saveFileToStatus = (e) => {
 		const fileToUpload = e.target.files[0];
@@ -163,8 +151,6 @@ const StoryForm = () => {
 			</div>
 		);
 	}
-
-	const [description, setDescription] = useState("");
 
 	const submitStory = async () => {
 		const {
@@ -236,8 +222,7 @@ const StoryForm = () => {
 	}, [state.formData]);
 
 	useEffect(() => {
-		const { title, subtitle, description, metaTitle, metaDescription } =
-			state.formData;
+		const { title, subtitle, metaTitle, metaDescription } = state.formData;
 
 		if (
 			title &&
@@ -428,21 +413,17 @@ const StoryForm = () => {
 													</div>
 												</div>
 											</div>
-											<div className="form__group">
-												<label className="form__label">Descripció</label>
-												<QuillNoSSRWrapper
-													className="form-control"
-													modules={modules}
-													formats={formats}
-													theme="bubble"
-													placeholder={
-														"Comença a descriure la teva historia..."
-													}
-													value={description}
-													onChange={setDescription}
-												/>
-											</div>
 										</form>
+										<div className="form__group -my-1.5 -mx-3">
+											<label htmlFor="description" className="form__label">
+												Descripció
+											</label>
+											<EditorNavbar editor={editor} />
+											<EditorContent
+												editor={editor}
+												className="form-composer__editor"
+											/>
+										</div>
 									</div>
 								) : (
 									<div className="form__wrapper">
