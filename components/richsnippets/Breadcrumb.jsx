@@ -27,7 +27,7 @@ const Breadcrumb = ({
 				"position": 2, 
 				"name": "${page2Title}",
 				"item": "${page2Url}"  
-			},
+			}
 			${
 				page3Title && page3Url
 					? `, {
