@@ -95,14 +95,14 @@ const EditorNavbar = ({ editor }) => {
 				</svg>
 			</button>
 			<button
-				onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-				className={editor.isActive("heading", { level: 1 }) ? "is-active" : ""}
+				onClick={() => editor.chain().focus().toggleBlockquote().run()}
+				className={editor.isActive("blockquote") ? "is-active" : ""}
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					className="icon icon-tabler icon-tabler-h-1"
-					width="44"
-					height="44"
+					className="icon icon-tabler icon-tabler-blockquote"
+					width={44}
+					height={44}
 					viewBox="0 0 24 24"
 					strokeWidth="1.5"
 					stroke="#000000"
@@ -110,15 +110,13 @@ const EditorNavbar = ({ editor }) => {
 					strokeLinecap="round"
 					strokeLinejoin="round"
 				>
-					<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-					<path d="M19 18v-8l-2 2" />
-					<path d="M4 6v12" />
-					<path d="M12 6v12" />
-					<path d="M11 18h2" />
-					<path d="M3 18h2" />
-					<path d="M4 12h8" />
-					<path d="M3 6h2" />
-					<path d="M11 6h2" />
+					<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+					<path d="M6 15h15"></path>
+					<path d="M21 19h-15"></path>
+					<path d="M15 11h6"></path>
+					<path d="M21 7h-6"></path>
+					<path d="M9 9h1a1 1 0 1 1 -1 1v-2.5a2 2 0 0 1 2 -2"></path>
+					<path d="M3 9h1a1 1 0 1 1 -1 1v-2.5a2 2 0 0 1 2 -2"></path>
 				</svg>
 			</button>
 			<button
@@ -146,6 +144,34 @@ const EditorNavbar = ({ editor }) => {
 					<path d="M4 12h8" />
 					<path d="M3 6h2" />
 					<path d="M11 6h2" />
+				</svg>
+			</button>
+			<button
+				onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
+				className={editor.isActive("heading", { level: 3 }) ? "is-active" : ""}
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					className="icon icon-tabler icon-tabler-h-3"
+					width={44}
+					height={44}
+					viewBox="0 0 24 24"
+					strokeWidth="1.5"
+					stroke="#000000"
+					fill="none"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				>
+					<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+					<path d="M19 14a2 2 0 1 0 -2 -2"></path>
+					<path d="M17 16a2 2 0 1 0 2 -2"></path>
+					<path d="M4 6v12"></path>
+					<path d="M12 6v12"></path>
+					<path d="M11 18h2"></path>
+					<path d="M3 18h2"></path>
+					<path d="M4 12h8"></path>
+					<path d="M3 6h2"></path>
+					<path d="M11 6h2"></path>
 				</svg>
 			</button>
 			<button

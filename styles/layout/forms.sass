@@ -29,5 +29,15 @@
 		textarea, &-composer__editor .ProseMirror
 			min-height: 92px
 
-		&-composer__editor, &-composer__editor *
-			@apply text-sm bg-primary-100
+		&-composer__editor 
+			h2
+				@apply text-xl font-semibold
+
+			h3
+				@apply text-lg font-semibold
+
+			p, a, ul li, ol li
+				@apply text-sm bg-primary-100
+
+			blockquote, blockquote *
+				@apply text-lg font-normal italic

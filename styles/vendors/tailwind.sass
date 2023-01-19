@@ -8,7 +8,7 @@
         @apply scroll-smooth
 
     body
-        @apply text-base text-primary-400 font-normal leading-normal font-body
+        @apply text-base text-primary-500 font-normal leading-normal font-body
 
     #__next > *:not(header, footer, section)
         padding-top: 101px
@@ -27,7 +27,7 @@
     h1 
         @apply text-3xl leading-tight mt-0
         @screen md
-            @apply text-4xl leading-snug
+            @apply text-4xl leading-tight
 
     h2
         @apply text-2xl leading-tight mb-2
@@ -53,6 +53,15 @@
     ol, ul, menu
         @apply list-disc pl-5 mb-5 leading-normal
 
+    blockquote, blockquote *
+        @apply text-xl font-semibold mb-8
+
+    blockquote
+        @apply relative pl-9
+
+    blockquote::before
+        content: '"'
+        @apply absolute -left-2 top-2 text-8xl opacity-50 text-secondary-50 leading-10
 
     #animate-area
         width: 100%

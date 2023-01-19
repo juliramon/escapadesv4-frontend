@@ -137,7 +137,7 @@ const StoryListing = ({ storyDetails }) => {
 					<AdSkyScrapperHoritzontal728x90 />
 				</div>
 				<main>
-					<article className="pt-8 pb-4">
+					<article className="pt-12 pb-4">
 						<div className="container">
 							<div className="max-w-full md:max-w-2xl mx-auto">
 								<h1 className="md:text-center">{storyDetails.title}</h1>
@@ -174,7 +174,7 @@ const StoryListing = ({ storyDetails }) => {
 								</div>
 							</div>
 
-							<div className="w-full max-w-full md:max-w-3xl md:mx-auto mt-6">
+							<div className="w-full max-w-full md:max-w-4xl md:mx-auto mt-6">
 								<div className="aspect-w-16 aspect-h-9 rounded overflow-hidden">
 									<picture>
 										<img
@@ -193,8 +193,8 @@ const StoryListing = ({ storyDetails }) => {
 								</figcaption>
 							</div>
 
-							<div className="w-full max-w-full md:max-w-xl mx-auto pt-8">
-								<div className="text-center text-tertiary-500 text-opacity-80 text-sm py-4 mb-5 md:mb-8 bg-tertiary-100 bg-opacity-50 flex items-center justify-center rounded-md">
+							<div className="w-full max-w-full md:max-w-2xl mx-auto pt-8">
+								<div className="text-center text-tertiary-500 text-opacity-80 text-sm py-4 mb-5 md:mb-6 bg-tertiary-100 bg-opacity-50 flex items-center justify-center rounded-md">
 									<span className="inline-block">
 										Darrera actualització:{" "}
 										<time dateTime={updatedDate}>

@@ -2653,27 +2653,6 @@ form .form-control::placeholder {
 
 /*---END FOLLOW BOX---*/
 /*---EDITOR HISTORIA---*/
-.quill.form-control {
-	height: auto !important;
-}
-
-.ql-editor.ql-blank::before {
-	font-size: 16px;
-	color: #00206b !important;
-	font-style: normal !important;
-	left: 12px !important;
-}
-
-.ql-container,
-.ql-editor {
-	font-size: 16px !important;
-}
-
-.ql-editor p,
-.ql-editor blockquote,
-.ql-editor ul li:last-child {
-	margin-bottom: 15px !important;
-}
 
 #landingServices {
 	section:not(:first-child) {

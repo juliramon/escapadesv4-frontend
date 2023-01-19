@@ -5,37 +5,6 @@ import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap";
 import NavigationBar from "../../../components/global/NavigationBar";
 import UserContext from "../../../contexts/UserContext";
 import ContentService from "../../../services/contentService";
-import dynamic from "next/dynamic";
-
-const QuillNoSSRWrapper = dynamic(import("react-quill"), {
-	ssr: false,
-	loading: () => <p>Loading ...</p>,
-});
-
-const modules = {
-	toolbar: [
-		[{ header: "1" }, { header: "2" }],
-		["bold", "italic", "underline", "strike", "blockquote"],
-		[{ list: "ordered" }, { list: "bullet" }],
-		["link", "image"],
-	],
-	clipboard: {
-		matchVisual: false,
-	},
-};
-
-const formats = [
-	"header",
-	"bold",
-	"italic",
-	"underline",
-	"strike",
-	"blockquote",
-	"list",
-	"bullet",
-	"link",
-	"image",
-];
 
 const StoryEditionForm = () => {
 	const { user } = useContext(UserContext);
@@ -508,20 +477,6 @@ const StoryEditionForm = () => {
 														</div>
 													</div>
 												</div>
-												<Form.Group>
-													<Form.Label>Descripció</Form.Label>
-													<QuillNoSSRWrapper
-														className="form-control"
-														modules={modules}
-														formats={formats}
-														theme="bubble"
-														placeholder={
-															"Comença a descriure la teva historia..."
-														}
-														value={description}
-														onChange={setDescription}
-													/>
-												</Form.Group>
 											</Form>
 										</div>
 									) : (
