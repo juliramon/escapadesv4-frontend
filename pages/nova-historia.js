@@ -1,12 +1,13 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import NavigationBar from "../components/global/NavigationBar";
 import UserContext from "../contexts/UserContext";
 import ContentService from "../services/contentService";
 import EditorNavbar from "../components/editor/EditorNavbar";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import { Editor } from "@tinymce/tinymce-react";
 
 const StoryForm = () => {
 	// Validate if user is allowed to access this view
@@ -80,6 +81,14 @@ const StoryForm = () => {
 	}, [router]);
 
 	const service = new ContentService();
+
+	const editorRef = useRef(null);
+
+	const log = () => {
+		if (editorRef.current) {
+			console.log(editorRef.current.getContent());
+		}
+	};
 
 	const editor = useEditor({
 		extensions: [StarterKit],
@@ -418,11 +427,48 @@ const StoryForm = () => {
 											<label htmlFor="description" className="form__label">
 												Descripció
 											</label>
-											<EditorNavbar editor={editor} />
+											{/* <EditorNavbar editor={editor} />
 											<EditorContent
 												editor={editor}
 												className="form-composer__editor"
+											/> */}
+											<Editor
+												apiKey="ddmqpo6x4mty12l6sx3rsrud6193ralegnfdk3o2osuoa5g3"
+												onInit={(evt, editor) => (editorRef.current = editor)}
+												initialValue="<p>This is the initial content of the editor.</p>"
+												init={{
+													height: 500,
+													menubar: false,
+													plugins: [
+														"advlist",
+														"autolink",
+														"lists",
+														"link",
+														"image",
+														"charmap",
+														"preview",
+														"anchor",
+														"searchreplace",
+														"visualblocks",
+														"code",
+														"fullscreen",
+														"insertdatetime",
+														"media",
+														"table",
+														"code",
+														"help",
+														"wordcount",
+													],
+													toolbar:
+														"undo redo | blocks | code | fullscreen | " +
+														"bold italic forecolor | alignleft aligncenter " +
+														"alignright alignjustify | bullist numlist outdent indent | " +
+														"removeformat | help",
+													content_style:
+														"body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+												}}
 											/>
+											<button onClick={log}>Log editor content</button>
 										</div>
 									</div>
 								) : (
