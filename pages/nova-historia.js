@@ -72,7 +72,10 @@ const StoryForm = () => {
 	const [state, setState] = useState(initialState);
 	const [queryId, setQueryId] = useState(null);
 	const [activeTab, setActiveTab] = useState("main");
-	const [description, setDescription] = useState({});
+	const [description, setDescription] = useState("");
+	const [value, setValue] = useState(
+		"<p>The quick brown fox jumps over the lazy dog</p>"
+	);
 
 	useEffect(() => {
 		if (router && router.route) {
@@ -83,28 +86,6 @@ const StoryForm = () => {
 	const service = new ContentService();
 
 	const editorRef = useRef(null);
-
-	const log = () => {
-		if (editorRef.current) {
-			console.log(editorRef.current.getContent());
-		}
-	};
-
-	const editor = useEditor({
-		extensions: [StarterKit],
-		content: description !== "" ? description : "",
-		onUpdate: (props) => {
-			const data = {
-				html: props.editor.getHTML(),
-				text: props.editor.state.doc.textContent,
-			};
-			setDescription(data.html);
-		},
-		autofocus: false,
-		parseOptions: {
-			preserveWhitespace: true,
-		},
-	});
 
 	const saveFileToStatus = (e) => {
 		const fileToUpload = e.target.files[0];
@@ -434,8 +415,14 @@ const StoryForm = () => {
 											/> */}
 											<Editor
 												apiKey="ddmqpo6x4mty12l6sx3rsrud6193ralegnfdk3o2osuoa5g3"
-												onInit={(evt, editor) => (editorRef.current = editor)}
-												initialValue="<p>This is the initial content of the editor.</p>"
+												value={value}
+												onInit={(evt, editor) =>
+													setDescription(editor.getContent({ format: "text" }))
+												}
+												onEditorChange={(newValue, editor) => {
+													setValue(newValue);
+													setDescription(editor.getContent({ format: "text" }));
+												}}
 												init={{
 													height: 500,
 													menubar: false,
@@ -468,7 +455,6 @@ const StoryForm = () => {
 														"body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
 												}}
 											/>
-											<button onClick={log}>Log editor content</button>
 										</div>
 									</div>
 								) : (

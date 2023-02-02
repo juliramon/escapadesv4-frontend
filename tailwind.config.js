@@ -1,14 +1,15 @@
 const colors = {
 	primary: {
-		100: "#F2F7F9",
-		200: "#DAEAEF",
-		300: "#E7EBF5",
-		400: "#435A8C",
-		500: "#00206B",
-		600: "#001661",
-		700: "#000c57",
-		800: "#00024d",
-		900: "#000043",
+		50: "#f2f4f8",
+		100: "#e6e9f0",
+		200: "#bfc7da",
+		300: "#99a6c4",
+		400: "#4d6397",
+		500: "#00206b",
+		600: "#001d60",
+		700: "#001850", // color text
+		800: "#001340",
+		900: "#001034",
 	},
 	secondary: {
 		50: "#ffbfa8",
@@ -45,7 +46,7 @@ module.exports = {
 	theme: {
 		container: {
 			center: true,
-			padding: "1rem",
+			padding: "1.5rem",
 		},
 		extend: {
 			colors: {
@@ -53,13 +54,14 @@ module.exports = {
 			},
 			fontSize: {
 				10: "10px",
+				13: "13px",
 				15: "15px",
 				16: "16px",
 				base: "17px",
 			},
 			fontFamily: {
-				body: ["CircularStd", "sans-serif"],
-				headings: ["CircularStd", "sans-serif"],
+				body: ["Circular", "sans-serif"],
+				headings: ["Circular", "sans-serif"],
 			},
 			borderRadius: {
 				350: "350px",

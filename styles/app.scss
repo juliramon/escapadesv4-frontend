@@ -23,79 +23,103 @@
 @import "vendors/tailwind.sass";
 
 /* CircularStd @font-face kit */
+// @font-face {
+// 	font-family: "CircularStd";
+// 	src: url("../fonts/CircularStd-Bold.eot");
+// 	src: url("../fonts/CircularStd-Bold.eot?#iefix") format("embedded-opentype"),
+// 		url("../fonts/CircularStd-Bold.woff2") format("woff2"),
+// 		url("../fonts/CircularStd-Bold.ttf") format("truetype"),
+// 		url("../fonts/CircularStd-Bold.svg#bcc26993292869431e54c666aafa8fcd")
+// 			format("svg");
+// 	font-weight: 700;
+// 	font-style: normal;
+// 	font-display: swap;
+// }
+// @font-face {
+// 	font-family: "CircularStd";
+// 	src: url("../fonts/CircularStd-BoldItalic.eot");
+// 	src: url("../fonts/CircularStd-BoldItalic.eot?#iefix")
+// 			format("embedded-opentype"),
+// 		url("../fonts/CircularStd-BoldItalic.woff2") format("woff2"),
+// 		url("../fonts/CircularStd-BoldItalic.ttf") format("truetype"),
+// 		url("../fonts/CircularStd-BoldItalic.svg#bcc26993292869431e54c666aafa8fcd")
+// 			format("svg");
+// 	font-weight: 700;
+// 	font-style: italic;
+// 	font-display: swap;
+// }
+// @font-face {
+// 	font-family: "CircularStd";
+// 	src: url("../fonts/CircularStd-Medium.eot");
+// 	src: url("../fonts/CircularStd-Medium.eot?#iefix") format("embedded-opentype"),
+// 		url("../fonts/CircularStd-Medium.woff2") format("woff2"),
+// 		url("../fonts/CircularStd-Medium.ttf") format("truetype"),
+// 		url("../fonts/CircularStd-Medium.svg#bcc26993292869431e54c666aafa8fcd")
+// 			format("svg");
+// 	font-weight: 600;
+// 	font-style: normal;
+// 	font-display: swap;
+// }
+// @font-face {
+// 	font-family: "CircularStd";
+// 	src: url("../fonts/CircularStd-MediumItalic.eot");
+// 	src: url("../fonts/CircularStd-MediumItalic.eot?#iefix")
+// 			format("embedded-opentype"),
+// 		url("../fonts/CircularStd-MediumItalic.woff2") format("woff2"),
+// 		url("../fonts/CircularStd-MediumItalic.ttf") format("truetype"),
+// 		url("../fonts/CircularStd-MediumItalic.svg#bcc26993292869431e54c666aafa8fcd")
+// 			format("svg");
+// 	font-weight: 600;
+// 	font-style: italic;
+// 	font-display: swap;
+// }
+// @font-face {
+// 	font-family: "CircularStd";
+// 	src: url("../fonts/CircularStd-Book.eot");
+// 	src: url("../fonts/CircularStd-Book.eot?#iefix") format("embedded-opentype"),
+// 		url("../fonts/CircularStd-Book.woff2") format("woff2"),
+// 		url("../fonts/CircularStd-Book.ttf") format("truetype"),
+// 		url("../fonts/CircularStd-Book.svg#bcc26993292869431e54c666aafa8fcd")
+// 			format("svg");
+// 	font-weight: 400;
+// 	font-style: normal;
+// 	font-display: swap;
+// }
+// @font-face {
+// 	font-family: "CircularStd";
+// 	src: url("../fonts/CircularStd-BookItalic.eot");
+// 	src: url("../fonts/CircularStd-BookItalic.eot?#iefix")
+// 			format("embedded-opentype"),
+// 		url("../fonts/CircularStd-BookItalic.woff2") format("woff2"),
+// 		url("../fonts/CircularStd-BookItalic.ttf") format("truetype"),
+// 		url("../fonts/CircularStd-BookItalic.svg#bcc26993292869431e54c666aafa8fcd")
+// 			format("svg");
+// 	font-weight: 400;
+// 	font-style: italic;
+// 	font-display: swap;
+// }
+
 @font-face {
-	font-family: "CircularStd";
-	src: url("../fonts/CircularStd-Bold.eot");
-	src: url("../fonts/CircularStd-Bold.eot?#iefix") format("embedded-opentype"),
-		url("../fonts/CircularStd-Bold.woff2") format("woff2"),
-		url("../fonts/CircularStd-Bold.ttf") format("truetype"),
-		url("../fonts/CircularStd-Bold.svg#bcc26993292869431e54c666aafa8fcd")
-			format("svg");
-	font-weight: 700;
+	font-family: "Circular";
+	src: url("../fonts/circular-medium.woff2");
+	font-weight: 500;
 	font-style: normal;
 	font-display: swap;
 }
+
 @font-face {
-	font-family: "CircularStd";
-	src: url("../fonts/CircularStd-BoldItalic.eot");
-	src: url("../fonts/CircularStd-BoldItalic.eot?#iefix")
-			format("embedded-opentype"),
-		url("../fonts/CircularStd-BoldItalic.woff2") format("woff2"),
-		url("../fonts/CircularStd-BoldItalic.ttf") format("truetype"),
-		url("../fonts/CircularStd-BoldItalic.svg#bcc26993292869431e54c666aafa8fcd")
-			format("svg");
-	font-weight: 700;
-	font-style: italic;
-	font-display: swap;
-}
-@font-face {
-	font-family: "CircularStd";
-	src: url("../fonts/CircularStd-Medium.eot");
-	src: url("../fonts/CircularStd-Medium.eot?#iefix") format("embedded-opentype"),
-		url("../fonts/CircularStd-Medium.woff2") format("woff2"),
-		url("../fonts/CircularStd-Medium.ttf") format("truetype"),
-		url("../fonts/CircularStd-Medium.svg#bcc26993292869431e54c666aafa8fcd")
-			format("svg");
-	font-weight: 600;
-	font-style: normal;
-	font-display: swap;
-}
-@font-face {
-	font-family: "CircularStd";
-	src: url("../fonts/CircularStd-MediumItalic.eot");
-	src: url("../fonts/CircularStd-MediumItalic.eot?#iefix")
-			format("embedded-opentype"),
-		url("../fonts/CircularStd-MediumItalic.woff2") format("woff2"),
-		url("../fonts/CircularStd-MediumItalic.ttf") format("truetype"),
-		url("../fonts/CircularStd-MediumItalic.svg#bcc26993292869431e54c666aafa8fcd")
-			format("svg");
-	font-weight: 600;
-	font-style: italic;
-	font-display: swap;
-}
-@font-face {
-	font-family: "CircularStd";
-	src: url("../fonts/CircularStd-Book.eot");
-	src: url("../fonts/CircularStd-Book.eot?#iefix") format("embedded-opentype"),
-		url("../fonts/CircularStd-Book.woff2") format("woff2"),
-		url("../fonts/CircularStd-Book.ttf") format("truetype"),
-		url("../fonts/CircularStd-Book.svg#bcc26993292869431e54c666aafa8fcd")
-			format("svg");
+	font-family: "Circular";
+	src: url("../fonts/circular-book.woff2");
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
 }
+
 @font-face {
-	font-family: "CircularStd";
-	src: url("../fonts/CircularStd-BookItalic.eot");
-	src: url("../fonts/CircularStd-BookItalic.eot?#iefix")
-			format("embedded-opentype"),
-		url("../fonts/CircularStd-BookItalic.woff2") format("woff2"),
-		url("../fonts/CircularStd-BookItalic.ttf") format("truetype"),
-		url("../fonts/CircularStd-BookItalic.svg#bcc26993292869431e54c666aafa8fcd")
-			format("svg");
-	font-weight: 400;
-	font-style: italic;
+	font-family: "Circular";
+	src: url("../fonts/circular-light.woff2");
+	font-weight: 200;
+	font-style: normal;
 	font-display: swap;
 }
 
@@ -108,6 +132,7 @@ $electric-blue: #002b8f;
 $background-input: #f2f7f9;
 
 /*---GLOBAL STYLES---*/
+
 #listingSquareBox .btn {
 	margin: 4px;
 }
