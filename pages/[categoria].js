@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useState } from "react";
-import Error404 from "../components/global/Error404";
+import { useContext, useEffect, useState } from "react";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
 import GlobalMetas from "../components/head/GlobalMetas";
@@ -70,7 +69,6 @@ const CategoryPage = ({
 				hasResults: paginatedResults.length > 0 ? true : false,
 				numResults: totalItems,
 				numPages: numPages,
-				notFound: false,
 			});
 		}
 	}, []);
@@ -213,15 +211,6 @@ const CategoryPage = ({
 			currentPage: ++state.currentPage,
 		});
 	};
-
-	if (
-		(state.notFound &&
-			!state.isFetching &&
-			Object.keys(state.categoryDetails).length === 0) ||
-		paginatedResults == null
-	) {
-		return <Error404 />;
-	}
 
 	return (
 		<>
@@ -420,27 +409,25 @@ const CategoryPage = ({
 export async function getServerSideProps({ params }) {
 	const service = new ContentService();
 	const categoryDetails = await service.getCategoryDetails(params.categoria);
-	let error404 = categoryDetails == undefined ? true : false;
-	if (categoryDetails == undefined) {
-		return {
-			props: {
-				error404,
-			},
-		};
-	} else {
-		let { allResults, paginatedResults, totalItems, numPages } =
-			await service.getCategoryResults(categoryDetails.name);
 
+	if (!categoryDetails) {
 		return {
-			props: {
-				categoryDetails,
-				allResults,
-				paginatedResults,
-				totalItems,
-				numPages,
-			},
+			notFound: true,
 		};
 	}
+
+	const { allResults, paginatedResults, totalItems, numPages } =
+		await service.getCategoryResults(categoryDetails.name);
+
+	return {
+		props: {
+			categoryDetails,
+			allResults,
+			paginatedResults,
+			totalItems,
+			numPages,
+		},
+	};
 }
 
 export default CategoryPage;

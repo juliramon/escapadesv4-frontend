@@ -225,6 +225,13 @@ const StoryListing = ({ storyDetails }) => {
 export async function getServerSideProps({ params }) {
 	const service = new ContentService();
 	const storyDetails = await service.getStoryDetails(params.slug);
+
+	if (!storyDetails) {
+		return {
+			notFound: true,
+		};
+	}
+
 	return {
 		props: {
 			storyDetails,

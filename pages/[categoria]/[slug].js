@@ -1804,6 +1804,12 @@ export async function getServerSideProps({ params }) {
 		getawayDetails = placeDetails;
 	}
 
+	if (activityDetails == null && placeDetails == null) {
+		return {
+			notFound: true,
+		};
+	}
+
 	return {
 		props: {
 			getawayDetails,
