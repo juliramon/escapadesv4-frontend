@@ -11,7 +11,7 @@ const Error404 = () => {
 			/>
 			<NavigationBar />
 			<main>
-				<section className="py-10 md:py-20 lg:py-44 relative">
+				<section className="py-10 md:py-20 lg:py-36 relative">
 					<div className="container relative z-10">
 						<div className="flex flex-wrap items-start justify-center -mx-6">
 							<div className="w-full md:w-auto flex justify-center px-6">

@@ -907,6 +907,13 @@ const PlaceListing = ({ placeDetails }) => {
 export async function getServerSideProps({ params }) {
 	const service = new ContentService();
 	const placeDetails = await service.getPlaceDetails(params.slug);
+
+	if (!placeDetails) {
+		return {
+			notFound: true,
+		};
+	}
+
 	return {
 		props: {
 			placeDetails,
