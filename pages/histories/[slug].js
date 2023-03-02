@@ -44,7 +44,7 @@ const StoryListing = ({ storyDetails }) => {
 		<div className="mb-8">
 			<h2 className="mb-5">
 				{storyDetails.title}: Benvinguts a l'escapada de la setmana, ens hi
-				acompanyes?
+				acompanyeu?
 			</h2>
 			<div className="bg-primary-100">
 				<AdInArticle />
@@ -58,6 +58,7 @@ const StoryListing = ({ storyDetails }) => {
 		if (slicedDescription.length > 1) {
 			slicedDescription.splice(1, 0, welcomeText);
 		}
+		console.log(slicedDescription);
 	}
 
 	const publicationDate = new Date(storyDetails.createdAt).toLocaleDateString(

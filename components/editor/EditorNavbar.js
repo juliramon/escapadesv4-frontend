@@ -5,6 +5,7 @@ const EditorNavbar = ({ editor }) => {
 			editor.chain().focus().setImage({ src: url }).run();
 		}
 	};
+
 	if (!editor) {
 		return null;
 	}
