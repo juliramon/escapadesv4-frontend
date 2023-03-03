@@ -29,14 +29,6 @@ const StoryListing = ({ storyDetails }) => {
 		}
 	}, [router]);
 
-	const [queryId, setQueryId] = useState(null);
-
-	useEffect(() => {
-		if (router && router.query) {
-			setQueryId(router.query.slug);
-		}
-	}, [router]);
-
 	let parsedDescription;
 	let slicedDescription = [];
 
@@ -52,13 +44,43 @@ const StoryListing = ({ storyDetails }) => {
 		</div>
 	);
 
+	const buildImagesGrid = (start, end) => {
+		const images = storyDetails.images.slice(start, end);
+
+		return (
+			<div className="columns-1 md:columns-2 gap-2.5 md:gap-4">
+				{images.map((image, key) => {
+					return (
+						<picture id={key} className="block mb-2.5 md:mb-4">
+							<img src={image} loading="lazy" />
+						</picture>
+					);
+				})}
+			</div>
+		);
+	};
+
 	if (storyDetails.description) {
 		parsedDescription = parse(storyDetails.description);
 		parsedDescription.map((el) => slicedDescription.push(el));
 		if (slicedDescription.length > 1) {
 			slicedDescription.splice(1, 0, welcomeText);
+			slicedDescription.forEach((el, idx) => {
+				if (
+					typeof el.props.children == "string" &&
+					el.props.children.includes("carousel")
+				) {
+					const str = el.props.children;
+
+					const found = str.replace(/^\D+/g, "");
+					const foundArr = found.slice(0, -2).split(",");
+					const startingIndex = foundArr[0];
+					const endIndex = foundArr[1];
+
+					slicedDescription[idx] = buildImagesGrid(startingIndex, endIndex);
+				}
+			});
 		}
-		console.log(slicedDescription);
 	}
 
 	const publicationDate = new Date(storyDetails.createdAt).toLocaleDateString(
