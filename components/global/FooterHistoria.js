@@ -37,14 +37,20 @@ const FooterHistoria = () => {
 			<div className="flex items-center mt-10 banner-wrapper">
 				<div className="relative rounded-md overflow-hidden left">
 					<img
-						src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-comes-rubio_luuish.jpg"
-						alt=""
+						source="/escapadesenparella-tossa-mar_m2lvdz-s.webp"
+						type="image/webp"
+						src="/escapadesenparella-tossa-mar_m2lvdz-s.jpg"
+						alt="Segueix-nos a Instagram"
+						loading="lazy"
 					/>
 				</div>
 				<div className="relative rounded-md overflow-hidden right">
 					<img
-						src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-tossa-mar_m2lvdz.jpg"
-						alt=""
+						source="/escapadesenparella-comes-rubio_luuish-s.webp"
+						type="image/webp"
+						src="/escapadesenparella-comes-rubio_luuish-s.jpg"
+						alt="Segueix @escapadesenparella a Instagram"
+						loading="lazy"
 					/>
 				</div>
 			</div>
