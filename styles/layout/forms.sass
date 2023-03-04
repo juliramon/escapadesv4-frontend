@@ -1,21 +1,24 @@
 @layer components
 	.form
 		@apply -m-1.5
+
+		&__container
+			height: calc(100vh - 171.5px)
 		
 		&__wrapper
-			@apply bg-white rounded-md p-5 shadow border border-primary-300
+			@apply bg-white rounded-md p-5 shadow border border-primary-100
 		
 		&__group
 			@apply p-1.5 flex flex-col
 
 		&__label
-			@apply block mb-2 text-sm font-medium text-primary-400
+			@apply block mb-2 text-sm font-medium text-primary-500
 
 		&__text_info
 			@apply text-xs mt-2 text-primary-400
 
 		&__control
-			@apply bg-primary-100 border border-primary-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5
+			@apply bg-primary-50 border border-primary-100 text-primary-400 text-sm rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5
   
 		.location-control::placeholder
 			color: #173572
@@ -25,19 +28,59 @@
 			border: none !important
 			background-color: #f2f7f9 !important
 			box-shadow: inset 0 0 0 3px #3a4887 !important
+			
   
-		textarea, &-composer__editor .ProseMirror
-			min-height: 92px
+		&-composer__editor .ProseMirror
+			@apply bg-white
 
+		&-composer__body
+			@apply overflow-y-auto
+		
 		&-composer__editor 
 			h2
-				@apply text-xl font-semibold
+				@apply text-3xl
 
 			h3
-				@apply text-lg font-semibold
+				@apply text-2xl
 
 			p, a, ul li, ol li
-				@apply text-sm bg-primary-100
+				@apply text-base bg-white
 
 			blockquote, blockquote *
 				@apply text-lg font-normal italic
+			
+			.img-frame
+				@apply m-2 relative w-48 h-auto overflow-hidden rounded-md border-8 border-white shadow
+
+.ProseMirror p.is-editor-empty:first-child::before 
+	@apply text-primary-900 float-left h-0 pointer-events-none
+	content: attr(data-placeholder)
+
+
+/*EDITION BAR*/
+
+.editor-bar__wrapper 
+	@apply rounded-md rounded-md py-1.5 px-2.5 border border-primary-50 sticky top-2.5 bg-white z-50 shadow-sm shadow-primary-100
+
+.editor-bar__wrapper button 
+	background-color: white
+	border: none
+	width: 30px
+	height: 30px
+	padding: 0
+	margin-right: 5px
+
+
+.editor-bar__wrapper svg 
+	width: 22px
+	height: 22px
+
+.form-composer__editor 
+	@apply outline-none
+
+.form-composer__editor .ProseMirror 
+	@apply outline-none pt-5
+
+
+.form-composer__editor .ProseMirror img 
+	max-width: 100%

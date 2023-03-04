@@ -8,21 +8,16 @@
         @apply scroll-smooth
 
     body
-        @apply text-base text-primary-500 font-normal leading-normal font-body
-
-    #__next > *:not(header, footer, section)
-        padding-top: 101px
-
-        @screen lg
-            padding-top: 109.5px
+        @apply text-base text-primary-700 font-normal leading-normal font-body
 
     h1.font-display
         @apply text-2xl leading-tight mt-0
+
         @screen md
             @apply text-4xl leading-1.1
 
     h1, h2, h3, h4, h5
-        @apply text-primary-900 font-semibold font-headings
+        @apply text-primary-900 font-medium font-headings
 
     h1 
         @apply text-3xl leading-tight mt-0
@@ -37,13 +32,16 @@
     h3
         @apply text-base leading-normal
         @screen md
-            @apply text-lg font-normal leading-snug
+            @apply text-lg font-medium leading-snug
 
-    h3, h4
-        @apply font-body font-normal
+    h4
+        @apply font-medium
 
     a
         @apply cursor-pointer no-underline
+
+        &:hover
+            @applu
 
     p 
         @apply mb-5 leading-normal text-16
@@ -54,7 +52,7 @@
         @apply list-disc pl-5 mb-5 leading-normal
 
     blockquote, blockquote *
-        @apply text-xl font-semibold mb-8
+        @apply text-xl font-semibold my-8
 
     blockquote
         @apply relative pl-8
@@ -71,6 +69,8 @@
         animation: horizontalSlide 40s linear 1s infinite
         margin-top: -70px
         
+    .container
+        @apply w-full sm:max-w-2xl md:max-w-3xl lg:max-w-5xl xl:max-w-7xl #{!important}
 
     @keyframes horizontalSlide
         0% 

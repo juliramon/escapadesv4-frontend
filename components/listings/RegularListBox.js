@@ -10,7 +10,6 @@ const RegularListBox = ({
 	owner,
 	date,
 }) => {
-	let shortenedSubtitle = subtitle.slice(0, 105);
 	let publicationDate = new Date(date).toLocaleDateString("ca-es", {
 		year: "numeric",
 		month: "short",
@@ -24,13 +23,18 @@ const RegularListBox = ({
 	const avatarId = avatar.substring(63);
 	const avatarImg = `${avatarPath}w_32,h_32,c_fill/${avatarId}`;
 	return (
-		<article className="py-6 md:px-10 lists__item">
+		<article className="lists__item">
 			<Link href={`/llistes/${slug}`}>
-				<a title={title} className="flex flex-wrap md:flex-nowrap items-center">
-					<div className="w-full md:w-1/2 md:py-4 pr-8">
+				<a
+					title={title}
+					className="flex flex-wrap md:flex-nowrap items-stretch"
+				>
+					<div className="w-full md:w-2/3 p-6 lg:px-10 lg:py-12">
 						<div className="mb-4">
-							<h3 className="text-xl md:text-2xl">{title}</h3>
-							<p className="text-lg mt-2">{shortenedSubtitle}...</p>
+							<h3 className="text-xl">{title}</h3>
+							<p className="mt-2 text-primary-400 font-light line-clamp-2">
+								{subtitle}
+							</p>
 						</div>
 						<div className="flex items-center border-t border-primary-200 pt-4">
 							<div className="w-8 h-8 mr-2 rounded-full overflow-hidden">
@@ -54,19 +58,17 @@ const RegularListBox = ({
 							</div>
 						</div>
 					</div>
-					<div className="rounded-md w-full md:w-1/2 h-auto overflow-hidden order-first md:order-none mb-6 md:mb-0">
-						<div className="aspect-w-3 aspect-h-2">
-							<picture>
-								<img
-									src={coverImg}
-									alt={title}
-									width="240"
-									height="240"
-									className="w-full h-full object-cover"
-									loading="lazy"
-								/>
-							</picture>
-						</div>
+					<div className="w-full md:w-1/3 overflow-hidden order-first md:order-none mb-6 md:mb-0">
+						<picture>
+							<img
+								src={coverImg}
+								alt={title}
+								width="240"
+								height="240"
+								className="w-full h-full object-cover"
+								loading="lazy"
+							/>
+						</picture>
 					</div>
 				</a>
 			</Link>

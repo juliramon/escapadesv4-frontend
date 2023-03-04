@@ -228,7 +228,7 @@ const StoriesList = ({
 							</div>
 						</div>
 					</section>
-					<section className="py-6 md:py-16 bg-primary-100">
+					<section className="py-6 md:py-16 bg-primary-50">
 						<div className="container">
 							<h2>Històries destacades</h2>
 							<div className="flex flex-wrap items-center mt-8 -mx-6 -mb-6">
@@ -251,7 +251,7 @@ const StoriesList = ({
 					</section>
 					<section className="py-6 md:py-16">
 						<div className="container">
-							<div className="w-full border-b border-primary-300 pb-6 mb-8">
+							<div className="w-full border-b border-primary-100 pb-6 mb-8">
 								<h2>Més històries per a inspirar-vos</h2>
 								<p className="mt-4">
 									Des del Delta de l'Ebre fins al Cap de Creus, passant pels

@@ -120,15 +120,15 @@ const ListView = ({ listDetails }) => {
 						</ul>
 					</div>
 				</div>
-				<div className="bg-primary-100 py-4">
+				<div className="bg-primary-50 py-4">
 					<AdSkyScrapperHoritzontal728x90 />
 				</div>
 				<main>
-					<article className="pt-8 pb-4">
+					<article className="pt-8 pb-4 md:pt-12">
 						<div className="container">
 							<div className="flex flex-wrap">
 								<div className="w-full max-w-5xl mx-auto">
-									<div className="w-full pb-6 lg:pl-12 lg:pr-20 lg:border-l border-primary-300">
+									<div className="w-full pb-6 lg:pl-12 lg:pr-20 lg:border-l border-primary-100">
 										<h1 className=" max-w-2xl">{listDetails.title}</h1>
 										<div className="mt-3 flex flex-wrap items-center">
 											<div className="flex flex-wrap items-center">
@@ -181,7 +181,7 @@ const ListView = ({ listDetails }) => {
 								</div>
 							</div>
 							<div className="flex flex-wrap items-stretch w-full max-w-5xl mx-auto">
-								<div className="w-full lg:w-9/12 lg:pl-12 lg:pr-20 -mt-6 pt-10 pb-8 lg:border-l md:border-primary-300">
+								<div className="w-full lg:w-9/12 lg:pl-12 lg:pr-20 -mt-6 pt-10 pb-8 lg:border-l md:border-primary-100">
 									<div className="text-center text-tertiary-500 text-opacity-80 text-sm py-4 mb-5 md:mb-6 bg-tertiary-100 bg-opacity-50 flex items-center justify-center rounded-md">
 										<span className="inline-block">
 											Actualitzat el{" "}

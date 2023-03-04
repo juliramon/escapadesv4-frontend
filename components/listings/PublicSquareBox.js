@@ -180,29 +180,40 @@ const PublicSquareBox = ({
 	const coverImg = `${coverPath}w_400,h_300,c_fill/${imageId}`;
 
 	return (
-		<div className="w-full md:w-1/2 lg:w-1/4 px-2 py-4 product__item">
-			<div className="overflow-hidden">
-				<Link href={`/${linkPath}/${slug}`}>
-					<a title={title} className="relative block">
-						<div className="aspect-w-4 aspect-h-3 relative rounded-md overflow-hidden">
-							<picture className="w-full h-full">
-								<source srcSet={coverImg} />
-								<img
-									src={coverImg}
-									data-src={coverImg}
-									alt={title}
-									className="w-full h-full object-cover object-center"
-									loading="lazy"
-									width="400"
-									height="300"
-								/>
-							</picture>
+		<article className="w-full md:w-1/2 lg:w-1/4 px-1.5 py-2 group">
+			<Link href={`/${linkPath}/${slug}`}>
+				<a
+					title={title}
+					className="flex flex-col justify-between h-full rounded-md shadow-md overflow-hidden relative"
+				>
+					<div className="aspect-w-4 aspect-h-3 relative overflow-hidden">
+						<picture className="w-full h-full">
+							<source srcSet={coverImg} />
+							<img
+								src={coverImg}
+								data-src={coverImg}
+								alt={title}
+								className="w-full h-full object-cover object-center scale-1000 hover:scale-105 transition-all duration-300 ease-in-out"
+								loading="lazy"
+								width="400"
+								height="300"
+							/>
+						</picture>
+					</div>
+					<div className="flex flex-col justify-between p-4 h-full">
+						<div className="">
+							<h3 className="text-16 my-0 font-medium line-clamp-1">{title}</h3>
+							<span className="mt-0.5 inline-flex text-15 font-light text-primary-400 line-clamp-1">
+								{type == "place" ? placeTypeModified : "Activitat"}{" "}
+								{type == "place" ? "amb encant" : ""} a{" "}
+								<u>{shortenedLocation}</u>
+							</span>
 						</div>
-						<div className="absolute top-3 right-3 bg-white inline-block w-auto h-auto rounded-md text-primary-500 px-2 py-1 text-sm">
-							<div className="flex items-center justify-center">
+						<div className="mt-4 flex items-center justify-between">
+							<div className="inline-flex items-center justify-center text-sm leading-tight">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
-									className="icon icon-tabler icon-tabler-star mr-1"
+									className="mr-1.5"
 									width="15"
 									height="15"
 									viewBox="0 0 24 24"
@@ -215,16 +226,14 @@ const PublicSquareBox = ({
 									<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 									<path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
 								</svg>
-								{modRating || rating}
+								{modRating || rating}/5
 							</div>
-						</div>
-						<div className="pt-3 flex flex-col justify-between">
-							<span className="flex items-center text-sm">
+							<span className="text-13 text-secondary-800 group-hover:text-secondary-900 transition-all duration-300 ease-in-out inline-flex items-center leading-tight">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
-									className="icon icon-tabler icon-tabler-brand-safari text-secondary-500 mr-1.5"
-									width={16}
-									height={16}
+									className="mr-1"
+									width={15}
+									height={15}
 									viewBox="0 0 24 24"
 									strokeWidth="2"
 									stroke="currentColor"
@@ -233,35 +242,16 @@ const PublicSquareBox = ({
 									strokeLinejoin="round"
 								>
 									<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-									<polyline points="8 16 10 10 16 8 14 14 8 16"></polyline>
-									<circle cx={12} cy={12} r={9}></circle>
+									<path d="M12 5l0 14"></path>
+									<path d="M5 12l14 0"></path>
 								</svg>
-								<span className="text-primary-400 opacity-80">
-									{shortenedLocation}
-								</span>
+								Veure'n més
 							</span>
-							<h3 className="mt-2 mb-1 text-primary-600 text-base font-semibold">
-								{title}
-							</h3>
-							<p className="text-15 my-0 text-primary-400 font-light leading-normal line-clamp-2">
-								{subtitle}
-							</p>
-							<div className="mt-5 flex items-center text-xs tracking-wider text-secondary-500">
-								<span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 mr-2.5 capitalize">
-									{categoryModified}
-								</span>
-								<span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 mr-2.5 capitalize">
-									{tipus}
-								</span>
-								<span className="bg-primary-200 text-primary-400 rounded-md px-2 py-1 capitalize">
-									{additionalInfoRef}
-								</span>
-							</div>
 						</div>
-					</a>
-				</Link>
-			</div>
-		</div>
+					</div>
+				</a>
+			</Link>
+		</article>
 	);
 };
 

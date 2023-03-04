@@ -82,7 +82,7 @@ const HomePageResults = ({
 					{/* Most rated getaways */}
 					<section className="pt-12">
 						<h2>Els allotjaments més ben valorats</h2>
-						<div className="flex flex-wrap items-start -mx-2 mt-2">
+						<div className="flex flex-wrap items-stretch -mx-1.5 mt-2">
 							{state.mostRatedGetaways.length > 0
 								? state.mostRatedGetaways.map((el, idx) => {
 										while (state.mostRatedGetaways.indexOf(el) < 4) {
@@ -131,8 +131,8 @@ const HomePageResults = ({
 											className="w-full md:w-1/2 lg:w-1/4 px-2"
 											role="status"
 										>
-											<div className="flex justify-center items-center max-w-sm h-56 bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
-												<div className="flex justify-center items-center w-full h-48 bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
+											<div className="flex justify-center items-center max-w-sm h-56 bg-gray-300 rounded-md animate-pulse dark:bg-gray-700">
+												<div className="flex justify-center items-center w-full h-48 bg-gray-300 rounded-md sm:w-96 dark:bg-gray-700">
 													<svg
 														className="w-12 h-12 text-gray-200"
 														xmlns="http://www.w3.org/2000/svg"
@@ -154,7 +154,7 @@ const HomePageResults = ({
 					{state.featuredList ? (
 						<section className="pt-12">
 							<h2>La llista destacada</h2>
-							<div className="flex flex-wrap items-center justify-end overflow-hidden relative rounded-md py-12 px-10 lg:py-20 lg:pr-20 mt-4">
+							<div className="flex flex-wrap items-center justify-end overflow-hidden relative rounded-md py-12 px-10 lg:py-12 lg:pr-20 mt-4">
 								<div className="absolute inset-0 rounded-md overflow-hidden">
 									<picture>
 										<source
@@ -172,7 +172,7 @@ const HomePageResults = ({
 										/>
 									</picture>
 								</div>
-								<div className="w-full lg:w-3/4 rounded-lg lg:py-10 px-5 md:px-0 bg-white relative z-10">
+								<div className="w-full lg:w-9/12 rounded-md bg-white relative z-10 shadow-md overflow-hidden">
 									<RegularListBox
 										key={state.featuredList._id}
 										slug={state.featuredList.slug}
@@ -193,8 +193,8 @@ const HomePageResults = ({
 
 					{/* Featured regions */}
 					<section className="pt-12">
-						<h2 className="">Escapades per Catalunya</h2>
-						<p className="">
+						<h2 className="mb-1">Escapades per Catalunya</h2>
+						<p className="font-light">
 							Exploreu tots els racons de casa nostra; descobriu les millors
 							escapades en parella per Catalunya
 						</p>
@@ -216,7 +216,7 @@ const HomePageResults = ({
 										slidesPerView: 4,
 									},
 									1280: {
-										slidesPerView: 5,
+										slidesPerView: 4,
 									},
 								}}
 							>
@@ -288,7 +288,7 @@ const HomePageResults = ({
 					{/* Most popular romantic getaways */}
 					<section className="pt-12">
 						<h2>Escapades romàntiques per desconnectar </h2>
-						<div className="flex flex-wrap items-start -mx-2 mt-2">
+						<div className="flex flex-wrap items-stretch -mx-1.5 mt-2">
 							{state.featuredRelaxGetaways.length > 0
 								? state.featuredRomanticGetaways.map((el) => {
 										while (state.featuredRomanticGetaways.indexOf(el) < 4) {
@@ -341,7 +341,7 @@ const HomePageResults = ({
 							<h2 className="">Allotjaments pensats per a parelles</h2>
 						</div>
 						<div className="mt-5">
-							<div className="flex flex-wrap items-center justify-between -m-4">
+							<div className="flex flex-wrap items-stretch justify-between -m-4">
 								<a
 									href={`/hotels-amb-encant`}
 									title="Hotels amb encant"
@@ -367,11 +367,14 @@ const HomePageResults = ({
 										</div>
 									</div>
 									<div className="right">
-										<h3>Hotels amb encant</h3>
-										<span className="block w-full text-base">
-											{hotels} hotels amb encant
+										<h3 className="text-lg my-0 font-medium line-clamp-1">
+											Hotels amb encant
+										</h3>
+										<span className="mt-0.5 inline-flex text-15 font-light text-primary-400 leading-tight">
+											{hotels} hotels amb encant per a la vostra escapada en
+											parella de somni
 										</span>
-										<span className="flex items-center w-full mt-2">
+										<span className="mt-3 text-13 text-secondary-800 group-hover:text-secondary-900 transition-all duration-300 ease-in-out inline-flex items-center leading-tight">
 											Veure'ls tots{" "}
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
@@ -418,11 +421,14 @@ const HomePageResults = ({
 										</div>
 									</div>
 									<div className="right">
-										<h3>Apartaments de somni</h3>
-										<span className="block w-full text-base">
-											{apartaments} apartaments de somni
+										<h3 className="text-lg my-0 font-medium line-clamp-1">
+											Apartaments de somni
+										</h3>
+										<span className="mt-0.5 inline-flex text-15 font-light text-primary-400 leading-tight">
+											{apartaments} apartaments de somni des d'on descobrir
+											Catalunya
 										</span>
-										<span className="flex items-center w-full mt-2">
+										<span className="mt-3 text-13 text-secondary-800 group-hover:text-secondary-900 transition-all duration-300 ease-in-out inline-flex items-center leading-tight">
 											Veure'ls tots{" "}
 											<svg
 												xmlns="http://www.w3.org/2000/svg"
@@ -655,7 +661,7 @@ const HomePageResults = ({
 					{/* Most popular adventure getaways */}
 					<section className="pt-12">
 						<h2>L'aventura us crida</h2>
-						<div className="flex flex-wrap items-start -mx-2 mt-2">
+						<div className="flex flex-wrap items-stretch -mx-1.5 mt-2">
 							{state.featuredAdventureGetaways.length > 0
 								? state.featuredAdventureGetaways.map((el) => {
 										while (state.featuredAdventureGetaways.indexOf(el) < 4) {
@@ -705,7 +711,7 @@ const HomePageResults = ({
 					{/* Most popular gastronomic getaways */}
 					<section className="pt-12">
 						<h2>La millor cita, als millors restaurants</h2>
-						<div className="flex flex-wrap items-start -mx-2 mt-2">
+						<div className="flex flex-wrap items-stretch -mx-1.5 mt-2">
 							{state.featuredGastronomicGetaways.length > 0
 								? state.featuredGastronomicGetaways.map((el) => {
 										while (state.featuredGastronomicGetaways.indexOf(el) < 4) {
@@ -755,7 +761,7 @@ const HomePageResults = ({
 					{/* Most popular relax getaways */}
 					<section className="pt-12 pb-12">
 						<h2>Escapades en parella per a desconnectar</h2>
-						<div className="flex flex-wrap items-start -mx-2 mt-2">
+						<div className="flex flex-wrap items-stretch -mx-1.5 mt-2">
 							{state.featuredRelaxGetaways.length > 0
 								? state.featuredRelaxGetaways.map((el) => {
 										while (state.featuredRelaxGetaways.indexOf(el) < 4) {
@@ -804,7 +810,7 @@ const HomePageResults = ({
 				</div>
 			</div>
 
-			<section className="py-12 md:py-24 bg-primary-100">
+			<section className="py-12 md:py-24 bg-primary-50">
 				<div className="container">
 					<div className="w-full flex flex-wrap items-stretch justify-center">
 						<div className="w-full md:w-1/3">
@@ -817,7 +823,7 @@ const HomePageResults = ({
 									src="../../cover-about-home.jpg"
 									data-src="../../cover-about-home.jpg"
 									alt="Escapades en parella, i molt més"
-									className="w-full h-full object-cover object-center rounded-lg"
+									className="w-full h-full object-cover object-center rounded-md"
 									width={300}
 									height={400}
 									loading="lazy"

@@ -63,10 +63,10 @@ const ContentBox = ({
 	const hideShareModalVisibility = () => setShareModalVisibility(false);
 
 	return (
-		<div className="content rounded box flex items-center w-full bg-primary-100 bg-opacity-50 border border-primary-300 mb-2.5 px-5 py-4">
+		<div className="content rounded-md box flex items-center w-full bg-primary-50 border border-primary-100 mb-2.5 px-5 py-4">
 			<Link href={type != "category" ? `/${path}/${slug}` : `/${slug}`}>
 				<a className="flex items-center justify-between w-full">
-					<div className="flex items-center justify-center bg-white overflow-hidden h-12 w-12 rounded-md p-0 mr-5 border border-primary-300">
+					<div className="flex items-center justify-center bg-white overflow-hidden h-12 w-12 rounded-md p-0 mr-5 border border-primary-100">
 						<img
 							src={image}
 							alt={title}
@@ -107,7 +107,7 @@ const ContentBox = ({
 						dropdownVisibility ? "block" : "hidden"
 					}`}
 				>
-					<li className="border-b border-primary-300 w-full">
+					<li className="border-b border-primary-100 w-full">
 						<Link href={`/${path}/${slug}`}>
 							<a className="dropdown__menu_item">
 								<svg
@@ -131,7 +131,7 @@ const ContentBox = ({
 							</a>
 						</Link>
 					</li>
-					<li className="border-b border-primary-300 w-full">
+					<li className="border-b border-primary-100 w-full">
 						<Link href={`/${path}/${slug}/editar`}>
 							<a className="dropdown__menu_item">
 								<svg
@@ -154,7 +154,7 @@ const ContentBox = ({
 							</a>
 						</Link>
 					</li>
-					<li className="border-b border-primary-300 w-full">
+					<li className="border-b border-primary-100 w-full">
 						<button
 							onClick={() => handleShareModalVisibility()}
 							className="dropdown__menu_item"

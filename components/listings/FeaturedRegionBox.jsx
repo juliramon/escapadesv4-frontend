@@ -2,7 +2,7 @@ import React from "react";
 
 const FeaturedRegionBox = ({ image, title, slug }) => {
 	return (
-		<div className="w-full p-2 border-none">
+		<div className="w-full px-1.5 py-2 border-none">
 			<a
 				href={`escapades-catalunya/${slug}`}
 				className="block w-full h-full rounded-md overflow-hidden group"

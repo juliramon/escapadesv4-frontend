@@ -196,7 +196,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 					autohide
 				>
 					<Toast.Header>
-						<img src="../../logo-xs.svg" className="rounded mr-2" alt="" />
+						<img src="../../logo-xs.svg" className="rounded-md mr-2" alt="" />
 						<strong className="mr-auto">Getaways.guru</strong>
 					</Toast.Header>
 					<Toast.Body>
@@ -495,7 +495,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 												</div>
 											</div>
 											<div className="w-full mt-5 md:mt-0">
-												<div className="flex flex-wrap items-stretch rounded-2xl overflow-hidden -m-0.5 relative">
+												<div className="flex flex-wrap items-stretch rounded-md-2xl overflow-hidden -m-0.5 relative">
 													<button
 														data-fancybox-trigger="gallery"
 														className="inline-flex items-center absolute bottom-3 right-3 text-white bg-slate-800 bg-opacity-80 text-xs py-2 px-3"
@@ -611,11 +611,11 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 										</div>
 									</div>
 								</section>
-								<section className="pt-5 pb-12 md:pb-16">
+								<section className="pt-5 pb-12 md:pt-10 md:pb-16">
 									<div className="container">
-										<div className="w-full lg:w-10/12 2xl:w-9/12 mx-auto">
+										<div className="w-full lg:w-10/12 mx-auto">
 											<div className="flex flex-wrap items-start xl:-mx-6">
-												<div className="w-full xl:w-8/12 xl:px-6 mx-auto">
+												<div className="w-full xl:w-7/12 xl:px-6 mx-auto">
 													<h2 className="w-full md:w-9/12">
 														{getawayDetails.subtitle}
 													</h2>
@@ -843,9 +843,9 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 														}}
 													></div>
 												</div>
-												<aside className="w-full xl:w-4/12 xl:px-6 relative xl:sticky xl:top-36">
-													<div className="p-5 rounded-md shadow-lg shadow-primary-300">
-														<div className="w-full h-56 rounded-lg overflow-hidden">
+												<aside className="w-full xl:w-5/12 xl:px-6 relative xl:sticky xl:top-36">
+													<div className="p-5 rounded-md shadow-lg shadow-primary-50">
+														<div className="w-full h-56 rounded-md overflow-hidden">
 															<GoogleMapReact
 																bootstrapURLKeys={{
 																	key: `${process.env.GOOGLE_API_KEY}`,
@@ -1100,7 +1100,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 					autohide
 				>
 					<Toast.Header>
-						<img src="../../logo-xs.svg" className="rounded mr-2" alt="" />
+						<img src="../../logo-xs.svg" className="rounded-md mr-2" alt="" />
 						<strong className="mr-auto">Getaways.guru</strong>
 					</Toast.Header>
 					<Toast.Body>
@@ -1411,7 +1411,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 												</div>
 											</div>
 											<div className="w-full mt-5 md:mt-0">
-												<div className="flex flex-wrap items-stretch rounded-2xl overflow-hidden -m-0.5 relative">
+												<div className="flex flex-wrap items-stretch rounded-md-2xl overflow-hidden -m-0.5 relative">
 													<button
 														data-fancybox-trigger="gallery"
 														className="inline-flex items-center absolute bottom-3 right-3 text-white bg-slate-800 bg-opacity-80 text-xs py-2 px-3"
@@ -1527,11 +1527,11 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 										</div>
 									</div>
 								</section>
-								<section className="pt-5 pb-12 md:pb-16">
+								<section className="pt-5 pb-12 md:pt-10 md:pb-16">
 									<div className="container">
-										<div className="w-full lg:w-10/12 2xl:w-9/12 mx-auto">
+										<div className="w-full lg:w-10/12 mx-auto">
 											<div className="flex flex-wrap items-start xl:-mx-6">
-												<div className="w-full xl:w-8/12 xl:px-6 mx-auto">
+												<div className="w-full xl:w-7/12 xl:px-6 mx-auto">
 													<h2 className="w-full md:w-9/12">
 														{getawayDetails.subtitle}
 													</h2>
@@ -1705,9 +1705,9 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 														}}
 													></div>
 												</div>
-												<aside className="w-full xl:w-4/12 xl:px-6 relative xl:sticky xl:top-36">
-													<div className="p-5 rounded-md shadow-lg shadow-primary-300">
-														<div className="w-full h-56 rounded-lg overflow-hidden">
+												<aside className="w-full xl:w-5/12 xl:px-6 relative xl:sticky xl:top-36">
+													<div className="p-5 rounded-md shadow-lg shadow-primary-50">
+														<div className="w-full h-56 rounded-md overflow-hidden">
 															<GoogleMapReact
 																bootstrapURLKeys={{
 																	key: `${process.env.GOOGLE_API_KEY}`,

@@ -151,7 +151,7 @@ const Login = () => {
 			{/* Rich snippets */}
 			<section className="relative">
 				<div className="flex flex-wrap items-stretch">
-					<div className="w-3/12 h-screen bg-primary-300 p-5 relative">
+					<div className="w-3/12 h-screen bg-primary-50 p-5 relative">
 						<Link href="/">
 							<img
 								src="https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"

@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import NavigationBar from "../../components/global/NavigationBar";
 import ContentService from "../../services/contentService";
@@ -29,14 +29,6 @@ const StoryListing = ({ storyDetails }) => {
 		}
 	}, [router]);
 
-	const [queryId, setQueryId] = useState(null);
-
-	useEffect(() => {
-		if (router && router.query) {
-			setQueryId(router.query.slug);
-		}
-	}, [router]);
-
 	let parsedDescription;
 	let slicedDescription = [];
 
@@ -44,7 +36,7 @@ const StoryListing = ({ storyDetails }) => {
 		<div className="mb-8">
 			<h2 className="mb-5">
 				{storyDetails.title}: Benvinguts a l'escapada de la setmana, ens hi
-				acompanyes?
+				acompanyeu?
 			</h2>
 			<div className="bg-primary-100">
 				<AdInArticle />
@@ -52,11 +44,42 @@ const StoryListing = ({ storyDetails }) => {
 		</div>
 	);
 
+	const buildImagesGrid = (start, end) => {
+		const images = storyDetails.images.slice(start, end);
+
+		return (
+			<div className="columns-1 md:columns-2 gap-2.5 md:gap-4">
+				{images.map((image, key) => {
+					return (
+						<picture id={key} className="block mb-2.5 md:mb-4">
+							<img src={image} loading="lazy" />
+						</picture>
+					);
+				})}
+			</div>
+		);
+	};
+
 	if (storyDetails.description) {
 		parsedDescription = parse(storyDetails.description);
 		parsedDescription.map((el) => slicedDescription.push(el));
 		if (slicedDescription.length > 1) {
 			slicedDescription.splice(1, 0, welcomeText);
+			slicedDescription.forEach((el, idx) => {
+				if (
+					typeof el.props.children == "string" &&
+					el.props.children.includes("post_images")
+				) {
+					const str = el.props.children;
+
+					const found = str.replace(/^\D+/g, "");
+					const foundArr = found.slice(0, -2).split(",");
+					const startingIndex = foundArr[0];
+					const endIndex = foundArr[1];
+
+					slicedDescription[idx] = buildImagesGrid(startingIndex, endIndex);
+				}
+			});
 		}
 	}
 
@@ -133,7 +156,7 @@ const StoryListing = ({ storyDetails }) => {
 						</ul>
 					</div>
 				</div>
-				<div className="bg-primary-100 py-4">
+				<div className="bg-primary-50 py-4">
 					<AdSkyScrapperHoritzontal728x90 />
 				</div>
 				<main>
@@ -175,7 +198,7 @@ const StoryListing = ({ storyDetails }) => {
 							</div>
 
 							<div className="w-full max-w-full md:max-w-4xl md:mx-auto mt-6">
-								<div className="aspect-w-16 aspect-h-9 rounded overflow-hidden">
+								<div className="aspect-w-16 aspect-h-9 rounded-md overflow-hidden">
 									<picture>
 										<img
 											src={storyDetails.cover}
