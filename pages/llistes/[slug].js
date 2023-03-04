@@ -237,6 +237,13 @@ const ListView = ({ listDetails }) => {
 export async function getServerSideProps({ params }) {
 	const service = new ContentService();
 	const listDetails = await service.getListDetails(params.slug);
+
+	if (!listDetails) {
+		return {
+			notFound: true,
+		};
+	}
+
 	return {
 		props: {
 			listDetails,

@@ -966,6 +966,13 @@ const ActivityListing = ({ activityDetails }) => {
 export async function getServerSideProps({ params }) {
 	const service = new ContentService();
 	const activityDetails = await service.activityDetails(params.slug);
+
+	if (!activityDetails) {
+		return {
+			notFound: true,
+		};
+	}
+
 	return {
 		props: {
 			activityDetails,
