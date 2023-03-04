@@ -104,6 +104,7 @@ export async function getStaticProps() {
 			featuredList,
 			totals,
 		},
+		revalidate: 120,
 	};
 }
 
