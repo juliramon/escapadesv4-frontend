@@ -407,9 +407,9 @@ const EditCategoryModal = ({
 						<div className="form__group">
 							<span className="form__label">Il·lustració de la catagoria</span>
 							<div className="flex items-center flex-col max-w-full mb-4">
-								<div className="bg-white border border-primary-300 rounded-tl-md rounded-tr-md w-full">
+								<div className="bg-white border border-primary-100 rounded-tl-md rounded-tr-md w-full">
 									<div className="bg-white border-none h-auto p-4 justify-start">
-										<label className="form__label m-0 bg-white rounded shadow py-3 px-5 inline-flex items-center cursor-pointer">
+										<label className="form__label m-0 bg-white rounded-md shadow py-3 px-5 inline-flex items-center cursor-pointer">
 											<input
 												type="file"
 												className="hidden"
@@ -440,7 +440,7 @@ const EditCategoryModal = ({
 										</label>
 									</div>
 								</div>
-								<div className="w-full border border-primary-300 rounded-br-md rounded-bl-md -mt-px p-4 flex">
+								<div className="w-full border border-primary-100 rounded-br-md rounded-bl-md -mt-px p-4 flex">
 									<div className="-m-2.5 flex flex-wrap items-center">
 										{illustrationPreview}
 									</div>
@@ -450,9 +450,9 @@ const EditCategoryModal = ({
 						<div className="form__group">
 							<span className="form__label">Imatge de la catagoria</span>
 							<div className="flex items-center flex-col max-w-full mb-4">
-								<div className="bg-white border border-primary-300 rounded-tl-md rounded-tr-md w-full">
+								<div className="bg-white border border-primary-100 rounded-tl-md rounded-tr-md w-full">
 									<div className="bg-white border-none h-auto p-4 justify-start">
-										<label className="form__label m-0 bg-white rounded shadow py-3 px-5 inline-flex items-center cursor-pointer">
+										<label className="form__label m-0 bg-white rounded-md shadow py-3 px-5 inline-flex items-center cursor-pointer">
 											<input
 												type="file"
 												className="hidden"
@@ -481,7 +481,7 @@ const EditCategoryModal = ({
 										</label>
 									</div>
 								</div>
-								<div className="w-full border border-primary-300 rounded-br-md rounded-bl-md -mt-px p-4 flex">
+								<div className="w-full border border-primary-100 rounded-br-md rounded-bl-md -mt-px p-4 flex">
 									<div className="-m-2.5 flex flex-wrap items-center">
 										{imagePreview}
 									</div>
@@ -586,9 +586,9 @@ const EditCategoryModal = ({
 						<div className="image">
 							<span className="form__label">Logo del patrocinador</span>
 							<div className="flex items-center flex-col max-w-full mb-4">
-								<div className="bg-white border border-primary-300 rounded-tl-md rounded-tr-md w-full">
+								<div className="bg-white border border-primary-100 rounded-tl-md rounded-tr-md w-full">
 									<div className="bg-white border-none h-auto p-4 justify-start">
-										<label className="form__label m-0 bg-white rounded shadow py-3 px-5 inline-flex items-center cursor-pointer">
+										<label className="form__label m-0 bg-white rounded-md shadow py-3 px-5 inline-flex items-center cursor-pointer">
 											<input
 												type="file"
 												className="hidden"
@@ -619,7 +619,7 @@ const EditCategoryModal = ({
 										</label>
 									</div>
 								</div>
-								<div className="w-full border border-primary-300 rounded-br-md rounded-bl-md -mt-px p-4 flex">
+								<div className="w-full border border-primary-100 rounded-br-md rounded-bl-md -mt-px p-4 flex">
 									<div className="-m-2.5 flex flex-wrap items-center">
 										{sponsorLogoPreview}
 									</div>

@@ -8,7 +8,7 @@ $background-input: #f2f7f9
 		
 @layer components
 	.button
-		@apply rounded transition-all duration-300 ease-in-out inline-flex
+		@apply rounded-md transition-all duration-300 ease-in-out inline-flex
 
 	.button__primary
 		@apply inline-flex items-center bg-primary-500 text-white
@@ -21,7 +21,7 @@ $background-input: #f2f7f9
 			@apply bg-primary-400 border-primary-400 text-white
 
 	.button__ghost
-		@apply inline-flex items-center bg-transparent text-primary-400 border border-primary-300  
+		@apply inline-flex items-center bg-transparent text-primary-400 border border-primary-100  
 		&:hover
 			@apply bg-primary-500 border-primary-500 text-white
 		&.active

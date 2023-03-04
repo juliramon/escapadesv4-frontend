@@ -35,13 +35,13 @@ const FooterHistoria = () => {
 				</a>
 			</div>
 			<div className="flex items-center mt-10 banner-wrapper">
-				<div className="relative rounded overflow-hidden left">
+				<div className="relative rounded-md overflow-hidden left">
 					<img
 						src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-comes-rubio_luuish.jpg"
 						alt=""
 					/>
 				</div>
-				<div className="relative rounded overflow-hidden right">
+				<div className="relative rounded-md overflow-hidden right">
 					<img
 						src="https://res.cloudinary.com/juligoodie/image/upload/v1610652281/getaways-guru/static-files/escapadesenparella-tossa-mar_m2lvdz.jpg"
 						alt=""

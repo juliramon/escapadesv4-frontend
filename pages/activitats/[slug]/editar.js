@@ -490,7 +490,7 @@ const ActivityEditionForm = () => {
 								checked={isChecked}
 							/>
 							<div className="flex items-center p-2">
-								<div className="rounded-md w-10 h-10 border border-primary-300 overflow-hidden mr-2">
+								<div className="rounded-md w-10 h-10 border border-primary-100 overflow-hidden mr-2">
 									<img
 										src={el.orgLogo}
 										alt={el.orgName}
@@ -536,9 +536,9 @@ const ActivityEditionForm = () => {
 								</div>
 							</div>
 							<div className="form-composer__body">
-								<div className="flex items-center justify-between overflow-hidden border border-primary-300 mb-4 bg-white shadow rounded-md">
+								<div className="flex items-center justify-between overflow-hidden border border-primary-100 mb-4 bg-white shadow rounded-md">
 									<button
-										className={`flex-1 bg-none px-4 py-4 text-primary-500 !rounded-none focus:border-t-4 focus:border-primary-500 text-sm ${
+										className={`flex-1 bg-none px-4 py-4 text-primary-500 !rounded-md-none focus:border-t-4 focus:border-primary-500 text-sm ${
 											activeTab === "main"
 												? "border-t-4 border-primary-500"
 												: ""
@@ -548,7 +548,7 @@ const ActivityEditionForm = () => {
 										Contingut principal
 									</button>
 									<button
-										className={`flex-1 bg-none px-4 py-4 text-primary-500 !rounded-none focus:border-t-4 focus:border-primary-500 text-sm ${
+										className={`flex-1 bg-none px-4 py-4 text-primary-500 !rounded-md-none focus:border-t-4 focus:border-primary-500 text-sm ${
 											activeTab === "seo" ? "border-t-4 border-primary-500" : ""
 										}`}
 										onClick={() => setActiveTab("seo")}
@@ -985,9 +985,9 @@ const ActivityEditionForm = () => {
 											<div className="cover">
 												<span className="form__label">Imatge de portada</span>
 												<div className="flex items-center flex-col max-w-full mb-4">
-													<div className="bg-white border border-primary-300 rounded-tl-md rounded-tr-md w-full">
+													<div className="bg-white border border-primary-100 rounded-tl-md rounded-tr-md w-full">
 														<div className="bg-white border-none h-auto p-4 justify-start">
-															<label className="form__label m-0 bg-white rounded shadow py-3 px-5 inline-flex items-center cursor-pointer">
+															<label className="form__label m-0 bg-white rounded-md shadow py-3 px-5 inline-flex items-center cursor-pointer">
 																<input
 																	type="file"
 																	className="hidden"
@@ -1022,7 +1022,7 @@ const ActivityEditionForm = () => {
 															</label>
 														</div>
 													</div>
-													<div className="w-full border border-primary-300 rounded-br-md rounded-bl-md -mt-px p-4 flex">
+													<div className="w-full border border-primary-100 rounded-br-md rounded-bl-md -mt-px p-4 flex">
 														<div className="-m-2.5 flex flex-wrap items-center">
 															{coverImage}
 														</div>
@@ -1035,9 +1035,9 @@ const ActivityEditionForm = () => {
 													Imatges d'aquesta història
 												</span>
 												<div className="flex items-center flex-col max-w-full mb-4">
-													<div className="bg-white border border-primary-300 rounded-tl-md rounded-tr-md w-full">
+													<div className="bg-white border border-primary-100 rounded-tl-md rounded-tr-md w-full">
 														<div className="bg-white border-none h-auto p-4 justify-start">
-															<label className="form__label m-0 bg-white rounded shadow py-3 px-5 inline-flex items-center cursor-pointer">
+															<label className="form__label m-0 bg-white rounded-md shadow py-3 px-5 inline-flex items-center cursor-pointer">
 																<svg
 																	xmlns="http://www.w3.org/2000/svg"
 																	className="mr-2"
@@ -1069,7 +1069,7 @@ const ActivityEditionForm = () => {
 															</label>
 														</div>
 													</div>
-													<div className="w-full border border-primary-300 rounded-br-md rounded-bl-md -mt-px p-4 flex">
+													<div className="w-full border border-primary-100 rounded-br-md rounded-bl-md -mt-px p-4 flex">
 														<div className="-m-2.5 flex flex-wrap items-center">
 															{imagesList}
 														</div>

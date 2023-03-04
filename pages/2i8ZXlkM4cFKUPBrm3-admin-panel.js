@@ -194,12 +194,12 @@ const AdminPanel = () => {
 				}
 				user={user}
 			/>
-			<main className="bg-primary-100 p-6 relative">
-				<div className="bg-white rounded border border-primary-300 p-5">
+			<main className="bg-primary-50 p-6 relative">
+				<div className="bg-white rounded-md shadow p-5">
 					<h1 className="text-2xl">Panell d'administració</h1>
 					<div className="mt-4 flex items-center -mx-2">
 						<div className="px-2 w-1/6">
-							<div className="p-6 border border-primary-300 rounded text-center flex flex-col justify-center">
+							<div className="p-6 border border-primary-100 rounded-md text-center flex flex-col justify-center">
 								<div className="text-2xl">
 									{state.isFetching ? (
 										<div className="flex items-center justify-center mb-1">
@@ -230,7 +230,7 @@ const AdminPanel = () => {
 							</div>
 						</div>
 						<div className="px-2 w-1/6">
-							<div className="p-6 border border-primary-300 rounded text-center flex flex-col justify-center">
+							<div className="p-6 border border-primary-100 rounded-md text-center flex flex-col justify-center">
 								<span className="text-2xl">
 									{state.isFetching ? (
 										<div className="flex items-center justify-center mb-1">
@@ -261,7 +261,7 @@ const AdminPanel = () => {
 							</div>
 						</div>
 						<div className="px-2 w-1/6">
-							<div className="p-6 border border-primary-300 rounded text-center flex flex-col justify-center">
+							<div className="p-6 border border-primary-100 rounded-md text-center flex flex-col justify-center">
 								<span className="text-2xl">
 									{state.isFetching ? (
 										<div className="flex items-center justify-center mb-1">
@@ -292,7 +292,7 @@ const AdminPanel = () => {
 							</div>
 						</div>
 						<div className="px-2 w-1/6">
-							<div className="p-6 border border-primary-300 rounded text-center flex flex-col justify-center">
+							<div className="p-6 border border-primary-100 rounded-md text-center flex flex-col justify-center">
 								<span className="text-2xl">
 									{state.isFetching ? (
 										<div className="flex items-center justify-center mb-1">
@@ -323,7 +323,7 @@ const AdminPanel = () => {
 							</div>
 						</div>
 						<div className="px-2 w-1/6">
-							<div className="p-6 border border-primary-300 rounded text-center flex flex-col justify-center">
+							<div className="p-6 border border-primary-100 rounded-md text-center flex flex-col justify-center">
 								<span className="text-2xl">
 									{state.isFetching ? (
 										<div className="flex items-center justify-center mb-1">
@@ -357,17 +357,17 @@ const AdminPanel = () => {
 				</div>
 				<div className="flex flex-wrap items-stretch mt-6 -mx-3">
 					<div className="w-2/12 px-3">
-						<div className="bg-white rounded border border-primary-300 p-5">
+						<div className="bg-white rounded-md shadow p-5">
 							<h2 className="uppercase text-sm font-normal tracking-wider">
 								Menú
 							</h2>
 							<ul className="list-none mt-3 mx-0 mb-0 p-0">
 								<li>
 									<button
-										className={`py-2.5 px-4 border  transition-all duration-300 ease-in-out mb-2 rounded cursor-pointer w-full text-left text-sm ${
+										className={`py-2.5 px-4 border  transition-all duration-300 ease-in-out mb-2 rounded-md cursor-pointer w-full text-left text-sm ${
 											state.activeTab == "activities"
 												? isActive
-												: "border-primary-300 bg-white hover:bg-primary-100"
+												: "border-primary-100 bg-white hover:bg-primary-50"
 										}`}
 										onClick={() =>
 											setState({ ...state, activeTab: "activities" })
@@ -378,10 +378,10 @@ const AdminPanel = () => {
 								</li>
 								<li>
 									<button
-										className={`py-2.5 px-4 border transition-all duration-300 ease-in-out mb-2 rounded cursor-pointer w-full text-left text-sm ${
+										className={`py-2.5 px-4 border transition-all duration-300 ease-in-out mb-2 rounded-md cursor-pointer w-full text-left text-sm ${
 											state.activeTab == "places"
 												? isActive
-												: "border-primary-300 bg-white hover:bg-primary-100"
+												: "border-primary-100 bg-white hover:bg-primary-50"
 										}`}
 										onClick={() => setState({ ...state, activeTab: "places" })}
 									>
@@ -390,10 +390,10 @@ const AdminPanel = () => {
 								</li>
 								<li>
 									<button
-										className={`py-2.5 px-4 border transition-all duration-300 ease-in-out mb-2 rounded cursor-pointer w-full text-left text-sm ${
+										className={`py-2.5 px-4 border transition-all duration-300 ease-in-out mb-2 rounded-md cursor-pointer w-full text-left text-sm ${
 											state.activeTab == "stories"
 												? isActive
-												: "border-primary-300 bg-white hover:bg-primary-100"
+												: "border-primary-100 bg-white hover:bg-primary-50"
 										}`}
 										onClick={() => setState({ ...state, activeTab: "stories" })}
 									>
@@ -402,10 +402,10 @@ const AdminPanel = () => {
 								</li>
 								<li>
 									<button
-										className={`py-2.5 px-4 border transition-all duration-300 ease-in-out mb-2 rounded cursor-pointer w-full text-left text-sm ${
+										className={`py-2.5 px-4 border transition-all duration-300 ease-in-out mb-2 rounded-md cursor-pointer w-full text-left text-sm ${
 											state.activeTab == "lists"
 												? isActive
-												: "border-primary-300 bg-white hover:bg-primary-100"
+												: "border-primary-100 bg-white hover:bg-primary-50"
 										}`}
 										onClick={() => setState({ ...state, activeTab: "lists" })}
 									>
@@ -414,10 +414,10 @@ const AdminPanel = () => {
 								</li>
 								<li>
 									<button
-										className={`py-2.5 px-4 border transition-all duration-300 ease-in-out mb-2 rounded cursor-pointer w-full text-left text-sm ${
+										className={`py-2.5 px-4 border transition-all duration-300 ease-in-out mb-2 rounded-md cursor-pointer w-full text-left text-sm ${
 											state.activeTab == "categories"
 												? isActive
-												: "border-primary-300 bg-white hover:bg-primary-100"
+												: "border-primary-100 bg-white hover:bg-primary-50"
 										}`}
 										onClick={() =>
 											setState({ ...state, activeTab: "categories" })
@@ -430,7 +430,7 @@ const AdminPanel = () => {
 						</div>
 					</div>
 					<div className="w-10/12 px-3">
-						<div className="bg-white rounded border border-primary-300 p-5">
+						<div className="bg-white rounded-md shadow p-5">
 							<h2 className="uppercase text-sm font-normal tracking-wider">
 								Llista de resultats
 							</h2>

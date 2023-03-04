@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import NavigationBar from "../../components/global/NavigationBar";
 import ContentService from "../../services/contentService";
@@ -68,7 +68,7 @@ const StoryListing = ({ storyDetails }) => {
 			slicedDescription.forEach((el, idx) => {
 				if (
 					typeof el.props.children == "string" &&
-					el.props.children.includes("carousel")
+					el.props.children.includes("post_images")
 				) {
 					const str = el.props.children;
 
@@ -156,7 +156,7 @@ const StoryListing = ({ storyDetails }) => {
 						</ul>
 					</div>
 				</div>
-				<div className="bg-primary-100 py-4">
+				<div className="bg-primary-50 py-4">
 					<AdSkyScrapperHoritzontal728x90 />
 				</div>
 				<main>
@@ -198,7 +198,7 @@ const StoryListing = ({ storyDetails }) => {
 							</div>
 
 							<div className="w-full max-w-full md:max-w-4xl md:mx-auto mt-6">
-								<div className="aspect-w-16 aspect-h-9 rounded overflow-hidden">
+								<div className="aspect-w-16 aspect-h-9 rounded-md overflow-hidden">
 									<picture>
 										<img
 											src={storyDetails.cover}

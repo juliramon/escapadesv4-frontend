@@ -57,16 +57,12 @@ const StoryForm = () => {
 			metaTitle: "",
 			metaDescription: "",
 		},
-		blopImages: {},
-		tempImages: [],
-		counter: 1,
 	};
 
 	const [state, setState] = useState(initialState);
 	const [editorData, setEditorData] = useState({});
 	const [queryId, setQueryId] = useState(null);
 	const [activeTab, setActiveTab] = useState("main");
-	const [images, setImages] = useState([]);
 
 	useEffect(() => {
 		if (router && router.route) {
@@ -117,7 +113,9 @@ const StoryForm = () => {
 		} else {
 			const choosenFiles = Array.prototype.slice.call(e.target.files);
 			const filesToUpload = [];
+
 			choosenFiles.forEach((file) => filesToUpload.push(file));
+
 			const blopImages = filesToUpload.map((file) => URL.createObjectURL(file));
 			const images = filesToUpload.map((image) => image);
 			setState({
@@ -148,7 +146,6 @@ const StoryForm = () => {
 	};
 
 	const removeImage = (elIdx) => {
-		console.log(elIdx);
 		const arrBlopImages = state.formData.blopImages;
 		const arrImages = state.formData.images;
 
@@ -375,6 +372,40 @@ const StoryForm = () => {
 										</div>
 									</form>
 									<div className="mt-8">
+										{state.formData.images.length > 0 ? (
+											<div className="text-primary-300 flex items-center mb-1.5 text-sm">
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													className="mr-1"
+													width={16}
+													height={16}
+													viewBox="0 0 24 24"
+													strokeWidth="2"
+													stroke="currentColor"
+													fill="none"
+													strokeLinecap="round"
+													strokeLinejoin="round"
+												>
+													<path
+														stroke="none"
+														d="M0 0h24v24H0z"
+														fill="none"
+													></path>
+													<path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
+													<path d="M12 8l.01 0"></path>
+													<path d="M11 12l1 0l0 4l1 0"></path>
+												</svg>
+												<span>
+													Hi ha{" "}
+													<strong>
+														{state.formData.images.length} imatges
+													</strong>{" "}
+													disponibles. Utilitza el shortcut{" "}
+													<strong>post_images(n, n)</strong> per inserir-les a
+													la publicació.
+												</span>
+											</div>
+										) : null}
 										<EditorNavbar editor={editor} />
 										<EditorContent
 											editor={editor}
@@ -389,9 +420,9 @@ const StoryForm = () => {
 											Imatges de la publicació
 										</span>
 										<div className="flex items-center flex-col max-w-full">
-											<div className="bg-white border border-primary-300 rounded-tl-md rounded-tr-md w-full overflow-hidden">
+											<div className="bg-white border border-primary-100 rounded-tl-md rounded-tr-md w-full overflow-hidden">
 												<div className="bg-white border-none h-auto p-3 justify-start">
-													<label className="form__label m-0 bg-white rounded shadow py-3 px-5 inline-flex items-center cursor-pointer">
+													<label className="form__label m-0 bg-white rounded-md shadow py-3 px-5 inline-flex items-center cursor-pointer">
 														<svg
 															xmlns="http://www.w3.org/2000/svg"
 															className="mr-2"
@@ -424,7 +455,7 @@ const StoryForm = () => {
 													</label>
 												</div>
 											</div>
-											<div className="w-full border border-primary-300 rounded-br-md rounded-bl-md -mt-px p-4 flex">
+											<div className="w-full border border-primary-100 rounded-br-md rounded-bl-md -mt-px p-4 flex">
 												<div className="columns-3 gap-5">{imagesList}</div>
 											</div>
 										</div>
@@ -486,9 +517,9 @@ const StoryForm = () => {
 								<div className="form__group">
 									<span className="form__label">Imatge de portada</span>
 									<div className="flex items-center flex-col max-w-full">
-										<div className="bg-white border border-primary-300 rounded-tl-md rounded-tr-md w-full overflow-hidden">
+										<div className="bg-white border border-primary-100 rounded-tl-md rounded-tr-md w-full overflow-hidden">
 											<div className="bg-white border-none h-auto p-3 justify-start">
-												<label className="form__label m-0 bg-white rounded shadow py-3 px-5 inline-flex items-center cursor-pointer">
+												<label className="form__label m-0 bg-white rounded-md shadow py-3 px-5 inline-flex items-center cursor-pointer">
 													<input
 														type="file"
 														className="hidden"
@@ -519,7 +550,7 @@ const StoryForm = () => {
 												</label>
 											</div>
 										</div>
-										<div className="w-full border border-primary-300 rounded-br-md rounded-bl-md -mt-px p-4 flex">
+										<div className="w-full border border-primary-100 rounded-br-md rounded-bl-md -mt-px p-4 flex">
 											<div className="-m-2.5 flex flex-wrap items-center">
 												{coverImage}
 											</div>

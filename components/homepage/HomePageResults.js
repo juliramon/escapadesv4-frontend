@@ -131,8 +131,8 @@ const HomePageResults = ({
 											className="w-full md:w-1/2 lg:w-1/4 px-2"
 											role="status"
 										>
-											<div className="flex justify-center items-center max-w-sm h-56 bg-gray-300 rounded-lg animate-pulse dark:bg-gray-700">
-												<div className="flex justify-center items-center w-full h-48 bg-gray-300 rounded sm:w-96 dark:bg-gray-700">
+											<div className="flex justify-center items-center max-w-sm h-56 bg-gray-300 rounded-md animate-pulse dark:bg-gray-700">
+												<div className="flex justify-center items-center w-full h-48 bg-gray-300 rounded-md sm:w-96 dark:bg-gray-700">
 													<svg
 														className="w-12 h-12 text-gray-200"
 														xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +172,7 @@ const HomePageResults = ({
 										/>
 									</picture>
 								</div>
-								<div className="w-full lg:w-9/12 rounded-lg bg-white relative z-10 shadow-md overflow-hidden">
+								<div className="w-full lg:w-9/12 rounded-md bg-white relative z-10 shadow-md overflow-hidden">
 									<RegularListBox
 										key={state.featuredList._id}
 										slug={state.featuredList.slug}
@@ -810,7 +810,7 @@ const HomePageResults = ({
 				</div>
 			</div>
 
-			<section className="py-12 md:py-24 bg-primary-100">
+			<section className="py-12 md:py-24 bg-primary-50">
 				<div className="container">
 					<div className="w-full flex flex-wrap items-stretch justify-center">
 						<div className="w-full md:w-1/3">
@@ -823,7 +823,7 @@ const HomePageResults = ({
 									src="../../cover-about-home.jpg"
 									data-src="../../cover-about-home.jpg"
 									alt="Escapades en parella, i molt més"
-									className="w-full h-full object-cover object-center rounded-lg"
+									className="w-full h-full object-cover object-center rounded-md"
 									width={300}
 									height={400}
 									loading="lazy"

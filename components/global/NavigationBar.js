@@ -247,12 +247,12 @@ const NavigationBar = ({ logo_url, path }) => {
 						</a>
 					</Link>
 					<div className="flex flex-wrap items-center lg:flex-auto">
-						<form className="hidden lg:flex flex-auto items-center bg-primary-100 mr-5 relative rounded overflow-hidden">
+						<form className="hidden lg:flex flex-auto items-center bg-primary-100 mr-5 relative rounded-md overflow-hidden">
 							<input
 								onKeyDown={handleKeyPress}
 								type="text"
 								placeholder="Cerca la vostra propera escapada..."
-								className="flex-auto bg-primary-100 px-5 py-2.5 placeholder:text-sm focus:outline-blue-200 focus:bg-white focus:text-primary-500"
+								className="flex-auto bg-primary-50 px-5 py-2.5 placeholder:text-sm focus:outline-blue-200 focus:bg-white focus:text-primary-500"
 							/>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
