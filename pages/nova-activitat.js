@@ -1,15 +1,16 @@
+import Head from "next/head";
+import { useRouter } from "next/router";
 import { useState, useEffect, useContext } from "react";
 import NavigationBar from "../components/global/NavigationBar";
-import ContentService from "../services/contentService";
-import Router, { useRouter } from "next/router";
-import Autocomplete from "react-google-autocomplete";
 import UserContext from "../contexts/UserContext";
-import Head from "next/head";
+import ContentService from "../services/contentService";
+import Autocomplete from "react-google-autocomplete";
 import PaymentService from "../services/paymentService";
-import FetchingSpinner from "../components/global/FetchingSpinner";
-import EditorNavbar from "../components/editor/EditorNavbar";
 import { useEditor, EditorContent } from "@tiptap/react";
+import EditorNavbar from "../components/editor/EditorNavbar";
 import StarterKit from "@tiptap/starter-kit";
+import Image from "@tiptap/extension-image";
+import Placeholder from "@tiptap/extension-placeholder";
 
 const ActivityForm = () => {
 	// Validate if user is allowed to access this view
@@ -36,17 +37,6 @@ const ActivityForm = () => {
 					router.push("/signup/confirmacio-correu");
 				}
 			}
-		}
-		if (
-			router.pathname.includes("editar") ||
-			router.pathname.includes("nova-activitat") ||
-			router.pathname.includes("nou-allotjament") ||
-			router.pathname.includes("nova-historia") ||
-			router.pathname.includes("nova-llista")
-		) {
-			document.querySelector("body").classList.add("bg-primary-100");
-		} else {
-			document.querySelector("body").classList.remove("bg-primary-100");
 		}
 	}, [user]);
 
@@ -93,7 +83,7 @@ const ActivityForm = () => {
 	const [queryId, setQueryId] = useState(null);
 	const [stateStep, setStateStep] = useState({ step: "null" });
 	const [activeTab, setActiveTab] = useState("main");
-	const [description, setDescription] = useState({});
+	const [editorData, setEditorData] = useState({});
 
 	useEffect(() => {
 		if (router && router.route) {
@@ -120,14 +110,25 @@ const ActivityForm = () => {
 	}, []);
 
 	const editor = useEditor({
-		extensions: [StarterKit],
-		content: description !== "" ? description : "",
+		extensions: [
+			StarterKit,
+			Image.configure({
+				inline: false,
+				HTMLAttributes: {
+					class: "img-frame",
+				},
+			}),
+			Placeholder.configure({
+				placeholder: "Comença a escriure la teva història...",
+			}),
+		],
+		content: "",
 		onUpdate: (props) => {
 			const data = {
 				html: props.editor.getHTML(),
 				text: props.editor.state.doc.textContent,
 			};
-			setDescription(data.html);
+			setEditorData(data);
 		},
 		autofocus: false,
 		parseOptions: {
@@ -136,8 +137,8 @@ const ActivityForm = () => {
 	});
 
 	const saveFileToStatus = (e) => {
-		const fileToUpload = e.target.files[0];
 		if (e.target.name === "cover") {
+			const fileToUpload = e.target.files[0];
 			setState({
 				...state,
 				formData: {
@@ -147,25 +148,80 @@ const ActivityForm = () => {
 				},
 			});
 		} else {
+			const choosenFiles = Array.prototype.slice.call(e.target.files);
+			const filesToUpload = [];
+
+			choosenFiles.forEach((file) => filesToUpload.push(file));
+
+			const blopImages = filesToUpload.map((file) => URL.createObjectURL(file));
+			const images = filesToUpload.map((image) => image);
 			setState({
 				...state,
 				formData: {
 					...state.formData,
-					blopImages: [
-						...state.formData.blopImages,
-						URL.createObjectURL(fileToUpload),
-					],
-					images: [...state.formData.images, fileToUpload],
+					blopImages: [...state.formData.blopImages, ...blopImages],
+					images: [...state.formData.images, ...images],
 				},
 			});
 		}
 	};
 
+	const removeImage = (elIdx) => {
+		const arrBlopImages = state.formData.blopImages;
+		const arrImages = state.formData.images;
+
+		arrBlopImages.forEach((img, imgIdx) => {
+			if (imgIdx === elIdx) {
+				arrBlopImages.splice(elIdx, 1);
+			}
+		});
+
+		arrImages.forEach((img, imgIdx) => {
+			if (imgIdx === elIdx) {
+				arrImages.splice(elIdx, 1);
+			}
+		});
+
+		setState({
+			...state,
+			formData: {
+				...state.formData,
+				blopImages: arrBlopImages,
+				images: arrImages,
+			},
+		});
+	};
+
 	const imagesList = state.formData.blopImages.map((el, idx) => (
 		<div
-			className="m-2 relative w-48 h-auto overflow-hidden rounded-md border-8 border-white shadow"
+			className="relative overflow-hidden rounded-md border-8 border-white shadow mb-5"
 			key={idx}
 		>
+			<button
+				type="button"
+				onClick={() => removeImage(idx)}
+				className="w-7 h-7 bg-black bg-opacity-70 text-white hover:bg-opacity-100 transition-all duration-300 ease-in-out absolute top-2 right-2 rounded-full flex items-center justify-center"
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					className="icon icon-tabler icon-tabler-trash"
+					width={16}
+					height={16}
+					viewBox="0 0 24 24"
+					strokeWidth="2"
+					stroke="currentColor"
+					fill="none"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				>
+					<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+					<path d="M4 7l16 0"></path>
+					<path d="M10 11l0 6"></path>
+					<path d="M14 11l0 6"></path>
+					<path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+					<path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+				</svg>
+			</button>
 			<img src={el} />
 		</div>
 	));
@@ -261,6 +317,11 @@ const ActivityForm = () => {
 	};
 
 	const handleChange = (e) => {
+		if (e.target.nodeName == "TEXTAREA") {
+			e.target.style.height = "0px";
+			const scrollHeight = e.target.scrollHeight;
+			e.target.style.height = scrollHeight + "px";
+		}
 		setState({
 			...state,
 			formData: {
@@ -311,7 +372,7 @@ const ActivityForm = () => {
 				region,
 				coverCloudImage,
 				cloudImages,
-				description,
+				editorData.html,
 				phone,
 				website,
 				activity_full_address,
@@ -390,7 +451,7 @@ const ActivityForm = () => {
 			website &&
 			images.length > 0 &&
 			coverImage !== "" &&
-			description &&
+			editorData &&
 			duration &&
 			price &&
 			organization &&
@@ -399,7 +460,7 @@ const ActivityForm = () => {
 		) {
 			setState((state) => ({ ...state, isReadyToSubmit: true }));
 		}
-	}, [state.formData]);
+	}, [state.formData, editorData]);
 
 	useEffect(() => {
 		if (router.query.step) {
@@ -432,10 +493,6 @@ const ActivityForm = () => {
 				</label>
 			)
 		);
-	}
-
-	if (!loadPage) {
-		return <FetchingSpinner />;
 	}
 
 	return (
@@ -1042,29 +1099,30 @@ const ActivityForm = () => {
 																<input
 																	type="file"
 																	className="hidden"
+																	multiple="multiple"
 																	onChange={saveFileToStatus}
 																/>
 															</label>
 														</div>
 													</div>
 													<div className="w-full border border-primary-100 rounded-br-md rounded-bl-md -mt-px p-4 flex">
-														<div className="-m-2.5 flex flex-wrap items-center">
+														<div className="columns-7 gap-5">
 															{imagesList}
 														</div>
 													</div>
 												</div>
 											</div>
-											<div className="form__group">
-												<label htmlFor="description" className="form__label">
-													Descripció
-												</label>
-												<EditorNavbar editor={editor} />
-												<EditorContent
-													editor={editor}
-													className="form-composer__editor"
-												/>
-											</div>
 										</form>
+										<div className="form__group">
+											<label htmlFor="description" className="form__label">
+												Descripció
+											</label>
+											<EditorNavbar editor={editor} />
+											<EditorContent
+												editor={editor}
+												className="form-composer__editor"
+											/>
+										</div>
 									</div>
 								) : (
 									<div className="form__wrapper">

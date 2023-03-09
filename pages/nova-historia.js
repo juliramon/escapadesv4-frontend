@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import NavigationBar from "../components/global/NavigationBar";
 import UserContext from "../contexts/UserContext";
 import ContentService from "../services/contentService";
