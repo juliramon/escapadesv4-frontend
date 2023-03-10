@@ -242,7 +242,7 @@ const PlaceList = ({ user, totalItems, places, allPlaces, numPages }) => {
 					<ListingHeader
 						title={`<span class="text-secondary-500">Allotjaments</span> amb encant a Catalunya`}
 						subtitle={`Descobreix <span class="inline-block bg-tertiary-100 px-2">${state.numPlaces} allotjaments amb encant</span>, hotels boutique, apartaments, cabanyes als arbres i cases rurals de somni per a una escapada en parella increïble a Catalunya`}
-						figCaption={`📍 Escapada a Mas Farner, hotel rural a Llívia (Cerdanya)`}
+						figCaption={`Escapada a Mas Farner, hotel rural a Llívia (Cerdanya)`}
 						image={
 							"https://res.cloudinary.com/juligoodie/image/upload/v1664908197/getaways-guru/chlfg0bnkyyydrgtr6tp.jpg"
 						}

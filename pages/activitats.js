@@ -241,7 +241,7 @@ const ActivityList = ({ totalItems, activities, allActivities, numPages }) => {
 					<ListingHeader
 						title={`<span class="text-secondary-500">Activitats</span> per fer en parella a Catalunya`}
 						subtitle={`Descobreix <span class="inline-block bg-tertiary-100 px-2">${state.numActivities} activitats en parella</span>, excursions, restaurants i paratges extraordinaris per a una escapada en parella de somni a Catalunya`}
-						figCaption={`📍 Escapada a les Basses de Coll de Nargó (Alt Urgell)`}
+						figCaption={`Escapada a les Basses de Coll de Nargó (Alt Urgell)`}
 						image={
 							"https://res.cloudinary.com/juligoodie/image/upload/v1657047006/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.38_zsnyc7.jpg"
 						}
