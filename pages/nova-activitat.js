@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { useState, useEffect, useContext } from "react";
 import NavigationBar from "../components/global/NavigationBar";
 import UserContext from "../contexts/UserContext";
