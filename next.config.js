@@ -30,7 +30,7 @@ module.exports = withTM({
 				permanent: true,
 			},
 			{
-				source: "/listing-region/barcelona/?search_keywords=&search_region=178&search_categories[]=&filter_job_type[]=",
+				source: "/listing-region/barcelona/\?search_keywords=&search_region=178&search_categories[]=&filter_job_type[]=",
 				destination: "/escapades-catalunya/escapades-barcelona",
 				permanent: true,
 			},
@@ -40,12 +40,12 @@ module.exports = withTM({
 				permanent: true,
 			},
 			{
-				source: "/listing-type/refugi?search_keywords=&search_region=178&search_categories[]=179&filter_job_type[]=refugi",
+				source: "/listing-type/refugi\?search_keywords=&search_region=178&search_categories[]=179&filter_job_type[]=refugi",
 				destination: "/refugis",
 				permanent: true,
 			},
 			{
-				source: "/listing-type/refugi/?search_keywords=&search_region=182&search_categories[]=&filter_job_type[]=refugi",
+				source: "/listing-type/refugi/\?search_keywords=&search_region=182&search_categories[]=&filter_job_type[]=refugi",
 				destination: "/refugis",
 				permanent: true,
 			},
