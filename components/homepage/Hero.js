@@ -19,6 +19,14 @@ const Hero = ({ mostRecentStories }) => {
         type: "carousel",
         perView: 3,
         gap: 18,
+        breakpoints: {
+          1024: {
+            perView: 2,
+          },
+          640: {
+            perView: 1,
+          },
+        },
       }).mount();
     }
   });
@@ -26,7 +34,7 @@ const Hero = ({ mostRecentStories }) => {
   return (
     <>
       <section id="hero" className="flex flex-wrap items-stretch">
-        <div className="w-full bg-primary-900 flex items-center justify-center verflow-hidden relative pt-20 pb-44 px-20">
+        <div className="w-full bg-primary-900 flex items-center justify-center verflow-hidden relative pt-20 pb-44 px-6 xl:px-20">
           <picture className="absolute inset-0 w-full h-full z-0 opacity-30">
             <img src="/shape.svg" className="w-full h-full object-cover" />
           </picture>
@@ -41,7 +49,7 @@ const Hero = ({ mostRecentStories }) => {
           </div>
         </div>
 
-        <div className="w-full h-full lg:w-9/12 mx-auto -mt-24 rounded-md overflow-hidden">
+        <div className="w-full h-full xl:w-9/12 mx-auto -mt-24 rounded-md overflow-hidden px-6 xl:px-0">
           <div className="glide js-slider-cover">
             <div className="glide__track" data-glide-el="track">
               <div className="glide__slides">
@@ -58,6 +66,10 @@ const Hero = ({ mostRecentStories }) => {
                       const coverPath = story.cover.substring(0, 51);
                       const imageId = story.cover.substring(63);
                       const coverImg = `${coverPath}w_468,h_263,c_fill/${imageId}`;
+
+                      const avatarPath = story.owner.avatar.substring(0, 51);
+                      const ownerImageId = story.owner.avatar.substring(63);
+                      const avatarImg = `${avatarPath}w_24,h_24,c_fill/${ownerImageId}`;
 
                       return (
                         <Link href={"histories/" + story.slug}>
@@ -79,10 +91,10 @@ const Hero = ({ mostRecentStories }) => {
                                 <div className="w-6 h-6 mr-2 rounded-full overflow-hidden">
                                   <picture>
                                     <img
-                                      src={story.owner.avatar}
+                                      src={avatarImg}
                                       alt={story.owner.fullName}
-                                      width="32"
-                                      height="32"
+                                      width="24"
+                                      height="24"
                                       className="w-full h-full object-cover"
                                       loading="lazy"
                                     />

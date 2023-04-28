@@ -7,7 +7,6 @@ import Footer from "../components/global/Footer";
 import HomePageResults from "../components/homepage/HomePageResults";
 import { useRouter } from "next/router";
 import UserContext from "../contexts/UserContext";
-import FollowBox from "../components/global/FollowBox";
 import LocalBusiness from "../components/richsnippets/LocalBusiness";
 import GlobalMetas from "../components/head/GlobalMetas";
 
