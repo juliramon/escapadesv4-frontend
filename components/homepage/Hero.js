@@ -34,10 +34,7 @@ const Hero = ({ mostRecentStories }) => {
   return (
     <>
       <section id="hero" className="flex flex-wrap items-stretch">
-        <div className="w-full bg-primary-900 flex items-center justify-center verflow-hidden relative pt-20 pb-44 px-6 xl:px-20">
-          <picture className="absolute inset-0 w-full h-full z-0 opacity-30">
-            <img src="/shape.svg" className="w-full h-full object-cover" />
-          </picture>
+        <div className="w-full bg-primary-900 flex items-center justify-center verflow-hidden relative pt-20 pb-44 px-6 xl:px-20 bg-geo">
           <div className="max-w-sm text-center relative z-10">
             <span className="uppercase text-sm text-white tracking-wider">
               escapadesenparella.cat
