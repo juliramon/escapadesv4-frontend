@@ -1,0 +1,9 @@
+.underlined-element
+    @apply relative inline
+    
+    &::after
+        content: ''
+        @apply block w-0 absolute -bottom-1 inset-x-0 bg-secondary-500 h-1 rounded-full transition-all duration-700 ease-in-out -rotate-2
+        
+    &.active::after
+        @apply w-full
