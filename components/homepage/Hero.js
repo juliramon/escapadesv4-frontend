@@ -46,7 +46,7 @@ const Hero = ({ mostRecentStories }) => {
           </div>
         </div>
 
-        <div className="w-full h-full xl:w-9/12 mx-auto -mt-24 rounded-md overflow-hidden px-6 xl:px-0">
+        <div className="w-full max-w-[1600px] mx-auto -mt-24 rounded-md overflow-hidden px-6">
           <div className="glide js-slider-cover">
             <div className="glide__track" data-glide-el="track">
               <div className="glide__slides">
