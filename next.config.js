@@ -85,7 +85,7 @@ module.exports = withTM({
         permanent: true,
       },
       {
-        source: "/escapades/hotel-rural-vinyes-de-lemporda/?db-claim",
+        source: "/escapades/hotel-rural-vinyes-de-lemporda/",
         destination: "/escapades-romantiques/hotel-rural-vinyes-emporda",
         permanent: true,
       },
@@ -135,6 +135,21 @@ module.exports = withTM({
         source:
           "/escapades-gastronomiques/2016/restaurant-orquestra-dargentona/",
         destination: "/escapades-gastronomiques",
+        permanent: true,
+      },
+      {
+        source: "/activitats/restaurant-maria-de-cadaques",
+        destination: "/escapades-gastronomiques/restaurant-maria-de-cadaques",
+        permanent: true,
+      },
+      {
+        source: "/escapades-romantiques/2017/apartament-parellada",
+        destination: "/escapades-romantiques/apartament-spa-parellada",
+        permanent: true,
+      },
+      {
+        source: "/escapades-pirineus",
+        destination: "/escapades-catalunya/escapades-pirineus",
         permanent: true,
       },
     ];
