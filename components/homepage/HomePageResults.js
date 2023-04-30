@@ -550,8 +550,8 @@ const HomePageResults = ({
                   </div>
                 </a>
                 <a
-                  href={`/carabanes`}
-                  title="Carabanes"
+                  href={`/caravanes`}
+                  title="Caravanes"
                   rel="nofollow"
                   className="flex items-center w-full md:w-1/2 lg:w-1/3 p-4"
                 >
@@ -574,9 +574,9 @@ const HomePageResults = ({
                     </div>
                   </div>
                   <div className="right">
-                    <h3>Carabanes</h3>
+                    <h3>Caravanes</h3>
                     <span className="block w-full text-base">
-                      {carabanes} carabanes
+                      {carabanes} caravanes
                     </span>
                     <span className="flex items-center w-full mt-2">
                       Veure'ls tots{" "}
