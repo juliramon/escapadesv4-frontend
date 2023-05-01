@@ -9,7 +9,6 @@ import FooterHistoria from "../../components/global/FooterHistoria";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
 import Article from "../../components/richsnippets/Article";
-import AdSkyScrapperHoritzontal728x90 from "../../components/ads/AdSkyScrapperHoritzontal728x90";
 import AdInArticle from "../../components/ads/AdInArticle";
 
 const StoryListing = ({ storyDetails }) => {
@@ -49,12 +48,14 @@ const StoryListing = ({ storyDetails }) => {
 
     return (
       <div className="columns-1 md:columns-2 gap-2.5 md:gap-4">
-        {images.map((image, key) => {
+        {images.map((image, idx) => {
           return (
-            <picture id={key} className="block mb-2.5 md:mb-4">
+            <picture key={idx} className="block mb-2.5 md:mb-4">
               <img
                 src={image}
-                alt={`${storyDetails.title} - ${key + 1}`}
+                alt={`${storyDetails.title} - ${idx + 1}`}
+                width={400}
+                height={300}
                 loading="lazy"
               />
             </picture>
@@ -181,7 +182,7 @@ const StoryListing = ({ storyDetails }) => {
                     <div className="rounded-full overflow-hidden w-8 h-8 mr-2.5">
                       <picture>
                         <img
-                          src={coverAuthorImg.avatar}
+                          src={coverAuthorImg}
                           alt={storyDetails.owner.fullName}
                           width={32}
                           height={32}
