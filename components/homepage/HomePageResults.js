@@ -450,7 +450,7 @@ const HomePageResults = ({
           </section>
 
           {/* Getaway categories */}
-          <section className="py-16" id="placesTypes">
+          <section className="pt-16 pb-20 lg:pb-24" id="placesTypes">
             <div className="flex md:justify-center">
               <h2 className="mb-0 text-2xl md:text-center max-w-md">
                 Escapades en parella a Catalunya, tot un món d'escapades per
