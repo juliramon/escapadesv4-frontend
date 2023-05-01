@@ -51,7 +51,7 @@ const Hero = ({ mostRecentStories }) => {
             <div className="glide__track" data-glide-el="track">
               <div className="glide__slides">
                 {mostRecentStories.length > 0
-                  ? mostRecentStories.map((story) => {
+                  ? mostRecentStories.map((story, idx) => {
                       const createdDate = new Date(
                         story.createdAt
                       ).toLocaleDateString("ca-es", {
@@ -69,7 +69,7 @@ const Hero = ({ mostRecentStories }) => {
                       const avatarImg = `${avatarPath}w_24,h_24,c_fill/${ownerImageId}`;
 
                       return (
-                        <Link href={"histories/" + story.slug}>
+                        <Link href={"histories/" + story.slug} key={idx}>
                           <a className="glide__slide relative ">
                             <picture className="block aspect-w-16 aspect-h-9 relative after:block after:w-full after:h-full after:z-20 after:content after:absolute after:inset-0 after:bg-primary-500 after:bg-opacity-0 shadow-md shadow-primary-100 rounded-md overflow-hidden">
                               <img
@@ -115,6 +115,51 @@ const Hero = ({ mostRecentStories }) => {
                       );
                     })
                   : ""}
+              </div>
+              <div
+                className="glide__arrows flex items-center justify-center space-x-3 mt-4"
+                data-glide-el="controls"
+              >
+                <button
+                  className="glide__arrow glide__arrow--left w-10 h-10 flex items-center justify-center bg-secondary-500 rounded-full hover:bg-secondary-900 transition-all duration-300 ease-in-out"
+                  data-glide-dir="<"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="text-white"
+                    width={24}
+                    height={24}
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M15 6l-6 6l6 6"></path>
+                  </svg>
+                </button>
+                <button
+                  className="glide__arrow glide__arrow--right w-10 h-10 flex items-center justify-center bg-secondary-500 rounded-full hover:bg-secondary-900 transition-all duration-300 ease-in-out"
+                  data-glide-dir=">"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="text-white"
+                    width={24}
+                    height={24}
+                    viewBox="0 0 24 24"
+                    strokeWidth="2"
+                    stroke="currentColor"
+                    fill="none"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                    <path d="M9 6l6 6l-6 6"></path>
+                  </svg>
+                </button>
               </div>
             </div>
           </div>

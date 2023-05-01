@@ -1,15 +1,10 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { Navigation } from "swiper";
-import { Swiper, SwiperSlide } from "swiper/react";
 import PublicSquareBox from "../../components/listings/PublicSquareBox";
 import RegularListBox from "../../components/listings/RegularListBox";
-import FeaturedRegionBox from "../listings/FeaturedRegionBox";
-
-import "swiper/css";
-import "swiper/css/navigation";
 
 const HomePageResults = ({
+  categories,
   featuredRegions,
   featuredActivities,
   featuredList,
@@ -21,6 +16,8 @@ const HomePageResults = ({
   totals,
 }) => {
   const initialState = {
+    placeCategories: [],
+    activityCategories: [],
     featuredRegions: [],
     mostRatedGetaways: [],
     mostRecentStories: [],
@@ -35,6 +32,7 @@ const HomePageResults = ({
 
   useEffect(() => {
     if (
+      categories.length > 0 ||
       featuredRegions.length > 0 ||
       featuredActivities.length > 0 ||
       featuredList.length > 0 ||
@@ -44,8 +42,21 @@ const HomePageResults = ({
       featuredAdventureGetaways.length > 0 ||
       featuredGastronomicGetaways.length > 0
     ) {
+      let placeCategories = [];
+      let activityCategories = [];
+
+      categories.filter((el) => {
+        if (el.isPlace == true) {
+          placeCategories.push(el);
+        } else {
+          activityCategories.push(el);
+        }
+      });
+
       setState({
         ...state,
+        placeCategories: placeCategories,
+        activityCategories: activityCategories,
         featuredRegions: featuredRegions,
         mostRatedGetaways: mostRatedPlaces,
         featuredList: featuredList[0],
@@ -62,23 +73,13 @@ const HomePageResults = ({
   const date = new Date();
   const foundationYears = date.getFullYear() - 2015;
 
-  let hotels, apartaments, casesrurals, casesarbre, refugis, carabanes;
-  if (state.totals !== undefined) {
-    hotels = state.totals.objPlaces.hotels;
-    apartaments = state.totals.objPlaces.apartaments;
-    casesrurals = state.totals.objPlaces.casesrurals;
-    casesarbre = state.totals.objPlaces.casesarbre;
-    refugis = state.totals.objPlaces.refugis;
-    carabanes = state.totals.objPlaces.carabanes;
-  }
-
   return (
     <div id="homePageResults" className="relative z-30">
       <div className="container">
         <div className="w-full">
           {/* Most rated getaways */}
-          <section className="pt-12">
-            <h2>Els allotjaments més ben valorats</h2>
+          <section className="pt-12 lg:pt-20">
+            <h2 className="mb-0">Els allotjaments més ben valorats</h2>
             <div className="flex flex-wrap items-stretch -mx-1.5 mt-2">
               {state.mostRatedGetaways.length > 0
                 ? state.mostRatedGetaways.map((el, idx) => {
@@ -145,146 +146,33 @@ const HomePageResults = ({
                     </div>
                   ))}
             </div>
-          </section>
-
-          {/* Featured list */}
-          {state.featuredList ? (
-            <section className="pt-12">
-              <h2>La llista destacada</h2>
-              <div className="flex flex-wrap items-center justify-end overflow-hidden relative rounded-md py-12 px-10 lg:py-12 lg:pr-20 mt-4">
-                <div className="absolute inset-0 rounded-md overflow-hidden">
-                  <picture>
-                    <source
-                      srcSet="../../bg-home-llista-nadal-s.webp"
-                      type="image/webp"
-                    />
-                    <img
-                      src="../../bg-home-llista-nadal-s.jpg"
-                      data-src="../../bg-home-llista-nadal-s.jpg"
-                      alt="La llista destacada"
-                      className="w-full lg:w-8/12 h-full object-cover rounded-md overflow-hidden"
-                      width=""
-                      height=""
-                      loading="lazy"
-                    />
-                  </picture>
-                </div>
-                <div className="w-full lg:w-9/12 rounded-md bg-white relative z-10 shadow-md overflow-hidden">
-                  <RegularListBox
-                    key={state.featuredList._id}
-                    slug={state.featuredList.slug}
-                    cover={state.featuredList.cover}
-                    title={state.featuredList.title}
-                    subtitle={state.featuredList.subtitle}
-                    avatar={state.featuredList.owner.avatar}
-                    owner={state.featuredList.owner.fullName}
-                    date={state.featuredList.createdAt}
-                  />
-                </div>
-              </div>
-              <figcaption className="text-xs mt-2">
-                Il·lustració: Andrea Prat
-              </figcaption>
-            </section>
-          ) : null}
-
-          {/* Featured regions */}
-          <section className="pt-12">
-            <h2 className="mb-1">Escapades per Catalunya</h2>
-            <p className="font-light">
-              Exploreu tots els racons de casa nostra; descobriu les millors
-              escapades en parella per Catalunya
-            </p>
-
-            <div className="flex flex-wrap items-center relative mt-3 -mx-1.5">
-              <Swiper
-                modules={[Navigation]}
-                spaceBetween={0}
-                slidesPerView={1}
-                navigation={{
-                  nextEl: ".swiper-prev",
-                  prevEl: ".swiper-next",
-                }}
-                breakpoints={{
-                  768: {
-                    slidesPerView: 3,
-                  },
-                  1024: {
-                    slidesPerView: 4,
-                  },
-                  1280: {
-                    slidesPerView: 4,
-                  },
-                }}
+            <a
+              href="/allotjaments"
+              title="Veure més allotjaments"
+              className="button button__ghost button__med text-[16px] inline-flex items-center mt-2.5 transition-all duration-300 ease-in-out"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="mr-1.5"
+                width={20}
+                height={20}
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
-                {state.featuredRegions.length > 0
-                  ? state.featuredRegions.map((el) => {
-                      while (state.featuredRegions.indexOf(el) < 6) {
-                        return (
-                          <SwiperSlide>
-                            <FeaturedRegionBox
-                              key={el._id}
-                              slug={el.slug}
-                              id={el._id}
-                              image={el.image}
-                              title={el.title}
-                            />
-                          </SwiperSlide>
-                        );
-                      }
-                    })
-                  : null}
-              </Swiper>
-              <button
-                className="bg-white shadow-xl w-10 h-10 flex items-center justify-center swiper-next absolute top-1/2 -left-4 z-40 transform -translate-y-1/2 swiper-button"
-                aria-label="Botó slide anterior"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="icon icon-tabler icon-tabler-arrow-narrow-left text-primary-500"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <line x1="5" y1="12" x2="9" y2="16" />
-                  <line x1="5" y1="12" x2="9" y2="8" />
-                </svg>
-              </button>
-              <button
-                className="bg-white shadow-xl w-10 h-10 flex items-center justify-center swiper-prev absolute top-1/2 -right-4 z-40 transform -translate-y-1/2 swiper-button"
-                aria-label="Botó slide següent"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="icon icon-tabler icon-tabler-arrow-narrow-right text-primary-500"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <line x1="15" y1="16" x2="19" y2="12" />
-                  <line x1="15" y1="8" x2="19" y2="12" />
-                </svg>
-              </button>
-            </div>
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M9 6l6 6l-6 6"></path>
+              </svg>
+              Veure'n més
+            </a>
           </section>
 
           {/* Most popular romantic getaways */}
           <section className="pt-12">
-            <h2>Escapades romàntiques per desconnectar </h2>
+            <h2 className="mb-0">Escapades romàntiques per desconnectar</h2>
             <div className="flex flex-wrap items-stretch -mx-1.5 mt-2">
               {state.featuredRomanticGetaways.length > 0
                 ? state.featuredRomanticGetaways.map((el) => {
@@ -330,334 +218,96 @@ const HomePageResults = ({
                   })
                 : null}
             </div>
+            <a
+              href="/escapades-romantiques"
+              title="Veure més escapades romàntiques"
+              className="button button__ghost button__med text-[16px] inline-flex items-center mt-2.5 transition-all duration-300 ease-in-out"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="mr-1.5"
+                width={20}
+                height={20}
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M9 6l6 6l-6 6"></path>
+              </svg>
+              Veure'n més
+            </a>
           </section>
 
-          {/* Place types section */}
-          <section className="pt-12" id="placesTypes">
-            <div className="">
-              <h2 className="">Allotjaments pensats per a parelles</h2>
-            </div>
-            <div className="mt-5">
-              <div className="flex flex-wrap items-stretch justify-between -m-4">
-                <a
-                  href={`/hotels-amb-encant`}
-                  title="Hotels amb encant"
-                  rel="follow"
-                  className="flex items-center w-full md:w-1/2 lg:w-1/3 p-4"
-                >
-                  <div className="left">
-                    <div className="w-40 h-auto mr-5">
-                      <picture>
-                        <source
-                          srcSet="../../hotels-amb-encant-escapades-en-parella.webp"
-                          type="image/webp"
-                        />
-                        <img
-                          src="../../hotels-amb-encant-escapades-en-parella.png"
-                          data-src="../../hotels-amb-encant-escapades-en-parella.png"
-                          alt="Hotels amb encant"
-                          width="160"
-                          height="160"
-                          loading="lazy"
-                        />
-                      </picture>
-                    </div>
-                  </div>
-                  <div className="right">
-                    <h3 className="text-lg my-0 font-medium line-clamp-1">
-                      Hotels amb encant
-                    </h3>
-                    <span className="mt-0.5 inline-flex text-15 font-light text-primary-400 leading-tight">
-                      {hotels} hotels amb encant per a la vostra escapada en
-                      parella de somni
-                    </span>
-                    <span className="mt-3 text-13 text-secondary-800 group-hover:text-secondary-900 transition-all duration-300 ease-in-out inline-flex items-center leading-tight">
-                      Veure'ls tots{" "}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="icon icon-tabler icon-tabler-arrow-narrow-right ml-1 relative top-0.5"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <line x1="15" y1="16" x2="19" y2="12" />
-                        <line x1="15" y1="8" x2="19" y2="12" />
-                      </svg>
-                    </span>
-                  </div>
-                </a>
-                <a
-                  href={`/apartaments-per-a-parelles`}
-                  title="Apartaments de somni"
-                  rel="nofollow"
-                  className="flex items-center w-full md:w-1/2 lg:w-1/3 p-4"
-                >
-                  <div className="left">
-                    <div className="w-40 h-auto mr-5">
-                      <picture>
-                        <source
-                          srcSet="../../apartamens-escapades-en-parella.webp"
-                          type="image/webp"
-                        />
-                        <img
-                          src="../../apartamens-escapades-en-parella.png"
-                          data-src="../../apartamens-escapades-en-parella.png"
-                          alt="Apartaments de somni"
-                          width="160"
-                          height="160"
-                          loading="lazy"
-                        />
-                      </picture>
-                    </div>
-                  </div>
-                  <div className="right">
-                    <h3 className="text-lg my-0 font-medium line-clamp-1">
-                      Apartaments de somni
-                    </h3>
-                    <span className="mt-0.5 inline-flex text-15 font-light text-primary-400 leading-tight">
-                      {apartaments} apartaments de somni des d'on descobrir
-                      Catalunya
-                    </span>
-                    <span className="mt-3 text-13 text-secondary-800 group-hover:text-secondary-900 transition-all duration-300 ease-in-out inline-flex items-center leading-tight">
-                      Veure'ls tots{" "}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="icon icon-tabler icon-tabler-arrow-narrow-right ml-1 relative top-0.5"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <line x1="15" y1="16" x2="19" y2="12" />
-                        <line x1="15" y1="8" x2="19" y2="12" />
-                      </svg>
-                    </span>
-                  </div>
-                </a>
-                <a
-                  href={`/cabanyes-als-arbres`}
-                  title="Cases-arbre"
-                  rel="follow"
-                  className="flex items-center w-full md:w-1/2 lg:w-1/3 p-4"
-                >
-                  <div className="left">
-                    <div className="w-40 h-auto mr-5">
-                      <picture>
-                        <source
-                          srcSet="../../cases-arbre-escapades-en-parella.webp"
-                          type="image/webp"
-                        />
-                        <img
-                          src="../../cases-arbre-escapades-en-parella.png"
-                          data-src="../../cases-arbre-escapades-en-parella.png"
-                          alt="Cases-arbre"
-                          width="160"
-                          height="160"
-                          loading="lazy"
-                        />
-                      </picture>
-                    </div>
-                  </div>
-                  <div className="right">
-                    <h3>Cases-arbre</h3>
-                    <span className="block w-full text-base">
-                      {casesarbre} cases-arbre
-                    </span>
-                    <span className="flex items-center w-full mt-2">
-                      Veure'ls tots{" "}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="icon icon-tabler icon-tabler-arrow-narrow-right ml-1 relative top-0.5"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <line x1="15" y1="16" x2="19" y2="12" />
-                        <line x1="15" y1="8" x2="19" y2="12" />
-                      </svg>
-                    </span>
-                  </div>
-                </a>
-                <a
-                  href={`/cases-rurals`}
-                  title="Cases rurals"
-                  rel="follow"
-                  className="flex items-center w-full md:w-1/2 lg:w-1/3 p-4"
-                >
-                  <div className="left">
-                    <div className="w-40 h-auto mr-5">
-                      <picture>
-                        <source
-                          srcSet="../../cases-rurals-escapades-en-parella.webp"
-                          type="image/webp"
-                        />
-                        <img
-                          src="../../cases-rurals-escapades-en-parella.png"
-                          data-src="../../cases-rurals-escapades-en-parella.png"
-                          alt="Cases rurals"
-                          width="160"
-                          height="160"
-                          loading="lazy"
-                        />
-                      </picture>
-                    </div>
-                  </div>
-                  <div className="right">
-                    <h3>Cases rurals</h3>
-                    <span className="block w-full text-base">
-                      {casesrurals} cases rurals
-                    </span>
-                    <span className="flex items-center w-full mt-2">
-                      Veure'ls tots{" "}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="icon icon-tabler icon-tabler-arrow-narrow-right ml-1 relative top-0.5"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <line x1="15" y1="16" x2="19" y2="12" />
-                        <line x1="15" y1="8" x2="19" y2="12" />
-                      </svg>
-                    </span>
-                  </div>
-                </a>
-                <a
-                  href={`/caravanes`}
-                  title="Caravanes"
-                  rel="nofollow"
-                  className="flex items-center w-full md:w-1/2 lg:w-1/3 p-4"
-                >
-                  <div className="left">
-                    <div className="w-40 h-auto mr-5">
-                      <picture>
-                        <source
-                          srcSet="../../carabanes-escapades-en-parella.webp"
-                          type="image/webp"
-                        />
-                        <img
-                          src="../../carabanes-escapades-en-parella.png"
-                          data-src="../../carabanes-escapades-en-parella.png"
-                          alt="Carabanes"
-                          width="160"
-                          height="160"
-                          loading="lazy"
-                        />
-                      </picture>
-                    </div>
-                  </div>
-                  <div className="right">
-                    <h3>Caravanes</h3>
-                    <span className="block w-full text-base">
-                      {carabanes} caravanes
-                    </span>
-                    <span className="flex items-center w-full mt-2">
-                      Veure'ls tots{" "}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="icon icon-tabler icon-tabler-arrow-narrow-right ml-1 relative top-0.5"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <line x1="15" y1="16" x2="19" y2="12" />
-                        <line x1="15" y1="8" x2="19" y2="12" />
-                      </svg>
-                    </span>
-                  </div>
-                </a>
-                <a
-                  href={`/refugis`}
-                  title="Refugis"
-                  rel="nofollow"
-                  className="flex items-center w-full md:w-1/2 lg:w-1/3 p-4"
-                >
-                  <div className="left">
-                    <div className="w-40 h-auto mr-5">
-                      <picture>
-                        <source
-                          srcSet="../../refugis-escapades-en-parella.webp"
-                          type="image/webp"
-                        />
-                        <img
-                          src="../../refugis-escapades-en-parella.png"
-                          data-src="../../refugis-escapades-en-parella.png"
-                          alt="Refugis"
-                          width="160"
-                          height="160"
-                          loading="lazy"
-                        />
-                      </picture>
-                    </div>
-                  </div>
-                  <div className="right">
-                    <h3>Refugis</h3>
-                    <span className="block w-full text-base">
-                      {refugis} refugis
-                    </span>
-                    <span className="flex items-center w-full mt-2">
-                      Veure'ls tots{" "}
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="icon icon-tabler icon-tabler-arrow-narrow-right ml-1 relative top-0.5"
-                        width="18"
-                        height="18"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                        <line x1="15" y1="16" x2="19" y2="12" />
-                        <line x1="15" y1="8" x2="19" y2="12" />
-                      </svg>
-                    </span>
-                  </div>
-                </a>
+          {/* Featured list */}
+          {state.featuredList ? (
+            <section className="pt-12">
+              <h2 className="mb-0">La llista destacada</h2>
+              <div className="flex flex-wrap items-center justify-end overflow-hidden relative rounded-md lg:px-10 lg:py-12 lg:pr-20 mt-4 shadow-md lg:shadow-none">
+                <div className="hidden lg:block absolute inset-0 rounded-md overflow-hidden w-full lg:w-8/12">
+                  <picture>
+                    <source
+                      srcSet="../../bg-llista-destacada.webp"
+                      type="image/webp"
+                    />
+                    <img
+                      src="../../bg-llista-destacada-s.jpg"
+                      data-src="../../bg-llista-destacada-s.jpg"
+                      alt="La llista destacada"
+                      className="w-full  h-full object-cover rounded-md overflow-hidden"
+                      width="400"
+                      height="300"
+                      loading="lazy"
+                    />
+                  </picture>
+                  <figcaption className="text-xs hidden lg:block absolute bottom-2 right-3">
+                    Il·lustració: Andrea Prat
+                  </figcaption>
+                </div>
+                <div className="w-full lg:w-9/12 rounded-md bg-white relative z-10 shadow-md overflow-hidden">
+                  <RegularListBox
+                    key={state.featuredList._id}
+                    slug={state.featuredList.slug}
+                    cover={state.featuredList.cover}
+                    title={state.featuredList.title}
+                    subtitle={state.featuredList.subtitle}
+                    avatar={state.featuredList.owner.avatar}
+                    owner={state.featuredList.owner.fullName}
+                    date={state.featuredList.createdAt}
+                  />
+                </div>
               </div>
-            </div>
-          </section>
+              <a
+                href="/llistes"
+                title="Veure més llistes"
+                className="button button__ghost button__med text-[16px] inline-flex items-center mt-3 transition-all duration-300 ease-in-out"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="mr-1.5"
+                  width={20}
+                  height={20}
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                  <path d="M9 6l6 6l-6 6"></path>
+                </svg>
+                Veure'n més
+              </a>
+            </section>
+          ) : null}
 
           {/* Most popular adventure getaways */}
           <section className="pt-12">
-            <h2>L'aventura us crida</h2>
+            <h2 className="mb-0">L'aventura us crida</h2>
             <div className="flex flex-wrap items-stretch -mx-1.5 mt-2">
               {state.featuredAdventureGetaways.length > 0
                 ? state.featuredAdventureGetaways.map((el) => {
@@ -703,11 +353,33 @@ const HomePageResults = ({
                   })
                 : null}
             </div>
+            <a
+              href="/escapades-aventura"
+              title="Veure més escapades d'aventura"
+              className="button button__ghost button__med text-[16px] inline-flex items-center mt-2.5 transition-all duration-300 ease-in-out"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="mr-1.5"
+                width={20}
+                height={20}
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M9 6l6 6l-6 6"></path>
+              </svg>
+              Veure'n més
+            </a>
           </section>
 
           {/* Most popular gastronomic getaways */}
           <section className="pt-12">
-            <h2>La millor cita, als millors restaurants</h2>
+            <h2 className="mb-0">La millor cita als millors restaurants</h2>
             <div className="flex flex-wrap items-stretch -mx-1.5 mt-2">
               {state.featuredGastronomicGetaways.length > 0
                 ? state.featuredGastronomicGetaways.map((el) => {
@@ -753,39 +425,166 @@ const HomePageResults = ({
                   })
                 : null}
             </div>
+            <a
+              href="/escapades-gastronomiques"
+              title="Veure més escapades gastronòmiques"
+              className="button button__ghost button__med text-[16px] inline-flex items-center mt-2.5 transition-all duration-300 ease-in-out"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="mr-1.5"
+                width={20}
+                height={20}
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                <path d="M9 6l6 6l-6 6"></path>
+              </svg>
+              Veure'n més
+            </a>
+          </section>
+
+          {/* Getaway categories */}
+          <section className="py-16" id="placesTypes">
+            <div className="flex md:justify-center">
+              <h2 className="mb-0 text-2xl md:text-center max-w-md">
+                Escapades en parella a Catalunya, tot un món d'escapades per
+                descobrir
+              </h2>
+            </div>
+
+            <div className="mt-4">
+              <div className="flex flex-wrap items-stretch justify-center">
+                <ul className="list-none -m-1.5 pt-4 px-0 columns-1 md:columns-2 lg:columns-3 w-full">
+                  {state.activityCategories
+                    ? state.activityCategories.map((el, idx) => {
+                        return (
+                          <li key={idx} className="p-1.5">
+                            <Link href="">
+                              <a
+                                title={el.title}
+                                className="flex flex-wrap items-center shadow-md rounded-md overflow-hidden
+                              "
+                              >
+                                <picture className="block w-16 h-16 overflow-hidden">
+                                  <img
+                                    src={el.image}
+                                    alt={el.title}
+                                    className="w-full h-full object-cover"
+                                    width={48}
+                                    height={48}
+                                    loading="lazy"
+                                  />
+                                </picture>
+                                <div className="pl-4 pr-6 py-4">
+                                  <span className="inline-block text-[16px]">
+                                    {el.title}
+                                  </span>
+                                </div>
+                              </a>
+                            </Link>
+                          </li>
+                        );
+                      })
+                    : null}
+
+                  {state.placeCategories
+                    ? state.placeCategories.map((el, idx) => {
+                        return (
+                          <li key={idx} className="p-1.5">
+                            <Link href="">
+                              <a
+                                title={el.title}
+                                className="flex flex-wrap items-center shadow-md rounded-md overflow-hidden
+                              "
+                              >
+                                <picture className="block w-16 h-16 overflow-hidden">
+                                  <img
+                                    src={el.image}
+                                    alt={el.title}
+                                    className="w-full h-full object-cover"
+                                    width={48}
+                                    height={48}
+                                    loading="lazy"
+                                  />
+                                </picture>
+                                <div className="pl-4 pr-6 py-4">
+                                  <span className="inline-block text-[16px]">
+                                    {el.title}
+                                  </span>
+                                </div>
+                              </a>
+                            </Link>
+                          </li>
+                        );
+                      })
+                    : null}
+
+                  {state.featuredRegions
+                    ? state.featuredRegions.map((el, idx) => {
+                        return (
+                          <li key={idx} className="p-1.5">
+                            <Link href="">
+                              <a
+                                title={el.title}
+                                className="flex flex-wrap items-center shadow-md rounded-md overflow-hidden
+                              "
+                              >
+                                <picture className="block w-16 h-16 overflow-hidden">
+                                  <img
+                                    src={el.image}
+                                    alt={el.title}
+                                    className="w-full h-full object-cover"
+                                    width={48}
+                                    height={48}
+                                    loading="lazy"
+                                  />
+                                </picture>
+                                <div className="pl-4 pr-6 py-4">
+                                  <span className="inline-block text-[16px]">
+                                    {el.title}
+                                  </span>
+                                </div>
+                              </a>
+                            </Link>
+                          </li>
+                        );
+                      })
+                    : null}
+                </ul>
+              </div>
+            </div>
           </section>
         </div>
       </div>
 
-      <section className="py-12 md:py-24 bg-primary-50">
+      {/* About us section */}
+      <section className="pb-12">
         <div className="container">
-          <div className="w-full flex flex-wrap items-stretch justify-center">
-            <div className="w-full md:w-1/3">
-              <picture>
-                <source
-                  srcSet="../../cover-about-home.webp"
-                  type="image/webp"
-                />
-                <img
-                  src="../../cover-about-home.jpg"
-                  data-src="../../cover-about-home.jpg"
-                  alt="Escapades en parella, i molt més"
-                  className="w-full h-full object-cover object-center rounded-md"
-                  width={300}
-                  height={400}
-                  loading="lazy"
-                ></img>
-              </picture>
-              <figcaption className="text-xs mt-2.5">
-                Andrea i Juli, Castell de Rocabruna (Ripollès) / ©
-                Escapadesenparella.cat
-              </figcaption>
-            </div>
-            <div className="w-full md:w-1/2 md:pl-6 lg:pl-10 xl:pl-20 py-8 xl:py-16 flex justify-center flex-col mt-14 md:mt-0">
-              <div className="mb-4">
-                <h2>Escapades en parella, i molt més</h2>
+          <div className="flex flex-wrap items-center justify-start overflow-hidden relative rounded-md lg:py-12 lg:pr-20">
+            <div className="relative lg:absolute inset-0 rounded-md overflow-hidden flex justify-end">
+              <div className="w-full lg:w-8/12 rounded-md overflow-hidden">
+                <picture>
+                  <sourcse srcSet="../../home-about-s.webp" type="image/webp" />
+                  <img
+                    src="../../home-about-s.jpg"
+                    alt="Escapades en parella, i molt més"
+                    width="400"
+                    height="300"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </picture>
               </div>
-              <p>
+            </div>
+            <div className="w-full lg:w-6/12 rounded-md bg-white relative z-10 lg:shadow-lg overflow-hidden pt-8 lg:px-8 lg:pb-8">
+              <h2 className="mb-4">Escapades en parella, i molt més</h2>
+              <p className="text-[16px]">
                 Hola, som l'Andrea i en Juli, i et volem donar la benvinguda a
                 Escapadesenparella.cat, el recomanador d'escapades en parella de
                 referència a Catalunya. Busques{" "}
@@ -793,7 +592,7 @@ const HomePageResults = ({
                 <strong>què fer aquest cap de setmana</strong>? Cansats de fer
                 sempre el mateix? A Escapadesenparella.cat tenim la sol·lució!
               </p>
-              <p>
+              <p className="text-[16px]">
                 Fa {foundationYears} anys vam començar a compartir les escapades
                 en parella que fèiem arreu de Catalunya, amb l'objectiu de
                 motivar a sortir a <strong>descobrir Catalunya</strong>, i donar
@@ -801,7 +600,7 @@ const HomePageResults = ({
                 seguim creient, que hi ha vida més enllà d'anar al cinema o
                 veure Netflix al sofà.
               </p>
-              <p>
+              <p className="text-[16px] mb-0">
                 A dia d'avui estem encantats de poder seguir compartint amb tots
                 vosaltres les{" "}
                 <strong>millors escapades en parella a Catalunya</strong>, així
@@ -809,21 +608,14 @@ const HomePageResults = ({
                 nosaltres, Escapadesenparella.cat és molt més que escapades en
                 parella; esperem transmetre't aquest sentiment!
               </p>
-              <div className="flex flex-wrap items-center -mx-2 mt-5">
-                <div className="px-2">
-                  <Link href="#">
-                    <a className="button button__primary button__lg inline-flex">
-                      Conèix-nos millor
-                    </a>
-                  </Link>
-                </div>
-                <div className="px-2">
-                  <Link href="/contacte">
-                    <a className="button button__secondary button__lg inline-flex">
-                      Contacta'ns
-                    </a>
-                  </Link>
-                </div>
+              <div className="mt-6">
+                <a
+                  href="/contacte"
+                  title="Contacta'ns"
+                  className="button button__primary button__med px-8"
+                >
+                  Contacta'ns
+                </a>
               </div>
             </div>
           </div>

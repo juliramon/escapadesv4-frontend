@@ -44,6 +44,7 @@ const Homepage = (props) => {
         <NavigationBar />
         <Hero mostRecentStories={props.mostRecentStories} />
         <HomePageResults
+          categories={props.categories}
           featuredRegions={props.featuredRegions}
           featuredActivities={props.featuredActivities}
           featuredList={props.featuredList}
@@ -79,10 +80,12 @@ export async function getStaticProps() {
     await service.getFeaturedGetawaysByCategory("gastronomica");
 
   const featuredList = await service.getFeaturedList();
+  const categories = await service.getCategories();
   const totals = await service.getCategoriesTotals();
 
   return {
     props: {
+      categories,
       featuredRegions,
       featuredActivities,
       mostRatedPlaces,

@@ -1,10 +1,7 @@
 import Router, { useRouter } from "next/router";
 import { useContext, useState } from "react";
-import { Nav, Container, Form, Dropdown } from "react-bootstrap";
-import ContentBar from "../homepage/ContentBar";
 import Link from "next/link";
 import UserContext from "../../contexts/UserContext";
-import AdSense from "react-adsense";
 
 const NavigationBar = ({ logo_url, path }) => {
   const { user } = useContext(UserContext);
@@ -38,171 +35,174 @@ const NavigationBar = ({ logo_url, path }) => {
 
   let logoLink = user === "null" || !user || user === undefined ? "/" : "/feed";
 
-  // const responsiveMenu = (
-  // 	<>
-  // 		<div
-  // 			className={`menu__responsive ${
-  // 				state.isResponsiveMenuOpen ? "open" : null
-  // 			}`}
-  // 		>
-  // 			<button
-  // 				className="menu__close"
-  // 				aria-label="Botó tancar menu"
-  // 				onClick={() => handleResponsiveMenu()}
-  // 			>
-  // 				<svg
-  // 					xmlns="http://www.w3.org/2000/svg"
-  // 					Name="icon icon-tabler icon-tabler-x"
-  // 					width="32"
-  // 					height="32"
-  // 					viewBox="0 0 24 24"
-  // 					strokeWidth="1.5"
-  // 					stroke="#00206B"
-  // 					fill="none"
-  // 					strokeLinecap="round"
-  // 					strokeLinejoin="round"
-  // 				>
-  // 					<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  // 					<line x1="18" y1="6" x2="6" y2="18" />
-  // 					<line x1="6" y1="6" x2="18" y2="18" />
-  // 				</svg>
-  // 			</button>
+  const responsiveMenu = (
+    <>
+      <div
+        className={`menu__responsive ${
+          state.isResponsiveMenuOpen ? "open shadow-md" : null
+        }`}
+      >
+        <button
+          className="menu__close"
+          aria-label="Botó tancar menu"
+          onClick={() => handleResponsiveMenu()}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            Name="icon icon-tabler icon-tabler-x"
+            width="32"
+            height="32"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="#00206B"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
 
-  // 			<Nav className="search-box">
-  // 				<svg
-  // 					xmlns="http://www.w3.org/2000/svg"
-  // 					className="icon icon-tabler icon-tabler-search"
-  // 					width="15"
-  // 					height="15"
-  // 					viewBox="0 0 24 24"
-  // 					strokeWidth="1.5"
-  // 					stroke="#00206B"
-  // 					fill="none"
-  // 					strokeLinecap="round"
-  // 					strokeLinejoin="round"
-  // 				>
-  // 					<path stroke="none" d="M0 0h24v24H0z" />
-  // 					<circle cx="10" cy="10" r="7" />
-  // 					<line x1="21" y1="21" x2="15" y2="15" />
-  // 				</svg>
-  // 				<Form className="form">
-  // 					<Form.Control
-  // 						onKeyDown={handleKeyPress}
-  // 						className="form__control"
-  // 						type="text"
-  // 						placeholder="Cerca la vostra propera escapada..."
-  // 					/>
-  // 				</Form>
-  // 			</Nav>
-  // 			<span className="flex items-center text-xs mt-3">
-  // 				<svg
-  // 					xmlns="http://www.w3.org/2000/svg"
-  // 					className="icon icon-tabler icon-tabler-corner-down-left"
-  // 					width="16"
-  // 					height="16"
-  // 					viewBox="0 0 24 24"
-  // 					strokeWidth="1.5"
-  // 					stroke="#00206B"
-  // 					fill="none"
-  // 					strokeLinecap="round"
-  // 					strokeLinejoin="round"
-  // 				>
-  // 					<path stroke="none" d="M0 0h24v24H0z" />
-  // 					<path d="M18 6v6a3 3 0 0 1 -3 3h-10l5 -5m0 10l-5 -5" />
-  // 				</svg>
-  // 				Prem "Enter" per cercar
-  // 			</span>
-  // 			<Nav className="mt-8">
-  // 				<Link href="/activitats">
-  // 					<a className="menu__link flex items-center">
-  // 						<svg
-  // 							xmlns="http://www.w3.org/2000/svg"
-  // 							className="icon icon-tabler icon-tabler-route mr-2"
-  // 							width="25"
-  // 							height="25"
-  // 							viewBox="0 0 24 24"
-  // 							strokeWidth="1.5"
-  // 							stroke="#00206B"
-  // 							fill="none"
-  // 							strokeLinecap="round"
-  // 							strokeLinejoin="round"
-  // 						>
-  // 							<path stroke="none" d="M0 0h24v24H0z" />
-  // 							<circle cx="6" cy="19" r="2" />
-  // 							<circle cx="18" cy="5" r="2" />
-  // 							<path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
-  // 						</svg>
-  // 						Activitats
-  // 					</a>
-  // 				</Link>
-  // 				<Link href="/allotjaments">
-  // 					<a className="menu__link flex items-center">
-  // 						<svg
-  // 							xmlns="http://www.w3.org/2000/svg"
-  // 							className="icon icon-tabler icon-tabler-tent mr-2"
-  // 							width="25"
-  // 							height="25"
-  // 							viewBox="0 0 24 24"
-  // 							strokeWidth="1.5"
-  // 							stroke="#00206B"
-  // 							fill="none"
-  // 							strokeLinecap="round"
-  // 							strokeLinejoin="round"
-  // 						>
-  // 							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  // 							<path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" />
-  // 						</svg>
-  // 						Allotjaments
-  // 					</a>
-  // 				</Link>
-  // 				<Link href="/histories">
-  // 					<a className="menu__link flex items-center">
-  // 						<svg
-  // 							xmlns="http://www.w3.org/2000/svg"
-  // 							className="icon icon-tabler icon-tabler-notebook mr-2"
-  // 							width="25"
-  // 							height="25"
-  // 							viewBox="0 0 24 24"
-  // 							strokeWidth="1.5"
-  // 							stroke="#00206B"
-  // 							fill="none"
-  // 							strokeLinecap="round"
-  // 							strokeLinejoin="round"
-  // 						>
-  // 							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  // 							<path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" />
-  // 							<line x1="13" y1="8" x2="15" y2="8" />
-  // 							<line x1="13" y1="12" x2="15" y2="12" />
-  // 						</svg>
-  // 						Històries
-  // 					</a>
-  // 				</Link>
-  // 				<Link href="/llistes">
-  // 					<a className="menu__link flex items-center">
-  // 						<svg
-  // 							xmlns="http://www.w3.org/2000/svg"
-  // 							className="icon icon-tabler icon-tabler-layout-list mr-2"
-  // 							width="25"
-  // 							height="25"
-  // 							viewBox="0 0 24 24"
-  // 							strokeWidth="1.5"
-  // 							stroke="#00206B"
-  // 							fill="none"
-  // 							strokeLinecap="round"
-  // 							strokeLinejoin="round"
-  // 						>
-  // 							<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-  // 							<rect x="4" y="4" width="16" height="6" rx="2" />
-  // 							<rect x="4" y="14" width="16" height="6" rx="2" />
-  // 						</svg>
-  // 						Llistes
-  // 					</a>
-  // 				</Link>
-  // 			</Nav>
-  // 			{/* {navRight} */}
-  // 		</div>
-  // 	</>
-  // );
+        <div className="search-box">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="icon icon-tabler icon-tabler-search"
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="#00206B"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <circle cx="10" cy="10" r="7" />
+            <line x1="21" y1="21" x2="15" y2="15" />
+          </svg>
+          <form className="form">
+            <fieldset>
+              <input
+                type="text"
+                onKeyDown={handleKeyPress}
+                className="form__control"
+                type="text"
+                placeholder="Cerca la vostra propera escapada..."
+              />
+            </fieldset>
+          </form>
+        </div>
+        <span className="flex items-center text-xs mt-3">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="icon icon-tabler icon-tabler-corner-down-left"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="#00206B"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" />
+            <path d="M18 6v6a3 3 0 0 1 -3 3h-10l5 -5m0 10l-5 -5" />
+          </svg>
+          Prem "Enter" per cercar
+        </span>
+        <div className="mt-8">
+          <Link href="/activitats">
+            <a className="menu__link flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="icon icon-tabler icon-tabler-route mr-2"
+                width="25"
+                height="25"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="#00206B"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" />
+                <circle cx="6" cy="19" r="2" />
+                <circle cx="18" cy="5" r="2" />
+                <path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
+              </svg>
+              Activitats
+            </a>
+          </Link>
+          <Link href="/allotjaments">
+            <a className="menu__link flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="icon icon-tabler icon-tabler-tent mr-2"
+                width="25"
+                height="25"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="#00206B"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" />
+              </svg>
+              Allotjaments
+            </a>
+          </Link>
+          <Link href="/histories">
+            <a className="menu__link flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="icon icon-tabler icon-tabler-notebook mr-2"
+                width="25"
+                height="25"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="#00206B"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" />
+                <line x1="13" y1="8" x2="15" y2="8" />
+                <line x1="13" y1="12" x2="15" y2="12" />
+              </svg>
+              Històries
+            </a>
+          </Link>
+          <Link href="/llistes">
+            <a className="menu__link flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="icon icon-tabler icon-tabler-layout-list mr-2"
+                width="25"
+                height="25"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="#00206B"
+                fill="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <rect x="4" y="4" width="16" height="6" rx="2" />
+                <rect x="4" y="14" width="16" height="6" rx="2" />
+              </svg>
+              Llistes
+            </a>
+          </Link>
+        </div>
+        {/* {navRight} */}
+      </div>
+    </>
+  );
 
   return (
     <header className="z-50 bg-white w-full sticky top-0 shadow-md">
@@ -392,7 +392,6 @@ const NavigationBar = ({ logo_url, path }) => {
         </div>
         {state.isResponsiveMenuOpen ? responsiveMenu : null}
       </nav>
-      {/* <ContentBar /> */}
     </header>
   );
 };
