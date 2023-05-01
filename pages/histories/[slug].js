@@ -52,7 +52,11 @@ const StoryListing = ({ storyDetails }) => {
         {images.map((image, key) => {
           return (
             <picture id={key} className="block mb-2.5 md:mb-4">
-              <img src={image} loading="lazy" />
+              <img
+                src={image}
+                alt={`${storyDetails.title} - ${key + 1}`}
+                loading="lazy"
+              />
             </picture>
           );
         })}
@@ -182,6 +186,7 @@ const StoryListing = ({ storyDetails }) => {
                           height={32}
                           className="w-full h-full object-cover"
                           loadgin="eager"
+                          fetchpriority="high"
                         />
                       </picture>
                     </div>
@@ -210,6 +215,7 @@ const StoryListing = ({ storyDetails }) => {
                       width={400}
                       height={300}
                       className="w-full h-full object-cover"
+                      fetchpriority="high"
                       loading="eager"
                     />
                   </picture>

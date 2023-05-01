@@ -209,7 +209,7 @@ const NavigationBar = ({ logo_url, path }) => {
       <nav className="px-4 py-3 menu">
         <div className="w-full flex flex-wrap items-center justify-between lg:justify-start">
           <Link href={logoLink}>
-            <a className="mr-5 px-0 menu__item">
+            <a className="mr-5 px-0 menu__item" title="Escapadesenparella.cat">
               <svg
                 width="135px"
                 height="auto"
@@ -392,7 +392,7 @@ const NavigationBar = ({ logo_url, path }) => {
         </div>
         {state.isResponsiveMenuOpen ? responsiveMenu : null}
       </nav>
-      <ContentBar />
+      {/* <ContentBar /> */}
     </header>
   );
 };
