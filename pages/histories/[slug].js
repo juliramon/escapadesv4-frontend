@@ -107,7 +107,11 @@ const StoryListing = ({ storyDetails }) => {
 
   const coverPath = storyDetails.cover.substring(0, 51);
   const imageId = storyDetails.cover.substring(63);
-  const coverImg = `${coverPath}w_896,h_504,c_fill/${imageId}`;
+  const coverImg = `${coverPath}w_400,h_300,c_fill/${imageId}`;
+
+  const coverAuthorPath = storyDetails.owner.avatar.substring(0, 51);
+  const imageAuthorId = storyDetails.owner.avatar.substring(63);
+  const coverAuthorImg = `${coverAuthorPath}w_32,h_32,c_fill/${imageAuthorId}`;
 
   return (
     <>
@@ -164,9 +168,6 @@ const StoryListing = ({ storyDetails }) => {
             </ul>
           </div>
         </div>
-        <div className="bg-primary-50 py-4">
-          <AdSkyScrapperHoritzontal728x90 />
-        </div>
         <main>
           <article className="pt-12 pb-4">
             <div className="container">
@@ -180,7 +181,7 @@ const StoryListing = ({ storyDetails }) => {
                     <div className="rounded-full overflow-hidden w-8 h-8 mr-2.5">
                       <picture>
                         <img
-                          src={storyDetails.owner.avatar}
+                          src={coverAuthorImg.avatar}
                           alt={storyDetails.owner.fullName}
                           width={32}
                           height={32}
@@ -209,6 +210,11 @@ const StoryListing = ({ storyDetails }) => {
               <div className="w-full max-w-full md:max-w-4xl md:mx-auto mt-6">
                 <div className="aspect-w-16 aspect-h-9 rounded-md overflow-hidden">
                   <picture>
+                    <source srcSet={coverImg} media="(max-width: 768px)" />
+                    <source
+                      srcSet={storyDetails.cover}
+                      media="(min-width: 768px)"
+                    />
                     <img
                       src={coverImg}
                       alt={storyDetails.title}
