@@ -47,10 +47,13 @@ const StoryListing = ({ storyDetails }) => {
     const images = storyDetails.images.slice(start, end);
 
     return (
-      <div className="columns-1 md:columns-2 gap-2.5 md:gap-4">
+      <div className="columns-1 md:columns-2 gap-2.5 md:gap-4 mb-4">
         {images.map((image, idx) => {
           return (
-            <picture key={idx} className="block mb-2.5 md:mb-4">
+            <picture
+              key={idx}
+              className="block mb-2.5 md:mb-4 rounded-md overflow-hidden"
+            >
               <img
                 src={image}
                 alt={`${storyDetails.title} - ${idx + 1}`}
