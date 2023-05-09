@@ -570,7 +570,24 @@ const HomePageResults = ({
             <div className="relative lg:absolute inset-0 rounded-md overflow-hidden flex justify-end">
               <div className="w-full lg:w-8/12 rounded-md overflow-hidden">
                 <picture>
-                  <sourcse srcSet="../../home-about-s.webp" type="image/webp" />
+                  <source
+                    srcSet="../../home-about-s-m.webp"
+                    media="(max-width: 768px)"
+                    type="image/webp"
+                  />
+                  <source
+                    srcSet="../../home-about-s-m.jpg"
+                    media="(max-width: 768px)"
+                  />
+                  <source
+                    srcSet="../../home-about-s.webp"
+                    media="(min-width: 768px)"
+                    type="image/webp"
+                  />
+                  <source
+                    srcSet="../../home-about-s.webp"
+                    media="(max-width: 768px)"
+                  />
                   <img
                     src="../../home-about-s.jpg"
                     alt="Escapades en parella, i molt més"
