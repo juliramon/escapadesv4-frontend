@@ -37,6 +37,7 @@ const Homepage = (props) => {
         url="https://escapadesenparella.cat"
         image="https://res.cloudinary.com/juligoodie/image/upload/v1652527292/getaways-guru/IMGP9489-s_izgty6.jpg"
         canonical="https://escapadesenparella.cat"
+        preload={"bg-geo.png"}
       />
       {/* Rich snippets */}
       <LocalBusiness />

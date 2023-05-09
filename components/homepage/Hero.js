@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import Glide from "@glidejs/glide";
 import Link from "next/link";
 
 const Hero = ({ mostRecentStories }) => {
@@ -46,7 +45,10 @@ const Hero = ({ mostRecentStories }) => {
                   const avatarImg = `${avatarPath}w_24,h_24,c_fill/${ownerImageId}`;
 
                   return (
-                    <article className="w-full md:w-1/2 lg:w-1/3 px-2 mb-6 lg:mb-0">
+                    <article
+                      key={idx}
+                      className="w-full md:w-1/2 lg:w-1/3 px-2 mb-6 lg:mb-0"
+                    >
                       <Link href={"histories/" + story.slug} key={idx}>
                         <a className="glide__slide relative ">
                           <picture className="block aspect-w-16 aspect-h-9 relative after:block after:w-full after:h-full after:z-20 after:content after:absolute after:inset-0 after:bg-primary-500 after:bg-opacity-0 shadow-md shadow-primary-100 rounded-md overflow-hidden">
