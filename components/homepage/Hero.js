@@ -4,31 +4,10 @@ import Link from "next/link";
 
 const Hero = ({ mostRecentStories }) => {
   useEffect(() => {
-    if (window !== undefined) {
-      const underlinedElement = document.querySelector(".underlined-element");
-      if (!underlinedElement) return;
+    const underlinedElement = document.querySelector(".underlined-element");
+    if (!underlinedElement) return;
 
-      underlinedElement.classList.add("active");
-
-      const sliderSelector = ".js-slider-cover";
-      const sliderElement = document.querySelector(sliderSelector);
-
-      if (!sliderElement) return;
-
-      new Glide(sliderSelector, {
-        type: "carousel",
-        perView: 3,
-        gap: 18,
-        breakpoints: {
-          1024: {
-            perView: 2,
-          },
-          640: {
-            perView: 1,
-          },
-        },
-      }).mount();
-    }
+    underlinedElement.classList.add("active");
   });
 
   return (
@@ -47,121 +26,74 @@ const Hero = ({ mostRecentStories }) => {
         </div>
 
         <div className="w-full max-w-[1600px] mx-auto -mt-24 rounded-md overflow-hidden px-6">
-          <div className="glide js-slider-cover">
-            <div className="glide__track" data-glide-el="track">
-              <div className="glide__slides">
-                {mostRecentStories.length > 0
-                  ? mostRecentStories.map((story, idx) => {
-                      const createdDate = new Date(
-                        story.createdAt
-                      ).toLocaleDateString("ca-es", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      });
+          <div className="flex flex-wrap items-stretch -mx-2">
+            {mostRecentStories.length > 0
+              ? mostRecentStories.map((story, idx) => {
+                  const createdDate = new Date(
+                    story.createdAt
+                  ).toLocaleDateString("ca-es", {
+                    year: "numeric",
+                    month: "short",
+                    day: "numeric",
+                  });
 
-                      const coverPath = story.cover.substring(0, 51);
-                      const imageId = story.cover.substring(63);
-                      const coverImg = `${coverPath}w_468,h_263,c_fill/${imageId}`;
+                  const coverPath = story.cover.substring(0, 51);
+                  const imageId = story.cover.substring(63);
+                  const coverImg = `${coverPath}w_468,h_263,c_fill/${imageId}`;
 
-                      const avatarPath = story.owner.avatar.substring(0, 51);
-                      const ownerImageId = story.owner.avatar.substring(63);
-                      const avatarImg = `${avatarPath}w_24,h_24,c_fill/${ownerImageId}`;
+                  const avatarPath = story.owner.avatar.substring(0, 51);
+                  const ownerImageId = story.owner.avatar.substring(63);
+                  const avatarImg = `${avatarPath}w_24,h_24,c_fill/${ownerImageId}`;
 
-                      return (
-                        <Link href={"histories/" + story.slug} key={idx}>
-                          <a className="glide__slide relative ">
-                            <picture className="block aspect-w-16 aspect-h-9 relative after:block after:w-full after:h-full after:z-20 after:content after:absolute after:inset-0 after:bg-primary-500 after:bg-opacity-0 shadow-md shadow-primary-100 rounded-md overflow-hidden">
-                              <img
-                                src={coverImg}
-                                alt=""
-                                className="w-full h-full object-cover rounded-md overflow-hidden"
-                                loading="eager"
-                              />
-                            </picture>
+                  return (
+                    <article className="w-full md:w-1/2 lg:w-1/3 px-2">
+                      <Link href={"histories/" + story.slug} key={idx}>
+                        <a className="glide__slide relative ">
+                          <picture className="block aspect-w-16 aspect-h-9 relative after:block after:w-full after:h-full after:z-20 after:content after:absolute after:inset-0 after:bg-primary-500 after:bg-opacity-0 shadow-md shadow-primary-100 rounded-md overflow-hidden">
+                            <img
+                              src={coverImg}
+                              alt=""
+                              className="w-full h-full object-cover rounded-md overflow-hidden"
+                              loading="eager"
+                            />
+                          </picture>
 
-                            <div className="w-full pl-4 pr-8 mx-auto mt-4">
-                              <h2 className="text-primary-900 text-base my-0 leading-snug">
-                                {story.title}
-                              </h2>
-                              <div className="flex items-center mt-3">
-                                <div className="w-6 h-6 mr-2 rounded-full overflow-hidden">
-                                  <picture>
-                                    <img
-                                      src={avatarImg}
-                                      alt={story.owner.fullName}
-                                      width="24"
-                                      height="24"
-                                      className="w-full h-full object-cover"
-                                      loading="lazy"
-                                    />
-                                  </picture>
-                                </div>
-                                <div className="flex items-center justify-center">
-                                  <span className="text-xs inline-block text-primary-900">
-                                    {story.owner.fullName}
-                                  </span>
-                                  <span className="mx-1.5 text-primary-900 inline-block">
-                                    –
-                                  </span>
-                                  <span className="text-xs inline-block text-primary-900">
-                                    {createdDate}
-                                  </span>
-                                </div>
+                          <div className="w-full pl-4 pr-8 mx-auto mt-4">
+                            <h2 className="text-primary-900 text-base my-0 leading-snug">
+                              {story.title}
+                            </h2>
+                            <div className="flex items-center mt-3">
+                              <div className="w-6 h-6 mr-2 rounded-full overflow-hidden">
+                                <picture>
+                                  <img
+                                    src={avatarImg}
+                                    alt={story.owner.fullName}
+                                    width="24"
+                                    height="24"
+                                    className="w-full h-full object-cover"
+                                    loading="lazy"
+                                  />
+                                </picture>
+                              </div>
+                              <div className="flex items-center justify-center">
+                                <span className="text-xs inline-block text-primary-900">
+                                  {story.owner.fullName}
+                                </span>
+                                <span className="mx-1.5 text-primary-900 inline-block">
+                                  –
+                                </span>
+                                <span className="text-xs inline-block text-primary-900">
+                                  {createdDate}
+                                </span>
                               </div>
                             </div>
-                          </a>
-                        </Link>
-                      );
-                    })
-                  : ""}
-              </div>
-              <div
-                className="glide__arrows flex items-center justify-center space-x-3 mt-4"
-                data-glide-el="controls"
-              >
-                <button
-                  className="glide__arrow glide__arrow--left w-10 h-10 flex items-center justify-center bg-secondary-500 rounded-full hover:bg-secondary-900 transition-all duration-300 ease-in-out"
-                  data-glide-dir="<"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="text-white"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    strokeWidth="2"
-                    stroke="currentColor"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M15 6l-6 6l6 6"></path>
-                  </svg>
-                </button>
-                <button
-                  className="glide__arrow glide__arrow--right w-10 h-10 flex items-center justify-center bg-secondary-500 rounded-full hover:bg-secondary-900 transition-all duration-300 ease-in-out"
-                  data-glide-dir=">"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="text-white"
-                    width={24}
-                    height={24}
-                    viewBox="0 0 24 24"
-                    strokeWidth="2"
-                    stroke="currentColor"
-                    fill="none"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                    <path d="M9 6l6 6l-6 6"></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
+                          </div>
+                        </a>
+                      </Link>
+                    </article>
+                  );
+                })
+              : ""}
           </div>
         </div>
       </section>
