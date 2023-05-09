@@ -228,7 +228,7 @@ const PublicSquareBox = ({
                 </svg>
                 {modRating || rating}/5
               </div>
-              <span className="text-13 text-secondary-800 group-hover:text-secondary-900 transition-all duration-300 ease-in-out inline-flex items-center leading-tight">
+              <span className="text-13 text-tertiary-800 group-hover:text-tertiary-900 transition-all duration-300 ease-in-out inline-flex items-center leading-tight">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="mr-1"
