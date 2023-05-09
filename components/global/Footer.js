@@ -11,7 +11,7 @@ const Footer = () => {
             <div className="flex flex-col flex-wrap items-start">
               <svg
                 width="135px"
-                height="auto"
+                height="100%"
                 viewBox="0 0 638 173"
                 version="1.1"
                 className="mb-3 w-36 h-auto"

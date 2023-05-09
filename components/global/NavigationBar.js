@@ -212,7 +212,7 @@ const NavigationBar = ({ logo_url, path }) => {
             <a className="mr-5 px-0 menu__item" title="Escapadesenparella.cat">
               <svg
                 width="135px"
-                height="auto"
+                height="100%"
                 viewBox="0 0 638 173"
                 version="1.1"
               >
