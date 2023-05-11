@@ -10,7 +10,6 @@ import FooterHistoria from "../../components/global/FooterHistoria";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
 import AdSkyScrapper from "../../components/ads/AdSkyScrapper";
-import AdSkyScrapperHoritzontal728x90 from "../../components/ads/AdSkyScrapperHoritzontal728x90";
 import Article from "../../components/richsnippets/Article";
 
 const ListView = ({ listDetails }) => {
@@ -128,9 +127,6 @@ const ListView = ({ listDetails }) => {
               </li>
             </ul>
           </div>
-        </div>
-        <div className="bg-primary-50 py-4">
-          <AdSkyScrapperHoritzontal728x90 />
         </div>
         <main>
           <article className="pt-8 pb-4 md:pt-12">
