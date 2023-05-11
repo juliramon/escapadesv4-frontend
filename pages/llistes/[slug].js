@@ -9,7 +9,6 @@ import ContentService from "../../services/contentService";
 import FooterHistoria from "../../components/global/FooterHistoria";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
-import AdSkyScrapper from "../../components/ads/AdSkyScrapper";
 import Article from "../../components/richsnippets/Article";
 
 const ListView = ({ listDetails }) => {
@@ -211,11 +210,6 @@ const ListView = ({ listDetails }) => {
                       __html: listDetails.description,
                     }}
                   ></div>
-                </div>
-                <div className="w-full lg:w-3/12 py-8 md:pt-20 -mt-7 ">
-                  <div className="p-4 sticky top-36">
-                    <AdSkyScrapper />
-                  </div>
                 </div>
               </div>
             </div>
