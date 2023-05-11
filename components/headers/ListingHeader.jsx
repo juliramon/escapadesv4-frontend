@@ -48,6 +48,7 @@ const ListingHeader = ({ title, subtitle, figCaption, image, sponsorData }) => {
                         width={400}
                         height={300}
                         loading="eager"
+                        fetchpriority="high"
                       />
                     </picture>
                   </div>
