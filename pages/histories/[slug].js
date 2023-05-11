@@ -9,7 +9,7 @@ import FooterHistoria from "../../components/global/FooterHistoria";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
 import Article from "../../components/richsnippets/Article";
-import AdInArticle from "../../components/ads/AdInArticle";
+import AdBanner from "../../components/ads/AdBanner";
 
 const StoryListing = ({ storyDetails }) => {
   const { user } = useContext(UserContext);
@@ -38,7 +38,11 @@ const StoryListing = ({ storyDetails }) => {
         acompanyeu?
       </h2>
       <div className="bg-primary-100">
-        <AdInArticle />
+        <AdBanner
+          data-ad-slot="7638377836"
+          data-ad-format="fluid"
+          data-ad-layout="in-article"
+        />
       </div>
     </div>
   );
