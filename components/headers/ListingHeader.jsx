@@ -1,6 +1,9 @@
 import Fancybox from "../../utils/FancyboxUtils";
 
 const ListingHeader = ({ title, subtitle, figCaption, image, sponsorData }) => {
+  const coverPath = image.substring(0, 51);
+  const imageId = image.substring(63);
+  const coverImg = `${coverPath}w_400,h_300,c_fill/${imageId}`;
   return (
     <section className="pt-2">
       <div className="container relative">
@@ -24,7 +27,7 @@ const ListingHeader = ({ title, subtitle, figCaption, image, sponsorData }) => {
             </div>
           </div>
           <div className="w-full md:w-4/12 xl:w-4/12 overflow-hidden">
-            {image ? (
+            {coverImg ? (
               <Fancybox
                 options={{
                   infinite: true,
@@ -33,13 +36,13 @@ const ListingHeader = ({ title, subtitle, figCaption, image, sponsorData }) => {
                 <div
                   className="cursor-pointer relative group overflow-hidden"
                   data-fancybox="gallery"
-                  data-src={image}
+                  data-src={coverImg}
                   data-caption={figCaption}
                 >
                   <div className="aspect-w-4 aspect-h-3 h-full w-full ">
                     <picture>
                       <img
-                        src={image}
+                        src={coverImg}
                         alt={figCaption}
                         className="w-full h-full object-cover object-center scale-100 transition-all duration-300 ease-in-out group-hover:scale-105"
                         width={400}
