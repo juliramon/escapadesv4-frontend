@@ -38,7 +38,7 @@ const Hero = ({ mostRecentStories }) => {
 
                   const coverPath = story.cover.substring(0, 51);
                   const imageId = story.cover.substring(63);
-                  const coverImg = `${coverPath}w_468,h_263,c_fill/${imageId}`;
+                  const coverImg = `${coverPath}w_507,h_285,c_fill/${imageId}`;
 
                   const avatarPath = story.owner.avatar.substring(0, 51);
                   const ownerImageId = story.owner.avatar.substring(63);
