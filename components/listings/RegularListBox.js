@@ -29,12 +29,12 @@ const RegularListBox = ({
           title={title}
           className="flex flex-wrap md:flex-nowrap items-stretch"
         >
-          <div className="w-full md:w-2/3 p-6 lg:px-10 lg:py-12">
+          <div className="w-full md:w-2/3 p-6 md:py-6 md:px-8">
             <div className="mb-4">
               <h3 className="text-xl">{title}</h3>
-              <p className="mt-2 text-primary-400 font-light line-clamp-2">
+              <div className="mt-2 text-primary-400 font-light line-clamp-2">
                 {subtitle}
-              </p>
+              </div>
             </div>
             <div className="flex items-center border-t border-primary-200 pt-4">
               <div className="w-8 h-8 mr-2 rounded-full overflow-hidden">
@@ -58,7 +58,7 @@ const RegularListBox = ({
               </div>
             </div>
           </div>
-          <div className="w-full md:w-1/3 overflow-hidden order-first md:order-none md:mb-0">
+          <div className="w-full md:w-1/3 overflow-hidden order-first md:order-none md:mb-0 rounded-md">
             <picture>
               <img
                 src={coverImg}
