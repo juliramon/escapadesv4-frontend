@@ -497,7 +497,7 @@ const HomePageResults = ({
                     ? state.placeCategories.map((el, idx) => {
                         return (
                           <li key={idx} className="p-1.5">
-                            <Link href="">
+                            <Link href={el.slug}>
                               <a
                                 title={el.title}
                                 className="flex flex-wrap items-center shadow-md rounded-md overflow-hidden
@@ -529,7 +529,7 @@ const HomePageResults = ({
                     ? state.featuredRegions.map((el, idx) => {
                         return (
                           <li key={idx} className="p-1.5">
-                            <Link href="">
+                            <Link href={el.slug}>
                               <a
                                 title={el.title}
                                 className="flex flex-wrap items-center shadow-md rounded-md overflow-hidden
