@@ -1,25 +1,20 @@
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
-import FetchingSpinner from "../../../components/global/FetchingSpinner";
+import FetchingSpinner from "../global/FetchingSpinner";
 import Head from "next/head";
-import ContentService from "../../../services/contentService";
-import { EditorContent, useEditor } from "@tiptap/react";
+import ContentService from "../../services/contentService";
+import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import UserContext from "../../../contexts/UserContext";
-import NavigationBar from "../../../components/global/NavigationBar";
-import Autocomplete from "react-google-autocomplete";
-import EditorNavbar from "../../../components/editor/EditorNavbar";
-import { EditorView } from "prosemirror-view";
-
-EditorView.prototype.updateState = function updateState(state) {
-  if (!this.docView) return; // This prevents the matchesNode error on hot reloads
-  this.updateStateInner(state, this.state.plugins !== state.plugins);
-};
 
 const EditionForm = () => {
   // Validate if user is allowed to access this view
   const { user } = useContext(UserContext);
   const [loadPage, setLoadPage] = useState(false);
+  useEffect(() => {
+    if (user) {
+      setLoadPage(true);
+    }
+  }, []);
   // End validation
 
   const router = useRouter();
@@ -93,9 +88,64 @@ const EditionForm = () => {
 
   const service = new ContentService();
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const userOrganizations = await service.checkOrganizationsOwned();
+      let hasOrganizations;
+      userOrganizations.number > 0
+        ? (hasOrganizations = true)
+        : (hasOrganizations = false);
+      setState({
+        ...state,
+        formData: { ...state.formData, userOrganizations: userOrganizations },
+      });
+      let placeDetails = await service.getPlaceDetails(router.query.slug);
+      setState({
+        ...state,
+        place: placeDetails,
+        formData: {
+          _id: placeDetails._id,
+          type: placeDetails.type,
+          title: placeDetails.title,
+          subtitle: placeDetails.subtitle,
+          slug: placeDetails.slug,
+          categories: placeDetails.categories,
+          seasons: placeDetails.seasons,
+          region: placeDetails.region,
+          placeType: placeDetails.placeType,
+          cover: placeDetails.cover,
+          blopCover: "",
+          images: [],
+          blopImages: [],
+          cloudImages: [],
+          coverCloudImage: "",
+          cloudImagesUploaded: false,
+          coverCloudImageUploaded: false,
+          phone: placeDetails.phone,
+          website: placeDetails.website,
+          place_full_address: "",
+          place_locality: "",
+          place_province: "",
+          place_state: "",
+          place_country: "",
+          place_lat: "",
+          place_lng: "",
+          place_rating: 0,
+          place_id: "",
+          place_opening_hours: "",
+          price: "",
+          metaTitle: placeDetails.metaTitle,
+          metaDescription: placeDetails.metaDescription,
+        },
+        isPlaceLoaded: true,
+      });
+    };
+    fetchData();
+  }, [queryId, router.query.slug]);
+
   const editor = useEditor({
     extensions: [StarterKit],
-    content: description,
+    content: description !== "" ? description : "",
     onUpdate: (props) => {
       const data = {
         html: props.editor.getHTML(),
@@ -108,72 +158,6 @@ const EditionForm = () => {
       preserveWhitespace: true,
     },
   });
-
-  // Fetch data
-  useEffect(() => {
-    if (router.query.slug !== undefined) {
-      const fetchData = async () => {
-        const userOrganizations = await service.checkOrganizationsOwned();
-        let hasOrganizations;
-        userOrganizations.number > 0
-          ? (hasOrganizations = true)
-          : (hasOrganizations = false);
-        setState({
-          ...state,
-          formData: { ...state.formData, userOrganizations: userOrganizations },
-        });
-        let placeDetails = await service.getPlaceDetails(router.query.slug);
-        if (user && placeDetails) {
-          setLoadPage(true);
-        }
-        setState({
-          ...state,
-          place: placeDetails,
-          formData: {
-            _id: placeDetails._id,
-            type: placeDetails.type,
-            title: placeDetails.title,
-            subtitle: placeDetails.subtitle,
-            slug: placeDetails.slug,
-            categories: placeDetails.categories,
-            seasons: placeDetails.seasons,
-            region: placeDetails.region,
-            placeType: placeDetails.placeType,
-            cover: placeDetails.cover,
-            blopCover: "",
-            images: [],
-            blopImages: [],
-            cloudImages: [],
-            coverCloudImage: "",
-            cloudImagesUploaded: false,
-            coverCloudImageUploaded: false,
-            phone: placeDetails.phone,
-            website: placeDetails.website,
-            place_full_address: "",
-            place_locality: "",
-            place_province: "",
-            place_state: "",
-            place_country: "",
-            place_lat: "",
-            place_lng: "",
-            place_rating: 0,
-            place_id: "",
-            place_opening_hours: "",
-            price: placeDetails.price,
-            metaTitle: placeDetails.metaTitle,
-            metaDescription: placeDetails.metaDescription,
-          },
-          isPlaceLoaded: true,
-        });
-        setDescription(placeDetails.description);
-        if (editor) {
-          editor.commands.setContent(placeDetails.description);
-        }
-      };
-
-      fetchData();
-    }
-  }, [queryId, router.query.slug]);
 
   const saveFileToStatus = (e) => {
     const fileToUpload = e.target.files[0];
@@ -229,7 +213,7 @@ const EditionForm = () => {
   if (state.formData.blopCover || state.formData.cover) {
     coverImage = (
       <div className="m-2 relative w-48 h-auto overflow-hidden rounded-md border-8 border-white shadow">
-        <img src={state.formData.blopCover || state.formData.cover} />
+        <img src={state.formData.blopCover} />
       </div>
     );
   }
@@ -351,6 +335,9 @@ const EditionForm = () => {
       placeType,
       cover,
       images,
+      description,
+      phone,
+      website,
       place_full_address,
       place_locality,
       place_province,
@@ -361,12 +348,12 @@ const EditionForm = () => {
       place_rating,
       place_id,
       place_opening_hours,
+      price,
       slug,
       metaTitle,
       metaDescription,
     } = state.place;
-    const { coverCloudImage, cloudImages, price, phone, website } =
-      state.formData;
+    const { coverCloudImage, cloudImages } = state.formData;
     let placeCover, placeImages;
     coverCloudImage !== ""
       ? (placeCover = coverCloudImage)
@@ -403,19 +390,12 @@ const EditionForm = () => {
         metaTitle,
         metaDescription
       )
-      .then(() => router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel"));
+      .then(() => router.push("/dashboard"));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      state.formData.blopCover !== "" ||
-      state.formData.blopImages.length > 0
-    ) {
-      handleFileUpload();
-    } else {
-      submitPlace();
-    }
+    handleFileUpload();
   };
 
   useEffect(() => {
@@ -537,7 +517,7 @@ const EditionForm = () => {
                 </div>
                 <div className="w-full lg:w-1/2 flex justify-end">
                   <button
-                    className="button button__primary button__lg"
+                    className="button__primary button__lg"
                     type="submit"
                     onClick={handleSubmit}
                   >
@@ -569,6 +549,14 @@ const EditionForm = () => {
                 {activeTab === "main" ? (
                   <div className="form__wrapper">
                     <form className="form" onSubmit={handleSubmit}>
+                      <div className="form__group">
+                        <label className="form__label">
+                          Empresa propietària
+                        </label>
+                        <div className="flex items-center -mt-4 -mx-2 -mb-2">
+                          {organizationsList}
+                        </div>
+                      </div>
                       <div className="form__group">
                         <label htmlFor="title" className="form__label">
                           Títol
@@ -1024,7 +1012,7 @@ const EditionForm = () => {
                             name="phone"
                             placeholder="Número de telèfon de l'allotjament"
                             className="form__control"
-                            value={state.formData.phone}
+                            value={state.place.phone}
                             onChange={handleChange}
                           />
                         </div>
@@ -1038,7 +1026,7 @@ const EditionForm = () => {
                             name="website"
                             placeholder="Pàgina web de reserva o contacte"
                             className="form__control"
-                            value={state.formData.website}
+                            value={state.place.website}
                             onChange={handleChange}
                           />
                         </div>
@@ -1052,7 +1040,7 @@ const EditionForm = () => {
                             name="price"
                             placeholder="Preu per nit de l'allotjament"
                             className="form__control"
-                            value={state.formData.price}
+                            value={state.place.price}
                             onChange={handleChange}
                           />
                         </div>
@@ -1152,17 +1140,18 @@ const EditionForm = () => {
                           </div>
                         </div>
                       </div>
+
+                      <div className="form__group">
+                        <label htmlFor="description" className="form__label">
+                          Descripció
+                        </label>
+                        <EditorNavbar editor={editor} />
+                        <EditorContent
+                          editor={editor}
+                          className="form-composer__editor"
+                        />
+                      </div>
                     </form>
-                    <div className="form__group">
-                      <label htmlFor="description" className="form__label">
-                        Descripció
-                      </label>
-                      <EditorNavbar editor={editor} />
-                      <EditorContent
-                        editor={editor}
-                        className="form-composer__editor"
-                      />
-                    </div>
                   </div>
                 ) : (
                   <div className="form__wrapper">
@@ -1176,7 +1165,7 @@ const EditionForm = () => {
                           name="metaTitle"
                           placeholder="Meta títol"
                           className="form__control"
-                          value={state.formData.metaTitle}
+                          value={state.place.metaTitle}
                           onChange={handleChange}
                         />
                         <span className="form__text_info">
@@ -1197,7 +1186,7 @@ const EditionForm = () => {
                           name="metaDescription"
                           placeholder="Meta descripció"
                           className="form__control"
-                          value={state.formData.metaDescription}
+                          value={state.place.metaDescription}
                           onChange={handleChange}
                         />
                         <span className="form__text_info">
@@ -1215,7 +1204,7 @@ const EditionForm = () => {
                           name="slug"
                           placeholder="Slug de l'allotjament"
                           className="form__control"
-                          value={state.formData.slug}
+                          value={state.place.slug}
                           onChange={handleChange}
                         />
                       </div>

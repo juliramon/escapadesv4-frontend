@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Container, Col, Row, Form } from "react-bootstrap";
 import ContentService from "../../services/contentService";
 
 const initialState = {

@@ -152,6 +152,12 @@ module.exports = withTM({
         destination: "/escapades-catalunya/escapades-pirineus",
         permanent: true,
       },
+      {
+        source: "/escapades-romantiques/hotel-lazure-lloret-de-mar",
+        destination:
+          "/escapades-romantiques/lazure-hotel-lloret-de-mar-costa-brava",
+        permanent: true,
+      },
     ];
   },
 });
