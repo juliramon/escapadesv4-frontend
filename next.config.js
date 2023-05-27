@@ -158,6 +158,12 @@ module.exports = withTM({
           "/escapades-romantiques/lazure-hotel-lloret-de-mar-costa-brava",
         permanent: true,
       },
+      {
+        source: "/escapades-romantiques/lazure-hotel-llore-de-mar-costa-brava",
+        destination:
+          "/escapades-romantiques/lazure-hotel-lloret-de-mar-costa-brava",
+        permanent: true,
+      },
     ];
   },
 });
