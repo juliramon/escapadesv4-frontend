@@ -164,6 +164,12 @@ module.exports = withTM({
           "/escapades-romantiques/lazure-hotel-lloret-de-mar-costa-brava",
         permanent: true,
       },
+      {
+        source: "/escapades/refugi-comes-de-rubio",
+        destination:
+          "/escapades-aventura/refugi-comes-rubio-massis-orri-pallars-sobira",
+        permanent: true,
+      },
     ];
   },
 });

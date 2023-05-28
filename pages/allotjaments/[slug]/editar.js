@@ -343,8 +343,6 @@ const EditionForm = () => {
   const submitPlace = async () => {
     const {
       _id,
-      title,
-      subtitle,
       categories,
       seasons,
       region,
@@ -365,8 +363,15 @@ const EditionForm = () => {
       metaTitle,
       metaDescription,
     } = state.place;
-    const { coverCloudImage, cloudImages, price, phone, website } =
-      state.formData;
+    const {
+      title,
+      subtitle,
+      coverCloudImage,
+      cloudImages,
+      price,
+      phone,
+      website,
+    } = state.formData;
     let placeCover, placeImages;
     coverCloudImage !== ""
       ? (placeCover = coverCloudImage)
@@ -578,7 +583,7 @@ const EditionForm = () => {
                           name="title"
                           placeholder="Títol de l'allotjament"
                           className="form__control"
-                          value={state.place.title}
+                          value={state.formData.title}
                           onChange={handleChange}
                         />
                       </div>
@@ -591,7 +596,7 @@ const EditionForm = () => {
                           name="subtitle"
                           placeholder="Subtítol de l'allotjament"
                           className="form__control"
-                          value={state.place.subtitle}
+                          value={state.formData.subtitle}
                           onChange={handleChange}
                         />
                       </div>
