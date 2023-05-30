@@ -170,6 +170,24 @@ module.exports = withTM({
           "/escapades-aventura/refugi-comes-rubio-massis-orri-pallars-sobira",
         permanent: true,
       },
+      {
+        source: "/escapades-culturals/museu-de-la-pesca-de-palamos",
+        destination: "/escapades-culturals/museu-pesca-palamos-costa-brava",
+        permanent: true,
+      },
+      {
+        source:
+          "/escapades-romantiques/2016/calella-de-palafrugell-jardins-cap-roig/",
+        destination:
+          "/escapades-culturals/jardins-cap-roig-calella-palafrugell-costa-brava",
+        permanent: true,
+      },
+      {
+        source: "/escapades-aventura/refugi-prat-daguilo",
+        destination:
+          "/escapades-aventura/refugi-prat-aguilo-serra-del-cadi-pas-gosolans",
+        permanent: true,
+      },
     ];
   },
 });
