@@ -51,15 +51,8 @@
     ol, ul, menu
         @apply list-disc pl-5 mb-5 leading-normal
 
-    blockquote, blockquote *
-        @apply text-xl font-semibold my-8
-
-    blockquote
-        @apply relative pl-8
-
-    blockquote::before
-        content: '"'
-        @apply absolute -left-2 top-2 text-8xl opacity-50 text-secondary-50 leading-10
+    .text-block, .text-block *
+        @apply text-[15px]
 
     #animate-area
         width: 100%

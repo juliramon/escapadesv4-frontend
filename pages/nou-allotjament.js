@@ -37,23 +37,13 @@ const PlaceForm = () => {
         }
       }
     }
-    if (
-      router.pathname.includes("editar") ||
-      router.pathname.includes("nova-activitat") ||
-      router.pathname.includes("nou-allotjament") ||
-      router.pathname.includes("nova-historia") ||
-      router.pathname.includes("nova-llista")
-    ) {
-      document.querySelector("body").classList.add("bg-primary-100");
-    } else {
-      document.querySelector("body").classList.remove("bg-primary-100");
-    }
   }, [user]);
 
   const initialState = {
     formData: {
       emptyForm: true,
       type: "place",
+      isVerified: false,
       title: "",
       subtitle: "",
       slug: "",
@@ -287,6 +277,7 @@ const PlaceForm = () => {
   const submitPlace = async () => {
     const {
       type,
+      isVerified,
       title,
       subtitle,
       slug,
@@ -316,6 +307,7 @@ const PlaceForm = () => {
     service
       .place(
         type,
+        isVerified,
         slug,
         title,
         subtitle,
@@ -373,6 +365,7 @@ const PlaceForm = () => {
 
   useEffect(() => {
     const {
+      isVerified,
       title,
       subtitle,
       slug,
@@ -392,6 +385,7 @@ const PlaceForm = () => {
     } = state.formData;
 
     if (
+      isVerified &&
       title &&
       subtitle &&
       slug &&
@@ -446,6 +440,20 @@ const PlaceForm = () => {
       )
     );
   }
+
+  const handleCheck = (e) => {
+    if (e.target.name === "isVerified") {
+      e.target.checked
+        ? setState({
+            ...state,
+            formData: { ...state.formData, isVerified: true },
+          })
+        : setState({
+            ...state,
+            formData: { ...state.formData, isVerified: false },
+          });
+    }
+  };
 
   if (!loadPage) {
     return <FetchingSpinner />;
@@ -517,7 +525,7 @@ const PlaceForm = () => {
                     ""
                   )}
                 </div>
-                <div className="w-full lg:w-1/2">
+                <div className="w-full">
                   <h1 className="text-3xl">
                     Potencia la visibilitat del teu allotjament
                   </h1>
@@ -525,15 +533,6 @@ const PlaceForm = () => {
                     Descriu l'allotjament per arribar a parelles d'arreu de
                     Catalunya
                   </p>
-                </div>
-                <div className="w-full lg:w-1/2 flex justify-end">
-                  <button
-                    className="button__primary button__lg"
-                    type="submit"
-                    onClick={handleSubmit}
-                  >
-                    Guardar canvis
-                  </button>
                 </div>
               </div>
               <div className="form-composer__body">
@@ -560,14 +559,38 @@ const PlaceForm = () => {
                 {activeTab === "main" ? (
                   <div className="form__wrapper">
                     <form className="form" onSubmit={handleSubmit}>
-                      <div className="form__group">
-                        <label className="form__label">
-                          Empresa propietària
-                        </label>
-                        <div className="flex items-center -mt-4 -mx-2 -mb-2">
-                          {organizationsList}
+                      <div className="flex flex-wrap items-stretch mt-2">
+                        <div className="form__group w-1/2">
+                          <label className="form__label">
+                            Empresa propietària
+                          </label>
+                          <div className="flex items-center -mt-4 -mx-2 -mb-2">
+                            {organizationsList}
+                          </div>
+                        </div>
+                        <div className="form__group w-1/2">
+                          <label className="form__label">
+                            Escapada verificada?
+                          </label>
+                          <div className="flex items-center">
+                            <label
+                              htmlFor="isVerified"
+                              className="form__label flex items-center"
+                            >
+                              <input
+                                type="checkbox"
+                                name="isVerified"
+                                id="isVerified"
+                                className="mr-2"
+                                onClick={handleCheck}
+                                checked={state.formData.isVerified}
+                              />
+                              Verificada
+                            </label>
+                          </div>
                         </div>
                       </div>
+
                       <div className="form__group">
                         <label htmlFor="title" className="form__label">
                           Títol
@@ -1057,7 +1080,7 @@ const PlaceForm = () => {
                         </div>
                       </div>
 
-                      <div className="cover">
+                      <div className="form__group cover">
                         <span className="form__label">Imatge de portada</span>
                         <div className="flex items-center flex-col max-w-full mb-4">
                           <div className="bg-white border border-primary-100 rounded-tl-md rounded-tr-md w-full">
@@ -1105,7 +1128,7 @@ const PlaceForm = () => {
                         </div>
                       </div>
 
-                      <div className="images">
+                      <div className="form__group images">
                         <span className="form__label">
                           Imatges d'aquest allotjament
                         </span>
@@ -1226,6 +1249,19 @@ const PlaceForm = () => {
             </div>
           </div>
         </section>
+        <div className="w-full fixed bottom-0 inset-x-0 bg-white border-t border-primary-200 py-2.5 z-50">
+          <div className="container flex items-center justify-end">
+            <div className="px-5">
+              <button
+                className="button button__primary button__lg"
+                type="submit"
+                onClick={handleSubmit}
+              >
+                Guardar canvis
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );
