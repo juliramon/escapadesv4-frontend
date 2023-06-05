@@ -21,15 +21,19 @@ const Error404 = () => {
 							</div>
 							<div className="w-full md:max-w-xl px-6 text-center md:text-left mt-5 md:mt-2">
 								<div className="max-w-xs mx-auto md:max-w-full">
-									<h1 className="mt-0 mb-5">Pàgina no trobada</h1>
+									<h1 className="mt-0 mb-5">
+										Pàgina no trobada
+									</h1>
 									<p className="text-primary-400">
-										La pàgina sol·licitada no està disponible, o potser ha
-										canviat de direcció, disculpa les molèsties.
+										La pàgina sol·licitada no està
+										disponible, o potser ha canviat de
+										direcció, disculpa les molèsties.
 									</p>
 									<p className="text-primary-400">
-										Amb freqüència és degut a un error a l'escriure la direcció
-										de la pàgina que estàs intentant accedir. Comprova-ho de nou
-										a veure si és correcte.
+										Amb freqüència és degut a un error a
+										l'escriure la direcció de la pàgina que
+										estàs intentant accedir. Comprova-ho de
+										nou a veure si és correcte.
 									</p>
 								</div>
 							</div>

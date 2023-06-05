@@ -129,7 +129,9 @@ const CategoryPage = ({
 								<img src={state.categoryDetails.sponsorLogo} />
 							</div>
 							<div className="sponsor-block-claim">
-								<span>{state.categoryDetails.sponsorClaim}</span>
+								<span>
+									{state.categoryDetails.sponsorClaim}
+								</span>
 							</div>
 						</div>
 					</div>
@@ -241,7 +243,11 @@ const CategoryPage = ({
 						<div className="container">
 							<ul className="breadcrumb">
 								<li className="breadcrumb__item">
-									<a href="/" title="Inici" className="breadcrumb__link">
+									<a
+										href="/"
+										title="Inici"
+										className="breadcrumb__link"
+									>
 										Inici
 									</a>
 								</li>
@@ -266,9 +272,9 @@ const CategoryPage = ({
 						}</span>`}
 						subtitle={`Descobreix <span class="inline-block bg-tertiary-100 px-2">${
 							state.allResults.length
-						} ${!state.categoryDetails.isPlace ? "escapades" : ""} ${
-							state.categoryDetails.pluralName
 						} ${
+							!state.categoryDetails.isPlace ? "escapades" : ""
+						} ${state.categoryDetails.pluralName} ${
 							state.categoryDetails.isPlace ? "amb encant" : ""
 						}</span> a Catalunya. ${
 							state.categoryDetails.seoTextHeader
@@ -294,7 +300,9 @@ const CategoryPage = ({
 													className="button button__primary button__lg"
 													onClick={() =>
 														loadMoreResults(
-															state.categoryDetails.name,
+															state
+																.categoryDetails
+																.name,
 															state.currentPage
 														)
 													}
@@ -316,8 +324,18 @@ const CategoryPage = ({
 															d="M0 0h24v24H0z"
 															fill="none"
 														></path>
-														<line x1={12} y1={5} x2={12} y2={19}></line>
-														<line x1={5} y1={12} x2={19} y2={12}></line>
+														<line
+															x1={12}
+															y1={5}
+															x2={12}
+															y2={19}
+														></line>
+														<line
+															x1={5}
+															y1={12}
+															x2={19}
+															y2={12}
+														></line>
 													</svg>
 													Veure'n més
 												</button>
@@ -350,14 +368,16 @@ const CategoryPage = ({
 										<div
 											className="w-full md:w-8/12 xl:w-5/12 md:mx-auto"
 											dangerouslySetInnerHTML={{
-												__html: state.categoryDetails.seoText,
+												__html: state.categoryDetails
+													.seoText,
 											}}
 										></div>
 									</div>
 								</>
 							) : (
 								<p className="text-center mx-auto text-lg">
-									No s'han trobat escapades per aquesta categoria.
+									No s'han trobat escapades per aquesta
+									categoria.
 									<br /> Torna-ho a provar més endavant.
 								</p>
 							)}
@@ -392,6 +412,7 @@ const CategoryPage = ({
 					Veure-les al mapa
 				</button>
 			</div>
+
 			<Footer />
 			{stateModalMap == true ? (
 				<MapModal

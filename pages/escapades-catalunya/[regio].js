@@ -228,7 +228,11 @@ const RegioPage = ({
 						<div className="container">
 							<ul className="breadcrumb">
 								<li className="breadcrumb__item">
-									<a href="/" title="Inici" className="breadcrumb__link">
+									<a
+										href="/"
+										title="Inici"
+										className="breadcrumb__link"
+									>
 										Inici
 									</a>
 								</li>
@@ -245,7 +249,9 @@ const RegioPage = ({
 						<div className="container">
 							<div className="w-full md:w-8/12 xl:w-5/12 mb-3">
 								<h1 className="my-0 font-display">
-									<span className="capitalize">Escapades </span>
+									<span className="capitalize">
+										Escapades{" "}
+									</span>
 									<span className="text-secondary-500">
 										{state.regioDetails.pluralName}
 									</span>
@@ -256,16 +262,23 @@ const RegioPage = ({
 									<div className="w-full flex flex-wrap items-center justify-between">
 										<div className="w-full md:w-1/2">
 											<h2 className="max-w-2xl text-3xl font-medium">
-												{state.regioDetails.title}. Descobreix{" "}
-												{state.allResults.length} escapades{" "}
-												{state.regioDetails.name} per gaudir com mai en parella.
+												{state.regioDetails.title}.
+												Descobreix{" "}
+												{state.allResults.length}{" "}
+												escapades{" "}
+												{state.regioDetails.name} per
+												gaudir com mai en parella.
 											</h2>
 											{sponsorBlock}
 										</div>
 										<div className="relative flex items-center justify-end w-full md:w-1/2">
 											<button
 												className="text-sm inline-flex flex-nowrap items-center button button__ghost button__med mr-3"
-												onClick={() => setStateModalMap(!stateModalMap)}
+												onClick={() =>
+													setStateModalMap(
+														!stateModalMap
+													)
+												}
 											>
 												<svg
 													xmlns="http://www.w3.org/2000/svg"
@@ -279,12 +292,31 @@ const RegioPage = ({
 													strokeLinecap="round"
 													strokeLinejoin="round"
 												>
-													<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-													<line x1="18" y1="6" x2="18" y2="6.01" />
+													<path
+														stroke="none"
+														d="M0 0h24v24H0z"
+														fill="none"
+													/>
+													<line
+														x1="18"
+														y1="6"
+														x2="18"
+														y2="6.01"
+													/>
 													<path d="M18 13l-3.5 -5a4 4 0 1 1 7 0l-3.5 5" />
 													<polyline points="10.5 4.75 9 4 3 7 3 20 9 17 15 20 21 17 21 15" />
-													<line x1="9" y1="4" x2="9" y2="17" />
-													<line x1="15" y1="15" x2="15" y2="20" />
+													<line
+														x1="9"
+														y1="4"
+														x2="9"
+														y2="17"
+													/>
+													<line
+														x1="15"
+														y1="15"
+														x2="15"
+														y2="20"
+													/>
 												</svg>
 												Veure-les al mapa
 											</button>
@@ -300,7 +332,8 @@ const RegioPage = ({
 													className="button button__primary button__lg"
 													onClick={() =>
 														loadMoreResults(
-															state.regioDetails.name,
+															state.regioDetails
+																.name,
 															state.currentPage
 														)
 													}
@@ -322,8 +355,18 @@ const RegioPage = ({
 															d="M0 0h24v24H0z"
 															fill="none"
 														></path>
-														<line x1={12} y1={5} x2={12} y2={19}></line>
-														<line x1={5} y1={12} x2={19} y2={12}></line>
+														<line
+															x1={12}
+															y1={5}
+															x2={12}
+															y2={19}
+														></line>
+														<line
+															x1={5}
+															y1={12}
+															x2={19}
+															y2={12}
+														></line>
 													</svg>
 													Veure'n més
 												</button>

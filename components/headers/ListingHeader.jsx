@@ -1,4 +1,4 @@
-const ListingHeader = ({ title, subtitle, figCaption, image, sponsorData }) => {
+const ListingHeader = ({ title, subtitle, sponsorData }) => {
   return (
     <section className="py-5">
       <div className="container px-0">
