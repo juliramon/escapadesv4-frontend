@@ -60,6 +60,11 @@ module.exports = withTM({
 				permanent: true,
 			},
 			{
+				source: "/tag/aventura",
+				destination: "/escapades-aventura",
+				permanent: true,
+			},
+			{
 				source: "/assets/documents/escapadesdespresconfinament.pdf",
 				destination: "/",
 				permanent: true,
@@ -294,6 +299,16 @@ module.exports = withTM({
 			{
 				source: "/[categoria]",
 				destination: "/",
+				permanent: true,
+			},
+			{
+				source: "/carabanes",
+				destination: "/caravanes",
+				permanent: true,
+			},
+			{
+				source: "/llistes/[slug]",
+				destination: "/llistes",
 				permanent: true,
 			},
 		];
