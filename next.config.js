@@ -257,6 +257,45 @@ module.exports = withTM({
 				destination: "/apartaments-per-a-parelles",
 				permanent: true,
 			},
+			{
+				source: "/politica-de-cookies/",
+				destination: "/politica-privadesa",
+				permanent: true,
+			},
+			{
+				source: "/escapades-romantiques/hotel-castell-de-ciutat-seu-urgell?db-claim",
+				destination:
+					"/escapades-de-relax/hotel-castell-de-ciutat-hotel-boutique-la-seu-urgell-lleida",
+				permanent: true,
+			},
+			{
+				source: "/escapades/hotel-el-castell-de-ciutat-seu-urgell",
+				destination:
+					"/escapades-de-relax/hotel-castell-de-ciutat-hotel-boutique-la-seu-urgell-lleida",
+				permanent: true,
+			},
+			{
+				source: "/escapades/hotel-el-castell-de-ciutat-seu-urgell/",
+				destination:
+					"/escapades-de-relax/hotel-castell-de-ciutat-hotel-boutique-la-seu-urgell-lleida",
+				permanent: true,
+			},
+			{
+				source: "/escapades-romantiques/hotel-castell-de-ciutat-seu-urgell",
+				destination:
+					"/escapades-de-relax/hotel-castell-de-ciutat-hotel-boutique-la-seu-urgell-lleida",
+				permanent: true,
+			},
+			{
+				source: "/escapades-culturals/972 75 19 10",
+				destination: "/escapades-culturals",
+				permanent: true,
+			},
+			{
+				source: "/[categoria]",
+				destination: "/",
+				permanent: true,
+			},
 		];
 	},
 });
