@@ -232,12 +232,7 @@ const CategoryPage = ({
 				page2Url={`https://escapadesenparella.cat/${state.categoryDetails.slug}`}
 			/>
 			<div id="contentList" className="category relative">
-				<NavigationBar
-					logo_url={
-						"https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
-					}
-					user={user}
-				/>
+				<NavigationBar />
 				<main>
 					<div className="pt-6">
 						<div className="container">
@@ -257,34 +252,35 @@ const CategoryPage = ({
 									</span>
 								</li>
 							</ul>
+							<ListingHeader
+								title={`<span class="capitalize">${
+									!state.categoryDetails.isPlace
+										? "Escapades"
+										: state.categoryDetails.pluralName
+								}</span> <span class="text-secondary-500 lowercase">${
+									state.categoryDetails.isPlace
+										? "amb encant"
+										: state.categoryDetails.pluralName
+								}</span>`}
+								subtitle={`Descobreix <span class="inline-block relative after:absolute after:inset-x-0 after:bottom-px after:w-full after:h-0.5 after:bg-secondary-500">${
+									state.allResults.length
+								} ${
+									!state.categoryDetails.isPlace
+										? "escapades"
+										: ""
+								} ${state.categoryDetails.pluralName} ${
+									state.categoryDetails.isPlace
+										? "amb encant"
+										: ""
+								}</span> a Catalunya. ${
+									state.categoryDetails.seoTextHeader
+										? state.categoryDetails.seoTextHeader
+										: ""
+								}`}
+								sponsorData={sponsorBlock}
+							/>
 						</div>
 					</div>
-
-					<ListingHeader
-						title={`<span class="capitalize">${
-							!state.categoryDetails.isPlace
-								? "Escapades"
-								: state.categoryDetails.pluralName
-						}</span> <span class="text-secondary-500 lowercase">${
-							state.categoryDetails.isPlace
-								? "amb encant"
-								: state.categoryDetails.pluralName
-						}</span>`}
-						subtitle={`Descobreix <span class="inline-block bg-tertiary-100 px-2">${
-							state.allResults.length
-						} ${
-							!state.categoryDetails.isPlace ? "escapades" : ""
-						} ${state.categoryDetails.pluralName} ${
-							state.categoryDetails.isPlace ? "amb encant" : ""
-						}</span> a Catalunya. ${
-							state.categoryDetails.seoTextHeader
-								? state.categoryDetails.seoTextHeader
-								: ""
-						}`}
-						figCaption={categoryDetails.imageCaption}
-						image={categoryDetails.image}
-						sponsorData={sponsorBlock}
-					/>
 
 					<section className="pb-8 md:pb-16">
 						<div className="container">
@@ -366,7 +362,7 @@ const CategoryPage = ({
 									)}
 									<div className="border-t border-primary-100 pt-10 mt-10">
 										<div
-											className="w-full md:w-8/12 xl:w-5/12 md:mx-auto"
+											className="w-full max-w-prose mx-auto text-block text-primary-400"
 											dangerouslySetInnerHTML={{
 												__html: state.categoryDetails
 													.seoText,

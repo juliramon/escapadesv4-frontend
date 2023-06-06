@@ -44,7 +44,7 @@ const Footer = () => {
 			<div className="container">
 				<div className="w-full flex flex-wrap items-start">
 					<div className="w-full md:w-1/2 lg:w-4/12 mb-6 lg:mb-0 md:pr-5 lg:pr-10">
-						<div className="flex flex-col flex-wrap items-start">
+						<div className="flex flex-col flex-wrap items-start max-w-xs">
 							<svg
 								width="135px"
 								height="100%"
@@ -82,7 +82,7 @@ const Footer = () => {
 									</g>
 								</g>
 							</svg>
-							<span className="text-sm">
+							<span className="text-sm block mt-2.5">
 								Escapadesenparella.cat és el recomanador
 								especialista en escapades en parella a
 								Catalunya. Registra't per gaudir de tots els
@@ -138,7 +138,7 @@ const Footer = () => {
 					</div>
 					<div className="w-full md:w-1/2 lg:w-3/12 mb-6 lg:mb-0">
 						<div className="footer-content">
-							<span className="footer-header text-xl mb-4">
+							<span className="footer-header text-xl mb-2 inline-block">
 								Continguts
 							</span>
 							<ul className="list-none m-0 p-0">
@@ -158,7 +158,7 @@ const Footer = () => {
 					</div>
 					<div className="w-full md:w-1/2 lg:w-3/12 mb-6 lg:mb-0 ">
 						<div className="footer-about">
-							<span className="footer-header text-xl mb-4">
+							<span className="footer-header text-xl mb-2 inline-block">
 								Nosaltres
 							</span>
 							<ul className="list-none m-0 p-0">
@@ -186,7 +186,7 @@ const Footer = () => {
 					</div>
 					<div className="w-full md:w-1/2 lg:w-2/12">
 						<div className="footer-connect">
-							<span className="footer-header text-xl mb-4">
+							<span className="footer-header text-xl mb-2 inline-block">
 								Contacta'ns
 							</span>
 							<ul className="list-none m-0 p-0">
