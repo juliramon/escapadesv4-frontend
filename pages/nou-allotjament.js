@@ -1070,11 +1070,29 @@ const PlaceForm = () => {
 															onChange={
 																handleCheckPlaceType
 															}
-															checked={checkIfRegionChecked(
+															checked={checkIfTypeChecked(
 																"carabana"
 															)}
 														/>
 														Carabana
+													</label>
+													<label
+														htmlFor="camping"
+														className="form__label flex items-center"
+													>
+														<input
+															type="radio"
+															name="placeType"
+															id="camping"
+															className="mr-2"
+															onChange={
+																handleCheckPlaceType
+															}
+															checked={checkIfTypeChecked(
+																"camping"
+															)}
+														/>
+														Càmping
 													</label>
 												</div>
 											</div>

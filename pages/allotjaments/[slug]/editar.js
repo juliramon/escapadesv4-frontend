@@ -349,10 +349,6 @@ const EditionForm = () => {
 	const submitPlace = async () => {
 		const {
 			_id,
-			categories,
-			seasons,
-			region,
-			placeType,
 			cover,
 			images,
 			place_full_address,
@@ -367,6 +363,10 @@ const EditionForm = () => {
 			place_opening_hours,
 		} = state.place;
 		const {
+			categories,
+			seasons,
+			region,
+			placeType,
 			title,
 			subtitle,
 			coverCloudImage,
@@ -1044,11 +1044,29 @@ const EditionForm = () => {
 															onChange={
 																handleCheckPlaceType
 															}
-															checked={checkIfRegionChecked(
+															checked={checkIfTypeChecked(
 																"carabana"
 															)}
 														/>
 														Carabana
+													</label>
+													<label
+														htmlFor="camping"
+														className="form__label flex items-center"
+													>
+														<input
+															type="radio"
+															name="placeType"
+															id="camping"
+															className="mr-2"
+															onChange={
+																handleCheckPlaceType
+															}
+															checked={checkIfTypeChecked(
+																"camping"
+															)}
+														/>
+														Càmping
 													</label>
 												</div>
 											</div>

@@ -7,6 +7,7 @@ import UserContext from "../contexts/UserContext";
 import FetchingSpinner from "../components/global/FetchingSpinner";
 import { useRouter } from "next/router";
 import CategoryBox from "../components/dashboard/CategoryBox";
+import CreateCategoryModal from "../components/modals/CreateCategoryModal";
 
 const AdminPanel = () => {
 	// Validate if user is allowed to access this view
@@ -40,7 +41,8 @@ const AdminPanel = () => {
 
 	const [state, setState] = useState(initialState);
 	const [toggleButton, setToggleButton] = useState(false);
-	const [categoryModalVisibility, setCategoryModalVisibility] = useState(false);
+	const [categoryModalVisibility, setCategoryModalVisibility] =
+		useState(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -130,7 +132,6 @@ const AdminPanel = () => {
 				/>
 			));
 		}
-
 		if (state.activeTab === "lists") {
 			listResults = state.lists.map((el, idx) => (
 				<ContentBox
@@ -145,7 +146,6 @@ const AdminPanel = () => {
 				/>
 			));
 		}
-
 		if (state.activeTab === "categories") {
 			listResults = state.categories.map((el, idx) => (
 				<CategoryBox
@@ -370,7 +370,10 @@ const AdminPanel = () => {
 												: "border-primary-100 bg-white hover:bg-primary-50"
 										}`}
 										onClick={() =>
-											setState({ ...state, activeTab: "activities" })
+											setState({
+												...state,
+												activeTab: "activities",
+											})
 										}
 									>
 										Activitats
@@ -383,7 +386,12 @@ const AdminPanel = () => {
 												? isActive
 												: "border-primary-100 bg-white hover:bg-primary-50"
 										}`}
-										onClick={() => setState({ ...state, activeTab: "places" })}
+										onClick={() =>
+											setState({
+												...state,
+												activeTab: "places",
+											})
+										}
 									>
 										Allotjaments
 									</button>
@@ -395,7 +403,12 @@ const AdminPanel = () => {
 												? isActive
 												: "border-primary-100 bg-white hover:bg-primary-50"
 										}`}
-										onClick={() => setState({ ...state, activeTab: "stories" })}
+										onClick={() =>
+											setState({
+												...state,
+												activeTab: "stories",
+											})
+										}
 									>
 										Històries
 									</button>
@@ -407,7 +420,12 @@ const AdminPanel = () => {
 												? isActive
 												: "border-primary-100 bg-white hover:bg-primary-50"
 										}`}
-										onClick={() => setState({ ...state, activeTab: "lists" })}
+										onClick={() =>
+											setState({
+												...state,
+												activeTab: "lists",
+											})
+										}
 									>
 										Llistes
 									</button>
@@ -420,7 +438,10 @@ const AdminPanel = () => {
 												: "border-primary-100 bg-white hover:bg-primary-50"
 										}`}
 										onClick={() =>
-											setState({ ...state, activeTab: "categories" })
+											setState({
+												...state,
+												activeTab: "categories",
+											})
 										}
 									>
 										Categories
@@ -446,7 +467,10 @@ const AdminPanel = () => {
 						toggleButton ? "show" : ""
 					}`}
 				>
-					<div id="floatingPublishButton" className={`flex flex-col items-end`}>
+					<div
+						id="floatingPublishButton"
+						className={`flex flex-col items-end`}
+					>
 						<a
 							href="/nova-activitat"
 							title="Publicar nova activitat"
@@ -479,6 +503,16 @@ const AdminPanel = () => {
 						>
 							Publicar nova llista
 						</a>
+						<button
+							className="bg-white hover:bg-primary-100 border-primary-200 rounded-md py-2.5 px-4 mb-1.5 shadow-lg text-sm"
+							onClick={() =>
+								setCategoryModalVisibility(
+									!categoryModalVisibility
+								)
+							}
+						>
+							Publicar nova categoria
+						</button>
 					</div>
 					<button
 						className="button button__primary button__med shadow-xl"
@@ -496,7 +530,11 @@ const AdminPanel = () => {
 							strokeLinecap="round"
 							strokeLinejoin="round"
 						>
-							<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+							<path
+								stroke="none"
+								d="M0 0h24v24H0z"
+								fill="none"
+							></path>
 							<line x1={12} y1={5} x2={12} y2={19}></line>
 							<line x1={5} y1={12} x2={19} y2={12}></line>
 						</svg>
@@ -504,6 +542,13 @@ const AdminPanel = () => {
 					</button>
 				</div>
 			</main>
+			{categoryModalVisibility == true ? (
+				<CreateCategoryModal
+					visibility={categoryModalVisibility}
+					hideModal={setCategoryModalVisibility}
+					fetchData={fetchData}
+				/>
+			) : null}
 		</>
 	);
 };
