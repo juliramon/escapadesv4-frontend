@@ -268,12 +268,6 @@ module.exports = withTM({
 				permanent: true,
 			},
 			{
-				source: "/escapades-romantiques/hotel-castell-de-ciutat-seu-urgell?db-claim",
-				destination:
-					"/escapades-de-relax/hotel-castell-de-ciutat-hotel-boutique-la-seu-urgell-lleida",
-				permanent: true,
-			},
-			{
 				source: "/escapades/hotel-el-castell-de-ciutat-seu-urgell",
 				destination:
 					"/escapades-de-relax/hotel-castell-de-ciutat-hotel-boutique-la-seu-urgell-lleida",
