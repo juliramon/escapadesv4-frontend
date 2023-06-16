@@ -31,7 +31,7 @@ const Hero = ({ totals }) => {
 						</picture>
 					</div>
 				</div>
-				<div className="w-full md:w-8/12 2xl:container px-3 flex items-center justify-center">
+				<div className="w-full md:w-8/12 2xl:container md:px-3 flex items-center justify-center">
 					<div className="bg-primary-900 bg-geo pt-24 pb-32 px-6 xl:px-20 h-full w-full overflow-hidden md:rounded-b-lg">
 						<div className="relative z-10 md:min-h-[150px] lg:min-h-[300px] flex items-center justify-center">
 							<div className="max-w-sm text-center ">
