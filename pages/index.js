@@ -1,14 +1,14 @@
+import { useEffect, useContext } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import ContentService from "../services/contentService";
-import { useEffect, useContext } from "react";
-import Hero from "../components/homepage/Hero";
-import NavigationBar from "../components/global/NavigationBar";
-import Footer from "../components/global/Footer";
-import HomePageResults from "../components/homepage/HomePageResults";
-import { useRouter } from "next/router";
 import UserContext from "../contexts/UserContext";
 import LocalBusiness from "../components/richsnippets/LocalBusiness";
 import GlobalMetas from "../components/head/GlobalMetas";
+import NavigationBar from "../components/global/NavigationBar";
+import HomeHeader from "../components/headers/HomeHeader";
+import HomePageResults from "../components/homepage/HomePageResults";
+import Footer from "../components/global/Footer";
 
 const Homepage = (props) => {
 	const { user } = useContext(UserContext);
@@ -43,7 +43,7 @@ const Homepage = (props) => {
 			<LocalBusiness />
 			<main id="homepage">
 				<NavigationBar />
-				<Hero mostRecentStories={props.mostRecentStories} />
+				<HomeHeader totals={props.totals} />
 				<HomePageResults
 					categories={props.categories}
 					featuredRegions={props.featuredRegions}
@@ -55,7 +55,7 @@ const Homepage = (props) => {
 					featuredGastronomicGetaways={
 						props.featuredGastronomicGetaways
 					}
-					totals={props.totals}
+					mostRecentStories={props.mostRecentStories}
 				/>
 				<Footer />
 			</main>
@@ -78,7 +78,7 @@ export async function getStaticProps() {
 
 	const featuredList = await service.getFeaturedList();
 	const categories = await service.getCategories();
-	const totals = await service.getCategoriesTotals();
+	const totals = await service.getSiteStats();
 
 	return {
 		props: {

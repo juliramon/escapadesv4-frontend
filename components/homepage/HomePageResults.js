@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import PublicSquareBox from "../../components/listings/PublicSquareBox";
 import RegularListBox from "../../components/listings/RegularListBox";
+import StoryListing from "../listings/StoryListing";
 
 const HomePageResults = ({
 	categories,
@@ -13,7 +14,6 @@ const HomePageResults = ({
 	featuredRomanticGetaways,
 	featuredAdventureGetaways,
 	featuredGastronomicGetaways,
-	totals,
 }) => {
 	const initialState = {
 		placeCategories: [],
@@ -64,7 +64,6 @@ const HomePageResults = ({
 				featuredRomanticGetaways: featuredRomanticGetaways,
 				featuredAdventureGetaways: featuredAdventureGetaways,
 				featuredGastronomicGetaways: featuredGastronomicGetaways,
-				totals: totals,
 			});
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -78,7 +77,7 @@ const HomePageResults = ({
 			<div className="container">
 				<div className="w-full">
 					{/* Most rated getaways */}
-					<section className="pt-12 lg:pt-20">
+					<section className="pt-12 lg:pt-16">
 						<h2 className="mb-0">
 							Els allotjaments més ben valorats
 						</h2>
@@ -249,6 +248,57 @@ const HomePageResults = ({
 						<a
 							href="/escapades-romantiques"
 							title="Veure més escapades romàntiques"
+							className="button button__ghost button__med text-[16px] inline-flex items-center mt-2.5 transition-all duration-300 ease-in-out"
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								className="mr-1.5"
+								width={20}
+								height={20}
+								viewBox="0 0 24 24"
+								strokeWidth="2"
+								stroke="currentColor"
+								fill="none"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+							>
+								<path
+									stroke="none"
+									d="M0 0h24v24H0z"
+									fill="none"
+								></path>
+								<path d="M9 6l6 6l-6 6"></path>
+							</svg>
+							Veure'n més
+						</a>
+					</section>
+
+					{/* Most recent stories */}
+					<section className="pt-12">
+						<h2 className="mb-0">
+							Històries en parella, el blog
+							d'Escapadesenparella.cat
+						</h2>
+						<div className="flex flex-wrap items-stretch mt-2 -mx-2">
+							{state.mostRecentStories.length > 0
+								? state.mostRecentStories.map((story, idx) => {
+										return (
+											<article
+												key={idx}
+												className="w-full md:w-1/2 lg:w-1/3 p-2 mb-4 lg:mb-0"
+											>
+												<StoryListing
+													story={story}
+													index={idx}
+												/>
+											</article>
+										);
+								  })
+								: ""}
+						</div>
+						<a
+							href="/histories"
+							title="Veure més històries"
 							className="button button__ghost button__med text-[16px] inline-flex items-center mt-2.5 transition-all duration-300 ease-in-out"
 						>
 							<svg
