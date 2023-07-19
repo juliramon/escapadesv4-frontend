@@ -64,9 +64,14 @@ const Contacte = ({ user }) => {
 						message: "",
 						serverMessage: res.message,
 					});
-					setToastState({ ...formsState, isVisible: true, duration: 5000 });
+					setToastState({
+						...formsState,
+						isVisible: true,
+						duration: 5000,
+					});
 					setTimeout(
-						() => setToastState({ ...toastState, isVisible: false }),
+						() =>
+							setToastState({ ...toastState, isVisible: false }),
 						5000
 					);
 				}
@@ -130,12 +135,18 @@ const Contacte = ({ user }) => {
 						<div className="container">
 							<ul className="breadcrumb">
 								<li className="breadcrumb__item">
-									<a href="/" title="Inici" className="breadcrumb__link">
+									<a
+										href="/"
+										title="Inici"
+										className="breadcrumb__link"
+									>
 										Inici
 									</a>
 								</li>
 								<li className="breadcrumb__item">
-									<span className="breadcrumb__link active">Contacte</span>
+									<span className="breadcrumb__link active">
+										Contacte
+									</span>
 								</li>
 							</ul>
 						</div>
@@ -146,14 +157,19 @@ const Contacte = ({ user }) => {
 								<div className="w-full lg:w-9/12 mx-auto">
 									<h1 className="mt-0 mb-3">Contacte</h1>
 									<p className="mb-5">
-										Vols que col·laborem per donar a conèixer el teu allotjament
-										o activitat? Tens dubtes sobre com podem donar a conèixer la
-										teva marca? No saps on escapar-te? Contacta'ns! 👇{" "}
+										Vols que col·laborem per donar a
+										conèixer el teu allotjament o activitat?
+										Tens dubtes sobre com podem donar a
+										conèixer la teva marca? No saps on
+										escapar-te? Contacta'ns! 👇{" "}
 									</p>
 									{alertContainer}
 									<form name="" id="" className="mt-8 form">
 										<fieldset className="form__group">
-											<label htmlFor="name" className="form__label">
+											<label
+												htmlFor="name"
+												className="form__label"
+											>
 												Nom i cognom
 											</label>
 											<input
@@ -167,7 +183,10 @@ const Contacte = ({ user }) => {
 											/>
 										</fieldset>
 										<fieldset className="form__group">
-											<label htmlFor="email" className="form__label">
+											<label
+												htmlFor="email"
+												className="form__label"
+											>
 												Correu electrònic
 											</label>
 											<input
@@ -181,7 +200,10 @@ const Contacte = ({ user }) => {
 											/>
 										</fieldset>
 										<fieldset className="form__group">
-											<label htmlFor="phone" className="form__label">
+											<label
+												htmlFor="phone"
+												className="form__label"
+											>
 												Telèfon
 											</label>
 											<input
@@ -195,7 +217,10 @@ const Contacte = ({ user }) => {
 											/>
 										</fieldset>
 										<fieldset className="form__group">
-											<label htmlFor="name" className="form__label">
+											<label
+												htmlFor="name"
+												className="form__label"
+											>
 												Pàgina web
 											</label>
 											<input
@@ -209,7 +234,10 @@ const Contacte = ({ user }) => {
 											/>
 										</fieldset>
 										<fieldset className="form__group">
-											<label htmlFor="message" className="form__label">
+											<label
+												htmlFor="message"
+												className="form__label"
+											>
 												Missatge
 											</label>
 											<textarea
@@ -239,7 +267,11 @@ const Contacte = ({ user }) => {
 													strokeLinecap="round"
 													strokeLinejoin="round"
 												>
-													<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+													<path
+														stroke="none"
+														d="M0 0h24v24H0z"
+														fill="none"
+													/>
 													<path d="M15 10l-4 4l6 6l4 -16l-18 7l4 2l2 6l3 -4" />
 												</svg>
 												Enviar formulari
@@ -249,21 +281,23 @@ const Contacte = ({ user }) => {
 								</div>
 							</div>
 						</div>
-						<div className="w-full md:w-1/3 md:absolute right-0 top-0 max-h-96 md:max-h-full md:h-full bg-red-100 order-last lg:order-none">
-							<picture>
-								<img
-									src="https://res.cloudinary.com/juligoodie/image/upload/v1651513521/getaways-guru/contacta-amb-nosaltres_sg47zn.jpg"
-									alt="Escapadesenparella.cat a la platja d'Itzurun, Zumaia, País Basc"
-									className="w-full h-full object-cover"
-									width={400}
-									height={300}
-									loading="lazy"
-								/>
-							</picture>
-							<figcaption className="absolute bottom-2.5 left-3 text-xs text-white">
-								Andrea i Juli, Platja d'Itzurun, Zumaia (País Basc) / ©
-								Escapadesenparella.cat
-							</figcaption>
+						<div className="w-full md:w-1/3 md:absolute right-0 top-0 max-h-96 md:max-h-full md:h-full order-last lg:order-none p-6">
+							<div className="block rounded-xl overflow-hidden relative">
+								<picture>
+									<img
+										src="https://res.cloudinary.com/juligoodie/image/upload/v1651513521/getaways-guru/contacta-amb-nosaltres_sg47zn.jpg"
+										alt="Escapadesenparella.cat a la platja d'Itzurun, Zumaia, País Basc"
+										className="w-full h-full object-cover"
+										width={400}
+										height={300}
+										loading="lazy"
+									/>
+								</picture>
+								<figcaption className="absolute bottom-2.5 left-3 text-xs text-white">
+									Andrea i Juli, Platja d'Itzurun, Zumaia
+									(País Basc) / © Escapadesenparella.cat
+								</figcaption>
+							</div>
 						</div>
 					</div>
 				</section>

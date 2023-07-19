@@ -17,7 +17,7 @@ const StoryListing = ({ story, index }) => {
 
 	return (
 		<Link href={"histories/" + story.slug} key={index}>
-			<a className="glide__slide relative ">
+			<a className="relative">
 				<picture className="block aspect-w-16 aspect-h-9 relative after:block after:w-full after:h-full after:z-20 after:content after:absolute after:inset-0 after:bg-primary-500 after:bg-opacity-0 shadow-md shadow-primary-100 rounded-md overflow-hidden">
 					<img
 						src={coverImg}

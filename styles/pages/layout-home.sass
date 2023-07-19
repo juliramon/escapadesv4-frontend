@@ -1,6 +1,8 @@
-.bg-geo
-    background-image: url('/bg-geo.png')
-    background-repeat: repeat
+@layer components
 
-    @supports (background-image: url('/bg-geo.webp'))
-        background-image: url('/bg-geo.webp')
+    .bg-geo
+        background-image: url('/bg-geo.png')
+        background-repeat: repeat
+
+        @supports (background-image: url('/bg-geo.webp'))
+            background-image: url('/bg-geo.webp')

@@ -145,7 +145,10 @@ const Footer = () => {
 								{state.activityCategories
 									? state.activityCategories.map(
 											(category, idx) => (
-												<li className="py-1 text-sm leading-tight">
+												<li
+													key={idx}
+													className="py-1 text-sm leading-tight"
+												>
 													<Link href={category.slug}>
 														<a>{category.title}</a>
 													</Link>
