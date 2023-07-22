@@ -1,5 +1,5 @@
 /**
- * HandleFilesUpload
+ * handleFilesUpload
  *
  * Utility function to upload images to Cloudinary CDN
  * The function expects two parameters
@@ -48,7 +48,7 @@ const handleFilesUpload = async (coverImage, bodyImages) => {
 };
 
 /**
- * RemoveImage
+ * removeImage
  *
  * Utility function to remove images from the state images array
  * The function expects three parameters
@@ -80,4 +80,21 @@ const removeImage = (elIdx, blopImages, images) => {
 	};
 };
 
-export { handleFilesUpload, removeImage };
+/**
+ * formatDateTimeToISODate
+ *
+ * Utility function to convert datetime values to formatted date
+ * The function expects one parameter:
+ *
+ * @param {string} storyDetails
+ */
+
+const formatDateTimeToISODate = (datetime) => {
+	return new Date(datetime).toLocaleDateString("ca-es", {
+		year: "numeric",
+		month: "short",
+		day: "numeric",
+	});
+};
+
+export { handleFilesUpload, removeImage, formatDateTimeToISODate };

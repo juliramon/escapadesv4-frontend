@@ -399,7 +399,7 @@ const StoryForm = () => {
 													disponibles. Utilitza el
 													shortcut{" "}
 													<strong>
-														post_images(n, n)
+														post_images(n, m + 1)
 													</strong>{" "}
 													per inserir-les a la
 													publicació.

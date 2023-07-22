@@ -11,6 +11,7 @@ import Breadcrumb from "../../components/richsnippets/Breadcrumb";
 import Article from "../../components/richsnippets/Article";
 import AdBanner from "../../components/ads/AdBanner";
 import FancyboxUtil from "../../utils/FancyboxUtils";
+import { formatDateTimeToISODate } from "../../utils/helpers";
 
 const StoryListing = ({ storyDetails }) => {
 	const { user } = useContext(UserContext);
@@ -114,27 +115,9 @@ const StoryListing = ({ storyDetails }) => {
 		}
 	}
 
-	const publicationDate = new Date(storyDetails.createdAt).toLocaleDateString(
-		"ca-es",
-		{
-			year: "numeric",
-			month: "short",
-			day: "numeric",
-		}
-	);
-
-	const updatedDate = new Date(storyDetails.updatedAt).toLocaleDateString(
-		"ca-es",
-		{
-			year: "numeric",
-			month: "short",
-			day: "numeric",
-		}
-	);
-
 	const coverPath = storyDetails.cover.substring(0, 51);
 	const imageId = storyDetails.cover.substring(63);
-	const coverImg = `${coverPath}w_400,h_300,c_fill/${imageId}`;
+	const coverImg = `${coverPath}w_800,h_600,c_fill/${imageId}`;
 
 	const coverAuthorPath = storyDetails.owner.avatar.substring(0, 51);
 	const imageAuthorId = storyDetails.owner.avatar.substring(63);
@@ -239,11 +222,15 @@ const StoryListing = ({ storyDetails }) => {
 										<span className="text-sm text-primary-400 text-opacity-80">
 											Publicat el{" "}
 											<time
-												dateTime={
+												dateTime={formatDateTimeToISODate(
 													storyDetails.createdAt
-												}
+												)}
 											>
-												<u>{publicationDate}</u>
+												<u>
+													{formatDateTimeToISODate(
+														storyDetails.createdAt
+													)}
+												</u>
 											</time>
 										</span>
 									</div>
@@ -282,8 +269,16 @@ const StoryListing = ({ storyDetails }) => {
 								<div className="text-center text-tertiary-500 text-opacity-80 text-sm py-4 mb-5 md:mb-6 bg-tertiary-100 bg-opacity-50 flex items-center justify-center rounded-md">
 									<span className="inline-block">
 										Darrera actualització:{" "}
-										<time dateTime={updatedDate}>
-											<u>{updatedDate}</u>
+										<time
+											dateTime={formatDateTimeToISODate(
+												storyDetails.updatedAt
+											)}
+										>
+											<u>
+												{formatDateTimeToISODate(
+													storyDetails.updatedAt
+												)}
+											</u>
 										</time>
 									</span>
 								</div>
