@@ -280,6 +280,7 @@ const NavigationBar = ({ logo_url, path }) => {
 							<input
 								onKeyDown={handleKeyPress}
 								type="text"
+								id="search"
 								placeholder="Cerca la vostra propera escapada..."
 								className="flex-auto bg-primary-50 px-5 py-2.5 placeholder:text-sm focus:outline-blue-200 focus:bg-white focus:text-primary-500"
 							/>

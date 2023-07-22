@@ -12,6 +12,7 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Placeholder from "@tiptap/extension-placeholder";
+import handleFilesUpload from "../utils/helpers";
 
 const PlaceForm = () => {
 	// Validate if user is allowed to access this view
@@ -173,32 +174,6 @@ const PlaceForm = () => {
 		}
 	};
 
-	const removeImage = (elIdx) => {
-		const arrBlopImages = state.formData.blopImages;
-		const arrImages = state.formData.images;
-
-		arrBlopImages.forEach((img, imgIdx) => {
-			if (imgIdx === elIdx) {
-				arrBlopImages.splice(elIdx, 1);
-			}
-		});
-
-		arrImages.forEach((img, imgIdx) => {
-			if (imgIdx === elIdx) {
-				arrImages.splice(elIdx, 1);
-			}
-		});
-
-		setState({
-			...state,
-			formData: {
-				...state.formData,
-				blopImages: arrBlopImages,
-				images: arrImages,
-			},
-		});
-	};
-
 	const imagesList = state.formData.blopImages.map((el, idx) => (
 		<div
 			className="relative overflow-hidden rounded-md border-8 border-white shadow mb-5"
@@ -206,7 +181,22 @@ const PlaceForm = () => {
 		>
 			<button
 				type="button"
-				onClick={() => removeImage(idx)}
+				onClick={() => {
+					const objImages = removeImage(
+						idx,
+						state.formData.blopImages,
+						state.formData.images
+					);
+					console.log(objImages.arrBlopImages);
+					setState({
+						...state,
+						formData: {
+							...state.formData,
+							images: objImages.arrImages,
+							blopImages: objImages.arrBlopImages,
+						},
+					});
+				}}
 				className="w-7 h-7 bg-black bg-opacity-70 text-white hover:bg-opacity-100 transition-all duration-300 ease-in-out absolute top-2 right-2 rounded-full flex items-center justify-center"
 			>
 				<svg
@@ -241,34 +231,6 @@ const PlaceForm = () => {
 			</div>
 		);
 	}
-
-	const handleFileUpload = async (e) => {
-		const imagesList = state.formData.images;
-		const cover = state.formData.cover;
-		let uploadedImages = [];
-		const uploadData = new FormData();
-		uploadData.append("imageUrl", cover);
-		const uploadedCover = await service.uploadFile(uploadData);
-		imagesList.forEach((el) => {
-			const uploadData = new FormData();
-			uploadData.append("imageUrl", el);
-			service.uploadFile(uploadData).then((res) => {
-				uploadedImages.push(res.path);
-				if (uploadedImages.length === state.formData.images.length) {
-					setState({
-						...state,
-						formData: {
-							...state.formData,
-							cloudImages: uploadedImages,
-							coverCloudImage: uploadedCover.path,
-							cloudImagesUploaded: true,
-							coverCloudImageUploaded: true,
-						},
-					});
-				}
-			});
-		});
-	};
 
 	const checkIfCategoryChecked = (val) => {
 		if (state.formData.categories) {
@@ -432,7 +394,7 @@ const PlaceForm = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		handleFileUpload();
+		handleFilesUpload(state.formData.cover, state.formData.images);
 	};
 
 	useEffect(() => {
