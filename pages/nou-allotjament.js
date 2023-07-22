@@ -392,9 +392,25 @@ const PlaceForm = () => {
 			.catch((err) => console.error(err));
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		handleFilesUpload(state.formData.cover, state.formData.images);
+		const { uploadedCover, uploadedImages } = await handleFilesUpload(
+			state.formData.cover,
+			state.formData.images
+		);
+
+		if (uploadedCover && uploadedImages) {
+			setState({
+				...state,
+				formData: {
+					...state.formData,
+					cloudImages: uploadedImages,
+					coverCloudImage: uploadedCover,
+					cloudImagesUploaded: true,
+					coverCloudImageUploaded: true,
+				},
+			});
+		}
 	};
 
 	useEffect(() => {

@@ -161,7 +161,6 @@ const StoryForm = () => {
 						state.formData.blopImages,
 						state.formData.images
 					);
-					console.log(objImages.arrBlopImages);
 					setState({
 						...state,
 						formData: {
@@ -233,9 +232,26 @@ const StoryForm = () => {
 			.catch((err) => console.error(err));
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		handleFilesUpload(state.formData.cover, state.formData.images);
+
+		const { uploadedCover, uploadedImages } = await handleFilesUpload(
+			state.formData.cover,
+			state.formData.images
+		);
+
+		if (uploadedCover && uploadedImages) {
+			setState({
+				...state,
+				formData: {
+					...state.formData,
+					cloudImages: uploadedImages,
+					coverCloudImage: uploadedCover,
+					cloudImagesUploaded: true,
+					coverCloudImageUploaded: true,
+				},
+			});
+		}
 	};
 
 	useEffect(() => {
@@ -331,6 +347,7 @@ const StoryForm = () => {
 												value={state.formData.title}
 												rows={2}
 												onChange={handleChange}
+												required
 											></textarea>
 										</div>
 										<div className="form__group">
@@ -342,6 +359,7 @@ const StoryForm = () => {
 												rows={1}
 												value={state.formData.subtitle}
 												onChange={handleChange}
+												required
 											></textarea>
 										</div>
 									</form>
@@ -449,6 +467,7 @@ const StoryForm = () => {
 															onChange={
 																saveFileToStatus
 															}
+															required
 														/>
 													</label>
 												</div>
@@ -483,6 +502,7 @@ const StoryForm = () => {
 										className="form__control"
 										value={state.formData.metaTitle}
 										onChange={handleChange}
+										required
 									/>
 									<span className="form__text_info">
 										Cada publicació hauria de tenir un meta
@@ -506,6 +526,7 @@ const StoryForm = () => {
 										className="form__control"
 										value={state.formData.metaDescription}
 										onChange={handleChange}
+										required
 									/>
 									<span className="form__text_info">
 										Cada publicació hauria de tenir una meta
@@ -529,6 +550,7 @@ const StoryForm = () => {
 										className="form__control"
 										value={state.formData.slug}
 										onChange={handleChange}
+										required
 									/>
 								</div>
 								<div className="form__group">
@@ -547,6 +569,7 @@ const StoryForm = () => {
 														onChange={
 															saveFileToStatus
 														}
+														required
 													/>
 													<svg
 														xmlns="http://www.w3.org/2000/svg"

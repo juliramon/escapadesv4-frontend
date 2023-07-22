@@ -20,38 +20,31 @@ const handleFilesUpload = async (coverImage, bodyImages) => {
 		return response.path;
 	};
 
-	const uploadedCover = uploadCoverImage();
+	const uploadedCover = await uploadCoverImage();
 	let uploadedImages = [];
 
-	const uploadBodyImages = (index, bodyImages) => {
+	const uploadBodyImages = async (index, bodyImages) => {
 		const uploadData = new FormData();
 		uploadData.append("imageUrl", bodyImages[index]);
 
 		try {
-			service.uploadFile(uploadData).then((res) => {
-				uploadedImages.push(res.path);
-				if (index + 1 < bodyImages.length)
-					uploadBodyImages(index + 1, bodyImages);
-			});
+			const uploadedFile = await service.uploadFile(uploadData);
+			uploadedImages.push(uploadedFile.path);
+			if (index + 1 < bodyImages.length) {
+				await uploadBodyImages(index + 1, bodyImages);
+			}
+			if (uploadedImages.length === bodyImages.length) {
+				return {
+					uploadedCover,
+					uploadedImages,
+				};
+			}
 		} catch (error) {
 			console.error(error);
 		}
 	};
 
-	uploadBodyImages(0, bodyImages);
-
-	if (uploadedImages.length === bodyImages.length) {
-		setState({
-			...state,
-			formData: {
-				...state.formData,
-				cloudImages: uploadedImages,
-				coverCloudImage: uploadedCover.path,
-				cloudImagesUploaded: true,
-				coverCloudImageUploaded: true,
-			},
-		});
-	}
+	return await uploadBodyImages(0, bodyImages);
 };
 
 /**

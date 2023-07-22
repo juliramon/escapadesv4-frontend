@@ -1,34 +1,15 @@
 import { useEffect, useState } from "react";
 import ContentService from "../services/contentService";
 import NavigationBar from "../components/global/NavigationBar";
-import { useRouter } from "next/router";
 import FeaturedListBox from "../components/listings/FeaturedListBox";
 import RegularListBox from "../components/listings/RegularListBox";
 import ShareBar from "../components/social/ShareBar";
 import Footer from "../components/global/Footer";
-import FetchingSpinner from "../components/global/FetchingSpinner";
 import GlobalMetas from "../components/head/GlobalMetas";
 import Breadcrumb from "../components/richsnippets/Breadcrumb";
 import AdBanner from "../components/ads/AdBanner";
 
 const ListsList = ({ user, totalItems, lists, numPages }) => {
-	const router = useRouter();
-
-	const urlToShare = `https://escapadesenparella.cat/llistes`;
-
-	useEffect(() => {
-		if (
-			router.pathname.includes("editar") ||
-			router.pathname.includes("nova-activitat") ||
-			router.pathname.includes("nou-allotjament") ||
-			router.pathname.includes("nova-historia")
-		) {
-			document.querySelector("body").classList.add("composer");
-		} else {
-			document.querySelector("body").classList.remove("composer");
-		}
-	}, [router]);
-
 	const initialState = {
 		loggedUser: user,
 		lists: [],
@@ -53,10 +34,6 @@ const ListsList = ({ user, totalItems, lists, numPages }) => {
 			});
 		}
 	}, []);
-
-	if (!state.hasLists) {
-		return <FetchingSpinner />;
-	}
 
 	const loadMoreResults = async (page) => {
 		setState({ ...state, isFetching: true });
