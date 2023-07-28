@@ -1,3 +1,5 @@
+import { useCallback } from "react";
+
 const EditorNavbar = ({ editor }) => {
 	const addImage = () => {
 		const url = window.prompt("URL");
@@ -5,6 +7,31 @@ const EditorNavbar = ({ editor }) => {
 			editor.chain().focus().setImage({ src: url }).run();
 		}
 	};
+
+	const setLink = useCallback(() => {
+		const previousUrl = editor.getAttributes("link").href;
+		const url = window.prompt("URL", previousUrl);
+
+		// cancelled
+		if (url === null) {
+			return;
+		}
+
+		// empty
+		if (url === "") {
+			editor.chain().focus().extendMarkRange("link").unsetLink().run();
+
+			return;
+		}
+
+		// update link
+		editor
+			.chain()
+			.focus()
+			.extendMarkRange("link")
+			.setLink({ href: url })
+			.run();
+	}, [editor]);
 
 	if (!editor) {
 		return null;
@@ -121,8 +148,12 @@ const EditorNavbar = ({ editor }) => {
 				</svg>
 			</button>
 			<button
-				onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-				className={editor.isActive("heading", { level: 2 }) ? "is-active" : ""}
+				onClick={() =>
+					editor.chain().focus().toggleHeading({ level: 2 }).run()
+				}
+				className={
+					editor.isActive("heading", { level: 2 }) ? "is-active" : ""
+				}
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -148,8 +179,12 @@ const EditorNavbar = ({ editor }) => {
 				</svg>
 			</button>
 			<button
-				onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-				className={editor.isActive("heading", { level: 3 }) ? "is-active" : ""}
+				onClick={() =>
+					editor.chain().focus().toggleHeading({ level: 3 }).run()
+				}
+				className={
+					editor.isActive("heading", { level: 3 }) ? "is-active" : ""
+				}
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
@@ -224,7 +259,9 @@ const EditorNavbar = ({ editor }) => {
 					<path d="M6 10v-6l-2 2" />
 				</svg>
 			</button>
-			<button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
+			<button
+				onClick={() => editor.chain().focus().setHorizontalRule().run()}
+			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					className="icon icon-tabler icon-tabler-border-horizontal"
@@ -275,6 +312,25 @@ const EditorNavbar = ({ editor }) => {
 					<rect x="4" y="4" width="16" height="16" rx="3" />
 					<path d="M4 15l4 -4a3 5 0 0 1 3 0l5 5" />
 					<path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2" />
+				</svg>
+			</button>
+			<button onClick={() => setLink()}>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					className="icon icon-tabler icon-tabler-link"
+					width={44}
+					height={44}
+					viewBox="0 0 24 24"
+					strokeWidth="2"
+					stroke="currentColor"
+					fill="none"
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				>
+					<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+					<path d="M9 15l6 -6"></path>
+					<path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464"></path>
+					<path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463"></path>
 				</svg>
 			</button>
 		</div>

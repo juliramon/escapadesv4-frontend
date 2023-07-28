@@ -15,6 +15,7 @@
     "@stripe/stripe-js": "^1.14.0",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tiptap/extension-image": "^2.0.0-beta.218",
+    "@tiptap/extension-link": "^2.0.4",
     "@tiptap/extension-placeholder": "^2.0.0-beta.218",
     "@tiptap/pm": "^2.0.0-beta.218",
     "@tiptap/react": "^2.0.0-beta.218",
@@ -41,27 +42,15 @@
     "react-dom": "^18.1.0",
     "react-ga": "^3.3.0",
     "react-google-autocomplete": "^1.2.6",
-    "react-html-parser": "^2.0.2",
-    "react-inlinesvg": "^2.2.2",
-    "react-quill": "^2.0.0",
-    "react-slick": "^0.28.1",
     "react-sortablejs": "^6.1.4",
-    "reading-time": "^1.2.1",
     "sass": "^1.26.11",
-    "slick-carousel": "^1.8.1",
     "slugify": "^1.4.6",
     "sortablejs": "^1.15.0",
     "stripe": "^8.147.0",
-    "swiper": "^8.2.4",
-    "tabler-icons-react": "^1.35.0",
     "tailwindcss": "^3.0.23"
   },
   "devDependencies": {
-    "@editorjs/editorjs": "^2.19.1",
-    "@editorjs/paragraph": "^2.8.0",
-    "@tailwindcss/line-clamp": "^0.4.0",
     "autoprefixer": "^10.4.0",
-    "postcss": "^8.3.11",
-    "react-editor-js": "^1.7.0"
+    "postcss": "^8.3.11"
   }
 }

@@ -4,10 +4,10 @@
 
 		&__container
 			height: calc(100vh - 171.5px)
-		
+
 		&__wrapper
 			@apply bg-white rounded-md p-5 shadow border border-primary-100
-		
+
 		&__group
 			@apply p-1.5 flex flex-col
 
@@ -19,24 +19,23 @@
 
 		&__control
 			@apply bg-primary-50 border border-primary-100 text-primary-400 text-sm rounded-md focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5
-  
+
 		.location-control::placeholder
 			color: #173572
-  
+
 		.location-control:focus
 			outline: none !important
 			border: none !important
 			background-color: #f2f7f9 !important
 			box-shadow: inset 0 0 0 3px #3a4887 !important
-			
-  
+
 		&-composer__editor .ProseMirror
 			@apply bg-white
 
 		&-composer__body
 			@apply overflow-y-auto
-		
-		&-composer__editor 
+
+		&-composer__editor
 			h2
 				@apply text-3xl
 
@@ -46,23 +45,25 @@
 			p, a, ul li, ol li
 				@apply text-base bg-white
 
+			a
+				@apply text-blue-500 underline
+
 			blockquote, blockquote *
 				@apply text-lg font-normal italic
-			
+
 			.img-frame
 				@apply m-2 relative w-48 h-auto overflow-hidden rounded-md border-8 border-white shadow
 
-.ProseMirror p.is-editor-empty:first-child::before 
-	@apply text-primary-900 float-left h-0 pointer-events-none
+.ProseMirror p.is-editor-empty:first-child::before
 	content: attr(data-placeholder)
-
+	@apply text-primary-900 float-left h-0 pointer-events-none
 
 /*EDITION BAR*/
 
-.editor-bar__wrapper 
+.editor-bar__wrapper
 	@apply rounded-md rounded-md py-1.5 px-2.5 border border-primary-50 sticky top-2.5 bg-white z-50 shadow-sm shadow-primary-100
 
-.editor-bar__wrapper button 
+.editor-bar__wrapper button
 	background-color: white
 	border: none
 	width: 30px
@@ -70,17 +71,15 @@
 	padding: 0
 	margin-right: 5px
 
-
-.editor-bar__wrapper svg 
+.editor-bar__wrapper svg
 	width: 22px
 	height: 22px
 
-.form-composer__editor 
+.form-composer__editor
 	@apply outline-none
 
-.form-composer__editor .ProseMirror 
+.form-composer__editor .ProseMirror
 	@apply outline-none pt-5
 
-
-.form-composer__editor .ProseMirror img 
+.form-composer__editor .ProseMirror img
 	max-width: 100%

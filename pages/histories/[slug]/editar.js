@@ -5,37 +5,6 @@ import { Container, Row, Col, Form, Button, Spinner } from "react-bootstrap";
 import NavigationBar from "../../../components/global/NavigationBar";
 import UserContext from "../../../contexts/UserContext";
 import ContentService from "../../../services/contentService";
-import dynamic from "next/dynamic";
-
-const QuillNoSSRWrapper = dynamic(import("react-quill"), {
-	ssr: false,
-	loading: () => <p>Loading ...</p>,
-});
-
-const modules = {
-	toolbar: [
-		[{ header: "1" }, { header: "2" }],
-		["bold", "italic", "underline", "strike", "blockquote"],
-		[{ list: "ordered" }, { list: "bullet" }],
-		["link", "image"],
-	],
-	clipboard: {
-		matchVisual: false,
-	},
-};
-
-const formats = [
-	"header",
-	"bold",
-	"italic",
-	"underline",
-	"strike",
-	"blockquote",
-	"list",
-	"bullet",
-	"link",
-	"image",
-];
 
 const StoryEditionForm = () => {
 	const { user } = useContext(UserContext);
@@ -105,7 +74,9 @@ const StoryEditionForm = () => {
 	useEffect(() => {
 		if (router.query.slug !== undefined) {
 			const fetchData = async () => {
-				let storyDetails = await service.getStoryDetails(router.query.slug);
+				let storyDetails = await service.getStoryDetails(
+					router.query.slug
+				);
 				setState({
 					...state,
 					story: storyDetails,
@@ -138,7 +109,8 @@ const StoryEditionForm = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [queryId, router.query.slug]);
 
-	const { title, subtitle, slug, metaTitle, metaDescription } = state.formData;
+	const { title, subtitle, slug, metaTitle, metaDescription } =
+		state.formData;
 
 	const saveFileToStatus = (e) => {
 		const fileToUpload = e.target.files[0];
@@ -268,7 +240,9 @@ const StoryEditionForm = () => {
 				uploadData.append("imageUrl", el);
 				service.uploadFile(uploadData).then((res) => {
 					uploadedImages.push(res.path);
-					if (uploadedImages.length === state.formData.images.length) {
+					if (
+						uploadedImages.length === state.formData.images.length
+					) {
 						setState({
 							...state,
 							formData: {
@@ -297,7 +271,9 @@ const StoryEditionForm = () => {
 				uploadData.append("imageUrl", el);
 				service.uploadFile(uploadData).then((res) => {
 					uploadedImages.push(res.path);
-					if (uploadedImages.length === state.formData.images.length) {
+					if (
+						uploadedImages.length === state.formData.images.length
+					) {
 						setState({
 							...state,
 							formData: {
@@ -363,11 +339,16 @@ const StoryEditionForm = () => {
 									<div className="form-composer__header-left">
 										<h1>Editar la història</h1>
 										<p className="sub-h1">
-											Edit and submit your story so others start enjoying it.
+											Edit and submit your story so others
+											start enjoying it.
 										</p>
 									</div>
 									<div className="form-composer__header-right">
-										<Button type="submit" variant="none" onClick={handleSubmit}>
+										<Button
+											type="submit"
+											variant="none"
+											onClick={handleSubmit}
+										>
 											Guardar canvis
 										</Button>
 									</div>
@@ -399,7 +380,9 @@ const StoryEditionForm = () => {
 										<div className="form-composer__post-content">
 											<Form onSubmit={handleSubmit}>
 												<Form.Group>
-													<Form.Label>Títol</Form.Label>
+													<Form.Label>
+														Títol
+													</Form.Label>
 													<Form.Control
 														type="text"
 														name="title"
@@ -409,7 +392,9 @@ const StoryEditionForm = () => {
 													/>
 												</Form.Group>
 												<Form.Group>
-													<Form.Label>Subtitle</Form.Label>
+													<Form.Label>
+														Subtitle
+													</Form.Label>
 													<Form.Control
 														type="text"
 														name="subtitle"
@@ -419,7 +404,9 @@ const StoryEditionForm = () => {
 													/>
 												</Form.Group>
 												<div className="cover">
-													<span>Imatge de portada</span>
+													<span>
+														Imatge de portada
+													</span>
 													<div className="images-wrapper">
 														<div className="top-bar">
 															<Form.Group>
@@ -442,31 +429,54 @@ const StoryEditionForm = () => {
 																				d="M0 0h24v24H0z"
 																				fill="none"
 																			/>
-																			<circle cx="12" cy="13" r="3" />
+																			<circle
+																				cx="12"
+																				cy="13"
+																				r="3"
+																			/>
 																			<path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
-																			<line x1="15" y1="6" x2="21" y2="6" />
-																			<line x1="18" y1="3" x2="18" y2="9" />
+																			<line
+																				x1="15"
+																				y1="6"
+																				x2="21"
+																				y2="6"
+																			/>
+																			<line
+																				x1="18"
+																				y1="3"
+																				x2="18"
+																				y2="9"
+																			/>
 																		</svg>
-																		{state.formData.cover
+																		{state
+																			.formData
+																			.cover
 																			? "Canviar imatge"
 																			: "Seleccionar imatge"}
 
 																		<Form.Control
 																			type="file"
 																			name="cover"
-																			onChange={saveFileToStatus}
+																			onChange={
+																				saveFileToStatus
+																			}
 																		/>
 																	</Form.Label>
 																</div>
 															</Form.Group>
 														</div>
 														<div className="images-list-wrapper">
-															<div className="image-wrapper">{coverImage}</div>
+															<div className="image-wrapper">
+																{coverImage}
+															</div>
 														</div>
 													</div>
 												</div>
 												<div className="images">
-													<span>Imatges d'aquesta història</span>
+													<span>
+														Imatges d'aquesta
+														història
+													</span>
 													<div className="images-wrapper">
 														<div className="top-bar">
 															<Form.Group>
@@ -489,38 +499,48 @@ const StoryEditionForm = () => {
 																				d="M0 0h24v24H0z"
 																				fill="none"
 																			/>
-																			<circle cx="12" cy="13" r="3" />
+																			<circle
+																				cx="12"
+																				cy="13"
+																				r="3"
+																			/>
 																			<path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
-																			<line x1="15" y1="6" x2="21" y2="6" />
-																			<line x1="18" y1="3" x2="18" y2="9" />
+																			<line
+																				x1="15"
+																				y1="6"
+																				x2="21"
+																				y2="6"
+																			/>
+																			<line
+																				x1="18"
+																				y1="3"
+																				x2="18"
+																				y2="9"
+																			/>
 																		</svg>
-																		Seleccionar imatges
+																		Seleccionar
+																		imatges
 																		<Form.Control
 																			type="file"
-																			onChange={saveFileToStatus}
+																			onChange={
+																				saveFileToStatus
+																			}
 																		/>
 																	</Form.Label>
 																</div>
 															</Form.Group>
 														</div>
 														<div className="images-list-wrapper">
-															<div className="image-wrapper">{imagesList}</div>
+															<div className="image-wrapper">
+																{imagesList}
+															</div>
 														</div>
 													</div>
 												</div>
 												<Form.Group>
-													<Form.Label>Descripció</Form.Label>
-													<QuillNoSSRWrapper
-														className="form-control"
-														modules={modules}
-														formats={formats}
-														theme="bubble"
-														placeholder={
-															"Comença a descriure la teva historia..."
-														}
-														value={description}
-														onChange={setDescription}
-													/>
+													<Form.Label>
+														Descripció
+													</Form.Label>
 												</Form.Group>
 											</Form>
 										</div>
@@ -531,8 +551,11 @@ const StoryEditionForm = () => {
 													<Form.Label>
 														Meta títol{" "}
 														<span className="form-composer__label-description">
-															Cada publicació hauria de tenir un meta títol
-															únic, idealment de menys de 60 caràcters de
+															Cada publicació
+															hauria de tenir un
+															meta títol únic,
+															idealment de menys
+															de 60 caràcters de
 															llargada
 														</span>
 													</Form.Label>
@@ -548,9 +571,13 @@ const StoryEditionForm = () => {
 													<Form.Label>
 														Meta descripció{" "}
 														<span className="form-composer__label-description">
-															Cada publicació hauria de tenir una meta
-															descripció única, idealment de menys de 160
-															caràcters de llargada
+															Cada publicació
+															hauria de tenir una
+															meta descripció
+															única, idealment de
+															menys de 160
+															caràcters de
+															llargada
 														</span>
 													</Form.Label>
 													<Form.Control
@@ -562,7 +589,9 @@ const StoryEditionForm = () => {
 													/>
 												</Form.Group>
 												<Form.Group>
-													<Form.Label>Slug</Form.Label>
+													<Form.Label>
+														Slug
+													</Form.Label>
 													<Form.Control
 														type="text"
 														name="slug"

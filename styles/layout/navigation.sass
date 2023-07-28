@@ -1,32 +1,36 @@
 @layer components
+	.menu
+		&__item
+			@apply text-primary-500 text-sm px-3 transition-all duration-300 ease-in-out
 
-    .menu
-        &__item
-            @apply text-primary-500 text-sm px-3 transition-all duration-300 ease-in-out
-            svg
-                @apply transition-all duration-300 ease-in-out text-primary-500
-        &__item:hover
-            @apply text-primary-500
-            svg
-                @apply stroke-primary-500
+			svg
+				@apply transition-all duration-300 ease-in-out text-primary-500
 
-    .menu__responsive
-        @apply bg-white fixed -right-full top-0 w-72 md:w-96 h-full shadow-xl transition-all duration-300 ease-in-out pt-20 px-5 pb-5
+		&__item:hover
+			@apply text-primary-500
 
-        .menu
-            &__link
-                @apply py-2
+			svg
+				@apply stroke-primary-500
 
-            &__close
-                @apply absolute top-5 right-5
+	.menu__responsive
+		@apply bg-white fixed -right-full top-0 w-72 md:w-96 h-full shadow-xl transition-all duration-300 ease-in-out pt-20 px-5 pb-5
 
-        .search-box
-            @apply relative
-            input
-                @apply pl-10
-            .icon
-                @apply absolute left-2 top-1/2 transform -translate-y-1/2
+		.menu
+			&__link
+				@apply py-2
 
-        &.open
-            @apply right-0
-            z-index: 1000
+			&__close
+				@apply absolute top-5 right-5
+
+		.search-box
+			@apply relative
+
+			input
+				@apply pl-10
+
+			.icon
+				@apply absolute left-2 top-1/2 transform -translate-y-1/2
+
+		&.open
+			z-index: 1000
+			@apply right-0
