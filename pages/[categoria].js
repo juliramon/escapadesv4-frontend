@@ -10,6 +10,7 @@ import MapModal from "../components/modals/MapModal";
 import Breadcrumb from "../components/richsnippets/Breadcrumb";
 import UserContext from "../contexts/UserContext";
 import ContentService from "../services/contentService";
+import FetchingSpinner from "../components/global/FetchingSpinner";
 
 const CategoryPage = ({
 	categoryDetails,
@@ -44,7 +45,6 @@ const CategoryPage = ({
 	}, [router]);
 
 	const initialState = {
-		categoryDetails: {},
 		results: [],
 		allResults: [],
 		hasResults: false,
@@ -63,7 +63,6 @@ const CategoryPage = ({
 		if (categoryDetails && paginatedResults) {
 			setState({
 				...state,
-				categoryDetails: categoryDetails,
 				results: paginatedResults,
 				allResults: allResults,
 				hasResults: paginatedResults.length > 0 ? true : false,
@@ -116,9 +115,9 @@ const CategoryPage = ({
 		});
 	}
 
-	const sponsorBlock = state.categoryDetails.isSponsored ? (
+	const sponsorBlock = categoryDetails.isSponsored ? (
 		<div className="sponsor-block">
-			<Link href={`${state.categoryDetails.sponsorURL}`} target="_blank">
+			<Link href={`${categoryDetails.sponsorURL}`} target="_blank">
 				<a>
 					<div className="sponsor-block-top">
 						<div className="sponsor-block-left">
@@ -126,12 +125,10 @@ const CategoryPage = ({
 						</div>
 						<div className="sponsor-block-right">
 							<div className="sponsor-logo">
-								<img src={state.categoryDetails.sponsorLogo} />
+								<img src={categoryDetails.sponsorLogo} />
 							</div>
 							<div className="sponsor-block-claim">
-								<span>
-									{state.categoryDetails.sponsorClaim}
-								</span>
+								<span>{categoryDetails.sponsorClaim}</span>
 							</div>
 						</div>
 					</div>
@@ -218,18 +215,18 @@ const CategoryPage = ({
 		<>
 			{/* Browser metas  */}
 			<GlobalMetas
-				title={state.categoryDetails.title}
-				description={state.categoryDetails.subtitle}
-				url={`https://escapadesenparella.cat/${state.categoryDetails.slug}`}
-				image={state.categoryDetails.image}
-				canonical={`https://escapadesenparella.cat/${state.categoryDetails.slug}`}
+				title={categoryDetails.title}
+				description={categoryDetails.subtitle}
+				url={`https://escapadesenparella.cat/${categoryDetails.slug}`}
+				image={categoryDetails.image}
+				canonical={`https://escapadesenparella.cat/${categoryDetails.slug}`}
 			/>
 			{/* Rich snippets */}
 			<Breadcrumb
 				page1Title="Inici"
 				page1Url="https://escapadesenparella.cat"
-				page2Title={state.categoryDetails.title}
-				page2Url={`https://escapadesenparella.cat/${state.categoryDetails.slug}`}
+				page2Title={categoryDetails.title}
+				page2Url={`https://escapadesenparella.cat/${categoryDetails.slug}`}
 			/>
 			<div id="contentList" className="category relative">
 				<NavigationBar />
@@ -248,33 +245,29 @@ const CategoryPage = ({
 								</li>
 								<li className="breadcrumb__item">
 									<span className="breadcrumb__link active">
-										{state.categoryDetails.title}
+										{categoryDetails.title}
 									</span>
 								</li>
 							</ul>
 							<ListingHeader
 								title={`<span class="capitalize">${
-									!state.categoryDetails.isPlace
+									!categoryDetails.isPlace
 										? "Escapades"
-										: state.categoryDetails.pluralName
+										: categoryDetails.pluralName
 								}</span> <span class="text-secondary-500 lowercase">${
-									state.categoryDetails.isPlace
+									categoryDetails.isPlace
 										? "amb encant"
-										: state.categoryDetails.pluralName
+										: categoryDetails.pluralName
 								}</span>`}
 								subtitle={`Descobreix <span class="inline-block relative after:absolute after:inset-x-0 after:bottom-px after:w-full after:h-0.5 after:bg-secondary-500">${
-									state.allResults.length
+									allResults.length
 								} ${
-									!state.categoryDetails.isPlace
-										? "escapades"
-										: ""
-								} ${state.categoryDetails.pluralName} ${
-									state.categoryDetails.isPlace
-										? "amb encant"
-										: ""
+									!categoryDetails.isPlace ? "escapades" : ""
+								} ${categoryDetails.pluralName} ${
+									categoryDetails.isPlace ? "amb encant" : ""
 								}</span> a Catalunya. ${
-									state.categoryDetails.seoTextHeader
-										? state.categoryDetails.seoTextHeader
+									categoryDetails.seoTextHeader
+										? categoryDetails.seoTextHeader
 										: ""
 								}`}
 								sponsorData={sponsorBlock}
@@ -364,8 +357,7 @@ const CategoryPage = ({
 										<div
 											className="w-full max-w-prose mx-auto text-block text-primary-400"
 											dangerouslySetInnerHTML={{
-												__html: state.categoryDetails
-													.seoText,
+												__html: categoryDetails.seoText,
 											}}
 										></div>
 									</div>
