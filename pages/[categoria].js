@@ -423,18 +423,26 @@ const CategoryPage = ({
 	);
 };
 
-export async function getServerSideProps({ params }) {
+export async function getStaticPaths() {
+	const service = new ContentService();
+	const categories = await service.getCategories();
+	const paths = categories.map((categoria) => ({
+		params: { categoria: categoria.slug },
+	}));
+	return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
 	const service = new ContentService();
 	const categoryDetails = await service.getCategoryDetails(params.categoria);
+	let { allResults, paginatedResults, totalItems, numPages } =
+		await service.getCategoryResults(categoryDetails.name);
 
 	if (!categoryDetails) {
 		return {
 			notFound: true,
 		};
 	}
-
-	const { allResults, paginatedResults, totalItems, numPages } =
-		await service.getCategoryResults(categoryDetails.name);
 
 	return {
 		props: {
@@ -444,6 +452,7 @@ export async function getServerSideProps({ params }) {
 			totalItems,
 			numPages,
 		},
+		revalidate: 120,
 	};
 }
 
