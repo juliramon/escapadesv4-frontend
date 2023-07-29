@@ -61,10 +61,6 @@ const StoriesList = ({
 		}
 	}, []);
 
-	if (!state.hasStories) {
-		return <FetchingSpinner />;
-	}
-
 	const loadMoreResults = async (page) => {
 		setState({ ...state, isFetching: true });
 		const { stories } = await service.paginateStories(page);
