@@ -144,6 +144,7 @@ const StoryEditionForm = () => {
 					isStoryLoaded: true,
 				});
 				setEditorData(storyDetails.description);
+				editor.commands.setContent(storyDetails.description);
 			};
 			fetchData();
 		}
