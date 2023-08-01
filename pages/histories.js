@@ -96,7 +96,7 @@ const StoriesList = ({
 					<section className="pt-6 md:pt-16">
 						<div className="container">
 							<h2>Històries destacades</h2>
-							<div className="flex flex-wrap items-center mt-6 -mx-2">
+							<div className="flex flex-wrap items-stretch mt-6 -mx-2">
 								{state.hasStories
 									? state.featuredStories.map((el, idx) => (
 											<article
@@ -127,7 +127,7 @@ const StoriesList = ({
 									aventures en parella a Catalunya.
 								</div>
 							</div>
-							<div className="flex flex-wrap items-start mt-6 -mx-2">
+							<div className="flex flex-wrap items-stretch mt-6 -mx-2">
 								{state.stories.map((el, idx) => (
 									<article
 										key={idx}
