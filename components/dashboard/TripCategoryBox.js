@@ -1,23 +1,17 @@
 import Link from "next/link";
 import { useState } from "react";
 import ContentService from "../../services/contentService";
-import EditCategoryModal from "../modals/EditTripCategoryModal";
 import ShareModal from "../modals/ShareModal";
+import EditTripCategoryModal from "../modals/EditTripCategoryModal";
 
-const CategoryBox = ({
+const TripCategoryBox = ({
 	id,
-	name,
-	pluralName,
-	isPlace,
-	illustration,
-	image,
-	imageCaption,
+	slug,
 	title,
 	subtitle,
-	slug,
+	image,
 	seoTextHeader,
 	seoText,
-	icon,
 	isSponsored,
 	sponsorURL,
 	sponsorLogo,
@@ -30,22 +24,24 @@ const CategoryBox = ({
 	const service = new ContentService();
 	const removeItem = () => service.removeCategory(id).then(() => fetchData());
 
-	const urlToShare = `https://escapadesenparella.cat/${slug}`;
+	const urlToShare = `https://escapadesenparella.cat/viatges/${slug}`;
 
 	const [shareModalVisibility, setShareModalVisibility] = useState(false);
 	const handleShareModalVisibility = () => setShareModalVisibility(true);
 	const hideShareModalVisibility = () => setShareModalVisibility(false);
 
-	const [editCategoryModalVisibility, setEditCategoryModalVisibility] =
-		useState(false);
-	const handleEditCategoryModalVisibility = () =>
-		setEditCategoryModalVisibility(true);
-	const hideEditCategoryModalVisibility = () =>
-		setEditCategoryModalVisibility(false);
+	const [
+		editTripCategoryModalVisibility,
+		setEditTripCategoryModalVisibility,
+	] = useState(false);
+	const handleEditTripCategoryModalVisibility = () =>
+		setEditTripCategoryModalVisibility(true);
+	const hideEditTripCategoryModalVisibility = () =>
+		setEditTripCategoryModalVisibility(false);
 
 	return (
 		<div className="content rounded-md box flex items-center w-full bg-primary-50 border border-primary-100 mb-2.5 px-5 py-4">
-			<Link href={`/${slug}`}>
+			<Link href={`/viatges/${slug}`}>
 				<a className="flex items-center justify-between w-full">
 					<div className="flex items-center justify-center bg-white overflow-hidden h-12 w-12 rounded-md p-0 mr-5 border border-primary-100">
 						<img
@@ -88,7 +84,7 @@ const CategoryBox = ({
 					}`}
 				>
 					<li className="border-b border-primary-100 w-full">
-						<Link href={`/${slug}`}>
+						<Link href={`/viatges/${slug}`}>
 							<a className="dropdown__menu_item">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +109,9 @@ const CategoryBox = ({
 					</li>
 					<li className="border-b border-primary-100 w-full">
 						<button
-							onClick={() => handleEditCategoryModalVisibility()}
+							onClick={() =>
+								handleEditTripCategoryModalVisibility()
+							}
 							className="dropdown__menu_item"
 						>
 							<svg
@@ -173,20 +171,14 @@ const CategoryBox = ({
 				hideModal={hideShareModalVisibility}
 				url={urlToShare}
 			/>
-			<EditCategoryModal
-				visibility={editCategoryModalVisibility}
-				hideModal={hideEditCategoryModalVisibility}
+			<EditTripCategoryModal
+				visibility={editTripCategoryModalVisibility}
+				hideModal={hideEditTripCategoryModalVisibility}
 				id={id}
 				slug={slug}
-				name={name}
-				pluralName={pluralName}
-				isPlace={isPlace}
 				title={title}
 				subtitle={subtitle}
-				illustration={illustration}
 				image={image}
-				imageCaption={imageCaption}
-				icon={icon}
 				seoTextHeader={seoTextHeader}
 				seoText={seoText}
 				isSponsored={isSponsored}
@@ -199,4 +191,4 @@ const CategoryBox = ({
 	);
 };
 
-export default CategoryBox;
+export default TripCategoryBox;

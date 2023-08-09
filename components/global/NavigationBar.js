@@ -411,6 +411,33 @@ const NavigationBar = ({ logo_url, path }) => {
 									Llistes
 								</a>
 							</Link>
+							<Link href="/llistes">
+								<a className="flex items-center menu__item">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										className="icon icon-tabler icon-tabler-globe text-primary-500 mr-1.5"
+										width={22}
+										height={22}
+										viewBox="0 0 24 24"
+										stroke-width={1.5}
+										stroke="currentColor"
+										fill="none"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									>
+										<path
+											stroke="none"
+											d="M0 0h24v24H0z"
+											fill="none"
+										></path>
+										<path d="M7 9a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+										<path d="M5.75 15a8.015 8.015 0 1 0 9.25 -13"></path>
+										<path d="M11 17v4"></path>
+										<path d="M7 21h8"></path>
+									</svg>
+									Viatges
+								</a>
+							</Link>
 							<Link href="/contacte">
 								<a className="flex items-center button button__primary button__med px-8 ml-6">
 									Contacta'ns

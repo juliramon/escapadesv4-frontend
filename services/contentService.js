@@ -450,6 +450,164 @@ class ContentService {
 			.put(`/stories/${id}`, { isRemoved: true })
 			.then((res) => res.data);
 
+	// TRIP ENTRIES ENDPOINTS
+
+	tripEntry = (
+		type,
+		slug,
+		title,
+		subtitle,
+		cover,
+		images,
+		description,
+		metaTitle,
+		metaDescription
+	) => {
+		return this.service
+			.post("/trip-entry", {
+				type,
+				slug,
+				title,
+				subtitle,
+				cover,
+				images,
+				description,
+				metaTitle,
+				metaDescription,
+			})
+			.then((res) => res.data);
+	};
+
+	getAllTripEntries = () =>
+		this.service.get("/all-trip-entries").then((res) => res.data);
+
+	getTripEntries = () =>
+		this.service.get("/trip-entries").then((res) => res.data);
+
+	paginateTripEntries = (page) =>
+		this.service.get(`/trip-entries?page=${page}`).then((res) => res.data);
+
+	getTripEntryDetails = (id) =>
+		this.service.get(`/trip-entry/${id}`).then((res) => res.data);
+
+	getUserTripEntries = (id) =>
+		this.service.get(`/users/${id}/trip-entries`).then((res) => res.data);
+
+	editTripEntryDetails = (
+		_id,
+		slug,
+		title,
+		subtitle,
+		cover,
+		images,
+		description,
+		metaTitle,
+		metaDescription
+	) =>
+		this.service.put(`/trip-entries/${_id}`, {
+			slug,
+			title,
+			subtitle,
+			cover,
+			images,
+			description,
+			metaTitle,
+			metaDescription,
+		});
+
+	removeTripEntry = (id) =>
+		this.service
+			.put(`/trip-entries/${id}`, { isRemoved: true })
+			.then((res) => res.data);
+
+	// TRIP CATEGORIES
+	createTripCategory = (
+		slug,
+		title,
+		subtitle,
+		image,
+		seoTextHeader,
+		seoText,
+		isSponsored,
+		isFeatured,
+		sponsorURL,
+		sponsorLogo,
+		sponsorClaim
+	) => {
+		return this.service
+			.post("/trip-category", {
+				slug,
+				title,
+				subtitle,
+				image,
+				seoTextHeader,
+				seoText,
+				isSponsored,
+				isFeatured,
+				sponsorURL,
+				sponsorLogo,
+				sponsorClaim,
+			})
+			.then((res) => res.data);
+	};
+
+	getTripCategories = () =>
+		this.service.get("/trip-categories").then((res) => res.data);
+
+	getFeaturedTripCategories = () =>
+		this.service.get("/feaured-trip-categories").then((res) => res.data);
+
+	removeTripCategory = (id) =>
+		this.service
+			.put(`/trip-categories/${id}`, { isRemoved: true })
+			.then((res) => res.data);
+
+	editTripCategoryDetails = (
+		id,
+		slug,
+		title,
+		subtitle,
+		image,
+		seoTextHeader,
+		seoText,
+		isSponsored,
+		isFeatured,
+		sponsorURL,
+		sponsorLogo,
+		sponsorClaim
+	) => {
+		return this.service.put(`/trip-categories/${id}`, {
+			slug,
+			title,
+			subtitle,
+			image,
+			seoTextHeader,
+			seoText,
+			isSponsored,
+			isFeatured,
+			sponsorURL,
+			sponsorLogo,
+			sponsorClaim,
+		});
+	};
+
+	getTripCategoryDetails = (slug) => {
+		return this.service
+			.get(`/trip-categories/${slug}`)
+			.then((res) => res.data);
+	};
+
+	paginateCategory = (category, page) =>
+		this.service
+			.get(`/search-trip-category-results/${category}?page=${page}`)
+			.then((res) => res.data);
+
+	getTripCategoryResults = (category) => {
+		return this.service
+			.get(`/search-trip-category-results/${category}`)
+			.then((res) => res.data);
+	};
+
 	// PLACES ENDPOINTS
 
 	bookmark = (listingId, listingType) =>

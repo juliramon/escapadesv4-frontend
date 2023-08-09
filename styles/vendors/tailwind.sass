@@ -19,7 +19,7 @@
     h1, h2, h3, h4, h5
         @apply text-primary-900 font-medium font-headings
 
-    h1 
+    h1
         @apply text-3xl leading-tight mt-0
         @screen md
             @apply text-4xl leading-tight
@@ -43,7 +43,7 @@
         &:hover
             @applu
 
-    p 
+    p
         @apply mb-5 leading-normal text-16
         @screen md
             @apply text-base
@@ -51,11 +51,24 @@
     ol, ul, menu
         @apply list-disc pl-5 mb-5 leading-normal
 
-    .text-block, .text-block *
+    .text-block
         @apply text-[15px]
 
-        &:last-child
-            @apply mb-0
+        *
+            @apply text-[15px]
+
+            &:last-child
+                @apply mb-0
+
+    .text-block--xl
+        @extend .text-block
+        @apply text-lg md:text-xl
+
+        *
+            @apply text-lg md:text-xl
+
+            &:last-child
+                @apply mb-0
 
     #animate-area
         width: 100%
@@ -64,15 +77,14 @@
         background-size: cover
         animation: horizontalSlide 40s linear 1s infinite
         margin-top: -70px
-        
+
     .container
         @apply w-full sm:max-w-2xl md:max-w-3xl lg:max-w-5xl xl:max-w-[90rem] #{!important}
 
     @keyframes horizontalSlide
-        0% 
+        0%
             background-position: 0 0
-        50% 
+        50%
             background-position: -250px 0
-        100% 
+        100%
             background-position: -500px 0
-    
