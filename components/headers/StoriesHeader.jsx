@@ -28,7 +28,7 @@ const Hero = ({ mostRecentStories }) => {
 								</li>
 								<li className="breadcrumb__item">
 									<span className="breadcrumb__link active text-white">
-										Històries
+										Històries en parella
 									</span>
 								</li>
 							</ul>

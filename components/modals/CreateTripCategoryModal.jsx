@@ -10,11 +10,12 @@ const CreateTripCategoryModal = ({ visibility, hideModal, fetchData }) => {
 
 	const initialState = {
 		title: "",
-		subtitle: "",
 		image: "",
 		blopImage: "",
 		cloudImage: "",
 		cloudImageUploaded: false,
+		country: "",
+		mapLocation: "",
 		seoTextHeader: "",
 		seoText: "",
 		isFeatured: false,
@@ -141,7 +142,8 @@ const CreateTripCategoryModal = ({ visibility, hideModal, fetchData }) => {
 		});
 		const {
 			title,
-			subtitle,
+			country,
+			mapLocation,
 			cloudImage,
 			isSponsored,
 			isFeatured,
@@ -153,8 +155,9 @@ const CreateTripCategoryModal = ({ visibility, hideModal, fetchData }) => {
 			.createTripCategory(
 				slug,
 				title,
-				subtitle,
 				cloudImage,
+				country,
+				mapLocation,
 				editorDataHeader,
 				editorData,
 				isSponsored,
@@ -287,27 +290,35 @@ const CreateTripCategoryModal = ({ visibility, hideModal, fetchData }) => {
 							/>
 						</div>
 						<div className="form__group">
-							<label htmlFor="subtitle" className="form__label">
-								Subtítol de la categoria
+							<label htmlFor="country" className="form__label">
+								País de la categoria
 							</label>
 							<input
 								type="text"
-								name="subtitle"
-								placeholder="Entra el subtítol de la categoria"
+								name="country"
+								placeholder="Entra el país de la categoria"
 								className="form__control"
-								value={tripCategory.subtitle}
+								value={tripCategory.country}
 								onChange={handleChange}
 							/>
 						</div>
 						<div className="form__group">
-							<label htmlFor="textSeo" className="form__label">
-								Text SEO header de la categoria
+							<label
+								htmlFor="mapLocation"
+								className="form__label"
+							>
+								Localització de la categoria (iframe)
 							</label>
-							<EditorNavbar editor={editorHeader} />
-							<EditorContent
-								editor={editorHeader}
-								className="form-composer__editor"
-							/>
+							<textarea
+								name="mapLocation"
+								id="mapLocation"
+								rows="6"
+								className="form__control"
+								placeholder="Entra l'iframe de la localitzacio de la categoria"
+								onChange={handleChange}
+							>
+								{tripCategory.mapLocation}
+							</textarea>
 						</div>
 						<div className="form__group">
 							<span className="form__label">
@@ -367,16 +378,6 @@ const CreateTripCategoryModal = ({ visibility, hideModal, fetchData }) => {
 									</div>
 								</div>
 							</div>
-						</div>
-						<div className="form__group">
-							<label htmlFor="textSeo" className="form__label">
-								Text SEO de la categoria
-							</label>
-							<EditorNavbar editor={editor} />
-							<EditorContent
-								editor={editor}
-								className="form-composer__editor"
-							/>
 						</div>
 						<div className="form__group">
 							<label
@@ -499,6 +500,26 @@ const CreateTripCategoryModal = ({ visibility, hideModal, fetchData }) => {
 							/>
 						</div>
 					</form>
+					<div className="form__group">
+						<label htmlFor="textSeo" className="form__label">
+							Text SEO header de la categoria
+						</label>
+						<EditorNavbar editor={editorHeader} />
+						<EditorContent
+							editor={editorHeader}
+							className="form-composer__editor"
+						/>
+					</div>
+					<div className="form__group">
+						<label htmlFor="textSeo" className="form__label">
+							Text SEO de la categoria
+						</label>
+						<EditorNavbar editor={editor} />
+						<EditorContent
+							editor={editor}
+							className="form-composer__editor"
+						/>
+					</div>
 				</div>
 				<div className="modal__footer">
 					<button

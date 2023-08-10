@@ -195,7 +195,8 @@ const AdminPanel = () => {
 					id={el._id}
 					slug={el.slug}
 					title={el.title}
-					subtitle={el.subtitle}
+					country={el.country}
+					mapLocation={el.mapLocation}
 					image={el.image}
 					seoTextHeader={el.seoTextHeader}
 					seoText={el.seoText}

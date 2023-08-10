@@ -73,7 +73,7 @@ module.exports = {
 			fontFamily: {
 				body: ["Circular", "sans-serif"],
 				headings: ["Circular", "sans-serif"],
-				headingsCondensed: ["LibreCaslon", "serif"],
+				headingsCondensed: ["Domine", "serif"],
 			},
 			borderRadius: {
 				350: "350px",

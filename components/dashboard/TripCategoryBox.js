@@ -8,8 +8,9 @@ const TripCategoryBox = ({
 	id,
 	slug,
 	title,
-	subtitle,
 	image,
+	country,
+	mapLocation,
 	seoTextHeader,
 	seoText,
 	isSponsored,
@@ -20,7 +21,7 @@ const TripCategoryBox = ({
 }) => {
 	const [dropdownVisibility, setDropdownVisibility] = useState(false);
 
-	let shortenedSubtitle = subtitle.slice(0, 70);
+	let shortenedSubtitle = seoTextHeader.slice(0, 70);
 	const service = new ContentService();
 	const removeItem = () => service.removeCategory(id).then(() => fetchData());
 
@@ -177,7 +178,8 @@ const TripCategoryBox = ({
 				id={id}
 				slug={slug}
 				title={title}
-				subtitle={subtitle}
+				country={country}
+				mapLocation={mapLocation}
 				image={image}
 				seoTextHeader={seoTextHeader}
 				seoText={seoText}

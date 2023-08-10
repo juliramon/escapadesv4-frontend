@@ -411,7 +411,7 @@ const NavigationBar = ({ logo_url, path }) => {
 									Llistes
 								</a>
 							</Link>
-							<Link href="/llistes">
+							<Link href="/viatges">
 								<a className="flex items-center menu__item">
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
