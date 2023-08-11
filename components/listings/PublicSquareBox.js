@@ -6,32 +6,19 @@ const PublicSquareBox = ({
 	cover,
 	placeType,
 	title,
-	subtitle,
 	duration,
 	location,
 	website,
 	categoria,
 	rating,
 }) => {
-	let secureWebsite, shortenedLocation, buttonLight;
+	let secureWebsite, buttonLight;
 	if (website.includes("https://") || website.includes("http://")) {
 		secureWebsite = website;
 	} else {
 		secureWebsite = `https://${website}`;
 	}
-	if (location.props) {
-		if (location.props.children.length > 35) {
-			shortenedLocation = location.props.children.slice(0, 35) + "...";
-		} else {
-			shortenedLocation = location.props.children;
-		}
-	} else {
-		if (location.length > 35) {
-			shortenedLocation = location.slice(0, 35) + "...";
-		} else {
-			shortenedLocation = location;
-		}
-	}
+
 	let linkPath, tipus, icon;
 	if (type === "activity") {
 		tipus = "Activitat";
@@ -130,46 +117,10 @@ const PublicSquareBox = ({
 		}
 	}
 
-	let additionalInfoRef, additionalInfoSVG;
+	let additionalInfoRef;
 	if (duration) {
 		additionalInfoRef = `${duration} hores`;
-		additionalInfoSVG = (
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				className="icon icon-tabler icon-tabler-route"
-				width="16"
-				height="16"
-				viewBox="0 0 24 24"
-				strokeWidth="1.5"
-				stroke="currentColor"
-				fill="none"
-				strokeLinecap="round"
-				strokeLinejoin="round"
-			>
-				<path stroke="none" d="M0 0h24v24H0z"></path>
-				<circle cx="6" cy="19" r="2"></circle>
-				<circle cx="18" cy="5" r="2"></circle>
-				<path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5"></path>
-			</svg>
-		);
 	} else {
-		additionalInfoSVG = (
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				className="icon icon-tabler icon-tabler-tent"
-				width="16"
-				height="16"
-				viewBox="0 0 24 24"
-				stroke-width="1.5"
-				stroke="currentColor"
-				fill="none"
-				strokeLinecap="round"
-				strokeLinejoin="round"
-			>
-				<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-				<path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" />
-			</svg>
-		);
 		additionalInfoRef = placeTypeModified;
 	}
 	let modRating;
@@ -211,8 +162,8 @@ const PublicSquareBox = ({
 								{type == "place"
 									? placeTypeModified
 									: "Activitat"}{" "}
-								{type == "place" ? "amb encant" : ""} a{" "}
-								<u>{shortenedLocation}</u>
+								{type == "place" ? "amb encant" : ""} a&nbsp;
+								<u>{location}</u>
 							</span>
 						</div>
 						<div className="mt-4 flex items-center justify-between">

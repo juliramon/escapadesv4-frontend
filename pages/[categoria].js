@@ -22,6 +22,7 @@ const CategoryPage = ({
 	// Validate if user is allowed to access this view
 	const { user } = useContext(UserContext);
 	const [loadPage, setLoadPage] = useState(false);
+	const initialResults = paginatedResults;
 	useEffect(() => {
 		if (user) {
 			setLoadPage(true);
@@ -60,60 +61,16 @@ const CategoryPage = ({
 	const service = new ContentService();
 
 	useEffect(() => {
-		if (categoryDetails && paginatedResults) {
+		if (categoryDetails && initialResults) {
 			setState({
 				...state,
-				results: paginatedResults,
 				allResults: allResults,
-				hasResults: paginatedResults.length > 0 ? true : false,
+				hasResults: initialResults.length > 0 ? true : false,
 				numResults: totalItems,
 				numPages: numPages,
 			});
 		}
 	}, []);
-
-	let resultsList;
-	if (state.hasResults) {
-		resultsList = state.results.map((el) => {
-			let location;
-			if (el.type === "activity") {
-				location = (
-					<span className="listing-location">{`${
-						el.activity_locality === undefined
-							? el.activity_country
-							: el.activity_locality
-					}`}</span>
-				);
-			}
-			if (el.type === "place") {
-				location = (
-					<span className="listing-location">{`${
-						el.place_locality === undefined
-							? el.place_country
-							: el.place_locality
-					}`}</span>
-				);
-			}
-			return (
-				<PublicSquareBox
-					key={el._id}
-					type={el.type}
-					slug={el.slug}
-					id={el._id}
-					cover={el.cover}
-					title={el.title}
-					subtitle={el.subtitle}
-					rating={el.activity_rating || el.place_rating}
-					placeType={el.placeType}
-					categoria={el.categories}
-					duration={el.duration}
-					website={el.website}
-					phone={el.phone}
-					location={location}
-				/>
-			);
-		});
-	}
 
 	const sponsorBlock = categoryDetails.isSponsored ? (
 		<div className="sponsor-block">
@@ -196,8 +153,6 @@ const CategoryPage = ({
 	};
 
 	const loadMoreResults = async (categoryName, page) => {
-		console.log("categoryname =>", categoryName);
-		console.log("page =>", page);
 		setState({ ...state, isFetching: true });
 		const { paginatedResults } = await service.paginateCategory(
 			categoryName,
@@ -277,10 +232,57 @@ const CategoryPage = ({
 
 					<section className="pb-8 md:pb-16">
 						<div className="container">
-							{state.results.length > 0 ? (
+							{initialResults.length > 0 ? (
 								<>
 									<div className="flex flex-wrap items-start -mx-2">
-										{resultsList}
+										{initialResults.map((el) => (
+											<PublicSquareBox
+												key={el._id}
+												type={el.type}
+												slug={el.slug}
+												id={el._id}
+												cover={el.cover}
+												title={el.title}
+												subtitle={el.subtitle}
+												rating={
+													el.activity_rating ||
+													el.place_rating
+												}
+												placeType={el.placeType}
+												categoria={el.categories}
+												duration={el.duration}
+												website={el.website}
+												phone={el.phone}
+												location={
+													el.activity_locality ||
+													el.place_locality
+												}
+											/>
+										))}
+										{state.results.map((el) => (
+											<PublicSquareBox
+												key={el._id}
+												type={el.type}
+												slug={el.slug}
+												id={el._id}
+												cover={el.cover}
+												title={el.title}
+												subtitle={el.subtitle}
+												rating={
+													el.activity_rating ||
+													el.place_rating
+												}
+												placeType={el.placeType}
+												categoria={el.categories}
+												duration={el.duration}
+												website={el.website}
+												phone={el.phone}
+												location={
+													el.activity_locality ||
+													el.place_locality
+												}
+											/>
+										))}
 									</div>
 									{state.currentPage !== state.numPages ? (
 										<div className="w-full mt-10 flex justify-center">
@@ -289,9 +291,7 @@ const CategoryPage = ({
 													className="button button__primary button__lg"
 													onClick={() =>
 														loadMoreResults(
-															state
-																.categoryDetails
-																.name,
+															categoryDetails.name,
 															state.currentPage
 														)
 													}
