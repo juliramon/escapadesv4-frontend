@@ -235,7 +235,7 @@ const CategoryPage = ({
 							{initialResults.length > 0 ? (
 								<>
 									<div className="flex flex-wrap items-start -mx-2">
-										{initialResults.map((el) => (
+										{initialResults.map((el, idx) => (
 											<PublicSquareBox
 												key={el._id}
 												type={el.type}
@@ -257,6 +257,7 @@ const CategoryPage = ({
 													el.activity_locality ||
 													el.place_locality
 												}
+												index={idx}
 											/>
 										))}
 										{state.results.map((el) => (

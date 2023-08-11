@@ -11,7 +11,9 @@ const PublicSquareBox = ({
 	website,
 	categoria,
 	rating,
+	index,
 }) => {
+	console.log(typeof index);
 	let secureWebsite, buttonLight;
 	if (website.includes("https://") || website.includes("http://")) {
 		secureWebsite = website;
@@ -147,7 +149,16 @@ const PublicSquareBox = ({
 								data-src={coverImg}
 								alt={title}
 								className="w-full h-full object-cover object-center scale-1000 hover:scale-105 transition-all duration-300 ease-in-out"
-								loading="lazy"
+								loading={
+									index !== undefined && index == 0
+										? "eager"
+										: "lazy"
+								}
+								fetchPriority={
+									index !== undefined && index == 0
+										? "high"
+										: "low"
+								}
 								width="400"
 								height="300"
 							/>
