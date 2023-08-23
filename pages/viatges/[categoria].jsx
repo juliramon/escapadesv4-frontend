@@ -5,9 +5,9 @@ import Breadcrumb from "../../components/richsnippets/Breadcrumb";
 import NavigationBar from "../../components/global/NavigationBar";
 import Footer from "../../components/global/Footer";
 import UserContext from "../../contexts/UserContext";
-import RegularListBox from "../../components/listings/RegularListBox";
 import { useRouter } from "next/router";
 import AdBanner from "../../components/ads/AdBanner";
+import RegularTripEntryBox from "../../components/listings/RegularTripEntryBox";
 
 const CategoryTrip = ({
 	categoryDetails,
@@ -241,9 +241,10 @@ const CategoryTrip = ({
 									<div className="flex flex-wrap items-start mt-4">
 										{initialResults.map((el, idx) => (
 											<div className="mb-8 shadow-md rounded-md overflow-hidden w-full md:w-2/3">
-												<RegularListBox
+												<RegularTripEntryBox
 													key={el._id}
 													slug={el.slug}
+													trip={categoryDetails.slug}
 													cover={el.cover}
 													title={el.title}
 													subtitle={el.subtitle}
@@ -255,9 +256,10 @@ const CategoryTrip = ({
 										))}
 										{state.results.map((el) => (
 											<div className="mb-8 shadow-md rounded-md overflow-hidden w-full md:w-2/3">
-												<RegularListBox
+												<RegularTripEntryBox
 													key={el._id}
 													slug={el.slug}
+													trip={categoryDetails.slug}
 													cover={el.cover}
 													title={el.title}
 													subtitle={el.subtitle}
