@@ -169,7 +169,7 @@ const PublicSquareBox = ({
 							<h3 className="text-16 my-0 font-medium line-clamp-1">
 								{title}
 							</h3>
-							<span className="mt-0.5 inline-flex text-15 font-light text-primary-400 line-clamp-1">
+							<span className="mt-0.5 inline-flex flex-wrap text-15 font-light text-primary-400 line-clamp-1">
 								{type == "place"
 									? placeTypeModified
 									: "Activitat"}{" "}

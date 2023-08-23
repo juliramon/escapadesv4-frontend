@@ -209,18 +209,24 @@ const AdminPanel = () => {
 			));
 		}
 		if (state.activeTab === "tripEntries") {
-			listResults = state.tripEntries.map((el, idx) => (
-				<ContentBox
-					key={idx}
-					type={el.type}
-					id={el._id}
-					image={el.cover}
-					title={el.title}
-					subtitle={el.subtitle}
-					publicationDate={el.createdAt}
-					slug={el.slug}
-				/>
-			));
+			listResults = state.tripEntries.map((el, idx) => {
+				const category = state.tripCategories.find(
+					(tripCategory) => tripCategory._id === el.trip._id
+				);
+				return (
+					<ContentBox
+						key={idx}
+						trip={category.slug}
+						type={el.type}
+						id={el._id}
+						image={el.cover}
+						title={el.title}
+						subtitle={el.subtitle}
+						publicationDate={el.createdAt}
+						slug={el.slug}
+					/>
+				);
+			});
 		}
 	}
 

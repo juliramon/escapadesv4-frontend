@@ -1,18 +1,19 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
-import NavigationBar from "../components/global/NavigationBar";
-import UserContext from "../contexts/UserContext";
-import ContentService from "../services/contentService";
-import { useEditor, EditorContent } from "@tiptap/react";
-import EditorNavbar from "../components/editor/EditorNavbar";
+import { useState, useEffect, useContext } from "react";
+import NavigationBar from "../../../../components/global/NavigationBar";
+import UserContext from "../../../../contexts/UserContext";
+import ContentService from "../../../../services/contentService";
+import FetchingSpinner from "../../../../components/global/FetchingSpinner";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Placeholder from "@tiptap/extension-placeholder";
-import { handleFilesUpload, removeImage } from "../utils/helpers";
 import Link from "@tiptap/extension-link";
+import { handleFilesUpload, removeImage } from "../../../../utils/helpers";
+import { EditorContent, useEditor } from "@tiptap/react";
+import EditorNavbar from "../../../../components/editor/EditorNavbar";
 
-const TripEntryForm = () => {
+const TripEntryEditionForm = () => {
 	// Validate if user is allowed to access this view
 	const { user } = useContext(UserContext);
 	const [loadPage, setLoadPage] = useState(false);
@@ -26,40 +27,45 @@ const TripEntryForm = () => {
 	const router = useRouter();
 
 	useEffect(() => {
-		if (!user || user === "null" || user === undefined) {
+		if (!user) {
 			router.push("/login");
+		}
+		if (
+			router.pathname.includes("editar") ||
+			router.pathname.includes("nova-activitat") ||
+			router.pathname.includes("nou-allotjament") ||
+			router.pathname.includes("nova-historia")
+		) {
+			document.querySelector("body").classList.add("composer");
 		} else {
-			if (user) {
-				if (user.accountCompleted === false) {
-					router.push("/signup/complete-account");
-				}
-				if (user.hasConfirmedEmail === false) {
-					router.push("/signup/confirmacio-correu");
-				}
-			}
+			document.querySelector("body").classList.remove("composer");
 		}
 	}, [user]);
 
 	const initialState = {
+		tripEntry: {},
 		formData: {
-			emptyForm: true,
-			trip: "",
+			_id: "",
 			type: "tripEntry",
-			slug: "",
 			title: "",
 			subtitle: "",
+			slug: "",
 			cover: "",
 			blopCover: "",
-			coverCloudImage: "",
-			coverCloudImageUploaded: false,
+			updatedCover: false,
 			images: [],
 			blopImages: [],
+			updatedImages: false,
 			cloudImages: [],
-			cloudImagesUploaded: false,
+			coverCloudImage: "",
 			isReadyToSubmit: false,
+			cloudImagesUploaded: false,
+			coverCloudImageUploaded: false,
 			metaTitle: "",
 			metaDescription: "",
+			trip: "",
 		},
+		isTripEntryLoaded: false,
 	};
 
 	const [state, setState] = useState(initialState);
@@ -69,23 +75,10 @@ const TripEntryForm = () => {
 	const [tripCategories, setTripCategories] = useState();
 
 	useEffect(() => {
-		if (router && router.route) {
-			setQueryId(router.route);
+		if (router && router.query) {
+			setQueryId(router.query.id);
 		}
 	}, [router]);
-
-	const service = new ContentService();
-
-	// Fetch data
-	useEffect(() => {
-		const fetchData = async () => {
-			const categories = await service.getTripCategories();
-			setTripCategories(categories);
-		};
-		fetchData();
-
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
 
 	const editor = useEditor({
 		extensions: [
@@ -97,13 +90,13 @@ const TripEntryForm = () => {
 				},
 			}),
 			Placeholder.configure({
-				placeholder: "Comença a escriure el viatge...",
+				placeholder: "Comença a escriure la teva història...",
 			}),
 			Link.configure({
 				openOnClick: false,
 			}),
 		],
-		content: "",
+		content: editorData,
 		onUpdate: (props) => {
 			const data = {
 				html: props.editor.getHTML(),
@@ -117,6 +110,51 @@ const TripEntryForm = () => {
 		},
 	});
 
+	const service = new ContentService();
+
+	// Fetch data
+	useEffect(() => {
+		if (router.query.slug !== undefined) {
+			const fetchData = async () => {
+				const categories = await service.getTripCategories();
+				let tripEntryDetails = await service.getTripEntryDetails(
+					router.query.slug
+				);
+				setState({
+					...state,
+					tripEntry: tripEntryDetails,
+					formData: {
+						_id: tripEntryDetails._id,
+						type: tripEntryDetails.type,
+						title: tripEntryDetails.title,
+						subtitle: tripEntryDetails.subtitle,
+						slug: tripEntryDetails.slug,
+						cover: tripEntryDetails.cover,
+						blopCover: tripEntryDetails.cover,
+						updatedCover: false,
+						images: tripEntryDetails.images,
+						blopImages: tripEntryDetails.images,
+						updatedImages: false,
+						cloudImages: tripEntryDetails.images,
+						coverCloudImage: tripEntryDetails.cover,
+						isReadyToSubmit: false,
+						cloudImagesUploaded: false,
+						coverCloudImageUploaded: false,
+						metaTitle: tripEntryDetails.metaTitle,
+						metaDescription: tripEntryDetails.metaDescription,
+						trip: tripEntryDetails?.trip,
+					},
+					isTripEntryLoaded: true,
+				});
+				setEditorData(tripEntryDetails.description);
+				editor.commands.setContent(tripEntryDetails.description);
+				setTripCategories(categories);
+			};
+			fetchData();
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [queryId, router.query.slug]);
+
 	const saveFileToStatus = (e) => {
 		if (e.target.name === "cover") {
 			const fileToUpload = e.target.files[0];
@@ -126,6 +164,7 @@ const TripEntryForm = () => {
 					...state.formData,
 					blopCover: URL.createObjectURL(fileToUpload),
 					cover: fileToUpload,
+					updatedCover: true,
 				},
 			});
 		} else {
@@ -144,6 +183,7 @@ const TripEntryForm = () => {
 					...state.formData,
 					blopImages: [...state.formData.blopImages, ...blopImages],
 					images: [...state.formData.images, ...images],
+					updatedImages: true,
 				},
 			});
 		}
@@ -224,28 +264,37 @@ const TripEntryForm = () => {
 
 	const submitTripEntry = async () => {
 		const {
-			trip,
-			type,
-			slug,
+			_id,
 			title,
 			subtitle,
+			slug,
 			coverCloudImage,
 			cloudImages,
 			metaTitle,
 			metaDescription,
+			trip,
 		} = state.formData;
+
+		const { cover, images } = state.tripEntry;
+		const tripEntryCover = state.formData.updatedCover
+			? coverCloudImage
+			: cover;
+		const tripEntryImages = state.formData.updatedImages
+			? cloudImages
+			: images;
+
 		service
-			.tripEntry(
-				trip,
-				type,
+			.editTripEntryDetails(
+				_id,
 				slug,
 				title,
 				subtitle,
-				coverCloudImage,
-				cloudImages,
+				tripEntryCover,
+				tripEntryImages,
 				editorData.html,
 				metaTitle,
-				metaDescription
+				metaDescription,
+				trip
 			)
 			.then(() => router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel"))
 			.catch((err) => console.error(err));
@@ -254,22 +303,26 @@ const TripEntryForm = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		const { uploadedCover, uploadedImages } = await handleFilesUpload(
-			state.formData.cover,
-			state.formData.images
-		);
+		if (state.formData.updatedImages || state.formData.updatedCover) {
+			const { uploadedCover, uploadedImages } = await handleFilesUpload(
+				state.formData.cover,
+				state.formData.images
+			);
 
-		if (uploadedCover && uploadedImages) {
-			setState({
-				...state,
-				formData: {
-					...state.formData,
-					cloudImages: uploadedImages,
-					coverCloudImage: uploadedCover,
-					cloudImagesUploaded: true,
-					coverCloudImageUploaded: true,
-				},
-			});
+			if (uploadedCover && uploadedImages) {
+				setState({
+					...state,
+					formData: {
+						...state.formData,
+						cloudImages: uploadedImages,
+						coverCloudImage: uploadedCover,
+						cloudImagesUploaded: true,
+						coverCloudImageUploaded: true,
+					},
+				});
+			}
+		} else {
+			submitTripEntry();
 		}
 	};
 
@@ -282,38 +335,22 @@ const TripEntryForm = () => {
 		}
 	}, [state.formData]);
 
-	useEffect(() => {
-		const { title, subtitle, metaTitle, metaDescription } = state.formData;
-
-		if (
-			trip &&
-			title &&
-			subtitle &&
-			coverImage &&
-			editorData &&
-			metaTitle &&
-			metaDescription
-		) {
-			setState((state) => ({ ...state, isReadyToSubmit: true }));
-		}
-	}, [state.formData, editorData]);
+	if (!user || !state.isTripEntryLoaded) {
+		return <FetchingSpinner />;
+	}
 
 	return (
 		<>
 			<Head>
-				<title>
-					Publicar una nova entrada de viatge - Escapadesenparella.cat
-				</title>
+				<title>Edita la història - Escapadesenparella.cat</title>
 			</Head>
-			<div id="tripEntryForm" className="bg-white h-screen">
+			<div id="editTripEntry">
 				<NavigationBar user={user} path={queryId} />
 
 				<section className="form__container">
 					<div className="flex items-center justify-between px-4 border-y border-primary-100 sticky top-0 z-50 bg-white">
 						<div className="w-1/4 py-2.5">
-							<h1 className="text-lg my-0">
-								Publicar una nova entrada de viatge
-							</h1>
+							<h1 className="text-lg my-0">Edita la història</h1>
 						</div>
 						<div className="flex flex-wrap items-center justify-center flex-1 px-12 py-2.5">
 							<button
@@ -343,7 +380,7 @@ const TripEntryForm = () => {
 								type="submit"
 								onClick={handleSubmit}
 							>
-								Publicar
+								Guardar
 							</button>
 						</div>
 					</div>
@@ -356,7 +393,7 @@ const TripEntryForm = () => {
 											<textarea
 												name="title"
 												id="title"
-												placeholder="Escriu un títol per la teva entrada de viatge"
+												placeholder="Escriu un títol per a la teva història"
 												className="border-none bg-white text-5xl text-primary-900 placeholder-primary-900 outline-none resize-none min-h-[auto overflow-hidden leading-tight"
 												value={state.formData.title}
 												rows={2}
@@ -368,7 +405,7 @@ const TripEntryForm = () => {
 											<textarea
 												name="subtitle"
 												id="subtitle"
-												placeholder="Escriu una introducció curta per la teva entrada de viatge"
+												placeholder="Escriu una introducció curta a la història"
 												className="border-none bg-white text-2xl text-primary-900 placeholder-primary-900 outline-none resize-none"
 												rows={1}
 												value={state.formData.subtitle}
@@ -523,6 +560,13 @@ const TripEntryForm = () => {
 														<option
 															value={el._id}
 															key={el._id}
+															selected={
+																el._id ===
+																state.formData
+																	.trip._id
+																	? "true"
+																	: null
+															}
 														>
 															{el.title}
 														</option>
@@ -673,4 +717,4 @@ const TripEntryForm = () => {
 	);
 };
 
-export default TripEntryForm;
+export default TripEntryEditionForm;

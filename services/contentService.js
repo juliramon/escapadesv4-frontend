@@ -453,6 +453,7 @@ class ContentService {
 	// TRIP ENTRIES ENDPOINTS
 
 	tripEntry = (
+		trip,
 		type,
 		slug,
 		title,
@@ -465,6 +466,7 @@ class ContentService {
 	) => {
 		return this.service
 			.post("/trip-entry", {
+				trip,
 				type,
 				slug,
 				title,
@@ -502,7 +504,8 @@ class ContentService {
 		images,
 		description,
 		metaTitle,
-		metaDescription
+		metaDescription,
+		trip
 	) =>
 		this.service.put(`/trip-entries/${_id}`, {
 			slug,
@@ -513,6 +516,7 @@ class ContentService {
 			description,
 			metaTitle,
 			metaDescription,
+			trip,
 		});
 
 	removeTripEntry = (id) =>
@@ -601,14 +605,14 @@ class ContentService {
 			.then((res) => res.data);
 	};
 
-	paginateCategory = (category, page) =>
+	paginateTripCategory = (category, page) =>
 		this.service
 			.get(`/search-trip-category-results/${category}?page=${page}`)
 			.then((res) => res.data);
 
-	getTripCategoryResults = (category) => {
+	getTripCategoryResults = (categoryId) => {
 		return this.service
-			.get(`/search-trip-category-results/${category}`)
+			.get(`/search-trip-category-results/${categoryId}`)
 			.then((res) => res.data);
 	};
 

@@ -5,6 +5,7 @@ import ShareModal from "../modals/ShareModal";
 import PaymentService from "../../services/paymentService";
 
 const ContentBox = ({
+	trip,
 	type,
 	slug,
 	id,
@@ -46,9 +47,22 @@ const ContentBox = ({
 		path = "histories";
 	} else if (type === "list") {
 		path = "llistes";
+	} else if (type === "tripEntry") {
+		path = "viatges";
 	}
 
 	const urlToShare = `https://escapadesenparella.cat/${path}/${slug}`;
+
+	let url;
+	if (type == "tripEntry") {
+		url = `/${path}/${trip}/${slug}`;
+	}
+	if (type != "category" && type != "tripEntry") {
+		url = `/${path}/${slug}`;
+	}
+	if (type == "category") {
+		url = `/${slug}`;
+	}
 
 	const transformDate = (unformattedDate) => {
 		let modpublicationDate = new Date(unformattedDate);
@@ -64,7 +78,7 @@ const ContentBox = ({
 
 	return (
 		<div className="content rounded-md box flex items-center w-full bg-primary-50 border border-primary-100 mb-2.5 px-5 py-4">
-			<Link href={type != "category" ? `/${path}/${slug}` : `/${slug}`}>
+			<Link href={url}>
 				<a className="flex items-center justify-between w-full">
 					<div className="flex items-center justify-center bg-white overflow-hidden h-12 w-12 rounded-md p-0 mr-5 border border-primary-100">
 						<img
@@ -83,7 +97,9 @@ const ContentBox = ({
 				</a>
 			</Link>
 			<div className={`dropdown ${dropdownVisibility ? "open" : ""}`}>
-				<button onClick={() => setDropdownVisibility(!dropdownVisibility)}>
+				<button
+					onClick={() => setDropdownVisibility(!dropdownVisibility)}
+				>
 					<svg
 						xmlns="http://www.w3.org/2000/svg"
 						className="dropdown__icon"
@@ -108,7 +124,7 @@ const ContentBox = ({
 					}`}
 				>
 					<li className="border-b border-primary-100 w-full">
-						<Link href={`/${path}/${slug}`}>
+						<Link href={url}>
 							<a className="dropdown__menu_item">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -132,7 +148,7 @@ const ContentBox = ({
 						</Link>
 					</li>
 					<li className="border-b border-primary-100 w-full">
-						<Link href={`/${path}/${slug}/editar`}>
+						<Link href={url + "/editar"}>
 							<a className="dropdown__menu_item">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -148,7 +164,12 @@ const ContentBox = ({
 								>
 									<path stroke="none" d="M0 0h24v24H0z" />
 									<path d="M4 20h4l10.5 -10.5a1.5 1.5 0 0 0 -4 -4l-10.5 10.5v4" />
-									<line x1="13.5" y1="6.5" x2="17.5" y2="10.5" />
+									<line
+										x1="13.5"
+										y1="6.5"
+										x2="17.5"
+										y2="10.5"
+									/>
 								</svg>
 								Editar
 							</a>
@@ -182,7 +203,10 @@ const ContentBox = ({
 						</button>
 					</li>
 					<li>
-						<button onClick={removeItem} className="dropdown__menu_item">
+						<button
+							onClick={removeItem}
+							className="dropdown__menu_item"
+						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								className="dropdown__menu_icon"
