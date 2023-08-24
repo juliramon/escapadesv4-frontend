@@ -94,9 +94,9 @@ const CategoryTrip = ({
 			<GlobalMetas
 				title={categoryDetails.title}
 				description={categoryDetails.seoTextHeader}
-				url={`https://escapadesenparella.cat/${categoryDetails.slug}`}
+				url={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}`}
 				image={categoryDetails.image}
-				canonical={`https://escapadesenparella.cat/${categoryDetails.slug}`}
+				canonical={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}`}
 			/>
 			{/* Rich snippets */}
 			<Breadcrumb
@@ -224,13 +224,6 @@ const CategoryTrip = ({
 							</div>
 						</div>
 					</section>
-
-					{/* Section Ad */}
-					<div className="flex justify-center">
-						<div className="rounded-md bg-primary-100 overflow-hidden max-w-3xl">
-							<AdBanner data-ad-slot="8691959412" />
-						</div>
-					</div>
 
 					{/* Section results list */}
 					<section className="py-10 md:py-16">
