@@ -1,24 +1,26 @@
 import { useRouter } from "next/router";
 
-const ShareBar = () => {
+const ShareBar = ({ color = "text-white", iconsSize = 24 }) => {
 	const router = useRouter();
-	const url = "https://escapadesenparella.cat" + router.pathname;
+	const url = "https://escapadesenparella.cat" + router.asPath;
 
 	return (
 		<div className="flex flex-wrap items-center -mx-1.5">
-			<span className="px-1.5 font-medium text-sm text-white">
-				Comparteix-ho!
-			</span>
+			<span className="px-1.5 font-medium text-sm ">Comparteixa-ho!</span>
 			<a
 				href={`http://www.facebook.com/sharer.php?u=${url}`}
-				className="px-1.5 text-white hover:text-secondary-500 transition-all duration-300 ease-in-out"
+				className={
+					`px-1.5 hover:text-secondary-500 transition-all duration-300 ease-in-out` +
+					color
+				}
 				target="_blank"
-				rel="nofollow"
+				title="Comparteixa-ho a Facebook"
+				rel="nofollow nofererrer"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					width={24}
-					height={24}
+					width={iconsSize}
+					height={iconsSize}
 					viewBox="0 0 24 24"
 					strokeWidth="1"
 					stroke="currentColor"
@@ -36,16 +38,20 @@ const ShareBar = () => {
 			</a>
 			<a
 				href={`https://twitter.com/intent/tweet?url=${url}`}
-				className="px-1.5 text-white hover:text-secondary-500 transition-all duration-300 ease-in-out"
+				className={
+					`px-1.5 hover:text-secondary-500 transition-all duration-300 ease-in-out` +
+					color
+				}
 				target="_blank"
-				rel="nofollow"
+				title="Comparteixa-ho a X"
+				rel="nofollow nofererrer"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					width={24}
-					height={24}
+					width={iconsSize}
+					height={iconsSize}
 					viewBox="0 0 24 24"
-					strokeWidth="1"
+					stroke-width={1}
 					stroke="currentColor"
 					fill="none"
 					strokeLinecap="round"
@@ -53,7 +59,7 @@ const ShareBar = () => {
 				>
 					<path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
 					<path
-						d="M14.058 3.41c-1.807 .767 -2.995 2.453 -3.056 4.38l-.002 .182l-.243 -.023c-2.392 -.269 -4.498 -1.512 -5.944 -3.531a1 1 0 0 0 -1.685 .092l-.097 .186l-.049 .099c-.719 1.485 -1.19 3.29 -1.017 5.203l.03 .273c.283 2.263 1.5 4.215 3.779 5.679l.173 .107l-.081 .043c-1.315 .663 -2.518 .952 -3.827 .9c-1.056 -.04 -1.446 1.372 -.518 1.878c3.598 1.961 7.461 2.566 10.792 1.6c4.06 -1.18 7.152 -4.223 8.335 -8.433l.127 -.495c.238 -.993 .372 -2.006 .401 -3.024l.003 -.332l.393 -.779l.44 -.862l.214 -.434l.118 -.247c.265 -.565 .456 -1.033 .574 -1.43l.014 -.056l.008 -.018c.22 -.593 -.166 -1.358 -.941 -1.358l-.122 .007a.997 .997 0 0 0 -.231 .057l-.086 .038a7.46 7.46 0 0 1 -.88 .36l-.356 .115l-.271 .08l-.772 .214c-1.336 -1.118 -3.144 -1.254 -5.012 -.554l-.211 .084z"
+						d="M8.267 3a1 1 0 0 1 .73 .317l.076 .092l4.274 5.828l5.946 -5.944a1 1 0 0 1 1.497 1.32l-.083 .094l-6.163 6.162l6.262 8.54a1 1 0 0 1 -.697 1.585l-.109 .006h-4.267a1 1 0 0 1 -.73 -.317l-.076 -.092l-4.276 -5.829l-5.944 5.945a1 1 0 0 1 -1.497 -1.32l.083 -.094l6.161 -6.163l-6.26 -8.539a1 1 0 0 1 .697 -1.585l.109 -.006h4.267z"
 						strokeWidth={0}
 						fill="currentColor"
 					></path>
@@ -61,14 +67,18 @@ const ShareBar = () => {
 			</a>
 			<a
 				href={`mailto:?subject=Mira%20què%20he%20trobat%20a%20Escapadesenparella.cat&body=${url}`}
-				className="px-1.5 text-white hover:text-secondary-500 transition-all duration-300 ease-in-out"
+				className={
+					`px-1.5 hover:text-secondary-500 transition-all duration-300 ease-in-out` +
+					color
+				}
 				target="_blank"
-				rel="nofollow"
+				title="Comparteixa-ho per correu electrònic"
+				rel="nofollow nofererrer"
 			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
-					width={24}
-					height={24}
+					width={iconsSize}
+					height={iconsSize}
 					viewBox="0 0 24 24"
 					strokeWidth="2"
 					stroke="currentColor"

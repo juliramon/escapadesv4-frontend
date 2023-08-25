@@ -1,24 +1,24 @@
 .listing-story
 	.listing-description
 		h2
-			@apply mt-3
-			
+			@apply mt-3 text-xl md:text-2xl
+
 		p:first-child
 			@apply mt-0 mb-5
-			
+
 		p
 			@apply my-5
 
-		
 		blockquote, blockquote *
-			@apply text-xl font-semibold my-8
+			@apply text-xl my-8
 
 		blockquote
 			@apply relative pl-8
 
 		blockquote::before
-			content: '"'
-			@apply absolute -left-2 top-2 text-8xl opacity-50 text-secondary-50 leading-10
+			content: ''
+
+			@apply absolute left-0 inset-y-0 w-1 h-full bg-secondary-500 block rounded-full
 
 		.pswp-thumbnails
 			@apply flex items-stretch flex-wrap -mx-2 mb-6

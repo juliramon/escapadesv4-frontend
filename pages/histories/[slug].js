@@ -9,9 +9,9 @@ import FooterHistoria from "../../components/global/FooterHistoria";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
 import Article from "../../components/richsnippets/Article";
-import AdBanner from "../../components/ads/AdBanner";
 import FancyboxUtil from "../../utils/FancyboxUtils";
 import { formatDateTimeToISODate } from "../../utils/helpers";
+import ShareBar from "../../components/social/ShareBar";
 
 const StoryListing = ({ storyDetails }) => {
 	const { user } = useContext(UserContext);
@@ -35,17 +35,10 @@ const StoryListing = ({ storyDetails }) => {
 
 	const welcomeText = (
 		<div className="mb-8">
-			<h2 className="mb-5">
+			<h2>
 				{storyDetails.title}: Benvinguts a l'escapada de la setmana, ens
 				hi acompanyeu?
 			</h2>
-			<div className="bg-primary-100">
-				<AdBanner
-					data-ad-slot="7638377836"
-					data-ad-format="fluid"
-					data-ad-layout="in-article"
-				/>
-			</div>
 		</div>
 	);
 
@@ -62,7 +55,7 @@ const StoryListing = ({ storyDetails }) => {
 					{images.map((image, idx) => {
 						return (
 							<div
-								className="w-full md:w-1/2 lg:w-1/3 px-1 mb-2 flex-auto"
+								className="w-1/2 md:w-1/3 px-1 mb-2 flex-auto"
 								data-fancybox="gallery"
 								data-src={image}
 							>
@@ -117,7 +110,7 @@ const StoryListing = ({ storyDetails }) => {
 
 	const coverPath = storyDetails.cover.substring(0, 51);
 	const imageId = storyDetails.cover.substring(63);
-	const coverImg = `${coverPath}w_800,h_600,c_fill/${imageId}`;
+	const coverImg = `${coverPath}w_597,h_336,c_fill/${imageId}`;
 
 	const coverAuthorPath = storyDetails.owner.avatar.substring(0, 51);
 	const imageAuthorId = storyDetails.owner.avatar.substring(63);
@@ -157,132 +150,156 @@ const StoryListing = ({ storyDetails }) => {
 					}
 					user={user}
 				/>
-				<div className="pt-3 px-4">
-					<div className="w-full">
-						<ul className="breadcrumb">
-							<li className="breadcrumb__item">
-								<a
-									href="/"
-									title="Inici"
-									className="breadcrumb__link"
-								>
-									Inici
-								</a>
-							</li>
-							<li className="breadcrumb__item">
-								<a
-									href="/histories"
-									className="breadcrumb__link"
-								>
-									Històries en parella
-								</a>
-							</li>
-							<li className="breadcrumb__item">
-								<span className="breadcrumb__link active">
-									{storyDetails.title}
-								</span>
-							</li>
-						</ul>
-					</div>
-				</div>
 				<main>
-					<article className="pt-12 pb-4">
+					<article className="py-4 lg:pt-12">
 						<div className="container">
-							<div className="max-w-full md:max-w-2xl mx-auto">
-								<h1 className="md:text-center">
-									{storyDetails.title}
-								</h1>
-								<p className="text-lg md:text-xl md:text-center md:px-16 mt-2.5">
-									{storyDetails.subtitle}
-								</p>
-								<div className="mt-3 flex flex-wrap items-center md:justify-center">
-									<div className="flex flex-wrap items-center">
-										<div className="rounded-full overflow-hidden w-8 h-8 mr-2.5">
-											<picture>
-												<img
-													src={coverAuthorImg}
-													alt={
-														storyDetails.owner
-															.fullName
-													}
-													width={32}
-													height={32}
-													className="w-full h-full object-cover"
-													loadgin="eager"
-													fetchpriority="high"
-												/>
-											</picture>
+							{/* Breadcrumb + article header */}
+							<div className="max-w-full lg:max-w-5xl mx-auto">
+								<div className="w-full lg:max-w-3xl">
+									<div className="pb-3">
+										<div className="w-full">
+											<ul className="breadcrumb">
+												<li className="breadcrumb__item">
+													<a
+														href="/"
+														title="Inici"
+														className="breadcrumb__link"
+													>
+														Inici
+													</a>
+												</li>
+												<li className="breadcrumb__item">
+													<a
+														href="/histories"
+														className="breadcrumb__link"
+													>
+														Històries en parella
+													</a>
+												</li>
+												<li className="breadcrumb__item">
+													<span className="breadcrumb__link active">
+														{storyDetails.title}
+													</span>
+												</li>
+											</ul>
 										</div>
-										<span className="text-sm text-primary-400 text-opacity-80">
-											{storyDetails.owner.fullName}
-										</span>
-										<span className="mx-2 text-sm text-primary-400 text-opacity-80">
-											·
-										</span>
-										<span className="text-sm text-primary-400 text-opacity-80">
-											Publicat el{" "}
-											<time
-												dateTime={formatDateTimeToISODate(
-													storyDetails.createdAt
-												)}
-											>
-												<u>
-													{formatDateTimeToISODate(
-														storyDetails.createdAt
-													)}
-												</u>
-											</time>
-										</span>
+									</div>
+									<h1>{storyDetails.title}</h1>
+								</div>
+							</div>
+
+							{/* Article subtitle + meta info */}
+							<div className="w-full max-w-full lg:max-w-5xl lg:mx-auto mt-5">
+								<div className="flex flex-wrap items-stretch">
+									<div className="w-full lg:w-7/12">
+										<picture className="block aspect-w-16 aspect-h-9 rounded-md overflow-hidden">
+											<source
+												srcSet={coverImg}
+												media="(max-width: 768px)"
+											/>
+											<source
+												srcSet={coverImg}
+												media="(min-width: 768px)"
+											/>
+											<img
+												src={coverImg}
+												alt={storyDetails.title}
+												width={400}
+												height={300}
+												className="w-full h-full object-cover"
+												fetchpriority="high"
+												loading="eager"
+											/>
+										</picture>
+									</div>
+									<div className="w-full lg:w-5/12 pt-5 lg:pt-0 lg:pl-8">
+										<div className="flex flex-col h-full">
+											<div className="flex-1">
+												<p className="text-xl lg:text-2xl font-light mb-2.5">
+													{storyDetails.subtitle}
+												</p>
+												{/* Informació de l'autor */}
+												<div className="lg:mt-3 flex flex-wrap items-center">
+													<div className="flex flex-wrap items-center">
+														<div className="rounded-full overflow-hidden w-8 h-8 mr-2.5">
+															<picture>
+																<img
+																	src={
+																		coverAuthorImg
+																	}
+																	alt={
+																		storyDetails
+																			.owner
+																			.fullName
+																	}
+																	width={32}
+																	height={32}
+																	className="w-full h-full object-cover"
+																	loadgin="eager"
+																	fetchpriority="high"
+																/>
+															</picture>
+														</div>
+														<span className="text-sm">
+															{
+																storyDetails
+																	.owner
+																	.fullName
+															}
+														</span>
+														<span className="mx-2 text-sm ">
+															·
+														</span>
+														<span className="text-sm ">
+															Publicat el{" "}
+															<time
+																dateTime={formatDateTimeToISODate(
+																	storyDetails.createdAt
+																)}
+															>
+																<u>
+																	{formatDateTimeToISODate(
+																		storyDetails.createdAt
+																	)}
+																</u>
+															</time>
+														</span>
+													</div>
+												</div>
+											</div>
+											<div className="mt-5 lg:mt-0">
+												<ShareBar
+													color="text-grey-700"
+													iconsSize={20}
+												/>
+												<span className="block text-xs mt-1.5">
+													Darrera actualització:{" "}
+													<time
+														dateTime={formatDateTimeToISODate(
+															storyDetails.updatedAt
+														)}
+													>
+														<u>
+															{formatDateTimeToISODate(
+																storyDetails.updatedAt
+															)}
+														</u>
+													</time>
+												</span>
+												<figcaption className="text-xs text-grey-400 block mt-1.5">
+													Foto d' <u>Andrea Prat</u> i{" "}
+													<u>Juli Ramon</u> per
+													Escapadesenparella.cat
+												</figcaption>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
 
-							<div className="w-full max-w-full md:max-w-4xl md:mx-auto mt-6">
-								<div className="aspect-w-16 aspect-h-9 rounded-md overflow-hidden">
-									<picture>
-										<source
-											srcSet={coverImg}
-											media="(max-width: 768px)"
-										/>
-										<source
-											srcSet={coverImg}
-											media="(min-width: 768px)"
-										/>
-										<img
-											src={coverImg}
-											alt={storyDetails.title}
-											width={400}
-											height={300}
-											className="w-full h-full object-cover"
-											fetchpriority="high"
-											loading="eager"
-										/>
-									</picture>
-								</div>
-								<figcaption className="text-xs mt-2 text-primary-400 text-opacity-80">
-									Foto d' <u>Andrea Prat</u> i{" "}
-									<u>Juli Ramon</u> per Escapadesenparella.cat
-								</figcaption>
-							</div>
-
-							<div className="w-full max-w-full md:max-w-2xl mx-auto pt-8">
-								<div className="text-center text-tertiary-500 text-opacity-80 text-sm py-4 mb-5 md:mb-6 bg-tertiary-100 bg-opacity-50 flex items-center justify-center rounded-md">
-									<span className="inline-block">
-										Darrera actualització:{" "}
-										<time
-											dateTime={formatDateTimeToISODate(
-												storyDetails.updatedAt
-											)}
-										>
-											<u>
-												{formatDateTimeToISODate(
-													storyDetails.updatedAt
-												)}
-											</u>
-										</time>
-									</span>
-								</div>
-								<div className="listing-description">
+							{/* Article description */}
+							<div className="w-full max-w-full lg:max-w-5xl mx-auto pt-8">
+								<div className="listing-description w-full max-w-[55ch] first-letter:text-2xl lg:first-letter:text-4xl first-letter:text-secondary-500">
 									{slicedDescription}
 								</div>
 							</div>

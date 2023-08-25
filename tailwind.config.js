@@ -5,7 +5,7 @@ const colors = {
 		200: "#99a3b9",
 		300: "#667496",
 		400: "#334673",
-		500: "#001850", // legacy color text
+		500: "#001850",
 		600: "#001340",
 		700: "#000e30",
 		800: "#000a20",
@@ -73,7 +73,6 @@ module.exports = {
 			fontFamily: {
 				body: ["Circular", "sans-serif"],
 				headings: ["Circular", "sans-serif"],
-				headingsCondensed: ["Domine", "serif"],
 			},
 			borderRadius: {
 				350: "350px",
