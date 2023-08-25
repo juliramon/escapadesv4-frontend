@@ -16,7 +16,7 @@ const Homepage = (props) => {
 
 	useEffect(() => {
 		if (user) {
-			router.push("/feed");
+			router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel");
 		}
 	}, [user]);
 

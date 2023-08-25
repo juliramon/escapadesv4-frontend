@@ -34,7 +34,9 @@ const NavigationBar = ({ logo_url, path }) => {
 	};
 
 	let logoLink =
-		user === "null" || !user || user === undefined ? "/" : "/feed";
+		user === "null" || !user || user === undefined
+			? "/"
+			: "/2i8ZXlkM4cFKUPBrm3-admin-panel";
 
 	const responsiveMenu = (
 		<>

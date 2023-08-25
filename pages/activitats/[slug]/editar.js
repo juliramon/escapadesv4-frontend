@@ -95,12 +95,15 @@ const ActivityEditionForm = () => {
 	useEffect(() => {
 		if (router.query.slug !== undefined) {
 			const fetchData = async () => {
-				const userOrganizations = await service.checkOrganizationsOwned();
+				const userOrganizations =
+					await service.checkOrganizationsOwned();
 				let hasOrganizations;
 				userOrganizations.number > 0
 					? (hasOrganizations = true)
 					: (hasOrganizations = false);
-				let activityDetails = await service.activityDetails(router.query.slug);
+				let activityDetails = await service.activityDetails(
+					router.query.slug
+				);
 				setState({
 					activity: activityDetails,
 					formData: {
@@ -334,7 +337,7 @@ const ActivityEditionForm = () => {
 			metaTitle,
 			metaDescription
 		);
-		// .then(() => router.push("/dashboard"));
+		// .then(() => router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel"));
 	};
 
 	const handleFileUpload = (e) => {
@@ -362,7 +365,9 @@ const ActivityEditionForm = () => {
 				uploadData.append("imageUrl", el);
 				service.uploadFile(uploadData).then((res) => {
 					uploadedImages.push(res.path);
-					if (uploadedImages.length === state.formData.images.length) {
+					if (
+						uploadedImages.length === state.formData.images.length
+					) {
 						setState({
 							...state,
 							formData: {
@@ -391,7 +396,9 @@ const ActivityEditionForm = () => {
 				uploadData.append("imageUrl", el);
 				service.uploadFile(uploadData).then((res) => {
 					uploadedImages.push(res.path);
-					if (uploadedImages.length === state.formData.images.length) {
+					if (
+						uploadedImages.length === state.formData.images.length
+					) {
 						setState({
 							...state,
 							formData: {
@@ -471,38 +478,41 @@ const ActivityEditionForm = () => {
 	let organizationsList = [];
 	if (state.formData.userOrganizations !== undefined) {
 		if (state.formData.userOrganizations.organizations !== undefined) {
-			organizationsList = state.formData.userOrganizations.organizations.map(
-				(el, idx) => {
-					let isChecked;
-					if (!state.organization) {
-						if (selectedOrganization === el._id) {
-							isChecked = true;
+			organizationsList =
+				state.formData.userOrganizations.organizations.map(
+					(el, idx) => {
+						let isChecked;
+						if (!state.organization) {
+							if (selectedOrganization === el._id) {
+								isChecked = true;
+							}
 						}
-					}
-					return (
-						<label key={idx} className="flex items-center m-2">
-							<input
-								value={el.orgName}
-								name="orgName"
-								type="radio"
-								id={el._id}
-								onChange={handleCheckOrganization}
-								checked={isChecked}
-							/>
-							<div className="flex items-center p-2">
-								<div className="rounded-md w-10 h-10 border border-primary-100 overflow-hidden mr-2">
-									<img
-										src={el.orgLogo}
-										alt={el.orgName}
-										className="w-full h-full object-cover"
-									/>
+						return (
+							<label key={idx} className="flex items-center m-2">
+								<input
+									value={el.orgName}
+									name="orgName"
+									type="radio"
+									id={el._id}
+									onChange={handleCheckOrganization}
+									checked={isChecked}
+								/>
+								<div className="flex items-center p-2">
+									<div className="rounded-md w-10 h-10 border border-primary-100 overflow-hidden mr-2">
+										<img
+											src={el.orgLogo}
+											alt={el.orgName}
+											className="w-full h-full object-cover"
+										/>
+									</div>
+									<span className="text-sm">
+										{el.orgName}
+									</span>
 								</div>
-								<span className="text-sm">{el.orgName}</span>
-							</div>
-						</label>
-					);
-				}
-			);
+							</label>
+						);
+					}
+				);
 		}
 	}
 
@@ -529,9 +539,12 @@ const ActivityEditionForm = () => {
 						<div className="pt-7 pb-12">
 							<div className="flex flex-wrap items-center justify-between">
 								<div className="w-full lg:w-1/2">
-									<h1 className="text-3xl">Editar l'activitat</h1>
+									<h1 className="text-3xl">
+										Editar l'activitat
+									</h1>
 									<p className="text-base">
-										Edita i desa els canvis de la teva activitat
+										Edita i desa els canvis de la teva
+										activitat
 									</p>
 								</div>
 							</div>
@@ -549,7 +562,9 @@ const ActivityEditionForm = () => {
 									</button>
 									<button
 										className={`flex-1 bg-none px-4 py-4 text-primary-500 !rounded-md-none focus:border-t-4 focus:border-primary-500 text-sm ${
-											activeTab === "seo" ? "border-t-4 border-primary-500" : ""
+											activeTab === "seo"
+												? "border-t-4 border-primary-500"
+												: ""
 										}`}
 										onClick={() => setActiveTab("seo")}
 									>
@@ -558,7 +573,10 @@ const ActivityEditionForm = () => {
 								</div>
 								{activeTab === "main" ? (
 									<div className="form__wrapper">
-										<form className="form" onSubmit={handleSubmit}>
+										<form
+											className="form"
+											onSubmit={handleSubmit}
+										>
 											<div className="form__group">
 												<label className="form__label">
 													Empresa propietària
@@ -568,7 +586,10 @@ const ActivityEditionForm = () => {
 												</div>
 											</div>
 											<div className="form__group">
-												<label htmlFor="title" className="form__label">
+												<label
+													htmlFor="title"
+													className="form__label"
+												>
 													Títol
 												</label>
 												<input
@@ -581,7 +602,10 @@ const ActivityEditionForm = () => {
 												/>
 											</div>
 											<div className="form__group">
-												<label htmlFor="subtitle" className="form__label">
+												<label
+													htmlFor="subtitle"
+													className="form__label"
+												>
 													Subtítol
 												</label>
 												<input
@@ -589,14 +613,19 @@ const ActivityEditionForm = () => {
 													name="subtitle"
 													placeholder="Subtítol de l'activitat"
 													className="form__control"
-													value={state.formData.subtitle}
+													value={
+														state.formData.subtitle
+													}
 													onChange={handleChange}
 												/>
 											</div>
 
 											<div className="flex flex-wrap items-stretch mt-2">
 												<div className="form__group w-3/12">
-													<label htmlFor="categoria" className="form__label">
+													<label
+														htmlFor="categoria"
+														className="form__label"
+													>
 														Categoria d'escapada
 													</label>
 													<label
@@ -608,8 +637,12 @@ const ActivityEditionForm = () => {
 															name="activityCategory"
 															id="romantica"
 															className="mr-2"
-															onChange={handleCheckCategory}
-															checked={checkIfCategoryChecked("romantica")}
+															onChange={
+																handleCheckCategory
+															}
+															checked={checkIfCategoryChecked(
+																"romantica"
+															)}
 														/>
 														Romàntica
 													</label>
@@ -622,8 +655,12 @@ const ActivityEditionForm = () => {
 															name="activityCategory"
 															id="aventura"
 															className="mr-2"
-															onChange={handleCheckCategory}
-															checked={checkIfCategoryChecked("aventura")}
+															onChange={
+																handleCheckCategory
+															}
+															checked={checkIfCategoryChecked(
+																"aventura"
+															)}
 														/>
 														Aventura
 													</label>
@@ -636,8 +673,12 @@ const ActivityEditionForm = () => {
 															name="activityCategory"
 															id="gastronomica"
 															className="mr-2"
-															onChange={handleCheckCategory}
-															checked={checkIfCategoryChecked("gastronomica")}
+															onChange={
+																handleCheckCategory
+															}
+															checked={checkIfCategoryChecked(
+																"gastronomica"
+															)}
 														/>
 														Gastronòmica
 													</label>
@@ -650,8 +691,12 @@ const ActivityEditionForm = () => {
 															name="activityCategory"
 															id="cultural"
 															className="mr-2"
-															onChange={handleCheckCategory}
-															checked={checkIfCategoryChecked("cultural")}
+															onChange={
+																handleCheckCategory
+															}
+															checked={checkIfCategoryChecked(
+																"cultural"
+															)}
 														/>
 														Cultural
 													</label>
@@ -664,14 +709,21 @@ const ActivityEditionForm = () => {
 															name="activityCategory"
 															id="relax"
 															className="mr-2"
-															onChange={handleCheckCategory}
-															checked={checkIfCategoryChecked("relax")}
+															onChange={
+																handleCheckCategory
+															}
+															checked={checkIfCategoryChecked(
+																"relax"
+															)}
 														/>
 														Relax
 													</label>
 												</div>
 												<div className="form__group w-3/12">
-													<label htmlFor="categoria" className="form__label">
+													<label
+														htmlFor="categoria"
+														className="form__label"
+													>
 														Estació recomanada
 													</label>
 													<label
@@ -683,8 +735,12 @@ const ActivityEditionForm = () => {
 															name="hivern"
 															id="hivern"
 															className="mr-2"
-															onChange={handleCheckSeason}
-															checked={checkIfSeasonChecked("hivern")}
+															onChange={
+																handleCheckSeason
+															}
+															checked={checkIfSeasonChecked(
+																"hivern"
+															)}
 														/>
 														Hivern
 													</label>
@@ -697,8 +753,12 @@ const ActivityEditionForm = () => {
 															name="primavera"
 															id="primavera"
 															className="mr-2"
-															onChange={handleCheckSeason}
-															checked={checkIfSeasonChecked("primavera")}
+															onChange={
+																handleCheckSeason
+															}
+															checked={checkIfSeasonChecked(
+																"primavera"
+															)}
 														/>
 														Primavera
 													</label>
@@ -711,8 +771,12 @@ const ActivityEditionForm = () => {
 															name="estiu"
 															id="estiu"
 															className="mr-2"
-															onChange={handleCheckSeason}
-															checked={checkIfSeasonChecked("estiu")}
+															onChange={
+																handleCheckSeason
+															}
+															checked={checkIfSeasonChecked(
+																"estiu"
+															)}
 														/>
 														Estiu
 													</label>
@@ -725,14 +789,21 @@ const ActivityEditionForm = () => {
 															name="tardor"
 															id="tardor"
 															className="mr-2"
-															onChange={handleCheckSeason}
-															checked={checkIfSeasonChecked("tardor")}
+															onChange={
+																handleCheckSeason
+															}
+															checked={checkIfSeasonChecked(
+																"tardor"
+															)}
 														/>
 														Tardor
 													</label>
 												</div>
 												<div className="form__group w-3/12">
-													<label htmlFor="categoria" className="form__label">
+													<label
+														htmlFor="categoria"
+														className="form__label"
+													>
 														Regió de l'activitat
 													</label>
 													<label
@@ -744,8 +815,12 @@ const ActivityEditionForm = () => {
 															name="activityRegion"
 															id="barcelona"
 															className="mr-2"
-															onChange={handleCheckRegion}
-															checked={checkIfRegionChecked("barcelona")}
+															onChange={
+																handleCheckRegion
+															}
+															checked={checkIfRegionChecked(
+																"barcelona"
+															)}
 														/>
 														Barcelona
 													</label>
@@ -758,8 +833,12 @@ const ActivityEditionForm = () => {
 															name="activityRegion"
 															id="tarragona"
 															className="mr-2"
-															onChange={handleCheckRegion}
-															checked={checkIfRegionChecked("tarragona")}
+															onChange={
+																handleCheckRegion
+															}
+															checked={checkIfRegionChecked(
+																"tarragona"
+															)}
 														/>
 														Tarragona
 													</label>
@@ -772,8 +851,12 @@ const ActivityEditionForm = () => {
 															name="activityRegion"
 															id="girona"
 															className="mr-2"
-															onChange={handleCheckRegion}
-															checked={checkIfRegionChecked("girona")}
+															onChange={
+																handleCheckRegion
+															}
+															checked={checkIfRegionChecked(
+																"girona"
+															)}
 														/>
 														Girona
 													</label>
@@ -786,8 +869,12 @@ const ActivityEditionForm = () => {
 															name="activityRegion"
 															id="lleida"
 															className="mr-2"
-															onChange={handleCheckRegion}
-															checked={checkIfRegionChecked("lleida")}
+															onChange={
+																handleCheckRegion
+															}
+															checked={checkIfRegionChecked(
+																"lleida"
+															)}
 														/>
 														Lleida
 													</label>
@@ -800,8 +887,12 @@ const ActivityEditionForm = () => {
 															name="activityRegion"
 															id="costaBrava"
 															className="mr-2"
-															onChange={handleCheckRegion}
-															checked={checkIfRegionChecked("costaBrava")}
+															onChange={
+																handleCheckRegion
+															}
+															checked={checkIfRegionChecked(
+																"costaBrava"
+															)}
 														/>
 														Costa Brava
 													</label>
@@ -814,8 +905,12 @@ const ActivityEditionForm = () => {
 															name="activityRegion"
 															id="costaDaurada"
 															className="mr-2"
-															onChange={handleCheckRegion}
-															checked={checkIfRegionChecked("costaDaurada")}
+															onChange={
+																handleCheckRegion
+															}
+															checked={checkIfRegionChecked(
+																"costaDaurada"
+															)}
 														/>
 														Costa Daurada
 													</label>
@@ -828,8 +923,12 @@ const ActivityEditionForm = () => {
 															name="activityRegion"
 															id="pirineus"
 															className="mr-2"
-															onChange={handleCheckRegion}
-															checked={checkIfRegionChecked("pirineus")}
+															onChange={
+																handleCheckRegion
+															}
+															checked={checkIfRegionChecked(
+																"pirineus"
+															)}
 														/>
 														Pirineus
 													</label>
@@ -837,15 +936,23 @@ const ActivityEditionForm = () => {
 											</div>
 
 											<div className="form__group">
-												<label htmlFor="loaction" className="form__label">
+												<label
+													htmlFor="loaction"
+													className="form__label"
+												>
 													Localització
 												</label>
 												<Autocomplete
 													className="form__control"
 													apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
 													style={{ width: "100%" }}
-													defaultValue={state.formData.activity_full_address}
-													onPlaceSelected={(activity) => {
+													defaultValue={
+														state.formData
+															.activity_full_address
+													}
+													onPlaceSelected={(
+														activity
+													) => {
 														let activity_full_address,
 															activity_locality,
 															activity_province,
@@ -857,62 +964,108 @@ const ActivityEditionForm = () => {
 															activity_id,
 															activity_opening_hours;
 
-														activity_full_address = activity.formatted_address;
-														activity.address_components.forEach((el) => {
-															if (el.types[0] === "locality") {
-																activity_locality = el.long_name;
+														activity_full_address =
+															activity.formatted_address;
+														activity.address_components.forEach(
+															(el) => {
+																if (
+																	el
+																		.types[0] ===
+																	"locality"
+																) {
+																	activity_locality =
+																		el.long_name;
+																}
+																if (
+																	el
+																		.types[0] ===
+																	"administrative_area_level_2"
+																) {
+																	activity_province =
+																		el.long_name;
+																}
+																if (
+																	el
+																		.types[0] ===
+																	"administrative_area_level_1"
+																) {
+																	activity_state =
+																		el.long_name;
+																}
+																if (
+																	el
+																		.types[0] ===
+																	"country"
+																) {
+																	activity_country =
+																		el.long_name;
+																}
 															}
-															if (
-																el.types[0] === "administrative_area_level_2"
-															) {
-																activity_province = el.long_name;
-															}
-															if (
-																el.types[0] === "administrative_area_level_1"
-															) {
-																activity_state = el.long_name;
-															}
-															if (el.types[0] === "country") {
-																activity_country = el.long_name;
-															}
-														});
+														);
 
-														if (activity.geometry.viewport) {
-															activity_lat = Object.values(
-																activity.geometry.viewport
-															)[0].hi;
-															activity_lng = Object.values(
-																activity.geometry.viewport
-															)[1].hi;
+														if (
+															activity.geometry
+																.viewport
+														) {
+															activity_lat =
+																Object.values(
+																	activity
+																		.geometry
+																		.viewport
+																)[0].hi;
+															activity_lng =
+																Object.values(
+																	activity
+																		.geometry
+																		.viewport
+																)[1].hi;
 														}
 
-														activity_rating = activity.rating;
-														activity_id = activity.place_id;
+														activity_rating =
+															activity.rating;
+														activity_id =
+															activity.place_id;
 
-														if (activity.opening_hours) {
+														if (
+															activity.opening_hours
+														) {
 															activity_opening_hours =
-																activity.opening_hours.weekday_text;
+																activity
+																	.opening_hours
+																	.weekday_text;
 														}
 
 														setState({
 															...state,
 															activity: {
 																...state.activity,
-																activity_full_address: activity_full_address,
-																activity_locality: activity_locality,
-																activity_province: activity_province,
-																activity_state: activity_state,
-																activity_country: activity_country,
-																activity_lat: activity_lat,
-																activity_lng: activity_lng,
-																activity_rating: activity_rating,
-																activity_id: activity_id,
-																activity_opening_hours: activity_opening_hours,
+																activity_full_address:
+																	activity_full_address,
+																activity_locality:
+																	activity_locality,
+																activity_province:
+																	activity_province,
+																activity_state:
+																	activity_state,
+																activity_country:
+																	activity_country,
+																activity_lat:
+																	activity_lat,
+																activity_lng:
+																	activity_lng,
+																activity_rating:
+																	activity_rating,
+																activity_id:
+																	activity_id,
+																activity_opening_hours:
+																	activity_opening_hours,
 															},
 														});
 													}}
 													types={["establishment"]}
-													placeholder={"Escriu la localització de l'activitat"}
+													placeholder={
+														"Escriu la localització de l'activitat"
+													}
 													fields={[
 														"rating",
 														"place_id",
@@ -926,7 +1079,10 @@ const ActivityEditionForm = () => {
 
 											<div className="flex flex-wrap items-center">
 												<div className="form__group w-3/12">
-													<label htmlFor="phone" className="form__label">
+													<label
+														htmlFor="phone"
+														className="form__label"
+													>
 														Número de telèfon
 													</label>
 													<input
@@ -934,13 +1090,18 @@ const ActivityEditionForm = () => {
 														name="phone"
 														placeholder="Número de telèfon de l'activitat"
 														className="form__control"
-														value={state.formData.phone}
+														value={
+															state.formData.phone
+														}
 														onChange={handleChange}
 													/>
 												</div>
 
 												<div className="form__group w-3/12">
-													<label htmlFor="website" className="form__label">
+													<label
+														htmlFor="website"
+														className="form__label"
+													>
 														Pàgina web
 													</label>
 													<input
@@ -948,13 +1109,19 @@ const ActivityEditionForm = () => {
 														name="website"
 														placeholder="Pàgina web de l'activitat"
 														className="form__control"
-														value={state.formData.website}
+														value={
+															state.formData
+																.website
+														}
 														onChange={handleChange}
 													/>
 												</div>
 
 												<div className="form__group w-3/12">
-													<label htmlFor="price" className="form__label">
+													<label
+														htmlFor="price"
+														className="form__label"
+													>
 														Preu per persona (€)
 													</label>
 													<input
@@ -962,13 +1129,18 @@ const ActivityEditionForm = () => {
 														name="price"
 														placeholder="Preu de l'activitat"
 														className="form__control"
-														value={state.formData.price}
+														value={
+															state.formData.price
+														}
 														onChange={handleChange}
 													/>
 												</div>
 
 												<div className="form__group w-3/12">
-													<label htmlFor="price" className="form__label">
+													<label
+														htmlFor="price"
+														className="form__label"
+													>
 														Durada (h)
 													</label>
 													<input
@@ -976,14 +1148,19 @@ const ActivityEditionForm = () => {
 														name="duration"
 														placeholder="Durada de l'activitat"
 														className="form__control"
-														value={state.formData.duration}
+														value={
+															state.formData
+																.duration
+														}
 														onChange={handleChange}
 													/>
 												</div>
 											</div>
 
 											<div className="cover">
-												<span className="form__label">Imatge de portada</span>
+												<span className="form__label">
+													Imatge de portada
+												</span>
 												<div className="flex items-center flex-col max-w-full mb-4">
 													<div className="bg-white border border-primary-100 rounded-tl-md rounded-tr-md w-full">
 														<div className="bg-white border-none h-auto p-4 justify-start">
@@ -992,7 +1169,9 @@ const ActivityEditionForm = () => {
 																	type="file"
 																	className="hidden"
 																	name="cover"
-																	onChange={saveFileToStatus}
+																	onChange={
+																		saveFileToStatus
+																	}
 																/>
 																<svg
 																	xmlns="http://www.w3.org/2000/svg"
@@ -1011,12 +1190,27 @@ const ActivityEditionForm = () => {
 																		d="M0 0h24v24H0z"
 																		fill="none"
 																	/>
-																	<circle cx="12" cy="13" r="3" />
+																	<circle
+																		cx="12"
+																		cy="13"
+																		r="3"
+																	/>
 																	<path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
-																	<line x1="15" y1="6" x2="21" y2="6" />
-																	<line x1="18" y1="3" x2="18" y2="9" />
+																	<line
+																		x1="15"
+																		y1="6"
+																		x2="21"
+																		y2="6"
+																	/>
+																	<line
+																		x1="18"
+																		y1="3"
+																		x2="18"
+																		y2="9"
+																	/>
 																</svg>
-																{state.formData.cover
+																{state.formData
+																	.cover
 																	? "Canviar imatge"
 																	: "Seleccionar imatge"}
 															</label>
@@ -1055,16 +1249,33 @@ const ActivityEditionForm = () => {
 																		d="M0 0h24v24H0z"
 																		fill="none"
 																	/>
-																	<circle cx="12" cy="13" r="3" />
+																	<circle
+																		cx="12"
+																		cy="13"
+																		r="3"
+																	/>
 																	<path d="M5 7h2a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h2m9 7v7a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2" />
-																	<line x1="15" y1="6" x2="21" y2="6" />
-																	<line x1="18" y1="3" x2="18" y2="9" />
+																	<line
+																		x1="15"
+																		y1="6"
+																		x2="21"
+																		y2="6"
+																	/>
+																	<line
+																		x1="18"
+																		y1="3"
+																		x2="18"
+																		y2="9"
+																	/>
 																</svg>
-																Seleccionar imatges
+																Seleccionar
+																imatges
 																<input
 																	type="file"
 																	className="hidden"
-																	onChange={saveFileToStatus}
+																	onChange={
+																		saveFileToStatus
+																	}
 																/>
 															</label>
 														</div>
@@ -1078,7 +1289,10 @@ const ActivityEditionForm = () => {
 											</div>
 
 											<div className="form__group">
-												<label htmlFor="description" className="form__label">
+												<label
+													htmlFor="description"
+													className="form__label"
+												>
 													Descripció
 												</label>
 												<EditorNavbar editor={editor} />
@@ -1091,9 +1305,15 @@ const ActivityEditionForm = () => {
 									</div>
 								) : (
 									<div className="form__wrapper">
-										<form className="form" onSubmit={handleSubmit}>
+										<form
+											className="form"
+											onSubmit={handleSubmit}
+										>
 											<div className="form__group">
-												<label htmlFor="metaTitle" className="form__label">
+												<label
+													htmlFor="metaTitle"
+													className="form__label"
+												>
 													Meta títol{" "}
 												</label>
 												<input
@@ -1101,12 +1321,16 @@ const ActivityEditionForm = () => {
 													name="metaTitle"
 													placeholder="Meta títol"
 													className="form__control"
-													value={state.formData.metaTitle}
+													value={
+														state.formData.metaTitle
+													}
 													onChange={handleChange}
 												/>
 												<span className="form__text_info">
-													Cada publicació hauria de tenir un meta títol únic,
-													idealment de menys de 60 caràcters de llargada
+													Cada publicació hauria de
+													tenir un meta títol únic,
+													idealment de menys de 60
+													caràcters de llargada
 												</span>
 											</div>
 
@@ -1122,17 +1346,25 @@ const ActivityEditionForm = () => {
 													name="metaDescription"
 													placeholder="Meta descripció"
 													className="form__control"
-													value={state.formData.metaDescription}
+													value={
+														state.formData
+															.metaDescription
+													}
 													onChange={handleChange}
 												/>
 												<span className="form__text_info">
-													Cada publicació hauria de tenir una meta descripció
-													única, idealment de menys de 160 caràcters de llargada
+													Cada publicació hauria de
+													tenir una meta descripció
+													única, idealment de menys de
+													160 caràcters de llargada
 												</span>
 											</div>
 
 											<div className="form__group">
-												<label htmlFor="slug" className="form__label">
+												<label
+													htmlFor="slug"
+													className="form__label"
+												>
 													Slug{" "}
 												</label>
 												<input

@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }) {
 		if (typeof window !== "undefined") {
 			setState({ ...state, userFetched: true });
 			window.localStorage.setItem("loggedInUser", JSON.stringify(user));
-			Router.push("/feed");
+			Router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel");
 		}
 	};
 

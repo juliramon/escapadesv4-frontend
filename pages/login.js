@@ -126,7 +126,7 @@ const Login = () => {
 				if (router.components["/empreses/registre"]) {
 					router.push("/empreses/registre?step=seleccio-pla");
 				} else {
-					router.push("/feed");
+					router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel");
 				}
 			}
 		} else {
@@ -160,7 +160,8 @@ const Login = () => {
 							/>
 						</Link>
 						<h2 className="mt-12 text-2xl lg:text-4xl">
-							Descobreix les millors escapades en parella a Catalunya.
+							Descobreix les millors escapades en parella a
+							Catalunya.
 						</h2>
 						<div className="absolute bottom-4 left-1/2 -translate-x-1/2 w-9/12">
 							<img
@@ -176,20 +177,26 @@ const Login = () => {
 							<div className="absolute top-7 right-7 text-15">
 								Encara no tens un compte?{" "}
 								<Link href="/signup">
-									<a className="text-primary-900">Registra't</a>
+									<a className="text-primary-900">
+										Registra't
+									</a>
 								</Link>
 							</div>
 							<div className="title-area">
 								<h1>Inicia sessió</h1>
 								<p className="text-lg">
-									Accedeix al teu compte per cercar, descobrir i gaudir de la
-									teva propera escapada en parella.
+									Accedeix al teu compte per cercar, descobrir
+									i gaudir de la teva propera escapada en
+									parella.
 								</p>
 							</div>
 							<form onSubmit={handleSubmit} className="form mt-8">
 								{errorMessage}
 								<div className="form__group">
-									<label className="form__label" htmlFor="email">
+									<label
+										className="form__label"
+										htmlFor="email"
+									>
 										Correu electrònic
 									</label>
 									<input
@@ -201,7 +208,10 @@ const Login = () => {
 									/>
 								</div>
 								<div className="form__group">
-									<label className="form__label" htmlFor="password">
+									<label
+										className="form__label"
+										htmlFor="password"
+									>
 										Correu electrònic
 									</label>
 									<input
