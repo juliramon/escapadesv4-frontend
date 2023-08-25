@@ -352,7 +352,7 @@ const PlaceListing = ({ placeDetails }) => {
                           width={20}
                           height={20}
                           viewBox="0 0 24 24"
-                          stroke-width={2}
+                          strokeWidth={2}
                           stroke="#fbbf24"
                           fill="#fbbf24"
                           strokeLinecap="round"
@@ -419,7 +419,7 @@ const PlaceListing = ({ placeDetails }) => {
                             width={24}
                             height={24}
                             viewBox="0 0 24 24"
-                            stroke-width={2}
+                            strokeWidth={2}
                             stroke="currentColor"
                             fill="none"
                             strokeLinecap="round"
@@ -446,7 +446,7 @@ const PlaceListing = ({ placeDetails }) => {
                             width={24}
                             height={24}
                             viewBox="0 0 24 24"
-                            stroke-width={2}
+                            strokeWidth={2}
                             stroke="currentColor"
                             fill="none"
                             strokeLinecap="round"
@@ -473,7 +473,7 @@ const PlaceListing = ({ placeDetails }) => {
                             width={24}
                             height={24}
                             viewBox="0 0 24 24"
-                            stroke-width={2}
+                            strokeWidth={2}
                             stroke="currentColor"
                             fill="none"
                             strokeLinecap="round"
@@ -509,7 +509,7 @@ const PlaceListing = ({ placeDetails }) => {
                           width={19}
                           height={19}
                           viewBox="0 0 24 24"
-                          stroke-width={2}
+                          strokeWidth={2}
                           stroke="currentColor"
                           fill="none"
                           strokeLinecap="round"
@@ -658,7 +658,7 @@ const PlaceListing = ({ placeDetails }) => {
                                 width={24}
                                 height={24}
                                 viewBox="0 0 24 24"
-                                stroke-width={2}
+                                strokeWidth={2}
                                 stroke="currentColor"
                                 fill="none"
                                 strokeLinecap="round"
@@ -702,7 +702,7 @@ const PlaceListing = ({ placeDetails }) => {
                                 width={24}
                                 height={24}
                                 viewBox="0 0 24 24"
-                                stroke-width={2}
+                                strokeWidth={2}
                                 stroke="currentColor"
                                 fill="none"
                                 strokeLinecap="round"
@@ -742,7 +742,7 @@ const PlaceListing = ({ placeDetails }) => {
                                 width={24}
                                 height={24}
                                 viewBox="0 0 24 24"
-                                stroke-width={2}
+                                strokeWidth={2}
                                 stroke="currentColor"
                                 fill="none"
                                 strokeLinecap="round"

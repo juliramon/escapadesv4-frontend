@@ -9,7 +9,7 @@
             <stop stop-color="#8D18AD" offset="100%"></stop>
         </linearGradient>
     </defs>
-    <g id="Avatars" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g id="Avatars" stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd">
         <circle id="Oval" fill="url(#linearGradient-1)" cx="24" cy="24" r="24"></circle>
     </g>
 </svg>

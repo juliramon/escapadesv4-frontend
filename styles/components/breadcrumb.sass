@@ -1,11 +1,11 @@
 @layer components
     .breadcrumb
-        @apply text-sm flex items-center overflow-x-auto mb-0
+        @apply text-sm flex items-center overflow-x-auto m-0 p-0
         &__item
-            @apply px-2 flex items-center whitespace-nowrap
+            @apply flex items-center whitespace-nowrap
         &__item:not(:last-child)::after
             content: "/"
-            @apply mx-0.5 block
+            @apply mx-2 block
         &__link:hover
             @apply underline
         &__link.active

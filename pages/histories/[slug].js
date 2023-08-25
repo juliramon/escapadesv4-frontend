@@ -58,6 +58,7 @@ const StoryListing = ({ storyDetails }) => {
 								className="w-1/2 md:w-1/3 px-1 mb-2 flex-auto"
 								data-fancybox="gallery"
 								data-src={image}
+								key={idx}
 							>
 								<picture
 									key={idx}
@@ -171,15 +172,10 @@ const StoryListing = ({ storyDetails }) => {
 												<li className="breadcrumb__item">
 													<a
 														href="/histories"
-														className="breadcrumb__link"
+														className="breadcrumb__link underline underline-offset-4 text-secondary-500"
 													>
 														Històries en parella
 													</a>
-												</li>
-												<li className="breadcrumb__item">
-													<span className="breadcrumb__link active">
-														{storyDetails.title}
-													</span>
 												</li>
 											</ul>
 										</div>
@@ -188,11 +184,11 @@ const StoryListing = ({ storyDetails }) => {
 								</div>
 							</div>
 
-							{/* Article subtitle + meta info */}
+							{/* Article cover + subtitle + meta info */}
 							<div className="w-full max-w-full lg:max-w-5xl lg:mx-auto mt-5">
 								<div className="flex flex-wrap items-stretch">
-									<div className="w-full lg:w-7/12">
-										<picture className="block aspect-w-16 aspect-h-9 rounded-md overflow-hidden">
+									<div className="w-full h-full lg:w-7/12">
+										<picture className="block aspect-w-16 aspect-h-9 rounded-t-lg lg:rounded-t-none lg:rounded-l-lg overflow-hidden">
 											<source
 												srcSet={coverImg}
 												media="(max-width: 768px)"
@@ -212,8 +208,8 @@ const StoryListing = ({ storyDetails }) => {
 											/>
 										</picture>
 									</div>
-									<div className="w-full lg:w-5/12 pt-5 lg:pt-0 lg:pl-8">
-										<div className="flex flex-col h-full">
+									<div className="w-full lg:w-5/12">
+										<div className="flex flex-col h-full bg-[#f5f5f5] rounded-b-lg lg:rounded-b-none lg:rounded-r-lg p-5 lg:p-8 relative z-10">
 											<div className="flex-1">
 												<p className="text-xl lg:text-2xl font-light mb-2.5">
 													{storyDetails.subtitle}

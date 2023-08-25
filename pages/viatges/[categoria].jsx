@@ -1,12 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ContentService from "../../services/contentService";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
 import NavigationBar from "../../components/global/NavigationBar";
 import Footer from "../../components/global/Footer";
-import UserContext from "../../contexts/UserContext";
-import { useRouter } from "next/router";
-import AdBanner from "../../components/ads/AdBanner";
 import RegularTripEntryBox from "../../components/listings/RegularTripEntryBox";
 
 const CategoryTrip = ({
@@ -17,30 +14,15 @@ const CategoryTrip = ({
 	numPages,
 }) => {
 	// Validate if user is allowed to access this view
-	const { user } = useContext(UserContext);
 	const [loadPage, setLoadPage] = useState(false);
-	const initialResults = trips;
 	useEffect(() => {
 		if (user) {
 			setLoadPage(true);
 		}
 	}, []);
 	// End validation
-
-	const router = useRouter();
-
-	useEffect(() => {
-		if (
-			router.pathname.includes("editar") ||
-			router.pathname.includes("nova-activitat") ||
-			router.pathname.includes("nou-allotjament") ||
-			router.pathname.includes("nova-historia")
-		) {
-			document.querySelector("body").classList.add("bg-primary-100");
-		} else {
-			document.querySelector("body").classList.remove("bg-primary-100");
-		}
-	}, [router]);
+	
+	const initialResults = trips;
 
 	const initialState = {
 		results: [],
@@ -160,7 +142,7 @@ const CategoryTrip = ({
 														width={20}
 														height={20}
 														viewBox="0 0 24 24"
-														stroke-width={1.5}
+														strokeWidth={1.5}
 														stroke="currentColor"
 														fill="none"
 														strokeLinecap="round"

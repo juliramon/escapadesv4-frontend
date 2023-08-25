@@ -41,7 +41,7 @@ const TripCategoryBox = ({ image, title, subtitle, slug, country }) => {
 											width={15}
 											height={15}
 											viewBox="0 0 24 24"
-											stroke-width={1.5}
+											strokeWidth={1.5}
 											stroke="currentColor"
 											fill="none"
 											strokeLinecap="round"
@@ -67,7 +67,7 @@ const TripCategoryBox = ({ image, title, subtitle, slug, country }) => {
 											width="15"
 											height="15"
 											viewBox="0 0 24 24"
-											stroke-width="2"
+											strokeWidth="2"
 											stroke="currentColor"
 											fill="none"
 											stroke-linecap="round"

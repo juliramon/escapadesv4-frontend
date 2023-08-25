@@ -421,7 +421,7 @@ const NavigationBar = ({ logo_url, path }) => {
 										width={22}
 										height={22}
 										viewBox="0 0 24 24"
-										stroke-width={1.5}
+										strokeWidth={1.5}
 										stroke="currentColor"
 										fill="none"
 										strokeLinecap="round"

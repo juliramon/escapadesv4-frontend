@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
 import ContentService from "../services/contentService";
 import NavigationBar from "../components/global/NavigationBar";
-import FetchingSpinner from "../components/global/FetchingSpinner";
-import { useRouter } from "next/router";
 import Footer from "../components/global/Footer";
 import GlobalMetas from "../components/head/GlobalMetas";
 import Breadcrumb from "../components/richsnippets/Breadcrumb";
@@ -10,36 +8,22 @@ import StoriesHeader from "../components/headers/StoriesHeader";
 import StoryListing from "../components/listings/StoryListing";
 
 const StoriesList = ({
-	user,
 	mostRecentStories,
-	totalItems,
-	stories,
 	featuredStories,
+	stories,
+	totalItems,
 	numPages,
 }) => {
-	const router = useRouter();
-
-	useEffect(() => {
-		if (
-			router.pathname.includes("editar") ||
-			router.pathname.includes("nova-activitat") ||
-			router.pathname.includes("nou-allotjament") ||
-			router.pathname.includes("nova-historia")
-		) {
-			document.querySelector("body").classList.add("composer");
-		} else {
-			document.querySelector("body").classList.remove("composer");
-		}
-	}, [router]);
+	const initialResults = stories;
 
 	const initialState = {
-		loggedUser: user,
 		mostRecentStories: [],
-		stories: [],
 		featuredStories: [],
-		hasStories: false,
+		results: [],
+		allResults: [],
+		hasResults: false,
 		isFetching: false,
-		numActivities: 0,
+		numResults: 0,
 		numPages: 0,
 		currentPage: 1,
 	};
@@ -48,14 +32,13 @@ const StoriesList = ({
 	const service = new ContentService();
 
 	useEffect(() => {
-		if (stories) {
+		if (initialResults) {
 			setState({
 				...state,
 				mostRecentStories: mostRecentStories,
-				stories: stories,
 				featuredStories: featuredStories,
-				hasStories: true,
-				numStories: totalItems,
+				hasResults: initialResults.length > 0 ? true : false,
+				numResults: totalItems,
 				numPages: numPages,
 			});
 		}
@@ -66,7 +49,7 @@ const StoriesList = ({
 		const { stories } = await service.paginateStories(page);
 		setState({
 			...state,
-			stories: [...state.stories, ...stories],
+			results: [...state.results, ...stories],
 			isFetching: false,
 			currentPage: ++state.currentPage,
 		});
@@ -97,8 +80,8 @@ const StoriesList = ({
 						<div className="container">
 							<h2>Històries destacades</h2>
 							<div className="flex flex-wrap items-stretch mt-6 -mx-2">
-								{state.hasStories
-									? state.featuredStories.map((el, idx) => (
+								{featuredStories
+									? featuredStories.map((el, idx) => (
 											<article
 												key={idx}
 												className="w-full md:w-1/2 lg:w-1/4 px-2 mb-8"
@@ -127,18 +110,34 @@ const StoriesList = ({
 									aventures en parella a Catalunya.
 								</div>
 							</div>
-							<div className="flex flex-wrap items-stretch mt-6 -mx-2">
-								{state.stories.map((el, idx) => (
-									<article
-										key={idx}
-										className="w-full md:w-1/2 lg:w-1/4 px-2 mb-8"
-									>
-										<StoryListing story={el} index={idx} />
-									</article>
-								))}
-								<div className="flex justify-center w-full mt-2 md:mt-10">
+							{initialResults.length > 0 ? (
+								<>
+									<div className="flex flex-wrap items-stretch mt-6 -mx-2">
+										{initialResults.map((el, idx) => (
+											<article
+												key={idx}
+												className="w-full md:w-1/2 lg:w-1/4 px-2 mb-8"
+											>
+												<StoryListing
+													story={el}
+													index={idx}
+												/>
+											</article>
+										))}
+										{state.results.map((el, idx) => (
+											<article
+												key={idx}
+												className="w-full md:w-1/2 lg:w-1/4 px-2 mb-8"
+											>
+												<StoryListing
+													story={el}
+													index={idx}
+												/>
+											</article>
+										))}
+									</div>
 									{state.currentPage !== state.numPages ? (
-										<div className="w-full flex justify-center">
+										<div className="w-full mt-2 flex justify-center">
 											{!state.isFetching ? (
 												<button
 													className="button button__primary button__lg"
@@ -205,8 +204,13 @@ const StoriesList = ({
 									) : (
 										""
 									)}
-								</div>
-							</div>
+								</>
+							) : (
+								<p className="mt-4">
+									Encara no hi ha publicacions disponibles.
+									Sisplau, torna-ho a provar més endavant.
+								</p>
+							)}
 						</div>
 					</section>
 				</main>

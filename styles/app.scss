@@ -103,22 +103,6 @@ $background-input: #f2f7f9;
 	height: 50px;
 }
 
-.breadcrumb {
-	background-color: transparent !important;
-	padding: 0 !important;
-	li,
-	a {
-		padding-left: 1px !important;
-		font-size: 0.9em;
-	}
-	a {
-		padding-right: 8px !important;
-	}
-	li:first-child a {
-		padding-left: 0 !important;
-	}
-}
-
 .form-group {
 	position: relative;
 }

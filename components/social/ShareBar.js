@@ -51,7 +51,7 @@ const ShareBar = ({ color = "text-white", iconsSize = 24 }) => {
 					width={iconsSize}
 					height={iconsSize}
 					viewBox="0 0 24 24"
-					stroke-width={1}
+					strokeWidth={1}
 					stroke="currentColor"
 					fill="none"
 					strokeLinecap="round"

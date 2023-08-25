@@ -4,7 +4,7 @@
     <defs>
         <polygon id="path-1" points="0.861999498 0.160995485 232.092 0.160995485 232.092 406 0.861999498 406"></polygon>
     </defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+    <g id="Page-1" stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd">
         <g id="3545756">
             <path d="M108.803,103.325 L108.803,103.325 C89.882,103.325 74.544,87.986 74.544,69.066 C74.544,50.145 89.882,34.806 108.803,34.806 C127.724,34.806 143.062,50.145 143.062,69.066 C143.062,87.986 127.724,103.325 108.803,103.325" id="Fill-1" fill="#E4E4DE"></path>
             <polygon id="Fill-2" fill="#FFFFFE" points="93.268 84.335 100.359 84.335 100.359 61.429 93.268 61.429"></polygon>
