@@ -305,6 +305,17 @@ module.exports = withTM({
 				destination: "/llistes",
 				permanent: true,
 			},
+			{
+				source: "/viatge-a-sardenya",
+				destination: "/viatges/viatge-a-sardenya",
+				permanent: true,
+			},
+			{
+				source: "/viatge-a-sardenya/que-visitar-a-sardenya-vacances-a-sardenya",
+				destination:
+					"/viatges/viatge-a-sardenya/que-visitar-a-sardenya-vacances-a-sardenya",
+				permanent: true,
+			},
 		];
 	},
 	async headers() {
