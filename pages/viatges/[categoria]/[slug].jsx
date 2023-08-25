@@ -83,7 +83,8 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 
 	const coverPath = tripEntryDetails.cover.substring(0, 51);
 	const imageId = tripEntryDetails.cover.substring(63);
-	const coverImg = `${coverPath}w_800,h_600,c_fill/${imageId}`;
+	const coverImgDesktop = `${coverPath}w_896,h_504,c_fill/${imageId}`;
+	const coverImgMobile = `${coverPath}w_366,h_206,c_fill/${imageId}`;
 
 	const coverAuthorPath = tripEntryDetails.owner.avatar.substring(0, 51);
 	const imageAuthorId = tripEntryDetails.owner.avatar.substring(63);
@@ -215,15 +216,15 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 								<div className="aspect-w-16 aspect-h-9 rounded-md overflow-hidden">
 									<picture>
 										<source
-											srcSet={coverImg}
+											srcSet={coverImgMobile}
 											media="(max-width: 768px)"
 										/>
 										<source
-											srcSet={coverImg}
+											srcSet={coverImgDesktop}
 											media="(min-width: 768px)"
 										/>
 										<img
-											src={coverImg}
+											src={coverImgDesktop}
 											alt={tripEntryDetails.title}
 											width={400}
 											height={300}
