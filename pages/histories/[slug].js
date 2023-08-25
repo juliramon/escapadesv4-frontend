@@ -245,7 +245,7 @@ const StoryListing = ({ storyDetails }) => {
 											media="(max-width: 768px)"
 										/>
 										<source
-											srcSet={storyDetails.cover}
+											srcSet={coverImg}
 											media="(min-width: 768px)"
 										/>
 										<img

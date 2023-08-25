@@ -219,7 +219,7 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 											media="(max-width: 768px)"
 										/>
 										<source
-											srcSet={tripEntryDetails.cover}
+											srcSet={coverImg}
 											media="(min-width: 768px)"
 										/>
 										<img
