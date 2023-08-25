@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import ContentService from "../../services/contentService";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import Breadcrumb from "../../components/richsnippets/Breadcrumb";
 import NavigationBar from "../../components/global/NavigationBar";
 import Footer from "../../components/global/Footer";
 import RegularTripEntryBox from "../../components/listings/RegularTripEntryBox";
+import UserContext from "../../contexts/UserContext";
+import { useRouter } from "next/router";
 
 const CategoryTrip = ({
 	categoryDetails,
@@ -14,6 +16,8 @@ const CategoryTrip = ({
 	numPages,
 }) => {
 	// Validate if user is allowed to access this view
+	const { user } = useContext(UserContext);
+	const router = useRouter();
 	const [loadPage, setLoadPage] = useState(false);
 	useEffect(() => {
 		if (user) {
@@ -21,7 +25,7 @@ const CategoryTrip = ({
 		}
 	}, []);
 	// End validation
-	
+
 	const initialResults = trips;
 
 	const initialState = {
