@@ -39,7 +39,6 @@ const Contacte = ({ user }) => {
 			message !== ""
 		) {
 			handleSubmit(name, phone, email, website, message);
-			console.log("submitt!");
 		} else {
 			setAlertState({ ...alertState, isVisible: true });
 			setTimeout(
@@ -76,7 +75,7 @@ const Contacte = ({ user }) => {
 					);
 				}
 			})
-			.catch((error) => console.log(error));
+			.catch((error) => console.error(error));
 	};
 
 	const notification = toastState.isVisible ? (

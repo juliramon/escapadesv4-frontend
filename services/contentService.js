@@ -846,7 +846,6 @@ class ContentService {
 			.then((res) => res.data);
 
 	getCategoryResults = (category) => {
-		console.log(category);
 		return this.service
 			.get(`/searchCategoryResults/${category}`)
 			.then((res) => res.data);
@@ -926,16 +925,6 @@ class ContentService {
 		slug,
 		editorData
 	) => {
-		console.log({
-			type,
-			title,
-			subtitle,
-			coverCloudImage,
-			metaTitle,
-			metaDescription,
-			slug,
-			editorData,
-		});
 		return this.service
 			.post("/list", {
 				type,

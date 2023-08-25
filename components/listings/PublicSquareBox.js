@@ -13,7 +13,6 @@ const PublicSquareBox = ({
 	rating,
 	index,
 }) => {
-	console.log(typeof index);
 	let secureWebsite, buttonLight;
 	if (website.includes("https://") || website.includes("http://")) {
 		secureWebsite = website;

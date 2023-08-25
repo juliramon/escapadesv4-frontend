@@ -187,7 +187,6 @@ const PlaceForm = () => {
 						state.formData.blopImages,
 						state.formData.images
 					);
-					console.log(objImages.arrBlopImages);
 					setState({
 						...state,
 						formData: {
@@ -346,7 +345,6 @@ const PlaceForm = () => {
 			metaDescription,
 		} = state.formData;
 
-		console.log({ region, placeType });
 		service
 			.place(
 				type,

@@ -186,7 +186,6 @@ const ActivityForm = () => {
 						state.formData.blopImages,
 						state.formData.images
 					);
-					console.log(objImages.arrBlopImages);
 					setState({
 						...state,
 						formData: {
