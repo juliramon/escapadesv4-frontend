@@ -149,7 +149,6 @@ const StoryListing = ({ storyDetails }) => {
 					logo_url={
 						"https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
 					}
-					user={user}
 				/>
 				<main>
 					<article className="py-4 lg:pt-12">
