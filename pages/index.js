@@ -1,8 +1,4 @@
-import { useEffect, useContext } from "react";
-import { useRouter } from "next/router";
-import Head from "next/head";
 import ContentService from "../services/contentService";
-import UserContext from "../contexts/UserContext";
 import GlobalMetas from "../components/head/GlobalMetas";
 import NavigationBar from "../components/global/NavigationBar";
 import HomeHeader from "../components/headers/HomeHeader";
@@ -11,23 +7,6 @@ import Footer from "../components/global/Footer";
 import LocalBusinessRichSnippet from "../components/richsnippets/LocalBusinessRichSnippet";
 
 const Homepage = (props) => {
-	const { user } = useContext(UserContext);
-	const router = useRouter();
-
-	useEffect(() => {
-		if (user) {
-			router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel");
-		}
-	}, [user]);
-
-	if (user) {
-		return (
-			<Head>
-				<title>Carregant...</title>
-			</Head>
-		);
-	}
-
 	return (
 		<>
 			{/* Browser metas  */}
