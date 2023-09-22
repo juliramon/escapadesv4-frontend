@@ -316,6 +316,11 @@ module.exports = withTM({
 					"/viatges/viatge-a-sardenya/que-visitar-a-sardenya-vacances-a-sardenya",
 				permanent: true,
 			},
+			{
+				source: "/escapades-gastronomiques/local-la-terra-girona",
+				destination: "/escapades-gastronomiques/la-terra-a-girona",
+				permanent: true,
+			},
 		];
 	},
 	async headers() {

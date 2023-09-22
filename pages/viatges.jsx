@@ -2,7 +2,7 @@ import Link from "next/link";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
 import GlobalMetas from "../components/head/GlobalMetas";
-import Breadcrumb from "../components/richsnippets/Breadcrumb";
+import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
 import UserContext from "../contexts/UserContext";
 import { useContext, useEffect } from "react";
 import ContentService from "../services/contentService";
@@ -27,7 +27,7 @@ const Trips = ({ tripCategories, featuredTripCategories }) => {
 				canonical="https://escapadesenparella.cat/viatges"
 			/>
 			{/* Rich snippets */}
-			<Breadcrumb
+			<BreadcrumbRichSnippet
 				page1Title="Inici"
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Viatges en parella"

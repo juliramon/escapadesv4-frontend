@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-const Breadcrumb = ({
+const BreadcrumbRichSnippet = ({
 	page1Title,
 	page1Url,
 	page2Title,
@@ -46,4 +46,4 @@ const Breadcrumb = ({
 	);
 };
 
-export default Breadcrumb;
+export default BreadcrumbRichSnippet;

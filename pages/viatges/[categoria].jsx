@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import ContentService from "../../services/contentService";
 import GlobalMetas from "../../components/head/GlobalMetas";
-import Breadcrumb from "../../components/richsnippets/Breadcrumb";
+import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
 import NavigationBar from "../../components/global/NavigationBar";
 import Footer from "../../components/global/Footer";
 import RegularTripEntryBox from "../../components/listings/RegularTripEntryBox";
@@ -85,7 +85,7 @@ const CategoryTrip = ({
 				canonical={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}`}
 			/>
 			{/* Rich snippets */}
-			<Breadcrumb
+			<BreadcrumbRichSnippet
 				page1Title="Inici"
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Viatges en parella"

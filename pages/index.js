@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 import ContentService from "../services/contentService";
 import UserContext from "../contexts/UserContext";
-import LocalBusiness from "../components/richsnippets/LocalBusiness";
 import GlobalMetas from "../components/head/GlobalMetas";
 import NavigationBar from "../components/global/NavigationBar";
 import HomeHeader from "../components/headers/HomeHeader";
 import HomePageResults from "../components/homepage/HomePageResults";
 import Footer from "../components/global/Footer";
+import LocalBusinessRichSnippet from "../components/richsnippets/LocalBusinessRichSnippet";
 
 const Homepage = (props) => {
 	const { user } = useContext(UserContext);
@@ -40,7 +40,7 @@ const Homepage = (props) => {
 				preload={"bg-geo.webp"}
 			/>
 			{/* Rich snippets */}
-			<LocalBusiness />
+			<LocalBusinessRichSnippet />
 			<main id="homepage">
 				<NavigationBar />
 				<HomeHeader totals={props.totals} />

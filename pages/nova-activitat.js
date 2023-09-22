@@ -11,7 +11,7 @@ import EditorNavbar from "../components/editor/EditorNavbar";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Placeholder from "@tiptap/extension-placeholder";
-import handleFilesUpload from "../utils/helpers";
+import { handleFilesUpload, removeImage } from "../utils/helpers";
 
 const ActivityForm = () => {
 	// Validate if user is allowed to access this view

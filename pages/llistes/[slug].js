@@ -8,8 +8,8 @@ import UserContext from "../../contexts/UserContext";
 import ContentService from "../../services/contentService";
 import FooterHistoria from "../../components/global/FooterHistoria";
 import GlobalMetas from "../../components/head/GlobalMetas";
-import Breadcrumb from "../../components/richsnippets/Breadcrumb";
-import Article from "../../components/richsnippets/Article";
+import ArticleRichSnippet from "../../components/richsnippets/ArticleRichSnippet";
+import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
 
 const ListView = ({ listDetails }) => {
 	const { user } = useContext(UserContext);
@@ -83,7 +83,7 @@ const ListView = ({ listDetails }) => {
 				canonical={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
 			/>
 			{/* Rich snippets */}
-			<Breadcrumb
+			<BreadcrumbRichSnippet
 				page1Title="Inici"
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Llistes"
@@ -91,7 +91,7 @@ const ListView = ({ listDetails }) => {
 				page3Title={listDetails.metaTitle}
 				page3Url={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
 			/>
-			<Article
+			<ArticleRichSnippet
 				headline={listDetails.title}
 				summary={listDetails.subtitle}
 				image={listDetails.cover}

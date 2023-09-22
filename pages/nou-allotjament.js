@@ -12,7 +12,7 @@ import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Placeholder from "@tiptap/extension-placeholder";
-import handleFilesUpload from "../utils/helpers";
+import { handleFilesUpload, removeImage } from "../utils/helpers";
 
 const PlaceForm = () => {
 	// Validate if user is allowed to access this view
@@ -392,6 +392,7 @@ const PlaceForm = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		console.log(state.formData.cover, state.formData.images);
 		const { uploadedCover, uploadedImages } = await handleFilesUpload(
 			state.formData.cover,
 			state.formData.images

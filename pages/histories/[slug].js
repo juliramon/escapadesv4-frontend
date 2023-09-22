@@ -7,11 +7,11 @@ import parse from "html-react-parser";
 import Footer from "../../components/global/Footer";
 import FooterHistoria from "../../components/global/FooterHistoria";
 import GlobalMetas from "../../components/head/GlobalMetas";
-import Breadcrumb from "../../components/richsnippets/Breadcrumb";
-import Article from "../../components/richsnippets/Article";
 import FancyboxUtil from "../../utils/FancyboxUtils";
 import { formatDateTimeToISODate } from "../../utils/helpers";
 import ShareBar from "../../components/social/ShareBar";
+import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
+import ArticleRichSnippet from "../../components/richsnippets/ArticleRichSnippet";
 
 const StoryListing = ({ storyDetails }) => {
 	const { user } = useContext(UserContext);
@@ -111,7 +111,7 @@ const StoryListing = ({ storyDetails }) => {
 
 	const coverPath = storyDetails.cover.substring(0, 51);
 	const imageId = storyDetails.cover.substring(63);
-	const coverImg = `${coverPath}w_597,h_336,c_fill/${imageId}`;
+	const coverImg = `${coverPath}w_812,h_457,c_fill/${imageId}`;
 
 	const coverAuthorPath = storyDetails.owner.avatar.substring(0, 51);
 	const imageAuthorId = storyDetails.owner.avatar.substring(63);
@@ -128,7 +128,7 @@ const StoryListing = ({ storyDetails }) => {
 				canonical={`https://escapadesenparella.cat/histories/${storyDetails.slug}`}
 			/>
 			{/* Rich snippets */}
-			<Breadcrumb
+			<BreadcrumbRichSnippet
 				page1Title="Inici"
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Històries"
@@ -136,7 +136,7 @@ const StoryListing = ({ storyDetails }) => {
 				page3Title={storyDetails.metaTitle}
 				page3Url={`https://escapadesenparella.cat/histories/${storyDetails.slug}`}
 			/>
-			<Article
+			<ArticleRichSnippet
 				headline={storyDetails.title}
 				summary={storyDetails.subtitle}
 				image={storyDetails.cover}
@@ -155,9 +155,9 @@ const StoryListing = ({ storyDetails }) => {
 					<article className="py-4 lg:pt-12">
 						<div className="container">
 							{/* Breadcrumb + article header */}
-							<div className="max-w-full lg:max-w-5xl mx-auto">
+							<div className="w-full">
 								<div className="w-full lg:max-w-3xl">
-									<div className="pb-3">
+									<div className="pb-2">
 										<div className="w-full">
 											<ul className="breadcrumb">
 												<li className="breadcrumb__item">
@@ -185,10 +185,10 @@ const StoryListing = ({ storyDetails }) => {
 							</div>
 
 							{/* Article cover + subtitle + meta info */}
-							<div className="w-full max-w-full lg:max-w-5xl lg:mx-auto mt-5">
-								<div className="flex flex-wrap items-stretch">
-									<div className="w-full h-full lg:w-7/12">
-										<picture className="block aspect-w-16 aspect-h-9 rounded-t-lg lg:rounded-t-none lg:rounded-l-lg overflow-hidden">
+							<div className="w-full mt-10">
+								<div className="flex flex-wrap items-stretch -mx-2.5">
+									<div className="w-full lg:w-7/12 px-2.5">
+										<picture className="block aspect-w-16 aspect-h-9 h-full rounded-lg overflow-hidden">
 											<source
 												srcSet={coverImg}
 												media="(max-width: 768px)"
@@ -208,10 +208,10 @@ const StoryListing = ({ storyDetails }) => {
 											/>
 										</picture>
 									</div>
-									<div className="w-full lg:w-5/12">
-										<div className="flex flex-col h-full bg-[#f5f5f5] rounded-b-lg lg:rounded-b-none lg:rounded-r-lg p-5 lg:p-8 relative z-10">
+									<div className="w-full lg:w-5/12 px-2.5">
+										<div className="flex flex-col h-full bg-[#f5f5f5] rounded-lg p-5 lg:p-10 relative z-10">
 											<div className="flex-1">
-												<p className="text-xl lg:text-2xl font-light mb-2.5">
+												<p className="text-xl lg:text-2xl font-light mb-4">
 													{storyDetails.subtitle}
 												</p>
 												{/* Informació de l'autor */}
@@ -263,7 +263,7 @@ const StoryListing = ({ storyDetails }) => {
 													</div>
 												</div>
 											</div>
-											<div className="mt-5 lg:mt-0">
+											<div className="mt-5 lg:mt-7">
 												<ShareBar
 													color="text-grey-700"
 													iconsSize={20}
@@ -294,7 +294,7 @@ const StoryListing = ({ storyDetails }) => {
 							</div>
 
 							{/* Article description */}
-							<div className="w-full max-w-full lg:max-w-5xl mx-auto pt-8">
+							<div className="w-full max-w-full lg:max-w-5xl mx-auto mt-10">
 								<div className="listing-description w-full max-w-[55ch] first-letter:text-2xl lg:first-letter:text-4xl first-letter:text-secondary-500">
 									{slicedDescription}
 								</div>

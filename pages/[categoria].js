@@ -7,7 +7,7 @@ import GlobalMetas from "../components/head/GlobalMetas";
 import ListingHeader from "../components/headers/ListingHeader";
 import PublicSquareBox from "../components/listings/PublicSquareBox";
 import MapModal from "../components/modals/MapModal";
-import Breadcrumb from "../components/richsnippets/Breadcrumb";
+import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
 import UserContext from "../contexts/UserContext";
 import ContentService from "../services/contentService";
 import FetchingSpinner from "../components/global/FetchingSpinner";
@@ -177,7 +177,7 @@ const CategoryPage = ({
 				canonical={`https://escapadesenparella.cat/${categoryDetails.slug}`}
 			/>
 			{/* Rich snippets */}
-			<Breadcrumb
+			<BreadcrumbRichSnippet
 				page1Title="Inici"
 				page1Url="https://escapadesenparella.cat"
 				page2Title={categoryDetails.title}

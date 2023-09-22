@@ -4,7 +4,7 @@ import NavigationBar from "../components/global/NavigationBar";
 import GlobalMetas from "../components/head/GlobalMetas";
 import ToastNotification from "../components/toasts/ToastNotification";
 import EmailService from "../services/emailService";
-import Breadcrumb from "../components/richsnippets/Breadcrumb";
+import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
 
 const Contacte = ({ user }) => {
 	const initialState = {
@@ -116,7 +116,7 @@ const Contacte = ({ user }) => {
 				canonical="https://escapadesenparella.cat/contacte"
 			/>
 			{/* Rich snippets */}
-			<Breadcrumb
+			<BreadcrumbRichSnippet
 				page1Title="Inici"
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Contacte"

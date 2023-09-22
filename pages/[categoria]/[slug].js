@@ -10,7 +10,7 @@ import UserContext from "../../contexts/UserContext";
 import Footer from "../../components/global/Footer";
 import FancyboxUtil from "../../utils/FancyboxUtils";
 import GlobalMetas from "../../components/head/GlobalMetas";
-import Breadcrumb from "../../components/richsnippets/Breadcrumb";
+import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
 
 const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 	const { user } = useContext(UserContext);
@@ -253,7 +253,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 					)
 				);
 				hasOpeningHours = (
-					<div className="mt-7">
+					<div className="mt-0">
 						<ul className="list-none p-0 m-0">
 							<li className="flex flex-wrap items-center mb-3">
 								<span className="block w-full">
@@ -300,7 +300,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 						canonical={`https://escapadesenparella.cat/${categoryDetails.slug}/${getawayDetails.slug}`}
 					/>
 					{/* Rich snippets */}
-					<Breadcrumb
+					<BreadcrumbRichSnippet
 						page1Title="Inici"
 						page1Url="https://escapadesenparella.cat"
 						page2Title={categoryDetails.title}
@@ -1080,7 +1080,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 												</div>
 												<aside className="w-full xl:w-5/12 xl:px-6 relative xl:sticky xl:top-36">
 													<div className="p-5 rounded-md shadow-lg shadow-primary-50">
-														<div className="w-full h-56 rounded-md overflow-hidden">
+														<div className="w-full h-56 rounded-md overflow-hidden mb-5">
 															<GoogleMapReact
 																bootstrapURLKeys={{
 																	key: `${process.env.GOOGLE_API_KEY}`,
@@ -1104,24 +1104,34 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																}
 															/>
 														</div>
-														<div className="fixed z-50 lg:z-auto bottom-0 inset-x-0 lg:bottom-auto lg:inset-x-auto lg:relative flex flex-row items-stretch lg:flex-col w-full mt-5 bg-white py-3 px-4 lg:p-0 border-t border-primary-200 lg:border-none">
-															<a
-																href={`tel:${getawayDetails.phone}`}
-																className="button button__ghost button__med justify-center mr-2 lg:mr-0 flex-1"
-																title="Trucar"
-															>
-																Trucar
-															</a>
-															<a
-																href={`${getawayDetails.website}`}
-																className="button button__primary button__med justify-center ml-2 lg:ml-0 lg:mb-2.5 flex-1"
-																title="Reservar"
-															>
-																Reservar
-															</a>
+														<div className="fixed z-50 lg:z-auto bottom-0 inset-x-0 lg:bottom-auto lg:inset-x-auto lg:relative flex flex-row items-stretch lg:flex-col w-full bg-white py-3 px-4 lg:p-0 border-t border-primary-200 lg:border-none mb-5">
+															{getawayDetails?.phone !==
+																"-" &&
+															getawayDetails?.phone !==
+																"" ? (
+																<a
+																	href={`tel:${getawayDetails.phone}`}
+																	className="button button__ghost button__med justify-center mr-2 lg:mr-0 flex-1"
+																	title="Trucar"
+																>
+																	Trucar
+																</a>
+															) : null}
+															{getawayDetails?.website !==
+																"-" &&
+															getawayDetails?.website !==
+																"" ? (
+																<a
+																	href={`${getawayDetails.website}`}
+																	className="button button__primary button__med justify-center ml-2 lg:ml-0 lg:mb-2.5 flex-1"
+																	title="Reservar"
+																>
+																	Reservar
+																</a>
+															) : null}
 														</div>
 														{hasOpeningHours}
-														<ul className="list-none mt-4 mb-0 px-0 pt-4 border-t border-primary-200">
+														<ul className="list-none mt-0 px-0 pt-4 border-t border-primary-200">
 															<li className="flex items-start">
 																<div className="w-5 h-5 mr-2">
 																	<svg
@@ -1430,7 +1440,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 						)
 					);
 					hasOpeningHours = (
-						<div className="mt-7">
+						<div className="mt-0">
 							<ul className="list-none p-0 m-0">
 								<li className="flex flex-wrap items-center mb-3">
 									<span className="block w-full">
@@ -1483,7 +1493,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 						canonical={`https://escapadesenparella.cat/${categoryDetails.slug}/${getawayDetails.slug}`}
 					/>
 					{/* Rich snippets */}
-					<Breadcrumb
+					<BreadcrumbRichSnippet
 						page1Title="Inici"
 						page1Url="https://escapadesenparella.cat"
 						page2Title={categoryDetails.title}

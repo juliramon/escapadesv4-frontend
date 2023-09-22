@@ -1,7 +1,7 @@
 import Head from "next/head";
 import React from "react";
 
-const Article = ({
+const ArticleRichSnippet = ({
 	headline,
 	summary,
 	image,
@@ -41,4 +41,4 @@ const Article = ({
 	);
 };
 
-export default Article;
+export default ArticleRichSnippet;

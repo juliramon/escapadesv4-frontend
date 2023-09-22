@@ -11,7 +11,7 @@ import UserContext from "../../contexts/UserContext";
 import Footer from "../../components/global/Footer";
 import FancyboxUtil from "../../utils/FancyboxUtils";
 import GlobalMetas from "../../components/head/GlobalMetas";
-import Breadcrumb from "../../components/richsnippets/Breadcrumb";
+import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
 
 const ActivityListing = ({ activityDetails }) => {
 	const { user } = useContext(UserContext);
@@ -323,7 +323,7 @@ const ActivityListing = ({ activityDetails }) => {
 				index={false}
 			/>
 			{/* Rich snippets */}
-			<Breadcrumb
+			<BreadcrumbRichSnippet
 				page1Title="Inici"
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Activitats"

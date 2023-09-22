@@ -6,7 +6,7 @@ import RegularListBox from "../components/listings/RegularListBox";
 import ShareBar from "../components/social/ShareBar";
 import Footer from "../components/global/Footer";
 import GlobalMetas from "../components/head/GlobalMetas";
-import Breadcrumb from "../components/richsnippets/Breadcrumb";
+import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
 import AdBanner from "../components/ads/AdBanner";
 
 const ListsList = ({ user, totalItems, lists, numPages }) => {
@@ -57,7 +57,7 @@ const ListsList = ({ user, totalItems, lists, numPages }) => {
 				canonical="https://escapadesenparella.cat/llistes"
 			/>
 			{/* Rich snippets */}
-			<Breadcrumb
+			<BreadcrumbRichSnippet
 				page1Title="Inici"
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Llistes d'escapades"

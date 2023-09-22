@@ -4,7 +4,7 @@ import NavigationBar from "../components/global/NavigationBar";
 import PublicSquareBox from "../components/listings/PublicSquareBox";
 import Footer from "../components/global/Footer";
 import MapModal from "../components/modals/MapModal";
-import Breadcrumb from "../components/richsnippets/Breadcrumb";
+import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
 import GlobalMetas from "../components/head/GlobalMetas";
 import ListingHeader from "../components/headers/ListingHeader";
 
@@ -207,7 +207,7 @@ const PlaceList = ({
 				canonical="https://escapadesenparella.cat/allotjaments"
 			/>
 			{/* Rich snippets */}
-			<Breadcrumb
+			<BreadcrumbRichSnippet
 				page1Title="Inici"
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Allotjaments amb encant"

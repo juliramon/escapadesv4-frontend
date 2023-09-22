@@ -3,7 +3,7 @@ import ContentService from "../services/contentService";
 import NavigationBar from "../components/global/NavigationBar";
 import Footer from "../components/global/Footer";
 import GlobalMetas from "../components/head/GlobalMetas";
-import Breadcrumb from "../components/richsnippets/Breadcrumb";
+import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
 import StoriesHeader from "../components/headers/StoriesHeader";
 import StoryListing from "../components/listings/StoryListing";
 
@@ -66,7 +66,7 @@ const StoriesList = ({
 				canonical="https://escapadesenparella.cat/histories"
 			/>
 			{/* Rich snippets */}
-			<Breadcrumb
+			<BreadcrumbRichSnippet
 				page1Title="Inici"
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Històries en parella"

@@ -5,10 +5,10 @@ import UserContext from "../../../contexts/UserContext";
 import parse from "html-react-parser";
 import Footer from "../../../components/global/Footer";
 import GlobalMetas from "../../../components/head/GlobalMetas";
-import Breadcrumb from "../../../components/richsnippets/Breadcrumb";
-import Article from "../../../components/richsnippets/Article";
 import FancyboxUtil from "../../../utils/FancyboxUtils";
 import { formatDateTimeToISODate } from "../../../utils/helpers";
+import ArticleRichSnippet from "../../../components/richsnippets/ArticleRichSnippet";
+import BreadcrumbRichSnippet from "../../../components/richsnippets/BreadcrumbRichSnippet";
 
 const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 	const { user } = useContext(UserContext);
@@ -101,7 +101,7 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 				canonical={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}/${tripEntryDetails.slug}`}
 			/>
 			{/* Rich snippets */}
-			<Breadcrumb
+			<BreadcrumbRichSnippet
 				page1Title="Inici"
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Viatges"
@@ -111,7 +111,7 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 				page4Title={tripEntryDetails.metaTitle}
 				page4Url={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}/${tripEntryDetails.slug}`}
 			/>
-			<Article
+			<ArticleRichSnippet
 				headline={tripEntryDetails.title}
 				summary={tripEntryDetails.subtitle}
 				image={tripEntryDetails.cover}

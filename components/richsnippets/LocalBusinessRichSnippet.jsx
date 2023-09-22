@@ -1,13 +1,13 @@
 import Head from "next/head";
 import React from "react";
 
-const LocalBusiness = () => {
-  return (
-    <Head>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: `
+const LocalBusinessRichSnippet = () => {
+	return (
+		<Head>
+			<script
+				type="application/ld+json"
+				dangerouslySetInnerHTML={{
+					__html: `
 	{
 		"@context": "https://schema.org",
 		"@type": "Organization",
@@ -32,10 +32,10 @@ const LocalBusiness = () => {
 		]
 	}
 	`,
-        }}
-      ></script>
-    </Head>
-  );
+				}}
+			></script>
+		</Head>
+	);
 };
 
-export default LocalBusiness;
+export default LocalBusinessRichSnippet;

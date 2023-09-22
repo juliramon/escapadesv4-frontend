@@ -6,7 +6,7 @@ import NavigationBar from "../../components/global/NavigationBar";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import PublicSquareBox from "../../components/listings/PublicSquareBox";
 import MapModal from "../../components/modals/MapModal";
-import Breadcrumb from "../../components/richsnippets/Breadcrumb";
+import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
 import UserContext from "../../contexts/UserContext";
 import ContentService from "../../services/contentService";
 
@@ -210,7 +210,7 @@ const RegioPage = ({
 				canonical={`https://escapadesenparella.cat/${state.regioDetails.slug}`}
 			/>
 			{/* Rich snippets */}
-			<Breadcrumb
+			<BreadcrumbRichSnippet
 				page1Title="Inici"
 				page1Url="https://escapadesenparella.cat"
 				page2Title={state.regioDetails.title}
