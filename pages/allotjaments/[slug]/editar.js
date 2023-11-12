@@ -1575,6 +1575,15 @@ const EditionForm = () => {
 																							key={
 																								el._id
 																							}
+																							selected={
+																								el._id ===
+																								state
+																									.place
+																									?.relatedStory
+																									?._id
+																									? "true"
+																									: null
+																							}
 																						>
 																							{
 																								el.title
