@@ -607,6 +607,9 @@ const PlaceList = ({
 														duration={el.duration}
 														website={el.website}
 														phone={el.phone}
+														isVerified={
+															el.isVerified
+														}
 														location={`${
 															el.place_locality ===
 															undefined
@@ -718,6 +721,9 @@ const PlaceList = ({
 														duration={el.duration}
 														website={el.website}
 														phone={el.phone}
+														isVerified={
+															el.isVerified
+														}
 														location={`${
 															el.place_locality ===
 															undefined

@@ -11,12 +11,18 @@ import Footer from "../../components/global/Footer";
 import FancyboxUtil from "../../utils/FancyboxUtils";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
+import { formatDateTimeToISODate } from "../../utils/helpers";
 
-const GetawayListing = ({ getawayDetails, categoryDetails }) => {
+const GetawayListing = ({
+	getawayDetails,
+	categoryDetails,
+	checkedCharacteristics,
+}) => {
 	const { user } = useContext(UserContext);
 	const router = useRouter();
 
 	if (getawayDetails && categoryDetails) {
+		// ACTIVITY DETAILS
 		if (getawayDetails.type == "activity") {
 			useEffect(() => {
 				if (
@@ -247,13 +253,17 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 			if (getawayDetails.activity_opening_hours.length > 0) {
 				activityHours = getawayDetails.activity_opening_hours.map(
 					(hour, idx) => (
-						<li key={idx} className="activity-hour">
+						<li
+							key={idx}
+							className="capitalize text-15 text-primary-400"
+						>
 							{hour}
 						</li>
 					)
 				);
+
 				hasOpeningHours = (
-					<div className="mt-0">
+					<div className="my-5 py-5 border-t border-primary-100 border-b">
 						<ul className="list-none p-0 m-0">
 							<li className="flex flex-wrap items-center mb-3">
 								<span className="block w-full">
@@ -317,7 +327,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 						/>
 						<main>
 							{state.showBookmarkToast ? toast : null}
-							<div className="pt-6">
+							<div className="py-5 bg-primary-500 text-white">
 								<div className="container">
 									<ul className="breadcrumb">
 										<li className="breadcrumb__item">
@@ -348,24 +358,54 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 							</div>
 							<article>
 								{/* Listing header */}
-								<section className="pt-2 md:pt-5">
+								<section className="pt-2 md:pt-5 bg-primary-500">
 									<div className="container">
 										<div className="w-full flex flex-wrap items-center">
-											<div className="w-full md:w-1/2">
-												<h1>{getawayDetails.title}</h1>
-												<ul className="flex flex-wrap items-center p-0 -mx-3 mt-2 mb-0 md:mb-5">
-													{getawayDetails.place_rating !==
-													undefined ? (
+											<div className="w-full md:w-1/2 text-white">
+												<div className="flex items-start">
+													<h1>
+														{getawayDetails.title}
+													</h1>
+													{getawayDetails.isVerified ? (
+														<svg
+															xmlns="http://www.w3.org/2000/svg"
+															className="ml-2 relative -top-2 text-[#57A1FE]"
+															width={28}
+															height={28}
+															viewBox="0 0 24 24"
+															stroke-width={1.5}
+															stroke="currentColor"
+															fill="none"
+															strokeLinecap="round"
+															strokeLinejoin="round"
+														>
+															<path
+																stroke="none"
+																d="M0 0h24v24H0z"
+																fill="none"
+															></path>
+															<path
+																d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+																strokeWidth={0}
+																fill="currentColor"
+															></path>
+														</svg>
+													) : null}
+												</div>
+												<ul className="flex flex-wrap items-center p-0 -mx-2 mt-2 mb-0 md:mb-5">
+													{getawayDetails.isVerified ? (
 														<li className="flex flex-wrap items-center px-2">
 															<svg
 																xmlns="http://www.w3.org/2000/svg"
-																className="icon icon-tabler icon-tabler-star mr-1.5"
-																width={20}
-																height={20}
+																className="mr-1.5 text-white"
+																width={18}
+																height={18}
 																viewBox="0 0 24 24"
-																strokeWidth={2}
-																stroke="#fbbf24"
-																fill="#fbbf24"
+																stroke-width={
+																	1.5
+																}
+																stroke="currentColor"
+																fill="none"
 																strokeLinecap="round"
 																strokeLinejoin="round"
 															>
@@ -374,21 +414,52 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																	d="M0 0h24v24H0z"
 																	fill="none"
 																></path>
-																<path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
+																<path
+																	d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+																	strokeWidth={
+																		0
+																	}
+																	fill="currentColor"
+																></path>
 															</svg>
-															<span className="text-primary-400 opacity-80">
-																{
-																	getawayDetails.place_rating
-																}
+															<span className="text-white text-sm relative inline-block top-px">
+																Escapada
+																verificada
 															</span>
 														</li>
 													) : null}
-													<li className="flex flex-wrap items-center px-3">
+													<li className="flex flex-wrap items-center px-2">
 														<svg
 															xmlns="http://www.w3.org/2000/svg"
-															className="icon icon-tabler icon-tabler-brand-safari text-secondary-500 mr-1.5"
-															width={20}
-															height={20}
+															className="mr-1.5 text-white"
+															width={16}
+															height={16}
+															viewBox="0 0 24 24"
+															strokeWidth={1.5}
+															stroke="currentCOlor"
+															fill="currentCOlor"
+															strokeLinecap="round"
+															strokeLinejoin="round"
+														>
+															<path
+																stroke="none"
+																d="M0 0h24v24H0z"
+																fill="none"
+															></path>
+															<path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
+														</svg>
+														<span className="text-white text-sm relative inline-block top-px">
+															{
+																getawayDetails.activity_rating
+															}
+														</span>
+													</li>
+													<li className="flex flex-wrap items-center px-2">
+														<svg
+															xmlns="http://www.w3.org/2000/svg"
+															className="mr-1.5 text-white"
+															width={18}
+															height={18}
 															viewBox="0 0 24 24"
 															strokeWidth="2"
 															stroke="currentColor"
@@ -408,7 +479,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																r={9}
 															></circle>
 														</svg>
-														<span className="text-primary-400 opacity-80">{`${
+														<span className="text-white text-sm relative inline-block top-px">{`${
 															getawayDetails.activity_locality ===
 															undefined
 																? ""
@@ -419,7 +490,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																? ""
 																: ","
 														} ${
-															getawayDetails.pactivity_province ||
+															getawayDetails.activity_province ||
 															getawayDetails.activity_state
 														}, ${
 															getawayDetails.activity_country
@@ -429,104 +500,39 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 											</div>
 											<div className="hidden md:block w-full md:w-1/2 mt-3 md:mt-0">
 												<div className="flex flex-wrap justify-start md:justify-end items-center">
-													{bookmarkButton}
-													<div className="flex flex-wrap items-center -mx-2 opacity-60">
-														<a
-															href={`http://www.facebook.com/sharer.php?u=${urlToShare}`}
-															title="Compartir a Facebook"
-															className="px-2"
-															target="_blank"
-															rel="nofollow noopenner noreferrer"
+													<button className="text-white inline-flex items-center text-sm relative after:block after:absolute after:-bottom-1 after:inset-x-0 after:bg-white after:h-px">
+														<span>Compartir</span>
+														<svg
+															xmlns="http://www.w3.org/2000/svg"
+															className="ml-1.5 relative -top-px"
+															width={18}
+															height={18}
+															viewBox="0 0 24 24"
+															stroke-width={1.5}
+															stroke="currentColor"
+															fill="none"
+															strokeLinecap="round"
+															strokeLinejoin="round"
 														>
-															<svg
-																xmlns="http://www.w3.org/2000/svg"
-																className="icon icon-tabler icon-tabler-brand-facebook"
-																width={24}
-																height={24}
-																viewBox="0 0 24 24"
-																strokeWidth={2}
-																stroke="currentColor"
+															<path
+																stroke="none"
+																d="M0 0h24v24H0z"
 																fill="none"
-																strokeLinecap="round"
-																strokeLinejoin="round"
-															>
-																<path
-																	stroke="none"
-																	d="M0 0h24v24H0z"
-																	fill="none"
-																></path>
-																<path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"></path>
-															</svg>
-														</a>
-														<a
-															href={`https://twitter.com/intent/tweet?urlToShare=${urlToShare}`}
-															title="Compartir a Twitter"
-															className="px-2"
-															target="_blank"
-															rel="nofollow noopenner noreferrer"
-														>
-															<svg
-																xmlns="http://www.w3.org/2000/svg"
-																className="icon icon-tabler icon-tabler-brand-twitter"
-																width={24}
-																height={24}
-																viewBox="0 0 24 24"
-																strokeWidth={2}
-																stroke="currentColor"
-																fill="none"
-																strokeLinecap="round"
-																strokeLinejoin="round"
-															>
-																<path
-																	stroke="none"
-																	d="M0 0h24v24H0z"
-																	fill="none"
-																></path>
-																<path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
-															</svg>
-														</a>
-														<a
-															href={`mailto:?subject=Mira%20aquesta%20escapada%20a%20Escapadesenparella.cat&body=${urlToShare}`}
-															title="Compartir per correu"
-															className="px-2"
-															rel="nofollow noopenner noreferrer"
-															target="_blank"
-														>
-															<svg
-																xmlns="http://www.w3.org/2000/svg"
-																className="icon icon-tabler icon-tabler-mail"
-																width={24}
-																height={24}
-																viewBox="0 0 24 24"
-																strokeWidth={2}
-																stroke="currentColor"
-																fill="none"
-																strokeLinecap="round"
-																strokeLinejoin="round"
-															>
-																<path
-																	stroke="none"
-																	d="M0 0h24v24H0z"
-																	fill="none"
-																></path>
-																<rect
-																	x={3}
-																	y={5}
-																	width={18}
-																	height={14}
-																	rx={2}
-																></rect>
-																<polyline points="3 7 12 13 21 7"></polyline>
-															</svg>
-														</a>
-													</div>
+															></path>
+															<path d="M6 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+															<path d="M18 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+															<path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+															<path d="M8.7 10.7l6.6 -3.4"></path>
+															<path d="M8.7 13.3l6.6 3.4"></path>
+														</svg>
+													</button>
 												</div>
 											</div>
-											<div className="w-full mt-5 md:mt-0">
-												<div className="flex flex-wrap items-stretch rounded-md-2xl overflow-hidden -m-0.5 relative">
+											<div className="w-full mt-5 md:mt-2.5">
+												<div className="flex flex-wrap items-stretch rounded-sm overflow-hidden relative -m-0.5">
 													<button
 														data-fancybox-trigger="gallery"
-														className="inline-flex items-center absolute bottom-3 right-3 text-white bg-slate-800 bg-opacity-80 text-xs py-2 px-3"
+														className="inline-flex items-center absolute bottom-5 right-5 text-primary-500 bg-white rounded text-xs py-2 px-3 shadow-md"
 													>
 														<svg
 															xmlns="http://www.w3.org/2000/svg"
@@ -534,7 +540,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 															width={19}
 															height={19}
 															viewBox="0 0 24 24"
-															strokeWidth={2}
+															strokeWidth={1.5}
 															stroke="currentColor"
 															fill="none"
 															strokeLinecap="round"
@@ -574,7 +580,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 														}}
 													>
 														<div
-															className="w-full lg:w-1/2 p-0.5 h-80 lg:h-50vh"
+															className="w-full lg:w-1/2 h-80 lg:h-50vh p-0.5"
 															data-fancybox="gallery"
 															data-src={
 																getawayDetails
@@ -596,7 +602,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																.images[1] !==
 															undefined ? (
 																<div
-																	className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
+																	className="w-1/4 lg:w-1/2 flex-auto h-full lg:h-1/2 p-0.5"
 																	data-fancybox="gallery"
 																	data-src={
 																		getawayDetails
@@ -618,7 +624,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																.images[2] !==
 															undefined ? (
 																<div
-																	className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
+																	className="w-1/4 lg:w-1/2 flex-auto h-full lg:h-1/2 p-0.5"
 																	data-fancybox="gallery"
 																	data-src={
 																		getawayDetails
@@ -640,7 +646,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																.images[3] !==
 															undefined ? (
 																<div
-																	className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
+																	className="w-1/4 lg:w-1/2 flex-auto h-full lg:h-1/2 p-0.5"
 																	data-fancybox="gallery"
 																	data-src={
 																		getawayDetails
@@ -662,7 +668,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																.images[4] !==
 															undefined ? (
 																<div
-																	className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
+																	className="w-1/4 lg:w-1/2 flex-auto h-full lg:h-1/2 p-0.5"
 																	data-fancybox="gallery"
 																	data-src={
 																		getawayDetails
@@ -692,395 +698,364 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 										<div className="w-full lg:w-10/12 mx-auto">
 											<div className="flex flex-wrap items-start xl:-mx-6">
 												<div className="w-full xl:w-7/12 xl:px-6 mx-auto">
-													<h2 className="w-full md:w-9/12">
-														{
-															getawayDetails.subtitle
-														}
-													</h2>
-													{state.organization ? (
-														<div className="listing-owner mt-4">
+													<div>
+														{getawayDetails.relatedStory ? (
 															<Link
-																href={`/empreses/${state.organization.slug}`}
+																href={`/histories/${getawayDetails.relatedStory.slug}`}
 															>
-																<a className="flex items-center">
-																	<div className="rounded-full w-14 h-14 border border-primary-200 p-1 overflow-hidden mr-4">
-																		<picture>
-																			<img
-																				src={
-																					state
-																						.organization
-																						.orgLogo
-																				}
-																				alt={
-																					state
-																						.organization
-																						.orgName
-																				}
-																				className="w-full h-full object-cover"
-																				width={
-																					96
-																				}
-																				height96
-																				loading="lazy"
-																			/>
-																		</picture>
-																	</div>
-																	<div className="text-primary-500 opacity-80">
-																		<span className="block text-xs">
-																			Gestionat
-																			per:
-																		</span>
-																		<span className="text-base">
-																			{
-																				state
-																					.organization
-																					.orgName
+																<a className="p-5 rounded-md border border-primary-50 w-full block group mb-6">
+																	<span className="inline-flex items-center">
+																		<svg
+																			xmlns="http://www.w3.org/2000/svg"
+																			className="mr-1.5 text-secondary-800"
+																			width={
+																				20
 																			}
-																		</span>
-																	</div>
-																</a>
-															</Link>
-														</div>
-													) : null}
-													<div className="border-y border-primary-200 my-4 md:my-8 py-5">
-														<div className="flex flex-wrap items-start">
-															<div className="pb-6 flex items-start">
-																<div className="w-6 h-6 flex items-center justify-center">
-																	<svg
-																		xmlns="http://www.w3.org/2000/svg"
-																		className="icon icon-tabler icon-tabler-tag mt-0.5 block"
-																		width={
-																			24
-																		}
-																		height={
-																			24
-																		}
-																		viewBox="0 0 24 24"
-																		strokeWidth={
-																			2
-																		}
-																		stroke="currentColor"
-																		fill="none"
-																		strokeLinecap="round"
-																		strokeLinejoin="round"
-																	>
-																		<path
-																			stroke="none"
-																			d="M0 0h24v24H0z"
+																			height={
+																				20
+																			}
+																			viewBox="0 0 24 24"
+																			stroke-width={
+																				1.5
+																			}
+																			stroke="currentColor"
 																			fill="none"
-																		></path>
-																		<circle
-																			cx="8.5"
-																			cy="8.5"
-																			r={
-																				1
-																			}
-																			fill="currentColor"
-																		></circle>
-																		<path d="M4 7v3.859c0 .537 .213 1.052 .593 1.432l8.116 8.116a2.025 2.025 0 0 0 2.864 0l4.834 -4.834a2.025 2.025 0 0 0 0 -2.864l-8.117 -8.116a2.025 2.025 0 0 0 -1.431 -.593h-3.859a3 3 0 0 0 -3 3z"></path>
-																	</svg>
-																</div>
-																<div className="pl-4">
-																	<p className="text-base text-primary-500 font-semibold mb-0.5">
-																		L'
-																		{getawayDetails.type ==
-																		"activitat"
-																			? "allotjament"
-																			: "activitat"}{" "}
-																		està
-																		catalogada
-																		com a
-																		escapada&nbsp;
+																			strokeLinecap="round"
+																			strokeLinejoin="round"
+																		>
+																			<path
+																				stroke="none"
+																				d="M0 0h24v24H0z"
+																				fill="none"
+																			></path>
+																			<path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18"></path>
+																			<path d="M13 8l2 0"></path>
+																			<path d="M13 12l2 0"></path>
+																		</svg>
+																		<span className="text-sm relative top-0.5 flex-1">
+																			Llegeix
+																			la
+																			nostra
+																			escapada
+																			a{" "}
+																			<u>
+																				{
+																					getawayDetails.title
+																				}
+																			</u>
+																			:
+																		</span>
+																	</span>
+																	<span className="block text-lg group-hover:text-secondary-800 transition-all duration-300 ease-in-out">
 																		{
 																			getawayDetails
-																				.categories[0]
+																				.relatedStory
+																				.title
 																		}
-																	</p>
-																	<p className="text-sm mb-0 opacity-70">
-																		Els
-																		allotjaments
-																		i les
-																		activitats
-																		recomanades
-																		a
-																		Escapadesenparella.cat
-																		estan
-																		pensades
-																		per a
-																		que les
-																		parelles
-																		gaudeixin
-																		al màxim
-																		de les
-																		seves
-																		escapades.
-																	</p>
-																</div>
-															</div>
-															<div className="pb-6 flex items-start">
-																<div className="w-6 h-6 flex items-center justify-center">
-																	<svg
-																		xmlns="http://www.w3.org/2000/svg"
-																		className="icon icon-tabler icon-tabler-alarm mt-0.5 block"
-																		width={
-																			24
-																		}
-																		height={
-																			24
-																		}
-																		viewBox="0 0 24 24"
-																		strokeWidth={
-																			2
-																		}
-																		stroke="currentColor"
-																		fill="none"
-																		strokeLinecap="round"
-																		strokeLinejoin="round"
-																	>
-																		<path
-																			stroke="none"
-																			d="M0 0h24v24H0z"
+																	</span>
+																	<time className="text-sm text-primary-300 inline-block -mt-1.5">
+																		Publicada
+																		el{" "}
+																		{formatDateTimeToISODate(
+																			getawayDetails
+																				.relatedStory
+																				.createdAt
+																		)}
+																	</time>
+																</a>
+															</Link>
+														) : null}
+														<h2 className="w-full md:w-9/12">
+															{
+																getawayDetails.subtitle
+															}
+														</h2>
+														<div className="border-y border-primary-200 my-4 md:my-8 py-5">
+															<div className="flex flex-wrap items-start">
+																<div className="pb-6 flex items-start">
+																	<div className="w-6 h-6 flex items-center justify-center">
+																		<svg
+																			xmlns="http://www.w3.org/2000/svg"
+																			className="icon icon-tabler icon-tabler-tag mt-0.5 block"
+																			width={
+																				24
+																			}
+																			height={
+																				24
+																			}
+																			viewBox="0 0 24 24"
+																			strokeWidth={
+																				2
+																			}
+																			stroke="currentColor"
 																			fill="none"
-																		></path>
-																		<circle
-																			cx={
-																				12
-																			}
-																			cy={
-																				13
-																			}
-																			r={
-																				7
-																			}
-																		></circle>
-																		<polyline points="12 10 12 13 14 13"></polyline>
-																		<line
-																			x1={
-																				7
-																			}
-																			y1={
-																				4
-																			}
-																			x2="4.25"
-																			y2={
-																				6
-																			}
-																		></line>
-																		<line
-																			x1={
-																				17
-																			}
-																			y1={
-																				4
-																			}
-																			x2="19.75"
-																			y2={
-																				6
-																			}
-																		></line>
-																	</svg>
-																</div>
-																<div className="pl-4">
-																	<p className="text-base text-primary-500 font-semibold mb-0.5">
-																		L'
-																		{getawayDetails.type ==
-																		"activitat"
-																			? "allotjament"
-																			: "activitat"}{" "}
-																		té una
-																		durada
-																		aproximada
-																		de{" "}
-																		{
-																			getawayDetails.duration
-																		}{" "}
-																		{getawayDetails.duration >
-																		1
-																			? "hores"
-																			: "hora"}
-																	</p>
-																	<p className="text-sm mb-0 opacity-70">
-																		Hem
-																		calculat
-																		que la
-																		durada
-																		mitjana
-																		aproximada
-																		per
-																		aquesta
-																		activitat
-																		sol ser
-																		de{" "}
-																		{
-																			getawayDetails.duration
-																		}{" "}
-																		{getawayDetails.duration >
-																		1
-																			? "hores"
-																			: "hora"}
-																		.
-																	</p>
-																</div>
-															</div>
-
-															<div className="pb-6 flex items-start">
-																<div className="w-6 h-6 flex items-center justify-center">
-																	<svg
-																		xmlns="http://www.w3.org/2000/svg"
-																		className="icon icon-tabler icon-tabler-map-pin mt-0.5 block"
-																		width={
-																			24
-																		}
-																		height={
-																			24
-																		}
-																		viewBox="0 0 24 24"
-																		strokeWidth={
-																			2
-																		}
-																		stroke="currentColor"
-																		fill="none"
-																		strokeLinecap="round"
-																		strokeLinejoin="round"
-																	>
-																		<path
-																			stroke="none"
-																			d="M0 0h24v24H0z"
-																			fill="none"
-																		></path>
-																		<circle
-																			cx={
-																				12
-																			}
-																			cy={
-																				11
-																			}
-																			r={
-																				3
-																			}
-																		></circle>
-																		<path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
-																	</svg>
-																</div>
-																<div className="pl-4">
-																	<p className="text-base text-primary-500 font-semibold mb-0.5">
-																		L'
-																		{getawayDetails.type ==
-																		"activitat"
-																			? "allotjament"
-																			: "activitat"}{" "}
-																		es troba
-																		a la
-																		província/zona
-																		de{" "}
-																		<span className="capitalize">
+																			strokeLinecap="round"
+																			strokeLinejoin="round"
+																		>
+																			<path
+																				stroke="none"
+																				d="M0 0h24v24H0z"
+																				fill="none"
+																			></path>
+																			<circle
+																				cx="8.5"
+																				cy="8.5"
+																				r={
+																					1
+																				}
+																				fill="currentColor"
+																			></circle>
+																			<path d="M4 7v3.859c0 .537 .213 1.052 .593 1.432l8.116 8.116a2.025 2.025 0 0 0 2.864 0l4.834 -4.834a2.025 2.025 0 0 0 0 -2.864l-8.117 -8.116a2.025 2.025 0 0 0 -1.431 -.593h-3.859a3 3 0 0 0 -3 3z"></path>
+																		</svg>
+																	</div>
+																	<div className="pl-4">
+																		<p className="text-base text-primary-500 font-semibold mb-0.5">
+																			L'
+																			{getawayDetails.type ==
+																			"place"
+																				? "allotjament"
+																				: "activitat"}{" "}
+																			està
+																			catalogat
+																			com
+																			a{" "}
 																			{
-																				activityRegion
+																				getawayDetails.placeType
 																			}
-																		</span>
-																	</p>
-																	<p className="text-sm mb-0 opacity-70">
-																		L'adreça
-																		completa
-																		de
-																		l'allotjament
-																		és{" "}
-																		{
-																			getawayDetails.activity_full_address
-																		}
-																		.
-																	</p>
+																		</p>
+																		<p className="text-sm mb-0 opacity-70">
+																			Els
+																			allotjaments
+																			i
+																			les
+																			activitats
+																			recomanades
+																			a
+																			Escapadesenparella.cat
+																			estan
+																			pensades
+																			per
+																			a
+																			que
+																			les
+																			parelles
+																			gaudeixin
+																			al
+																			màxim
+																			de
+																			les
+																			seves
+																			escapades.
+																		</p>
+																	</div>
 																</div>
-															</div>
-															<div className="flex items-start">
-																<div className="w-6 h-6 flex items-center justify-center">
-																	<svg
-																		xmlns="http://www.w3.org/2000/svg"
-																		className="icon icon-tabler icon-tabler-currency-euro mt-0.5"
-																		width={
-																			24
-																		}
-																		height={
-																			24
-																		}
-																		viewBox="0 0 24 24"
-																		strokeWidth={
-																			2
-																		}
-																		stroke="currentColor"
-																		fill="none"
-																		strokeLinecap="round"
-																		strokeLinejoin="round"
-																	>
-																		<path
-																			stroke="none"
-																			d="M0 0h24v24H0z"
+																<div className="pb-6 flex items-start">
+																	<div className="w-6 h-6 flex items-center justify-center">
+																		<svg
+																			xmlns="http://www.w3.org/2000/svg"
+																			className="icon icon-tabler icon-tabler-map-pin mt-0.5 block"
+																			width={
+																				24
+																			}
+																			height={
+																				24
+																			}
+																			viewBox="0 0 24 24"
+																			strokeWidth={
+																				2
+																			}
+																			stroke="currentColor"
 																			fill="none"
-																		></path>
-																		<path d="M17.2 7a6 7 0 1 0 0 10"></path>
-																		<path d="M13 10h-8m0 4h8"></path>
-																	</svg>
+																			strokeLinecap="round"
+																			strokeLinejoin="round"
+																		>
+																			<path
+																				stroke="none"
+																				d="M0 0h24v24H0z"
+																				fill="none"
+																			></path>
+																			<circle
+																				cx={
+																					12
+																				}
+																				cy={
+																					11
+																				}
+																				r={
+																					3
+																				}
+																			></circle>
+																			<path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
+																		</svg>
+																	</div>
+																	<div className="pl-4">
+																		<p className="text-base text-primary-500 font-semibold mb-0.5">
+																			L'
+																			{getawayDetails.type ==
+																			"place"
+																				? "allotjament"
+																				: "activitat"}{" "}
+																			es
+																			troba
+																			a la
+																			zona
+																			de{" "}
+																			<span className="capitalize">
+																				{
+																					getawayDetails
+																						.region[0]
+																				}
+																			</span>
+																		</p>
+																		<p className="text-sm mb-0 opacity-70">
+																			L'adreça
+																			completa
+																			de
+																			l'allotjament
+																			és{" "}
+																			{
+																				getawayDetails.place_full_address
+																			}
+																			.
+																		</p>
+																	</div>
 																</div>
-																<div className="pl-4">
-																	<p className="text-base text-primary-500 font-semibold mb-0.5">
-																		L'
-																		{getawayDetails.type ==
-																		"activitat"
-																			? "allotjament"
-																			: "activitat"}{" "}
-																		té un
-																		preu
-																		aproximat
-																		de{" "}
-																		{
-																			getawayDetails.price
-																		}{" "}
-																		€
-																	</p>
-																	<p className="text-sm mb-0 opacity-70">
-																		Tot i
-																		que els
-																		preus
-																		poden
-																		variar i
-																		no
-																		estiguin
-																		constantment
-																		actualitzats,
-																		hem
-																		calculat
-																		que el
-																		preu
-																		mitjà
-																		per
-																		persona
-																		per
-																		aquesta
-																		activitat
-																		és de{" "}
-																		{
-																			getawayDetails.price
-																		}{" "}
-																		€.
-																	</p>
+																<div className="flex items-start">
+																	<div className="w-6 h-6 flex items-center justify-center">
+																		<svg
+																			xmlns="http://www.w3.org/2000/svg"
+																			className="icon icon-tabler icon-tabler-currency-euro mt-0.5"
+																			width={
+																				24
+																			}
+																			height={
+																				24
+																			}
+																			viewBox="0 0 24 24"
+																			strokeWidth={
+																				2
+																			}
+																			stroke="currentColor"
+																			fill="none"
+																			strokeLinecap="round"
+																			strokeLinejoin="round"
+																		>
+																			<path
+																				stroke="none"
+																				d="M0 0h24v24H0z"
+																				fill="none"
+																			></path>
+																			<path d="M17.2 7a6 7 0 1 0 0 10"></path>
+																			<path d="M13 10h-8m0 4h8"></path>
+																		</svg>
+																	</div>
+																	<div className="pl-4">
+																		<p className="text-base text-primary-500 font-semibold mb-0.5">
+																			L'
+																			{getawayDetails.type ==
+																			"place"
+																				? "allotjament"
+																				: "activitat"}{" "}
+																			té
+																			un
+																			preu
+																			aproximat
+																			de{" "}
+																			{
+																				getawayDetails.price
+																			}{" "}
+																			€ la
+																			nit
+																		</p>
+																		<p className="text-sm mb-0 opacity-70">
+																			Tot
+																			i
+																			que
+																			els
+																			preus
+																			poden
+																			variar
+																			i no
+																			estiguin
+																			constantment
+																			actualitzats,
+																			hem
+																			calculat
+																			que
+																			el
+																			preu
+																			mitjà
+																			per
+																			persona
+																			per
+																			aquest
+																			allotjament
+																			és
+																			de{" "}
+																			{
+																				getawayDetails.price
+																			}{" "}
+																			€ la
+																			nit.
+																		</p>
+																	</div>
 																</div>
 															</div>
 														</div>
 													</div>
-													<h2 className="text-2xl">
-														Sobre{" "}
-														{getawayDetails.title}
-													</h2>
-													<div
-														className="mt-4"
-														dangerouslySetInnerHTML={{
-															__html: getawayDetails.description,
-														}}
-													></div>
-												</div>
-												<aside className="w-full xl:w-5/12 xl:px-6 relative xl:sticky xl:top-36">
-													<div className="p-5 rounded-md shadow-lg shadow-primary-50">
-														<div className="w-full h-56 rounded-md overflow-hidden mb-5">
+													<div>
+														<h2 className="text-2xl font-body">
+															Sobre{" "}
+															{
+																getawayDetails.title
+															}
+														</h2>
+														<div
+															className="mt-4 listing__description"
+															dangerouslySetInnerHTML={{
+																__html: getawayDetails.description,
+															}}
+														></div>
+													</div>
+													<div className="pt-8">
+														<h2 className="text-2xl font-body">
+															Com arribar a{" "}
+															{
+																getawayDetails.title
+															}
+														</h2>
+														<div className="flex flex-wrap items-center mt-4">
+															<div className="w-5 h-5 mr-2">
+																<svg
+																	xmlns="http://www.w3.org/2000/svg"
+																	width="20"
+																	height="20"
+																	viewBox="0 0 24 24"
+																	strokeWidth="1.5"
+																	stroke="currentColor"
+																	fill="none"
+																	strokeLinecap="round"
+																	strokeLinejoin="round"
+																>
+																	<path
+																		stroke="none"
+																		d="M0 0h24v24H0z"
+																	/>
+																	<circle
+																		cx="12"
+																		cy="11"
+																		r="3"
+																	/>
+																	<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
+																</svg>
+															</div>
+															<span className="text-15 opacity-80">
+																{
+																	getawayDetails.activity_full_address
+																}
+															</span>
+														</div>
+														<div className="w-full mt-5 h-72 rounded-md overflow-hidden">
 															<GoogleMapReact
 																bootstrapURLKeys={{
 																	key: `${process.env.GOOGLE_API_KEY}`,
@@ -1104,43 +1079,26 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																}
 															/>
 														</div>
-														<div className="fixed z-50 lg:z-auto bottom-0 inset-x-0 lg:bottom-auto lg:inset-x-auto lg:relative flex flex-row items-stretch lg:flex-col w-full bg-white py-3 px-4 lg:p-0 border-t border-primary-200 lg:border-none mb-5">
-															{getawayDetails?.phone !==
-																"-" &&
-															getawayDetails?.phone !==
-																"" ? (
-																<a
-																	href={`tel:${getawayDetails.phone}`}
-																	className="button button__ghost button__med justify-center mr-2 lg:mr-0 flex-1"
-																	title="Trucar"
-																>
-																	Trucar
-																</a>
-															) : null}
-															{getawayDetails?.website !==
-																"-" &&
-															getawayDetails?.website !==
-																"" ? (
-																<a
-																	href={`${getawayDetails.website}`}
-																	className="button button__primary button__med justify-center ml-2 lg:ml-0 lg:mb-2.5 flex-1"
-																	title="Reservar"
-																>
-																	Reservar
-																</a>
-															) : null}
-														</div>
-														{hasOpeningHours}
-														<ul className="list-none mt-0 px-0 pt-4 border-t border-primary-200">
-															<li className="flex items-start">
-																<div className="w-5 h-5 mr-2">
+													</div>
+												</div>
+												<aside className="w-full xl:w-5/12 xl:px-6 relative xl:sticky xl:top-36">
+													<div className="p-5 rounded shadow-lg shadow-primary-50">
+														{getawayDetails.isVerified ? (
+															<div>
+																<div className="flex items-center">
 																	<svg
 																		xmlns="http://www.w3.org/2000/svg"
-																		className="icon icon-tabler icon-tabler-map-pin text-secondary-500 mt-0.5"
-																		width="20"
-																		height="20"
+																		className="mr-1 text-[#57A1FE]"
+																		width={
+																			22
+																		}
+																		height={
+																			22
+																		}
 																		viewBox="0 0 24 24"
-																		strokeWidth="2"
+																		stroke-width={
+																			1.5
+																		}
 																		stroke="currentColor"
 																		fill="none"
 																		strokeLinecap="round"
@@ -1149,23 +1107,137 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																		<path
 																			stroke="none"
 																			d="M0 0h24v24H0z"
-																		/>
-																		<circle
-																			cx="12"
-																			cy="11"
-																			r="3"
-																		/>
-																		<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
+																			fill="none"
+																		></path>
+																		<path
+																			d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+																			strokeWidth={
+																				0
+																			}
+																			fill="currentColor"
+																		></path>
 																	</svg>
+																	<span className="inline-block text-sm text-primary-400 font-normal">
+																		Escapada
+																		verificada
+																	</span>
 																</div>
+																{getawayDetails.review ? (
+																	<div className="w-full bg-tertiary-50 rounded p-5 mt-3">
+																		<blockquote className="font-serif text-lg pr-8">
+																			{
+																				getawayDetails.review
+																			}
+																			<cite className="block mt-4 text-sm">
+																				<picture>
+																					<img
+																						src="/signatura-andrea-juli.svg"
+																						className="w-32 h-auto"
+																						alt="Andrea i Juli"
+																						loading="lazy"
+																					/>
+																				</picture>
+																			</cite>
+																		</blockquote>
+																	</div>
+																) : null}
+															</div>
+														) : null}
 
-																<span className="text-15 opacity-80">
-																	{
-																		getawayDetails.activity_full_address
-																	}
-																</span>
-															</li>
-														</ul>
+														{hasOpeningHours}
+
+														<div className="fixed z-50 lg:z-auto bottom-0 inset-x-0 lg:bottom-auto lg:inset-x-auto lg:relative flex flex-row items-stretch bg-white py-3 px-4 lg:p-0 border-t border-primary-200 lg:border-none mt-5 -mx-1.5">
+															{getawayDetails?.phone !==
+																"-" &&
+															getawayDetails?.phone !==
+																"" ? (
+																<div className="flex-1 px-1.5">
+																	<a
+																		href={`tel:${getawayDetails.phone}`}
+																		className="button button__ghost button__med justify-center items-center w-full"
+																		title="Trucar"
+																		target="_blank"
+																		rel="nofollow noreferrer"
+																	>
+																		<svg
+																			xmlns="http://www.w3.org/2000/svg"
+																			className="mr-1.5"
+																			width={
+																				24
+																			}
+																			height={
+																				24
+																			}
+																			viewBox="0 0 24 24"
+																			stroke-width={
+																				1.5
+																			}
+																			stroke="currentColor"
+																			fill="none"
+																			strokeLinecap="round"
+																			strokeLinejoin="round"
+																		>
+																			<path
+																				stroke="none"
+																				d="M0 0h24v24H0z"
+																				fill="none"
+																			></path>
+																			<path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path>
+																		</svg>
+																		Trucar
+																	</a>
+																</div>
+															) : null}
+															{getawayDetails?.website !==
+																"-" &&
+															getawayDetails?.website !==
+																"" ? (
+																<div className="flex-1 px-1.5">
+																	<a
+																		href={`${getawayDetails.website}`}
+																		className="button button__primary button__med justify-center items-center w-full"
+																		title="Reservar"
+																		target="_blank"
+																		rel="nofollow noreferrer"
+																	>
+																		<svg
+																			xmlns="http://www.w3.org/2000/svg"
+																			className="mr-1.5"
+																			width={
+																				24
+																			}
+																			height={
+																				24
+																			}
+																			viewBox="0 0 24 24"
+																			stroke-width={
+																				1.5
+																			}
+																			stroke="currentColor"
+																			fill="none"
+																			strokeLinecap="round"
+																			strokeLinejoin="round"
+																		>
+																			<path
+																				stroke="none"
+																				d="M0 0h24v24H0z"
+																				fill="none"
+																			></path>
+																			<path d="M19.5 7a9 9 0 0 0 -7.5 -4a8.991 8.991 0 0 0 -7.484 4"></path>
+																			<path d="M11.5 3a16.989 16.989 0 0 0 -1.826 4"></path>
+																			<path d="M12.5 3a16.989 16.989 0 0 1 1.828 4"></path>
+																			<path d="M19.5 17a9 9 0 0 1 -7.5 4a8.991 8.991 0 0 1 -7.484 -4"></path>
+																			<path d="M11.5 21a16.989 16.989 0 0 1 -1.826 -4"></path>
+																			<path d="M12.5 21a16.989 16.989 0 0 0 1.828 -4"></path>
+																			<path d="M2 10l1 4l1.5 -4l1.5 4l1 -4"></path>
+																			<path d="M17 10l1 4l1.5 -4l1.5 4l1 -4"></path>
+																			<path d="M9.5 10l1 4l1.5 -4l1.5 4l1 -4"></path>
+																		</svg>
+																		Reservar
+																	</a>
+																</div>
+															) : null}
+														</div>
 													</div>
 												</aside>
 											</div>
@@ -1188,6 +1260,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 			);
 		}
 
+		// PLACE DETAILS
 		if (getawayDetails.type == "place") {
 			useEffect(() => {
 				if (
@@ -1415,8 +1488,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 				placeHours,
 				hasOpeningHours,
 				placeCategories,
-				placeSeasons,
-				placeRegion;
+				placeSeasons;
 
 			if (state.placeLoaded === true) {
 				coversList = getawayDetails.images.map((cover, idx) => (
@@ -1433,14 +1505,14 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 						(hour, idx) => (
 							<li
 								key={idx}
-								className="capitalize text-15 opacity-80"
+								className="capitalize text-15 text-primary-400"
 							>
 								{hour}
 							</li>
 						)
 					);
 					hasOpeningHours = (
-						<div className="mt-0">
+						<div className="my-5 py-5 border-t border-primary-100 border-b">
 							<ul className="list-none p-0 m-0">
 								<li className="flex flex-wrap items-center mb-3">
 									<span className="block w-full">
@@ -1476,10 +1548,6 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 						</span>
 					</li>
 				));
-
-				placeRegion = getawayDetails.region.map((region, idx) => (
-					<span key={idx}>{region}</span>
-				));
 			}
 
 			return (
@@ -1510,7 +1578,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 						/>
 						<main>
 							{state.showBookmarkToast ? toast : null}
-							<div className="pt-6">
+							<div className="py-5 bg-primary-500 text-white">
 								<div className="container">
 									<ul className="breadcrumb">
 										<li className="breadcrumb__item">
@@ -1541,22 +1609,86 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 							</div>
 							<article>
 								{/* Listing header */}
-								<section className="pt-2 md:pt-5">
+								<section className="pt-2 md:pt-5 bg-primary-500">
 									<div className="container">
 										<div className="w-full flex flex-wrap items-center">
-											<div className="w-full md:w-1/2">
-												<h1>{getawayDetails.title}</h1>
-												<ul className="flex flex-wrap items-center p-0 -mx-3 mt-2 mb-0 md:mb-5">
-													<li className="flex flex-wrap items-center px-3">
+											<div className="w-full md:w-1/2 text-white">
+												<div className="flex items-start">
+													<h1>
+														{getawayDetails.title}
+													</h1>
+													{getawayDetails.isVerified ? (
 														<svg
 															xmlns="http://www.w3.org/2000/svg"
-															className="icon icon-tabler icon-tabler-star mr-1.5"
-															width={20}
-															height={20}
+															className="ml-2 relative -top-2 text-[#57A1FE]"
+															width={28}
+															height={28}
 															viewBox="0 0 24 24"
-															strokeWidth={2}
-															stroke="#fbbf24"
-															fill="#fbbf24"
+															stroke-width={1.5}
+															stroke="currentColor"
+															fill="none"
+															strokeLinecap="round"
+															strokeLinejoin="round"
+														>
+															<path
+																stroke="none"
+																d="M0 0h24v24H0z"
+																fill="none"
+															></path>
+															<path
+																d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+																strokeWidth={0}
+																fill="currentColor"
+															></path>
+														</svg>
+													) : null}
+												</div>
+												<ul className="flex flex-wrap items-center p-0 -mx-2 mt-2 mb-0 md:mb-5">
+													{getawayDetails.isVerified ? (
+														<li className="flex flex-wrap items-center px-2">
+															<svg
+																xmlns="http://www.w3.org/2000/svg"
+																className="mr-1.5 text-white"
+																width={18}
+																height={18}
+																viewBox="0 0 24 24"
+																stroke-width={
+																	1.5
+																}
+																stroke="currentColor"
+																fill="none"
+																strokeLinecap="round"
+																strokeLinejoin="round"
+															>
+																<path
+																	stroke="none"
+																	d="M0 0h24v24H0z"
+																	fill="none"
+																></path>
+																<path
+																	d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+																	strokeWidth={
+																		0
+																	}
+																	fill="currentColor"
+																></path>
+															</svg>
+															<span className="text-white text-sm relative inline-block top-px">
+																Escapada
+																verificada
+															</span>
+														</li>
+													) : null}
+													<li className="flex flex-wrap items-center px-2">
+														<svg
+															xmlns="http://www.w3.org/2000/svg"
+															className="mr-1.5 text-white"
+															width={16}
+															height={16}
+															viewBox="0 0 24 24"
+															strokeWidth={1.5}
+															stroke="currentCOlor"
+															fill="currentCOlor"
 															strokeLinecap="round"
 															strokeLinejoin="round"
 														>
@@ -1567,18 +1699,18 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 															></path>
 															<path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z"></path>
 														</svg>
-														<span className="text-primary-400 opacity-80">
+														<span className="text-white text-sm relative inline-block top-px">
 															{
 																getawayDetails.place_rating
 															}
 														</span>
 													</li>
-													<li className="flex flex-wrap items-center px-3">
+													<li className="flex flex-wrap items-center px-2">
 														<svg
 															xmlns="http://www.w3.org/2000/svg"
-															className="icon icon-tabler icon-tabler-brand-safari text-secondary-500 mr-1.5"
-															width={20}
-															height={20}
+															className="mr-1.5 text-white"
+															width={18}
+															height={18}
 															viewBox="0 0 24 24"
 															strokeWidth="2"
 															stroke="currentColor"
@@ -1598,7 +1730,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																r={9}
 															></circle>
 														</svg>
-														<span className="text-primary-400 opacity-80">{`${
+														<span className="text-white text-sm relative inline-block top-px">{`${
 															getawayDetails.place_locality ===
 															undefined
 																? ""
@@ -1619,104 +1751,39 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 											</div>
 											<div className="hidden md:block w-full md:w-1/2 mt-3 md:mt-0">
 												<div className="flex flex-wrap justify-start md:justify-end items-center">
-													{bookmarkButton}
-													<div className="flex flex-wrap items-center -mx-2 opacity-60">
-														<a
-															href={`http://www.facebook.com/sharer.php?u=${urlToShare}`}
-															title="Compartir a Facebook"
-															className="px-2"
-															target="_blank"
-															rel="nofollow noopenner noreferrer"
+													<button className="text-white inline-flex items-center text-sm relative after:block after:absolute after:-bottom-1 after:inset-x-0 after:bg-white after:h-px">
+														<span>Compartir</span>
+														<svg
+															xmlns="http://www.w3.org/2000/svg"
+															className="ml-1.5 relative -top-px"
+															width={18}
+															height={18}
+															viewBox="0 0 24 24"
+															stroke-width={1.5}
+															stroke="currentColor"
+															fill="none"
+															strokeLinecap="round"
+															strokeLinejoin="round"
 														>
-															<svg
-																xmlns="http://www.w3.org/2000/svg"
-																className="icon icon-tabler icon-tabler-brand-facebook"
-																width={24}
-																height={24}
-																viewBox="0 0 24 24"
-																strokeWidth={2}
-																stroke="currentColor"
+															<path
+																stroke="none"
+																d="M0 0h24v24H0z"
 																fill="none"
-																strokeLinecap="round"
-																strokeLinejoin="round"
-															>
-																<path
-																	stroke="none"
-																	d="M0 0h24v24H0z"
-																	fill="none"
-																></path>
-																<path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3"></path>
-															</svg>
-														</a>
-														<a
-															href={`https://twitter.com/intent/tweet?urlToShare=${urlToShare}`}
-															title="Compartir a Twitter"
-															className="px-2"
-															target="_blank"
-															rel="nofollow noopenner noreferrer"
-														>
-															<svg
-																xmlns="http://www.w3.org/2000/svg"
-																className="icon icon-tabler icon-tabler-brand-twitter"
-																width={24}
-																height={24}
-																viewBox="0 0 24 24"
-																strokeWidth={2}
-																stroke="currentColor"
-																fill="none"
-																strokeLinecap="round"
-																strokeLinejoin="round"
-															>
-																<path
-																	stroke="none"
-																	d="M0 0h24v24H0z"
-																	fill="none"
-																></path>
-																<path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z"></path>
-															</svg>
-														</a>
-														<a
-															href={`mailto:?subject=Mira%20aquesta%20escapada%20a%20Escapadesenparella.cat&body=${urlToShare}`}
-															title="Compartir per correu"
-															className="px-2"
-															rel="nofollow noopenner noreferrer"
-															target="_blank"
-														>
-															<svg
-																xmlns="http://www.w3.org/2000/svg"
-																className="icon icon-tabler icon-tabler-mail"
-																width={24}
-																height={24}
-																viewBox="0 0 24 24"
-																strokeWidth={2}
-																stroke="currentColor"
-																fill="none"
-																strokeLinecap="round"
-																strokeLinejoin="round"
-															>
-																<path
-																	stroke="none"
-																	d="M0 0h24v24H0z"
-																	fill="none"
-																></path>
-																<rect
-																	x={3}
-																	y={5}
-																	width={18}
-																	height={14}
-																	rx={2}
-																></rect>
-																<polyline points="3 7 12 13 21 7"></polyline>
-															</svg>
-														</a>
-													</div>
+															></path>
+															<path d="M6 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+															<path d="M18 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+															<path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+															<path d="M8.7 10.7l6.6 -3.4"></path>
+															<path d="M8.7 13.3l6.6 3.4"></path>
+														</svg>
+													</button>
 												</div>
 											</div>
-											<div className="w-full mt-5 md:mt-0">
-												<div className="flex flex-wrap items-stretch rounded-md-2xl overflow-hidden -m-0.5 relative">
+											<div className="w-full mt-5 md:mt-2.5">
+												<div className="flex flex-wrap items-stretch rounded-sm overflow-hidden relative -m-0.5">
 													<button
 														data-fancybox-trigger="gallery"
-														className="inline-flex items-center absolute bottom-3 right-3 text-white bg-slate-800 bg-opacity-80 text-xs py-2 px-3"
+														className="inline-flex items-center absolute bottom-5 right-5 text-primary-500 bg-white rounded text-xs py-2 px-3 shadow-md"
 													>
 														<svg
 															xmlns="http://www.w3.org/2000/svg"
@@ -1724,7 +1791,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 															width={19}
 															height={19}
 															viewBox="0 0 24 24"
-															strokeWidth={2}
+															strokeWidth={1.5}
 															stroke="currentColor"
 															fill="none"
 															strokeLinecap="round"
@@ -1764,18 +1831,16 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 														}}
 													>
 														<div
-															className="w-full lg:w-1/2 p-0.5 h-80 lg:h-50vh"
+															className="w-full lg:w-1/2 h-80 lg:h-50vh p-0.5"
 															data-fancybox="gallery"
 															data-src={
-																getawayDetails
-																	.images[0]
+																getawayDetails.cover
 															}
 														>
 															<picture>
 																<img
 																	src={
-																		getawayDetails
-																			.images[0]
+																		getawayDetails.cover
 																	}
 																	className="w-full h-full object-cover"
 																/>
@@ -1786,7 +1851,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																.images[1] !==
 															undefined ? (
 																<div
-																	className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
+																	className="w-1/4 lg:w-1/2 flex-auto h-full lg:h-1/2 p-0.5"
 																	data-fancybox="gallery"
 																	data-src={
 																		getawayDetails
@@ -1808,7 +1873,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																.images[2] !==
 															undefined ? (
 																<div
-																	className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
+																	className="w-1/4 lg:w-1/2 flex-auto h-full lg:h-1/2 p-0.5"
 																	data-fancybox="gallery"
 																	data-src={
 																		getawayDetails
@@ -1830,7 +1895,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																.images[3] !==
 															undefined ? (
 																<div
-																	className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
+																	className="w-1/4 lg:w-1/2 flex-auto h-full lg:h-1/2 p-0.5"
 																	data-fancybox="gallery"
 																	data-src={
 																		getawayDetails
@@ -1852,7 +1917,7 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																.images[4] !==
 															undefined ? (
 																<div
-																	className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
+																	className="w-1/4 lg:w-1/2 flex-auto h-full lg:h-1/2 p-0.5"
 																	data-fancybox="gallery"
 																	data-src={
 																		getawayDetails
@@ -1881,289 +1946,408 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 									<div className="container">
 										<div className="w-full lg:w-10/12 mx-auto">
 											<div className="flex flex-wrap items-start xl:-mx-6">
-												<div className="w-full xl:w-7/12 xl:px-6 mx-auto">
-													<h2 className="w-full md:w-9/12">
-														{
-															getawayDetails.subtitle
-														}
-													</h2>
-													{state.organization ? (
-														<div className="listing-owner mt-4">
+												<div className="w-full xl:w-7/12 xl:px-6 mx-auto order-2 lg:order-none">
+													<div>
+														{getawayDetails.relatedStory ? (
 															<Link
-																href={`/empreses/${state.organization.slug}`}
+																href={`/histories/${getawayDetails.relatedStory.slug}`}
 															>
-																<a className="flex items-center">
-																	<div className="rounded-full w-14 h-14 border border-primary-200 p-1 overflow-hidden mr-4">
-																		<picture>
-																			<img
-																				src={
-																					state
-																						.organization
-																						.orgLogo
-																				}
-																				alt={
-																					state
-																						.organization
-																						.orgName
-																				}
-																				className="w-full h-full object-cover"
-																				width={
-																					96
-																				}
-																				height96
-																				loading="lazy"
-																			/>
-																		</picture>
-																	</div>
-																	<div className="text-primary-500 opacity-80">
-																		<span className="block text-xs">
-																			Gestionat
-																			per:
-																		</span>
-																		<span className="text-base">
-																			{
-																				state
-																					.organization
-																					.orgName
+																<a className="p-5 rounded-md border border-primary-50 w-full block group mb-6">
+																	<span className="inline-flex items-center">
+																		<svg
+																			xmlns="http://www.w3.org/2000/svg"
+																			className="mr-1.5 text-secondary-800"
+																			width={
+																				20
 																			}
+																			height={
+																				20
+																			}
+																			viewBox="0 0 24 24"
+																			stroke-width={
+																				1.5
+																			}
+																			stroke="currentColor"
+																			fill="none"
+																			strokeLinecap="round"
+																			strokeLinejoin="round"
+																		>
+																			<path
+																				stroke="none"
+																				d="M0 0h24v24H0z"
+																				fill="none"
+																			></path>
+																			<path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18"></path>
+																			<path d="M13 8l2 0"></path>
+																			<path d="M13 12l2 0"></path>
+																		</svg>
+																		<span className="text-sm relative top-0.5 flex-1">
+																			Llegeix
+																			la
+																			nostra
+																			escapada
+																			a{" "}
+																			<u>
+																				{
+																					getawayDetails.title
+																				}
+																			</u>
+																			:
 																		</span>
-																	</div>
+																	</span>
+																	<span className="block text-lg group-hover:text-secondary-800 transition-all duration-300 ease-in-out">
+																		{
+																			getawayDetails
+																				.relatedStory
+																				.title
+																		}
+																	</span>
+																	<time className="text-sm text-primary-300 inline-block -mt-1.5">
+																		Publicada
+																		el{" "}
+																		{formatDateTimeToISODate(
+																			getawayDetails
+																				.relatedStory
+																				.createdAt
+																		)}
+																	</time>
 																</a>
 															</Link>
-														</div>
-													) : null}
-													<div className="border-y border-primary-200 my-4 md:my-8 py-5">
-														<div className="flex flex-wrap items-start">
-															<div className="pb-6 flex items-start">
-																<div className="w-6 h-6 flex items-center justify-center">
-																	<svg
-																		xmlns="http://www.w3.org/2000/svg"
-																		className="icon icon-tabler icon-tabler-tag mt-0.5 block"
-																		width={
-																			24
-																		}
-																		height={
-																			24
-																		}
-																		viewBox="0 0 24 24"
-																		strokeWidth={
-																			2
-																		}
-																		stroke="currentColor"
-																		fill="none"
-																		strokeLinecap="round"
-																		strokeLinejoin="round"
-																	>
-																		<path
-																			stroke="none"
-																			d="M0 0h24v24H0z"
+														) : null}
+														<h2 className="w-full md:w-9/12">
+															{
+																getawayDetails.subtitle
+															}
+														</h2>
+														<div className="border-y border-primary-200 my-4 md:my-8 py-5">
+															<div className="flex flex-wrap items-start">
+																<div className="pb-6 flex items-start">
+																	<div className="w-6 h-6 flex items-center justify-center">
+																		<svg
+																			xmlns="http://www.w3.org/2000/svg"
+																			className="icon icon-tabler icon-tabler-tag mt-0.5 block"
+																			width={
+																				24
+																			}
+																			height={
+																				24
+																			}
+																			viewBox="0 0 24 24"
+																			strokeWidth={
+																				2
+																			}
+																			stroke="currentColor"
 																			fill="none"
-																		></path>
-																		<circle
-																			cx="8.5"
-																			cy="8.5"
-																			r={
-																				1
-																			}
-																			fill="currentColor"
-																		></circle>
-																		<path d="M4 7v3.859c0 .537 .213 1.052 .593 1.432l8.116 8.116a2.025 2.025 0 0 0 2.864 0l4.834 -4.834a2.025 2.025 0 0 0 0 -2.864l-8.117 -8.116a2.025 2.025 0 0 0 -1.431 -.593h-3.859a3 3 0 0 0 -3 3z"></path>
-																	</svg>
-																</div>
-																<div className="pl-4">
-																	<p className="text-base text-primary-500 font-semibold mb-0.5">
-																		L'
-																		{getawayDetails.type ==
-																		"place"
-																			? "allotjament"
-																			: "activitat"}{" "}
-																		està
-																		catalogat
-																		com a{" "}
-																		{
-																			getawayDetails.placeType
-																		}
-																	</p>
-																	<p className="text-sm mb-0 opacity-70">
-																		Els
-																		allotjaments
-																		i les
-																		activitats
-																		recomanades
-																		a
-																		Escapadesenparella.cat
-																		estan
-																		pensades
-																		per a
-																		que les
-																		parelles
-																		gaudeixin
-																		al màxim
-																		de les
-																		seves
-																		escapades.
-																	</p>
-																</div>
-															</div>
-															<div className="pb-6 flex items-start">
-																<div className="w-6 h-6 flex items-center justify-center">
-																	<svg
-																		xmlns="http://www.w3.org/2000/svg"
-																		className="icon icon-tabler icon-tabler-map-pin mt-0.5 block"
-																		width={
-																			24
-																		}
-																		height={
-																			24
-																		}
-																		viewBox="0 0 24 24"
-																		strokeWidth={
-																			2
-																		}
-																		stroke="currentColor"
-																		fill="none"
-																		strokeLinecap="round"
-																		strokeLinejoin="round"
-																	>
-																		<path
-																			stroke="none"
-																			d="M0 0h24v24H0z"
-																			fill="none"
-																		></path>
-																		<circle
-																			cx={
-																				12
-																			}
-																			cy={
-																				11
-																			}
-																			r={
-																				3
-																			}
-																		></circle>
-																		<path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
-																	</svg>
-																</div>
-																<div className="pl-4">
-																	<p className="text-base text-primary-500 font-semibold mb-0.5">
-																		L'
-																		{getawayDetails.type ==
-																		"place"
-																			? "allotjament"
-																			: "activitat"}{" "}
-																		es troba
-																		a la
-																		província/zona
-																		de{" "}
-																		<span className="capitalize">
+																			strokeLinecap="round"
+																			strokeLinejoin="round"
+																		>
+																			<path
+																				stroke="none"
+																				d="M0 0h24v24H0z"
+																				fill="none"
+																			></path>
+																			<circle
+																				cx="8.5"
+																				cy="8.5"
+																				r={
+																					1
+																				}
+																				fill="currentColor"
+																			></circle>
+																			<path d="M4 7v3.859c0 .537 .213 1.052 .593 1.432l8.116 8.116a2.025 2.025 0 0 0 2.864 0l4.834 -4.834a2.025 2.025 0 0 0 0 -2.864l-8.117 -8.116a2.025 2.025 0 0 0 -1.431 -.593h-3.859a3 3 0 0 0 -3 3z"></path>
+																		</svg>
+																	</div>
+																	<div className="pl-4">
+																		<p className="text-base text-primary-500 font-semibold mb-0.5">
+																			L'
+																			{getawayDetails.type ==
+																			"place"
+																				? "allotjament"
+																				: "activitat"}{" "}
+																			està
+																			catalogat
+																			com
+																			a{" "}
 																			{
-																				placeRegion
+																				getawayDetails.placeType
 																			}
-																		</span>
-																	</p>
-																	<p className="text-sm mb-0 opacity-70">
-																		L'adreça
-																		completa
-																		de
-																		l'allotjament
-																		és{" "}
-																		{
-																			getawayDetails.place_full_address
-																		}
-																		.
-																	</p>
+																		</p>
+																		<p className="text-sm mb-0 opacity-70">
+																			Els
+																			allotjaments
+																			i
+																			les
+																			activitats
+																			recomanades
+																			a
+																			Escapadesenparella.cat
+																			estan
+																			pensades
+																			per
+																			a
+																			que
+																			les
+																			parelles
+																			gaudeixin
+																			al
+																			màxim
+																			de
+																			les
+																			seves
+																			escapades.
+																		</p>
+																	</div>
 																</div>
-															</div>
-															<div className="flex items-start">
-																<div className="w-6 h-6 flex items-center justify-center">
-																	<svg
-																		xmlns="http://www.w3.org/2000/svg"
-																		className="icon icon-tabler icon-tabler-currency-euro mt-0.5"
-																		width={
-																			24
-																		}
-																		height={
-																			24
-																		}
-																		viewBox="0 0 24 24"
-																		strokeWidth={
-																			2
-																		}
-																		stroke="currentColor"
-																		fill="none"
-																		strokeLinecap="round"
-																		strokeLinejoin="round"
-																	>
-																		<path
-																			stroke="none"
-																			d="M0 0h24v24H0z"
+																<div className="pb-6 flex items-start">
+																	<div className="w-6 h-6 flex items-center justify-center">
+																		<svg
+																			xmlns="http://www.w3.org/2000/svg"
+																			className="icon icon-tabler icon-tabler-map-pin mt-0.5 block"
+																			width={
+																				24
+																			}
+																			height={
+																				24
+																			}
+																			viewBox="0 0 24 24"
+																			strokeWidth={
+																				2
+																			}
+																			stroke="currentColor"
 																			fill="none"
-																		></path>
-																		<path d="M17.2 7a6 7 0 1 0 0 10"></path>
-																		<path d="M13 10h-8m0 4h8"></path>
-																	</svg>
+																			strokeLinecap="round"
+																			strokeLinejoin="round"
+																		>
+																			<path
+																				stroke="none"
+																				d="M0 0h24v24H0z"
+																				fill="none"
+																			></path>
+																			<circle
+																				cx={
+																					12
+																				}
+																				cy={
+																					11
+																				}
+																				r={
+																					3
+																				}
+																			></circle>
+																			<path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z"></path>
+																		</svg>
+																	</div>
+																	<div className="pl-4">
+																		<p className="text-base text-primary-500 font-semibold mb-0.5">
+																			L'
+																			{getawayDetails.type ==
+																			"place"
+																				? "allotjament"
+																				: "activitat"}{" "}
+																			es
+																			troba
+																			a la
+																			zona
+																			de{" "}
+																			<span className="capitalize">
+																				{
+																					getawayDetails
+																						.region[0]
+																				}
+																			</span>
+																		</p>
+																		<p className="text-sm mb-0 opacity-70">
+																			L'adreça
+																			completa
+																			de
+																			l'allotjament
+																			és{" "}
+																			{
+																				getawayDetails.place_full_address
+																			}
+																			.
+																		</p>
+																	</div>
 																</div>
-																<div className="pl-4">
-																	<p className="text-base text-primary-500 font-semibold mb-0.5">
-																		L'
-																		{getawayDetails.type ==
-																		"place"
-																			? "allotjament"
-																			: "activitat"}{" "}
-																		té un
-																		preu
-																		aproximat
-																		de{" "}
-																		{
-																			getawayDetails.price
-																		}{" "}
-																		€ la nit
-																	</p>
-																	<p className="text-sm mb-0 opacity-70">
-																		Tot i
-																		que els
-																		preus
-																		poden
-																		variar i
-																		no
-																		estiguin
-																		constantment
-																		actualitzats,
-																		hem
-																		calculat
-																		que el
-																		preu
-																		mitjà
-																		per
-																		persona
-																		per
-																		aquest
-																		allotjament
-																		és de{" "}
-																		{
-																			getawayDetails.price
-																		}{" "}
-																		€ la
-																		nit.
-																	</p>
+																<div className="flex items-start">
+																	<div className="w-6 h-6 flex items-center justify-center">
+																		<svg
+																			xmlns="http://www.w3.org/2000/svg"
+																			className="icon icon-tabler icon-tabler-currency-euro mt-0.5"
+																			width={
+																				24
+																			}
+																			height={
+																				24
+																			}
+																			viewBox="0 0 24 24"
+																			strokeWidth={
+																				2
+																			}
+																			stroke="currentColor"
+																			fill="none"
+																			strokeLinecap="round"
+																			strokeLinejoin="round"
+																		>
+																			<path
+																				stroke="none"
+																				d="M0 0h24v24H0z"
+																				fill="none"
+																			></path>
+																			<path d="M17.2 7a6 7 0 1 0 0 10"></path>
+																			<path d="M13 10h-8m0 4h8"></path>
+																		</svg>
+																	</div>
+																	<div className="pl-4">
+																		<p className="text-base text-primary-500 font-semibold mb-0.5">
+																			L'
+																			{getawayDetails.type ==
+																			"place"
+																				? "allotjament"
+																				: "activitat"}{" "}
+																			té
+																			un
+																			preu
+																			aproximat
+																			de{" "}
+																			{
+																				getawayDetails.price
+																			}{" "}
+																			€ la
+																			nit
+																		</p>
+																		<p className="text-sm mb-0 opacity-70">
+																			Tot
+																			i
+																			que
+																			els
+																			preus
+																			poden
+																			variar
+																			i no
+																			estiguin
+																			constantment
+																			actualitzats,
+																			hem
+																			calculat
+																			que
+																			el
+																			preu
+																			mitjà
+																			per
+																			persona
+																			per
+																			aquest
+																			allotjament
+																			és
+																			de{" "}
+																			{
+																				getawayDetails.price
+																			}{" "}
+																			€ la
+																			nit.
+																		</p>
+																	</div>
 																</div>
 															</div>
 														</div>
 													</div>
-													<h2 className="text-2xl">
-														Sobre{" "}
-														{getawayDetails.title}
-													</h2>
-													<div
-														className="mt-4"
-														dangerouslySetInnerHTML={{
-															__html: getawayDetails.description,
-														}}
-													></div>
-												</div>
-												<aside className="w-full xl:w-5/12 xl:px-6 relative xl:sticky xl:top-36">
-													<div className="p-5 rounded-md shadow-lg shadow-primary-50">
-														<div className="w-full h-56 rounded-md overflow-hidden">
+
+													<div>
+														<h2 className="text-2xl font-body">
+															Sobre{" "}
+															{
+																getawayDetails.title
+															}
+														</h2>
+														<div
+															className="mt-4 listing__description"
+															dangerouslySetInnerHTML={{
+																__html: getawayDetails.description,
+															}}
+														></div>
+													</div>
+
+													{checkedCharacteristics.length >
+													0 ? (
+														<div className="pt-8">
+															<h2 className="text-2xl font-body">
+																Què trobareu a{" "}
+																{
+																	getawayDetails.title
+																}
+																?
+															</h2>
+															<div className="mt-7">
+																<ul className="p-0 -m-2.5 flex flex-wrap">
+																	{checkedCharacteristics.map(
+																		(
+																			el
+																		) => (
+																			<li
+																				key={
+																					el.name
+																				}
+																				className="flex flex-col items-center w-1/2 md:w-1/3 lg:w-1/4 p-2.5"
+																			>
+																				<span
+																					dangerouslySetInnerHTML={{
+																						__html: el.icon,
+																					}}
+																					className="inline-block [&>svg]:w-9 [&>svg]:h-9 mb-1.5"
+																				></span>
+																				<span className="inline-block text-sm text-center">
+																					{
+																						el.name
+																					}
+																				</span>
+																			</li>
+																		)
+																	)}
+																</ul>
+															</div>
+														</div>
+													) : null}
+
+													<div className="pt-8">
+														<h2 className="text-2xl font-body">
+															Com arribar a{" "}
+															{
+																getawayDetails.title
+															}
+														</h2>
+														<div className="flex flex-wrap items-center mt-4">
+															<div className="w-5 h-5 mr-2">
+																<svg
+																	xmlns="http://www.w3.org/2000/svg"
+																	width="20"
+																	height="20"
+																	viewBox="0 0 24 24"
+																	strokeWidth="1.5"
+																	stroke="currentColor"
+																	fill="none"
+																	strokeLinecap="round"
+																	strokeLinejoin="round"
+																>
+																	<path
+																		stroke="none"
+																		d="M0 0h24v24H0z"
+																	/>
+																	<circle
+																		cx="12"
+																		cy="11"
+																		r="3"
+																	/>
+																	<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
+																</svg>
+															</div>
+															<span className="text-15 opacity-80">
+																{
+																	getawayDetails.place_full_address
+																}
+															</span>
+														</div>
+														<div className="w-full mt-5 h-72 rounded-md overflow-hidden">
 															<GoogleMapReact
 																bootstrapURLKeys={{
 																	key: `${process.env.GOOGLE_API_KEY}`,
@@ -2187,43 +2371,26 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																}
 															/>
 														</div>
-														<div className="fixed z-50 lg:z-auto bottom-0 inset-x-0 lg:bottom-auto lg:inset-x-auto lg:relative flex flex-row items-stretch lg:flex-col w-full bg-white py-3 px-4 lg:p-0 border-t border-primary-200 lg:border-none mb-5">
-															{getawayDetails?.phone !==
-																"-" &&
-															getawayDetails?.phone !==
-																"" ? (
-																<a
-																	href={`tel:${getawayDetails.phone}`}
-																	className="button button__ghost button__med justify-center mr-2 lg:mr-0 flex-1"
-																	title="Trucar"
-																>
-																	Trucar
-																</a>
-															) : null}
-															{getawayDetails?.website !==
-																"-" &&
-															getawayDetails?.website !==
-																"" ? (
-																<a
-																	href={`${getawayDetails.website}`}
-																	className="button button__primary button__med justify-center ml-2 lg:ml-0 lg:mb-2.5 flex-1"
-																	title="Reservar"
-																>
-																	Reservar
-																</a>
-															) : null}
-														</div>
-														{hasOpeningHours}
-														<ul className="list-none mt-4 mb-0 px-0 pt-4 border-t border-primary-200">
-															<li className="flex items-start">
-																<div className="w-5 h-5 mr-2">
+													</div>
+												</div>
+												<aside className="w-full xl:w-5/12 xl:px-6 relative xl:sticky xl:top-36 order-1 lg:order-none mb-6 lg:mb-0">
+													<div className="p-5 rounded shadow-lg shadow-primary-50">
+														{getawayDetails.isVerified ? (
+															<div>
+																<div className="flex items-center">
 																	<svg
 																		xmlns="http://www.w3.org/2000/svg"
-																		className="icon icon-tabler icon-tabler-map-pin text-secondary-500 mt-0.5"
-																		width="20"
-																		height="20"
+																		className="mr-1 text-[#57A1FE]"
+																		width={
+																			22
+																		}
+																		height={
+																			22
+																		}
 																		viewBox="0 0 24 24"
-																		strokeWidth="2"
+																		stroke-width={
+																			1.5
+																		}
 																		stroke="currentColor"
 																		fill="none"
 																		strokeLinecap="round"
@@ -2232,22 +2399,137 @@ const GetawayListing = ({ getawayDetails, categoryDetails }) => {
 																		<path
 																			stroke="none"
 																			d="M0 0h24v24H0z"
-																		/>
-																		<circle
-																			cx="12"
-																			cy="11"
-																			r="3"
-																		/>
-																		<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z" />
+																			fill="none"
+																		></path>
+																		<path
+																			d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+																			strokeWidth={
+																				0
+																			}
+																			fill="currentColor"
+																		></path>
 																	</svg>
+																	<span className="inline-block text-sm text-primary-400 font-normal">
+																		Escapada
+																		verificada
+																	</span>
 																</div>
-																<span className="text-15 opacity-80">
-																	{
-																		getawayDetails.place_full_address
-																	}
-																</span>
-															</li>
-														</ul>
+																{getawayDetails.review ? (
+																	<div className="w-full bg-tertiary-50 rounded p-5 mt-3">
+																		<blockquote className="font-serif text-lg pr-8">
+																			{
+																				getawayDetails.review
+																			}
+																			<cite className="block mt-4 text-sm">
+																				<picture>
+																					<img
+																						src="/signatura-andrea-juli.svg"
+																						className="w-32 h-auto"
+																						alt="Andrea i Juli"
+																						loading="lazy"
+																					/>
+																				</picture>
+																			</cite>
+																		</blockquote>
+																	</div>
+																) : null}
+															</div>
+														) : null}
+
+														{hasOpeningHours}
+
+														<div className="fixed z-50 lg:z-auto bottom-0 inset-x-0 lg:bottom-auto lg:inset-x-auto lg:relative flex flex-row items-stretch bg-white py-3 px-4 lg:p-0 border-t border-primary-200 lg:border-none mt-5 -mx-1.5">
+															{getawayDetails?.phone !==
+																"-" &&
+															getawayDetails?.phone !==
+																"" ? (
+																<div className="flex-1 px-1.5">
+																	<a
+																		href={`tel:${getawayDetails.phone}`}
+																		className="button button__ghost button__med justify-center items-center w-full"
+																		title="Trucar"
+																		target="_blank"
+																		rel="nofollow noreferrer"
+																	>
+																		<svg
+																			xmlns="http://www.w3.org/2000/svg"
+																			className="mr-1.5"
+																			width={
+																				24
+																			}
+																			height={
+																				24
+																			}
+																			viewBox="0 0 24 24"
+																			stroke-width={
+																				1.5
+																			}
+																			stroke="currentColor"
+																			fill="none"
+																			strokeLinecap="round"
+																			strokeLinejoin="round"
+																		>
+																			<path
+																				stroke="none"
+																				d="M0 0h24v24H0z"
+																				fill="none"
+																			></path>
+																			<path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path>
+																		</svg>
+																		Trucar
+																	</a>
+																</div>
+															) : null}
+															{getawayDetails?.website !==
+																"-" &&
+															getawayDetails?.website !==
+																"" ? (
+																<div className="flex-1 px-1.5">
+																	<a
+																		href={`${getawayDetails.website}`}
+																		className="button button__primary button__med justify-center items-center w-full"
+																		title="Reservar"
+																		target="_blank"
+																		rel="nofollow noreferrer"
+																	>
+																		<svg
+																			xmlns="http://www.w3.org/2000/svg"
+																			className="mr-1.5"
+																			width={
+																				24
+																			}
+																			height={
+																				24
+																			}
+																			viewBox="0 0 24 24"
+																			stroke-width={
+																				1.5
+																			}
+																			stroke="currentColor"
+																			fill="none"
+																			strokeLinecap="round"
+																			strokeLinejoin="round"
+																		>
+																			<path
+																				stroke="none"
+																				d="M0 0h24v24H0z"
+																				fill="none"
+																			></path>
+																			<path d="M19.5 7a9 9 0 0 0 -7.5 -4a8.991 8.991 0 0 0 -7.484 4"></path>
+																			<path d="M11.5 3a16.989 16.989 0 0 0 -1.826 4"></path>
+																			<path d="M12.5 3a16.989 16.989 0 0 1 1.828 4"></path>
+																			<path d="M19.5 17a9 9 0 0 1 -7.5 4a8.991 8.991 0 0 1 -7.484 -4"></path>
+																			<path d="M11.5 21a16.989 16.989 0 0 1 -1.826 -4"></path>
+																			<path d="M12.5 21a16.989 16.989 0 0 0 1.828 -4"></path>
+																			<path d="M2 10l1 4l1.5 -4l1.5 4l1 -4"></path>
+																			<path d="M17 10l1 4l1.5 -4l1.5 4l1 -4"></path>
+																			<path d="M9.5 10l1 4l1.5 -4l1.5 4l1 -4"></path>
+																		</svg>
+																		Reservar
+																	</a>
+																</div>
+															) : null}
+														</div>
 													</div>
 												</aside>
 											</div>
@@ -2277,8 +2559,9 @@ export async function getServerSideProps({ params }) {
 	const categoryDetails = await service.getCategoryDetails(params.categoria);
 	const activityDetails = await service.activityDetails(params.slug);
 	const placeDetails = await service.getPlaceDetails(params.slug);
+	const characteristics = await service.getCharacteristics();
 
-	let getawayDetails;
+	let getawayDetails, storyDetails;
 	if (activityDetails != undefined) {
 		getawayDetails = activityDetails;
 	} else {
@@ -2291,10 +2574,26 @@ export async function getServerSideProps({ params }) {
 		};
 	}
 
+	let checkedCharacteristics = [];
+
+	if (getawayDetails?.characteristics) {
+		getawayDetails.characteristics.forEach((getawayCharacteristic) => {
+			characteristics.forEach((rawCharacteristic) => {
+				if (getawayCharacteristic == rawCharacteristic.name) {
+					checkedCharacteristics.push({
+						icon: rawCharacteristic.icon,
+						name: rawCharacteristic.name,
+					});
+				}
+			});
+		});
+	}
+
 	return {
 		props: {
 			getawayDetails,
 			categoryDetails,
+			checkedCharacteristics,
 		},
 	};
 }

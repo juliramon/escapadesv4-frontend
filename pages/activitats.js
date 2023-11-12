@@ -549,6 +549,9 @@ const ActivityList = ({
 															}
 															website={el.website}
 															phone={el.phone}
+															isVerified={
+																el.isVerified
+															}
 															location={`${
 																el.activity_locality ===
 																undefined
@@ -662,6 +665,9 @@ const ActivityList = ({
 														duration={el.duration}
 														website={el.website}
 														phone={el.phone}
+														isVerified={
+															el.isVerified
+														}
 														location={`${
 															el.activity_locality ===
 															undefined

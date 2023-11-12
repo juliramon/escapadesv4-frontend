@@ -18,11 +18,6 @@ const PlaceForm = () => {
 	// Validate if user is allowed to access this view
 	const { user } = useContext(UserContext);
 	const [loadPage, setLoadPage] = useState(false);
-	useEffect(() => {
-		if (user) {
-			setLoadPage(true);
-		}
-	}, []);
 	// End validation
 
 	const router = useRouter();
@@ -54,6 +49,7 @@ const PlaceForm = () => {
 			seasons: [],
 			region: "",
 			placeType: "",
+			characteristics: [],
 			cover: "",
 			blopCover: "",
 			images: [],
@@ -75,12 +71,16 @@ const PlaceForm = () => {
 			place_id: "",
 			place_opening_hours: "",
 			price: "",
+			review: "",
+			relatedStory: "",
 			organization: "",
 			isOrganizationChecked: false,
 			isReadyToSubmit: false,
 			metaTitle: "",
 			metaDescription: "",
 		},
+		characteristics: [],
+		stories: [],
 	};
 
 	const [state, setState] = useState(initialState);
@@ -97,6 +97,7 @@ const PlaceForm = () => {
 	const service = new ContentService();
 	const paymentService = new PaymentService();
 
+	// Fetch data
 	useEffect(() => {
 		const fetchData = async () => {
 			const userOrganizations = await service.checkOrganizationsOwned();
@@ -104,12 +105,22 @@ const PlaceForm = () => {
 			userOrganizations.number > 0
 				? (hasOrganizations = true)
 				: (hasOrganizations = false);
+
+			const stories = await service.getStories();
+			const characteristics = await service.getCharacteristics();
+
+			if (user && stories && characteristics) {
+				setLoadPage(true);
+			}
+
 			setState({
 				...state,
 				formData: {
 					...state.formData,
 					userOrganizations: userOrganizations,
 				},
+				characteristics: characteristics,
+				stories: stories.allStories,
 			});
 		};
 		fetchData();
@@ -125,7 +136,7 @@ const PlaceForm = () => {
 				},
 			}),
 			Placeholder.configure({
-				placeholder: "Comença a escriure la teva història...",
+				placeholder: "Comença a descriure l'allotjament...",
 			}),
 		],
 		content: "",
@@ -255,10 +266,31 @@ const PlaceForm = () => {
 		}
 	};
 
+	const checkIfCharacteristicChecked = (val) => {
+		if (state.formData.characteristics) {
+			return state.formData.characteristics.includes(val) ? true : false;
+		}
+	};
+
 	const handleCheckPlaceType = (e) => {
 		setState({
 			...state,
 			formData: { ...state.formData, placeType: e.target.id },
+		});
+	};
+
+	const handleCheckCharacteristic = (e) => {
+		let characteristics = state.formData.characteristics;
+		if (e.target.checked === true) {
+			characteristics.push(e.target.id);
+		} else {
+			let index = characteristics.indexOf(e.target.id);
+
+			characteristics.splice(index, 1);
+		}
+		setState({
+			...state,
+			formData: { ...state.formData, characteristics: characteristics },
 		});
 	};
 
@@ -323,6 +355,7 @@ const PlaceForm = () => {
 			slug,
 			categories,
 			seasons,
+			characteristics,
 			region,
 			placeType,
 			coverCloudImage,
@@ -340,6 +373,8 @@ const PlaceForm = () => {
 			place_id,
 			place_opening_hours,
 			price,
+			review,
+			relatedStory,
 			organization,
 			metaTitle,
 			metaDescription,
@@ -354,6 +389,7 @@ const PlaceForm = () => {
 				subtitle,
 				categories,
 				seasons,
+				characteristics,
 				region,
 				placeType,
 				coverCloudImage,
@@ -372,6 +408,8 @@ const PlaceForm = () => {
 				place_id,
 				place_opening_hours,
 				price,
+				review,
+				relatedStory,
 				organization,
 				metaTitle,
 				metaDescription
@@ -429,6 +467,7 @@ const PlaceForm = () => {
 			slug,
 			categories,
 			seasons,
+			characteristics,
 			region,
 			placeType,
 			place_full_address,
@@ -449,6 +488,7 @@ const PlaceForm = () => {
 			slug &&
 			categories &&
 			seasons &&
+			characteristics &&
 			region &&
 			placeType &&
 			place_full_address &&
@@ -537,59 +577,6 @@ const PlaceForm = () => {
 					<div className="container">
 						<div className="pt-7 pb-12">
 							<div className="flex items-center justify-between">
-								<div className="mb-5">
-									{state.step ? (
-										<div
-											className="funnel-steps-wrapper max-w-xl mx-auto mb-7"
-											style={{ marginTop: "60px" }}
-										>
-											<ul className="list-none m-0 p-0 flex items-center justify-center text-center">
-												<li
-													className={
-														state.step ===
-														"informacio-empresa"
-															? "text-primary-500"
-															: null
-													}
-												>
-													Pas 1
-												</li>
-												<li
-													className={
-														state.step ===
-														"seleccio-pla"
-															? "text-primary-500"
-															: null
-													}
-												>
-													Pas 2
-												</li>
-												<li
-													className={
-														state.step ===
-														"seleccio-tipologia"
-															? "text-primary-500"
-															: null
-													}
-												>
-													Pas 3
-												</li>
-												<li
-													className={
-														state.step ===
-														"publicacio-fitxa"
-															? "active"
-															: null
-													}
-												>
-													Pas 4
-												</li>
-											</ul>
-										</div>
-									) : (
-										""
-									)}
-								</div>
 								<div className="w-full">
 									<h1 className="text-3xl">
 										Potencia la visibilitat del teu
@@ -630,44 +617,6 @@ const PlaceForm = () => {
 											className="form"
 											onSubmit={handleSubmit}
 										>
-											<div className="flex flex-wrap items-stretch mt-2">
-												<div className="form__group w-1/2">
-													<label className="form__label">
-														Empresa propietària
-													</label>
-													<div className="flex items-center -mt-4 -mx-2 -mb-2">
-														{organizationsList}
-													</div>
-												</div>
-												<div className="form__group w-1/2">
-													<label className="form__label">
-														Escapada verificada?
-													</label>
-													<div className="flex items-center">
-														<label
-															htmlFor="isVerified"
-															className="form__label flex items-center"
-														>
-															<input
-																type="checkbox"
-																name="isVerified"
-																id="isVerified"
-																className="mr-2"
-																onClick={
-																	handleCheck
-																}
-																checked={
-																	state
-																		.formData
-																		.isVerified
-																}
-															/>
-															Verificada
-														</label>
-													</div>
-												</div>
-											</div>
-
 											<div className="form__group">
 												<label
 													htmlFor="title"
@@ -1150,6 +1099,63 @@ const PlaceForm = () => {
 														Càmping
 													</label>
 												</div>
+												<div className="form__group w-full">
+													<label
+														htmlFor="caracteristica"
+														className="form__label"
+													>
+														Característiques de
+														l'allotjament
+													</label>
+													<ul className="list-none flex flex-wrap items-start m-0 p-0">
+														{state.characteristics
+															? state.characteristics.map(
+																	(el) => (
+																		<li
+																			key={
+																				el.id
+																			}
+																			className="pr-5 pb-5 w-1/2 md:w-1/3 lg:w-1/5"
+																		>
+																			<label
+																				htmlFor={
+																					el.name
+																				}
+																				className="form__label flex items-center"
+																			>
+																				<input
+																					type="checkbox"
+																					name={
+																						el.name
+																					}
+																					id={
+																						el.name
+																					}
+																					className="mr-2"
+																					onChange={
+																						handleCheckCharacteristic
+																					}
+																					checked={checkIfCharacteristicChecked(
+																						el.name
+																					)}
+																				/>
+																				<span
+																					dangerouslySetInnerHTML={{
+																						__html: el.icon,
+																					}}
+																					className="w-8 h-8 mr-1.5"
+																				></span>
+
+																				{
+																					el.name
+																				}
+																			</label>
+																		</li>
+																	)
+															  )
+															: null}
+													</ul>
+												</div>
 											</div>
 
 											<div className="form__group">
@@ -1482,8 +1488,122 @@ const PlaceForm = () => {
 													</div>
 												</div>
 											</div>
+											<div className="flex flex-wrap items-stretch mt-2">
+												<div className="form__group w-1/2">
+													<label className="form__label">
+														Escapada verificada?
+													</label>
+													<div className="flex items-center">
+														<label
+															htmlFor="isVerified"
+															className="form__label flex items-center"
+														>
+															<input
+																type="checkbox"
+																name="isVerified"
+																id="isVerified"
+																className="mr-2"
+																onClick={
+																	handleCheck
+																}
+																checked={
+																	state
+																		.formData
+																		.isVerified
+																}
+															/>
+															Verificada
+														</label>
+													</div>
+												</div>
+												{state.formData.isVerified ? (
+													<>
+														<div className="form__group w-full">
+															<label
+																htmlFor="review"
+																className="form__label"
+															>
+																Review de
+																l'escapada
+															</label>
+															<div className="flex items-center">
+																<textarea
+																	id="review"
+																	name="review"
+																	placeholder="Review de l'activitat"
+																	className="form__control"
+																	value={
+																		state
+																			.formData
+																			.review
+																	}
+																	onChange={
+																		handleChange
+																	}
+																/>
+															</div>
+														</div>
+														<div className="form__group w-full">
+															<label
+																htmlFor="review"
+																className="form__label"
+															>
+																Selecciona la
+																"Història"
+																relacionada
+															</label>
+															<div className="flex items-center">
+																<select
+																	id="relatedStory"
+																	name="relatedStory"
+																	className="form__control"
+																	onChange={
+																		handleChange
+																	}
+																>
+																	<option
+																		value=""
+																		default
+																		hidden
+																	>
+																		Selecciona
+																		una
+																		història
+																	</option>
+																	{state.stories &&
+																	state
+																		.stories
+																		.length >
+																		0
+																		? state.stories.map(
+																				(
+																					el
+																				) => {
+																					return (
+																						<option
+																							value={
+																								el._id
+																							}
+																							key={
+																								el._id
+																							}
+																						>
+																							{
+																								el.title
+																							}
+																						</option>
+																					);
+																				}
+																		  )
+																		: null}
+																</select>
+															</div>
+														</div>
+													</>
+												) : null}
+											</div>
 										</form>
-										<div className="form__group">
+										<div className="form__group mt-2">
 											<label
 												htmlFor="description"
 												className="form__label"

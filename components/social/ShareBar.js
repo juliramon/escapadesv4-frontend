@@ -6,13 +6,12 @@ const ShareBar = ({ color = "text-white", iconsSize = 24 }) => {
 
 	return (
 		<div className="flex flex-wrap items-center -mx-1.5">
-			<span className="px-1.5 font-medium text-sm ">Comparteixa-ho!</span>
+			<span className={`px-1.5 font-normal text-sm ${color}`}>
+				Comparteixa-ho!
+			</span>
 			<a
 				href={`http://www.facebook.com/sharer.php?u=${url}`}
-				className={
-					`px-1.5 hover:text-secondary-500 transition-all duration-300 ease-in-out` +
-					color
-				}
+				className={`px-1.5 hover:text-secondary-500 transition-all duration-300 ease-in-out ${color}`}
 				target="_blank"
 				title="Comparteixa-ho a Facebook"
 				rel="nofollow nofererrer"
@@ -38,10 +37,7 @@ const ShareBar = ({ color = "text-white", iconsSize = 24 }) => {
 			</a>
 			<a
 				href={`https://twitter.com/intent/tweet?url=${url}`}
-				className={
-					`px-1.5 hover:text-secondary-500 transition-all duration-300 ease-in-out` +
-					color
-				}
+				className={`px-1.5 hover:text-secondary-500 transition-all duration-300 ease-in-out ${color}`}
 				target="_blank"
 				title="Comparteixa-ho a X"
 				rel="nofollow nofererrer"
@@ -67,10 +63,7 @@ const ShareBar = ({ color = "text-white", iconsSize = 24 }) => {
 			</a>
 			<a
 				href={`mailto:?subject=Mira%20què%20he%20trobat%20a%20Escapadesenparella.cat&body=${url}`}
-				className={
-					`px-1.5 hover:text-secondary-500 transition-all duration-300 ease-in-out` +
-					color
-				}
+				className={`px-1.5 hover:text-secondary-500 transition-all duration-300 ease-in-out ${color}`}
 				target="_blank"
 				title="Comparteixa-ho per correu electrònic"
 				rel="nofollow nofererrer"

@@ -17,11 +17,6 @@ const ActivityForm = () => {
 	// Validate if user is allowed to access this view
 	const { user } = useContext(UserContext);
 	const [loadPage, setLoadPage] = useState(false);
-	useEffect(() => {
-		if (user) {
-			setLoadPage(true);
-		}
-	}, []);
 	// End validation
 
 	const router = useRouter();
@@ -74,16 +69,19 @@ const ActivityForm = () => {
 			activity_opening_hours: "",
 			duration: "",
 			price: "",
+			review: "",
+			relatedStory: "",
 			organization: "",
 			isReadyToSubmit: false,
 			metaTitle: "",
 			metaDescription: "",
 		},
+		characteristics: [],
+		stories: [],
 	};
 
 	const [state, setState] = useState(initialState);
 	const [queryId, setQueryId] = useState(null);
-	const [stateStep, setStateStep] = useState({ step: "null" });
 	const [activeTab, setActiveTab] = useState("main");
 	const [editorData, setEditorData] = useState({});
 
@@ -96,6 +94,7 @@ const ActivityForm = () => {
 	const service = new ContentService();
 	const paymentService = new PaymentService();
 
+	// Fetch data
 	useEffect(() => {
 		const fetchData = async () => {
 			const userOrganizations = await service.checkOrganizationsOwned();
@@ -103,12 +102,17 @@ const ActivityForm = () => {
 			userOrganizations.number > 0
 				? (hasOrganizations = true)
 				: (hasOrganizations = false);
+			const stories = await service.getStories();
+			if (user && stories) {
+				setLoadPage(true);
+			}
 			setState({
 				...state,
 				formData: {
 					...state.formData,
 					userOrganizations: userOrganizations,
 				},
+				stories: stories.allStories,
 			});
 		};
 		fetchData();
@@ -124,7 +128,7 @@ const ActivityForm = () => {
 				},
 			}),
 			Placeholder.configure({
-				placeholder: "Comença a escriure la teva història...",
+				placeholder: "Comença a descriure l'activitat...",
 			}),
 		],
 		content: "",
@@ -325,6 +329,8 @@ const ActivityForm = () => {
 			activity_opening_hours,
 			duration,
 			price,
+			review,
+			relatedStory,
 			organization,
 			metaTitle,
 			metaDescription,
@@ -356,6 +362,8 @@ const ActivityForm = () => {
 				activity_opening_hours,
 				duration,
 				price,
+				review,
+				relatedStory,
 				organization,
 				metaTitle,
 				metaDescription
@@ -517,59 +525,6 @@ const ActivityForm = () => {
 					<div className="container">
 						<div className="pt-7 pb-12">
 							<div className="flex flex-wrap items-center justify-between">
-								<div className="w-full mb-5">
-									{state.step ? (
-										<div
-											className="funnel-steps-wrapper max-w-xl mx-auto mb-7"
-											style={{ marginTop: "60px" }}
-										>
-											<ul className="list-none m-0 p-0 flex items-center justify-center text-center">
-												<li
-													className={
-														state.step ===
-														"informacio-empresa"
-															? "text-primary-500"
-															: null
-													}
-												>
-													Pas 1
-												</li>
-												<li
-													className={
-														state.step ===
-														"seleccio-pla"
-															? "text-primary-500"
-															: null
-													}
-												>
-													Pas 2
-												</li>
-												<li
-													className={
-														state.step ===
-														"seleccio-tipologia"
-															? "text-primary-500"
-															: null
-													}
-												>
-													Pas 3
-												</li>
-												<li
-													className={
-														state.step ===
-														"publicacio-fitxa"
-															? "active"
-															: null
-													}
-												>
-													Pas 4
-												</li>
-											</ul>
-										</div>
-									) : (
-										""
-									)}
-								</div>
 								<div className="w-full">
 									<h1 className="text-3xl">
 										Potencia la visibilitat de la teva
@@ -610,43 +565,6 @@ const ActivityForm = () => {
 											className="form"
 											onSubmit={handleSubmit}
 										>
-											<div className="flex flex-wrap items-stretch mt-2">
-												<div className="form__group w-1/2">
-													<label className="form__label">
-														Empresa propietària
-													</label>
-													<div className="flex items-center -mt-4 -mx-2 -mb-2">
-														{organizationsList}
-													</div>
-												</div>
-												<div className="form__group w-1/2">
-													<label className="form__label">
-														Escapada verificada?
-													</label>
-													<div className="flex items-center">
-														<label
-															htmlFor="isVerified"
-															className="form__label flex items-center"
-														>
-															<input
-																type="checkbox"
-																name="isVerified"
-																id="isVerified"
-																className="mr-2"
-																onClick={
-																	handleCheck
-																}
-																checked={
-																	state
-																		.formData
-																		.isVerified
-																}
-															/>
-															Verificada
-														</label>
-													</div>
-												</div>
-											</div>
 											<div className="form__group">
 												<label
 													htmlFor="title"
@@ -1346,8 +1264,122 @@ const ActivityForm = () => {
 													</div>
 												</div>
 											</div>
+											<div className="flex flex-wrap items-stretch mt-2">
+												<div className="form__group w-1/2">
+													<label className="form__label">
+														Escapada verificada?
+													</label>
+													<div className="flex items-center">
+														<label
+															htmlFor="isVerified"
+															className="form__label flex items-center"
+														>
+															<input
+																type="checkbox"
+																name="isVerified"
+																id="isVerified"
+																className="mr-2"
+																onClick={
+																	handleCheck
+																}
+																checked={
+																	state
+																		.formData
+																		.isVerified
+																}
+															/>
+															Verificada
+														</label>
+													</div>
+												</div>
+												{state.formData.isVerified ? (
+													<>
+														<div className="form__group w-full">
+															<label
+																htmlFor="review"
+																className="form__label"
+															>
+																Review de
+																l'escapada
+															</label>
+															<div className="flex items-center">
+																<textarea
+																	id="review"
+																	name="review"
+																	placeholder="Review de l'activitat"
+																	className="form__control"
+																	value={
+																		state
+																			.formData
+																			.review
+																	}
+																	onChange={
+																		handleChange
+																	}
+																/>
+															</div>
+														</div>
+														<div className="form__group w-full">
+															<label
+																htmlFor="review"
+																className="form__label"
+															>
+																Selecciona la
+																"Història"
+																relacionada
+															</label>
+															<div className="flex items-center">
+																<select
+																	id="relatedStory"
+																	name="relatedStory"
+																	className="form__control"
+																	onChange={
+																		handleChange
+																	}
+																>
+																	<option
+																		value=""
+																		default
+																		hidden
+																	>
+																		Selecciona
+																		una
+																		història
+																	</option>
+																	{state.stories &&
+																	state
+																		.stories
+																		.length >
+																		0
+																		? state.stories.map(
+																				(
+																					el
+																				) => {
+																					return (
+																						<option
+																							value={
+																								el._id
+																							}
+																							key={
+																								el._id
+																							}
+																						>
+																							{
+																								el.title
+																							}
+																						</option>
+																					);
+																				}
+																		  )
+																		: null}
+																</select>
+															</div>
+														</div>
+													</>
+												) : null}
+											</div>
 										</form>
-										<div className="form__group">
+										<div className="form__group mt-2">
 											<label
 												htmlFor="description"
 												className="form__label"

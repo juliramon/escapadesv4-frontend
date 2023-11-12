@@ -53,11 +53,11 @@ const Hero = () => {
 
 	return (
 		<>
-			<section id="hero" className="flex items-stretch px-6 pt-1">
+			<section id="hero" className="flex items-stretch">
 				<div
 					className={`glide ${
 						slides.length > 1 ? "js-glide-homeCover" : null
-					} rounded-lg lg:rounded-2xl overflow-hidden`}
+					} overflow-hidden`}
 				>
 					<div className="glide__track" data-glide-el="track">
 						<div className="glide__slides">
@@ -68,7 +68,7 @@ const Hero = () => {
 												key={slide.title}
 												className="glide__slide"
 											>
-												<div className="flex flex-wrap items-stretch justify-center rounded-lg lg:rounded-2xl overflow-hidden">
+												<div className="flex flex-wrap items-stretch justify-center overflow-hidden">
 													<div className="w-full md:w-1/2 bg-primary-300 hidden md:block">
 														<picture className="block w-full h-full aspect-w-4 aspect-h-3">
 															<source

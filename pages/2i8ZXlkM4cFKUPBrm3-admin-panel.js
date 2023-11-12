@@ -7,9 +7,11 @@ import UserContext from "../contexts/UserContext";
 import FetchingSpinner from "../components/global/FetchingSpinner";
 import { useRouter } from "next/router";
 import CategoryBox from "../components/dashboard/CategoryBox";
+import CharacteristicBox from "../components/dashboard/CharacteristicBox";
 import CreateCategoryModal from "../components/modals/CreateCategoryModal";
 import CreateTripCategoryModal from "../components/modals/CreateTripCategoryModal";
 import TripCategoryBox from "../components/dashboard/TripCategoryBox";
+import CreateCharacteristicModal from "../components/modals/CreateCharacteristicModal";
 
 const AdminPanel = () => {
 	// Validate if user is allowed to access this view
@@ -38,6 +40,7 @@ const AdminPanel = () => {
 		stories: [],
 		lists: [],
 		categories: [],
+		characteristics: [],
 		tripCategories: [],
 		tripEntries: [],
 		isFetching: false,
@@ -47,6 +50,8 @@ const AdminPanel = () => {
 	const [state, setState] = useState(initialState);
 	const [toggleButton, setToggleButton] = useState(false);
 	const [categoryModalVisibility, setCategoryModalVisibility] =
+		useState(false);
+	const [characteristicModalVisibility, setCharacteristicModalVisibility] =
 		useState(false);
 	const [tripCategoryModalVisibility, setTripCategoryModalVisibility] =
 		useState(false);
@@ -59,6 +64,7 @@ const AdminPanel = () => {
 			const stories = await service.getAllStories();
 			const lists = await service.getAllLists();
 			const categories = await service.getCategories();
+			const characteristics = await service.getCharacteristics();
 			const tripCategories = await service.getTripCategories();
 			const tripEntries = await service.getAllTripEntries();
 
@@ -69,6 +75,7 @@ const AdminPanel = () => {
 				stories: stories.allStories,
 				lists: lists,
 				categories: categories,
+				characteristics: characteristics,
 				tripCategories: tripCategories,
 				tripEntries: tripEntries.allTrips,
 				isFetching: false,
@@ -84,6 +91,7 @@ const AdminPanel = () => {
 		const stories = await service.getAllStories();
 		const lists = await service.getAllLists();
 		const categories = await service.getCategories();
+		const characteristics = await service.getCharacteristics();
 		const tripCategories = await service.getTripCategories();
 		const tripEntries = await service.getAllTripEntries();
 
@@ -94,6 +102,7 @@ const AdminPanel = () => {
 			stories: stories.allStories,
 			lists: lists,
 			categories: categories,
+			characteristics: characteristics,
 			tripCategories: tripCategories,
 			tripEntries: tripEntries.allTrips,
 			isFetching: false,
@@ -166,6 +175,32 @@ const AdminPanel = () => {
 				<CategoryBox
 					key={idx}
 					type={"category"}
+					id={el._id}
+					name={el.name}
+					pluralName={el.pluralName}
+					isPlace={el.isPlace}
+					illustration={el.illustration}
+					image={el.image}
+					imageCaption={el.imageCaption}
+					title={el.title}
+					subtitle={el.subtitle}
+					slug={el.slug}
+					seoTextHeader={el.seoTextHeader}
+					seoText={el.seoText}
+					icon={el.icon}
+					isSponsored={el.isSponsored}
+					sponsorURL={el.sponsorURL}
+					sponsorLogo={el.sponsorLogo}
+					sponsorClaim={el.sponsorClaim}
+					fetchData={fetchData}
+				/>
+			));
+		}
+		if (state.activeTab === "characteristics") {
+			listResults = state.characteristics.map((el, idx) => (
+				<CharacteristicBox
+					key={idx}
+					type={"characteristic"}
 					id={el._id}
 					name={el.name}
 					pluralName={el.pluralName}
@@ -551,6 +586,23 @@ const AdminPanel = () => {
 								<li>
 									<button
 										className={`py-2.5 px-4 border transition-all duration-300 ease-in-out mb-2 rounded-md cursor-pointer w-full text-left text-sm ${
+											state.activeTab == "characteristics"
+												? isActive
+												: "border-primary-100 bg-white hover:bg-primary-50"
+										}`}
+										onClick={() =>
+											setState({
+												...state,
+												activeTab: "characteristics",
+											})
+										}
+									>
+										Característiques
+									</button>
+								</li>
+								<li>
+									<button
+										className={`py-2.5 px-4 border transition-all duration-300 ease-in-out mb-2 rounded-md cursor-pointer w-full text-left text-sm ${
 											state.activeTab == "categories"
 												? isActive
 												: "border-primary-100 bg-white hover:bg-primary-50"
@@ -668,6 +720,16 @@ const AdminPanel = () => {
 						<button
 							className="bg-white hover:bg-primary-100 border-primary-200 rounded-md py-2.5 px-4 mb-1.5 shadow-lg text-sm"
 							onClick={() =>
+								setCharacteristicModalVisibility(
+									!characteristicModalVisibility
+								)
+							}
+						>
+							Publicar nova característica
+						</button>
+						<button
+							className="bg-white hover:bg-primary-100 border-primary-200 rounded-md py-2.5 px-4 mb-1.5 shadow-lg text-sm"
+							onClick={() =>
 								setTripCategoryModalVisibility(
 									!tripCategoryModalVisibility
 								)
@@ -716,6 +778,13 @@ const AdminPanel = () => {
 				<CreateCategoryModal
 					visibility={categoryModalVisibility}
 					hideModal={setCategoryModalVisibility}
+					fetchData={fetchData}
+				/>
+			) : null}
+			{characteristicModalVisibility == true ? (
+				<CreateCharacteristicModal
+					visibility={characteristicModalVisibility}
+					hideModal={setCharacteristicModalVisibility}
 					fetchData={fetchData}
 				/>
 			) : null}

@@ -8,7 +8,7 @@
         @apply scroll-smooth
 
     body
-        @apply text-base text-grey-700 font-normal leading-normal font-body
+        @apply text-base text-primary-500 font-normal leading-normal font-body
 
     h1.font-display
         @apply text-2xl leading-tight mt-0
@@ -16,7 +16,10 @@
         @screen md
             @apply text-4xl leading-1.1
 
-    h1, h2, h3, h4, h5
+    h1, h2
+        @apply font-serif font-normal
+
+    h3, h4, h5
         @apply font-medium font-headings
 
     h1
@@ -27,7 +30,7 @@
     h2
         @apply text-2xl leading-tight mb-2
         @screen md
-            @apply text-3xl leading-1.1 mb-2
+            @apply text-3xl leading-[1.3] mb-2
 
     h3
         @apply text-base leading-normal

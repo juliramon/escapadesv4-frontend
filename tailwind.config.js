@@ -1,15 +1,15 @@
 const colors = {
 	primary: {
-		50: "#f2f3f6",
-		100: "#ccd1dc",
-		200: "#99a3b9",
-		300: "#667496",
-		400: "#334673",
-		500: "#001850",
-		600: "#001340",
-		700: "#000e30",
-		800: "#000a20",
-		900: "#000510",
+		50: "#f1f1f1", // block1
+		100: "#ccd0d6",
+		200: "#99a0ad",
+		300: "#667185",
+		400: "#33415c",
+		500: "#001233", // text-color
+		600: "#000e29",
+		700: "#000b1f",
+		800: "#000714",
+		900: "#00040a",
 	},
 	secondary: {
 		50: "#ffbfa8",
@@ -24,7 +24,7 @@ const colors = {
 		900: "#d7654e",
 	},
 	tertiary: {
-		50: "#fff8ed",
+		50: "#fef8f0", // block3
 		100: "#fff0d4",
 		200: "#ffdea9",
 		300: "#ffbd5e",
@@ -73,6 +73,7 @@ module.exports = {
 			fontFamily: {
 				body: ["Circular", "sans-serif"],
 				headings: ["Circular", "sans-serif"],
+				serif: ["Prata", "sans-serif"],
 			},
 			borderRadius: {
 				350: "350px",

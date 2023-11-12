@@ -53,6 +53,8 @@ class ContentService {
 		activity_opening_hours,
 		duration,
 		price,
+		review,
+		relatedStory,
 		organization_id,
 		metaTitle,
 		metaDescription
@@ -84,6 +86,8 @@ class ContentService {
 				activity_opening_hours,
 				duration,
 				price,
+				review,
+				relatedStory,
 				organization_id,
 				metaTitle,
 				metaDescription,
@@ -110,6 +114,7 @@ class ContentService {
 	editActivity = (
 		_id,
 		slug,
+		isVerified,
 		title,
 		subtitle,
 		categories,
@@ -117,6 +122,8 @@ class ContentService {
 		region,
 		cover,
 		images,
+		review,
+		relatedStory,
 		description,
 		phone,
 		website,
@@ -132,12 +139,12 @@ class ContentService {
 		activity_opening_hours,
 		duration,
 		price,
-		organization,
 		metaTitle,
 		metaDescription
 	) =>
 		this.service.put(`/activities/${_id}`, {
 			slug,
+			isVerified,
 			title,
 			subtitle,
 			categories,
@@ -145,6 +152,8 @@ class ContentService {
 			region,
 			cover,
 			images,
+			review,
+			relatedStory,
 			description,
 			phone,
 			website,
@@ -160,7 +169,6 @@ class ContentService {
 			activity_opening_hours,
 			duration,
 			price,
-			organization,
 			metaTitle,
 			metaDescription,
 		});
@@ -253,6 +261,7 @@ class ContentService {
 		subtitle,
 		categories,
 		seasons,
+		characteristics,
 		region,
 		placeType,
 		cover,
@@ -271,6 +280,8 @@ class ContentService {
 		place_id,
 		place_opening_hours,
 		price,
+		review,
+		relatedStory,
 		organization_id,
 		metaTitle,
 		metaDescription
@@ -284,6 +295,7 @@ class ContentService {
 				subtitle,
 				categories,
 				seasons,
+				characteristics,
 				region,
 				placeType,
 				cover,
@@ -302,6 +314,8 @@ class ContentService {
 				place_id,
 				place_opening_hours,
 				price,
+				review,
+				relatedStory,
 				organization_id,
 				metaTitle,
 				metaDescription,
@@ -325,14 +339,18 @@ class ContentService {
 	editPlace = (
 		_id,
 		slug,
+		isVerified,
 		title,
 		subtitle,
 		categories,
 		seasons,
+		characteristics,
 		region,
 		placeType,
 		placeCover,
 		placeImages,
+		review,
+		relatedStory,
 		description,
 		phone,
 		website,
@@ -352,14 +370,18 @@ class ContentService {
 	) =>
 		this.service.put(`/places/${_id}`, {
 			slug,
+			isVerified,
 			title,
 			subtitle,
 			categories,
 			seasons,
+			characteristics,
 			region,
 			placeType,
 			placeCover,
 			placeImages,
+			review,
+			relatedStory,
 			description,
 			phone,
 			website,
@@ -1002,6 +1024,98 @@ class ContentService {
 
 	getSiteStats = () =>
 		this.service.get("/get-site-stats").then((res) => res.data);
+
+	// Characteristics
+	createCharacteristic = (
+		isFeatured,
+		isSponsored,
+		slug,
+		name,
+		pluralName,
+		isPlace,
+		title,
+		subtitle,
+		illustration,
+		image,
+		imageCaption,
+		icon,
+		seoTextHeader,
+		seoText,
+		sponsorURL,
+		sponsorLogo,
+		sponsorClaim
+	) => {
+		return this.service
+			.post("/characteristic", {
+				isFeatured,
+				isSponsored,
+				slug,
+				name,
+				pluralName,
+				isPlace,
+				title,
+				subtitle,
+				illustration,
+				image,
+				imageCaption,
+				icon,
+				seoTextHeader,
+				seoText,
+				sponsorURL,
+				sponsorLogo,
+				sponsorClaim,
+			})
+			.then((res) => res.data);
+	};
+
+	getCharacteristics = () =>
+		this.service.get("/characteristics").then((res) => res.data);
+
+	removeCharacteristic = (id) =>
+		this.service
+			.put(`/characteristics/${id}`, { isRemoved: true })
+			.then((res) => res.data);
+
+	editCharacteristic = (
+		id,
+		slug,
+		name,
+		pluralName,
+		isPlace,
+		title,
+		subtitle,
+		illustration,
+		image,
+		imageCaption,
+		icon,
+		seoTextHeader,
+		seoText,
+		isSponsored,
+		isFeatured,
+		sponsorURL,
+		sponsorLogo,
+		sponsorClaim
+	) => {
+		return this.service.put(`/characteristics/${id}`, {
+			slug,
+			name,
+			pluralName,
+			isPlace,
+			title,
+			subtitle,
+			illustration,
+			image,
+			imageCaption,
+			icon,
+			seoTextHeader,
+			seoText,
+			isSponsored,
+			isFeatured,
+			sponsorURL,
+			sponsorLogo,
+			sponsorClaim,
+		});
+	};
 }
 
 export default ContentService;

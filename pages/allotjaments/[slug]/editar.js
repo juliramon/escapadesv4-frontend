@@ -44,6 +44,7 @@ const EditionForm = () => {
 		formData: {
 			emptyForm: true,
 			type: "place",
+			isVerified: false,
 			title: "",
 			subtitle: "",
 			slug: "slug",
@@ -51,6 +52,7 @@ const EditionForm = () => {
 			seasons: [],
 			region: "",
 			placeType: "",
+			characteristics: [],
 			cover: "",
 			blopCover: "",
 			images: [],
@@ -59,6 +61,8 @@ const EditionForm = () => {
 			coverCloudImage: "",
 			cloudImagesUploaded: false,
 			coverCloudImageUploaded: false,
+			review: "",
+			relatedStory: "",
 			description: "",
 			phone: "",
 			website: "",
@@ -77,6 +81,8 @@ const EditionForm = () => {
 			metaTitle: "",
 			metaDescription: "",
 		},
+		characteristics: [],
+		stories: [],
 		isPlaceLoaded: false,
 	};
 
@@ -129,7 +135,9 @@ const EditionForm = () => {
 				let placeDetails = await service.getPlaceDetails(
 					router.query.slug
 				);
-				if (user && placeDetails) {
+				const characteristics = await service.getCharacteristics();
+				const stories = await service.getStories();
+				if (user && placeDetails && characteristics && stories) {
 					setLoadPage(true);
 				}
 				setState({
@@ -138,10 +146,14 @@ const EditionForm = () => {
 					formData: {
 						_id: placeDetails._id,
 						type: placeDetails.type,
+						isVerified: placeDetails.isVerified,
 						title: placeDetails.title,
 						subtitle: placeDetails.subtitle,
 						slug: placeDetails.slug,
 						categories: placeDetails.categories,
+						characteristics: placeDetails.characteristics
+							? placeDetails.characteristics
+							: [],
 						seasons: placeDetails.seasons,
 						region: placeDetails.region,
 						placeType: placeDetails.placeType,
@@ -166,9 +178,13 @@ const EditionForm = () => {
 						place_id: "",
 						place_opening_hours: "",
 						price: placeDetails.price,
+						review: placeDetails.review,
+						relatedStory: placeDetails.relarelatedStory,
 						metaTitle: placeDetails.metaTitle,
 						metaDescription: placeDetails.metaDescription,
 					},
+					characteristics: characteristics,
+					stories: stories.allStories,
 					isPlaceLoaded: true,
 				});
 				setDescription(placeDetails.description);
@@ -292,10 +308,31 @@ const EditionForm = () => {
 		}
 	};
 
+	const checkIfCharacteristicChecked = (val) => {
+		if (state.formData.characteristics) {
+			return state.formData.characteristics.includes(val) ? true : false;
+		}
+	};
+
 	const handleCheckPlaceType = (e) => {
 		setState({
 			...state,
 			formData: { ...state.formData, placeType: e.target.id },
+		});
+	};
+
+	const handleCheckCharacteristic = (e) => {
+		let characteristics = state.formData.characteristics;
+		if (e.target.checked === true) {
+			characteristics.push(e.target.id);
+		} else {
+			let index = characteristics.indexOf(e.target.id);
+
+			characteristics.splice(index, 1);
+		}
+		setState({
+			...state,
+			formData: { ...state.formData, characteristics: characteristics },
 		});
 	};
 
@@ -365,8 +402,10 @@ const EditionForm = () => {
 		const {
 			categories,
 			seasons,
+			characteristics,
 			region,
 			placeType,
+			isVerified,
 			title,
 			subtitle,
 			coverCloudImage,
@@ -375,6 +414,8 @@ const EditionForm = () => {
 			phone,
 			website,
 			slug,
+			review,
+			relatedStory,
 			metaTitle,
 			metaDescription,
 		} = state.formData;
@@ -389,14 +430,18 @@ const EditionForm = () => {
 			.editPlace(
 				_id,
 				slug,
+				isVerified,
 				title,
 				subtitle,
 				categories,
 				seasons,
+				characteristics,
 				region,
 				placeType,
 				placeCover,
 				placeImages,
+				review,
+				relatedStory,
 				description,
 				phone,
 				website,
@@ -445,7 +490,9 @@ const EditionForm = () => {
 			slug,
 			categories,
 			seasons,
+			characteristics,
 			region,
+			isVerified,
 			placeType,
 			place_full_address,
 			phone,
@@ -464,7 +511,9 @@ const EditionForm = () => {
 			slug &&
 			categories &&
 			seasons &&
+			characteristics &&
 			region &&
+			isVerified &&
 			placeType &&
 			place_full_address &&
 			phone &&
@@ -487,32 +536,19 @@ const EditionForm = () => {
 		}
 	}, [router]);
 
-	let organizationsList = [];
-	if (state.formData.userOrganizations !== undefined) {
-		organizationsList = state.formData.userOrganizations.organizations.map(
-			(el, idx) => (
-				<label key={idx} className="flex items-center m-2">
-					<input
-						value={el.orgName}
-						name="orgName"
-						type="radio"
-						id={el._id}
-						onChange={handleCheckOrganization}
-					/>
-					<div className="flex items-center p-2">
-						<div className="rounded-md w-10 h-10 border border-primary-100 overflow-hidden mr-2">
-							<img
-								src={el.orgLogo}
-								alt={el.orgName}
-								className="w-full h-full object-cover"
-							/>
-						</div>
-						<span className="text-sm">{el.orgName}</span>
-					</div>
-				</label>
-			)
-		);
-	}
+	const handleCheck = (e) => {
+		if (e.target.name === "isVerified") {
+			e.target.checked
+				? setState({
+						...state,
+						formData: { ...state.formData, isVerified: true },
+				  })
+				: setState({
+						...state,
+						formData: { ...state.formData, isVerified: false },
+				  });
+		}
+	};
 
 	if (!loadPage) {
 		return <FetchingSpinner />;
@@ -521,10 +557,7 @@ const EditionForm = () => {
 	return (
 		<>
 			<Head>
-				<title>
-					Potencia la visibilitat del teu allotjament -
-					Escapadesenparella.cat
-				</title>
+				<title>Edita l'allotjament - Escapadesenparella.cat</title>
 			</Head>
 			<div id="place">
 				<NavigationBar
@@ -534,7 +567,7 @@ const EditionForm = () => {
 					user={user}
 					path={queryId}
 				/>
-				<section>
+				<section className="pb-10">
 					<div className="container">
 						<div className="pt-7 pb-12">
 							<div className="flex items-center justify-between">
@@ -547,15 +580,6 @@ const EditionForm = () => {
 										Descriu l'allotjament per arribar a
 										parelles d'arreu de Catalunya
 									</p>
-								</div>
-								<div className="w-full lg:w-1/2 flex justify-end">
-									<button
-										className="button button__primary button__lg"
-										type="submit"
-										onClick={handleSubmit}
-									>
-										Guardar canvis
-									</button>
 								</div>
 							</div>
 							<div className="form-composer__body">
@@ -621,7 +645,6 @@ const EditionForm = () => {
 													onChange={handleChange}
 												/>
 											</div>
-
 											<div className="flex flex-wrap items-stretch mt-2">
 												<div className="form__group w-3/12">
 													<label
@@ -1069,8 +1092,64 @@ const EditionForm = () => {
 														Càmping
 													</label>
 												</div>
-											</div>
+												<div className="form__group w-full">
+													<label
+														htmlFor="caracteristica"
+														className="form__label"
+													>
+														Característiques de
+														l'allotjament
+													</label>
+													<ul className="list-none flex flex-wrap items-start m-0 p-0">
+														{state.characteristics
+															? state.characteristics.map(
+																	(el) => (
+																		<li
+																			key={
+																				el.id
+																			}
+																			className="pr-5 pb-5 w-1/2 md:w-1/3 lg:w-1/5"
+																		>
+																			<label
+																				htmlFor={
+																					el.name
+																				}
+																				className="form__label flex items-center"
+																			>
+																				<input
+																					type="checkbox"
+																					name={
+																						el.name
+																					}
+																					id={
+																						el.name
+																					}
+																					className="mr-2"
+																					onChange={
+																						handleCheckCharacteristic
+																					}
+																					checked={checkIfCharacteristicChecked(
+																						el.name
+																					)}
+																				/>
+																				<span
+																					dangerouslySetInnerHTML={{
+																						__html: el.icon,
+																					}}
+																					className="w-8 h-8 mr-1.5"
+																				></span>
 
+																				{
+																					el.name
+																				}
+																			</label>
+																		</li>
+																	)
+															  )
+															: null}
+													</ul>
+												</div>
+											</div>
 											<div className="form__group">
 												<label
 													htmlFor="loaction"
@@ -1208,7 +1287,6 @@ const EditionForm = () => {
 													]}
 												/>
 											</div>
-
 											<div className="flex flex-wrap items-center">
 												<div className="form__group w-3/12">
 													<label
@@ -1269,7 +1347,6 @@ const EditionForm = () => {
 													/>
 												</div>
 											</div>
-
 											<div className="cover">
 												<span className="form__label">
 													Imatge de portada
@@ -1336,7 +1413,6 @@ const EditionForm = () => {
 													</div>
 												</div>
 											</div>
-
 											<div className="images">
 												<span className="form__label">
 													Imatges d'aquest allotjament
@@ -1400,8 +1476,122 @@ const EditionForm = () => {
 													</div>
 												</div>
 											</div>
+											<div className="flex flex-wrap items-stretch mt-2">
+												<div className="form__group w-1/2">
+													<label className="form__label">
+														Escapada verificada?
+													</label>
+													<div className="flex items-center">
+														<label
+															htmlFor="isVerified"
+															className="form__label flex items-center"
+														>
+															<input
+																type="checkbox"
+																name="isVerified"
+																id="isVerified"
+																className="mr-2"
+																onClick={
+																	handleCheck
+																}
+																checked={
+																	state
+																		.formData
+																		.isVerified
+																}
+															/>
+															Verificada
+														</label>
+													</div>
+												</div>
+												{state.formData.isVerified ? (
+													<>
+														<div className="form__group w-full">
+															<label
+																htmlFor="review"
+																className="form__label"
+															>
+																Review de
+																l'escapada
+															</label>
+															<div className="flex items-center">
+																<textarea
+																	id="review"
+																	name="review"
+																	placeholder="Review de l'allotjament"
+																	className="form__control"
+																	value={
+																		state
+																			.formData
+																			.review
+																	}
+																	onChange={
+																		handleChange
+																	}
+																/>
+															</div>
+														</div>
+														<div className="form__group w-full">
+															<label
+																htmlFor="review"
+																className="form__label"
+															>
+																Selecciona la
+																"Història"
+																relacionada
+															</label>
+															<div className="flex items-center">
+																<select
+																	id="relatedStory"
+																	name="relatedStory"
+																	className="form__control"
+																	onChange={
+																		handleChange
+																	}
+																>
+																	<option
+																		value=""
+																		default
+																		hidden
+																	>
+																		Selecciona
+																		una
+																		història
+																	</option>
+																	{state.stories &&
+																	state
+																		.stories
+																		.length >
+																		0
+																		? state.stories.map(
+																				(
+																					el
+																				) => {
+																					return (
+																						<option
+																							value={
+																								el._id
+																							}
+																							key={
+																								el._id
+																							}
+																						>
+																							{
+																								el.title
+																							}
+																						</option>
+																					);
+																				}
+																		  )
+																		: null}
+																</select>
+															</div>
+														</div>
+													</>
+												) : null}
+											</div>
 										</form>
-										<div className="form__group">
+										<div className="form__group mt-2">
 											<label
 												htmlFor="description"
 												className="form__label"
@@ -1495,6 +1685,18 @@ const EditionForm = () => {
 						</div>
 					</div>
 				</section>
+
+				<div className="w-full fixed bottom-0 inset-x-0 bg-white border-t border-primary-50 py-2.5 z-50">
+					<div className="container flex items-center justify-end">
+						<button
+							className="button button__primary button__lg"
+							type="submit"
+							onClick={handleSubmit}
+						>
+							Guardar canvis
+						</button>
+					</div>
+				</div>
 			</div>
 		</>
 	);

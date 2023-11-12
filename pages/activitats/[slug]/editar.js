@@ -1,49 +1,50 @@
-import { useState, useEffect, useContext } from "react";
-import NavigationBar from "../../../components/global/NavigationBar";
-import ContentService from "../../../services/contentService";
 import { useRouter } from "next/router";
-import Autocomplete from "react-google-autocomplete";
-import UserContext from "../../../contexts/UserContext";
-import Head from "next/head";
+import { useState, useEffect, useContext } from "react";
 import FetchingSpinner from "../../../components/global/FetchingSpinner";
-import EditorNavbar from "../../../components/editor/EditorNavbar";
+import Head from "next/head";
+import ContentService from "../../../services/contentService";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import UserContext from "../../../contexts/UserContext";
+import NavigationBar from "../../../components/global/NavigationBar";
+import Autocomplete from "react-google-autocomplete";
+import EditorNavbar from "../../../components/editor/EditorNavbar";
+import { EditorView } from "prosemirror-view";
+
+EditorView.prototype.updateState = function updateState(state) {
+	if (!this.docView) return; // This prevents the matchesNode error on hot reloads
+	this.updateStateInner(state, this.state.plugins !== state.plugins);
+};
 
 const ActivityEditionForm = () => {
 	// Validate if user is allowed to access this view
 	const { user } = useContext(UserContext);
 	const [loadPage, setLoadPage] = useState(false);
-	useEffect(() => {
-		if (user) {
-			setLoadPage(true);
-		}
-	}, []);
 	// End validation
 
 	const router = useRouter();
 
 	useEffect(() => {
-		if (!user) {
+		if (!user || user === "null" || user === undefined) {
 			router.push("/login");
-		}
-		if (
-			router.pathname.includes("editar") ||
-			router.pathname.includes("nova-activitat") ||
-			router.pathname.includes("nou-allotjament") ||
-			router.pathname.includes("nova-historia")
-		) {
-			document.querySelector("body").classList.add("bg-primary-100");
 		} else {
-			document.querySelector("body").classList.remove("bg-primary-100");
+			if (user) {
+				if (user.accountCompleted === false) {
+					router.push("/signup/complete-account");
+				}
+				if (user.hasConfirmedEmail === false) {
+					router.push("/signup/confirmacio-correu");
+				}
+			}
 		}
-	}, [user, router]);
+	}, [user]);
 
 	const initialState = {
 		activity: {},
 		formData: {
 			emptyForm: true,
 			type: "activity",
+			isVerified: false,
 			title: "",
 			subtitle: "",
 			slug: "slug",
@@ -58,6 +59,7 @@ const ActivityEditionForm = () => {
 			coverCloudImage: "",
 			cloudImagesUploaded: false,
 			coverCloudImageUploaded: false,
+			review: "",
 			phone: "",
 			website: "",
 			activity_full_address: "",
@@ -77,8 +79,10 @@ const ActivityEditionForm = () => {
 			metaTitle: "",
 			metaDescription: "",
 		},
+		stories: [],
 		isActivityLoaded: false,
 	};
+
 	const [state, setState] = useState(initialState);
 	const [queryId, setQueryId] = useState(null);
 	const [activeTab, setActiveTab] = useState("main");
@@ -92,6 +96,23 @@ const ActivityEditionForm = () => {
 
 	const service = new ContentService();
 
+	const editor = useEditor({
+		extensions: [StarterKit],
+		content: description,
+		onUpdate: (props) => {
+			const data = {
+				html: props.editor.getHTML(),
+				text: props.editor.state.doc.textContent,
+			};
+			setDescription(data.html);
+		},
+		autofocus: false,
+		parseOptions: {
+			preserveWhitespace: true,
+		},
+	});
+
+	// Fetch data
 	useEffect(() => {
 		if (router.query.slug !== undefined) {
 			const fetchData = async () => {
@@ -101,14 +122,26 @@ const ActivityEditionForm = () => {
 				userOrganizations.number > 0
 					? (hasOrganizations = true)
 					: (hasOrganizations = false);
+				setState({
+					...state,
+					formData: {
+						...state.formData,
+						userOrganizations: userOrganizations,
+					},
+				});
 				let activityDetails = await service.activityDetails(
 					router.query.slug
 				);
+				const stories = await service.getStories();
+				if (user && activityDetails && stories) {
+					setLoadPage(true);
+				}
 				setState({
 					activity: activityDetails,
 					formData: {
 						_id: activityDetails._id,
 						type: activityDetails.type,
+						isVerified: activityDetails.isVerified,
 						title: activityDetails.title,
 						subtitle: activityDetails.subtitle,
 						slug: activityDetails.slug,
@@ -137,12 +170,14 @@ const ActivityEditionForm = () => {
 						activity_opening_hours: "",
 						duration: activityDetails.duration,
 						price: activityDetails.price,
+						review: activityDetails.review,
 						metaTitle: activityDetails.metaTitle,
 						metaDescription: activityDetails.metaDescription,
-						userOrganizations: userOrganizations,
 					},
+					stories: stories.allStories,
 					isActivityLoaded: true,
 				});
+				setDescription(activityDetails.description);
 				if (editor) {
 					editor.commands.setContent(activityDetails.description);
 				}
@@ -150,23 +185,7 @@ const ActivityEditionForm = () => {
 			fetchData();
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [queryId]);
-
-	const editor = useEditor({
-		extensions: [StarterKit],
-		content: description !== "" ? description : "",
-		onUpdate: (props) => {
-			const data = {
-				html: props.editor.getHTML(),
-				text: props.editor.state.doc.textContent,
-			};
-			setDescription(data.html);
-		},
-		autofocus: false,
-		parseOptions: {
-			preserveWhitespace: true,
-		},
-	});
+	}, [queryId, router.query.slug]);
 
 	const saveFileToStatus = (e) => {
 		const fileToUpload = e.target.files[0];
@@ -220,34 +239,12 @@ const ActivityEditionForm = () => {
 		}
 	}
 
-	if (
-		state.activity.cover ||
-		state.formData.blopCover ||
-		state.formData.cover
-	) {
-		let stateCover;
-		state.formData.blopCover !== ""
-			? (stateCover = state.formData.blopCover)
-			: (stateCover = state.activity.cover);
+	if (state.formData.blopCover || state.formData.cover) {
 		coverImage = (
 			<div className="m-2 relative w-48 h-auto overflow-hidden rounded-md border-8 border-white shadow">
-				<img src={stateCover} />
-				<button className="w-auto p-0 bg-black bg-opacity-60 rounded-full absolute top-3 right-3"></button>
+				<img src={state.formData.blopCover || state.formData.cover} />
 			</div>
 		);
-	}
-
-	let selectedOrganization;
-	if (state.formData.userOrganizations) {
-		if (state.formData.userOrganizations.organizations) {
-			state.formData.userOrganizations.organizations.forEach((el) => {
-				if (state.formData.organization) {
-					if (el._id === state.formData.organization._id) {
-						selectedOrganization = state.formData.organization._id;
-					}
-				}
-			});
-		}
 	}
 
 	const checkIfCategoryChecked = (val) => {
@@ -271,9 +268,6 @@ const ActivityEditionForm = () => {
 	const submitActivity = async () => {
 		const {
 			_id,
-			categories,
-			seasons,
-			region,
 			cover,
 			images,
 			activity_full_address,
@@ -288,6 +282,10 @@ const ActivityEditionForm = () => {
 			activity_opening_hours,
 		} = state.activity;
 		const {
+			categories,
+			seasons,
+			region,
+			isVerified,
 			title,
 			subtitle,
 			slug,
@@ -299,8 +297,9 @@ const ActivityEditionForm = () => {
 			website,
 			duration,
 			price,
+			review,
+			relatedStory,
 		} = state.formData;
-		const { organization } = state;
 		let activityCover, activityImages;
 		coverCloudImage !== ""
 			? (activityCover = coverCloudImage)
@@ -308,36 +307,39 @@ const ActivityEditionForm = () => {
 		cloudImages.length > 0
 			? (activityImages = cloudImages)
 			: (activityImages = images);
-		service.editActivity(
-			_id,
-			slug,
-			title,
-			subtitle,
-			categories,
-			seasons,
-			region,
-			activityCover,
-			activityImages,
-			description,
-			phone,
-			website,
-			activity_full_address,
-			activity_locality,
-			activity_province,
-			activity_state,
-			activity_country,
-			activity_lat,
-			activity_lng,
-			activity_rating,
-			activity_place_id,
-			activity_opening_hours,
-			duration,
-			price,
-			organization,
-			metaTitle,
-			metaDescription
-		);
-		// .then(() => router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel"));
+		service
+			.editActivity(
+				_id,
+				slug,
+				isVerified,
+				title,
+				subtitle,
+				categories,
+				seasons,
+				region,
+				activityCover,
+				activityImages,
+				review,
+				relatedStory,
+				description,
+				phone,
+				website,
+				activity_full_address,
+				activity_locality,
+				activity_province,
+				activity_state,
+				activity_country,
+				activity_lat,
+				activity_lng,
+				activity_rating,
+				activity_place_id,
+				activity_opening_hours,
+				duration,
+				price,
+				metaTitle,
+				metaDescription
+			)
+			.then(() => router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel"));
 	};
 
 	const handleFileUpload = (e) => {
@@ -475,46 +477,19 @@ const ActivityEditionForm = () => {
 		}
 	};
 
-	let organizationsList = [];
-	if (state.formData.userOrganizations !== undefined) {
-		if (state.formData.userOrganizations.organizations !== undefined) {
-			organizationsList =
-				state.formData.userOrganizations.organizations.map(
-					(el, idx) => {
-						let isChecked;
-						if (!state.organization) {
-							if (selectedOrganization === el._id) {
-								isChecked = true;
-							}
-						}
-						return (
-							<label key={idx} className="flex items-center m-2">
-								<input
-									value={el.orgName}
-									name="orgName"
-									type="radio"
-									id={el._id}
-									onChange={handleCheckOrganization}
-									checked={isChecked}
-								/>
-								<div className="flex items-center p-2">
-									<div className="rounded-md w-10 h-10 border border-primary-100 overflow-hidden mr-2">
-										<img
-											src={el.orgLogo}
-											alt={el.orgName}
-											className="w-full h-full object-cover"
-										/>
-									</div>
-									<span className="text-sm">
-										{el.orgName}
-									</span>
-								</div>
-							</label>
-						);
-					}
-				);
+	const handleCheck = (e) => {
+		if (e.target.name === "isVerified") {
+			e.target.checked
+				? setState({
+						...state,
+						formData: { ...state.formData, isVerified: true },
+				  })
+				: setState({
+						...state,
+						formData: { ...state.formData, isVerified: false },
+				  });
 		}
-	}
+	};
 
 	if (!loadPage) {
 		return <FetchingSpinner />;
@@ -577,14 +552,6 @@ const ActivityEditionForm = () => {
 											className="form"
 											onSubmit={handleSubmit}
 										>
-											<div className="form__group">
-												<label className="form__label">
-													Empresa propietària
-												</label>
-												<div className="flex items-center -mt-4 -mx-2 -mb-2">
-													{organizationsList}
-												</div>
-											</div>
 											<div className="form__group">
 												<label
 													htmlFor="title"
@@ -1287,21 +1254,134 @@ const ActivityEditionForm = () => {
 													</div>
 												</div>
 											</div>
-
-											<div className="form__group">
-												<label
-													htmlFor="description"
-													className="form__label"
-												>
-													Descripció
-												</label>
-												<EditorNavbar editor={editor} />
-												<EditorContent
-													editor={editor}
-													className="form-composer__editor"
-												/>
+											<div className="flex flex-wrap items-stretch mt-2">
+												<div className="form__group w-1/2">
+													<label className="form__label">
+														Escapada verificada?
+													</label>
+													<div className="flex items-center">
+														<label
+															htmlFor="isVerified"
+															className="form__label flex items-center"
+														>
+															<input
+																type="checkbox"
+																name="isVerified"
+																id="isVerified"
+																className="mr-2"
+																onClick={
+																	handleCheck
+																}
+																checked={
+																	state
+																		.formData
+																		.isVerified
+																}
+															/>
+															Verificada
+														</label>
+													</div>
+												</div>
+												{state.formData.isVerified ? (
+													<>
+														<div className="form__group w-full">
+															<label
+																htmlFor="review"
+																className="form__label"
+															>
+																Review de
+																l'escapada
+															</label>
+															<div className="flex items-center">
+																<textarea
+																	id="review"
+																	name="review"
+																	placeholder="Review de l'allotjament"
+																	className="form__control"
+																	value={
+																		state
+																			.formData
+																			.review
+																	}
+																	onChange={
+																		handleChange
+																	}
+																/>
+															</div>
+														</div>
+														<div className="form__group w-full">
+															<label
+																htmlFor="review"
+																className="form__label"
+															>
+																Selecciona la
+																"Història"
+																relacionada
+															</label>
+															<div className="flex items-center">
+																<select
+																	id="relatedStory"
+																	name="relatedStory"
+																	className="form__control"
+																	onChange={
+																		handleChange
+																	}
+																>
+																	<option
+																		value=""
+																		default
+																		hidden
+																	>
+																		Selecciona
+																		una
+																		història
+																	</option>
+																	{state.stories &&
+																	state
+																		.stories
+																		.length >
+																		0
+																		? state.stories.map(
+																				(
+																					el
+																				) => {
+																					return (
+																						<option
+																							value={
+																								el._id
+																							}
+																							key={
+																								el._id
+																							}
+																						>
+																							{
+																								el.title
+																							}
+																						</option>
+																					);
+																				}
+																		  )
+																		: null}
+																</select>
+															</div>
+														</div>
+													</>
+												) : null}
 											</div>
 										</form>
+										<div className="form__group mt-2">
+											<label
+												htmlFor="description"
+												className="form__label"
+											>
+												Descripció
+											</label>
+											<EditorNavbar editor={editor} />
+											<EditorContent
+												editor={editor}
+												className="form-composer__editor"
+											/>
+										</div>
 									</div>
 								) : (
 									<div className="form__wrapper">
@@ -1384,17 +1464,15 @@ const ActivityEditionForm = () => {
 					</div>
 				</section>
 
-				<div className="w-full fixed bottom-0 inset-x-0 bg-white border-t border-primary-200 py-2.5">
+				<div className="w-full fixed bottom-0 inset-x-0 bg-white border-t border-primary-50 py-2.5 z-50">
 					<div className="container flex items-center justify-end">
-						<div className="px-5">
-							<button
-								className="button__primary button__lg"
-								type="submit"
-								onClick={handleSubmit}
-							>
-								Guardar canvis
-							</button>
-						</div>
+						<button
+							className="button button__primary button__lg"
+							type="submit"
+							onClick={handleSubmit}
+						>
+							Guardar canvis
+						</button>
 					</div>
 				</div>
 			</div>

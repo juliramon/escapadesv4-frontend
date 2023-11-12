@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { useState } from "react";
 import ContentService from "../../services/contentService";
-import EditCategoryModal from "../modals/EditCategoryModal";
+import EditCharacteristicModal from "../modals/EditCharacteristicModal";
 import ShareModal from "../modals/ShareModal";
 
-const CategoryBox = ({
+const CharacteristicBox = ({
 	id,
 	name,
 	pluralName,
@@ -28,7 +28,8 @@ const CategoryBox = ({
 
 	let shortenedSubtitle = subtitle.slice(0, 70);
 	const service = new ContentService();
-	const removeItem = () => service.removeCategory(id).then(() => fetchData());
+	const removeItem = () =>
+		service.removeCharacteristic(id).then(() => fetchData());
 
 	const urlToShare = `https://escapadesenparella.cat/${slug}`;
 
@@ -36,27 +37,26 @@ const CategoryBox = ({
 	const handleShareModalVisibility = () => setShareModalVisibility(true);
 	const hideShareModalVisibility = () => setShareModalVisibility(false);
 
-	const [editCategoryModalVisibility, setEditCategoryModalVisibility] =
-		useState(false);
-	const handleEditCategoryModalVisibility = () =>
-		setEditCategoryModalVisibility(true);
-	const hideEditCategoryModalVisibility = () =>
-		setEditCategoryModalVisibility(false);
+	const [
+		editCharacteristicModalVisibility,
+		setEditCharacteristicModalVisibility,
+	] = useState(false);
+	const handleEditCharacteristicModalVisibility = () =>
+		setEditCharacteristicModalVisibility(true);
+	const hideEditCharacteristicModalVisibility = () =>
+		setEditCharacteristicModalVisibility(false);
 
 	return (
 		<div className="content rounded-md box flex items-center w-full bg-primary-50 border border-primary-100 mb-2.5 px-5 py-4">
 			<Link href={`/${slug}`}>
 				<a className="flex items-center justify-between w-full">
-					<div className="flex items-center justify-center bg-white overflow-hidden h-12 w-12 rounded-md p-0 mr-5 border border-primary-100">
-						<img
-							src={image}
-							alt={title}
-							className="w-full h-full object-cover"
-						/>
-					</div>
-					<h3 className="text-lg m-0 pr-5 w-96">{title}</h3>
+					<div
+						className="flex items-center justify-center bg-white overflow-hidden h-12 w-12 rounded-md p-0 mr-5 border border-primary-100"
+						dangerouslySetInnerHTML={{ __html: icon }}
+					></div>
+					<h3 className="text-lg m-0 pr-5 w-96">{name}</h3>
 					<span className="m-0 pr-16 text-sm flex-1">
-						{shortenedSubtitle}...
+						{/* {shortenedSubtitle}... */}
 					</span>
 				</a>
 			</Link>
@@ -113,7 +113,9 @@ const CategoryBox = ({
 					</li>
 					<li className="border-b border-primary-100 w-full">
 						<button
-							onClick={() => handleEditCategoryModalVisibility()}
+							onClick={() =>
+								handleEditCharacteristicModalVisibility()
+							}
 							className="dropdown__menu_item"
 						>
 							<svg
@@ -173,9 +175,9 @@ const CategoryBox = ({
 				hideModal={hideShareModalVisibility}
 				url={urlToShare}
 			/>
-			<EditCategoryModal
-				visibility={editCategoryModalVisibility}
-				hideModal={hideEditCategoryModalVisibility}
+			<EditCharacteristicModal
+				visibility={editCharacteristicModalVisibility}
+				hideModal={hideEditCharacteristicModalVisibility}
 				id={id}
 				slug={slug}
 				name={name}
@@ -199,4 +201,4 @@ const CategoryBox = ({
 	);
 };
 
-export default CategoryBox;
+export default CharacteristicBox;

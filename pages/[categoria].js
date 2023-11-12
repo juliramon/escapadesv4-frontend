@@ -253,6 +253,7 @@ const CategoryPage = ({
 												duration={el.duration}
 												website={el.website}
 												phone={el.phone}
+												isVerified={el.isVerified}
 												location={
 													el.activity_locality ||
 													el.place_locality
@@ -278,6 +279,7 @@ const CategoryPage = ({
 												duration={el.duration}
 												website={el.website}
 												phone={el.phone}
+												isVerified={el.isVerified}
 												location={
 													el.activity_locality ||
 													el.place_locality

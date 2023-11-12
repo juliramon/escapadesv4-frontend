@@ -100,6 +100,7 @@ const RegioPage = ({
 					website={el.website}
 					phone={el.phone}
 					location={location}
+					isVerified={el.isVerified}
 				/>
 			);
 		});

@@ -7,6 +7,7 @@ const PublicSquareBox = ({
 	placeType,
 	title,
 	duration,
+	isVerified,
 	location,
 	website,
 	categoria,
@@ -140,8 +141,8 @@ const PublicSquareBox = ({
 					title={title}
 					className="flex flex-col justify-between h-full rounded-md shadow-md overflow-hidden relative"
 				>
-					<div className="aspect-w-4 aspect-h-3 relative overflow-hidden">
-						<picture className="w-full h-full">
+					<div className="relative overflow-hidden">
+						<picture className="block w-full h-full aspect-w-4 aspect-h-3">
 							<source srcSet={coverImg} />
 							<img
 								src={coverImg}
@@ -162,6 +163,36 @@ const PublicSquareBox = ({
 								height="300"
 							/>
 						</picture>
+						{isVerified ? (
+							<span className="inline-flex items-center absolute top-2 right-2 text-primary-500 bg-white rounded py-1 px-2 shadow-md">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="mr-1 text-[#57A1FE]"
+									width={18}
+									height={18}
+									viewBox="0 0 24 24"
+									stroke-width={1.5}
+									stroke="currentColor"
+									fill="none"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								>
+									<path
+										stroke="none"
+										d="M0 0h24v24H0z"
+										fill="none"
+									></path>
+									<path
+										d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+										strokeWidth={0}
+										fill="currentColor"
+									></path>
+								</svg>
+								<span className="text-xs inline-block relative top-px">
+									Verificada
+								</span>
+							</span>
+						) : null}
 					</div>
 					<div className="flex flex-col justify-between p-4 h-full">
 						<div className="">
