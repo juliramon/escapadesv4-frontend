@@ -81,7 +81,7 @@ const HomePageResults = ({
 						<h2 className="mb-0">
 							Els allotjaments més ben valorats
 						</h2>
-						<div className="flex flex-wrap items-stretch -mx-1.5 mt-2">
+						<div className="flex flex-wrap items-start -mx-1.5 mt-2">
 							{state.mostRatedGetaways.length > 0
 								? state.mostRatedGetaways.map((el, idx) => {
 										while (
@@ -191,7 +191,7 @@ const HomePageResults = ({
 						<h2 className="mb-0">
 							Escapades romàntiques per desconnectar
 						</h2>
-						<div className="flex flex-wrap items-stretch -mx-1.5 mt-2">
+						<div className="flex flex-wrap items-start -mx-1.5 mt-2">
 							{state.featuredRomanticGetaways.length > 0
 								? state.featuredRomanticGetaways.map((el) => {
 										while (
@@ -279,7 +279,7 @@ const HomePageResults = ({
 							Històries en parella, el blog
 							d'Escapadesenparella.cat
 						</h2>
-						<div className="flex flex-wrap items-stretch mt-2 -mx-2">
+						<div className="flex flex-wrap items-start mt-2 -mx-2">
 							{state.mostRecentStories.length > 0
 								? state.mostRecentStories.map((story, idx) => {
 										return (
@@ -396,7 +396,7 @@ const HomePageResults = ({
 					{/* Most popular adventure getaways */}
 					<section className="pt-12">
 						<h2 className="mb-0">L'aventura us crida</h2>
-						<div className="flex flex-wrap items-stretch -mx-1.5 mt-2">
+						<div className="flex flex-wrap items-start -mx-1.5 mt-2">
 							{state.featuredAdventureGetaways.length > 0
 								? state.featuredAdventureGetaways.map((el) => {
 										while (
@@ -483,7 +483,7 @@ const HomePageResults = ({
 						<h2 className="mb-0">
 							La millor cita als millors restaurants
 						</h2>
-						<div className="flex flex-wrap items-stretch -mx-1.5 mt-2">
+						<div className="flex flex-wrap items-start -mx-1.5 mt-2">
 							{state.featuredGastronomicGetaways.length > 0
 								? state.featuredGastronomicGetaways.map(
 										(el) => {
@@ -579,7 +579,7 @@ const HomePageResults = ({
 						</div>
 
 						<div className="mt-4">
-							<div className="flex flex-wrap items-stretch justify-center">
+							<div className="flex flex-wrap items-start justify-center">
 								<ul className="list-none -m-1.5 pt-4 px-0 columns-1 md:columns-2 lg:columns-3 w-full">
 									{state.activityCategories
 										? state.activityCategories.map(
