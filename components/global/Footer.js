@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import ContentService from "../../services/contentService";
+import KoFiBadge from "./KoFiBadge";
 
 const Footer = () => {
 	const service = new ContentService();
@@ -377,6 +378,8 @@ const Footer = () => {
 					</div>
 				</div>
 			</div>
+
+			<KoFiBadge />
 		</footer>
 	);
 };
