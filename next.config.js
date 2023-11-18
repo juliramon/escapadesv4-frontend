@@ -358,7 +358,7 @@ module.exports = withTM({
 				permanent: true,
 			},
 			{
-				source: "/categories-escapades/escapades-aventura/?search_keywords=&search_region=182&search_categories[]=&filter_job_type[]=",
+				source: "/categories-escapades/escapades-aventura",
 				destination: "/escapades-aventura",
 				permanent: true,
 			},
@@ -379,17 +379,7 @@ module.exports = withTM({
 				permanent: true,
 			},
 			{
-				source: "/categories-escapades/escapades-hivern/?search_keywords=&search_region=0&search_categories[]=179&filter_job_type[]=",
-				destination: "/escapades-hivern",
-				permanent: true,
-			},
-			{
-				source: "/categories-escapades/escapades-hivern/?search_keywords=&search_region=0&search_categories[]=177&filter_job_type[]=",
-				destination: "/escapades-hivern",
-				permanent: true,
-			},
-			{
-				source: "/categories-escapades/escapades-hivern/?search_keywords=&search_region=182&search_categories[]=&filter_job_type[]=",
+				source: "/categories-escapades/escapades-hivern",
 				destination: "/escapades-hivern",
 				permanent: true,
 			},
@@ -420,7 +410,7 @@ module.exports = withTM({
 				permanent: true,
 			},
 			{
-				source: "/escapades-romantiques/hotel-castell-de-ciutat-seu-urgell?db-claim",
+				source: "/escapades-romantiques/hotel-castell-de-ciutat-seu-urgell",
 				destination:
 					"/escapades-de-relax/hotel-castell-de-ciutat-hotel-boutique-la-seu-urgell-lleida",
 				permanent: true,
