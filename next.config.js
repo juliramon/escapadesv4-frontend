@@ -106,11 +106,6 @@ module.exports = withTM({
 				permanent: true,
 			},
 			{
-				source: "/escapades-gastronomiques/la-terra-a-girona",
-				destination: "/escapades-gastronomiques/local-la-terra-girona",
-				permanent: true,
-			},
-			{
 				source: "/carabanes",
 				destination: "/caravanes",
 				permanent: true,
@@ -319,6 +314,125 @@ module.exports = withTM({
 			{
 				source: "/escapades-gastronomiques/local-la-terra-girona",
 				destination: "/escapades-gastronomiques/la-terra-a-girona",
+				permanent: true,
+			},
+			{
+				source: "/undefined",
+				destination: "/",
+				permanent: true,
+			},
+			{
+				source: "/escapades-lleida",
+				destination: "/escapades-catalunya/escapades-lleida",
+				permanent: true,
+			},
+			{
+				source: "/escapades-gastronomiques/restaurant-orquestra-argentona",
+				destination: "/escapades-gastronomiques",
+				permanent: true,
+			},
+			{
+				source: "/escapades/restaurant-fosbury-castelldefels",
+				destination:
+					"/escapades-gastronomiques/fosbury-cafe-castelldefels-barcelona",
+				permanent: true,
+			},
+			{
+				source: "/viatge-a-estocolm",
+				destination: "/viatges/viatge-a-estolcom",
+				permanent: true,
+			},
+			{
+				source: "/escapades-aventura/2016/puigpedros-raquetes-de-neu/",
+				destination: "/histories/puigpedros-raquetes-neu-malniu",
+				permanent: true,
+			},
+			{
+				source: "/escapades-culturals/2016/fundacio-cram-alliberament-tortugues/",
+				destination: "/histories/fundacio-cram-alliberament-tortugues",
+				permanent: true,
+			},
+			{
+				source: "/categories-escapades/escapades-culturals",
+				destination: "/escapades-culturals",
+				permanent: true,
+			},
+			{
+				source: "/categories-escapades/escapades-aventura/?search_keywords=&search_region=182&search_categories[]=&filter_job_type[]=",
+				destination: "/escapades-aventura",
+				permanent: true,
+			},
+			{
+				source: "/escapades/hotel-rural-vinyes-de-lemporda/",
+				destination:
+					"/escapades-romantiques/hotel-rural-vinyes-emporda",
+				permanent: true,
+			},
+			{
+				source: "/listing-region/tarragona",
+				destination: "/escapades-catalunya/escapades-tarragona",
+				permanent: true,
+			},
+			{
+				source: "/listing-region/tarragona/",
+				destination: "/escapades-catalunya/escapades-tarragona",
+				permanent: true,
+			},
+			{
+				source: "/categories-escapades/escapades-hivern/?search_keywords=&search_region=0&search_categories[]=179&filter_job_type[]=",
+				destination: "/escapades-hivern",
+				permanent: true,
+			},
+			{
+				source: "/categories-escapades/escapades-hivern/?search_keywords=&search_region=0&search_categories[]=177&filter_job_type[]=",
+				destination: "/escapades-hivern",
+				permanent: true,
+			},
+			{
+				source: "/categories-escapades/escapades-hivern/?search_keywords=&search_region=182&search_categories[]=&filter_job_type[]=",
+				destination: "/escapades-hivern",
+				permanent: true,
+			},
+			{
+				source: "/[categoria]/escapades-estiu",
+				destination: "/escapades-estiu",
+				permanent: true,
+			},
+			{
+				source: "/tag/vacation/",
+				destination: "/",
+				permanent: true,
+			},
+			{
+				source: "/categories-escapades/escapades-gastronomiques",
+				destination: "/escapades-gastronomiques",
+				permanent: true,
+			},
+			{
+				source: "/escapades-gastronomiques/cals-frares-santa-elena-agell",
+				destination: "/escapades-gastronomiques/cals-frares",
+				permanent: true,
+			},
+			{
+				source: "/escapades-aventura/refugi-comes-de-rubio-pallars-sobira",
+				destination:
+					"/escapades-aventura/refugi-comes-rubio-massis-orri-pallars-sobira",
+				permanent: true,
+			},
+			{
+				source: "/escapades-romantiques/hotel-castell-de-ciutat-seu-urgell?db-claim",
+				destination:
+					"/escapades-de-relax/hotel-castell-de-ciutat-hotel-boutique-la-seu-urgell-lleida",
+				permanent: true,
+			},
+			{
+				source: "/escapades-culturals/vilanova-de-banat-cadi",
+				destination: "/escapades-culturals/vilanova-de-banat",
+				permanent: true,
+			},
+			{
+				source: "/tag/pirineus/",
+				destination: "/escapades-catalunya/escapades-pirineus",
 				permanent: true,
 			},
 		];
