@@ -1,14 +1,35 @@
 import Glide from "@glidejs/glide";
 import Link from "next/link";
 import { useEffect } from "react";
+import { getPicturesBySeason } from "../../utils/helpers";
 
 const Hero = () => {
+	const firstSlidePictures = {
+		spring: {},
+		summer: {
+			picture_webp: "home-cover-estiu.webp",
+			picture_raw: "home-cover-estiu.jpg",
+			picture_webp_mob: "home-cover-estiu-m.webp",
+			picture_raw_mob: "home-cover-estiu-m.jpg",
+		},
+		autumn: {
+			picture_webp: "home-cover-tardor.webp",
+			picture_raw: "home-cover-tardor.jpg",
+			picture_webp_mob: "home-cover-tardor-m.webp",
+			picture_raw_mob: "home-cover-tardor-m.jpg",
+		},
+		winter: {},
+	};
+
+	const currentDate = new Date();
+	const slideImage = getPicturesBySeason(currentDate, firstSlidePictures);
+
 	const slides = [
 		{
-			picture_webp: "home-cover-1.webp",
-			picture_raw: "home-cover-1.jpg",
-			picture_webp_mob: "home-cover-1-m.webp",
-			picture_raw_mob: "home-cover-1-m.jpg",
+			picture_webp: slideImage.picture_webp,
+			picture_raw: slideImage.picture_raw,
+			picture_webp_mob: slideImage.picture_webp_mob,
+			picture_raw_mob: slideImage.picture_raw_mob,
 			picture_alt: "La vostra propera escapada en parella comença aquí",
 			tagline: "Escapadesenparella.cat",
 			title: `La vostra propera escapada

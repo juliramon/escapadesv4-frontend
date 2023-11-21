@@ -97,4 +97,50 @@ const formatDateTimeToISODate = (datetime) => {
 	});
 };
 
-export { handleFilesUpload, removeImage, formatDateTimeToISODate };
+/**
+ * getSeasonPictures
+ *
+ * Utility function to select an image from an object of seasons
+ * based on the current date.
+ * The function expects two parameters:
+ *
+ * @param {string} thisDate
+ * @param {object} objImages
+ */
+
+const getPicturesBySeason = (thisDate, objImages) => {
+	const currentYear = thisDate.getFullYear();
+
+	const triggers = {
+		winter: currentYear + "/12/21",
+		spring: currentYear + "/03/20",
+		summer: currentYear + "/06/21",
+		autumn: currentYear + "/09/21",
+	};
+
+	let selectedImages;
+
+	switch (true) {
+		case thisDate > new Date(triggers.autumn):
+			selectedImages = objImages.autumn;
+			break;
+		case thisDate > new Date(triggers.winter):
+			selectedImages = objImages.winter;
+			break;
+		case thisDate > new Date(triggers.spring):
+			selectedImages = objImages.spring;
+			break;
+		default:
+			selectedImages = objImages.summer;
+			break;
+	}
+
+	return selectedImages;
+};
+
+export {
+	handleFilesUpload,
+	removeImage,
+	formatDateTimeToISODate,
+	getPicturesBySeason,
+};
