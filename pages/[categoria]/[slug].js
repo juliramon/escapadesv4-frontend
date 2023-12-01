@@ -12,6 +12,7 @@ import FancyboxUtil from "../../utils/FancyboxUtils";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
 import { formatDateTimeToISODate } from "../../utils/helpers";
+import ListingDiscount from "../../components/listingpage/ListingDiscount";
 
 const GetawayListing = ({
 	getawayDetails,
@@ -74,7 +75,7 @@ const GetawayListing = ({
 								if (
 									el.bookmarkActivityRef &&
 									el.bookmarkActivityRef._id ===
-										getawayDetails._id
+									getawayDetails._id
 								) {
 									return (bookmarkDetails = el);
 								}
@@ -479,22 +480,18 @@ const GetawayListing = ({
 																r={9}
 															></circle>
 														</svg>
-														<span className="text-white text-sm relative inline-block top-px">{`${
-															getawayDetails.activity_locality ===
+														<span className="text-white text-sm relative inline-block top-px">{`${getawayDetails.activity_locality ===
 															undefined
-																? ""
-																: getawayDetails.activity_locality
-														}${
-															getawayDetails.activity_locality ===
-															undefined
+															? ""
+															: getawayDetails.activity_locality
+															}${getawayDetails.activity_locality ===
+																undefined
 																? ""
 																: ","
-														} ${
-															getawayDetails.activity_province ||
+															} ${getawayDetails.activity_province ||
 															getawayDetails.activity_state
-														}, ${
-															getawayDetails.activity_country
-														}`}</span>
+															}, ${getawayDetails.activity_country
+															}`}</span>
 													</li>
 												</ul>
 											</div>
@@ -600,7 +597,7 @@ const GetawayListing = ({
 														<div className="w-full lg:w-1/2 flex flex-wrap h-40 lg:h-50vh">
 															{getawayDetails
 																.images[1] !==
-															undefined ? (
+																undefined ? (
 																<div
 																	className="w-1/4 lg:w-1/2 flex-auto h-full lg:h-1/2 p-0.5"
 																	data-fancybox="gallery"
@@ -622,7 +619,7 @@ const GetawayListing = ({
 															) : null}
 															{getawayDetails
 																.images[2] !==
-															undefined ? (
+																undefined ? (
 																<div
 																	className="w-1/4 lg:w-1/2 flex-auto h-full lg:h-1/2 p-0.5"
 																	data-fancybox="gallery"
@@ -644,7 +641,7 @@ const GetawayListing = ({
 															) : null}
 															{getawayDetails
 																.images[3] !==
-															undefined ? (
+																undefined ? (
 																<div
 																	className="w-1/4 lg:w-1/2 flex-auto h-full lg:h-1/2 p-0.5"
 																	data-fancybox="gallery"
@@ -666,7 +663,7 @@ const GetawayListing = ({
 															) : null}
 															{getawayDetails
 																.images[4] !==
-															undefined ? (
+																undefined ? (
 																<div
 																	className="w-1/4 lg:w-1/2 flex-auto h-full lg:h-1/2 p-0.5"
 																	data-fancybox="gallery"
@@ -812,7 +809,7 @@ const GetawayListing = ({
 																		<p className="text-base text-primary-500 font-semibold mb-0.5">
 																			L'
 																			{getawayDetails.type ==
-																			"place"
+																				"place"
 																				? "allotjament"
 																				: "activitat"}{" "}
 																			està
@@ -892,7 +889,7 @@ const GetawayListing = ({
 																		<p className="text-base text-primary-500 font-semibold mb-0.5">
 																			L'
 																			{getawayDetails.type ==
-																			"place"
+																				"place"
 																				? "allotjament"
 																				: "activitat"}{" "}
 																			es
@@ -953,7 +950,7 @@ const GetawayListing = ({
 																		<p className="text-base text-primary-500 font-semibold mb-0.5">
 																			L'
 																			{getawayDetails.type ==
-																			"place"
+																				"place"
 																				? "allotjament"
 																				: "activitat"}{" "}
 																			té
@@ -1149,7 +1146,7 @@ const GetawayListing = ({
 														<div className="fixed z-50 lg:z-auto bottom-0 inset-x-0 lg:bottom-auto lg:inset-x-auto lg:relative flex flex-row items-stretch bg-white py-3 px-4 lg:p-0 border-t border-primary-200 lg:border-none mt-5 -mx-1.5">
 															{getawayDetails?.phone !==
 																"-" &&
-															getawayDetails?.phone !==
+																getawayDetails?.phone !==
 																"" ? (
 																<div className="flex-1 px-1.5">
 																	<a
@@ -1190,7 +1187,7 @@ const GetawayListing = ({
 															) : null}
 															{getawayDetails?.website !==
 																"-" &&
-															getawayDetails?.website !==
+																getawayDetails?.website !==
 																"" ? (
 																<div className="flex-1 px-1.5">
 																	<a
@@ -1239,6 +1236,7 @@ const GetawayListing = ({
 															) : null}
 														</div>
 													</div>
+													{getawayDetails.discountCode ? <ListingDiscount discountCode={getawayDetails.discountCode} discountInfo={getawayDetails.discountInfo} /> : null}
 												</aside>
 											</div>
 										</div>
@@ -1313,7 +1311,7 @@ const GetawayListing = ({
 								if (
 									el.bookmarkPlaceRef &&
 									el.bookmarkPlaceRef._id ===
-										getawayDetails._id
+									getawayDetails._id
 								) {
 									return (bookmarkDetails = el);
 								}
@@ -1730,22 +1728,18 @@ const GetawayListing = ({
 																r={9}
 															></circle>
 														</svg>
-														<span className="text-white text-sm relative inline-block top-px">{`${
-															getawayDetails.place_locality ===
+														<span className="text-white text-sm relative inline-block top-px">{`${getawayDetails.place_locality ===
 															undefined
-																? ""
-																: getawayDetails.place_locality
-														}${
-															getawayDetails.place_locality ===
-															undefined
+															? ""
+															: getawayDetails.place_locality
+															}${getawayDetails.place_locality ===
+																undefined
 																? ""
 																: ","
-														} ${
-															getawayDetails.place_province ||
+															} ${getawayDetails.place_province ||
 															getawayDetails.place_state
-														}, ${
-															getawayDetails.place_country
-														}`}</span>
+															}, ${getawayDetails.place_country
+															}`}</span>
 													</li>
 												</ul>
 											</div>
@@ -1849,7 +1843,7 @@ const GetawayListing = ({
 														<div className="w-full lg:w-1/2 flex flex-wrap h-40 lg:h-50vh">
 															{getawayDetails
 																.images[1] !==
-															undefined ? (
+																undefined ? (
 																<div
 																	className="w-1/4 lg:w-1/2 flex-auto h-full lg:h-1/2 p-0.5"
 																	data-fancybox="gallery"
@@ -1871,7 +1865,7 @@ const GetawayListing = ({
 															) : null}
 															{getawayDetails
 																.images[2] !==
-															undefined ? (
+																undefined ? (
 																<div
 																	className="w-1/4 lg:w-1/2 flex-auto h-full lg:h-1/2 p-0.5"
 																	data-fancybox="gallery"
@@ -1893,7 +1887,7 @@ const GetawayListing = ({
 															) : null}
 															{getawayDetails
 																.images[3] !==
-															undefined ? (
+																undefined ? (
 																<div
 																	className="w-1/4 lg:w-1/2 flex-auto h-full lg:h-1/2 p-0.5"
 																	data-fancybox="gallery"
@@ -1915,7 +1909,7 @@ const GetawayListing = ({
 															) : null}
 															{getawayDetails
 																.images[4] !==
-															undefined ? (
+																undefined ? (
 																<div
 																	className="w-1/4 lg:w-1/2 flex-auto h-full lg:h-1/2 p-0.5"
 																	data-fancybox="gallery"
@@ -2061,7 +2055,7 @@ const GetawayListing = ({
 																		<p className="text-base text-primary-500 font-semibold mb-0.5">
 																			L'
 																			{getawayDetails.type ==
-																			"place"
+																				"place"
 																				? "allotjament"
 																				: "activitat"}{" "}
 																			està
@@ -2141,7 +2135,7 @@ const GetawayListing = ({
 																		<p className="text-base text-primary-500 font-semibold mb-0.5">
 																			L'
 																			{getawayDetails.type ==
-																			"place"
+																				"place"
 																				? "allotjament"
 																				: "activitat"}{" "}
 																			es
@@ -2202,7 +2196,7 @@ const GetawayListing = ({
 																		<p className="text-base text-primary-500 font-semibold mb-0.5">
 																			L'
 																			{getawayDetails.type ==
-																			"place"
+																				"place"
 																				? "allotjament"
 																				: "activitat"}{" "}
 																			té
@@ -2269,7 +2263,7 @@ const GetawayListing = ({
 													</div>
 
 													{checkedCharacteristics.length >
-													0 ? (
+														0 ? (
 														<div className="pt-8">
 															<h2 className="text-2xl font-body">
 																Què trobareu a{" "}
@@ -2441,7 +2435,7 @@ const GetawayListing = ({
 														<div className="fixed z-50 lg:z-auto bottom-0 inset-x-0 lg:bottom-auto lg:inset-x-auto lg:relative flex flex-row items-stretch bg-white py-3 px-4 lg:p-0 border-t border-primary-200 lg:border-none mt-5 -mx-1.5">
 															{getawayDetails?.phone !==
 																"-" &&
-															getawayDetails?.phone !==
+																getawayDetails?.phone !==
 																"" ? (
 																<div className="flex-1 px-1.5">
 																	<a
@@ -2482,7 +2476,7 @@ const GetawayListing = ({
 															) : null}
 															{getawayDetails?.website !==
 																"-" &&
-															getawayDetails?.website !==
+																getawayDetails?.website !==
 																"" ? (
 																<div className="flex-1 px-1.5">
 																	<a
@@ -2531,6 +2525,7 @@ const GetawayListing = ({
 															) : null}
 														</div>
 													</div>
+													{getawayDetails.discountCode ? <ListingDiscount discountCode={getawayDetails.discountCode} discountInfo={getawayDetails.discountInfo} /> : null}
 												</aside>
 											</div>
 										</div>

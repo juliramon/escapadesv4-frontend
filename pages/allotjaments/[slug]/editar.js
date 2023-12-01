@@ -77,6 +77,8 @@ const EditionForm = () => {
 			place_id: "",
 			place_opening_hours: "",
 			price: "",
+			discountCode: "",
+			discountInfo: "",
 			isReadyToSubmit: false,
 			metaTitle: "",
 			metaDescription: "",
@@ -178,6 +180,8 @@ const EditionForm = () => {
 						place_id: "",
 						place_opening_hours: "",
 						price: placeDetails.price,
+						discountCode: placeDetails.discountCode,
+						discountInfo: placeDetails.discountInfo,
 						review: placeDetails.review,
 						relatedStory: placeDetails.relarelatedStory,
 						metaTitle: placeDetails.metaTitle,
@@ -411,6 +415,8 @@ const EditionForm = () => {
 			coverCloudImage,
 			cloudImages,
 			price,
+			discountCode,
+			discountInfo,
 			phone,
 			website,
 			slug,
@@ -456,6 +462,8 @@ const EditionForm = () => {
 				place_id,
 				place_opening_hours,
 				price,
+				discountCode,
+				discountInfo,
 				metaTitle,
 				metaDescription
 			)
@@ -540,13 +548,13 @@ const EditionForm = () => {
 		if (e.target.name === "isVerified") {
 			e.target.checked
 				? setState({
-						...state,
-						formData: { ...state.formData, isVerified: true },
-				  })
+					...state,
+					formData: { ...state.formData, isVerified: true },
+				})
 				: setState({
-						...state,
-						formData: { ...state.formData, isVerified: false },
-				  });
+					...state,
+					formData: { ...state.formData, isVerified: false },
+				});
 		}
 	};
 
@@ -585,21 +593,19 @@ const EditionForm = () => {
 							<div className="form-composer__body">
 								<div className="flex items-center justify-between overflow-hidden border border-primary-100 mb-4 bg-white shadow rounded-md">
 									<button
-										className={`flex-1 bg-none px-4 py-4 text-primary-500 !rounded-md-none focus:border-t-4 focus:border-primary-500 text-sm ${
-											activeTab === "main"
-												? "border-t-4 border-primary-500"
-												: ""
-										}`}
+										className={`flex-1 bg-none px-4 py-4 text-primary-500 !rounded-md-none focus:border-t-4 focus:border-primary-500 text-sm ${activeTab === "main"
+											? "border-t-4 border-primary-500"
+											: ""
+											}`}
 										onClick={() => setActiveTab("main")}
 									>
 										Contingut principal
 									</button>
 									<button
-										className={`flex-1 bg-none px-4 py-4 text-primary-500 !rounded-md-none focus:border-t-4 focus:border-primary-500 text-sm ${
-											activeTab === "seo"
-												? "border-t-4 border-primary-500"
-												: ""
-										}`}
+										className={`flex-1 bg-none px-4 py-4 text-primary-500 !rounded-md-none focus:border-t-4 focus:border-primary-500 text-sm ${activeTab === "seo"
+											? "border-t-4 border-primary-500"
+											: ""
+											}`}
 										onClick={() => setActiveTab("seo")}
 									>
 										SEO
@@ -1103,49 +1109,49 @@ const EditionForm = () => {
 													<ul className="list-none flex flex-wrap items-start m-0 p-0">
 														{state.characteristics
 															? state.characteristics.map(
-																	(el) => (
-																		<li
-																			key={
-																				el.id
+																(el) => (
+																	<li
+																		key={
+																			el.id
+																		}
+																		className="pr-5 pb-5 w-1/2 md:w-1/3 lg:w-1/5"
+																	>
+																		<label
+																			htmlFor={
+																				el.name
 																			}
-																			className="pr-5 pb-5 w-1/2 md:w-1/3 lg:w-1/5"
+																			className="form__label flex items-center"
 																		>
-																			<label
-																				htmlFor={
+																			<input
+																				type="checkbox"
+																				name={
 																					el.name
 																				}
-																				className="form__label flex items-center"
-																			>
-																				<input
-																					type="checkbox"
-																					name={
-																						el.name
-																					}
-																					id={
-																						el.name
-																					}
-																					className="mr-2"
-																					onChange={
-																						handleCheckCharacteristic
-																					}
-																					checked={checkIfCharacteristicChecked(
-																						el.name
-																					)}
-																				/>
-																				<span
-																					dangerouslySetInnerHTML={{
-																						__html: el.icon,
-																					}}
-																					className="w-8 h-8 mr-1.5"
-																				></span>
+																				id={
+																					el.name
+																				}
+																				className="mr-2"
+																				onChange={
+																					handleCheckCharacteristic
+																				}
+																				checked={checkIfCharacteristicChecked(
+																					el.name
+																				)}
+																			/>
+																			<span
+																				dangerouslySetInnerHTML={{
+																					__html: el.icon,
+																				}}
+																				className="w-8 h-8 mr-1.5"
+																			></span>
 
-																				{
-																					el.name
-																				}
-																			</label>
-																		</li>
-																	)
-															  )
+																			{
+																				el.name
+																			}
+																		</label>
+																	</li>
+																)
+															)
 															: null}
 													</ul>
 												</div>
@@ -1342,6 +1348,44 @@ const EditionForm = () => {
 														className="form__control"
 														value={
 															state.formData.price
+														}
+														onChange={handleChange}
+													/>
+												</div>
+											</div>
+											<div className="flex flex-wrap items-center">
+												<div className="form__group w-3/12">
+													<label
+														htmlFor="discountCode"
+														className="form__label"
+													>
+														Codi de descompte
+													</label>
+													<input
+														type="text"
+														name="discountCode"
+														placeholder="Eg. 15ESCAPADES24"
+														className="form__control"
+														value={
+															state.formData.discountCode
+														}
+														onChange={handleChange}
+													/>
+												</div>
+												<div className="form__group w-3/12">
+													<label
+														htmlFor="discountInfo"
+														className="form__label"
+													>
+														Informació descompte
+													</label>
+													<input
+														type="text"
+														name="discountInfo"
+														placeholder="Eg. 15% descompte"
+														className="form__control"
+														value={
+															state.formData.discountInfo
 														}
 														onChange={handleChange}
 													/>
@@ -1559,39 +1603,39 @@ const EditionForm = () => {
 																		història
 																	</option>
 																	{state.stories &&
-																	state
-																		.stories
-																		.length >
+																		state
+																			.stories
+																			.length >
 																		0
 																		? state.stories.map(
-																				(
-																					el
-																				) => {
-																					return (
-																						<option
-																							value={
-																								el._id
-																							}
-																							key={
-																								el._id
-																							}
-																							selected={
-																								el._id ===
+																			(
+																				el
+																			) => {
+																				return (
+																					<option
+																						value={
+																							el._id
+																						}
+																						key={
+																							el._id
+																						}
+																						selected={
+																							el._id ===
 																								state
 																									.place
 																									?.relatedStory
 																									?._id
-																									? "true"
-																									: null
-																							}
-																						>
-																							{
-																								el.title
-																							}
-																						</option>
-																					);
-																				}
-																		  )
+																								? "true"
+																								: null
+																						}
+																					>
+																						{
+																							el.title
+																						}
+																					</option>
+																				);
+																			}
+																		)
 																		: null}
 																</select>
 															</div>

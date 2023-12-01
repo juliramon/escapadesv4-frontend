@@ -138,9 +138,23 @@ const getPicturesBySeason = (thisDate, objImages) => {
 	return selectedImages;
 };
 
+/**
+ * copyContentToClipboard
+ * 
+ * Utility function to copy the innerText of the clicked element into the clipboard
+ * 
+ * @param {object} e
+ */
+
+const copyTextToClipboard = e => {
+	e.preventDefault();
+	navigator.clipboard.writeText(e.currentTarget.innerText)
+}
+
 export {
 	handleFilesUpload,
 	removeImage,
 	formatDateTimeToISODate,
 	getPicturesBySeason,
+	copyTextToClipboard
 };

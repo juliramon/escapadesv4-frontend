@@ -53,6 +53,8 @@ class ContentService {
 		activity_opening_hours,
 		duration,
 		price,
+		discountCode,
+		discountInfo,
 		review,
 		relatedStory,
 		organization_id,
@@ -86,6 +88,8 @@ class ContentService {
 				activity_opening_hours,
 				duration,
 				price,
+				discountCode,
+				discountInfo,
 				review,
 				relatedStory,
 				organization_id,
@@ -139,6 +143,8 @@ class ContentService {
 		activity_opening_hours,
 		duration,
 		price,
+		discountCode,
+		discountInfo,
 		metaTitle,
 		metaDescription
 	) =>
@@ -169,6 +175,8 @@ class ContentService {
 			activity_opening_hours,
 			duration,
 			price,
+			discountCode,
+			discountInfo,
 			metaTitle,
 			metaDescription,
 		});
@@ -280,6 +288,8 @@ class ContentService {
 		place_id,
 		place_opening_hours,
 		price,
+		discountCode,
+		discountInfo,
 		review,
 		relatedStory,
 		organization_id,
@@ -314,13 +324,15 @@ class ContentService {
 				place_id,
 				place_opening_hours,
 				price,
+				discountCode,
+				discountInfo,
 				review,
 				relatedStory,
 				organization_id,
 				metaTitle,
 				metaDescription,
 			})
-			.then((res) => {});
+			.then((res) => { });
 	};
 
 	getAllPlaces = () => this.service.get("/places").then((res) => res.data);
@@ -365,6 +377,8 @@ class ContentService {
 		place_id,
 		place_opening_hours,
 		price,
+		discountCode,
+		discountInfo,
 		metaTitle,
 		metaDescription
 	) =>
@@ -396,6 +410,8 @@ class ContentService {
 			place_id,
 			place_opening_hours,
 			price,
+			discountCode,
+			discountInfo,
 			metaTitle,
 			metaDescription,
 		});

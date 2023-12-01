@@ -69,6 +69,8 @@ const ActivityForm = () => {
 			activity_opening_hours: "",
 			duration: "",
 			price: "",
+			discountCode: "",
+			discountInfo: "",
 			review: "",
 			relatedStory: "",
 			organization: "",
@@ -329,6 +331,8 @@ const ActivityForm = () => {
 			activity_opening_hours,
 			duration,
 			price,
+			discountCode,
+			discountInfo,
 			review,
 			relatedStory,
 			organization,
@@ -362,6 +366,8 @@ const ActivityForm = () => {
 				activity_opening_hours,
 				duration,
 				price,
+				discountCode,
+				discountInfo,
 				review,
 				relatedStory,
 				organization,
@@ -435,7 +441,7 @@ const ActivityForm = () => {
 
 		if (
 			(isVerified,
-			title &&
+				title &&
 				subtitle &&
 				slug &&
 				categories &&
@@ -494,13 +500,13 @@ const ActivityForm = () => {
 		if (e.target.name === "isVerified") {
 			e.target.checked
 				? setState({
-						...state,
-						formData: { ...state.formData, isVerified: true },
-				  })
+					...state,
+					formData: { ...state.formData, isVerified: true },
+				})
 				: setState({
-						...state,
-						formData: { ...state.formData, isVerified: false },
-				  });
+					...state,
+					formData: { ...state.formData, isVerified: false },
+				});
 		}
 	};
 
@@ -539,21 +545,19 @@ const ActivityForm = () => {
 							<div className="form-composer__body">
 								<div className="flex items-center justify-between overflow-hidden border border-primary-100 mb-4 bg-white shadow rounded-md">
 									<button
-										className={`flex-1 bg-none px-4 py-4 text-primary-500 !rounded-md-none focus:border-t-4 focus:border-primary-500 text-sm ${
-											activeTab === "main"
-												? "border-t-4 border-primary-500"
-												: ""
-										}`}
+										className={`flex-1 bg-none px-4 py-4 text-primary-500 !rounded-md-none focus:border-t-4 focus:border-primary-500 text-sm ${activeTab === "main"
+											? "border-t-4 border-primary-500"
+											: ""
+											}`}
 										onClick={() => setActiveTab("main")}
 									>
 										Contingut principal
 									</button>
 									<button
-										className={`flex-1 bg-none px-4 py-4 text-primary-500 !rounded-md-none focus:border-t-4 focus:border-primary-500 text-sm ${
-											activeTab === "seo"
-												? "border-t-4 border-primary-500"
-												: ""
-										}`}
+										className={`flex-1 bg-none px-4 py-4 text-primary-500 !rounded-md-none focus:border-t-4 focus:border-primary-500 text-sm ${activeTab === "seo"
+											? "border-t-4 border-primary-500"
+											: ""
+											}`}
 										onClick={() => setActiveTab("seo")}
 									>
 										SEO
@@ -1132,6 +1136,44 @@ const ActivityForm = () => {
 													/>
 												</div>
 											</div>
+											<div className="flex flex-wrap items-center">
+												<div className="form__group w-3/12">
+													<label
+														htmlFor="discountCode"
+														className="form__label"
+													>
+														Codi de descompte
+													</label>
+													<input
+														type="text"
+														name="discountCode"
+														placeholder="Eg. 15ESCAPADES24"
+														className="form__control"
+														value={
+															state.formData.discountCode
+														}
+														onChange={handleChange}
+													/>
+												</div>
+												<div className="form__group w-3/12">
+													<label
+														htmlFor="discountInfo"
+														className="form__label"
+													>
+														Informació descompte
+													</label>
+													<input
+														type="text"
+														name="discountInfo"
+														placeholder="Eg. 15% descompte"
+														className="form__control"
+														value={
+															state.formData.discountInfo
+														}
+														onChange={handleChange}
+													/>
+												</div>
+											</div>
 
 											<div className="form__group cover">
 												<span className="form__label">
@@ -1347,30 +1389,30 @@ const ActivityForm = () => {
 																		història
 																	</option>
 																	{state.stories &&
-																	state
-																		.stories
-																		.length >
+																		state
+																			.stories
+																			.length >
 																		0
 																		? state.stories.map(
-																				(
-																					el
-																				) => {
-																					return (
-																						<option
-																							value={
-																								el._id
-																							}
-																							key={
-																								el._id
-																							}
-																						>
-																							{
-																								el.title
-																							}
-																						</option>
-																					);
-																				}
-																		  )
+																			(
+																				el
+																			) => {
+																				return (
+																					<option
+																						value={
+																							el._id
+																						}
+																						key={
+																							el._id
+																						}
+																					>
+																						{
+																							el.title
+																						}
+																					</option>
+																				);
+																			}
+																		)
 																		: null}
 																</select>
 															</div>
