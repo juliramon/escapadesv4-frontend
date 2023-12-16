@@ -15,7 +15,7 @@ const PublicSquareBox = ({
 	index,
 }) => {
 	let secureWebsite, buttonLight;
-	if (website.includes("https://") || website.includes("http://")) {
+	if (website && (website.includes("https://") || website.includes("http://"))) {
 		secureWebsite = website;
 	} else {
 		secureWebsite = `https://${website}`;
@@ -130,8 +130,8 @@ const PublicSquareBox = ({
 		modRating = `${rating.toString()}.0`;
 	}
 
-	const coverPath = cover.substring(0, 51);
-	const imageId = cover.substring(63);
+	const coverPath = cover?.substring(0, 51);
+	const imageId = cover?.substring(63);
 	const coverImg = `${coverPath}w_400,h_300,c_fill/${imageId}`;
 
 	return (
@@ -139,7 +139,7 @@ const PublicSquareBox = ({
 			<Link href={`/${linkPath}/${slug}`}>
 				<a
 					title={title}
-					className="flex flex-col justify-between h-full rounded-md shadow-md overflow-hidden relative"
+					className="flex flex-col justify-between h-full overflow-hidden relative rounded-md shadow-sm"
 				>
 					<div className="relative overflow-hidden">
 						<picture className="block w-full h-full aspect-w-4 aspect-h-3">
@@ -148,7 +148,7 @@ const PublicSquareBox = ({
 								src={coverImg}
 								data-src={coverImg}
 								alt={title}
-								className="w-full h-full object-cover object-center scale-1000 hover:scale-105 transition-all duration-300 ease-in-out"
+								className="w-full h-full object-cover object-center scale-1000 hover:scale-105 transition-all duration-300 ease-in-out "
 								loading={
 									index !== undefined && index == 0
 										? "eager"
@@ -164,7 +164,7 @@ const PublicSquareBox = ({
 							/>
 						</picture>
 						{isVerified ? (
-							<span className="inline-flex items-center absolute top-2 right-2 text-primary-500 bg-white rounded py-1 px-2 shadow-md">
+							<span className="inline-flex items-center absolute top-2.5 right-2.5 text-primary-500 bg-white rounded py-1 px-2 shadow-md">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									className="mr-1 text-[#57A1FE]"

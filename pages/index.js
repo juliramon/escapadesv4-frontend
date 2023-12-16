@@ -27,13 +27,7 @@ const Homepage = (props) => {
 					categories={props.categories}
 					featuredRegions={props.featuredRegions}
 					featuredActivities={props.featuredActivities}
-					featuredList={props.featuredList}
-					mostRatedPlaces={props.mostRatedPlaces}
-					featuredRomanticGetaways={props.featuredRomanticGetaways}
-					featuredAdventureGetaways={props.featuredAdventureGetaways}
-					featuredGastronomicGetaways={
-						props.featuredGastronomicGetaways
-					}
+					mostRecentPlaces={props.mostRecentPlaces}
 					mostRecentStories={props.mostRecentStories}
 				/>
 				<Footer />
@@ -46,30 +40,20 @@ export async function getStaticProps() {
 	const service = new ContentService();
 	const featuredRegions = await service.getFeaturedRegions();
 	const featuredActivities = await service.getFeaturedActivities();
-	const mostRatedPlaces = await service.getMostRatedPlaces();
+	const mostRecentPlaces = await service.getMostRecentPlaces();
 	const mostRecentStories = await service.getMostRecentStories();
-	const featuredRomanticGetaways =
-		await service.getFeaturedGetawaysByCategory("romantica");
-	const featuredAdventureGetaways =
-		await service.getFeaturedGetawaysByCategory("aventura");
-	const featuredGastronomicGetaways =
-		await service.getFeaturedGetawaysByCategory("gastronomica");
-
-	const featuredList = await service.getFeaturedList();
 	const categories = await service.getCategories();
 	const totals = await service.getSiteStats();
+
+	console.log(featuredActivities.length)
 
 	return {
 		props: {
 			categories,
 			featuredRegions,
 			featuredActivities,
-			mostRatedPlaces,
+			mostRecentPlaces,
 			mostRecentStories,
-			featuredRomanticGetaways,
-			featuredAdventureGetaways,
-			featuredGastronomicGetaways,
-			featuredList,
 			totals,
 		},
 		revalidate: 120,

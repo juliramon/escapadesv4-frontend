@@ -272,7 +272,10 @@ const EditionForm = () => {
 			uploadData.append("imageUrl", el);
 			service.uploadFile(uploadData).then((res) => {
 				uploadedImages.push(res.path);
-				if (uploadedImages.length === state.formData.images.length) {
+				if (
+					uploadedImages.length === state.formData.images.length ||
+					uploadedCover != ""
+				) {
 					setState({
 						...state,
 						formData: {

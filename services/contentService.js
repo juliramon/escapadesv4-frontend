@@ -1027,6 +1027,11 @@ class ContentService {
 	getMostRatedPlaces = () =>
 		this.service.get("/most-rated-places").then((res) => res.data);
 
+	getMostRecentPlaces = () =>
+		this.service.get("/most-recent-places").then((res) => {
+			return res.data;
+		});
+
 	getMostRecentStories = () =>
 		this.service.get("/most-recent-stories").then((res) => res.data);
 

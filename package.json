@@ -12,6 +12,7 @@
   "dependencies": {
     "@fancyapps/ui": "^4.0.31",
     "@glidejs/glide": "^3.6.0",
+    "@splidejs/react-splide": "^0.7.12",
     "@stripe/stripe-js": "^1.14.0",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tiptap/extension-image": "^2.0.0-beta.218",

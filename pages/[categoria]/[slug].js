@@ -1842,6 +1842,28 @@ const GetawayListing = ({
 														</div>
 														<div className="w-full lg:w-1/2 flex flex-wrap h-40 lg:h-50vh">
 															{getawayDetails
+																.images[0] !==
+																undefined ? (
+																<div
+																	className="w-1/4 lg:w-1/2 flex-auto h-full lg:h-1/2 p-0.5"
+																	data-fancybox="gallery"
+																	data-src={
+																		getawayDetails
+																			.images[0]
+																	}
+																>
+																	<picture>
+																		<img
+																			src={
+																				getawayDetails
+																					.images[0]
+																			}
+																			className="w-full h-full object-cover"
+																		/>
+																	</picture>
+																</div>
+															) : null}
+															{getawayDetails
 																.images[1] !==
 																undefined ? (
 																<div
@@ -1901,28 +1923,6 @@ const GetawayListing = ({
 																			src={
 																				getawayDetails
 																					.images[3]
-																			}
-																			className="w-full h-full object-cover"
-																		/>
-																	</picture>
-																</div>
-															) : null}
-															{getawayDetails
-																.images[4] !==
-																undefined ? (
-																<div
-																	className="w-1/4 lg:w-1/2 flex-auto h-full lg:h-1/2 p-0.5"
-																	data-fancybox="gallery"
-																	data-src={
-																		getawayDetails
-																			.images[4]
-																	}
-																>
-																	<picture>
-																		<img
-																			src={
-																				getawayDetails
-																					.images[4]
 																			}
 																			className="w-full h-full object-cover"
 																		/>

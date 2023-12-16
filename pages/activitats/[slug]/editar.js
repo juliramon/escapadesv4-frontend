@@ -10,6 +10,7 @@ import NavigationBar from "../../../components/global/NavigationBar";
 import Autocomplete from "react-google-autocomplete";
 import EditorNavbar from "../../../components/editor/EditorNavbar";
 import { EditorView } from "prosemirror-view";
+import { removeImage } from "../../../utils/helpers";
 
 EditorView.prototype.updateState = function updateState(state) {
 	if (!this.docView) return; // This prevents the matchesNode error on hot reloads
@@ -233,11 +234,53 @@ const ActivityEditionForm = () => {
 		if (stateImages) {
 			imagesList = stateImages.map((el, idx) => (
 				<div
-					className="m-2 relative w-48 h-auto overflow-hidden rounded-md border-8 border-white shadow"
+					className="relative overflow-hidden rounded-md border-8 border-white shadow mb-5"
 					key={idx}
 				>
+					<button
+						type="button"
+						onClick={() => {
+							const objImages = removeImage(
+								idx,
+								state.formData.blopImages,
+								stateImages
+							);
+							setState({
+								...state,
+								formData: {
+									...state.formData,
+									images: objImages.arrImages,
+									blopImages: objImages.arrBlopImages,
+								},
+							});
+						}}
+						className="w-7 h-7 bg-black bg-opacity-70 text-white hover:bg-opacity-100 transition-all duration-300 ease-in-out absolute top-2 right-2 rounded-full flex items-center justify-center"
+					>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className="icon icon-tabler icon-tabler-trash"
+							width={16}
+							height={16}
+							viewBox="0 0 24 24"
+							strokeWidth="2"
+							stroke="currentColor"
+							fill="none"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						>
+							<path
+								stroke="none"
+								d="M0 0h24v24H0z"
+								fill="none"
+							></path>
+							<path d="M4 7l16 0"></path>
+							<path d="M10 11l0 6"></path>
+							<path d="M14 11l0 6"></path>
+							<path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"></path>
+							<path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"></path>
+						</svg>
+					</button>
 					<img src={el} />
-					<button className="w-auto p-0 bg-black bg-opacity-60 rounded-full absolute top-3 right-3"></button>
 				</div>
 			));
 		}
@@ -1293,7 +1336,7 @@ const ActivityEditionForm = () => {
 														</div>
 													</div>
 													<div className="w-full border border-primary-100 rounded-br-md rounded-bl-md -mt-px p-4 flex">
-														<div className="-m-2.5 flex flex-wrap items-center">
+														<div className="columns-7 gap-5">
 															{imagesList}
 														</div>
 													</div>

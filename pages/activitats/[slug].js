@@ -377,7 +377,7 @@ const ActivityListing = ({ activityDetails }) => {
 										<h1>{title}</h1>
 										<ul className="flex flex-wrap items-center p-0 -mx-3 mt-2 mb-0 md:mb-5">
 											{state.activity.place_rating !==
-											undefined ? (
+												undefined ? (
 												<li className="flex flex-wrap items-center px-2">
 													<svg
 														xmlns="http://www.w3.org/2000/svg"
@@ -431,28 +431,24 @@ const ActivityListing = ({ activityDetails }) => {
 														r={9}
 													></circle>
 												</svg>
-												<span className="text-primary-400 opacity-80">{`${
-													state.activity
+												<span className="text-primary-400 opacity-80">{`${state.activity
 														.activity_locality ===
-													undefined
+														undefined
 														? ""
 														: state.activity
-																.activity_locality
-												}${
-													state.activity
+															.activity_locality
+													}${state.activity
 														.activity_locality ===
-													undefined
+														undefined
 														? ""
 														: ","
-												} ${
-													state.activity
+													} ${state.activity
 														.pactivity_province ||
 													state.activity
 														.activity_state
-												}, ${
-													state.activity
+													}, ${state.activity
 														.activity_country
-												}`}</span>
+													}`}</span>
 											</li>
 										</ul>
 									</div>
@@ -603,14 +599,14 @@ const ActivityListing = ({ activityDetails }) => {
 													className="w-full lg:w-1/2 p-0.5 h-80 lg:h-50vh"
 													data-fancybox="gallery"
 													data-src={
-														state.activity.images[0]
+														state.activity.cover
 													}
 												>
 													<picture>
 														<img
 															src={
 																state.activity
-																	.images[0]
+																	.cover
 															}
 															className="w-full h-full object-cover"
 														/>
@@ -619,7 +615,30 @@ const ActivityListing = ({ activityDetails }) => {
 												<div className="w-full lg:w-1/2 flex flex-wrap h-40 lg:h-50vh">
 													{state.activity
 														.images[1] !==
-													undefined ? (
+														undefined ? (
+														<div
+															className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
+															data-fancybox="gallery"
+															data-src={
+																state.activity
+																	.images[0]
+															}
+														>
+															<picture>
+																<img
+																	src={
+																		state
+																			.activity
+																			.images[0]
+																	}
+																	className="w-full h-full object-cover"
+																/>
+															</picture>
+														</div>
+													) : null}
+													{state.activity
+														.images[2] !==
+														undefined ? (
 														<div
 															className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
 															data-fancybox="gallery"
@@ -641,8 +660,8 @@ const ActivityListing = ({ activityDetails }) => {
 														</div>
 													) : null}
 													{state.activity
-														.images[2] !==
-													undefined ? (
+														.images[3] !==
+														undefined ? (
 														<div
 															className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
 															data-fancybox="gallery"
@@ -664,8 +683,8 @@ const ActivityListing = ({ activityDetails }) => {
 														</div>
 													) : null}
 													{state.activity
-														.images[3] !==
-													undefined ? (
+														.images[4] !==
+														undefined ? (
 														<div
 															className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
 															data-fancybox="gallery"
@@ -680,29 +699,6 @@ const ActivityListing = ({ activityDetails }) => {
 																		state
 																			.activity
 																			.images[3]
-																	}
-																	className="w-full h-full object-cover"
-																/>
-															</picture>
-														</div>
-													) : null}
-													{state.activity
-														.images[4] !==
-													undefined ? (
-														<div
-															className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
-															data-fancybox="gallery"
-															data-src={
-																state.activity
-																	.images[4]
-															}
-														>
-															<picture>
-																<img
-																	src={
-																		state
-																			.activity
-																			.images[4]
 																	}
 																	className="w-full h-full object-cover"
 																/>
@@ -804,7 +800,7 @@ const ActivityListing = ({ activityDetails }) => {
 																L'
 																{state.activity
 																	.type ==
-																"activitat"
+																	"activitat"
 																	? "allotjament"
 																	: "activitat"}{" "}
 																està catalogada
@@ -874,7 +870,7 @@ const ActivityListing = ({ activityDetails }) => {
 																L'
 																{state.activity
 																	.type ==
-																"activitat"
+																	"activitat"
 																	? "allotjament"
 																	: "activitat"}{" "}
 																té una durada
@@ -886,7 +882,7 @@ const ActivityListing = ({ activityDetails }) => {
 																}{" "}
 																{state.activity
 																	.duration >
-																1
+																	1
 																	? "hores"
 																	: "hora"}
 															</p>
@@ -905,7 +901,7 @@ const ActivityListing = ({ activityDetails }) => {
 																}{" "}
 																{state.activity
 																	.duration >
-																1
+																	1
 																	? "hores"
 																	: "hora"}
 																.
@@ -945,7 +941,7 @@ const ActivityListing = ({ activityDetails }) => {
 																L'
 																{state.activity
 																	.type ==
-																"activitat"
+																	"activitat"
 																	? "allotjament"
 																	: "activitat"}{" "}
 																es troba a la
@@ -998,7 +994,7 @@ const ActivityListing = ({ activityDetails }) => {
 																L'
 																{state.activity
 																	.type ==
-																"activitat"
+																	"activitat"
 																	? "allotjament"
 																	: "activitat"}{" "}
 																té un preu
