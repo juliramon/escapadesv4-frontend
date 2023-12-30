@@ -113,25 +113,25 @@ const getPicturesBySeason = (thisDate, objImages) => {
 
 	const triggers = {
 		winter: currentYear + "/12/21",
-		spring: currentYear + "/03/20",
-		summer: currentYear + "/06/21",
 		autumn: currentYear + "/09/21",
+		summer: currentYear + "/06/21",
+		spring: currentYear + "/03/20",
 	};
 
 	let selectedImages;
 
 	switch (true) {
-		case thisDate > new Date(triggers.autumn):
-			selectedImages = objImages.autumn;
-			break;
 		case thisDate > new Date(triggers.winter):
 			selectedImages = objImages.winter;
 			break;
-		case thisDate > new Date(triggers.spring):
-			selectedImages = objImages.spring;
+		case thisDate > new Date(triggers.autumn):
+			selectedImages = objImages.autumn;
+			break;
+		case thisDate > new Date(triggers.summer):
+			selectedImages = objImages.summer;
 			break;
 		default:
-			selectedImages = objImages.summer;
+			selectedImages = objImages.spring;
 			break;
 	}
 

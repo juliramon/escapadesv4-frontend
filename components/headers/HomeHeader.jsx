@@ -18,7 +18,12 @@ const Hero = () => {
 			picture_webp_mob: "home-cover-tardor-m.webp",
 			picture_raw_mob: "home-cover-tardor-m.jpg",
 		},
-		winter: {},
+		winter: {
+			picture_webp: "home-cover-hivern.webp",
+			picture_raw: "home-cover-hivern.jpg",
+			picture_webp_mob: "home-cover-hivern-m.webp",
+			picture_raw_mob: "home-cover-hivern-m.jpg",
+		},
 	};
 
 	const currentDate = new Date();
