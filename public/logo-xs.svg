@@ -18,10 +18,10 @@
             <stop stop-color="#FD8305" offset="100%"></stop>
         </linearGradient>
     </defs>
-    <g id="favicon" stroke="none" strokeWidth="1" fill="none" fill-rule="evenodd">
+    <g id="favicon" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <rect id="Rectangle" fill="url(#linearGradient-1)" x="0" y="0" width="200" height="200" rx="20"></rect>
         <g id="Group" transform="translate(0.000000, 7.000000)">
-            <g id="G" fill-rule="nonzero">
+            <g id="G" fillRule="nonzero">
                 <use fill="#FEFFC9" xlink:href="#path-3"></use>
                 <use fill="url(#linearGradient-2)" xlink:href="#path-3"></use>
             </g>

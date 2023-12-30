@@ -6,35 +6,23 @@ import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
 import '@splidejs/react-splide/css/core';
 
 const HomePageResults = ({
-	categories,
 	featuredRegions,
 	featuredActivities,
 	mostRecentPlaces,
 	mostRecentStories,
-	featuredRomanticGetaways,
-	featuredAdventureGetaways,
-	featuredGastronomicGetaways,
 }) => {
 	const initialState = {
-		placeCategories: [],
-		activityCategories: [],
-		featuredRegions: [],
 		mostRecentGetaways: [],
-		mostRecentStories: [],
-		featuredRomanticGetaways: [],
-		featuredAdventureGetaways: [],
-		featuredGastronomicGetaways: [],
-		featuredRelaxGetaways: [],
 		featuredActivities: [],
-		popularRegions: [],
+		featuredRegions: [],
+		mostRecentStories: [],
 		emptyBlocksPerRow: [0, 1, 2, 3],
 	};
 	const [state, setState] = useState(initialState);
 
 	useEffect(() => {
 		if (
-			categories.length > 0 ||
-			featuredRegions.length > 0 ||
+			mostRecentPlaces.length > 0 ||
 			featuredActivities.length > 0 ||
 			mostRecentPlaces.length > 0 ||
 			mostRecentStories.length > 0 ||
@@ -42,28 +30,14 @@ const HomePageResults = ({
 			featuredAdventureGetaways.length > 0 ||
 			featuredGastronomicGetaways.length > 0
 		) {
-			let placeCategories = [];
-			let activityCategories = [];
-
-			categories.filter((el) => {
-				if (el.isPlace == true) {
-					placeCategories.push(el);
-				} else {
-					activityCategories.push(el);
-				}
-			});
-
 			setState({
 				...state,
-				placeCategories: placeCategories,
-				activityCategories: activityCategories,
+				featuredActivities: featuredActivities,
+				mostRecentGetaways: mostRecentPlaces,
 				featuredRegions: featuredRegions,
 				mostRecentGetaways: mostRecentPlaces,
 				featuredActivities: featuredActivities,
 				mostRecentStories: mostRecentStories,
-				featuredRomanticGetaways: featuredRomanticGetaways,
-				featuredAdventureGetaways: featuredAdventureGetaways,
-				featuredGastronomicGetaways: featuredGastronomicGetaways,
 			});
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -255,9 +229,9 @@ const HomePageResults = ({
 								))}
 						</div>
 						<a
-							href="/activitats"
-							title="Veure més experiències per fer en parella"
-							className="button button__ghost button__med text-[16px] inline-flex items-center mt-4 transition-all duration-300 ease-in-out"
+							href="/escapades-romantiques"
+							title="Veure més escapades romàntiques"
+							className="button button__ghost button__med text-[16px] inline-flex items-center mt-2.5 transition-all duration-300 ease-in-out"
 						>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -407,23 +381,8 @@ const HomePageResults = ({
 								</div>
 								<div className="w-full lg:w-6/12 rounded-md bg-white relative z-10 lg:shadow-lg overflow-hidden pt-8 lg:px-8 lg:pb-8">
 									<h2 className="mb-4">
-										Escapades en parella, allotjaments amb encant i experiències originals a Catalunya
+										Allotjaments amb encant i experiències originals per a les parelles més exigent
 									</h2>
-									<p className="text-[16px]">
-										Hola, som l'Andrea i en Juli, i et
-										donem la benvinguda a
-										Escapadesenparella.cat, el recomanador
-										d'escapades en parella de referència a
-										Catalunya. Busques{" "}
-										<strong>escapades en parella</strong>?
-										No sabeu&nbsp;
-										<strong>
-											què fer aquest cap de setmana
-										</strong>
-										? Cansats de fer sempre el mateix? A
-										Escapadesenparella.cat tenim la
-										sol·lució!
-									</p>
 									<p className="text-[16px]">
 										Fa {foundationYears} anys vam començar a
 										compartir les escapades en parella que
@@ -463,7 +422,7 @@ const HomePageResults = ({
 					</section>
 
 					{/* Most recent stories */}
-					<section className="pt-12 lg:pt-20">
+					<section className="py-12 lg:py-20">
 						<h2 className="mb-0">
 							Últimes entrades al blog d' "Històries en parella"
 						</h2>
@@ -510,124 +469,6 @@ const HomePageResults = ({
 							</svg>
 							Veure'n més
 						</a>
-					</section>
-
-					{/* Getaway categories */}
-					<section className="py-12 lg:py-20" id="placesTypes">
-						<div className="flex md:justify-center">
-							<h2 className="mb-0 text-2xl md:text-center max-w-md">
-								Escapades en parella a Catalunya, tot un món
-								d'escapades per descobrir
-							</h2>
-						</div>
-
-						<div className="mt-4">
-							<div className="flex flex-wrap items-start justify-center">
-								<ul className="list-none -m-1.5 pt-4 px-0 columns-1 md:columns-2 lg:columns-3 w-full">
-									{state.activityCategories
-										? state.activityCategories.map(
-											(el, idx) => {
-												return (
-													<li
-														key={idx}
-														className="p-1.5"
-													>
-														<Link
-															href={el.slug}
-														>
-															<a
-																title={
-																	el.title
-																}
-																className="flex flex-wrap items-center shadow-md rounded-md overflow-hidden
-                              "
-															>
-																<picture className="block w-16 h-16 overflow-hidden">
-																	<img
-																		src={
-																			el.image
-																		}
-																		alt={
-																			el.title
-																		}
-																		className="w-full h-full object-cover"
-																		width={
-																			48
-																		}
-																		height={
-																			48
-																		}
-																		loading="lazy"
-																	/>
-																</picture>
-																<div className="pl-4 pr-6 py-4">
-																	<span className="inline-block text-[16px]">
-																		{
-																			el.title
-																		}
-																	</span>
-																</div>
-															</a>
-														</Link>
-													</li>
-												);
-											}
-										)
-										: null}
-
-									{state.placeCategories
-										? state.placeCategories.map(
-											(el, idx) => {
-												return (
-													<li
-														key={idx}
-														className="p-1.5"
-													>
-														<Link
-															href={el.slug}
-														>
-															<a
-																title={
-																	el.title
-																}
-																className="flex flex-wrap items-center shadow-md rounded-md overflow-hidden
-                              "
-															>
-																<picture className="block w-16 h-16 overflow-hidden">
-																	<img
-																		src={
-																			el.image
-																		}
-																		alt={
-																			el.title
-																		}
-																		className="w-full h-full object-cover"
-																		width={
-																			48
-																		}
-																		height={
-																			48
-																		}
-																		loading="lazy"
-																	/>
-																</picture>
-																<div className="pl-4 pr-6 py-4">
-																	<span className="inline-block text-[16px]">
-																		{
-																			el.title
-																		}
-																	</span>
-																</div>
-															</a>
-														</Link>
-													</li>
-												);
-											}
-										)
-										: null}
-								</ul>
-							</div>
-						</div>
 					</section>
 				</div>
 			</div>

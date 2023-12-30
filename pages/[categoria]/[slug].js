@@ -374,7 +374,7 @@ const GetawayListing = ({
 															width={28}
 															height={28}
 															viewBox="0 0 24 24"
-															stroke-width={1.5}
+															strokeWidth={1.5}
 															stroke="currentColor"
 															fill="none"
 															strokeLinecap="round"
@@ -402,7 +402,7 @@ const GetawayListing = ({
 																width={18}
 																height={18}
 																viewBox="0 0 24 24"
-																stroke-width={
+																strokeWidth={
 																	1.5
 																}
 																stroke="currentColor"
@@ -505,7 +505,7 @@ const GetawayListing = ({
 															width={18}
 															height={18}
 															viewBox="0 0 24 24"
-															stroke-width={1.5}
+															strokeWidth={1.5}
 															stroke="currentColor"
 															fill="none"
 															strokeLinecap="round"
@@ -712,7 +712,7 @@ const GetawayListing = ({
 																				20
 																			}
 																			viewBox="0 0 24 24"
-																			stroke-width={
+																			strokeWidth={
 																				1.5
 																			}
 																			stroke="currentColor"
@@ -1093,7 +1093,7 @@ const GetawayListing = ({
 																			22
 																		}
 																		viewBox="0 0 24 24"
-																		stroke-width={
+																		strokeWidth={
 																			1.5
 																		}
 																		stroke="currentColor"
@@ -1121,7 +1121,7 @@ const GetawayListing = ({
 																</div>
 																{getawayDetails.review ? (
 																	<div className="w-full bg-tertiary-50 rounded p-5 mt-3">
-																		<blockquote className="font-serif text-lg pr-8">
+																		<blockquote className="font-headings text-lg pr-8">
 																			{
 																				getawayDetails.review
 																			}
@@ -1166,7 +1166,7 @@ const GetawayListing = ({
 																				24
 																			}
 																			viewBox="0 0 24 24"
-																			stroke-width={
+																			strokeWidth={
 																				1.5
 																			}
 																			stroke="currentColor"
@@ -1207,7 +1207,7 @@ const GetawayListing = ({
 																				24
 																			}
 																			viewBox="0 0 24 24"
-																			stroke-width={
+																			strokeWidth={
 																				1.5
 																			}
 																			stroke="currentColor"
@@ -1622,7 +1622,7 @@ const GetawayListing = ({
 															width={28}
 															height={28}
 															viewBox="0 0 24 24"
-															stroke-width={1.5}
+															strokeWidth={1.5}
 															stroke="currentColor"
 															fill="none"
 															strokeLinecap="round"
@@ -1650,7 +1650,7 @@ const GetawayListing = ({
 																width={18}
 																height={18}
 																viewBox="0 0 24 24"
-																stroke-width={
+																strokeWidth={
 																	1.5
 																}
 																stroke="currentColor"
@@ -1753,7 +1753,7 @@ const GetawayListing = ({
 															width={18}
 															height={18}
 															viewBox="0 0 24 24"
-															stroke-width={1.5}
+															strokeWidth={1.5}
 															stroke="currentColor"
 															fill="none"
 															strokeLinecap="round"
@@ -1958,7 +1958,7 @@ const GetawayListing = ({
 																				20
 																			}
 																			viewBox="0 0 24 24"
-																			stroke-width={
+																			strokeWidth={
 																				1.5
 																			}
 																			stroke="currentColor"
@@ -2382,7 +2382,7 @@ const GetawayListing = ({
 																			22
 																		}
 																		viewBox="0 0 24 24"
-																		stroke-width={
+																		strokeWidth={
 																			1.5
 																		}
 																		stroke="currentColor"
@@ -2410,7 +2410,7 @@ const GetawayListing = ({
 																</div>
 																{getawayDetails.review ? (
 																	<div className="w-full bg-tertiary-50 rounded p-5 mt-3">
-																		<blockquote className="font-serif text-lg pr-8">
+																		<blockquote className="font-headings text-lg pr-8">
 																			{
 																				getawayDetails.review
 																			}
@@ -2455,7 +2455,7 @@ const GetawayListing = ({
 																				24
 																			}
 																			viewBox="0 0 24 24"
-																			stroke-width={
+																			strokeWidth={
 																				1.5
 																			}
 																			stroke="currentColor"
@@ -2496,7 +2496,7 @@ const GetawayListing = ({
 																				24
 																			}
 																			viewBox="0 0 24 24"
-																			stroke-width={
+																			strokeWidth={
 																				1.5
 																			}
 																			stroke="currentColor"

@@ -41,9 +41,8 @@ const NavigationBar = ({ logo_url, path }) => {
 	const responsiveMenu = (
 		<>
 			<div
-				className={`menu__responsive ${
-					state.isResponsiveMenuOpen ? "open shadow-md" : null
-				}`}
+				className={`menu__responsive ${state.isResponsiveMenuOpen ? "open shadow-md" : null
+					}`}
 			>
 				<button
 					className="menu__close"
@@ -273,14 +272,14 @@ const NavigationBar = ({ logo_url, path }) => {
 								<g
 									id="Logo-v5"
 									stroke="none"
-									stroke-width="1"
+									strokeWidth="1"
 									fill="none"
-									fill-rule="evenodd"
+									fillRule="evenodd"
 								>
 									<g
 										id="Logo-Text---Vectoritzat"
 										transform="translate(-236.000000, -124.000000)"
-										fill-rule="nonzero"
+										fillRule="nonzero"
 									>
 										<g
 											id="Group"

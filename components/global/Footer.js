@@ -1,7 +1,11 @@
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import ContentService from "../../services/contentService";
-import KoFiBadge from "./KoFiBadge";
+
+const DynamicKoFiBadge = dynamic(() => import('./KoFiBadge'), {
+	loading: () => <span>Loading...</span>
+});
 
 const Footer = () => {
 	const service = new ContentService();
@@ -40,6 +44,7 @@ const Footer = () => {
 
 	let copyrightDate = new Date();
 	copyrightDate = copyrightDate.getFullYear();
+
 	return (
 		<footer id="footer" className="pt-12 pb-2 lg:pt-16 lg:pb-10">
 			<div className="container">
@@ -96,7 +101,7 @@ const Footer = () => {
 								<a
 									href="https://github.com/juliramon"
 									target="_blank"
-									rel="noopener noreferrer"
+									rel="noopener noreferrer nofollow"
 								>
 									<u>Juli Ramon</u>
 								</a>
@@ -105,7 +110,7 @@ const Footer = () => {
 								<a
 									href="https://andreaprat.cat"
 									target="_blank"
-									rel="noopener noreferrer"
+									rel="noopener noreferrer nofollow"
 								>
 									<u>Andrea Prat</u>
 								</a>
@@ -145,17 +150,17 @@ const Footer = () => {
 							<ul className="list-none m-0 p-0">
 								{state.activityCategories
 									? state.activityCategories.map(
-											(category, idx) => (
-												<li
-													key={idx}
-													className="py-1 text-sm leading-tight"
-												>
-													<Link href={category.slug}>
-														<a>{category.title}</a>
-													</Link>
-												</li>
-											)
-									  )
+										(category, idx) => (
+											<li
+												key={idx}
+												className="py-1 text-sm leading-tight"
+											>
+												<Link href={category.slug}>
+													<a>{category.title}</a>
+												</Link>
+											</li>
+										)
+									)
 									: null}
 							</ul>
 						</div>
@@ -379,7 +384,7 @@ const Footer = () => {
 				</div>
 			</div>
 
-			<KoFiBadge />
+			<DynamicKoFiBadge />
 		</footer>
 	);
 };

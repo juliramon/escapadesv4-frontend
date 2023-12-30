@@ -7,6 +7,15 @@ module.exports = withTM({
 		GOOGLE_ANALYTICS_TAG: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS,
 		STRIPE_API_KEY: process.env.NEXT_PUBLIC_STRIPE_API_KEY,
 	},
+	images: {
+		remotePatterns: [
+			{
+				protocol: 'https',
+				hostname: 'res.cloudinary.com',
+				port: '',
+			}
+		]
+	},
 	async redirects() {
 		return [
 			{

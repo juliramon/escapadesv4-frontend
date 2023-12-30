@@ -135,19 +135,20 @@ const PublicSquareBox = ({
 	const coverImg = `${coverPath}w_400,h_300,c_fill/${imageId}`;
 
 	return (
-		<article className="w-full sm:w-1/2 lg:w-1/4 px-1.5 py-2 group">
+		<article className="w-full sm:w-1/2 lg:w-1/4 px-2.5 py-2 group">
 			<Link href={`/${linkPath}/${slug}`}>
 				<a
 					title={title}
-					className="flex flex-col justify-between h-full overflow-hidden relative rounded-md shadow-sm"
+					className="flex flex-col justify-between h-full overflow-hidden relative"
 				>
-					<div className="relative overflow-hidden">
+					<div className="relative overflow-hidden rounded-md">
 						<picture className="block w-full h-full aspect-w-4 aspect-h-3">
 							<source srcSet={coverImg} />
 							<img
 								src={coverImg}
 								data-src={coverImg}
 								alt={title}
+								className="w-full h-full object-cover object-center scale-1000 hover:scale-105 transition-all duration-300 ease-in-out "
 								className="w-full h-full object-cover object-center scale-1000 hover:scale-105 transition-all duration-300 ease-in-out "
 								loading={
 									index !== undefined && index == 0
@@ -171,7 +172,7 @@ const PublicSquareBox = ({
 									width={18}
 									height={18}
 									viewBox="0 0 24 24"
-									stroke-width={1.5}
+									strokeWidth={1.5}
 									stroke="currentColor"
 									fill="none"
 									strokeLinecap="round"
@@ -194,7 +195,7 @@ const PublicSquareBox = ({
 							</span>
 						) : null}
 					</div>
-					<div className="flex flex-col justify-between p-4 h-full">
+					<div className="flex flex-col justify-between pt-2 pb-4 h-full">
 						<div className="">
 							<h3 className="text-16 my-0 font-medium line-clamp-1">
 								{title}
@@ -207,7 +208,7 @@ const PublicSquareBox = ({
 								<u>{location}</u>
 							</span>
 						</div>
-						<div className="mt-4 flex items-center justify-between">
+						<div className="mt-2.5 flex items-center justify-between">
 							<div className="inline-flex items-center justify-center text-sm leading-tight">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -230,7 +231,7 @@ const PublicSquareBox = ({
 								</svg>
 								{modRating || rating}/5
 							</div>
-							<span className="text-13 text-tertiary-800 group-hover:text-tertiary-900 transition-all duration-300 ease-in-out inline-flex items-center leading-tight">
+							<span className="text-13 text-tertiary-800 group-hover:text-tertiary-900 transition-all duration-300 ease-in-out inline-flex items-center leading-tight relative right-1">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									className="mr-1"

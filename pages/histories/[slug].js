@@ -12,6 +12,7 @@ import { formatDateTimeToISODate } from "../../utils/helpers";
 import ShareBar from "../../components/social/ShareBar";
 import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
 import ArticleRichSnippet from "../../components/richsnippets/ArticleRichSnippet";
+import Image from "next/image";
 
 const StoryListing = ({ storyDetails }) => {
 	const { user } = useContext(UserContext);
@@ -62,18 +63,26 @@ const StoryListing = ({ storyDetails }) => {
 							>
 								<picture
 									key={idx}
-									className="block rounded-md overflow-hidden aspect-1"
+									className="block rounded-md overflow-hidden aspect-1 relative"
 								>
-									<img
+									<Image src={image}
+										alt={`${storyDetails.title} - ${idx + 1
+											}`}
+										layout="fill"
+										objectFit="cover"
+										blur="true"
+										blurDataURL={image}
+										loading="lazy"
+									/>
+									{/* <img
 										src={image}
-										alt={`${storyDetails.title} - ${
-											idx + 1
-										}`}
+										alt={`${storyDetails.title} - ${idx + 1
+											}`}
 										width={400}
 										height={300}
 										className="w-full h-full object-cover object-center"
 										loading="lazy"
-									/>
+									/> */}
 								</picture>
 							</div>
 						);
@@ -145,12 +154,7 @@ const StoryListing = ({ storyDetails }) => {
 				modificationDate={storyDetails.updatedAt}
 			/>
 			<div className="listing-story">
-				<NavigationBar
-					logo_url={
-						"https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
-					}
-					user={user}
-				/>
+				<NavigationBar />
 				<main>
 					<article className="py-4 lg:pt-12">
 						<div className="container">
@@ -189,22 +193,13 @@ const StoryListing = ({ storyDetails }) => {
 								<div className="flex flex-wrap items-stretch -mx-2.5">
 									<div className="w-full lg:w-7/12 px-2.5">
 										<picture className="block aspect-w-16 aspect-h-9 h-full rounded-lg overflow-hidden">
-											<source
-												srcSet={coverImg}
-												media="(max-width: 768px)"
-											/>
-											<source
-												srcSet={coverImg}
-												media="(min-width: 768px)"
-											/>
-											<img
-												src={coverImg}
+											<Image src={coverImg}
 												alt={storyDetails.title}
-												width={400}
-												height={300}
-												className="w-full h-full object-cover"
-												fetchpriority="high"
+												layout="fill"
+												priority={true}
 												loading="eager"
+												placeholder="blur"
+												blurDataURL={coverImg}
 											/>
 										</picture>
 									</div>
@@ -219,20 +214,12 @@ const StoryListing = ({ storyDetails }) => {
 													<div className="flex flex-wrap items-center">
 														<div className="rounded-full overflow-hidden w-8 h-8 mr-2.5">
 															<picture>
-																<img
-																	src={
-																		coverAuthorImg
-																	}
-																	alt={
-																		storyDetails
-																			.owner
-																			.fullName
-																	}
+																<Image src={coverAuthorImg}
+																	alt={storyDetails.owner.fullName}
 																	width={32}
 																	height={32}
-																	className="w-full h-full object-cover"
-																	loadgin="eager"
-																	fetchpriority="high"
+																	priority={true}
+																	loading="eager"
 																/>
 															</picture>
 														</div>

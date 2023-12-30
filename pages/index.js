@@ -22,12 +22,11 @@ const Homepage = (props) => {
 			<LocalBusinessRichSnippet />
 			<main id="homepage">
 				<NavigationBar />
-				<HomeHeader totals={props.totals} />
+				<HomeHeader />
 				<HomePageResults
-					categories={props.categories}
-					featuredRegions={props.featuredRegions}
-					featuredActivities={props.featuredActivities}
 					mostRecentPlaces={props.mostRecentPlaces}
+					featuredActivities={props.featuredActivities}
+					featuredRegions={props.featuredRegions}
 					mostRecentStories={props.mostRecentStories}
 				/>
 				<Footer />
@@ -38,18 +37,14 @@ const Homepage = (props) => {
 
 export async function getStaticProps() {
 	const service = new ContentService();
-	const featuredRegions = await service.getFeaturedRegions();
-	const featuredActivities = await service.getFeaturedActivities();
 	const mostRecentPlaces = await service.getMostRecentPlaces();
+	const featuredActivities = await service.getFeaturedActivities();
+	const featuredRegions = await service.getFeaturedRegions();
 	const mostRecentStories = await service.getMostRecentStories();
-	const categories = await service.getCategories();
 	const totals = await service.getSiteStats();
-
-	console.log(featuredActivities.length)
 
 	return {
 		props: {
-			categories,
 			featuredRegions,
 			featuredActivities,
 			mostRecentPlaces,
