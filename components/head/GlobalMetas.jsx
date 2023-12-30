@@ -8,6 +8,7 @@ const GlobalMetas = ({
 	canonical,
 	index = true,
 	preload,
+	preconnect
 }) => {
 	return (
 		<Head>
@@ -51,6 +52,8 @@ const GlobalMetas = ({
 				content="756319ea1956c99d055184c4cac47dbfa3c81808"
 			/>
 			{preload ? <link rel="preload" href={preload} as="image" /> : null}
+			{preconnect ? <link rel="preconnect" href={preconnect} crossOrigin /> : null}
+			{preconnect ? <link rel="dns-prefetch" href={preconnect} /> : null}
 		</Head>
 	);
 };
