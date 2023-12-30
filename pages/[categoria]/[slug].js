@@ -1119,7 +1119,7 @@ const GetawayListing = ({
 																		verificada
 																	</span>
 																</div>
-																{getawayDetails.review ? (
+																{getawayDetails.review && getawayDetails.review !== 'false' ? (
 																	<div className="w-full bg-tertiary-50 rounded p-5 mt-3">
 																		<blockquote className="font-headings text-lg pr-8">
 																			{
@@ -2404,11 +2404,10 @@ const GetawayListing = ({
 																		></path>
 																	</svg>
 																	<span className="inline-block text-sm text-primary-400 font-normal">
-																		Escapada
-																		verificada
+																		Escapada verificada
 																	</span>
 																</div>
-																{getawayDetails.review ? (
+																{getawayDetails.review && getawayDetails.review !== 'false' ? (
 																	<div className="w-full bg-tertiary-50 rounded p-5 mt-3">
 																		<blockquote className="font-headings text-lg pr-8">
 																			{
