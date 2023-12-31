@@ -1,36 +1,64 @@
 @layer components
 	.menu
+		@apply flex items-center justify-end flex-1
+
+		&__list
+			@apply list-none m-0 flex flex-col bg-white fixed -right-full top-0 w-72 h-full shadow-xl transition-all duration-500 ease-in-out pt-20 px-5 pb-5 md:w-96 lg:flex-row lg:items-center lg:relative lg:right-auto lg:w-auto lg:h-auto lg:shadow-none lg:p-0
+
+		&.open .menu__list
+			@apply right-0 z-40
+
 		&__item
-			@apply text-primary-500 text-sm px-3 transition-all duration-300 ease-in-out
+			@apply last:mb-0 lg:pr-4 xl:pr-6 lg:last:pr-0 mb-4 lg:mb-0 lg:inline-flex lg:items-center
+
+		&__link:not(.button)
+			@apply inline-flex items-center text-primary-500 text-sm transition-all duration-300 ease-in-out
 
 			svg
 				@apply transition-all duration-300 ease-in-out text-primary-500
 
-		&__item:hover
-			@apply text-primary-500
+			&:hover
+				@apply text-primary-500
 
-			svg
+			&:hover svg
 				@apply stroke-primary-500
 
-	.menu__responsive
-		@apply bg-white fixed -right-full top-0 w-72 md:w-96 h-full shadow-xl transition-all duration-300 ease-in-out pt-20 px-5 pb-5
+		&__link.button
+			@apply w-full lg:w-auto px-4 xl:px-8 mt-4 lg:mt-0 flex items-center justify-center
 
-		.menu
-			&__link
-				@apply py-2
+		&__open
+			@apply lg:hidden
+
+		&__close
+			@apply absolute top-5 right-5 z-50 lg:hidden
+
+		.search
+			&__open
+				@apply inline-block mr-3 lg:hidden
 
 			&__close
-				@apply absolute top-5 right-5
+				@apply absolute top-5 right-5 z-50 lg:hidden
 
-		.search-box
-			@apply relative
+			&__panel
+				@apply fixed -top-full inset-x-0 h-screen bg-white transition-all duration-500 ease-in-out p-5 flex flex-wrap justify-center lg:relative lg:top-auto lg:left-auto lg:right-auto lg:h-auto  lg:bg-transparent lg:p-0 lg:w-full lg:block
 
-			input
-				@apply pl-10
+			&__panel.open
+				@apply top-0 z-40
 
-			.icon
-				@apply absolute left-2 top-1/2 transform -translate-y-1/2
+			&__form
+				@apply w-full relative rounded-md overflow-hidden pt-20 lg:pt-0 lg:w-auto
 
-		&.open
-			z-index: 1000
-			@apply right-0
+			&__fieldset
+				@apply w-full flex flex-wrap lg:flex-nowrap lg:items-stretch
+
+			&__label
+				@apply block mb-3 text-sm lg:hidden
+
+			&__input
+				@apply w-full flex-auto rounded-md bg-primary-50 px-5 py-2 placeholder:text-sm focus:bg-white focus:text-primary-500 lg:rounded-r-none
+
+			&__submit
+				@apply w-full inline-flex items-center justify-center mt-2.5 lg:mt-0 lg:rounded-l-none lg:w-auto lg:bg-primary-50 lg:text-primary-300 lg:hover:bg-primary-500 lg:hover:text-white transition-all duration-300 ease-in-out
+
+				span
+					@apply inline-block mr-2.5 lg:hidden

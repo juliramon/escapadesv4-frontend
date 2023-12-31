@@ -1,21 +1,19 @@
-import Router, { useRouter } from "next/router";
-import { useContext, useState } from "react";
+import Router from "next/router";
+import { useContext, useRef, useState } from "react";
 import Link from "next/link";
 import UserContext from "../../contexts/UserContext";
 
 const NavigationBar = ({ logo_url, path }) => {
 	const { user } = useContext(UserContext);
-	const router = useRouter();
+	const searchInputRef = useRef(null);
+
 	const initialState = {
 		searchQuery: "",
 		isResponsiveMenuOpen: false,
+		isSearchPanelOpen: false,
 	};
 	const [state, setState] = useState(initialState);
 
-	const notLoggedHeader = {
-		boxShadow: "none",
-		borderBottom: "1px solid #e8e8e8",
-	};
 	const handleKeyPress = (e) => {
 		let searchQuery = e.target.value;
 		setState({ ...state, searchQuery: searchQuery });
@@ -25,241 +23,28 @@ const NavigationBar = ({ logo_url, path }) => {
 		}
 	};
 
-	const handleResponsiveMenu = () => {
-		if (!state.isResponsiveMenuOpen) {
-			setState({ ...state, isResponsiveMenuOpen: true });
+	const handleSearchSubmit = (e) => {
+		if (state.searchQuery !== "") {
+			Router.push(`/search?query=${state.searchQuery}`);
 		} else {
-			setState({ ...state, isResponsiveMenuOpen: false });
+			e.preventDefault();
+			searchInputRef.current.focus();
 		}
-	};
+	}
+
+	const handleResponsiveMenu = () => !state.isResponsiveMenuOpen ? setState({ ...state, isResponsiveMenuOpen: true }) : setState({ ...state, isResponsiveMenuOpen: false });
+	const handleSearchPanel = () => !state.isSearchPanelOpen ? setState({ ...state, isSearchPanelOpen: true }) : setState({ ...state, isSearchPanelOpen: false });
 
 	let logoLink =
 		user === "null" || !user || user === undefined
 			? "/"
 			: "/2i8ZXlkM4cFKUPBrm3-admin-panel";
 
-	const responsiveMenu = (
-		<>
-			<div
-				className={`menu__responsive ${state.isResponsiveMenuOpen ? "open shadow-md" : null
-					}`}
-			>
-				<button
-					className="menu__close"
-					aria-label="Botó tancar menu"
-					onClick={() => handleResponsiveMenu()}
-				>
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						width="32"
-						height="32"
-						viewBox="0 0 24 24"
-						strokeWidth="1.5"
-						stroke="#00206B"
-						fill="none"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					>
-						<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-						<line x1="18" y1="6" x2="6" y2="18" />
-						<line x1="6" y1="6" x2="18" y2="18" />
-					</svg>
-				</button>
-
-				<div className="search-box">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						className="icon icon-tabler icon-tabler-search"
-						width="15"
-						height="15"
-						viewBox="0 0 24 24"
-						strokeWidth="1.5"
-						stroke="#00206B"
-						fill="none"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					>
-						<path stroke="none" d="M0 0h24v24H0z" />
-						<circle cx="10" cy="10" r="7" />
-						<line x1="21" y1="21" x2="15" y2="15" />
-					</svg>
-					<form className="form">
-						<fieldset>
-							<input
-								type="text"
-								onKeyDown={handleKeyPress}
-								className="form__control"
-								type="text"
-								placeholder="Cerca la vostra propera escapada..."
-							/>
-						</fieldset>
-					</form>
-				</div>
-				<span className="flex items-center text-xs mt-3">
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						className="icon icon-tabler icon-tabler-corner-down-left"
-						width="16"
-						height="16"
-						viewBox="0 0 24 24"
-						strokeWidth="1.5"
-						stroke="#00206B"
-						fill="none"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					>
-						<path stroke="none" d="M0 0h24v24H0z" />
-						<path d="M18 6v6a3 3 0 0 1 -3 3h-10l5 -5m0 10l-5 -5" />
-					</svg>
-					Prem "Enter" per cercar
-				</span>
-				<div className="mt-8">
-					<Link href="/activitats">
-						<a className="menu__link flex items-center">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								className="icon icon-tabler icon-tabler-route mr-2"
-								width="25"
-								height="25"
-								viewBox="0 0 24 24"
-								strokeWidth="1.5"
-								stroke="#00206B"
-								fill="none"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							>
-								<path stroke="none" d="M0 0h24v24H0z" />
-								<circle cx="6" cy="19" r="2" />
-								<circle cx="18" cy="5" r="2" />
-								<path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
-							</svg>
-							Activitats
-						</a>
-					</Link>
-					<Link href="/allotjaments">
-						<a className="menu__link flex items-center">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								className="icon icon-tabler icon-tabler-tent mr-2"
-								width="25"
-								height="25"
-								viewBox="0 0 24 24"
-								strokeWidth="1.5"
-								stroke="#00206B"
-								fill="none"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							>
-								<path
-									stroke="none"
-									d="M0 0h24v24H0z"
-									fill="none"
-								/>
-								<path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" />
-							</svg>
-							Allotjaments
-						</a>
-					</Link>
-					<Link href="/histories">
-						<a className="menu__link flex items-center">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								className="icon icon-tabler icon-tabler-notebook mr-2"
-								width="25"
-								height="25"
-								viewBox="0 0 24 24"
-								strokeWidth="1.5"
-								stroke="#00206B"
-								fill="none"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							>
-								<path
-									stroke="none"
-									d="M0 0h24v24H0z"
-									fill="none"
-								/>
-								<path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" />
-								<line x1="13" y1="8" x2="15" y2="8" />
-								<line x1="13" y1="12" x2="15" y2="12" />
-							</svg>
-							Històries
-						</a>
-					</Link>
-					<Link href="/llistes">
-						<a className="menu__link flex items-center">
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								className="icon icon-tabler icon-tabler-layout-list mr-2"
-								width="25"
-								height="25"
-								viewBox="0 0 24 24"
-								strokeWidth="1.5"
-								stroke="#00206B"
-								fill="none"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							>
-								<path
-									stroke="none"
-									d="M0 0h24v24H0z"
-									fill="none"
-								/>
-								<rect
-									x="4"
-									y="4"
-									width="16"
-									height="6"
-									rx="2"
-								/>
-								<rect
-									x="4"
-									y="14"
-									width="16"
-									height="6"
-									rx="2"
-								/>
-							</svg>
-							Llistes
-						</a>
-					</Link>
-				</div>
-				{/* {navRight} */}
-			</div>
-		</>
-	);
-
 	return (
 		<header className="z-50 bg-white w-full sticky top-0">
 			<nav className="px-6 py-3 menu">
-				<div className="w-full flex flex-wrap items-center justify-between lg:justify-start">
-					<div className="flex-1 ">
-						<form className="hidden lg:flex items-center bg-primary-100 relative rounded-md overflow-hidden max-w-[400px]">
-							<input
-								onKeyDown={handleKeyPress}
-								type="text"
-								id="search"
-								placeholder="Cerca la vostra propera escapada..."
-								className="flex-auto rounded-md bg-primary-50 px-5 py-2.5 placeholder:text-sm focus:ring-primary-500 focus:bg-white focus:text-primary-500"
-							/>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								className="icon icon-tabler icon-tabler-search absolute right-3 text-primary-400"
-								width="22"
-								height="22"
-								viewBox="0 0 24 24"
-								strokeWidth="1.5"
-								stroke="currentColor"
-								fill="none"
-								strokeLinecap="round"
-								strokeLinejoin="round"
-							>
-								<path stroke="none" d="M0 0h24v24H0z" />
-								<circle cx="10" cy="10" r="7" />
-								<line x1="21" y1="21" x2="15" y2="15" />
-							</svg>
-						</form>
-					</div>
+				<div className="w-full flex items-center justify-between lg:justify-start">
+
 					<Link href={logoLink}>
 						<a title="Escapadesenparella.cat">
 							<svg
@@ -268,6 +53,7 @@ const NavigationBar = ({ logo_url, path }) => {
 								viewBox="0 0 638 173"
 								version="1.1"
 								xmlns="http://www.w3.org/2000/svg"
+								className="w-36 lg:w-44 h-auto"
 							>
 								<g
 									id="Logo-v5"
@@ -301,87 +87,37 @@ const NavigationBar = ({ logo_url, path }) => {
 							</svg>
 						</a>
 					</Link>
-					<div className="flex flex-wrap items-center justify-end flex-1">
-						<div className="hidden lg:flex flex-wrap items-center">
-							<Link href="/activitats">
-								<a className="flex items-center menu__item relative group">
+					<div className={`menu ${state.isResponsiveMenuOpen ? 'open' : ''}`}>
+						{/* Search input */}
+						<div className="lg:flex-1 flex lg:mx-8">
+							<button className="search__open" onClick={() => handleSearchPanel()}>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width="26"
+									height="26"
+									viewBox="0 0 24 24"
+									strokeWidth="1.5"
+									stroke="currentColor"
+									fill="none"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								>
+									<path stroke="none" d="M0 0h24v24H0z" />
+									<circle cx="10" cy="10" r="7" />
+									<line x1="21" y1="21" x2="15" y2="15" />
+								</svg>
+							</button>
+							<div className={`search__panel ${state.isSearchPanelOpen ? 'open' : ''}`}>
+								{/* Button close */}
+								<button
+									className="search__close"
+									aria-label="Botó tancar menu"
+									onClick={() => handleSearchPanel()}
+								>
 									<svg
 										xmlns="http://www.w3.org/2000/svg"
-										className="icon icon-tabler icon-tabler-route text-primary-500 mr-1"
-										width="22"
-										height="22"
-										viewBox="0 0 24 24"
-										strokeWidth="1.5"
-										stroke="currentColor"
-										fill="none"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<path stroke="none" d="M0 0h24v24H0z" />
-										<circle cx="6" cy="19" r="2" />
-										<circle cx="18" cy="5" r="2" />
-										<path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
-									</svg>
-									Activitats
-								</a>
-							</Link>
-							<Link href="/allotjaments">
-								<a className="flex items-center menu__item">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										className="icon icon-tabler icon-tabler-tent mr-1"
-										width="22"
-										height="22"
-										viewBox="0 0 24 24"
-										strokeWidth="1.5"
-										stroke="#00206B"
-										fill="none"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<path
-											stroke="none"
-											d="M0 0h24v24H0z"
-											fill="none"
-										/>
-										<path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" />
-									</svg>
-									Allotjaments
-								</a>
-							</Link>
-							<Link href="/histories">
-								<a className="flex items-center menu__item">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										className="icon icon-tabler icon-tabler-notebook text-primary-500 mr-1"
-										width="22"
-										height="22"
-										viewBox="0 0 24 24"
-										strokeWidth="1.5"
-										stroke="currentColor"
-										fill="none"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<path
-											stroke="none"
-											d="M0 0h24v24H0z"
-											fill="none"
-										/>
-										<path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" />
-										<line x1="13" y1="8" x2="15" y2="8" />
-										<line x1="13" y1="12" x2="15" y2="12" />
-									</svg>
-									Històries
-								</a>
-							</Link>
-							<Link href="/llistes">
-								<a className="flex items-center menu__item">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										className="icon icon-tabler icon-tabler-layout-list text-primary-500 mr-1"
-										width="22"
-										height="22"
+										width="32"
+										height="32"
 										viewBox="0 0 24 24"
 										strokeWidth="1.5"
 										stroke="#00206B"
@@ -389,72 +125,86 @@ const NavigationBar = ({ logo_url, path }) => {
 										strokeLinecap="round"
 										strokeLinejoin="round"
 									>
-										<path
-											stroke="none"
-											d="M0 0h24v24H0z"
-											fill="none"
-										/>
-										<rect
-											x="4"
-											y="4"
-											width="16"
-											height="6"
-											rx="2"
-										/>
-										<rect
-											x="4"
-											y="14"
-											width="16"
-											height="6"
-											rx="2"
-										/>
+										<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+										<line x1="18" y1="6" x2="6" y2="18" />
+										<line x1="6" y1="6" x2="18" y2="18" />
 									</svg>
-									Llistes
-								</a>
-							</Link>
-							<Link href="/viatges">
-								<a className="flex items-center menu__item">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										className="icon icon-tabler icon-tabler-globe text-primary-500 mr-1"
-										width={22}
-										height={22}
-										viewBox="0 0 24 24"
-										strokeWidth={1.5}
-										stroke="currentColor"
-										fill="none"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<path
-											stroke="none"
-											d="M0 0h24v24H0z"
-											fill="none"
-										></path>
-										<path d="M7 9a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-										<path d="M5.75 15a8.015 8.015 0 1 0 9.25 -13"></path>
-										<path d="M11 17v4"></path>
-										<path d="M7 21h8"></path>
-									</svg>
-									Viatges
-								</a>
-							</Link>
-							<Link href="/contacte">
-								<a className="flex items-center button button__primary button__med px-8 ml-6">
-									Contacta'ns
-								</a>
-							</Link>
+								</button>
+								<form className="search__form">
+									<fieldset className="search__fieldset">
+										<label htmlFor="search" className="search__label">Cerca activitats i allotjaments</label>
+
+										<input
+											onKeyDown={handleKeyPress}
+											type="text"
+											name="search"
+											id="search"
+											ref={searchInputRef}
+											placeholder="Cerca escapades..."
+											className="search__input"
+										/>
+
+										<button type="submit" className="search__submit button button__med button__primary" onClick={handleSearchSubmit}>
+											<span>Buscar</span>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="22"
+												height="22"
+												viewBox="0 0 24 24"
+												strokeWidth="1.5"
+												stroke="currentColor"
+												fill="none"
+												strokeLinecap="round"
+												strokeLinejoin="round"
+											>
+												<path stroke="none" d="M0 0h24v24H0z" />
+												<circle cx="10" cy="10" r="7" />
+												<line x1="21" y1="21" x2="15" y2="15" />
+											</svg></button>
+									</fieldset>
+								</form>
+							</div>
 						</div>
-						{/* {navRight} */}
-						<div className="flex items-center lg:hidden">
+
+						{/* Button open */}
+						<button
+							className="menu__open"
+							aria-label="Botó obrir menú"
+							onClick={() => handleResponsiveMenu()}
+						>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								className="icon icon-tabler icon-tabler-menu-2"
+								width="32"
+								height="32"
+								viewBox="0 0 24 24"
+								strokeWidth="1.5"
+								stroke="#00206B"
+								fill="none"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+							>
+								<path
+									stroke="none"
+									d="M0 0h24v24H0z"
+									fill="none"
+								/>
+								<line x1="4" y1="6" x2="20" y2="6" />
+								<line x1="4" y1="12" x2="20" y2="12" />
+								<line x1="4" y1="18" x2="20" y2="18" />
+							</svg>
+						</button>
+
+						{/* Menu list */}
+						<ul className="menu__list">
+							{/* Button close */}
 							<button
-								className=""
-								aria-label="Botó obrir menú"
+								className="menu__close"
+								aria-label="Botó tancar menu"
 								onClick={() => handleResponsiveMenu()}
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
-									className="icon icon-tabler icon-tabler-menu-2"
 									width="32"
 									height="32"
 									viewBox="0 0 24 24"
@@ -464,20 +214,167 @@ const NavigationBar = ({ logo_url, path }) => {
 									strokeLinecap="round"
 									strokeLinejoin="round"
 								>
-									<path
-										stroke="none"
-										d="M0 0h24v24H0z"
-										fill="none"
-									/>
-									<line x1="4" y1="6" x2="20" y2="6" />
-									<line x1="4" y1="12" x2="20" y2="12" />
-									<line x1="4" y1="18" x2="20" y2="18" />
+									<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+									<line x1="18" y1="6" x2="6" y2="18" />
+									<line x1="6" y1="6" x2="18" y2="18" />
 								</svg>
 							</button>
-						</div>
+							<li className="menu__item">
+								<Link href="/activitats">
+									<a className="menu__link">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											className="icon icon-tabler icon-tabler-route text-primary-500 mr-1"
+											width="22"
+											height="22"
+											viewBox="0 0 24 24"
+											strokeWidth="1.5"
+											stroke="currentColor"
+											fill="none"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										>
+											<path stroke="none" d="M0 0h24v24H0z" />
+											<circle cx="6" cy="19" r="2" />
+											<circle cx="18" cy="5" r="2" />
+											<path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
+										</svg>
+										Activitats
+									</a>
+								</Link>
+							</li>
+							<li className="menu__item">
+								<Link href="/allotjaments">
+									<a className="menu__link">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											className="icon icon-tabler icon-tabler-tent mr-1"
+											width="22"
+											height="22"
+											viewBox="0 0 24 24"
+											strokeWidth="1.5"
+											stroke="#00206B"
+											fill="none"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										>
+											<path
+												stroke="none"
+												d="M0 0h24v24H0z"
+												fill="none"
+											/>
+											<path d="M11 14l4 6h6l-9 -16l-9 16h6l4 -6" />
+										</svg>
+										Allotjaments
+									</a>
+								</Link>
+							</li>
+							<li className="menu__item">
+								<Link href="/histories">
+									<a className="menu__link">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											className="icon icon-tabler icon-tabler-notebook text-primary-500 mr-1"
+											width="22"
+											height="22"
+											viewBox="0 0 24 24"
+											strokeWidth="1.5"
+											stroke="currentColor"
+											fill="none"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										>
+											<path
+												stroke="none"
+												d="M0 0h24v24H0z"
+												fill="none"
+											/>
+											<path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18" />
+											<line x1="13" y1="8" x2="15" y2="8" />
+											<line x1="13" y1="12" x2="15" y2="12" />
+										</svg>
+										Històries
+									</a>
+								</Link>
+							</li>
+							<li className="menu__item">
+								<Link href="/llistes">
+									<a className="menu__link">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											className="icon icon-tabler icon-tabler-layout-list text-primary-500 mr-1"
+											width="22"
+											height="22"
+											viewBox="0 0 24 24"
+											strokeWidth="1.5"
+											stroke="#00206B"
+											fill="none"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										>
+											<path
+												stroke="none"
+												d="M0 0h24v24H0z"
+												fill="none"
+											/>
+											<rect
+												x="4"
+												y="4"
+												width="16"
+												height="6"
+												rx="2"
+											/>
+											<rect
+												x="4"
+												y="14"
+												width="16"
+												height="6"
+												rx="2"
+											/>
+										</svg>
+										Llistes
+									</a>
+								</Link>
+							</li>
+							<li className="menu__item">
+								<Link href="/viatges">
+									<a className="menu__link">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											className="icon icon-tabler icon-tabler-globe text-primary-500 mr-1"
+											width={22}
+											height={22}
+											viewBox="0 0 24 24"
+											strokeWidth={1.5}
+											stroke="currentColor"
+											fill="none"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										>
+											<path
+												stroke="none"
+												d="M0 0h24v24H0z"
+												fill="none"
+											></path>
+											<path d="M7 9a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
+											<path d="M5.75 15a8.015 8.015 0 1 0 9.25 -13"></path>
+											<path d="M11 17v4"></path>
+											<path d="M7 21h8"></path>
+										</svg>
+										Viatges
+									</a>
+								</Link>
+							</li>
+							<li className="menu__item">
+								<Link href="/contacte">
+									<a className="button button__primary button__med menu__link">
+										Contacta'ns
+									</a>
+								</Link>
+							</li>
+						</ul>
 					</div>
 				</div>
-				{state.isResponsiveMenuOpen ? responsiveMenu : null}
 			</nav>
 		</header>
 	);

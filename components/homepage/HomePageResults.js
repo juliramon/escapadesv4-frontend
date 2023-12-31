@@ -51,7 +51,7 @@ const HomePageResults = ({
 			<div className="container">
 				<div className="w-full">
 					{/* Most recent places */}
-					<section className="pt-12 lg:pt-20">
+					<section className="pt-12 lg:pt-16">
 						<h2 className="mb-0">
 							Allotjaments afegits recentment
 						</h2>
@@ -154,7 +154,7 @@ const HomePageResults = ({
 					</section>
 
 					{/* Featured activities */}
-					<section className="pt-12 lg:pt-20">
+					<section className="pt-12 lg:pt-16">
 						<h2 className="mb-0">
 							Experiències en parella a Catalunya
 						</h2>
@@ -257,7 +257,7 @@ const HomePageResults = ({
 					</section>
 
 					{/* Featured regions */}
-					<section className="pt-12 pb-6 lg:pt-20">
+					<section className="pt-12 pb-6 lg:pt-16">
 						<h2 className="mb-0">
 							Zones per descobrir
 						</h2>
@@ -344,7 +344,7 @@ const HomePageResults = ({
 					</section>
 
 					{/* About us section */}
-					<section className="pt-12 lg:pt-20">
+					<section className="pt-12 lg:pt-16">
 						<div className="container">
 							<div className="flex flex-wrap items-center justify-start overflow-hidden relative rounded-md lg:py-12 lg:pr-20">
 								<div className="relative lg:absolute inset-0 rounded-md overflow-hidden flex justify-end">
@@ -422,7 +422,7 @@ const HomePageResults = ({
 					</section>
 
 					{/* Most recent stories */}
-					<section className="py-12 lg:py-20">
+					<section className="py-12 lg:py-16">
 						<h2 className="mb-0">
 							Últimes entrades al blog d' "Històries en parella"
 						</h2>
