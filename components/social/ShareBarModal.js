@@ -116,7 +116,7 @@ const ShareBarModal = ({ picture, title, rating, slug, locality, colorClass }) =
                         <div className='modal__body pt-0'>
                             <div className='flex items-center mb-4'>
                                 {picture ? <picture className='block mr-3 rounded overflow-hidden w-12 h-12 relative'>
-                                    <Image src={picture} alt={title} layout='fill' />
+                                    <Image src={picture} alt={title} layout='fill' objectFit='cover' />
                                 </picture> : null}
                                 <div className='flex flex-wrap items-center text-sm flex-1'>
                                     {title ? <div className='mr-2.5'>
