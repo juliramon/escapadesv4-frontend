@@ -75,14 +75,19 @@ const Newsletter = () => {
                                             <button type="submit" className="button button__med button__primary justify-center md:mt-1">Subscriure'm</button>
                                         </fieldset>
                                         <span className="block w-full px-1.5 mt-1 form__text_info">Al fer clic a "Subscriure'm" confirmes haver llegit i estàs d'acord amb la <Link href="/politica-privadesa"><a title="Política de Privacitat" className="text-primary-900 underline">Política de Privacitat.</a></Link></span>
-                                    </form> : <div className="flex items-center justify-center md:justify-start xl:justify-center flex-1 lg:flex-none xl:flex-1">
-                                        <div className="max-w-[280px] mx-auto md:mx-0 flex items-center">
+                                    </form> : <div className="flex flex-col items-center justify-center md:justify-start xl:justify-center flex-1 lg:flex-none xl:flex-1">
+                                        <div className="max-w-[280px] mx-auto md:mx-0 flex items-center mt-3">
                                             <svg xmlns="http://www.w3.org/2000/svg" className="mr-2.5 text-green-500" width={32} height={32} viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                                                 <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                                                 <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />
                                                 <path d="M9 12l2 2l4 -4" />
                                             </svg>
                                             <span className="inline-block flex-1">{newsletterFormData.serverMessage}</span>
+                                        </div>
+                                        <div className='mt-7'>
+                                            <Link href={'/'}>
+                                                <a title="Tornar al començament" className='button button__med button__ghost'>Tornar al començament</a>
+                                            </Link>
                                         </div>
                                     </div>}
                                 </div>
