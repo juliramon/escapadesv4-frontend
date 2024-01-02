@@ -36,9 +36,9 @@ const Newsletter = () => {
             {/* Browser metas  */}
             <GlobalMetas
                 title="Subscriu-te a la newsletter"
-                description="Subscriu-te a la nostra newsletter pre rebre les últimes novetats i ofertes."
+                description="Subscriu-te a la nostra newsletter per rebre les últimes novetats i ofertes."
                 url="https://escapadesenparella.cat/newsletter"
-                image="https://escapadesenparella.cat/img/containers/main/img/og-histories.png/69081998ba0dfcb1465f7f878cbc7912.png"
+                image="https://res.cloudinary.com/juligoodie/image/upload/v1626446634/getaways-guru/static-files/email-confirmation_lu3qbp.jpg"
                 canonical="https://escapadesenparella.cat/newsletter"
                 index="false"
             />
