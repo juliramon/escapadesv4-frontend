@@ -95,13 +95,13 @@ const Hero = () => {
 											className="glide__slide"
 										>
 											<div className="flex flex-wrap items-stretch justify-center overflow-hidden">
-												<div className="w-full md:w-1/2 bg-primary-300 hidden md:block">
+												<div className="w-full md:w-1/2 bg-primary-300">
 													<picture className="block w-full h-full aspect-w-4 aspect-h-3 md:aspect-w-16 md:aspect-h-9 relative">
 														<Image src={slide.picture_raw} alt={slide.picture_alt} layout="fill" objectFit="cover" priority={true} loading="eager" />
 													</picture>
 												</div>
 												<div className="w-full md:w-1/2">
-													<div className="bg-primary-900 relative pt-16 pb-20 md:pt-24 md:pb-32 px-6 xl:px-20 h-full w-full overflow-hidden after:bg-geo after:opacity-50 after:w-full after:h-full after:absolute after:inset-0 flex items-center justify-center">
+													<div className="bg-primary-900 relative pt-8 pb-8 md:pt-24 md:pb-32 px-6 xl:px-20 h-full w-full overflow-hidden after:bg-geo after:opacity-50 after:w-full after:h-full after:absolute after:inset-0 flex items-center justify-center">
 														<div className="relative z-10 md:min-h-[150px] lg:min-h-[300px] flex items-center justify-center">
 															<div className="max-w-sm text-center ">
 																<span className="uppercase text-sm text-white tracking-wider">
@@ -115,8 +115,8 @@ const Hero = () => {
 																		__html: slide.title,
 																	}}
 																></h1>
-																<div className="flex flex-wrap items-center justify-center -mx-2.5 -mb-2.5 mt-12">
-																	<div className="p-2.5">
+																<div className="flex flex-wrap items-center justify-center md:-mx-2.5 md:-mb-2.5 mt-9 md:mt-12">
+																	<div className="w-full md:w-auto mb-2.5 md:mb-0 md:p-2.5">
 																		<Link
 																			href={
 																				slide.button_link_1
@@ -126,7 +126,7 @@ const Hero = () => {
 																				title={
 																					slide.button_text_1
 																				}
-																				className="button border border-white text-white button__lg text-sm hover:bg-white hover:text-primary-500 transition-all duration-300 ease-in-out"
+																				className="button border border-white text-white button__lg w-full md:w-auto justify-center text-sm hover:bg-white hover:text-primary-500 transition-all duration-300 ease-in-out"
 																			>
 																				{
 																					slide.button_text_1
@@ -134,7 +134,7 @@ const Hero = () => {
 																			</a>
 																		</Link>
 																	</div>
-																	<div className="p-2.5">
+																	<div className="w-full md:w-auto md:p-2.5">
 																		<Link
 																			href={
 																				slide.button_link_2
@@ -144,7 +144,7 @@ const Hero = () => {
 																				title={
 																					slide.button_text_2
 																				}
-																				className="button bg-white border border-white text-primary-500 button__lg text-sm hover:bg-secondary-600 hover:border-secondary-600 hover:text-white transition-all duration-300 ease-in-out"
+																				className="button bg-white border border-white text-primary-500 button__lg w-full md:w-auto justify-center text-sm hover:bg-secondary-600 hover:border-secondary-600 hover:text-white transition-all duration-300 ease-in-out"
 																			>
 																				{
 																					slide.button_text_2
