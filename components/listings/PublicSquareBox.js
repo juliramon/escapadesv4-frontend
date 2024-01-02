@@ -149,13 +149,12 @@ const PublicSquareBox = ({
 								data-src={coverImg}
 								alt={title}
 								className="w-full h-full object-cover object-center scale-1000 hover:scale-105 transition-all duration-300 ease-in-out "
-								className="w-full h-full object-cover object-center scale-1000 hover:scale-105 transition-all duration-300 ease-in-out "
 								loading={
 									index !== undefined && index == 0
 										? "eager"
 										: "lazy"
 								}
-								fetchPriority={
+								fetchpriority={
 									index !== undefined && index == 0
 										? "high"
 										: "low"

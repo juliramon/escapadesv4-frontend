@@ -2,27 +2,28 @@ import Glide from "@glidejs/glide";
 import Link from "next/link";
 import { useEffect } from "react";
 import { getPicturesBySeason } from "../../utils/helpers";
+import Image from "next/image";
 
 const Hero = () => {
 	const firstSlidePictures = {
 		spring: {},
 		summer: {
-			picture_webp: "home-cover-estiu.webp",
-			picture_raw: "home-cover-estiu.jpg",
-			picture_webp_mob: "home-cover-estiu-m.webp",
-			picture_raw_mob: "home-cover-estiu-m.jpg",
+			picture_webp: "/home-cover-estiu.webp",
+			picture_raw: "/home-cover-estiu.jpg",
+			picture_webp_mob: "/home-cover-estiu-m.webp",
+			picture_raw_mob: "/home-cover-estiu-m.jpg",
 		},
 		autumn: {
-			picture_webp: "home-cover-tardor.webp",
-			picture_raw: "home-cover-tardor.jpg",
-			picture_webp_mob: "home-cover-tardor-m.webp",
-			picture_raw_mob: "home-cover-tardor-m.jpg",
+			picture_webp: "/home-cover-tardor.webp",
+			picture_raw: "/home-cover-tardor.jpg",
+			picture_webp_mob: "/home-cover-tardor-m.webp",
+			picture_raw_mob: "/home-cover-tardor-m.jpg",
 		},
 		winter: {
-			picture_webp: "home-cover-hivern.webp",
-			picture_raw: "home-cover-hivern.jpg",
-			picture_webp_mob: "home-cover-hivern-m.webp",
-			picture_raw_mob: "home-cover-hivern-m.jpg",
+			picture_webp: "/home-cover-hivern.webp",
+			picture_raw: "/home-cover-hivern.jpg",
+			picture_webp_mob: "/home-cover-hivern-m.webp",
+			picture_raw_mob: "/home-cover-hivern-m.jpg",
 		},
 	};
 
@@ -95,48 +96,12 @@ const Hero = () => {
 										>
 											<div className="flex flex-wrap items-stretch justify-center overflow-hidden">
 												<div className="w-full md:w-1/2 bg-primary-300 hidden md:block">
-													<picture className="block w-full h-full aspect-w-4 aspect-h-3 md:aspect-w-16 md:aspect-h-9">
-														<source
-															media="(max-width: 768px)"
-															srcSet={
-																slide.picture_webp_mob
-															}
-															type="image/webp"
-														/>
-														<source
-															media="(max-width: 768px)"
-															srcSet={
-																slide.picture_raw_mob
-															}
-														/>
-														<source
-															media="(min-width: 768px)"
-															srcSet={
-																slide.picture_webp
-															}
-															type="image/webp"
-														/>
-														<source
-															media="(min-width: 768px)"
-															srcSet={
-																slide.picture_raw
-															}
-														/>
-														<img
-															src={
-																slide.picture_raw
-															}
-															alt={
-																slide.picture_alt
-															}
-															className="w-full h-full object-cover"
-															loading="eager"
-															fetchpriority="high"
-														/>
+													<picture className="block w-full h-full aspect-w-4 aspect-h-3 md:aspect-w-16 md:aspect-h-9 relative">
+														<Image src={slide.picture_raw} alt={slide.picture_alt} layout="fill" objectFit="cover" priority={true} loading="eager" />
 													</picture>
 												</div>
 												<div className="w-full md:w-1/2">
-													<div className="bg-primary-900 relative pt-16 pb-20 md:pt-24 md:pb-32 px-6 xl:px-20 h-full w-full overflow-hidden after:bg-geo after:opacity-50 after:w-full after:h-full after:absolute after:inset-0 flex items-center justify-center rounded-lg md:rounded-none">
+													<div className="bg-primary-900 relative pt-16 pb-20 md:pt-24 md:pb-32 px-6 xl:px-20 h-full w-full overflow-hidden after:bg-geo after:opacity-50 after:w-full after:h-full after:absolute after:inset-0 flex items-center justify-center">
 														<div className="relative z-10 md:min-h-[150px] lg:min-h-[300px] flex items-center justify-center">
 															<div className="max-w-sm text-center ">
 																<span className="uppercase text-sm text-white tracking-wider">
