@@ -110,28 +110,48 @@ const formatDateTimeToISODate = (datetime) => {
 
 const getPicturesBySeason = (thisDate, objImages) => {
 	const currentYear = thisDate.getFullYear();
+	const lastYear = thisDate.getFullYear() - 1;
+	const nextYear = thisDate.getFullYear() + 1;
+	const currentMonth = thisDate.getMonth() + 1;
+	const currentDay = thisDate.getDay();
+
+	let currentDate = currentMonth + '/' + currentDay + '/' + currentYear;
 
 	const triggers = {
-		winter: currentYear + "/12/21",
-		autumn: currentYear + "/09/21",
-		summer: currentYear + "/06/21",
-		spring: currentYear + "/03/20",
+		spring: "03/20/" + currentYear,
+		summer: "06/21/" + currentYear,
+		autumn: "09/21/" + currentYear,
+		winter: "12/21/" + currentYear,
+	};
+
+	const triggersLastYear = {
+		spring: "03/20/" + lastYear,
+		summer: "06/21/" + lastYear,
+		autumn: "09/21/" + lastYear,
+		winter: "12/21/" + lastYear,
+	};
+
+	const triggersNextYear = {
+		spring: "03/20/" + nextYear,
+		summer: "06/21/" + nextYear,
+		autumn: "09/21/" + nextYear,
+		winter: "12/21/" + nextYear,
 	};
 
 	let selectedImages;
 
 	switch (true) {
-		case thisDate > new Date(triggers.winter):
+		case new Date(currentDate) <= new Date(triggers.spring) && new Date(currentDate) >= new Date(triggersLastYear.winter) || new Date(currentDate) >= new Date(triggers.winter) && new Date(currentDate) <= new Date(triggersNextYear.spring):
 			selectedImages = objImages.winter;
 			break;
-		case thisDate > new Date(triggers.autumn):
-			selectedImages = objImages.autumn;
+		case new Date(currentDate) <= new Date(triggers.summer) && new Date(currentDate) >= new Date(triggers.spring):
+			selectedImages = objImages.spring;
 			break;
-		case thisDate > new Date(triggers.summer):
+		case new Date(currentDate) <= new Date(triggers.autumn) && new Date(currentDate) >= new Date(triggers.summer):
 			selectedImages = objImages.summer;
 			break;
-		default:
-			selectedImages = objImages.spring;
+		case new Date(currentDate) <= new Date(triggers.winter) && new Date(currentDate) >= new Date(triggers.autumn):
+			selectedImages = objImages.autumn;
 			break;
 	}
 
