@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import ContentService from "../../services/contentService";
 import NewsletterService from "../../services/newsletterService";
-import ToastNotification from "../toasts/ToastNotification";
 
 const DynamicKoFiBadge = dynamic(() => import('./KoFiBadge'), {
 	loading: () => <span>Loading...</span>
@@ -78,9 +77,9 @@ const Footer = () => {
 		<>
 			<section className="pb-12 md:pt-12 md:pb-24">
 				<div className="container">
-					<div className="bg-primary-50 rounded-md px-8 pb-8 pt-6 md:p-12 relative flex flex-wrap items-center">
-						<picture className="block w-64 lg:w-80 h-auto mx-auto">
-							<img src="newsletter-image.svg" alt="Subscriu-te a la nostra newsletter" loading="lazy" />
+					<div className="bg-primary-50 rounded-md px-8 pb-8 pt-6 md:px-12 md:py-8 relative flex flex-wrap items-center">
+						<picture className="block w-64 lg:w-80 h-auto mx-auto mix-blend-multiply">
+							<img src="https://res.cloudinary.com/juligoodie/image/upload/v1626446634/getaways-guru/static-files/email-confirmation_lu3qbp.jpg" width="256" height="170" className="w-full h-auto object-contain" alt="Subscriu-te a la nostra newsletter" loading="lazy" />
 						</picture>
 						<div className="w-full md:w-auto flex flex-wrap items-center gap-5 pt-6 md:pt-0 md:pl-8 md:flex-1">
 							<div className="w-full md:max-w-xs">
