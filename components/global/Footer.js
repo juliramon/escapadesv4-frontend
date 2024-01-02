@@ -86,7 +86,7 @@ const Footer = () => {
 								<h2 className="mb-2 text-2xl leading-tight text-center md:text-left">Subscriu-te a la nostra newsletter</h2>
 								<p className="mb-0 font-light text-center md:text-left">Per rebre les últimes novetats i ofertes</p>
 							</div>
-							{!newsletterFormData.submitted ? <form className="form flex flex-wrap lg:flex-nowrap items-center flex-1" onSubmit={handleNewsletterFormSubmit}>
+							{!newsletterFormData.submitted ? <form className="form flex flex-wrap items-center flex-1" onSubmit={handleNewsletterFormSubmit}>
 								<fieldset className="form__group w-full md:w-auto">
 									<label htmlFor="name" className="form__label">Nom</label>
 									<input type="text" id="name" name="name" onChange={handleNewsletterFormChange} className="form__control bg-white" />
@@ -98,6 +98,7 @@ const Footer = () => {
 								<fieldset className="form__group w-full lg:w-auto">
 									<button type="submit" className="button button__med button__primary justify-center md:mt-1 lg:mt-5">Subscriure'm</button>
 								</fieldset>
+								<span className="block w-full px-1.5 mt-1 form__text_info">Al fer clic a "Subscriure'm" confirmes haver llegit i estàs d'acord amb la <a href="/politica-privadesa" title="Política de Privacitat" className="text-primary-900 underline">Política de Privacitat.</a></span>
 							</form> : <div className="flex items-center justify-center md:justify-start xl:justify-center flex-1 lg:flex-none xl:flex-1">
 								<div className="max-w-[280px] mx-auto md:mx-0 flex items-center">
 									<svg xmlns="http://www.w3.org/2000/svg" className="mr-2.5 text-green-500" width={32} height={32} viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
