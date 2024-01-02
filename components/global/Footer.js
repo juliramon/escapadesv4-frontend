@@ -255,6 +255,9 @@ const Footer = () => {
 										<Link href="#">Què fem?</Link>
 									</li>
 									<li className="pt-1 text-sm leading-tight">
+										<Link href="/newsletter">Subscriu-te a la newsletter</Link>
+									</li>
+									<li className="pt-1 text-sm leading-tight">
 										<Link href="/contacte">Contacte</Link>
 									</li>
 								</ul>
