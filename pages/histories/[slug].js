@@ -9,10 +9,10 @@ import FooterHistoria from "../../components/global/FooterHistoria";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import FancyboxUtil from "../../utils/FancyboxUtils";
 import { formatDateTimeToISODate } from "../../utils/helpers";
-import ShareBar from "../../components/social/ShareBar";
 import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
 import ArticleRichSnippet from "../../components/richsnippets/ArticleRichSnippet";
 import Image from "next/image";
+import ShareBarModal from "../../components/social/ShareBarModal";
 
 const StoryListing = ({ storyDetails }) => {
 	const { user } = useContext(UserContext);
@@ -252,10 +252,7 @@ const StoryListing = ({ storyDetails }) => {
 												</div>
 											</div>
 											<div className="mt-5 lg:mt-7">
-												<ShareBar
-													color="text-grey-700"
-													iconsSize={20}
-												/>
+												<ShareBarModal picture={coverImg} title={storyDetails.title} rating={null} slug={`https://escapadesenparella.cat/histories/${storyDetails.slug}`} locality={null} colorClass={'text-primary-500'} />
 												<span className="block text-xs mt-1.5">
 													Darrera actualització:{" "}
 													<time

@@ -3,11 +3,11 @@ import ContentService from "../services/contentService";
 import NavigationBar from "../components/global/NavigationBar";
 import FeaturedListBox from "../components/listings/FeaturedListBox";
 import RegularListBox from "../components/listings/RegularListBox";
-import ShareBar from "../components/social/ShareBar";
 import Footer from "../components/global/Footer";
 import GlobalMetas from "../components/head/GlobalMetas";
 import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
 import AdBanner from "../components/ads/AdBanner";
+import ShareBarModal from "../components/social/ShareBarModal";
 
 const ListsList = ({ user, totalItems, lists, numPages }) => {
 	const initialState = {
@@ -105,7 +105,7 @@ const ListsList = ({ user, totalItems, lists, numPages }) => {
 									</div>
 								</div>
 								<div className="w-full md:w-1/2 flex md:justify-end mt-8 md:mt-0">
-									<ShareBar />
+									<ShareBarModal picture={null} title={'Llistes'} rating={null} slug={'https://escapadesenparella.cat/llistes'} locality={null} />
 								</div>
 							</div>
 						</div>
@@ -118,39 +118,39 @@ const ListsList = ({ user, totalItems, lists, numPages }) => {
 								<div className="w-full md:w-7/12 px-4">
 									{state.hasLists
 										? state.lists.slice(0, 1).map((el) => (
-												<article className="mb-8 w-full">
-													<FeaturedListBox
-														key={el._id}
-														slug={el.slug}
-														cover={el.cover}
-														title={el.title}
-														subtitle={el.subtitle}
-														avatar={el.owner.avatar}
-														owner={
-															el.owner.fullName
-														}
-														date={el.createdAt}
-													/>
-												</article>
-										  ))
+											<article className="mb-8 w-full">
+												<FeaturedListBox
+													key={el._id}
+													slug={el.slug}
+													cover={el.cover}
+													title={el.title}
+													subtitle={el.subtitle}
+													avatar={el.owner.avatar}
+													owner={
+														el.owner.fullName
+													}
+													date={el.createdAt}
+												/>
+											</article>
+										))
 										: ""}
 									{state.hasLists
 										? state.lists.slice(1).map((el) => (
-												<article className="mb-8">
-													<RegularListBox
-														key={el._id}
-														slug={el.slug}
-														cover={el.cover}
-														title={el.title}
-														subtitle={el.subtitle}
-														avatar={el.owner.avatar}
-														owner={
-															el.owner.fullName
-														}
-														date={el.createdAt}
-													/>
-												</article>
-										  ))
+											<article className="mb-8">
+												<RegularListBox
+													key={el._id}
+													slug={el.slug}
+													cover={el.cover}
+													title={el.title}
+													subtitle={el.subtitle}
+													avatar={el.owner.avatar}
+													owner={
+														el.owner.fullName
+													}
+													date={el.createdAt}
+												/>
+											</article>
+										))
 										: ""}
 									{state.currentPage !== state.numPages ? (
 										<div className="w-full mt-6 flex justify-center">

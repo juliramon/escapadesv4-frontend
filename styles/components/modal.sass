@@ -3,17 +3,20 @@
 
     &.active
         @apply flex items-center justify-center
-    
+
     &.active::before
         content: ""
-        @apply bg-primary-900 bg-opacity-80 fixed inset-0 w-full h-full
+        @apply bg-primary-300 bg-opacity-40 backdrop-blur-md fixed inset-0 w-full h-full
 
     &__wrapper
-        @apply block bg-white w-11/12 lg:w-6/12 mx-auto shadow-xl  rounded-md
         z-index: 1002
+        @apply block bg-white w-11/12 lg:w-6/12 mx-auto shadow-xl relative rounded-md
+
+        &.modal--sm
+            @apply max-w-md
 
     &__container
-        @apply w-full h-full relative z-50 border-4 border-white rounded-md
+        @apply w-full h-full relative z-50 rounded-md
 
     &__header, &__body, &__footer
         @apply p-5
@@ -21,12 +24,15 @@
     &__header
         @apply border-b border-primary-100 relative flex items-center justify-between
 
+        &.no-border
+            @apply border-none
+
         span
             @apply text-xl
-    
+
     &__body
+        max-height: 70vh
         @apply overflow-scroll
-        max-height: 60vh
 
     &__body.map
         @apply max-h-screen

@@ -13,6 +13,7 @@ import GlobalMetas from "../../components/head/GlobalMetas";
 import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
 import { formatDateTimeToISODate } from "../../utils/helpers";
 import ListingDiscount from "../../components/listingpage/ListingDiscount";
+import ShareBarModal from "../../components/social/ShareBarModal";
 
 const GetawayListing = ({
 	getawayDetails,
@@ -470,34 +471,20 @@ const GetawayListing = ({
 													</li>
 												</ul>
 											</div>
-											<div className="hidden md:block w-full md:w-1/2 mt-3 md:mt-0">
+											<div className="inline-block w-auto md:w-1/2 mt-3 md:mt-0">
 												<div className="flex flex-wrap justify-start md:justify-end items-center">
-													<button className="text-white inline-flex items-center text-sm relative after:block after:absolute after:-bottom-1 after:inset-x-0 after:bg-white after:h-px">
-														<span>Compartir</span>
-														<svg
-															xmlns="http://www.w3.org/2000/svg"
-															className="ml-1.5 relative -top-px"
-															width={18}
-															height={18}
-															viewBox="0 0 24 24"
-															strokeWidth={1.5}
-															stroke="currentColor"
-															fill="none"
-															strokeLinecap="round"
-															strokeLinejoin="round"
-														>
-															<path
-																stroke="none"
-																d="M0 0h24v24H0z"
-																fill="none"
-															></path>
-															<path d="M6 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
-															<path d="M18 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
-															<path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
-															<path d="M8.7 10.7l6.6 -3.4"></path>
-															<path d="M8.7 13.3l6.6 3.4"></path>
-														</svg>
-													</button>
+													<ShareBarModal picture={getawayDetails.cover} title={getawayDetails.title} rating={getawayDetails.activity_rating} slug={urlToShare} locality={`${getawayDetails.activity_locality ===
+														undefined
+														? ""
+														: getawayDetails.activity_locality
+														}${getawayDetails.activity_locality ===
+															undefined
+															? ""
+															: ","
+														} ${getawayDetails.activity_province ||
+														getawayDetails.activity_state
+														}, ${getawayDetails.activity_country
+														}`} />
 												</div>
 											</div>
 											<div className="w-full mt-5 md:mt-2.5">
@@ -1693,34 +1680,20 @@ const GetawayListing = ({
 													</li>
 												</ul>
 											</div>
-											<div className="hidden md:block w-full md:w-1/2 mt-3 md:mt-0">
+											<div className="inline-block w-auto md:w-1/2 mt-3 md:mt-0">
 												<div className="flex flex-wrap justify-start md:justify-end items-center">
-													<button className="text-white inline-flex items-center text-sm relative after:block after:absolute after:-bottom-1 after:inset-x-0 after:bg-white after:h-px">
-														<span>Compartir</span>
-														<svg
-															xmlns="http://www.w3.org/2000/svg"
-															className="ml-1.5 relative -top-px"
-															width={18}
-															height={18}
-															viewBox="0 0 24 24"
-															strokeWidth={1.5}
-															stroke="currentColor"
-															fill="none"
-															strokeLinecap="round"
-															strokeLinejoin="round"
-														>
-															<path
-																stroke="none"
-																d="M0 0h24v24H0z"
-																fill="none"
-															></path>
-															<path d="M6 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
-															<path d="M18 6m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
-															<path d="M18 18m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
-															<path d="M8.7 10.7l6.6 -3.4"></path>
-															<path d="M8.7 13.3l6.6 3.4"></path>
-														</svg>
-													</button>
+													<ShareBarModal picture={getawayDetails.cover} title={getawayDetails.title} rating={getawayDetails.place_rating} slug={urlToShare} locality={`${getawayDetails.place_locality ===
+														undefined
+														? ""
+														: getawayDetails.place_locality
+														}${getawayDetails.place_locality ===
+															undefined
+															? ""
+															: ","
+														} ${getawayDetails.place_province ||
+														getawayDetails.place_state
+														}, ${getawayDetails.place_country
+														}`} />
 												</div>
 											</div>
 											<div className="w-full mt-5 md:mt-2.5">

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import StoryListing from "../listings/StoryListing";
-import ShareBar from "../social/ShareBar";
+import ShareBarModal from "../social/ShareBarModal";
 
 const Hero = ({ mostRecentStories }) => {
 	useEffect(() => {
@@ -14,7 +14,7 @@ const Hero = ({ mostRecentStories }) => {
 		<>
 			<section id="hero" className="flex flex-wrap items-stretch">
 				<div className="w-full bg-primary-900 flex items-center justify-center verflow-hidden relative pt-10 md:pt-20 pb-20 md:pb-44 px-6 xl:px-20 bg-geo">
-					<div className="max-w-sm text-center relative z-10">
+					<div className="max-w-sm text-center relative z-50">
 						<div className="flex justify-center">
 							<ul className="breadcrumb">
 								<li className="breadcrumb__item text-white">
@@ -45,7 +45,7 @@ const Hero = ({ mostRecentStories }) => {
 							d'una escapada en parella per recordar!
 						</p>
 						<div className="flex justify-center mt-5">
-							<ShareBar />
+							<ShareBarModal picture={null} title={'Històries en parella'} rating={null} slug={'https://escapadesenparella.cat/histories'} locality={null} />
 						</div>
 					</div>
 				</div>
@@ -54,16 +54,16 @@ const Hero = ({ mostRecentStories }) => {
 					<div className="flex flex-wrap items-stretch -mx-2">
 						{mostRecentStories.length > 0
 							? mostRecentStories.map((story, idx) => (
-									<article
-										key={idx}
-										className="w-full md:w-1/2 lg:w-1/3 px-2 mb-6 lg:mb-0"
-									>
-										<StoryListing
-											story={story}
-											index={idx}
-										/>
-									</article>
-							  ))
+								<article
+									key={idx}
+									className="w-full md:w-1/2 lg:w-1/3 px-2 mb-6 lg:mb-0"
+								>
+									<StoryListing
+										story={story}
+										index={idx}
+									/>
+								</article>
+							))
 							: ""}
 					</div>
 				</div>
