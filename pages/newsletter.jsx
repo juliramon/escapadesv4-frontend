@@ -10,6 +10,7 @@ const Newsletter = () => {
         email: '',
         serverMessage: '',
         submitted: false,
+        error: false
     });
 
     const newsletterService = new NewsletterService();
@@ -24,9 +25,11 @@ const Newsletter = () => {
 
         if (name !== "" && email !== "") {
             newsletterService.subscribeToNewsletter(name, email).then((res) => {
-                console.log(res);
                 if (res.status === 200) {
-                    setNewsletterFormData({ ...newsletterFormData, serverMessage: res.message, submitted: true })
+                    setNewsletterFormData({ ...newsletterFormData, serverMessage: res.message, submitted: true, error: false })
+                }
+                if (res.status === 400 || res.status === 500) {
+                    setNewsletterFormData({ ...newsletterFormData, serverMessage: res.message, error: true });
                 }
             });
         }
@@ -62,6 +65,15 @@ const Newsletter = () => {
                                         <h2 className="mb-2 text-2xl leading-tight text-center">Subscriu-te a la nostra newsletter</h2>
                                         <p className="mb-0 font-light text-center">Per rebre les últimes novetats i ofertes</p>
                                     </div>
+                                    {newsletterFormData.error ? <span className="px-1.5 inline-flex items-center mt-2.5 text-sm text-red-500">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="mr-1.5" width={24} height={24} viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                            <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+                                            <path d="M12 8v4" />
+                                            <path d="M12 16h.01" />
+                                        </svg>
+                                        {newsletterFormData.serverMessage}</span>
+                                        : null}
                                     {!newsletterFormData.submitted ? <form className="form flex flex-wrap items-center flex-1" onSubmit={handleNewsletterFormSubmit}>
                                         <fieldset className="form__group w-full">
                                             <label htmlFor="name" className="form__label">Nom</label>
