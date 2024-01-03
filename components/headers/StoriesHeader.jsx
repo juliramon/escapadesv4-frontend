@@ -14,7 +14,7 @@ const Hero = ({ mostRecentStories }) => {
 		<>
 			<section id="hero" className="flex flex-wrap items-stretch">
 				<div className="w-full bg-primary-900 flex items-center justify-center verflow-hidden relative pt-10 md:pt-20 pb-20 md:pb-44 px-6 xl:px-20 bg-geo">
-					<div className="max-w-sm text-center relative z-50">
+					<div className="max-w-sm text-center">
 						<div className="flex justify-center">
 							<ul className="breadcrumb">
 								<li className="breadcrumb__item text-white">

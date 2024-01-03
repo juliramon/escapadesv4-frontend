@@ -205,7 +205,7 @@ const StoryListing = ({ storyDetails }) => {
 										</picture>
 									</div>
 									<div className="w-full lg:w-5/12 px-2.5">
-										<div className="flex flex-col h-full bg-[#f5f5f5] rounded-lg p-5 lg:p-10 relative z-10">
+										<div className="flex flex-col h-full bg-[#f5f5f5] rounded-lg p-5 lg:p-10">
 											<div className="flex-1">
 												<p className="text-xl lg:text-2xl font-light mb-4">
 													{storyDetails.subtitle}
