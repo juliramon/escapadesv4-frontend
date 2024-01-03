@@ -13,16 +13,16 @@ const PoliticaPrivadesa = () => {
 			<GlobalMetas
 				title="Descomptes per viatjar"
 				description="Descomptes per viatjar i escapar-vos. Codis de descompte i ofertes per viatjar. Fes clic per saber-ne més."
-				url="https://escapadesenparella.cat/politica-privadesa"
+				url="https://escapadesenparella.cat/descomptes-viatjar"
 				image="https://res.cloudinary.com/juligoodie/image/upload/v1632416196/getaways-guru/zpdiudqa0bk8sc3wfyue.jpg"
-				canonical="https://escapadesenparella.cat/politica-privadesa"
+				canonical="https://escapadesenparella.cat/descomptes-viatjar"
 			/>
 			{/* Rich snippets */}
 			<BreadcrumbRichSnippet
 				page1Title="Inici"
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Descomptes per viatjar"
-				page2Url={`https://escapadesenparella.cat/politica-privadesa`}
+				page2Url={`https://escapadesenparella.cat/descomptes-viatjar`}
 			/>
 			<NavigationBar
 				logo_url={
