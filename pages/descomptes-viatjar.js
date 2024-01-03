@@ -76,7 +76,7 @@ const PoliticaPrivadesa = () => {
 								</li>
 								<li className="pb-2 m-0">
 									<a
-										href="#iativiajes"
+										href="#iatiseguros"
 										title="IATI Seguros"
 										rel="nofollow"
 									>
@@ -94,11 +94,11 @@ const PoliticaPrivadesa = () => {
 								</li>
 								<li className="pb-2 m-0">
 									<a
-										href="#impact"
-										title="Impact"
+										href="#visitBarcelona"
+										title="Visit Barcelona"
 										rel="nofollow"
 									>
-										Impact
+										Visit Barcelona
 									</a>
 								</li>
 							</ul>
@@ -133,11 +133,22 @@ const PoliticaPrivadesa = () => {
 							</section>
 							<section className="legal-terms__block mt-6">
 								<h2 className="mb-4">Descomptes per assegurances de viatges</h2>
-								<span className="anchor" id="iativiajes"></span>
+								<span className="anchor" id="iatiseguros"></span>
 								<h3 className="mb-3">Codi descompte IATI Seguros</h3>
 								<p>La nostra opció de confiança quan es tracta de viatjar. IATI Seguros compta amb més de 100 anys d'història oferint assegurances de viatge, i una gran oferta d'assegurances que de segur s'adaptarà a les vostres necessitats. Nosaltres vam confiar amb ells per cobrir el nostre viatge de noces, i vam quedar encantats.</p>
 								<p>Fent servir l'enllaç que trobareu a continuació us beneficiareu d'un <strong>descompte del 5%</strong> sobre l'import total de la vostra assegurança de viatge.</p>
 								<a href="https://www.iatiseguros.com/?r=27071736087599" title="Descomptes per IATI Seguros" target="_blank" rel="nofollow noreferrer" className="button button__lg button__primary">Reservar assegurança amb IATI Seguros</a>
+							</section>
+							<section className="legal-terms__block mt-6">
+								<h2 className="mb-4">Descomptes per reservar activitats</h2>
+								<span className="anchor" id="civitatis"></span>
+								<h3 className="mb-3">Els preus més econòmics amb Civitatis</h3>
+								<p>Quan visitem per primer cop una ciutat, ja sigui a Catalunya o a l'estranger, norlament la descobrim per lliure, però també hi ha cops que tenim ganes de recórre-la acompanyats d'un guia o d'una persona amb coneixements sobre allò que estem veient. Per aquest motiu, Civitatis és la nostra millor opció a l'hora de servar activitats, visites guidades o free tours.</p>
+								<a href="https://www.civitatis.com/es?aid=103875" title="Descomptes per Civitatis" target="_blank" rel="nofollow noreferrer" className="button button__lg button__primary">Reservar activitats amb Civitatis</a>
+								<span className="anchor" id="visitBarcelona"></span>
+								<h3 className="mb-3 mt-7">Descobrir Barcelona amb Visit Barcelona</h3>
+								<p>Hi ha dies en que ens hem d'arribar fins a Barcelona per fer-hi alguna gestió, o simplement ens ve de gust anar-hi per fer-hi una volta. En aquests dies, confiem amb visit Barcelona per buscar fàcilment activitats i propostes per gaudir de la ciutat d'una manera diferent i a un <strong>preu econòmic</strong>. Podeu fer servir l'enllaç a continuació per navegar entre les centenars d'ofertes lúdiques que presenten.</p>
+								<a href="https://bcnshop.barcelonaturisme.com/shopv3/ca/?o=h&w=20869-2016" title="Descomptes per viatjar amb Centraldereservas" target="_blank" rel="nofollow noreferrer" className="button button__lg button__primary">Reservar activitats amb visit Barcelona</a>
 							</section>
 						</article>
 					</div>
