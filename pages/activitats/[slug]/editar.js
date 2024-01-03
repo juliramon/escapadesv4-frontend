@@ -1463,15 +1463,7 @@ const ActivityEditionForm = () => {
 																						key={
 																							el._id
 																						}
-																						selected={
-																							el._id ===
-																								state
-																									.activity
-																									.relatedStory
-																									._id
-																								? "true"
-																								: null
-																						}
+																						selected={state.activity?.relatedStory && state.activity?.relatedStory?._id === el._id ? "true" : null}
 																					>
 																						{
 																							el.title
