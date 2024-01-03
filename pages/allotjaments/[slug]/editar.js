@@ -64,6 +64,7 @@ const EditionForm = () => {
 			review: "",
 			relatedStory: "",
 			description: "",
+			reasons: "",
 			phone: "",
 			website: "",
 			place_full_address: "",
@@ -92,6 +93,7 @@ const EditionForm = () => {
 	const [queryId, setQueryId] = useState(null);
 	const [activeTab, setActiveTab] = useState("main");
 	const [description, setDescription] = useState({});
+	const [reasons, setReasons] = useState({});
 
 	useEffect(() => {
 		if (router && router.route) {
@@ -110,6 +112,22 @@ const EditionForm = () => {
 				text: props.editor.state.doc.textContent,
 			};
 			setDescription(data.html);
+		},
+		autofocus: false,
+		parseOptions: {
+			preserveWhitespace: true,
+		},
+	});
+
+	const reasonsEditor = useEditor({
+		extensions: [StarterKit],
+		content: reasons,
+		onUpdate: (props) => {
+			const data = {
+				html: props.editor.getHTML(),
+				text: props.editor.state.doc.textContent,
+			};
+			setReasons(data.html);
 		},
 		autofocus: false,
 		parseOptions: {
@@ -192,8 +210,12 @@ const EditionForm = () => {
 					isPlaceLoaded: true,
 				});
 				setDescription(placeDetails.description);
+				setReasons(placeDetails.reasons);
 				if (editor) {
 					editor.commands.setContent(placeDetails.description);
+				}
+				if (reasonsEditor) {
+					reasonsEditor.commands.setContent(placeDetails.reasons);
 				}
 			};
 
@@ -452,6 +474,7 @@ const EditionForm = () => {
 				review,
 				relatedStory,
 				description,
+				reasons,
 				phone,
 				website,
 				place_full_address,
@@ -532,6 +555,7 @@ const EditionForm = () => {
 			images.length > 0 &&
 			coverImage !== "" &&
 			description &&
+			reasons &&
 			price &&
 			organization &&
 			metaTitle &&
@@ -1657,6 +1681,19 @@ const EditionForm = () => {
 											<EditorNavbar editor={editor} />
 											<EditorContent
 												editor={editor}
+												className="form-composer__editor"
+											/>
+										</div>
+										<div className="form__group mt-2">
+											<label
+												htmlFor="reasons"
+												className="form__label"
+											>
+												Raons
+											</label>
+											<EditorNavbar editor={reasonsEditor} />
+											<EditorContent
+												editor={reasonsEditor}
 												className="form-composer__editor"
 											/>
 										</div>

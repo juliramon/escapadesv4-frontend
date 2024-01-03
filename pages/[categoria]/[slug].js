@@ -977,6 +977,18 @@ const GetawayListing = ({
 														></div>
 													</div>
 													<div className="pt-8">
+														<h2 className="text-2xl font-body mb-1">
+															Per què realitzar aquesta activitat?
+														</h2>
+														<p>Us compartim 5 raons per les quals creiem que hauríeu de fer aquesta escapada:</p>
+														<div
+															className="mt-4 listing__description"
+															dangerouslySetInnerHTML={{
+																__html: getawayDetails.reasons,
+															}}
+														></div>
+													</div>
+													<div className="pt-8">
 														<h2 className="text-2xl font-body">
 															Com arribar a{" "}
 															{
@@ -2228,6 +2240,22 @@ const GetawayListing = ({
 
 													<div className="pt-8">
 														<h2 className="text-2xl font-body">
+															Per què escapar-vos a {" "}
+															{
+																getawayDetails.title
+															}?
+														</h2>
+														<p>Us compartim 5 raons per les quals creiem que hauríeu de fer aquesta escapada:</p>
+														<div
+															className="mt-4 listing__description"
+															dangerouslySetInnerHTML={{
+																__html: getawayDetails.reasons,
+															}}
+														></div>
+													</div>
+
+													<div className="pt-8">
+														<h2 className="text-2xl font-body">
 															Com arribar a{" "}
 															{
 																getawayDetails.title
@@ -2478,7 +2506,7 @@ export async function getServerSideProps({ params }) {
 	const placeDetails = await service.getPlaceDetails(params.slug);
 	const characteristics = await service.getCharacteristics();
 
-	let getawayDetails, storyDetails;
+	let getawayDetails;
 	if (activityDetails != undefined) {
 		getawayDetails = activityDetails;
 	} else {

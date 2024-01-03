@@ -90,6 +90,7 @@ const ActivityEditionForm = () => {
 	const [queryId, setQueryId] = useState(null);
 	const [activeTab, setActiveTab] = useState("main");
 	const [description, setDescription] = useState("");
+	const [reasons, setReasons] = useState("");
 
 	useEffect(() => {
 		if (router && router.query) {
@@ -108,6 +109,22 @@ const ActivityEditionForm = () => {
 				text: props.editor.state.doc.textContent,
 			};
 			setDescription(data.html);
+		},
+		autofocus: false,
+		parseOptions: {
+			preserveWhitespace: true,
+		},
+	});
+
+	const editorReasons = useEditor({
+		extensions: [StarterKit],
+		content: reasons,
+		onUpdate: (props) => {
+			const data = {
+				html: props.editor.getHTML(),
+				text: props.editor.state.doc.textContent,
+			};
+			setReasons(data.html);
 		},
 		autofocus: false,
 		parseOptions: {
@@ -183,8 +200,12 @@ const ActivityEditionForm = () => {
 					isActivityLoaded: true,
 				});
 				setDescription(activityDetails.description);
+				setReasons(activityDetails.reasons);
 				if (editor) {
 					editor.commands.setContent(activityDetails.description);
+				}
+				if (editorReasons) {
+					editorReasons.commands.setContent(activityDetails.reasons);
 				}
 			};
 			fetchData();
@@ -371,6 +392,7 @@ const ActivityEditionForm = () => {
 				review,
 				relatedStory,
 				description,
+				reasons,
 				phone,
 				website,
 				activity_full_address,
@@ -1476,6 +1498,19 @@ const ActivityEditionForm = () => {
 											<EditorNavbar editor={editor} />
 											<EditorContent
 												editor={editor}
+												className="form-composer__editor"
+											/>
+										</div>
+										<div className="form__group mt-2">
+											<label
+												htmlFor="reasons"
+												className="form__label"
+											>
+												Raons
+											</label>
+											<EditorNavbar editor={editorReasons} />
+											<EditorContent
+												editor={editorReasons}
 												className="form-composer__editor"
 											/>
 										</div>

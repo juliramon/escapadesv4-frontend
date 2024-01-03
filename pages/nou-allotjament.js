@@ -89,6 +89,7 @@ const PlaceForm = () => {
 	const [queryId, setQueryId] = useState(null);
 	const [activeTab, setActiveTab] = useState("main");
 	const [editorData, setEditorData] = useState({});
+	const [reasonsEditorData, setReasonsEditorData] = useState({});
 
 	useEffect(() => {
 		if (router && router.route) {
@@ -148,6 +149,33 @@ const PlaceForm = () => {
 				text: props.editor.state.doc.textContent,
 			};
 			setEditorData(data);
+		},
+		autofocus: false,
+		parseOptions: {
+			preserveWhitespace: true,
+		},
+	});
+
+	const reasonsEditor = useEditor({
+		extensions: [
+			StarterKit,
+			Image.configure({
+				inline: false,
+				HTMLAttributes: {
+					class: "img-frame",
+				},
+			}),
+			Placeholder.configure({
+				placeholder: "Comença a escriure raons per realitzar l'allotjament...",
+			}),
+		],
+		content: "",
+		onUpdate: (props) => {
+			const data = {
+				html: props.editor.getHTML(),
+				text: props.editor.state.doc.textContent,
+			};
+			setReasonsEditorData(data);
 		},
 		autofocus: false,
 		parseOptions: {
@@ -399,6 +427,7 @@ const PlaceForm = () => {
 				coverCloudImage,
 				cloudImages,
 				editorData.html,
+				reasonsEditorData.html,
 				phone,
 				website,
 				place_full_address,
@@ -436,7 +465,6 @@ const PlaceForm = () => {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(state.formData.cover, state.formData.images);
 		const { uploadedCover, uploadedImages } = await handleFilesUpload(
 			state.formData.cover,
 			state.formData.images
@@ -503,6 +531,7 @@ const PlaceForm = () => {
 			images.length > 0 &&
 			coverImage !== "" &&
 			editorData &&
+			reasonsEditorData &&
 			price &&
 			organization &&
 			metaTitle &&
@@ -1656,6 +1685,19 @@ const PlaceForm = () => {
 											<EditorNavbar editor={editor} />
 											<EditorContent
 												editor={editor}
+												className="form-composer__editor"
+											/>
+										</div>
+										<div className="form__group mt-2">
+											<label
+												htmlFor="reasons"
+												className="form__label"
+											>
+												Raons
+											</label>
+											<EditorNavbar editor={reasonsEditor} />
+											<EditorContent
+												editor={reasonsEditor}
 												className="form-composer__editor"
 											/>
 										</div>
