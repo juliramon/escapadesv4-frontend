@@ -51,6 +51,7 @@ const GlobalMetas = ({
 				name="B-verify"
 				content="756319ea1956c99d055184c4cac47dbfa3c81808"
 			/>
+			<meta name='impact-site-verification' value='041455ce-54f0-4bc3-b2ea-2730d637aa2d' />
 			{preload ? <link rel="preload" href={preload} as="image" /> : null}
 			{preconnect ? <link rel="preconnect" href={preconnect} crossOrigin /> : null}
 			{preconnect ? <link rel="dns-prefetch" href={preconnect} /> : null}

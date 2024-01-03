@@ -266,7 +266,10 @@ const Footer = () => {
 									<li className="disabled py-1 text-sm leading-tight">
 										<Link href="#">Què fem?</Link>
 									</li>
-									<li className="pt-1 text-sm leading-tight">
+									<li className="py-1 text-sm leading-tight">
+										<Link href="/descomptes-viatjar">Descomptes per viatjar</Link>
+									</li>
+									<li className="py-1 text-sm leading-tight">
 										<Link href="/newsletter">Subscriu-te a la newsletter</Link>
 									</li>
 									<li className="pt-1 text-sm leading-tight">
