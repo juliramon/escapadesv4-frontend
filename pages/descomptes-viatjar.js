@@ -101,6 +101,15 @@ const PoliticaPrivadesa = () => {
 										Visit Barcelona
 									</a>
 								</li>
+								<li className="pb-2 m-0">
+									<a
+										href="#wesmartpark"
+										title="Visit Barcelona"
+										rel="nofollow"
+									>
+										Wesmartpark
+									</a>
+								</li>
 							</ul>
 						</aside>
 						<article className="w-full md:w-3/4">
@@ -149,6 +158,14 @@ const PoliticaPrivadesa = () => {
 								<h3 className="mb-3 mt-7">Descobrir Barcelona amb Visit Barcelona</h3>
 								<p>Hi ha dies en què ens hem d'arribar fins a Barcelona per fer-hi alguna gestió, o simplement ens ve de gust anar-hi per fer-hi una volta. En aquests dies, confiem amb visit Barcelona per buscar fàcilment activitats i propostes per gaudir de la ciutat d'una manera diferent i a un <strong>preu econòmic</strong>. Podeu fer servir l'enllaç a continuació per navegar entre els centenars d'ofertes lúdiques que presenten.</p>
 								<a href="https://bcnshop.barcelonaturisme.com/shopv3/ca/?o=h&w=20869-2016" title="Descomptes per viatjar amb Centraldereservas" target="_blank" rel="nofollow noreferrer" className="button button__lg button__primary">Reservar activitats amb visit Barcelona</a>
+							</section>
+							<section className="legal-terms__block mt-6">
+								<h2 className="mb-4">Descomptes per aparcar a Barcelona</h2>
+								<span className="anchor" id="wesmartpark"></span>
+								<h3 className="mb-3">Aparqueu a Barcelona a meitat de preu</h3>
+								<p>La nostra plataforma de preferència quan es tracta de desplaçar-nos amb cotxe a Barcelona. Tots sabem que aparcar a Barcelona no és gens fàcil, i encara menys quan suposa haver de pagar una plaça d'aparcament. Per aquest motiu, des de fa més de 5 anys que nosaltres confiem en Wesmartpark per trobar de manera fàcil i còmoda <strong>places d'aparcament barates a Barcelona</strong>, ja que el preu que ofereix Wesmartpark és d'1,95€/hora, la meitat del que costaria en una altra plaça d'estacionament.</p>
+								<p>Els pàrquings on podreu deixar el vostre cotxe estan molt bé, en tenen més de 150 en actiu, i si us registreu amb l'enllaç a continuació us regalen 3€ de benvinguda.</p>
+								<a href="https://bit.ly/41LhLrm" title="Aparcar a Barcelona a meitat de preu" target="_blank" rel="nofollow noreferrer" className="button button__lg button__primary">Reservar aparcament amb Wesmartpark</a>
 							</section>
 						</article>
 					</div>
