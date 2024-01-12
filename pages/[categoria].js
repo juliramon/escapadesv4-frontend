@@ -17,7 +17,7 @@ const CategoryPage = ({
 	numPages,
 }) => {
 	const initialState = {
-		results: [],
+		results: paginatedResults,
 		allResults: [],
 		queryPlaceType: [],
 		queryPlaceRegion: [],
