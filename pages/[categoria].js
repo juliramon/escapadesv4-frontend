@@ -49,7 +49,7 @@ const CategoryPage = ({
 				hasResults: true,
 				numResults: totalItems,
 				numPages: numPages,
-				queryPlaceType: [`placeType=${categoryDetails.name}`]
+				queryPlaceType: categoryDetails?.isPlace ? [`placeType=${categoryDetails.name}`] : [],
 			});
 		}
 	}, []);
@@ -367,7 +367,7 @@ const CategoryPage = ({
 											</label>
 										</fieldset>
 									</div>
-									<div className="pb-5">
+									{categoryDetails?.isPlace ? <div className="pb-5">
 										<span className="text-xs uppercase text-primary-400 tracking-wider mb-2 block">
 											Categoria
 										</span>
@@ -441,7 +441,7 @@ const CategoryPage = ({
 												Relax
 											</label>
 										</fieldset>
-									</div>
+									</div> : null}
 									<div className="pb-5">
 										<span className="text-xs uppercase text-primary-400 tracking-wider mb-2 block">
 											Temporada
