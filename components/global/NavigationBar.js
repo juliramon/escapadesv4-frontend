@@ -53,7 +53,7 @@ const NavigationBar = ({ logo_url, path }) => {
 					<div className={`menu ${state.isResponsiveMenuOpen ? 'open' : ''}`}>
 						{/* Search input */}
 						<div className="lg:flex-1 flex lg:mx-8">
-							<button className="search__open" onClick={() => handleSearchPanel()}>
+							<button className="search__open" onClick={() => handleSearchPanel()} aria-label="Obrir panell de cerca">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									width="26"
@@ -161,27 +161,29 @@ const NavigationBar = ({ logo_url, path }) => {
 						{/* Menu list */}
 						<ul className="menu__list">
 							{/* Button close */}
-							<button
-								className="menu__close"
-								aria-label="Botó tancar menu"
-								onClick={() => handleResponsiveMenu()}
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width="32"
-									height="32"
-									viewBox="0 0 24 24"
-									strokeWidth="1.5"
-									stroke="#00206B"
-									fill="none"
-									strokeLinecap="round"
-									strokeLinejoin="round"
+							<li>
+								<button
+									className="menu__close"
+									aria-label="Botó tancar menu"
+									onClick={() => handleResponsiveMenu()}
 								>
-									<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-									<line x1="18" y1="6" x2="6" y2="18" />
-									<line x1="6" y1="6" x2="18" y2="18" />
-								</svg>
-							</button>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="32"
+										height="32"
+										viewBox="0 0 24 24"
+										strokeWidth="1.5"
+										stroke="#00206B"
+										fill="none"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									>
+										<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+										<line x1="18" y1="6" x2="6" y2="18" />
+										<line x1="6" y1="6" x2="18" y2="18" />
+									</svg>
+								</button>
+							</li>
 							<li className="menu__item">
 								<Link href="/activitats">
 									<a className="menu__link" title="Experiències en parella a Catalunya">
