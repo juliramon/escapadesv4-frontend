@@ -242,7 +242,7 @@ const CategoryPage = ({
 						<div className="flex flex-wrap pt-6">
 							{/* Left column - Filters */}
 							<aside
-								className={`fixed lg:static w-full lg:w-1/5 2xl:w-1/6 lg:pb-20 p-5 lg:p-0 z-50 lg:z-0 inset-0 h-screen lg:h-auto overflow-y-auto lg:overflow-visible bg-white lg:bg-transparent transition-all duration-300 ease-in-out ${state.isMobileFilterPanelDisplated
+								className={`hidden lg:block fixed lg:static w-full lg:w-1/5 2xl:w-1/6 lg:pb-20 p-5 lg:p-0 z-50 lg:z-0 inset-0 h-screen lg:h-auto overflow-y-auto lg:overflow-visible bg-white lg:bg-transparent transition-all duration-300 ease-in-out ${state.isMobileFilterPanelDisplated
 									? "translate-x-0"
 									: "-translate-x-full lg:translate-x-0"
 									}`}
