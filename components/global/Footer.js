@@ -334,9 +334,7 @@ const Footer = () => {
 													key={idx}
 													className="py-1 text-sm leading-tight"
 												>
-													<Link href={category.slug}>
-														<a title={category.title}>{category.title}</a>
-													</Link>
+													<a href={"/" + category.slug} title={category.title}>{category.title}</a>
 												</li>
 											)
 										)
@@ -357,9 +355,7 @@ const Footer = () => {
 													key={idx}
 													className="py-1 text-sm leading-tight"
 												>
-													<Link href={category.slug}>
-														<a title={category.title}>{category.title}</a>
-													</Link>
+													<a href={"/" + category.slug} title={category.title}>{category.title}</a>
 												</li>
 											)
 										)
