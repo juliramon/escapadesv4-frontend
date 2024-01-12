@@ -1,3 +1,5 @@
+import AdBanner from './../ads/AdBanner';
+
 const ListingHeader = ({ title, subtitle, sponsorData }) => {
 	return (
 		<section className="py-5">
@@ -12,7 +14,11 @@ const ListingHeader = ({ title, subtitle, sponsorData }) => {
 					</div>
 					<div
 						className="py-1.5 md:py-2.5 w-full md:w-1/2"
-					></div>
+					>
+						<AdBanner data-ad-slot="8648501664"
+							data-ad-format="auto"
+							data-full-width-responsive="true" />
+					</div>
 				</div>
 			</div>
 		</section>
