@@ -538,7 +538,7 @@ const CategoryPage = ({
 										<>
 											<div className="flex flex-wrap items-start -mx-2">
 
-												{state.results.map((el) => (
+												{state.results.map((el, idx) => (
 													<PublicSquareBox
 														key={el._id}
 														type={el.type}
@@ -561,6 +561,7 @@ const CategoryPage = ({
 															el.activity_locality ||
 															el.place_locality
 														}
+														index={idx}
 													/>
 												))}
 											</div>
