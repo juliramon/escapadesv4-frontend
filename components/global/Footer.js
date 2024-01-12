@@ -125,10 +125,10 @@ const Footer = () => {
 					</div>
 				</div>
 			</section>
-			<footer id="footer" className="pt-12 pb-2 lg:pt-16 lg:pb-10">
+			<footer id="footer" className="pt-12 pb-2 lg:pt-16 lg:pb-6">
 				<div className="container">
-					<div className="w-full flex flex-wrap items-start">
-						<div className="w-full md:w-1/2 lg:w-4/12 mb-6 lg:mb-0 md:pr-5 lg:pr-10">
+					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-10">
+						<div className="w-full mb-6 lg:mb-0 md:pr-5">
 							<div className="flex flex-col flex-wrap items-start max-w-xs">
 								<svg
 									width="135px"
@@ -169,11 +169,111 @@ const Footer = () => {
 								</svg>
 								<span className="text-sm block mt-2.5">
 									Escapadesenparella.cat és el recomanador
-									especialista en escapades en parella a
-									Catalunya. Registra't per gaudir de tots els
-									beneficis de la comunitat.
+									especialista d'escapades en parella a
+									Catalunya. Segueix-nos per estar al dia de totes les novetats:
 								</span>
-								<span className="opacity-70 text-xs block mt-4">
+								<ul className="list-none flex items-center mx-0 mt-3 mb-4 p-0 space-x-3">
+									<li className="py-1 text-sm leading-tight">
+										<a
+											href="https://www.instagram.com/escapadesenparella"
+											title="Segueix-nos a Instagram"
+											target="_blank"
+											className="flex items-center justify-center"
+											rel="noopener noreferrer"
+										>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												className="icon icon-tabler icon-tabler-brand-instagram"
+												width="22"
+												height="22"
+												viewBox="0 0 24 24"
+												strokeWidth="1.5"
+												stroke="currentColor"
+												fill="none"
+												strokeLinecap="round"
+												strokeLinejoin="round"
+											>
+												<path
+													stroke="none"
+													d="M0 0h24v24H0z"
+													fill="none"
+												/>
+												<rect
+													x="4"
+													y="4"
+													width="16"
+													height="16"
+													rx="4"
+												/>
+												<circle cx="12" cy="12" r="3" />
+												<line
+													x1="16.5"
+													y1="7.5"
+													x2="16.5"
+													y2="7.501"
+												/>
+											</svg>
+										</a>
+									</li>
+									<li className="py-1 text-sm leading-tight">
+										<a
+											href="https://twitter.com/escapaenparella"
+											title="Segueix-nos a Twitter"
+											target="_blank"
+											className="flex items-center justify-center"
+											rel="noopener noreferrer"
+										>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												className="icon icon-tabler icon-tabler-brand-twitter"
+												width="22"
+												height="22"
+												viewBox="0 0 24 24"
+												strokeWidth="1.5"
+												stroke="currentColor"
+												fill="none"
+												strokeLinecap="round"
+												strokeLinejoin="round"
+											>
+												<path
+													stroke="none"
+													d="M0 0h24v24H0z"
+												/>
+												<path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84 0 0 0 .497 -3.753C20.18 7.773 21.692 5.25 22 4.009z" />
+											</svg>
+										</a>
+									</li>
+									<li className="py-1 text-sm leading-tight">
+										<a
+											href="https://facebook.com/escapadesenparella"
+											title="Segueix-nos a Facebook"
+											target="_blank"
+											className="flex items-center justify-center"
+											rel="noopener noreferrer"
+										>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												className="icon icon-tabler icon-tabler-brand-facebook"
+												width="22"
+												height="22"
+												viewBox="0 0 24 24"
+												strokeWidth="1.5"
+												stroke="currentColor"
+												fill="none"
+												strokeLinecap="round"
+												strokeLinejoin="round"
+											>
+												<path
+													stroke="none"
+													d="M0 0h24v24H0z"
+													fill="none"
+												/>
+												<path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+											</svg>
+										</a>
+									</li>
+								</ul>
+								<span className="opacity-70 text-xs block">
 									Copyright © {copyrightDate}. Tots els drets
 									reservats. <br />
 									Codi i UI/UX:{" "}
@@ -221,10 +321,10 @@ const Footer = () => {
 								</span>
 							</div>
 						</div>
-						<div className="w-full md:w-1/2 lg:w-3/12 mb-6 lg:mb-0">
+						<div className="w-full mb-6 lg:mb-0">
 							<div className="footer-content">
 								<span className="footer-header text-xl mb-2 inline-block">
-									Continguts
+									Categories d'escapada
 								</span>
 								<ul className="list-none m-0 p-0">
 									{state.activityCategories
@@ -235,7 +335,7 @@ const Footer = () => {
 													className="py-1 text-sm leading-tight"
 												>
 													<Link href={category.slug}>
-														<a>{category.title}</a>
+														<a title={category.title}>{category.title}</a>
 													</Link>
 												</li>
 											)
@@ -244,20 +344,59 @@ const Footer = () => {
 								</ul>
 							</div>
 						</div>
-						<div className="w-full md:w-1/2 lg:w-3/12 mb-6 lg:mb-0 ">
+						<div className="w-full mb-6 lg:mb-0">
+							<div className="footer-content">
+								<span className="footer-header text-xl mb-2 inline-block">
+									Categories d'allotjaments
+								</span>
+								<ul className="list-none m-0 p-0">
+									{state.placeCategories
+										? state.placeCategories.map(
+											(category, idx) => (
+												<li
+													key={idx}
+													className="py-1 text-sm leading-tight"
+												>
+													<Link href={category.slug}>
+														<a title={category.title}>{category.title}</a>
+													</Link>
+												</li>
+											)
+										)
+										: null}
+								</ul>
+							</div>
+						</div>
+						<div className="w-full mb-6 lg:mb-0 ">
 							<div className="footer-about">
 								<span className="footer-header text-xl mb-2 inline-block">
 									Nosaltres
 								</span>
 								<ul className="list-none m-0 p-0">
 									<li className="py-1 text-sm leading-tight">
+										<Link href="/allotjaments">
+											<a title="Allotjaments amb encant a Catalunya">
+												Allotjaments
+											</a>
+										</Link>
+									</li>
+									<li className="py-1 text-sm leading-tight">
+										<Link href="/activitats">
+											<a title="Experiències en parella">
+												Experiències
+											</a>
+										</Link>
+									</li>
+									<li className="py-1 text-sm leading-tight">
 										<Link href="/histories">
-											Històries en parella
+											<a title="Històries en parella">
+												Històries en parella
+											</a>
 										</Link>
 									</li>
 									<li className="py-1 text-sm leading-tight">
 										<Link href="/empreses">
-											Serveis empreses
+											<a title="Serveis per a empreses">Serveis empreses</a>
 										</Link>
 									</li>
 									<li className="disabled py-1 text-sm leading-tight">
@@ -267,205 +406,42 @@ const Footer = () => {
 										<Link href="#">Què fem?</Link>
 									</li>
 									<li className="py-1 text-sm leading-tight">
-										<Link href="/descomptes-viatjar">Descomptes per viatjar</Link>
+										<Link href="/descomptes-viatjar">
+											<a title="Descomptes per viatjar">Descomptes per viatjar</a>
+										</Link>
 									</li>
 									<li className="py-1 text-sm leading-tight">
-										<Link href="/newsletter">Subscriu-te a la newsletter</Link>
+										<Link href="/newsletter">
+											<a title="Subscriu-te a la newsletter">Subscriu-te a la newsletter</a>
+										</Link>
 									</li>
 									<li className="pt-1 text-sm leading-tight">
-										<Link href="/contacte">Contacte</Link>
+										<Link href="/contacte">
+											<a title="Contacte">Contacte</a>
+										</Link>
 									</li>
 								</ul>
 							</div>
 						</div>
-						<div className="w-full md:w-1/2 lg:w-2/12">
-							<div className="footer-connect">
-								<span className="footer-header text-xl mb-2 inline-block">
-									Contacta'ns
-								</span>
-								<ul className="list-none m-0 p-0">
-									<li className="py-1 text-sm leading-tight">
-										<a
-											href="mailto:social@escapadesenparella.com"
-											target="_blank"
-											className="flex items-center"
-											rel="noopener noreferrer"
-										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												className="icon icon-tabler icon-tabler-mailbox"
-												width="22"
-												height="22"
-												viewBox="0 0 24 24"
-												strokeWidth="1.5"
-												stroke="#00206B"
-												fill="none"
-												strokeLinecap="round"
-												strokeLinejoin="round"
-											>
-												<path
-													stroke="none"
-													d="M0 0h24v24H0z"
-													fill="none"
-												/>
-												<path d="M10 21v-6.5a3.5 3.5 0 0 0 -7 0v6.5h18v-6a4 4 0 0 0 -4 -4h-10.5" />
-												<path d="M12 11v-8h4l2 2l-2 2h-4" />
-												<path d="M6 15h1" />
-											</svg>
-											Correu
-										</a>
-									</li>
-									<li className="py-1 text-sm leading-tight">
-										<a
-											href="https://www.instagram.com/escapadesenparella"
-											target="_blank"
-											className="flex items-center"
-											rel="noopener noreferrer"
-										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												className="icon icon-tabler icon-tabler-brand-instagram"
-												width="22"
-												height="22"
-												viewBox="0 0 24 24"
-												strokeWidth="1.5"
-												stroke="#00206B"
-												fill="none"
-												strokeLinecap="round"
-												strokeLinejoin="round"
-											>
-												<path
-													stroke="none"
-													d="M0 0h24v24H0z"
-													fill="none"
-												/>
-												<rect
-													x="4"
-													y="4"
-													width="16"
-													height="16"
-													rx="4"
-												/>
-												<circle cx="12" cy="12" r="3" />
-												<line
-													x1="16.5"
-													y1="7.5"
-													x2="16.5"
-													y2="7.501"
-												/>
-											</svg>
-											Instagram
-										</a>
-									</li>
-									<li className="py-1 text-sm leading-tight">
-										<a
-											href="https://twitter.com/escapaenparella"
-											target="_blank"
-											className="flex items-center"
-											rel="noopener noreferrer"
-										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												className="icon icon-tabler icon-tabler-brand-twitter"
-												width="22"
-												height="22"
-												viewBox="0 0 24 24"
-												strokeWidth="1.5"
-												stroke="#00206B"
-												fill="none"
-												strokeLinecap="round"
-												strokeLinejoin="round"
-											>
-												<path
-													stroke="none"
-													d="M0 0h24v24H0z"
-												/>
-												<path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84 0 0 0 .497 -3.753C20.18 7.773 21.692 5.25 22 4.009z" />
-											</svg>
-											Twitter
-										</a>
-									</li>
-									<li className="py-1 text-sm leading-tight">
-										<a
-											href="https://facebook.com/escapadesenparella"
-											target="_blank"
-											className="flex items-center"
-											rel="noopener noreferrer"
-										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												className="icon icon-tabler icon-tabler-brand-facebook"
-												width="22"
-												height="22"
-												viewBox="0 0 24 24"
-												strokeWidth="1.5"
-												stroke="#00206B"
-												fill="none"
-												strokeLinecap="round"
-												strokeLinejoin="round"
-											>
-												<path
-													stroke="none"
-													d="M0 0h24v24H0z"
-													fill="none"
-												/>
-												<path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
-											</svg>
-											Facebook
-										</a>
-									</li>
-									<li className="py-1 text-sm leading-tight">
-										<a
-											href="tel:633178499"
-											target="_blank"
-											className="flex items-center"
-											rel="noopener noreferrer"
-										>
-											<svg
-												xmlns="http://www.w3.org/2000/svg"
-												className="icon icon-tabler icon-tabler-brand-whatsapp"
-												width="22"
-												height="22"
-												viewBox="0 0 24 24"
-												strokeWidth="1.5"
-												stroke="#00206B"
-												fill="none"
-												strokeLinecap="round"
-												strokeLinejoin="round"
-											>
-												<path
-													stroke="none"
-													d="M0 0h24v24H0z"
-													fill="none"
-												/>
-												<path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9" />
-												<path d="M9 10a0.5 .5 0 0 0 1 0v-1a0.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a0.5 .5 0 0 0 0 -1h-1a0.5 .5 0 0 0 0 1" />
-											</svg>
-											Telèfon
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div className="w-full mt-8 md:mt-14">
-							<ul className="list-none px-0 flex flex-col md:flex-row md:items-center -mx-3 md:justify-center">
-								<li className="pb-1.5 px-3 text-sm">
-									<Link href="/politica-privadesa">
-										<a>Política de privadesa</a>
-									</Link>
-								</li>
-								<li className="pb-1.5 px-3 text-sm">
-									<Link href="/condicions-us">
-										<a>Condicions d'ús</a>
-									</Link>
-								</li>
-								<li className="pb-1.5 px-3 text-sm">
-									<Link href="/politica-privadesa#politicacookies">
-										<a>Política de cookies</a>
-									</Link>
-								</li>
-							</ul>
-						</div>
+					</div>
+					<div className="w-full mt-8 md:mt-14">
+						<ul className="list-none px-0 flex flex-col md:flex-row md:items-center -mx-3 md:justify-center">
+							<li className="pb-1.5 px-3 text-sm">
+								<Link href="/politica-privadesa">
+									<a>Política de privadesa</a>
+								</Link>
+							</li>
+							<li className="pb-1.5 px-3 text-sm">
+								<Link href="/condicions-us">
+									<a>Condicions d'ús</a>
+								</Link>
+							</li>
+							<li className="pb-1.5 px-3 text-sm">
+								<Link href="/politica-privadesa#politicacookies">
+									<a>Política de cookies</a>
+								</Link>
+							</li>
+						</ul>
 					</div>
 				</div>
 

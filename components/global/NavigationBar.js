@@ -132,7 +132,7 @@ const NavigationBar = ({ logo_url, path }) => {
 								</button>
 								<form className="search__form">
 									<fieldset className="search__fieldset">
-										<label htmlFor="search" className="search__label">Cerca activitats i allotjaments</label>
+										<label htmlFor="search" className="search__label">Cerca experiències i allotjaments</label>
 
 										<input
 											onKeyDown={handleKeyPress}
@@ -221,7 +221,7 @@ const NavigationBar = ({ logo_url, path }) => {
 							</button>
 							<li className="menu__item">
 								<Link href="/activitats">
-									<a className="menu__link">
+									<a className="menu__link" title="Experiències en parella a Catalunya">
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
 											className="icon icon-tabler icon-tabler-route text-primary-500 mr-1"
@@ -239,7 +239,7 @@ const NavigationBar = ({ logo_url, path }) => {
 											<circle cx="18" cy="5" r="2" />
 											<path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
 										</svg>
-										Activitats
+										Experiències
 									</a>
 								</Link>
 							</li>

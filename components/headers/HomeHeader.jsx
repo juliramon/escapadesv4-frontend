@@ -36,17 +36,19 @@ const Hero = () => {
 			picture_raw: slideImage.picture_raw,
 			picture_webp_mob: slideImage.picture_webp_mob,
 			picture_raw_mob: slideImage.picture_raw_mob,
-			picture_alt: "La vostra propera escapada en parella comença aquí",
+			picture_alt: "La vostra propera escapada en parella a Catalunya comença aquí",
 			tagline: "Escapadesenparella.cat",
 			title: `La vostra propera escapada
-			en parella
+			en parella a Catalunya
 			<span class="underlined-element">
 				comença aquí
 			</span>`,
 			button_link_1: "/activitats",
-			button_text_1: "Veure activitats",
+			button_text_1: "Veure experiències",
+			button_title_1: "Veure experiències originals a Catalunya",
 			button_link_2: "/allotjaments",
 			button_text_2: "Veure allotjaments",
+			button_title_2: "Veure allotjaments amb encant a Catalunya",
 		},
 	];
 
@@ -103,7 +105,7 @@ const Hero = () => {
 												<div className="w-full md:w-1/2">
 													<div className="bg-primary-900 relative pt-8 pb-8 md:pt-24 md:pb-32 px-6 xl:px-20 h-full w-full overflow-hidden after:bg-geo after:opacity-50 after:w-full after:h-full after:absolute after:inset-0 flex items-center justify-center">
 														<div className="relative z-10 md:min-h-[150px] lg:min-h-[300px] flex items-center justify-center">
-															<div className="max-w-sm text-center ">
+															<div className="max-w-md ">
 																<span className="uppercase text-sm text-white tracking-wider">
 																	{
 																		slide.tagline
@@ -115,7 +117,7 @@ const Hero = () => {
 																		__html: slide.title,
 																	}}
 																></h1>
-																<div className="flex flex-wrap items-center justify-center md:-mx-2.5 md:-mb-2.5 mt-9 md:mt-12">
+																<div className="flex flex-wrap items-center md:-mx-2.5 md:-mb-2.5 mt-9 md:mt-12">
 																	<div className="w-full md:w-auto mb-2.5 md:mb-0 md:p-2.5">
 																		<Link
 																			href={
@@ -124,7 +126,7 @@ const Hero = () => {
 																		>
 																			<a
 																				title={
-																					slide.button_text_1
+																					slide.button_title_1
 																				}
 																				className="button border border-white text-white button__lg w-full md:w-auto justify-center text-sm hover:bg-white hover:text-primary-500 transition-all duration-300 ease-in-out"
 																			>
@@ -142,7 +144,7 @@ const Hero = () => {
 																		>
 																			<a
 																				title={
-																					slide.button_text_2
+																					slide.button_title_2
 																				}
 																				className="button bg-white border border-white text-primary-500 button__lg w-full md:w-auto justify-center text-sm hover:bg-secondary-600 hover:border-secondary-600 hover:text-white transition-all duration-300 ease-in-out"
 																			>

@@ -229,8 +229,8 @@ const HomePageResults = ({
 								))}
 						</div>
 						<a
-							href="/escapades-romantiques"
-							title="Veure més escapades romàntiques"
+							href="/activitats"
+							title="Veure més experiències originals a Catalunya"
 							className="button button__ghost button__med text-[16px] inline-flex items-center mt-2.5 transition-all duration-300 ease-in-out"
 						>
 							<svg
@@ -259,7 +259,7 @@ const HomePageResults = ({
 					{/* Featured regions */}
 					<section className="pt-12 pb-6 lg:pt-16">
 						<h2 className="mb-0">
-							Zones per descobrir
+							Llocs de Catalunya per anar amb parella
 						</h2>
 						<div className="flex flex-wrap mt-4">
 							<Splide options={{
@@ -381,16 +381,16 @@ const HomePageResults = ({
 								</div>
 								<div className="w-full lg:w-6/12 rounded-md bg-white relative z-10 lg:shadow-lg overflow-hidden pt-8 lg:px-8 lg:pb-8">
 									<h2 className="mb-4">
-										Allotjaments amb encant i experiències originals per a les parelles més exigent
+										Hotels amb encant i experiències originals per la vostra propera escapada de cap de setmana a Catalunya
 									</h2>
 									<p className="text-[16px]">
 										Fa {foundationYears} anys vam començar a
 										compartir les escapades en parella que
 										fèiem arreu de Catalunya, amb l'objectiu
-										de motivar a sortir a{" "}
-										<strong>descobrir Catalunya</strong>, i
-										donar a conèixer llocs únics per gaudir
-										en parella, perquè crèiem, i seguim
+										de fer-vos gaudir de <strong>caps de setmana originals</strong>, de sortir a{" "}
+										<strong>descobrir Catalunya</strong>, de compartir <strong>ofertes de cap de setmana a Catalunya</strong>, i sobretot
+										donar a conèixer llocs únics i <strong>experiències per gaudir
+											en parella</strong>, perquè crèiem, i seguim
 										creient, que hi ha vida més enllà d'anar
 										al cinema o veure Netflix al sofà.
 									</p>
