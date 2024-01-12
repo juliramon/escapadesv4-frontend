@@ -532,7 +532,7 @@ const CategoryPage = ({
 										}`}
 									sponsorData={sponsorBlock}
 								/>
-								<section className="pt-4 md:pt-10 pb-8 md:pb-16">
+								<section className="pb-8 md:pb-16">
 									{state.results.length > 0 ? (
 										<>
 											<div className="flex flex-wrap items-start -mx-2">
