@@ -10,11 +10,12 @@ const AdBanner = (props) => {
 	}, []);
 
 	return (
-		<div className="adblock">
+		<div className="adblock w-[450px] md:w-[768px] lg:w-[1024px]">
 			<ins
 				className="adsbygoogle adbanner-customize"
 				style={{
 					display: "block",
+					overflow: "hidden",
 				}}
 				data-ad-client={process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID}
 				{...props}
