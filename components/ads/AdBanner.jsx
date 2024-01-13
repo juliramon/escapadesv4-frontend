@@ -9,8 +9,10 @@ const AdBanner = (props) => {
 		}
 	}, []);
 
+	const sizes = props.customstyles ? props.customstyles : "";
+
 	return (
-		<div className="adblock w-[450px] md:w-[768px] lg:w-[1024px]">
+		<div className={`adblock ${sizes}`}>
 			<ins
 				className="adsbygoogle adbanner-customize"
 				style={{
