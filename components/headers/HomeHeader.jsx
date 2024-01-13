@@ -3,6 +3,8 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { getPicturesBySeason } from "../../utils/helpers";
 import Image from "next/image";
+import AdBanner from "../ads/AdBanner";
+import Script from "next/script";
 
 const Hero = () => {
 	const firstSlidePictures = {
@@ -97,7 +99,7 @@ const Hero = () => {
 											className="glide__slide"
 										>
 											<div className="flex flex-wrap items-stretch justify-center overflow-hidden">
-												<div className="w-full md:w-1/2 bg-primary-300">
+												<div className="w-full md:w-1/2 bg-primary-800">
 													<picture className="block w-full h-full aspect-w-4 aspect-h-3 md:aspect-w-16 md:aspect-h-9 relative">
 														<Image src={slide.picture_raw} alt={slide.picture_alt} layout="fill" objectFit="cover" priority={true} loading="eager" />
 													</picture>
@@ -168,6 +170,22 @@ const Hero = () => {
 					</div>
 				</div>
 			</section>
+
+			<section className="pt-12 lg:pt-16">
+				<div className="container">
+					<div className="flex justify-center">
+						<AdBanner style={{ display: "inline-block", width: 728 + "px", height: 90 + "px" }}
+							data-ad-client="ca-pub-6252269250624547"
+							data-ad-slot="8691959412" />
+					</div>
+				</div>
+			</section>
+			<Script
+				async
+				src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID}`}
+				strategy="lazyOnload"
+				crossOrigin="anonymous"
+			/>
 		</>
 	);
 };
