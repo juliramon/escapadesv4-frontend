@@ -207,8 +207,8 @@ const ActivityList = ({
 		<>
 			{/* Browser metas  */}
 			<GlobalMetas
-				title="Activitats en parella"
-				description="Activitats en parella a Catalunya. Troba les millors excursions, activitats d'aventura i plans per fer en parella a Catalunya."
+				title="Activitats originals a Catalunya en parella"
+				description="Activitats a Catalunya per a gaudir d'experiències originals en parella. Troba les millors activitats en parella, excursions i activitats originals en parella."
 				url="https://escapadesenparella.cat/activitats"
 				image="https://res.cloudinary.com/juligoodie/image/upload/v1657047006/getaways-guru/static-activities-cover/photo_2022-07-05_20.48.38_zsnyc7.jpg"
 				canonical="https://escapadesenparella.cat/activitats"
