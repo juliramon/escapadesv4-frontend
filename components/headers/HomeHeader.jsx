@@ -174,7 +174,7 @@ const Hero = () => {
 			<section className="pt-12 lg:pt-16">
 				<div className="container">
 					<div className="flex justify-center">
-						<AdBanner data-ad-slot="1462489200"
+						<AdBanner data-ad-slot="7418001579"
 							data-ad-format="auto"
 							data-full-width-responsive="true" />
 					</div>
