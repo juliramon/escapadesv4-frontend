@@ -178,10 +178,10 @@ const ActivityList = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [state.updateSearch]);
 
-	const textareaFooter = `<p>Calceu-vos les botes, poseu-vos el banyador, prepareu-vos la motxilla o despengeu l'anorac; aquí trobareu les millors <strong>activitats en parella</strong> a Catalunya!</p>
-	<p>Catalunya és un destí ideal per a realitzar activitats en parella. Amb la seva meravellosa costa mediterrània, pobles encantadors i rica història cultural, ens ofereix un vetall de possibilitats infinits per a realitzar activitats en parella de tots tipus.</p>
-	<p>Un dels llocs imperdibles per a fer activitats en parella és Barcelona. Amb la seva arquitectura icònica, museus de classe mundial i vida nocturna vibrant; sempre hi trobareu alguna cosa a fer a la ciutat.</p>
-	<p>Per a activitats en parella d'aventura, als Pirineus hi trobareu mil i una opcions, ja sigui realitzant sortides de senderisme o esquí, entre d'altres activitats. Sabíes que la regió és seu d'alguns dels millors resorts d'esquí d'Espanya? El paisatge és espectacular!</p>
+	const textareaFooter = `<p>Calceu-vos les botes, poseu-vos el banyador, prepareu-vos la motxilla o despengeu l'anorac; aquí trobareu les millors <strong>activitats a Catalunya</strong> per a una escapada en parella que no oblidareu.</p>
+	<p>Catalunya és un destí ideal per a realitzar activitats originals en parella. Amb la seva meravellosa costa mediterrània, pobles encantadors i rica història cultural, ens ofereix un vetall de possibilitats infinit per viure <strong>experiències en parella</strong> de tot tipus.</p>
+	<p>Un dels llocs imperdibles per a fer <strong>activitats en parella</strong> és Barcelona. Amb la seva arquitectura icònica, museus de classe mundial i vida nocturna vibrant; sempre hi trobareu alguna cosa a fer a la ciutat.</p>
+	<p>Per a <strong>activitats d'aventura</strong>, als Pirineus hi trobareu mil i una opcions, ja sigui realitzant sortides de senderisme o esquí, entre d'altres activitats. Sabíes que la regió és seu d'alguns dels millors resorts d'esquí d'Espanya? El paisatge és espectacular!</p>
 	<p>Per últim, per a activitats de relax, activitats en parella culturals, o activitats en parella gastronòmiques, no dubtis en visitar la Costa Brava, la Costa Daurada, el Camp de Tarragona o el Delta de l'Ebre. Aquestes regions ofereixen propostes que s'adapten a cada parella.</p>`;
 
 	const loadMoreResults = async (page) => {
@@ -233,8 +233,8 @@ const ActivityList = ({
 							{/* Left column - Filters */}
 							<div
 								className={`fixed lg:static w-full lg:w-1/5 2xl:w-1/6 lg:pb-20 p-5 lg:p-0 z-50 lg:z-0 inset-0 h-screen lg:h-auto overflow-y-auto lg:overflow-visible bg-white lg:bg-transparent transition-all duration-300 ease-in-out ${state.isMobileFilterPanelDisplated
-										? "translate-x-0"
-										: "-translate-x-full lg:translate-x-0"
+									? "translate-x-0"
+									: "-translate-x-full lg:translate-x-0"
 									}`}
 							>
 								<button
@@ -501,22 +501,22 @@ const ActivityList = ({
 									</li>
 									<li className="breadcrumb__item">
 										<span className="breadcrumb__link active">
-											Activitats a Catalunya
+											Experiències en parella
 										</span>
 									</li>
 								</ul>
 
 								<ListingHeader
-									title={`<span class="text-secondary-500">Activitats</span> per fer en parella a Catalunya`}
-									subtitle={`Descobreix <span class="inline-block relative after:absolute after:inset-x-0 after:bottom-px after:w-full after:h-0.5 after:bg-secondary-500">${state.numActivities} activitats en parella</span>, excursions, restaurants i paratges extraordinaris per a una escapada en parella de somni a Catalunya`}
+									title={`<span class="text-secondary-500">Activitats</span> originals en parella a Catalunya`}
+									subtitle={`Descobreix <span class="inline-block relative after:absolute after:inset-x-0 after:bottom-px after:w-full after:h-0.5 after:bg-secondary-500">${state.numActivities} activitats en parella a Catalunya</span>. Us recomanem activitats originals en parella, experiències en parella, excursions, restaurants i llocs de Catalunya per a una escapada en parella extraordinària!`}
 								/>
 
 								<section>
 									<h2 className="mt-0 mb-1.5">
-										Activitats més ben valorades
+										Experiències més ben valorades
 									</h2>
 									<div className="text-primary-400 text-[15px] font-light">
-										Quatre activitats per fer en parella a
+										Vuit activitats originals en parella a
 										Catalunya totalment recomanables
 									</div>
 									<div className="flex flex-wrap items-start mt-3 -mx-1.5">
@@ -552,9 +552,9 @@ const ActivityList = ({
 															el.isVerified
 														}
 														location={`${el.activity_locality ===
-																undefined
-																? el.activity_country
-																: el.activity_locality
+															undefined
+															? el.activity_country
+															: el.activity_locality
 															}`}
 													/>
 												)
@@ -667,9 +667,9 @@ const ActivityList = ({
 														el.isVerified
 													}
 													location={`${el.activity_locality ===
-															undefined
-															? el.activity_country
-															: el.activity_locality
+														undefined
+														? el.activity_country
+														: el.activity_locality
 														}`}
 												/>
 											))
