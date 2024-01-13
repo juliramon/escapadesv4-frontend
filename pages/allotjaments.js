@@ -224,11 +224,10 @@ const PlaceList = ({
 						<div className="flex flex-wrap pt-6">
 							{/* Left column - Filters */}
 							<div
-								className={`fixed lg:static w-full lg:w-1/5 2xl:w-1/6 lg:pb-20 p-5 lg:p-0 z-50 lg:z-0 inset-0 h-screen lg:h-auto overflow-y-auto lg:overflow-visible bg-white lg:bg-transparent transition-all duration-300 ease-in-out ${
-									state.isMobileFilterPanelDisplated
+								className={`fixed lg:static w-full lg:w-1/5 2xl:w-1/6 lg:pb-20 p-5 lg:p-0 z-50 lg:z-0 inset-0 h-screen lg:h-auto overflow-y-auto lg:overflow-visible bg-white lg:bg-transparent transition-all duration-300 ease-in-out ${state.isMobileFilterPanelDisplated
 										? "translate-x-0"
 										: "-translate-x-full lg:translate-x-0"
-								}`}
+									}`}
 							>
 								<button
 									className="absolute z-50 right-3 top-3 lg:hidden"
@@ -580,7 +579,7 @@ const PlaceList = ({
 									subtitle={`Descobreix <span class="inline-block relative after:absolute after:inset-x-0 after:bottom-px after:w-full after:h-0.5 after:bg-secondary-500">${state.numPlaces} allotjaments amb encant</span>, hotels boutique, apartaments, cabanyes als arbres i cases rurals de somni per a una escapada en parella increïble a Catalunya`}
 								/>
 
-								<section className="pt-4 md:pt-10">
+								<section>
 									<h2 className="mt-0 mb-1.5">
 										Allotjaments més ben valorats
 									</h2>
@@ -591,33 +590,32 @@ const PlaceList = ({
 									<div className="flex flex-wrap items-start mt-3 -mx-1.5">
 										{state.hasPlaces
 											? state.featuredPlaces.map((el) => (
-													<PublicSquareBox
-														key={el._id}
-														type={el.type}
-														slug={el.slug}
-														id={el._id}
-														cover={el.cover}
-														title={el.title}
-														subtitle={el.subtitle}
-														rating={el.place_rating}
-														placeType={el.placeType}
-														categoria={
-															el.categories
-														}
-														duration={el.duration}
-														website={el.website}
-														phone={el.phone}
-														isVerified={
-															el.isVerified
-														}
-														location={`${
-															el.place_locality ===
+												<PublicSquareBox
+													key={el._id}
+													type={el.type}
+													slug={el.slug}
+													id={el._id}
+													cover={el.cover}
+													title={el.title}
+													subtitle={el.subtitle}
+													rating={el.place_rating}
+													placeType={el.placeType}
+													categoria={
+														el.categories
+													}
+													duration={el.duration}
+													website={el.website}
+													phone={el.phone}
+													isVerified={
+														el.isVerified
+													}
+													location={`${el.place_locality ===
 															undefined
-																? el.place_country
-																: el.place_locality
+															? el.place_country
+															: el.place_locality
 														}`}
-													/>
-											  ))
+												/>
+											))
 											: null}
 									</div>
 								</section>
@@ -705,37 +703,36 @@ const PlaceList = ({
 									<div className="flex flex-wrap items-start mt-3 -mx-1.5">
 										{state.hasPlaces
 											? state.places.map((el) => (
-													<PublicSquareBox
-														key={el._id}
-														type={el.type}
-														slug={el.slug}
-														id={el._id}
-														cover={el.cover}
-														title={el.title}
-														subtitle={el.subtitle}
-														rating={el.place_rating}
-														placeType={el.placeType}
-														categoria={
-															el.categories
-														}
-														duration={el.duration}
-														website={el.website}
-														phone={el.phone}
-														isVerified={
-															el.isVerified
-														}
-														location={`${
-															el.place_locality ===
+												<PublicSquareBox
+													key={el._id}
+													type={el.type}
+													slug={el.slug}
+													id={el._id}
+													cover={el.cover}
+													title={el.title}
+													subtitle={el.subtitle}
+													rating={el.place_rating}
+													placeType={el.placeType}
+													categoria={
+														el.categories
+													}
+													duration={el.duration}
+													website={el.website}
+													phone={el.phone}
+													isVerified={
+														el.isVerified
+													}
+													location={`${el.place_locality ===
 															undefined
-																? el.place_country
-																: el.place_locality
+															? el.place_country
+															: el.place_locality
 														}`}
-													/>
-											  ))
+												/>
+											))
 											: null}
 									</div>
 									{state.currentPage !== state.numPages &&
-									checkAreFiltersActive() ? (
+										checkAreFiltersActive() ? (
 										<div className="w-full mt-6 flex justify-center">
 											{!state.isFetching ? (
 												<button
