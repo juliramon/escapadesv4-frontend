@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const PublicSquareBox = ({
@@ -142,25 +143,19 @@ const PublicSquareBox = ({
 					className="flex flex-col justify-between h-full overflow-hidden relative"
 				>
 					<div className="relative overflow-hidden rounded-md">
+
 						<picture className="block w-full h-full aspect-w-4 aspect-h-3">
-							<source srcSet={coverImg} />
-							<img
-								src={coverImg}
-								data-src={coverImg}
+							<Image src={coverImg}
 								alt={title}
-								className="w-full h-full object-cover object-center scale-1000 hover:scale-105 transition-all duration-300 ease-in-out "
-								loading={
-									index !== undefined && index == 0
-										? "eager"
-										: "lazy"
-								}
-								fetchpriority={
-									index !== undefined && index == 0
-										? "high"
-										: "low"
-								}
-								width="400"
-								height="300"
+								layout="fill"
+								priority={index !== undefined && index == 0
+									? true
+									: false}
+								loading={index !== undefined && index == 0
+									? "eager"
+									: "lazy"}
+								placeholder="blur"
+								blurDataURL={coverImg}
 							/>
 						</picture>
 						{isVerified ? (
