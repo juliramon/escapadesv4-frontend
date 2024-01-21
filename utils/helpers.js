@@ -113,9 +113,10 @@ const getPicturesBySeason = (thisDate, objImages) => {
 	const lastYear = thisDate.getFullYear() - 1;
 	const nextYear = thisDate.getFullYear() + 1;
 	const currentMonth = thisDate.getMonth() + 1;
-	const currentDay = thisDate.getDay();
+	const currentDay = thisDate.getUTCDate();
 
 	let currentDate = currentMonth + '/' + currentDay + '/' + currentYear;
+	// currentDate = '01/21/2024';
 
 	const triggers = {
 		spring: "03/20/" + currentYear,
