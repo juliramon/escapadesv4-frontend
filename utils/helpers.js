@@ -20,9 +20,6 @@ const handleFilesUpload = async (coverImage, bodyImages) => {
 		return response.path;
 	};
 
-	const uploadedCover = await uploadCoverImage();
-	let uploadedImages = [];
-
 	const uploadBodyImages = async (index, bodyImages) => {
 		const uploadData = new FormData();
 		uploadData.append("imageUrl", bodyImages[index]);
@@ -34,17 +31,27 @@ const handleFilesUpload = async (coverImage, bodyImages) => {
 				await uploadBodyImages(index + 1, bodyImages);
 			}
 			if (uploadedImages.length === bodyImages.length) {
-				return {
-					uploadedCover,
-					uploadedImages,
-				};
+				return;
 			}
 		} catch (error) {
 			console.error(error);
 		}
 	};
 
-	return await uploadBodyImages(0, bodyImages);
+	let uploadedCover = null;
+	let uploadedImages = [];
+
+	if (coverImage) {
+		uploadedCover = await uploadCoverImage();
+	};
+
+	if (bodyImages.length > 0) {
+		await uploadBodyImages(0, bodyImages)
+	}
+
+	return {
+		uploadedCover, uploadedImages
+	};
 };
 
 /**
@@ -119,21 +126,21 @@ const getPicturesBySeason = (thisDate, objImages) => {
 	// currentDate = '01/21/2024';
 
 	const triggers = {
-		spring: "03/20/" + currentYear,
+		spring: "03/21/" + currentYear,
 		summer: "06/21/" + currentYear,
 		autumn: "09/21/" + currentYear,
 		winter: "12/21/" + currentYear,
 	};
 
 	const triggersLastYear = {
-		spring: "03/20/" + lastYear,
+		spring: "03/21/" + lastYear,
 		summer: "06/21/" + lastYear,
 		autumn: "09/21/" + lastYear,
 		winter: "12/21/" + lastYear,
 	};
 
 	const triggersNextYear = {
-		spring: "03/20/" + nextYear,
+		spring: "03/21/" + nextYear,
 		summer: "06/21/" + nextYear,
 		autumn: "09/21/" + nextYear,
 		winter: "12/21/" + nextYear,
