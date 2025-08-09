@@ -87,13 +87,6 @@ const NavigationBar = () => {
 
 	const dropdownItems = [
 		{
-			href: "/histories",
-			title: "Històries",
-			icon: "/icones/icona-histories.png",
-			iconWebp: "/icones/icona-histories.webp",
-			text: "Històries",
-		},
-		{
 			href: "/llistes",
 			title: "Llistes",
 			icon: "/icones/icona-llistes.png",
@@ -133,7 +126,7 @@ const NavigationBar = () => {
 
 	return (
 		<header className="z-[60] bg-white w-full sticky top-0 border-b border-neutral-100">
-			<nav className="px-6 lg:px-12 py-4 md:py-4 menu">
+			<nav className="px-6 lg:px-12 py-4 md:py-6 menu">
 				<div className="w-full grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-x-4">
 					<Link
 						href={{
@@ -294,25 +287,25 @@ const NavigationBar = () => {
 										</Link>
 									</li>
 									<li className="menu__item">
-										<Link href="/escapades-catalunya">
+										<Link href="/histories">
 											<a
 												className="menu__link"
-												title="Escapades per Catalunya"
+												title="Històries en parella"
 											>
 												<picture>
 													<source
-														srcSet="/icones/icona-ubicacions.webp"
+														srcSet="/icones/icona-histories.webp"
 														type="image/webp"
 													/>
 													<img
-														src="/icones/icona-ubicacions.png"
-														alt="Escapades per Catalunya"
+														src="/icones/icona-histories.png"
+														alt="Històries en parella"
 														className="w-9 h-auto lg:w-12"
 														width={36}
 														height={36}
 													/>
 												</picture>
-												Ubicacions
+												Històries
 											</a>
 										</Link>
 									</li>
