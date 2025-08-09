@@ -94,6 +94,7 @@ module.exports = {
 		extend: {},
 	},
 	plugins: [
-		require("@tailwindcss/aspect-ratio"), require('tailwindcss-container-bleed')
+		require("@tailwindcss/aspect-ratio"),
+		require("tailwindcss-container-bleed"),
 	],
 };

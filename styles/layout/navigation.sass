@@ -1,33 +1,44 @@
 @layer components
 	.menu
-		@apply flex items-center justify-end flex-1
+		@apply flex items-center justify-end
+
+		&__list-wrapper
+			@apply relative w-full z-50
 
 		&__list
-			@apply list-none m-0 flex flex-col bg-white fixed -right-full top-0 w-72 h-full shadow-xl transition-all duration-500 ease-in-out pt-20 px-5 pb-5 md:w-96 lg:flex-row lg:items-center lg:relative lg:right-auto lg:w-auto lg:h-auto lg:shadow-none lg:p-0 lg:gap-x-2
+			width: 90vw
+			@apply list-none content-start m-0 bg-white fixed -right-full top-0 h-full shadow-xl transition-all duration-500 ease-in-out pt-20 px-6 pb-5 md:w-96 lg:flex-row lg:items-center lg:relative lg:right-auto lg:w-auto lg:h-auto lg:shadow-none lg:p-0 lg:bg-transparent gap-y-4
+
+		&__close
+			@apply hidden
+
+		&.open .menu__list-wrapper::before
+			content: ""
+			@apply fixed inset-0 bg-black/50 z-40
 
 		&.open .menu__list
-			@apply right-0 z-40
+			@apply right-0 z-50
+
+		&.open .menu__close
+			@apply inline-block
 
 		&__item
-			@apply last:mb-0 mb-4 lg:mb-0 lg:inline-flex lg:items-center relative
+			@apply m-0 inline-flex items-center relative
 
 		&__link:not(.button)
-			@apply inline-flex items-center gap-x-1.5 text-primary-500 text-sm xl:text-15 transition-all duration-300 ease-in-out z-10 px-3 py-2.5 w-full lg:w-auto
+			@apply inline-flex items-center gap-x-2 text-primary-500 text-sm xl:text-15 transition-all duration-300 ease-in-out z-10 w-full lg:w-auto
 
-			svg
-				@apply transition-all duration-300 ease-in-out text-primary-500
+			img
+				@apply transition-all duration-300 ease-in-out scale-100
 
-			&:hover
-				@apply text-primary-500 bg-primary-50 rounded-xl
-
-			&:hover svg
-				@apply stroke-primary-500
+			&:hover img
+				@apply scale-110
 
 		&__link.button
 			@apply w-full lg:w-auto px-4 2xl:py-3 2xl:px-6 mt-4 lg:mt-0 flex items-center justify-center xl:text-15
 
 		&__open
-			@apply lg:hidden
+			@apply flex items-center justify-end lg:hidden
 
 		&__close
 			@apply absolute top-5 right-5 z-50 lg:hidden
@@ -36,31 +47,34 @@
 
 		.search
 			&__open
-				@apply inline-block mr-3 lg:hidden
+				@apply inline-block mr-3
 
 			&__close
 				@apply absolute top-5 right-5 z-50 lg:hidden
 
 			&__panel
-				@apply fixed -top-full inset-x-0 h-0 overflow-hidden bg-white transition-all duration-500 ease-in-out flex flex-wrap justify-center lg:relative lg:top-auto lg:left-auto lg:right-auto lg:bg-transparent lg:w-full lg:block lg:h-auto
+				@apply fixed -top-full inset-x-0 h-0 overflow-hidden bg-white transition-all duration-500 ease-in-out flex flex-wrap justify-center lg:relative lg:top-auto lg:left-auto lg:right-auto lg:bg-transparent lg:w-full lg:block lg:h-auto lg:overflow-visible
 
 			&__panel.open
-				@apply top-0 z-40 h-screen p-5 lg:p-0
+				@apply top-0 z-40 h-screen p-6 lg:p-0
 
 			&__form
-				@apply w-full relative rounded-md overflow-hidden pt-20 lg:pt-0 lg:w-auto
+				@apply w-full relative pt-20 lg:pt-0 lg:w-auto
 
 			&__fieldset
-				@apply w-full flex flex-wrap lg:flex-nowrap lg:items-stretch
+				@apply w-full flex flex-wrap lg:flex-nowrap lg:items-stretch relative
 
 			&__label
 				@apply block mb-3 text-sm lg:hidden
 
 			&__input
-				@apply w-full flex-auto rounded-md bg-primary-50 px-5 py-2 placeholder:text-sm focus:bg-white focus:text-primary-500 lg:rounded-r-none
+				@apply w-full flex-auto rounded-full bg-white border border-gray-100 px-5 py-2 placeholder:text-sm focus:bg-white focus:text-primary-500 focus:outline-none focus:shadow-md transition-all duration-300 ease-in-out
 
 			&__submit
-				@apply w-full inline-flex items-center justify-center mt-2.5 lg:mt-0 lg:rounded-l-none lg:w-auto lg:bg-primary-50 lg:text-primary-300 lg:hover:bg-primary-500 lg:hover:text-white transition-all duration-300 ease-in-out
+				@apply absolute inset-y-0 right-0 rounded-full m-1 bg-secondary-500 text-white z-10 p-2.5 inline-flex items-center justify-center hover:bg-secondary-900 transition-all duration-300 ease-in-out
+
+				svg
+					@apply w-5 h-5
 
 				span
-					@apply inline-block mr-2.5 lg:hidden
+					@apply inline-block mr-2 lg:hidden
