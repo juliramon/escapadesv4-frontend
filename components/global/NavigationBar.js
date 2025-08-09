@@ -126,7 +126,7 @@ const NavigationBar = () => {
 
 	return (
 		<header className="z-[60] bg-white w-full sticky top-0 border-b border-neutral-100">
-			<nav className="px-6 lg:px-12 py-4 md:py-6 menu">
+			<nav className="px-6 lg:px-12 py-4 menu">
 				<div className="w-full grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-x-4">
 					<Link
 						href={{
