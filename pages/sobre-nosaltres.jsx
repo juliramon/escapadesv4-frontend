@@ -134,7 +134,7 @@ const AboutUs = () => {
 				<main>
 					{/* Section header */}
 					<section className="flex items-stretch pt-6">
-						<div className="px-5 w-full">
+						<div className="container">
 							<div className="overflow-hidden rounded-2xl">
 								<div className="flex flex-wrap items-stretch overflow-hidden">
 									<div className="w-full lg:w-1/2 relative z-10">
@@ -189,7 +189,6 @@ const AboutUs = () => {
 														>
 															Mencions als mitjans
 														</a>
-
 													</div>
 												</div>
 											</div>
@@ -233,7 +232,7 @@ const AboutUs = () => {
 
 					{/* Section textblock 1 */}
 					<section className="flex items-stretch pt-8 md:pt-12 lg:pt-20">
-						<div className="px-5 w-full">
+						<div className="container">
 							<div className="overflow-hidden rounded-2xl">
 								<div className="flex flex-wrap items-stretch overflow-hidden">
 									<div className="relative w-full h-full lg:h-auto lg:w-1/2 inset-0 grid grid-cols-1 lg:grid-cols-2 gap-5 order-2 lg:order-1 mt-6 lg:mt-0">
@@ -388,7 +387,7 @@ const AboutUs = () => {
 						className="flex items-stretch pt-8 md:pt-12 lg:pt-20"
 						id="equip"
 					>
-						<div className="px-5 w-full">
+						<div className="container">
 							<div className="max-w-[32rem] mx-auto text-center">
 								<h2 className="mt-4 md:mt-7 mb-0">Equip</h2>
 								<p className="mt-4 text-block font-light leading-normal">
@@ -562,7 +561,7 @@ const AboutUs = () => {
 
 					{/* Section services */}
 					<section className="flex items-stretch pt-8 md:pt-12 lg:pt-20">
-						<div className="px-5 w-full">
+						<div className="container">
 							<div className="overflow-hidden rounded-2xl">
 								<div className="flex flex-wrap items-stretch overflow-hidden">
 									<div className="w-full lg:w-1/2 relative z-10">
@@ -636,7 +635,7 @@ const AboutUs = () => {
 
 					{/* Section brands */}
 					<section className="flex items-stretch py-8 md:py-12 lg:py-20">
-						<div className="px-5 w-full">
+						<div className="container">
 							<div className="max-w-[32rem] mx-auto text-center">
 								<h3 className="mt-4 md:mt-7 mb-0 font-display">
 									Confien en nosaltres

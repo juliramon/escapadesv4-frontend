@@ -1799,7 +1799,7 @@ const PlaceForm = () => {
 				</section>
 				<div className="w-full fixed bottom-0 inset-x-0 bg-white border-t border-primary-200 py-2.5 z-50">
 					<div className="container flex items-center justify-end">
-						<div className="px-5">
+						<div className="container">
 							<button
 								className="button button__primary button__lg"
 								type="submit"

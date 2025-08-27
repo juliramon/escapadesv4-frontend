@@ -126,7 +126,7 @@ const NavigationBar = () => {
 
 	return (
 		<header className="z-[60] bg-white w-full sticky top-0 border-b border-neutral-100">
-			<nav className="px-6 lg:px-12 py-4 menu">
+			<nav className="container py-4 menu">
 				<div className="w-full grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-x-4">
 					<Link
 						href={{
@@ -305,7 +305,9 @@ const NavigationBar = () => {
 														height={36}
 													/>
 												</picture>
-												Històries
+												<span className="inline-block">
+													Històries
+												</span>
 											</a>
 										</Link>
 									</li>
@@ -454,9 +456,9 @@ const NavigationBar = () => {
 												viewBox="0 0 24 24"
 												fill="none"
 												stroke="currentColor"
-												stroke-width="1.5"
-												stroke-linecap="round"
-												stroke-linejoin="round"
+												strokeWidth="1.5"
+												strokeLinecap="round"
+												strokeLinejoin="round"
 											>
 												<path
 													stroke="none"
@@ -472,6 +474,7 @@ const NavigationBar = () => {
 											{dropdownItems.map((item) => {
 												return (
 													<li
+														key={item.href}
 														className={`menu__item ${
 															item.liClassName
 																? item.liClassName

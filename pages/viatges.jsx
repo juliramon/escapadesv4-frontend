@@ -38,7 +38,7 @@ const Trips = ({ tripCategories, featuredTripCategories }) => {
 				<NavigationBar user={user} />
 				<main>
 					{/* Section cover */}
-					<section className="px-5 pt-6">
+					<section className="container pt-6">
 						<div className="flex flex-wrap items-stretch -mx-3">
 							<div className="px-3 w-full lg:w-auto">
 								<div className="bg-gray-50 flex items-center justify-center p-8 md:pl-14 md:pr-16 md:py-14 rounded-lg md:rounded-2xl h-full">
@@ -213,7 +213,7 @@ const Trips = ({ tripCategories, featuredTripCategories }) => {
 					</section>
 
 					{/* Section trips list */}
-					<section className="px-5 pt-6 pb-8">
+					<section className="container pt-6 pb-8">
 						<div className="flex flex-wrap items-stretch -mx-3">
 							{tripCategories
 								? tripCategories.map((tripCategory) => {

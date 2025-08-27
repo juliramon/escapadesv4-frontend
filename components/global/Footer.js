@@ -85,11 +85,11 @@ const Footer = () => {
 
 	return (
 		<>
-			<section className="py-8 md:py-12 lg:py-20 bg-tertiary-50">
-				<div className="px-5">
+			<section className="py-12 md:py-16 lg:py-20 bg-tertiary-50">
+				<div className="container">
 					<div className="max-w-5xl mx-auto">
 						<div className="relative flex flex-wrap items-center">
-							<picture className="block w-64 lg:w-80 h-auto mx-auto mix-blend-multiply">
+							<picture className="block w-64 lg:w-96 h-auto mx-auto mix-blend-multiply">
 								<source
 									srcSet="/email-confirmation.webp"
 									type="image/webp"
@@ -103,12 +103,12 @@ const Footer = () => {
 									loading="lazy"
 								/>
 							</picture>
-							<div className="w-full lg:w-auto flex flex-col lg:flew-row items-center lg:items-start gap-5 pt-6 md:pt-0 lg:pl-8 lg:flex-1 max-w-md lg:max-w-full mx-auto lg:mx-0">
-								<div className="w-full md:max-w-xs mx-auto md:ml-0 md:mr-auto mb-3">
+							<div className="w-full lg:w-auto flex flex-col lg:flew-row items-center lg:items-start gap-5 pt-6 md:pt-0 lg:pl-16 lg:flex-1 max-w-md lg:max-w-full mx-auto lg:mx-0">
+								<div className="w-full mb-3">
 									<h2 className="mb-2 text-center md:text-left">
 										Subscriu-te a la nostra newsletter
 									</h2>
-									<p className="mb-0 font-light text-center md:text-left">
+									<p className="mb-0 text-center md:text-left">
 										Per rebre les últimes novetats i ofertes
 									</p>
 								</div>
@@ -237,7 +237,7 @@ const Footer = () => {
 				</div>
 			</section>
 			<footer id="footer" className="pt-12 pb-2 lg:pt-16">
-				<div className="px-5">
+				<div className="container">
 					<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-10">
 						<div className="w-full mb-6 lg:mb-0 md:pr-5">
 							<div className="flex flex-col flex-wrap items-start max-w-xs">
@@ -358,7 +358,7 @@ const Footer = () => {
 										</a>
 									</li>
 								</ul>
-								<span className="opacity-70 text-xs block">
+								<span className="opacity-70 text-sm block">
 									Copyright © {copyrightDate}. Tots els drets
 									reservats. <br />
 									Codi i UI/UX:{" "}

@@ -191,7 +191,7 @@ const PublicSquareBox = ({
 										fill="currentColor"
 									></path>
 								</svg>
-								<span className="text-xs inline-block relative top-px">
+								<span className="text-sm inline-block relative top-px">
 									Verificada
 								</span>
 							</span>
@@ -199,10 +199,8 @@ const PublicSquareBox = ({
 					</div>
 					<div className="flex flex-col justify-between pt-3 pb-4 h-full">
 						<div>
-							<h3 className="text-block font-normal my-0 pr-10 line-clamp-1">
-								{title}
-							</h3>
-							<span className="mt-0.5 inline-flex flex-wrap text-15 font-light text-primary-400 line-clamp-1">
+							<h3 className="my-0 pr-10 line-clamp-1">{title}</h3>
+							<span className="mt-0.5 inline-flex flex-wrap text-16 text-grey-400 line-clamp-1">
 								{type == "place"
 									? placeTypeModified
 									: "Activitat"}{" "}
@@ -233,7 +231,7 @@ const PublicSquareBox = ({
 								</svg>
 								{modRating || rating}/5
 							</div>
-							<span className="text-13 text-tertiary-800 group-hover:text-tertiary-900 transition-all duration-300 ease-in-out inline-flex items-center leading-tight relative right-1">
+							<span className="text-15 text-tertiary-800 group-hover:text-tertiary-900 transition-all duration-300 ease-in-out inline-flex items-center leading-tight relative right-1">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
 									className="mr-1"

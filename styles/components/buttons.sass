@@ -8,27 +8,27 @@ $background-input: #f2f7f9
 
 @layer components
 	.button
-		@apply rounded-xl transition-all duration-300 ease-in-out inline-flex
+		@apply rounded-xl transition-all duration-300 ease-in-out w-full md:w-fit inline-flex items-center text-center justify-center
 
 	.button__primary
-		@apply inline-flex items-center bg-grey-700 text-white
+		@apply  bg-grey-700 text-white
 		&:hover
 			@apply bg-primary-800 text-white
 
 	.button__secondary
-		@apply inline-flex items-center bg-white text-grey-700 border border-grey-700
+		@apply bg-white text-grey-700 border border-grey-700
 		&:hover
 			@apply bg-grey-700 border-grey-700 text-white
 
 	.button__ghost
-		@apply inline-flex items-center bg-transparent text-grey-700 border border-grey-700
+		@apply bg-transparent text-grey-700 border border-grey-700
 		&:hover
 			@apply bg-grey-700 border-grey-700 text-white
 		&.active
 			@apply bg-grey-700 text-white border-grey-700
 
 .button__lg
-	@apply py-4 px-6 text-sm
+	@apply py-4 px-6 text-16
 
 .button__med
 	@apply py-3 px-6 text-sm

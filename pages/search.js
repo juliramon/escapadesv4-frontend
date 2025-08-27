@@ -225,7 +225,7 @@ const Search = (props) => {
 				/>
 				<main>
 					<div className="pt-6">
-						<div className="px-5 w-full">
+						<div className="container">
 							<ul className="breadcrumb">
 								<li className="breadcrumb__item">
 									<a
@@ -245,7 +245,7 @@ const Search = (props) => {
 						</div>
 					</div>
 					<section className="pt-6 pb-12">
-						<div className="px-5 w-full">
+						<div className="container">
 							<div className="border-b border-primary-50">
 								<h1>Resultats de cerca</h1>
 								<p className="mt-2">

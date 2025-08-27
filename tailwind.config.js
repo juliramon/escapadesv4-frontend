@@ -71,8 +71,9 @@ module.exports = {
 				base: "18px",
 			},
 			fontFamily: {
-				body: ["Circular", "sans-serif"],
-				headings: ["Circular", "sans-serif"],
+				body: ["Satoshi", "sans-serif"],
+				headings: ["New Spirit", "serif"],
+				condensed: ["New Spirit Condensed", "serif"],
 			},
 			borderRadius: {
 				350: "350px",

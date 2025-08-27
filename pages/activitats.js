@@ -497,7 +497,7 @@ const ActivityList = ({
 
 					{/* Main column - Listings */}
 					<section className="lg:mt-6">
-						<div className="px-5">
+						<div className="container">
 							<ul className="breadcrumb max-w-5xl">
 								<li className="breadcrumb__item">
 									<a
@@ -523,7 +523,7 @@ const ActivityList = ({
 
 					{/* Section activities */}
 					<section className="pt-8">
-						<div className="px-5">
+						<div className="container">
 							<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5">
 								{state.hasActivities
 									? state.activities.map((el, idx) => {
@@ -659,7 +659,7 @@ const ActivityList = ({
 
 					{textareaFooter !== "" ? (
 						<section>
-							<div className="px-5">
+							<div className="container">
 								<div className="border-t border-primary-100 py-8 mt-8 md:py-12 md:mt-12 lg:py-20 lg:mt-20">
 									<div
 										className="w-full max-w-prose mx-auto text-block"

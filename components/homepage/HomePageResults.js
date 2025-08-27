@@ -1,58 +1,150 @@
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import PublicSquareBox from "../../components/listings/PublicSquareBox";
-import StoryListing from "../listings/StoryListing";
 import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
+import FeaturedStoryBox from "../listings/FeaturedStoryBox";
 import "@splidejs/react-splide/css/core";
 
 const HomePageResults = ({
+	featuredCategories,
 	featuredRegions,
 	featuredActivities,
 	mostRecentPlaces,
 	mostRecentStories,
 }) => {
 	const initialState = {
-		mostRecentGetaways: [],
-		featuredActivities: [],
-		featuredRegions: [],
-		mostRecentStories: [],
+		mostRecentGetaways: mostRecentPlaces,
+		featuredActivities: featuredActivities,
+		featuredRegions: featuredRegions,
+		mostRecentStories: mostRecentStories,
+		featuredCategories: featuredCategories,
 		emptyBlocksPerRow: [0, 1, 2, 3],
 	};
-	const [state, setState] = useState(initialState);
 
-	useEffect(() => {
-		if (
-			mostRecentPlaces.length > 0 ||
-			featuredActivities.length > 0 ||
-			mostRecentPlaces.length > 0 ||
-			mostRecentStories.length > 0 ||
-			featuredRomanticGetaways.length > 0 ||
-			featuredAdventureGetaways.length > 0 ||
-			featuredGastronomicGetaways.length > 0
-		) {
-			setState({
-				...state,
-				featuredActivities: featuredActivities,
-				mostRecentGetaways: mostRecentPlaces,
-				featuredRegions: featuredRegions,
-				mostRecentGetaways: mostRecentPlaces,
-				featuredActivities: featuredActivities,
-				mostRecentStories: mostRecentStories,
-			});
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	const [state, setState] = useState(initialState);
 
 	const date = new Date();
 	const foundationYears = date.getFullYear() - 2015;
 
 	return (
 		<div id="homePageResults" className="relative z-30">
-			{/* Most recent places */}
-			<section className="pt-8 md:pt-12 lg:pt-20">
-				<div className="px-5">
-					<h2 className="my-0">Nous allotjaments</h2>
-					<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5 mt-4">
+			{/* Most recent stories */}
+			<section className="pt-12 md:pt-16 lg:pt-20">
+				<div className="container">
+					<Splide
+						options={{
+							gap: "20px",
+							perMove: 1,
+							perPage: 1,
+							arrows: true,
+							pagination: false,
+						}}
+						hasTrack={false}
+						aria-label="Zones per descobrir"
+					>
+						<SplideTrack>
+							{state.mostRecentStories
+								? state.mostRecentStories.map((el, idx) => {
+										return (
+											<SplideSlide key={idx}>
+												<article key={idx}>
+													<FeaturedStoryBox
+														story={el}
+														index={idx}
+													/>
+												</article>
+											</SplideSlide>
+										);
+								  })
+								: null}
+						</SplideTrack>
+						<div className="splide__arrows absolute top-1/2 -translate-y-1/2 inline-flex flex-col gap-y-4 -right-5 lg:flex-row lg:gap-x-4 lg:right-9 lg:bottom-8 lg:top-auto lg:translate-y-0">
+							<button className="splide__arrow splide__arrow--prev ">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="icon icon-tabler icon-tabler-chevron-left"
+									width={24}
+									height={24}
+									viewBox="0 0 24 24"
+									strokeWidth={1.5}
+									stroke="currentColor"
+									fill="none"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								>
+									<path
+										stroke="none"
+										d="M0 0h24v24H0z"
+										fill="none"
+									/>
+									<path d="M15 6l-6 6l6 6" />
+								</svg>
+							</button>
+							<button className="splide__arrow splide__arrow--next">
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									className="icon icon-tabler icon-tabler-chevron-right"
+									width={24}
+									height={24}
+									viewBox="0 0 24 24"
+									strokeWidth={1.5}
+									stroke="currentColor"
+									fill="none"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								>
+									<path
+										stroke="none"
+										d="M0 0h24v24H0z"
+										fill="none"
+									/>
+									<path d="M9 6l6 6l-6 6" />
+								</svg>
+							</button>
+						</div>
+					</Splide>
+				</div>
+			</section>
+
+			{/* Text block categories */}
+			<section className="pt-12 md:pt-16 lg:pt-32">
+				<div className="container">
+					<h2 className="text-center max-w-7xl mx-auto mb-8 md:mb-16">
+						<span className="font-condensed subtitle block mb-5">
+							Centenars d'experiències i allotjaments
+						</span>
+						<span className="inline-block mr-4">
+							per a escapades{" "}
+						</span>
+						{state.featuredCategories.map((el, idx) => {
+							return (
+								<Link href={`/${el.slug}`} key={idx}>
+									<a className="underline inline-flex items-center relative top-2 mb-3 md:top-4 md:mr-4">
+										<picture className="w-8 md:w-20 h-8 md:h-20 mr-2.5 md:mr-4 rounded-md md:rounded-2xl overflow-hidden inline-block rotate-[5deg]">
+											<img
+												src={el.image}
+												alt={el.title}
+												width={32}
+												height={32}
+												className="w-full h-full object-cover"
+												loading="lazy"
+											/>
+										</picture>
+										{el.pluralName === "aventura"
+											? "d'"
+											: ""}
+										{el.pluralName}
+										{idx <
+										state.featuredCategories.length - 1
+											? ", "
+											: ""}
+									</a>
+								</Link>
+							);
+						})}
+						<span className="block mt-2 md:mt-4">i molt més</span>
+					</h2>
+					<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5 mt-4 lg:mt-7">
 						{state.mostRecentGetaways.length > 0
 							? state.mostRecentGetaways.map((el, idx) => {
 									let location;
@@ -126,21 +218,7 @@ const HomePageResults = ({
 									</div>
 							  ))}
 					</div>
-					<a
-						href="/allotjaments"
-						title="Veure més allotjaments amb encant a Catalunya"
-						className="button button__ghost button__med mt-5"
-					>
-						Veure'n més
-					</a>
-				</div>
-			</section>
-
-			{/* Featured activities */}
-			<section className="pt-8 md:pt-12 lg:pt-20">
-				<div className="px-5">
-					<h2 className="my-0">Noves experiències</h2>
-					<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5 mt-4">
+					<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5 mt-4 lg:mt-7">
 						{state.featuredActivities.length > 0
 							? state.featuredActivities.map((el, idx) => {
 									let location;
@@ -211,136 +289,168 @@ const HomePageResults = ({
 									</div>
 							  ))}
 					</div>
-					<a
-						href="/activitats"
-						title="Veure més experiències originals a Catalunya"
-						className="button button__ghost button__med mt-5"
-					>
-						Veure'n més
-					</a>
+					<div className="flex flex-wrap items-center justify-center gap-2.5 mt-6 md:mt-12">
+						<div className="w-full lg:w-auto">
+							<Link href={"/experiencies"}>
+								<a
+									title={
+										"Veure més experiències originals a Catalunya"
+									}
+									className="button button__primary button__lg w-full lg:w-auto text-center justify-center"
+								>
+									{"Veure experiències"}
+								</a>
+							</Link>
+						</div>
+						<div className="w-full lg:w-auto">
+							<Link href={"/allotjaments"}>
+								<a
+									title={
+										"Veure allotjaments amb encant a Catalunya"
+									}
+									className="button button__ghost button__lg w-full lg:w-auto text-center justify-center"
+								>
+									{"Veure allotjaments"}
+								</a>
+							</Link>
+						</div>
+					</div>
 				</div>
 			</section>
 
 			{/* Featured regions */}
-			<section className="py-8 md:py-12 lg:py-20 bg-tertiary-50 mt-8 md:mt-12 lg:mt-20">
-				<div className="px-5">
-					<h2 className="my-0">Escapades per Catalunya</h2>
-					<div className="flex flex-wrap mt-4 rounded-2xl overflow-hidden">
-						<Splide
-							options={{
-								gap: "20px",
-								perMove: 1,
-								perPage: 4,
-								arrows: true,
-								breakpoints: {
-									1024: {
-										perPage: 3,
+			<section className="py-12 md:pt-16 md:pb-0 lg:pt-20 bg-tertiary-50 md:bg-transparent mt-12 md:mt-0">
+				<div className="container">
+					<div className="bg-tertiary-50 rounded-2xl md:py-12 lg:py-20 md:px-12 lg:px-16">
+						<h2 className="my-0 text-center">
+							Escapades per Catalunya
+						</h2>
+						<p className="mt-4 !mb-0 text-block--xl leading-normal max-w-[55ch] mx-auto text-center">
+							Descobreix les millors destinacions per a una
+							escapada en parella a Catalunya.
+						</p>
+						<div className="flex flex-wrap rounded-2xl mt-8 lg:mt-12">
+							<Splide
+								options={{
+									gap: "20px",
+									perMove: 1,
+									perPage: 4,
+									arrows: true,
+									pagination: false,
+									breakpoints: {
+										1024: {
+											perPage: 3,
+										},
+										768: {
+											perPage: 2,
+										},
+										640: {
+											perPage: 1,
+										},
 									},
-									768: {
-										perPage: 2,
-									},
-									640: {
-										perPage: 1,
-									},
-								},
-							}}
-							hasTrack={false}
-							aria-label="Zones per descobrir"
-						>
-							<SplideTrack>
-								{state.featuredRegions
-									? state.featuredRegions.map((el, idx) => {
-											return (
-												<SplideSlide key={idx}>
-													<article>
-														<Link
-															href={
-																"escapades-catalunya/" +
-																el.slug
-															}
-														>
-															<a
-																title={el.title}
-																className="flex flex-wrap items-center rounded-xl overflow-hidden"
-															>
-																<picture className="block w-full h-full overflow-hidden">
-																	<img
-																		src={
-																			el.image
-																		}
-																		alt={
+								}}
+								hasTrack={false}
+								aria-label="Zones per descobrir"
+							>
+								<SplideTrack>
+									{state.featuredRegions
+										? state.featuredRegions.map(
+												(el, idx) => {
+													return (
+														<SplideSlide key={idx}>
+															<article>
+																<Link
+																	href={
+																		"escapades-catalunya/" +
+																		el.slug
+																	}
+																>
+																	<a
+																		title={
 																			el.title
 																		}
-																		className="w-full h-full object-cover"
-																		width={
-																			390
-																		}
-																		height={
-																			525
-																		}
-																		loading="lazy"
-																	/>
-																</picture>
-															</a>
-														</Link>
-													</article>
-												</SplideSlide>
-											);
-									  })
-									: null}
-							</SplideTrack>
-							<div className="splide__arrows">
-								<button className="splide__arrow splide__arrow--prev w-12 h-12 bg-white rounded-full shadow flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-7 md:left-9 lg:left-16 2xl:left-20">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										className="icon icon-tabler icon-tabler-chevron-left"
-										width={24}
-										height={24}
-										viewBox="0 0 24 24"
-										strokeWidth={1.5}
-										stroke="currentColor"
-										fill="none"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<path
-											stroke="none"
-											d="M0 0h24v24H0z"
+																		className="flex flex-wrap items-center rounded-xl overflow-hidden"
+																	>
+																		<picture className="block w-full h-full overflow-hidden">
+																			<img
+																				src={
+																					el.image
+																				}
+																				alt={
+																					el.title
+																				}
+																				className="w-full h-full object-cover"
+																				width={
+																					390
+																				}
+																				height={
+																					525
+																				}
+																				loading="lazy"
+																			/>
+																		</picture>
+																	</a>
+																</Link>
+															</article>
+														</SplideSlide>
+													);
+												}
+										  )
+										: null}
+								</SplideTrack>
+								<div className="splide__arrows absolute top-1/2 -translate-y-1/2 inline-flex flex-col gap-y-4 -right-5 lg:flex-row lg:gap-x-4 lg:right-9 lg:bottom-8 lg:top-auto lg:translate-y-0">
+									<button className="splide__arrow splide__arrow--prev">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											className="icon icon-tabler icon-tabler-chevron-left"
+											width={24}
+											height={24}
+											viewBox="0 0 24 24"
+											strokeWidth={1.5}
+											stroke="currentColor"
 											fill="none"
-										/>
-										<path d="M15 6l-6 6l6 6" />
-									</svg>
-								</button>
-								<button className="splide__arrow splide__arrow--next w-12 h-12 bg-white rounded-full shadow flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-7 md:right-9 lg:right-16 2xl:right-20">
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										className="icon icon-tabler icon-tabler-chevron-right"
-										width={24}
-										height={24}
-										viewBox="0 0 24 24"
-										strokeWidth={1.5}
-										stroke="currentColor"
-										fill="none"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<path
-											stroke="none"
-											d="M0 0h24v24H0z"
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										>
+											<path
+												stroke="none"
+												d="M0 0h24v24H0z"
+												fill="none"
+											/>
+											<path d="M15 6l-6 6l6 6" />
+										</svg>
+									</button>
+									<button className="splide__arrow splide__arrow--next">
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											className="icon icon-tabler icon-tabler-chevron-right"
+											width={24}
+											height={24}
+											viewBox="0 0 24 24"
+											strokeWidth={1.5}
+											stroke="currentColor"
 											fill="none"
-										/>
-										<path d="M9 6l6 6l-6 6" />
-									</svg>
-								</button>
-							</div>
-						</Splide>
+											strokeLinecap="round"
+											strokeLinejoin="round"
+										>
+											<path
+												stroke="none"
+												d="M0 0h24v24H0z"
+												fill="none"
+											/>
+											<path d="M9 6l6 6l-6 6" />
+										</svg>
+									</button>
+								</div>
+							</Splide>
+						</div>
 					</div>
 				</div>
 			</section>
 
 			{/* About us section */}
-			<section className="py-8 md:pt-12 lg:pt-20">
-				<div className="px-5">
+			<section className="py-12 md:py-16 lg:py-20">
+				<div className="container">
 					<div className="grid grid-cols-1 lg:grid-cols-2 gap-9">
 						<div className="relative h-full col-span-1 order-2">
 							<picture className="block aspect-[4/3] lg:col-span-7 w-full h-full">
@@ -376,12 +486,11 @@ const HomePageResults = ({
 							<div className="relative h-full md:px-16 2xl:px-20 overflow-hidden flex items-center justify-center lg:justify-start">
 								<div className="relative z-10 md:min-h-[150px] lg:min-h-[300px] flex items-center justify-center rounded-2xl bg-white md:p-10">
 									<div className="max-w-[33rem]">
-										<h2 className="mb-4">
-											{foundationYears} anys descobrint
-											escapades en parella i racons amb
-											encant a Catalunya
+										<h2 className="mb-4 md:mb-7">
+											{foundationYears} anys d'escapades
+											en escapades en parella a Catalunya
 										</h2>
-										<p className="text-block font-light leading-normal">
+										<p className="text-block leading-normal">
 											Fa {foundationYears} anys vam
 											començar a compartir les escapades
 											en parella que fèiem arreu de
@@ -407,7 +516,7 @@ const HomePageResults = ({
 											que hi ha vida més enllà d'anar al
 											cinema o veure Netflix al sofà.
 										</p>
-										<p className="text-block font-light leading-normal mb-0">
+										<p className="text-block leading-normal mb-0">
 											A dia d'avui estem encantats de
 											poder seguir compartint amb tots
 											vosaltres les{" "}
@@ -421,45 +530,17 @@ const HomePageResults = ({
 											transmetre't aquest sentiment!
 										</p>
 										<a
-											href="/contacte"
-											title="Contacta'ns"
-											className="button button__primary button__med mt-8"
+											href="/sobre-nosaltres"
+											title="Conèix-nos millor"
+											className="button button__primary button__lg mt-4 md:mt-7"
 										>
-											Contacta'ns
+											Conèix-nos millor
 										</a>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</section>
-
-			{/* Most recent stories */}
-			<section className="py-8 md:py-12 lg:py-20">
-				<div className="px-5">
-					<h2 className="my-0">Noves "Històries en parella"</h2>
-					<div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-4">
-						{state.mostRecentStories.length > 0
-							? state.mostRecentStories.map((story, idx) => {
-									return (
-										<article key={idx}>
-											<StoryListing
-												story={story}
-												index={idx}
-											/>
-										</article>
-									);
-							  })
-							: ""}
-					</div>
-					<a
-						href="/histories"
-						title="Veure més històries"
-						className="button button__ghost button__med mt-8"
-					>
-						Veure'n més
-					</a>
 				</div>
 			</section>
 		</div>

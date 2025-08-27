@@ -14,8 +14,8 @@ import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichS
 import { formatDateTimeToISODate } from "../../utils/helpers";
 import ListingDiscount from "../../components/listingpage/ListingDiscount";
 import ShareBarModal from "../../components/social/ShareBarModal";
-import { Splide, SplideTrack, SplideSlide } from '@splidejs/react-splide';
-import '@splidejs/react-splide/css/core';
+import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
+import "@splidejs/react-splide/css/core";
 import AdBanner from "../../components/ads/AdBanner";
 import ArticleRichSnippet from "../../components/richsnippets/ArticleRichSnippet";
 
@@ -28,7 +28,6 @@ const GetawayListing = ({
 	const router = useRouter();
 
 	if (getawayDetails && categoryDetails) {
-
 		useEffect(() => {
 			if (
 				router.pathname.includes("editar") ||
@@ -81,7 +80,7 @@ const GetawayListing = ({
 								if (
 									el.bookmarkActivityRef &&
 									el.bookmarkActivityRef._id ===
-									getawayDetails._id
+										getawayDetails._id
 								) {
 									return (bookmarkDetails = el);
 								}
@@ -91,7 +90,7 @@ const GetawayListing = ({
 								if (
 									el.bookmarkPlaceRef &&
 									el.bookmarkPlaceRef._id ===
-									getawayDetails._id
+										getawayDetails._id
 								) {
 									return (bookmarkDetails = el);
 								}
@@ -185,10 +184,7 @@ const GetawayListing = ({
 			}
 		} else {
 			bookmarkButton = (
-				<div
-					className="px-4"
-					onClick={() => handleModalVisibility()}
-				>
+				<div className="px-4" onClick={() => handleModalVisibility()}>
 					<button className="flex items-center">
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -242,8 +238,16 @@ const GetawayListing = ({
 		);
 
 		const center = {
-			lat: parseFloat(getawayDetails?.activity_lat ? getawayDetails.activity_lat : getawayDetails.place_lat),
-			lng: parseFloat(getawayDetails?.activity_lng ? getawayDetails.activity_lng : getawayDetails.place_lng),
+			lat: parseFloat(
+				getawayDetails?.activity_lat
+					? getawayDetails.activity_lat
+					: getawayDetails.place_lat
+			),
+			lng: parseFloat(
+				getawayDetails?.activity_lng
+					? getawayDetails.activity_lng
+					: getawayDetails.place_lng
+			),
 		};
 
 		const getMapOptions = (maps) => {
@@ -261,8 +265,16 @@ const GetawayListing = ({
 
 		const renderMarker = (map, maps) => {
 			const position = {
-				lat: parseFloat(getawayDetails?.activity_lat ? getawayDetails.activity_lat : getawayDetails.place_lat),
-				lng: parseFloat(getawayDetails?.activity_lng ? getawayDetails.activity_lng : getawayDetails.place_lng),
+				lat: parseFloat(
+					getawayDetails?.activity_lat
+						? getawayDetails.activity_lat
+						: getawayDetails.place_lat
+				),
+				lng: parseFloat(
+					getawayDetails?.activity_lng
+						? getawayDetails.activity_lng
+						: getawayDetails.place_lng
+				),
 			};
 			new maps.Marker({ position: position, map, title: "Hello" });
 		};
@@ -273,29 +285,48 @@ const GetawayListing = ({
 			workingHours = getawayDetails.activity_opening_hours;
 		} else {
 			workingHours = getawayDetails.place_opening_hours;
-		};
+		}
 
-		const rating = getawayDetails.activity_rating ? getawayDetails.activity_rating : getawayDetails.place_rating;
+		const rating = getawayDetails.activity_rating
+			? getawayDetails.activity_rating
+			: getawayDetails.place_rating;
 
-		const locality = getawayDetails?.activity_locality ? getawayDetails.activity_locality : getawayDetails?.place_locality ? getawayDetails.place_locality : null;
-		const province = getawayDetails?.activity_province ? getawayDetails.activity_province || getawayDetails?.activity_state : getawayDetails?.place_province || getawayDetails?.place_state;
+		const locality = getawayDetails?.activity_locality
+			? getawayDetails.activity_locality
+			: getawayDetails?.place_locality
+			? getawayDetails.place_locality
+			: null;
+		const province = getawayDetails?.activity_province
+			? getawayDetails.activity_province || getawayDetails?.activity_state
+			: getawayDetails?.place_province || getawayDetails?.place_state;
 
 		let fullLocation = "";
 		if (locality) {
 			fullLocation += locality;
-		};
+		}
 		if (locality && province) {
-			fullLocation += ', ';
+			fullLocation += ", ";
 		}
 		if (province) {
 			fullLocation += province;
-		};
+		}
 
-		const fullAddress = getawayDetails?.activity_full_address ? getawayDetails.activity_full_address : getawayDetails?.place_full_address ? getawayDetails.place_full_address : null;
-		const mainCategory = getawayDetails.type === 'activity' && getawayDetails?.categories ? getawayDetails.categories[0] : getawayDetails?.placeType ? getawayDetails.placeType : null;
+		const fullAddress = getawayDetails?.activity_full_address
+			? getawayDetails.activity_full_address
+			: getawayDetails?.place_full_address
+			? getawayDetails.place_full_address
+			: null;
+		const mainCategory =
+			getawayDetails.type === "activity" && getawayDetails?.categories
+				? getawayDetails.categories[0]
+				: getawayDetails?.placeType
+				? getawayDetails.placeType
+				: null;
 
-		const relatedStoryCoverPath = getawayDetails?.relatedStory?.cover.substring(0, 51);
-		const relatedStoryImageId = getawayDetails?.relatedStory?.cover?.substring(63);
+		const relatedStoryCoverPath =
+			getawayDetails?.relatedStory?.cover.substring(0, 51);
+		const relatedStoryImageId =
+			getawayDetails?.relatedStory?.cover?.substring(63);
 		const relatedStoryCoverImg = `${relatedStoryCoverPath}w_100,h_100,c_fill/${relatedStoryImageId}`;
 
 		const getawayCoverPath = getawayDetails?.cover.substring(0, 51);
@@ -337,7 +368,7 @@ const GetawayListing = ({
 						<article>
 							{/* Listing header */}
 							<section className="lg:mt-6">
-								<div className="px-5">
+								<div className="container">
 									<div className="grid grid-cols-1 md:grid-cols-12">
 										<div className="col-start-1 col-span-11">
 											{/* Breadcrumbs */}
@@ -351,25 +382,31 @@ const GetawayListing = ({
 													</a>
 												</li>
 												<li className="breadcrumb__item">
-													{getawayDetails.type === 'activity' ? <a
-														href={`/activitats`}
-														title={`Experiències`}
-														className="breadcrumb__link"
-													>
-														Experiències
-													</a> : <a
-														href={`/allotjaments`}
-														title={`Allotjaments`}
-														className="breadcrumb__link"
-													>
-														Allotjaments
-													</a>}
-
+													{getawayDetails.type ===
+													"activity" ? (
+														<a
+															href={`/activitats`}
+															title={`Experiències`}
+															className="breadcrumb__link"
+														>
+															Experiències
+														</a>
+													) : (
+														<a
+															href={`/allotjaments`}
+															title={`Allotjaments`}
+															className="breadcrumb__link"
+														>
+															Allotjaments
+														</a>
+													)}
 												</li>
 												<li className="breadcrumb__item">
 													<a
 														href={`/${categoryDetails.slug}`}
-														title={categoryDetails.title}
+														title={
+															categoryDetails.title
+														}
 														className="breadcrumb__link"
 													>
 														{categoryDetails.title}
@@ -430,19 +467,23 @@ const GetawayListing = ({
 																width={16}
 																height={16}
 																viewBox="0 0 24 24"
-																strokeWidth={1.5}
+																strokeWidth={
+																	1.5
+																}
 																stroke="currentCOlor"
 																fill="none"
 																strokeLinecap="round"
 																strokeLinejoin="round"
 															>
-																<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+																<path
+																	stroke="none"
+																	d="M0 0h24v24H0z"
+																	fill="none"
+																/>
 																<path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
 															</svg>
 															<span className="text-sm relative inline-block top-px">
-																{
-																	rating
-																}
+																{rating}
 															</span>
 														</li>
 														<li className="flex flex-wrap items-center px-2">
@@ -452,7 +493,9 @@ const GetawayListing = ({
 																width={18}
 																height={18}
 																viewBox="0 0 24 24"
-																strokeWidth={1.5}
+																strokeWidth={
+																	1.5
+																}
 																stroke="currentColor"
 																fill="none"
 																strokeLinecap="round"
@@ -470,10 +513,29 @@ const GetawayListing = ({
 																	r={9}
 																></circle>
 															</svg>
-															<span className="text-sm relative inline-block top-px">{fullLocation}</span>
+															<span className="text-sm relative inline-block top-px">
+																{fullLocation}
+															</span>
 														</li>
 														<li className="flex flex-wrap items-center px-2">
-															<ShareBarModal picture={getawayDetails.cover} title={getawayDetails.title} rating={rating} slug={urlToShare} locality={fullLocation} colorClass={'text-primary-500 text-sm'} />
+															<ShareBarModal
+																picture={
+																	getawayDetails.cover
+																}
+																title={
+																	getawayDetails.title
+																}
+																rating={rating}
+																slug={
+																	urlToShare
+																}
+																locality={
+																	fullLocation
+																}
+																colorClass={
+																	"text-primary-500 text-sm"
+																}
+															/>
 														</li>
 													</ul>
 												</div>
@@ -484,24 +546,28 @@ const GetawayListing = ({
 							</section>
 							<section class="pt-8 md:pt-12">
 								{/* Slider images */}
-								<div className="px-5">
+								<div className="container">
 									<div className="relative z-10 rounded-2xl">
-										<Splide options={{
-											type: "slide",
-											gap: "20px",
-											perMove: 1,
-											perPage: 3,
-											breakpoints: {
-												1024: {
-													perPage: 2
+										<Splide
+											options={{
+												type: "slide",
+												gap: "20px",
+												perMove: 1,
+												perPage: 3,
+												breakpoints: {
+													1024: {
+														perPage: 2,
+													},
+													768: {
+														perPage: 1,
+													},
 												},
-												768: {
-													perPage: 1
-												}
-											},
-											arrows: true,
-											pagination: false,
-										}} hasTrack={false} aria-label="Carousel d'imatges">
+												arrows: true,
+												pagination: false,
+											}}
+											hasTrack={false}
+											aria-label="Carousel d'imatges"
+										>
 											<SplideTrack>
 												<SplideSlide>
 													<FancyboxUtil
@@ -517,57 +583,142 @@ const GetawayListing = ({
 															}
 														>
 															<picture className="block w-full h-full">
-																<img src={getawayCoverImg} alt={getawayDetails.title} className={'w-full h-full object-cover rounded-2xl'} width={400} height={300} loading="eager" />
+																<img
+																	src={
+																		getawayCoverImg
+																	}
+																	alt={
+																		getawayDetails.title
+																	}
+																	className={
+																		"w-full h-full object-cover rounded-2xl"
+																	}
+																	width={400}
+																	height={300}
+																	loading="eager"
+																/>
 															</picture>
 														</div>
 													</FancyboxUtil>
 												</SplideSlide>
 												{getawayDetails.images
 													? getawayDetails.images.map(
-														(el, idx) => {
-															const imageSrc = el?.substring(0, 51);
-															const imageId = el?.substring(63);
-															const imageModSrc = `${imageSrc}w_805,h_605,c_fill/${imageId}`;
-															const imageModSrcMob = `${imageSrc}w_400,h_300,c_fill/${imageId}`;
+															(el, idx) => {
+																const imageSrc =
+																	el?.substring(
+																		0,
+																		51
+																	);
+																const imageId =
+																	el?.substring(
+																		63
+																	);
+																const imageModSrc = `${imageSrc}w_805,h_605,c_fill/${imageId}`;
+																const imageModSrcMob = `${imageSrc}w_400,h_300,c_fill/${imageId}`;
 
-															const priority = idx === 1 || idx === 2 ? 'eager' : 'lazy';
-															return (
-																<SplideSlide key={idx}>
-																	<FancyboxUtil
-																		options={{
-																			infinite: true,
-																		}}
+																const priority =
+																	idx === 1 ||
+																	idx === 2
+																		? "eager"
+																		: "lazy";
+																return (
+																	<SplideSlide
+																		key={
+																			idx
+																		}
 																	>
-																		<div
-																			className="w-full aspect-[4/3] overflow-hidden"
-																			data-fancybox="gallery"
-																			data-src={
-																				el
-																			}
+																		<FancyboxUtil
+																			options={{
+																				infinite: true,
+																			}}
 																		>
-																			<picture className="block w-full h-full bg-primary-50">
-																				<source srcSet={imageModSrcMob} media="(max-width: 768px)" />
-																				<source srcSet={imageModSrc} media="(min-width: 768px)" />
-																				<img src={imageModSrc} alt={`${getawayDetails.title} - ${idx}`} className={'w-full h-full object-cover rounded-2xl'} width={400} height={300} loading={priority} />
-																			</picture>
-																		</div>
-																	</FancyboxUtil>
-																</SplideSlide>
-															);
-														}
-													)
+																			<div
+																				className="w-full aspect-[4/3] overflow-hidden"
+																				data-fancybox="gallery"
+																				data-src={
+																					el
+																				}
+																			>
+																				<picture className="block w-full h-full bg-primary-50">
+																					<source
+																						srcSet={
+																							imageModSrcMob
+																						}
+																						media="(max-width: 768px)"
+																					/>
+																					<source
+																						srcSet={
+																							imageModSrc
+																						}
+																						media="(min-width: 768px)"
+																					/>
+																					<img
+																						src={
+																							imageModSrc
+																						}
+																						alt={`${getawayDetails.title} - ${idx}`}
+																						className={
+																							"w-full h-full object-cover rounded-2xl"
+																						}
+																						width={
+																							400
+																						}
+																						height={
+																							300
+																						}
+																						loading={
+																							priority
+																						}
+																					/>
+																				</picture>
+																			</div>
+																		</FancyboxUtil>
+																	</SplideSlide>
+																);
+															}
+													  )
 													: null}
 											</SplideTrack>
 											<div className="splide__arrows">
 												<button className="splide__arrow splide__arrow--prev w-12 h-12 bg-white rounded-full shadow flex items-center justify-center absolute top-1/2 -translate-y-1/2 left-7 md:left-9 lg:left-16 2xl:left-20">
-													<svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-left" width={24} height={24} viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-														<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														className="icon icon-tabler icon-tabler-chevron-left"
+														width={24}
+														height={24}
+														viewBox="0 0 24 24"
+														strokeWidth={1.5}
+														stroke="currentColor"
+														fill="none"
+														strokeLinecap="round"
+														strokeLinejoin="round"
+													>
+														<path
+															stroke="none"
+															d="M0 0h24v24H0z"
+															fill="none"
+														/>
 														<path d="M15 6l-6 6l6 6" />
 													</svg>
 												</button>
 												<button className="splide__arrow splide__arrow--next w-12 h-12 bg-white rounded-full shadow flex items-center justify-center absolute top-1/2 -translate-y-1/2 right-7 md:right-9 lg:right-16 2xl:right-20">
-													<svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-right" width={24} height={24} viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
-														<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														className="icon icon-tabler icon-tabler-chevron-right"
+														width={24}
+														height={24}
+														viewBox="0 0 24 24"
+														strokeWidth={1.5}
+														stroke="currentColor"
+														fill="none"
+														strokeLinecap="round"
+														strokeLinejoin="round"
+													>
+														<path
+															stroke="none"
+															d="M0 0h24v24H0z"
+															fill="none"
+														/>
 														<path d="M9 6l6 6l-6 6" />
 													</svg>
 												</button>
@@ -578,19 +729,21 @@ const GetawayListing = ({
 
 								{/* Listing content */}
 								<div className="container py-8 md:py-12 lg:pb-20 listing__description">
-
 									<div className="grid grid-cols-1 md:grid-cols-12 gap-5 lg:gap-9">
 										<div className="w-full col-span-1 md:col-start-2 md:col-span-6">
-
 											{/* Verified review */}
 											{getawayDetails.isVerified ? (
 												<div className="max-w-[666px] pt-8">
-													{getawayDetails.review && getawayDetails.review !== 'false' ? (
+													{getawayDetails.review &&
+													getawayDetails.review !==
+														"false" ? (
 														<div className="w-full">
 															<blockquote className="font-headings text-lg lg:text-2xl font-light leading-normal md:leading-loose">
-																"{
+																"
+																{
 																	getawayDetails.review
-																}"
+																}
+																"
 																<cite className="block mt-4 text-sm">
 																	<picture>
 																		<img
@@ -604,17 +757,19 @@ const GetawayListing = ({
 															</blockquote>
 														</div>
 													) : null}
-
 												</div>
 											) : null}
 
 											{/* About this listing */}
-											<div className={`max-w-[666px] ${getawayDetails.isVerified ? "border-t border-primary-50 pt-8 mt-8 md:pt-12 md:mt-12" : ""}`}>
+											<div
+												className={`max-w-[666px] ${
+													getawayDetails.isVerified
+														? "border-t border-primary-50 pt-8 mt-8 md:pt-12 md:mt-12"
+														: ""
+												}`}
+											>
 												<h2 className="font-body mt-0">
-													Sobre{" "}
-													{
-														getawayDetails.title
-													}
+													Sobre {getawayDetails.title}
 												</h2>
 												<div
 													className="mt-4 listing__description"
@@ -626,21 +781,16 @@ const GetawayListing = ({
 
 											{/* Section reasons / characteristics */}
 											{checkedCharacteristics?.length >
-												0 ? (
+											0 ? (
 												<div className="pt-8 mt-8 md:pt-12 md:mt-12 border-t border-primary-50 max-w-[666px]">
 													<h2 className="font-body">
 														Què trobareu a{" "}
-														{
-															getawayDetails.title
-														}
-														?
+														{getawayDetails.title}?
 													</h2>
 													<div className="mt-7">
 														<ul className="p-0 -m-2.5 flex flex-wrap">
 															{checkedCharacteristics.map(
-																(
-																	el
-																) => (
+																(el) => (
 																	<li
 																		key={
 																			el.name
@@ -666,27 +816,33 @@ const GetawayListing = ({
 												</div>
 											) : null}
 
-											{getawayDetails?.reasons && getawayDetails.reasons !== "" ? <div className="pt-8 mt-8 md:pt-12 md:mt-12 border-t border-primary-50 max-w-[666px]">
-												<h2 className="font-body mb-1">
-													Per què realitzar aquesta activitat?
-												</h2>
-												<p>Us compartim 5 raons per les quals creiem que hauríeu de fer aquesta escapada:</p>
-												<div
-													className="mt-4 listing__description"
-													dangerouslySetInnerHTML={{
-														__html: getawayDetails.reasons,
-													}}
-												></div>
-											</div>
-												: null}
+											{getawayDetails?.reasons &&
+											getawayDetails.reasons !== "" ? (
+												<div className="pt-8 mt-8 md:pt-12 md:mt-12 border-t border-primary-50 max-w-[666px]">
+													<h2 className="font-body mb-1">
+														Per què realitzar
+														aquesta activitat?
+													</h2>
+													<p>
+														Us compartim 5 raons per
+														les quals creiem que
+														hauríeu de fer aquesta
+														escapada:
+													</p>
+													<div
+														className="mt-4 listing__description"
+														dangerouslySetInnerHTML={{
+															__html: getawayDetails.reasons,
+														}}
+													></div>
+												</div>
+											) : null}
 
 											{/* Section how to arrive */}
 											<div className="pt-8 mt-8 md:pt-12 md:mt-12 border-t border-primary-50 max-w-[666px]">
 												<h2 className="font-body">
 													Com arribar a{" "}
-													{
-														getawayDetails.title
-													}
+													{getawayDetails.title}
 												</h2>
 												<div className="flex flex-wrap items-center mt-2.5">
 													<div className="w-5 h-5 mr-2">
@@ -714,9 +870,7 @@ const GetawayListing = ({
 														</svg>
 													</div>
 													<span className="text-15 opacity-80 flex-1">
-														{
-															fullAddress
-														}
+														{fullAddress}
 													</span>
 												</div>
 												<div className="w-full mt-7 aspect-[4/3] md:aspect-[16/9] rounded-xl overflow-hidden">
@@ -724,13 +878,9 @@ const GetawayListing = ({
 														bootstrapURLKeys={{
 															key: `${process.env.GOOGLE_API_KEY}`,
 														}}
-														defaultCenter={
-															center
-														}
+														defaultCenter={center}
 														defaultZoom={11}
-														options={
-															getMapOptions
-														}
+														options={getMapOptions}
 														yesIWantToUseGoogleMapApiInternals
 														onGoogleApiLoaded={({
 															map,
@@ -760,8 +910,12 @@ const GetawayListing = ({
 																		<svg
 																			xmlns="http://www.w3.org/2000/svg"
 																			className="mr-1.5"
-																			width={18}
-																			height={18}
+																			width={
+																				18
+																			}
+																			height={
+																				18
+																			}
 																			viewBox="0 0 24 24"
 																			strokeWidth={
 																				1.5
@@ -785,7 +939,10 @@ const GetawayListing = ({
 																			></path>
 																		</svg>
 																		<span className="text-sm">
-																			T'expliquem la nostra escapada{" "}
+																			T'expliquem
+																			la
+																			nostra
+																			escapada{" "}
 																			<u>
 																				{
 																					getawayDetails.title
@@ -797,7 +954,26 @@ const GetawayListing = ({
 
 																	<div className="flex flex-wrap mt-3">
 																		<picture className="block relative w-16 h-16 overflow-hidden rounded-2xl">
-																			<img src={relatedStoryCoverImg} alt={getawayDetails.relatedStory.title} className={'w-full h-full object-cover'} width={64} height={64} loading="lazy" />
+																			<img
+																				src={
+																					relatedStoryCoverImg
+																				}
+																				alt={
+																					getawayDetails
+																						.relatedStory
+																						.title
+																				}
+																				className={
+																					"w-full h-full object-cover"
+																				}
+																				width={
+																					64
+																				}
+																				height={
+																					64
+																				}
+																				loading="lazy"
+																			/>
 																		</picture>
 																		<div className="pl-5 flex-1">
 																			<h3 className="block mt-0 mb-0.5">
@@ -807,11 +983,13 @@ const GetawayListing = ({
 																						.title
 																				}
 																			</h3>
-																			<p className="text-sm font-light mb-4">{
-																				getawayDetails
-																					.relatedStory
-																					.subtitle
-																			}</p>
+																			<p className="text-sm font-light mb-4">
+																				{
+																					getawayDetails
+																						.relatedStory
+																						.subtitle
+																				}
+																			</p>
 																			<div className="flex items-center">
 																				<time className="text-sm block font-light">
 																					Publicada
@@ -822,8 +1000,13 @@ const GetawayListing = ({
 																							.createdAt
 																					)}
 																				</time>
-																				<span className="text-sm inline-block mx-1.5">|</span>
-																				<span className="text-sm inline-block">Llegir-ne més</span>
+																				<span className="text-sm inline-block mx-1.5">
+																					|
+																				</span>
+																				<span className="text-sm inline-block">
+																					Llegir-ne
+																					més
+																				</span>
 																			</div>
 																		</div>
 																	</div>
@@ -835,52 +1018,50 @@ const GetawayListing = ({
 													{/* Price and location grid */}
 													<div className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-9">
 														<div className="">
-															<h3>Tipus d'
+															<h3>
+																Tipus d'
 																{getawayDetails.type ==
-																	"place"
+																"place"
 																	? "allotjament"
 																	: "activitat"}{" "}
 															</h3>
 															<p className="font-light capitalize mb-0">
-
-																{
-																	mainCategory
-																}
+																{mainCategory}
 															</p>
 														</div>
 														<div className="">
-															<h3>Direcció de l'{getawayDetails.type ==
+															<h3>
+																Direcció de l'
+																{getawayDetails.type ==
 																"place"
-																? "allotjament"
-																: "activitat"}</h3>
+																	? "allotjament"
+																	: "activitat"}
+															</h3>
 
 															<p className="font-light mb-0">
-																{
-																	fullAddress
-																}
+																{fullAddress}
 															</p>
 														</div>
 														<div className="">
-
-															<h3>Preu aproximat *</h3>
+															<h3>
+																Preu aproximat *
+															</h3>
 															<p className="font-light mb-0">
-
 																{
 																	getawayDetails.price
 																}{" "}
-																€ {getawayDetails.type ==
-																	"place"
+																€{" "}
+																{getawayDetails.type ==
+																"place"
 																	? "/persona/nit"
 																	: "/persona"}
 															</p>
-
 														</div>
 														<div>
 															<p className="text-sm font-light mb-0">
 																* Els preus
-																poden
-																variar
-																i pot ser que no
+																poden variar i
+																pot ser que no
 																estiguin
 																constantment
 																actualitzats
@@ -888,12 +1069,21 @@ const GetawayListing = ({
 														</div>
 													</div>
 
-													{getawayDetails.discountCode ? <ListingDiscount discountCode={getawayDetails.discountCode} discountInfo={getawayDetails.discountInfo} /> : null}
+													{getawayDetails.discountCode ? (
+														<ListingDiscount
+															discountCode={
+																getawayDetails.discountCode
+															}
+															discountInfo={
+																getawayDetails.discountInfo
+															}
+														/>
+													) : null}
 
 													<div className="fixed z-50 lg:z-auto bottom-0 inset-x-0 lg:bottom-auto lg:inset-x-auto lg:relative grid grid-cols-2 gap-x-5 items-stretch bg-white py-4 md:py-7 px-4 lg:px-0 border-t border-primary-50 mt-7">
 														{getawayDetails?.phone !==
 															"-" &&
-															getawayDetails?.phone !==
+														getawayDetails?.phone !==
 															"" ? (
 															<div className="flex-1">
 																<a
@@ -934,7 +1124,7 @@ const GetawayListing = ({
 														) : null}
 														{getawayDetails?.website !==
 															"-" &&
-															getawayDetails?.website !==
+														getawayDetails?.website !==
 															"" ? (
 															<div className="flex-1">
 																<a
@@ -977,7 +1167,10 @@ const GetawayListing = ({
 																		<path d="M17 10l1 4l1.5 -4l1.5 4l1 -4"></path>
 																		<path d="M9.5 10l1 4l1.5 -4l1.5 4l1 -4"></path>
 																	</svg>
-																	{getawayDetails.type === 'activity' ? 'Contactar' : 'Reservar'}
+																	{getawayDetails.type ===
+																	"activity"
+																		? "Contactar"
+																		: "Reservar"}
 																</a>
 															</div>
 														) : null}
@@ -986,27 +1179,28 @@ const GetawayListing = ({
 
 												{/* Ad unit */}
 												<div className="p-7 bg-white rounded-2xl border border-primary-50 mt-7">
-													<span className="inline-block text-xs">Anunci</span>
-													<AdBanner data-ad-slot="4940975412"
+													<span className="inline-block text-xs">
+														Anunci
+													</span>
+													<AdBanner
+														data-ad-slot="4940975412"
 														data-ad-format="auto"
-														data-full-width-responsive="true" />
+														data-full-width-responsive="true"
+													/>
 												</div>
 											</div>
-
-
 										</aside>
 									</div>
-
 								</div>
 							</section>
 						</article>
-					</main >
+					</main>
 					<Footer />
 					<SignUpModal
 						visibility={modalVisibility}
 						hideModal={hideModalVisibility}
 					/>
-				</div >
+				</div>
 			</>
 		);
 	}

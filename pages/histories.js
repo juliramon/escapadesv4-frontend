@@ -70,7 +70,7 @@ const StoriesList = ({ featuredStories, stories, totalItems, numPages }) => {
 				<StoriesHeader />
 				<main>
 					<section className="py-8 md:pb-12 lg:pb-20">
-						<div className="px-5">
+						<div className="container">
 							{initialResults.length > 0 ? (
 								<>
 									<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5">

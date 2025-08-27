@@ -22,35 +22,53 @@
 @import "pages/layout-home.sass";
 @import "pages/layout-listing.sass";
 @import "pages/layout-tripCategory.sass";
+@import "utilities/container.sass";
 @import "base/global.sass";
 
 @import "vendors/cookie-consent.sass";
 @import "vendors/swiper.sass";
 @import "vendors/glide.sass";
 @import "vendors/tailwind.sass";
+@import "vendors/splide.sass";
 @import "node_modules/@glidejs/glide/src/assets/sass/glide.core";
 
 @font-face {
-	font-family: "Circular";
-	src: url("../fonts/circular-medium.woff2");
-	font-weight: 500;
-	font-style: normal;
-	font-display: swap;
-}
-
-@font-face {
-	font-family: "Circular";
-	src: url("../fonts/circular-book.woff2");
+	font-family: "New Spirit Condensed";
+	src: url("../fonts/New-Spirit-Condensed.otf");
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
 }
 
 @font-face {
-	font-family: "Circular";
-	src: url("../fonts/circular-light.woff2");
-	font-weight: 200;
+	font-family: "New Spirit";
+	src: url("../fonts/New-Spirit-Medium.otf");
+	font-weight: 500;
 	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "New Spirit";
+	src: url("../fonts/New-Spirit-Bold.otf");
+	font-weight: 700;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Satoshi";
+	src: url("../fonts/Satoshi-Variable.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "Satoshi";
+	src: url("../fonts/Satoshi-VariableItalic.woff2") format("woff2");
+	font-weight: 100 900;
+	font-style: italic;
 	font-display: swap;
 }
 

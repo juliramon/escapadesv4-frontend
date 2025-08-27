@@ -8,7 +8,6 @@ import LocalBusinessRichSnippet from "../components/richsnippets/LocalBusinessRi
 import { getPicturesBySeason } from "../utils/helpers";
 
 const Homepage = (props) => {
-
 	const firstSlidePictures = {
 		spring: {
 			picture_webp: "/home-cover-primavera.webp",
@@ -55,6 +54,7 @@ const Homepage = (props) => {
 				<NavigationBar />
 				<HomeHeader slideImage={slideImage} />
 				<HomePageResults
+					featuredCategories={props.featuredCategories}
 					mostRecentPlaces={props.mostRecentPlaces}
 					featuredActivities={props.featuredActivities}
 					featuredRegions={props.featuredRegions}
@@ -72,6 +72,7 @@ export async function getStaticProps() {
 	const featuredActivities = await service.getFeaturedActivities();
 	const featuredRegions = await service.getFeaturedRegions();
 	const mostRecentStories = await service.getMostRecentStories();
+	const featuredCategories = await service.getFeaturedCategories();
 	const totals = await service.getSiteStats();
 
 	return {
@@ -80,6 +81,7 @@ export async function getStaticProps() {
 			featuredActivities,
 			mostRecentPlaces,
 			mostRecentStories,
+			featuredCategories,
 			totals,
 		},
 		revalidate: 120,

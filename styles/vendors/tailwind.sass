@@ -16,36 +16,44 @@
         @apply font-headings font-normal text-balance
 
     h3, h4, h5
-        @apply font-medium font-headings text-balance
+        @apply font-medium font-body text-balance
 
     h1, .h1
-        font-size: clamp(28px, 3vw, 40px)
-        line-height: clamp(34px, 3.5vw, 44px)
+        font-size: clamp(28px, 5vw, 72px)
+        line-height: clamp(34px, 5vw, 80px)
 
         &.font-display
-            font-size: clamp(28px, 3vw, 44px)
-            line-height: clamp(34px, 3.5vw, 48px)
+            font-size: clamp(28px, 5vw, 44px)
+            line-height: clamp(34px, 5vw, 48px)
 
     h2, .h2
-        font-size: clamp(28px, 3vw, 40px)
-        line-height: clamp(34px, 3.5vw, 44px)
+        font-size: clamp(28px, 3vw, 52px)
+        line-height: clamp(34px, 3.5vw, 56px)
         @apply mb-2
+
+    .subtitle
+        font-size: clamp(24px, 2vw, 32px)
+        line-height: clamp(28px, 2vw, 36px)
 
     h3, .h3
         @apply text-base leading-normal
+
         @screen md
             @apply text-lg font-medium leading-snug
 
         &.font-display
             font-size: clamp(22px, 3vw, 28px)
             line-height: clamp(24px, 3.5vw, 30px)
-            @apply font-light
+            @apply font-normal
 
     h3.text-block
         line-height: clamp(20px, 2vw, 24px)
 
     h4
         @apply font-medium
+
+    .condensed
+        @apply font-condensed
 
     a
         @apply cursor-pointer no-underline
@@ -56,7 +64,6 @@
     p, .text-block
         font-size: clamp(16px, 2vw, 18px)
         line-height: clamp(24px, 2vw, 27px)
-        text-wrap: balance
         @apply mb-5
 
     ol, ul, menu
@@ -65,7 +72,7 @@
     .text-block
         font-size: clamp(14px, 2vw, 18px)
         line-height: clamp(21px, 2vw, 27px)
-        @apply font-light
+        @apply font-normal
 
         *:not(h1, h2, h3, h4)
             font-size: clamp(14px, 2vw, 18px)
@@ -75,7 +82,7 @@
                 @apply mb-0
 
         *:not(strong)
-            @apply font-light
+            @apply font-normal
 
     .text-block--xl
         @extend .text-block
@@ -106,9 +113,6 @@
         background-size: cover
         animation: horizontalSlide 40s linear 1s infinite
         margin-top: -70px
-
-    .container
-        @apply w-full max-w-full lg:max-w-5xl xl:max-w-[80rem] 2xl:max-w-[90rem] #{!important}
 
     @keyframes horizontalSlide
         0%

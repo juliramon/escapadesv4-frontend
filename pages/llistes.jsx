@@ -73,7 +73,7 @@ const ListsList = ({ user, totalItems, lists, numPages }) => {
 				<main>
 					{/* Main column - Listings */}
 					<div className="lg:mt-6">
-						<div className="px-5">
+						<div className="container">
 							<ul className="breadcrumb max-w-5xl">
 								<li className="breadcrumb__item">
 									<a
@@ -99,7 +99,7 @@ const ListsList = ({ user, totalItems, lists, numPages }) => {
 
 					{/* Section lists' list */}
 					<section className="py-8 md:pb-12 lg:pb-20">
-						<div className="px-5">
+						<div className="container">
 							<div className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 gap-x-5">
 								{state.hasLists
 									? state.lists.map((el, idx) => (

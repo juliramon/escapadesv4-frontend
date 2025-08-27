@@ -101,7 +101,7 @@ const CategoryTrip = ({
 				<main>
 					{/* Section cover */}
 					<section className="flex items-stretch pt-6">
-						<div className="px-5 w-full">
+						<div className="container">
 							<div className="overflow-hidden rounded-2xl">
 								<div className="flex flex-wrap items-stretch overflow-hidden">
 									<div className="w-full lg:w-1/2 relative z-10">
@@ -216,7 +216,7 @@ const CategoryTrip = ({
 						className="py-8 md:py-12 lg:py-24 tripCategory__intro"
 						id="viatge"
 					>
-						<div className="px-5">
+						<div className="container">
 							<div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-5">
 								<div className="col-span-4 md:col-span-6 lg:col-start-4">
 									<div className="flex items-center justify-center gap-x-2.5 mb-5">
@@ -269,7 +269,7 @@ const CategoryTrip = ({
 
 					{/* Section images carousel */}
 					<section className="border-y border-gray-100">
-						<div className="px-5 py-10">
+						<div className="container py-10">
 							<Splide
 								options={{
 									type: "slide",
@@ -412,7 +412,7 @@ const CategoryTrip = ({
 						className="py-8 md:py-12 lg:pt-24 lg:pb-20 tripCategory__info"
 						id="informacio"
 					>
-						<div className="px-5">
+						<div className="container">
 							<div className="grid grid-cols-4 md:grid-cols-6 lg:grid-cols-12 gap-5">
 								<div className="col-span-4 md:col-span-6 lg:col-span-5 lg:col-start-3 lg:pr-12">
 									<div
@@ -546,7 +546,7 @@ const CategoryTrip = ({
 
 					{/* Section results list */}
 					<section className="py-10 md:py-16" id="publicacions">
-						<div className="px-5">
+						<div className="container">
 							<h2>Publicacions del viatge</h2>
 							{initialResults.length > 0 ? (
 								<>

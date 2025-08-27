@@ -130,7 +130,7 @@ const Contacte = ({ user }) => {
 					user={user}
 				/>
 				<section className="pt-6 pb-8 md:pb-12 lg:pb-20">
-					<div className="px-5">
+					<div className="container">
 						<div className="box flex flex-wrap">
 							<div className="w-full lg:w-2/3 pb-12 lg:py-16 h-full lg:pr-8">
 								<div className="max-w-xl mx-auto">
@@ -154,13 +154,18 @@ const Contacte = ({ user }) => {
 										<h1 className="mt-0 mb-3">Contacte</h1>
 										<p className="mb-5 text-block">
 											Vols que col·laborem per donar a
-											conèixer el teu allotjament o activitat?
-											Tens dubtes sobre com podem donar a
-											conèixer la teva marca? No saps on
-											escapar-te? Contacta'ns! 👇{" "}
+											conèixer el teu allotjament o
+											activitat? Tens dubtes sobre com
+											podem donar a conèixer la teva
+											marca? No saps on escapar-te?
+											Contacta'ns! 👇{" "}
 										</p>
 										{alertContainer}
-										<form name="" id="" className="mt-4 form">
+										<form
+											name=""
+											id=""
+											className="mt-4 form"
+										>
 											<fieldset className="form__group">
 												<label
 													htmlFor="name"
