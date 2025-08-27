@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const FeaturedStoryBox = ({ story, index, priority }) => {
+const FeaturedStoryBox = ({ story, index }) => {
 	const createdDate = new Date(story.createdAt).toLocaleDateString("ca-es", {
 		year: "numeric",
 		month: "short",
@@ -9,7 +9,10 @@ const FeaturedStoryBox = ({ story, index, priority }) => {
 
 	const coverPath = story.cover.substring(0, 51);
 	const imageId = story.cover.substring(63);
-	const coverImg = `${coverPath}w_2000,h_800,c_fill/${imageId}`;
+	const coverImg = `${coverPath}w_1729,h_973,c_fill/${imageId}`;
+	const coverImageIdWebp = story.cover?.substring(63).replace("jpg", "webp");
+	const coverImgWebp = `${coverPath}f_webp/w_1729,h_973,c_fill/${coverImageIdWebp}`;
+	const coverImgWebpMobile = `${coverPath}f_webp/w_450,h_337,c_fill/${coverImageIdWebp}`;
 
 	const avatarPath = story.owner.avatar.substring(0, 51);
 	const ownerImageId = story.owner.avatar.substring(63);
@@ -19,13 +22,27 @@ const FeaturedStoryBox = ({ story, index, priority }) => {
 		<Link href={"histories/" + story.slug} key={index}>
 			<a className="relative">
 				<picture className="block aspect-[4/3] md:aspect-[16/9] relative rounded-2xl overflow-hidden">
+					{coverImgWebpMobile ? (
+						<source
+							srcSet={coverImgWebpMobile}
+							media="(max-width: 767px)"
+							type="image/webp"
+						/>
+					) : null}
+					{coverImgWebp ? (
+						<source
+							srcSet={coverImgWebp}
+							media="(min-width: 768px)"
+							type="image/webp"
+						/>
+					) : null}
 					<img
 						src={coverImg}
 						alt={story.title}
 						className={"w-full h-full object-cover"}
-						width={2000}
-						height={800}
-						loading={priority ? priority : "lazy"}
+						width={450}
+						height={337}
+						loading={index === 0 ? "eager" : "lazy"}
 					/>
 				</picture>
 
@@ -76,7 +93,7 @@ const FeaturedStoryBox = ({ story, index, priority }) => {
 									width={32}
 									height={32}
 									className={"w-full h-full object-cover"}
-									loading={priority ? priority : "lazy"}
+									loading={index === 0 ? "eager" : "lazy"}
 								/>
 							</picture>
 						</div>
