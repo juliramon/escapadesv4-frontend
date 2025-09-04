@@ -65,8 +65,16 @@ const StoryListing = ({ storyDetails }) => {
 									key={idx}
 									className="block rounded-2xl overflow-hidden aspect-1 relative"
 								>
-									<img src={image} alt={`${storyDetails.title} - ${idx + 1
-										}`} className={'w-full h-full object-cover'} width={400} height={300} loading="lazy" />
+									<img
+										src={image}
+										alt={`${storyDetails.title} - ${
+											idx + 1
+										}`}
+										className={"w-full h-full object-cover"}
+										width={400}
+										height={300}
+										loading="lazy"
+									/>
 								</picture>
 							</div>
 						);
@@ -104,8 +112,16 @@ const StoryListing = ({ storyDetails }) => {
 
 	const coverPath = storyDetails.cover.substring(0, 51);
 	const imageId = storyDetails.cover.substring(63);
-	const coverImg = `${coverPath}w_1392,h_783,c_fill/${imageId}`;
-	const coverImgMob = `${coverPath}w_400,h_300,c_fill/${imageId}`;
+
+	const coverImg = `${coverPath}w_1729,h_973,c_fill/${imageId}`;
+	const coverImgMob = `${coverPath}w_450,h_337,c_fill/${imageId}`;
+	const coverImageIdWebp = storyDetails.cover
+		?.substring(63)
+		.replace("jpg", "webp");
+	const coverImgWebp = `${coverPath}f_webp/w_1729,h_973,c_fill/${coverImageIdWebp}`;
+	const coverImgWebpMobile = `${coverPath}f_webp/w_450,h_337,c_fill/${coverImageIdWebp}`;
+
+	const ogImg = `${coverPath}w_1200,h_630,c_fill/${imageId}`;
 
 	const coverAuthorPath = storyDetails.owner.avatar.substring(0, 51);
 	const imageAuthorId = storyDetails.owner.avatar.substring(63);
@@ -118,9 +134,9 @@ const StoryListing = ({ storyDetails }) => {
 				title={storyDetails.metaTitle}
 				description={storyDetails.metaDescription}
 				url={`https://escapadesenparella.cat/histories/${storyDetails.slug}`}
-				image={storyDetails.cover}
+				image={ogImg}
 				canonical={`https://escapadesenparella.cat/histories/${storyDetails.slug}`}
-				preconnect={'https://res.cloudinary.com/'}
+				preconnect={"https://res.cloudinary.com/"}
 			/>
 			{/* Rich snippets */}
 			<BreadcrumbRichSnippet
@@ -134,7 +150,7 @@ const StoryListing = ({ storyDetails }) => {
 			<BlogPostingRichSnippet
 				headline={storyDetails.title}
 				summary={storyDetails.subtitle}
-				image={storyDetails.cover}
+				image={ogImg}
 				author={storyDetails.owner.fullName}
 				publicationDate={storyDetails.createdAt}
 				modificationDate={storyDetails.updatedAt}
@@ -172,7 +188,9 @@ const StoryListing = ({ storyDetails }) => {
 							<div className="relative mt-4 md:mt-7">
 								<div className="container">
 									<div className="md:max-w-xl lg:max-w-5xl lg:mx-auto">
-										<h1 className="font-display max-w-2xl my-0">{storyDetails.title}</h1>
+										<h1 className="font-display max-w-2xl my-0">
+											{storyDetails.title}
+										</h1>
 										<p className="lg:text-xl font-light mt-2.5 mb-3 md:mt-3 md:mb-4 max-w-2xl">
 											{storyDetails.subtitle}
 										</p>
@@ -181,13 +199,26 @@ const StoryListing = ({ storyDetails }) => {
 											<div className="flex flex-wrap items-center">
 												<div className="rounded-full overflow-hidden w-8 h-8 mr-2.5">
 													<picture>
-														<img src={coverAuthorImg} alt={storyDetails.owner.fullName} className={'w-full h-full object-cover'} width={32} height={32} loading="eager" fetchpriority="high" />
+														<img
+															src={coverAuthorImg}
+															alt={
+																storyDetails
+																	.owner
+																	.fullName
+															}
+															className={
+																"w-full h-full object-cover"
+															}
+															width={32}
+															height={32}
+															loading="eager"
+															fetchpriority="high"
+														/>
 													</picture>
 												</div>
 												<span className="text-sm">
 													{
-														storyDetails
-															.owner
+														storyDetails.owner
 															.fullName
 													}
 												</span>
@@ -208,7 +239,16 @@ const StoryListing = ({ storyDetails }) => {
 													</time>
 												</span>
 											</div>
-											<ShareBarModal picture={coverImgMob} title={storyDetails.title} rating={null} slug={`https://escapadesenparella.cat/histories/${storyDetails.slug}`} locality={null} colorClass={'text-primary-500 text-sm'} />
+											<ShareBarModal
+												picture={coverImgMob}
+												title={storyDetails.title}
+												rating={null}
+												slug={`https://escapadesenparella.cat/histories/${storyDetails.slug}`}
+												locality={null}
+												colorClass={
+													"text-primary-500 text-sm"
+												}
+											/>
 										</div>
 									</div>
 								</div>
@@ -219,9 +259,27 @@ const StoryListing = ({ storyDetails }) => {
 						<div className="relative after:absolute after:top-0 after:inset-x-0 after:bg-tertiary-50 after:h-20">
 							<div className="container relative z-10">
 								<picture className="block aspect-w-4 aspect-h-3 lg:aspect-w-16 lg:aspect-h-9 h-full rounded-2xl overflow-hidden">
-									<source srcSet={coverImgMob} media="(max-width: 768px)" />
-									<source srcSet={coverImg} media="(min-width: 768px)" />
-									<img src={coverImg} alt={storyDetails.title} className={'w-full h-full object-cover'} width={400} height={300} loading="eager" fetchpriority="high" />
+									<source
+										srcSet={coverImgWebpMobile}
+										media="(max-width: 768px)"
+									/>
+									<source
+										srcSet={coverImgWebp}
+										media="(min-width: 768px)"
+									/>
+									<source
+										srcSet={coverImg}
+										media="(min-width: 768px)"
+									/>
+									<img
+										src={coverImg}
+										alt={storyDetails.title}
+										className={"w-full h-full object-cover"}
+										width={400}
+										height={300}
+										loading="eager"
+										fetchpriority="high"
+									/>
 								</picture>
 							</div>
 						</div>
@@ -249,7 +307,8 @@ const StoryListing = ({ storyDetails }) => {
 														</time>
 													</span>
 													<figcaption className="text-sm font-light block">
-														Foto d' <u>Andrea Prat</u> i{" "}
+														Foto d'{" "}
+														<u>Andrea Prat</u> i{" "}
 														<u>Juli Ramon</u> per
 														Escapadesenparella.cat
 													</figcaption>
@@ -267,10 +326,14 @@ const StoryListing = ({ storyDetails }) => {
 													<FollowInstagramBox />
 												</div>
 												<div className="p-7 bg-white rounded-2xl border border-primary-50 mt-7">
-													<span className="inline-block text-xs">Anunci</span>
-													<AdBanner data-ad-slot="4940975412"
+													<span className="inline-block text-xs">
+														Anunci
+													</span>
+													<AdBanner
+														data-ad-slot="4940975412"
 														data-ad-format="auto"
-														data-full-width-responsive="true" />
+														data-full-width-responsive="true"
+													/>
 												</div>
 											</div>
 										</aside>
@@ -283,13 +346,14 @@ const StoryListing = ({ storyDetails }) => {
 				<section className="py-8 md:py-12">
 					<div className="container">
 						<div className="border-t border-primary-50 pt-8 md:pt-12">
-							<AdBanner data-ad-slot="9222117584"
+							<AdBanner
+								data-ad-slot="9222117584"
 								data-ad-format="autorelaxed"
 							/>
 						</div>
 					</div>
 				</section>
-			</div >
+			</div>
 			<Footer
 				logo_url={
 					"https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
