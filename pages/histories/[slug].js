@@ -143,11 +143,11 @@ const StoryListing = ({ storyDetails }) => {
 				<NavigationBar />
 				<main>
 					<article>
-						<section className="pt-8 md:pt-10 lg:pt-12 pb-6 md:pb-8 bg-tertiary-50 ">
+						<section className="pt-8 md:pt-10 lg:pt-12 pb-6 md:pb-8">
 							{/* Breadcrumb + article header */}
 							<div className="w-full">
 								<div className="container">
-									<ul className="breadcrumb max-w-5xl mx-auto">
+									<ul className="breadcrumb max-w-3xl mx-auto">
 										<li className="breadcrumb__item">
 											<a
 												href="/"
@@ -171,17 +171,17 @@ const StoryListing = ({ storyDetails }) => {
 							{/* Article heading + subtitle + meta info */}
 							<div className="relative mt-4 md:mt-7">
 								<div className="container">
-									<div className="md:max-w-xl lg:max-w-5xl lg:mx-auto">
-										<h1 className="font-display max-w-2xl my-0">
+									<div className="md:max-w-xl lg:max-w-3xl lg:mx-auto">
+										<h1 className="h2 max-w-3xl my-0">
 											{storyDetails.title}
 										</h1>
-										<p className="lg:text-xl font-light mt-2.5 mb-3 md:mt-3 md:mb-4 max-w-2xl">
+										<p className="mt-4 !mb-0 text-block--xl leading-normal max-w-[55ch]">
 											{storyDetails.subtitle}
 										</p>
 										{/* Informació de l'autor */}
-										<div className="flex flex-wrap items-center gap-4">
-											<div className="flex flex-wrap items-center">
-												<div className="rounded-full overflow-hidden w-8 h-8 mr-2.5">
+										<div className="flex flex-wrap items-center gap-4 mt-4">
+											<div className="flex flex-wrap items-center gap-x-1.5">
+												<div className="rounded-full overflow-hidden w-8 h-8 mr-1.5">
 													<picture>
 														<img
 															src={coverAuthorImg}
@@ -200,16 +200,16 @@ const StoryListing = ({ storyDetails }) => {
 														/>
 													</picture>
 												</div>
-												<span className="text-sm">
+												<span className="text-15 text-grey-400 inline-block">
 													{
 														storyDetails.owner
 															.fullName
 													}
 												</span>
-												<span className="mx-2 text-sm ">
+												<span className="text-15 text-grey-400 inline-block ">
 													–
 												</span>
-												<span className="text-sm ">
+												<span className="text-15 text-grey-400 inline-block ">
 													<time
 														dateTime={formatDateTimeToISODate(
 															storyDetails.createdAt
@@ -230,7 +230,7 @@ const StoryListing = ({ storyDetails }) => {
 												slug={`https://escapadesenparella.cat/histories/${storyDetails.slug}`}
 												locality={null}
 												colorClass={
-													"text-primary-500 text-sm"
+													"text-15 text-grey-400 inline-block"
 												}
 											/>
 										</div>
@@ -240,9 +240,9 @@ const StoryListing = ({ storyDetails }) => {
 						</section>
 
 						{/* Article cover */}
-						<div className="relative after:absolute after:top-0 after:inset-x-0 after:bg-tertiary-50 after:h-20">
+						<div className="relative">
 							<div className="container relative z-10">
-								<picture className="block aspect-w-4 aspect-h-3 lg:aspect-w-16 lg:aspect-h-9 h-full rounded-2xl overflow-hidden">
+								<picture className="block aspect-[4/3] md:aspect-[16/9] relative rounded-2xl overflow-hidden max-w-[1200px] mx-auto">
 									<source
 										srcSet={coverImgWebpMobile}
 										media="(max-width: 768px)"
@@ -269,7 +269,7 @@ const StoryListing = ({ storyDetails }) => {
 						</div>
 
 						{/* Article description */}
-						<section className="pt-7">
+						<section className="py-7 md:pb-12">
 							<div className="container">
 								<div className="max-w-5xl mx-auto">
 									<div className="grid grid-cols-1 md:grid-cols-12 gap-y-8 gap-x-12">
@@ -301,11 +301,19 @@ const StoryListing = ({ storyDetails }) => {
 											<div className="listing-description w-full mt-6 md:mt-8">
 												{slicedDescription}
 											</div>
+											<div className="pt-8 md:pt-12">
+												<div className="border-t border-primary-50">
+													<AdBanner
+														data-ad-slot="9222117584"
+														data-ad-format="autorelaxed"
+													/>
+												</div>
+											</div>
 										</div>
 
 										{/* Aside */}
 										<aside className="md:col-span-4">
-											<div className="relative xl:sticky xl:top-24 mt-1.5">
+											<div className="relative md:sticky md:top-24 mt-1.5">
 												<div className="p-7 bg-white rounded-2xl border border-primary-50">
 													<FollowInstagramBox />
 												</div>
@@ -327,16 +335,6 @@ const StoryListing = ({ storyDetails }) => {
 						</section>
 					</article>
 				</main>
-				<section className="py-8 md:py-12">
-					<div className="container">
-						<div className="border-t border-primary-50 pt-8 md:pt-12">
-							<AdBanner
-								data-ad-slot="9222117584"
-								data-ad-format="autorelaxed"
-							/>
-						</div>
-					</div>
-				</section>
 			</div>
 			<Footer
 				logo_url={

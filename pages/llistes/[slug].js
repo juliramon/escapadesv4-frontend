@@ -51,12 +51,20 @@ const ListView = ({ listDetails }) => {
 
 	const coverPath = listDetails.cover.substring(0, 51);
 	const imageId = listDetails.cover.substring(63);
-	const coverImg = `${coverPath}w_1392,h_783,c_fill/${imageId}`;
-	const coverImgMob = `${coverPath}w_400,h_300,c_fill/${imageId}`;
+	const coverImg = `${coverPath}w_1729,h_973,c_fill/${imageId}`;
+	const coverImgMob = `${coverPath}w_450,h_337,c_fill/${imageId}`;
+	const coverImageIdWebp = listDetails.cover
+		?.substring(63)
+		.replace("jpg", "webp");
+	const coverImgWebp = `${coverPath}f_webp/w_1729,h_973,c_fill/${coverImageIdWebp}`;
+	const coverImgWebpMobile = `${coverPath}f_webp/w_450,h_337,c_fill/${coverImageIdWebp}`;
+
+	const ogImg = `${coverPath}w_1200,h_630,c_fill/${imageId}`;
 
 	const coverAuthorPath = listDetails.owner.avatar.substring(0, 51);
 	const imageAuthorId = listDetails.owner.avatar.substring(63);
 	const coverAuthorImg = `${coverAuthorPath}w_32,h_32,c_fill/${imageAuthorId}`;
+
 	return (
 		<>
 			{/* Browser metas  */}
@@ -64,7 +72,7 @@ const ListView = ({ listDetails }) => {
 				title={listDetails.metaTitle}
 				description={listDetails.metaDescription}
 				url={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
-				image={listDetails.cover}
+				image={ogImg}
 				canonical={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
 			/>
 			{/* Rich snippets */}
@@ -79,7 +87,7 @@ const ListView = ({ listDetails }) => {
 			<BlogPostingRichSnippet
 				headline={listDetails.title}
 				summary={listDetails.subtitle}
-				image={listDetails.cover}
+				image={ogImg}
 				author={listDetails.owner.fullName}
 				publicationDate={listDetails.createdAt}
 				modificationDate={listDetails.updatedAt}
@@ -88,11 +96,11 @@ const ListView = ({ listDetails }) => {
 				<NavigationBar />
 				<main>
 					<article>
-						<section className="pt-8 md:pt-10 lg:pt-12 pb-6 md:pb-8 bg-tertiary-50 ">
+						<section className="pt-8 md:pt-10 lg:pt-12 pb-6 md:pb-8">
 							{/* Breadcrumb + article header */}
 							<div className="w-full">
 								<div className="container">
-									<ul className="breadcrumb max-w-5xl mx-auto">
+									<ul className="breadcrumb max-w-3xl mx-auto">
 										<li className="breadcrumb__item">
 											<a
 												href="/"
@@ -116,30 +124,42 @@ const ListView = ({ listDetails }) => {
 							{/* Article heading + subtitle + meta info */}
 							<div className="relative mt-4 md:mt-7">
 								<div className="container">
-									<div className="md:max-w-xl lg:max-w-5xl lg:mx-auto">
-										<h1 className="font-display max-w-2xl my-0">{listDetails.title}</h1>
-										<p className="lg:text-xl font-light mt-2.5 mb-3 md:mt-3 md:mb-4 max-w-2xl">
+									<div className="md:max-w-xl lg:max-w-3xl lg:mx-auto">
+										<h1 className="h2 max-w-3xl my-0">
+											{listDetails.title}
+										</h1>
+										<p className="mt-4 !mb-0 text-block--xl leading-normal max-w-[55ch]">
 											{listDetails.subtitle}
 										</p>
 										{/* Informació de l'autor */}
-										<div className="flex flex-wrap items-center gap-4">
-											<div className="flex flex-wrap items-center">
+										<div className="flex flex-wrap items-center gap-4 mt-4">
+											<div className="flex flex-wrap items-center gap-x-1.5">
 												<div className="rounded-full overflow-hidden w-8 h-8 mr-2.5">
 													<picture>
-														<img src={coverAuthorImg} alt={listDetails.owner.fullName} className={'w-full h-full object-cover'} width={32} height={32} loading="eager" fetchpriority="high" />
+														<img
+															src={coverAuthorImg}
+															alt={
+																listDetails
+																	.owner
+																	.fullName
+															}
+															className={
+																"w-full h-full object-cover"
+															}
+															width={32}
+															height={32}
+															loading="eager"
+															fetchpriority="high"
+														/>
 													</picture>
 												</div>
-												<span className="text-sm">
-													{
-														listDetails
-															.owner
-															.fullName
-													}
+												<span className="text-15 text-grey-400 inline-block">
+													{listDetails.owner.fullName}
 												</span>
-												<span className="mx-2 text-sm ">
+												<span className="text-15 text-grey-400 inline-block ">
 													–
 												</span>
-												<span className="text-sm ">
+												<span className="text-15 text-grey-400 inline-block ">
 													<time
 														dateTime={formatDateTimeToISODate(
 															listDetails.createdAt
@@ -153,7 +173,16 @@ const ListView = ({ listDetails }) => {
 													</time>
 												</span>
 											</div>
-											<ShareBarModal picture={coverImg} title={listDetails.title} rating={null} slug={`https://escapadesenparella.cat/llistes/${listDetails.slug}`} locality={null} colorClass={'text-primary-500 text-sm'} />
+											<ShareBarModal
+												picture={coverImg}
+												title={listDetails.title}
+												rating={null}
+												slug={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
+												locality={null}
+												colorClass={
+													"text-15 text-grey-400 inline-block"
+												}
+											/>
 										</div>
 									</div>
 								</div>
@@ -161,18 +190,40 @@ const ListView = ({ listDetails }) => {
 						</section>
 
 						{/* Article cover */}
-						<div className="relative after:absolute after:top-0 after:inset-x-0 after:bg-tertiary-50 after:h-20">
+						<div className="relative">
 							<div className="container relative z-10">
-								<picture className="block aspect-w-4 aspect-h-3 lg:aspect-w-16 lg:aspect-h-9 h-full rounded-2xl overflow-hidden">
-									<source srcSet={coverImgMob} media="(max-width: 768px)" />
-									<source srcSet={coverImg} media="(min-width: 768px)" />
-									<img src={coverImg} alt={listDetails.title} className={'w-full h-full object-cover'} width={400} height={300} loading="eager" fetchpriority="high" />
+								<picture className="block aspect-[4/3] md:aspect-[16/9] relative rounded-2xl overflow-hidden max-w-[1200px] mx-auto">
+									<source
+										srcSet={coverImgWebpMobile}
+										media="(max-width: 768px)"
+									/>
+									<source
+										srcSet={coverImgWebp}
+										media="(min-width: 768px)"
+									/>
+									<source
+										srcSet={coverImgMob}
+										media="(max-width: 768px)"
+									/>
+									<source
+										srcSet={coverImg}
+										media="(min-width: 768px)"
+									/>
+									<img
+										src={coverImg}
+										alt={listDetails.title}
+										className={"w-full h-full object-cover"}
+										width={400}
+										height={300}
+										loading="eager"
+										fetchpriority="high"
+									/>
 								</picture>
 							</div>
 						</div>
 
 						{/* Article description */}
-						<section className="pt-6">
+						<section className="py-7 md:pb-12">
 							<div className="container">
 								<div className="max-w-5xl mx-auto">
 									<div className="grid grid-cols-1 md:grid-cols-12 gap-y-8 gap-x-12">
@@ -194,27 +245,44 @@ const ListView = ({ listDetails }) => {
 														</time>
 													</span>
 													<figcaption className="text-sm font-light block">
-														Foto d' <u>Andrea Prat</u> i{" "}
+														Foto d'{" "}
+														<u>Andrea Prat</u> i{" "}
 														<u>Juli Ramon</u> per
 														Escapadesenparella.cat
 													</figcaption>
 												</div>
 											</div>
-											<div className="list__description w-full mt-6 md:mt-8" dangerouslySetInnerHTML={{ __html: listDetails.description }}>
+											<div
+												className="list__description w-full mt-6 md:mt-8"
+												dangerouslySetInnerHTML={{
+													__html: listDetails.description,
+												}}
+											></div>
+											<div className="pt-8 md:pt-12">
+												<div className="border-t border-primary-50">
+													<AdBanner
+														data-ad-slot="9222117584"
+														data-ad-format="autorelaxed"
+													/>
+												</div>
 											</div>
 										</div>
 
 										{/* Aside */}
 										<aside className="md:col-span-4">
-											<div className="relative xl:sticky xl:top-24 mt-1.5">
+											<div className="relative md:sticky md:top-24 mt-1.5">
 												<div className="p-7 bg-white rounded-2xl border border-primary-50">
 													<FollowInstagramBox />
 												</div>
 												<div className="p-7 bg-white rounded-2xl border border-primary-50 mt-7">
-													<span className="inline-block text-xs">Anunci</span>
-													<AdBanner data-ad-slot="4940975412"
+													<span className="inline-block text-xs">
+														Anunci
+													</span>
+													<AdBanner
+														data-ad-slot="4940975412"
 														data-ad-format="auto"
-														data-full-width-responsive="true" />
+														data-full-width-responsive="true"
+													/>
 												</div>
 											</div>
 										</aside>
@@ -224,15 +292,6 @@ const ListView = ({ listDetails }) => {
 						</section>
 					</article>
 				</main>
-				<section className="py-8 md:py-12">
-					<div className="container">
-						<div className="border-t border-primary-50 pt-8 md:pt-12">
-							<AdBanner data-ad-slot="9222117584"
-								data-ad-format="autorelaxed"
-							/>
-						</div>
-					</div>
-				</section>
 
 				<SignUpModal
 					visibility={modalVisibility}
