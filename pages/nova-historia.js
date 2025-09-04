@@ -6,6 +6,7 @@ import UserContext from "../contexts/UserContext";
 import ContentService from "../services/contentService";
 import { useEditor, EditorContent } from "@tiptap/react";
 import EditorNavbar from "../components/editor/EditorNavbar";
+import AdBannerShortcodeHelper from "../components/editor/AdBannerShortcodeHelper";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Placeholder from "@tiptap/extension-placeholder";
@@ -413,6 +414,32 @@ const StoryForm = () => {
 												</span>
 											</div>
 										) : null}
+
+										{/* Helper para insertar banners publicitarios */}
+										<div className="mb-4 p-4 bg-gray-50 rounded-lg border">
+											<h4 className="text-sm font-medium text-gray-900 mb-2">
+												Atajos disponibles:
+											</h4>
+											<div className="flex flex-wrap gap-2">
+												<AdBannerShortcodeHelper
+													onInsertShortcode={(
+														shortcode
+													) => {
+														editor.commands.insertContent(
+															shortcode
+														);
+													}}
+												/>
+												<span className="text-sm text-gray-600 flex items-center">
+													También puedes usar{" "}
+													<code className="mx-1 px-2 py-1 bg-white rounded text-xs">
+														[ad_banner]
+													</code>{" "}
+													directamente en el texto
+												</span>
+											</div>
+										</div>
+
 										<EditorNavbar editor={editor} />
 										<EditorContent
 											editor={editor}

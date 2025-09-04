@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import NavigationBar from "../../components/global/NavigationBar";
 import ContentService from "../../services/contentService";
 import UserContext from "../../contexts/UserContext";
-import parse from "html-react-parser";
 import Footer from "../../components/global/Footer";
 import FollowInstagramBox from "../../components/global/FollowInstagramBox";
 import GlobalMetas from "../../components/head/GlobalMetas";
@@ -13,6 +12,7 @@ import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichS
 import BlogPostingRichSnippet from "../../components/richsnippets/BlogPostingRichSnippet";
 import ShareBarModal from "../../components/social/ShareBarModal";
 import AdBanner from "../../components/ads/AdBanner";
+import ContentParser from "../../utils/ContentParser";
 
 const StoryListing = ({ storyDetails }) => {
 	const { user } = useContext(UserContext);
@@ -31,11 +31,10 @@ const StoryListing = ({ storyDetails }) => {
 		}
 	}, [router]);
 
-	let parsedDescription;
 	let slicedDescription = [];
 
 	const welcomeText = (
-		<div className="mb-5">
+		<div className="mb-5" key="welcome-text">
 			<h2>
 				{storyDetails.title}: Benvinguts a l'escapada de la setmana, ens
 				hi acompanyeu?
@@ -51,6 +50,7 @@ const StoryListing = ({ storyDetails }) => {
 				options={{
 					infinite: true,
 				}}
+				key={`images-grid-${start}-${end}`}
 			>
 				<div className="flex flex-wrap -mx-1 cursor-pointer">
 					{images.map((image, idx) => {
@@ -85,29 +85,13 @@ const StoryListing = ({ storyDetails }) => {
 	};
 
 	if (storyDetails.description) {
-		parsedDescription = parse(storyDetails.description);
-		parsedDescription.map((el) => slicedDescription.push(el));
-		if (slicedDescription.length > 1) {
-			slicedDescription.splice(1, 0, welcomeText);
-			slicedDescription.forEach((el, idx) => {
-				if (
-					typeof el.props.children == "string" &&
-					el.props.children.includes("post_images")
-				) {
-					const str = el.props.children;
-
-					const found = str.replace(/^\D+/g, "");
-					const foundArr = found.slice(0, -2).split(",");
-					const startingIndex = foundArr[0];
-					const endIndex = foundArr[1];
-
-					slicedDescription[idx] = buildImagesGrid(
-						startingIndex,
-						endIndex
-					);
-				}
-			});
-		}
+		// Usar el nuevo parser que soporta atajos de banners publicitarios
+		slicedDescription = ContentParser.parseStoryContent(
+			storyDetails.description,
+			storyDetails.images,
+			buildImagesGrid,
+			welcomeText
+		);
 	}
 
 	const coverPath = storyDetails.cover.substring(0, 51);
