@@ -164,12 +164,11 @@ const ListView = ({ listDetails }) => {
 														dateTime={formatDateTimeToISODate(
 															listDetails.createdAt
 														)}
+														className="underline underline-offset-2"
 													>
-														<u>
-															{formatDateTimeToISODate(
-																listDetails.createdAt
-															)}
-														</u>
+														{formatDateTimeToISODate(
+															listDetails.createdAt
+														)}
 													</time>
 												</span>
 											</div>
