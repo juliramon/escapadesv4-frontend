@@ -13,6 +13,7 @@ import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichS
 import { formatDateTimeToISODate } from "../../utils/helpers";
 import ShareBarModal from "../../components/social/ShareBarModal";
 import AdBanner from "../../components/ads/AdBanner";
+import ContentParser from "../../utils/ContentParser";
 
 const ListView = ({ listDetails }) => {
 	const { user } = useContext(UserContext);
@@ -251,12 +252,11 @@ const ListView = ({ listDetails }) => {
 													</figcaption>
 												</div>
 											</div>
-											<div
-												className="list__description w-full mt-6 md:mt-8"
-												dangerouslySetInnerHTML={{
-													__html: listDetails.description,
-												}}
-											></div>
+											<div className="list__description w-full mt-6 md:mt-8">
+												{ContentParser.parseContent(
+													listDetails.description
+												)}
+											</div>
 											<div className="pt-8 md:pt-12">
 												<div className="border-t border-primary-50 pt-8 md:pt-12">
 													<AdBanner

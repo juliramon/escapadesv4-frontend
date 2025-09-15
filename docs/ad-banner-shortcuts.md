@@ -1,6 +1,6 @@
-# Atajos de Banners Publicitarios para Historias
+# Atajos de Banners Publicitarios para Historias y Listas
 
-Esta funcionalidad permite a los usuarios insertar banners publicitarios dinámicamente en las descripciones de historias utilizando atajos especiales (shortcodes).
+Esta funcionalidad permite a los usuarios insertar banners publicitarios dinámicamente en las descripciones de historias y listas utilizando atajos especiales (shortcodes).
 
 ## Cómo usar los atajos
 
@@ -103,7 +103,7 @@ Inserta un banner publicitario con la configuración predeterminada.
 
 ## Integración en el editor
 
-En los formularios de creación y edición de historias, encontrarás:
+En los formularios de creación y edición de historias y listas, encontrarás:
 
 1. **Botón helper**: "Insertar Banner Publicitario" que abre un modal con opciones.
 2. **Interfaz visual**: Selección de slots, formatos y configuraciones.
@@ -119,8 +119,19 @@ En los formularios de creación y edición de historias, encontrarás:
 
 ## Archivos modificados
 
+### Componentes principales
+
 -   `utils/ContentParser.js` - Parser principal para procesar atajos
 -   `components/editor/AdBannerShortcodeHelper.jsx` - Helper visual para editores
+
+### Historias
+
 -   `pages/histories/[slug].js` - Visualización de historias
 -   `pages/nova-historia.js` - Formulario de nueva historia
--   `pages/histories/[slug]/editar.js` - Formulario de edición
+-   `pages/histories/[slug]/editar.js` - Formulario de edición de historias
+
+### Listas
+
+-   `pages/llistes/[slug].js` - Visualización de listas
+-   `pages/nova-llista.js` - Formulario de nueva lista
+-   `pages/llistes/[slug]/editar.js` - Formulario de edición de listas
