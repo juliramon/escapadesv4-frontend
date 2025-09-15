@@ -96,7 +96,7 @@ const ListView = ({ listDetails }) => {
 				<NavigationBar />
 				<main>
 					<article>
-						<section className="pt-8 md:pt-10 lg:pt-12 pb-6 md:pb-8">
+						<section className="pt-8 md:pt-10 lg:pt-12 pb-6 md:pb-8 lg:pb-10">
 							{/* Breadcrumb + article header */}
 							<div className="w-full">
 								<div className="container">
@@ -132,7 +132,7 @@ const ListView = ({ listDetails }) => {
 											{listDetails.subtitle}
 										</p>
 										{/* Informació de l'autor */}
-										<div className="flex flex-wrap items-center gap-4 mt-4">
+										<div className="flex flex-wrap items-center gap-4 mt-4 md:mt-6">
 											<div className="flex flex-wrap items-center gap-x-1.5">
 												<div className="rounded-full overflow-hidden w-8 h-8 mr-2.5">
 													<picture>
@@ -259,7 +259,7 @@ const ListView = ({ listDetails }) => {
 												}}
 											></div>
 											<div className="pt-8 md:pt-12">
-												<div className="border-t border-primary-50">
+												<div className="border-t border-primary-50 pt-8 md:pt-12">
 													<AdBanner
 														data-ad-slot="9222117584"
 														data-ad-format="autorelaxed"
