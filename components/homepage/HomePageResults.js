@@ -117,12 +117,41 @@ const HomePageResults = ({
 							per a escapades{" "}
 						</span>
 						{state.featuredCategories.map((el, idx) => {
+							const image = el.image;
+							const imagePath = image?.substring(0, 51);
+							const imageId = image?.substring(63);
+							const imageIdWebp = image
+								?.substring(63)
+								.replace("jpg", "webp");
+							const imageImgMobile = `${imagePath}w_32,h_32,c_fill/${imageId}`;
+							const imageImgWebpMobile = `${imagePath}f_webp/w_32,h_32,c_fill/${imageIdWebp}`;
+							const imageImgWebp = `${imagePath}f_webp/w_80,h_80,c_fill/${imageIdWebp}`;
+							const imageImg = `${imagePath}w_80,h_80,c_fill/${imageId}`;
+
 							return (
 								<Link href={`/${el.slug}`} key={idx}>
 									<a className="underline inline-flex items-center relative top-2 mb-3 md:top-4 md:mr-4">
 										<picture className="w-8 md:w-20 h-8 md:h-20 mr-2.5 md:mr-4 rounded-md md:rounded-2xl overflow-hidden inline-block rotate-[5deg]">
+											<source
+												srcSet={imageImgWebpMobile}
+												media="(max-width: 768px)"
+												type="image/webp"
+											/>
+											<source
+												srcSet={imageImgMobile}
+												media="(max-width: 768px)"
+											/>
+											<source
+												srcSet={imageImgWebp}
+												media="(min-width: 768px)"
+												type="image/webp"
+											/>
+											<source
+												srcSet={imageImg}
+												media="(min-width: 768px)"
+											/>
 											<img
-												src={el.image}
+												src={imageImgMobile}
 												alt={el.title}
 												width={32}
 												height={32}
