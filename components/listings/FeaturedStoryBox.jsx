@@ -43,6 +43,7 @@ const FeaturedStoryBox = ({ story, index }) => {
 						width={450}
 						height={337}
 						loading={index === 0 ? "eager" : "lazy"}
+						fetchPriority={index === 0 ? "high" : "auto"}
 					/>
 				</picture>
 
@@ -94,6 +95,9 @@ const FeaturedStoryBox = ({ story, index }) => {
 									height={32}
 									className={"w-full h-full object-cover"}
 									loading={index === 0 ? "eager" : "lazy"}
+									fetchPriority={
+										index === 0 ? "high" : "auto"
+									}
 								/>
 							</picture>
 						</div>
