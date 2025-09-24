@@ -6,16 +6,16 @@ module.exports = withTM({
 		GOOGLE_API_KEY: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
 		GOOGLE_ANALYTICS_TAG: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS,
 		STRIPE_API_KEY: process.env.NEXT_PUBLIC_STRIPE_API_KEY,
-		GOOGLE_ADS_CLIENT_ID: process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID
+		GOOGLE_ADS_CLIENT_ID: process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID,
 	},
 	images: {
 		remotePatterns: [
 			{
-				protocol: 'https',
-				hostname: 'res.cloudinary.com',
-				port: '',
-			}
-		]
+				protocol: "https",
+				hostname: "res.cloudinary.com",
+				port: "",
+			},
+		],
 	},
 	async redirects() {
 		return [
@@ -433,6 +433,11 @@ module.exports = withTM({
 			{
 				source: "/tag/pirineus/",
 				destination: "/escapades-catalunya/escapades-pirineus",
+				permanent: true,
+			},
+			{
+				source: "/llistes/que-fer-delta-ebre",
+				destination: "/llistes/que-fer-al-delta-de-lebre",
 				permanent: true,
 			},
 		];
