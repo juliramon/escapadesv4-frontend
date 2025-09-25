@@ -69,7 +69,7 @@ const StoriesList = ({ featuredStories, stories, totalItems, numPages }) => {
 				<main>
 					{/* Main column - Listings */}
 					<ListingHeader
-						title={`<span class="text-secondary-500">Històries</span> en parella`}
+						title={`Històries en parella`}
 						subtitle={`Les històries en parella de l'Andrea i en Juli. Aquí trobareu les nostres escapades viscudes de primera mà, històries per inspirar, descobrir llocs nous i fer-vos venir ganes d'una escapada en parella per recordar!`}
 						breadcrumbLevel1={"Històries en parella"}
 					/>

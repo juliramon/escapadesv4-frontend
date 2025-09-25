@@ -67,7 +67,7 @@ const ListsList = ({ user, totalItems, lists, numPages }) => {
 				<main>
 					{/* Main column - Listings */}
 					<ListingHeader
-						title={`<span class="text-secondary-500">Llistes</span> d'escapades per gaudir en parella`}
+						title={`Llistes d'escapades per gaudir en parella`}
 						subtitle={`Descobreix llistes d'idees i consells per viure al màxim les vostres escapades en parella per Catalunya`}
 						breadcrumbLevel1={"Llistes"}
 					/>
