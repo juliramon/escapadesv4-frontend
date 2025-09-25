@@ -5,7 +5,6 @@ import RegularListBox from "../components/listings/RegularListBox";
 import Footer from "../components/global/Footer";
 import GlobalMetas from "../components/head/GlobalMetas";
 import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
-import ShareBarModal from "../components/social/ShareBarModal";
 import ListingHeader from "../components/headers/ListingHeader";
 
 const ListsList = ({ user, totalItems, lists, numPages }) => {
@@ -64,41 +63,17 @@ const ListsList = ({ user, totalItems, lists, numPages }) => {
 				page2Url={`https://escapadesenparella.cat/llistes`}
 			/>
 			<div className="lists">
-				<NavigationBar
-					logo_url={
-						"https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
-					}
-					user={user}
-				/>
+				<NavigationBar />
 				<main>
 					{/* Main column - Listings */}
-					<div className="lg:mt-6">
-						<div className="container">
-							<ul className="breadcrumb max-w-5xl">
-								<li className="breadcrumb__item">
-									<a
-										href="/"
-										title="Inici"
-										className="breadcrumb__link"
-									>
-										Inici
-									</a>
-								</li>
-								<li className="breadcrumb__item">
-									<span className="breadcrumb__link active">
-										Llistes
-									</span>
-								</li>
-							</ul>
-							<ListingHeader
-								title={`<span class="text-secondary-500">Llistes</span> d'escapades per gaudir en parella`}
-								subtitle={`Descobreix llistes d'idees i consells per viure al màxim les vostres escapades en parella per Catalunya`}
-							/>
-						</div>
-					</div>
+					<ListingHeader
+						title={`<span class="text-secondary-500">Llistes</span> d'escapades per gaudir en parella`}
+						subtitle={`Descobreix llistes d'idees i consells per viure al màxim les vostres escapades en parella per Catalunya`}
+						breadcrumbLevel1={"Llistes"}
+					/>
 
-					{/* Section lists' list */}
-					<section className="py-8 md:pb-12 lg:pb-20">
+					{/* Section lists */}
+					<section className="py-8 md:py-12 lg:pb-20">
 						<div className="container">
 							<div className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 gap-x-5">
 								{state.hasLists

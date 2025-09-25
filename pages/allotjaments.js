@@ -7,6 +7,8 @@ import MapModal from "../components/modals/MapModal";
 import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
 import GlobalMetas from "../components/head/GlobalMetas";
 import ListingHeader from "../components/headers/ListingHeader";
+import ListingsTextareaFooter from "../components/listings/ListingsTextareaFooter";
+import FilterPlacesModal from "../components/modals/FilterPlacesModal";
 
 const PlaceList = ({
 	totalItems,
@@ -19,7 +21,6 @@ const PlaceList = ({
 		places: [],
 		featuredPlaces: [],
 		allPlaces: [],
-		queryPlaceType: [],
 		queryPlaceRegion: [],
 		queryPlaceCategory: [],
 		queryPlaceSeason: [],
@@ -27,14 +28,15 @@ const PlaceList = ({
 		hasPlaces: false,
 		isFetching: false,
 		numPlaces: 0,
+		numPages: 0,
 		currentPage: 1,
+		isFilterModalOpen: false,
+		selectedCount: 0,
+		isMapModalOpen: false,
 		emptyBlocksPerRow: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
 	};
 
-	const [dropdownVisible, setDropdownVisible] = useState(null);
-
 	const [state, setState] = useState(initialState);
-	const [stateModalMap, setStateModalMap] = useState(false);
 
 	const service = new ContentService();
 
@@ -52,75 +54,57 @@ const PlaceList = ({
 		}
 	}, []);
 
-	const handleCheckType = (e) => {
-		let query = state.queryPlaceType;
-		if (e.target.checked === true) {
-			if (query.length < 1) {
-				query.push(`${e.target.name}=${e.target.id}`);
-			} else {
-				query.push(e.target.id);
-			}
-		} else {
-			let index = query.indexOf(e.target.id);
-			query.splice(index, 1);
-		}
-		setState({ ...state, queryPlaceType: query, updateSearch: true });
-	};
-
 	const handleCheckRegion = (e) => {
 		let query = state.queryPlaceRegion;
 		if (e.target.checked === true) {
-			if (query.length < 1) {
-				query.push(`${e.target.name}=${e.target.id}`);
-			} else {
-				query.push(e.target.id);
-			}
+			query.push(e.target.id);
 		} else {
 			let index = query.indexOf(e.target.id);
 			query.splice(index, 1);
 		}
-		setState({ ...state, queryPlaceRegion: query, updateSearch: true });
+		setState({
+			...state,
+			queryPlaceRegion: query,
+		});
 	};
 
 	const handleCheckCategory = (e) => {
 		let query = state.queryPlaceCategory;
 		if (e.target.checked === true) {
-			if (query.length < 1) {
-				query.push(`${e.target.name}=${e.target.id}`);
-			} else {
-				query.push(e.target.id);
-			}
+			query.push(e.target.id);
 		} else {
 			let index = query.indexOf(e.target.id);
 			query.splice(index, 1);
 		}
-		setState({ ...state, queryPlaceCategory: query, updateSearch: true });
+
+		setState({
+			...state,
+			queryPlaceCategory: query,
+		});
 	};
 
 	const handleCheckSeason = (e) => {
 		let query = state.queryPlaceSeason;
 		if (e.target.checked === true) {
-			if (query.length < 1) {
-				query.push(`${e.target.name}=${e.target.id}`);
-			} else {
-				query.push(e.target.id);
-			}
+			query.push(e.target.id);
 		} else {
 			let index = query.indexOf(e.target.id);
 			query.splice(index, 1);
 		}
-		setState({ ...state, queryPlaceSeason: query, updateSearch: true });
+		setState({
+			...state,
+			queryPlaceSeason: query,
+		});
 	};
 
-	const handleCheckDropdownClick = (e) => {
+	const handleFilterSubmit = (e, selectedCount) => {
 		e.preventDefault();
-
-		if ([...e.target.classList].includes("active")) {
-			setDropdownVisible(null);
-			return;
-		}
-
-		setDropdownVisible(e.target.id);
+		setState({
+			...state,
+			updateSearch: true,
+			isFilterModalOpen: false,
+			selectedCount: selectedCount,
+		});
 	};
 
 	const center = {
@@ -141,7 +125,8 @@ const PlaceList = ({
 		};
 	};
 
-	let renderMarker = (map, maps) => {
+	const renderMarker = (map, maps) => {
+		const bounds = new maps.LatLngBounds();
 		state.allPlaces.forEach((place) => {
 			const position = {
 				lat: parseFloat(place.place_lat),
@@ -166,15 +151,16 @@ const PlaceList = ({
 				map,
 				icon: "../../map-marker.svg",
 			});
+			bounds.extend(marker.position);
 			marker.addListener("click", () => infowindow.open(map, marker));
 		});
+		map.fitBounds(bounds);
 	};
 
 	useEffect(() => {
 		if (state.updateSearch === true) {
 			service
 				.searchPlaces(
-					state.queryPlaceType,
 					state.queryPlaceRegion,
 					state.queryPlaceCategory,
 					state.queryPlaceSeason
@@ -205,8 +191,7 @@ const PlaceList = ({
 		return (
 			state.queryPlaceCategory.length == 0 &&
 			state.queryPlaceRegion == 0 &&
-			state.queryPlaceSeason == 0 &&
-			state.queryPlaceType == 0
+			state.queryPlaceSeason == 0
 		);
 	};
 
@@ -228,65 +213,35 @@ const PlaceList = ({
 				page2Url={`https://escapadesenparella.cat/allotjaments`}
 			/>
 			<div id="contentList" className="place">
-				<NavigationBar
-					logo_url={
-						"https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
-					}
-				/>
+				<NavigationBar />
 				<main>
 					{/* Main column - Listings */}
-					<section className="lg:mt-6">
-						<div className="container">
-							<ul className="breadcrumb max-w-5xl">
-								<li className="breadcrumb__item">
-									<a
-										href="/"
-										title="Inici"
-										className="breadcrumb__link"
-									>
-										Inici
-									</a>
-								</li>
-								<li className="breadcrumb__item">
-									<span className="breadcrumb__link active">
-										Allotjaments a Catalunya
-									</span>
-								</li>
-							</ul>
-							<ListingHeader
-								title={`<span class="text-secondary-500">Allotjaments</span> amb encant a Catalunya`}
-								subtitle={`Descobreix <strong>${state.numPlaces} allotjaments amb encant</strong>, hotels boutique, apartaments, cabanyes als arbres i cases rurals de somni per a una escapada en parella increïble a Catalunya`}
-							/>
-						</div>
-					</section>
+					<ListingHeader
+						title={`Allotjaments amb encant a Catalunya`}
+						subtitle={`Descobreix una selecció de <strong>${state.numPlaces} allotjaments amb encant</strong>, des d'<strong>hotels boutique</strong>, <strong>apartaments</strong>, <strong>cabanyes als arbres</strong> i <strong>cases rurals de somni</strong> per fer que la vostra propera escapada en parella sigui inoblidable!`}
+						breadcrumbLevel1={"Allotjaments amb encant"}
+					/>
 
-					{/* Left column - Filters  */}
-					<nav className="container pt-5 pb-6 sticky top-[136px] bg-white z-50">
-						<div
-							className={`fixed lg:relative w-full z-50 inset-0 h-screen lg:h-auto overflow-y-auto lg:overflow-visible bg-white lg:bg-transparent transition-all duration-300 ease-in-out ${
-								state.isMobileFilterPanelDisplated
-									? "translate-x-0"
-									: "-translate-x-full lg:translate-x-0"
-							}`}
-						>
+					{/* Left column - Filters */}
+					<div className="pt-8">
+						<nav className="container flex justify-center">
 							<button
-								className="absolute z-50 right-3 top-3 lg:hidden"
+								className="button button__ghost button__med px-6 w-fit gap-x-1.5 group"
 								onClick={() =>
 									setState({
 										...state,
-										isMobileFilterPanelDisplated: false,
+										isFilterModalOpen: true,
 									})
 								}
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
-									className="text-primary-500"
-									width="30"
-									height="30"
+									width={20}
+									height={20}
 									viewBox="0 0 24 24"
-									strokeWidth="3"
-									stroke="currentColor"
 									fill="none"
+									stroke="currentColor"
+									strokeWidth={1.5}
 									strokeLinecap="round"
 									strokeLinejoin="round"
 								>
@@ -295,386 +250,61 @@ const PlaceList = ({
 										d="M0 0h24v24H0z"
 										fill="none"
 									/>
-									<line x1="18" y1="6" x2="6" y2="18" />
-									<line x1="6" y1="6" x2="18" y2="18" />
+									<path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+									<path d="M6 4v4" />
+									<path d="M6 12v8" />
+									<path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+									<path d="M12 4v10" />
+									<path d="M12 18v2" />
+									<path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+									<path d="M18 4v1" />
+									<path d="M18 9v11" />
 								</svg>
+								Filtrar
+								{state.selectedCount &&
+								state.selectedCount > 0 ? (
+									<span className="rounded-full bg-primary-500 p-2 w-5 h-5 flex items-center justify-center group-hover:bg-white transition-colors duration-300 ease-in-out">
+										<span className="text-white text-xs group-hover:text-primary-500 transition-colors duration-300 ease-in-out">
+											{state.selectedCount}
+										</span>
+									</span>
+								) : null}
 							</button>
-							<div className="flex flex-col lg:flex-row lg:items-center space-x-3 lg:sticky lg:top-[210px]">
-								<div className="relative">
-									<button
-										className={`button button__ghost button__med ${
-											dropdownVisible === "type"
-												? "active"
-												: ""
-										}`}
-										onClick={(e) =>
-											handleCheckDropdownClick(e)
-										}
-										id="type"
-									>
-										Tipologia
-									</button>
-									<div
-										className={`bg-white absolute left-0 top-full w-auto shadow-lg rounded-xl p-5 ${
-											dropdownVisible === "type"
-												? "block"
-												: "hidden"
-										}`}
-									>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeType"
-													id="hotel"
-													onChange={handleCheckType}
-													className="mr-2"
-												/>
-												Hotels
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeType"
-													id="apartament"
-													onChange={handleCheckType}
-													className="mr-2"
-												/>
-												Apartaments
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeType"
-													id="refugi"
-													onChange={handleCheckType}
-													className="mr-2"
-												/>
-												Refugis
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeType"
-													id="casaarbre"
-													onChange={handleCheckType}
-													className="mr-2"
-												/>
-												Cases-arbre
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeType"
-													id="casarural"
-													onChange={handleCheckType}
-													className="mr-2"
-												/>
-												Cases rurals
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeType"
-													id="carabana"
-													onChange={handleCheckType}
-													className="mr-2"
-												/>
-												Carabanes
-											</label>
-										</fieldset>
-									</div>
-								</div>
-								<div className="relative">
-									<button
-										className={`button button__ghost button__med ${
-											dropdownVisible === "region"
-												? "active"
-												: ""
-										}`}
-										onClick={(e) =>
-											handleCheckDropdownClick(e)
-										}
-										id="region"
-									>
-										Regió
-									</button>
-									<div
-										className={`bg-white absolute left-0 top-full w-auto shadow-lg rounded-xl p-5 ${
-											dropdownVisible === "region"
-												? "block"
-												: "hidden"
-										}`}
-									>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeRegion"
-													id="barcelona"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Barcelona
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeRegion"
-													id="girona"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Girona
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeRegion"
-													id="lleida"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Lleida
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeRegion"
-													id="tarragona"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Tarragona
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeRegion"
-													id="costaBrava"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Costa Brava
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeRegion"
-													id="costaDaurada"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Costa Daurada
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeRegion"
-													id="pirineus"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Pirineus
-											</label>
-										</fieldset>
-									</div>
-								</div>
-								<div className="relative">
-									<button
-										className={`button button__ghost button__med ${
-											dropdownVisible === "category"
-												? "active"
-												: ""
-										}`}
-										onClick={(e) =>
-											handleCheckDropdownClick(e)
-										}
-										id="category"
-									>
-										Categoria
-									</button>
-									<div
-										class={`bg-white absolute left-0 top-full w-auto shadow-lg rounded-xl p-5 ${
-											dropdownVisible === "category"
-												? "block"
-												: "hidden"
-										}`}
-									>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeCategory"
-													id="romantica"
-													onChange={
-														handleCheckCategory
-													}
-													className="mr-2"
-												/>
-												Romàntiques
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeCategory"
-													id="aventura"
-													onChange={
-														handleCheckCategory
-													}
-													className="mr-2"
-												/>
-												Aventura
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeCategory"
-													id="gastronomica"
-													onChange={
-														handleCheckCategory
-													}
-													className="mr-2"
-												/>
-												Gastronòmiques
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeCategory"
-													id="cultural"
-													onChange={
-														handleCheckCategory
-													}
-													className="mr-2"
-												/>
-												Culturals
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeCategory"
-													id="relax"
-													onChange={
-														handleCheckCategory
-													}
-													className="mr-2"
-												/>
-												Relax
-											</label>
-										</fieldset>
-									</div>
-								</div>
-								<div className="relative">
-									<button
-										className={`button button__ghost button__med ${
-											dropdownVisible === "season"
-												? "active"
-												: ""
-										}`}
-										onClick={(e) =>
-											handleCheckDropdownClick(e)
-										}
-										id="season"
-									>
-										Temporada
-									</button>
-									<div
-										className={`bg-white absolute left-0 top-full w-auto shadow-lg rounded-xl p-5 ${
-											dropdownVisible === "season"
-												? "block"
-												: "hidden"
-										}`}
-									>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeSeason"
-													id="hivern"
-													onChange={handleCheckSeason}
-													className="mr-2"
-												/>
-												Hivern
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeSeason"
-													id="primavera"
-													onChange={handleCheckSeason}
-													className="mr-2"
-												/>
-												Primavera
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeSeason"
-													id="estiu"
-													onChange={handleCheckSeason}
-													className="mr-2"
-												/>
-												Estiu
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm inline-flex items-center whitespace-nowrap">
-												<input
-													type="checkbox"
-													name="placeSeason"
-													id="tardor"
-													onChange={handleCheckSeason}
-													className="mr-2"
-												/>
-												Tardor
-											</label>
-										</fieldset>
-									</div>
-								</div>
-								<span className="inline-block text-sm text-grey-500">
-									{state.places.length} resultats disponibles
-								</span>
-							</div>
-						</div>
-					</nav>
+							<button
+								className="button button__ghost button__med px-6 w-fit gap-x-1.5 ml-3"
+								onClick={() =>
+									setState({
+										...state,
+										isMapModalOpen: true,
+									})
+								}
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width={20}
+									height={20}
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									strokeWidth={1.5}
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								>
+									<path
+										stroke="none"
+										d="M0 0h24v24H0z"
+										fill="none"
+									/>
+									<path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+									<path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
+								</svg>
+								Veure mapa
+							</button>
+						</nav>
+					</div>
 
 					{/* Section places */}
-					<section>
+					<section className="pt-8 md:pt-12">
 						<div className="container">
 							<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5">
 								{state.hasPlaces
@@ -807,32 +437,37 @@ const PlaceList = ({
 					</section>
 
 					{textareaFooter !== "" ? (
-						<section>
-							<div className="container">
-								<div className="border-t border-primary-100 py-8 mt-8 md:py-12 md:mt-12 lg:py-20 lg:mt-20">
-									<div
-										className="w-full max-w-prose mx-auto text-block"
-										dangerouslySetInnerHTML={{
-											__html: textareaFooter,
-										}}
-									></div>
-								</div>
-							</div>
-						</section>
+						<ListingsTextareaFooter
+							textareaFooter={textareaFooter}
+						/>
 					) : null}
 				</main>
 			</div>
 
 			<Footer />
-			{stateModalMap == true ? (
+
+			{state.isMapModalOpen == true ? (
 				<MapModal
-					visibility={stateModalMap}
-					hideModal={setStateModalMap}
+					visibility={state.isMapModalOpen}
+					hideModal={() =>
+						setState({ ...state, isMapModalOpen: false })
+					}
 					center={center}
 					getMapOptions={getMapOptions}
 					renderMarker={renderMarker}
 				/>
 			) : null}
+
+			<FilterPlacesModal
+				isFilterModalOpen={state.isFilterModalOpen}
+				hideModal={() =>
+					setState({ ...state, isFilterModalOpen: false })
+				}
+				handleCheckRegion={handleCheckRegion}
+				handleCheckCategory={handleCheckCategory}
+				handleCheckSeason={handleCheckSeason}
+				handleSubmit={handleFilterSubmit}
+			/>
 		</>
 	);
 };

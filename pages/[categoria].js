@@ -5,9 +5,9 @@ import NavigationBar from "../components/global/NavigationBar";
 import GlobalMetas from "../components/head/GlobalMetas";
 import ListingHeader from "../components/headers/ListingHeader";
 import PublicSquareBox from "../components/listings/PublicSquareBox";
-import MapModal from "../components/modals/MapModal";
 import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
 import ContentService from "../services/contentService";
+import ListingsTextareaFooter from "../components/listings/ListingsTextareaFooter";
 
 const CategoryPage = ({
 	categoryDetails,
@@ -37,7 +37,6 @@ const CategoryPage = ({
 	};
 
 	const [state, setState] = useState(initialState);
-	const [stateModalMap, setStateModalMap] = useState(false);
 
 	const service = new ContentService();
 
@@ -56,51 +55,6 @@ const CategoryPage = ({
 			});
 		}
 	}, []);
-
-	const handleCheckRegion = (e) => {
-		let query = state.queryPlaceRegion;
-		if (e.target.checked === true) {
-			if (query.length < 1) {
-				query.push(`${e.target.name}=${e.target.id}`);
-			} else {
-				query.push(e.target.id);
-			}
-		} else {
-			let index = query.indexOf(e.target.id);
-			query.splice(index, 1);
-		}
-		setState({ ...state, queryPlaceRegion: query, updateSearch: true });
-	};
-
-	const handleCheckCategory = (e) => {
-		let query = state.queryPlaceCategory;
-		if (e.target.checked === true) {
-			if (query.length < 1) {
-				query.push(`${e.target.name}=${e.target.id}`);
-			} else {
-				query.push(e.target.id);
-			}
-		} else {
-			let index = query.indexOf(e.target.id);
-			query.splice(index, 1);
-		}
-		setState({ ...state, queryPlaceCategory: query, updateSearch: true });
-	};
-
-	const handleCheckSeason = (e) => {
-		let query = state.queryPlaceSeason;
-		if (e.target.checked === true) {
-			if (query.length < 1) {
-				query.push(`${e.target.name}=${e.target.id}`);
-			} else {
-				query.push(e.target.id);
-			}
-		} else {
-			let index = query.indexOf(e.target.id);
-			query.splice(index, 1);
-		}
-		setState({ ...state, queryPlaceSeason: query, updateSearch: true });
-	};
 
 	const sponsorBlock = categoryDetails.isSponsored ? (
 		<div className="sponsor-block">
@@ -123,64 +77,6 @@ const CategoryPage = ({
 			</Link>
 		</div>
 	) : null;
-
-	const center = {
-		lat: 41.3948976,
-		lng: 2.0787283,
-	};
-
-	const getMapOptions = (maps) => {
-		return {
-			disableDefaultUI: true,
-			styles: [
-				{
-					featureType: "poi",
-					elementType: "labels",
-					styles: [{ visibility: "on" }],
-				},
-			],
-		};
-	};
-
-	let renderMarker = (map, maps) => {
-		state.allResults.forEach((result) => {
-			let position, path;
-			if (result.type === "activity") {
-				position = {
-					lat: parseFloat(result.activity_lat),
-					lng: parseFloat(result.activity_lng),
-				};
-				path = "/activitats";
-			}
-			if (result.type === "place") {
-				position = {
-					lat: parseFloat(result.place_lat),
-					lng: parseFloat(result.place_lng),
-				};
-				path = "/allotjaments";
-			}
-			const contentString = `<a href="${path}/${result.slug}" title="${result.title}" class="gmaps-infobox" target="_blank">
-        <div class="gmaps-infobox__picture">
-          <picture>
-            <img src="${result.images[0]}" alt="${result.title}" class="object-cover w-full h-full" width="80" height="80">
-          </picture>
-        </div>
-        <div class="gmaps-infobox__text">
-          <span class="gmaps-infobox__title">${result.title}</span>
-          <span class="gmaps-infobox__intro">${result.subtitle}</span>
-        </div>
-        </a>`;
-			const infowindow = new maps.InfoWindow({
-				content: contentString,
-			});
-			const marker = new maps.Marker({
-				position: position,
-				map,
-				icon: "../../map-marker.svg",
-			});
-			marker.addListener("click", () => infowindow.open(map, marker));
-		});
-	};
 
 	const loadMoreResults = async (categoryName, page) => {
 		setState({ ...state, isFetching: true });
@@ -241,312 +137,34 @@ const CategoryPage = ({
 			<div id="contentList" className="category relative">
 				<NavigationBar />
 				<main>
-					{/* Top row - Filters 
-						<div
-								className={`fixed lg:static w-full lg:w-1/5 2xl:w-1/6 lg:pb-20 p-5 lg:p-0 z-50 lg:z-0 inset-0 h-screen lg:h-auto overflow-y-auto lg:overflow-visible bg-white lg:bg-transparent transition-all duration-300 ease-in-out ${state.isMobileFilterPanelDisplated
-									? "translate-x-0"
-									: "-translate-x-full lg:translate-x-0"
-									}`}
-							>
-								<button
-									aria-label="Tancar filters"
-									className="absolute z-50 right-3 top-3 lg:hidden"
-									onClick={() =>
-										setState({
-											...state,
-											isMobileFilterPanelDisplated: false,
-										})
-									}
-								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										className="text-primary-500"
-										width="30"
-										height="30"
-										viewBox="0 0 24 24"
-										strokeWidth="3"
-										stroke="currentColor"
-										fill="none"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<path
-											stroke="none"
-											d="M0 0h24v24H0z"
-											fill="none"
-										/>
-										<line x1="18" y1="6" x2="6" y2="18" />
-										<line x1="6" y1="6" x2="18" y2="18" />
-									</svg>
-								</button>
-								<div className="flex flex-col lg:sticky lg:top-[95px]">
-									<div className="pb-5">
-										<span className="text-xs uppercase text-primary-400 tracking-wider mb-2 block">
-											Regió
-										</span>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="placeRegion"
-													id="barcelona"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Barcelona
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="placeRegion"
-													id="girona"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Girona
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="placeRegion"
-													id="lleida"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Lleida
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="placeRegion"
-													id="tarragona"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Tarragona
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="placeRegion"
-													id="costaBrava"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Costa Brava
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="placeRegion"
-													id="costaDaurada"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Costa Daurada
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="placeRegion"
-													id="pirineus"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Pirineus
-											</label>
-										</fieldset>
-									</div>
-									{categoryDetails?.isPlace ? <div className="pb-5">
-										<span className="text-xs uppercase text-primary-400 tracking-wider mb-2 block">
-											Categoria
-										</span>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="placeCategory"
-													id="romantica"
-													onChange={
-														handleCheckCategory
-													}
-													className="mr-2"
-												/>
-												Romàntiques
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="placeCategory"
-													id="aventura"
-													onChange={
-														handleCheckCategory
-													}
-													className="mr-2"
-												/>
-												Aventura
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="placeCategory"
-													id="gastronomica"
-													onChange={
-														handleCheckCategory
-													}
-													className="mr-2"
-												/>
-												Gastronòmiques
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="placeCategory"
-													id="cultural"
-													onChange={
-														handleCheckCategory
-													}
-													className="mr-2"
-												/>
-												Culturals
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="placeCategory"
-													id="relax"
-													onChange={
-														handleCheckCategory
-													}
-													className="mr-2"
-												/>
-												Relax
-											</label>
-										</fieldset>
-									</div> : null}
-									<div className="pb-5">
-										<span className="text-xs uppercase text-primary-400 tracking-wider mb-2 block">
-											Temporada
-										</span>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="placeSeason"
-													id="hivern"
-													onChange={handleCheckSeason}
-													className="mr-2"
-												/>
-												Hivern
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="placeSeason"
-													id="primavera"
-													onChange={handleCheckSeason}
-													className="mr-2"
-												/>
-												Primavera
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="placeSeason"
-													id="estiu"
-													onChange={handleCheckSeason}
-													className="mr-2"
-												/>
-												Estiu
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="placeSeason"
-													id="tardor"
-													onChange={handleCheckSeason}
-													className="mr-2"
-												/>
-												Tardor
-											</label>
-										</fieldset>
-									</div>
-								</div>
-							</div>
-					*/}
 					{/* Main column - Listings */}
-					<section className="lg:mt-6">
-						<div className="container">
-							<ul className="breadcrumb max-w-5xl ">
-								<li className="breadcrumb__item">
-									<a
-										href="/"
-										title="Inici"
-										className="breadcrumb__link"
-									>
-										Inici
-									</a>
-								</li>
-								<li className="breadcrumb__item">
-									<span className="breadcrumb__link active">
-										{categoryDetails.title}
-									</span>
-								</li>
-							</ul>
-							<ListingHeader
-								title={`<span class="capitalize">${
-									!categoryDetails.isPlace
-										? "Escapades"
-										: categoryDetails.pluralName
-								}</span> <span class="text-secondary-500 lowercase">${
-									categoryDetails.isPlace
-										? "amb encant"
-										: categoryDetails.pluralName
-								}</span>`}
-								subtitle={`Descobreix <strong>${
-									allResults.length
-								} ${
-									!categoryDetails.isPlace ? "escapades" : ""
-								} ${categoryDetails.pluralName} ${
-									categoryDetails.isPlace ? "amb encant" : ""
-								}</strong> a Catalunya. ${
-									categoryDetails.seoTextHeader
-										? categoryDetails.seoTextHeader
-										: ""
-								}`}
-								sponsorData={sponsorBlock}
-							/>
-						</div>
-					</section>
+					<ListingHeader
+						title={`${
+							!categoryDetails.isPlace
+								? ""
+								: categoryDetails.title
+						}</span> <span class="">${
+							categoryDetails.isPlace ? "" : categoryDetails.title
+						}</span>`}
+						subtitle={`Us proposem <strong class="lowercase">${
+							allResults.length
+						} ${
+							!categoryDetails.isPlace
+								? categoryDetails.title
+								: categoryDetails.title
+						}  ${
+							categoryDetails.isPlace ? "" : ""
+						}</strong> a Catalunya.${" "}${
+							categoryDetails.seoTextHeader
+								? categoryDetails.seoTextHeader
+								: ""
+						}`}
+						sponsorData={sponsorBlock}
+						breadcrumbLevel1={categoryDetails.title}
+					/>
 
 					{/* Section listings */}
-					<section className="pt-8">
+					<section className="pt-8 md:pt-12">
 						<div className="container">
 							<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5">
 								{state.results.length > 0 ? (
@@ -708,59 +326,15 @@ const CategoryPage = ({
 					</section>
 
 					{/* Section text footer */}
-					<section>
-						<div className="container">
-							<div className="border-t border-primary-100 py-8 mt-8 md:py-12 md:mt-12 lg:py-20 lg:mt-20">
-								<div
-									className="w-full max-w-prose mx-auto text-block"
-									dangerouslySetInnerHTML={{
-										__html: categoryDetails.seoText,
-									}}
-								></div>
-							</div>
-						</div>
-					</section>
-
-					{/* <div className="fixed bottom-5 left-1/2 -translate-x-1/2">
-							<button
-								className="text-sm inline-flex flex-nowrap items-center bg-white shadow-xl px-4 py-3 !rounded-full z-10"
-								onClick={() => setStateModalMap(!stateModalMap)}
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									className="icon icon-tabler icon-tabler-map-2 mr-2"
-									width="18"
-									height="18"
-									viewBox="0 0 24 24"
-									strokeWidth="1.5"
-									stroke="currentColor"
-									fill="none"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								>
-									<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-									<line x1="18" y1="6" x2="18" y2="6.01" />
-									<path d="M18 13l-3.5 -5a4 4 0 1 1 7 0l-3.5 5" />
-									<polyline points="10.5 4.75 9 4 3 7 3 20 9 17 15 20 21 17 21 15" />
-									<line x1="9" y1="4" x2="9" y2="17" />
-									<line x1="15" y1="15" x2="15" y2="20" />
-								</svg>
-								Veure-les al mapa
-							</button>
-						</div> */}
+					{categoryDetails.seoText !== "" ? (
+						<ListingsTextareaFooter
+							textareaFooter={categoryDetails.seoText}
+						/>
+					) : null}
 				</main>
 			</div>
 
 			<Footer />
-			{stateModalMap == true ? (
-				<MapModal
-					visibility={stateModalMap}
-					hideModal={setStateModalMap}
-					center={center}
-					getMapOptions={getMapOptions}
-					renderMarker={renderMarker}
-				/>
-			) : null}
 		</>
 	);
 };

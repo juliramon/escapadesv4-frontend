@@ -4,9 +4,8 @@ import NavigationBar from "../components/global/NavigationBar";
 import Footer from "../components/global/Footer";
 import GlobalMetas from "../components/head/GlobalMetas";
 import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
-import StoriesHeader from "../components/headers/StoriesHeader";
 import StoryListing from "../components/listings/StoryListing";
-import AdBanner from "../components/ads/AdBanner";
+import ListingHeader from "../components/headers/ListingHeader";
 
 const StoriesList = ({ featuredStories, stories, totalItems, numPages }) => {
 	const initialResults = stories;
@@ -67,9 +66,16 @@ const StoriesList = ({ featuredStories, stories, totalItems, numPages }) => {
 			/>
 			<div className="stories">
 				<NavigationBar />
-				<StoriesHeader />
 				<main>
-					<section className="py-8 md:pb-12 lg:pb-20">
+					{/* Main column - Listings */}
+					<ListingHeader
+						title={`<span class="text-secondary-500">Històries</span> en parella`}
+						subtitle={`Les històries en parella de l'Andrea i en Juli. Aquí trobareu les nostres escapades viscudes de primera mà, històries per inspirar, descobrir llocs nous i fer-vos venir ganes d'una escapada en parella per recordar!`}
+						breadcrumbLevel1={"Històries en parella"}
+					/>
+
+					{/* Section stories */}
+					<section className="py-8 md:py-12 lg:pb-20">
 						<div className="container">
 							{initialResults.length > 0 ? (
 								<>

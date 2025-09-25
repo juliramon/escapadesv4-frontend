@@ -7,6 +7,8 @@ import MapModal from "../components/modals/MapModal";
 import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
 import GlobalMetas from "../components/head/GlobalMetas";
 import ListingHeader from "../components/headers/ListingHeader";
+import ListingsTextareaFooter from "../components/listings/ListingsTextareaFooter";
+import FilterActivitiesModal from "../components/modals/FilterActivitiesModal";
 
 const ActivityList = ({
 	totalItems,
@@ -28,13 +30,13 @@ const ActivityList = ({
 		numActivities: 0,
 		numPages: 0,
 		currentPage: 1,
-		isFilterActive: false,
-		isMobileFilterPanelDisplated: false,
+		isFilterModalOpen: false,
+		selectedCount: 0,
+		isMapModalOpen: false,
 		emptyBlocksPerRow: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
 	};
 
 	const [state, setState] = useState(initialState);
-	const [stateModalMap, setStateModalMap] = useState(false);
 
 	const service = new ContentService();
 
@@ -55,11 +57,7 @@ const ActivityList = ({
 	const handleCheckRegion = (e) => {
 		let query = state.queryActivityRegion;
 		if (e.target.checked === true) {
-			if (query.length < 1) {
-				query.push(`${e.target.name}=${e.target.id}`);
-			} else {
-				query.push(e.target.id);
-			}
+			query.push(e.target.id);
 		} else {
 			let index = query.indexOf(e.target.id);
 			query.splice(index, 1);
@@ -67,18 +65,13 @@ const ActivityList = ({
 		setState({
 			...state,
 			queryActivityRegion: query,
-			updateSearch: true,
 		});
 	};
 
 	const handleCheckCategory = (e) => {
 		let query = state.queryActivityCategory;
 		if (e.target.checked === true) {
-			if (query.length < 1) {
-				query.push(`${e.target.name}=${e.target.id}`);
-			} else {
-				query.push(e.target.id);
-			}
+			query.push(e.target.id);
 		} else {
 			let index = query.indexOf(e.target.id);
 			query.splice(index, 1);
@@ -87,18 +80,13 @@ const ActivityList = ({
 		setState({
 			...state,
 			queryActivityCategory: query,
-			updateSearch: true,
 		});
 	};
 
 	const handleCheckSeason = (e) => {
 		let query = state.queryActivitySeason;
 		if (e.target.checked === true) {
-			if (query.length < 1) {
-				query.push(`${e.target.name}=${e.target.id}`);
-			} else {
-				query.push(e.target.id);
-			}
+			query.push(e.target.id);
 		} else {
 			let index = query.indexOf(e.target.id);
 			query.splice(index, 1);
@@ -106,7 +94,16 @@ const ActivityList = ({
 		setState({
 			...state,
 			queryActivitySeason: query,
+		});
+	};
+
+	const handleFilterSubmit = (e, selectedCount) => {
+		e.preventDefault();
+		setState({
+			...state,
 			updateSearch: true,
+			isFilterModalOpen: false,
+			selectedCount: selectedCount,
 		});
 	};
 
@@ -117,7 +114,7 @@ const ActivityList = ({
 
 	const getMapOptions = (maps) => {
 		return {
-			disableDefaultUI: true,
+			disableDefaultUI: false,
 			styles: [
 				{
 					featureType: "poi",
@@ -229,300 +226,99 @@ const ActivityList = ({
 				page2Title="Activitats en parella"
 				page2Url={`https://escapadesenparella.cat/activitats`}
 			/>
-			{/* w-full lg:w-1/4 2xl:w-1/6 lg:pb-20 */}
 			<div id="contentList" className="activity relative">
-				<NavigationBar
-					logo_url={
-						"https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
-					}
-				/>
+				<NavigationBar />
 				<main>
-					{/* Top row - Filters 
-							<div
-								className={`fixed lg:static w-full lg:w-1/5 2xl:w-1/6 lg:pb-20 p-5 lg:p-0 z-50 lg:z-0 inset-0 h-screen lg:h-auto overflow-y-auto lg:overflow-visible bg-white lg:bg-transparent transition-all duration-300 ease-in-out ${state.isMobileFilterPanelDisplated
-									? "translate-x-0"
-									: "-translate-x-full lg:translate-x-0"
-									}`}
-							>
-								<button
-									className="absolute z-50 right-3 top-3 lg:hidden"
-									onClick={() =>
-										setState({
-											...state,
-											isMobileFilterPanelDisplated: false,
-										})
-									}
-								>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										className="text-primary-500"
-										width="30"
-										height="30"
-										viewBox="0 0 24 24"
-										strokeWidth="3"
-										stroke="currentColor"
-										fill="none"
-										strokeLinecap="round"
-										strokeLinejoin="round"
-									>
-										<path
-											stroke="none"
-											d="M0 0h24v24H0z"
-											fill="none"
-										/>
-										<line x1="18" y1="6" x2="6" y2="18" />
-										<line x1="6" y1="6" x2="18" y2="18" />
-									</svg>
-								</button>
-								<div className="flex flex-col lg:sticky lg:top-[95px]">
-									<div className="pb-5">
-										<span className="text-xs uppercase text-primary-400 tracking-wider mb-2 block">
-											Regió
-										</span>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="activityRegion"
-													id="barcelona"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Barcelona
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="activityRegion"
-													id="girona"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Girona
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="activityRegion"
-													id="lleida"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Lleida
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="activityRegion"
-													id="tarragona"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Tarragona
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="activityRegion"
-													id="costaBrava"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Costa Brava
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="activityRegion"
-													id="costaDaurada"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Costa Daurada
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="activityRegion"
-													id="pirineus"
-													onChange={handleCheckRegion}
-													className="mr-2"
-												/>
-												Pirineus
-											</label>
-										</fieldset>
-									</div>
-									<div className="py-5">
-										<span className="text-xs uppercase text-primary-400 tracking-wider mb-2 block">
-											Categoria
-										</span>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="activityCategory"
-													id="romantica"
-													onChange={
-														handleCheckCategory
-													}
-													className="mr-2"
-												/>
-												Romàntiques
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="activityCategory"
-													id="aventura"
-													onChange={
-														handleCheckCategory
-													}
-													className="mr-2"
-												/>
-												Aventura
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="activityCategory"
-													id="gastronomica"
-													onChange={
-														handleCheckCategory
-													}
-													className="mr-2"
-												/>
-												Gastronòmiques
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="activityCategory"
-													id="cultural"
-													onChange={
-														handleCheckCategory
-													}
-													className="mr-2"
-												/>
-												Culturals
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="activityCategory"
-													id="relax"
-													onChange={
-														handleCheckCategory
-													}
-													className="mr-2"
-												/>
-												Relax
-											</label>
-										</fieldset>
-									</div>
-									<div className="py-5">
-										<span className="text-xs uppercase text-primary-400 tracking-wider mb-2 block">
-											Temporada
-										</span>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="activitySeason"
-													id="hivern"
-													onChange={handleCheckSeason}
-													className="mr-2"
-												/>
-												Hivern
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="activitySeason"
-													id="primavera"
-													onChange={handleCheckSeason}
-													className="mr-2"
-												/>
-												Primavera
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="activitySeason"
-													id="estiu"
-													onChange={handleCheckSeason}
-													className="mr-2"
-												/>
-												Estiu
-											</label>
-										</fieldset>
-										<fieldset>
-											<label className="cursor-pointer text-sm">
-												<input
-													type="checkbox"
-													name="placeSeason"
-													id="tardor"
-													onChange={handleCheckSeason}
-													className="mr-2"
-												/>
-												Tardor
-											</label>
-										</fieldset>
-									</div>
-								</div>
-							</div> */}
-
 					{/* Main column - Listings */}
-					<section className="lg:mt-6">
-						<div className="container">
-							<ul className="breadcrumb max-w-5xl">
-								<li className="breadcrumb__item">
-									<a
-										href="/"
-										title="Inici"
-										className="breadcrumb__link"
-									>
-										Inici
-									</a>
-								</li>
-								<li className="breadcrumb__item">
-									<span className="breadcrumb__link active">
-										Experiències en parella
+					<ListingHeader
+						title={`Activitats originals en parella a Catalunya`}
+						subtitle={`Us proposem ${state.numActivities} <strong>activitats per fer en parella a Catalunya</strong>. Descobriu <strong>activitats originals</strong> i <strong>experiències per fer en parella</strong>, des de rutes i excursions, a restaurants i paisatges increïbles per a una escapada en parella extraordinària!`}
+						breadcrumbLevel1={"Activitats en parella"}
+					/>
+
+					{/* Left column - Filters */}
+					<div className="pt-8">
+						<nav className="container flex justify-center">
+							<button
+								className="button button__ghost button__med px-6 w-fit gap-x-1.5 group"
+								onClick={() =>
+									setState({
+										...state,
+										isFilterModalOpen: true,
+									})
+								}
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width={20}
+									height={20}
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									strokeWidth={1.5}
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								>
+									<path
+										stroke="none"
+										d="M0 0h24v24H0z"
+										fill="none"
+									/>
+									<path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+									<path d="M6 4v4" />
+									<path d="M6 12v8" />
+									<path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+									<path d="M12 4v10" />
+									<path d="M12 18v2" />
+									<path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+									<path d="M18 4v1" />
+									<path d="M18 9v11" />
+								</svg>
+								Filtrar
+								{state.selectedCount &&
+								state.selectedCount > 0 ? (
+									<span className="rounded-full bg-primary-500 p-2 w-5 h-5 flex items-center justify-center group-hover:bg-white transition-colors duration-300 ease-in-out">
+										<span className="text-white text-xs group-hover:text-primary-500 transition-colors duration-300 ease-in-out">
+											{state.selectedCount}
+										</span>
 									</span>
-								</li>
-							</ul>
-							<ListingHeader
-								title={`<span class="text-secondary-500">Activitats</span> originals en parella a Catalunya`}
-								subtitle={`Descobreix ${state.numActivities} <strong>activitats en parella a Catalunya</strong>. Us recomanem activitats originals en parella, experiències en parella, excursions, restaurants i llocs de Catalunya per a una escapada en parella extraordinària!`}
-							/>
-						</div>
-					</section>
+								) : null}
+							</button>
+							<button
+								className="button button__ghost button__med px-6 w-fit gap-x-1.5 ml-3"
+								onClick={() =>
+									setState({
+										...state,
+										isMapModalOpen: true,
+									})
+								}
+							>
+								<svg
+									xmlns="http://www.w3.org/2000/svg"
+									width={20}
+									height={20}
+									viewBox="0 0 24 24"
+									fill="none"
+									stroke="currentColor"
+									strokeWidth={1.5}
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								>
+									<path
+										stroke="none"
+										d="M0 0h24v24H0z"
+										fill="none"
+									/>
+									<path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+									<path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
+								</svg>
+								Veure mapa
+							</button>
+						</nav>
+					</div>
 
 					{/* Section activities */}
-					<section className="pt-8">
+					<section className="pt-8 md:pt-12">
 						<div className="container">
 							<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5">
 								{state.hasActivities
@@ -658,40 +454,37 @@ const ActivityList = ({
 					</section>
 
 					{textareaFooter !== "" ? (
-						<section>
-							<div className="container">
-								<div className="border-t border-primary-100 py-8 mt-8 md:py-12 md:mt-12 lg:py-20 lg:mt-20">
-									<div
-										className="w-full max-w-prose mx-auto text-block"
-										dangerouslySetInnerHTML={{
-											__html: textareaFooter,
-										}}
-									></div>
-								</div>
-							</div>
-						</section>
+						<ListingsTextareaFooter
+							textareaFooter={textareaFooter}
+						/>
 					) : null}
 				</main>
 			</div>
 
 			<Footer />
-			{stateModalMap == true ? (
+
+			{state.isMapModalOpen == true ? (
 				<MapModal
-					visibility={stateModalMap}
-					hideModal={setStateModalMap}
+					visibility={state.isMapModalOpen}
+					hideModal={() =>
+						setState({ ...state, isMapModalOpen: false })
+					}
 					center={center}
 					getMapOptions={getMapOptions}
 					renderMarker={renderMarker}
 				/>
 			) : null}
-			<button
-				className="fixed left-1/2 -translate-x-1/2 bottom-4 lg:hidden button button__primary button__med px-6"
-				onClick={() =>
-					setState({ ...state, isMobileFilterPanelDisplated: true })
+
+			<FilterActivitiesModal
+				isFilterModalOpen={state.isFilterModalOpen}
+				hideModal={() =>
+					setState({ ...state, isFilterModalOpen: false })
 				}
-			>
-				Filtrar activitats
-			</button>
+				handleCheckRegion={handleCheckRegion}
+				handleCheckCategory={handleCheckCategory}
+				handleCheckSeason={handleCheckSeason}
+				handleSubmit={handleFilterSubmit}
+			/>
 		</>
 	);
 };

@@ -701,17 +701,17 @@ class ContentService {
 
 	// SEARCH ENDPOINTS
 
-	searchPlaces = (queryType, queryRegion, queryCategory, querySeason) =>
+	searchPlaces = (queryRegion, queryCategory, querySeason) =>
 		this.service
 			.get(
-				`/searchPlaces?${queryType}&${queryRegion}&${queryCategory}&${querySeason}`
+				`/searchPlaces?placeRegion=${queryRegion}&placeCategory=${queryCategory}&placeSeason=${querySeason}`
 			)
 			.then((res) => res.data);
 
 	searchActivities = (queryRegion, queryCategory, querySeason) =>
 		this.service
 			.get(
-				`/searchActivities?${queryRegion}&${queryCategory}&${querySeason}`
+				`/searchActivities?activityRegion=${queryRegion}&activityCategory=${queryCategory}&activitySeason=${querySeason}`
 			)
 			.then((res) => res.data);
 
