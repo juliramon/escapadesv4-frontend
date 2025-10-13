@@ -4,8 +4,8 @@ import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnip
 const LinksBioInstagram = () => {
 	const links = [
 		{
-			title: "💦 Activitats per no passar calor aquest estiu a Catalunya",
-			link: "https://escapadesenparella.cat/llistes/activitats-per-no-passar-calor-vacances-estiu-catalunya",
+			title: "🍂🍁 Què fer aquesta tardor a Catalunya: 17 escapades que no et pots perdre",
+			link: "https://escapadesenparella.cat/llistes/que-fer-tardor-catalunya-activitats-on-anar",
 		},
 		{
 			title: "⛰️ 11 activitats per descobrir el Pallars Sobirà",
