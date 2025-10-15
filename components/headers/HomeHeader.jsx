@@ -78,7 +78,7 @@ const Hero = () => {
 											</div>
 										</div>
 										<h1
-											className="mt-4 lg:mt-6 mb-0 text-balance"
+											className="mt-4 lg:mt-6 mb-0 text-balance max-w-[22ch] mx-auto"
 											dangerouslySetInnerHTML={{
 												__html: heroText.title,
 											}}

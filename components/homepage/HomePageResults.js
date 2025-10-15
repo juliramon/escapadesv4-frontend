@@ -110,68 +110,73 @@ const HomePageResults = ({
 			<section className="pt-12 md:pt-16 lg:pt-32">
 				<div className="container">
 					<h2 className="text-center max-w-7xl mx-auto mb-8 md:mb-16">
-						<span className="font-condensed subtitle block mb-5">
+						<span className="font-condensed subtitle block">
 							Centenars d'experiències i allotjaments
 						</span>
-						<span className="inline-block mr-4">
-							per a escapades{" "}
-						</span>
-						{state.featuredCategories.map((el, idx) => {
-							const image = el.image;
-							const imagePath = image?.substring(0, 51);
-							const imageId = image?.substring(63);
-							const imageIdWebp = image
-								?.substring(63)
-								.replace("jpg", "webp");
-							const imageImgMobile = `${imagePath}w_32,h_32,c_fill/${imageId}`;
-							const imageImgWebpMobile = `${imagePath}f_webp/w_32,h_32,c_fill/${imageIdWebp}`;
-							const imageImgWebp = `${imagePath}f_webp/w_80,h_80,c_fill/${imageIdWebp}`;
-							const imageImg = `${imagePath}w_80,h_80,c_fill/${imageId}`;
 
-							return (
-								<Link href={`/${el.slug}`} key={idx}>
-									<a className="underline inline-flex items-center relative top-2 mb-3 md:top-4 md:mr-4">
-										<picture className="w-8 md:w-20 h-8 md:h-20 mr-2.5 md:mr-4 rounded-md md:rounded-2xl overflow-hidden inline-block rotate-[5deg]">
-											<source
-												srcSet={imageImgWebpMobile}
-												media="(max-width: 768px)"
-												type="image/webp"
-											/>
-											<source
-												srcSet={imageImgMobile}
-												media="(max-width: 768px)"
-											/>
-											<source
-												srcSet={imageImgWebp}
-												media="(min-width: 768px)"
-												type="image/webp"
-											/>
-											<source
-												srcSet={imageImg}
-												media="(min-width: 768px)"
-											/>
-											<img
-												src={imageImgMobile}
-												alt={el.title}
-												width={32}
-												height={32}
-												className="w-full h-full object-cover"
-												loading="lazy"
-											/>
-										</picture>
-										{el.pluralName === "aventura"
-											? "d'"
-											: ""}
-										{el.pluralName}
-										{idx <
-										state.featuredCategories.length - 1
-											? ", "
-											: ""}
-									</a>
-								</Link>
-							);
-						})}
-						<span className="block mt-2 md:mt-4">i molt més</span>
+						<div className="flex flex-wrap items-center justify-center mt-6 md:mt-8 gap-y-2.5">
+							<span className="inline-block mr-4">
+								per a escapades{" "}
+							</span>
+							{state.featuredCategories.map((el, idx) => {
+								const image = el.image;
+								const imagePath = image?.substring(0, 51);
+								const imageId = image?.substring(63);
+								const imageIdWebp = image
+									?.substring(63)
+									.replace("jpg", "webp");
+								const imageImgMobile = `${imagePath}w_32,h_32,c_fill/${imageId}`;
+								const imageImgWebpMobile = `${imagePath}f_webp/w_32,h_32,c_fill/${imageIdWebp}`;
+								const imageImgWebp = `${imagePath}f_webp/w_80,h_80,c_fill/${imageIdWebp}`;
+								const imageImg = `${imagePath}w_80,h_80,c_fill/${imageId}`;
+
+								return (
+									<Link href={`/${el.slug}`} key={idx}>
+										<a className="underline inline-flex items-center relative mr-2.5 lg:mr-4">
+											<picture className="w-8 h-8 md:w-14 md:h-14 lg:w-16 lg:h-16 xl:w-20 xl:h-20 mr-2.5 lg:mr-4 rounded-md md:rounded-2xl overflow-hidden inline-block rotate-[5deg]">
+												<source
+													srcSet={imageImgWebpMobile}
+													media="(max-width: 768px)"
+													type="image/webp"
+												/>
+												<source
+													srcSet={imageImgMobile}
+													media="(max-width: 768px)"
+												/>
+												<source
+													srcSet={imageImgWebp}
+													media="(min-width: 768px)"
+													type="image/webp"
+												/>
+												<source
+													srcSet={imageImg}
+													media="(min-width: 768px)"
+												/>
+												<img
+													src={imageImgMobile}
+													alt={el.title}
+													width={32}
+													height={32}
+													className="w-full h-full object-cover"
+													loading="lazy"
+												/>
+											</picture>
+											{el.pluralName === "aventura"
+												? "d'"
+												: ""}
+											{el.pluralName}
+											{idx <
+											state.featuredCategories.length - 1
+												? ", "
+												: ""}
+										</a>
+									</Link>
+								);
+							})}
+							<span className="inline-flex mr-2.5 lg:mr-4">
+								i molt més
+							</span>
+						</div>
 					</h2>
 					<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5 mt-4 lg:mt-7">
 						{state.mostRecentGetaways.length > 0
@@ -320,7 +325,7 @@ const HomePageResults = ({
 					</div>
 					<div className="flex flex-wrap items-center justify-center gap-2.5 mt-6 md:mt-12">
 						<div className="w-full lg:w-auto">
-							<Link href={"/experiencies"}>
+							<Link href={"/activitats"}>
 								<a
 									title={
 										"Veure més experiències originals a Catalunya"
