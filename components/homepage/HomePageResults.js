@@ -7,7 +7,7 @@ import "@splidejs/react-splide/css/core";
 
 const HomePageResults = ({
 	featuredCategories,
-	featuredRegions,
+	featuredDestinations,
 	featuredActivities,
 	mostRecentPlaces,
 	mostRecentStories,
@@ -15,7 +15,7 @@ const HomePageResults = ({
 	const initialState = {
 		mostRecentGetaways: mostRecentPlaces,
 		featuredActivities: featuredActivities,
-		featuredRegions: featuredRegions,
+		featuredDestinations: featuredDestinations,
 		mostRecentStories: mostRecentStories,
 		featuredCategories: featuredCategories,
 		emptyBlocksPerRow: [0, 1, 2, 3],
@@ -352,7 +352,7 @@ const HomePageResults = ({
 				</div>
 			</section>
 
-			{/* Featured regions */}
+			{/* Featured destinations */}
 			<section className="py-12 md:pt-16 md:pb-0 lg:pt-20 bg-tertiary-50 md:bg-transparent mt-12 md:mt-0">
 				<div className="container">
 					<div className="bg-tertiary-50 rounded-2xl md:py-12 lg:py-20 md:px-12 lg:px-16">
@@ -387,15 +387,15 @@ const HomePageResults = ({
 								aria-label="Zones per descobrir"
 							>
 								<SplideTrack>
-									{state.featuredRegions
-										? state.featuredRegions.map(
+									{state.featuredDestinations
+										? state.featuredDestinations.map(
 												(el, idx) => {
 													return (
 														<SplideSlide key={idx}>
 															<article>
 																<Link
 																	href={
-																		"escapades-catalunya/" +
+																		"/destinacions/" +
 																		el.slug
 																	}
 																>

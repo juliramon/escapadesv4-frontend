@@ -13,7 +13,7 @@ import FancyboxUtil from "../../utils/FancyboxUtils";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
 
-const ActivityListing = ({ activityDetails }) => {
+const ActivityListing = ({ activityDetails, destinationNames = [] }) => {
 	const { user } = useContext(UserContext);
 	const router = useRouter();
 
@@ -303,9 +303,15 @@ const ActivityListing = ({ activityDetails }) => {
 		</li>
 	));
 
-	const activityRegion = state.activity.region.map((region, idx) => (
-		<span key={idx}>{region}</span>
-	));
+	// `destinations` guarda referències en text pla, així que els noms es resolen
+	// a getServerSideProps. Si l'activitat encara no en té cap, es recorre a la
+	// província que ve de Google.
+	const activityDestinations =
+		destinationNames.length > 0
+			? destinationNames.join(", ")
+			: state.activity.activity_province ||
+			  state.activity.activity_state ||
+			  "";
 
 	return (
 		<>
@@ -377,7 +383,7 @@ const ActivityListing = ({ activityDetails }) => {
 										<h1>{title}</h1>
 										<ul className="flex flex-wrap items-center p-0 -mx-3 mt-2 mb-0 md:mb-5">
 											{state.activity.place_rating !==
-												undefined ? (
+											undefined ? (
 												<li className="flex flex-wrap items-center px-2">
 													<svg
 														xmlns="http://www.w3.org/2000/svg"
@@ -431,24 +437,28 @@ const ActivityListing = ({ activityDetails }) => {
 														r={9}
 													></circle>
 												</svg>
-												<span className="text-primary-400 opacity-80">{`${state.activity
+												<span className="text-primary-400 opacity-80">{`${
+													state.activity
 														.activity_locality ===
-														undefined
+													undefined
 														? ""
 														: state.activity
-															.activity_locality
-													}${state.activity
+																.activity_locality
+												}${
+													state.activity
 														.activity_locality ===
-														undefined
+													undefined
 														? ""
 														: ","
-													} ${state.activity
-														.pactivity_province ||
+												} ${
+													state.activity
+														.activity_province ||
 													state.activity
 														.activity_state
-													}, ${state.activity
+												}, ${
+													state.activity
 														.activity_country
-													}`}</span>
+												}`}</span>
 											</li>
 										</ul>
 									</div>
@@ -615,7 +625,7 @@ const ActivityListing = ({ activityDetails }) => {
 												<div className="w-full lg:w-1/2 flex flex-wrap h-40 lg:h-50vh">
 													{state.activity
 														.images[1] !==
-														undefined ? (
+													undefined ? (
 														<div
 															className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
 															data-fancybox="gallery"
@@ -638,7 +648,7 @@ const ActivityListing = ({ activityDetails }) => {
 													) : null}
 													{state.activity
 														.images[2] !==
-														undefined ? (
+													undefined ? (
 														<div
 															className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
 															data-fancybox="gallery"
@@ -661,7 +671,7 @@ const ActivityListing = ({ activityDetails }) => {
 													) : null}
 													{state.activity
 														.images[3] !==
-														undefined ? (
+													undefined ? (
 														<div
 															className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
 															data-fancybox="gallery"
@@ -684,7 +694,7 @@ const ActivityListing = ({ activityDetails }) => {
 													) : null}
 													{state.activity
 														.images[4] !==
-														undefined ? (
+													undefined ? (
 														<div
 															className="w-1/4 lg:w-1/2 p-0.5 flex-auto h-full lg:h-1/2"
 															data-fancybox="gallery"
@@ -800,7 +810,7 @@ const ActivityListing = ({ activityDetails }) => {
 																L'
 																{state.activity
 																	.type ==
-																	"activitat"
+																"activitat"
 																	? "allotjament"
 																	: "activitat"}{" "}
 																està catalogada
@@ -870,7 +880,7 @@ const ActivityListing = ({ activityDetails }) => {
 																L'
 																{state.activity
 																	.type ==
-																	"activitat"
+																"activitat"
 																	? "allotjament"
 																	: "activitat"}{" "}
 																té una durada
@@ -882,7 +892,7 @@ const ActivityListing = ({ activityDetails }) => {
 																}{" "}
 																{state.activity
 																	.duration >
-																	1
+																1
 																	? "hores"
 																	: "hora"}
 															</p>
@@ -901,7 +911,7 @@ const ActivityListing = ({ activityDetails }) => {
 																}{" "}
 																{state.activity
 																	.duration >
-																	1
+																1
 																	? "hores"
 																	: "hora"}
 																.
@@ -941,7 +951,7 @@ const ActivityListing = ({ activityDetails }) => {
 																L'
 																{state.activity
 																	.type ==
-																	"activitat"
+																"activitat"
 																	? "allotjament"
 																	: "activitat"}{" "}
 																es troba a la
@@ -949,7 +959,7 @@ const ActivityListing = ({ activityDetails }) => {
 																de{" "}
 																<span className="capitalize">
 																	{
-																		activityRegion
+																		activityDestinations
 																	}
 																</span>
 															</p>
@@ -994,7 +1004,7 @@ const ActivityListing = ({ activityDetails }) => {
 																L'
 																{state.activity
 																	.type ==
-																	"activitat"
+																"activitat"
 																	? "allotjament"
 																	: "activitat"}{" "}
 																té un preu
@@ -1197,9 +1207,34 @@ export async function getServerSideProps({ params }) {
 		};
 	}
 
+	// El backend desa `destinations` com a array de strings (ids, o slugs en
+	// documents antics) i per tant no els pot popular. Es resolen aquí per poder
+	// mostrar el nom de la destinació i no l'identificador.
+	let destinationNames = [];
+	if (
+		Array.isArray(activityDetails.destinations) &&
+		activityDetails.destinations.length > 0
+	) {
+		try {
+			const allDestinations = await service.getDestinations();
+			destinationNames = activityDetails.destinations
+				.map((ref) => {
+					const match = allDestinations.find(
+						(d) =>
+							String(d._id) === String(ref) || d.slug === ref
+					);
+					return match ? match.title : null;
+				})
+				.filter(Boolean);
+		} catch (err) {
+			destinationNames = [];
+		}
+	}
+
 	return {
 		props: {
 			activityDetails,
+			destinationNames,
 		},
 	};
 }

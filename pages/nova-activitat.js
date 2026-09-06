@@ -11,7 +11,11 @@ import EditorNavbar from "../components/editor/EditorNavbar";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
 import Placeholder from "@tiptap/extension-placeholder";
-import { handleFilesUpload, removeImage } from "../utils/helpers";
+import {
+	handleFilesUpload,
+	removeImage,
+	destinationUploadFolderKey,
+} from "../utils/helpers";
 import Link from "@tiptap/extension-link";
 
 const ActivityForm = () => {
@@ -47,7 +51,7 @@ const ActivityForm = () => {
 			slug: "",
 			categories: [],
 			seasons: [],
-			region: "",
+			destinations: [],
 			cover: "",
 			blopCover: "",
 			images: [],
@@ -89,14 +93,29 @@ const ActivityForm = () => {
 	const [editorData, setEditorData] = useState({});
 	const [reasonsEditorData, setReasonsEditorData] = useState({});
 
+	const [destinations, setDestinations] = useState([]);
+
+	const service = new ContentService();
+	const paymentService = new PaymentService();
+
+	useEffect(() => {
+		const fetchDestinations = async () => {
+			try {
+				const data = await service.getDestinations();
+				setDestinations(Array.isArray(data) ? data : []);
+			} catch (err) {
+				console.error(err);
+				setDestinations([]);
+			}
+		};
+		fetchDestinations();
+	}, []);
+
 	useEffect(() => {
 		if (router && router.route) {
 			setQueryId(router.route);
 		}
 	}, [router]);
-
-	const service = new ContentService();
-	const paymentService = new PaymentService();
 
 	// Fetch data
 	useEffect(() => {
@@ -200,7 +219,7 @@ const ActivityForm = () => {
 			choosenFiles.forEach((file) => filesToUpload.push(file));
 
 			const blopImages = filesToUpload.map((file) =>
-				URL.createObjectURL(file)
+				URL.createObjectURL(file),
 			);
 			const images = filesToUpload.map((image) => image);
 			setState({
@@ -225,7 +244,7 @@ const ActivityForm = () => {
 					const objImages = removeImage(
 						idx,
 						state.formData.blopImages,
-						state.formData.images
+						state.formData.images,
 					);
 					setState({
 						...state,
@@ -283,12 +302,6 @@ const ActivityForm = () => {
 		}
 	};
 
-	const checkIfRegionChecked = (val) => {
-		if (state.formData.region) {
-			return state.formData.region.includes(val) ? true : false;
-		}
-	};
-
 	const handleCheckCategory = (e) => {
 		setState({
 			...state,
@@ -310,11 +323,35 @@ const ActivityForm = () => {
 		});
 	};
 
-	const handleCheckRegion = (e) => {
+	const handleCheckDestination = (e) => {
+		let nextDestinations = [...state.formData.destinations];
+		const v = e.target.value;
+		if (e.target.checked) {
+			if (
+				!nextDestinations.some((d) => String(d) === String(v))
+			) {
+				nextDestinations.push(v);
+			}
+		} else {
+			nextDestinations = nextDestinations.filter(
+				(dest) => String(dest) !== String(v)
+			);
+		}
 		setState({
 			...state,
-			formData: { ...state.formData, region: e.target.id },
+			formData: {
+				...state.formData,
+				destinations: nextDestinations,
+				emptyForm: false,
+			},
 		});
+	};
+
+	const checkIfDestinationChecked = (val) => {
+		const list = state.formData.destinations;
+		if (!list || !list.length) return false;
+		const v = String(val);
+		return list.some((d) => String(d) === v);
 	};
 
 	const handleCheckOrganization = (e) => {
@@ -349,7 +386,7 @@ const ActivityForm = () => {
 			slug,
 			categories,
 			seasons,
-			region,
+			destinations,
 			coverCloudImage,
 			cloudImages,
 			phone,
@@ -383,7 +420,7 @@ const ActivityForm = () => {
 				subtitle,
 				categories,
 				seasons,
-				region,
+				destinations,
 				coverCloudImage,
 				cloudImages,
 				editorData.html,
@@ -408,7 +445,7 @@ const ActivityForm = () => {
 				relatedStory,
 				organization,
 				metaTitle,
-				metaDescription
+				metaDescription,
 			)
 			.then(() => {
 				/**
@@ -430,7 +467,14 @@ const ActivityForm = () => {
 		const { uploadedCover, uploadedImages, success } =
 			await handleFilesUpload(
 				state.formData.cover,
-				state.formData.images
+				state.formData.images,
+				{
+					uploadModel: "activities",
+					uploadFolder: destinationUploadFolderKey(
+						state.formData.slug,
+						state.formData.title
+					),
+				}
 			);
 
 		if (success.status === 200) {
@@ -464,7 +508,7 @@ const ActivityForm = () => {
 			slug,
 			categories,
 			seasons,
-			region,
+			destinations,
 			activity_full_address,
 			phone,
 			website,
@@ -484,7 +528,8 @@ const ActivityForm = () => {
 				slug &&
 				categories &&
 				seasons &&
-				region &&
+				destinations &&
+				destinations.length > 0 &&
 				activity_full_address &&
 				phone &&
 				website &&
@@ -531,7 +576,7 @@ const ActivityForm = () => {
 						<span className="text-sm">{el.orgName}</span>
 					</div>
 				</label>
-			)
+			),
 		);
 	}
 
@@ -541,11 +586,11 @@ const ActivityForm = () => {
 				? setState({
 						...state,
 						formData: { ...state.formData, isVerified: true },
-				  })
+					})
 				: setState({
 						...state,
 						formData: { ...state.formData, isVerified: false },
-				  });
+					});
 		}
 	};
 
@@ -666,7 +711,7 @@ const ActivityForm = () => {
 																handleCheckCategory
 															}
 															checked={checkIfCategoryChecked(
-																"romantica"
+																"romantica",
 															)}
 														/>
 														Romàntica
@@ -684,7 +729,7 @@ const ActivityForm = () => {
 																handleCheckCategory
 															}
 															checked={checkIfCategoryChecked(
-																"aventura"
+																"aventura",
 															)}
 														/>
 														Aventura
@@ -702,7 +747,7 @@ const ActivityForm = () => {
 																handleCheckCategory
 															}
 															checked={checkIfCategoryChecked(
-																"gastronomica"
+																"gastronomica",
 															)}
 														/>
 														Gastronòmica
@@ -720,7 +765,7 @@ const ActivityForm = () => {
 																handleCheckCategory
 															}
 															checked={checkIfCategoryChecked(
-																"cultural"
+																"cultural",
 															)}
 														/>
 														Cultural
@@ -738,7 +783,7 @@ const ActivityForm = () => {
 																handleCheckCategory
 															}
 															checked={checkIfCategoryChecked(
-																"relax"
+																"relax",
 															)}
 														/>
 														Relax
@@ -764,7 +809,7 @@ const ActivityForm = () => {
 																handleCheckSeason
 															}
 															checked={checkIfSeasonChecked(
-																"hivern"
+																"hivern",
 															)}
 														/>
 														Hivern
@@ -782,7 +827,7 @@ const ActivityForm = () => {
 																handleCheckSeason
 															}
 															checked={checkIfSeasonChecked(
-																"primavera"
+																"primavera",
 															)}
 														/>
 														Primavera
@@ -800,7 +845,7 @@ const ActivityForm = () => {
 																handleCheckSeason
 															}
 															checked={checkIfSeasonChecked(
-																"estiu"
+																"estiu",
 															)}
 														/>
 														Estiu
@@ -818,7 +863,7 @@ const ActivityForm = () => {
 																handleCheckSeason
 															}
 															checked={checkIfSeasonChecked(
-																"tardor"
+																"tardor",
 															)}
 														/>
 														Tardor
@@ -829,134 +874,38 @@ const ActivityForm = () => {
 														htmlFor="categoria"
 														className="form__label"
 													>
-														Regió de l'allotjament
+														Destinació on es troba
+														l'activitat
 													</label>
-													<label
-														htmlFor="barcelona"
-														className="form__label flex items-center"
-													>
-														<input
-															type="radio"
-															name="placeRegion"
-															id="barcelona"
-															className="mr-2"
-															onChange={
-																handleCheckRegion
-															}
-															checked={checkIfRegionChecked(
-																"barcelona"
-															)}
-														/>
-														Barcelona
-													</label>
-													<label
-														htmlFor="tarragona"
-														className="form__label flex items-center"
-													>
-														<input
-															type="radio"
-															name="placeRegion"
-															id="tarragona"
-															className="mr-2"
-															onChange={
-																handleCheckRegion
-															}
-															checked={checkIfRegionChecked(
-																"tarragona"
-															)}
-														/>
-														Tarragona
-													</label>
-													<label
-														htmlFor="girona"
-														className="form__label flex items-center"
-													>
-														<input
-															type="radio"
-															name="placeRegion"
-															id="girona"
-															className="mr-2"
-															onChange={
-																handleCheckRegion
-															}
-															checked={checkIfRegionChecked(
-																"girona"
-															)}
-														/>
-														Girona
-													</label>
-													<label
-														htmlFor="lleida"
-														className="form__label flex items-center"
-													>
-														<input
-															type="radio"
-															name="placeRegion"
-															id="lleida"
-															className="mr-2"
-															onChange={
-																handleCheckRegion
-															}
-															checked={checkIfRegionChecked(
-																"lleida"
-															)}
-														/>
-														Lleida
-													</label>
-													<label
-														htmlFor="costaBrava"
-														className="form__label flex items-center"
-													>
-														<input
-															type="radio"
-															name="placeRegion"
-															id="costaBrava"
-															className="mr-2"
-															onChange={
-																handleCheckRegion
-															}
-															checked={checkIfRegionChecked(
-																"costaBrava"
-															)}
-														/>
-														Costa Brava
-													</label>
-													<label
-														htmlFor="costaDaurada"
-														className="form__label flex items-center"
-													>
-														<input
-															type="radio"
-															name="placeRegion"
-															id="costaDaurada"
-															className="mr-2"
-															onChange={
-																handleCheckRegion
-															}
-															checked={checkIfRegionChecked(
-																"costaDaurada"
-															)}
-														/>
-														Costa Daurada
-													</label>
-													<label
-														htmlFor="pirineus"
-														className="form__label flex items-center"
-													>
-														<input
-															type="radio"
-															name="placeRegion"
-															id="pirineus"
-															className="mr-2"
-															onChange={
-																handleCheckRegion
-															}
-															checked={checkIfRegionChecked(
-																"pirineus"
-															)}
-														/>
-														Pirineus
-													</label>
+													<div className="max-h-48 overflow-y-auto border border-gray-300 rounded-md p-2">
+														{destinations.map(
+															(el) => (
+																<label
+																	key={el._id}
+																	htmlFor={`destination-${el._id}`}
+																	className="form__label flex items-center mb-2"
+																>
+																	<input
+																		type="checkbox"
+																		id={`destination-${el._id}`}
+																		value={String(
+																			el._id
+																		)}
+																		className="mr-2"
+																		onChange={
+																			handleCheckDestination
+																		}
+																		checked={checkIfDestinationChecked(
+																			String(
+																				el._id
+																			)
+																		)}
+																	/>
+																	{el.title}
+																</label>
+															)
+														)}
+													</div>
 												</div>
 											</div>
 
@@ -972,7 +921,7 @@ const ActivityForm = () => {
 													apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
 													style={{ width: "100%" }}
 													onPlaceSelected={(
-														activity
+														activity,
 													) => {
 														let activity_full_address,
 															activity_locality,
@@ -1021,7 +970,7 @@ const ActivityForm = () => {
 																	activity_country =
 																		el.long_name;
 																}
-															}
+															},
 														);
 
 														if (
@@ -1032,13 +981,13 @@ const ActivityForm = () => {
 																Object.values(
 																	activity
 																		.geometry
-																		.viewport
+																		.viewport,
 																)[0].hi;
 															activity_lng =
 																Object.values(
 																	activity
 																		.geometry
-																		.viewport
+																		.viewport,
 																)[1].hi;
 														}
 
@@ -1221,6 +1170,7 @@ const ActivityForm = () => {
 											<div className="form__group cover">
 												<span className="form__label">
 													Imatge de portada
+													(1200x630px)
 												</span>
 												<div className="flex items-center flex-col max-w-full mb-4">
 													<div className="bg-white border border-primary-100 rounded-tl-md rounded-tr-md w-full">
@@ -1288,6 +1238,7 @@ const ActivityForm = () => {
 											<div className="form__group images">
 												<span className="form__label">
 													Imatges d'aquesta activitat
+													(800x600px)
 												</span>
 												<div className="flex items-center flex-col max-w-full mb-4">
 													<div className="bg-white border border-primary-100 rounded-tl-md rounded-tr-md w-full">
@@ -1438,7 +1389,7 @@ const ActivityForm = () => {
 																		0
 																		? state.stories.map(
 																				(
-																					el
+																					el,
 																				) => {
 																					return (
 																						<option
@@ -1454,8 +1405,8 @@ const ActivityForm = () => {
 																							}
 																						</option>
 																					);
-																				}
-																		  )
+																				},
+																			)
 																		: null}
 																</select>
 															</div>
@@ -1576,15 +1527,13 @@ const ActivityForm = () => {
 
 				<div className="w-full fixed bottom-0 inset-x-0 bg-white border-t border-primary-200 py-2.5 z-50">
 					<div className="container flex items-center justify-end">
-						<div className="container">
-							<button
-								className="button button__primary button__lg"
-								type="submit"
-								onClick={handleSubmit}
-							>
-								Guardar canvis
-							</button>
-						</div>
+						<button
+							className="button button__primary button__lg"
+							type="submit"
+							onClick={handleSubmit}
+						>
+							Publicar
+						</button>
 					</div>
 				</div>
 			</div>

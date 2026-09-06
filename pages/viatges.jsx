@@ -59,7 +59,7 @@ const Trips = ({ tripCategories, featuredTripCategories }) => {
 												</span>
 											</li>
 										</ul>
-										<h1 className="mt-4 md:mt-7 mb-0">
+										<h1 className="mt-4 md:mt-7 mb-0 h2">
 											<span className="text-secondary-500">
 												Viatges
 											</span>{" "}

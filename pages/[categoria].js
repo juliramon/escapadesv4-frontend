@@ -147,7 +147,7 @@ const CategoryPage = ({
 							categoryDetails.isPlace ? "" : categoryDetails.title
 						}</span>`}
 						subtitle={`Us proposem <strong class="lowercase">${
-							allResults.length
+							totalItems
 						} ${
 							!categoryDetails.isPlace
 								? categoryDetails.title

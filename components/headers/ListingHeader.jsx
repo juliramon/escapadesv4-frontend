@@ -2,6 +2,7 @@ const ListingHeader = ({
 	title,
 	subtitle,
 	textHeader,
+	sponsorData,
 	breadcrumbLevel1,
 	breadcrumbLevel2,
 }) => {
@@ -48,9 +49,17 @@ const ListingHeader = ({
 						) : null}
 						{textHeader ? (
 							<div
-								className="mt-4 !mb-0 text-block--xl leading-normal max-w-[55ch] mx-auto"
+								className="!mb-0 text-block--xl leading-normal max-w-[55ch] mx-auto [&>p]:inline"
 								dangerouslySetInnerHTML={{ __html: textHeader }}
 							></div>
+						) : null}
+						{/* Les pàgines de categoria i destinació ja passaven aquest
+						    bloc, però el component no el rebia i el patrocini no
+						    es renderitzava enlloc. */}
+						{sponsorData ? (
+							<div className="mt-6 flex justify-center">
+								{sponsorData}
+							</div>
 						) : null}
 					</div>
 				</div>

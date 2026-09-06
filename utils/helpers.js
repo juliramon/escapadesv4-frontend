@@ -1,22 +1,28 @@
 /**
  * handleFilesUpload
  *
- * Utility function to upload images to Cloudinary CDN
- * The function expects two parameters
+ * Upload images to Cloudinary. Optionally target a model folder + subfolder
+ * (see backend configs/cloudinary.config.js: uploadModel, uploadFolder).
  *
- * @param {string} coverImage
- * @param {array} bodyImages
+ * @param {File} coverImage
+ * @param {File[]} bodyImages
+ * @param {{ uploadFolder?: string, uploadModel?: string }} [options]
  */
 
 import ContentService from "../services/contentService";
 
-const handleFilesUpload = async (coverImage, bodyImages) => {
+const handleFilesUpload = async (coverImage, bodyImages, options = {}) => {
+	const { uploadFolder, uploadModel } = options || {};
 	const service = new ContentService();
 
 	const uploadCoverImage = async () => {
 		const uploadData = new FormData();
 		uploadData.append("imageUrl", coverImage);
-		const response = await service.uploadFile(uploadData);
+		const response = await service.uploadFile(
+			uploadData,
+			uploadFolder,
+			uploadModel
+		);
 		return response.path;
 	};
 
@@ -25,7 +31,11 @@ const handleFilesUpload = async (coverImage, bodyImages) => {
 		uploadData.append("imageUrl", bodyImages[index]);
 
 		try {
-			const uploadedFile = await service.uploadFile(uploadData);
+			const uploadedFile = await service.uploadFile(
+				uploadData,
+				uploadFolder,
+				uploadModel
+			);
 			uploadedImages.push(uploadedFile.path);
 			if (index + 1 < bodyImages.length) {
 				await uploadBodyImages(index + 1, bodyImages);
@@ -87,6 +97,77 @@ const removeImage = (elIdx, blopImages, images) => {
 		arrBlopImages,
 		arrImages,
 	};
+};
+
+/**
+ * Single segment for getaways-guru/{model}/{segment}/ — prefer slug, else slugified title.
+ * Ignores the literal "slug" used as an empty placeholder in some forms.
+ */
+const destinationUploadFolderKey = (slug, title) => {
+	let key = (slug || "").trim();
+	if (key === "slug") {
+		key = "";
+	}
+	if (key) return key;
+	if (title && typeof title === "string") {
+		key = title
+			.normalize("NFD")
+			.replace(/[\u0300-\u036f]/g, "")
+			.toLowerCase()
+			.replace(/[^a-z0-9]+/g, "-")
+			.replace(/^-+|-+$/g, "")
+			.slice(0, 80);
+	}
+	return key || "sense-slug";
+};
+
+/**
+ * Align activity/place destination values with checkbox values (Mongo _id strings).
+ * Accepts stored slugs or id strings; returns unique id strings using loaded docs.
+ */
+const normalizeDestinationRefsToIds = (refs, destinationDocs) => {
+	if (!Array.isArray(refs)) return [];
+	if (!Array.isArray(destinationDocs) || destinationDocs.length === 0) {
+		return [...refs].filter((r) => r != null && r !== "");
+	}
+	return [
+		...new Set(
+			refs
+				.map((ref) => {
+					if (ref == null || ref === "") return null;
+					const s = String(ref);
+					const byId = destinationDocs.find(
+						(d) => d._id != null && String(d._id) === s
+					);
+					if (byId) return String(byId._id);
+					const bySlug = destinationDocs.find((d) => d.slug === s);
+					if (bySlug) return String(bySlug._id);
+					return s;
+				})
+				.filter(Boolean)
+		),
+	];
+};
+
+/**
+ * Upload File entries in a carousel list; keep existing remote URL strings.
+ *
+ * @param {Array<File|string>} items
+ * @param {(formData: FormData) => Promise<{ path: string }>} uploadFile
+ */
+const uploadCarouselMediaItems = async (items, uploadFile) => {
+	const paths = [];
+	for (const item of items) {
+		if (typeof File !== "undefined" && item instanceof File) {
+			const uploadData = new FormData();
+			uploadData.append("imageUrl", item);
+			const uploadedFile = await uploadFile(uploadData);
+			paths.push(uploadedFile.path);
+		} else if (item != null && item !== "") {
+			paths.push(item);
+		}
+	}
+	return paths;
 };
 
 /**
@@ -190,6 +271,9 @@ const copyTextToClipboard = (e) => {
 export {
 	handleFilesUpload,
 	removeImage,
+	destinationUploadFolderKey,
+	normalizeDestinationRefsToIds,
+	uploadCarouselMediaItems,
 	formatDateTimeToISODate,
 	getPicturesBySeason,
 	copyTextToClipboard,

@@ -114,10 +114,10 @@ const PressMedia = () => {
 				<NavigationBar />
 
 				{/* Section heading */}
-				<section className="pt-6">
+				<section className="pt-8 md:pt-12 lg:pt-20">
 					<div className="container">
 						{/* Breadcrumb + article header */}
-						<ul className="breadcrumb max-w-5xl mx-auto justify-center">
+						<ul className="breadcrumb max-w-3xl mx-auto justify-center">
 							<li className="breadcrumb__item">
 								<a
 									href="/"
@@ -135,15 +135,15 @@ const PressMedia = () => {
 						</ul>
 
 						{/* Article heading + subtitle + meta info */}
-						<div className="relative pt-4 md:pt-8">
+						<div className="relative pt-4">
 							<div className="md:max-w-xl lg:max-w-5xl mx-auto text-center">
-								<h1 className="font-display max-w-2xl my-0 mx-auto">
+								<h1 className="my-0 text-balance">
 									<span class="text-secondary-500">
 										Premsa
 									</span>{" "}
 									i mitjans
 								</h1>
-								<p className="text-block mt-2.5 mb-3 md:mt-3 md:mb-4 max-w-2xl mx-auto">
+								<p className="mt-4 !mb-0 text-block--xl leading-normal max-w-[55ch] mx-auto">
 									Recull de col·laboracions i mencions
 									d'Escapadesenparella.cat a la premsa i als
 									mitjans.

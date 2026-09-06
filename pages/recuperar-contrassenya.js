@@ -6,7 +6,7 @@ import { Button, Form, Alert } from "react-bootstrap";
 import AuthService from "../services/authService";
 import Router from "next/router";
 
-const ResetPassword = ({ userData }) => {
+const ResetPassword = ({ userData, resetToken }) => {
 	const initialState = {
 		formData: {
 			password: "",
@@ -27,8 +27,9 @@ const ResetPassword = ({ userData }) => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const { password } = state.formData;
+		// El token surt de la URL: l'API ja no el retorna dins de userData.
 		service
-			.resetPassword(userData._id, password, userData.resetPasswordToken)
+			.resetPassword(userData._id, password, resetToken)
 			.then((res) => {
 				if (res.status) {
 					setState({
@@ -89,6 +90,29 @@ const ResetPassword = ({ userData }) => {
 						<line x1="10.85" y1="12.15" x2="19" y2="4" />
 						<line x1="18" y1="5" x2="20" y2="7" />
 						<line x1="15" y1="8" x2="17" y2="10" />
+					</svg>
+					{state.errorMessage.message}
+				</Alert>
+			);
+		} else {
+			errorMessage = (
+				<Alert variant="danger">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						className="icon icon-tabler icon-tabler-alert-circle"
+						width="18"
+						height="18"
+						viewBox="0 0 24 24"
+						strokeWidth="1.5"
+						stroke="#fff"
+						fill="none"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+					>
+						<path stroke="none" d="M0 0h24v24H0z" />
+						<circle cx="12" cy="12" r="9" />
+						<line x1="12" y1="8" x2="12" y2="12" />
+						<line x1="12" y1="16" x2="12.01" y2="16" />
 					</svg>
 					{state.errorMessage.message}
 				</Alert>
@@ -164,7 +188,15 @@ const ResetPassword = ({ userData }) => {
 
 export async function getServerSideProps(req) {
 	const service = new ContentService();
-	const userData = await service.getUserData(req.query.token);
+	const resetToken = req.query.token;
+
+	if (!resetToken) {
+		return {
+			notFound: true,
+		};
+	}
+
+	const userData = await service.getUserData(resetToken);
 
 	if (!userData) {
 		return {
@@ -175,6 +207,7 @@ export async function getServerSideProps(req) {
 	return {
 		props: {
 			userData: userData,
+			resetToken: resetToken,
 		},
 	};
 }

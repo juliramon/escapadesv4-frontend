@@ -1,24 +1,26 @@
 import Link from "next/link";
 import { useState } from "react";
 import ContentService from "../../services/contentService";
-import EditRegionModal from "../modals/EditRegionModal";
+import EditDestinationModal from "../modals/EditDestinationModal";
 import ShareModal from "../modals/ShareModal";
 
-const RegionBox = ({
+const DestinationBox = ({
 	id,
-	name,
-	pluralName,
-	illustration,
-	image,
-	imageCaption,
-	title,
-	richTitle,
-	subtitle,
 	slug,
+	title,
+	longTitle,
+	subtitle,
+	image,
+	reviewText,
+	carouselImages,
+	mapLocation,
+	mostLikedText,
+	pointsOfInterestText,
+	mustSeeText,
 	seoTextHeader,
 	seoText,
-	icon,
 	isSponsored,
+	isFeatured,
 	sponsorURL,
 	sponsorLogo,
 	sponsorClaim,
@@ -26,26 +28,28 @@ const RegionBox = ({
 }) => {
 	const [dropdownVisibility, setDropdownVisibility] = useState(false);
 
-	let shortenedSubtitle = subtitle.slice(0, 70);
+	// El subtítol és opcional al model de destinació.
+	let shortenedSubtitle = subtitle ? subtitle.slice(0, 70) : "";
 	const service = new ContentService();
-	const removeItem = () => service.removeCategory(id).then(() => fetchData());
+	const removeItem = () =>
+		service.removeDestination(id).then(() => fetchData());
 
-	const urlToShare = `https://escapadesenparella.cat/${slug}`;
+	const urlToShare = `https://escapadesenparella.cat/destinacions/${slug}`;
 
 	const [shareModalVisibility, setShareModalVisibility] = useState(false);
 	const handleShareModalVisibility = () => setShareModalVisibility(true);
 	const hideShareModalVisibility = () => setShareModalVisibility(false);
 
-	const [editRegionModalVisibility, setEditRegionModalVisibility] =
+	const [editDestinationModalVisibility, setEditDestinationModalVisibility] =
 		useState(false);
-	const handleEditRegionModalVisibility = () =>
-		setEditRegionModalVisibility(true);
-	const hideEditRegionModalVisibility = () =>
-		setEditRegionModalVisibility(false);
+	const handleEditDestinationModalVisibility = () =>
+		setEditDestinationModalVisibility(true);
+	const hideEditDestinationModalVisibility = () =>
+		setEditDestinationModalVisibility(false);
 
 	return (
 		<div className="content rounded-md box flex items-center w-full bg-primary-50 border border-primary-100 mb-2.5 px-5 py-4">
-			<Link href={`/${slug}`}>
+			<Link href={`/destinacions/${slug}`}>
 				<a className="flex items-center justify-between w-full">
 					<div className="flex items-center justify-center bg-white overflow-hidden h-12 w-12 rounded-md p-0 mr-5 border border-primary-100">
 						<img
@@ -83,11 +87,12 @@ const RegionBox = ({
 					</svg>
 				</button>
 				<ul
-					className={`dropdown__menu ${dropdownVisibility ? "block" : "hidden"
-						}`}
+					className={`dropdown__menu ${
+						dropdownVisibility ? "block" : "hidden"
+					}`}
 				>
 					<li className="border-b border-primary-100 w-full">
-						<Link href={`/${slug}`}>
+						<Link href={`/destinacions/${slug}`}>
 							<a className="dropdown__menu_item">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -112,7 +117,9 @@ const RegionBox = ({
 					</li>
 					<li className="border-b border-primary-100 w-full">
 						<button
-							onClick={() => handleEditRegionModalVisibility()}
+							onClick={() =>
+								handleEditDestinationModalVisibility()
+							}
 							className="dropdown__menu_item"
 						>
 							<svg
@@ -172,23 +179,25 @@ const RegionBox = ({
 				hideModal={hideShareModalVisibility}
 				url={urlToShare}
 			/>
-			<EditRegionModal
-				visibility={editRegionModalVisibility}
-				hideModal={hideEditRegionModalVisibility}
+			<EditDestinationModal
+				visibility={editDestinationModalVisibility}
+				hideModal={hideEditDestinationModalVisibility}
 				id={id}
 				slug={slug}
-				name={name}
-				pluralName={pluralName}
 				title={title}
-				richTitle={richTitle}
+				longTitle={longTitle}
 				subtitle={subtitle}
-				illustration={illustration}
 				image={image}
-				imageCaption={imageCaption}
-				icon={icon}
+				reviewText={reviewText}
+				carouselImages={carouselImages}
+				mapLocation={mapLocation}
+				mostLikedText={mostLikedText}
+				pointsOfInterestText={pointsOfInterestText}
+				mustSeeText={mustSeeText}
 				seoTextHeader={seoTextHeader}
 				seoText={seoText}
 				isSponsored={isSponsored}
+				isFeatured={isFeatured}
 				sponsorURL={sponsorURL}
 				sponsorLogo={sponsorLogo}
 				sponsorClaim={sponsorClaim}
@@ -198,4 +207,4 @@ const RegionBox = ({
 	);
 };
 
-export default RegionBox;
+export default DestinationBox;

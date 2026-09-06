@@ -143,7 +143,7 @@ const StoryListing = ({ storyDetails }) => {
 				<NavigationBar />
 				<main>
 					<article>
-						<section className="pt-8 md:pt-10 lg:pt-12 pb-6 md:pb-8">
+						<section className="pt-8 md:pt-10 lg:pt-12">
 							{/* Breadcrumb + article header */}
 							<div className="w-full">
 								<div className="container">
@@ -179,60 +179,51 @@ const StoryListing = ({ storyDetails }) => {
 											{storyDetails.subtitle}
 										</p>
 										{/* Informació de l'autor */}
-										<div className="flex flex-wrap items-center gap-4 mt-4">
-											<div className="flex flex-wrap items-center gap-x-1.5">
-												<div className="rounded-full overflow-hidden w-8 h-8 mr-1.5">
-													<picture>
-														<img
-															src={coverAuthorImg}
-															alt={
-																storyDetails
-																	.owner
-																	.fullName
-															}
-															className={
-																"w-full h-full object-cover"
-															}
-															width={32}
-															height={32}
-															loading="eager"
-															fetchpriority="high"
-														/>
-													</picture>
-												</div>
-												<span className="text-15 text-grey-400 inline-block">
-													{
-														storyDetails.owner
-															.fullName
-													}
-												</span>
-												<span className="text-15 text-grey-400 inline-block ">
-													–
-												</span>
-												<span className="text-15 text-grey-400 inline-block ">
-													<time
-														dateTime={formatDateTimeToISODate(
-															storyDetails.createdAt
-														)}
-													>
-														<u>
-															{formatDateTimeToISODate(
-																storyDetails.createdAt
-															)}
-														</u>
-													</time>
-												</span>
+										<div className="flex flex-wrap items-stretch m-0 p-0 gap-x-2 mt-6">
+											<div className="flex flex-wrap items-center text-primary-500 bg-gray-100 rounded-lg py-2.5 px-3 text-sm gap-x-1">
+												<picture className="inline-block rounded-full overflow-hidden w-8 h-8 mr-1.5">
+													<img
+														src={coverAuthorImg}
+														alt={
+															storyDetails.owner
+																.fullName
+														}
+														className={
+															"w-full h-full object-cover"
+														}
+														width={32}
+														height={32}
+														loading="eager"
+														fetchpriority="high"
+													/>
+												</picture>
+												{storyDetails.owner.fullName}
 											</div>
-											<ShareBarModal
-												picture={coverImgMob}
-												title={storyDetails.title}
-												rating={null}
-												slug={`https://escapadesenparella.cat/histories/${storyDetails.slug}`}
-												locality={null}
-												colorClass={
-													"text-15 text-grey-400 inline-block"
-												}
-											/>
+
+											<div className="flex flex-wrap items-center text-primary-500 bg-gray-100 rounded-lg py-2.5 px-3 text-sm gap-x-1">
+												<time
+													dateTime={formatDateTimeToISODate(
+														storyDetails.createdAt
+													)}
+												>
+													{formatDateTimeToISODate(
+														storyDetails.createdAt
+													)}
+												</time>
+											</div>
+
+											<div className="flex flex-wrap items-center text-primary-500 bg-gray-100 rounded-lg py-2.5 px-3 text-sm gap-x-1">
+												<ShareBarModal
+													picture={coverImgMob}
+													title={storyDetails.title}
+													rating={null}
+													slug={`https://escapadesenparella.cat/histories/${storyDetails.slug}`}
+													locality={null}
+													colorClass={
+														"text-primary-500 text-sm"
+													}
+												/>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -240,7 +231,7 @@ const StoryListing = ({ storyDetails }) => {
 						</section>
 
 						{/* Article cover */}
-						<div className="relative">
+						<div className="pt-8 md:pt-12">
 							<div className="container relative z-10">
 								<picture className="block aspect-[4/3] md:aspect-[16/9] relative rounded-2xl overflow-hidden max-w-[1200px] mx-auto">
 									<source
@@ -302,7 +293,7 @@ const StoryListing = ({ storyDetails }) => {
 												{slicedDescription}
 											</div>
 											<div className="pt-8 md:pt-12">
-												<div className="border-t border-primary-50">
+												<div className="border-t border-primary-50 pt-8 md:pt-12">
 													<AdBanner
 														data-ad-slot="9222117584"
 														data-ad-format="autorelaxed"

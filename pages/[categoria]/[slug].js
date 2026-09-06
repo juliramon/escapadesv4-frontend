@@ -15,14 +15,16 @@ import { formatDateTimeToISODate } from "../../utils/helpers";
 import ListingDiscount from "../../components/listingpage/ListingDiscount";
 import ShareBarModal from "../../components/social/ShareBarModal";
 import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
-import "@splidejs/react-splide/css/core";
 import AdBanner from "../../components/ads/AdBanner";
 import ArticleRichSnippet from "../../components/richsnippets/ArticleRichSnippet";
+import "@splidejs/react-splide/css/core";
+import PublicSquareBox from "../../components/listings/PublicSquareBox";
 
 const GetawayListing = ({
 	getawayDetails,
 	categoryDetails,
 	checkedCharacteristics,
+	relatedResults,
 }) => {
 	const { user } = useContext(UserContext);
 	const router = useRouter();
@@ -367,12 +369,12 @@ const GetawayListing = ({
 
 						<article>
 							{/* Listing header */}
-							<section className="lg:mt-6">
+							<section className="pt-8 md:pt-12 lg:pt-20">
 								<div className="container">
 									<div className="grid grid-cols-1 md:grid-cols-12">
-										<div className="col-start-1 col-span-11">
+										<div className="col-start-1 col-span-12">
 											{/* Breadcrumbs */}
-											<ul className="breadcrumb max-w-5xl">
+											<ul className="breadcrumb justify-center">
 												<li className="breadcrumb__item">
 													<a
 														href="/"
@@ -414,82 +416,19 @@ const GetawayListing = ({
 												</li>
 											</ul>
 
-											<div className="relative pt-4 md:pt-8">
-												<div className="md:max-w-xl lg:max-w-5xl">
-													<h1 className="font-display max-w-2xl my-0">
-														{getawayDetails.title}
-													</h1>
-													<p className="lg:text-xl font-light mt-2.5 mb-3 md:mt-3 md:mb-4 max-w-2xl">
-														{
-															getawayDetails.subtitle
-														}
-													</p>
-													<ul className="flex flex-wrap items-center p-0 -mx-2 mb-0">
-														{getawayDetails.isVerified ? (
-															<li className="flex flex-wrap items-center px-2">
-																<svg
-																	xmlns="http://www.w3.org/2000/svg"
-																	className="mr-1.5 "
-																	width={18}
-																	height={18}
-																	viewBox="0 0 24 24"
-																	strokeWidth={
-																		1.5
-																	}
-																	stroke="currentColor"
-																	fill="none"
-																	strokeLinecap="round"
-																	strokeLinejoin="round"
-																>
-																	<path
-																		stroke="none"
-																		d="M0 0h24v24H0z"
-																		fill="none"
-																	></path>
-																	<path
-																		d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
-																		strokeWidth={
-																			1.5
-																		}
-																		fill="none"
-																	></path>
-																</svg>
-																<span className="text-sm relative inline-block top-px">
-																	Escapada
-																	verificada
-																</span>
-															</li>
-														) : null}
-														<li className="flex flex-wrap items-center px-2">
+											<div className="md:max-w-xl lg:max-w-5xl mx-auto text-center mt-4">
+												<h1 className="my-0 text-balance">
+													{getawayDetails.title}
+												</h1>
+												<p className="mt-4 !mb-0 text-block--xl leading-normal max-w-[55ch] mx-auto [&>p]:inline">
+													{getawayDetails.subtitle}
+												</p>
+												<ul className="flex flex-wrap items-center justify-center m-0 p-0 gap-x-2 mt-6">
+													{getawayDetails.isVerified ? (
+														<li className="flex flex-wrap items-center text-primary-500 bg-gray-100 rounded-lg py-2.5 px-3 text-sm gap-x-1">
 															<svg
 																xmlns="http://www.w3.org/2000/svg"
-																className="mr-1.5"
-																width={16}
-																height={16}
-																viewBox="0 0 24 24"
-																strokeWidth={
-																	1.5
-																}
-																stroke="currentCOlor"
-																fill="none"
-																strokeLinecap="round"
-																strokeLinejoin="round"
-															>
-																<path
-																	stroke="none"
-																	d="M0 0h24v24H0z"
-																	fill="none"
-																/>
-																<path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
-															</svg>
-															<span className="text-sm relative inline-block top-px">
-																{rating}
-															</span>
-														</li>
-														<li className="flex flex-wrap items-center px-2">
-															<svg
-																xmlns="http://www.w3.org/2000/svg"
-																className="mr-1.5"
+																className="text-[#57A1FE]"
 																width={18}
 																height={18}
 																viewBox="0 0 24 24"
@@ -506,39 +445,83 @@ const GetawayListing = ({
 																	d="M0 0h24v24H0z"
 																	fill="none"
 																></path>
-																<polyline points="8 16 10 10 16 8 14 14 8 16"></polyline>
-																<circle
-																	cx={12}
-																	cy={12}
-																	r={9}
-																></circle>
+																<path
+																	d="M12.01 2.011a3.2 3.2 0 0 1 2.113 .797l.154 .145l.698 .698a1.2 1.2 0 0 0 .71 .341l.135 .008h1a3.2 3.2 0 0 1 3.195 3.018l.005 .182v1c0 .27 .092 .533 .258 .743l.09 .1l.697 .698a3.2 3.2 0 0 1 .147 4.382l-.145 .154l-.698 .698a1.2 1.2 0 0 0 -.341 .71l-.008 .135v1a3.2 3.2 0 0 1 -3.018 3.195l-.182 .005h-1a1.2 1.2 0 0 0 -.743 .258l-.1 .09l-.698 .697a3.2 3.2 0 0 1 -4.382 .147l-.154 -.145l-.698 -.698a1.2 1.2 0 0 0 -.71 -.341l-.135 -.008h-1a3.2 3.2 0 0 1 -3.195 -3.018l-.005 -.182v-1a1.2 1.2 0 0 0 -.258 -.743l-.09 -.1l-.697 -.698a3.2 3.2 0 0 1 -.147 -4.382l.145 -.154l.698 -.698a1.2 1.2 0 0 0 .341 -.71l.008 -.135v-1l.005 -.182a3.2 3.2 0 0 1 3.013 -3.013l.182 -.005h1a1.2 1.2 0 0 0 .743 -.258l.1 -.09l.698 -.697a3.2 3.2 0 0 1 2.269 -.944zm3.697 7.282a1 1 0 0 0 -1.414 0l-3.293 3.292l-1.293 -1.292l-.094 -.083a1 1 0 0 0 -1.32 1.497l2 2l.094 .083a1 1 0 0 0 1.32 -.083l4 -4l.083 -.094a1 1 0 0 0 -.083 -1.32z"
+																	strokeWidth={
+																		0
+																	}
+																	fill="currentColor"
+																></path>
 															</svg>
-															<span className="text-sm relative inline-block top-px">
-																{fullLocation}
-															</span>
+															Verificada
 														</li>
-														<li className="flex flex-wrap items-center px-2">
-															<ShareBarModal
-																picture={
-																	getawayDetails.cover
-																}
-																title={
-																	getawayDetails.title
-																}
-																rating={rating}
-																slug={
-																	urlToShare
-																}
-																locality={
-																	fullLocation
-																}
-																colorClass={
-																	"text-primary-500 text-sm"
-																}
+													) : null}
+													<li className="flex flex-wrap items-center text-primary-500 bg-gray-100 rounded-lg py-2.5 px-3 text-sm gap-x-1">
+														<svg
+															xmlns="http://www.w3.org/2000/svg"
+															width={16}
+															height={16}
+															viewBox="0 0 24 24"
+															strokeWidth={1.5}
+															stroke="currentCOlor"
+															fill="none"
+															strokeLinecap="round"
+															strokeLinejoin="round"
+														>
+															<path
+																stroke="none"
+																d="M0 0h24v24H0z"
+																fill="none"
 															/>
-														</li>
-													</ul>
-												</div>
+															<path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+														</svg>
+														{rating}
+													</li>
+													<li className="flex flex-wrap items-center text-primary-500 bg-gray-100 rounded-lg py-2.5 px-3 text-sm gap-x-1">
+														<svg
+															xmlns="http://www.w3.org/2000/svg"
+															width={18}
+															height={18}
+															viewBox="0 0 24 24"
+															strokeWidth={1.5}
+															stroke="currentColor"
+															fill="none"
+															strokeLinecap="round"
+															strokeLinejoin="round"
+														>
+															<path
+																stroke="none"
+																d="M0 0h24v24H0z"
+																fill="none"
+															></path>
+															<polyline points="8 16 10 10 16 8 14 14 8 16"></polyline>
+															<circle
+																cx={12}
+																cy={12}
+																r={9}
+															></circle>
+														</svg>
+														{fullLocation}
+													</li>
+													<li className="flex flex-wrap items-center text-primary-500 bg-gray-100 rounded-lg py-2.5 px-3 text-sm gap-x-1">
+														<ShareBarModal
+															picture={
+																getawayDetails.cover
+															}
+															title={
+																getawayDetails.title
+															}
+															rating={rating}
+															slug={urlToShare}
+															locality={
+																fullLocation
+															}
+															colorClass={
+																"text-primary-500 text-sm"
+															}
+														/>
+													</li>
+												</ul>
 											</div>
 										</div>
 									</div>
@@ -1194,6 +1177,107 @@ const GetawayListing = ({
 								</div>
 							</section>
 						</article>
+
+						{/* Sección de respaldo para más escapades de la categoría */}
+						{relatedResults.length > 0
+							? relatedResults.map((result) => (
+									<section
+										key={result._id}
+										className="py-8 md:py-12 lg:py-20 border-t border-primary-50"
+									>
+										<div className="container">
+											<h2 className="text-center">
+												Més escapades a {result.title}
+											</h2>
+											<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-8">
+												{result.relatedResults.map(
+													(el, idx) => {
+														let location;
+														if (
+															el.type ===
+															"activity"
+														) {
+															location = (
+																<span className="listing-location">{`${
+																	el.activity_locality ===
+																	undefined
+																		? el.activity_state
+																		: el.activity_locality
+																}`}</span>
+															);
+														}
+														if (
+															el.type === "place"
+														) {
+															location = (
+																<span className="listing-location">{`${
+																	el.place_locality ===
+																	undefined
+																		? ""
+																		: el.place_locality
+																}`}</span>
+															);
+														}
+														const priority =
+															idx === 0
+																? "eager"
+																: "lazy";
+														return (
+															<PublicSquareBox
+																key={el._id}
+																type={el.type}
+																slug={el.slug}
+																id={el._id}
+																cover={el.cover}
+																title={el.title}
+																subtitle={
+																	el.subtitle
+																}
+																rating={
+																	el.activity_rating ||
+																	el.place_rating
+																}
+																placeType={
+																	el.placeType
+																}
+																categoria={
+																	el.categories
+																}
+																duration={
+																	el.duration
+																}
+																location={
+																	location
+																}
+																isVerified={
+																	el.isVerified
+																}
+																website={
+																	el.website
+																}
+																phone={el.phone}
+																imgPriority={
+																	priority
+																}
+															/>
+														);
+													}
+												)}
+											</div>
+											<div className="flex justify-center pt-8">
+												<Link
+													href={`/destinacions/${result.slug}`}
+												>
+													<a className="button button__primary button__med">
+														Veure totes les
+														escapades
+													</a>
+												</Link>
+											</div>
+										</div>
+									</section>
+							  ))
+							: null}
 					</main>
 					<Footer />
 					<SignUpModal
@@ -1226,6 +1310,13 @@ export async function getServerSideProps({ params }) {
 		};
 	}
 
+	let relatedResults = [];
+
+	if (getawayDetails.destinations.length > 0) {
+		let ids = getawayDetails.destinations.toString();
+		relatedResults = await service.getRelatedResultsByDestinationsIds(ids);
+	}
+
 	let checkedCharacteristics = [];
 
 	if (getawayDetails?.characteristics) {
@@ -1246,6 +1337,7 @@ export async function getServerSideProps({ params }) {
 			getawayDetails,
 			categoryDetails,
 			checkedCharacteristics,
+			relatedResults,
 		},
 	};
 }

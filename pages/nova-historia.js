@@ -589,7 +589,7 @@ const StoryForm = () => {
 								</div>
 								<div className="form__group">
 									<span className="form__label">
-										Imatge de portada
+										Imatge de portada (1729x973px)
 									</span>
 									<div className="flex items-center flex-col max-w-full">
 										<div className="bg-white border border-primary-100 rounded-tl-md rounded-tr-md w-full overflow-hidden">

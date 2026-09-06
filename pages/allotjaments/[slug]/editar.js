@@ -11,6 +11,10 @@ import Autocomplete from "react-google-autocomplete";
 import EditorNavbar from "../../../components/editor/EditorNavbar";
 import { EditorView } from "prosemirror-view";
 import Link from "@tiptap/extension-link";
+import {
+	normalizeDestinationRefsToIds,
+	destinationUploadFolderKey,
+} from "../../../utils/helpers";
 
 EditorView.prototype.updateState = function updateState(state) {
 	if (!this.docView) return; // This prevents the matchesNode error on hot reloads
@@ -51,7 +55,7 @@ const EditionForm = () => {
 			slug: "slug",
 			categories: [],
 			seasons: [],
-			region: "",
+			destinations: [],
 			placeType: "",
 			characteristics: [],
 			cover: "",
@@ -96,13 +100,51 @@ const EditionForm = () => {
 	const [description, setDescription] = useState({});
 	const [reasons, setReasons] = useState({});
 
+	const [destinations, setDestinations] = useState([]);
+
+	const service = new ContentService();
+
+	useEffect(() => {
+		const fetchDestinations = async () => {
+			try {
+				const data = await service.getDestinations();
+				setDestinations(Array.isArray(data) ? data : []);
+			} catch (err) {
+				console.error(err);
+				setDestinations([]);
+			}
+		};
+		fetchDestinations();
+	}, []);
+
 	useEffect(() => {
 		if (router && router.route) {
 			setQueryId(router.route);
 		}
 	}, [router]);
 
-	const service = new ContentService();
+	const destinationIdsSignature = (arr) =>
+		[...(arr || [])]
+			.map((x) => String(x))
+			.sort()
+			.join(",");
+
+	useEffect(() => {
+		if (!state.isPlaceLoaded || !destinations.length) return;
+		setState((prev) => {
+			const next = normalizeDestinationRefsToIds(
+				prev.formData.destinations,
+				destinations,
+			);
+			const prevSig = destinationIdsSignature(prev.formData.destinations);
+			const nextSig = destinationIdsSignature(next);
+			if (prevSig === nextSig) return prev;
+			return {
+				...prev,
+				formData: { ...prev.formData, destinations: next },
+			};
+		});
+	}, [state.isPlaceLoaded, destinations]);
 
 	const editor = useEditor({
 		extensions: [
@@ -161,7 +203,7 @@ const EditionForm = () => {
 					},
 				});
 				let placeDetails = await service.getPlaceDetails(
-					router.query.slug
+					router.query.slug,
 				);
 				const characteristics = await service.getCharacteristics();
 				const stories = await service.getStories();
@@ -183,7 +225,11 @@ const EditionForm = () => {
 							? placeDetails.characteristics
 							: [],
 						seasons: placeDetails.seasons,
-						region: placeDetails.region,
+						destinations:
+							placeDetails.destinations ||
+							(placeDetails.destination
+								? [placeDetails.destination]
+								: []),
 						placeType: placeDetails.placeType,
 						cover: placeDetails.cover,
 						blopCover: "",
@@ -294,30 +340,41 @@ const EditionForm = () => {
 		const imagesList = state.formData.images;
 		const cover = state.formData.cover;
 		let uploadedImages = [];
+		const uploadFolder = destinationUploadFolderKey(
+			state.formData.slug || state.place?.slug,
+			state.formData.title || state.place?.title,
+		);
 		const uploadData = new FormData();
 		uploadData.append("imageUrl", cover);
-		const uploadedCover = await service.uploadFile(uploadData);
+		const uploadedCover = await service.uploadFile(
+			uploadData,
+			uploadFolder,
+			"places",
+		);
 		imagesList.forEach((el) => {
 			const uploadData = new FormData();
 			uploadData.append("imageUrl", el);
-			service.uploadFile(uploadData).then((res) => {
-				uploadedImages.push(res.path);
-				if (
-					uploadedImages.length === state.formData.images.length ||
-					uploadedCover != ""
-				) {
-					setState({
-						...state,
-						formData: {
-							...state.formData,
-							cloudImages: uploadedImages,
-							coverCloudImage: uploadedCover.path,
-							cloudImagesUploaded: true,
-							coverCloudImageUploaded: true,
-						},
-					});
-				}
-			});
+			service
+				.uploadFile(uploadData, uploadFolder, "places")
+				.then((res) => {
+					uploadedImages.push(res.path);
+					if (
+						uploadedImages.length ===
+							state.formData.images.length ||
+						uploadedCover != ""
+					) {
+						setState({
+							...state,
+							formData: {
+								...state.formData,
+								cloudImages: uploadedImages,
+								coverCloudImage: uploadedCover.path,
+								cloudImagesUploaded: true,
+								coverCloudImageUploaded: true,
+							},
+						});
+					}
+				});
 		});
 	};
 
@@ -330,12 +387,6 @@ const EditionForm = () => {
 	const checkIfSeasonChecked = (val) => {
 		if (state.formData.seasons) {
 			return state.formData.seasons.includes(val) ? true : false;
-		}
-	};
-
-	const checkIfRegionChecked = (val) => {
-		if (state.formData.region) {
-			return state.formData.region.includes(val) ? true : false;
 		}
 	};
 
@@ -395,11 +446,26 @@ const EditionForm = () => {
 		});
 	};
 
-	const handleCheckRegion = (e) => {
+	const handleCheckDestination = (e) => {
+		let destinations = [...state.formData.destinations];
+		if (e.target.checked) {
+			destinations.push(e.target.value);
+		} else {
+			destinations = destinations.filter(
+				(dest) => dest !== e.target.value,
+			);
+		}
 		setState({
 			...state,
-			formData: { ...state.formData, region: e.target.id },
+			formData: { ...state.formData, destinations: destinations },
 		});
+	};
+
+	const checkIfDestinationChecked = (val) => {
+		const list = state.formData.destinations;
+		if (!list || !list.length) return false;
+		const v = String(val);
+		return list.some((d) => String(d) === v);
 	};
 
 	const handleCheckOrganization = (e) => {
@@ -440,7 +506,7 @@ const EditionForm = () => {
 			categories,
 			seasons,
 			characteristics,
-			region,
+			destinations,
 			placeType,
 			isVerified,
 			title,
@@ -475,7 +541,7 @@ const EditionForm = () => {
 				categories,
 				seasons,
 				characteristics,
-				region,
+				destinations,
 				placeType,
 				placeCover,
 				placeImages,
@@ -499,7 +565,7 @@ const EditionForm = () => {
 				discountCode,
 				discountInfo,
 				metaTitle,
-				metaDescription
+				metaDescription,
 			)
 			.then(() => router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel"));
 	};
@@ -533,7 +599,7 @@ const EditionForm = () => {
 			categories,
 			seasons,
 			characteristics,
-			region,
+			destinations,
 			isVerified,
 			placeType,
 			place_full_address,
@@ -554,7 +620,7 @@ const EditionForm = () => {
 			categories &&
 			seasons &&
 			characteristics &&
-			region &&
+			destinations &&
 			isVerified &&
 			placeType &&
 			place_full_address &&
@@ -585,11 +651,11 @@ const EditionForm = () => {
 				? setState({
 						...state,
 						formData: { ...state.formData, isVerified: true },
-				  })
+					})
 				: setState({
 						...state,
 						formData: { ...state.formData, isVerified: false },
-				  });
+					});
 		}
 	};
 
@@ -709,7 +775,7 @@ const EditionForm = () => {
 																handleCheckCategory
 															}
 															checked={checkIfCategoryChecked(
-																"romantica"
+																"romantica",
 															)}
 														/>
 														Romàntica
@@ -727,7 +793,7 @@ const EditionForm = () => {
 																handleCheckCategory
 															}
 															checked={checkIfCategoryChecked(
-																"aventura"
+																"aventura",
 															)}
 														/>
 														Aventura
@@ -745,7 +811,7 @@ const EditionForm = () => {
 																handleCheckCategory
 															}
 															checked={checkIfCategoryChecked(
-																"gastronomica"
+																"gastronomica",
 															)}
 														/>
 														Gastronòmica
@@ -763,7 +829,7 @@ const EditionForm = () => {
 																handleCheckCategory
 															}
 															checked={checkIfCategoryChecked(
-																"cultural"
+																"cultural",
 															)}
 														/>
 														Cultural
@@ -781,7 +847,7 @@ const EditionForm = () => {
 																handleCheckCategory
 															}
 															checked={checkIfCategoryChecked(
-																"relax"
+																"relax",
 															)}
 														/>
 														Relax
@@ -807,7 +873,7 @@ const EditionForm = () => {
 																handleCheckSeason
 															}
 															checked={checkIfSeasonChecked(
-																"hivern"
+																"hivern",
 															)}
 														/>
 														Hivern
@@ -825,7 +891,7 @@ const EditionForm = () => {
 																handleCheckSeason
 															}
 															checked={checkIfSeasonChecked(
-																"primavera"
+																"primavera",
 															)}
 														/>
 														Primavera
@@ -843,7 +909,7 @@ const EditionForm = () => {
 																handleCheckSeason
 															}
 															checked={checkIfSeasonChecked(
-																"estiu"
+																"estiu",
 															)}
 														/>
 														Estiu
@@ -861,7 +927,7 @@ const EditionForm = () => {
 																handleCheckSeason
 															}
 															checked={checkIfSeasonChecked(
-																"tardor"
+																"tardor",
 															)}
 														/>
 														Tardor
@@ -872,134 +938,38 @@ const EditionForm = () => {
 														htmlFor="categoria"
 														className="form__label"
 													>
-														Regió de l'allotjament
+														Destinació on es troba
+														l'allotjament
 													</label>
-													<label
-														htmlFor="barcelona"
-														className="form__label flex items-center"
-													>
-														<input
-															type="radio"
-															name="placeRegion"
-															id="barcelona"
-															className="mr-2"
-															onChange={
-																handleCheckRegion
-															}
-															checked={checkIfRegionChecked(
-																"barcelona"
-															)}
-														/>
-														Barcelona
-													</label>
-													<label
-														htmlFor="tarragona"
-														className="form__label flex items-center"
-													>
-														<input
-															type="radio"
-															name="placeRegion"
-															id="tarragona"
-															className="mr-2"
-															onChange={
-																handleCheckRegion
-															}
-															checked={checkIfRegionChecked(
-																"tarragona"
-															)}
-														/>
-														Tarragona
-													</label>
-													<label
-														htmlFor="girona"
-														className="form__label flex items-center"
-													>
-														<input
-															type="radio"
-															name="placeRegion"
-															id="girona"
-															className="mr-2"
-															onChange={
-																handleCheckRegion
-															}
-															checked={checkIfRegionChecked(
-																"girona"
-															)}
-														/>
-														Girona
-													</label>
-													<label
-														htmlFor="lleida"
-														className="form__label flex items-center"
-													>
-														<input
-															type="radio"
-															name="placeRegion"
-															id="lleida"
-															className="mr-2"
-															onChange={
-																handleCheckRegion
-															}
-															checked={checkIfRegionChecked(
-																"lleida"
-															)}
-														/>
-														Lleida
-													</label>
-													<label
-														htmlFor="costabrava"
-														className="form__label flex items-center"
-													>
-														<input
-															type="radio"
-															name="placeRegion"
-															id="costaBrava"
-															className="mr-2"
-															onChange={
-																handleCheckRegion
-															}
-															checked={checkIfRegionChecked(
-																"costabrava"
-															)}
-														/>
-														Costa Brava
-													</label>
-													<label
-														htmlFor="costaDaurada"
-														className="form__label flex items-center"
-													>
-														<input
-															type="radio"
-															name="placeRegion"
-															id="costaDaurada"
-															className="mr-2"
-															onChange={
-																handleCheckRegion
-															}
-															checked={checkIfRegionChecked(
-																"costaDaurada"
-															)}
-														/>
-														Costa Daurada
-													</label>
-													<label
-														htmlFor="pirineus"
-														className="form__label flex items-center"
-													>
-														<input
-															type="radio"
-															name="placeRegion"
-															id="pirineus"
-															className="mr-2"
-															onChange={
-																handleCheckRegion
-															}
-															checked={checkIfRegionChecked(
-																"pirineus"
-															)}
-														/>
-														Pirineus
-													</label>
+													<div className="max-h-48 overflow-y-auto border border-gray-300 rounded-md p-2">
+														{destinations.map(
+															(el) => (
+																<label
+																	key={el._id}
+																	htmlFor={`destination-${el._id}`}
+																	className="form__label flex items-center mb-2"
+																>
+																	<input
+																		type="checkbox"
+																		id={`destination-${el._id}`}
+																		value={String(
+																			el._id,
+																		)}
+																		className="mr-2"
+																		onChange={
+																			handleCheckDestination
+																		}
+																		checked={checkIfDestinationChecked(
+																			String(
+																				el._id,
+																			),
+																		)}
+																	/>
+																	{el.title}
+																</label>
+															),
+														)}
+													</div>
 												</div>
 												<div className="form__group w-3/12">
 													<label
@@ -1021,7 +991,7 @@ const EditionForm = () => {
 																handleCheckPlaceType
 															}
 															checked={checkIfTypeChecked(
-																"hotel"
+																"hotel",
 															)}
 														/>
 														Hotel
@@ -1039,7 +1009,7 @@ const EditionForm = () => {
 																handleCheckPlaceType
 															}
 															checked={checkIfTypeChecked(
-																"apartament"
+																"apartament",
 															)}
 														/>
 														Apartament
@@ -1057,7 +1027,7 @@ const EditionForm = () => {
 																handleCheckPlaceType
 															}
 															checked={checkIfTypeChecked(
-																"refugi"
+																"refugi",
 															)}
 														/>
 														Refugi
@@ -1075,7 +1045,7 @@ const EditionForm = () => {
 																handleCheckPlaceType
 															}
 															checked={checkIfTypeChecked(
-																"casaarbre"
+																"casaarbre",
 															)}
 														/>
 														Casa-arbre
@@ -1093,7 +1063,7 @@ const EditionForm = () => {
 																handleCheckPlaceType
 															}
 															checked={checkIfTypeChecked(
-																"casarural"
+																"casarural",
 															)}
 														/>
 														Casa rural
@@ -1111,7 +1081,7 @@ const EditionForm = () => {
 																handleCheckPlaceType
 															}
 															checked={checkIfTypeChecked(
-																"carabana"
+																"carabana",
 															)}
 														/>
 														Carabana
@@ -1129,7 +1099,7 @@ const EditionForm = () => {
 																handleCheckPlaceType
 															}
 															checked={checkIfTypeChecked(
-																"camping"
+																"camping",
 															)}
 														/>
 														Càmping
@@ -1172,7 +1142,7 @@ const EditionForm = () => {
 																						handleCheckCharacteristic
 																					}
 																					checked={checkIfCharacteristicChecked(
-																						el.name
+																						el.name,
 																					)}
 																				/>
 																				<span
@@ -1187,8 +1157,8 @@ const EditionForm = () => {
 																				}
 																			</label>
 																		</li>
-																	)
-															  )
+																	),
+																)
 															: null}
 													</ul>
 												</div>
@@ -1205,7 +1175,7 @@ const EditionForm = () => {
 													apiKey={`${process.env.NEXT_PUBLIC_GOOGLE_API_KEY}`}
 													style={{ width: "100%" }}
 													onPlaceSelected={(
-														place
+														place,
 													) => {
 														let place_full_address,
 															place_locality,
@@ -1254,7 +1224,7 @@ const EditionForm = () => {
 																	place_country =
 																		el.long_name;
 																}
-															}
+															},
 														);
 
 														if (
@@ -1265,13 +1235,13 @@ const EditionForm = () => {
 																Object.values(
 																	place
 																		.geometry
-																		.viewport
+																		.viewport,
 																)[0].hi;
 															place_lng =
 																Object.values(
 																	place
 																		.geometry
-																		.viewport
+																		.viewport,
 																)[1].hi;
 														}
 
@@ -1433,6 +1403,7 @@ const EditionForm = () => {
 											<div className="cover">
 												<span className="form__label">
 													Imatge de portada
+													(1200x630px)
 												</span>
 												<div className="flex items-center flex-col max-w-full mb-4">
 													<div className="bg-white border border-primary-100 rounded-tl-md rounded-tr-md w-full">
@@ -1499,6 +1470,7 @@ const EditionForm = () => {
 											<div className="images">
 												<span className="form__label">
 													Imatges d'aquest allotjament
+													(800x600px)
 												</span>
 												<div className="flex items-center flex-col max-w-full mb-4">
 													<div className="bg-white border border-primary-100 rounded-tl-md rounded-tr-md w-full">
@@ -1648,7 +1620,7 @@ const EditionForm = () => {
 																		0
 																		? state.stories.map(
 																				(
-																					el
+																					el,
 																				) => {
 																					return (
 																						<option
@@ -1676,8 +1648,8 @@ const EditionForm = () => {
 																							}
 																						</option>
 																					);
-																				}
-																		  )
+																				},
+																			)
 																		: null}
 																</select>
 															</div>

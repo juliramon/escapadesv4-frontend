@@ -13,7 +13,7 @@ const FilterPlacesModal = ({
 	const service = new ContentService();
 
 	const initialState = {
-		regions: [],
+		destinations: [],
 		categories: [],
 	};
 
@@ -21,9 +21,9 @@ const FilterPlacesModal = ({
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const regions = await service.getRegions();
+			const destinations = await service.getDestinations();
 			const categories = await service.getCategories();
-			setState({ ...state, regions, categories });
+			setState({ ...state, destinations, categories });
 		};
 		fetchData();
 	}, []);
@@ -91,22 +91,24 @@ const FilterPlacesModal = ({
 							<span className="text-xs uppercase text-primary-400 tracking-wider mb-2 block">
 								Regió
 							</span>
-							{state.regions.length > 0 &&
-								state.regions.map((region) => (
-									<fieldset key={region._id}>
+							{state.destinations.length > 0 &&
+								state.destinations.map((destination) => (
+									<fieldset key={destination._id}>
 										<label className="cursor-pointer capitalize text-15">
 											<input
 												type="checkbox"
 												name="placeRegion"
-												id={region.name.toLowerCase()}
+												// Les activitats i allotjaments referencien la destinació
+												// per _id: el filtre ha d enviar l id, no el títol.
+												id={destination._id}
 												onChange={handleCheckRegion}
 												className="mr-2"
 											/>
-											{region.name}
+											{destination.title}
 										</label>
 									</fieldset>
 								))}
-							{state.regions.length === 0 && (
+							{state.destinations.length === 0 && (
 								<FetchingSpinnerInline />
 							)}
 						</div>

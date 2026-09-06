@@ -11,7 +11,7 @@ const MapModal = ({
 		<div className={`modal ${visibility == true ? "active" : ""}`}>
 			<div className="modal__wrapper modal--xl">
 				<div className="modal__header">
-					<span>Activitats al mapa</span>
+					<span>Mapa d'escapades</span>
 					<button
 						onClick={() => hideModal()}
 						className="modal__close"

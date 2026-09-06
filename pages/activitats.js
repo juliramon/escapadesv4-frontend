@@ -229,14 +229,14 @@ const ActivityList = ({
 			<div id="contentList" className="activity relative">
 				<NavigationBar />
 				<main>
-					{/* Main column - Listings */}
+					{/* Header */}
 					<ListingHeader
 						title={`Activitats originals en parella a Catalunya`}
 						subtitle={`Us proposem ${state.numActivities} <strong>activitats per fer en parella a Catalunya</strong>. Descobriu <strong>activitats originals</strong> i <strong>experiències per fer en parella</strong>, des de rutes i excursions, a restaurants i paisatges increïbles per a una escapada en parella extraordinària!`}
 						breadcrumbLevel1={"Activitats en parella"}
 					/>
 
-					{/* Left column - Filters */}
+					{/* Filter buttons */}
 					<div className="pt-8">
 						<nav className="container flex justify-center">
 							<button
@@ -317,7 +317,7 @@ const ActivityList = ({
 						</nav>
 					</div>
 
-					{/* Section activities */}
+					{/* Section listings */}
 					<section className="pt-8 md:pt-12">
 						<div className="container">
 							<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5">

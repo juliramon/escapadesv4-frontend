@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import ContentService from "../../services/contentService";
 import FetchingSpinnerInline from "../global/FetchingSpinnerInline";
 
-const FilterActivitiesModal = ({
+const FilterDestinationsModal = ({
 	isFilterModalOpen,
 	hideModal,
 	handleCheckRegion,
@@ -58,7 +58,7 @@ const FilterActivitiesModal = ({
 		<div className={`modal ${isFilterModalOpen == true ? "active" : ""}`}>
 			<div className="modal__wrapper modal--md">
 				<div className="modal__header">
-					<span>Filtrar activitats</span>
+					<span>Filtrar resultats</span>
 					<button
 						onClick={() => hideModal()}
 						className="modal__close"
@@ -89,7 +89,7 @@ const FilterActivitiesModal = ({
 					<form className="form flex flex-col gap-y-8 m-0">
 						<div>
 							<span className="text-xs uppercase text-primary-400 tracking-wider mb-2 block">
-								Regió
+								Destinació
 							</span>
 							{state.destinations.length > 0 &&
 								state.destinations.map((destination) => (
@@ -210,4 +210,4 @@ const FilterActivitiesModal = ({
 	);
 };
 
-export default FilterActivitiesModal;
+export default FilterDestinationsModal;

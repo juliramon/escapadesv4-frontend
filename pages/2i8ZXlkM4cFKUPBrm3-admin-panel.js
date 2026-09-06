@@ -10,10 +10,10 @@ import CategoryBox from "../components/dashboard/CategoryBox";
 import CharacteristicBox from "../components/dashboard/CharacteristicBox";
 import CreateCategoryModal from "../components/modals/CreateCategoryModal";
 import CreateTripCategoryModal from "../components/modals/CreateTripCategoryModal";
-import CreateRegionModal from "../components/modals/CreateRegionModal";
+import CreateDestinationModal from "../components/modals/CreateDestinationModal";
 import TripCategoryBox from "../components/dashboard/TripCategoryBox";
 import CreateCharacteristicModal from "../components/modals/CreateCharacteristicModal";
-import RegionBox from "../components/dashboard/RegionBox";
+import DestinationBox from "../components/dashboard/DestinationBox";
 
 const AdminPanel = () => {
 	// Validate if user is allowed to access this view
@@ -23,7 +23,10 @@ const AdminPanel = () => {
 		if (user && user.userType == "admin") {
 			setLoadPage(true);
 		}
-	}, []);
+		// Depèn de `user`: amb la llista buida només s'avaluava al primer
+		// render, quan encara no s'ha resolt la sessió, i un administrador
+		// legítim es quedava permanentment amb el spinner.
+	}, [user]);
 	// End validation
 
 	const router = useRouter();
@@ -45,7 +48,7 @@ const AdminPanel = () => {
 		characteristics: [],
 		tripCategories: [],
 		tripEntries: [],
-		regions: [],
+		destinations: [],
 		isFetching: false,
 		activeTab: "activities",
 	};
@@ -58,7 +61,8 @@ const AdminPanel = () => {
 		useState(false);
 	const [tripCategoryModalVisibility, setTripCategoryModalVisibility] =
 		useState(false);
-	const [regionModalVisibility, setRegionModalVisibility] = useState(false);
+	const [destinationModalVisibility, setDestinationModalVisibility] =
+		useState(false);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -71,7 +75,7 @@ const AdminPanel = () => {
 			const characteristics = await service.getCharacteristics();
 			const tripCategories = await service.getTripCategories();
 			const tripEntries = await service.getAllTripEntries();
-			const regions = await service.getRegions();
+			const destinations = await service.getDestinations();
 
 			setState({
 				...state,
@@ -83,7 +87,7 @@ const AdminPanel = () => {
 				characteristics: characteristics,
 				tripCategories: tripCategories,
 				tripEntries: tripEntries.allTrips,
-				regions: regions,
+				destinations: destinations,
 				isFetching: false,
 			});
 		};
@@ -100,7 +104,7 @@ const AdminPanel = () => {
 		const characteristics = await service.getCharacteristics();
 		const tripCategories = await service.getTripCategories();
 		const tripEntries = await service.getAllTripEntries();
-		const regions = await service.getRegions();
+		const destinations = await service.getDestinations();
 
 		setState({
 			...state,
@@ -112,7 +116,7 @@ const AdminPanel = () => {
 			characteristics: characteristics,
 			tripCategories: tripCategories,
 			tripEntries: tripEntries.allTrips,
-			regions: regions,
+			destinations: destinations,
 			isFetching: false,
 		});
 	});
@@ -139,6 +143,11 @@ const AdminPanel = () => {
 			stateLabel: state.categories,
 		},
 		{
+			// Hi havia pestanya de Característiques però no comptador.
+			title: "Característiques",
+			stateLabel: state.characteristics,
+		},
+		{
 			title: "Categories de viatge",
 			stateLabel: state.tripCategories,
 		},
@@ -147,8 +156,8 @@ const AdminPanel = () => {
 			stateLabel: state.tripEntries,
 		},
 		{
-			title: "Regions",
-			stateLabel: state.regions,
+			title: "Destinacions",
+			stateLabel: state.destinations,
 		},
 	];
 
@@ -294,13 +303,18 @@ const AdminPanel = () => {
 		}
 		if (state.activeTab === "tripEntries") {
 			listResults = state.tripEntries.map((el, idx) => {
-				const category = state.tripCategories.find(
-					(tripCategory) => tripCategory._id === el.trip._id
-				);
+				// Una entrada sense categoria (o amb una de ja esborrada) feia
+				// petar tota la pestanya en llegir el.trip._id / category.slug.
+				const tripId = el.trip ? el.trip._id || el.trip : null;
+				const category = tripId
+					? state.tripCategories.find(
+							(tripCategory) => tripCategory._id === tripId
+					  )
+					: null;
 				return (
 					<ContentBox
 						key={idx}
-						trip={category.slug}
+						trip={category ? category.slug : ""}
 						type={el.type}
 						id={el._id}
 						image={el.cover}
@@ -312,26 +326,28 @@ const AdminPanel = () => {
 				);
 			});
 		}
-		if (state.activeTab === "regions") {
-			listResults = state.regions.map((el, idx) => {
+		if (state.activeTab === "destinations") {
+			listResults = state.destinations.map((el, idx) => {
 				return (
-					<RegionBox
+					<DestinationBox
 						key={idx}
-						type={"category"}
+						type={"destination"}
 						id={el._id}
-						name={el.name}
-						pluralName={el.pluralName}
-						illustration={el.illustration}
-						image={el.image}
-						imageCaption={el.imageCaption}
-						title={el.title}
-						richTitle={el.richTitle}
-						subtitle={el.subtitle}
 						slug={el.slug}
+						title={el.title}
+						longTitle={el.longTitle}
+						subtitle={el.subtitle}
+						image={el.image}
+						reviewText={el.reviewText}
+						carouselImages={el.carouselImages}
+						mapLocation={el.mapLocation}
+						mostLikedText={el.mostLikedText}
+						pointsOfInterestText={el.pointsOfInterestText}
+						mustSeeText={el.mustSeeText}
 						seoTextHeader={el.seoTextHeader}
 						seoText={el.seoText}
-						icon={el.icon}
 						isSponsored={el.isSponsored}
+						isFeatured={el.isFeatured}
 						sponsorURL={el.sponsorURL}
 						sponsorLogo={el.sponsorLogo}
 						sponsorClaim={el.sponsorClaim}
@@ -370,7 +386,10 @@ const AdminPanel = () => {
 					<div className="mt-4 flex items-center -mx-2">
 						{entitiesMenu.map((item) => {
 							return (
-								<div className="px-2 flex-1 min-w-[1/6]">
+								<div
+									key={item.title}
+									className="px-2 flex-1 min-w-[1/6]"
+								>
 									<div className="p-6 border border-primary-100 rounded-md text-center flex flex-col justify-center">
 										<div className="text-2xl">
 											{state.isFetching ? (
@@ -393,7 +412,12 @@ const AdminPanel = () => {
 													</svg>
 												</div>
 											) : (
-												item.stateLabel.length
+												// Si una crida falla i retorna
+												// un objecte d'error, .length
+												// tombava tot el panell.
+												Array.isArray(item.stateLabel)
+													? item.stateLabel.length
+													: 0
 											)}
 										</div>
 										<span className="uppercase text-xs inline-block mt-1">
@@ -551,18 +575,18 @@ const AdminPanel = () => {
 								<li>
 									<button
 										className={`py-2.5 px-4 border transition-all duration-300 ease-in-out mb-2 rounded-md cursor-pointer w-full text-left text-sm ${
-											state.activeTab == "regions"
+											state.activeTab == "destinations"
 												? isActive
 												: "border-primary-100 bg-white hover:bg-primary-50"
 										}`}
 										onClick={() =>
 											setState({
 												...state,
-												activeTab: "regions",
+												activeTab: "destinations",
 											})
 										}
 									>
-										Regions
+										Destinacions
 									</button>
 								</li>
 							</ul>
@@ -644,10 +668,12 @@ const AdminPanel = () => {
 						<button
 							className="bg-white hover:bg-primary-100 border-primary-200 rounded-md py-2.5 px-4 mb-1.5 shadow-lg text-sm"
 							onClick={() =>
-								setRegionModalVisibility(!regionModalVisibility)
+								setDestinationModalVisibility(
+									!destinationModalVisibility
+								)
 							}
 						>
-							Publicar nova regió
+							Publicar nova destinació
 						</button>
 						<button
 							className="bg-white hover:bg-primary-100 border-primary-200 rounded-md py-2.5 px-4 mb-1.5 shadow-lg text-sm"
@@ -717,10 +743,10 @@ const AdminPanel = () => {
 					fetchData={fetchData}
 				/>
 			) : null}
-			{regionModalVisibility == true ? (
-				<CreateRegionModal
-					visibility={regionModalVisibility}
-					hideModal={setRegionModalVisibility}
+			{destinationModalVisibility == true ? (
+				<CreateDestinationModal
+					visibility={destinationModalVisibility}
+					hideModal={setDestinationModalVisibility}
 					fetchData={fetchData}
 				/>
 			) : null}

@@ -13,12 +13,46 @@ module.exports = withTM({
 			{
 				protocol: "https",
 				hostname: "res.cloudinary.com",
-				port: "",
 			},
 		],
 	},
 	async redirects() {
 		return [
+			// Migració /escapades-catalunya/* -> /destinacions/*.
+			// Les destinacions ja no són províncies sinó zones curades, així que
+			// Barcelona, Girona, Lleida i Tarragona no tenen equivalent directe i
+			// van a l'índex de destinacions. Han d'anar abans del comodí de sota,
+			// perquè Next aplica el primer redirect que casa.
+			{
+				source: "/escapades-catalunya/escapades-barcelona",
+				destination: "/destinacions",
+				permanent: true,
+			},
+			{
+				source: "/escapades-catalunya/escapades-girona",
+				destination: "/destinacions",
+				permanent: true,
+			},
+			{
+				source: "/escapades-catalunya/escapades-lleida",
+				destination: "/destinacions",
+				permanent: true,
+			},
+			{
+				source: "/escapades-catalunya/escapades-tarragona",
+				destination: "/destinacions",
+				permanent: true,
+			},
+			{
+				source: "/escapades-catalunya/:slug",
+				destination: "/destinacions/:slug",
+				permanent: true,
+			},
+			{
+				source: "/escapades-catalunya",
+				destination: "/destinacions",
+				permanent: true,
+			},
 			{
 				source: "/festivals-de-musica-a-catalunya",
 				destination: "/llistes/festivals-musica-catalunya",
@@ -41,22 +75,22 @@ module.exports = withTM({
 			},
 			{
 				source: "/listing-region/barcelona/",
-				destination: "/escapades-catalunya/escapades-barcelona",
+				destination: "/destinacions",
 				permanent: true,
 			},
 			{
 				source: "/escapades-tarragona",
-				destination: "/escapades-catalunya/escapades-tarragona",
+				destination: "/destinacions",
 				permanent: true,
 			},
 			{
 				source: "/escapades-girona",
-				destination: "/escapades-catalunya/escapades-girona",
+				destination: "/destinacions",
 				permanent: true,
 			},
 			{
 				source: "/listing-region/girona",
-				destination: "/escapades-catalunya/escapades-girona",
+				destination: "/destinacions",
 				permanent: true,
 			},
 			{
@@ -162,12 +196,12 @@ module.exports = withTM({
 			},
 			{
 				source: "/escapades-pirineus",
-				destination: "/escapades-catalunya/escapades-pirineus",
+				destination: "/destinacions/escapades-pirineus",
 				permanent: true,
 			},
 			{
 				source: "/tag/pirineus",
-				destination: "/escapades-catalunya/escapades-pirineus",
+				destination: "/destinacions/escapades-pirineus",
 				permanent: true,
 			},
 			{
@@ -249,17 +283,17 @@ module.exports = withTM({
 			},
 			{
 				source: "/escapades-costa-brava",
-				destination: "/escapades-catalunya/escapades-costa-brava",
+				destination: "/destinacions/escapades-costa-brava",
 				permanent: true,
 			},
 			{
 				source: "/escapades-barcelona",
-				destination: "/escapades-catalunya/escapades-barcelona",
+				destination: "/destinacions",
 				permanent: true,
 			},
 			{
 				source: "/escapades-barcelona",
-				destination: "/escapades-catalunya/escapades-lleida",
+				destination: "/destinacions",
 				permanent: true,
 			},
 			{
@@ -333,7 +367,7 @@ module.exports = withTM({
 			},
 			{
 				source: "/escapades-lleida",
-				destination: "/escapades-catalunya/escapades-lleida",
+				destination: "/destinacions",
 				permanent: true,
 			},
 			{
@@ -380,12 +414,12 @@ module.exports = withTM({
 			},
 			{
 				source: "/listing-region/tarragona",
-				destination: "/escapades-catalunya/escapades-tarragona",
+				destination: "/destinacions",
 				permanent: true,
 			},
 			{
 				source: "/listing-region/tarragona/",
-				destination: "/escapades-catalunya/escapades-tarragona",
+				destination: "/destinacions",
 				permanent: true,
 			},
 			{
@@ -432,7 +466,7 @@ module.exports = withTM({
 			},
 			{
 				source: "/tag/pirineus/",
-				destination: "/escapades-catalunya/escapades-pirineus",
+				destination: "/destinacions/escapades-pirineus",
 				permanent: true,
 			},
 			{

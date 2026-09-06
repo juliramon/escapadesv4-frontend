@@ -36,6 +36,10 @@ const ContentBox = ({
 			service.removeStory(id).then(() => fetchData());
 		} else if (type === "list") {
 			service.removeList(id).then(() => fetchData());
+		} else if (type === "tripEntry") {
+			// No hi havia branca per a les entrades de viatge: el botó
+			// "Eliminar" del panell d'administració no feia absolutament res.
+			service.removeTripEntry(id).then(() => fetchData());
 		}
 	};
 	let path;

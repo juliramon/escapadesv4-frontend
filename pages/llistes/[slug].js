@@ -97,7 +97,7 @@ const ListView = ({ listDetails }) => {
 				<NavigationBar />
 				<main>
 					<article>
-						<section className="pt-8 md:pt-10 lg:pt-12 pb-6 md:pb-8 lg:pb-10">
+						<section className="pt-8 md:pt-10 lg:pt-12">
 							{/* Breadcrumb + article header */}
 							<div className="w-full">
 								<div className="container">
@@ -133,56 +133,51 @@ const ListView = ({ listDetails }) => {
 											{listDetails.subtitle}
 										</p>
 										{/* Informació de l'autor */}
-										<div className="flex flex-wrap items-center gap-4 mt-4 md:mt-6">
-											<div className="flex flex-wrap items-center gap-x-1.5">
-												<div className="rounded-full overflow-hidden w-8 h-8 mr-2.5">
-													<picture>
-														<img
-															src={coverAuthorImg}
-															alt={
-																listDetails
-																	.owner
-																	.fullName
-															}
-															className={
-																"w-full h-full object-cover"
-															}
-															width={32}
-															height={32}
-															loading="eager"
-															fetchpriority="high"
-														/>
-													</picture>
-												</div>
-												<span className="text-15 text-grey-400 inline-block">
-													{listDetails.owner.fullName}
-												</span>
-												<span className="text-15 text-grey-400 inline-block ">
-													–
-												</span>
-												<span className="text-15 text-grey-400 inline-block ">
-													<time
-														dateTime={formatDateTimeToISODate(
-															listDetails.createdAt
-														)}
-														className="underline underline-offset-2"
-													>
-														{formatDateTimeToISODate(
-															listDetails.createdAt
-														)}
-													</time>
-												</span>
+										<div className="flex flex-wrap items-stretch m-0 p-0 gap-x-2 mt-6">
+											<div className="flex flex-wrap items-center text-primary-500 bg-gray-100 rounded-lg py-2.5 px-3 text-sm gap-x-1">
+												<picture className="inline-block rounded-full overflow-hidden w-8 h-8 mr-2.5">
+													<img
+														src={coverAuthorImg}
+														alt={
+															listDetails.owner
+																.fullName
+														}
+														className={
+															"w-full h-full object-cover"
+														}
+														width={32}
+														height={32}
+														loading="eager"
+														fetchpriority="high"
+													/>
+												</picture>
+												{listDetails.owner.fullName}
 											</div>
-											<ShareBarModal
-												picture={coverImg}
-												title={listDetails.title}
-												rating={null}
-												slug={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
-												locality={null}
-												colorClass={
-													"text-15 text-grey-400 inline-block"
-												}
-											/>
+
+											<div className="flex flex-wrap items-center text-primary-500 bg-gray-100 rounded-lg py-2.5 px-3 text-sm gap-x-1">
+												<time
+													dateTime={formatDateTimeToISODate(
+														listDetails.createdAt
+													)}
+												>
+													{formatDateTimeToISODate(
+														listDetails.createdAt
+													)}
+												</time>
+											</div>
+
+											<div className="flex flex-wrap items-center text-primary-500 bg-gray-100 rounded-lg py-2.5 px-3 text-sm gap-x-1">
+												<ShareBarModal
+													picture={coverImg}
+													title={listDetails.title}
+													rating={null}
+													slug={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
+													locality={null}
+													colorClass={
+														"text-primary-500 text-sm"
+													}
+												/>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -190,7 +185,7 @@ const ListView = ({ listDetails }) => {
 						</section>
 
 						{/* Article cover */}
-						<div className="relative">
+						<div className="pt-8 md:pt-12">
 							<div className="container relative z-10">
 								<picture className="block aspect-[4/3] md:aspect-[16/9] relative rounded-2xl overflow-hidden max-w-[1200px] mx-auto">
 									<source

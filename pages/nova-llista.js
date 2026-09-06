@@ -296,6 +296,7 @@ const ListForm = () => {
 											<div className="cover">
 												<span className="form__label">
 													Imatge de portada
+													(1729x973px)
 												</span>
 												<div className="flex items-center flex-col max-w-full mb-4">
 													<div className="bg-white border border-primary-100 rounded-tl-md rounded-tr-md w-full">

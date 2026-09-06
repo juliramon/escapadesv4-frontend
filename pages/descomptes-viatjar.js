@@ -365,6 +365,7 @@ const PoliticaPrivadesa = () => {
 									Reservar aparcament amb Wesmartpark
 								</a>
 							</section>
+							
 						</article>
 					</div>
 				</div>

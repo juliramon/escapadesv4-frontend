@@ -57,7 +57,7 @@ const Homepage = (props) => {
 					featuredCategories={props.featuredCategories}
 					mostRecentPlaces={props.mostRecentPlaces}
 					featuredActivities={props.featuredActivities}
-					featuredRegions={props.featuredRegions}
+					featuredDestinations={props.featuredDestinations}
 					mostRecentStories={props.mostRecentStories}
 				/>
 				<Footer />
@@ -70,14 +70,14 @@ export async function getStaticProps() {
 	const service = new ContentService();
 	const mostRecentPlaces = await service.getMostRecentPlaces();
 	const featuredActivities = await service.getFeaturedActivities();
-	const featuredRegions = await service.getFeaturedRegions();
+	const featuredDestinations = await service.getFeaturedDestinations();
 	const mostRecentStories = await service.getMostRecentStories();
 	const featuredCategories = await service.getFeaturedCategories();
 	const totals = await service.getSiteStats();
 
 	return {
 		props: {
-			featuredRegions,
+			featuredDestinations,
 			featuredActivities,
 			mostRecentPlaces,
 			mostRecentStories,

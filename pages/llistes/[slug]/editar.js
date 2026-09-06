@@ -65,6 +65,7 @@ const ListEditionForm = () => {
 			isReadyToSubmit: false,
 			cloudImagesUploaded: false,
 			coverCloudImageUploaded: false,
+			coverUploading: false,
 			metaTitle: "",
 			metaDescription: "",
 			slug: "",
@@ -128,6 +129,7 @@ const ListEditionForm = () => {
 						coverCloudImage: "",
 						isReadyToSubmit: false,
 						coverCloudImageUploaded: false,
+						coverUploading: false,
 						metaTitle: listDetails.metaTitle,
 						metaDescription: listDetails.metaDescription,
 						slug: listDetails.slug,
@@ -184,27 +186,85 @@ const ListEditionForm = () => {
 	};
 
 	let coverImage;
-	if (state.formData.blopCover || state.list.cover) {
+	if (
+		state.formData.blopCover ||
+		state.formData.coverCloudImage ||
+		state.list.cover
+	) {
 		coverImage = (
 			<div className="m-2 relative w-48 h-auto overflow-hidden rounded-md border-8 border-white shadow">
-				<img src={state.formData.blopCover || state.list.cover} />
+				<img
+					src={
+						state.formData.coverCloudImage ||
+						state.formData.blopCover ||
+						state.list.cover
+					}
+				/>
+				{state.formData.coverUploading && (
+					<div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+						<div className="text-white text-sm flex items-center">
+							<svg
+								className="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
+								xmlns="http://www.w3.org/2000/svg"
+								fill="none"
+								viewBox="0 0 24 24"
+							>
+								<circle
+									className="opacity-25"
+									cx="12"
+									cy="12"
+									r="10"
+									stroke="currentColor"
+									strokeWidth="4"
+								></circle>
+								<path
+									className="opacity-75"
+									fill="currentColor"
+									d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+								></path>
+							</svg>
+							Pujant...
+						</div>
+					</div>
+				)}
 			</div>
 		);
 	}
 
 	const handleFileUpload = async (e) => {
-		const cover = state.formData.cover;
-		const uploadData = new FormData();
-		uploadData.append("imageUrl", cover);
-		const uploadedCover = await service.uploadFile(uploadData);
+		// Set uploading state to true
 		setState({
 			...state,
 			formData: {
 				...state.formData,
-				coverCloudImage: uploadedCover.path,
-				coverCloudImageUploaded: true,
+				coverUploading: true,
 			},
 		});
+
+		try {
+			const cover = state.formData.cover;
+			const uploadData = new FormData();
+			uploadData.append("imageUrl", cover);
+			const uploadedCover = await service.uploadFile(uploadData);
+			setState({
+				...state,
+				formData: {
+					...state.formData,
+					coverCloudImage: uploadedCover.path,
+					coverCloudImageUploaded: true,
+					coverUploading: false,
+				},
+			});
+		} catch (error) {
+			console.error("Error uploading cover image:", error);
+			setState({
+				...state,
+				formData: {
+					...state.formData,
+					coverUploading: false,
+				},
+			});
+		}
 	};
 
 	const handleSubmit = (e) => {
@@ -234,6 +294,7 @@ const ListEditionForm = () => {
 			metaDescription,
 			slug,
 		} = state.formData;
+
 		service
 			.editList(
 				_id,
@@ -248,7 +309,7 @@ const ListEditionForm = () => {
 				editorData.html
 			)
 			.then(() => {
-				Router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel");
+				//Router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel");
 			})
 			.catch((err) => console.error(err));
 	};
@@ -284,11 +345,18 @@ const ListEditionForm = () => {
 								</div>
 								<div className="w-full lg:w-1/2 flex justify-end">
 									<button
-										className="button__primary button__lg"
+										className={`button__primary button__lg ${
+											state.formData.coverUploading
+												? "opacity-50 cursor-not-allowed"
+												: ""
+										}`}
 										type="submit"
 										onClick={handleSubmit}
+										disabled={state.formData.coverUploading}
 									>
-										Guardar canvis
+										{state.formData.coverUploading
+											? "Pujant imatge..."
+											: "Guardar canvis"}
 									</button>
 								</div>
 							</div>
@@ -374,6 +442,7 @@ const ListEditionForm = () => {
 											<div className="cover">
 												<span className="form__label">
 													Imatge de portada
+													(1729x973px)
 												</span>
 												<div className="flex items-center flex-col max-w-full mb-4">
 													<div className="bg-white border border-primary-100 rounded-tl-md rounded-tr-md w-full">

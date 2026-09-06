@@ -3,7 +3,10 @@ const { default: Axios } = require("axios");
 class ContentService {
 	constructor() {
 		let service = Axios.create({
-			baseURL: process.env.API_URL,
+			baseURL:
+				process.env.API_URL ||
+				process.env.NEXT_PUBLIC_APP_API_URL ||
+				"",
 			withCredentials: true,
 			headers: {
 				"Content-Type": "application/json",
@@ -35,7 +38,7 @@ class ContentService {
 		subtitle,
 		categories,
 		seasons,
-		region,
+		destinations,
 		cover,
 		images,
 		description,
@@ -60,7 +63,7 @@ class ContentService {
 		relatedStory,
 		organization_id,
 		metaTitle,
-		metaDescription
+		metaDescription,
 	) => {
 		return this.service
 			.post("/activity", {
@@ -71,7 +74,7 @@ class ContentService {
 				subtitle,
 				categories,
 				seasons,
-				region,
+				destinations,
 				cover,
 				images,
 				description,
@@ -125,7 +128,7 @@ class ContentService {
 		subtitle,
 		categories,
 		seasons,
-		region,
+		destinations,
 		cover,
 		images,
 		review,
@@ -149,7 +152,7 @@ class ContentService {
 		discountCode,
 		discountInfo,
 		metaTitle,
-		metaDescription
+		metaDescription,
 	) =>
 		this.service.put(`/activities/${_id}`, {
 			slug,
@@ -158,7 +161,7 @@ class ContentService {
 			subtitle,
 			categories,
 			seasons,
-			region,
+			destinations,
 			cover,
 			images,
 			review,
@@ -187,15 +190,61 @@ class ContentService {
 
 	// FILES ENDPOINTS
 
-	uploadFile = (file) => {
-		return this.service.post("/upload", file).then((res) => {
-			return res.data;
-			// if (this.error === undefined) {
-			//   return this.response;
-			// } else {
-			//   return this.error;
-			// }
-		});
+	uploadFile = (file, uploadFolder, uploadModel) => {
+		let payload = file;
+		if (typeof FormData !== "undefined" && file instanceof FormData) {
+			const folderTrim =
+				uploadFolder != null &&
+				typeof uploadFolder === "string" &&
+				uploadFolder.trim() !== ""
+					? uploadFolder.trim()
+					: "";
+			const modelTrim =
+				uploadModel != null &&
+				typeof uploadModel === "string" &&
+				uploadModel.trim() !== ""
+					? uploadModel.trim()
+					: "";
+
+			// Multer only sees req.body fields that appear *before* the file part in
+			// multipart data, so text fields must be appended first.
+			if (folderTrim || modelTrim) {
+				const ordered = new FormData();
+				if (folderTrim) {
+					ordered.append("uploadFolder", folderTrim);
+				}
+				if (modelTrim) {
+					ordered.append("uploadModel", modelTrim);
+				}
+				for (const pair of file.entries()) {
+					const k = pair[0];
+					const v = pair[1];
+					if (k === "uploadFolder" || k === "uploadModel") {
+						continue;
+					}
+					ordered.append(k, v);
+				}
+				payload = ordered;
+			}
+		}
+
+		// Instance default Content-Type is application/json, which breaks multipart;
+		// let the runtime set multipart boundary for FormData.
+		const cfg =
+			typeof FormData !== "undefined" && payload instanceof FormData
+				? {
+						transformRequest: [
+							(data, headers) => {
+								if (headers && typeof headers === "object") {
+									delete headers["Content-Type"];
+								}
+								return data;
+							},
+						],
+				  }
+				: {};
+
+		return this.service.post("/upload", payload, cfg).then((res) => res.data);
 	};
 
 	// USERS ENDPOINTS
@@ -238,7 +287,7 @@ class ContentService {
 		hasSelectedPlan,
 		hasPublishedAnOrganization,
 		hasSelectedContentType,
-		hasPostedContent
+		hasPostedContent,
 	) =>
 		this.service.put(`/users/${_id}/editPlan`, {
 			hasSelectedPlan: hasSelectedPlan,
@@ -274,7 +323,7 @@ class ContentService {
 		categories,
 		seasons,
 		characteristics,
-		region,
+		destinations,
 		placeType,
 		cover,
 		images,
@@ -299,7 +348,7 @@ class ContentService {
 		relatedStory,
 		organization_id,
 		metaTitle,
-		metaDescription
+		metaDescription,
 	) => {
 		return this.service
 			.post("/place", {
@@ -311,7 +360,7 @@ class ContentService {
 				categories,
 				seasons,
 				characteristics,
-				region,
+				destinations,
 				placeType,
 				cover,
 				images,
@@ -363,7 +412,7 @@ class ContentService {
 		categories,
 		seasons,
 		characteristics,
-		region,
+		destinations,
 		placeType,
 		placeCover,
 		placeImages,
@@ -387,7 +436,7 @@ class ContentService {
 		discountCode,
 		discountInfo,
 		metaTitle,
-		metaDescription
+		metaDescription,
 	) =>
 		this.service.put(`/places/${_id}`, {
 			slug,
@@ -397,10 +446,16 @@ class ContentService {
 			categories,
 			seasons,
 			characteristics,
-			region,
+			destinations,
 			placeType,
-			placeCover,
-			placeImages,
+			// L'esquema Place té `cover` i `images`. Enviant-los com a placeCover
+			// i placeImages, Mongoose els descartava i editar un allotjament mai
+			// no n'actualitzava la portada ni la galeria. S'ometen si venen buits
+			// per no esborrar les imatges que ja hi havia.
+			...(placeCover ? {cover: placeCover} : {}),
+			...(placeImages && placeImages.length
+				? {images: placeImages}
+				: {}),
 			review,
 			relatedStory,
 			description,
@@ -438,7 +493,7 @@ class ContentService {
 		image,
 		description,
 		metaTitle,
-		metaDescription
+		metaDescription,
 	) => {
 		return this.service
 			.post("/story", {
@@ -478,7 +533,7 @@ class ContentService {
 		images,
 		description,
 		metaTitle,
-		metaDescription
+		metaDescription,
 	) =>
 		this.service.put(`/stories/${_id}`, {
 			slug,
@@ -508,7 +563,7 @@ class ContentService {
 		images,
 		description,
 		metaTitle,
-		metaDescription
+		metaDescription,
 	) => {
 		return this.service
 			.post("/trip-entry", {
@@ -551,7 +606,7 @@ class ContentService {
 		description,
 		metaTitle,
 		metaDescription,
-		trip
+		trip,
 	) =>
 		this.service.put(`/trip-entries/${_id}`, {
 			slug,
@@ -589,7 +644,7 @@ class ContentService {
 		isFeatured,
 		sponsorURL,
 		sponsorLogo,
-		sponsorClaim
+		sponsorClaim,
 	) => {
 		return this.service
 			.post("/trip-category", {
@@ -645,7 +700,7 @@ class ContentService {
 		isFeatured,
 		sponsorURL,
 		sponsorLogo,
-		sponsorClaim
+		sponsorClaim,
 	) => {
 		return this.service.put(`/trip-categories/${id}`, {
 			slug,
@@ -701,17 +756,17 @@ class ContentService {
 
 	// SEARCH ENDPOINTS
 
-	searchPlaces = (queryRegion, queryCategory, querySeason) =>
+	searchPlaces = (queryDestination, queryCategory, querySeason) =>
 		this.service
 			.get(
-				`/searchPlaces?placeRegion=${queryRegion}&placeCategory=${queryCategory}&placeSeason=${querySeason}`
+				`/searchPlaces?placeDestination=${queryDestination}&placeCategory=${queryCategory}&placeSeason=${querySeason}`,
 			)
 			.then((res) => res.data);
 
-	searchActivities = (queryRegion, queryCategory, querySeason) =>
+	searchActivities = (queryDestination, queryCategory, querySeason) =>
 		this.service
 			.get(
-				`/searchActivities?activityRegion=${queryRegion}&activityCategory=${queryCategory}&activitySeason=${querySeason}`
+				`/searchActivities?activityDestination=${queryDestination}&activityCategory=${queryCategory}&activitySeason=${querySeason}`,
 			)
 			.then((res) => res.data);
 
@@ -724,49 +779,41 @@ class ContentService {
 	getUserCustomPlaces = () =>
 		this.service.get("/searchUserCustomPlaces").then((res) => res.data);
 
-	// Regions
-	createRegion = (
-		name,
-		pluralName,
+	// Destinations
+	createDestination = (
 		slug,
 		title,
-		richTitle,
+		longTitle,
 		subtitle,
 		image,
-		seoTextHeader,
 		reviewText,
 		carouselImages,
-		reasonsText,
-		relatedStory,
+		mapLocation,
 		mostLikedText,
 		pointsOfInterestText,
 		mustSeeText,
-		googleMapsIframe,
+		seoTextHeader,
 		seoText,
 		isSponsored,
 		isFeatured,
 		sponsorURL,
 		sponsorLogo,
-		sponsorClaim
+		sponsorClaim,
 	) => {
 		return this.service
-			.post("/region", {
-				name,
-				pluralName,
+			.post("/destination", {
 				slug,
 				title,
-				richTitle,
+				longTitle,
 				subtitle,
 				image,
-				seoTextHeader,
 				reviewText,
 				carouselImages,
-				reasonsText,
-				relatedStory,
+				mapLocation,
 				mostLikedText,
 				pointsOfInterestText,
 				mustSeeText,
-				googleMapsIframe,
+				seoTextHeader,
 				seoText,
 				isSponsored,
 				isFeatured,
@@ -777,59 +824,51 @@ class ContentService {
 			.then((res) => res.data);
 	};
 
-	getRegions = () => this.service.get("/regions").then((res) => res.data);
+	getDestinations = () =>
+		this.service.get("/destinations").then((res) => res.data);
 
-	getFeaturedRegions = () =>
-		this.service.get("/featured-regions").then((res) => res.data);
+	getFeaturedDestinations = () =>
+		this.service.get("/featured-destinations").then((res) => res.data);
 
-	removeRegion = (id) =>
+	removeDestination = (id) =>
 		this.service
-			.put(`/regions/${id}`, { isRemoved: true })
+			.put(`/destinations/${id}`, { isRemoved: true })
 			.then((res) => res.data);
 
-	editRegion = (
+	editDestination = (
 		id,
-		name,
-		pluralName,
 		slug,
 		title,
-		richTitle,
+		longTitle,
 		subtitle,
 		image,
-		seoTextHeader,
 		reviewText,
 		carouselImages,
-		reasonsText,
-		relatedStory,
+		mapLocation,
 		mostLikedText,
 		pointsOfInterestText,
 		mustSeeText,
-		googleMapsIframe,
+		seoTextHeader,
 		seoText,
 		isSponsored,
 		isFeatured,
 		sponsorURL,
 		sponsorLogo,
-		sponsorClaim
+		sponsorClaim,
 	) => {
-		return this.service.put(`/regions/${id}`, {
-			slug,
-			name,
-			pluralName,
+		return this.service.put(`/destinations/${id}`, {
 			slug,
 			title,
-			richTitle,
+			longTitle,
 			subtitle,
 			image,
-			seoTextHeader,
 			reviewText,
 			carouselImages,
-			reasonsText,
-			relatedStory,
+			mapLocation,
 			mostLikedText,
 			pointsOfInterestText,
 			mustSeeText,
-			googleMapsIframe,
+			seoTextHeader,
 			seoText,
 			isSponsored,
 			isFeatured,
@@ -839,17 +878,24 @@ class ContentService {
 		});
 	};
 
-	getRegionDetails = (slug) =>
-		this.service.get(`/regions/${slug}`).then((res) => res.data);
+	// Get destination details by slug (used in static paths)
+	getDestinationDetails = (slug) =>
+		this.service.get(`/destinations/${slug}`).then((res) => res.data);
 
-	paginateRegion = (region, page) =>
+	// Get destination details by id (used in activities and places pages) and related results by destinations ids
+	getRelatedResultsByDestinationsIds = (ids) =>
 		this.service
-			.get(`/searchRegionResults/${region}?page=${page}`)
+			.get(`/relatedResultsByDestinationsIds/${ids}`)
 			.then((res) => res.data);
 
-	getRegionResults = (region) =>
+	paginateDestination = (destination, page) =>
 		this.service
-			.get(`/searchRegionResults/${region}`)
+			.get(`/searchDestinationResults/${destination}?page=${page}`)
+			.then((res) => res.data);
+
+	getDestinationResults = (destination) =>
+		this.service
+			.get(`/searchDestinationResults/${destination}`)
 			.then((res) => res.data);
 
 	// Categories
@@ -870,7 +916,7 @@ class ContentService {
 		seoText,
 		sponsorURL,
 		sponsorLogo,
-		sponsorClaim
+		sponsorClaim,
 	) => {
 		return this.service
 			.post("/category", {
@@ -924,7 +970,7 @@ class ContentService {
 		isFeatured,
 		sponsorURL,
 		sponsorLogo,
-		sponsorClaim
+		sponsorClaim,
 	) => {
 		return this.service.put(`/categories/${id}`, {
 			slug,
@@ -996,7 +1042,7 @@ class ContentService {
 		organization_country,
 		organization_lat,
 		organization_lng,
-		additionalInfo
+		additionalInfo,
 	) =>
 		this.service.put(`/editOrganizationData/${_id}`, {
 			_id,
@@ -1034,7 +1080,7 @@ class ContentService {
 		metaTitle,
 		metaDescription,
 		slug,
-		editorData
+		editorData,
 	) => {
 		return this.service
 			.post("/list", {
@@ -1060,19 +1106,27 @@ class ContentService {
 		metaTitle,
 		metaDescription,
 		slug,
-		description
-	) =>
-		this.service.put(`/lists/${id}`, {
+		description,
+	) => {
+		const payload = {
 			type,
 			title,
 			subtitle,
 			isFeatured,
-			coverCloudImage,
 			metaTitle,
 			metaDescription,
 			slug,
 			description,
-		});
+		};
+		// L'esquema List té el camp `cover`, no `coverCloudImage`: amb el nom
+		// antic Mongoose el descartava i la portada no s'actualitzava mai. Només
+		// s'envia quan hi ha imatge nova, perquè el formulari deixa el valor buit
+		// si no se n'ha pujat cap i sobreescriuria la portada existent.
+		if (coverCloudImage) {
+			payload.cover = coverCloudImage;
+		}
+		return this.service.put(`/lists/${id}`, payload);
+	};
 
 	getAllLists = () => this.service.get("/all-lists").then((res) => res.data);
 
@@ -1137,7 +1191,7 @@ class ContentService {
 		seoText,
 		sponsorURL,
 		sponsorLogo,
-		sponsorClaim
+		sponsorClaim,
 	) => {
 		return this.service
 			.post("/characteristic", {
@@ -1188,7 +1242,7 @@ class ContentService {
 		isFeatured,
 		sponsorURL,
 		sponsorLogo,
-		sponsorClaim
+		sponsorClaim,
 	) => {
 		return this.service.put(`/characteristics/${id}`, {
 			slug,

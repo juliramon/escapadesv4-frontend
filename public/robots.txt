@@ -1,1 +1,18 @@
 User-agent: *
+Allow: /
+
+Disallow: /2i8ZXlkM4cFKUPBrm3-admin-panel
+Disallow: /configuracio
+Disallow: /bookmarks
+Disallow: /login
+Disallow: /logout
+Disallow: /signup
+Disallow: /recuperar-contrassenya
+Disallow: /nova-activitat
+Disallow: /nou-allotjament
+Disallow: /nova-historia
+Disallow: /nova-llista
+Disallow: /nou-viatge
+Disallow: /*/editar$
+
+Sitemap: https://escapadesenparella.cat/sitemap.xml

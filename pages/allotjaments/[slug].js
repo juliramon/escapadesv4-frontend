@@ -12,7 +12,7 @@ import FancyboxUtil from "../../utils/FancyboxUtils";
 import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
 import GlobalMetas from "../../components/head/GlobalMetas";
 
-const PlaceListing = ({ placeDetails }) => {
+const PlaceListing = ({ placeDetails, destinationNames = [] }) => {
 	const { user } = useContext(UserContext);
 	const router = useRouter();
 
@@ -289,9 +289,13 @@ const PlaceListing = ({ placeDetails }) => {
 		</li>
 	));
 
-	const placeRegion = state.place.region.map((region, idx) => (
-		<span key={idx}>{region}</span>
-	));
+	// `destinations` guarda referències en text pla, així que els noms es resolen
+	// a getServerSideProps. Si l'allotjament encara no en té cap, es recorre a la
+	// província que ve de Google.
+	const placeDestinations =
+		destinationNames.length > 0
+			? destinationNames.join(", ")
+			: state.place.place_province || state.place.place_state || "";
 
 	return (
 		<>
@@ -843,7 +847,7 @@ const PlaceListing = ({ placeDetails }) => {
 																de{" "}
 																<span className="capitalize">
 																	{
-																		placeRegion
+																		placeDestinations
 																	}
 																</span>
 															</p>
@@ -948,7 +952,7 @@ const PlaceListing = ({ placeDetails }) => {
 														}) =>
 															renderMarker(
 																map,
-																maps
+																maps,
 															)
 														}
 													/>
@@ -1091,9 +1095,34 @@ export async function getServerSideProps({ params }) {
 		};
 	}
 
+	// El backend desa `destinations` com a array de strings (ids, o slugs en
+	// documents antics) i per tant no els pot popular. Es resolen aquí per poder
+	// mostrar el nom de la destinació i no l'identificador.
+	let destinationNames = [];
+	if (
+		Array.isArray(placeDetails.destinations) &&
+		placeDetails.destinations.length > 0
+	) {
+		try {
+			const allDestinations = await service.getDestinations();
+			destinationNames = placeDetails.destinations
+				.map((ref) => {
+					const match = allDestinations.find(
+						(d) =>
+							String(d._id) === String(ref) || d.slug === ref
+					);
+					return match ? match.title : null;
+				})
+				.filter(Boolean);
+		} catch (err) {
+			destinationNames = [];
+		}
+	}
+
 	return {
 		props: {
 			placeDetails,
+			destinationNames,
 		},
 	};
 }
