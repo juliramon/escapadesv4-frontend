@@ -565,7 +565,20 @@ const DestinationPage = ({
 
 export async function getStaticPaths() {
 	const service = new ContentService();
-	const destinations = await service.getDestinations();
+
+	// Si l'API no respon en temps de build (per exemple, un desplegament del
+	// backend encara en curs), no s'ha de tombar tot el build: amb fallback
+	// "blocking" les pagines es generen a la primera visita.
+	let destinations = [];
+	try {
+		destinations = (await service.getDestinations()) || [];
+	} catch (err) {
+		console.warn(
+			"getStaticPaths: no s'han pogut llistar les destinacions, es generaran sota demanda."
+		);
+		destinations = [];
+	}
+
 	const paths = destinations.map((destination) => ({
 		params: { destination: destination.slug },
 	}));
