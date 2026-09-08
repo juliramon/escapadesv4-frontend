@@ -5,6 +5,13 @@
  * estava repetit tres cops dins de cada modal de crear i d'editar: vint-i-quatre
  * còpies del mateix marcatge.
  */
+import { useState } from "react";
+import {
+	ACCEPTED_IMAGE_ACCEPT,
+	isAcceptedImage,
+	rejectedImageMessage,
+} from "../../utils/uploads";
+
 const CameraIcon = () => (
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
@@ -33,8 +40,31 @@ const ImageUploadField = ({
 	hasImage,
 	preview,
 	multiple = false,
-	accept = "image/*",
+	accept = ACCEPTED_IMAGE_ACCEPT,
 }) => {
+	const [error, setError] = useState("");
+
+	const handleChange = (e) => {
+		const files = Array.prototype.slice.call(e.target.files || []);
+		if (!files.length) return;
+
+		// Cloudinary només accepta jpg, png i gif. Amb qualsevol altre format
+		// l'API responia amb un error 500 en HTML i el formulari només deia
+		// que no s'havia pogut desar, sense dir per què.
+		const rejected = files.filter((file) => !isAcceptedImage(file));
+		if (rejected.length) {
+			setError(rejectedImageMessage(rejected));
+			e.target.value = "";
+			return;
+		}
+
+		setError("");
+		onChange(e);
+		// Permet tornar a triar el mateix fitxer: sense això el navegador no
+		// dispara cap altre `change` si el nom no canvia.
+		e.target.value = "";
+	};
+
 	return (
 		<div className="form__group">
 			<span className="form__label">{label}</span>
@@ -48,7 +78,7 @@ const ImageUploadField = ({
 								name={name}
 								accept={accept}
 								multiple={multiple}
-								onChange={onChange}
+								onChange={handleChange}
 							/>
 							<CameraIcon />
 							{hasImage ? "Canviar imatge" : "Seleccionar imatge"}
@@ -61,6 +91,11 @@ const ImageUploadField = ({
 					</div>
 				</div>
 			</div>
+			{error ? (
+				<span className="text-15 text-red-600" role="alert">
+					{error}
+				</span>
+			) : null}
 		</div>
 	);
 };

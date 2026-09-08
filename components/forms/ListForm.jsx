@@ -12,6 +12,11 @@ import { CheckboxField, ImagePreview, TextField } from "../admin/FormFields";
 import ContentFormLayout from "./ContentFormLayout";
 import SeoFieldset from "./SeoFieldset";
 import { readValidationError } from "../../utils/apiErrors";
+import {
+	UPLOAD_MODELS,
+	createUploader,
+	uploadSingleFile,
+} from "../../utils/uploads";
 
 /**
  * Formulari de llistes, per crear-ne una de nova o editar-ne una d'existent.
@@ -133,13 +138,18 @@ const ListForm = ({ mode = "create", initialData = null }) => {
 		try {
 			// Només es puja la portada si se n'ha triat una de nova; abans
 			// s'enviava sempre i, en editar sense canviar-la, es perdia.
-			let cover = formData.coverCloudImage;
-			if (formData.updatedCover) {
-				const uploadData = new FormData();
-				uploadData.append("imageUrl", formData.cover);
-				const uploaded = await service.uploadFile(uploadData);
-				cover = uploaded?.path || "";
-			}
+			const upload = createUploader(
+				service,
+				UPLOAD_MODELS.lists,
+				formData,
+			);
+			const cover = formData.updatedCover
+				? await uploadSingleFile(
+						upload,
+						formData.cover,
+						formData.coverCloudImage,
+					)
+				: formData.coverCloudImage;
 
 			const description = editor ? editor.getHTML() : "";
 
@@ -154,8 +164,8 @@ const ListForm = ({ mode = "create", initialData = null }) => {
 						formData.metaTitle,
 						formData.metaDescription,
 						formData.slug,
-						description
-				  )
+						description,
+					)
 				: await service.list(
 						formData.type,
 						formData.title,
@@ -164,8 +174,8 @@ const ListForm = ({ mode = "create", initialData = null }) => {
 						formData.metaTitle,
 						formData.metaDescription,
 						formData.slug,
-						description
-				  );
+						description,
+					);
 
 			const failure = readValidationError(response);
 			if (failure) {
@@ -177,7 +187,9 @@ const ListForm = ({ mode = "create", initialData = null }) => {
 			Router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel");
 		} catch (error) {
 			console.error(error);
-			setErrorMessage("No s'ha pogut desar la llista. Torna-ho a provar.");
+			setErrorMessage(
+				"No s'ha pogut desar la llista. Torna-ho a provar.",
+			);
 			setIsSaving(false);
 		}
 	};
@@ -231,7 +243,7 @@ const ListForm = ({ mode = "create", initialData = null }) => {
 							name="cover"
 							onChange={saveFileToStatus}
 							hasImage={Boolean(
-								formData.cover || formData.coverCloudImage
+								formData.cover || formData.coverCloudImage,
 							)}
 							preview={
 								<ImagePreview

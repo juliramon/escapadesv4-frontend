@@ -9,6 +9,14 @@ import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import {
+	ACCEPTED_IMAGE_ACCEPT,
+	isAcceptedImage,
+	rejectedImageMessage,
+	UPLOAD_MODELS,
+	createUploader,
+	uploadSingleFile,
+} from "../../utils/uploads";
 
 const UserProfile = ({
 	userDetails,
@@ -41,6 +49,7 @@ const UserProfile = ({
 
 	const service = new ContentService();
 
+	const [uploadError, setUploadError] = useState("");
 	const [modalVisibility, setModalVisibility] = useState(false);
 	const [modalVisibilityOffpage, setModalVisibilityOffpage] = useState(false);
 	const handleModalVisibility = () => setModalVisibility(true);
@@ -252,14 +261,25 @@ const UserProfile = ({
 
 	const handleFileUpload = async (e) => {
 		const fileToUpload = e.target.files[0];
-		const uploadData = new FormData();
-		uploadData.append("imageUrl", fileToUpload);
-		const uploadedFile = await service.uploadFile(uploadData);
-		setState({
-			...state,
-			cover: uploadedFile.path,
-			isCoverReadyToUpload: true,
+		if (!fileToUpload) return;
+		// L'atribut accept ja filtra el diàleg, però es pot esquivar.
+		if (!isAcceptedImage(fileToUpload)) {
+			setUploadError(rejectedImageMessage([fileToUpload]));
+			e.target.value = "";
+			return;
+		}
+		setUploadError("");
+		// getaways-guru/users/{slug de l'usuari}
+		const upload = createUploader(service, UPLOAD_MODELS.users, {
+			slug: state.userProfile.slug,
+			title: state.userProfile.fullName,
 		});
+		const cover = await uploadSingleFile(upload, fileToUpload);
+		setState((previous) => ({
+			...previous,
+			cover,
+			isCoverReadyToUpload: true,
+		}));
 	};
 
 	const refreshUser = () => {
@@ -292,28 +312,42 @@ const UserProfile = ({
 	if (user && user !== "null") {
 		if (user._id === state.userProfile._id) {
 			editCoverButton = (
-				<label className="edit-cover">
-					<input type="file" onChange={handleFileUpload} />
-					<svg
-						xmlns="http://www.w3.org/2000/svg"
-						className="icon icon-tabler icon-tabler-photo"
-						width="24"
-						height="24"
-						viewBox="0 0 24 24"
-						strokeWidth="1.5"
-						stroke="#ffffff"
-						fill="none"
-						strokeLinecap="round"
-						strokeLinejoin="round"
-					>
-						<path stroke="none" d="M0 0h24v24H0z" />
-						<line x1="15" y1="8" x2="15.01" y2="8" />
-						<rect x="4" y="4" width="16" height="16" rx="3" />
-						<path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-						<path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-					</svg>{" "}
-					Editar portada
-				</label>
+				<>
+					<label className="edit-cover">
+						<input
+							type="file"
+							accept={ACCEPTED_IMAGE_ACCEPT}
+							onChange={handleFileUpload}
+						/>
+						<svg
+							xmlns="http://www.w3.org/2000/svg"
+							className="icon icon-tabler icon-tabler-photo"
+							width="24"
+							height="24"
+							viewBox="0 0 24 24"
+							strokeWidth="1.5"
+							stroke="#ffffff"
+							fill="none"
+							strokeLinecap="round"
+							strokeLinejoin="round"
+						>
+							<path stroke="none" d="M0 0h24v24H0z" />
+							<line x1="15" y1="8" x2="15.01" y2="8" />
+							<rect x="4" y="4" width="16" height="16" rx="3" />
+							<path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
+							<path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
+						</svg>{" "}
+						Editar portada
+					</label>
+					{uploadError ? (
+						<span
+							className="text-15 text-red-600 block mt-1"
+							role="alert"
+						>
+							{uploadError}
+						</span>
+					) : null}
+				</>
 			);
 		}
 	}

@@ -3,6 +3,14 @@ import { Modal, Form, Button } from "react-bootstrap";
 import ContentService from "../../services/contentService";
 import Autocomplete from "react-google-autocomplete";
 import { useRouter } from "next/router";
+import {
+	ACCEPTED_IMAGE_ACCEPT,
+	isAcceptedImage,
+	rejectedImageMessage,
+	UPLOAD_MODELS,
+	createUploader,
+	uploadSingleFile,
+} from "../../utils/uploads";
 
 const EditOrganizationModal = ({
 	organizationDetails,
@@ -50,6 +58,7 @@ const EditOrganizationModal = ({
 	}, [organizationDetails]);
 	const [state, setState] = useState(initialState);
 	const service = new ContentService();
+	const [uploadError, setUploadError] = useState("");
 
 	const handleChange = (e) => {
 		if (e.target.name === "orgName") {
@@ -72,16 +81,26 @@ const EditOrganizationModal = ({
 		}
 	};
 
-	const handleFileUpload = (e) => {
+	const handleFileUpload = async (e) => {
 		const fileToUpload = e.target.files[0];
-		const uploadData = new FormData();
-		uploadData.append("imageUrl", fileToUpload);
-		service.uploadFile(uploadData).then((res) =>
-			setState({
-				...state,
-				formData: { ...state.formData, orgLogo: res.path },
-			})
-		);
+		if (!fileToUpload) return;
+		// L'atribut accept ja filtra el diàleg, però es pot esquivar.
+		if (!isAcceptedImage(fileToUpload)) {
+			setUploadError(rejectedImageMessage([fileToUpload]));
+			e.target.value = "";
+			return;
+		}
+		setUploadError("");
+		// getaways-guru/organizations/{slug de l'empresa}
+		const upload = createUploader(service, UPLOAD_MODELS.organizations, {
+			slug: state.formData.slug,
+			title: state.formData.orgName,
+		});
+		const orgLogo = await uploadSingleFile(upload, fileToUpload);
+		setState((previous) => ({
+			...previous,
+			formData: { ...previous.formData, orgLogo },
+		}));
 	};
 
 	const handleSubmit = (e) => {
@@ -151,7 +170,7 @@ const EditOrganizationModal = ({
 				organization_country,
 				organization_lat,
 				organization_lng,
-				additionalInfo
+				additionalInfo,
 			)
 			.then((res) => {
 				if (res.data.message === "Aquesta URL ja està en us") {
@@ -197,6 +216,7 @@ const EditOrganizationModal = ({
 						<label>
 							<Form.Control
 								type="file"
+								accept={ACCEPTED_IMAGE_ACCEPT}
 								onChange={handleFileUpload}
 								className="input-avatar-user"
 							></Form.Control>
@@ -228,6 +248,11 @@ const EditOrganizationModal = ({
 							</div>
 						</label>
 					</Form.Group>
+					{uploadError ? (
+						<p className="text-15 text-red-600" role="alert">
+							{uploadError}
+						</p>
+					) : null}
 					<Form.Group>
 						<Form.Label>Nom de l'empresa</Form.Label>
 						<Form.Control
@@ -343,15 +368,15 @@ const EditOrganizationModal = ({
 										if (el.types[0] === "country") {
 											organization_country = el.long_name;
 										}
-									}
+									},
 								);
 
 								if (organization.geometry.viewport) {
 									organization_lat = Object.values(
-										organization.geometry.viewport
+										organization.geometry.viewport,
 									)[0].i;
 									organization_lng = Object.values(
-										organization.geometry.viewport
+										organization.geometry.viewport,
 									)[1].i;
 								}
 

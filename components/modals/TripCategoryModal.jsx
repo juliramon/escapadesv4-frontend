@@ -1,9 +1,11 @@
 import { useState } from "react";
 import ContentService from "../../services/contentService";
+import { uploadCarouselMediaItems } from "../../utils/helpers";
 import {
-	destinationUploadFolderKey,
-	uploadCarouselMediaItems,
-} from "../../utils/helpers";
+	UPLOAD_MODELS,
+	createUploader,
+	uploadSingleFile,
+} from "../../utils/uploads";
 import AdminModal from "../admin/AdminModal";
 import ImageUploadField from "../admin/ImageUploadField";
 import GalleryField from "../admin/GalleryField";
@@ -149,29 +151,26 @@ const TripCategoryModal = ({
 		setSubmitError(null);
 
 		try {
-			const uploadFolder = destinationUploadFolderKey(
-				tripCategory.slug,
-				tripCategory.title,
+			// Abans només s'enviava la carpeta i el backend, sense model, ho
+			// donava per destinació: les imatges de les categories de viatge
+			// acabaven dins de `getaways-guru/destinations/`.
+			const upload = createUploader(
+				service,
+				UPLOAD_MODELS.tripCategories,
+				tripCategory,
 			);
-			const upload = (payload) =>
-				service.uploadFile(payload, uploadFolder);
-
-			const uploadSingle = async (file, current) => {
-				const uploadData = new FormData();
-				uploadData.append("imageUrl", file);
-				const uploaded = await upload(uploadData);
-				return uploaded?.path || current;
-			};
 
 			const categoryImage = tripCategory.updatedImage
-				? await uploadSingle(
+				? await uploadSingleFile(
+						upload,
 						tripCategory.image,
 						tripCategory.cloudImage,
 					)
 				: tripCategory.cloudImage;
 
 			const categorySponsorLogo = tripCategory.updatedSponsorLogo
-				? await uploadSingle(
+				? await uploadSingleFile(
+						upload,
 						tripCategory.sponsorLogo,
 						tripCategory.cloudSponsorLogo,
 					)

@@ -1,9 +1,11 @@
 import { useState } from "react";
 import ContentService from "../../services/contentService";
+import { uploadCarouselMediaItems } from "../../utils/helpers";
 import {
-	destinationUploadFolderKey,
-	uploadCarouselMediaItems,
-} from "../../utils/helpers";
+	UPLOAD_MODELS,
+	createUploader,
+	uploadSingleFile,
+} from "../../utils/uploads";
 import AdminModal from "../admin/AdminModal";
 import ImageUploadField from "../admin/ImageUploadField";
 import GalleryField from "../admin/GalleryField";
@@ -149,26 +151,23 @@ const DestinationModal = ({
 		setSubmitError(null);
 
 		try {
-			const uploadFolder = destinationUploadFolderKey(
-				destination.slug,
-				destination.title,
+			const upload = createUploader(
+				service,
+				UPLOAD_MODELS.destinations,
+				destination,
 			);
-			const upload = (payload) =>
-				service.uploadFile(payload, uploadFolder);
-
-			const uploadSingle = async (file, current) => {
-				const uploadData = new FormData();
-				uploadData.append("imageUrl", file);
-				const uploaded = await upload(uploadData);
-				return uploaded?.path || current;
-			};
 
 			const destinationImage = destination.updatedImage
-				? await uploadSingle(destination.image, destination.cloudImage)
+				? await uploadSingleFile(
+						upload,
+						destination.image,
+						destination.cloudImage,
+					)
 				: destination.cloudImage;
 
 			const destinationSponsorLogo = destination.updatedSponsorLogo
-				? await uploadSingle(
+				? await uploadSingleFile(
+						upload,
 						destination.sponsorLogo,
 						destination.cloudSponsorLogo,
 					)

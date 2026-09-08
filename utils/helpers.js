@@ -1,26 +1,4 @@
 /**
- * Single segment for getaways-guru/{model}/{segment}/ — prefer slug, else slugified title.
- * Ignores the literal "slug" used as an empty placeholder in some forms.
- */
-const destinationUploadFolderKey = (slug, title) => {
-	let key = (slug || "").trim();
-	if (key === "slug") {
-		key = "";
-	}
-	if (key) return key;
-	if (title && typeof title === "string") {
-		key = title
-			.normalize("NFD")
-			.replace(/[\u0300-\u036f]/g, "")
-			.toLowerCase()
-			.replace(/[^a-z0-9]+/g, "-")
-			.replace(/^-+|-+$/g, "")
-			.slice(0, 80);
-	}
-	return key || "sense-slug";
-};
-
-/**
  * Align activity/place destination values with checkbox values (Mongo _id strings).
  * Accepts stored slugs or id strings; returns unique id strings using loaded docs.
  */
@@ -168,7 +146,6 @@ const copyTextToClipboard = (e) => {
 };
 
 export {
-	destinationUploadFolderKey,
 	normalizeDestinationRefsToIds,
 	uploadCarouselMediaItems,
 	formatDateTimeToISODate,

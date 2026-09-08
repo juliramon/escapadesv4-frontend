@@ -14,6 +14,11 @@ import { ImagePreview, SelectField, TextField } from "../admin/FormFields";
 import ContentFormLayout from "./ContentFormLayout";
 import SeoFieldset from "./SeoFieldset";
 import { readValidationError } from "../../utils/apiErrors";
+import {
+	UPLOAD_MODELS,
+	createUploader,
+	uploadSingleFile,
+} from "../../utils/uploads";
 
 /**
  * Formulari d'entrades de viatge, per crear-ne una de nova o editar-ne una
@@ -182,17 +187,23 @@ const TripEntryForm = ({ mode = "create", initialData = null }) => {
 		setErrorMessage("");
 
 		try {
-			let cover = formData.coverCloudImage;
-			if (formData.updatedCover) {
-				const uploadData = new FormData();
-				uploadData.append("imageUrl", formData.cover);
-				const uploaded = await service.uploadFile(uploadData);
-				cover = uploaded?.path || "";
-			}
+			const upload = createUploader(
+				service,
+				UPLOAD_MODELS.tripEntries,
+				formData,
+			);
+
+			const cover = formData.updatedCover
+				? await uploadSingleFile(
+						upload,
+						formData.cover,
+						formData.coverCloudImage,
+					)
+				: formData.coverCloudImage;
 
 			const images = await uploadCarouselMediaItems(
 				formData.images,
-				(payload) => service.uploadFile(payload),
+				upload,
 			);
 
 			const description = editor ? editor.getHTML() : "";

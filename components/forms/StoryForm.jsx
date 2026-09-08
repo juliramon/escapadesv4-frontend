@@ -14,6 +14,11 @@ import { ImagePreview, TextField } from "../admin/FormFields";
 import ContentFormLayout from "./ContentFormLayout";
 import SeoFieldset from "./SeoFieldset";
 import { readValidationError } from "../../utils/apiErrors";
+import {
+	UPLOAD_MODELS,
+	createUploader,
+	uploadSingleFile,
+} from "../../utils/uploads";
 
 /**
  * Formulari d'històries, per crear-ne una de nova o editar-ne una d'existent.
@@ -145,17 +150,23 @@ const StoryForm = ({ mode = "create", initialData = null }) => {
 		setErrorMessage("");
 
 		try {
-			let cover = formData.coverCloudImage;
-			if (formData.updatedCover) {
-				const uploadData = new FormData();
-				uploadData.append("imageUrl", formData.cover);
-				const uploaded = await service.uploadFile(uploadData);
-				cover = uploaded?.path || "";
-			}
+			const upload = createUploader(
+				service,
+				UPLOAD_MODELS.stories,
+				formData,
+			);
+
+			const cover = formData.updatedCover
+				? await uploadSingleFile(
+						upload,
+						formData.cover,
+						formData.coverCloudImage,
+					)
+				: formData.coverCloudImage;
 
 			const images = await uploadCarouselMediaItems(
 				formData.images,
-				(payload) => service.uploadFile(payload)
+				upload,
 			);
 
 			const description = editor ? editor.getHTML() : "";
@@ -170,8 +181,8 @@ const StoryForm = ({ mode = "create", initialData = null }) => {
 						images,
 						description,
 						formData.metaTitle,
-						formData.metaDescription
-				  )
+						formData.metaDescription,
+					)
 				: await service.story(
 						formData.type,
 						formData.slug,
@@ -181,8 +192,8 @@ const StoryForm = ({ mode = "create", initialData = null }) => {
 						images,
 						description,
 						formData.metaTitle,
-						formData.metaDescription
-				  );
+						formData.metaDescription,
+					);
 
 			const failure = readValidationError(response);
 			if (failure) {
@@ -195,7 +206,7 @@ const StoryForm = ({ mode = "create", initialData = null }) => {
 		} catch (error) {
 			console.error(error);
 			setErrorMessage(
-				"No s'ha pogut desar la història. Torna-ho a provar."
+				"No s'ha pogut desar la història. Torna-ho a provar.",
 			);
 			setIsSaving(false);
 		}
@@ -244,7 +255,7 @@ const StoryForm = ({ mode = "create", initialData = null }) => {
 							name="cover"
 							onChange={saveCoverToStatus}
 							hasImage={Boolean(
-								formData.cover || formData.coverCloudImage
+								formData.cover || formData.coverCloudImage,
 							)}
 							preview={
 								<ImagePreview

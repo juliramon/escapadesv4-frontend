@@ -1,3 +1,5 @@
+import { UPLOAD_MODELS } from "../../utils/uploads";
+
 /**
  * Diferències entre la fitxa d'activitat i la d'allotjament.
  *
@@ -52,7 +54,7 @@ const locationFields = (prefix, placeIdField) => ({
 const LISTING_VARIANTS = {
 	activity: {
 		type: "activity",
-		uploadModel: "activities",
+		uploadModel: UPLOAD_MODELS.activities,
 		location: locationFields("activity", "activity_place_id"),
 		hasDuration: true,
 		hasPlaceType: false,
@@ -86,7 +88,7 @@ const LISTING_VARIANTS = {
 	},
 	place: {
 		type: "place",
-		uploadModel: "places",
+		uploadModel: UPLOAD_MODELS.places,
 		location: locationFields("place", "place_id"),
 		hasDuration: false,
 		hasPlaceType: true,

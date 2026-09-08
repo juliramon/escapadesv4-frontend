@@ -10,6 +10,14 @@ import UserContext from "../../contexts/UserContext";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import GoogleMapReact from "google-map-react";
+import {
+	ACCEPTED_IMAGE_ACCEPT,
+	isAcceptedImage,
+	rejectedImageMessage,
+	UPLOAD_MODELS,
+	createUploader,
+	uploadSingleFile,
+} from "../../utils/uploads";
 
 const OrganizationProfile = ({ organizationData }) => {
 	const { user } = useContext(UserContext);
@@ -53,6 +61,7 @@ const OrganizationProfile = ({ organizationData }) => {
 
 	const service = new ContentService();
 
+	const [uploadError, setUploadError] = useState("");
 	const [modalVisibility, setModalVisibility] = useState(false);
 	const [modalVisibilityOffpage, setModalVisibilityOffpage] = useState(false);
 	const handleModalVisibility = () => setModalVisibility(true);
@@ -76,7 +85,7 @@ const OrganizationProfile = ({ organizationData }) => {
 
 			const getJoinedDate = () => {
 				const joinedDate = new Date(
-					organizationData.organizationDetails.createdAt
+					organizationData.organizationDetails.createdAt,
 				);
 				return (yearJoined = joinedDate.getFullYear());
 			};
@@ -99,7 +108,9 @@ const OrganizationProfile = ({ organizationData }) => {
 
 	const fetchData = async () => {
 		setState({ ...state, isFetching: true });
-		const organizationData = await service.organizationData(router.query.slug);
+		const organizationData = await service.organizationData(
+			router.query.slug,
+		);
 		let hasListings, hasActivities, hasPlaces;
 		organizationData.organizationActivities.length > 0
 			? (hasActivities = true)
@@ -170,13 +181,17 @@ const OrganizationProfile = ({ organizationData }) => {
 			noresults = (
 				<div className="box empty d-flex">
 					<div className="media">
-						<img src="../../no-results.svg" alt="Graphic no results" />
+						<img
+							src="../../no-results.svg"
+							alt="Graphic no results"
+						/>
 					</div>
 					<div className="text">
 						<p>
 							Oh no, això està molt buit.
 							<br />
-							Anuncia una {contentType} per a tenir més visibilitat.
+							Anuncia una {contentType} per a tenir més
+							visibilitat.
 						</p>
 						{noResultsCTA}
 					</div>
@@ -186,7 +201,10 @@ const OrganizationProfile = ({ organizationData }) => {
 			noresults = (
 				<div className="box empty d-flex">
 					<div className="media">
-						<img src="../../no-results.svg" alt="Graphic no results" />
+						<img
+							src="../../no-results.svg"
+							alt="Graphic no results"
+						/>
 					</div>
 					<div className="text">
 						<p>
@@ -234,7 +252,9 @@ const OrganizationProfile = ({ organizationData }) => {
 						title={el.title}
 						subtitle={el.subtitle}
 						location={`${
-							el.activity_locality === undefined ? "" : el.activity_locality
+							el.activity_locality === undefined
+								? ""
+								: el.activity_locality
 						} ${el.activity_locality === undefined ? "" : ","} ${
 							el.activity_province || el.activity_state
 						}, ${el.activity_country}`}
@@ -258,7 +278,9 @@ const OrganizationProfile = ({ organizationData }) => {
 						title={el.title}
 						subtitle={el.subtitle}
 						location={`${
-							el.place_locality === undefined ? "" : el.place_locality
+							el.place_locality === undefined
+								? ""
+								: el.place_locality
 						}${el.place_locality === undefined ? "" : ","} ${
 							el.place_province || el.place_state
 						}, ${el.place_country}`}
@@ -284,14 +306,25 @@ const OrganizationProfile = ({ organizationData }) => {
 
 	const handleFileUpload = async (e) => {
 		const fileToUpload = e.target.files[0];
-		const uploadData = new FormData();
-		uploadData.append("imageUrl", fileToUpload);
-		const uploadedFile = await service.uploadFile(uploadData);
-		setState({
-			...state,
-			profileCover: uploadedFile.path,
-			isCoverReadyToUpload: true,
+		if (!fileToUpload) return;
+		// L'atribut accept ja filtra el diàleg, però es pot esquivar.
+		if (!isAcceptedImage(fileToUpload)) {
+			setUploadError(rejectedImageMessage([fileToUpload]));
+			e.target.value = "";
+			return;
+		}
+		setUploadError("");
+		// getaways-guru/organizations/{slug de l'empresa}
+		const upload = createUploader(service, UPLOAD_MODELS.organizations, {
+			slug: state.organizationProfile.slug,
+			title: state.organizationProfile.orgName,
 		});
+		const profileCover = await uploadSingleFile(upload, fileToUpload);
+		setState((previous) => ({
+			...previous,
+			profileCover,
+			isCoverReadyToUpload: true,
+		}));
 	};
 
 	let editCoverButton;
@@ -299,28 +332,48 @@ const OrganizationProfile = ({ organizationData }) => {
 		if (state.organizationProfile) {
 			if (user._id === state.organizationProfile.owner) {
 				editCoverButton = (
-					<label className="edit-cover">
-						<input type="file" onChange={handleFileUpload} />
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							className="icon icon-tabler icon-tabler-photo"
-							width="24"
-							height="24"
-							viewBox="0 0 24 24"
-							strokeWidth="1.5"
-							stroke="#ffffff"
-							fill="none"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-						>
-							<path stroke="none" d="M0 0h24v24H0z" />
-							<line x1="15" y1="8" x2="15.01" y2="8" />
-							<rect x="4" y="4" width="16" height="16" rx="3" />
-							<path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
-							<path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
-						</svg>{" "}
-						Editar portada
-					</label>
+					<>
+						<label className="edit-cover">
+							<input
+								type="file"
+								accept={ACCEPTED_IMAGE_ACCEPT}
+								onChange={handleFileUpload}
+							/>
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								className="icon icon-tabler icon-tabler-photo"
+								width="24"
+								height="24"
+								viewBox="0 0 24 24"
+								strokeWidth="1.5"
+								stroke="#ffffff"
+								fill="none"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+							>
+								<path stroke="none" d="M0 0h24v24H0z" />
+								<line x1="15" y1="8" x2="15.01" y2="8" />
+								<rect
+									x="4"
+									y="4"
+									width="16"
+									height="16"
+									rx="3"
+								/>
+								<path d="M4 15l4 -4a3 5 0 0 1 3 0l 5 5" />
+								<path d="M14 14l1 -1a3 5 0 0 1 3 0l 2 2" />
+							</svg>{" "}
+							Editar portada
+						</label>
+						{uploadError ? (
+							<span
+								className="text-15 text-red-600 block mt-1"
+								role="alert"
+							>
+								{uploadError}
+							</span>
+						) : null}
+					</>
 				);
 			}
 		}
@@ -426,7 +479,10 @@ const OrganizationProfile = ({ organizationData }) => {
 					property="url"
 					content={`https://escapadesenparella.cat${router.asPath}`}
 				/>
-				<meta property="og:site_name" content="Escapadesenparella.cat" />
+				<meta
+					property="og:site_name"
+					content="Escapadesenparella.cat"
+				/>
 				<meta property="og:locale" content="ca_ES" />
 				<meta name="twitter:card" content="summary_large_image" />
 				<meta
@@ -437,8 +493,14 @@ const OrganizationProfile = ({ organizationData }) => {
 					name="twitter:description"
 					content={`${state.organizationProfile.orgName}, una escapada que us encantarà! Descobreix ${state.organizationProfile.orgName} amb nosaltres i sorprèn a la teva parella. Fes clic aquí!`}
 				/>
-				<meta name="twitter:image" content={state.organizationProfile.avatar} />
-				<meta property="og:image" content={state.organizationProfile.avatar} />
+				<meta
+					name="twitter:image"
+					content={state.organizationProfile.avatar}
+				/>
+				<meta
+					property="og:image"
+					content={state.organizationProfile.avatar}
+				/>
 				<meta property="og:image:width" content="1200" />
 				<meta property="og:image:heigth" content="1200" />
 				<link
@@ -480,13 +542,25 @@ const OrganizationProfile = ({ organizationData }) => {
 														<div className="left">
 															<div className="organization-logo">
 																<img
-																	src={state.organizationProfile.orgLogo}
-																	alt={state.organizationProfile.orgName}
+																	src={
+																		state
+																			.organizationProfile
+																			.orgLogo
+																	}
+																	alt={
+																		state
+																			.organizationProfile
+																			.orgName
+																	}
 																/>
 															</div>
 															<div className="organization-meta">
 																<h1 className="organization-name">
-																	{state.organizationProfile.orgName}
+																	{
+																		state
+																			.organizationProfile
+																			.orgName
+																	}
 																</h1>
 																<p className="organization-slug">
 																	<svg
@@ -501,57 +575,92 @@ const OrganizationProfile = ({ organizationData }) => {
 																		strokeLinecap="round"
 																		strokeLinejoin="round"
 																	>
-																		<path stroke="none" d="M0 0h24v24H0z" />
-																		<circle cx="12" cy="12" r="4" />
+																		<path
+																			stroke="none"
+																			d="M0 0h24v24H0z"
+																		/>
+																		<circle
+																			cx="12"
+																			cy="12"
+																			r="4"
+																		/>
 																		<path d="M16 12v1.5a2.5 2.5 0 0 0 5 0v-1.5a9 9 0 1 0 -5.5 8.28" />
 																	</svg>{" "}
-																	{state.organizationProfile.slug || "slug"} ·
-																	Verificat
+																	{state
+																		.organizationProfile
+																		.slug ||
+																		"slug"}{" "}
+																	· Verificat
 																</p>
 															</div>
 														</div>
 														<div className="right">
-															<div className="main-button">{mainButton}</div>
+															<div className="main-button">
+																{mainButton}
+															</div>
 														</div>
 													</div>
 													<div className="header-bottom-bar">
-														<p>{state.organizationProfile.description}</p>
+														<p>
+															{
+																state
+																	.organizationProfile
+																	.description
+															}
+														</p>
 													</div>
 													<div className="filter-bar">
 														<Button
 															className="d-flex align-items-center justify-content-center"
 															variant="none"
 															style={
-																state.activeTab === "activities"
+																state.activeTab ===
+																"activities"
 																	? activeTab
 																	: null
 															}
 															onClick={() =>
 																setState({
 																	...state,
-																	activeTab: "activities",
+																	activeTab:
+																		"activities",
 																})
 															}
 														>
-															Activitats ({state.activities.length || 0})
+															Activitats (
+															{state.activities
+																.length || 0}
+															)
 														</Button>
 														<Button
 															variant="none"
 															className="d-flex align-items-center justify-content-center"
 															style={
-																state.activeTab === "places" ? activeTab : null
+																state.activeTab ===
+																"places"
+																	? activeTab
+																	: null
 															}
 															onClick={() =>
-																setState({ ...state, activeTab: "places" })
+																setState({
+																	...state,
+																	activeTab:
+																		"places",
+																})
 															}
 														>
-															Allotjaments ({state.places.length || 0})
+															Allotjaments (
+															{state.places
+																.length || 0}
+															)
 														</Button>
 													</div>
 												</div>
 											</div>
 											<div className="content-box">
-												<div className="listings-wrapper">{listings}</div>
+												<div className="listings-wrapper">
+													{listings}
+												</div>
 											</div>
 										</div>
 										<aside className="col-right">
@@ -559,7 +668,9 @@ const OrganizationProfile = ({ organizationData }) => {
 												<h3>Informació de contacte</h3>
 												<ul>
 													<li>
-														<Link href={`${state.organizationProfile.website}`}>
+														<Link
+															href={`${state.organizationProfile.website}`}
+														>
 															<a>
 																<svg
 																	xmlns="http://www.w3.org/2000/svg"
@@ -578,7 +689,12 @@ const OrganizationProfile = ({ organizationData }) => {
 																		d="M0 0h24v24H0z"
 																		fill="none"
 																	></path>
-																	<line x1="3" y1="19" x2="21" y2="19"></line>
+																	<line
+																		x1="3"
+																		y1="19"
+																		x2="21"
+																		y2="19"
+																	></line>
 																	<rect
 																		x="5"
 																		y="6"
@@ -587,7 +703,11 @@ const OrganizationProfile = ({ organizationData }) => {
 																		rx="1"
 																	></rect>
 																</svg>
-																{state.organizationProfile.website}
+																{
+																	state
+																		.organizationProfile
+																		.website
+																}
 															</a>
 														</Link>
 													</li>
@@ -604,12 +724,19 @@ const OrganizationProfile = ({ organizationData }) => {
 															strokeLinecap="round"
 															strokeLinejoin="round"
 														>
-															<path stroke="none" d="M0 0h24v24H0z"></path>
+															<path
+																stroke="none"
+																d="M0 0h24v24H0z"
+															></path>
 															<path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path>
 															<path d="M15 7a2 2 0 0 1 2 2"></path>
 															<path d="M15 3a6 6 0 0 1 6 6"></path>
 														</svg>
-														{state.organizationProfile.phone}
+														{
+															state
+																.organizationProfile
+																.phone
+														}
 													</li>
 													<li>
 														<svg
@@ -624,12 +751,20 @@ const OrganizationProfile = ({ organizationData }) => {
 															strokeLinecap="round"
 															strokeLinejoin="round"
 														>
-															<path stroke="none" d="M0 0h24v24H0z"></path>
-															<circle cx="12" cy="11" r="3"></circle>
+															<path
+																stroke="none"
+																d="M0 0h24v24H0z"
+															></path>
+															<circle
+																cx="12"
+																cy="11"
+																r="3"
+															></circle>
 															<path d="M17.657 16.657L13.414 20.9a1.998 1.998 0 0 1 -2.827 0l-4.244-4.243a8 8 0 1 1 11.314 0z"></path>
 														</svg>
 														{
-															state.organizationProfile
+															state
+																.organizationProfile
 																.organization_full_address
 														}
 													</li>
@@ -643,8 +778,14 @@ const OrganizationProfile = ({ organizationData }) => {
 														defaultZoom={11}
 														options={getMapOptions}
 														yesIWantToUseGoogleMapApiInternals
-														onGoogleApiLoaded={({ map, maps }) =>
-															renderMarker(map, maps)
+														onGoogleApiLoaded={({
+															map,
+															maps,
+														}) =>
+															renderMarker(
+																map,
+																maps,
+															)
 														}
 													/>
 												</div>

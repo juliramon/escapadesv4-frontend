@@ -9,6 +9,11 @@ import ContentService from "../../services/contentService";
 import Autocomplete from "react-google-autocomplete";
 import Plans from "../../components/global/Plans";
 import GlobalMetas from "../../components/head/GlobalMetas";
+import {
+	ACCEPTED_IMAGE_ACCEPT,
+	UPLOAD_MODELS,
+	createUploader,
+} from "../../utils/uploads";
 
 const Registre = () => {
 	const { user, refreshUserData } = useContext(UserContext);
@@ -24,7 +29,7 @@ const Registre = () => {
 		}
 		if (query.get("canceled")) {
 			setMessage(
-				"Order canceled -- continue to shop around and checkout when you're ready."
+				"Order canceled -- continue to shop around and checkout when you're ready.",
 			);
 		}
 	}, []);
@@ -166,7 +171,14 @@ const Registre = () => {
 		const orgLogo = state.orgLogo;
 		const uploadData = new FormData();
 		uploadData.append("imageUrl", orgLogo);
-		const uploadedOrgLogo = await serviceContent.uploadFile(uploadData);
+		// L'empresa encara no té slug: la carpeta surt del nom.
+		// getaways-guru/organizations/{nom de l'empresa}
+		const upload = createUploader(
+			serviceContent,
+			UPLOAD_MODELS.organizations,
+			{ title: state.orgName },
+		);
+		const uploadedOrgLogo = await upload(uploadData);
 		if (uploadedOrgLogo.message) {
 			setState({
 				...state,
@@ -233,7 +245,7 @@ const Registre = () => {
 				organization_country,
 				organization_lat,
 				organization_lng,
-				additionalInfo
+				additionalInfo,
 			)
 			.then((res) => {
 				if (res.message === "Aquesta empresa ja existeix") {
@@ -251,7 +263,7 @@ const Registre = () => {
 						true,
 						true,
 						false,
-						false
+						false,
 					);
 					router.push("/empreses/registre?step=seleccio-tipologia");
 				}
@@ -380,6 +392,9 @@ const Registre = () => {
 														<Form.Control
 															name="orgLogo"
 															type="file"
+															accept={
+																ACCEPTED_IMAGE_ACCEPT
+															}
 															onChange={
 																saveFileToStatus
 															}
@@ -469,7 +484,7 @@ const Registre = () => {
 															width: "100%",
 														}}
 														onPlaceSelected={(
-															organization
+															organization,
 														) => {
 															let organization_full_address,
 																organization_streetNumber,
@@ -541,7 +556,7 @@ const Registre = () => {
 																		organization_country =
 																			el.long_name;
 																	}
-																}
+																},
 															);
 
 															if (
@@ -553,13 +568,13 @@ const Registre = () => {
 																	Object.values(
 																		organization
 																			.geometry
-																			.viewport
+																			.viewport,
 																	)[0].i;
 																organization_lng =
 																	Object.values(
 																		organization
 																			.geometry
-																			.viewport
+																			.viewport,
 																	)[1].i;
 															}
 															setState({

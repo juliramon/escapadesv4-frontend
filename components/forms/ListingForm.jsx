@@ -6,10 +6,8 @@ import Image from "@tiptap/extension-image";
 import Link from "@tiptap/extension-link";
 import Placeholder from "@tiptap/extension-placeholder";
 import ContentService from "../../services/contentService";
-import {
-	uploadCarouselMediaItems,
-	destinationUploadFolderKey,
-} from "../../utils/helpers";
+import { uploadCarouselMediaItems } from "../../utils/helpers";
+import { createUploader, uploadSingleFile } from "../../utils/uploads";
 import EditorNavbar from "../editor/EditorNavbar";
 import ImageUploadField from "../admin/ImageUploadField";
 import GalleryField from "../admin/GalleryField";
@@ -340,20 +338,19 @@ const ListingForm = ({ variant, mode = "create", initialData = null }) => {
 		setErrorMessage("");
 
 		try {
-			const uploadFolder = destinationUploadFolderKey(
-				formData.slug,
-				formData.title,
+			const upload = createUploader(
+				service,
+				config.uploadModel,
+				formData,
 			);
-			const upload = (payload) =>
-				service.uploadFile(payload, uploadFolder, config.uploadModel);
 
-			let cover = formData.coverCloudImage;
-			if (formData.updatedCover) {
-				const uploadData = new FormData();
-				uploadData.append("imageUrl", formData.cover);
-				const uploaded = await upload(uploadData);
-				cover = uploaded?.path || "";
-			}
+			const cover = formData.updatedCover
+				? await uploadSingleFile(
+						upload,
+						formData.cover,
+						formData.coverCloudImage,
+					)
+				: formData.coverCloudImage;
 
 			const images = await uploadCarouselMediaItems(
 				formData.images,

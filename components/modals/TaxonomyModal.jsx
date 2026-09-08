@@ -5,6 +5,11 @@ import Image from "@tiptap/extension-image";
 import slugify from "slugify";
 import ContentService from "../../services/contentService";
 import { readValidationError } from "../../utils/apiErrors";
+import {
+	UPLOAD_MODELS,
+	createUploader,
+	uploadSingleFile,
+} from "../../utils/uploads";
 import EditorNavbar from "../editor/EditorNavbar";
 import AdminModal from "../admin/AdminModal";
 import ImageUploadField from "../admin/ImageUploadField";
@@ -55,6 +60,7 @@ const ENTITIES = {
 		slugLabel: "URL de la categoria",
 		featuredLabel: "Categoria destacada?",
 		sponsoredLabel: "Categoria patrocinada?",
+		uploadModel: UPLOAD_MODELS.categories,
 		create: "createCategory",
 		update: "editCategory",
 	},
@@ -77,6 +83,7 @@ const ENTITIES = {
 		slugLabel: "URL de la característica",
 		featuredLabel: "Característica destacada?",
 		sponsoredLabel: "Característica patrocinada?",
+		uploadModel: UPLOAD_MODELS.characteristics,
 		create: "createCharacteristic",
 		update: "editCharacteristic",
 	},
@@ -139,7 +146,7 @@ const TaxonomyModal = ({
 	});
 
 	const [editorDataHeader, setEditorDataHeader] = useState(
-		seoTextHeader || ""
+		seoTextHeader || "",
 	);
 	const [editorData, setEditorData] = useState(seoText || "");
 
@@ -184,7 +191,7 @@ const TaxonomyModal = ({
 						sponsorLogo: "",
 						blopSponsorLogo: "",
 						sponsorClaim: "",
-				  }
+					}
 				: {}),
 		}));
 	};
@@ -194,10 +201,10 @@ const TaxonomyModal = ({
 		if (!fileToUpload) return;
 		const field = e.target.name;
 		const blobField = `blop${field.charAt(0).toUpperCase()}${field.slice(
-			1
+			1,
 		)}`;
 		const updatedField = `updated${field.charAt(0).toUpperCase()}${field.slice(
-			1
+			1,
 		)}`;
 		setCategory((previous) => ({
 			...previous,
@@ -207,25 +214,21 @@ const TaxonomyModal = ({
 		}));
 	};
 
-	const uploadIfNeeded = async (file, shouldUpload) => {
-		if (!shouldUpload) return "";
-		const uploadData = new FormData();
-		uploadData.append("imageUrl", file);
-		const uploaded = await service.uploadFile(uploadData);
-		return uploaded != undefined ? uploaded.path : "";
-	};
-
 	const handleFileUpload = async () => {
+		const upload = createUploader(service, config.uploadModel, category);
+		const uploadIfNeeded = (file, shouldUpload) =>
+			shouldUpload ? uploadSingleFile(upload, file) : Promise.resolve("");
+
 		const [cloudImage, cloudSponsorLogo, cloudIllustration] =
 			await Promise.all([
 				uploadIfNeeded(category.image, category.updatedImage),
 				uploadIfNeeded(
 					category.sponsorLogo,
-					category.updatedSponsorLogo
+					category.updatedSponsorLogo,
 				),
 				uploadIfNeeded(
 					category.illustration,
-					category.updatedIllustration
+					category.updatedIllustration,
 				),
 			]);
 
@@ -258,16 +261,16 @@ const TaxonomyModal = ({
 			cloudIllustration !== ""
 				? cloudIllustration
 				: isEdit
-				? category.illustration
-				: "";
+					? category.illustration
+					: "";
 		const resolvedImage =
 			cloudImage !== "" ? cloudImage : isEdit ? category.image : "";
 		const resolvedSponsorLogo =
 			cloudSponsorLogo !== ""
 				? cloudSponsorLogo
 				: isEdit
-				? category.sponsorLogo
-				: "";
+					? category.sponsorLogo
+					: "";
 
 		const request = isEdit
 			? service[config.update](
@@ -288,8 +291,8 @@ const TaxonomyModal = ({
 					category.isFeatured,
 					sponsor,
 					resolvedSponsorLogo,
-					claim
-			  )
+					claim,
+				)
 			: service[config.create](
 					category.isFeatured,
 					category.isSponsored,
@@ -311,8 +314,8 @@ const TaxonomyModal = ({
 					editorData,
 					sponsor,
 					resolvedSponsorLogo,
-					claim
-			  );
+					claim,
+				);
 
 		try {
 			const response = await request;
@@ -334,7 +337,7 @@ const TaxonomyModal = ({
 		} catch (error) {
 			console.error(error);
 			setErrorMessage(
-				"No s'ha pogut desar la categoria. Torna-ho a provar."
+				"No s'ha pogut desar la categoria. Torna-ho a provar.",
 			);
 			hasSubmitted.current = false;
 			setCategory((previous) => ({ ...previous, isSubmitable: false }));
@@ -418,9 +421,7 @@ const TaxonomyModal = ({
 				/>
 
 				<div className="form__group">
-					<span className="form__label">
-						{config.seoHeaderLabel}
-					</span>
+					<span className="form__label">{config.seoHeaderLabel}</span>
 					<EditorNavbar editor={editorHeader} />
 					<EditorContent
 						editor={editorHeader}
@@ -469,9 +470,7 @@ const TaxonomyModal = ({
 				/>
 
 				<div className="form__group">
-					<span className="form__label">
-						{config.seoLabel}
-					</span>
+					<span className="form__label">{config.seoLabel}</span>
 					<EditorNavbar editor={editor} />
 					<EditorContent
 						editor={editor}
@@ -500,32 +499,32 @@ const TaxonomyModal = ({
 				/>
 
 				<>
-						<TextField
-							name="sponsorURL"
-							label="URL del patrocinador"
-							placeholder="Entra la URL del patrocinador"
-							value={category.sponsorURL}
-							onChange={handleChange}
-						/>
-						<ImageUploadField
-							label="Logo del patrocinador"
-							name="sponsorLogo"
-							onChange={saveFileToStatus}
-							hasImage={Boolean(category.sponsorLogo)}
-							preview={
-								<ImagePreview
-									blob={category.blopSponsorLogo}
-									current={sponsorLogo}
-								/>
-							}
-						/>
-						<TextField
-							name="sponsorClaim"
-							label="Claim del patrocinador"
-							placeholder="Entra el claim del patrocinador"
-							value={category.sponsorClaim}
-							onChange={handleChange}
-						/>
+					<TextField
+						name="sponsorURL"
+						label="URL del patrocinador"
+						placeholder="Entra la URL del patrocinador"
+						value={category.sponsorURL}
+						onChange={handleChange}
+					/>
+					<ImageUploadField
+						label="Logo del patrocinador"
+						name="sponsorLogo"
+						onChange={saveFileToStatus}
+						hasImage={Boolean(category.sponsorLogo)}
+						preview={
+							<ImagePreview
+								blob={category.blopSponsorLogo}
+								current={sponsorLogo}
+							/>
+						}
+					/>
+					<TextField
+						name="sponsorClaim"
+						label="Claim del patrocinador"
+						placeholder="Entra el claim del patrocinador"
+						value={category.sponsorClaim}
+						onChange={handleChange}
+					/>
 				</>
 			</form>
 		</AdminModal>
