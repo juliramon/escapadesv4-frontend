@@ -44,23 +44,27 @@ const CategoryTrip = ({
 	const [state, setState] = useState(initialState);
 	const service = new ContentService();
 
+	// En passar d'una categoria de viatge a una altra, Next reaprofita aquest
+	// mateix component. Amb la llista de dependències buida, `state.results`
+	// —les pàgines que s'han carregat amb "veure'n més"— es quedava amb les
+	// entrades de la categoria anterior i sortien barrejades amb les noves.
 	useEffect(() => {
-		if (categoryDetails && initialResults) {
-			setState({
-				...state,
-				allResults: allTrips,
-				hasResults: initialResults.length > 0 ? true : false,
-				numResults: totalItems,
-				numPages: numPages,
-			});
-		}
-	}, []);
+		if (!categoryDetails || !initialResults) return;
+		setState({
+			...initialState,
+			allResults: allTrips,
+			hasResults: initialResults.length > 0,
+			numResults: totalItems,
+			numPages: numPages,
+		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [categoryDetails?.slug]);
 
 	const loadMoreResults = async (categoryName, page) => {
 		setState({ ...state, isFetching: true });
 		const { paginatedResults } = await service.paginateTripCategory(
 			categoryName,
-			page
+			page,
 		);
 		setState({
 			...state,
@@ -355,8 +359,8 @@ const CategoryTrip = ({
 															</FancyboxUtil>
 														</SplideSlide>
 													);
-												}
-										  )
+												},
+											)
 										: null}
 								</SplideTrack>
 								<div className="splide__arrows">
@@ -590,7 +594,7 @@ const CategoryTrip = ({
 													onClick={() =>
 														loadMoreResults(
 															categoryDetails.name,
-															state.currentPage
+															state.currentPage,
 														)
 													}
 												>
@@ -670,7 +674,7 @@ const CategoryTrip = ({
 export async function getServerSideProps({ params }) {
 	const service = new ContentService();
 	const categoryDetails = await service.getTripCategoryDetails(
-		params.categoria
+		params.categoria,
 	);
 
 	if (categoryDetails == null) {

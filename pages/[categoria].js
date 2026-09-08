@@ -46,20 +46,26 @@ const CategoryPage = ({
 	// aquí i connecten entre elles les 16 pàgines de categoria.
 	const siblingCategories = categoryGroupFor(categoryDetails?.slug);
 
+	// En passar d'una categoria a una altra, Next reaprofita aquest mateix
+	// component i només en canvia les props. Amb la llista de dependències
+	// buida, l'estat es quedava amb els resultats de la categoria anterior:
+	// el títol i l'URL canviaven, però la graella ensenyava les escapades que
+	// no tocaven. Per això es refà l'estat sencer a cada canvi de categoria,
+	// que a més descarta els filtres i la paginació de la categoria anterior.
 	useEffect(() => {
-		if (categoryDetails && paginatedResults) {
-			setState({
-				...state,
-				results: paginatedResults,
-				hasResults: true,
-				numResults: totalItems,
-				numPages: numPages,
-				queryPlaceType: categoryDetails?.isPlace
-					? [`placeType=${categoryDetails.name}`]
-					: [],
-			});
-		}
-	}, []);
+		if (!categoryDetails || !paginatedResults) return;
+		setState({
+			...initialState,
+			results: paginatedResults,
+			hasResults: true,
+			numResults: totalItems,
+			numPages: numPages,
+			queryPlaceType: categoryDetails.isPlace
+				? [`placeType=${categoryDetails.name}`]
+				: [],
+		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [categoryDetails?.slug]);
 
 	const sponsorBlock = categoryDetails.isSponsored ? (
 		<div className="sponsor-block">
@@ -87,7 +93,7 @@ const CategoryPage = ({
 		setState({ ...state, isFetching: true });
 		const { paginatedResults } = await service.paginateCategory(
 			categoryName,
-			page
+			page,
 		);
 		setState({
 			...state,
@@ -104,7 +110,7 @@ const CategoryPage = ({
 					state.queryPlaceType,
 					state.queryPlaceRegion,
 					state.queryPlaceCategory,
-					state.queryPlaceSeason
+					state.queryPlaceSeason,
 				)
 				.then((res) => {
 					setState({ ...state, results: res, updateSearch: false });
@@ -183,7 +189,7 @@ const CategoryPage = ({
 														onClick={() =>
 															loadMoreResults(
 																categoryDetails.name,
-																state.currentPage
+																state.currentPage,
 															)
 														}
 													>

@@ -44,18 +44,24 @@ const DestinationPage = ({
 
 	const service = new ContentService();
 
+	// En passar d'una destinació a una altra, Next reaprofita aquest mateix
+	// component i només en canvia les props. Amb la llista de dependències
+	// buida, l'estat es quedava amb els resultats de la destinació anterior:
+	// el títol i l'URL canviaven, però la graella ensenyava les escapades que
+	// no tocaven. Per això es refà l'estat sencer a cada canvi de destinació,
+	// que a més descarta els filtres i la paginació de l'anterior.
 	useEffect(() => {
-		if (destinationDetails && paginatedResults) {
-			setState({
-				...state,
-				results: paginatedResults,
-				allResults: allResults,
-				hasResults: paginatedResults.length > 0 ? true : false,
-				numResults: totalItems,
-				numPages: numPages,
-			});
-		}
-	}, []);
+		if (!destinationDetails || !paginatedResults) return;
+		setState({
+			...initialState,
+			results: paginatedResults,
+			allResults: allResults,
+			hasResults: paginatedResults.length > 0,
+			numResults: totalItems,
+			numPages: numPages,
+		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [destinationDetails?.slug]);
 
 	const handleCheckRegion = (e) => {
 		let query = state.queryActivityRegion;
@@ -136,7 +142,7 @@ const DestinationPage = ({
 		setState({ ...state, isFetching: true });
 		const { paginatedResults } = await service.paginateDestination(
 			destinationId,
-			page
+			page,
 		);
 		setState({
 			...state,
@@ -170,11 +176,7 @@ const DestinationPage = ({
 					strokeLinecap="round"
 					strokeLinejoin="round"
 				>
-					<path
-						stroke="none"
-						d="M0 0h24v24H0z"
-						fill="none"
-					/>
+					<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 					<path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
 					<path d="M6 4v4" />
 					<path d="M6 12v8" />
@@ -186,8 +188,7 @@ const DestinationPage = ({
 					<path d="M18 9v11" />
 				</svg>
 				Filtrar
-				{state.selectedCount &&
-				state.selectedCount > 0 ? (
+				{state.selectedCount && state.selectedCount > 0 ? (
 					<span className="rounded-full bg-primary-500 p-2 w-5 h-5 flex items-center justify-center group-hover:bg-white transition-colors duration-300 ease-in-out">
 						<span className="text-white text-xs group-hover:text-primary-500 transition-colors duration-300 ease-in-out">
 							{state.selectedCount}
@@ -215,11 +216,7 @@ const DestinationPage = ({
 					strokeLinecap="round"
 					strokeLinejoin="round"
 				>
-					<path
-						stroke="none"
-						d="M0 0h24v24H0z"
-						fill="none"
-					/>
+					<path stroke="none" d="M0 0h24v24H0z" fill="none" />
 					<path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
 					<path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
 				</svg>
@@ -269,7 +266,6 @@ const DestinationPage = ({
 						actions={listingActions}
 					/>
 
-
 					{/* Listings */}
 					<section className="pt-6 md:pt-8">
 						<div className="container">
@@ -303,7 +299,7 @@ const DestinationPage = ({
 																// referencien la destinació per
 																// _id, igual que a getStaticProps.
 																destinationDetails._id,
-																state.currentPage
+																state.currentPage,
 															)
 														}
 													>
@@ -466,7 +462,7 @@ export async function getStaticPaths() {
 		destinations = (await service.getDestinations()) || [];
 	} catch (err) {
 		console.warn(
-			"getStaticPaths: no s'han pogut llistar les destinacions, es generaran sota demanda."
+			"getStaticPaths: no s'han pogut llistar les destinacions, es generaran sota demanda.",
 		);
 		destinations = [];
 	}
@@ -482,7 +478,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
 	const service = new ContentService();
 	const destinationDetails = await service.getDestinationDetails(
-		params.destination
+		params.destination,
 	);
 
 	if (!destinationDetails) {
