@@ -11,9 +11,44 @@ import {
 	VERTICALS,
 } from "../../utils/siteTaxonomy";
 
+const ADMIN_PANEL_URL = "/2i8ZXlkM4cFKUPBrm3-admin-panel";
+
+/** Icona del quadre de comandament. */
+const DashboardIcon = () => (
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		width="18"
+		height="18"
+		viewBox="0 0 24 24"
+		fill="none"
+		stroke="currentColor"
+		strokeWidth="1.6"
+		strokeLinecap="round"
+		strokeLinejoin="round"
+		aria-hidden="true"
+	>
+		<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+		<rect x="4" y="4" width="6" height="6" rx="1" />
+		<rect x="14" y="4" width="6" height="6" rx="1" />
+		<rect x="4" y="14" width="6" height="6" rx="1" />
+		<rect x="14" y="14" width="6" height="6" rx="1" />
+	</svg>
+);
+
 const NavigationBar = () => {
 	const { user } = useContext(UserContext);
 	const searchInputRef = useRef(null);
+
+	// `_app` llegeix la sessió del localStorage mentre renderitza, de manera
+	// que al client ja hi és al primer render i al servidor no. Pintar
+	// l'enllaç abans d'hidratar trencaria la hidratació de totes les pàgines,
+	// així que s'espera a tenir el component muntat.
+	const [hasMounted, setHasMounted] = useState(false);
+	useEffect(() => setHasMounted(true), []);
+
+	// El panell només carrega per als comptes d'administrador; ensenyar-hi
+	// l'enllaç a la resta els deixaria en un spinner que no acaba mai.
+	const isAdmin = hasMounted && Boolean(user) && user.userType === "admin";
 
 	const initialState = {
 		searchQuery: "",
@@ -21,7 +56,6 @@ const NavigationBar = () => {
 		isSearchPanelOpen: false,
 		isMenuDropdownOpen: false,
 		isCategoriesDropdownOpen: false,
-		logoUrl: "/",
 	};
 	const [state, setState] = useState(initialState);
 
@@ -83,15 +117,6 @@ const NavigationBar = () => {
 		};
 	}, [state.isCategoriesDropdownOpen]);
 
-	useEffect(() => {
-		if (user) {
-			setState({
-				...initialState,
-				logoUrl: "/2i8ZXlkM4cFKUPBrm3-admin-panel",
-			});
-		}
-	}, [user]);
-
 	/** Enllaços secundaris: viuen al desplegable "més" de l'escriptori. */
 	const dropdownItems = [
 		{
@@ -120,8 +145,16 @@ const NavigationBar = () => {
 
 	/** Grups de categories que es despleguen dins el calaix de mòbil. */
 	const mobileGroups = [
-		{ heading: "Per tipus d'escapada", items: GETAWAY_CATEGORIES, prefix: "/" },
-		{ heading: "Per tipus d'allotjament", items: STAY_CATEGORIES, prefix: "/" },
+		{
+			heading: "Per tipus d'escapada",
+			items: GETAWAY_CATEGORIES,
+			prefix: "/",
+		},
+		{
+			heading: "Per tipus d'allotjament",
+			items: STAY_CATEGORIES,
+			prefix: "/",
+		},
 		{
 			heading: "Destinacions",
 			items: DESTINATIONS,
@@ -133,11 +166,10 @@ const NavigationBar = () => {
 		<header className="z-[60] bg-white w-full sticky top-0 border-b border-neutral-100">
 			<nav className="container py-3 md:py-4 menu">
 				<div className="w-full grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-x-4 items-center">
-					<Link
-						href={{
-							pathname: state.logoUrl,
-						}}
-					>
+					{/* El logo portava al panell d'administració quan hi havia
+					    sessió: qualsevol usuari, també els que no en són
+					    administradors, perdia la manera de tornar a la portada. */}
+					<Link href="/">
 						<a
 							title="Inici"
 							className="col-span-2 md:col-span-3 lg:col-span-3"
@@ -362,6 +394,20 @@ const NavigationBar = () => {
 
 								{/* Navegació completa dins el calaix de mòbil */}
 								<div className="col-span-3 md:col-span-6 lg:hidden mt-6">
+									{isAdmin ? (
+										<Link href={ADMIN_PANEL_URL}>
+											<a
+												title="Panell d'administració"
+												className="button button__ghost button__med w-full mb-4 inline-flex items-center justify-center gap-x-2"
+												onClick={() =>
+													handleResponsiveMenu()
+												}
+											>
+												<DashboardIcon />
+												Panell d&apos;administració
+											</a>
+										</Link>
+									) : null}
 									<ul className="list-none p-0 m-0 flex flex-col gap-y-1">
 										{VERTICALS.map((vertical) => (
 											<li
@@ -437,6 +483,19 @@ const NavigationBar = () => {
 
 								{/* Accions de la dreta (escriptori) */}
 								<ul className="hidden lg:flex lg:col-span-3 list-none p-0 m-0 lg:justify-end lg:items-center gap-x-2">
+									{isAdmin ? (
+										<li className="menu__item">
+											<Link href={ADMIN_PANEL_URL}>
+												<a
+													title="Panell d'administració"
+													className="button button__ghost button__xs whitespace-nowrap inline-flex items-center gap-x-1.5"
+												>
+													<DashboardIcon />
+													Panell
+												</a>
+											</Link>
+										</li>
+									) : null}
 									<li className="menu__item">
 										<Link href="/descomptes-viatjar">
 											<a
