@@ -12,7 +12,7 @@ import ContentService from "../../services/contentService";
 import { toListingCard, toMapMarker } from "../../utils/listingProps";
 import ListingHeader from "../../components/headers/ListingHeader";
 import MapModal from "../../components/modals/MapModal";
-import FilterDestinationsModal from "../../components/modals/FilterDestinationsModal";
+import FilterListingsModal from "../../components/modals/FilterListingsModal";
 
 const DestinationPage = ({
 	destinationDetails,
@@ -440,7 +440,8 @@ const DestinationPage = ({
 				/>
 			) : null}
 
-			<FilterDestinationsModal
+			<FilterListingsModal
+				variant="destinations"
 				isFilterModalOpen={state.isFilterModalOpen}
 				hideModal={() =>
 					setState({ ...state, isFilterModalOpen: false })

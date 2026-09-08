@@ -1,105 +1,4 @@
 /**
- * handleFilesUpload
- *
- * Upload images to Cloudinary. Optionally target a model folder + subfolder
- * (see backend configs/cloudinary.config.js: uploadModel, uploadFolder).
- *
- * @param {File} coverImage
- * @param {File[]} bodyImages
- * @param {{ uploadFolder?: string, uploadModel?: string }} [options]
- */
-
-import ContentService from "../services/contentService";
-
-const handleFilesUpload = async (coverImage, bodyImages, options = {}) => {
-	const { uploadFolder, uploadModel } = options || {};
-	const service = new ContentService();
-
-	const uploadCoverImage = async () => {
-		const uploadData = new FormData();
-		uploadData.append("imageUrl", coverImage);
-		const response = await service.uploadFile(
-			uploadData,
-			uploadFolder,
-			uploadModel
-		);
-		return response.path;
-	};
-
-	const uploadBodyImages = async (index, bodyImages) => {
-		const uploadData = new FormData();
-		uploadData.append("imageUrl", bodyImages[index]);
-
-		try {
-			const uploadedFile = await service.uploadFile(
-				uploadData,
-				uploadFolder,
-				uploadModel
-			);
-			uploadedImages.push(uploadedFile.path);
-			if (index + 1 < bodyImages.length) {
-				await uploadBodyImages(index + 1, bodyImages);
-			}
-			if (uploadedImages.length === bodyImages.length) {
-				return;
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	};
-
-	let uploadedCover = null;
-	let uploadedImages = [];
-
-	if (coverImage && typeof coverImage === "object") {
-		uploadedCover = await uploadCoverImage();
-	}
-
-	if (bodyImages.length > 0 && typeof bodyImages === "object") {
-		await uploadBodyImages(0, bodyImages);
-	}
-
-	return {
-		uploadedCover,
-		uploadedImages,
-		success: { status: 200 },
-	};
-};
-
-/**
- * removeImage
- *
- * Utility function to remove images from the state images array
- * The function expects three parameters
- *
- * @param {number} elIdx
- * @param {array} blopImages
- * @param {array} images
- */
-
-const removeImage = (elIdx, blopImages, images) => {
-	const arrBlopImages = blopImages;
-	const arrImages = images;
-
-	arrBlopImages.forEach((img, imgIdx) => {
-		if (imgIdx === elIdx) {
-			arrBlopImages.splice(elIdx, 1);
-		}
-	});
-
-	arrImages.forEach((img, imgIdx) => {
-		if (imgIdx === elIdx) {
-			arrImages.splice(elIdx, 1);
-		}
-	});
-
-	return {
-		arrBlopImages,
-		arrImages,
-	};
-};
-
-/**
  * Single segment for getaways-guru/{model}/{segment}/ — prefer slug, else slugified title.
  * Ignores the literal "slug" used as an empty placeholder in some forms.
  */
@@ -137,14 +36,14 @@ const normalizeDestinationRefsToIds = (refs, destinationDocs) => {
 					if (ref == null || ref === "") return null;
 					const s = String(ref);
 					const byId = destinationDocs.find(
-						(d) => d._id != null && String(d._id) === s
+						(d) => d._id != null && String(d._id) === s,
 					);
 					if (byId) return String(byId._id);
 					const bySlug = destinationDocs.find((d) => d.slug === s);
 					if (bySlug) return String(bySlug._id);
 					return s;
 				})
-				.filter(Boolean)
+				.filter(Boolean),
 		),
 	];
 };
@@ -269,8 +168,6 @@ const copyTextToClipboard = (e) => {
 };
 
 export {
-	handleFilesUpload,
-	removeImage,
 	destinationUploadFolderKey,
 	normalizeDestinationRefsToIds,
 	uploadCarouselMediaItems,

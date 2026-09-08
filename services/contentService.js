@@ -30,79 +30,15 @@ class ContentService {
 
 	// ACTIVITIES ENDPOINTS
 
-	activity = (
-		type,
-		isVerified,
-		slug,
-		title,
-		subtitle,
-		categories,
-		seasons,
-		destinations,
-		cover,
-		images,
-		description,
-		reasons,
-		phone,
-		website,
-		activity_full_address,
-		activity_locality,
-		activity_province,
-		activity_state,
-		activity_country,
-		activity_lat,
-		activity_lng,
-		activity_rating,
-		activity_place_id,
-		activity_opening_hours,
-		duration,
-		price,
-		discountCode,
-		discountInfo,
-		review,
-		relatedStory,
-		organization_id,
-		metaTitle,
-		metaDescription,
-	) => {
-		return this.service
-			.post("/activity", {
-				type,
-				isVerified,
-				slug,
-				title,
-				subtitle,
-				categories,
-				seasons,
-				destinations,
-				cover,
-				images,
-				description,
-				reasons,
-				phone,
-				website,
-				activity_full_address,
-				activity_locality,
-				activity_province,
-				activity_state,
-				activity_country,
-				activity_lat,
-				activity_lng,
-				activity_rating,
-				activity_place_id,
-				activity_opening_hours,
-				duration,
-				price,
-				discountCode,
-				discountInfo,
-				review,
-				relatedStory,
-				organization_id,
-				metaTitle,
-				metaDescription,
-			})
-			.then((res) => res.data);
-	};
+	/**
+	 * Crea una activitat.
+	 *
+	 * Abans rebia trenta-tres arguments posicionals; n'hi havia prou amb
+	 * descol·locar-ne un perquè la fitxa es desés amb els camps barrejats i
+	 * sense cap avís. Ara rep el mateix objecte que espera l'API.
+	 */
+	activity = (payload) =>
+		this.service.post("/activity", payload).then((res) => res.data);
 
 	activities = () => this.service.get("/activities").then((res) => res.data);
 
@@ -120,73 +56,8 @@ class ContentService {
 			.put(`/activities/${id}`, { isRemoved: true })
 			.then((res) => res.data);
 
-	editActivity = (
-		_id,
-		slug,
-		isVerified,
-		title,
-		subtitle,
-		categories,
-		seasons,
-		destinations,
-		cover,
-		images,
-		review,
-		relatedStory,
-		description,
-		reasons,
-		phone,
-		website,
-		activity_full_address,
-		activity_locality,
-		activity_province,
-		activity_state,
-		activity_country,
-		activity_lat,
-		activity_lng,
-		activity_rating,
-		activity_place_id,
-		activity_opening_hours,
-		duration,
-		price,
-		discountCode,
-		discountInfo,
-		metaTitle,
-		metaDescription,
-	) =>
-		this.service.put(`/activities/${_id}`, {
-			slug,
-			isVerified,
-			title,
-			subtitle,
-			categories,
-			seasons,
-			destinations,
-			cover,
-			images,
-			review,
-			relatedStory,
-			description,
-			reasons,
-			phone,
-			website,
-			activity_full_address,
-			activity_locality,
-			activity_province,
-			activity_state,
-			activity_country,
-			activity_lat,
-			activity_lng,
-			activity_rating,
-			activity_place_id,
-			activity_opening_hours,
-			duration,
-			price,
-			discountCode,
-			discountInfo,
-			metaTitle,
-			metaDescription,
-		});
+	editActivity = (_id, payload) =>
+		this.service.put(`/activities/${_id}`, payload).then((res) => res.data);
 
 	// FILES ENDPOINTS
 
@@ -241,10 +112,12 @@ class ContentService {
 								return data;
 							},
 						],
-				  }
+					}
 				: {};
 
-		return this.service.post("/upload", payload, cfg).then((res) => res.data);
+		return this.service
+			.post("/upload", payload, cfg)
+			.then((res) => res.data);
 	};
 
 	// USERS ENDPOINTS
@@ -314,81 +187,15 @@ class ContentService {
 
 	// PLACES ENDPOINTS
 
-	place = (
-		type,
-		isVerified,
-		slug,
-		title,
-		subtitle,
-		categories,
-		seasons,
-		characteristics,
-		destinations,
-		placeType,
-		cover,
-		images,
-		description,
-		reasons,
-		phone,
-		website,
-		place_full_address,
-		place_locality,
-		place_province,
-		place_state,
-		place_country,
-		place_lat,
-		place_lng,
-		place_rating,
-		place_id,
-		place_opening_hours,
-		price,
-		discountCode,
-		discountInfo,
-		review,
-		relatedStory,
-		organization_id,
-		metaTitle,
-		metaDescription,
-	) => {
-		return this.service
-			.post("/place", {
-				type,
-				isVerified,
-				slug,
-				title,
-				subtitle,
-				categories,
-				seasons,
-				characteristics,
-				destinations,
-				placeType,
-				cover,
-				images,
-				description,
-				reasons,
-				phone,
-				website,
-				place_full_address,
-				place_locality,
-				place_province,
-				place_state,
-				place_country,
-				place_lat,
-				place_lng,
-				place_rating,
-				place_id,
-				place_opening_hours,
-				price,
-				discountCode,
-				discountInfo,
-				review,
-				relatedStory,
-				organization_id,
-				metaTitle,
-				metaDescription,
-			})
-			.then((res) => {});
-	};
+	/**
+	 * Crea un allotjament.
+	 *
+	 * Igual que `activity`, rebia trenta-cinc arguments posicionals. A més,
+	 * resolia amb `.then((res) => {})`, de manera que qui la cridava no podia
+	 * saber ni què s'havia desat ni si l'API havia rebutjat la fitxa.
+	 */
+	place = (payload) =>
+		this.service.post("/place", payload).then((res) => res.data);
 
 	getAllPlaces = () => this.service.get("/places").then((res) => res.data);
 
@@ -403,81 +210,18 @@ class ContentService {
 			.put(`/places/${id}`, { isRemoved: true })
 			.then((res) => res.data);
 
-	editPlace = (
-		_id,
-		slug,
-		isVerified,
-		title,
-		subtitle,
-		categories,
-		seasons,
-		characteristics,
-		destinations,
-		placeType,
-		placeCover,
-		placeImages,
-		review,
-		relatedStory,
-		description,
-		reasons,
-		phone,
-		website,
-		place_full_address,
-		place_locality,
-		place_province,
-		place_state,
-		place_country,
-		place_lat,
-		place_lng,
-		place_rating,
-		place_id,
-		place_opening_hours,
-		price,
-		discountCode,
-		discountInfo,
-		metaTitle,
-		metaDescription,
-	) =>
-		this.service.put(`/places/${_id}`, {
-			slug,
-			isVerified,
-			title,
-			subtitle,
-			categories,
-			seasons,
-			characteristics,
-			destinations,
-			placeType,
-			// L'esquema Place té `cover` i `images`. Enviant-los com a placeCover
-			// i placeImages, Mongoose els descartava i editar un allotjament mai
-			// no n'actualitzava la portada ni la galeria. S'ometen si venen buits
-			// per no esborrar les imatges que ja hi havia.
-			...(placeCover ? {cover: placeCover} : {}),
-			...(placeImages && placeImages.length
-				? {images: placeImages}
-				: {}),
-			review,
-			relatedStory,
-			description,
-			reasons,
-			phone,
-			website,
-			place_full_address,
-			place_locality,
-			place_province,
-			place_state,
-			place_country,
-			place_lat,
-			place_lng,
-			place_rating,
-			place_id,
-			place_opening_hours,
-			price,
-			discountCode,
-			discountInfo,
-			metaTitle,
-			metaDescription,
-		});
+	/**
+	 * Modifica un allotjament.
+	 *
+	 * `cover` i `images` s'ometen si venen buits: l'esquema els descartaria i
+	 * l'allotjament es quedaria sense portada ni galeria.
+	 */
+	editPlace = (_id, payload) => {
+		const body = { ...payload };
+		if (!body.cover) delete body.cover;
+		if (!body.images || !body.images.length) delete body.images;
+		return this.service.put(`/places/${_id}`, body).then((res) => res.data);
+	};
 
 	getUserPlaces = (id) =>
 		this.service.get(`/users/${id}/places`).then((res) => res.data);

@@ -16,7 +16,7 @@ import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnip
 import GlobalMetas from "../components/head/GlobalMetas";
 import ListingHeader from "../components/headers/ListingHeader";
 import ListingsTextareaFooter from "../components/listings/ListingsTextareaFooter";
-import FilterPlacesModal from "../components/modals/FilterPlacesModal";
+import FilterListingsModal from "../components/modals/FilterListingsModal";
 
 const PlaceList = ({
 	totalItems,
@@ -391,7 +391,8 @@ ${taxonomyLinksHtml(DESTINATIONS, "/destinacions/")}
 				/>
 			) : null}
 
-			<FilterPlacesModal
+			<FilterListingsModal
+				variant="places"
 				isFilterModalOpen={state.isFilterModalOpen}
 				hideModal={() =>
 					setState({ ...state, isFilterModalOpen: false })
