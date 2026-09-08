@@ -9,6 +9,8 @@ import GoogleMapReact from "google-map-react";
 import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
 import Footer from "../../components/global/Footer";
+import BookingCard from "../../components/listingpage/BookingCard";
+import { listingPath } from "../../utils/listingRoutes";
 import FancyboxUtil from "../../utils/FancyboxUtils";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
@@ -1050,6 +1052,17 @@ const ActivityListing = ({ activityDetails, destinationNames = [] }) => {
 											></div>
 										</div>
 										<aside className="w-full xl:w-4/12 xl:px-6 relative xl:sticky xl:top-36 mt-7 xl:mt-0">
+											<BookingCard
+												type="activity"
+												price={state.activity.price}
+												rating={state.activity.activity_rating}
+												isVerified={state.activity.isVerified}
+												website={state.activity.website}
+												phone={state.activity.phone}
+												discountCode={state.activity.discountCode}
+												discountInfo={state.activity.discountInfo}
+											/>
+
 											<div className="p-5 rounded-md shadow-lg shadow-primary-300">
 												<div className="w-full h-56 rounded-md overflow-hidden">
 													<GoogleMapReact
@@ -1070,73 +1083,6 @@ const ActivityListing = ({ activityDetails, destinationNames = [] }) => {
 															)
 														}
 													/>
-												</div>
-												<div className="flex flex-col w-full mt-5">
-													<a
-														href={`${state.activity.website}`}
-														className="button button__primary button__med justify-center mb-2.5"
-														title="Reservar"
-													>
-														<svg
-															xmlns="http://www.w3.org/2000/svg"
-															className="icon icon-tabler icon-tabler-device-laptop mr-2"
-															width="22"
-															height="22"
-															viewBox="0 0 24 24"
-															strokeWidth="1.5"
-															stroke="currentColor"
-															fill="none"
-															strokeLinecap="round"
-															strokeLinejoin="round"
-														>
-															<path
-																stroke="none"
-																d="M0 0h24v24H0z"
-																fill="none"
-															/>
-															<line
-																x1="3"
-																y1="19"
-																x2="21"
-																y2="19"
-															/>
-															<rect
-																x="5"
-																y="6"
-																width="14"
-																height="10"
-																rx="1"
-															/>
-														</svg>
-														Reservar
-													</a>
-													<a
-														href={`tel:${state.activity.phone}`}
-														className="button button__ghost button__med justify-center "
-														title="Trucar"
-													>
-														<svg
-															xmlns="http://www.w3.org/2000/svg"
-															className="icon icon-tabler icon-tabler-phone-call mr-2"
-															width="22"
-															height="22"
-															viewBox="0 0 24 24"
-															strokeWidth="1.5"
-															stroke="currentColor"
-															fill="none"
-															strokeLinecap="round"
-															strokeLinejoin="round"
-														>
-															<path
-																stroke="none"
-																d="M0 0h24v24H0z"
-															/>
-															<path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2" />
-															<path d="M15 7a2 2 0 0 1 2 2" />
-															<path d="M15 3a6 6 0 0 1 6 6" />
-														</svg>
-														Trucar
-													</a>
 												</div>
 												{hasOpeningHours}
 												<ul className="list-none mt-4 mb-0 px-0 pt-4 border-t border-primary-200">
@@ -1183,6 +1129,7 @@ const ActivityListing = ({ activityDetails, destinationNames = [] }) => {
 						</section>
 					</article>
 				</main>
+				<div className="booking-bar-spacer" />
 				<Footer
 					logo_url={
 						"https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
@@ -1204,6 +1151,17 @@ export async function getServerSideProps({ params }) {
 	if (!activityDetails) {
 		return {
 			notFound: true,
+		};
+	}
+
+	// La URL que mana és `/{categoria}/{slug}`. Aquesta ruta es manté viva
+	// perquè hi ha enllaços antics i perquè el mapa hi cau quan la
+	// projecció de l'API no porta categories, però consolida el senyal
+	// amb una redirecció permanent.
+	const canonicalPath = listingPath(activityDetails);
+	if (canonicalPath !== `/activitats/${activityDetails.slug}`) {
+		return {
+			redirect: { destination: canonicalPath, permanent: true },
 		};
 	}
 

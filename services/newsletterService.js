@@ -3,7 +3,8 @@ const { default: Axios } = require("axios");
 class NewsletterService {
   constructor() {
     let service = Axios.create({
-      baseURL: process.env.API_URL,
+      baseURL:
+        process.env.API_URL || process.env.NEXT_PUBLIC_APP_API_URL || "",
       withCredentials: true,
       headers: {
         "Content-Type": "application/json",

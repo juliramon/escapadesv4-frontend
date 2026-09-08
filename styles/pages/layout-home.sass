@@ -1,1 +1,231 @@
+@layer components
+	/* --- Capçalera de la portada --- */
 
+	.home-hero
+		@apply relative isolate overflow-hidden bg-grey-700
+
+		&__media
+			@apply absolute inset-0 block w-full h-full
+
+			img
+				@apply w-full h-full object-cover
+
+		&__overlay
+			@apply absolute inset-0 block
+			background: linear-gradient(180deg, rgba(15, 15, 15, 0.62) 0%, rgba(15, 15, 15, 0.48) 45%, rgba(15, 15, 15, 0.78) 100%)
+
+		&__inner
+			@apply max-w-3xl py-14 md:py-20 lg:py-24 text-white
+
+		&__badge
+			@apply inline-flex items-center gap-x-1.5 rounded-full bg-white/15 hover:bg-white/25 backdrop-blur border border-white/25 text-white text-sm pr-3 pl-1 py-1 transition-all duration-300 ease-in-out
+
+		&__badge-tag
+			@apply inline-flex items-center gap-x-1 rounded-full bg-secondary-500 text-grey-700 px-2.5 py-1 font-medium
+
+		&__title
+			@apply text-white mt-5 mb-0 text-balance
+			text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35)
+
+		&__subtitle
+			@apply mt-4 mb-0 text-block--xl text-white/90 max-w-[46ch]
+
+		&__search
+			@apply relative flex flex-col sm:flex-row sm:items-center gap-2 mt-7 bg-white rounded-2xl sm:rounded-full p-2 shadow-xl max-w-2xl
+
+		&__search-icon
+			@apply hidden sm:inline-flex items-center justify-center pl-3 text-grey-300 shrink-0
+
+		&__search-input
+			@apply w-full flex-auto bg-transparent border-0 px-4 py-3 text-15 text-grey-700 placeholder:text-grey-300 focus:outline-none
+
+		&__search-button
+			@apply shrink-0 sm:w-auto
+
+		&__quick-links
+			@apply list-none p-0 m-0 mt-5 flex flex-wrap gap-2
+
+		&__chip
+			@apply inline-block rounded-full border border-white/35 bg-white/10 hover:bg-white hover:text-grey-700 backdrop-blur text-white text-15 px-3.5 py-1.5 transition-all duration-300 ease-in-out
+
+		&__trust
+			@apply list-none p-0 m-0 mt-7 flex flex-wrap items-center gap-x-5 gap-y-1 text-15 text-white/80
+
+			li
+				@apply m-0 inline-flex items-center
+
+				&:not(:first-child)::before
+					content: ""
+					@apply inline-block w-1 h-1 rounded-full bg-white/50 mr-5
+
+	/* --- Capçaleres de secció --- */
+
+	.section-heading__link
+		@apply inline-flex items-center gap-x-1 text-15 font-medium text-tertiary-800 shrink-0 transition-all duration-300 ease-in-out
+
+		&:hover
+			@apply text-tertiary-900 gap-x-2
+
+	/* --- Carril de categories --- */
+
+	.category-rail
+		@apply list-none p-0 m-0 flex gap-x-4 overflow-x-auto pb-2 -mx-6 px-6 lg:mx-0 lg:px-0 lg:grid lg:grid-cols-9 lg:gap-x-3
+		scrollbar-width: none
+
+		&::-webkit-scrollbar
+			display: none
+
+		&__item
+			@apply m-0 shrink-0 w-24 lg:w-auto
+
+		&__link
+			@apply block text-center
+
+		&__media
+			@apply block w-24 h-24 rounded-2xl overflow-hidden bg-tertiary-50 lg:w-full lg:h-auto
+
+			@screen lg
+				aspect-ratio: 1 / 1
+
+			picture, img
+				@apply block w-full h-full object-cover
+
+		&__placeholder
+			@apply block w-full h-full bg-tertiary-100
+
+		&__label
+			@apply block mt-2 text-15 leading-tight text-grey-700
+
+	/* --- Carril de destinacions --- */
+
+	.destination-rail
+		@apply list-none p-0 m-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4
+
+		&__item
+			@apply m-0
+
+		&__link
+			@apply relative block rounded-2xl overflow-hidden bg-grey-700
+			aspect-ratio: 3 / 4
+
+		&__media
+			@apply absolute inset-0 block w-full h-full
+
+			img
+				@apply w-full h-full object-cover
+
+			&--empty
+				@apply flex items-center justify-center text-white/15
+				background: linear-gradient(150deg, #33415c 0%, #001233 100%)
+
+				svg
+					@apply w-1/2 h-1/2
+
+		&__overlay
+			@apply absolute inset-0 block
+			background: linear-gradient(180deg, rgba(0, 0, 0, 0) 35%, rgba(0, 0, 0, 0.72) 100%)
+
+		&__content
+			@apply absolute inset-x-0 bottom-0 block p-4 text-white
+
+		&__title
+			@apply block font-medium text-base leading-tight
+
+		&__subtitle
+			@apply block mt-1 text-13 text-white/80 line-clamp-2
+
+	/* --- Graella de verticals --- */
+
+	.vertical-tiles
+		@apply list-none p-0 m-0 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4
+
+	.vertical-tile
+		@apply flex items-start gap-x-4 h-full rounded-2xl border border-neutral-100 bg-white p-5 transition-all duration-300 ease-in-out
+
+		&:hover
+			@apply border-grey-100 shadow-md -translate-y-0.5
+
+		&.is-highlight
+			@apply bg-tertiary-50 border-tertiary-100
+
+			.vertical-tile__icon
+				@apply bg-white
+
+		&__icon
+			@apply inline-flex items-center justify-center w-11 h-11 shrink-0 rounded-xl bg-tertiary-50 text-tertiary-800
+
+		&__body
+			@apply block flex-auto
+
+		&__label
+			@apply flex flex-wrap items-baseline gap-x-2 font-medium text-grey-700
+
+		&__count
+			@apply text-13 font-normal text-grey-300
+
+		&__description
+			@apply block mt-1 text-15 leading-snug text-grey-400
+
+		&__arrow
+			@apply inline-flex items-center text-grey-300 shrink-0 mt-3
+
+	/* --- Newsletter --- */
+
+	.newsletter-cta
+		@apply py-12 md:py-16 lg:py-20 bg-tertiary-50
+
+		&__panel
+			@apply grid grid-cols-1 lg:grid-cols-12 items-center gap-8 lg:gap-14 max-w-5xl mx-auto
+
+		&__media
+			@apply hidden lg:block lg:col-span-5
+
+		&__body
+			@apply lg:col-span-7
+
+		&__eyebrow
+			@apply block text-13 uppercase tracking-widest text-tertiary-800 mb-2
+
+		&__title
+			@apply my-0 text-balance
+
+		&__benefits
+			@apply list-none p-0 m-0 mt-4 flex flex-col gap-y-1.5
+
+			li
+				@apply flex items-start gap-x-2 m-0 text-block text-grey-500
+
+				svg
+					@apply shrink-0 mt-1 text-tertiary-800
+
+		&__form
+			@apply mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3
+
+		&__input
+			@apply w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-15 text-grey-700 placeholder:text-grey-300 focus:outline-none focus:border-grey-300 transition-all duration-300 ease-in-out
+
+		&__submit
+			@apply sm:col-span-2 md:w-fit disabled:opacity-60
+
+		&__success
+			@apply flex items-start gap-x-2 mt-4 mb-0 text-block font-medium text-grey-700
+
+			svg
+				@apply shrink-0 mt-0.5 text-green-600
+
+		&__error
+			@apply mt-3 mb-0 text-15 text-red-600
+
+		&__legal
+			@apply mt-3 mb-0 text-13 text-grey-300
+
+			a
+				@apply underline
+
+	/* --- Blocs publicitaris --- */
+
+	.ad-slot
+		@apply w-full flex flex-col justify-center
+
+		.adblock
+			@apply w-full

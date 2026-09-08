@@ -12,9 +12,11 @@ import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichS
 import BlogPostingRichSnippet from "../../components/richsnippets/BlogPostingRichSnippet";
 import ShareBarModal from "../../components/social/ShareBarModal";
 import AdBanner from "../../components/ads/AdBanner";
+import MobileAnchorAd from "../../components/ads/MobileAnchorAd";
+import RelatedListings from "../../components/listingpage/RelatedListings";
 import ContentParser from "../../utils/ContentParser";
 
-const StoryListing = ({ storyDetails }) => {
+const StoryListing = ({ storyDetails, relatedStories }) => {
 	const { user } = useContext(UserContext);
 	const router = useRouter();
 
@@ -325,6 +327,17 @@ const StoryListing = ({ storyDetails }) => {
 							</div>
 						</section>
 					</article>
+				<RelatedListings
+					eyebrow="Segueix llegint"
+					title="Altres històries en parella"
+					description="Més escapades explicades de primera mà."
+					href="/histories"
+					linkLabel="Veure totes les històries"
+					items={relatedStories}
+					variant="editorial"
+					basePath="/histories"
+					badge="Història"
+				/>
 				</main>
 			</div>
 			<Footer
@@ -332,6 +345,7 @@ const StoryListing = ({ storyDetails }) => {
 					"https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
 				}
 			/>
+			<MobileAnchorAd />
 		</>
 	);
 };
@@ -346,9 +360,22 @@ export async function getServerSideProps({ params }) {
 		};
 	}
 
+	// Contingut relacionat del peu: sense això la fitxa és un cul-de-sac
+	// per a qui hi arriba des de cerca.
+	let relatedStories = [];
+	try {
+		const all = await service.getMostRecentStories();
+		relatedStories = (all || [])
+			.filter((item) => item.slug !== storyDetails.slug)
+			.slice(0, 4);
+	} catch (error) {
+		relatedStories = [];
+	}
+
 	return {
 		props: {
 			storyDetails,
+			relatedStories,
 		},
 	};
 }

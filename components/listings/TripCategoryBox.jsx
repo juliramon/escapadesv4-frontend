@@ -33,8 +33,8 @@ const TripCategoryBox = ({ image, title, subtitle, slug, country }) => {
 										}}
 									></div>
 								</div>
-								<div class="mt-6 flex items-center justify-between">
-									<div class="inline-flex items-center justify-center text-sm leading-tight">
+								<div className="mt-6 flex items-center justify-between">
+									<div className="inline-flex items-center justify-center text-sm leading-tight">
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
 											className="icon icon-tabler icon-tabler-globe mr-1.5"
@@ -60,18 +60,18 @@ const TripCategoryBox = ({ image, title, subtitle, slug, country }) => {
 
 										{country}
 									</div>
-									<span class="text-13 text-tertiary-800 group-hover:text-tertiary-900 transition-all duration-300 ease-in-out inline-flex items-center leading-tight">
+									<span className="text-13 text-tertiary-800 group-hover:text-tertiary-900 transition-all duration-300 ease-in-out inline-flex items-center leading-tight">
 										<svg
 											xmlns="http://www.w3.org/2000/svg"
-											class="mr-1"
+											className="mr-1"
 											width="15"
 											height="15"
 											viewBox="0 0 24 24"
 											strokeWidth="2"
 											stroke="currentColor"
 											fill="none"
-											stroke-linecap="round"
-											stroke-linejoin="round"
+											strokeLinecap="round"
+											strokeLinejoin="round"
 										>
 											<path
 												stroke="none"

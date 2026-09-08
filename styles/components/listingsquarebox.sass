@@ -1,7 +1,60 @@
 .product
-    &__item 
+    &__item
         img
             @apply transition-all duration-700 ease-in-out
     &__item:hover
         img
             @apply transform scale-105
+
+@layer components
+    .listing-card
+        @apply w-full
+
+        &__link
+            @apply flex flex-col h-full
+
+        &__media
+            @apply relative overflow-hidden rounded-2xl bg-gray-100
+
+        &__badges
+            @apply absolute top-2.5 left-2.5 flex flex-wrap gap-1.5 max-w-[calc(100%-1.25rem)]
+
+        &__badge
+            @apply inline-block rounded-lg bg-white/95 backdrop-blur text-grey-700 text-13 leading-none px-2 py-1.5 shadow-sm
+
+        &__verified
+            @apply inline-flex items-center gap-x-1 absolute top-2.5 right-2.5 text-primary-500 bg-white rounded-lg py-1 px-2 shadow-md text-13 leading-none
+
+        &__body
+            @apply flex flex-col flex-auto pt-3 pb-1
+
+        &__title
+            @apply my-0 text-base leading-snug line-clamp-2 transition-all duration-300 ease-in-out
+
+        &__location
+            @apply inline-flex items-center gap-x-1 mt-1.5 text-15 text-grey-400 line-clamp-1
+
+            svg
+                @apply shrink-0
+
+        &__footer
+            @apply flex items-end justify-between gap-x-3 mt-auto pt-3
+
+        &__rating
+            @apply inline-flex items-center gap-x-1 text-15 leading-none text-grey-700
+
+        &__price
+            @apply inline-flex flex-col items-end leading-tight text-right
+
+            strong
+                @apply text-base font-medium text-grey-700
+
+        &__price-unit
+            @apply text-13 text-grey-300
+
+        &__more
+            @apply inline-flex items-center text-15 leading-none text-tertiary-800 transition-all duration-300 ease-in-out
+
+    .listing-card:hover
+        .listing-card__title
+            @apply underline

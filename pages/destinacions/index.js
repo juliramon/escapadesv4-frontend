@@ -1,5 +1,6 @@
-import Link from "next/link";
 import ContentService from "../../services/contentService";
+import DestinationRail from "../../components/homepage/DestinationRail";
+import MobileAnchorAd from "../../components/ads/MobileAnchorAd";
 import NavigationBar from "../../components/global/NavigationBar";
 import Footer from "../../components/global/Footer";
 import GlobalMetas from "../../components/head/GlobalMetas";
@@ -33,44 +34,13 @@ const DestinationsList = ({ destinations }) => {
 						breadcrumbLevel1={"Destinacions"}
 					/>
 
-					<section className="py-8 md:py-12 lg:pb-20">
+					<section className="pt-6 md:pt-8 pb-12 lg:pb-20">
 						<div className="container">
 							{destinations.length > 0 ? (
-								<div className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 gap-5">
-									{destinations.map((el) => (
-										<article key={el._id}>
-											<Link
-												href={`/destinacions/${el.slug}`}
-											>
-												<a
-													title={el.title}
-													className="block w-full h-full rounded-xl overflow-hidden group relative"
-												>
-													<picture className="block w-full aspect-w-3 aspect-h-4 overflow-hidden">
-														<img
-															src={el.image}
-															alt={el.title}
-															className="w-full h-full object-cover scale-100 group-hover:scale-110 transition-transform duration-500 ease-in-out"
-															width={390}
-															height={525}
-															loading="lazy"
-														/>
-													</picture>
-													<div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/70 to-transparent">
-														<span className="block text-white text-lg font-semibold">
-															{el.title}
-														</span>
-														{el.subtitle ? (
-															<span className="block text-white/80 text-sm mt-0.5">
-																{el.subtitle}
-															</span>
-														) : null}
-													</div>
-												</a>
-											</Link>
-										</article>
-									))}
-								</div>
+								<DestinationRail
+									destinations={destinations}
+									className="lg:grid-cols-3 xl:grid-cols-4"
+								/>
 							) : (
 								<p className="text-center mx-auto text-lg">
 									Encara no hi ha destinacions publicades.
@@ -86,6 +56,7 @@ const DestinationsList = ({ destinations }) => {
 					"https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
 				}
 			/>
+			<MobileAnchorAd />
 		</>
 	);
 };
@@ -102,7 +73,15 @@ export async function getStaticProps() {
 
 	return {
 		props: {
-			destinations,
+			// Els documents de destinació porten `reviewText`, `seoText` i un
+			// iframe de mapa que aquesta pàgina no pinta; enviar-ho tot al
+			// client inflava el JSON de la pàgina sense cap motiu.
+			destinations: destinations.map(({ slug, title, subtitle, image }) => ({
+				slug,
+				title,
+				subtitle: subtitle || null,
+				image: image || null,
+			})),
 		},
 		revalidate: 120,
 	};

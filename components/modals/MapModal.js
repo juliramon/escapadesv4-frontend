@@ -1,20 +1,34 @@
-import GoogleMapReact from "google-map-react";
+import ListingsMap from "../maps/ListingsMap";
 
-const MapModal = ({
-	visibility,
-	hideModal,
-	center,
-	getMapOptions,
-	renderMarker,
-}) => {
+/**
+ * Modal amb el mapa del llistat.
+ *
+ * El mapa només es munta quan el modal està obert: abans es renderitzava
+ * sempre, de manera que totes les pàgines de llistat carregaven l'API de
+ * Google Maps encara que ningú obrís el mapa.
+ */
+const MapModal = ({ visibility, hideModal, items = [] }) => {
+	const count = items.filter(
+		(item) => item && item.lat !== null && item.lng !== null
+	).length;
+
 	return (
 		<div className={`modal ${visibility == true ? "active" : ""}`}>
 			<div className="modal__wrapper modal--xl">
 				<div className="modal__header">
-					<span>Mapa d'escapades</span>
+					<span>
+						Mapa d&apos;escapades
+						{count ? (
+							<span className="text-15 text-grey-400 ml-2">
+								{count}{" "}
+								{count === 1 ? "resultat" : "resultats"}
+							</span>
+						) : null}
+					</span>
 					<button
 						onClick={() => hideModal()}
 						className="modal__close"
+						aria-label="Tancar el mapa"
 					>
 						<svg
 							xmlns="http://www.w3.org/2000/svg"
@@ -39,18 +53,7 @@ const MapModal = ({
 					</button>
 				</div>
 				<div className="modal__body h-full p-0 overflow-hidden">
-					<GoogleMapReact
-						bootstrapURLKeys={{
-							key: process.env.NEXT_PUBLIC_GOOGLE_API_KEY,
-						}}
-						defaultCenter={center}
-						defaultZoom={5}
-						options={getMapOptions}
-						yesIWantToUseGoogleMapApiInternals
-						onGoogleApiLoaded={({ map, maps }) =>
-							renderMarker(map, maps)
-						}
-					/>
+					{visibility ? <ListingsMap items={items} /> : null}
 				</div>
 			</div>
 		</div>

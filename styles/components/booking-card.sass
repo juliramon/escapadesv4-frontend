@@ -1,0 +1,63 @@
+@layer components
+	.booking-card
+		@apply rounded-2xl border border-neutral-100 bg-white p-6 shadow-sm
+
+		&__price
+			@apply flex flex-wrap items-baseline gap-x-2
+
+		&__price-label
+			@apply text-15 text-grey-400
+
+		&__price-value
+			@apply font-medium text-grey-700
+			font-size: clamp(26px, 3vw, 32px)
+			line-height: 1.1
+
+		&__price-unit
+			@apply w-full text-15 text-grey-400
+
+		&__trust
+			@apply flex flex-wrap items-center gap-x-4 gap-y-2 mt-3
+
+		&__rating
+			@apply inline-flex items-center gap-x-1 text-15 leading-none text-grey-700
+
+		&__verified
+			@apply inline-flex items-center gap-x-1 text-15 leading-none text-grey-700
+
+		&__actions
+			@apply flex flex-col gap-y-2.5 mt-5
+
+		&__note
+			@apply mt-3 mb-0 text-13 leading-snug text-grey-400
+
+		&__disclaimer
+			@apply mt-2.5 mb-0 text-13 leading-snug text-grey-300
+
+	// Barra fixa de reserva a mòbil. Per sobre de 1024px mana la targeta
+	// enganxada de la columna lateral i la barra desapareix.
+	.booking-bar
+		@apply fixed bottom-0 inset-x-0 z-50 flex items-center gap-x-4 bg-white border-t border-neutral-100 px-4 py-3 lg:hidden
+		box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.08)
+
+		&__price
+			@apply flex flex-col leading-tight shrink-0
+
+		&__price-value
+			@apply text-lg font-medium text-grey-700
+
+		&__price-unit
+			@apply text-13 text-grey-400
+
+		&__action
+			@apply flex-auto
+
+	// L'espai que ocupa la barra fixa, perquè no tapi el final del contingut.
+	.booking-bar-spacer
+		@apply h-20 lg:hidden
+
+	.related-listings
+		@apply pt-2
+
+		&__inner
+			@apply border-t border-neutral-100 pt-10 md:pt-14 lg:pt-16 pb-4

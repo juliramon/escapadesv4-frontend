@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
 import ContentService from "../services/contentService";
+import { toListingCard, toMapMarker } from "../utils/listingProps";
 import NavigationBar from "../components/global/NavigationBar";
-import PublicSquareBox from "../components/listings/PublicSquareBox";
+import ListingGrid from "../components/listings/ListingGrid";
+import TaxonomyChips from "../components/listings/TaxonomyChips";
+import MobileAnchorAd from "../components/ads/MobileAnchorAd";
+import {
+	DESTINATIONS,
+	GETAWAY_CATEGORIES,
+	taxonomyLinksHtml,
+} from "../utils/siteTaxonomy";
 import Footer from "../components/global/Footer";
 import MapModal from "../components/modals/MapModal";
 import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
@@ -107,56 +115,6 @@ const ActivityList = ({
 		});
 	};
 
-	const center = {
-		lat: 41.3948976,
-		lng: 2.0787283,
-	};
-
-	const getMapOptions = (maps) => {
-		return {
-			disableDefaultUI: false,
-			styles: [
-				{
-					featureType: "poi",
-					elementType: "labels",
-					styles: [{ visibility: "on" }],
-				},
-			],
-		};
-	};
-
-	const renderMarker = (map, maps) => {
-		const bounds = new maps.LatLngBounds();
-		state.allActivities.forEach((activity) => {
-			const position = {
-				lat: parseFloat(activity.activity_lat),
-				lng: parseFloat(activity.activity_lng),
-			};
-			const contentString = `<a href="/activitats/${activity.slug}" title="${activity.title}" class="gmaps-infobox" target="_blank">
-        <div class="gmaps-infobox__picture">
-          <picture class="block rounded-md overflow-hidden aspect-w-1 aspect-h-1">
-            <img src="${activity.images[0]}" alt="${activity.title}" class="object-cover w-full h-full" width="80" height="80">
-          </picture>
-        </div>
-        <div class="gmaps-infobox__text">
-          <span class="gmaps-infobox__title">${activity.title}</span>
-          <span class="gmaps-infobox__intro">${activity.subtitle}</span>
-        </div>
-        </a>`;
-			const infowindow = new maps.InfoWindow({
-				content: contentString,
-			});
-			const marker = new maps.Marker({
-				position: position,
-				map,
-				icon: "../../map-marker.svg",
-			});
-			bounds.extend(marker.position);
-			marker.addListener("click", () => infowindow.open(map, marker));
-		});
-		map.fitBounds(bounds);
-	};
-
 	useEffect(() => {
 		if (state.updateSearch === true) {
 			service
@@ -176,19 +134,26 @@ const ActivityList = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [state.updateSearch]);
 
-	const textareaFooter = `<h2>Activitats originals en parella a Catalunya</h2>
-<p>Busques idees per sorprendre la teva parella amb plans diferents i emocionants? Catalunya és un lloc ple d'opcions per gaudir d'<strong>activitats originals en parella</strong>, des de rutes d'aventura fins a experiències úniques que no oblidareu mai. Si voleu trencar amb la rutina i crear moments especials junts, aquí trobaràs inspiració per al vostre pròxim cap de setmana.</p>
+	// Bloc de text del peu del llistat. Es manté a la pàgina (i no a l'API)
+	// perquè inclou el comptador real i els enllaços a la taxonomia.
+	const textareaFooter = `<h2>Activitats originals per fer en parella a Catalunya</h2>
+<p>Aquí hi ha <strong>${state.numActivities} activitats per fer en parella</strong> arreu de Catalunya, de la Costa Brava als Pirineus. N'hi ha per a tots els ritmes: rutes a peu i vies ferrades, tastos de vi i visites a cellers, museus i pobles amb encant, o un dia de neu. Cada fitxa porta la ubicació, la durada aproximada i el preu orientatiu per persona, perquè pugueu decidir sense haver de buscar-ho a deu llocs.</p>
 
-<h3>Experiències en parella per gaudir al màxim</h3>
-<p>Si el que desitgeu són experiències memorables, Catalunya ofereix infinitat de possibilitats per a les millors <strong>experiències en parella</strong>. Des de volar en globus sobre paisatges espectaculars fins a fer una degustació de vins en una masia amb encant, cada proposta està pensada per sorprendre i enamorar. Descobreix activitats per fer en parella que us permetran connectar i viure emocions noves junts.</p>
+<h3>Escolliu per tipus d'escapada</h3>
+<p>Totes les activitats estan classificades pel pla que us ve de gust. Si ja sabeu què busqueu, aneu directament a la categoria:</p>
+${taxonomyLinksHtml(GETAWAY_CATEGORIES)}
 
-<h3>Activitats en parella a Barcelona i més enllà</h3>
-<p>Barcelona, amb la seva rica oferta cultural i d'oci, és l'escenari perfecte per a <strong>activitats en parella</strong>. Pugeu al Tibidabo per gaudir de vistes panoràmiques, exploreu museus interactius o feu un tour gastronòmic pel barri Gòtic. A més de Barcelona, Catalunya té molts altres indrets on viure aventures en parella, com rutes de senderisme per la Garrotxa o visites a coves i espais naturals.</p>
+<h3>Activitats per zones de Catalunya</h3>
+<p>Si el que teniu decidit és la zona i no el pla, cada destinació té la seva pàgina amb les activitats i els allotjaments que hi ha a prop:</p>
+${taxonomyLinksHtml(DESTINATIONS, "/destinacions/")}
 
-<h2>Activitats originals per a un cap de setmana únic</h2>
-<p>Planificar <strong>caps de setmana originals</strong> a Catalunya és fàcil gràcies a la varietat d'opcions que aquesta regió ofereix. Des d'activitats aquàtiques com caiac o paddle surf fins a experiències culturals com visites a monestirs o espectacles de música en viu, podreu personalitzar el vostre cap de setmana segons els vostres interessos. Aquestes activitats a Catalunya faran que cada escapada sigui única i especial.</p>
+<h3>Quant costa una activitat en parella?</h3>
+<p>Depèn molt del pla. Les rutes i excursions acostumen a ser gratuïtes i només cal comptar-hi el desplaçament; les visites guiades i els tastos solen moure's en un rang assequible per persona, i les experiències més especials —globus, activitats d'aventura amb guia— pugen força. A cada fitxa hi trobareu el preu aproximat que hem calculat, tenint en compte que pot variar segons la temporada i que no sempre està actualitzat al minut.</p>
 
-<h3>Plans en parella per descobrir Catalunya</h3><p>Quan es tracta de <strong>plans en parella a Catalunya</strong>, les opcions són infinites. Gaudiu de passejades romàntiques per pobles amb encant com Besalú o Peratallada, passegeu pels camps de lavanda al Delta de l'Ebre o feu excursions per parcs naturals. Cada regió té llocs increïbles per visitar amb la teva parella, fent de cada escapada una aventura plena de descobriments.</p><p>Explorar <strong>llocs de Catalunya per anar amb la teva parella</strong> no només enfortirà el vostre vincle, sinó que també us permetrà viure moments plens de màgia i sorpresa. Així que prepareu-vos per descobrir junts el millor de Catalunya amb activitats inoblidables que us deixaran amb ganes de repetir.</p>`;
+<h3>Quan hi anem?</h3>
+<p>Catalunya dona joc tot l'any i el pla canvia molt segons el mes. A la primavera i la tardor és quan més bé es camina; a l'estiu guanyen les activitats d'aigua i les nits a fora; a l'hivern, la neu i els plans de recer. Ho tenim ordenat a <a href="/escapades-estiu">escapades d'estiu</a> i <a href="/escapades-hivern">escapades d'hivern</a>, i si només teniu dos dies, a <a href="/escapades-de-cap-de-setmana">escapades de cap de setmana</a>.</p>
+
+<p>I si voleu allargar el pla i quedar-vos a dormir, mireu els <a href="/allotjaments">allotjaments amb encant</a> que hem anat trobant: hotels petits, cases rurals, cabanes i refugis.</p>`;
 
 	const loadMoreResults = async (page) => {
 		setState({ ...state, isFetching: true });
@@ -208,6 +173,88 @@ const ActivityList = ({
 			state.queryActivitySeason == 0
 		);
 	};
+
+	// Els filtres viuen a la capçalera: comparteixen fila amb el títol i
+	// deixen la primera fila de fitxes per sobre del plec.
+	const listingActions = (
+		<div className="flex flex-wrap items-center gap-2">
+			<button
+				className="button button__ghost button__med px-6 w-fit gap-x-1.5 group"
+				onClick={() =>
+					setState({
+						...state,
+						isFilterModalOpen: true,
+					})
+				}
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width={20}
+					height={20}
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					strokeWidth={1.5}
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				>
+					<path
+						stroke="none"
+						d="M0 0h24v24H0z"
+						fill="none"
+					/>
+					<path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+					<path d="M6 4v4" />
+					<path d="M6 12v8" />
+					<path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+					<path d="M12 4v10" />
+					<path d="M12 18v2" />
+					<path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+					<path d="M18 4v1" />
+					<path d="M18 9v11" />
+				</svg>
+				Filtrar
+				{state.selectedCount &&
+				state.selectedCount > 0 ? (
+					<span className="rounded-full bg-primary-500 p-2 w-5 h-5 flex items-center justify-center group-hover:bg-white transition-colors duration-300 ease-in-out">
+						<span className="text-white text-xs group-hover:text-primary-500 transition-colors duration-300 ease-in-out">
+							{state.selectedCount}
+						</span>
+					</span>
+				) : null}
+			</button>
+			<button
+				className="button button__ghost button__med px-6 w-fit gap-x-1.5 ml-3"
+				onClick={() =>
+					setState({
+						...state,
+						isMapModalOpen: true,
+					})
+				}
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width={20}
+					height={20}
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					strokeWidth={1.5}
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				>
+					<path
+						stroke="none"
+						d="M0 0h24v24H0z"
+						fill="none"
+					/>
+					<path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+					<path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
+				</svg>
+				Veure mapa
+			</button>
+		</div>
+	);
 
 	return (
 		<>
@@ -234,156 +281,27 @@ const ActivityList = ({
 						title={`Activitats originals en parella a Catalunya`}
 						subtitle={`Us proposem ${state.numActivities} <strong>activitats per fer en parella a Catalunya</strong>. Descobriu <strong>activitats originals</strong> i <strong>experiències per fer en parella</strong>, des de rutes i excursions, a restaurants i paisatges increïbles per a una escapada en parella extraordinària!`}
 						breadcrumbLevel1={"Activitats en parella"}
+						actions={listingActions}
 					/>
 
-					{/* Filter buttons */}
-					<div className="pt-8">
-						<nav className="container flex justify-center">
-							<button
-								className="button button__ghost button__med px-6 w-fit gap-x-1.5 group"
-								onClick={() =>
-									setState({
-										...state,
-										isFilterModalOpen: true,
-									})
-								}
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width={20}
-									height={20}
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth={1.5}
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								>
-									<path
-										stroke="none"
-										d="M0 0h24v24H0z"
-										fill="none"
-									/>
-									<path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-									<path d="M6 4v4" />
-									<path d="M6 12v8" />
-									<path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-									<path d="M12 4v10" />
-									<path d="M12 18v2" />
-									<path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-									<path d="M18 4v1" />
-									<path d="M18 9v11" />
-								</svg>
-								Filtrar
-								{state.selectedCount &&
-								state.selectedCount > 0 ? (
-									<span className="rounded-full bg-primary-500 p-2 w-5 h-5 flex items-center justify-center group-hover:bg-white transition-colors duration-300 ease-in-out">
-										<span className="text-white text-xs group-hover:text-primary-500 transition-colors duration-300 ease-in-out">
-											{state.selectedCount}
-										</span>
-									</span>
-								) : null}
-							</button>
-							<button
-								className="button button__ghost button__med px-6 w-fit gap-x-1.5 ml-3"
-								onClick={() =>
-									setState({
-										...state,
-										isMapModalOpen: true,
-									})
-								}
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width={20}
-									height={20}
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth={1.5}
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								>
-									<path
-										stroke="none"
-										d="M0 0h24v24H0z"
-										fill="none"
-									/>
-									<path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
-									<path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
-								</svg>
-								Veure mapa
-							</button>
-						</nav>
-					</div>
 
 					{/* Section listings */}
-					<section className="pt-8 md:pt-12">
+					<section className="pt-6 md:pt-8">
 						<div className="container">
-							<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5">
-								{state.hasActivities
-									? state.activities.map((el, idx) => {
-											const priority =
-												idx === 0 || idx === 1
-													? "eager"
-													: "lazy";
-											return (
-												<PublicSquareBox
-													key={el._id}
-													type={el.type}
-													slug={el.slug}
-													id={el._id}
-													cover={el.cover}
-													title={el.title}
-													subtitle={el.subtitle}
-													rating={
-														el.activity_rating ||
-														el.place_rating
-													}
-													placeType={el.placeType}
-													categoria={el.categories}
-													duration={el.duration}
-													website={el.website}
-													phone={el.phone}
-													isVerified={el.isVerified}
-													location={`${
-														el.activity_locality ===
-														undefined
-															? el.activity_country
-															: el.activity_locality
-													}`}
-													priority={priority}
-												/>
-											);
-									  })
-									: state.emptyBlocksPerRow.map((el, idx) => (
-											<div
-												key={idx}
-												className="w-full"
-												role="status"
-											>
-												<div className="flex justify-center items-center w-full aspect-[4/3] bg-gray-300 rounded-2xl animate-pulse dark:bg-gray-700">
-													<div className="flex justify-center items-center w-full h-48 bg-gray-300 rounded-md sm:w-96 dark:bg-gray-700">
-														<svg
-															className="w-12 h-12 text-gray-200"
-															xmlns="http://www.w3.org/2000/svg"
-															aria-hidden="true"
-															fill="currentColor"
-															viewBox="0 0 640 512"
-														>
-															<path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" />
-														</svg>
-													</div>
-													<span className="sr-only">
-														Loading...
-													</span>
-												</div>
-											</div>
-									  ))}
-							</div>
+							<TaxonomyChips
+								heading="Experiències per tipus d'escapada"
+								items={GETAWAY_CATEGORIES}
+								className="mb-5 md:mb-7"
+							/>
+							<ListingGrid
+								items={state.activities}
+								isLoading={!state.hasActivities}
+								skeletonCount={12}
+								eagerCount={2}
+							/>
 							{state.currentPage !== state.numPages &&
 							checkAreFiltersActive() ? (
-								<div className="col-span-1 md:col-span-3 2xl:col-span-4 w-full mt-10 flex justify-center">
+								<div className="col-span-full w-full mt-10 flex justify-center">
 									{!state.isFetching ? (
 										<button
 											className="button button__primary button__lg"
@@ -456,12 +374,16 @@ const ActivityList = ({
 					{textareaFooter !== "" ? (
 						<ListingsTextareaFooter
 							textareaFooter={textareaFooter}
+							relatedLinks={DESTINATIONS}
+							relatedLinksHeading="Experiències per destinació"
+							relatedLinksPrefix="/destinacions/"
 						/>
 					) : null}
 				</main>
 			</div>
 
 			<Footer />
+			<MobileAnchorAd />
 
 			{state.isMapModalOpen == true ? (
 				<MapModal
@@ -469,9 +391,7 @@ const ActivityList = ({
 					hideModal={() =>
 						setState({ ...state, isMapModalOpen: false })
 					}
-					center={center}
-					getMapOptions={getMapOptions}
-					renderMarker={renderMarker}
+					items={state.allActivities}
 				/>
 			) : null}
 
@@ -494,11 +414,13 @@ export async function getServerSideProps({ params }) {
 	const { totalItems, activities, allActivities, numPages } =
 		await service.activities();
 
+	// `allActivities` només alimenta els marcadors del mapa i `activities` les
+	// fitxes; la resta de camps del document no es pinten en aquesta pàgina.
 	return {
 		props: {
 			totalItems,
-			activities,
-			allActivities,
+			activities: (activities || []).map(toListingCard),
+			allActivities: (allActivities || []).map(toMapMarker),
 			numPages,
 		},
 	};

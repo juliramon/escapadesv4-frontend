@@ -4,7 +4,8 @@ import NavigationBar from "../components/global/NavigationBar";
 import Footer from "../components/global/Footer";
 import GlobalMetas from "../components/head/GlobalMetas";
 import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
-import StoryListing from "../components/listings/StoryListing";
+import EditorialGrid from "../components/listings/EditorialGrid";
+import MobileAnchorAd from "../components/ads/MobileAnchorAd";
 import ListingHeader from "../components/headers/ListingHeader";
 
 const StoriesList = ({ featuredStories, stories, totalItems, numPages }) => {
@@ -75,30 +76,21 @@ const StoriesList = ({ featuredStories, stories, totalItems, numPages }) => {
 					/>
 
 					{/* Section stories */}
-					<section className="py-8 md:py-12 lg:pb-20">
+					<section className="pt-6 md:pt-8 pb-12 lg:pb-20">
 						<div className="container">
 							{initialResults.length > 0 ? (
 								<>
-									<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5">
-										{initialResults.map((el, idx) => (
-											<article key={idx}>
-												<StoryListing
-													story={el}
-													index={idx}
-												/>
-											</article>
-										))}
-										{state.results.map((el, idx) => (
-											<article key={idx}>
-												<StoryListing
-													story={el}
-													index={idx}
-												/>
-											</article>
-										))}
-									</div>
+									<EditorialGrid
+										items={[
+											...initialResults,
+											...state.results,
+										]}
+										basePath="/histories"
+										badge="Història"
+										eagerCount={4}
+									/>
 									{state.currentPage !== state.numPages ? (
-										<div className="col-span-1 md:col-span-3 2xl:col-span-4 w-full mt-10 flex justify-center">
+										<div className="col-span-full w-full mt-10 flex justify-center">
 											{!state.isFetching ? (
 												<button
 													className="button button__primary button__lg"
@@ -167,7 +159,7 @@ const StoriesList = ({ featuredStories, stories, totalItems, numPages }) => {
 									)}
 								</>
 							) : (
-								<div className="col-span-1 md:col-span-3 2xl:col-span-4">
+								<div className="col-span-full">
 									<p className="text-center mx-auto text-lg">
 										Encara no hi ha publicacions
 										disponibles. Sisplau, torna-ho a provar
@@ -180,6 +172,7 @@ const StoriesList = ({ featuredStories, stories, totalItems, numPages }) => {
 				</main>
 			</div>
 			<Footer />
+			<MobileAnchorAd />
 		</>
 	);
 };

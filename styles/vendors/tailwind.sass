@@ -7,10 +7,10 @@
     html
         @apply scroll-smooth text-[16px]
         @screen lg
-            scroll-padding: 131px
+            scroll-padding: 148px
 
     body
-        @apply text-base text-grey-700 font-body leading-normal
+        @apply bg-white text-base text-grey-700 font-body leading-normal
 
     h1, h2
         @apply font-headings font-normal
@@ -18,32 +18,48 @@
     h3, h4, h5
         @apply font-medium font-body
 
-    h1, .h1
-        font-size: clamp(36px, 5vw, 72px)
-        line-height: clamp(40px, 5vw, 80px)
+    // Escala tipogràfica del web. Un sol nivell per a cada jerarquia:
+    // abans un h1 feia 72px a la portada i a la fitxa però 44px als
+    // llistats, i un h2 podia fer 43px o 32px segons la plantilla.
+    //
+    //   hero      32 → 56   (només la portada)
+    //   h1        28 → 40   (llistats i fitxes)
+    //   h2        24 → 32   (títols de secció)
+    //   h3        17 → 20
+    //   cos       16 → 18
 
+    h1, .h1
+        font-size: clamp(28px, 3.2vw, 40px)
+        line-height: 1.15
+
+        // Alias antic: es manté per no haver de tocar plantilles velles,
+        // però ja no és una mida diferent.
         &.font-display
-            font-size: clamp(28px, 5vw, 44px)
-            line-height: clamp(34px, 5vw, 48px)
+            font-size: clamp(28px, 3.2vw, 40px)
+            line-height: 1.15
+
+    // L'únic titular que va més gran que la resta, perquè fa d'aparador.
+    .h1--hero
+        font-size: clamp(32px, 4.4vw, 56px)
+        line-height: 1.08
 
     h2, .h2
-        font-size: clamp(28px, 3vw, 52px)
-        line-height: clamp(34px, 3.5vw, 56px)
+        font-size: clamp(24px, 2.4vw, 32px)
+        line-height: 1.2
         @apply mb-2
 
     .subtitle
-        font-size: clamp(24px, 2vw, 32px)
-        line-height: clamp(28px, 2vw, 36px)
+        font-size: clamp(20px, 1.8vw, 26px)
+        line-height: 1.25
 
     h3, .h3
-        @apply text-base leading-normal
-
-        @screen md
-            @apply text-lg font-medium leading-snug
+        font-size: clamp(17px, 1.5vw, 20px)
+        line-height: 1.35
+        @apply font-medium
 
         &.font-display
-            font-size: clamp(22px, 3vw, 28px)
-            line-height: clamp(24px, 3.5vw, 30px)
+            font-size: clamp(20px, 2vw, 24px)
+            line-height: 1.25
             @apply font-normal
 
     h3.text-block

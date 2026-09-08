@@ -7,7 +7,7 @@
 
 		&__list
 			width: 90vw
-			@apply list-none content-start m-0 bg-white fixed -right-full top-0 h-full shadow-xl transition-all duration-500 ease-in-out pt-20 px-6 pb-5 md:w-96 lg:flex-row lg:items-center lg:relative lg:right-auto lg:w-auto lg:h-auto lg:shadow-none lg:p-0 lg:bg-transparent gap-y-4
+			@apply list-none content-start m-0 bg-white fixed -right-full top-0 h-full overflow-y-auto overscroll-contain shadow-xl transition-all duration-500 ease-in-out pt-20 px-6 pb-12 md:w-96 lg:flex-row lg:items-center lg:relative lg:right-auto lg:w-auto lg:h-auto lg:overflow-visible lg:shadow-none lg:p-0 lg:bg-transparent gap-y-4
 
 		&__close
 			@apply hidden
@@ -59,7 +59,7 @@
 				@apply top-0 z-40 h-screen p-6 lg:p-0
 
 			&__form
-				@apply w-full relative pt-20 lg:pt-0 lg:w-auto
+				@apply w-full relative pt-20 lg:pt-0 lg:w-full
 
 			&__fieldset
 				@apply w-full flex flex-wrap lg:flex-nowrap lg:items-stretch relative
@@ -68,7 +68,7 @@
 				@apply block mb-3 text-sm lg:hidden
 
 			&__input
-				@apply w-full flex-auto rounded-full bg-white border border-gray-100 px-5 py-2 placeholder:text-sm focus:bg-white focus:text-primary-500 focus:outline-none focus:shadow-md transition-all duration-300 ease-in-out
+				@apply w-full flex-auto rounded-full bg-gray-50 border border-gray-200 px-5 py-2.5 text-15 placeholder:text-sm placeholder:truncate hover:bg-white hover:shadow-sm focus:bg-white focus:text-primary-500 focus:outline-none focus:shadow-md transition-all duration-300 ease-in-out
 
 			&__submit
 				@apply absolute inset-y-0 right-0 rounded-full m-1 bg-secondary-500 text-white z-10 p-2.5 inline-flex items-center justify-center hover:bg-secondary-900 transition-all duration-300 ease-in-out

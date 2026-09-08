@@ -1,12 +1,18 @@
 import { useEffect, useState } from "react";
 import NavigationBar from "../components/global/NavigationBar";
 import ContentService from "../services/contentService";
-import PublicContentBox from "../components/listings/PublicContentBox";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import Head from "next/head";
 import FetchingSpinner from "../components/global/FetchingSpinner";
-import PublicSquareBox from "../components/listings/PublicSquareBox";
+import ListingGrid from "../components/listings/ListingGrid";
+import TaxonomyChips from "../components/listings/TaxonomyChips";
+import Footer from "../components/global/Footer";
+import MobileAnchorAd from "../components/ads/MobileAnchorAd";
+import {
+	DESTINATIONS,
+	GETAWAY_CATEGORIES,
+	STAY_CATEGORIES,
+} from "../utils/siteTaxonomy";
 
 const Search = (props) => {
 	const router = useRouter();
@@ -89,125 +95,16 @@ const Search = (props) => {
 		return <FetchingSpinner />;
 	}
 
-	let searchResultsList;
-	let searchResultsLength;
+	// Segons l'endpoint, els resultats arriben com a llista plana o separats
+	// per tipus. Els unifiquem en un sol array per poder-los pintar amb la
+	// mateixa graella que la resta de llistats.
+	const results =
+		state.activitiesFound.length > 0 || state.placesFound.length > 0
+			? [...state.activitiesFound, ...state.placesFound]
+			: state.searchResults;
 
-	if (state.searchResults.length > 0) {
-		searchResultsLength = state.searchResults.length;
-	} else {
-		searchResultsLength =
-			state.activitiesFound.length + state.placesFound.length;
-	}
-
-	let browsedText = router.query ? router.query.query : null;
-
-	if (state.activitiesFound.length > 0 || state.placesFound.length > 0) {
-		let searchResults = [];
-		state.activitiesFound.map((el) => searchResults.push(el));
-		state.placesFound.map((el) => searchResults.push(el));
-		searchResultsList = searchResults.map((el) => {
-			let location;
-			if (el.type === "activity") {
-				location =
-					el.activity_locality === undefined
-						? el.activity_country
-						: el.activity_locality;
-			} else {
-				location =
-					el.place_locality === undefined
-						? el.place_country
-						: el.place_locality;
-			}
-
-			return (
-				<PublicSquareBox
-					key={el._id}
-					type={el.type}
-					slug={el.slug}
-					id={el._id}
-					cover={el.cover}
-					title={el.title}
-					subtitle={el.subtitle}
-					rating={el.activity_rating || el.place_rating}
-					placeType={el.placeType}
-					categoria={el.categories}
-					duration={el.duration}
-					website={el.website}
-					phone={el.phone}
-					isVerified={el.isVerified}
-					location={location}
-				/>
-			);
-		});
-	} else {
-		if (
-			searchResultsLength === 0 &&
-			state.activitiesFound.length === 0 &&
-			state.placesFound.length === 0
-		) {
-			searchResultsList = (
-				<div className="box empty d-flex">
-					<div className="media">
-						<img
-							src="../../empty-search-results.svg"
-							alt="Graphic no results"
-						/>
-					</div>
-					<div className="text">
-						<p>
-							<b>
-								Vaja, no hem pogut trobar resultats per la teva
-								cerca {browsedText}
-							</b>{" "}
-							😞
-							<br />
-							Cerca de nou per obtenir altres resultats
-						</p>
-						<Link href={"/"}>
-							<a className="btn btn-m btn-dark text-center">
-								Cercar de nou
-							</a>
-						</Link>
-					</div>
-				</div>
-			);
-		} else {
-			searchResultsList = state.searchResults.map((el) => {
-				let location;
-				if (el.type === "activity") {
-					location =
-						el.activity_locality === undefined
-							? el.activity_country
-							: el.activity_locality;
-				} else {
-					location =
-						el.place_locality === undefined
-							? el.place_country
-							: el.place_locality;
-				}
-
-				return (
-					<PublicSquareBox
-						key={el._id}
-						type={el.type}
-						slug={el.slug}
-						id={el._id}
-						cover={el.cover}
-						title={el.title}
-						subtitle={el.subtitle}
-						rating={el.activity_rating || el.place_rating}
-						placeType={el.placeType}
-						categoria={el.categories}
-						duration={el.duration}
-						website={el.website}
-						phone={el.phone}
-						isVerified={el.isVerified}
-						location={location}
-					/>
-				);
-			});
-		}
-	}
+	const searchResultsLength = results.length;
+	const browsedText = router.query ? router.query.query : null;
 
 	return (
 		<>
@@ -246,22 +143,65 @@ const Search = (props) => {
 					</div>
 					<section className="pt-6 pb-12">
 						<div className="container">
-							<div className="border-b border-primary-50">
-								<h1>Resultats de cerca</h1>
-								<p className="mt-2">
-									Hem trobat{" "}
-									<span>{searchResultsLength} resultats</span>{" "}
-									en base a la teva cerca{" "}
-									<b>"{browsedText}"</b>:
+							<div className="border-b border-primary-50 pb-6">
+								<h1 className="my-0">Resultats de cerca</h1>
+								<p className="mt-3 mb-0 text-block text-grey-400">
+									{searchResultsLength > 0 ? (
+										<>
+											Hem trobat{" "}
+											<strong className="text-grey-700">
+												{searchResultsLength}{" "}
+												{searchResultsLength === 1
+													? "resultat"
+													: "resultats"}
+											</strong>{" "}
+											per a <b>&laquo;{browsedText}&raquo;</b>
+										</>
+									) : (
+										<>
+											No hem trobat cap resultat per a{" "}
+											<b>&laquo;{browsedText}&raquo;</b>
+										</>
+									)}
 								</p>
 							</div>
-							<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5 mt-5">
-								{searchResultsList}
-							</div>
+
+							{searchResultsLength > 0 ? (
+								<ListingGrid
+									items={results}
+									eagerCount={4}
+									className="mt-8"
+								/>
+							) : (
+								<div className="mt-8 max-w-3xl">
+									<p className="text-block text-grey-400">
+										Proveu amb un altre terme, o entreu per
+										una d&apos;aquestes portes:
+									</p>
+									<TaxonomyChips
+										heading="Per tipus d'escapada"
+										items={GETAWAY_CATEGORIES}
+										className="mt-6"
+									/>
+									<TaxonomyChips
+										heading="Per tipus d'allotjament"
+										items={STAY_CATEGORIES}
+										className="mt-6"
+									/>
+									<TaxonomyChips
+										heading="Per destinació"
+										items={DESTINATIONS}
+										prefix="/destinacions/"
+										className="mt-6"
+									/>
+								</div>
+							)}
 						</div>
 					</section>
 				</main>
+				<Footer />
 			</div>
+			<MobileAnchorAd />
 		</>
 	);
 };

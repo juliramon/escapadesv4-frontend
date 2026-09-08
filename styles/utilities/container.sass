@@ -11,5 +11,9 @@
         @screen lg
             max-width: calc(100% - 4rem)
 
+        // A partir d'aquí el contenidor deixa de créixer: amb 4 columnes de
+        // fitxes, per sobre de ~1440px les targetes es fan enormes, les línies
+        // de text superen els 90 caràcters i el bloc publicitari queda perdut
+        // al mig. Per sota es manté fluid, com fins ara.
         @screen 2xl
-            max-width: calc(100% - 8rem)
+            max-width: min(calc(100% - 8rem), 1440px)

@@ -4,10 +4,12 @@ import NavigationBar from "../components/global/NavigationBar";
 import GlobalMetas from "../components/head/GlobalMetas";
 import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
 import UserContext from "../contexts/UserContext";
-import { useContext, useEffect } from "react";
+import { Fragment, useContext, useEffect } from "react";
 import ContentService from "../services/contentService";
 import TripCategoryBox from "../components/listings/TripCategoryBox";
 import ShareBarModal from "../components/social/ShareBarModal";
+import AdSlot from "../components/ads/AdSlot";
+import MobileAnchorAd from "../components/ads/MobileAnchorAd";
 
 const Trips = ({ tripCategories, featuredTripCategories }) => {
 	const { user } = useContext(UserContext);
@@ -216,18 +218,34 @@ const Trips = ({ tripCategories, featuredTripCategories }) => {
 					<section className="container pt-6 pb-8">
 						<div className="flex flex-wrap items-stretch -mx-3">
 							{tripCategories
-								? tripCategories.map((tripCategory) => {
+								? tripCategories.map((tripCategory, idx) => {
 										return (
-											<TripCategoryBox
-												key={tripCategory.id}
-												image={tripCategory.image}
-												title={tripCategory.title}
-												subtitle={
-													tripCategory.seoTextHeader
+											<Fragment
+												key={
+													tripCategory._id ||
+													tripCategory.slug
 												}
-												slug={tripCategory.slug}
-												country={tripCategory.country}
-											/>
+											>
+												<TripCategoryBox
+													image={tripCategory.image}
+													title={tripCategory.title}
+													subtitle={
+														tripCategory.seoTextHeader
+													}
+													slug={tripCategory.slug}
+													country={
+														tripCategory.country
+													}
+												/>
+												{idx === 2 ? (
+													<div className="px-3 w-full lg:w-1/2 xl:w-1/3 mb-6">
+														<AdSlot
+															placement="inFeed"
+															containerClassName="h-full rounded-lg md:rounded-2xl bg-gray-50 p-4"
+														/>
+													</div>
+												) : null}
+											</Fragment>
 										);
 								  })
 								: null}
@@ -236,6 +254,7 @@ const Trips = ({ tripCategories, featuredTripCategories }) => {
 				</main>
 			</div>
 			<Footer />
+			<MobileAnchorAd />
 		</>
 	);
 };

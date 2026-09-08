@@ -3,6 +3,13 @@ import { useContext, useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import UserContext from "../../contexts/UserContext";
 import ContentBar from "../homepage/ContentBar";
+import VerticalsNav from "./VerticalsNav";
+import {
+	DESTINATIONS,
+	GETAWAY_CATEGORIES,
+	STAY_CATEGORIES,
+	VERTICALS,
+} from "../../utils/siteTaxonomy";
 
 const NavigationBar = () => {
 	const { user } = useContext(UserContext);
@@ -85,35 +92,22 @@ const NavigationBar = () => {
 		}
 	}, [user]);
 
+	/** Enllaços secundaris: viuen al desplegable "més" de l'escriptori. */
 	const dropdownItems = [
-		{
-			href: "/llistes",
-			title: "Llistes",
-			icon: "/icones/icona-llistes.png",
-			iconWebp: "/icones/icona-llistes.webp",
-			text: "Llistes",
-		},
-		{
-			href: "/viatges",
-			title: "Viatges",
-			icon: "/icones/icona-viatges.png",
-			iconWebp: "/icones/icona-viatges.webp",
-			text: "Viatges",
-		},
-
 		{
 			href: "/sobre-nosaltres",
 			title: "Sobre nosaltres",
-			icon: "/icones/icona-sobre-nosaltres.png",
-			iconWebp: "/icones/icona-sobre-nosaltres.webp",
 			text: "Sobre nosaltres",
 		},
 		{
 			href: "/premsa-i-mitjans",
 			title: "Premsa i mitjans",
-			icon: "/icones/icona-premsa.png",
-			iconWebp: "/icones/icona-premsa.webp",
 			text: "Premsa i mitjans",
+		},
+		{
+			href: "/empreses",
+			title: "Per a empreses",
+			text: "Per a empreses",
 		},
 		{
 			href: "/contacte",
@@ -124,10 +118,21 @@ const NavigationBar = () => {
 		},
 	];
 
+	/** Grups de categories que es despleguen dins el calaix de mòbil. */
+	const mobileGroups = [
+		{ heading: "Per tipus d'escapada", items: GETAWAY_CATEGORIES, prefix: "/" },
+		{ heading: "Per tipus d'allotjament", items: STAY_CATEGORIES, prefix: "/" },
+		{
+			heading: "Destinacions",
+			items: DESTINATIONS,
+			prefix: "/destinacions/",
+		},
+	];
+
 	return (
 		<header className="z-[60] bg-white w-full sticky top-0 border-b border-neutral-100">
-			<nav className="container py-4 menu">
-				<div className="w-full grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-x-4">
+			<nav className="container py-3 md:py-4 menu">
+				<div className="w-full grid grid-cols-4 md:grid-cols-8 lg:grid-cols-12 gap-x-4 items-center">
 					<Link
 						href={{
 							pathname: state.logoUrl,
@@ -238,202 +243,209 @@ const NavigationBar = () => {
 
 						{/* Menu list */}
 						<div className="menu__list-wrapper grid grid-cols-subgrid col-span-3 md:col-span-6 lg:col-span-9">
-							<div className="menu__list grid grid-cols-subgrid col-span-3 md:col-span-6 lg:col-span-9">
-								<ul className="col-span-3 md:col-span-4 lg:col-span-6 list-none p-0 m-0 flex flex-col gap-y-4 lg:flex-row lg:justify-center lg:items-center lg:gap-x-8">
-									<li className="menu__item">
-										<Link href="/activitats">
-											<a
-												className="menu__link"
-												title="Experiències en parella a Catalunya"
-											>
-												<picture>
-													<source
-														srcSet="/icones/icona-activitats.webp"
-														type="image/webp"
-													/>
-													<img
-														src="/icones/icona-activitats.png"
-														alt="Experiències en parella a Catalunya"
-														className="w-9 h-auto lg:w-12"
-														width={36}
-														height={36}
-													/>
-												</picture>
-												Experiències
-											</a>
-										</Link>
-									</li>
-									<li className="menu__item">
-										<Link href="/allotjaments">
-											<a
-												className="menu__link"
-												title="Allotjaments amb encant a Catalunya"
-											>
-												<picture>
-													<source
-														srcSet="/icones/icona-allotjaments.webp"
-														type="image/webp"
-													/>
-													<img
-														src="/icones/icona-allotjaments.png"
-														alt="Experiències en parella a Catalunya"
-														className="w-9 h-auto lg:w-12"
-														width={36}
-														height={36}
-													/>
-												</picture>
-												Allotjaments
-											</a>
-										</Link>
-									</li>
-									<li className="menu__item">
-										<Link href="/histories">
-											<a
-												className="menu__link"
-												title="Històries en parella"
-											>
-												<picture>
-													<source
-														srcSet="/icones/icona-histories.webp"
-														type="image/webp"
-													/>
-													<img
-														src="/icones/icona-histories.png"
-														alt="Històries en parella"
-														className="w-9 h-auto lg:w-12"
-														width={36}
-														height={36}
-													/>
-												</picture>
-												<span className="inline-block">
-													Històries
-												</span>
-											</a>
-										</Link>
-									</li>
-								</ul>
-								<ul className="col-span-3 md:col-span-4 lg:col-span-3 list-none p-0 m-0 lg:flex lg:justify-end lg:items-center gap-x-4">
-									<li>
-										{/* Search input */}
-
-										<div
-											className={`search__panel menu-dropdown ${
-												state.isSearchPanelOpen
-													? "open"
-													: ""
-											}`}
+							<div className="menu__list menu__list--drawer grid grid-cols-subgrid col-span-3 md:col-span-6 lg:col-span-9">
+								{/* Cercador: sempre visible a partir de lg */}
+								<div className="col-span-3 md:col-span-4 lg:col-span-6">
+									<div
+										className={`search__panel menu-dropdown ${
+											state.isSearchPanelOpen
+												? "open"
+												: ""
+										}`}
+									>
+										<button
+											className="search__close"
+											aria-label="Botó tancar menu"
+											onClick={() => handleSearchPanel()}
 										>
-											<button
-												className="search__close"
-												aria-label="Botó tancar menu"
-												onClick={() =>
-													handleSearchPanel()
-												}
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width="32"
+												height="32"
+												viewBox="0 0 24 24"
+												strokeWidth="1.5"
+												stroke="#00206B"
+												fill="none"
+												strokeLinecap="round"
+												strokeLinejoin="round"
 											>
-												<svg
-													xmlns="http://www.w3.org/2000/svg"
-													width="32"
-													height="32"
-													viewBox="0 0 24 24"
-													strokeWidth="1.5"
-													stroke="#00206B"
+												<path
+													stroke="none"
+													d="M0 0h24v24H0z"
 													fill="none"
-													strokeLinecap="round"
-													strokeLinejoin="round"
-												>
-													<path
-														stroke="none"
-														d="M0 0h24v24H0z"
-														fill="none"
-													/>
-													<line
-														x1="18"
-														y1="6"
-														x2="6"
-														y2="18"
-													/>
-													<line
-														x1="6"
-														y1="6"
-														x2="18"
-														y2="18"
-													/>
-												</svg>
-											</button>
-											<form className="search__form xl:max-w-md">
-												<label
-													htmlFor="search"
-													className="search__label"
-												>
-													Cerca experiències i
-													allotjaments
-												</label>
-												<fieldset className="search__fieldset">
-													<input
-														onKeyDown={
-															handleKeyPress
-														}
-														type="text"
-														name="search"
-														id="search"
-														ref={searchInputRef}
-														placeholder="Cerca escapades..."
-														className="search__input"
-														autoComplete="off"
-														onFocus={() =>
-															handleCategoriesDropdownVisibility()
-														}
-													/>
+												/>
+												<line
+													x1="18"
+													y1="6"
+													x2="6"
+													y2="18"
+												/>
+												<line
+													x1="6"
+													y1="6"
+													x2="18"
+													y2="18"
+												/>
+											</svg>
+										</button>
+										<form className="search__form">
+											<label
+												htmlFor="search"
+												className="search__label"
+											>
+												Cerca experiències i
+												allotjaments
+											</label>
+											<fieldset className="search__fieldset">
+												<input
+													onKeyDown={handleKeyPress}
+													type="text"
+													name="search"
+													id="search"
+													ref={searchInputRef}
+													placeholder="On voleu anar? Cerca una experiència, un allotjament o una zona"
+													className="search__input"
+													autoComplete="off"
+													onFocus={() =>
+														handleCategoriesDropdownVisibility()
+													}
+												/>
 
-													<button
-														type="submit"
-														className="search__submit button button__med button__primary"
-														onClick={
-															handleSearchSubmit
-														}
+												<button
+													type="submit"
+													className="search__submit button button__med button__primary"
+													onClick={handleSearchSubmit}
+												>
+													<span>Buscar</span>
+													<svg
+														xmlns="http://www.w3.org/2000/svg"
+														width="22"
+														height="22"
+														viewBox="0 0 24 24"
+														strokeWidth="1.5"
+														stroke="currentColor"
+														fill="none"
+														strokeLinecap="round"
+														strokeLinejoin="round"
 													>
-														<span>Buscar</span>
-														<svg
-															xmlns="http://www.w3.org/2000/svg"
-															width="22"
-															height="22"
-															viewBox="0 0 24 24"
-															strokeWidth="1.5"
-															stroke="currentColor"
-															fill="none"
-															strokeLinecap="round"
-															strokeLinejoin="round"
+														<path
+															stroke="none"
+															d="M0 0h24v24H0z"
+														/>
+														<circle
+															cx="10"
+															cy="10"
+															r="7"
+														/>
+														<line
+															x1="21"
+															y1="21"
+															x2="15"
+															y2="15"
+														/>
+													</svg>
+												</button>
+											</fieldset>
+										</form>
+										{state.isCategoriesDropdownOpen ? (
+											<ul className="list-none bg-white rounded-xl border border-primary-50 shadow-md m-0 w-full absolute top-12 left-0 p-5 flex flex-col gap-y-4 max-h-[50vh] overflow-y-auto z-50">
+												<span className="text-xs">
+													Escapades per categories
+												</span>
+												<ContentBar />
+											</ul>
+										) : (
+											""
+										)}
+									</div>
+								</div>
+
+								{/* Navegació completa dins el calaix de mòbil */}
+								<div className="col-span-3 md:col-span-6 lg:hidden mt-6">
+									<ul className="list-none p-0 m-0 flex flex-col gap-y-1">
+										{VERTICALS.map((vertical) => (
+											<li
+												key={vertical.href}
+												className="m-0"
+											>
+												<Link href={vertical.href}>
+													<a
+														title={vertical.title}
+														className={`block py-2 text-base ${
+															vertical.highlight
+																? "text-tertiary-800 font-medium"
+																: "text-grey-700"
+														}`}
+													>
+														{vertical.label}
+													</a>
+												</Link>
+											</li>
+										))}
+									</ul>
+
+									{mobileGroups.map((group) => (
+										<div
+											key={group.heading}
+											className="mt-6 pt-5 border-t border-neutral-100"
+										>
+											<span className="block text-13 uppercase tracking-wider text-grey-300 mb-2">
+												{group.heading}
+											</span>
+											<ul className="list-none p-0 m-0 flex flex-wrap gap-2">
+												{group.items.map((item) => (
+													<li
+														key={item.slug}
+														className="m-0"
+													>
+														<Link
+															href={`${group.prefix}${item.slug}`}
 														>
-															<path
-																stroke="none"
-																d="M0 0h24v24H0z"
-															/>
-															<circle
-																cx="10"
-																cy="10"
-																r="7"
-															/>
-															<line
-																x1="21"
-																y1="21"
-																x2="15"
-																y2="15"
-															/>
-														</svg>
-													</button>
-												</fieldset>
-											</form>
-											{state.isCategoriesDropdownOpen ? (
-												<ul className="list-none bg-white rounded-xl border border-primary-50 shadow-md m-0 w-full absolute top-12 left-0 p-5 flex flex-col gap-y-4 max-h-[50vh] overflow-y-auto">
-													<span className="text-xs">
-														Escapades per categories
-													</span>
-													<ContentBar />
-												</ul>
-											) : (
-												""
-											)}
+															<a className="inline-block rounded-full border border-neutral-200 px-3 py-1.5 text-15 text-grey-700">
+																{item.label}
+															</a>
+														</Link>
+													</li>
+												))}
+											</ul>
 										</div>
+									))}
+
+									<div className="mt-6 pt-5 border-t border-neutral-100">
+										<ul className="list-none p-0 m-0 flex flex-col gap-y-1">
+											{dropdownItems.map((item) => (
+												<li
+													key={item.href}
+													className="m-0"
+												>
+													<Link href={item.href}>
+														<a
+															className={
+																item.aClassName
+																	? `${item.aClassName} mt-3`
+																	: "block py-2 text-base text-grey-700"
+															}
+														>
+															{item.text}
+														</a>
+													</Link>
+												</li>
+											))}
+										</ul>
+									</div>
+								</div>
+
+								{/* Accions de la dreta (escriptori) */}
+								<ul className="hidden lg:flex lg:col-span-3 list-none p-0 m-0 lg:justify-end lg:items-center gap-x-2">
+									<li className="menu__item">
+										<Link href="/descomptes-viatjar">
+											<a
+												title="Descomptes per viatjar"
+												className="button button__ghost button__xs whitespace-nowrap"
+											>
+												Descomptes
+											</a>
+										</Link>
 									</li>
 									<li
 										className={`menu__item menu-dropdown ${
@@ -489,33 +501,6 @@ const NavigationBar = () => {
 																		: ""
 																}`}
 															>
-																{item.icon ? (
-																	<picture>
-																		<source
-																			srcSet={
-																				item.icon
-																			}
-																			type="image/webp"
-																		/>
-																		<img
-																			src={
-																				item.icon
-																			}
-																			alt={
-																				item.text
-																			}
-																			className="w-9 h-auto lg:w-7"
-																			width={
-																				36
-																			}
-																			height={
-																				36
-																			}
-																		/>
-																	</picture>
-																) : (
-																	""
-																)}
 																{item.text}
 															</a>
 														</Link>
@@ -530,6 +515,7 @@ const NavigationBar = () => {
 					</div>
 				</div>
 			</nav>
+			<VerticalsNav />
 		</header>
 	);
 };

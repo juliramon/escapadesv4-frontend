@@ -13,9 +13,11 @@ import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichS
 import { formatDateTimeToISODate } from "../../utils/helpers";
 import ShareBarModal from "../../components/social/ShareBarModal";
 import AdBanner from "../../components/ads/AdBanner";
+import MobileAnchorAd from "../../components/ads/MobileAnchorAd";
+import RelatedListings from "../../components/listingpage/RelatedListings";
 import ContentParser from "../../utils/ContentParser";
 
-const ListView = ({ listDetails }) => {
+const ListView = ({ listDetails, relatedLists }) => {
 	const { user } = useContext(UserContext);
 	const router = useRouter();
 
@@ -285,6 +287,17 @@ const ListView = ({ listDetails }) => {
 							</div>
 						</section>
 					</article>
+				<RelatedListings
+					eyebrow="Més idees"
+					title="Altres llistes d'escapades"
+					description="Seleccions temàtiques per decidir on anar."
+					href="/llistes"
+					linkLabel="Veure totes les llistes"
+					items={relatedLists}
+					variant="editorial"
+					basePath="/llistes"
+					badge="Llista"
+				/>
 				</main>
 
 				<SignUpModal
@@ -301,6 +314,7 @@ const ListView = ({ listDetails }) => {
 						"https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
 					}
 				/>
+				<MobileAnchorAd />
 			</div>
 		</>
 	);
@@ -316,9 +330,22 @@ export async function getServerSideProps({ params }) {
 		};
 	}
 
+	// Contingut relacionat del peu: sense això la fitxa és un cul-de-sac
+	// per a qui hi arriba des de cerca.
+	let relatedLists = [];
+	try {
+		const all = await service.getAllLists();
+		relatedLists = (all || [])
+			.filter((item) => item.slug !== listDetails.slug)
+			.slice(0, 4);
+	} catch (error) {
+		relatedLists = [];
+	}
+
 	return {
 		props: {
 			listDetails,
+			relatedLists,
 		},
 	};
 }

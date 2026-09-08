@@ -1,0 +1,79 @@
+@layer components
+	.seo-block
+		@apply mt-10 md:mt-14 lg:mt-20
+
+		&__inner
+			@apply border-t border-neutral-100 pt-10 md:pt-14 lg:pt-16 pb-12 md:pb-16 max-w-3xl
+
+		&__heading
+			@apply mt-0 mb-6
+
+		&__body
+			@apply relative
+
+		&__fade
+			@apply absolute inset-x-0 bottom-0 h-24 pointer-events-none
+			background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #ffffff 90%)
+
+		&__toggle
+			@apply inline-flex items-center gap-x-1.5 mt-5 text-15 font-medium text-tertiary-800 transition-colors duration-200 ease-in-out
+
+			&:hover
+				@apply text-tertiary-900
+
+		&__links
+			@apply mt-10 pt-8 border-t border-neutral-100
+
+		// Tipografia del contingut, que arriba com a HTML des de l'API o des
+		// d'una constant a la pàgina.
+		&__content
+			@apply text-grey-500
+
+			&--clamped
+				max-height: 22rem
+				@apply overflow-hidden
+
+			> *:first-child
+				@apply mt-0
+
+			> *:last-child
+				@apply mb-0
+
+			h2
+				@apply font-headings font-normal mt-10 mb-3
+
+			h3
+				@apply font-body font-medium text-grey-700 mt-8 mb-2
+
+			h4
+				@apply font-body font-medium text-grey-700 mt-6 mb-2 text-base
+
+			p
+				@apply mb-4 text-block leading-relaxed
+
+			strong, b
+				@apply font-medium text-grey-700
+
+			ul, ol
+				@apply pl-5 mb-5 text-block leading-relaxed
+
+			ul
+				@apply list-disc
+
+			ol
+				@apply list-decimal
+
+			li
+				@apply mb-1.5 pl-1
+
+				&::marker
+					@apply text-tertiary-800
+
+			a
+				@apply text-tertiary-800 underline underline-offset-2 transition-colors duration-200 ease-in-out
+
+				&:hover
+					@apply text-tertiary-900
+
+			img
+				@apply rounded-2xl my-6

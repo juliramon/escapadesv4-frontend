@@ -12,19 +12,24 @@ import FancyboxUtil from "../../utils/FancyboxUtils";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
 import { formatDateTimeToISODate } from "../../utils/helpers";
-import ListingDiscount from "../../components/listingpage/ListingDiscount";
 import ShareBarModal from "../../components/social/ShareBarModal";
 import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
 import AdBanner from "../../components/ads/AdBanner";
 import ArticleRichSnippet from "../../components/richsnippets/ArticleRichSnippet";
 import "@splidejs/react-splide/css/core";
-import PublicSquareBox from "../../components/listings/PublicSquareBox";
+import BookingCard from "../../components/listingpage/BookingCard";
+import RelatedListings from "../../components/listingpage/RelatedListings";
+import {
+	categoryHeadingFor,
+	listingUrl,
+} from "../../utils/listingRoutes";
 
 const GetawayListing = ({
 	getawayDetails,
 	categoryDetails,
 	checkedCharacteristics,
 	relatedResults,
+	relatedByCategory,
 }) => {
 	const { user } = useContext(UserContext);
 	const router = useRouter();
@@ -335,15 +340,21 @@ const GetawayListing = ({
 		const getawayCoverId = getawayDetails?.cover?.substring(63);
 		const getawayCoverImg = `${getawayCoverPath}w_805,h_605,c_fill/${getawayCoverId}`;
 
+		// La fitxa és accessible des de qualsevol slug de categoria, però la URL
+		// que mana és sempre la de la seva categoria principal. Sense això cada
+		// variant es canonicalitzava a si mateixa i competien entre elles.
+		const canonicalUrl = listingUrl(getawayDetails);
+		const categoryHeading = categoryHeadingFor(getawayDetails.categories);
+
 		return (
 			<>
 				{/* Browser metas  */}
 				<GlobalMetas
 					title={getawayDetails.metaTitle}
 					description={getawayDetails.metaDescription}
-					url={`https://escapadesenparella.cat/${categoryDetails.slug}/${getawayDetails.slug}`}
+					url={canonicalUrl}
 					image={getawayDetails.cover}
-					canonical={`https://escapadesenparella.cat/${categoryDetails.slug}/${getawayDetails.slug}`}
+					canonical={canonicalUrl}
 				/>
 				{/* Rich snippets */}
 				<BreadcrumbRichSnippet
@@ -352,7 +363,7 @@ const GetawayListing = ({
 					page2Title={categoryDetails.title}
 					page2Url={`https://escapadesenparella.cat/${categoryDetails.slug}`}
 					page3Title={getawayDetails.metaTitle}
-					page3Url={`https://escapadesenparella.cat/${categoryDetails.slug}/${getawayDetails.slug}`}
+					page3Url={canonicalUrl}
 				/>
 				<ArticleRichSnippet
 					headline={getawayDetails.title}
@@ -751,7 +762,7 @@ const GetawayListing = ({
 														: ""
 												}`}
 											>
-												<h2 className="font-body mt-0">
+												<h2 className="mt-0">
 													Sobre {getawayDetails.title}
 												</h2>
 												<div
@@ -766,7 +777,7 @@ const GetawayListing = ({
 											{checkedCharacteristics?.length >
 											0 ? (
 												<div className="pt-8 mt-8 md:pt-12 md:mt-12 border-t border-primary-50 max-w-[666px]">
-													<h2 className="font-body">
+													<h2>
 														Què trobareu a{" "}
 														{getawayDetails.title}?
 													</h2>
@@ -802,7 +813,7 @@ const GetawayListing = ({
 											{getawayDetails?.reasons &&
 											getawayDetails.reasons !== "" ? (
 												<div className="pt-8 mt-8 md:pt-12 md:mt-12 border-t border-primary-50 max-w-[666px]">
-													<h2 className="font-body mb-1">
+													<h2 className="mb-1">
 														Per què realitzar
 														aquesta activitat?
 													</h2>
@@ -823,7 +834,7 @@ const GetawayListing = ({
 
 											{/* Section how to arrive */}
 											<div className="pt-8 mt-8 md:pt-12 md:mt-12 border-t border-primary-50 max-w-[666px]">
-												<h2 className="font-body">
+												<h2>
 													Com arribar a{" "}
 													{getawayDetails.title}
 												</h2>
@@ -882,7 +893,18 @@ const GetawayListing = ({
 										{/* Listing aside details + contact buttons */}
 										<aside className="w-full col-span-1 md:col-span-4 relative z-10">
 											<div className="relative xl:sticky xl:top-24">
-												<div className="p-7 bg-white rounded-2xl border border-primary-50">
+												<BookingCard
+													type={getawayDetails.type}
+													price={getawayDetails.price}
+													rating={rating}
+													isVerified={getawayDetails.isVerified}
+													website={getawayDetails.website}
+													phone={getawayDetails.phone}
+													discountCode={getawayDetails.discountCode}
+													discountInfo={getawayDetails.discountInfo}
+												/>
+
+												<div className="p-7 bg-white rounded-2xl border border-primary-50 mt-7">
 													{getawayDetails.relatedStory ? (
 														<div className="mb-7 pb-7 border-primary-50 border-b">
 															<Link
@@ -1025,139 +1047,9 @@ const GetawayListing = ({
 																{fullAddress}
 															</p>
 														</div>
-														<div className="">
-															<h3>
-																Preu aproximat *
-															</h3>
-															<p className="font-light mb-0">
-																{
-																	getawayDetails.price
-																}{" "}
-																€{" "}
-																{getawayDetails.type ==
-																"place"
-																	? "/persona/nit"
-																	: "/persona"}
-															</p>
-														</div>
-														<div>
-															<p className="text-sm font-light mb-0">
-																* Els preus
-																poden variar i
-																pot ser que no
-																estiguin
-																constantment
-																actualitzats
-															</p>
-														</div>
 													</div>
 
-													{getawayDetails.discountCode ? (
-														<ListingDiscount
-															discountCode={
-																getawayDetails.discountCode
-															}
-															discountInfo={
-																getawayDetails.discountInfo
-															}
-														/>
-													) : null}
 
-													<div className="fixed z-50 lg:z-auto bottom-0 inset-x-0 lg:bottom-auto lg:inset-x-auto lg:relative grid grid-cols-2 gap-x-5 items-stretch bg-white py-4 md:py-7 px-4 lg:px-0 border-t border-primary-50 mt-7">
-														{getawayDetails?.phone !==
-															"-" &&
-														getawayDetails?.phone !==
-															"" ? (
-															<div className="flex-1">
-																<a
-																	href={`tel:${getawayDetails.phone}`}
-																	className="button button__ghost button__med justify-center items-center w-full"
-																	title="Trucar"
-																	target="_blank"
-																	rel="nofollow noreferrer"
-																>
-																	<svg
-																		xmlns="http://www.w3.org/2000/svg"
-																		className="mr-1.5"
-																		width={
-																			24
-																		}
-																		height={
-																			24
-																		}
-																		viewBox="0 0 24 24"
-																		strokeWidth={
-																			1.5
-																		}
-																		stroke="currentColor"
-																		fill="none"
-																		strokeLinecap="round"
-																		strokeLinejoin="round"
-																	>
-																		<path
-																			stroke="none"
-																			d="M0 0h24v24H0z"
-																			fill="none"
-																		></path>
-																		<path d="M5 4h4l2 5l-2.5 1.5a11 11 0 0 0 5 5l1.5 -2.5l5 2v4a2 2 0 0 1 -2 2a16 16 0 0 1 -15 -15a2 2 0 0 1 2 -2"></path>
-																	</svg>
-																	Trucar
-																</a>
-															</div>
-														) : null}
-														{getawayDetails?.website !==
-															"-" &&
-														getawayDetails?.website !==
-															"" ? (
-															<div className="flex-1">
-																<a
-																	href={`${getawayDetails.website}`}
-																	className="button button__primary button__med justify-center items-center w-full"
-																	title="Reservar"
-																	target="_blank"
-																	rel="nofollow noreferrer"
-																>
-																	<svg
-																		xmlns="http://www.w3.org/2000/svg"
-																		className="mr-1.5"
-																		width={
-																			24
-																		}
-																		height={
-																			24
-																		}
-																		viewBox="0 0 24 24"
-																		strokeWidth={
-																			1.5
-																		}
-																		stroke="currentColor"
-																		fill="none"
-																		strokeLinecap="round"
-																		strokeLinejoin="round"
-																	>
-																		<path
-																			stroke="none"
-																			d="M0 0h24v24H0z"
-																			fill="none"
-																		></path>
-																		<path d="M19.5 7a9 9 0 0 0 -7.5 -4a8.991 8.991 0 0 0 -7.484 4"></path>
-																		<path d="M11.5 3a16.989 16.989 0 0 0 -1.826 4"></path>
-																		<path d="M12.5 3a16.989 16.989 0 0 1 1.828 4"></path>
-																		<path d="M19.5 17a9 9 0 0 1 -7.5 4a8.991 8.991 0 0 1 -7.484 -4"></path>
-																		<path d="M11.5 21a16.989 16.989 0 0 1 -1.826 -4"></path>
-																		<path d="M12.5 21a16.989 16.989 0 0 0 1.828 -4"></path>
-																		<path d="M2 10l1 4l1.5 -4l1.5 4l1 -4"></path>
-																		<path d="M17 10l1 4l1.5 -4l1.5 4l1 -4"></path>
-																		<path d="M9.5 10l1 4l1.5 -4l1.5 4l1 -4"></path>
-																	</svg>
-																	{getawayDetails.type ===
-																	"activity"
-																		? "Contactar"
-																		: "Reservar"}
-																</a>
-															</div>
-														) : null}
-													</div>
 												</div>
 
 												{/* Ad unit */}
@@ -1178,112 +1070,39 @@ const GetawayListing = ({
 							</section>
 						</article>
 
-						{/* Sección de respaldo para más escapades de la categoría */}
+						{/* Contingut relacionat: primer per destinació i, si la fitxa no
+						    en té cap, per categoria. */}
 						{relatedResults.length > 0
 							? relatedResults.map((result) => (
-									<section
+									<RelatedListings
 										key={result._id}
-										className="py-8 md:py-12 lg:py-20 border-t border-primary-50"
-									>
-										<div className="container">
-											<h2 className="text-center">
-												Més escapades a {result.title}
-											</h2>
-											<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-8">
-												{result.relatedResults.map(
-													(el, idx) => {
-														let location;
-														if (
-															el.type ===
-															"activity"
-														) {
-															location = (
-																<span className="listing-location">{`${
-																	el.activity_locality ===
-																	undefined
-																		? el.activity_state
-																		: el.activity_locality
-																}`}</span>
-															);
-														}
-														if (
-															el.type === "place"
-														) {
-															location = (
-																<span className="listing-location">{`${
-																	el.place_locality ===
-																	undefined
-																		? ""
-																		: el.place_locality
-																}`}</span>
-															);
-														}
-														const priority =
-															idx === 0
-																? "eager"
-																: "lazy";
-														return (
-															<PublicSquareBox
-																key={el._id}
-																type={el.type}
-																slug={el.slug}
-																id={el._id}
-																cover={el.cover}
-																title={el.title}
-																subtitle={
-																	el.subtitle
-																}
-																rating={
-																	el.activity_rating ||
-																	el.place_rating
-																}
-																placeType={
-																	el.placeType
-																}
-																categoria={
-																	el.categories
-																}
-																duration={
-																	el.duration
-																}
-																location={
-																	location
-																}
-																isVerified={
-																	el.isVerified
-																}
-																website={
-																	el.website
-																}
-																phone={el.phone}
-																imgPriority={
-																	priority
-																}
-															/>
-														);
-													}
-												)}
-											</div>
-											<div className="flex justify-center pt-8">
-												<Link
-													href={`/destinacions/${result.slug}`}
-												>
-													<a className="button button__primary button__med">
-														Veure totes les
-														escapades
-													</a>
-												</Link>
-											</div>
-										</div>
-									</section>
+										eyebrow="A prop d'aquí"
+										title={`Més escapades a ${result.title}`}
+										description="Altres allotjaments i experiències de la mateixa zona."
+										href={`/destinacions/${result.slug}`}
+										linkLabel="Veure tota la destinació"
+										items={result.relatedResults}
+									/>
 							  ))
-							: null}
+							: relatedByCategory.length > 0 && categoryHeading ? (
+									<RelatedListings
+										eyebrow="Del mateix estil"
+										title={`Més ${categoryHeading.title.charAt(0).toLowerCase()}${categoryHeading.title.slice(1)}`}
+										description="Altres escapades de la mateixa categoria."
+										href={`/${categoryHeading.slug}`}
+										linkLabel="Veure tota la categoria"
+										items={relatedByCategory}
+									/>
+							  ) : null}
 					</main>
 					<Footer />
 					<SignUpModal
 						visibility={modalVisibility}
 						hideModal={hideModalVisibility}
 					/>
+					{/* Sense anunci ancorat: a mòbil la part inferior és per a la barra de
+					    reserva, que és el que ha de rebre el clic. */}
+					<div className="booking-bar-spacer" />
 				</div>
 			</>
 		);
@@ -1315,6 +1134,36 @@ export async function getServerSideProps({ params }) {
 	if (getawayDetails.destinations.length > 0) {
 		let ids = getawayDetails.destinations.toString();
 		relatedResults = await service.getRelatedResultsByDestinationsIds(ids);
+
+		// La destinació retorna també la fitxa que s'està mirant.
+		relatedResults = (relatedResults || []).map((result) => ({
+			...result,
+			relatedResults: (result.relatedResults || []).filter(
+				(item) => item.slug !== getawayDetails.slug
+			),
+		}));
+	}
+
+	// Si la fitxa no té destinació —o la destinació no torna res— caiem a
+	// escapades de la mateixa categoria, perquè la fitxa mai quedi sense
+	// sortida cap a més contingut.
+	let relatedByCategory = [];
+	const hasDestinationResults = relatedResults.some(
+		(result) => result.relatedResults && result.relatedResults.length > 0
+	);
+
+	if (!hasDestinationResults && getawayDetails.categories?.length) {
+		relatedResults = [];
+		try {
+			const byCategory = await service.getFeaturedGetawaysByCategory(
+				getawayDetails.categories[0]
+			);
+			relatedByCategory = (byCategory || []).filter(
+				(item) => item.slug !== getawayDetails.slug
+			);
+		} catch (error) {
+			relatedByCategory = [];
+		}
 	}
 
 	let checkedCharacteristics = [];
@@ -1338,6 +1187,7 @@ export async function getServerSideProps({ params }) {
 			categoryDetails,
 			checkedCharacteristics,
 			relatedResults,
+			relatedByCategory,
 		},
 	};
 }

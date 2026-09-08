@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import ContentService from "../services/contentService";
 import NavigationBar from "../components/global/NavigationBar";
-import RegularListBox from "../components/listings/RegularListBox";
+import EditorialGrid from "../components/listings/EditorialGrid";
+import MobileAnchorAd from "../components/ads/MobileAnchorAd";
 import Footer from "../components/global/Footer";
 import GlobalMetas from "../components/head/GlobalMetas";
 import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
@@ -73,29 +74,18 @@ const ListsList = ({ user, totalItems, lists, numPages }) => {
 					/>
 
 					{/* Section lists */}
-					<section className="py-8 md:py-12 lg:pb-20">
+					<section className="pt-6 md:pt-8 pb-12 lg:pb-20">
 						<div className="container">
-							<div className="grid grid-cols-1 md:grid-cols-3 2xl:grid-cols-4 gap-x-5">
-								{state.hasLists
-									? state.lists.map((el, idx) => (
-											<article className="mb-8">
-												<RegularListBox
-													index={idx}
-													key={el._id}
-													slug={el.slug}
-													cover={el.cover}
-													title={el.title}
-													subtitle={el.subtitle}
-													avatar={el.owner.avatar}
-													owner={el.owner.fullName}
-													date={el.createdAt}
-												/>
-											</article>
-									  ))
-									: ""}
-							</div>
+							<EditorialGrid
+								items={state.lists}
+								basePath="/llistes"
+								badge="Llista"
+								isLoading={!state.hasLists}
+								skeletonCount={8}
+								eagerCount={4}
+							/>
 							{state.currentPage !== state.numPages ? (
-								<div className="col-span-1 md:col-span-3 2xl:col-span-4 w-full mt-10 flex justify-center">
+								<div className="col-span-full w-full mt-10 flex justify-center">
 									{!state.isFetching ? (
 										<button
 											className="button button__primary button__lg"
@@ -171,6 +161,7 @@ const ListsList = ({ user, totalItems, lists, numPages }) => {
 					"https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
 				}
 			/>
+			<MobileAnchorAd />
 		</>
 	);
 };

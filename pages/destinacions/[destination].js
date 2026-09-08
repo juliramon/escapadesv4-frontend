@@ -3,9 +3,13 @@ import React, { useEffect, useState } from "react";
 import Footer from "../../components/global/Footer";
 import NavigationBar from "../../components/global/NavigationBar";
 import GlobalMetas from "../../components/head/GlobalMetas";
-import PublicSquareBox from "../../components/listings/PublicSquareBox";
+import ListingGrid from "../../components/listings/ListingGrid";
+import TaxonomyChips from "../../components/listings/TaxonomyChips";
+import MobileAnchorAd from "../../components/ads/MobileAnchorAd";
+import { DESTINATIONS } from "../../utils/siteTaxonomy";
 import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
 import ContentService from "../../services/contentService";
+import { toListingCard, toMapMarker } from "../../utils/listingProps";
 import ListingHeader from "../../components/headers/ListingHeader";
 import MapModal from "../../components/modals/MapModal";
 import FilterDestinationsModal from "../../components/modals/FilterDestinationsModal";
@@ -106,65 +110,6 @@ const DestinationPage = ({
 		});
 	};
 
-	const center = {
-		lat: 41.3948976,
-		lng: 2.0787283,
-	};
-
-	const getMapOptions = (maps) => {
-		return {
-			disableDefaultUI: false,
-			styles: [
-				{
-					featureType: "poi",
-					elementType: "labels",
-					styles: [{ visibility: "on" }],
-				},
-			],
-		};
-	};
-
-	const renderMarker = (map, maps) => {
-		const bounds = new maps.LatLngBounds();
-		state.allResults.forEach((result) => {
-			// Els resultats barregen activitats i allotjaments, i cada model desa
-			// les coordenades amb el seu propi prefix. Llegint només les
-			// d'activitat, tots els allotjaments acabaven amb lat/lng NaN.
-			const lat = parseFloat(result.activity_lat ?? result.place_lat);
-			const lng = parseFloat(result.activity_lng ?? result.place_lng);
-			if (Number.isNaN(lat) || Number.isNaN(lng)) {
-				return;
-			}
-			const position = { lat, lng };
-			const detailPath = result.place_lat ? "allotjaments" : "activitats";
-			const contentString = `<a href="/${detailPath}/${result.slug}" title="${result.title}" class="gmaps-infobox" target="_blank">
-        <div class="gmaps-infobox__picture">
-          <picture class="block rounded-md overflow-hidden aspect-w-1 aspect-h-1">
-            <img src="${result.images[0]}" alt="${result.title}" class="object-cover w-full h-full" width="80" height="80">
-          </picture>
-        </div>
-        <div class="gmaps-infobox__text">
-          <span class="gmaps-infobox__title">${result.title}</span>
-          <span class="gmaps-infobox__intro">${result.subtitle}</span>
-        </div>
-        </a>`;
-			const infowindow = new maps.InfoWindow({
-				content: contentString,
-			});
-			const marker = new maps.Marker({
-				position: position,
-				map,
-				icon: "../../map-marker.svg",
-			});
-			bounds.extend(marker.position);
-			marker.addListener("click", () => infowindow.open(map, marker));
-		});
-		// fitBounds sobre uns límits buits deixa el mapa a un zoom absurd.
-		if (!bounds.isEmpty()) {
-			map.fitBounds(bounds);
-		}
-	};
-
 	const sponsorBlock = destinationDetails.isSponsored ? (
 		<div className="sponsor-block">
 			<Link href={`${destinationDetails.sponsorURL}`} target="_blank">
@@ -200,6 +145,88 @@ const DestinationPage = ({
 			currentPage: ++state.currentPage,
 		});
 	};
+
+	// Els filtres viuen a la capçalera: comparteixen fila amb el títol i
+	// deixen la primera fila de fitxes per sobre del plec.
+	const listingActions = (
+		<div className="flex flex-wrap items-center gap-2">
+			<button
+				className="button button__ghost button__med px-6 w-fit gap-x-1.5 group"
+				onClick={() =>
+					setState({
+						...state,
+						isFilterModalOpen: true,
+					})
+				}
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width={20}
+					height={20}
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					strokeWidth={1.5}
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				>
+					<path
+						stroke="none"
+						d="M0 0h24v24H0z"
+						fill="none"
+					/>
+					<path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+					<path d="M6 4v4" />
+					<path d="M6 12v8" />
+					<path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+					<path d="M12 4v10" />
+					<path d="M12 18v2" />
+					<path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+					<path d="M18 4v1" />
+					<path d="M18 9v11" />
+				</svg>
+				Filtrar
+				{state.selectedCount &&
+				state.selectedCount > 0 ? (
+					<span className="rounded-full bg-primary-500 p-2 w-5 h-5 flex items-center justify-center group-hover:bg-white transition-colors duration-300 ease-in-out">
+						<span className="text-white text-xs group-hover:text-primary-500 transition-colors duration-300 ease-in-out">
+							{state.selectedCount}
+						</span>
+					</span>
+				) : null}
+			</button>
+			<button
+				className="button button__ghost button__med px-6 w-fit gap-x-1.5 ml-3"
+				onClick={() =>
+					setState({
+						...state,
+						isMapModalOpen: true,
+					})
+				}
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width={20}
+					height={20}
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					strokeWidth={1.5}
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				>
+					<path
+						stroke="none"
+						d="M0 0h24v24H0z"
+						fill="none"
+					/>
+					<path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+					<path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
+				</svg>
+				Veure mapa
+			</button>
+		</div>
+	);
 
 	return (
 		<>
@@ -239,169 +266,34 @@ const DestinationPage = ({
 						sponsorData={sponsorBlock}
 						breadcrumbLevel1={"Destinacions"}
 						breadcrumbLevel2={destinationDetails.title}
+						actions={listingActions}
 					/>
 
-					{/* Filter buttons */}
-					<div className="pt-8">
-						<nav className="container flex justify-center">
-							<button
-								className="button button__ghost button__med px-6 w-fit gap-x-1.5 group"
-								onClick={() =>
-									setState({
-										...state,
-										isFilterModalOpen: true,
-									})
-								}
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width={20}
-									height={20}
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth={1.5}
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								>
-									<path
-										stroke="none"
-										d="M0 0h24v24H0z"
-										fill="none"
-									/>
-									<path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-									<path d="M6 4v4" />
-									<path d="M6 12v8" />
-									<path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-									<path d="M12 4v10" />
-									<path d="M12 18v2" />
-									<path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-									<path d="M18 4v1" />
-									<path d="M18 9v11" />
-								</svg>
-								Filtrar
-								{state.selectedCount &&
-								state.selectedCount > 0 ? (
-									<span className="rounded-full bg-primary-500 p-2 w-5 h-5 flex items-center justify-center group-hover:bg-white transition-colors duration-300 ease-in-out">
-										<span className="text-white text-xs group-hover:text-primary-500 transition-colors duration-300 ease-in-out">
-											{state.selectedCount}
-										</span>
-									</span>
-								) : null}
-							</button>
-							<button
-								className="button button__ghost button__med px-6 w-fit gap-x-1.5 ml-3"
-								onClick={() =>
-									setState({
-										...state,
-										isMapModalOpen: true,
-									})
-								}
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width={20}
-									height={20}
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth={1.5}
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								>
-									<path
-										stroke="none"
-										d="M0 0h24v24H0z"
-										fill="none"
-									/>
-									<path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
-									<path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
-								</svg>
-								Veure mapa
-							</button>
-						</nav>
-					</div>
 
 					{/* Listings */}
-					<section className="pt-8 md:pt-12">
+					<section className="pt-6 md:pt-8">
 						<div className="container">
+							<TaxonomyChips
+								heading="Altres destinacions"
+								items={DESTINATIONS}
+								prefix="/destinacions/"
+								activeSlug={destinationDetails?.slug}
+								className="mb-5 md:mb-7"
+							/>
 							<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5">
 								{state.results.length > 0 ? (
 									<>
-										{state.hasResults
-											? state.results.map((el, idx) => {
-													const priority =
-														idx === 0 || idx === 1
-															? "eager"
-															: "lazy";
-													return (
-														<PublicSquareBox
-															key={el._id}
-															type={el.type}
-															slug={el.slug}
-															id={el._id}
-															cover={el.cover}
-															title={el.title}
-															subtitle={
-																el.subtitle
-															}
-															rating={
-																el.activity_rating ||
-																el.place_rating
-															}
-															placeType={
-																el.placeType
-															}
-															categoria={
-																el.categories
-															}
-															duration={
-																el.duration
-															}
-															website={el.website}
-															phone={el.phone}
-															isVerified={
-																el.isVerified
-															}
-															location={
-																el.activity_locality ||
-																el.place_locality
-															}
-															index={idx}
-															priority={priority}
-														/>
-													);
-											  })
-											: state.emptyBlocksPerRow.map(
-													(el, idx) => (
-														<div
-															key={idx}
-															className="w-full"
-															role="status"
-														>
-															<div className="flex justify-center items-center w-full aspect-[4/3] bg-gray-300 rounded-2xl animate-pulse dark:bg-gray-700">
-																<div className="flex justify-center items-center w-full h-48 bg-gray-300 rounded-md sm:w-96 dark:bg-gray-700">
-																	<svg
-																		className="w-12 h-12 text-gray-200"
-																		xmlns="http://www.w3.org/2000/svg"
-																		aria-hidden="true"
-																		fill="currentColor"
-																		viewBox="0 0 640 512"
-																	>
-																		<path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" />
-																	</svg>
-																</div>
-																<span className="sr-only">
-																	Loading...
-																</span>
-															</div>
-														</div>
-													)
-											  )}
+										<ListingGrid
+											cellsOnly
+											items={state.results}
+											isLoading={!state.hasResults}
+											skeletonCount={12}
+											eagerCount={2}
+										/>
 
 										{state.currentPage !==
 										state.numPages ? (
-											<div className="col-span-1 md:col-span-3 2xl:col-span-4 w-full mt-10 flex justify-center">
+											<div className="col-span-full w-full mt-10 flex justify-center">
 												{!state.isFetching ? (
 													<button
 														className="button button__primary button__lg"
@@ -474,7 +366,7 @@ const DestinationPage = ({
 										)}
 									</>
 								) : (
-									<div className="col-span-1 md:col-span-3 2xl:col-span-4">
+									<div className="col-span-full">
 										<p className="text-center mx-auto text-lg">
 											No s'han trobat escapades per
 											aquesta categoria.
@@ -536,6 +428,7 @@ const DestinationPage = ({
 			</div>
 
 			<Footer />
+			<MobileAnchorAd />
 
 			{state.isMapModalOpen == true ? (
 				<MapModal
@@ -543,9 +436,7 @@ const DestinationPage = ({
 					hideModal={() =>
 						setState({ ...state, isMapModalOpen: false })
 					}
-					center={center}
-					getMapOptions={getMapOptions}
-					renderMarker={renderMarker}
+					items={state.allResults}
 				/>
 			) : null}
 
@@ -602,11 +493,14 @@ export async function getStaticProps({ params }) {
 	const { allResults, paginatedResults, totalItems, numPages } =
 		await service.getDestinationResults(destinationDetails._id);
 
+	// `allResults` només alimenta els marcadors del mapa i `paginatedResults`
+	// les fitxes: enviar els documents sencers multiplicava per deu el pes de
+	// la pàgina sense pintar-ne res més.
 	return {
 		props: {
 			destinationDetails,
-			allResults,
-			paginatedResults,
+			allResults: (allResults || []).map(toMapMarker),
+			paginatedResults: (paginatedResults || []).map(toListingCard),
 			totalItems,
 			numPages,
 		},

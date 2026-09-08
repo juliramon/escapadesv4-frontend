@@ -1,7 +1,15 @@
 import { useEffect, useState } from "react";
 import ContentService from "../services/contentService";
+import { toListingCard, toMapMarker } from "../utils/listingProps";
 import NavigationBar from "../components/global/NavigationBar";
-import PublicSquareBox from "../components/listings/PublicSquareBox";
+import ListingGrid from "../components/listings/ListingGrid";
+import TaxonomyChips from "../components/listings/TaxonomyChips";
+import MobileAnchorAd from "../components/ads/MobileAnchorAd";
+import {
+	DESTINATIONS,
+	STAY_CATEGORIES,
+	taxonomyLinksHtml,
+} from "../utils/siteTaxonomy";
 import Footer from "../components/global/Footer";
 import MapModal from "../components/modals/MapModal";
 import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
@@ -107,56 +115,6 @@ const PlaceList = ({
 		});
 	};
 
-	const center = {
-		lat: 41.3948976,
-		lng: 2.0787283,
-	};
-
-	const getMapOptions = (maps) => {
-		return {
-			disableDefaultUI: true,
-			styles: [
-				{
-					featureType: "poi",
-					elementType: "labels",
-					styles: [{ visibility: "on" }],
-				},
-			],
-		};
-	};
-
-	const renderMarker = (map, maps) => {
-		const bounds = new maps.LatLngBounds();
-		state.allPlaces.forEach((place) => {
-			const position = {
-				lat: parseFloat(place.place_lat),
-				lng: parseFloat(place.place_lng),
-			};
-			const contentString = `<a href="/allotjaments/${place.slug}" title="${place.title}" class="gmaps-infobox" target="_blank">
-        <div class="gmaps-infobox__picture">
-          <picture class="block rounded-md overflow-hidden aspect-w-1 aspect-h-1">
-            <img src="${place.images[0]}" alt="${place.title}" class="object-cover w-full h-full" width="80" height="80">
-          </picture>
-        </div>
-        <div class="gmaps-infobox__text">
-          <span class="gmaps-infobox__title">${place.title}</span>
-          <span class="gmaps-infobox__intro">${place.subtitle}</span>
-        </div>
-        </a>`;
-			const infowindow = new maps.InfoWindow({
-				content: contentString,
-			});
-			const marker = new maps.Marker({
-				position: position,
-				map,
-				icon: "../../map-marker.svg",
-			});
-			bounds.extend(marker.position);
-			marker.addListener("click", () => infowindow.open(map, marker));
-		});
-		map.fitBounds(bounds);
-	};
-
 	useEffect(() => {
 		if (state.updateSearch === true) {
 			service
@@ -172,9 +130,26 @@ const PlaceList = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [state.updateSearch]);
 
-	const textareaFooter = `<p>Des d'<strong>hotels amb encant</strong> únics a Catalunya, a <strong>cabanes acollidaroes</strong> i <strong>cases-arbre</strong>, passant per <strong>apartaments de somni</strong> i carabanes per gaudir de l'escapada, aquí trobaràs els millors allotjaments a Catalunya per a una escapada perfecta!</p>
-	<p>Catalunya és una destinació perfecta per a gaudir d'allotjaments amb encant, com ara hotels boutique, apartaments de disseny, cases rurals de somni, cabanes als arbres, etc.</p>
-	<p>No importa el que estiguis buscant per a una escapada a un allotjament a Catalunya; aquí trobaràs la millor selecció d'allotjaments per gaudir de la vostra propera escapada.</p>`;
+	// Bloc de text del peu del llistat. Es manté a la pàgina (i no a l'API)
+	// perquè inclou el comptador real i els enllaços a la taxonomia.
+	const textareaFooter = `<h2>Allotjaments amb encant a Catalunya per a una escapada en parella</h2>
+<p>Hem reunit <strong>${state.numPlaces} allotjaments</strong> pensats per anar-hi a dos: hotels petits amb personalitat, masies i cases rurals per tenir la casa sencera, cabanes als arbres, refugis de muntanya i càmpings amb bungalows. Cap gran cadena ni hotels de pas: la idea és que l'allotjament sigui part de l'escapada, i no només un lloc on dormir.</p>
+
+<h3>Quin tipus d'allotjament busqueu?</h3>
+<p>Cada tipus té la seva pàgina, amb el llistat complet i el mapa:</p>
+${taxonomyLinksHtml(STAY_CATEGORIES)}
+
+<h3>Allotjaments per zones</h3>
+<p>Si ja sabeu on voleu anar, entreu per la destinació i hi trobareu els allotjaments i les activitats de la zona:</p>
+${taxonomyLinksHtml(DESTINATIONS, "/destinacions/")}
+
+<h3>Quant costa dormir-hi?</h3>
+<p>A cada fitxa hi ha el preu aproximat per persona i nit que hem calculat. Com a referència, les cases rurals i els càmpings solen ser l'opció més continguda, els hotels amb encant es mouen en una forquilla mitjana i les cabanes als arbres i els allotjaments més singulars són els que pugen més. Els preus varien segons la temporada i el dia de la setmana, així que el que veureu a la pàgina de reserva mana per sobre del nostre.</p>
+
+<h3>Reservar i cancel·lar</h3>
+<p>Des de cada fitxa podeu anar directament a la pàgina de reserva de l'allotjament per veure la disponibilitat i les condicions reals de les dates que us interessin. Les condicions de cancel·lació i el que inclou el preu depenen de cada establiment, i sempre les trobareu allà.</p>
+
+<p>I un cop tingueu l'allotjament, us podeu muntar el cap de setmana amb les <a href="/activitats">experiències per fer en parella</a> que hi ha a prop, o agafar idees fetes a les nostres <a href="/llistes">llistes d'escapades</a>.</p>`;
 
 	const loadMoreResults = async (page) => {
 		setState({ ...state, isFetching: true });
@@ -194,6 +169,88 @@ const PlaceList = ({
 			state.queryPlaceSeason == 0
 		);
 	};
+
+	// Els filtres viuen a la capçalera: comparteixen fila amb el títol i
+	// deixen la primera fila de fitxes per sobre del plec.
+	const listingActions = (
+		<div className="flex flex-wrap items-center gap-2">
+			<button
+				className="button button__ghost button__med px-6 w-fit gap-x-1.5 group"
+				onClick={() =>
+					setState({
+						...state,
+						isFilterModalOpen: true,
+					})
+				}
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width={20}
+					height={20}
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					strokeWidth={1.5}
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				>
+					<path
+						stroke="none"
+						d="M0 0h24v24H0z"
+						fill="none"
+					/>
+					<path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+					<path d="M6 4v4" />
+					<path d="M6 12v8" />
+					<path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+					<path d="M12 4v10" />
+					<path d="M12 18v2" />
+					<path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+					<path d="M18 4v1" />
+					<path d="M18 9v11" />
+				</svg>
+				Filtrar
+				{state.selectedCount &&
+				state.selectedCount > 0 ? (
+					<span className="rounded-full bg-primary-500 p-2 w-5 h-5 flex items-center justify-center group-hover:bg-white transition-colors duration-300 ease-in-out">
+						<span className="text-white text-xs group-hover:text-primary-500 transition-colors duration-300 ease-in-out">
+							{state.selectedCount}
+						</span>
+					</span>
+				) : null}
+			</button>
+			<button
+				className="button button__ghost button__med px-6 w-fit gap-x-1.5 ml-3"
+				onClick={() =>
+					setState({
+						...state,
+						isMapModalOpen: true,
+					})
+				}
+			>
+				<svg
+					xmlns="http://www.w3.org/2000/svg"
+					width={20}
+					height={20}
+					viewBox="0 0 24 24"
+					fill="none"
+					stroke="currentColor"
+					strokeWidth={1.5}
+					strokeLinecap="round"
+					strokeLinejoin="round"
+				>
+					<path
+						stroke="none"
+						d="M0 0h24v24H0z"
+						fill="none"
+					/>
+					<path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+					<path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
+				</svg>
+				Veure mapa
+			</button>
+		</div>
+	);
 
 	return (
 		<>
@@ -220,153 +277,27 @@ const PlaceList = ({
 						title={`Allotjaments amb encant a Catalunya`}
 						subtitle={`Descobreix una selecció de <strong>${state.numPlaces} allotjaments amb encant</strong>, des d'<strong>hotels boutique</strong>, <strong>apartaments</strong>, <strong>cabanyes als arbres</strong> i <strong>cases rurals de somni</strong> per fer que la vostra propera escapada en parella sigui inoblidable!`}
 						breadcrumbLevel1={"Allotjaments amb encant"}
+						actions={listingActions}
 					/>
 
-					{/* Left column - Filters */}
-					<div className="pt-8">
-						<nav className="container flex justify-center">
-							<button
-								className="button button__ghost button__med px-6 w-fit gap-x-1.5 group"
-								onClick={() =>
-									setState({
-										...state,
-										isFilterModalOpen: true,
-									})
-								}
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width={20}
-									height={20}
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth={1.5}
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								>
-									<path
-										stroke="none"
-										d="M0 0h24v24H0z"
-										fill="none"
-									/>
-									<path d="M4 10a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-									<path d="M6 4v4" />
-									<path d="M6 12v8" />
-									<path d="M10 16a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-									<path d="M12 4v10" />
-									<path d="M12 18v2" />
-									<path d="M16 7a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
-									<path d="M18 4v1" />
-									<path d="M18 9v11" />
-								</svg>
-								Filtrar
-								{state.selectedCount &&
-								state.selectedCount > 0 ? (
-									<span className="rounded-full bg-primary-500 p-2 w-5 h-5 flex items-center justify-center group-hover:bg-white transition-colors duration-300 ease-in-out">
-										<span className="text-white text-xs group-hover:text-primary-500 transition-colors duration-300 ease-in-out">
-											{state.selectedCount}
-										</span>
-									</span>
-								) : null}
-							</button>
-							<button
-								className="button button__ghost button__med px-6 w-fit gap-x-1.5 ml-3"
-								onClick={() =>
-									setState({
-										...state,
-										isMapModalOpen: true,
-									})
-								}
-							>
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									width={20}
-									height={20}
-									viewBox="0 0 24 24"
-									fill="none"
-									stroke="currentColor"
-									strokeWidth={1.5}
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								>
-									<path
-										stroke="none"
-										d="M0 0h24v24H0z"
-										fill="none"
-									/>
-									<path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
-									<path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
-								</svg>
-								Veure mapa
-							</button>
-						</nav>
-					</div>
 
 					{/* Section places */}
-					<section className="pt-8 md:pt-12">
+					<section className="pt-6 md:pt-8">
 						<div className="container">
-							<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5">
-								{state.hasPlaces
-									? state.places.map((el, idx) => {
-											const priority =
-												idx === 0 || idx === 1
-													? "eager"
-													: "lazy";
-											return (
-												<PublicSquareBox
-													key={el._id}
-													type={el.type}
-													slug={el.slug}
-													id={el._id}
-													cover={el.cover}
-													title={el.title}
-													subtitle={el.subtitle}
-													rating={el.place_rating}
-													placeType={el.placeType}
-													categoria={el.categories}
-													duration={el.duration}
-													website={el.website}
-													phone={el.phone}
-													isVerified={el.isVerified}
-													location={`${
-														el.place_locality ===
-														undefined
-															? el.place_country
-															: el.place_locality
-													}`}
-													priority={priority}
-												/>
-											);
-									  })
-									: state.emptyBlocksPerRow.map((el, idx) => (
-											<div
-												key={idx}
-												className="w-full"
-												role="status"
-											>
-												<div className="flex justify-center items-center w-full aspect-[4/3] bg-gray-300 rounded-2xl animate-pulse dark:bg-gray-700">
-													<div className="flex justify-center items-center w-full h-48 bg-gray-300 rounded-md sm:w-96 dark:bg-gray-700">
-														<svg
-															className="w-12 h-12 text-gray-200"
-															xmlns="http://www.w3.org/2000/svg"
-															aria-hidden="true"
-															fill="currentColor"
-															viewBox="0 0 640 512"
-														>
-															<path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z" />
-														</svg>
-													</div>
-													<span className="sr-only">
-														Loading...
-													</span>
-												</div>
-											</div>
-									  ))}
-							</div>
+							<TaxonomyChips
+								heading="Allotjaments per tipus"
+								items={STAY_CATEGORIES}
+								className="mb-5 md:mb-7"
+							/>
+							<ListingGrid
+								items={state.places}
+								isLoading={!state.hasPlaces}
+								skeletonCount={12}
+								eagerCount={2}
+							/>
 							{state.currentPage !== state.numPages &&
 							checkAreFiltersActive() ? (
-								<div className="col-span-1 md:col-span-3 2xl:col-span-4 w-full mt-10 flex justify-center">
+								<div className="col-span-full w-full mt-10 flex justify-center">
 									{!state.isFetching ? (
 										<button
 											className="button button__primary button__lg"
@@ -439,12 +370,16 @@ const PlaceList = ({
 					{textareaFooter !== "" ? (
 						<ListingsTextareaFooter
 							textareaFooter={textareaFooter}
+							relatedLinks={DESTINATIONS}
+							relatedLinksHeading="Allotjaments per destinació"
+							relatedLinksPrefix="/destinacions/"
 						/>
 					) : null}
 				</main>
 			</div>
 
 			<Footer />
+			<MobileAnchorAd />
 
 			{state.isMapModalOpen == true ? (
 				<MapModal
@@ -452,9 +387,7 @@ const PlaceList = ({
 					hideModal={() =>
 						setState({ ...state, isMapModalOpen: false })
 					}
-					center={center}
-					getMapOptions={getMapOptions}
-					renderMarker={renderMarker}
+					items={state.allPlaces}
 				/>
 			) : null}
 
@@ -476,11 +409,13 @@ export async function getServerSideProps({ params }) {
 	const service = new ContentService();
 	const { totalItems, places, allPlaces, numPages } =
 		await service.getAllPlaces();
+
+	// `allPlaces` només alimenta els marcadors del mapa i `places` les fitxes.
 	return {
 		props: {
 			totalItems,
-			places,
-			allPlaces,
+			places: (places || []).map(toListingCard),
+			allPlaces: (allPlaces || []).map(toMapMarker),
 			numPages,
 		},
 	};

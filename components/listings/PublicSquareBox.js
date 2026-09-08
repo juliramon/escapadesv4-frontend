@@ -1,4 +1,28 @@
 import Link from "next/link";
+import { cloudinaryImage } from "../../utils/cloudinary";
+import { listingPath, resolveCategoryRoute } from "../../utils/listingRoutes";
+
+
+const PLACE_TYPES = [
+	{ match: "hotel", label: "Hotel" },
+	{ match: "casarural", label: "Casa rural" },
+	{ match: "apartament", label: "Apartament" },
+	{ match: "carabana", label: "Caravana" },
+	{ match: "casaarbre", label: "Casa als arbres" },
+	{ match: "refugi", label: "Refugi" },
+	{ match: "camping", label: "Càmping" },
+];
+
+/** Text pla d'un `location` que pot ser cadena o element de React. */
+const extractText = (node) => {
+	if (node === null || node === undefined || typeof node === "boolean")
+		return "";
+	if (typeof node === "string" || typeof node === "number")
+		return String(node);
+	if (Array.isArray(node)) return node.map(extractText).join("");
+	if (node.props) return extractText(node.props.children);
+	return "";
+};
 
 const PublicSquareBox = ({
 	type,
@@ -9,170 +33,72 @@ const PublicSquareBox = ({
 	duration,
 	isVerified,
 	location,
-	website,
 	categoria,
 	rating,
-	index,
+	price,
 	priority,
 }) => {
-	let secureWebsite, buttonLight;
-	if (
-		website &&
-		(website.includes("https://") || website.includes("http://"))
-	) {
-		secureWebsite = website;
-	} else {
-		secureWebsite = `https://${website}`;
-	}
+	const isPlace = type === "place";
 
-	let linkPath, tipus, icon;
-	if (type === "activity") {
-		tipus = "Activitat";
-		icon = (
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				className="icon icon-tabler icon-tabler-route"
-				width="16"
-				height="16"
-				viewBox="0 0 24 24"
-				strokeWidth="1.5"
-				stroke="#00206B"
-				fill="none"
-				strokeLinecap="round"
-				strokeLinejoin="round"
-			>
-				<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-				<circle cx="6" cy="19" r="2" />
-				<circle cx="18" cy="5" r="2" />
-				<path d="M12 19h4.5a3.5 3.5 0 0 0 0 -7h-8a3.5 3.5 0 0 1 0 -7h3.5" />
-			</svg>
-		);
-		buttonLight = undefined;
-	} else if (type === "place") {
-		tipus = "Allotjament";
-		icon = (
-			<svg
-				xmlns="http://www.w3.org/2000/svg"
-				className="icon icon-tabler icon-tabler-bed"
-				width="18"
-				height="18"
-				viewBox="0 0 24 24"
-				strokeWidth="1.5"
-				stroke="#00206B"
-				fill="none"
-				strokeLinecap="round"
-				strokeLinejoin="round"
-			>
-				<path stroke="none" d="M0 0h24v24H0z" fill="none" />
-				<path d="M3 7v11m0 -4h18m0 4v-8a2 2 0 0 0 -2 -2h-8v6" />
-				<circle cx="7" cy="10" r="1" />
-			</svg>
-		);
-		buttonLight = (
-			<a
-				href={secureWebsite}
-				title="Reservar"
-				className="button button__secondary button__med w-full justify-center"
-				target="_blank"
-				rel="nofollow"
-			>
-				Reservar
-			</a>
-		);
-	}
+	const category = resolveCategoryRoute(categoria);
+	const href = listingPath({ slug, type, categories: categoria });
 
-	let categoryModified;
-	if (categoria && categoria.length > 0) {
-		if (categoria[0].includes("romantica")) {
-			categoryModified = "romàntica";
-			linkPath = "escapades-romantiques";
-		} else if (categoria[0].includes("gastronomica")) {
-			categoryModified = "gastronòmica";
-			linkPath = "escapades-gastronomiques";
-		} else if (categoria[0].includes("aventura")) {
-			categoryModified = `d'aventura`;
-			linkPath = "escapades-aventura";
-		} else if (categoria[0].includes("relax")) {
-			categoryModified = "de relax";
-			linkPath = "escapades-de-relax";
-		} else if (categoria[0].includes("neu")) {
-			categoryModified = "a la neu";
-			linkPath = "escapades-a-la-neu";
-		} else {
-			categoryModified = "culturals";
-			linkPath = "escapades-culturals";
-		}
-	}
+	const placeTypeLabel =
+		placeType && placeType.length > 0
+			? PLACE_TYPES.find((entry) => placeType[0].includes(entry.match))
+					?.label
+			: null;
 
-	let placeTypeModified;
-	if (placeType) {
-		if (placeType[0].includes("hotel")) {
-			placeTypeModified = "Hotel";
-		} else if (placeType[0].includes("casarural")) {
-			placeTypeModified = "Casa rural";
-		} else if (placeType[0].includes("apartament")) {
-			placeTypeModified = "Apartament";
-		} else if (placeType[0].includes("carabana")) {
-			placeTypeModified = "Carabana";
-		} else if (placeType[0].includes("casaarbre")) {
-			placeTypeModified = "Casa arbre";
-		} else if (placeType[0].includes("refugi")) {
-			placeTypeModified = "Refugi";
-		} else if (placeType[0].includes("camping")) {
-			placeTypeModified = "Càmping";
-		}
-	}
+	const image = cloudinaryImage(cover, 457, 343);
+	const formattedRating =
+		typeof rating === "number" && rating > 0
+			? Number.isInteger(rating)
+				? `${rating}.0`
+				: `${rating}`
+			: null;
 
-	let additionalInfoRef;
-	if (duration) {
-		additionalInfoRef = `${duration} hores`;
-	} else {
-		additionalInfoRef = placeTypeModified;
-	}
-	let modRating;
-	if (rating && Number.isInteger(rating)) {
-		modRating = `${rating.toString()}.0`;
-	}
+	// Una sola etiqueta sobre la imatge: amb dues es solapaven amb el segell
+	// de "Verificada" en columnes estretes.
+	const mediaBadge = isPlace
+		? placeTypeLabel || "Allotjament"
+		: category?.label || "Activitat";
 
-	const coverPath = cover?.substring(0, 51);
-	const imageId = cover?.substring(63);
-	const imageIdWebp = cover?.substring(63).replace("jpg", "webp");
-	const coverImg = `${coverPath}w_457,h_343,c_fill/${imageId}`;
-	const coverImgWebp = `${coverPath}f_webp/w_457,h_343,c_fill/${imageIdWebp}`;
+	// La ubicació pot arribar com a element buit des dels llistats antics.
+	const locationText = extractText(location);
+	const hasLocation = locationText.trim().length > 0;
 
 	return (
-		<article className="w-full group">
-			<Link href={`/${linkPath}/${slug}`}>
-				<a
-					title={title}
-					className="flex flex-col justify-between overflow-hidden relative"
-				>
-					<div className="relative overflow-hidden rounded-2xl">
+		<article className="listing-card group">
+			<Link href={href}>
+				<a title={title} className="listing-card__link">
+					<div className="listing-card__media">
 						<picture className="block w-full h-full aspect-w-4 aspect-h-3">
-							{coverImgWebp ? (
-								<source
-									srcSet={coverImgWebp}
-									type="image/webp"
-								/>
-							) : (
-								""
-							)}
+							{image.webp ? (
+								<source srcSet={image.webp} type="image/webp" />
+							) : null}
 							<img
-								src={coverImg}
+								src={image.src}
 								alt={title}
-								className={"w-full h-full object-cover"}
+								className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
 								width={457}
 								height={343}
-								loading={priority ? priority : "lazy"}
+								loading={priority === "eager" ? "eager" : "lazy"}
 							/>
 						</picture>
+
+						<span className="listing-card__badges">
+							<span className="listing-card__badge">
+								{mediaBadge}
+							</span>
+						</span>
+
 						{isVerified ? (
-							<span className="inline-flex items-center absolute top-2.5 right-2.5 text-primary-500 bg-white rounded-lg py-1 px-2 shadow-md">
+							<span className="listing-card__verified">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
-									className="mr-1 text-[#57A1FE]"
-									width={18}
-									height={18}
+									className="text-[#57A1FE]"
+									width={16}
+									height={16}
 									viewBox="0 0 24 24"
 									strokeWidth={1.5}
 									stroke="currentColor"
@@ -191,34 +117,23 @@ const PublicSquareBox = ({
 										fill="currentColor"
 									></path>
 								</svg>
-								<span className="text-sm inline-block relative top-px">
-									Verificada
-								</span>
+								Verificada
 							</span>
 						) : null}
 					</div>
-					<div className="flex flex-col justify-between pt-3 pb-4 h-full">
-						<div>
-							<h3 className="my-0 pr-10 line-clamp-1">{title}</h3>
-							<span className="mt-0.5 inline-flex flex-wrap text-16 text-grey-400 line-clamp-1">
-								{type == "place"
-									? placeTypeModified
-									: "Activitat"}{" "}
-								{type == "place" ? "amb encant" : ""} a&nbsp;
-								<u>{location}</u>
-							</span>
-						</div>
-						<div className="mt-2.5 flex items-center justify-between">
-							<div className="inline-flex items-center justify-center text-sm leading-tight">
+
+					<div className="listing-card__body">
+						<h3 className="listing-card__title">{title}</h3>
+						{hasLocation ? (
+							<span className="listing-card__location">
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
-									className="mr-1.5"
-									width="15"
-									height="15"
+									width={14}
+									height={14}
 									viewBox="0 0 24 24"
-									strokeWidth="1.5"
-									stroke="#fbbf24"
-									fill="#fbbf24"
+									fill="none"
+									stroke="currentColor"
+									strokeWidth={1.5}
 									strokeLinecap="round"
 									strokeLinejoin="round"
 								>
@@ -227,33 +142,60 @@ const PublicSquareBox = ({
 										d="M0 0h24v24H0z"
 										fill="none"
 									/>
-									<path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+									<circle cx="12" cy="11" r="3" />
+									<path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
 								</svg>
-								{modRating || rating}/5
-							</div>
-							<span className="text-15 text-tertiary-800 group-hover:text-tertiary-900 transition-all duration-300 ease-in-out inline-flex items-center leading-tight relative right-1">
-								<svg
-									xmlns="http://www.w3.org/2000/svg"
-									className="mr-1"
-									width={15}
-									height={15}
-									viewBox="0 0 24 24"
-									strokeWidth="2"
-									stroke="currentColor"
-									fill="none"
-									strokeLinecap="round"
-									strokeLinejoin="round"
-								>
-									<path
-										stroke="none"
-										d="M0 0h24v24H0z"
-										fill="none"
-									></path>
-									<path d="M12 5l0 14"></path>
-									<path d="M5 12l14 0"></path>
-								</svg>
-								Veure'n més
+								{location}
+								{!isPlace && duration ? (
+									<span className="text-grey-300">
+										&nbsp;· {duration} h
+									</span>
+								) : null}
 							</span>
+						) : null}
+
+						<div className="listing-card__footer">
+							{formattedRating ? (
+								<span className="listing-card__rating">
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width="14"
+										height="14"
+										viewBox="0 0 24 24"
+										strokeWidth="1.5"
+										stroke="#fbbf24"
+										fill="#fbbf24"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									>
+										<path
+											stroke="none"
+											d="M0 0h24v24H0z"
+											fill="none"
+										/>
+										<path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873z" />
+									</svg>
+									{formattedRating}
+									<span className="text-grey-300">/5</span>
+								</span>
+							) : (
+								<span />
+							)}
+
+							{price ? (
+								<span className="listing-card__price">
+									<strong>{price} €</strong>
+									<span className="listing-card__price-unit">
+										{isPlace
+											? "/ persona i nit"
+											: "/ persona"}
+									</span>
+								</span>
+							) : (
+								<span className="listing-card__more">
+									Veure'n més
+								</span>
+							)}
 						</div>
 					</div>
 				</a>
