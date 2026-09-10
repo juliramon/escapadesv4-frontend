@@ -15,6 +15,7 @@ import AdBanner from "../../components/ads/AdBanner";
 import MobileAnchorAd from "../../components/ads/MobileAnchorAd";
 import RelatedListings from "../../components/listingpage/RelatedListings";
 import ContentParser from "../../utils/ContentParser";
+import { cloudinaryImage, cloudinaryUrl } from "../../utils/cloudinary";
 
 const StoryListing = ({ storyDetails, relatedStories }) => {
 	const { user } = useContext(UserContext);
@@ -92,26 +93,30 @@ const StoryListing = ({ storyDetails, relatedStories }) => {
 			storyDetails.description,
 			storyDetails.images,
 			buildImagesGrid,
-			welcomeText
+			welcomeText,
+			{ title: storyDetails.title }
 		);
 	}
 
-	const coverPath = storyDetails.cover.substring(0, 51);
-	const imageId = storyDetails.cover.substring(63);
+	// La portada es retallava tallant la URL per posició: `substring(0, 51)`
+	// donava per fet que el nom del compte de Cloudinary és "juligoodie" i
+	// `substring(63)` que darrere hi ha sempre un segment de versió de dotze
+	// caràcters. Amb qualsevol altra forma d'URL en sortia una ruta inventada i
+	// la imatge no es veia. `cloudinaryImage` ho fa amb el segment /upload/.
+	const desktopCover = cloudinaryImage(storyDetails.cover, 1729, 973);
+	const mobileCover = cloudinaryImage(storyDetails.cover, 450, 337);
 
-	const coverImg = `${coverPath}w_1729,h_973,c_fill/${imageId}`;
-	const coverImgMob = `${coverPath}w_450,h_337,c_fill/${imageId}`;
-	const coverImageIdWebp = storyDetails.cover
-		?.substring(63)
-		.replace("jpg", "webp");
-	const coverImgWebp = `${coverPath}f_webp/w_1729,h_973,c_fill/${coverImageIdWebp}`;
-	const coverImgWebpMobile = `${coverPath}f_webp/w_450,h_337,c_fill/${coverImageIdWebp}`;
+	const coverImg = desktopCover.src;
+	const coverImgMob = mobileCover.src;
+	const coverImgWebp = desktopCover.webp;
+	const coverImgWebpMobile = mobileCover.webp;
 
-	const ogImg = `${coverPath}w_1200,h_630,c_fill/${imageId}`;
+	const ogImg = cloudinaryImage(storyDetails.cover, 1200, 630).src;
 
-	const coverAuthorPath = storyDetails.owner.avatar.substring(0, 51);
-	const imageAuthorId = storyDetails.owner.avatar.substring(63);
-	const coverAuthorImg = `${coverAuthorPath}w_32,h_32,c_fill/${imageAuthorId}`;
+	const coverAuthorImg = cloudinaryUrl(
+		storyDetails.owner.avatar,
+		"w_32,h_32,c_fill"
+	);
 
 	return (
 		<>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Router from "next/router";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -8,11 +8,18 @@ import Placeholder from "@tiptap/extension-placeholder";
 import ContentService from "../../services/contentService";
 import { uploadCarouselMediaItems } from "../../utils/helpers";
 import EditorNavbar from "../editor/EditorNavbar";
+import GalleryBlock from "../editor/GalleryBlock";
 import ImageUploadField from "../admin/ImageUploadField";
 import GalleryField from "../admin/GalleryField";
 import { ImagePreview, SelectField, TextField } from "../admin/FormFields";
-import ContentFormLayout from "./ContentFormLayout";
+import ContentFormLayout, { ADMIN_PANEL_PATH } from "./ContentFormLayout";
+import FormSection from "./FormSection";
 import SeoFieldset from "./SeoFieldset";
+import { SeoScoreBadge } from "./SeoScore";
+import useAutosaveDraft from "../../hooks/useAutosaveDraft";
+import useEditorRevision from "../../hooks/useEditorRevision";
+import useSeoKeyword from "../../hooks/useSeoKeyword";
+import { analyzeSeo, buildSlug } from "../../utils/seo";
 import { readValidationError } from "../../utils/apiErrors";
 import {
 	UPLOAD_MODELS,
@@ -42,10 +49,14 @@ import {
  *    `value` al `select`).
  */
 
-const TABS = [
-	{ key: "main", label: "Contingut principal" },
-	{ key: "imatges", label: "Imatges" },
-	{ key: "seo", label: "SEO" },
+/** Camps que van a l'esborrany local: la resta són fitxers o identificadors. */
+const DRAFT_FIELDS = [
+	"title",
+	"subtitle",
+	"slug",
+	"metaTitle",
+	"metaDescription",
+	"trip",
 ];
 
 /** La categoria arriba poblada en editar i com a id en crear. */
@@ -53,14 +64,17 @@ const tripId = (trip) => (trip && trip._id ? trip._id : trip || "");
 
 const TripEntryForm = ({ mode = "create", initialData = null }) => {
 	const isEdit = mode === "edit";
-	const service = new ContentService();
+	const service = useMemo(() => new ContentService(), []);
 
 	const [activeTab, setActiveTab] = useState("main");
 	const [isSaving, setIsSaving] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
+	const [successMessage, setSuccessMessage] = useState("");
+	const [isReady, setIsReady] = useState(false);
 	const [tripCategories, setTripCategories] = useState([]);
 	const hasLoadedState = useRef(false);
 	const hasLoadedContent = useRef(false);
+	const hasTouchedSlug = useRef(isEdit);
 
 	const [formData, setFormData] = useState({
 		_id: "",
@@ -79,9 +93,22 @@ const TripEntryForm = ({ mode = "create", initialData = null }) => {
 		metaDescription: "",
 	});
 
+	// El bloc de galeria puja les imatges en el moment de triar-les. La
+	// funció de pujada depèn del slug, que canvia mentre s'escriu, i va per
+	// referència perquè l'editor no s'hagi de refer a cada lletra.
+	const uploadRef = useRef(null);
+	useEffect(() => {
+		uploadRef.current = createUploader(
+			service,
+			UPLOAD_MODELS.tripEntries,
+			formData,
+		);
+	}, [service, formData.slug, formData.title]);
+
 	const editor = useEditor({
 		extensions: [
 			StarterKit,
+			GalleryBlock.configure({ uploadRef }),
 			Image.configure({
 				inline: false,
 				HTMLAttributes: { class: "img-frame" },
@@ -100,6 +127,13 @@ const TripEntryForm = ({ mode = "create", initialData = null }) => {
 		parseOptions: { preserveWhitespace: true },
 	});
 
+	const editorRevision = useEditorRevision([editor]);
+	const description = useMemo(
+		() => (editor ? editor.getHTML() : ""),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[editor, editorRevision],
+	);
+
 	useEffect(() => {
 		const fetchCategories = async () => {
 			try {
@@ -110,8 +144,7 @@ const TripEntryForm = ({ mode = "create", initialData = null }) => {
 			}
 		};
 		fetchCategories();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [service]);
 
 	useEffect(() => {
 		if (!initialData || hasLoadedState.current) return;
@@ -140,13 +173,58 @@ const TripEntryForm = ({ mode = "create", initialData = null }) => {
 		if (!initialData || !editor || hasLoadedContent.current) return;
 		hasLoadedContent.current = true;
 		editor.commands.setContent(initialData.description || "");
+		setIsReady(true);
 	}, [initialData, editor]);
 
-	const handleChange = (e) =>
+	// L'estat de partida no es pot prendre fins que TipTap existeix: al primer
+	// render encara no hi ha editor i el cos es llegiria com a buit, o sigui
+	// que el formulari naixeria amb un canvi pendent que ningú ha fet.
+	useEffect(() => {
+		if (isEdit || !editor) return;
+		setIsReady(true);
+	}, [isEdit, editor]);
+
+	const draftKey = isEdit
+		? formData._id
+			? `trip-entry:${formData._id}`
+			: null
+		: "trip-entry:new";
+
+	const snapshot = useMemo(
+		() => ({
+			fields: DRAFT_FIELDS.reduce((acc, field) => {
+				acc[field] = formData[field];
+				return acc;
+			}, {}),
+			description,
+		}),
+		[formData, description],
+	);
+
+	const autosave = useAutosaveDraft({
+		key: draftKey,
+		snapshot,
+		enabled: isReady,
+	});
+
+	const [seoKeyword, setSeoKeyword] = useSeoKeyword(draftKey);
+
+	const setField = useCallback((name, value) => {
+		if (name === "slug") hasTouchedSlug.current = true;
+		setFormData((previous) => ({ ...previous, [name]: value }));
+	}, []);
+
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		if (name === "slug") hasTouchedSlug.current = true;
 		setFormData((previous) => ({
 			...previous,
-			[e.target.name]: e.target.value,
+			[name]: value,
+			...(name === "title" && !hasTouchedSlug.current
+				? { slug: buildSlug(value) }
+				: {}),
 		}));
+	};
 
 	const saveCoverToStatus = (e) => {
 		const fileToUpload = e.target.files[0];
@@ -179,12 +257,24 @@ const TripEntryForm = ({ mode = "create", initialData = null }) => {
 			blopImages: previous.blopImages.filter((_, idx) => idx !== index),
 		}));
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+	const restoreDraft = () => {
+		const data = autosave.restoreDraft();
+		if (!data) return;
+		if (data.fields) {
+			hasTouchedSlug.current = true;
+			setFormData((previous) => ({ ...previous, ...data.fields }));
+		}
+		if (editor && typeof data.description === "string") {
+			editor.commands.setContent(data.description);
+		}
+	};
+
+	const save = async ({ redirect = true } = {}) => {
 		if (isSaving) return;
 
 		setIsSaving(true);
 		setErrorMessage("");
+		setSuccessMessage("");
 
 		try {
 			const upload = createUploader(
@@ -205,8 +295,6 @@ const TripEntryForm = ({ mode = "create", initialData = null }) => {
 				formData.images,
 				upload,
 			);
-
-			const description = editor ? editor.getHTML() : "";
 
 			const response = isEdit
 				? await service.editTripEntryDetails(
@@ -241,7 +329,25 @@ const TripEntryForm = ({ mode = "create", initialData = null }) => {
 				return;
 			}
 
-			Router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel");
+			autosave.markSaved();
+
+			setFormData((previous) => ({
+				...previous,
+				cover: "",
+				blopCover: "",
+				coverCloudImage: cover,
+				updatedCover: false,
+				images,
+				blopImages: images,
+			}));
+
+			if (redirect) {
+				Router.push(ADMIN_PANEL_PATH);
+				return;
+			}
+
+			setIsSaving(false);
+			setSuccessMessage("Canvis desats.");
 		} catch (error) {
 			console.error(error);
 			setErrorMessage(
@@ -250,6 +356,45 @@ const TripEntryForm = ({ mode = "create", initialData = null }) => {
 			setIsSaving(false);
 		}
 	};
+
+	useEffect(() => {
+		if (!successMessage) return undefined;
+		const timer = setTimeout(() => setSuccessMessage(""), 4000);
+		return () => clearTimeout(timer);
+	}, [successMessage]);
+
+	const seo = useMemo(
+		() =>
+			analyzeSeo({
+				title: formData.title,
+				subtitle: formData.subtitle,
+				metaTitle: formData.metaTitle,
+				metaDescription: formData.metaDescription,
+				slug: formData.slug,
+				html: description,
+				hasCover: Boolean(formData.cover || formData.coverCloudImage),
+				keyword: seoKeyword,
+			}),
+		[formData, description, seoKeyword],
+	);
+
+	const categorySlug = useMemo(() => {
+		const category = tripCategories.find(
+			(item) => item._id === formData.trip,
+		);
+		return category ? category.slug : "";
+	}, [tripCategories, formData.trip]);
+
+	const publicPath = `/viatges/${categorySlug || "viatge"}/${formData.slug || ""}`;
+
+	const tabs = [
+		{ key: "main", label: "Contingut principal" },
+		{
+			key: "seo",
+			label: "SEO",
+			badge: <SeoScoreBadge score={seo.score} level={seo.level} />,
+		},
+	];
 
 	return (
 		<ContentFormLayout
@@ -268,91 +413,176 @@ const TripEntryForm = ({ mode = "create", initialData = null }) => {
 					? "Modifica el contingut de l'entrada de viatge"
 					: "Explica una etapa del vostre viatge"
 			}
-			submitLabel={isEdit ? "Desar canvis" : "Publicar"}
-			onSubmit={handleSubmit}
+			submitLabel={isEdit ? "Desar i sortir" : "Publicar"}
+			onSubmit={() => save({ redirect: true })}
+			onSaveAndStay={isEdit ? () => save({ redirect: false }) : null}
 			isSaving={isSaving}
 			errorMessage={errorMessage}
-			tabs={TABS}
+			successMessage={successMessage}
+			isDirty={autosave.isDirty}
+			dirtyRef={autosave.dirtyRef}
+			autosave={{ status: autosave.status, savedAt: autosave.savedAt }}
+			draftNotice={
+				autosave.storedDraft
+					? {
+							savedAt: autosave.storedDraft.savedAt,
+							onRestore: restoreDraft,
+							onDiscard: autosave.discardDraft,
+						}
+					: null
+			}
+			previewUrl={
+				isEdit && formData.slug && categorySlug
+					? `https://escapadesenparella.cat${publicPath}`
+					: null
+			}
+			tabs={tabs}
 			activeTab={activeTab}
 			onTabChange={setActiveTab}
+			sidebar={
+				activeTab === "main" ? (
+					<>
+						<FormSection title="Viatge">
+							<form
+								className="form"
+								onSubmit={(e) => e.preventDefault()}
+							>
+								<SelectField
+									name="trip"
+									label="Categoria de viatge"
+									value={formData.trip}
+									onChange={handleChange}
+									placeholder="Selecciona un viatge"
+									required
+									options={tripCategories.map((category) => ({
+										value: category._id,
+										label: category.title,
+									}))}
+									hint={
+										tripCategories.length
+											? "L'entrada surt dins de la pàgina del viatge que triïs."
+											: "Encara no hi ha viatges creats al panell."
+									}
+								/>
+							</form>
+						</FormSection>
+
+						<FormSection
+							title="Imatge de portada"
+							description="Encapçala l'entrada i és la imatge amb què es comparteix. 1729x973px."
+						>
+							<form
+								className="form"
+								onSubmit={(e) => e.preventDefault()}
+							>
+								<ImageUploadField
+									label=""
+									name="cover"
+									onChange={saveCoverToStatus}
+									hasImage={Boolean(
+										formData.cover ||
+											formData.coverCloudImage,
+									)}
+									preview={
+										<ImagePreview
+											blob={formData.blopCover}
+											current={formData.coverCloudImage}
+										/>
+									}
+								/>
+							</form>
+						</FormSection>
+
+						{formData.blopImages.length > 0 ? (
+						<FormSection
+							title="Imatges adjuntes"
+							description={
+								`${formData.blopImages.length} imatges pujades amb el mètode antic (post_images). Per posar imatges enmig del text, fes servir el bloc de galeria del cos.`
+							}
+						>
+							<form
+								className="form"
+								onSubmit={(e) => e.preventDefault()}
+							>
+								<GalleryField
+									label=""
+									previews={formData.blopImages}
+									onChange={saveGalleryToStatus}
+									onRemove={removeGalleryImage}
+								/>
+							</form>
+						</FormSection>
+						) : null}
+					</>
+				) : null
+			}
 		>
 			{activeTab === "main" ? (
-				<div className="form__wrapper">
-					<form className="form" onSubmit={(e) => e.preventDefault()}>
-						<SelectField
-							name="trip"
-							label="Categoria de viatge"
-							value={formData.trip}
-							onChange={handleChange}
-							placeholder="Selecciona un viatge"
-							options={tripCategories.map((category) => ({
-								value: category._id,
-								label: category.title,
-							}))}
-						/>
-						<TextField
-							name="title"
-							label="Títol"
-							placeholder="Títol de l'entrada de viatge"
-							value={formData.title}
-							onChange={handleChange}
-						/>
-						<TextField
-							name="subtitle"
-							label="Subtítol"
-							placeholder="Introducció curta a l'entrada de viatge"
-							value={formData.subtitle}
-							onChange={handleChange}
-						/>
-					</form>
+				<>
+					<FormSection
+						title="Encapçalament"
+						description="El títol i el subtítol són el que es llegeix als llistats i als resultats de cerca."
+					>
+						<form
+							className="form"
+							onSubmit={(e) => e.preventDefault()}
+						>
+							<TextField
+								name="title"
+								label="Títol"
+								placeholder="Títol de l'entrada de viatge"
+								value={formData.title}
+								onChange={handleChange}
+								required
+								maxLength={70}
+							/>
+							<TextField
+								name="subtitle"
+								label="Subtítol"
+								placeholder="Introducció curta a l'entrada de viatge"
+								value={formData.subtitle}
+								onChange={handleChange}
+								maxLength={160}
+								hint="Sol ser el millor esborrany de la meta descripció."
+							/>
+						</form>
+					</FormSection>
 
-					{formData.images.length > 0 ? (
-						<p className="text-primary-300 text-sm mb-2">
-							Hi ha{" "}
-							<strong>{formData.images.length} imatges</strong>{" "}
-							disponibles. Fes servir el shortcut{" "}
-							<strong>post_images(n, m + 1)</strong> per
-							inserir-les a la publicació.
-						</p>
-					) : null}
+					<FormSection
+						title="Cos de l'entrada"
+						description={`${seo.counts.words} paraules · ${seo.counts.headings} subtítols · ${seo.counts.links} enllaços`}
+					>
+						{formData.images.length > 0 ? (
+							<p className="text-primary-400 text-sm mb-2">
+								Hi ha{" "}
+								<strong>
+									{formData.images.length} imatges
+								</strong>{" "}
+								a la pestanya d&apos;imatges. Fes servir la
+								drecera <strong>post_images(n, m + 1)</strong>{" "}
+								per inserir-les al text.
+							</p>
+						) : null}
 
-					<EditorNavbar editor={editor} />
-					<EditorContent
-						editor={editor}
-						className="form-composer__editor"
-					/>
-				</div>
-			) : null}
-
-			{activeTab === "imatges" ? (
-				<div className="form__wrapper">
-					<form className="form" onSubmit={(e) => e.preventDefault()}>
-						<ImageUploadField
-							label="Imatge de portada (1729x973px)"
-							name="cover"
-							onChange={saveCoverToStatus}
-							hasImage={Boolean(
-								formData.cover || formData.coverCloudImage,
-							)}
-							preview={
-								<ImagePreview
-									blob={formData.blopCover}
-									current={formData.coverCloudImage}
-								/>
-							}
+						<EditorNavbar editor={editor} />
+						<EditorContent
+							editor={editor}
+							className="form-composer__editor"
 						/>
-						<GalleryField
-							label="Imatges de la publicació"
-							previews={formData.blopImages}
-							onChange={saveGalleryToStatus}
-							onRemove={removeGalleryImage}
-						/>
-					</form>
-				</div>
+					</FormSection>
+				</>
 			) : null}
 
 			{activeTab === "seo" ? (
-				<SeoFieldset values={formData} onChange={handleChange} />
+				<SeoFieldset
+					values={formData}
+					onChange={handleChange}
+					onFieldChange={setField}
+					analysis={seo}
+					keyword={seoKeyword}
+					onKeywordChange={setSeoKeyword}
+					previewPath={publicPath}
+				/>
 			) : null}
 		</ContentFormLayout>
 	);

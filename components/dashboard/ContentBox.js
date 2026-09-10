@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import ContentService from "../../services/contentService";
 import ShareModal from "../modals/ShareModal";
+import { SeoScoreRing } from "../forms/SeoScore";
 import PaymentService from "../../services/paymentService";
 
 const ContentBox = ({
@@ -13,11 +14,15 @@ const ContentBox = ({
 	title,
 	subtitle,
 	publicationDate,
+	seo = null,
 	fetchData,
 }) => {
 	const [dropdownVisibility, setDropdownVisibility] = useState(false);
 
-	const shortenedSubtitle = subtitle.slice(0, 70);
+	// Hi ha fitxes sense subtítol: `subtitle.slice` les feia petar totes.
+	const safeSubtitle = subtitle || "";
+	const shortenedSubtitle =
+		safeSubtitle.length > 70 ? `${safeSubtitle.slice(0, 70)}…` : safeSubtitle;
 	const service = new ContentService();
 	const paymentService = new PaymentService();
 	const removeItem = () => {
@@ -68,34 +73,56 @@ const ContentBox = ({
 		url = `/${slug}`;
 	}
 
-	const transformDate = (unformattedDate) => {
-		let modpublicationDate = new Date(unformattedDate);
-		const getYear = modpublicationDate.getFullYear();
-		const getMonth = modpublicationDate.getMonth();
-		const getDay = modpublicationDate.getDate();
-		return `${getDay}/${getMonth + 1}/${getYear}`;
-	};
+	const transformDate = (unformattedDate) =>
+		new Date(unformattedDate).toLocaleDateString("ca-ES", {
+			year: "numeric",
+			month: "short",
+			day: "numeric",
+		});
 
 	const [shareModalVisibility, setShareModalVisibility] = useState(false);
 	const handleShareModalVisibility = () => setShareModalVisibility(true);
 	const hideShareModalVisibility = () => setShareModalVisibility(false);
 
 	return (
-		<div className="content rounded-md box flex items-center w-full bg-primary-50 border border-primary-100 mb-2.5 px-5 py-4">
+		<div className="content box flex items-center gap-3 w-full bg-white hover:bg-gray-50 border border-primary-50 rounded-xl mb-2 px-4 py-3 transition-colors">
 			<Link href={url}>
-				<a className="flex items-center justify-between w-full">
-					<div className="flex items-center justify-center bg-white overflow-hidden h-12 w-12 rounded-md p-0 mr-5 border border-primary-100">
-						<img
-							src={image}
-							alt={title}
-							className="w-full h-full object-cover"
-						/>
+				<a className="flex items-center gap-4 min-w-0 flex-1">
+					<div className="flex items-center justify-center bg-gray-100 overflow-hidden h-12 w-12 shrink-0 rounded-lg border border-primary-50">
+						{image ? (
+							<img
+								src={image}
+								alt={title}
+								className="w-full h-full object-cover"
+							/>
+						) : null}
 					</div>
-					<h3 className="text-lg m-0 pr-5 w-96">{title}</h3>
-					<span className="m-0 pr-16 text-sm flex-1">
-						{shortenedSubtitle}...
+					<div className="min-w-0 flex-1">
+						<h3 className="m-0 text-15 font-medium text-primary-500 truncate">
+							{title}
+						</h3>
+						{shortenedSubtitle ? (
+							<p className="m-0 text-xs text-primary-400 truncate">
+								{shortenedSubtitle}
+							</p>
+						) : null}
+					</div>
+					<span className="shrink-0 flex items-center justify-end w-12">
+						{seo ? (
+							<SeoScoreRing
+								score={seo.score}
+								level={seo.level}
+							/>
+						) : (
+							<span
+								className="text-xs text-primary-300"
+								title="Aquest llistat no porta les metadades: obre la fitxa per veure'n el SEO."
+							>
+								—
+							</span>
+						)}
 					</span>
-					<span className="m-0 text-sm pr-5 block w-32">
+					<span className="hidden md:block shrink-0 w-28 text-right text-xs text-primary-400">
 						{transformDate(publicationDate)}
 					</span>
 				</a>
@@ -127,7 +154,7 @@ const ContentBox = ({
 						dropdownVisibility ? "block" : "hidden"
 					}`}
 				>
-					<li className="border-b border-primary-100 w-full">
+					<li className="border-b border-primary-50 w-full">
 						<Link href={url}>
 							<a className="dropdown__menu_item">
 								<svg
@@ -151,7 +178,7 @@ const ContentBox = ({
 							</a>
 						</Link>
 					</li>
-					<li className="border-b border-primary-100 w-full">
+					<li className="border-b border-primary-50 w-full">
 						<Link href={url + "/editar"}>
 							<a className="dropdown__menu_item">
 								<svg
@@ -179,7 +206,7 @@ const ContentBox = ({
 							</a>
 						</Link>
 					</li>
-					<li className="border-b border-primary-100 w-full">
+					<li className="border-b border-primary-50 w-full">
 						<button
 							onClick={() => handleShareModalVisibility()}
 							className="dropdown__menu_item"

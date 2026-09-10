@@ -1,13 +1,4 @@
-#floatingPublishPanel
-    #floatingPublishButton
-        @apply h-0 overflow-hidden transition-all duration-300 ease-in-out
-
-    .icon
-        @apply rotate-0 transition-all duration-300 ease-in-out
-
-    &.show
-        #floatingPublishButton
-            @apply h-auto overflow-auto
-
-        .icon
-            @apply rotate-45
+// El panell flotant de publicació ("Nou post") s'ha substituït per un botó
+// de creació dins de la capçalera de cada secció del panell: cada secció té
+// una sola acció possible i no calia una llista de nou opcions surant.
+// Aquest fitxer es manté perquè app.scss l'importa.

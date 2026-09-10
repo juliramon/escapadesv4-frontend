@@ -43,9 +43,9 @@ const useContentFormGuard = () => {
 	}, [user]);
 
 	useEffect(() => {
-		document.querySelector("body").classList.add("bg-primary-100");
+		document.querySelector("body").classList.add("bg-gray-50");
 		return () => {
-			document.querySelector("body").classList.remove("bg-primary-100");
+			document.querySelector("body").classList.remove("bg-gray-50");
 		};
 	}, []);
 

@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { cloudinaryUrl } from "../../utils/cloudinary";
 import { useRouter } from "next/router";
 import NavigationBar from "../../components/global/NavigationBar";
 import ContentService from "../../services/contentService";
@@ -330,15 +331,9 @@ const GetawayListing = ({
 				? getawayDetails.placeType
 				: null;
 
-		const relatedStoryCoverPath =
-			getawayDetails?.relatedStory?.cover.substring(0, 51);
-		const relatedStoryImageId =
-			getawayDetails?.relatedStory?.cover?.substring(63);
-		const relatedStoryCoverImg = `${relatedStoryCoverPath}w_100,h_100,c_fill/${relatedStoryImageId}`;
+		const relatedStoryCoverImg = cloudinaryUrl(getawayDetails?.relatedStory?.cover, "w_100,h_100,c_fill");
 
-		const getawayCoverPath = getawayDetails?.cover.substring(0, 51);
-		const getawayCoverId = getawayDetails?.cover?.substring(63);
-		const getawayCoverImg = `${getawayCoverPath}w_805,h_605,c_fill/${getawayCoverId}`;
+		const getawayCoverImg = cloudinaryUrl(getawayDetails?.cover, "w_805,h_605,c_fill");
 
 		// La fitxa és accessible des de qualsevol slug de categoria, però la URL
 		// que mana és sempre la de la seva categoria principal. Sense això cada

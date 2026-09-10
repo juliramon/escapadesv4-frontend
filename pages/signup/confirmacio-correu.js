@@ -1,87 +1,108 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useContext, useEffect, useState } from "react";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { useContext, useEffect, useState } from "react";
 import UserContext from "../../contexts/UserContext";
 import EmailService from "../../services/emailService";
-import NavigationBar from "../../components/global/NavigationBar";
+import AuthLayout from "../../components/auth/AuthLayout";
+import AuthAlert from "../../components/auth/AuthAlert";
 
+/**
+ * Pas de confirmació del correu electrònic.
+ *
+ * Respecte de la versió anterior:
+ *  - Cridava `useState` i un `useEffect` **després** d'un `return` condicional.
+ *    Quan la sessió es resolia, el component passava de dos hooks a quatre i
+ *    React avortava el render amb "Rendered more hooks than during the
+ *    previous render". Ara tots els hooks són abans de qualsevol retorn.
+ *  - Estava muntada amb `Container`, `Row`, `Col` i `Button` de react-bootstrap
+ *    sense el CSS de Bootstrap, i el botó de reenviar no deia mai si el correu
+ *    havia sortit.
+ */
 const ConfirmEmail = () => {
-  const { user } = useContext(UserContext);
-  const router = useRouter();
+	const { user } = useContext(UserContext);
+	const router = useRouter();
 
-  useEffect(() => {
-    if (!user || user === "null" || user === undefined) {
-      router.push("/login");
-    } else {
-      if (user) {
-        if (user.hasConfirmedEmail === true) {
-          router.push("/signup/complete-account");
-        }
-      }
-    }
-  }, [user]);
+	const [feedback, setFeedback] = useState("");
+	const [isSending, setIsSending] = useState(false);
 
-  if (!user) {
-    return (
-      <Head>
-        <title>Carregant...</title>
-      </Head>
-    );
-  }
+	useEffect(() => {
+		if (!user || user === "null" || user === undefined) {
+			router.push("/login");
+			return;
+		}
+		if (user.hasConfirmedEmail === true) {
+			router.push("/signup/complete-account");
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [user]);
 
-  const emailService = new EmailService();
-  const resendConfirmEmail = () =>
-    emailService.sendConfirmEmail(user.fullName, user.email);
+	if (!user) {
+		return (
+			<Head>
+				<title>Carregant… - Escapadesenparella.cat</title>
+			</Head>
+		);
+	}
 
-  const [queryId, setQueryId] = useState(null);
-  useEffect(() => {
-    if (router && router.route) {
-      setQueryId(router.route);
-    }
-  }, [router]);
+	const resendConfirmEmail = async () => {
+		if (isSending) return;
+		setIsSending(true);
+		setFeedback("");
 
-  return (
-    <>
-      <Head>
-        <title>Confirmació de correu - Escapadesenparella.cat</title>
-      </Head>
-      <section id="emailConfirmation">
-        <NavigationBar
-          logo_url={
-            "https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
-          }
-          user={user}
-          path={queryId}
-        />
-        <Container fluid className="mw-1600">
-          <Row>
-            <Col lg={12}>
-              <div className="content-wrapper">
-                <img
-                  src="/email-confirmation.jpg"
-                  alt=""
-                />
-                <h1>Confirma el teu correu</h1>
-                <p className="sub-h1 text-center">
-                  Hem enviat un correu a {user.email} per verificar la teva
-                  direcció de correu. <br />
-                  Revisa la teva bústia d'entrada i la carpeta d'spam.
-                </p>
-                <Button
-                  variant="none"
-                  className="btn btn-m btn-dark"
-                  onClick={resendConfirmEmail}
-                >
-                  Reenviar correu
-                </Button>
-              </div>
-            </Col>
-          </Row>
-        </Container>
-      </section>
-    </>
-  );
+		try {
+			const emailService = new EmailService();
+			await emailService.sendConfirmEmail(user.fullName, user.email);
+			setFeedback("Correu reenviat. Revisa la teva bústia.");
+		} catch (error) {
+			console.error(error);
+			setFeedback("No s'ha pogut reenviar el correu. Torna-ho a provar.");
+		}
+
+		setIsSending(false);
+	};
+
+	return (
+		<>
+			<Head>
+				<title>Confirmació de correu - Escapadesenparella.cat</title>
+				<meta name="robots" content="noindex, nofollow" />
+			</Head>
+
+			<AuthLayout
+				title="Confirma el teu correu"
+				subtitle={`Hem enviat un correu a ${user.email} per verificar la teva adreça. Revisa la safata d'entrada i la carpeta de correu brossa.`}
+			>
+				<img
+					src="/email-confirmation.jpg"
+					alt=""
+					className="w-full max-w-xs rounded-2xl mb-6"
+					loading="eager"
+				/>
+
+				<AuthAlert
+					tone={
+						feedback.startsWith("No s'ha") ? "error" : "success"
+					}
+				>
+					{feedback}
+				</AuthAlert>
+
+				<button
+					type="button"
+					className="button button__primary button__lg w-full justify-center"
+					onClick={resendConfirmEmail}
+					disabled={isSending}
+				>
+					{isSending ? "Enviant…" : "Reenviar el correu"}
+				</button>
+
+				<p className="text-xs text-primary-400 mt-4 mb-0">
+					Si el correu no arriba, comprova que l&apos;adreça sigui
+					correcta des de la teva configuració de compte.
+				</p>
+			</AuthLayout>
+		</>
+	);
 };
 
 export default ConfirmEmail;

@@ -1,530 +1,252 @@
-import { useContext, useEffect, useState } from "react";
-import { Button, Container, Form, Row, Spinner } from "react-bootstrap";
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import Head from "next/head";
+import Router, { useRouter } from "next/router";
 import NavigationBar from "../../components/global/NavigationBar";
+import ChoiceGroup from "../../components/forms/ChoiceGroup";
+import AuthAlert from "../../components/auth/AuthAlert";
 import AuthService from "../../services/authService";
 import ContentService from "../../services/contentService";
-import Router, { useRouter } from "next/router";
 import UserContext from "../../contexts/UserContext";
-import Head from "next/head";
 
-const CompleteAccount = ({ userWithConfirmedEmail }) => {
+/**
+ * Últim pas del registre: triar els temes d'interès.
+ *
+ * Respecte de la versió anterior:
+ *  - Cridava `useState` i dos `useEffect` **després** d'un `return` condicional;
+ *    quan la sessió es resolia, React avortava el render amb "Rendered more
+ *    hooks than during the previous render".
+ *  - `handleCheck` eren quatre branques quasi idèntiques de trenta línies que,
+ *    a més, feien `push` i `splice` damunt dels arrays de l'estat: React no
+ *    veia el canvi i la selecció es podia quedar sense pintar.
+ *  - Un `useEffect` que vigilava tot l'objecte `state` cridava
+ *    `refreshUserData` a cada clic en una casella, o sigui una petició de
+ *    perfil per cada tema marcat.
+ *  - Estava muntat amb `Container`, `Row` i `Form.Check` de react-bootstrap
+ *    sense el CSS de Bootstrap: les caselles sortien despentinades i el botó
+ *    de continuar no deia mai per què estava desactivat.
+ */
+
+const INTEREST_GROUPS = [
+	{
+		key: "regionsToFollow",
+		field: "region",
+		label: "Destinacions que t'interessen",
+		options: [
+			{ value: "barcelona", label: "Barcelona" },
+			{ value: "girona", label: "Girona" },
+			{ value: "lleida", label: "Lleida" },
+			{ value: "tarragona", label: "Tarragona" },
+			{ value: "costaBrava", label: "Costa Brava" },
+			{ value: "costaDaurada", label: "Costa Daurada" },
+			{ value: "pirineus", label: "Pirineus" },
+		],
+	},
+	{
+		key: "categoriesToFollow",
+		field: "category",
+		label: "Tipus d'escapada",
+		options: [
+			{ value: "romantica", label: "Romàntiques" },
+			{ value: "aventura", label: "Aventura" },
+			{ value: "gastronomica", label: "Gastronòmiques" },
+			{ value: "cultural", label: "Culturals" },
+			{ value: "relax", label: "Relax" },
+		],
+	},
+	{
+		key: "seasonsToFollow",
+		field: "season",
+		label: "Èpoques de l'any",
+		options: [
+			{ value: "hivern", label: "A la neu" },
+			{ value: "primavera", label: "Primavera" },
+			{ value: "estiu", label: "Estiu" },
+			// Deia "Tardo" a la pantalla; el valor que es desa sempre ha estat "tardor".
+			{ value: "tardor", label: "Tardor" },
+		],
+	},
+	{
+		key: "typesToFollow",
+		field: "type",
+		label: "On us agrada allotjar-vos",
+		options: [
+			{ value: "hotel", label: "Hotels" },
+			{ value: "apartament", label: "Apartaments" },
+			{ value: "casarural", label: "Cases rurals" },
+			{ value: "casaarbre", label: "Cases-arbre" },
+			{ value: "refugi", label: "Refugis" },
+			{ value: "carabana", label: "Carabanes" },
+		],
+	},
+];
+
+const CompleteAccount = () => {
 	const { user, refreshUserData } = useContext(UserContext);
 	const router = useRouter();
+
+	const [selection, setSelection] = useState({
+		regionsToFollow: [],
+		categoriesToFollow: [],
+		seasonsToFollow: [],
+		typesToFollow: [],
+	});
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
+	const hasConfirmedEmail = useRef(false);
+
+	const authService = useMemo(() => new AuthService(), []);
+	const service = useMemo(() => new ContentService(), []);
 
 	useEffect(() => {
 		if (!user || user === "null" || user === undefined) {
 			router.push("/login");
-		} else {
-			if (user.accountCompleted) {
-				router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel");
-			}
+			return;
 		}
+		if (user.accountCompleted) {
+			router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel");
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user]);
+
+	// Arribar fins aquí és el que confirma el correu. Es fa un sol cop: abans
+	// depenia de tot l'objecte d'estat i es repetia a cada canvi.
+	useEffect(() => {
+		if (!user || !user._id || hasConfirmedEmail.current) return;
+		hasConfirmedEmail.current = true;
+
+		const confirmEmail = async () => {
+			try {
+				const response = await authService.confirmEmail(user._id, true);
+				if (response && response.updateUser) {
+					refreshUserData(response.updateUser);
+				}
+			} catch (error) {
+				console.error(error);
+			}
+		};
+		confirmEmail();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [user]);
+
+	const missingGroups = INTEREST_GROUPS.filter(
+		(group) => selection[group.key].length === 0,
+	);
+	const isReadyToSubmit = missingGroups.length === 0;
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		if (!isReadyToSubmit || isSubmitting) return;
+
+		setIsSubmitting(true);
+		setErrorMessage("");
+
+		try {
+			await authService.completeAccount(
+				true,
+				selection.typesToFollow,
+				selection.categoriesToFollow,
+				selection.regionsToFollow,
+				selection.seasonsToFollow,
+			);
+
+			const profile = await service.getUserProfile(user._id);
+			refreshUserData(profile);
+			Router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel");
+		} catch (error) {
+			console.error(error);
+			setErrorMessage(
+				"No s'ha pogut desar la selecció. Torna-ho a provar.",
+			);
+			setIsSubmitting(false);
+		}
+	};
 
 	if (!user) {
 		return (
 			<Head>
-				<title>Carregant...</title>
+				<title>Carregant… - Escapadesenparella.cat</title>
 			</Head>
 		);
 	}
-
-	const initialState = {
-		typesToFollow: [],
-		categoriesToFollow: [],
-		regionsToFollow: [],
-		seasonsToFollow: [],
-		hasTypes: false,
-		hasCategories: false,
-		hasRegions: false,
-		hasSeasons: false,
-		accountCompleted: false,
-		isReadyToSubmit: false,
-		updatedUser: undefined,
-		isUserStateUpdated: false,
-	};
-
-	const [state, setState] = useState(initialState);
-	const authService = new AuthService();
-	const service = new ContentService();
-
-	useEffect(() => {
-		if (!state.isUserStateUpdated) {
-			const fetchData = async () => {
-				const isEmailConfirmed = true;
-				const userWithConfirmedEmail = await authService.confirmEmail(
-					user._id,
-					isEmailConfirmed
-				);
-				setState({
-					...state,
-					updatedUser: userWithConfirmedEmail.updateUser,
-					isUserStateUpdated: true,
-				});
-			};
-			fetchData();
-		}
-	}, [user, state]);
-
-	const handleCheck = (e) => {
-		let regions = state.regionsToFollow;
-		let types = state.typesToFollow;
-		let categories = state.categoriesToFollow;
-		let seasons = state.seasonsToFollow;
-		if (e.target.name === "region") {
-			if (e.target.checked === true) {
-				regions.push(e.target.id);
-				setState({
-					...state,
-					regionsToFollow: regions,
-					hasRegions: true,
-				});
-			} else {
-				let index = regions.indexOf(e.target.id);
-				regions.splice(index, 1);
-				if (regions.length > 0) {
-					setState({
-						...state,
-						regionsToFollow: regions,
-						hasRegions: true,
-					});
-				} else {
-					setState({
-						...state,
-						regionsToFollow: regions,
-						hasRegions: false,
-					});
-				}
-			}
-		} else if (e.target.name === "type") {
-			if (e.target.checked === true) {
-				types.push(e.target.id);
-				setState({ ...state, typesToFollow: types, hasTypes: true });
-			} else {
-				let index = types.indexOf(e.target.id);
-				types.splice(index, 1);
-				if (types.length > 0) {
-					setState({
-						...state,
-						typesToFollow: types,
-						hasTypes: true,
-					});
-				} else {
-					setState({
-						...state,
-						typesToFollow: types,
-						hasTypes: false,
-					});
-				}
-			}
-		} else if (e.target.name === "category") {
-			if (e.target.checked === true) {
-				categories.push(e.target.id);
-				setState({
-					...state,
-					categoriesToFollow: categories,
-					hasCategories: true,
-				});
-			} else {
-				let index = categories.indexOf(e.target.id);
-				categories.splice(index, 1);
-				if (categories.length > 0) {
-					setState({
-						...state,
-						categoriesToFollow: categories,
-						hasCategories: true,
-					});
-				} else {
-					setState({
-						...state,
-						categoriesToFollow: categories,
-						hasCategories: false,
-					});
-				}
-			}
-		} else if (e.target.name === "season") {
-			if (e.target.checked === true) {
-				seasons.push(e.target.id);
-				setState({
-					...state,
-					seasonsToFollow: seasons,
-					hasSeasons: true,
-				});
-			} else {
-				let index = seasons.indexOf(e.target.id);
-				seasons.splice(index, 1);
-				if (seasons.length > 0) {
-					setState({
-						...state,
-						seasonsToFollow: seasons,
-						hasSeasons: true,
-					});
-				} else {
-					setState({
-						...state,
-						seasonsToFollow: seasons,
-						hasSeasons: false,
-					});
-				}
-			}
-		}
-	};
-
-	useEffect(() => {
-		if (
-			state.hasCategories &&
-			state.hasRegions &&
-			state.hasTypes &&
-			state.hasSeasons
-		) {
-			setState({
-				...state,
-				accountCompleted: true,
-				isReadyToSubmit: true,
-			});
-		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [
-		state.hasCategories,
-		state.hasRegions,
-		state.hasTypes,
-		state.hasSeasons,
-	]);
-
-	const getUserUpdatedData = () => {
-		service.getUserProfile(user._id).then((res) => {
-			refreshUserData(res);
-		});
-	};
-
-	const submitSelection = () => {
-		const {
-			accountCompleted,
-			typesToFollow,
-			categoriesToFollow,
-			regionsToFollow,
-			seasonsToFollow,
-		} = state;
-		authService
-			.completeAccount(
-				accountCompleted,
-				typesToFollow,
-				categoriesToFollow,
-				regionsToFollow,
-				seasonsToFollow
-			)
-			.then(() => {
-				setState({
-					...state,
-					formData: {
-						typesToFollow: [],
-						categoriesToFollow: [],
-						regionsToFollow: [],
-						seasonsToFollow: [],
-						hasTypes: false,
-						hasCategories: false,
-						hasRegions: false,
-						hasSeasons: false,
-						accountCompleted: false,
-						isReadyToSubmit: false,
-					},
-				});
-				getUserUpdatedData();
-				Router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel");
-			})
-			.catch((err) => console.error(err));
-	};
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		submitSelection();
-	};
-
-	const [queryId, setQueryId] = useState(null);
-	useEffect(() => {
-		if (router && router.route) {
-			setQueryId(router.route);
-		}
-	}, [router]);
-
-	useEffect(() => {
-		if (state.isUserStateUpdated) {
-			refreshUserData(state.updatedUser);
-		}
-	}, [state]);
 
 	return (
 		<>
 			<Head>
 				<title>Completa el teu compte - Escapadesenparella.cat</title>
+				<meta name="robots" content="noindex, nofollow" />
 			</Head>
-			<section id="completeAccountPage">
+
+			<div className="bg-gray-50 min-h-screen">
 				<NavigationBar
 					logo_url={
 						"https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
 					}
 					user={user}
-					path={queryId}
+					path={router.route}
 				/>
-				<Container fluid className="mw-1600">
-					<Row>
-						<div className="box d-flex">
-							<div className="col left"></div>
-							<div className="col center">
-								<div className="top-nav-wrapper">
-									<h1 className="top-nav-title">
-										Selecciona temes d'interès
-									</h1>
-									<p className="top-nav-subtitle">
-										Selecciona les regions, categories i
-										allotjaments que més t'interessin per a
-										mantenir-te inspirat!
-										<br />
-										Sempre podràs modificar la teva selecció
-										des del teu compte.
-									</p>
-								</div>
-								<div className="selection-box">
-									<Form.Check
-										label="Barcelona"
-										name="region"
-										id="barcelona"
-										onChange={handleCheck}
-									/>
-									<Form.Check
-										label="Girona"
-										name="region"
-										id="girona"
-										onChange={handleCheck}
-									/>
-									<Form.Check
-										label="Lleida"
-										name="region"
-										id="lleida"
-										onChange={handleCheck}
-									/>
-									<Form.Check
-										label="Tarragona"
-										name="region"
-										id="tarragona"
-										onChange={handleCheck}
-									/>
-									<Form.Check
-										label="Costa Brava"
-										name="region"
-										id="costaBrava"
-										onChange={handleCheck}
-									/>
-									<Form.Check
-										label="Costa Daurada"
-										name="region"
-										id="costaDaurada"
-										onChange={handleCheck}
-									/>
-									<Form.Check
-										label="Pirineus"
-										name="region"
-										id="pirineus"
-										onChange={handleCheck}
-									/>
-									<Form.Check
-										label="Romàntiques"
-										name="category"
-										id="romantica"
-										onChange={handleCheck}
-									/>
-									<Form.Check
-										label="Aventura"
-										name="category"
-										id="aventura"
-										onChange={handleCheck}
-									/>
-									<Form.Check
-										label="Gastronòmiques"
-										name="category"
-										id="gastronomica"
-										onChange={handleCheck}
-									/>
-									<Form.Check
-										label="Culturals"
-										name="category"
-										onChange={handleCheck}
-										id="cultural"
-									/>
-									<Form.Check
-										label="Relax"
-										name="category"
-										onChange={handleCheck}
-										id="relax"
-									/>
-									<Form.Check
-										label="A la neu"
-										name="season"
-										onChange={handleCheck}
-										id="hivern"
-									/>
-									<Form.Check
-										label="Primavera"
-										name="season"
-										onChange={handleCheck}
-										id="primavera"
-									/>
-									<Form.Check
-										label="Estiu"
-										name="season"
-										onChange={handleCheck}
-										id="estiu"
-									/>
-									<Form.Check
-										label="Tardo"
-										name="season"
-										onChange={handleCheck}
-										id="tardor"
-									/>
-									<Form.Check
-										label="Apartaments"
-										name="type"
-										onChange={handleCheck}
-										id="apartament"
-									/>
-									<Form.Check
-										label="Refugis"
-										name="type"
-										id="refugi"
-										onChange={handleCheck}
-									/>
-									<Form.Check
-										label="Cases-arbre"
-										name="type"
-										id="casaarbre"
-										onChange={handleCheck}
-									/>
-									<Form.Check
-										label="Cases rurals"
-										name="type"
-										id="casarural"
-										onChange={handleCheck}
-									/>
-									<Form.Check
-										label="Carabanes"
-										name="type"
-										id="carabana"
-										onChange={handleCheck}
-									/>
-									<Form.Check
-										label="Hotels"
-										name="type"
-										id="hotel"
-										onChange={handleCheck}
-									/>
-								</div>
+
+				<section className="container py-10 lg:py-14">
+					<div className="max-w-3xl mx-auto">
+						<header className="text-center mb-8">
+							<span className="inline-block text-xs font-medium tracking-wide uppercase text-secondary-600 mb-2">
+								Últim pas
+							</span>
+							<h1 className="font-headings text-3xl lg:text-4xl leading-tight m-0">
+								Què us ve de gust?
+							</h1>
+							<p className="text-base text-primary-400 mt-3 mb-0">
+								Tria el que més us interessi i us proposarem
+								escapades a mida. Ho pots canviar quan vulguis
+								des del teu compte.
+							</p>
+						</header>
+
+						<form
+							onSubmit={handleSubmit}
+							className="form bg-white rounded-2xl border border-primary-50 shadow-sm p-6 lg:p-8"
+						>
+							<AuthAlert>{errorMessage}</AuthAlert>
+
+							{INTEREST_GROUPS.map((group) => (
+								<ChoiceGroup
+									key={group.key}
+									name={group.field}
+									label={group.label}
+									options={group.options}
+									value={selection[group.key]}
+									onChange={(value) =>
+										setSelection((previous) => ({
+											...previous,
+											[group.key]: value,
+										}))
+									}
+									multiple
+									className="mb-4"
+								/>
+							))}
+
+							<div className="border-t border-primary-50 pt-5 mt-2 flex flex-wrap items-center justify-between gap-3">
+								<p className="m-0 text-sm text-primary-400">
+									{isReadyToSubmit
+										? "Ja ho tens tot: som-hi!"
+										: `Tria almenys una opció de: ${missingGroups
+												.map((group) =>
+													group.label.toLowerCase(),
+												)
+												.join(", ")}.`}
+								</p>
+								<button
+									type="submit"
+									className="button button__primary button__med w-auto"
+									disabled={!isReadyToSubmit || isSubmitting}
+								>
+									{isSubmitting ? "Desant…" : "Continuar"}
+								</button>
 							</div>
-							<div className="col left"></div>
-						</div>
-					</Row>
-				</Container>
-				<div className="progress-bar-outter">
-					<Container className="d-flex align-items-center">
-						<div className="col left"></div>
-						<div className="col center"></div>
-						<div className="col right">
-							<div className="buttons d-flex justify-space-between justify-content-end">
-								{state.isReadyToSubmit ? (
-									<Button
-										type="submit"
-										variant="none"
-										className="btn btn-dark"
-										onClick={handleSubmit}
-									>
-										Continuar{" "}
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											className="icon icon-tabler icon-tabler-arrow-narrow-right"
-											width="20"
-											height="20"
-											viewBox="0 0 24 24"
-											strokeWidth="1.5"
-											stroke="#ffffff"
-											fill="none"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										>
-											<path
-												stroke="none"
-												d="M0 0h24v24H0z"
-												fill="none"
-											/>
-											<line
-												x1="5"
-												y1="12"
-												x2="19"
-												y2="12"
-											/>
-											<line
-												x1="15"
-												y1="16"
-												x2="19"
-												y2="12"
-											/>
-											<line
-												x1="15"
-												y1="8"
-												x2="19"
-												y2="12"
-											/>
-										</svg>
-									</Button>
-								) : (
-									<Button
-										type="submit"
-										variant="none"
-										className="btn btn-dark"
-										disabled
-									>
-										Continuar{" "}
-										<svg
-											xmlns="http://www.w3.org/2000/svg"
-											className="icon icon-tabler icon-tabler-arrow-narrow-right"
-											width="20"
-											height="20"
-											viewBox="0 0 24 24"
-											strokeWidth="1.5"
-											stroke="#ffffff"
-											fill="none"
-											strokeLinecap="round"
-											strokeLinejoin="round"
-										>
-											<path
-												stroke="none"
-												d="M0 0h24v24H0z"
-												fill="none"
-											/>
-											<line
-												x1="5"
-												y1="12"
-												x2="19"
-												y2="12"
-											/>
-											<line
-												x1="15"
-												y1="16"
-												x2="19"
-												y2="12"
-											/>
-											<line
-												x1="15"
-												y1="8"
-												x2="19"
-												y2="12"
-											/>
-										</svg>
-									</Button>
-								)}
-							</div>
-						</div>
-					</Container>
-				</div>
-			</section>
+						</form>
+					</div>
+				</section>
+			</div>
 		</>
 	);
 };

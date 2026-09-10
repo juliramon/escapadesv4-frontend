@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { cloudinaryUrl } from "../../utils/cloudinary";
 import ContentService from "../../services/contentService";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
@@ -298,12 +299,16 @@ const CategoryTrip = ({
 									{categoryDetails.carouselImages
 										? categoryDetails.carouselImages.map(
 												(el, idx) => {
-													const imageSrc =
-														el?.substring(0, 51);
-													const imageId =
-														el?.substring(63);
-													const imageModSrc = `${imageSrc}w_805,h_605,c_fill/${imageId}`;
-													const imageModSrcMob = `${imageSrc}w_400,h_300,c_fill/${imageId}`;
+													const imageModSrc =
+														cloudinaryUrl(
+															el,
+															"w_805,h_605,c_fill"
+														);
+													const imageModSrcMob =
+														cloudinaryUrl(
+															el,
+															"w_400,h_300,c_fill"
+														);
 
 													const priority =
 														idx === 1 || idx === 2

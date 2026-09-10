@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { cloudinaryUrl } from "../../utils/cloudinary";
 
 const RegularListBox = ({
 	index,
@@ -15,13 +16,9 @@ const RegularListBox = ({
 		month: "short",
 		day: "numeric",
 	});
-	const coverPath = cover.substring(0, 51);
-	const imageId = cover.substring(63);
-	const coverImg = `${coverPath}w_475,h_318,c_fill/${imageId}`;
+	const coverImg = cloudinaryUrl(cover, "w_475,h_318,c_fill");
 
-	const avatarPath = avatar.substring(0, 51);
-	const avatarId = avatar.substring(63);
-	const avatarImg = `${avatarPath}w_32,h_32,c_fill/${avatarId}`;
+	const avatarImg = cloudinaryUrl(avatar, "w_32,h_32,c_fill");
 	return (
 		<article className="w-full group">
 			<Link href={`/llistes/${slug}`}>

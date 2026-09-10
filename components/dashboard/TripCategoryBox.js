@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { analyzeListingSeo } from "../../utils/seo";
 import ContentService from "../../services/contentService";
 import TripCategoryModal from "../modals/TripCategoryModal";
 import EntityRow from "../admin/EntityRow";
@@ -13,6 +14,18 @@ const TripCategoryBox = ({ fetchData, ...entity }) => {
 	const service = new ContentService();
 	const [isEditOpen, setIsEditOpen] = useState(false);
 
+	// Puntuació de SEO de la fila. Les categories de viatge no tenen
+	// `metaTitle` ni `metaDescription`, i tampoc subtítol: la pàgina pública
+	// fa servir el títol i el text SEO de capçalera com a metes.
+	const seo = analyzeListingSeo({
+		title: entity.title,
+		subtitle: entity.subtitle,
+		metaTitle: entity.title,
+		metaDescription: entity.seoTextHeader,
+		slug: entity.slug,
+		hasCover: Boolean(entity.image),
+	});
+
 	const removeItem = () =>
 		service.removeTripCategory(entity.id).then(() => fetchData());
 
@@ -22,6 +35,7 @@ const TripCategoryBox = ({ fetchData, ...entity }) => {
 			image={entity.image}
 			title={entity.title}
 			subtitle={entity.subtitle}
+			seo={seo}
 			onEdit={() => setIsEditOpen(true)}
 			onRemove={removeItem}
 			editModal={

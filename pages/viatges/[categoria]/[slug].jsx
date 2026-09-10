@@ -1,8 +1,9 @@
 import { useContext } from "react";
+import { cloudinaryUrl } from "../../../utils/cloudinary";
 import NavigationBar from "../../../components/global/NavigationBar";
 import ContentService from "../../../services/contentService";
 import UserContext from "../../../contexts/UserContext";
-import parse from "html-react-parser";
+import ContentParser from "../../../utils/ContentParser";
 import Footer from "../../../components/global/Footer";
 import GlobalMetas from "../../../components/head/GlobalMetas";
 import FancyboxUtil from "../../../utils/FancyboxUtils";
@@ -16,7 +17,6 @@ import AdBanner from "../../../components/ads/AdBanner";
 const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 	const { user } = useContext(UserContext);
 
-	let parsedDescription;
 	let slicedDescription = [];
 
 	const buildImagesGrid = (start, end) => {
@@ -60,39 +60,24 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 	};
 
 	if (tripEntryDetails.description) {
-		parsedDescription = parse(tripEntryDetails.description);
-		parsedDescription.map((el) => slicedDescription.push(el));
-		if (slicedDescription.length > 1) {
-			slicedDescription.forEach((el, idx) => {
-				console.log(el.props.children);
-				if (
-					typeof el.props.children == "string" &&
-					el.props.children.includes("post_images")
-				) {
-					const str = el.props.children;
-
-					const found = str.replace(/^\D+/g, "");
-					const foundArr = found.slice(0, -2).split(",");
-					const startingIndex = foundArr[0];
-					const endIndex = foundArr[1];
-
-					slicedDescription[idx] = buildImagesGrid(
-						startingIndex,
-						endIndex
-					);
-				}
-			});
-		}
+		// Abans es feia aquí a mà: repetia el tractament de `post_images` que ja
+		// hi ha al parser, deixava un `console.log` a producció i llegia
+		// `el.props.children` sense comprovar-ho, cosa que peta amb qualsevol
+		// node de text solt. Passant pel parser, les entrades de viatge també
+		// entenen els blocs de galeria i els anuncis del cos.
+		slicedDescription = ContentParser.parseStoryContent(
+			tripEntryDetails.description,
+			tripEntryDetails.images,
+			buildImagesGrid,
+			null,
+			{ title: tripEntryDetails.title }
+		);
 	}
 
-	const coverPath = tripEntryDetails.cover.substring(0, 51);
-	const imageId = tripEntryDetails.cover.substring(63);
-	const coverImgDesktop = `${coverPath}w_1392,h_783,c_fill/${imageId}`;
-	const coverImgMobile = `${coverPath}w_400,h_300,c_fill/${imageId}`;
+	const coverImgDesktop = cloudinaryUrl(tripEntryDetails.cover, "w_1392,h_783,c_fill");
+	const coverImgMobile = cloudinaryUrl(tripEntryDetails.cover, "w_400,h_300,c_fill");
 
-	const coverAuthorPath = tripEntryDetails.owner.avatar.substring(0, 51);
-	const imageAuthorId = tripEntryDetails.owner.avatar.substring(63);
-	const coverAuthorImg = `${coverAuthorPath}w_32,h_32,c_fill/${imageAuthorId}`;
+	const coverAuthorImg = cloudinaryUrl(tripEntryDetails.owner.avatar, "w_32,h_32,c_fill");
 
 	return (
 		<>

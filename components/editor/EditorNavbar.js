@@ -333,6 +333,37 @@ const EditorNavbar = ({ editor }) => {
 					<path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463"></path>
 				</svg>
 			</button>
+			{/*
+			 * El bloc de galeria només surt als editors que el porten
+			 * carregat: als modals de destinacions i categories no hi és.
+			 */}
+			{editor.commands.insertGalleryBlock ? (
+				<button
+					onClick={() =>
+						editor.chain().focus().insertGalleryBlock([]).run()
+					}
+					title="Inserir una galeria d'imatges"
+				>
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						className="icon icon-tabler icon-tabler-layout-grid"
+						width={44}
+						height={44}
+						viewBox="0 0 24 24"
+						strokeWidth="1.5"
+						stroke="currentColor"
+						fill="none"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+					>
+						<path stroke="none" d="M0 0h24v24H0z" fill="none" />
+						<rect x="4" y="4" width="6" height="6" rx="1" />
+						<rect x="14" y="4" width="6" height="6" rx="1" />
+						<rect x="4" y="14" width="6" height="6" rx="1" />
+						<rect x="14" y="14" width="6" height="6" rx="1" />
+					</svg>
+				</button>
+			) : null}
 		</div>
 	);
 };

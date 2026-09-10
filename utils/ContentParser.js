@@ -1,5 +1,6 @@
 import parse from "html-react-parser";
 import AdBanner from "../components/ads/AdBanner";
+import ContentGallery from "../components/content/ContentGallery";
 
 /**
  * Parser personalizado para contenido de historias que soporta atajos especiales
@@ -68,6 +69,26 @@ const ContentParser = {
 					);
 					return adBannerComponents[bannerId];
 				}
+
+				// Bloc de galeria inserit des de l'editor. Les imatges viatgen
+				// dins del mateix HTML, separades per "|", i no depenen de la
+				// llista d'imatges adjuntes de la publicació.
+				if (
+					domNode.type === "tag" &&
+					domNode.name === "div" &&
+					domNode.attribs?.["data-gallery"]
+				) {
+					const galleryImages = domNode.attribs["data-gallery"]
+						.split("|")
+						.filter(Boolean);
+
+					return (
+						<ContentGallery
+							images={galleryImages}
+							title={options.title || ""}
+						/>
+					);
+				}
 			},
 		});
 
@@ -89,12 +110,13 @@ const ContentParser = {
 		description,
 		images = [],
 		buildImagesGrid = null,
-		welcomeText = null
+		welcomeText = null,
+		options = {}
 	) => {
 		if (!description) return [];
 
 		// Primero procesar los atajos de banners
-		let parsedDescription = ContentParser.parseContent(description);
+		let parsedDescription = ContentParser.parseContent(description, options);
 		let slicedDescription = [];
 
 		// Convertir a array plano

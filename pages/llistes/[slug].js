@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { cloudinaryUrl } from "../../utils/cloudinary";
 import { useContext, useEffect, useState } from "react";
 import Footer from "../../components/global/Footer";
 import NavigationBar from "../../components/global/NavigationBar";
@@ -52,21 +53,14 @@ const ListView = ({ listDetails, relatedLists }) => {
 	const handleShareModalVisibility = () => setShareModalVisibility(true);
 	const hideShareModalVisibility = () => setShareModalVisibility(false);
 
-	const coverPath = listDetails.cover.substring(0, 51);
-	const imageId = listDetails.cover.substring(63);
-	const coverImg = `${coverPath}w_1729,h_973,c_fill/${imageId}`;
-	const coverImgMob = `${coverPath}w_450,h_337,c_fill/${imageId}`;
-	const coverImageIdWebp = listDetails.cover
-		?.substring(63)
-		.replace("jpg", "webp");
-	const coverImgWebp = `${coverPath}f_webp/w_1729,h_973,c_fill/${coverImageIdWebp}`;
-	const coverImgWebpMobile = `${coverPath}f_webp/w_450,h_337,c_fill/${coverImageIdWebp}`;
+	const coverImg = cloudinaryUrl(listDetails.cover, "w_1729,h_973,c_fill");
+	const coverImgMob = cloudinaryUrl(listDetails.cover, "w_450,h_337,c_fill");
+	const coverImgWebp = cloudinaryUrl(listDetails.cover, "f_webp,w_1729,h_973,c_fill");
+	const coverImgWebpMobile = cloudinaryUrl(listDetails.cover, "f_webp,w_450,h_337,c_fill");
 
-	const ogImg = `${coverPath}w_1200,h_630,c_fill/${imageId}`;
+	const ogImg = cloudinaryUrl(listDetails.cover, "w_1200,h_630,c_fill");
 
-	const coverAuthorPath = listDetails.owner.avatar.substring(0, 51);
-	const imageAuthorId = listDetails.owner.avatar.substring(63);
-	const coverAuthorImg = `${coverAuthorPath}w_32,h_32,c_fill/${imageAuthorId}`;
+	const coverAuthorImg = cloudinaryUrl(listDetails.owner.avatar, "w_32,h_32,c_fill");
 
 	return (
 		<>
@@ -251,7 +245,8 @@ const ListView = ({ listDetails, relatedLists }) => {
 											</div>
 											<div className="list__description w-full mt-6 md:mt-8">
 												{ContentParser.parseContent(
-													listDetails.description
+													listDetails.description,
+													{ title: listDetails.title }
 												)}
 											</div>
 											<div className="pt-8 md:pt-12">

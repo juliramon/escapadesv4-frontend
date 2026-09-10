@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { cloudinaryUrl } from "../../utils/cloudinary";
 
 const FeaturedStoryBox = ({ story, index }) => {
 	const createdDate = new Date(story.createdAt).toLocaleDateString("ca-es", {
@@ -7,16 +8,11 @@ const FeaturedStoryBox = ({ story, index }) => {
 		day: "numeric",
 	});
 
-	const coverPath = story.cover.substring(0, 51);
-	const imageId = story.cover.substring(63);
-	const coverImg = `${coverPath}w_1729,h_973,c_fill/${imageId}`;
-	const coverImageIdWebp = story.cover?.substring(63).replace("jpg", "webp");
-	const coverImgWebp = `${coverPath}f_webp/w_1729,h_973,c_fill/${coverImageIdWebp}`;
-	const coverImgWebpMobile = `${coverPath}f_webp/w_450,h_337,c_fill/${coverImageIdWebp}`;
+	const coverImg = cloudinaryUrl(story.cover, "w_1729,h_973,c_fill");
+	const coverImgWebp = cloudinaryUrl(story.cover, "f_webp,w_1729,h_973,c_fill");
+	const coverImgWebpMobile = cloudinaryUrl(story.cover, "f_webp,w_450,h_337,c_fill");
 
-	const avatarPath = story.owner.avatar.substring(0, 51);
-	const ownerImageId = story.owner.avatar.substring(63);
-	const avatarImg = `${avatarPath}w_24,h_24,c_fill/${ownerImageId}`;
+	const avatarImg = cloudinaryUrl(story.owner.avatar, "w_24,h_24,c_fill");
 
 	return (
 		<Link href={"histories/" + story.slug} key={index}>

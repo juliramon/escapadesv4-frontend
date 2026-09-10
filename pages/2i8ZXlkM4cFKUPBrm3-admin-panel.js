@@ -1,8 +1,10 @@
 import { useEffect, useState, useContext, useCallback } from "react";
 import Head from "next/head";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import NavigationBar from "../components/global/NavigationBar";
 import ContentService from "../services/contentService";
+import { analyzeListingSeo } from "../utils/seo";
 import UserContext from "../contexts/UserContext";
 import FetchingSpinner from "../components/global/FetchingSpinner";
 import ContentBox from "../components/dashboard/ContentBox";
@@ -25,17 +27,38 @@ import DestinationModal from "../components/modals/DestinationModal";
  */
 
 /** Camps que comparteixen les fitxes de contingut publicable. */
-const contentBoxProps = (item) => ({
-	type: item.type,
-	id: item._id,
+const contentBoxProps = (item) => {
 	// Les llistes i les entrades de viatge guarden la portada a `cover`; les
 	// activitats i els allotjaments, a `images[0]`.
-	image: item.cover || (Array.isArray(item.images) ? item.images[0] : ""),
-	title: item.title,
-	subtitle: item.subtitle,
-	publicationDate: item.createdAt,
-	slug: item.slug,
-});
+	const image = item.cover || (Array.isArray(item.images) ? item.images[0] : "");
+
+	// Els llistats d'activitats i allotjaments arriben retallats des de l'API i
+	// no porten les metadades. Es distingeix "no ve al llistat" (undefined) de
+	// "està buit" (""): en el primer cas no es pot puntuar res i val més dir-ho
+	// que ensenyar un zero que no vol dir el que sembla.
+	const hasSeoFields =
+		item.metaTitle !== undefined || item.metaDescription !== undefined;
+
+	return {
+		type: item.type,
+		id: item._id,
+		image,
+		title: item.title,
+		subtitle: item.subtitle,
+		publicationDate: item.createdAt,
+		slug: item.slug,
+		seo: hasSeoFields
+			? analyzeListingSeo({
+					title: item.title,
+					subtitle: item.subtitle,
+					metaTitle: item.metaTitle,
+					metaDescription: item.metaDescription,
+					slug: item.slug,
+					hasCover: Boolean(image),
+				})
+			: null,
+	};
+};
 
 const AdminPanel = () => {
 	const { user } = useContext(UserContext);
@@ -43,7 +66,6 @@ const AdminPanel = () => {
 	const service = new ContentService();
 
 	const [loadPage, setLoadPage] = useState(false);
-	const [toggleButton, setToggleButton] = useState(false);
 	const [openCreateModal, setOpenCreateModal] = useState(null);
 
 	const [state, setState] = useState({
@@ -139,26 +161,36 @@ const AdminPanel = () => {
 		{
 			key: "activities",
 			title: "Activitats",
+			group: "Contingut",
+			create: { href: "/nova-activitat", label: "Nova activitat" },
 			render: (item) => <ContentBox {...contentBoxProps(item)} />,
 		},
 		{
 			key: "places",
 			title: "Allotjaments",
+			group: "Contingut",
+			create: { href: "/nou-allotjament", label: "Nou allotjament" },
 			render: (item) => <ContentBox {...contentBoxProps(item)} />,
 		},
 		{
 			key: "stories",
 			title: "Històries",
+			group: "Contingut",
+			create: { href: "/nova-historia", label: "Nova història" },
 			render: (item) => <ContentBox {...contentBoxProps(item)} />,
 		},
 		{
 			key: "lists",
 			title: "Llistes",
+			group: "Contingut",
+			create: { href: "/nova-llista", label: "Nova llista" },
 			render: (item) => <ContentBox {...contentBoxProps(item)} />,
 		},
 		{
 			key: "categories",
 			title: "Categories",
+			group: "Taxonomies",
+			create: { modal: "category", label: "Nova categoria" },
 			render: (item) => (
 				<CategoryBox
 					id={item._id}
@@ -185,6 +217,8 @@ const AdminPanel = () => {
 		{
 			key: "characteristics",
 			title: "Característiques",
+			group: "Taxonomies",
+			create: { modal: "characteristic", label: "Nova característica" },
 			render: (item) => (
 				<CharacteristicBox
 					id={item._id}
@@ -211,6 +245,8 @@ const AdminPanel = () => {
 		{
 			key: "tripCategories",
 			title: "Categories de viatge",
+			group: "Taxonomies",
+			create: { modal: "tripCategory", label: "Nova categoria de viatge" },
 			render: (item) => (
 				<TripCategoryBox
 					id={item._id}
@@ -238,6 +274,8 @@ const AdminPanel = () => {
 		{
 			key: "tripEntries",
 			title: "Entrades de viatge",
+			group: "Contingut",
+			create: { href: "/nou-viatge", label: "Nova entrada de viatge" },
 			render: (item) => {
 				// Una entrada sense categoria (o amb una de ja esborrada) feia
 				// petar tota la pestanya en llegir el.trip._id / category.slug.
@@ -258,6 +296,8 @@ const AdminPanel = () => {
 		{
 			key: "destinations",
 			title: "Destinacions",
+			group: "Taxonomies",
+			create: { modal: "destination", label: "Nova destinació" },
 			render: (item) => (
 				<DestinationBox
 					id={item._id}
@@ -285,45 +325,107 @@ const AdminPanel = () => {
 		},
 	];
 
-	/** Accions del panell flotant de publicació. */
-	const CREATE_ACTIONS = [
-		{ label: "Publicar nova activitat", href: "/nova-activitat" },
-		{ label: "Publicar nou allotjament", href: "/nou-allotjament" },
-		{ label: "Publicar nova història", href: "/nova-historia" },
-		{ label: "Publicar nova llista", href: "/nova-llista" },
-		{ label: "Publicar nova categoria", modal: "category" },
-		{ label: "Publicar nova característica", modal: "characteristic" },
-		{ label: "Publicar nova destinació", modal: "destination" },
-		{ label: "Publicar nova categoria de viatge", modal: "tripCategory" },
-		{ label: "Publicar nova entrada de viatge", href: "/nou-viatge" },
-	];
-
 	const activeTab = TABS.find((tab) => tab.key === state.activeTab);
-	const activeItems = state[state.activeTab] || [];
+	const countOf = (key) => (state[key] || []).length;
 
-	const listResults = state.isFetching ? (
-		<FetchingSpinner />
-	) : (
-		activeItems.map((item, idx) => (
-			<div key={item._id || idx} className="w-full">
-				{activeTab.render(item)}
-			</div>
-		))
+	/**
+	 * Cerca dins de la secció.
+	 *
+	 * Amb un centenar de fitxes, l'única manera de trobar-ne una era baixar
+	 * amb la roda fins a topar-hi. Les taxonomies desen el nom a `name` i les
+	 * publicacions a `title`; es miren els dos, més el subtítol i el slug.
+	 */
+	const [query, setQuery] = useState("");
+
+	useEffect(() => setQuery(""), [state.activeTab]);
+
+	const normalize = (value) =>
+		String(value || "")
+			.toLowerCase()
+			.normalize("NFD")
+			.replace(/[\u0300-\u036f]/g, "");
+
+	const activeItems = state[state.activeTab] || [];
+	const needle = normalize(query.trim());
+	const visibleItems = needle
+		? activeItems.filter((item) =>
+				[item.title, item.name, item.subtitle, item.slug].some((field) =>
+					normalize(field).includes(needle),
+				),
+			)
+		: activeItems;
+
+	const GROUPS = ["Contingut", "Taxonomies"];
+
+	/**
+	 * Indicadors del contingut publicat.
+	 *
+	 * Surten del que ja s'ha demanat per pintar el panell: no hi ha cap crida
+	 * nova. Els llistats venen retallats des de l'API —les activitats i els
+	 * allotjaments només porten `images`, i les històries, llistes i entrades
+	 * porten `cover`—, o sigui que la portada es mira igual que a les files.
+	 */
+	const contentKeys = TABS.filter((tab) => tab.group === "Contingut").map(
+		(tab) => tab.key,
+	);
+	const taxonomyKeys = TABS.filter((tab) => tab.group === "Taxonomies").map(
+		(tab) => tab.key,
 	);
 
-	const isActive =
-		"bg-primary-500 border-primary-500 text-white hover:bg-primary-700";
+	const contentItems = contentKeys.flatMap((key) => state[key] || []);
+	const coverOf = (item) =>
+		item.cover || (Array.isArray(item.images) ? item.images[0] : "");
+
+	const THIRTY_DAYS = 30 * 24 * 60 * 60 * 1000;
+	const now = Date.now();
+	const publishedLast30 = contentItems.filter(
+		(item) =>
+			item.createdAt && now - new Date(item.createdAt).getTime() <= THIRTY_DAYS,
+	).length;
+	const withoutCover = contentItems.filter((item) => !coverOf(item)).length;
+	const taxonomyTotal = taxonomyKeys.reduce(
+		(total, key) => total + countOf(key),
+		0,
+	);
+
+	const KPIS = [
+		{
+			label: "Contingut publicat",
+			value: contentItems.length,
+			caption: `${contentKeys.length} seccions de contingut`,
+		},
+		{
+			label: "Publicat els últims 30 dies",
+			value: publishedLast30,
+			caption: publishedLast30 ? "Ritme de publicació recent" : "Cap novetat aquest mes",
+		},
+		{
+			label: "Sense imatge de portada",
+			value: withoutCover,
+			caption: withoutCover
+				? "Es comparteixen sense imatge"
+				: "Totes tenen portada",
+			tone: withoutCover ? "warn" : "ok",
+		},
+		{
+			label: "Taxonomies",
+			value: taxonomyTotal,
+			caption: "Categories, característiques i destinacions",
+		},
+	];
 
 	if (!loadPage) {
 		return <FetchingSpinner />;
 	}
 
+	const createAction = activeTab.create;
+
 	return (
 		<>
 			<Head>
-				<title>Panell d'administració - Escapadesenparella.cat</title>
+				<title>Panell d&apos;administració - Escapadesenparella.cat</title>
 				<link rel="icon" href="/favicon.ico" />
-				<link meta="robots" rel="noindex,nofollow" />
+				<meta name="robots" content="noindex, nofollow" />
 			</Head>
 			<NavigationBar
 				logo_url={
@@ -331,157 +433,226 @@ const AdminPanel = () => {
 				}
 				user={user}
 			/>
-			<main className="bg-primary-50 p-6 relative">
-				<div className="bg-white rounded-md shadow p-5">
-					<h1 className="text-2xl">Panell d'administració</h1>
 
-					{/* Graella de mètriques */}
-					<div className="mt-4 flex items-center -mx-2">
-						{TABS.map((tab) => (
+			<main className="bg-gray-50 min-h-screen">
+				<div className="container py-8 lg:py-10">
+					<header className="mb-6">
+						<h1 className="font-headings text-3xl lg:text-4xl leading-tight m-0">
+							Panell d&apos;administració
+						</h1>
+						<p className="text-base text-primary-400 mt-2 mb-0">
+							{state.isFetching
+								? "Carregant el contingut del web…"
+								: "Tot el que hi ha publicat al web, en un cop d'ull."}
+						</p>
+					</header>
+
+					<div className="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-6">
+						{KPIS.map((kpi) => (
 							<div
-								key={tab.key}
-								className="px-2 flex-1 min-w-[1/6]"
+								key={kpi.label}
+								className="bg-white rounded-2xl border border-primary-50 p-4 lg:p-5"
 							>
-								<div className="p-6 border border-primary-100 rounded-md text-center flex flex-col justify-center">
-									<div className="text-2xl">
-										{state.isFetching ? (
-											<div className="flex items-center justify-center mb-1">
-												<svg
-													role="status"
-													className="w-6 h-6 text-blue-600 animate-spin dark:text-gray-600 fill-white"
-													viewBox="0 0 100 101"
-													fill="none"
-													xmlns="http://www.w3.org/2000/svg"
-												>
-													<path
-														d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-														fill="currentColor"
-													/>
-													<path
-														d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-														fill="currentFill"
-													/>
-												</svg>
-											</div>
-										) : (
-											// Si una crida falla i retorna un
-											// objecte d'error, .length tombava
-											// tot el panell.
-											(state[tab.key] || []).length
-										)}
-									</div>
-									<span className="text-sm">{tab.title}</span>
-								</div>
+								<p
+									className={`font-headings text-3xl lg:text-4xl leading-none m-0 ${
+										kpi.tone === "warn"
+											? "text-amber-600"
+											: "text-primary-500"
+									}`}
+								>
+									{state.isFetching ? "—" : kpi.value}
+								</p>
+								<p className="m-0 mt-2 text-sm font-medium text-primary-500">
+									{kpi.label}
+								</p>
+								<p className="m-0 mt-0.5 text-xs text-primary-400">
+									{kpi.caption}
+								</p>
 							</div>
 						))}
 					</div>
 
-					<div className="flex flex-wrap items-start -mx-3 mt-6">
-						<div className="w-2/12 px-3">
-							<div className="bg-white rounded-md shadow p-5">
-								<h2 className="uppercase text-sm font-normal tracking-wider">
-									Menú
-								</h2>
-								<ul className="list-none mt-3 mx-0 mb-0 p-0">
-									{TABS.map((tab) => (
-										<li key={tab.key}>
+					<div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
+						{/*
+						 * La navegació porta els comptadors a dins. Abans hi
+						 * havia una filera de nou caixes de mètriques a dalt i
+						 * un menú de nou botons a sota: les mateixes nou xifres
+						 * dues vegades, i cap de les dues deia on eres.
+						 */}
+						<aside className="lg:col-span-3 lg:sticky lg:top-24">
+							<nav className="bg-white rounded-2xl border border-primary-50 p-2 lg:p-3">
+								{GROUPS.map((group) => (
+									<div key={group} className="mb-2 last:mb-0">
+										<p className="px-2 pt-2 pb-1 m-0 text-[11px] font-medium uppercase tracking-wider text-primary-300">
+											{group}
+										</p>
+										<ul className="list-none m-0 p-0 flex lg:block overflow-x-auto lg:overflow-visible gap-1 lg:gap-0">
+											{TABS.filter(
+												(tab) => tab.group === group,
+											).map((tab) => {
+												const isCurrent =
+													state.activeTab === tab.key;
+												return (
+													<li
+														key={tab.key}
+														className="lg:mb-0.5 shrink-0 lg:shrink"
+													>
+														<button
+															type="button"
+															aria-current={
+																isCurrent
+																	? "page"
+																	: undefined
+															}
+															onClick={() =>
+																setState(
+																	(previous) => ({
+																		...previous,
+																		activeTab:
+																			tab.key,
+																	}),
+																)
+															}
+															className={`w-full flex items-center justify-between gap-2 whitespace-nowrap rounded-xl px-3 py-2 text-sm transition-colors ${
+																isCurrent
+																	? "bg-primary-500 text-white"
+																	: "text-primary-500 hover:bg-gray-50"
+															}`}
+														>
+															{tab.title}
+															<span
+																className={`inline-flex items-center justify-center min-w-[1.5rem] rounded-full px-1.5 py-0.5 text-[11px] ${
+																	isCurrent
+																		? "bg-white/20 text-white"
+																		: "bg-gray-100 text-primary-400"
+																}`}
+															>
+																{state.isFetching
+																	? "·"
+																	: countOf(
+																			tab.key,
+																		)}
+															</span>
+														</button>
+													</li>
+												);
+											})}
+										</ul>
+									</div>
+								))}
+							</nav>
+						</aside>
+
+						<section className="lg:col-span-9">
+							<div className="bg-white rounded-2xl border border-primary-50 overflow-hidden">
+								<div className="flex flex-wrap items-center justify-between gap-3 border-b border-primary-50 p-4 lg:p-5">
+									<div className="min-w-0">
+										<h2 className="m-0 text-lg font-medium text-primary-500">
+											{activeTab.title}
+										</h2>
+										<p className="m-0 text-xs text-primary-400">
+											{needle
+												? `${visibleItems.length} de ${activeItems.length} elements`
+												: `${activeItems.length} elements`}
+										</p>
+									</div>
+
+									<div className="flex items-center gap-2 flex-1 lg:flex-none justify-end">
+										<div className="relative w-full max-w-xs">
+											<input
+												type="search"
+												value={query}
+												onChange={(e) =>
+													setQuery(e.target.value)
+												}
+												placeholder={`Cercar a ${activeTab.title.toLowerCase()}…`}
+												aria-label={`Cercar a ${activeTab.title}`}
+												className="form__control py-2 pl-9 text-sm"
+											/>
+											<svg
+												xmlns="http://www.w3.org/2000/svg"
+												width={16}
+												height={16}
+												viewBox="0 0 24 24"
+												strokeWidth="2"
+												stroke="currentColor"
+												fill="none"
+												strokeLinecap="round"
+												strokeLinejoin="round"
+												className="absolute left-3 top-1/2 -translate-y-1/2 text-primary-300 pointer-events-none"
+												aria-hidden="true"
+											>
+												<path
+													stroke="none"
+													d="M0 0h24v24H0z"
+													fill="none"
+												/>
+												<circle cx="10" cy="10" r="7" />
+												<line
+													x1="21"
+													y1="21"
+													x2="15"
+													y2="15"
+												/>
+											</svg>
+										</div>
+
+										{createAction.href ? (
+											<Link href={createAction.href}>
+												<a className="button button__primary button__xs md:py-2.5 md:px-4 w-auto whitespace-nowrap">
+													{createAction.label}
+												</a>
+											</Link>
+										) : (
 											<button
 												type="button"
-												className={`py-2.5 px-4 border transition-all duration-300 ease-in-out mb-2 rounded-md cursor-pointer w-full text-left text-sm ${
-													state.activeTab === tab.key
-														? isActive
-														: "border-primary-100 bg-white hover:bg-primary-50"
-												}`}
 												onClick={() =>
-													setState((previous) => ({
-														...previous,
-														activeTab: tab.key,
-													}))
+													setOpenCreateModal(
+														createAction.modal,
+													)
 												}
+												className="button button__primary button__xs md:py-2.5 md:px-4 w-auto whitespace-nowrap"
 											>
-												{tab.title}
+												{createAction.label}
 											</button>
-										</li>
-									))}
-								</ul>
-							</div>
-						</div>
-						<div className="w-10/12 px-3">
-							<div className="bg-white rounded-md shadow p-5">
-								<h2 className="uppercase text-sm font-normal tracking-wider">
-									Llista de resultats
-								</h2>
-								<div className="w-full mt-3 flex flex-col items-center justify-center">
-									{listResults}
+										)}
+									</div>
+								</div>
+
+								<div className="p-4 lg:p-5">
+									{state.isFetching ? (
+										<FetchingSpinner />
+									) : visibleItems.length === 0 ? (
+										<div className="py-12 text-center">
+											<p className="m-0 text-sm text-primary-400">
+												{needle
+													? `Cap resultat per a «${query}».`
+													: `Encara no hi ha res a ${activeTab.title.toLowerCase()}.`}
+											</p>
+											{needle ? (
+												<button
+													type="button"
+													className="mt-2 text-sm text-blue-600 underline"
+													onClick={() => setQuery("")}
+												>
+													Esborrar la cerca
+												</button>
+											) : null}
+										</div>
+									) : (
+										visibleItems.map((item, idx) => (
+											<div
+												key={item._id || idx}
+												className="w-full"
+											>
+												{activeTab.render(item)}
+											</div>
+										))
+									)}
 								</div>
 							</div>
-						</div>
+						</section>
 					</div>
-				</div>
-
-				<div
-					id="floatingPublishPanel"
-					className={`fixed bottom-5 right-4 flex flex-col items-end ${
-						toggleButton ? "show" : ""
-					}`}
-				>
-					<div
-						id="floatingPublishButton"
-						className="flex flex-col items-end"
-					>
-						{CREATE_ACTIONS.map((action) =>
-							action.href ? (
-								<a
-									key={action.label}
-									href={action.href}
-									title={action.label}
-									target="_blank"
-									rel="noreferrer"
-									className="bg-white hover:bg-primary-100 border-primary-200 rounded-md py-2.5 px-4 mb-1.5 shadow-lg text-sm"
-								>
-									{action.label}
-								</a>
-							) : (
-								<button
-									key={action.label}
-									type="button"
-									className="bg-white hover:bg-primary-100 border-primary-200 rounded-md py-2.5 px-4 mb-1.5 shadow-lg text-sm"
-									onClick={() =>
-										setOpenCreateModal(action.modal)
-									}
-								>
-									{action.label}
-								</button>
-							)
-						)}
-					</div>
-					<button
-						type="button"
-						className="button button__primary button__med shadow-xl"
-						onClick={() => setToggleButton(!toggleButton)}
-					>
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							className="mr-2 icon"
-							width={24}
-							height={24}
-							viewBox="0 0 24 24"
-							strokeWidth="2"
-							stroke="currentColor"
-							fill="none"
-							strokeLinecap="round"
-							strokeLinejoin="round"
-						>
-							<path
-								stroke="none"
-								d="M0 0h24v24H0z"
-								fill="none"
-							></path>
-							<line x1={12} y1={5} x2={12} y2={19}></line>
-							<line x1={5} y1={12} x2={19} y2={12}></line>
-						</svg>
-						Nou post
-					</button>
 				</div>
 			</main>
 

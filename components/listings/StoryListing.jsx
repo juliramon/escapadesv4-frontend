@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { cloudinaryUrl } from "../../utils/cloudinary";
 
 const StoryListing = ({ story, index, priority }) => {
 	const createdDate = new Date(story.createdAt).toLocaleDateString("ca-es", {
@@ -7,13 +8,9 @@ const StoryListing = ({ story, index, priority }) => {
 		day: "numeric",
 	});
 
-	const coverPath = story.cover.substring(0, 51);
-	const imageId = story.cover.substring(63);
-	const coverImg = `${coverPath}w_457,h_343,c_fill/${imageId}`;
+	const coverImg = cloudinaryUrl(story.cover, "w_457,h_343,c_fill");
 
-	const avatarPath = story.owner.avatar.substring(0, 51);
-	const ownerImageId = story.owner.avatar.substring(63);
-	const avatarImg = `${avatarPath}w_24,h_24,c_fill/${ownerImageId}`;
+	const avatarImg = cloudinaryUrl(story.owner.avatar, "w_24,h_24,c_fill");
 
 	return (
 		<Link href={"histories/" + story.slug} key={index}>

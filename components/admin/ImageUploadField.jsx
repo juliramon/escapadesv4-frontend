@@ -67,9 +67,10 @@ const ImageUploadField = ({
 
 	return (
 		<div className="form__group">
-			<span className="form__label">{label}</span>
+			{/* A la barra lateral el títol ja el posa el bloc que l'envolta. */}
+			{label ? <span className="form__label">{label}</span> : null}
 			<div className="flex items-center flex-col max-w-full mb-4">
-				<div className="bg-white border border-primary-100 rounded-tl-md rounded-tr-md w-full">
+				<div className="bg-white border border-primary-50 rounded-tl-md rounded-tr-md w-full">
 					<div className="bg-white border-none h-auto p-4 justify-start">
 						<label className="form__label m-0 bg-white rounded-md shadow py-3 px-5 inline-flex items-center cursor-pointer">
 							<input
@@ -85,7 +86,7 @@ const ImageUploadField = ({
 						</label>
 					</div>
 				</div>
-				<div className="w-full border border-primary-100 rounded-br-md rounded-bl-md -mt-px p-4 flex">
+				<div className="w-full border border-primary-50 rounded-br-md rounded-bl-md -mt-px p-4 flex">
 					<div className="-m-2.5 flex flex-wrap items-center">
 						{preview}
 					</div>

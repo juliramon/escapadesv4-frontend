@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { useState } from "react";
+import { SeoScoreRing } from "../forms/SeoScore";
 
 /**
  * Fila d'una entitat al llistat del panell d'administració.
@@ -28,6 +29,7 @@ const EntityRow = ({
 	image,
 	title,
 	subtitle,
+	seo = null,
 	onEdit,
 	onRemove,
 	editModal,
@@ -35,13 +37,15 @@ const EntityRow = ({
 	const [dropdownVisibility, setDropdownVisibility] = useState(false);
 
 	// Alguns documents antics no tenen subtítol: `subtitle.slice()` petava.
-	const shortenedSubtitle = subtitle ? `${subtitle.slice(0, 70)}...` : "";
+	const safeSubtitle = subtitle || "";
+	const shortenedSubtitle =
+		safeSubtitle.length > 70 ? `${safeSubtitle.slice(0, 70)}…` : safeSubtitle;
 
 	return (
-		<div className="content rounded-md box flex items-center w-full bg-primary-50 border border-primary-100 mb-2.5 px-5 py-4">
+		<div className="content box flex items-center gap-3 w-full bg-white hover:bg-gray-50 border border-primary-50 rounded-xl mb-2 px-4 py-3 transition-colors">
 			<Link href={href}>
-				<a className="flex items-center justify-between w-full">
-					<div className="flex items-center justify-center bg-white overflow-hidden h-12 w-12 rounded-md p-0 mr-5 border border-primary-100">
+				<a className="flex items-center gap-4 min-w-0 flex-1">
+					<div className="flex items-center justify-center bg-gray-100 overflow-hidden h-12 w-12 shrink-0 rounded-lg border border-primary-50">
 						{image ? (
 							<img
 								src={image}
@@ -50,10 +54,24 @@ const EntityRow = ({
 							/>
 						) : null}
 					</div>
-					<h3 className="text-lg m-0 pr-5 w-96">{title}</h3>
-					<span className="m-0 pr-16 text-sm flex-1">
-						{shortenedSubtitle}
-					</span>
+					<div className="min-w-0 flex-1">
+						<h3 className="m-0 text-15 font-medium text-primary-500 truncate">
+							{title}
+						</h3>
+						{shortenedSubtitle ? (
+							<p className="m-0 text-xs text-primary-400 truncate">
+								{shortenedSubtitle}
+							</p>
+						) : null}
+					</div>
+					{seo ? (
+						<span className="shrink-0 flex items-center justify-end w-12">
+							<SeoScoreRing
+								score={seo.score}
+								level={seo.level}
+							/>
+						</span>
+					) : null}
 				</a>
 			</Link>
 
@@ -86,7 +104,7 @@ const EntityRow = ({
 						dropdownVisibility ? "block" : "hidden"
 					}`}
 				>
-					<li className="border-b border-primary-100 w-full">
+					<li className="border-b border-primary-50 w-full">
 						<Link href={href}>
 							<a className="dropdown__menu_item">
 								<svg {...iconProps}>
@@ -99,7 +117,7 @@ const EntityRow = ({
 							</a>
 						</Link>
 					</li>
-					<li className="border-b border-primary-100 w-full">
+					<li className="border-b border-primary-50 w-full">
 						<button
 							type="button"
 							onClick={() => {

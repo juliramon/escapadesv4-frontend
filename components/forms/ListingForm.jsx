@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Router from "next/router";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
@@ -18,11 +18,18 @@ import {
 	TextAreaField,
 	TextField,
 } from "../admin/FormFields";
-import ContentFormLayout from "./ContentFormLayout";
+import ContentFormLayout, { ADMIN_PANEL_PATH } from "./ContentFormLayout";
+import FormSection from "./FormSection";
 import SeoFieldset from "./SeoFieldset";
+import { SeoScoreBadge } from "./SeoScore";
 import ChoiceGroup from "./ChoiceGroup";
 import PlaceAutocompleteField from "./PlaceAutocompleteField";
 import { LISTING_VARIANTS } from "./listingFormConfig";
+import useAutosaveDraft from "../../hooks/useAutosaveDraft";
+import useEditorRevision from "../../hooks/useEditorRevision";
+import useSeoKeyword from "../../hooks/useSeoKeyword";
+import { analyzeSeo, buildSlug } from "../../utils/seo";
+import { listingPath } from "../../utils/listingRoutes";
 import { readValidationError } from "../../utils/apiErrors";
 
 /**
@@ -47,12 +54,6 @@ import { readValidationError } from "../../utils/apiErrors";
  *  - Es demanaven les organitzacions de l'usuari a cada càrrega per construir
  *    una llista que no es pintava enlloc.
  */
-
-const TABS = [
-	{ key: "main", label: "Contingut principal" },
-	{ key: "imatges", label: "Imatges" },
-	{ key: "seo", label: "SEO" },
-];
 
 const editorExtensions = (placeholder) => [
 	StarterKit,
@@ -96,11 +97,15 @@ const ListingForm = ({ variant, mode = "create", initialData = null }) => {
 	const [activeTab, setActiveTab] = useState("main");
 	const [isSaving, setIsSaving] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
+	const [successMessage, setSuccessMessage] = useState("");
+	const [isReady, setIsReady] = useState(false);
 	const [destinations, setDestinations] = useState([]);
 	const [characteristics, setCharacteristics] = useState([]);
 	const [stories, setStories] = useState([]);
 	const hasLoadedState = useRef(false);
 	const hasLoadedContent = useRef(false);
+	// Mentre no s'hi hagi tocat, el slug segueix el títol.
+	const hasTouchedSlug = useRef(isEdit);
 
 	const [formData, setFormData] = useState({
 		_id: "",
@@ -156,6 +161,18 @@ const ListingForm = ({ variant, mode = "create", initialData = null }) => {
 		autofocus: false,
 		parseOptions: { preserveWhitespace: true },
 	});
+
+	const editorRevision = useEditorRevision([editor, reasonsEditor]);
+	const descriptionHtml = useMemo(
+		() => (editor ? editor.getHTML() : ""),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[editor, editorRevision],
+	);
+	const reasonsHtml = useMemo(
+		() => (reasonsEditor ? reasonsEditor.getHTML() : ""),
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+		[reasonsEditor, editorRevision],
+	);
 
 	useEffect(() => {
 		const fetchOptions = async () => {
@@ -237,12 +254,81 @@ const ListingForm = ({ variant, mode = "create", initialData = null }) => {
 		hasLoadedContent.current = true;
 		editor.commands.setContent(initialData.description || "");
 		reasonsEditor.commands.setContent(initialData.reasons || "");
+		// A partir d'aquí el formulari ja ensenya el que hi ha desat, que és el
+		// punt de partida contra el qual es compten els canvis.
+		setIsReady(true);
 	}, [initialData, editor, reasonsEditor]);
 
-	const setField = (name, value) =>
-		setFormData((previous) => ({ ...previous, [name]: value }));
+	// L'estat de partida no es pot prendre fins que TipTap existeix: al primer
+	// render encara no hi ha editor i el cos es llegiria com a buit, o sigui
+	// que el formulari naixeria amb un canvi pendent que ningú ha fet.
+	useEffect(() => {
+		if (isEdit || !(editor && reasonsEditor)) return;
+		setIsReady(true);
+	}, [isEdit, editor, reasonsEditor]);
 
-	const handleChange = (e) => setField(e.target.name, e.target.value);
+	const draftKey = isEdit
+		? formData._id
+			? `${config.type}:${formData._id}`
+			: null
+		: `${config.type}:new`;
+
+	const snapshot = useMemo(() => {
+		// Els fitxers pendents de pujar i les rutes de Cloudinary no van a
+		// l'esborrany: ni es poden serialitzar ni tindrien sentit demà.
+		const {
+			cover,
+			blopCover,
+			coverCloudImage,
+			updatedCover,
+			images,
+			blopImages,
+			_id,
+			type,
+			...fields
+		} = formData;
+		return { fields, description: descriptionHtml, reasons: reasonsHtml };
+	}, [formData, descriptionHtml, reasonsHtml]);
+
+	const autosave = useAutosaveDraft({
+		key: draftKey,
+		snapshot,
+		enabled: isReady,
+	});
+
+	const [seoKeyword, setSeoKeyword] = useSeoKeyword(draftKey);
+
+	const setField = useCallback((name, value) => {
+		if (name === "slug") hasTouchedSlug.current = true;
+		setFormData((previous) => ({ ...previous, [name]: value }));
+	}, []);
+
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		if (name === "slug") hasTouchedSlug.current = true;
+		setFormData((previous) => ({
+			...previous,
+			[name]: value,
+			...(name === "title" && !hasTouchedSlug.current
+				? { slug: buildSlug(value) }
+				: {}),
+		}));
+	};
+
+	const restoreDraft = () => {
+		const data = autosave.restoreDraft();
+		if (!data) return;
+		if (data.fields) {
+			hasTouchedSlug.current = true;
+			setFormData((previous) => ({ ...previous, ...data.fields }));
+		}
+		if (editor && typeof data.description === "string") {
+			editor.commands.setContent(data.description);
+		}
+		if (reasonsEditor && typeof data.reasons === "string") {
+			reasonsEditor.commands.setContent(data.reasons);
+		}
+	};
 
 	const handleCheck = (e) => setField(e.target.name, e.target.checked);
 
@@ -310,8 +396,8 @@ const ListingForm = ({ variant, mode = "create", initialData = null }) => {
 			destinations: formData.destinations,
 			cover,
 			images,
-			description: editor ? editor.getHTML() : "",
-			reasons: reasonsEditor ? reasonsEditor.getHTML() : "",
+			description: descriptionHtml,
+			reasons: reasonsHtml,
 			phone: formData.phone,
 			website: formData.website,
 			price: formData.price,
@@ -330,12 +416,12 @@ const ListingForm = ({ variant, mode = "create", initialData = null }) => {
 		};
 	};
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
+	const save = async ({ redirect = true } = {}) => {
 		if (isSaving) return;
 
 		setIsSaving(true);
 		setErrorMessage("");
+		setSuccessMessage("");
 
 		try {
 			const upload = createUploader(
@@ -369,13 +455,69 @@ const ListingForm = ({ variant, mode = "create", initialData = null }) => {
 				return;
 			}
 
-			Router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel");
+			autosave.markSaved();
+
+			// Les imatges ja són al servidor: no s'han de tornar a pujar al
+			// desat següent.
+			setFormData((previous) => ({
+				...previous,
+				cover: "",
+				blopCover: "",
+				coverCloudImage: cover,
+				updatedCover: false,
+				images,
+				blopImages: images,
+			}));
+
+			if (redirect) {
+				Router.push(ADMIN_PANEL_PATH);
+				return;
+			}
+
+			setIsSaving(false);
+			setSuccessMessage("Canvis desats.");
 		} catch (error) {
 			console.error(error);
 			setErrorMessage(config.copy.saveError);
 			setIsSaving(false);
 		}
 	};
+
+	useEffect(() => {
+		if (!successMessage) return undefined;
+		const timer = setTimeout(() => setSuccessMessage(""), 4000);
+		return () => clearTimeout(timer);
+	}, [successMessage]);
+
+	const seo = useMemo(
+		() =>
+			analyzeSeo({
+				title: formData.title,
+				subtitle: formData.subtitle,
+				metaTitle: formData.metaTitle,
+				metaDescription: formData.metaDescription,
+				slug: formData.slug,
+				html: `${descriptionHtml}${reasonsHtml}`,
+				hasCover: Boolean(formData.cover || formData.coverCloudImage),
+				keyword: seoKeyword,
+			}),
+		[formData, descriptionHtml, reasonsHtml, seoKeyword],
+	);
+
+	const publicPath = listingPath({
+		slug: formData.slug,
+		type: config.type,
+		categories: formData.categories ? [formData.categories] : [],
+	});
+
+	const tabs = [
+		{ key: "main", label: "Contingut principal" },
+		{
+			key: "seo",
+			label: "SEO",
+			badge: <SeoScoreBadge score={seo.score} level={seo.level} />,
+		},
+	];
 
 	return (
 		<ContentFormLayout
@@ -390,254 +532,349 @@ const ListingForm = ({ variant, mode = "create", initialData = null }) => {
 					? config.copy.descriptionEdit
 					: config.copy.descriptionCreate
 			}
-			submitLabel={isEdit ? "Desar canvis" : "Publicar"}
-			onSubmit={handleSubmit}
+			submitLabel={isEdit ? "Desar i sortir" : "Publicar"}
+			onSubmit={() => save({ redirect: true })}
+			onSaveAndStay={isEdit ? () => save({ redirect: false }) : null}
 			isSaving={isSaving}
 			errorMessage={errorMessage}
-			tabs={TABS}
+			successMessage={successMessage}
+			isDirty={autosave.isDirty}
+			dirtyRef={autosave.dirtyRef}
+			autosave={{ status: autosave.status, savedAt: autosave.savedAt }}
+			draftNotice={
+				autosave.storedDraft
+					? {
+							savedAt: autosave.storedDraft.savedAt,
+							onRestore: restoreDraft,
+							onDiscard: autosave.discardDraft,
+						}
+					: null
+			}
+			previewUrl={
+				isEdit && formData.slug
+					? `https://escapadesenparella.cat${publicPath}`
+					: null
+			}
+			tabs={tabs}
 			activeTab={activeTab}
 			onTabChange={setActiveTab}
+			sidebar={
+				activeTab === "main" ? (
+					<>
+						<FormSection
+							title="Classificació"
+							description="Marca on surt la fitxa dins del web: la categoria decideix la URL pública."
+						>
+							<form
+								className="form"
+								onSubmit={(e) => e.preventDefault()}
+							>
+								<ChoiceGroup
+									name="categories"
+									label="Categoria d'escapada"
+									options={config.categories}
+									value={formData.categories}
+									onChange={(value) =>
+										setField("categories", value)
+									}
+								/>
+								<ChoiceGroup
+									name="seasons"
+									label="Estacions recomanades"
+									options={config.seasons}
+									value={formData.seasons}
+									onChange={(value) => setField("seasons", value)}
+									multiple
+								/>
+								<ChoiceGroup
+									name="destinations"
+									label="Destinació on es troba"
+									options={destinations.map((destination) => ({
+										value: destination._id,
+										label: destination.title,
+									}))}
+									value={formData.destinations}
+									onChange={(value) =>
+										setField("destinations", value)
+									}
+									multiple
+									emptyMessage="Encara no hi ha destinacions creades."
+								/>
+
+								{config.hasPlaceType ? (
+									<ChoiceGroup
+										name="placeType"
+										label="Tipus d'allotjament"
+										options={config.placeTypes}
+										value={formData.placeType}
+										onChange={(value) =>
+											setField("placeType", value)
+										}
+									/>
+								) : null}
+
+								{config.hasCharacteristics ? (
+									<ChoiceGroup
+										name="characteristics"
+										label="Característiques de l'allotjament"
+										options={characteristics.map(
+											(characteristic) => ({
+												// El model desa el nom, no l'identificador.
+												value: characteristic.name,
+												label: characteristic.name,
+												icon: characteristic.icon,
+											}),
+										)}
+										value={formData.characteristics}
+										onChange={(value) =>
+											setField("characteristics", value)
+										}
+										multiple
+										emptyMessage="Encara no hi ha característiques creades."
+									/>
+								) : null}
+							</form>
+						</FormSection>
+
+						<FormSection
+							title="Verificació"
+							description="Les fitxes verificades porten la ressenya i l'enllaç a la història de la visita."
+						>
+							<form
+								className="form"
+								onSubmit={(e) => e.preventDefault()}
+							>
+								<CheckboxField
+									name="isVerified"
+									label={config.copy.verifiedLabel}
+									checked={formData.isVerified}
+									onChange={handleCheck}
+									hint="Marca-ho només si hi heu estat."
+								/>
+
+								{formData.isVerified ? (
+									<>
+										<TextAreaField
+											name="review"
+											label={config.copy.reviewLabel}
+											placeholder={config.copy.reviewLabel}
+											value={formData.review}
+											onChange={handleChange}
+										/>
+										<SelectField
+											name="relatedStory"
+											label='Selecciona la "Història" relacionada'
+											placeholder="Selecciona una història"
+											value={formData.relatedStory}
+											onChange={handleChange}
+											options={stories.map((story) => ({
+												value: story._id,
+												label: story.title,
+											}))}
+										/>
+									</>
+								) : null}
+							</form>
+						</FormSection>
+
+						<FormSection
+							title="Imatge de portada"
+							description="Encapçala la fitxa i és la imatge amb què es comparteix. 1729x973px."
+						>
+							<form
+								className="form"
+								onSubmit={(e) => e.preventDefault()}
+							>
+								<ImageUploadField
+									label=""
+									name="cover"
+									onChange={saveCoverToStatus}
+									hasImage={Boolean(
+										formData.cover ||
+											formData.coverCloudImage,
+									)}
+									preview={
+										<ImagePreview
+											blob={formData.blopCover}
+											current={formData.coverCloudImage}
+										/>
+									}
+								/>
+							</form>
+						</FormSection>
+
+						<FormSection
+							title="Imatges adjuntes"
+							description={
+								formData.blopImages.length
+									? `${formData.blopImages.length} imatges al carrusel de la fitxa.`
+									: "Encara no hi ha cap imatge al carrusel."
+							}
+						>
+							<form
+								className="form"
+								onSubmit={(e) => e.preventDefault()}
+							>
+								<GalleryField
+									label=""
+									previews={formData.blopImages}
+									onChange={saveGalleryToStatus}
+									onRemove={removeGalleryImage}
+								/>
+							</form>
+						</FormSection>
+					</>
+				) : null
+			}
 		>
 			{activeTab === "main" ? (
-				<div className="form__wrapper">
-					<form className="form" onSubmit={(e) => e.preventDefault()}>
-						<TextField
-							name="title"
-							label="Títol"
-							placeholder={config.copy.titlePlaceholder}
-							value={formData.title}
-							onChange={handleChange}
-						/>
-						<TextField
-							name="subtitle"
-							label="Subtítol"
-							placeholder={config.copy.subtitlePlaceholder}
-							value={formData.subtitle}
-							onChange={handleChange}
-						/>
-
-						<ChoiceGroup
-							name="categories"
-							label="Categoria d'escapada"
-							options={config.categories}
-							value={formData.categories}
-							onChange={(value) => setField("categories", value)}
-						/>
-						<ChoiceGroup
-							name="seasons"
-							label="Estacions recomanades"
-							options={config.seasons}
-							value={formData.seasons}
-							onChange={(value) => setField("seasons", value)}
-							multiple
-						/>
-						<ChoiceGroup
-							name="destinations"
-							label="Destinació on es troba"
-							options={destinations.map((destination) => ({
-								value: destination._id,
-								label: destination.title,
-							}))}
-							value={formData.destinations}
-							onChange={(value) =>
-								setField("destinations", value)
-							}
-							multiple
-							emptyMessage="Encara no hi ha destinacions creades."
-						/>
-
-						{config.hasPlaceType ? (
-							<ChoiceGroup
-								name="placeType"
-								label="Tipus d'allotjament"
-								options={config.placeTypes}
-								value={formData.placeType}
-								onChange={(value) =>
-									setField("placeType", value)
-								}
+				<>
+					<FormSection
+						title="Encapçalament"
+						description="El títol i el subtítol són el que es llegeix als llistats, al mapa i als resultats de cerca."
+					>
+						<form
+							className="form"
+							onSubmit={(e) => e.preventDefault()}
+						>
+							<TextField
+								name="title"
+								label="Títol"
+								placeholder={config.copy.titlePlaceholder}
+								value={formData.title}
+								onChange={handleChange}
+								required
+								maxLength={70}
 							/>
-						) : null}
-
-						{config.hasCharacteristics ? (
-							<ChoiceGroup
-								name="characteristics"
-								label="Característiques de l'allotjament"
-								options={characteristics.map(
-									(characteristic) => ({
-										// El model desa el nom, no l'identificador.
-										value: characteristic.name,
-										label: characteristic.name,
-										icon: characteristic.icon,
-									}),
-								)}
-								value={formData.characteristics}
-								onChange={(value) =>
-									setField("characteristics", value)
-								}
-								multiple
-								emptyMessage="Encara no hi ha característiques creades."
+							<TextField
+								name="subtitle"
+								label="Subtítol"
+								placeholder={config.copy.subtitlePlaceholder}
+								value={formData.subtitle}
+								onChange={handleChange}
+								maxLength={160}
+								hint="Sol ser el millor esborrany de la meta descripció."
 							/>
-						) : null}
+						</form>
+					</FormSection>
 
-						<PlaceAutocompleteField
-							label="Localització"
-							placeholder={config.copy.addressPlaceholder}
-							defaultValue={
-								formData[config.location.full_address]
-							}
-							onSelect={handlePlaceSelected}
-						/>
-						{formData[config.location.full_address] ? (
-							<p className="form__text_info -mt-3 mb-4">
-								Localització desada:{" "}
-								<strong>
-									{formData[config.location.full_address]}
-								</strong>
-							</p>
-						) : null}
+					<FormSection
+						title="Localització i dades pràctiques"
+						description="La localització alimenta el mapa i la fitxa; la resta són les dades que es veuen a la targeta de reserva."
+					>
+						<form
+							className="form"
+							onSubmit={(e) => e.preventDefault()}
+						>
+							<PlaceAutocompleteField
+								label="Localització"
+								placeholder={config.copy.addressPlaceholder}
+								defaultValue={
+									formData[config.location.full_address]
+								}
+								onSelect={handlePlaceSelected}
+							/>
+							{formData[config.location.full_address] ? (
+								<p className="form__text_info -mt-3 mb-4">
+									Localització desada:{" "}
+									<strong>
+										{formData[config.location.full_address]}
+									</strong>
+								</p>
+							) : null}
 
-						<div className="flex flex-wrap -mx-2">
-							<div className="w-full md:w-1/2 px-2">
-								<TextField
-									name="phone"
-									label="Telèfon"
-									placeholder="Telèfon de contacte"
-									value={formData.phone}
-									onChange={handleChange}
-								/>
-							</div>
-							<div className="w-full md:w-1/2 px-2">
-								<TextField
-									name="website"
-									label="Pàgina web"
-									placeholder="Enllaç a la pàgina web"
-									value={formData.website}
-									onChange={handleChange}
-								/>
-							</div>
-							<div className="w-full md:w-1/2 px-2">
-								<TextField
-									name="price"
-									label="Preu"
-									placeholder="Preu"
-									value={formData.price}
-									onChange={handleChange}
-								/>
-							</div>
-							{config.hasDuration ? (
+							<div className="flex flex-wrap -mx-2">
 								<div className="w-full md:w-1/2 px-2">
 									<TextField
-										name="duration"
-										label="Durada"
-										placeholder="Durada de l'activitat"
-										value={formData.duration}
+										name="phone"
+										label="Telèfon"
+										placeholder="Telèfon de contacte"
+										value={formData.phone}
 										onChange={handleChange}
 									/>
 								</div>
-							) : null}
-							<div className="w-full md:w-1/2 px-2">
-								<TextField
-									name="discountCode"
-									label="Codi de descompte"
-									placeholder="Codi de descompte"
-									value={formData.discountCode}
-									onChange={handleChange}
-								/>
+								<div className="w-full md:w-1/2 px-2">
+									<TextField
+										name="website"
+										label="Pàgina web"
+										placeholder="Enllaç a la pàgina web"
+										value={formData.website}
+										onChange={handleChange}
+									/>
+								</div>
+								<div className="w-full md:w-1/2 px-2">
+									<TextField
+										name="price"
+										label="Preu"
+										placeholder="Preu"
+										value={formData.price}
+										onChange={handleChange}
+									/>
+								</div>
+								{config.hasDuration ? (
+									<div className="w-full md:w-1/2 px-2">
+										<TextField
+											name="duration"
+											label="Durada"
+											placeholder="Durada de l'activitat"
+											value={formData.duration}
+											onChange={handleChange}
+										/>
+									</div>
+								) : null}
+								<div className="w-full md:w-1/2 px-2">
+									<TextField
+										name="discountCode"
+										label="Codi de descompte"
+										placeholder="Codi de descompte"
+										value={formData.discountCode}
+										onChange={handleChange}
+									/>
+								</div>
+								<div className="w-full md:w-1/2 px-2">
+									<TextField
+										name="discountInfo"
+										label="Informació del descompte"
+										placeholder="Informació del descompte"
+										value={formData.discountInfo}
+										onChange={handleChange}
+									/>
+								</div>
 							</div>
-							<div className="w-full md:w-1/2 px-2">
-								<TextField
-									name="discountInfo"
-									label="Informació del descompte"
-									placeholder="Informació del descompte"
-									value={formData.discountInfo}
-									onChange={handleChange}
-								/>
-							</div>
-						</div>
+						</form>
+					</FormSection>
 
-						<CheckboxField
-							name="isVerified"
-							label={config.copy.verifiedLabel}
-							checked={formData.isVerified}
-							onChange={handleCheck}
-						/>
-
-						{formData.isVerified ? (
-							<>
-								<TextAreaField
-									name="review"
-									label={config.copy.reviewLabel}
-									placeholder={config.copy.reviewLabel}
-									value={formData.review}
-									onChange={handleChange}
-								/>
-								<SelectField
-									name="relatedStory"
-									label='Selecciona la "Història" relacionada'
-									placeholder="Selecciona una història"
-									value={formData.relatedStory}
-									onChange={handleChange}
-									options={stories.map((story) => ({
-										value: story._id,
-										label: story.title,
-									}))}
-								/>
-							</>
-						) : null}
-					</form>
-
-					<div className="form__group mt-2">
-						<span className="form__label">
-							{config.copy.descriptionLabel}
-						</span>
+					<FormSection
+						title={config.copy.descriptionLabel}
+						description={`${seo.counts.words} paraules en total · ${seo.counts.headings} subtítols · ${seo.counts.links} enllaços`}
+					>
 						<EditorNavbar editor={editor} />
 						<EditorContent
 							editor={editor}
 							className="form-composer__editor"
 						/>
-					</div>
-					<div className="form__group mt-2">
-						<span className="form__label">
-							{config.copy.reasonsLabel}
-						</span>
+					</FormSection>
+
+					<FormSection title={config.copy.reasonsLabel}>
 						<EditorNavbar editor={reasonsEditor} />
 						<EditorContent
 							editor={reasonsEditor}
 							className="form-composer__editor"
 						/>
-					</div>
-				</div>
-			) : null}
-
-			{activeTab === "imatges" ? (
-				<div className="form__wrapper">
-					<form className="form" onSubmit={(e) => e.preventDefault()}>
-						<ImageUploadField
-							label="Imatge de portada (1729x973px)"
-							name="cover"
-							onChange={saveCoverToStatus}
-							hasImage={Boolean(
-								formData.cover || formData.coverCloudImage,
-							)}
-							preview={
-								<ImagePreview
-									blob={formData.blopCover}
-									current={formData.coverCloudImage}
-								/>
-							}
-						/>
-						<GalleryField
-							label="Imatges de la fitxa"
-							previews={formData.blopImages}
-							onChange={saveGalleryToStatus}
-							onRemove={removeGalleryImage}
-						/>
-					</form>
-				</div>
+					</FormSection>
+				</>
 			) : null}
 
 			{activeTab === "seo" ? (
-				<SeoFieldset values={formData} onChange={handleChange} />
+				<SeoFieldset
+					values={formData}
+					onChange={handleChange}
+					onFieldChange={setField}
+					analysis={seo}
+					keyword={seoKeyword}
+					onKeywordChange={setSeoKeyword}
+					previewPath={publicPath}
+				/>
 			) : null}
 		</ContentFormLayout>
 	);
