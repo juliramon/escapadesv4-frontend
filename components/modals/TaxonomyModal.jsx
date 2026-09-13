@@ -11,6 +11,7 @@ import {
 	uploadSingleFile,
 } from "../../utils/uploads";
 import EditorNavbar from "../editor/EditorNavbar";
+import SiteLink from "../editor/SiteLink";
 import AdminModal from "../admin/AdminModal";
 import ImageUploadField from "../admin/ImageUploadField";
 import {
@@ -156,7 +157,7 @@ const TaxonomyModal = ({
 	const [errorMessage, setErrorMessage] = useState("");
 
 	const editorHeader = useEditor({
-		extensions: [StarterKit, Image],
+		extensions: [StarterKit, Image, SiteLink],
 		content: seoTextHeader || "",
 		onUpdate: (props) => setEditorDataHeader(props.editor.getHTML()),
 		autofocus: false,
@@ -164,7 +165,7 @@ const TaxonomyModal = ({
 	});
 
 	const editor = useEditor({
-		extensions: [StarterKit, Image],
+		extensions: [StarterKit, Image, SiteLink],
 		content: seoText || "",
 		onUpdate: (props) => setEditorData(props.editor.getHTML()),
 		autofocus: false,

@@ -1,6 +1,7 @@
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
+import SiteLink from "../components/editor/SiteLink";
 
 /**
  * Editor de text ric per als camps llargs de l'àrea d'administració.
@@ -14,7 +15,7 @@ import Image from "@tiptap/extension-image";
  */
 const useRichTextEditor = (content) =>
 	useEditor({
-		extensions: [StarterKit, Image],
+		extensions: [StarterKit, Image, SiteLink],
 		content: content || "",
 		autofocus: false,
 		parseOptions: { preserveWhitespace: true },

@@ -1,4 +1,5 @@
 import slugify from "slugify";
+import { isInternalHref } from "./internalLinks";
 
 /**
  * Anàlisi SEO dels formularis de composició.
@@ -117,7 +118,12 @@ const analyzeSeo = ({
 		(image) => !/alt\s*=\s*"[^"]+"/i.test(image),
 	);
 	const headings = (body.match(/<h[23][^>]*>/gi) || []).length;
-	const links = (body.match(/<a[^>]*href=/gi) || []).length;
+	const hrefs = Array.from(
+		body.matchAll(/<a[^>]*href\s*=\s*"([^"]*)"/gi),
+		(match) => match[1],
+	);
+	const links = hrefs.length;
+	const internalLinks = hrefs.filter(isInternalHref).length;
 	const cleanSlug = buildSlug(slug);
 
 	const checks = [];
@@ -231,12 +237,16 @@ const analyzeSeo = ({
 
 	add({
 		id: "links",
-		label: "Enllaços dins del text",
-		status: links > 0 ? "ok" : "warn",
+		label: "Enllaços interns dins del text",
+		// El que reparteix autoritat són els enllaços a altres pàgines del
+		// web; els externs no compten per aprovar aquesta comprovació.
+		status: internalLinks > 0 ? "ok" : "warn",
 		hint:
-			links > 0
-				? `${links} enllaços.`
-				: "Enllaça altres publicacions del web per repartir autoritat.",
+			internalLinks > 0
+				? `${links} enllaços, ${internalLinks} a altres pàgines del web.`
+				: links > 0
+					? `${links} enllaços, cap a altres pàgines del web. Busca'n una amb el botó d'enllaç.`
+					: "Enllaça altres publicacions del web per repartir autoritat.",
 	});
 
 	add({
@@ -311,6 +321,7 @@ const analyzeSeo = ({
 			images: images.length,
 			headings,
 			links,
+			internalLinks,
 		},
 	};
 };
