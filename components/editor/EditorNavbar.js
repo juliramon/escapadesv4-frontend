@@ -1,6 +1,19 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import LinkPicker from "./LinkPicker";
 
 const EditorNavbar = ({ editor }) => {
+	const [isLinkPickerOpen, setIsLinkPickerOpen] = useState(false);
+	const linkButtonRef = useRef(null);
+	const closeLinkPicker = useCallback(() => setIsLinkPickerOpen(false), []);
+
+	// Ctrl/⌘+K des de dins del text (vegeu `SiteLink`).
+	useEffect(() => {
+		if (!editor) return undefined;
+		const openLinkPicker = () => setIsLinkPickerOpen(true);
+		editor.on("openLinkPicker", openLinkPicker);
+		return () => editor.off("openLinkPicker", openLinkPicker);
+	}, [editor]);
+
 	const addImage = () => {
 		const url = window.prompt("URL");
 		if (url) {
@@ -8,37 +21,13 @@ const EditorNavbar = ({ editor }) => {
 		}
 	};
 
-	const setLink = useCallback(() => {
-		const previousUrl = editor.getAttributes("link").href;
-		const url = window.prompt("URL", previousUrl);
-
-		// cancelled
-		if (url === null) {
-			return;
-		}
-
-		// empty
-		if (url === "") {
-			editor.chain().focus().extendMarkRange("link").unsetLink().run();
-
-			return;
-		}
-
-		// update link
-		editor
-			.chain()
-			.focus()
-			.extendMarkRange("link")
-			.setLink({ href: url })
-			.run();
-	}, [editor]);
-
 	if (!editor) {
 		return null;
 	}
 	return (
 		<div className="editor-bar__wrapper">
 			<button
+				type="button"
 				onClick={() => editor.chain().focus().toggleBold().run()}
 				className={editor.isActive("bold") ? "is-active" : ""}
 			>
@@ -60,6 +49,7 @@ const EditorNavbar = ({ editor }) => {
 				</svg>
 			</button>
 			<button
+				type="button"
 				onClick={() => editor.chain().focus().toggleItalic().run()}
 				className={editor.isActive("italic") ? "is-active" : ""}
 			>
@@ -82,6 +72,7 @@ const EditorNavbar = ({ editor }) => {
 				</svg>
 			</button>
 			<button
+				type="button"
 				onClick={() => editor.chain().focus().toggleStrike().run()}
 				className={editor.isActive("strike") ? "is-active" : ""}
 			>
@@ -103,6 +94,7 @@ const EditorNavbar = ({ editor }) => {
 				</svg>
 			</button>
 			<button
+				type="button"
 				onClick={() => editor.chain().focus().setParagraph().run()}
 				className={editor.isActive("paragraph") ? "is-active" : ""}
 			>
@@ -123,6 +115,7 @@ const EditorNavbar = ({ editor }) => {
 				</svg>
 			</button>
 			<button
+				type="button"
 				onClick={() => editor.chain().focus().toggleBlockquote().run()}
 				className={editor.isActive("blockquote") ? "is-active" : ""}
 			>
@@ -148,6 +141,7 @@ const EditorNavbar = ({ editor }) => {
 				</svg>
 			</button>
 			<button
+				type="button"
 				onClick={() =>
 					editor.chain().focus().toggleHeading({ level: 2 }).run()
 				}
@@ -179,6 +173,7 @@ const EditorNavbar = ({ editor }) => {
 				</svg>
 			</button>
 			<button
+				type="button"
 				onClick={() =>
 					editor.chain().focus().toggleHeading({ level: 3 }).run()
 				}
@@ -211,6 +206,7 @@ const EditorNavbar = ({ editor }) => {
 				</svg>
 			</button>
 			<button
+				type="button"
 				onClick={() => editor.chain().focus().toggleBulletList().run()}
 				className={editor.isActive("bulletList") ? "is-active" : ""}
 			>
@@ -236,6 +232,7 @@ const EditorNavbar = ({ editor }) => {
 				</svg>
 			</button>
 			<button
+				type="button"
 				onClick={() => editor.chain().focus().toggleOrderedList().run()}
 				className={editor.isActive("orderedList") ? "is-active" : ""}
 			>
@@ -260,6 +257,7 @@ const EditorNavbar = ({ editor }) => {
 				</svg>
 			</button>
 			<button
+				type="button"
 				onClick={() => editor.chain().focus().setHorizontalRule().run()}
 			>
 				<svg
@@ -294,7 +292,7 @@ const EditorNavbar = ({ editor }) => {
 					<line x1="20" y1="20" x2="20" y2="20.01" />
 				</svg>
 			</button>
-			<button onClick={() => addImage()}>
+			<button type="button" onClick={() => addImage()}>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					className="icon icon-tabler icon-tabler-photo"
@@ -314,7 +312,21 @@ const EditorNavbar = ({ editor }) => {
 					<path d="M14 14l1 -1a3 5 0 0 1 3 0l2 2" />
 				</svg>
 			</button>
-			<button onClick={() => setLink()}>
+			{/*
+			 * Els botons porten `type="button"`: els editors dels modals són
+			 * dins d'un <form> i qualsevol botó sense tipus l'enviava.
+			 */}
+			<button
+				type="button"
+				ref={linkButtonRef}
+				onClick={() => setIsLinkPickerOpen((isOpen) => !isOpen)}
+				className={
+					isLinkPickerOpen || editor.isActive("link") ? "is-active" : ""
+				}
+				title="Enllaç (Ctrl/⌘+K)"
+				aria-haspopup="dialog"
+				aria-expanded={isLinkPickerOpen}
+			>
 				<svg
 					xmlns="http://www.w3.org/2000/svg"
 					className="icon icon-tabler icon-tabler-link"
@@ -339,6 +351,7 @@ const EditorNavbar = ({ editor }) => {
 			 */}
 			{editor.commands.insertGalleryBlock ? (
 				<button
+					type="button"
 					onClick={() =>
 						editor.chain().focus().insertGalleryBlock([]).run()
 					}
@@ -363,6 +376,13 @@ const EditorNavbar = ({ editor }) => {
 						<rect x="14" y="14" width="6" height="6" rx="1" />
 					</svg>
 				</button>
+			) : null}
+			{isLinkPickerOpen ? (
+				<LinkPicker
+					editor={editor}
+					onClose={closeLinkPicker}
+					toggleRef={linkButtonRef}
+				/>
 			) : null}
 		</div>
 	);

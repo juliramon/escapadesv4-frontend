@@ -3,12 +3,12 @@ import Router from "next/router";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
-import Link from "@tiptap/extension-link";
 import Placeholder from "@tiptap/extension-placeholder";
 import ContentService from "../../services/contentService";
 import { uploadCarouselMediaItems } from "../../utils/helpers";
 import EditorNavbar from "../editor/EditorNavbar";
 import GalleryBlock from "../editor/GalleryBlock";
+import SiteLink from "../editor/SiteLink";
 import ImageUploadField from "../admin/ImageUploadField";
 import GalleryField from "../admin/GalleryField";
 import { ImagePreview, SelectField, TextField } from "../admin/FormFields";
@@ -116,11 +116,7 @@ const TripEntryForm = ({ mode = "create", initialData = null }) => {
 			Placeholder.configure({
 				placeholder: "Comença a escriure el viatge...",
 			}),
-			Link.configure({
-				openOnClick: false,
-				autolink: false,
-				defaultProtocol: "https",
-			}),
+			SiteLink,
 		],
 		content: "",
 		autofocus: false,

@@ -3,10 +3,10 @@ import Router from "next/router";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
-import Link from "@tiptap/extension-link";
 import ContentService from "../../services/contentService";
 import EditorNavbar from "../editor/EditorNavbar";
 import GalleryBlock from "../editor/GalleryBlock";
+import SiteLink from "../editor/SiteLink";
 import AdBannerShortcodeHelper from "../editor/AdBannerShortcodeHelper";
 import ImageUploadField from "../admin/ImageUploadField";
 import { CheckboxField, ImagePreview, TextField } from "../admin/FormFields";
@@ -95,11 +95,7 @@ const ListForm = ({ mode = "create", initialData = null }) => {
 			StarterKit,
 			GalleryBlock.configure({ uploadRef }),
 			Image,
-			Link.configure({
-				openOnClick: false,
-				autolink: false,
-				defaultProtocol: "https",
-			}),
+			SiteLink,
 		],
 		content: "",
 		autofocus: false,

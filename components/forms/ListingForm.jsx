@@ -3,12 +3,12 @@ import Router from "next/router";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Image from "@tiptap/extension-image";
-import Link from "@tiptap/extension-link";
 import Placeholder from "@tiptap/extension-placeholder";
 import ContentService from "../../services/contentService";
 import { uploadCarouselMediaItems } from "../../utils/helpers";
 import { createUploader, uploadSingleFile } from "../../utils/uploads";
 import EditorNavbar from "../editor/EditorNavbar";
+import SiteLink from "../editor/SiteLink";
 import ImageUploadField from "../admin/ImageUploadField";
 import GalleryField from "../admin/GalleryField";
 import {
@@ -59,11 +59,7 @@ const editorExtensions = (placeholder) => [
 	StarterKit,
 	Image.configure({ inline: false, HTMLAttributes: { class: "img-frame" } }),
 	Placeholder.configure({ placeholder }),
-	Link.configure({
-		openOnClick: false,
-		autolink: false,
-		defaultProtocol: "https",
-	}),
+	SiteLink,
 ];
 
 /**

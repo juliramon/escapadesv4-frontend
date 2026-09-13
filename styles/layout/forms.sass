@@ -68,7 +68,9 @@
 	top: var(--composer-toolbar-offset, 0.625rem)
 	z-index: 30
 
-.editor-bar__wrapper button
+// Només els botons de la barra: el cercador d'enllaços en penja i porta els
+// seus propis botons i icones.
+.editor-bar__wrapper > button
 	background-color: white
 	border: none
 	width: 30px
@@ -76,9 +78,67 @@
 	padding: 0
 	margin-right: 5px
 
-.editor-bar__wrapper svg
+.editor-bar__wrapper > button svg
 	width: 22px
 	height: 22px
+
+// Cercador d'enllaços interns (`LinkPicker`). La barra és sticky i ja fa de
+// referència per a la posició absoluta, així que el desplegable la segueix.
+.link-picker
+	@apply absolute left-0 mt-2 w-full max-w-md rounded-md border border-primary-50 bg-white shadow-lg shadow-primary-100 text-left
+	top: 100%
+	z-index: 40
+
+	&__search
+		@apply flex items-center gap-2 border-b border-primary-50 px-3
+
+		svg
+			@apply w-4 h-4 shrink-0 text-primary-300
+
+	&__input
+		@apply w-full py-3 text-sm text-primary-500 bg-transparent outline-none placeholder:text-primary-300
+		border: none
+
+	&__heading
+		@apply m-0 px-3 pt-2.5 pb-1 text-10 font-medium uppercase tracking-wide text-primary-300
+
+	&__results
+		@apply m-0 max-h-72 overflow-y-auto py-1 list-none
+		padding-left: 0
+
+	&__option
+		@apply flex items-center gap-3 px-3 py-2 cursor-pointer
+
+		&.is-active
+			@apply bg-primary-50
+
+	&__option-text
+		@apply flex flex-col flex-1 min-w-0
+
+	&__title
+		@apply text-sm font-medium text-primary-500 truncate
+
+	&__path
+		@apply text-xs text-primary-300 truncate
+
+	&__type
+		@apply shrink-0 rounded-full bg-tertiary-50 px-2 py-0.5 text-10 font-medium text-tertiary-800
+
+	&__empty, &__notice
+		@apply m-0 px-3 py-3 text-xs text-primary-400
+
+	&__footer
+		@apply flex items-center justify-between gap-3 border-t border-primary-50 px-3 py-2
+
+	&__checkbox
+		@apply m-0 flex items-center gap-2 text-xs text-primary-500 cursor-pointer
+
+	&__remove
+		@apply p-0 text-xs font-medium text-red-600 bg-transparent hover:underline
+		border: none
+
+	&__hint
+		@apply m-0 px-3 pb-2 text-10 text-primary-300
 
 .form-composer__editor
 	@apply outline-none
