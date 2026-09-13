@@ -544,7 +544,12 @@ const AdminPanel = () => {
 						</aside>
 
 						<section className="lg:col-span-9">
-							<div className="bg-white rounded-2xl border border-primary-50 overflow-hidden">
+							{/*
+							 * Sense `overflow-hidden`: el menú d'accions de cada fila és
+							 * absolut i, a les darreres files, sortia per sota del
+							 * requadre i quedava retallat, sense accés a "Editar".
+							 */}
+							<div className="bg-white rounded-2xl border border-primary-50">
 								<div className="flex flex-wrap items-center justify-between gap-3 border-b border-primary-50 p-4 lg:p-5">
 									<div className="min-w-0">
 										<h2 className="m-0 text-lg font-medium text-primary-500">
