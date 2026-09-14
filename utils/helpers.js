@@ -48,21 +48,22 @@ const uploadCarouselMediaItems = async (items, uploadFile) => {
 };
 
 /**
- * formatDateTimeToISODate
+ * Data de publicació ("4 de set. del 2025").
  *
- * Utility function to convert datetime values to formatted date
- * The function expects one parameter:
- *
- * @param {string} storyDetails
+ * La zona horària és fixa: el servidor (UTC a Vercel) i el navegador
+ * (Europe/Madrid) donaven dies diferents per a les dates properes a mitjanit,
+ * React detectava que el text no coincidia amb l'HTML del servidor i
+ * tornava a renderitzar la pàgina sencera al client.
  */
+const publicationDateFormat = new Intl.DateTimeFormat("ca", {
+	timeZone: "Europe/Madrid",
+	year: "numeric",
+	month: "short",
+	day: "numeric",
+});
 
-const formatDateTimeToISODate = (datetime) => {
-	return new Date(datetime).toLocaleDateString("ca-es", {
-		year: "numeric",
-		month: "short",
-		day: "numeric",
-	});
-};
+const formatDateTimeToISODate = (datetime) =>
+	publicationDateFormat.format(new Date(datetime));
 
 /**
  * getSeasonPictures

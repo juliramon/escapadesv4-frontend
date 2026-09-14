@@ -81,7 +81,7 @@ const INTEREST_GROUPS = [
 ];
 
 const CompleteAccount = () => {
-	const { user, refreshUserData } = useContext(UserContext);
+	const { user, userReady, refreshUserData } = useContext(UserContext);
 	const router = useRouter();
 
 	const [selection, setSelection] = useState({
@@ -98,6 +98,7 @@ const CompleteAccount = () => {
 	const service = useMemo(() => new ContentService(), []);
 
 	useEffect(() => {
+		if (!userReady) return;
 		if (!user || user === "null" || user === undefined) {
 			router.push("/login");
 			return;
@@ -106,7 +107,7 @@ const CompleteAccount = () => {
 			router.push("/2i8ZXlkM4cFKUPBrm3-admin-panel");
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [user]);
+	}, [user, userReady]);
 
 	// Arribar fins aquí és el que confirma el correu. Es fa un sol cop: abans
 	// depenia de tot l'objecte d'estat i es repetia a cada canvi.

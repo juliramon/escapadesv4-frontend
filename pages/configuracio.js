@@ -8,10 +8,11 @@ import ContentService from "../services/contentService";
 import { useRouter } from "next/router";
 
 const configuracio = () => {
-  const { user, refreshUserData } = useContext(UserContext);
+  const { user, userReady, refreshUserData } = useContext(UserContext);
   const router = useRouter();
 
   useEffect(() => {
+    if (!userReady) return;
     if (!user || user === "null" || user === undefined) {
       router.push("/login");
     } else {
@@ -34,7 +35,7 @@ const configuracio = () => {
     } else {
       document.querySelector("body").classList.remove("composer");
     }
-  }, [user, router]);
+  }, [user, userReady, router]);
 
   if (!user) {
     return (

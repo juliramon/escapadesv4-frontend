@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { cloudinaryUrl } from "../../utils/cloudinary";
+import { formatDateTimeToISODate } from "../../utils/helpers";
 
 const RegularListBox = ({
 	index,
@@ -11,11 +12,7 @@ const RegularListBox = ({
 	owner,
 	date,
 }) => {
-	let publicationDate = new Date(date).toLocaleDateString("ca-es", {
-		year: "numeric",
-		month: "short",
-		day: "numeric",
-	});
+	let publicationDate = formatDateTimeToISODate(date);
 	const coverImg = cloudinaryUrl(cover, "w_475,h_318,c_fill");
 
 	const avatarImg = cloudinaryUrl(avatar, "w_32,h_32,c_fill");

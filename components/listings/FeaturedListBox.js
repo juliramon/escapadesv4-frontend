@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { formatDateTimeToISODate } from "../../utils/helpers";
 
 const FeaturedListBox = ({
 	slug,
@@ -11,11 +12,7 @@ const FeaturedListBox = ({
 	date,
 }) => {
 	let shortenedSubtitle = subtitle.slice(0, 120);
-	let publicationDate = new Date(date).toLocaleDateString("ca-es", {
-		year: "numeric",
-		month: "short",
-		day: "numeric",
-	});
+	let publicationDate = formatDateTimeToISODate(date);
 	return (
 		<Link href={`/llistes/${slug}`}>
 			<a

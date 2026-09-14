@@ -4,6 +4,7 @@ import ContentService from "../../services/contentService";
 import ShareModal from "../modals/ShareModal";
 import { SeoScoreRing } from "../forms/SeoScore";
 import PaymentService from "../../services/paymentService";
+import { formatDateTimeToISODate } from "../../utils/helpers";
 
 const ContentBox = ({
 	trip,
@@ -73,12 +74,7 @@ const ContentBox = ({
 		url = `/${slug}`;
 	}
 
-	const transformDate = (unformattedDate) =>
-		new Date(unformattedDate).toLocaleDateString("ca-ES", {
-			year: "numeric",
-			month: "short",
-			day: "numeric",
-		});
+	const transformDate = formatDateTimeToISODate;
 
 	const [shareModalVisibility, setShareModalVisibility] = useState(false);
 	const handleShareModalVisibility = () => setShareModalVisibility(true);

@@ -8,10 +8,11 @@ import { useRouter } from "next/router";
 import Head from "next/head";
 
 const BookmarksList = () => {
-	const { user } = useContext(UserContext);
+	const { user, userReady } = useContext(UserContext);
 	const router = useRouter();
 
 	useEffect(() => {
+		if (!userReady) return;
 		if (!user || user === "null" || user === undefined) {
 			router.push("/login");
 		} else {
@@ -27,7 +28,7 @@ const BookmarksList = () => {
 				}
 			}
 		}
-	}, [user]);
+	}, [user, userReady]);
 
 	if (!user) {
 		return (
