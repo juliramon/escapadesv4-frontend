@@ -1,4 +1,5 @@
 import ContentService from "../services/contentService";
+import { listingPath } from "../utils/listingRoutes";
 
 const SITE = "https://escapadesenparella.cat";
 
@@ -90,8 +91,12 @@ export async function getServerSideProps({res}) {
 		});
 	};
 
-	push(activities.allActivities, (el) => `/activitats/${el.slug}`);
-	push(places.allPlaces, (el) => `/allotjaments/${el.slug}`);
+	// Les fitxes van amb la seva URL canònica, `/{categoria}/{slug}`: les rutes
+	// `/activitats/{slug}` i `/allotjaments/{slug}` redirigeixen amb un 308, i
+	// Google vol al sitemap les URLs finals. Si el llistat no portés les
+	// categories, `listingPath` tornaria la ruta de reserva, com fins ara.
+	push(activities.allActivities, listingPath);
+	push(places.allPlaces, listingPath);
 	push(stories.allStories, (el) => `/histories/${el.slug}`);
 	push(lists, (el) => `/llistes/${el.slug}`);
 	push(destinations, (el) => `/destinacions/${el.slug}`);
