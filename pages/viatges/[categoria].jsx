@@ -11,6 +11,8 @@ import { useRouter } from "next/router";
 import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/react-splide/css/core";
 import FancyboxUtil from "../../utils/FancyboxUtils";
+import LoadMoreLink from "../../components/listings/LoadMoreLink";
+import { pagePath, pageTitle } from "../../utils/pagination";
 
 const CategoryTrip = ({
 	categoryDetails,
@@ -18,6 +20,7 @@ const CategoryTrip = ({
 	totalItems,
 	trips,
 	numPages,
+	currentPage = 1,
 }) => {
 	// Validate if user is allowed to access this view
 	const { user } = useContext(UserContext);
@@ -31,48 +34,55 @@ const CategoryTrip = ({
 	// End validation
 
 	const initialResults = trips;
+	const isFirstPage = currentPage === 1;
+	const basePath = `/viatges/${categoryDetails.slug}`;
+	const pageUrl = `https://escapadesenparella.cat${pagePath(
+		basePath,
+		currentPage,
+	)}`;
 
-	const initialState = {
+	// `results` només guarda les tandes carregades amb «Veure'n més»: les de la
+	// pàgina arriben per props i es pinten des del servidor.
+	const stateFromProps = () => ({
 		results: [],
-		allResults: [],
-		hasResults: false,
+		allResults: allTrips,
 		isFetching: false,
-		numResults: 0,
-		numPages: 0,
-		currentPage: 1,
-	};
+		numResults: totalItems,
+		numPages: numPages,
+		currentPage: currentPage,
+	});
 
-	const [state, setState] = useState(initialState);
+	const [state, setState] = useState(stateFromProps);
 	const service = new ContentService();
 
-	// En passar d'una categoria de viatge a una altra, Next reaprofita aquest
-	// mateix component. Amb la llista de dependències buida, `state.results`
-	// —les pàgines que s'han carregat amb "veure'n més"— es quedava amb les
-	// entrades de la categoria anterior i sortien barrejades amb les noves.
+	// En passar d'una categoria de viatge a una altra, o d'una pàgina a una
+	// altra, Next reaprofita aquest mateix component. Amb la llista de
+	// dependències buida, `state.results` —les pàgines que s'han carregat amb
+	// "veure'n més"— es quedava amb les entrades anteriors i sortien
+	// barrejades amb les noves.
 	useEffect(() => {
 		if (!categoryDetails || !initialResults) return;
-		setState({
-			...initialState,
-			allResults: allTrips,
-			hasResults: initialResults.length > 0,
-			numResults: totalItems,
-			numPages: numPages,
-		});
+		setState(stateFromProps());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [categoryDetails?.slug]);
+	}, [categoryDetails?.slug, currentPage]);
 
-	const loadMoreResults = async (categoryName, page) => {
-		setState({ ...state, isFetching: true });
-		const { paginatedResults } = await service.paginateTripCategory(
-			categoryName,
-			page,
+	// L'API filtra les entrades per l'_id de la categoria, com a
+	// getServerSideProps, i les torna a `trips`. Abans aquí s'enviava el nom i
+	// es llegia `paginatedResults`, que aquesta API no retorna: el botó no
+	// afegia res. Les pàgines de l'API comencen per 0, o sigui que la tanda
+	// que ve després de la `currentPage` (base 1) és justament `currentPage`.
+	const loadMoreResults = async () => {
+		setState((prev) => ({ ...prev, isFetching: true }));
+		const { trips: nextTrips } = await service.paginateTripCategory(
+			categoryDetails._id,
+			state.currentPage,
 		);
-		setState({
-			...state,
-			results: [...state.results, ...paginatedResults],
+		setState((prev) => ({
+			...prev,
+			results: [...prev.results, ...nextTrips],
 			isFetching: false,
-			currentPage: ++state.currentPage,
-		});
+			currentPage: prev.currentPage + 1,
+		}));
 	};
 
 	useEffect(() => {
@@ -86,11 +96,11 @@ const CategoryTrip = ({
 		<>
 			{/* Browser metas  */}
 			<GlobalMetas
-				title={categoryDetails.title}
+				title={pageTitle(categoryDetails.title, currentPage)}
 				description={categoryDetails.seoTextHeader}
-				url={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}`}
+				url={pageUrl}
 				image={categoryDetails.image}
-				canonical={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}`}
+				canonical={pageUrl}
 			/>
 			{/* Rich snippets */}
 			<BreadcrumbRichSnippet
@@ -189,6 +199,11 @@ const CategoryTrip = ({
 						</div>
 					</section>
 
+					{/* El relat, el carrusel i la informació del viatge només
+					    van a la primera pàgina: les altres són la continuació
+					    de les publicacions i no els han de repetir */}
+					{isFirstPage ? (
+					<>
 					{/* Section tabs */}
 					<div className="border-y border-gray-100 bg-white mt-10 md:sticky md:top-[130px] z-40">
 						<nav className="flex flex-wrap items-center justify-center py-5 gap-2.5 md:gap-5">
@@ -553,6 +568,9 @@ const CategoryTrip = ({
 						</div>
 					</section>
 
+					</>
+					) : null}
+
 					{/* Section results list */}
 					<section className="py-10 md:py-16" id="publicacions">
 						<div className="container">
@@ -591,75 +609,16 @@ const CategoryTrip = ({
 											</article>
 										))}
 									</div>
-									{state.currentPage !== state.numPages ? (
-										<div className="w-full mt-10 flex justify-center">
-											{!state.isFetching ? (
-												<button
-													className="button button__primary button__lg"
-													onClick={() =>
-														loadMoreResults(
-															categoryDetails.name,
-															state.currentPage,
-														)
-													}
-												>
-													<svg
-														xmlns="http://www.w3.org/2000/svg"
-														className="icon icon-tabler icon-tabler-plus mr-2"
-														width={20}
-														height={20}
-														viewBox="0 0 24 24"
-														strokeWidth="2"
-														stroke="currentColor"
-														fill="none"
-														strokeLinecap="round"
-														strokeLinejoin="round"
-													>
-														<path
-															stroke="none"
-															d="M0 0h24v24H0z"
-															fill="none"
-														></path>
-														<line
-															x1={12}
-															y1={5}
-															x2={12}
-															y2={19}
-														></line>
-														<line
-															x1={5}
-															y1={12}
-															x2={19}
-															y2={12}
-														></line>
-													</svg>
-													Veure'n més
-												</button>
-											) : (
-												<button className="button button__primary button__lg">
-													<svg
-														role="status"
-														className="w-5 h-5 mr-2.5 text-primary-400 animate-spin dark:text-gray-600 fill-white"
-														viewBox="0 0 100 101"
-														fill="none"
-														xmlns="http://www.w3.org/2000/svg"
-													>
-														<path
-															d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-															fill="currentColor"
-														/>
-														<path
-															d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-															fill="currentFill"
-														/>
-													</svg>
-													Carregant
-												</button>
+									{state.currentPage < state.numPages ? (
+										<LoadMoreLink
+											href={pagePath(
+												basePath,
+												state.currentPage + 1,
 											)}
-										</div>
-									) : (
-										""
-									)}
+											isFetching={state.isFetching}
+											onLoadMore={loadMoreResults}
+										/>
+									) : null}
 								</>
 							) : (
 								<p className="mt-4 text-block">
@@ -676,11 +635,13 @@ const CategoryTrip = ({
 	);
 };
 
-export async function getServerSideProps({ params }) {
+/**
+ * Props d'una pàgina d'una categoria de viatge. També les fa servir
+ * `pages/viatges/[categoria]/pagina/[pagina].jsx` per a la resta de tandes.
+ */
+export const getTripCategoryPageProps = async (slug, page = 1) => {
 	const service = new ContentService();
-	const categoryDetails = await service.getTripCategoryDetails(
-		params.categoria,
-	);
+	const categoryDetails = await service.getTripCategoryDetails(slug);
 
 	if (categoryDetails == null) {
 		return {
@@ -688,8 +649,12 @@ export async function getServerSideProps({ params }) {
 		};
 	}
 
-	let { allTrips, totalItems, trips, numPages } =
-		await service.getTripCategoryResults(categoryDetails._id);
+	const { allTrips, totalItems, trips, numPages } =
+		await service.paginateTripCategory(categoryDetails._id, page - 1);
+
+	if (page > 1 && page > numPages) {
+		return { notFound: true };
+	}
 
 	return {
 		props: {
@@ -698,8 +663,13 @@ export async function getServerSideProps({ params }) {
 			totalItems,
 			trips,
 			numPages,
+			currentPage: page,
 		},
 	};
+};
+
+export async function getServerSideProps({ params }) {
+	return getTripCategoryPageProps(params.categoria);
 }
 
 export default CategoryTrip;

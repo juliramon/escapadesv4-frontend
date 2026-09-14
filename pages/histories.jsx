@@ -5,58 +5,65 @@ import Footer from "../components/global/Footer";
 import GlobalMetas from "../components/head/GlobalMetas";
 import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
 import EditorialGrid from "../components/listings/EditorialGrid";
+import LoadMoreLink from "../components/listings/LoadMoreLink";
 import MobileAnchorAd from "../components/ads/MobileAnchorAd";
 import ListingHeader from "../components/headers/ListingHeader";
+import { toEditorialCard } from "../utils/listingProps";
+import { pagePath, pageTitle } from "../utils/pagination";
 
-const StoriesList = ({ featuredStories, stories, totalItems, numPages }) => {
-	const initialResults = stories;
+const BASE_PATH = "/histories";
 
-	const initialState = {
-		featuredStories: [],
+const StoriesList = ({ stories, totalItems, numPages, currentPage = 1 }) => {
+	// `results` només guarda les tandes carregades amb «Veure'n més»: les de la
+	// pàgina arriben per props i es pinten des del servidor.
+	const stateFromProps = () => ({
 		results: [],
-		allResults: [],
-		hasResults: false,
 		isFetching: false,
-		numResults: 0,
-		numPages: 0,
-		currentPage: 1,
-	};
+		numResults: totalItems,
+		numPages: numPages,
+		currentPage: currentPage,
+	});
 
-	const [state, setState] = useState(initialState);
+	const [state, setState] = useState(stateFromProps);
 	const service = new ContentService();
 
+	// `/histories` i `/histories/pagina/{n}` comparteixen aquest component: en
+	// passar de l'una a l'altra Next no el torna a muntar i l'estat s'ha de
+	// refer amb les props noves.
 	useEffect(() => {
-		if (initialResults) {
-			setState({
-				...state,
-				featuredStories: featuredStories,
-				hasResults: initialResults.length > 0 ? true : false,
-				numResults: totalItems,
-				numPages: numPages,
-			});
-		}
-	}, []);
+		setState(stateFromProps());
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [currentPage]);
 
-	const loadMoreResults = async (page) => {
-		setState({ ...state, isFetching: true });
-		const { stories } = await service.paginateStories(page);
-		setState({
-			...state,
-			results: [...state.results, ...stories],
+	// L'API compta les pàgines des de 0: la tanda que ve després de la
+	// `currentPage` (base 1) és justament `currentPage`.
+	const loadMoreResults = async () => {
+		setState((prev) => ({ ...prev, isFetching: true }));
+		const { stories: nextStories } = await service.paginateStories(
+			state.currentPage,
+		);
+		setState((prev) => ({
+			...prev,
+			results: [...prev.results, ...nextStories],
 			isFetching: false,
-			currentPage: ++state.currentPage,
-		});
+			currentPage: prev.currentPage + 1,
+		}));
 	};
+
+	const pageUrl = `https://escapadesenparella.cat${pagePath(
+		BASE_PATH,
+		currentPage,
+	)}`;
 
 	return (
 		<>
 			{/* Browser metas  */}
 			<GlobalMetas
-				title="Històries en parella"
+				title={pageTitle("Històries en parella", currentPage)}
 				description="Històries en parella per a inspirar, descobrir nous llocs i, en definitiva, fer-vos venir ganes d'una escapada en parella per recordar."
-				url="https://escapadesenparella.cat/histories"
+				url={pageUrl}
 				image="https://escapadesenparella.cat/img/containers/main/img/og-histories.png/69081998ba0dfcb1465f7f878cbc7912.png"
-				canonical="https://escapadesenparella.cat/histories"
+				canonical={pageUrl}
 			/>
 			{/* Rich snippets */}
 			<BreadcrumbRichSnippet
@@ -78,85 +85,24 @@ const StoriesList = ({ featuredStories, stories, totalItems, numPages }) => {
 					{/* Section stories */}
 					<section className="pt-6 md:pt-8 pb-12 lg:pb-20">
 						<div className="container">
-							{initialResults.length > 0 ? (
+							{stories.length > 0 ? (
 								<>
 									<EditorialGrid
-										items={[
-											...initialResults,
-											...state.results,
-										]}
+										items={[...stories, ...state.results]}
 										basePath="/histories"
 										badge="Història"
 										eagerCount={4}
 									/>
-									{state.currentPage !== state.numPages ? (
-										<div className="col-span-full w-full mt-10 flex justify-center">
-											{!state.isFetching ? (
-												<button
-													className="button button__primary button__lg"
-													onClick={() =>
-														loadMoreResults(
-															state.currentPage
-														)
-													}
-												>
-													<svg
-														xmlns="http://www.w3.org/2000/svg"
-														className="icon icon-tabler icon-tabler-plus mr-2"
-														width={20}
-														height={20}
-														viewBox="0 0 24 24"
-														strokeWidth="2"
-														stroke="currentColor"
-														fill="none"
-														strokeLinecap="round"
-														strokeLinejoin="round"
-													>
-														<path
-															stroke="none"
-															d="M0 0h24v24H0z"
-															fill="none"
-														></path>
-														<line
-															x1={12}
-															y1={5}
-															x2={12}
-															y2={19}
-														></line>
-														<line
-															x1={5}
-															y1={12}
-															x2={19}
-															y2={12}
-														></line>
-													</svg>
-													Veure'n més
-												</button>
-											) : (
-												<button className="button button__primary button__lg">
-													<svg
-														role="status"
-														className="w-5 h-5 mr-2.5 text-primary-400 animate-spin dark:text-gray-600 fill-white"
-														viewBox="0 0 100 101"
-														fill="none"
-														xmlns="http://www.w3.org/2000/svg"
-													>
-														<path
-															d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-															fill="currentColor"
-														/>
-														<path
-															d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-															fill="currentFill"
-														/>
-													</svg>
-													Carregant
-												</button>
+									{state.currentPage < state.numPages ? (
+										<LoadMoreLink
+											href={pagePath(
+												BASE_PATH,
+												state.currentPage + 1,
 											)}
-										</div>
-									) : (
-										""
-									)}
+											isFetching={state.isFetching}
+											onLoadMore={loadMoreResults}
+										/>
+									) : null}
 								</>
 							) : (
 								<div className="col-span-full">
@@ -177,18 +123,36 @@ const StoriesList = ({ featuredStories, stories, totalItems, numPages }) => {
 	);
 };
 
-export async function getServerSideProps() {
+/**
+ * Props d'una pàgina del llistat d'històries. També les fa servir
+ * `pages/histories/pagina/[pagina].jsx` per a la resta de tandes.
+ *
+ * `featuredStories` ja no s'envia: la pàgina no el pintava i l'API el demana
+ * amb `.limit(0)`, que a Mongoose vol dir «sense límit». Incrustava totes les
+ * històries, amb l'autor, a l'HTML de `/histories`, que feia 1 MB.
+ */
+export const getStoriesPageProps = async (page = 1) => {
 	const service = new ContentService();
-	const { totalItems, stories, featuredStories, numPages } =
-		await service.getStories();
+	const { totalItems, stories, numPages } = await service.paginateStories(
+		page - 1,
+	);
+
+	if (page > 1 && page > numPages) {
+		return { notFound: true };
+	}
+
 	return {
 		props: {
 			totalItems,
-			stories,
-			featuredStories,
+			stories: (stories || []).map(toEditorialCard),
 			numPages,
+			currentPage: page,
 		},
 	};
+};
+
+export async function getServerSideProps() {
+	return getStoriesPageProps();
 }
 
 export default StoriesList;

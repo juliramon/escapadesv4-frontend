@@ -13,6 +13,8 @@ import { toListingCard, toMapMarker } from "../../utils/listingProps";
 import ListingHeader from "../../components/headers/ListingHeader";
 import MapModal from "../../components/modals/MapModal";
 import FilterListingsModal from "../../components/modals/FilterListingsModal";
+import LoadMoreLink from "../../components/listings/LoadMoreLink";
+import { pagePath, pageTitle } from "../../utils/pagination";
 
 const DestinationPage = ({
 	destinationDetails,
@@ -20,15 +22,19 @@ const DestinationPage = ({
 	paginatedResults,
 	totalItems,
 	numPages,
+	currentPage = 1,
 }) => {
-	const initialState = {
-		results: paginatedResults,
-		allResults: [],
-		hasResults: false,
+	// L'estat surt de les props des del primer render. Abans `hasResults`
+	// començava a false i el servidor pintava esquelets en lloc de fitxes: a
+	// l'HTML que llegeix Google, la destinació no enllaçava cap escapada.
+	const stateFromProps = () => ({
+		results: paginatedResults || [],
+		allResults: allResults || [],
+		hasResults: true,
 		isFetching: false,
-		numResults: 0,
-		numPages: 0,
-		currentPage: 1,
+		numResults: totalItems,
+		numPages: numPages,
+		currentPage: currentPage,
 		isFilterModalOpen: false,
 		isMapModalOpen: false,
 		// Els handlers del modal de filtres hi escriuen: sense inicialitzar-les,
@@ -37,31 +43,29 @@ const DestinationPage = ({
 		queryActivityCategory: [],
 		queryActivitySeason: [],
 		selectedCount: 0,
-		emptyBlocksPerRow: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
-	};
+	});
 
-	const [state, setState] = useState(initialState);
+	const [state, setState] = useState(stateFromProps);
 
 	const service = new ContentService();
 
-	// En passar d'una destinació a una altra, Next reaprofita aquest mateix
-	// component i només en canvia les props. Amb la llista de dependències
-	// buida, l'estat es quedava amb els resultats de la destinació anterior:
-	// el títol i l'URL canviaven, però la graella ensenyava les escapades que
-	// no tocaven. Per això es refà l'estat sencer a cada canvi de destinació,
-	// que a més descarta els filtres i la paginació de l'anterior.
+	const basePath = `/destinacions/${destinationDetails.slug}`;
+	const pageUrl = `https://escapadesenparella.cat${pagePath(
+		basePath,
+		currentPage,
+	)}`;
+
+	// En passar d'una destinació a una altra, o d'una pàgina a una altra de la
+	// mateixa destinació, Next reaprofita aquest mateix component i només en
+	// canvia les props. Amb la llista de dependències buida, l'estat es
+	// quedava amb els resultats anteriors: el títol i l'URL canviaven, però la
+	// graella ensenyava les escapades que no tocaven. Per això es refà l'estat
+	// sencer a cada canvi, que a més descarta els filtres i la paginació.
 	useEffect(() => {
 		if (!destinationDetails || !paginatedResults) return;
-		setState({
-			...initialState,
-			results: paginatedResults,
-			allResults: allResults,
-			hasResults: paginatedResults.length > 0,
-			numResults: totalItems,
-			numPages: numPages,
-		});
+		setState(stateFromProps());
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [destinationDetails?.slug]);
+	}, [destinationDetails?.slug, currentPage]);
 
 	const handleCheckRegion = (e) => {
 		let query = state.queryActivityRegion;
@@ -138,18 +142,22 @@ const DestinationPage = ({
 		</div>
 	) : null;
 
-	const loadMoreResults = async (destinationId, page) => {
-		setState({ ...state, isFetching: true });
-		const { paginatedResults } = await service.paginateDestination(
-			destinationId,
-			page,
-		);
-		setState({
-			...state,
-			results: [...state.results, ...paginatedResults],
+	// Les activitats i allotjaments referencien la destinació per _id, igual
+	// que a getStaticProps. L'API compta les pàgines des de 0: la tanda que ve
+	// després de la `currentPage` (base 1) és justament `currentPage`.
+	const loadMoreResults = async () => {
+		setState((prev) => ({ ...prev, isFetching: true }));
+		const { paginatedResults: nextResults } =
+			await service.paginateDestination(
+				destinationDetails._id,
+				state.currentPage,
+			);
+		setState((prev) => ({
+			...prev,
+			results: [...prev.results, ...nextResults],
 			isFetching: false,
-			currentPage: ++state.currentPage,
-		});
+			currentPage: prev.currentPage + 1,
+		}));
 	};
 
 	// Els filtres viuen a la capçalera: comparteixen fila amb el títol i
@@ -229,11 +237,11 @@ const DestinationPage = ({
 		<>
 			{/* Browser metas  */}
 			<GlobalMetas
-				title={destinationDetails.title}
+				title={pageTitle(destinationDetails.title, currentPage)}
 				description={destinationDetails.subtitle}
-				url={`https://escapadesenparella.cat/destinacions/${destinationDetails.slug}`}
+				url={pageUrl}
 				image={destinationDetails.image}
-				canonical={`https://escapadesenparella.cat/destinacions/${destinationDetails.slug}`}
+				canonical={pageUrl}
 			/>
 			{/* Rich snippets */}
 			<BreadcrumbRichSnippet
@@ -287,79 +295,17 @@ const DestinationPage = ({
 											eagerCount={2}
 										/>
 
-										{state.currentPage !==
+										{state.currentPage <
 										state.numPages ? (
-											<div className="col-span-full w-full mt-10 flex justify-center">
-												{!state.isFetching ? (
-													<button
-														className="button button__primary button__lg"
-														onClick={() =>
-															loadMoreResults(
-																// Les activitats i allotjaments
-																// referencien la destinació per
-																// _id, igual que a getStaticProps.
-																destinationDetails._id,
-																state.currentPage,
-															)
-														}
-													>
-														<svg
-															xmlns="http://www.w3.org/2000/svg"
-															className="icon icon-tabler icon-tabler-plus mr-2"
-															width={20}
-															height={20}
-															viewBox="0 0 24 24"
-															strokeWidth="2"
-															stroke="currentColor"
-															fill="none"
-															strokeLinecap="round"
-															strokeLinejoin="round"
-														>
-															<path
-																stroke="none"
-																d="M0 0h24v24H0z"
-																fill="none"
-															></path>
-															<line
-																x1={12}
-																y1={5}
-																x2={12}
-																y2={19}
-															></line>
-															<line
-																x1={5}
-																y1={12}
-																x2={19}
-																y2={12}
-															></line>
-														</svg>
-														Veure'n més
-													</button>
-												) : (
-													<button className="button button__primary button__lg">
-														<svg
-															role="status"
-															className="w-5 h-5 mr-2.5 text-primary-400 animate-spin dark:text-gray-600 fill-white"
-															viewBox="0 0 100 101"
-															fill="none"
-															xmlns="http://www.w3.org/2000/svg"
-														>
-															<path
-																d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-																fill="currentColor"
-															/>
-															<path
-																d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-																fill="currentFill"
-															/>
-														</svg>
-														Carregant
-													</button>
+											<LoadMoreLink
+												href={pagePath(
+													basePath,
+													state.currentPage + 1,
 												)}
-											</div>
-										) : (
-											""
-										)}
+												isFetching={state.isFetching}
+												onLoadMore={loadMoreResults}
+											/>
+										) : null}
 									</>
 								) : (
 									<div className="col-span-full">
@@ -375,6 +321,10 @@ const DestinationPage = ({
 						</div>
 					</section>
 
+					{/* Els textos de la destinació només van a la primera
+					    pàgina, perquè les altres no els repeteixin */}
+					{currentPage === 1 ? (
+					<>
 					{/* Section review texto */}
 					<section className="mt-8 md:mt-12 lg:mt-20">
 						<div className="container">
@@ -420,6 +370,8 @@ const DestinationPage = ({
 							</div>
 						</div>
 					</section>
+					</>
+					) : null}
 				</main>
 			</div>
 
@@ -475,20 +427,25 @@ export async function getStaticPaths() {
 	return { paths, fallback: "blocking" };
 }
 
-export async function getStaticProps({ params }) {
+/**
+ * Props d'una pàgina del llistat d'una destinació. També les fa servir
+ * `pages/destinacions/[destination]/pagina/[pagina].js` per a la resta de
+ * tandes.
+ */
+export const getDestinationPageProps = async (slug, page = 1) => {
 	const service = new ContentService();
-	const destinationDetails = await service.getDestinationDetails(
-		params.destination,
-	);
+	const destinationDetails = await service.getDestinationDetails(slug);
 
 	if (!destinationDetails) {
-		return {
-			notFound: true,
-		};
+		return { notFound: true, revalidate: 120 };
 	}
 
 	const { allResults, paginatedResults, totalItems, numPages } =
-		await service.getDestinationResults(destinationDetails._id);
+		await service.paginateDestination(destinationDetails._id, page - 1);
+
+	if (page > 1 && page > numPages) {
+		return { notFound: true, revalidate: 120 };
+	}
 
 	// `allResults` només alimenta els marcadors del mapa i `paginatedResults`
 	// les fitxes: enviar els documents sencers multiplicava per deu el pes de
@@ -500,9 +457,14 @@ export async function getStaticProps({ params }) {
 			paginatedResults: (paginatedResults || []).map(toListingCard),
 			totalItems,
 			numPages,
+			currentPage: page,
 		},
 		revalidate: 120,
 	};
+};
+
+export async function getStaticProps({ params }) {
+	return getDestinationPageProps(params.destination);
 }
 
 export default DestinationPage;
