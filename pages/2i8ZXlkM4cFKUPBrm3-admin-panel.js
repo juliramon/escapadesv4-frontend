@@ -61,7 +61,7 @@ const contentBoxProps = (item) => {
 };
 
 const AdminPanel = () => {
-	const { user } = useContext(UserContext);
+	const { user, userReady } = useContext(UserContext);
 	const router = useRouter();
 	const service = new ContentService();
 
@@ -92,10 +92,11 @@ const AdminPanel = () => {
 	}, [user]);
 
 	useEffect(() => {
+		if (!userReady) return;
 		if (!user || user === "null" || user === undefined) {
 			router.push("/login");
 		}
-	}, [user]);
+	}, [user, userReady]);
 
 	/**
 	 * Les nou crides eren seqüencials i es feien esperar entre elles: la

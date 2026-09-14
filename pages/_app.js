@@ -21,21 +21,28 @@ function MyApp({ Component, pageProps }) {
 
 	// const [cookies, setCookie, removeCookie] = useCookies("");
 
-	let loggedData;
-	if (typeof window !== "undefined") {
-		let getLoggedUser = JSON.parse(
-			window.localStorage.getItem("loggedInUser")
-		);
-		if (getLoggedUser && getLoggedUser !== null) {
-			loggedData = getLoggedUser;
+	// El servidor no té accés a localStorage: si l'usuari desat es llegia
+	// durant el render, el primer render del client no coincidia amb l'HTML
+	// del servidor i React el llençava sencer. Es llegeix després de muntar;
+	// fins llavors `userReady` és fals i les pàgines privades no redirigeixen.
+	const [state, setState] = useState({
+		loggedUser: undefined,
+		userReady: false,
+	});
+
+	useEffect(() => {
+		let storedUser;
+		try {
+			storedUser = JSON.parse(window.localStorage.getItem("loggedInUser"));
+		} catch (error) {
+			storedUser = null;
 		}
-	}
-
-	const initialState = {
-		loggedUser: loggedData,
-	};
-
-	const [state, setState] = useState(initialState);
+		setState((previous) => ({
+			...previous,
+			loggedUser: storedUser || undefined,
+			userReady: true,
+		}));
+	}, []);
 
 	// let cookieCreationDate = new Date();
 	// let cookieExpirationDate = new Date();
@@ -104,6 +111,7 @@ function MyApp({ Component, pageProps }) {
 		<UserContext.Provider
 			value={{
 				user: state.loggedUser,
+				userReady: state.userReady,
 				saveUserDetails: getLoggedUser,
 				getNewUser: getNewUser,
 				refreshUserData: refreshUserData,

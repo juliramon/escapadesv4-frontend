@@ -1,12 +1,9 @@
 import Link from "next/link";
 import { cloudinaryUrl } from "../../utils/cloudinary";
+import { formatDateTimeToISODate } from "../../utils/helpers";
 
 const StoryListing = ({ story, index, priority }) => {
-	const createdDate = new Date(story.createdAt).toLocaleDateString("ca-es", {
-		year: "numeric",
-		month: "short",
-		day: "numeric",
-	});
+	const createdDate = formatDateTimeToISODate(story.createdAt);
 
 	const coverImg = cloudinaryUrl(story.cover, "w_457,h_343,c_fill");
 

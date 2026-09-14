@@ -19,13 +19,14 @@ import AuthAlert from "../../components/auth/AuthAlert";
  *    havia sortit.
  */
 const ConfirmEmail = () => {
-	const { user } = useContext(UserContext);
+	const { user, userReady } = useContext(UserContext);
 	const router = useRouter();
 
 	const [feedback, setFeedback] = useState("");
 	const [isSending, setIsSending] = useState(false);
 
 	useEffect(() => {
+		if (!userReady) return;
 		if (!user || user === "null" || user === undefined) {
 			router.push("/login");
 			return;
@@ -34,7 +35,7 @@ const ConfirmEmail = () => {
 			router.push("/signup/complete-account");
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [user]);
+	}, [user, userReady]);
 
 	if (!user) {
 		return (

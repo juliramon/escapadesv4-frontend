@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { cloudinaryImage } from "../../utils/cloudinary";
+import { formatDateTimeToISODate } from "../../utils/helpers";
 
 /**
  * Targeta editorial per a històries i llistes.
@@ -22,13 +23,7 @@ const EditorialCard = ({
 }) => {
 	const isEager = eager !== undefined ? eager : index < 3;
 	const image = cloudinaryImage(cover, 520, 390);
-	const publicationDate = date
-		? new Date(date).toLocaleDateString("ca-ES", {
-				year: "numeric",
-				month: "short",
-				day: "numeric",
-		  })
-		: null;
+	const publicationDate = date ? formatDateTimeToISODate(date) : null;
 
 	return (
 		<article className="w-full group">

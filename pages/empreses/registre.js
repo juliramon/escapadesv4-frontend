@@ -16,7 +16,7 @@ import {
 } from "../../utils/uploads";
 
 const Registre = () => {
-	const { user, refreshUserData } = useContext(UserContext);
+	const { user, userReady, refreshUserData } = useContext(UserContext);
 	const router = useRouter();
 	const service = new AuthService();
 	const serviceContent = new ContentService();
@@ -72,10 +72,10 @@ const Registre = () => {
 	// }, [router]);
 
 	useEffect(() => {
-		if (!user) {
+		if (userReady && !user) {
 			router.push("/login");
 		}
-	}, [user]);
+	}, [user, userReady]);
 
 	if (!user) {
 		return (
