@@ -363,13 +363,45 @@ const StoryListing = ({ storyDetails, relatedStories }) => {
 	);
 };
 
-export async function getServerSideProps({ params }) {
+/**
+ * Les històries es generaven a cada visita: 1,1–1,8 s fins al primer byte,
+ * també per a Googlebot. Amb ISR es genera un cop, se serveix de la cache de
+ * Vercel i es refresca cada dos minuts, com ja fan la portada, les categories
+ * i les destinacions.
+ */
+export async function getStaticPaths() {
+	const service = new ContentService();
+
+	// Si l'API no respon en temps de build (per exemple, un desplegament del
+	// backend encara en curs), no s'ha de tombar tot el build: amb fallback
+	// "blocking" les pàgines es generen a la primera visita.
+	let stories = [];
+	try {
+		stories = (await service.getAllStories())?.allStories || [];
+	} catch (err) {
+		console.warn(
+			"getStaticPaths: no s'han pogut llistar les històries, es generaran sota demanda.",
+		);
+	}
+
+	return {
+		paths: stories
+			.filter((story) => story?.slug)
+			.map((story) => ({ params: { slug: story.slug } })),
+		// "blocking" en lloc de false: amb false, una història publicada des
+		// del panell donaria 404 fins al següent desplegament.
+		fallback: "blocking",
+	};
+}
+
+export async function getStaticProps({ params }) {
 	const service = new ContentService();
 	const storyDetails = await service.getStoryDetails(params.slug);
 
 	if (!storyDetails) {
 		return {
 			notFound: true,
+			revalidate: 120,
 		};
 	}
 
@@ -390,6 +422,7 @@ export async function getServerSideProps({ params }) {
 			storyDetails,
 			relatedStories,
 		},
+		revalidate: 120,
 	};
 }
 

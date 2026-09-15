@@ -324,13 +324,44 @@ const ListView = ({ listDetails, relatedLists }) => {
 	);
 };
 
-export async function getServerSideProps({ params }) {
+/**
+ * Les llistes es generaven a cada visita: 1,1–1,8 s fins al primer byte,
+ * també per a Googlebot. Amb ISR es genera un cop, se serveix de la cache de
+ * Vercel i es refresca cada dos minuts, com ja fan la portada, les categories
+ * i les destinacions.
+ */
+export async function getStaticPaths() {
+	const service = new ContentService();
+
+	// Si l'API no respon en temps de build, no s'ha de tombar tot el build:
+	// amb fallback "blocking" les pàgines es generen a la primera visita.
+	let lists = [];
+	try {
+		lists = (await service.getAllLists()) || [];
+	} catch (err) {
+		console.warn(
+			"getStaticPaths: no s'han pogut llistar les llistes, es generaran sota demanda.",
+		);
+	}
+
+	return {
+		paths: lists
+			.filter((list) => list?.slug)
+			.map((list) => ({ params: { slug: list.slug } })),
+		// "blocking" en lloc de false: amb false, una llista publicada des del
+		// panell donaria 404 fins al següent desplegament.
+		fallback: "blocking",
+	};
+}
+
+export async function getStaticProps({ params }) {
 	const service = new ContentService();
 	const listDetails = await service.getListDetails(params.slug);
 
 	if (!listDetails) {
 		return {
 			notFound: true,
+			revalidate: 120,
 		};
 	}
 
@@ -351,6 +382,7 @@ export async function getServerSideProps({ params }) {
 			listDetails,
 			relatedLists,
 		},
+		revalidate: 120,
 	};
 }
 

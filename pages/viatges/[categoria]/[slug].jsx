@@ -342,7 +342,40 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 	);
 };
 
-export async function getServerSideProps({ params }) {
+/**
+ * Les entrades de viatge es generaven a cada visita: 1,1–1,8 s fins al primer
+ * byte, també per a Googlebot. Amb ISR es generen un cop, se serveixen de la
+ * cache de Vercel i es refresquen cada dos minuts, com ja fan la portada, les
+ * categories i les destinacions.
+ */
+export async function getStaticPaths() {
+	const service = new ContentService();
+
+	// Si l'API no respon en temps de build, no s'ha de tombar tot el build:
+	// amb fallback "blocking" les pàgines es generen a la primera visita.
+	let tripEntries = [];
+	try {
+		tripEntries = (await service.getAllTripEntries())?.allTrips || [];
+	} catch (err) {
+		console.warn(
+			"getStaticPaths: no s'han pogut llistar les entrades de viatge, es generaran sota demanda.",
+		);
+	}
+
+	return {
+		// L'entrada penja del slug de la seva categoria de viatge.
+		paths: tripEntries
+			.filter((entry) => entry?.slug && entry?.trip?.slug)
+			.map((entry) => ({
+				params: { categoria: entry.trip.slug, slug: entry.slug },
+			})),
+		// "blocking" en lloc de false: amb false, una entrada publicada des
+		// del panell donaria 404 fins al següent desplegament.
+		fallback: "blocking",
+	};
+}
+
+export async function getStaticProps({ params }) {
 	const service = new ContentService();
 	const categoryDetails = await service.getTripCategoryDetails(
 		params.categoria
@@ -352,6 +385,7 @@ export async function getServerSideProps({ params }) {
 	if (!tripEntryDetails) {
 		return {
 			notFound: true,
+			revalidate: 120,
 		};
 	}
 
@@ -360,6 +394,7 @@ export async function getServerSideProps({ params }) {
 			tripEntryDetails,
 			categoryDetails,
 		},
+		revalidate: 120,
 	};
 }
 

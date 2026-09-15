@@ -23,6 +23,7 @@ import BookingCard from "../../components/listingpage/BookingCard";
 import RelatedListings from "../../components/listingpage/RelatedListings";
 import {
 	categoryHeadingFor,
+	listingPath,
 	listingUrl,
 } from "../../utils/listingRoutes";
 
@@ -1122,7 +1123,60 @@ const GetawayListing = ({
 	}
 };
 
-export async function getServerSideProps({ params }) {
+/**
+ * Les fitxes es generaven a cada visita: 1,1–1,8 s fins al primer byte, també
+ * per a Googlebot, i són les 190 pàgines que més entren per cerca. Amb ISR es
+ * generen un cop, se serveixen de la cache de Vercel i es refresquen cada dos
+ * minuts, com ja fan la portada, les categories i les destinacions.
+ */
+export async function getStaticPaths() {
+	const service = new ContentService();
+
+	// Si l'API no respon en temps de build, no s'ha de tombar tot el build:
+	// amb fallback "blocking" les pàgines es generen a la primera visita.
+	const safe = async (request) => {
+		try {
+			return (await request()) || {};
+		} catch (err) {
+			console.warn(
+				"getStaticPaths: no s'han pogut llistar les fitxes, es generaran sota demanda.",
+			);
+			return {};
+		}
+	};
+
+	const [activities, places] = await Promise.all([
+		safe(() => service.activities()),
+		safe(() => service.getAllPlaces()),
+	]);
+
+	// `listingPath` dóna la URL canònica, `/{categoria}/{slug}`. Quan el
+	// llistat de l'API no porta les categories, torna la ruta de reserva
+	// (`/activitats/{slug}`), que no és d'aquesta pàgina i que redirigeix:
+	// aquestes fitxes es generen a la primera visita.
+	const paths = [];
+	// El catàleg pot tenir slugs repetits mentre no hi hagi índex únic, i una
+	// ruta repetida fa fallar el build.
+	const seen = new Set();
+	for (const item of [
+		...(activities.allActivities || []),
+		...(places.allPlaces || []),
+	]) {
+		const [categoria, slug] = listingPath(item).split("/").filter(Boolean);
+		if (!categoria || !slug) continue;
+		if (categoria === "activitats" || categoria === "allotjaments") continue;
+		const path = `${categoria}/${slug}`;
+		if (seen.has(path)) continue;
+		seen.add(path);
+		paths.push({ params: { categoria, slug } });
+	}
+
+	// "blocking" en lloc de false: amb false, una fitxa publicada des del
+	// panell donaria 404 fins al següent desplegament.
+	return { paths, fallback: "blocking" };
+}
+
+export async function getStaticProps({ params }) {
 	const service = new ContentService();
 	const categoryDetails = await service.getCategoryDetails(params.categoria);
 	const activityDetails = await service.activityDetails(params.slug);
@@ -1139,6 +1193,7 @@ export async function getServerSideProps({ params }) {
 	if (activityDetails == null && placeDetails == null) {
 		return {
 			notFound: true,
+			revalidate: 120,
 		};
 	}
 
@@ -1202,6 +1257,7 @@ export async function getServerSideProps({ params }) {
 			relatedResults,
 			relatedByCategory,
 		},
+		revalidate: 120,
 	};
 }
 
