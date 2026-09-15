@@ -218,8 +218,11 @@ const PressMedia = () => {
 												<img
 													src={item.thumbnail}
 													alt={item.title}
+													width={640}
+													height={360}
 													className="w-full h-full object-cover"
 													loading="lazy"
+													decoding="async"
 												/>
 											</picture>
 											<div className="col-span-4 md:col-span-3 lg:col-span-3 p-6">
@@ -286,8 +289,11 @@ const PressMedia = () => {
 												<img
 													src={item.thumbnail}
 													alt={item.title}
+													width={640}
+													height={360}
 													className="w-full h-full object-cover"
 													loading="lazy"
+													decoding="async"
 												/>
 											</picture>
 											<div className="col-span-4 md:col-span-3 lg:col-span-3 p-6">
@@ -353,8 +359,11 @@ const PressMedia = () => {
 											<img
 												src={item.thumbnail}
 												alt={item.title}
+												width={640}
+												height={360}
 												className="w-full h-full object-cover"
 												loading="lazy"
+												decoding="async"
 											/>
 										</picture>
 										<div className="col-span-4 md:col-span-3 lg:col-span-3 p-6">

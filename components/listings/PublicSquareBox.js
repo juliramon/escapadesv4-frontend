@@ -37,6 +37,9 @@ const PublicSquareBox = ({
 	rating,
 	price,
 	priority,
+	// La primera targeta del llistat és, gairebé sempre, l'element més gran de
+	// la pantalla: al navegador li va bé saber-ho abans de mirar l'estil.
+	isLcp = false,
 }) => {
 	const isPlace = type === "place";
 
@@ -73,9 +76,6 @@ const PublicSquareBox = ({
 				<a title={title} className="listing-card__link">
 					<div className="listing-card__media">
 						<picture className="block w-full h-full aspect-w-4 aspect-h-3">
-							{image.webp ? (
-								<source srcSet={image.webp} type="image/webp" />
-							) : null}
 							<img
 								src={image.src}
 								alt={title}
@@ -83,6 +83,8 @@ const PublicSquareBox = ({
 								width={457}
 								height={343}
 								loading={priority === "eager" ? "eager" : "lazy"}
+								fetchpriority={isLcp ? "high" : undefined}
+								decoding="async"
 							/>
 						</picture>
 

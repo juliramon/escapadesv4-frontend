@@ -88,6 +88,7 @@ const ListingGrid = ({
 				location={resolveLocation(item)}
 				isVerified={item.isVerified}
 				priority={index < eagerCount ? "eager" : "lazy"}
+				isLcp={index === 0}
 			/>
 		);
 

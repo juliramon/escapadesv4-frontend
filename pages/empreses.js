@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { cloudinaryImage } from "../utils/cloudinary";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
 import Plans from "../components/global/Plans";
@@ -114,9 +115,20 @@ const Serveis = () => {
 									<div className="w-full md:w-1/2 mt-5 lg:mt-0">
 										<picture>
 											<img
-												src="https://res.cloudinary.com/juligoodie/image/upload/v1621536007/getaways-guru/static-files/graphic-plans-3_lrey6s.png"
+												src={
+													cloudinaryImage(
+														"https://res.cloudinary.com/juligoodie/image/upload/v1621536007/getaways-guru/static-files/graphic-plans-3_lrey6s.png",
+														800,
+														600,
+														"fit"
+													).src
+												}
+												alt=""
+												width={800}
+												height={600}
 												className="w-full h-full object-cover"
 												loading="eager"
+												fetchpriority="high"
 											/>
 										</picture>
 									</div>
@@ -136,7 +148,21 @@ const Serveis = () => {
 									<br />i confien en nosaltres
 								</h3>
 								<div className="logos-bar mt-5">
-									<img src="https://res.cloudinary.com/juligoodie/image/upload/v1621538629/getaways-guru/static-files/graphic-plans-4_luvtvr.png" />
+									<img
+										src={
+											cloudinaryImage(
+												"https://res.cloudinary.com/juligoodie/image/upload/v1621538629/getaways-guru/static-files/graphic-plans-4_luvtvr.png",
+												1200,
+												400,
+												"fit"
+											).src
+										}
+										alt="Allotjaments i activitats que confien en nosaltres"
+										width={1200}
+										height={400}
+										loading="lazy"
+										decoding="async"
+									/>
 								</div>
 							</div>
 						</div>

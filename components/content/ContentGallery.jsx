@@ -1,4 +1,5 @@
 import FancyboxUtil from "../../utils/FancyboxUtils";
+import { cloudinaryImage } from "../../utils/cloudinary";
 
 /**
  * Galeria d'imatges dins del cos d'una publicació.
@@ -29,36 +30,51 @@ const ContentGallery = ({ images = [], title = "" }) => {
 	const groupName = `gallery-${gallery[0].slice(-24)}`;
 	const width = columnsFor(gallery.length);
 
+	// Les imatges es mostraven a mida original: una galeria de sis fotos podia
+	// arribar a pesar més de deu mega. La lupa (`data-src`) sí que obre la
+	// versió gran, però ara també passa per Cloudinary.
+	const thumbnail = (image) =>
+		gallery.length === 1
+			? cloudinaryImage(image, 1200, 675)
+			: cloudinaryImage(image, 600, 600);
+	const fullSize = (image) => cloudinaryImage(image, 1600, 1600, "limit").src;
+
 	return (
 		<FancyboxUtil options={{ infinite: true }}>
 			<div className="flex flex-wrap -mx-1 my-6 cursor-pointer">
-				{gallery.map((image, idx) => (
-					<div
-						className={`${width} px-1 mb-2 flex-auto`}
-						data-fancybox={groupName}
-						data-src={image}
-						key={`${image}-${idx}`}
-					>
-						<picture
-							className={`block rounded-2xl overflow-hidden relative ${
-								gallery.length === 1 ? "aspect-[16/9]" : "aspect-1"
-							}`}
+				{gallery.map((image, idx) => {
+					const thumb = thumbnail(image);
+					return (
+						<div
+							className={`${width} px-1 mb-2 flex-auto`}
+							data-fancybox={groupName}
+							data-src={fullSize(image)}
+							key={`${image}-${idx}`}
 						>
-							<img
-								src={image}
-								alt={
-									title
-										? `${title} - ${idx + 1}`
-										: `Imatge ${idx + 1}`
-								}
-								className="w-full h-full object-cover"
-								width={400}
-								height={300}
-								loading="lazy"
-							/>
-						</picture>
-					</div>
-				))}
+							<picture
+								className={`block rounded-2xl overflow-hidden relative ${
+									gallery.length === 1
+										? "aspect-[16/9]"
+										: "aspect-1"
+								}`}
+							>
+								<img
+									src={thumb.src}
+									alt={
+										title
+											? `${title} - ${idx + 1}`
+											: `Imatge ${idx + 1}`
+									}
+									className="w-full h-full object-cover"
+									width={thumb.width}
+									height={thumb.height}
+									loading="lazy"
+									decoding="async"
+								/>
+							</picture>
+						</div>
+					);
+				})}
 			</div>
 		</FancyboxUtil>
 	);

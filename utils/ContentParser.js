@@ -1,4 +1,5 @@
 import parse from "html-react-parser";
+import { withResponsiveImages } from "./contentImages";
 import AdBanner from "../components/ads/AdBanner";
 import ContentGallery from "../components/content/ContentGallery";
 
@@ -20,7 +21,9 @@ const ContentParser = {
 	parseContent: (htmlContent, options = {}) => {
 		if (!htmlContent) return [];
 
-		let processedContent = htmlContent;
+		// Les imatges del cos passen per Cloudinary abans de convertir-se en
+		// elements de React: el que hi ha desat continua sent l'original.
+		let processedContent = withResponsiveImages(htmlContent);
 		const adBannerComponents = [];
 
 		// Expresión regular para encontrar atajos de banners publicitarios

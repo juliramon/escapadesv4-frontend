@@ -25,12 +25,6 @@ const CategoryRail = ({ categories = [], prefix = "/" }) => {
 								<span className="category-rail__media">
 									{category.image ? (
 										<picture>
-											{image.webp ? (
-												<source
-													srcSet={image.webp}
-													type="image/webp"
-												/>
-											) : null}
 											<img
 												src={image.src}
 												alt={category.label}

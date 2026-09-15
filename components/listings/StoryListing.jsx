@@ -1,13 +1,13 @@
 import Link from "next/link";
-import { cloudinaryUrl } from "../../utils/cloudinary";
+import { cloudinaryImage } from "../../utils/cloudinary";
 import { formatDateTimeToISODate } from "../../utils/helpers";
 
 const StoryListing = ({ story, index, priority }) => {
 	const createdDate = formatDateTimeToISODate(story.createdAt);
 
-	const coverImg = cloudinaryUrl(story.cover, "w_457,h_343,c_fill");
+	const coverImg = cloudinaryImage(story.cover, 457, 343).src;
 
-	const avatarImg = cloudinaryUrl(story.owner.avatar, "w_24,h_24,c_fill");
+	const avatarImg = cloudinaryImage(story.owner.avatar, 24, 24).src;
 
 	return (
 		<Link href={"histories/" + story.slug} key={index}>

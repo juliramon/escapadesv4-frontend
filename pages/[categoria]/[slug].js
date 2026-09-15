@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
-import { cloudinaryUrl } from "../../utils/cloudinary";
+import { cloudinaryImage, cloudinaryResponsive } from "../../utils/cloudinary";
+import { withResponsiveImages } from "../../utils/contentImages";
 import { useRouter } from "next/router";
 import NavigationBar from "../../components/global/NavigationBar";
 import ContentService from "../../services/contentService";
@@ -331,9 +332,22 @@ const GetawayListing = ({
 				? getawayDetails.placeType
 				: null;
 
-		const relatedStoryCoverImg = cloudinaryUrl(getawayDetails?.relatedStory?.cover, "w_100,h_100,c_fill");
+		const relatedStoryCoverImg = cloudinaryImage(getawayDetails?.relatedStory?.cover, 100, 100).src;
 
-		const getawayCoverImg = cloudinaryUrl(getawayDetails?.cover, "w_805,h_605,c_fill");
+		// El carrusel ocupa tota l'amplada al mòbil i tres columnes a
+		// l'escriptori: amb `sizes` el navegador demana la mida que toca en
+		// comptes de la de 805 px sempre.
+		const gallerySizes =
+			"(min-width: 1024px) 805px, (min-width: 768px) 50vw, 100vw";
+		const galleryImage = (url) =>
+			cloudinaryResponsive(url, {
+				widths: [400, 600, 805, 1200],
+				ratio: 3 / 4,
+				sizes: gallerySizes,
+			});
+
+		const getawayCover = galleryImage(getawayDetails?.cover);
+		const getawayCoverImg = getawayCover.src;
 
 		// La fitxa és accessible des de qualsevol slug de categoria, però la URL
 		// que mana és sempre la de la seva categoria principal. Sense això cada
@@ -574,7 +588,13 @@ const GetawayListing = ({
 															<picture className="block w-full h-full">
 																<img
 																	src={
-																		getawayCoverImg
+																		getawayCover.src
+																	}
+																	srcSet={
+																		getawayCover.srcSet
+																	}
+																	sizes={
+																		getawayCover.sizes
 																	}
 																	alt={
 																		getawayDetails.title
@@ -582,9 +602,15 @@ const GetawayListing = ({
 																	className={
 																		"w-full h-full object-cover rounded-2xl"
 																	}
-																	width={400}
-																	height={300}
+																	width={
+																		getawayCover.width
+																	}
+																	height={
+																		getawayCover.height
+																	}
 																	loading="eager"
+																	fetchpriority="high"
+																	decoding="async"
 																/>
 															</picture>
 														</div>
@@ -593,17 +619,10 @@ const GetawayListing = ({
 												{getawayDetails.images
 													? getawayDetails.images.map(
 															(el, idx) => {
-																const imageSrc =
-																	el?.substring(
-																		0,
-																		51
+																const image =
+																	galleryImage(
+																		el
 																	);
-																const imageId =
-																	el?.substring(
-																		63
-																	);
-																const imageModSrc = `${imageSrc}w_805,h_605,c_fill/${imageId}`;
-																const imageModSrcMob = `${imageSrc}w_400,h_300,c_fill/${imageId}`;
 
 																const priority =
 																	idx === 1 ||
@@ -629,35 +648,30 @@ const GetawayListing = ({
 																				}
 																			>
 																				<picture className="block w-full h-full bg-primary-50">
-																					<source
-																						srcSet={
-																							imageModSrcMob
-																						}
-																						media="(max-width: 768px)"
-																					/>
-																					<source
-																						srcSet={
-																							imageModSrc
-																						}
-																						media="(min-width: 768px)"
-																					/>
 																					<img
 																						src={
-																							imageModSrc
+																							image.src
+																						}
+																						srcSet={
+																							image.srcSet
+																						}
+																						sizes={
+																							image.sizes
 																						}
 																						alt={`${getawayDetails.title} - ${idx}`}
 																						className={
 																							"w-full h-full object-cover rounded-2xl"
 																						}
 																						width={
-																							400
+																							image.width
 																						}
 																						height={
-																							300
+																							image.height
 																						}
 																						loading={
 																							priority
 																						}
+																						decoding="async"
 																					/>
 																				</picture>
 																			</div>
@@ -763,7 +777,9 @@ const GetawayListing = ({
 												<div
 													className="mt-4 listing__description"
 													dangerouslySetInnerHTML={{
-														__html: getawayDetails.description,
+														__html: withResponsiveImages(
+															getawayDetails.description
+														),
 													}}
 												></div>
 											</div>
@@ -821,7 +837,9 @@ const GetawayListing = ({
 													<div
 														className="mt-4 listing__description"
 														dangerouslySetInnerHTML={{
-															__html: getawayDetails.reasons,
+															__html: withResponsiveImages(
+																getawayDetails.reasons
+															),
 														}}
 													></div>
 												</div>

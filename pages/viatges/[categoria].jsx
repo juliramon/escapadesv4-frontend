@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import { cloudinaryUrl } from "../../utils/cloudinary";
+import { withResponsiveImages } from "../../utils/contentImages";
+import { cloudinaryImage } from "../../utils/cloudinary";
 import ContentService from "../../services/contentService";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
@@ -269,7 +270,9 @@ const CategoryTrip = ({
 									<div
 										className="text-block--xl text-center max-w-[920px] mx-auto"
 										dangerouslySetInnerHTML={{
-											__html: categoryDetails.reviewText,
+											__html: withResponsiveImages(
+												categoryDetails.reviewText
+											),
 										}}
 									></div>
 									<div className="mt-10 md:mt-12 flex justify-center">
@@ -315,15 +318,9 @@ const CategoryTrip = ({
 										? categoryDetails.carouselImages.map(
 												(el, idx) => {
 													const imageModSrc =
-														cloudinaryUrl(
-															el,
-															"w_805,h_605,c_fill"
-														);
+														cloudinaryImage(el, 805, 605).src;
 													const imageModSrcMob =
-														cloudinaryUrl(
-															el,
-															"w_400,h_300,c_fill"
-														);
+														cloudinaryImage(el, 400, 300).src;
 
 													const priority =
 														idx === 1 || idx === 2
@@ -442,7 +439,9 @@ const CategoryTrip = ({
 									<div
 										className="text-block tripCategory__info-text"
 										dangerouslySetInnerHTML={{
-											__html: categoryDetails.seoText,
+											__html: withResponsiveImages(
+												categoryDetails.seoText
+											),
 										}}
 									></div>
 
@@ -480,7 +479,9 @@ const CategoryTrip = ({
 											<div
 												className="text-block tripCategory__info-text mt-3 mb-0"
 												dangerouslySetInnerHTML={{
-													__html: categoryDetails.mostLikedText,
+													__html: withResponsiveImages(
+														categoryDetails.mostLikedText
+													),
 												}}
 											></div>
 										</div>
@@ -517,7 +518,9 @@ const CategoryTrip = ({
 											<div
 												className="text-block tripCategory__info-text mt-3 mb-0"
 												dangerouslySetInnerHTML={{
-													__html: categoryDetails.pointsOfInterestText,
+													__html: withResponsiveImages(
+														categoryDetails.pointsOfInterestText
+													),
 												}}
 											></div>
 										</div>
@@ -550,7 +553,9 @@ const CategoryTrip = ({
 											<div
 												className="text-block tripCategory__info-text mt-3 mb-0"
 												dangerouslySetInnerHTML={{
-													__html: categoryDetails.mustSeeText,
+													__html: withResponsiveImages(
+														categoryDetails.mustSeeText
+													),
 												}}
 											></div>
 										</div>

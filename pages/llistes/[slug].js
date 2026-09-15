@@ -1,5 +1,8 @@
 import { useRouter } from "next/router";
-import { cloudinaryUrl } from "../../utils/cloudinary";
+import {
+	cloudinaryImage,
+	cloudinaryResponsive,
+} from "../../utils/cloudinary";
 import { useContext, useEffect, useState } from "react";
 import Footer from "../../components/global/Footer";
 import NavigationBar from "../../components/global/NavigationBar";
@@ -53,14 +56,25 @@ const ListView = ({ listDetails, relatedLists }) => {
 	const handleShareModalVisibility = () => setShareModalVisibility(true);
 	const hideShareModalVisibility = () => setShareModalVisibility(false);
 
-	const coverImg = cloudinaryUrl(listDetails.cover, "w_1729,h_973,c_fill");
-	const coverImgMob = cloudinaryUrl(listDetails.cover, "w_450,h_337,c_fill");
-	const coverImgWebp = cloudinaryUrl(listDetails.cover, "f_webp,w_1729,h_973,c_fill");
-	const coverImgWebpMobile = cloudinaryUrl(listDetails.cover, "f_webp,w_450,h_337,c_fill");
+	// La portada és l'element més gran de la pantalla i el que decideix el LCP.
+	// Va per amplades: un mòbil es baixa la de 480 px, no la de 1.729. El
+	// retall canvia amb la pantalla (4:3 amunt, 16:9 a partir de tauleta),
+	// així que cada `<source>` porta la seva llista d'amplades.
+	const desktopCover = cloudinaryResponsive(listDetails.cover, {
+		widths: [768, 1024, 1400, 1920],
+		ratio: 9 / 16,
+		sizes: "(min-width: 1200px) 1200px, 100vw",
+	});
+	const mobileCover = cloudinaryResponsive(listDetails.cover, {
+		widths: [480, 768, 960],
+		ratio: 3 / 4,
+	});
 
-	const ogImg = cloudinaryUrl(listDetails.cover, "w_1200,h_630,c_fill");
+	const coverImg = desktopCover.src;
 
-	const coverAuthorImg = cloudinaryUrl(listDetails.owner.avatar, "w_32,h_32,c_fill");
+	const ogImg = cloudinaryImage(listDetails.cover, 1200, 630).src;
+
+	const coverAuthorImg = cloudinaryImage(listDetails.owner.avatar, 32, 32).src;
 
 	return (
 		<>
@@ -185,29 +199,24 @@ const ListView = ({ listDetails, relatedLists }) => {
 							<div className="container relative z-10">
 								<picture className="block aspect-[4/3] md:aspect-[16/9] relative rounded-2xl overflow-hidden max-w-[1200px] mx-auto">
 									<source
-										srcSet={coverImgWebpMobile}
+										srcSet={mobileCover.srcSet}
+										sizes={mobileCover.sizes}
 										media="(max-width: 768px)"
 									/>
 									<source
-										srcSet={coverImgWebp}
-										media="(min-width: 768px)"
-									/>
-									<source
-										srcSet={coverImgMob}
-										media="(max-width: 768px)"
-									/>
-									<source
-										srcSet={coverImg}
+										srcSet={desktopCover.srcSet}
+										sizes={desktopCover.sizes}
 										media="(min-width: 768px)"
 									/>
 									<img
-										src={coverImg}
+										src={desktopCover.src}
 										alt={listDetails.title}
 										className={"w-full h-full object-cover"}
-										width={400}
-										height={300}
+										width={desktopCover.width}
+										height={desktopCover.height}
 										loading="eager"
 										fetchpriority="high"
+										decoding="async"
 									/>
 								</picture>
 							</div>

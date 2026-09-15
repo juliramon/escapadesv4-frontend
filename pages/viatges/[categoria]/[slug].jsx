@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { cloudinaryUrl } from "../../../utils/cloudinary";
+import { cloudinaryImage, cloudinaryResponsive } from "../../../utils/cloudinary";
 import NavigationBar from "../../../components/global/NavigationBar";
 import ContentService from "../../../services/contentService";
 import UserContext from "../../../contexts/UserContext";
@@ -74,10 +74,24 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 		);
 	}
 
-	const coverImgDesktop = cloudinaryUrl(tripEntryDetails.cover, "w_1392,h_783,c_fill");
-	const coverImgMobile = cloudinaryUrl(tripEntryDetails.cover, "w_400,h_300,c_fill");
+	// La portada és l'element més gran de la pantalla i el que decideix el LCP.
+	// Va per amplades: un mòbil es baixa la de 480 px, no la de 1.729. El
+	// retall canvia amb la pantalla (4:3 amunt, 16:9 a partir de tauleta),
+	// així que cada `<source>` porta la seva llista d'amplades.
+	const desktopCover = cloudinaryResponsive(tripEntryDetails.cover, {
+		widths: [768, 1024, 1400, 1920],
+		ratio: 9 / 16,
+		sizes: "(min-width: 1400px) 1392px, 100vw",
+	});
+	const mobileCover = cloudinaryResponsive(tripEntryDetails.cover, {
+		widths: [480, 768, 960],
+		ratio: 3 / 4,
+	});
 
-	const coverAuthorImg = cloudinaryUrl(tripEntryDetails.owner.avatar, "w_32,h_32,c_fill");
+	const coverImgDesktop = desktopCover.src;
+	const coverImgMobile = mobileCover.src;
+
+	const coverAuthorImg = cloudinaryImage(tripEntryDetails.owner.avatar, 32, 32).src;
 
 	return (
 		<>
@@ -226,21 +240,24 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 							<div className="container relative z-10">
 								<picture className="block aspect-w-4 aspect-h-3 lg:aspect-w-16 lg:aspect-h-9 h-full rounded-2xl overflow-hidden">
 									<source
-										srcSet={coverImgMobile}
+										srcSet={mobileCover.srcSet}
+										sizes={mobileCover.sizes}
 										media="(max-width: 768px)"
 									/>
 									<source
-										srcSet={coverImgDesktop}
+										srcSet={desktopCover.srcSet}
+										sizes={desktopCover.sizes}
 										media="(min-width: 768px)"
 									/>
 									<img
-										src={coverImgDesktop}
+										src={desktopCover.src}
 										alt={tripEntryDetails.title}
 										className={"w-full h-full object-cover"}
-										width={400}
-										height={300}
+										width={desktopCover.width}
+										height={desktopCover.height}
 										loading="eager"
 										fetchpriority="high"
+										decoding="async"
 									/>
 								</picture>
 							</div>

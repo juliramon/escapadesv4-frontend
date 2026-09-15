@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { cloudinaryResponsive } from "../utils/cloudinary";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
 import GlobalMetas from "../components/head/GlobalMetas";
@@ -10,6 +11,19 @@ import TripCategoryBox from "../components/listings/TripCategoryBox";
 import ShareBarModal from "../components/social/ShareBarModal";
 import AdSlot from "../components/ads/AdSlot";
 import MobileAnchorAd from "../components/ads/MobileAnchorAd";
+
+
+/**
+ * Imatge de fons del carrusel: ocupa tota l'amplada de la pantalla, de manera
+ * que el mòbil no s'ha de baixar la versió d'escriptori.
+ */
+const heroImage = (url) => {
+	const { src, srcSet, sizes, width, height } = cloudinaryResponsive(url, {
+		widths: [640, 1024, 1400, 1920],
+		ratio: 2 / 3,
+	});
+	return { src, srcSet, sizes, width, height };
+};
 
 const Trips = ({ tripCategories, featuredTripCategories }) => {
 	const { user } = useContext(UserContext);
@@ -104,15 +118,16 @@ const Trips = ({ tripCategories, featuredTripCategories }) => {
 																		<div className="w-full absolute h-full inset-0">
 																			<picture className="block w-full h-full relative after:absolute after:inset-0 after:bg-primary-900 after:bg-opacity-20 after:mix-blend-multiply">
 																				<img
-																					src={
+																					{...heroImage(
 																						category.image
-																					}
+																					)}
 																					alt={
 																						category.title
 																					}
 																					className="w-full h-full object-cover object-[100%_95%]"
 																					loading="eager"
 																					fetchpriority="high"
+																					decoding="async"
 																				/>
 																			</picture>
 																		</div>

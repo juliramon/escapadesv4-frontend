@@ -1,7 +1,9 @@
 import Link from "next/link";
 import React from "react";
+import { cloudinaryImage } from "../../utils/cloudinary";
 
 const TripCategoryBox = ({ image, title, subtitle, slug, country }) => {
+	const cover = cloudinaryImage(image, 640, 640);
 	return (
 		<article className="px-3 w-full lg:w-1/2 xl:w-1/3 mb-6">
 			<Link href={`/viatges/${slug}`}>
@@ -13,10 +15,13 @@ const TripCategoryBox = ({ image, title, subtitle, slug, country }) => {
 						<div className="w-full md:w-1/2">
 							<picture className="block w-full h-full rounded-lg md:rounded-2xl overflow-hidden">
 								<img
-									src={image}
+									src={cover.src}
 									alt={title}
+									width={cover.width}
+									height={cover.height}
 									className="w-full h-full object-cover scale-100 group-hover:scale-105 transition-all duration-700 ease-in-out"
 									loading="lazy"
+									decoding="async"
 								/>
 							</picture>
 						</div>

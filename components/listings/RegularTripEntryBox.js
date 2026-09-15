@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { cloudinaryUrl } from "../../utils/cloudinary";
+import { cloudinaryImage } from "../../utils/cloudinary";
 import { formatDateTimeToISODate } from "../../utils/helpers";
 import React from "react";
 
@@ -14,9 +14,9 @@ const RegularTripEntryBox = ({
 	date,
 }) => {
 	let publicationDate = formatDateTimeToISODate(date);
-	const coverImg = cloudinaryUrl(cover, "w_475,h_318,c_fill");
+	const coverImg = cloudinaryImage(cover, 475, 318).src;
 
-	const avatarImg = cloudinaryUrl(avatar, "w_32,h_32,c_fill");
+	const avatarImg = cloudinaryImage(avatar, 32, 32).src;
 	return (
 		<article className="w-full group">
 			<Link href={`/viatges/${trip}/${slug}`}>
