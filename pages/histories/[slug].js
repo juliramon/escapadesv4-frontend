@@ -19,8 +19,16 @@ import {
 	cloudinaryImage,
 	cloudinaryResponsive,
 } from "../../utils/cloudinary";
+import {
+	listingsForStory,
+	loadListingCatalog,
+	loadStoryCatalog,
+	relatedEditorial,
+	storyCoordinates,
+	toListingCard,
+} from "../../utils/relatedContent";
 
-const StoryListing = ({ storyDetails, relatedStories }) => {
+const StoryListing = ({ storyDetails, storyListings, relatedStories }) => {
 	const { user } = useContext(UserContext);
 	const router = useRouter();
 
@@ -344,6 +352,12 @@ const StoryListing = ({ storyDetails, relatedStories }) => {
 						</section>
 					</article>
 				<RelatedListings
+					eyebrow="On és"
+					title="Els llocs d'aquesta història"
+					description="Les fitxes amb l'adreça, com arribar-hi i on reservar."
+					items={storyListings}
+				/>
+				<RelatedListings
 					eyebrow="Segueix llegint"
 					title="Altres històries en parella"
 					description="Més escapades explicades de primera mà."
@@ -408,21 +422,33 @@ export async function getStaticProps({ params }) {
 		};
 	}
 
-	// Contingut relacionat del peu: sense això la fitxa és un cul-de-sac
-	// per a qui hi arriba des de cerca.
-	let relatedStories = [];
-	try {
-		const all = await service.getMostRecentStories();
-		relatedStories = (all || [])
-			.filter((item) => item.slug !== storyDetails.slug)
-			.slice(0, 4);
-	} catch (error) {
-		relatedStories = [];
-	}
+	// Contingut relacionat del peu: sense això la història és un cul-de-sac
+	// per a qui hi arriba des de cerca. Abans eren les quatre històries més
+	// noves, les mateixes a totes les pàgines; ara són les més properes (pel
+	// lloc de la fitxa relacionada), les del mateix tema o les veïnes.
+	const [listingsResult, storiesResult] = await Promise.allSettled([
+		loadListingCatalog(service),
+		loadStoryCatalog(service),
+	]);
+	const listings =
+		listingsResult.status === "fulfilled" ? listingsResult.value : [];
+	const stories =
+		storiesResult.status === "fulfilled" ? storiesResult.value : [];
+
+	// Les fitxes que tenen aquesta història com a relacionada: la fitxa ja
+	// enllaça la història, i aquest és el camí de tornada.
+	const storyListings = listingsForStory(storyDetails._id, listings).map(
+		toListingCard,
+	);
+	const coords = storyCoordinates(listings);
+	const relatedStories = relatedEditorial(storyDetails, stories, {
+		coordsFor: (story) => coords.get(String(story._id)),
+	});
 
 	return {
 		props: {
 			storyDetails,
+			storyListings,
 			relatedStories,
 		},
 		revalidate: 120,

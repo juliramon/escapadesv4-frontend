@@ -19,6 +19,10 @@ import ShareBarModal from "../../components/social/ShareBarModal";
 import AdBanner from "../../components/ads/AdBanner";
 import MobileAnchorAd from "../../components/ads/MobileAnchorAd";
 import RelatedListings from "../../components/listingpage/RelatedListings";
+import {
+	loadListCatalog,
+	relatedEditorial,
+} from "../../utils/relatedContent";
 import ContentParser from "../../utils/ContentParser";
 import ItemListRichSnippet from "../../components/richsnippets/ItemListRichSnippet";
 
@@ -375,14 +379,16 @@ export async function getStaticProps({ params }) {
 		};
 	}
 
-	// Contingut relacionat del peu: sense això la fitxa és un cul-de-sac
-	// per a qui hi arriba des de cerca.
+	// Contingut relacionat del peu: sense això la llista és un cul-de-sac
+	// per a qui hi arriba des de cerca. Abans eren les quatre primeres de
+	// l'API, les mateixes a totes les llistes; ara són les del mateix tema
+	// («nadal», «estiu», «pallars») i, si no n'hi ha prou, les veïnes.
 	let relatedLists = [];
 	try {
-		const all = await service.getAllLists();
-		relatedLists = (all || [])
-			.filter((item) => item.slug !== listDetails.slug)
-			.slice(0, 4);
+		relatedLists = relatedEditorial(
+			listDetails,
+			await loadListCatalog(service),
+		);
 	} catch (error) {
 		relatedLists = [];
 	}

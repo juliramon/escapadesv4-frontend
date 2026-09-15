@@ -26,13 +26,18 @@ import {
 	listingPath,
 	listingUrl,
 } from "../../utils/listingRoutes";
+import {
+	idOf,
+	loadListingCatalog,
+	nearestListings,
+	toListingCard,
+} from "../../utils/relatedContent";
 
 const GetawayListing = ({
 	getawayDetails,
 	categoryDetails,
 	checkedCharacteristics,
-	relatedResults,
-	relatedByCategory,
+	related,
 }) => {
 	const { user } = useContext(UserContext);
 	const router = useRouter();
@@ -354,7 +359,6 @@ const GetawayListing = ({
 		// que mana és sempre la de la seva categoria principal. Sense això cada
 		// variant es canonicalitzava a si mateixa i competien entre elles.
 		const canonicalUrl = listingUrl(getawayDetails);
-		const categoryHeading = categoryHeadingFor(getawayDetails.categories);
 
 		return (
 			<>
@@ -1086,30 +1090,9 @@ const GetawayListing = ({
 							</section>
 						</article>
 
-						{/* Contingut relacionat: primer per destinació i, si la fitxa no
-						    en té cap, per categoria. */}
-						{relatedResults.length > 0
-							? relatedResults.map((result) => (
-									<RelatedListings
-										key={result._id}
-										eyebrow="A prop d'aquí"
-										title={`Més escapades a ${result.title}`}
-										description="Altres allotjaments i experiències de la mateixa zona."
-										href={`/destinacions/${result.slug}`}
-										linkLabel="Veure tota la destinació"
-										items={result.relatedResults}
-									/>
-							  ))
-							: relatedByCategory.length > 0 && categoryHeading ? (
-									<RelatedListings
-										eyebrow="Del mateix estil"
-										title={`Més ${categoryHeading.title.charAt(0).toLowerCase()}${categoryHeading.title.slice(1)}`}
-										description="Altres escapades de la mateixa categoria."
-										href={`/${categoryHeading.slug}`}
-										linkLabel="Veure tota la categoria"
-										items={relatedByCategory}
-									/>
-							  ) : null}
+						{/* Contingut relacionat: les fitxes més properes i, si no n'hi
+						    ha prou, les de la destinació o la categoria. */}
+						{related ? <RelatedListings {...related} /> : null}
 					</main>
 					<Footer />
 					<SignUpModal
@@ -1178,6 +1161,110 @@ export async function getStaticPaths() {
 	return { paths, fallback: "blocking" };
 }
 
+/** Per sota d'aquestes, el bloc «A prop d'aquí» es veu mig buit. */
+const MIN_NEARBY_ITEMS = 3;
+
+/**
+ * Bloc «A prop d'aquí»: les fitxes més properes per coordenades.
+ *
+ * Abans depenia de la destinació, que 143 de les 191 fitxes no tenen, i sense
+ * destinació queia a fitxes de la mateixa categoria d'arreu de Catalunya.
+ * Totes les fitxes tenen coordenades i el llistat resumit de l'API les porta.
+ * La destinació, si n'hi ha, queda com a enllaç de la capçalera.
+ */
+const nearbyBlock = async (service, getaway) => {
+	let items = [];
+	try {
+		items = nearestListings(getaway, await loadListingCatalog(service));
+	} catch (error) {
+		return null;
+	}
+	if (items.length < MIN_NEARBY_ITEMS) return null;
+
+	let destination = null;
+	const destinationIds = (getaway.destinations || []).map(idOf);
+	if (destinationIds.length) {
+		try {
+			destination =
+				((await service.getDestinations()) || []).find((item) =>
+					destinationIds.includes(String(item._id)),
+				) || null;
+		} catch (error) {
+			destination = null;
+		}
+	}
+
+	const locality = getaway.activity_locality || getaway.place_locality;
+	return {
+		eyebrow: "A prop d'aquí",
+		title: locality
+			? `Més escapades a prop de ${locality}`
+			: "Més escapades a prop",
+		description:
+			"Allotjaments i experiències de la mateixa zona, per completar l'escapada.",
+		...(destination
+			? {
+					href: `/destinacions/${destination.slug}`,
+					linkLabel: "Veure tota la destinació",
+			  }
+			: {}),
+		items: items.map(toListingCard),
+	};
+};
+
+/** Reserva: el que torna la destinació, com abans. */
+const destinationBlock = async (service, getaway) => {
+	if (!getaway.destinations?.length) return null;
+	try {
+		const results = await service.getRelatedResultsByDestinationsIds(
+			getaway.destinations.toString(),
+		);
+		// La destinació retorna també la fitxa que s'està mirant.
+		const result = (results || [])
+			.map((item) => ({
+				...item,
+				relatedResults: (item.relatedResults || []).filter(
+					(listing) => listing.slug !== getaway.slug,
+				),
+			}))
+			.find((item) => item.relatedResults.length > 0);
+		if (!result) return null;
+		return {
+			eyebrow: "A prop d'aquí",
+			title: `Més escapades a ${result.title}`,
+			description: "Altres allotjaments i experiències de la mateixa zona.",
+			href: `/destinacions/${result.slug}`,
+			linkLabel: "Veure tota la destinació",
+			items: result.relatedResults,
+		};
+	} catch (error) {
+		return null;
+	}
+};
+
+/** Última reserva: escapades destacades de la mateixa categoria. */
+const categoryBlock = async (service, getaway) => {
+	const heading = categoryHeadingFor(getaway.categories);
+	if (!heading) return null;
+	try {
+		const items = (
+			(await service.getFeaturedGetawaysByCategory(getaway.categories[0])) ||
+			[]
+		).filter((item) => item.slug !== getaway.slug);
+		if (!items.length) return null;
+		return {
+			eyebrow: "Del mateix estil",
+			title: `Més ${heading.title.charAt(0).toLowerCase()}${heading.title.slice(1)}`,
+			description: "Altres escapades de la mateixa categoria.",
+			href: `/${heading.slug}`,
+			linkLabel: "Veure tota la categoria",
+			items,
+		};
+	} catch (error) {
+		return null;
+	}
+};
+
 export async function getStaticProps({ params }) {
 	const service = new ContentService();
 	const categoryDetails = await service.getCategoryDetails(params.categoria);
@@ -1199,42 +1286,13 @@ export async function getStaticProps({ params }) {
 		};
 	}
 
-	let relatedResults = [];
-
-	if (getawayDetails.destinations.length > 0) {
-		let ids = getawayDetails.destinations.toString();
-		relatedResults = await service.getRelatedResultsByDestinationsIds(ids);
-
-		// La destinació retorna també la fitxa que s'està mirant.
-		relatedResults = (relatedResults || []).map((result) => ({
-			...result,
-			relatedResults: (result.relatedResults || []).filter(
-				(item) => item.slug !== getawayDetails.slug
-			),
-		}));
-	}
-
-	// Si la fitxa no té destinació —o la destinació no torna res— caiem a
-	// escapades de la mateixa categoria, perquè la fitxa mai quedi sense
-	// sortida cap a més contingut.
-	let relatedByCategory = [];
-	const hasDestinationResults = relatedResults.some(
-		(result) => result.relatedResults && result.relatedResults.length > 0
-	);
-
-	if (!hasDestinationResults && getawayDetails.categories?.length) {
-		relatedResults = [];
-		try {
-			const byCategory = await service.getFeaturedGetawaysByCategory(
-				getawayDetails.categories[0]
-			);
-			relatedByCategory = (byCategory || []).filter(
-				(item) => item.slug !== getawayDetails.slug
-			);
-		} catch (error) {
-			relatedByCategory = [];
-		}
-	}
+	// La fitxa mai ha de quedar sense sortida cap a més contingut: primer les
+	// més properes; si no n'hi ha prou, les de la destinació, i si tampoc, les
+	// de la mateixa categoria.
+	const related =
+		(await nearbyBlock(service, getawayDetails)) ||
+		(await destinationBlock(service, getawayDetails)) ||
+		(await categoryBlock(service, getawayDetails));
 
 	let checkedCharacteristics = [];
 
@@ -1256,8 +1314,7 @@ export async function getStaticProps({ params }) {
 			getawayDetails,
 			categoryDetails,
 			checkedCharacteristics,
-			relatedResults,
-			relatedByCategory,
+			related,
 		},
 		revalidate: 120,
 	};
