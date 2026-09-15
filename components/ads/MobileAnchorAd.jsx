@@ -74,7 +74,16 @@ const MobileAnchorAd = () => {
 						<path d="M6 6l12 12" />
 					</svg>
 				</button>
-				<AdSlot placement="anchor" label="" />
+				{/* Alçada fixa: si la barra canvia de mida, com que és fixa
+				    arran de baix, se'n mou la vora superior i compta com a
+				    layout shift. Sense anunci, es treu la barra sencera en
+				    comptes d'encongir-la. */}
+				<AdSlot
+					placement="anchor"
+					label=""
+					containerClassName="h-[50px] overflow-hidden text-center"
+					onUnfilled={() => setIsVisible(false)}
+				/>
 			</div>
 		</>
 	);
