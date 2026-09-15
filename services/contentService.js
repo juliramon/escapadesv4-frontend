@@ -238,6 +238,7 @@ class ContentService {
 		description,
 		metaTitle,
 		metaDescription,
+		seoScore,
 	) => {
 		return this.service
 			.post("/story", {
@@ -250,6 +251,7 @@ class ContentService {
 				description,
 				metaTitle,
 				metaDescription,
+				seoScore,
 			})
 			.then((res) => res.data);
 	};
@@ -278,6 +280,7 @@ class ContentService {
 		description,
 		metaTitle,
 		metaDescription,
+		seoScore,
 	) =>
 		this.service.put(`/stories/${_id}`, {
 			slug,
@@ -288,6 +291,7 @@ class ContentService {
 			description,
 			metaTitle,
 			metaDescription,
+			seoScore,
 		});
 
 	removeStory = (id) =>
@@ -308,6 +312,7 @@ class ContentService {
 		description,
 		metaTitle,
 		metaDescription,
+		seoScore,
 	) => {
 		return this.service
 			.post("/trip-entry", {
@@ -321,6 +326,7 @@ class ContentService {
 				description,
 				metaTitle,
 				metaDescription,
+				seoScore,
 			})
 			.then((res) => res.data);
 	};
@@ -351,6 +357,7 @@ class ContentService {
 		metaTitle,
 		metaDescription,
 		trip,
+		seoScore,
 	) =>
 		this.service.put(`/trip-entries/${_id}`, {
 			slug,
@@ -362,6 +369,7 @@ class ContentService {
 			metaTitle,
 			metaDescription,
 			trip,
+			seoScore,
 		});
 
 	removeTripEntry = (id) =>
@@ -825,6 +833,7 @@ class ContentService {
 		metaDescription,
 		slug,
 		editorData,
+		seoScore,
 	) => {
 		return this.service
 			.post("/list", {
@@ -836,6 +845,7 @@ class ContentService {
 				metaDescription,
 				slug,
 				editorData,
+				seoScore,
 			})
 			.then((res) => res.data);
 	};
@@ -851,6 +861,7 @@ class ContentService {
 		metaDescription,
 		slug,
 		description,
+		seoScore,
 	) => {
 		const payload = {
 			type,
@@ -861,6 +872,7 @@ class ContentService {
 			metaDescription,
 			slug,
 			description,
+			seoScore,
 		};
 		// L'esquema List té el camp `cover`, no `coverCloudImage`: amb el nom
 		// antic Mongoose el descartava i la portada no s'actualitzava mai. Només

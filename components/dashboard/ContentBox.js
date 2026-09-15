@@ -112,7 +112,7 @@ const ContentBox = ({
 						) : (
 							<span
 								className="text-xs text-primary-300"
-								title="Aquest llistat no porta les metadades: obre la fitxa per veure'n el SEO."
+								title="Encara no té puntuació desada: es calcula en desar la fitxa."
 							>
 								—
 							</span>

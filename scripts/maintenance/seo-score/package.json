@@ -1,0 +1,17 @@
+{
+	"name": "seo-score",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Calcula i desa la puntuació SEO (seoScore) de les publicacions que ja existien.",
+	"type": "module",
+	"engines": {
+		"node": ">=18"
+	},
+	"scripts": {
+		"dry-run": "node backfill-seo-score.mjs"
+	},
+	"dependencies": {
+		"esbuild": "0.28.2",
+		"mongodb": "6.21.0"
+	}
+}

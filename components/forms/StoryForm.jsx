@@ -270,6 +270,7 @@ const StoryForm = ({ mode = "create", initialData = null }) => {
 						description,
 						formData.metaTitle,
 						formData.metaDescription,
+						seo.score,
 					)
 				: await service.story(
 						formData.type,
@@ -281,6 +282,7 @@ const StoryForm = ({ mode = "create", initialData = null }) => {
 						description,
 						formData.metaTitle,
 						formData.metaDescription,
+						seo.score,
 					);
 
 			const failure = readValidationError(response);

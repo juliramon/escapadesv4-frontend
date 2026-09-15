@@ -13,8 +13,10 @@ import { SeoCheckList, SeoScoreDial } from "./SeoScore";
  *  - el slug generat des del títol, amb avís si té accents o majúscules,
  *  - una paraula clau objectiu, que es comprova al títol, a la descripció, al
  *    slug i a l'entrada del text (només viu al navegador: no es desa a la
- *    fitxa perquè el model no té cap camp on posar-la),
- *  - la llista de comprovacions i la puntuació que en surt.
+ *    fitxa perquè el model no té cap camp on posar-la, i per això tampoc no
+ *    compta per a la puntuació),
+ *  - la llista de comprovacions i la puntuació que en surt, que és la que es
+ *    desa a la fitxa en desar i la que ensenya el llistat del panell.
  */
 const SeoFieldset = ({
 	values,
@@ -186,8 +188,9 @@ const SeoFieldset = ({
 							onChange={(e) => onKeywordChange(e.target.value)}
 						/>
 						<span className="form__text_info">
-							Serveix per comprovar on surt. Es queda en aquest
-							navegador i no es desa a la publicació.
+							Serveix per comprovar on surt, però no compta per a
+							la puntuació: es queda en aquest navegador i no es
+							desa a la publicació.
 						</span>
 					</div>
 				</form>

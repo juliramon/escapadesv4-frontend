@@ -82,6 +82,10 @@ const lengthState = (value, limits) => {
 
 const STATUS_WEIGHT = { ok: 1, warn: 0.5, error: 0 };
 
+/** Franja d'una puntuació: la mateixa al formulari i al panell. */
+const seoLevel = (score) =>
+	score >= 80 ? "good" : score >= 50 ? "ok" : "poor";
+
 /**
  * @param {object} input dades del formulari
  * @param {string} input.title títol de la publicació
@@ -256,13 +260,17 @@ const analyzeSeo = ({
 		hint: "El subtítol encapçala la publicació i sol ser el millor esborrany de la meta descripció.",
 	});
 
+	// Les comprovacions de la paraula clau són orientatives i no puntuen: la
+	// paraula clau només viu al navegador de qui edita, i la puntuació es desa
+	// a la fitxa i ha de ser la mateixa al formulari i al llistat del panell.
 	if (keyword && keyword.trim()) {
 		const inTitle = containsKeyword(metaTitle || title, keyword);
 		const inDescription = containsKeyword(metaDescription, keyword);
 		const inSlug = containsKeyword(slug, keyword);
 		const inText = containsKeyword(text.slice(0, 600), keyword);
+		const addKeyword = (check) => add({ ...check, weight: 0 });
 
-		add({
+		addKeyword({
 			id: "keyword-title",
 			label: "Paraula clau al títol",
 			status: inTitle ? "ok" : "warn",
@@ -270,19 +278,19 @@ const analyzeSeo = ({
 				? "Hi és."
 				: "Google marca en negreta la paraula clau dins del títol.",
 		});
-		add({
+		addKeyword({
 			id: "keyword-description",
 			label: "Paraula clau a la meta descripció",
 			status: inDescription ? "ok" : "warn",
 			hint: inDescription ? "Hi és." : "Encara no hi surt.",
 		});
-		add({
+		addKeyword({
 			id: "keyword-slug",
 			label: "Paraula clau al slug",
 			status: inSlug ? "ok" : "warn",
 			hint: inSlug ? "Hi és." : "Encara no hi surt.",
 		});
-		add({
+		addKeyword({
 			id: "keyword-intro",
 			label: "Paraula clau a l'entrada del text",
 			status: inText ? "ok" : "warn",
@@ -310,7 +318,7 @@ const analyzeSeo = ({
 
 	return {
 		score,
-		level: score >= 80 ? "good" : score >= 50 ? "ok" : "poor",
+		level: seoLevel(score),
 		checks,
 		counts: {
 			metaTitle: metaTitle.length,
@@ -328,12 +336,11 @@ const analyzeSeo = ({
 /**
  * Puntuació de SEO a partir de les metadades, sense el cos de la publicació.
  *
- * Els llistats del panell arriben retallats des de l'API —enviar la descripció
- * sencera de cent fitxes per pintar una llista seria absurd—, o sigui que aquí
- * només es miren els senyals que hi caben: títol, meta títol, meta descripció,
- * slug i portada. És la meitat de `analyzeSeo`, la que es pot respondre sense
- * llegir el text, i per això es puntua a part: barrejar-la amb la puntuació
- * completa faria semblar dolentes publicacions que només estan sense mirar.
+ * Només per a les taxonomies (categories, destinacions, viatges), que no
+ * tenen formulari amb la puntuació completa: s'hi miren títol, meta títol,
+ * meta descripció, slug i portada. Les publicacions no la fan servir: al
+ * llistat del panell hi surt la `seoScore` que el formulari desa en guardar,
+ * perquè sigui la mateixa xifra que es veu dins del formulari.
  *
  * @param {object} input
  * @returns {{score: number, level: string, checks: object[]}}
@@ -422,7 +429,7 @@ const analyzeListingSeo = ({
 
 	return {
 		score,
-		level: score >= 80 ? "good" : score >= 50 ? "ok" : "poor",
+		level: seoLevel(score),
 		checks,
 	};
 };
@@ -458,6 +465,7 @@ export {
 	countWords,
 	lengthState,
 	serpDescription,
+	seoLevel,
 	serpPreview,
 	serpTitle,
 	stripHtml,
