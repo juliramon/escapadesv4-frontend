@@ -14,11 +14,36 @@ const EditorNavbar = ({ editor }) => {
 		return () => editor.off("openLinkPicker", openLinkPicker);
 	}, [editor]);
 
+	// Cap de les 188 imatges del cos de les llistes tenia `alt`: s'inserien
+	// només amb la URL. Són les que més opcions tenen de sortir a Google
+	// Imatges, i sense text alternatiu Google no sap què hi ha.
+	const altPrompt = (current = "") =>
+		window.prompt(
+			"Text alternatiu: el nom del lloc i què es veu a la foto (per exemple, «Castell de Miravet des del riu»)",
+			current,
+		);
+
 	const addImage = () => {
 		const url = window.prompt("URL");
-		if (url) {
-			editor.chain().focus().setImage({ src: url }).run();
-		}
+		if (!url) return;
+		const alt = (altPrompt() || "").trim();
+		editor
+			.chain()
+			.focus()
+			.setImage(alt ? { src: url, alt } : { src: url })
+			.run();
+	};
+
+	/** Posa o canvia el text alternatiu de la imatge seleccionada. */
+	const editImageAlt = () => {
+		if (!editor.isActive("image")) return;
+		const alt = altPrompt(editor.getAttributes("image").alt || "");
+		if (alt === null) return;
+		editor
+			.chain()
+			.focus()
+			.updateAttributes("image", { alt: alt.trim() || null })
+			.run();
 	};
 
 	if (!editor) {
@@ -291,6 +316,16 @@ const EditorNavbar = ({ editor }) => {
 					<line x1="16" y1="20" x2="16" y2="20.01" />
 					<line x1="20" y1="20" x2="20" y2="20.01" />
 				</svg>
+			</button>
+			<button
+				type="button"
+				onClick={editImageAlt}
+				disabled={!editor.isActive("image")}
+				title="Text alternatiu de la imatge seleccionada"
+				aria-label="Text alternatiu de la imatge seleccionada"
+				className="editor-bar__text-button"
+			>
+				Alt
 			</button>
 			<button type="button" onClick={() => addImage()}>
 				<svg
