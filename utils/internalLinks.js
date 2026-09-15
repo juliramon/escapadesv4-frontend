@@ -3,6 +3,7 @@ import {
 	FALLBACK_CATEGORY_PATH,
 	listingPath,
 } from "./listingRoutes";
+import { isAffiliateUrl } from "./affiliate";
 
 /**
  * Enllaços interns de l'editor: a quines entrades del web es pot enllaçar, com
@@ -111,8 +112,9 @@ const toHref = (value) => {
  * Atributs de la marca d'enllaç.
  *
  * Els interns no porten `nofollow` i s'obren a la mateixa pestanya si no es
- * demana el contrari. Els externs el mantenen, com fins ara: n'hi ha molts
- * d'afiliació.
+ * demana el contrari. Els externs el mantenen i, quan són d'afiliació, hi
+ * afegeixen `sponsored`, que és el valor que Google demana per als enllaços
+ * pagats o que deixen comissió.
  */
 const linkAttributesFor = (href, newTab) => {
 	if (isInternalHref(href)) {
@@ -122,10 +124,11 @@ const linkAttributesFor = (href, newTab) => {
 			rel: newTab ? "noopener" : null,
 		};
 	}
+	const follow = isAffiliateUrl(href) ? "sponsored nofollow" : "nofollow";
 	return {
 		href,
 		target: newTab ? "_blank" : null,
-		rel: newTab ? "noopener noreferrer nofollow" : "nofollow",
+		rel: newTab ? `noopener noreferrer ${follow}` : follow,
 	};
 };
 

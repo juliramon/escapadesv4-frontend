@@ -1,0 +1,17 @@
+{
+	"name": "affiliate-link-rel",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Afegeix rel=\"sponsored\" als enllaços d'afiliació ja publicats a les descripcions.",
+	"type": "module",
+	"engines": {
+		"node": ">=18"
+	},
+	"scripts": {
+		"dry-run": "node fix-affiliate-link-rel.mjs"
+	},
+	"dependencies": {
+		"mongodb": "6.21.0",
+		"parse5": "8.0.1"
+	}
+}

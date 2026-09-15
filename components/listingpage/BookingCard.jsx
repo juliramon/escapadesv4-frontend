@@ -1,5 +1,9 @@
 import ListingDiscount from "./ListingDiscount";
-import { hasLink, resolveAffiliate } from "../../utils/affiliate";
+import {
+	hasLink,
+	isAffiliateUrl,
+	resolveAffiliate,
+} from "../../utils/affiliate";
 import { normalizeWebsite } from "../../utils/websiteUrl";
 
 /**
@@ -74,6 +78,12 @@ const BookingCard = ({
 	const showPhone = hasLink(phone);
 
 	if (!showWebsite && !showPhone) return null;
+
+	// Els enllaços de reserva deixen comissió: Google demana que portin
+	// `sponsored`, i fins ara només portaven `nofollow`.
+	const websiteRel = isAffiliateUrl(websiteUrl)
+		? "sponsored nofollow noreferrer"
+		: "nofollow noreferrer";
 
 	const ctaLabel = affiliate
 		? `${isPlace ? "Veure preus a" : "Reservar a"} ${affiliate.label}`
@@ -153,7 +163,7 @@ const BookingCard = ({
 			className="button button__cta button__med w-full justify-center"
 			title={ctaLabel}
 			target="_blank"
-			rel="nofollow noreferrer"
+			rel={websiteRel}
 		>
 			<GlobeIcon className="mr-2 shrink-0" />
 			{ctaLabel}
@@ -220,7 +230,7 @@ const BookingCard = ({
 							className="button button__cta button__med w-full justify-center"
 							title={ctaLabel}
 							target="_blank"
-							rel="nofollow noreferrer"
+							rel={websiteRel}
 						>
 							{affiliate
 								? `Veure a ${affiliate.label}`
