@@ -60,7 +60,6 @@ const PoliticaPrivadesa = () => {
 									<a
 										href="#engeneral"
 										title="En general"
-										rel="nofollow"
 									>
 										En general
 									</a>
@@ -69,7 +68,6 @@ const PoliticaPrivadesa = () => {
 									<a
 										href="#finalitatstractament"
 										title="Finalitats del tractament i base jurídica"
-										rel="nofollow"
 									>
 										Finalitats del tractament i base
 										jurídica
@@ -79,7 +77,6 @@ const PoliticaPrivadesa = () => {
 									<a
 										href="#categoriesdades"
 										title="Categories de dades"
-										rel="nofollow"
 									>
 										Categories de dades
 									</a>
@@ -88,7 +85,6 @@ const PoliticaPrivadesa = () => {
 									<a
 										href="#presadecisions"
 										title="Presa de decisions automàtica"
-										rel="nofollow"
 									>
 										Presa de decisions automàtica
 									</a>
@@ -97,7 +93,6 @@ const PoliticaPrivadesa = () => {
 									<a
 										href="#configuracionsprivacitat"
 										title="Configuracions de privacitat i seguretat"
-										rel="nofollow"
 									>
 										Configuracions de privacitat i seguretat
 									</a>
@@ -106,7 +101,6 @@ const PoliticaPrivadesa = () => {
 									<a
 										href="#destinataris"
 										title="Destinataris i transferències de dades personals"
-										rel="nofollow"
 									>
 										Destinataris i transferències de dades
 										personals
@@ -116,7 +110,6 @@ const PoliticaPrivadesa = () => {
 									<a
 										href="#dretsusuaris"
 										title="Drets dels usuaris"
-										rel="nofollow"
 									>
 										Drets dels usuaris
 									</a>
@@ -125,7 +118,6 @@ const PoliticaPrivadesa = () => {
 									<a
 										href="#politicacookies"
 										title="Política de cookies"
-										rel="nofollow"
 									>
 										Política de cookies
 									</a>
@@ -134,7 +126,6 @@ const PoliticaPrivadesa = () => {
 									<a
 										href="#quesoncookies"
 										title="Què són les cookies"
-										rel="nofollow"
 									>
 										Què són les cookies
 									</a>
@@ -143,7 +134,6 @@ const PoliticaPrivadesa = () => {
 									<a
 										href="#controlcookies"
 										title="Control de cookies"
-										rel="nofollow"
 									>
 										Control de cookies
 									</a>
@@ -152,7 +142,6 @@ const PoliticaPrivadesa = () => {
 									<a
 										href="#quinescookiesutilitzem"
 										title="Quines cookies utilitza Escapadesenparella.cat?"
-										rel="nofollow"
 									>
 										Quines cookies utilitza
 										Escapadesenparella.cat?
@@ -162,7 +151,6 @@ const PoliticaPrivadesa = () => {
 									<a
 										href="#cookiestercers"
 										title="Política de cookies de tercer"
-										rel="nofollow"
 									>
 										Política de cookies de tercers
 									</a>
