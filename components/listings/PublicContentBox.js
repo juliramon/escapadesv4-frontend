@@ -1,7 +1,9 @@
 import Link from "next/link";
+import { cloudinaryImage } from "../../utils/cloudinary";
 
 const PublicContentBox = ({ type, slug, cover, title, subtitle, location }) => {
 	let shortenedSubtitle = subtitle.slice(0, 105);
+	const image = cloudinaryImage(cover, 360, 240);
 	let path;
 	if (type === "activity") {
 		path = "activitats";
@@ -21,8 +23,12 @@ const PublicContentBox = ({ type, slug, cover, title, subtitle, location }) => {
 						<div className="rounded-md aspect-w-3 aspect-h-2 overflow-hidden">
 							<picture>
 								<img
-									src={cover}
+									src={image.src}
 									alt={title}
+									width={image.width}
+									height={image.height}
+									loading="lazy"
+									decoding="async"
 									className="w-full h-full object-cover"
 								/>
 							</picture>

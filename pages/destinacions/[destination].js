@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { cloudinaryImage, cloudinaryResponsive } from "../../utils/cloudinary";
+import { withResponsiveImages } from "../../utils/contentImages";
 import React, { useEffect, useState } from "react";
 import Footer from "../../components/global/Footer";
 import NavigationBar from "../../components/global/NavigationBar";
@@ -120,6 +122,19 @@ const DestinationPage = ({
 		});
 	};
 
+	// La imatge de la destinació es penjava tal com sortia de la càmera i
+	// s'enviava sencera a tothom, mòbils inclosos.
+	const destinationImage = cloudinaryResponsive(destinationDetails.image, {
+		widths: [480, 768, 1024],
+		ratio: 3 / 4,
+		sizes: "(min-width: 768px) 50vw, 100vw",
+	});
+	// Cinc de les sis destinacions no tenen imatge: val més no declarar
+	// `og:image` que declarar-la buida.
+	const shareImage = destinationDetails.image
+		? cloudinaryImage(destinationDetails.image, 1200, 630).src
+		: undefined;
+
 	const sponsorBlock = destinationDetails.isSponsored ? (
 		<div className="sponsor-block">
 			<Link href={`${destinationDetails.sponsorURL}`} target="_blank">
@@ -240,7 +255,7 @@ const DestinationPage = ({
 				title={pageTitle(destinationDetails.title, currentPage)}
 				description={destinationDetails.subtitle}
 				url={pageUrl}
-				image={destinationDetails.image}
+				image={shareImage}
 				canonical={pageUrl}
 			/>
 			{/* Rich snippets */}
@@ -333,7 +348,9 @@ const DestinationPage = ({
 									<div
 										className="w-full max-w-prose mx-auto text-block m-0 text-center"
 										dangerouslySetInnerHTML={{
-											__html: destinationDetails.reviewText,
+											__html: withResponsiveImages(
+												destinationDetails.reviewText
+											),
 										}}
 									></div>
 								</div>
@@ -349,20 +366,23 @@ const DestinationPage = ({
 									<div
 										className="w-full max-w-prose mx-auto text-block px-6"
 										dangerouslySetInnerHTML={{
-											__html: destinationDetails.seoText,
+											__html: withResponsiveImages(
+												destinationDetails.seoText
+											),
 										}}
 									></div>
 								</div>
 								<div className="col-span-1 bg-slate-100 rounded-2xl overflow-hidden">
 									<picture className="w-full h-full">
-										<source
-											srcSet={destinationDetails.image}
-											type="image/webp"
-										/>
 										<img
-											src={destinationDetails.image}
+											src={destinationImage.src}
+											srcSet={destinationImage.srcSet}
+											sizes={destinationImage.sizes}
+											width={destinationImage.width}
+											height={destinationImage.height}
 											alt={destinationDetails.title}
 											loading={"lazy"}
+											decoding="async"
 											className="w-full h-full object-cover"
 										/>
 									</picture>

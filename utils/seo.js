@@ -1,5 +1,13 @@
 import slugify from "slugify";
 import { isInternalHref } from "./internalLinks";
+import {
+	SITE_NAME,
+	TITLE_MAX,
+	TITLE_SUFFIX,
+	serpDescription,
+	serpTitle,
+	stripHtml,
+} from "./pageMeta";
 
 /**
  * Anàlisi SEO dels formularis de composició.
@@ -16,7 +24,7 @@ import { isInternalHref } from "./internalLinks";
 
 /** Límits amb què treballen Google i la resta d'eines de SEO. */
 const SEO_LIMITS = {
-	metaTitle: { min: 30, max: 60 },
+	metaTitle: { min: 30, max: TITLE_MAX },
 	metaDescription: { min: 70, max: 160 },
 	slug: { max: 75 },
 	words: { min: 300 },
@@ -31,15 +39,6 @@ const buildSlug = (value) =>
 		strict: true,
 		trim: true,
 	});
-
-/** Text pla d'un HTML de l'editor, per comptar paraules i cercar la paraula clau. */
-const stripHtml = (html) =>
-	String(html || "")
-		.replace(/<[^>]*>/g, " ")
-		.replace(/&nbsp;/g, " ")
-		.replace(/&[a-z]+;/g, " ")
-		.replace(/\s+/g, " ")
-		.trim();
 
 const countWords = (html) => {
 	const text = stripHtml(html);
@@ -439,10 +438,10 @@ const serpPreview = ({
 	subtitle,
 	path,
 }) => ({
-	title: (metaTitle || title || "Sense títol").slice(0, 68),
+	// El mateix títol que es publicarà, marca inclosa: és on es veu si hi cap.
+	title: serpTitle({ metaTitle, title }).slice(0, 68),
 	description: (
-		metaDescription ||
-		stripHtml(subtitle) ||
+		serpDescription({ metaDescription, subtitle }) ||
 		"Sense meta descripció."
 	).slice(0, 180),
 	url: `${SITE_URL}${path || "/"}`,
@@ -452,10 +451,14 @@ export {
 	SEO_LIMITS,
 	analyzeListingSeo,
 	SITE_URL,
+	SITE_NAME,
+	TITLE_SUFFIX,
 	analyzeSeo,
 	buildSlug,
 	countWords,
 	lengthState,
+	serpDescription,
 	serpPreview,
+	serpTitle,
 	stripHtml,
 };

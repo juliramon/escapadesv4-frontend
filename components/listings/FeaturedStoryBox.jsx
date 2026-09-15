@@ -1,42 +1,47 @@
 import Link from "next/link";
-import { cloudinaryUrl } from "../../utils/cloudinary";
+import { cloudinaryImage, cloudinaryResponsive } from "../../utils/cloudinary";
 import { formatDateTimeToISODate } from "../../utils/helpers";
 
 const FeaturedStoryBox = ({ story, index }) => {
 	const createdDate = formatDateTimeToISODate(story.createdAt);
 
-	const coverImg = cloudinaryUrl(story.cover, "w_1729,h_973,c_fill");
-	const coverImgWebp = cloudinaryUrl(story.cover, "f_webp,w_1729,h_973,c_fill");
-	const coverImgWebpMobile = cloudinaryUrl(story.cover, "f_webp,w_450,h_337,c_fill");
+	// El bloc ocupa tota l'amplada del contenidor: amb una sola URL, el mòbil
+	// es baixava la portada de 1.729 px.
+	const desktopCover = cloudinaryResponsive(story.cover, {
+		widths: [768, 1024, 1400, 1920],
+		ratio: 9 / 16,
+		sizes: "(min-width: 1200px) 1200px, 100vw",
+	});
+	const mobileCover = cloudinaryResponsive(story.cover, {
+		widths: [480, 768, 960],
+		ratio: 3 / 4,
+	});
 
-	const avatarImg = cloudinaryUrl(story.owner.avatar, "w_24,h_24,c_fill");
+	const avatarImg = cloudinaryImage(story.owner.avatar, 24, 24).src;
 
 	return (
 		<Link href={"histories/" + story.slug} key={index}>
 			<a className="relative">
 				<picture className="block aspect-[4/3] md:aspect-[16/9] relative rounded-2xl overflow-hidden">
-					{coverImgWebpMobile ? (
-						<source
-							srcSet={coverImgWebpMobile}
-							media="(max-width: 767px)"
-							type="image/webp"
-						/>
-					) : null}
-					{coverImgWebp ? (
-						<source
-							srcSet={coverImgWebp}
-							media="(min-width: 768px)"
-							type="image/webp"
-						/>
-					) : null}
+					<source
+						srcSet={mobileCover.srcSet}
+						sizes={mobileCover.sizes}
+						media="(max-width: 767px)"
+					/>
+					<source
+						srcSet={desktopCover.srcSet}
+						sizes={desktopCover.sizes}
+						media="(min-width: 768px)"
+					/>
 					<img
-						src={coverImg}
+						src={desktopCover.src}
 						alt={story.title}
 						className={"w-full h-full object-cover"}
-						width={450}
-						height={337}
+						width={desktopCover.width}
+						height={desktopCover.height}
 						loading={index === 0 ? "eager" : "lazy"}
-						fetchPriority={index === 0 ? "high" : "auto"}
+						fetchpriority={index === 0 ? "high" : undefined}
+						decoding="async"
 					/>
 				</picture>
 

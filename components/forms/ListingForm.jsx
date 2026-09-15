@@ -7,6 +7,10 @@ import Placeholder from "@tiptap/extension-placeholder";
 import ContentService from "../../services/contentService";
 import { uploadCarouselMediaItems } from "../../utils/helpers";
 import { createUploader, uploadSingleFile } from "../../utils/uploads";
+import {
+	isPlaceholderWebsite,
+	normalizeWebsite,
+} from "../../utils/websiteUrl";
 import EditorNavbar from "../editor/EditorNavbar";
 import SiteLink from "../editor/SiteLink";
 import ImageUploadField from "../admin/ImageUploadField";
@@ -299,6 +303,30 @@ const ListingForm = ({ variant, mode = "create", initialData = null }) => {
 		setFormData((previous) => ({ ...previous, [name]: value }));
 	}, []);
 
+	/**
+	 * En sortir del camp «Pàgina web» s'hi desa l'adreça sencera: el que
+	 * s'escriu sovint és "www.exemple.cat", que a la fitxa acabava sent un
+	 * enllaç relatiu i un 404 del nostre domini. Els guions i altres maneres
+	 * d'escriure "no en té" es buiden: no generaven cap enllaç i només
+	 * embrutaven el catàleg.
+	 */
+	const handleWebsiteBlur = (e) => {
+		const typed = e.target.value.trim();
+		const normalized = normalizeWebsite(typed);
+		// Si no s'assembla a cap adreça i tampoc no vol dir "no en té", es
+		// deixa el que s'ha escrit: el camp avisa i qui edita ho pot arreglar,
+		// en comptes de perdre-ho sense dir res.
+		setFormData((previous) => ({
+			...previous,
+			website: normalized || (isPlaceholderWebsite(typed) ? "" : typed),
+		}));
+	};
+
+	const websiteError =
+		formData.website && !normalizeWebsite(formData.website)
+			? "Això no sembla una adreça web. Escriu-la sencera, per exemple https://exemple.cat."
+			: "";
+
 	const handleChange = (e) => {
 		const { name, value } = e.target;
 		if (name === "slug") hasTouchedSlug.current = true;
@@ -395,7 +423,7 @@ const ListingForm = ({ variant, mode = "create", initialData = null }) => {
 			description: descriptionHtml,
 			reasons: reasonsHtml,
 			phone: formData.phone,
-			website: formData.website,
+			website: normalizeWebsite(formData.website),
 			price: formData.price,
 			discountCode: formData.discountCode,
 			discountInfo: formData.discountInfo,
@@ -414,6 +442,10 @@ const ListingForm = ({ variant, mode = "create", initialData = null }) => {
 
 	const save = async ({ redirect = true } = {}) => {
 		if (isSaving) return;
+		if (websiteError) {
+			setErrorMessage(websiteError);
+			return;
+		}
 
 		setIsSaving(true);
 		setErrorMessage("");
@@ -793,9 +825,12 @@ const ListingForm = ({ variant, mode = "create", initialData = null }) => {
 									<TextField
 										name="website"
 										label="Pàgina web"
-										placeholder="Enllaç a la pàgina web"
+										placeholder="https://exemple.cat"
 										value={formData.website}
 										onChange={handleChange}
+										onBlur={handleWebsiteBlur}
+										error={websiteError}
+										hint="Si no en té, deixa-ho buit."
 									/>
 								</div>
 								<div className="w-full md:w-1/2 px-2">

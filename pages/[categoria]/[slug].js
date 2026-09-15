@@ -1,5 +1,6 @@
 import { useState, useEffect, useContext } from "react";
-import { cloudinaryUrl } from "../../utils/cloudinary";
+import { cloudinaryImage, cloudinaryResponsive } from "../../utils/cloudinary";
+import { withResponsiveImages } from "../../utils/contentImages";
 import { useRouter } from "next/router";
 import NavigationBar from "../../components/global/NavigationBar";
 import ContentService from "../../services/contentService";
@@ -16,12 +17,13 @@ import { formatDateTimeToISODate } from "../../utils/helpers";
 import ShareBarModal from "../../components/social/ShareBarModal";
 import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
 import AdBanner from "../../components/ads/AdBanner";
-import ArticleRichSnippet from "../../components/richsnippets/ArticleRichSnippet";
+import ListingRichSnippet from "../../components/richsnippets/ListingRichSnippet";
 import "@splidejs/react-splide/css/core";
 import BookingCard from "../../components/listingpage/BookingCard";
 import RelatedListings from "../../components/listingpage/RelatedListings";
 import {
 	categoryHeadingFor,
+	listingPath,
 	listingUrl,
 } from "../../utils/listingRoutes";
 
@@ -331,9 +333,22 @@ const GetawayListing = ({
 				? getawayDetails.placeType
 				: null;
 
-		const relatedStoryCoverImg = cloudinaryUrl(getawayDetails?.relatedStory?.cover, "w_100,h_100,c_fill");
+		const relatedStoryCoverImg = cloudinaryImage(getawayDetails?.relatedStory?.cover, 100, 100).src;
 
-		const getawayCoverImg = cloudinaryUrl(getawayDetails?.cover, "w_805,h_605,c_fill");
+		// El carrusel ocupa tota l'amplada al mòbil i tres columnes a
+		// l'escriptori: amb `sizes` el navegador demana la mida que toca en
+		// comptes de la de 805 px sempre.
+		const gallerySizes =
+			"(min-width: 1024px) 805px, (min-width: 768px) 50vw, 100vw";
+		const galleryImage = (url) =>
+			cloudinaryResponsive(url, {
+				widths: [400, 600, 805, 1200],
+				ratio: 3 / 4,
+				sizes: gallerySizes,
+			});
+
+		const getawayCover = galleryImage(getawayDetails?.cover);
+		const getawayCoverImg = getawayCover.src;
 
 		// La fitxa és accessible des de qualsevol slug de categoria, però la URL
 		// que mana és sempre la de la seva categoria principal. Sense això cada
@@ -346,7 +361,9 @@ const GetawayListing = ({
 				{/* Browser metas  */}
 				<GlobalMetas
 					title={getawayDetails.metaTitle}
+					fallbackTitle={getawayDetails.title}
 					description={getawayDetails.metaDescription}
+					fallbackDescription={getawayDetails.subtitle}
 					url={canonicalUrl}
 					image={getawayDetails.cover}
 					canonical={canonicalUrl}
@@ -357,16 +374,16 @@ const GetawayListing = ({
 					page1Url="https://escapadesenparella.cat"
 					page2Title={categoryDetails.title}
 					page2Url={`https://escapadesenparella.cat/${categoryDetails.slug}`}
-					page3Title={getawayDetails.metaTitle}
+					page3Title={getawayDetails.title}
 					page3Url={canonicalUrl}
 				/>
-				<ArticleRichSnippet
-					headline={getawayDetails.title}
-					summary={getawayDetails.subtitle}
-					image={getawayDetails.cover}
-					author={getawayDetails.owner.fullName}
-					publicationDate={getawayDetails.createdAt}
-					modificationDate={getawayDetails.updatedAt}
+				{/* Una fitxa és un lloc, no un article: amb `TouristAttraction`
+				    o `LodgingBusiness`, Google en pot llegir l'adreça, les
+				    coordenades, el telèfon i l'horari. */}
+				<ListingRichSnippet
+					listing={getawayDetails}
+					url={canonicalUrl}
+					image={cloudinaryImage(getawayDetails.cover, 1200, 630).src}
 				/>
 				<div id="listingPage">
 					<NavigationBar user={user} />
@@ -574,7 +591,13 @@ const GetawayListing = ({
 															<picture className="block w-full h-full">
 																<img
 																	src={
-																		getawayCoverImg
+																		getawayCover.src
+																	}
+																	srcSet={
+																		getawayCover.srcSet
+																	}
+																	sizes={
+																		getawayCover.sizes
 																	}
 																	alt={
 																		getawayDetails.title
@@ -582,9 +605,15 @@ const GetawayListing = ({
 																	className={
 																		"w-full h-full object-cover rounded-2xl"
 																	}
-																	width={400}
-																	height={300}
+																	width={
+																		getawayCover.width
+																	}
+																	height={
+																		getawayCover.height
+																	}
 																	loading="eager"
+																	fetchpriority="high"
+																	decoding="async"
 																/>
 															</picture>
 														</div>
@@ -593,17 +622,10 @@ const GetawayListing = ({
 												{getawayDetails.images
 													? getawayDetails.images.map(
 															(el, idx) => {
-																const imageSrc =
-																	el?.substring(
-																		0,
-																		51
+																const image =
+																	galleryImage(
+																		el
 																	);
-																const imageId =
-																	el?.substring(
-																		63
-																	);
-																const imageModSrc = `${imageSrc}w_805,h_605,c_fill/${imageId}`;
-																const imageModSrcMob = `${imageSrc}w_400,h_300,c_fill/${imageId}`;
 
 																const priority =
 																	idx === 1 ||
@@ -629,35 +651,30 @@ const GetawayListing = ({
 																				}
 																			>
 																				<picture className="block w-full h-full bg-primary-50">
-																					<source
-																						srcSet={
-																							imageModSrcMob
-																						}
-																						media="(max-width: 768px)"
-																					/>
-																					<source
-																						srcSet={
-																							imageModSrc
-																						}
-																						media="(min-width: 768px)"
-																					/>
 																					<img
 																						src={
-																							imageModSrc
+																							image.src
+																						}
+																						srcSet={
+																							image.srcSet
+																						}
+																						sizes={
+																							image.sizes
 																						}
 																						alt={`${getawayDetails.title} - ${idx}`}
 																						className={
 																							"w-full h-full object-cover rounded-2xl"
 																						}
 																						width={
-																							400
+																							image.width
 																						}
 																						height={
-																							300
+																							image.height
 																						}
 																						loading={
 																							priority
 																						}
+																						decoding="async"
 																					/>
 																				</picture>
 																			</div>
@@ -763,7 +780,9 @@ const GetawayListing = ({
 												<div
 													className="mt-4 listing__description"
 													dangerouslySetInnerHTML={{
-														__html: getawayDetails.description,
+														__html: withResponsiveImages(
+															getawayDetails.description
+														),
 													}}
 												></div>
 											</div>
@@ -821,7 +840,9 @@ const GetawayListing = ({
 													<div
 														className="mt-4 listing__description"
 														dangerouslySetInnerHTML={{
-															__html: getawayDetails.reasons,
+															__html: withResponsiveImages(
+																getawayDetails.reasons
+															),
 														}}
 													></div>
 												</div>
@@ -1104,7 +1125,60 @@ const GetawayListing = ({
 	}
 };
 
-export async function getServerSideProps({ params }) {
+/**
+ * Les fitxes es generaven a cada visita: 1,1–1,8 s fins al primer byte, també
+ * per a Googlebot, i són les 190 pàgines que més entren per cerca. Amb ISR es
+ * generen un cop, se serveixen de la cache de Vercel i es refresquen cada dos
+ * minuts, com ja fan la portada, les categories i les destinacions.
+ */
+export async function getStaticPaths() {
+	const service = new ContentService();
+
+	// Si l'API no respon en temps de build, no s'ha de tombar tot el build:
+	// amb fallback "blocking" les pàgines es generen a la primera visita.
+	const safe = async (request) => {
+		try {
+			return (await request()) || {};
+		} catch (err) {
+			console.warn(
+				"getStaticPaths: no s'han pogut llistar les fitxes, es generaran sota demanda.",
+			);
+			return {};
+		}
+	};
+
+	const [activities, places] = await Promise.all([
+		safe(() => service.activities()),
+		safe(() => service.getAllPlaces()),
+	]);
+
+	// `listingPath` dóna la URL canònica, `/{categoria}/{slug}`. Quan el
+	// llistat de l'API no porta les categories, torna la ruta de reserva
+	// (`/activitats/{slug}`), que no és d'aquesta pàgina i que redirigeix:
+	// aquestes fitxes es generen a la primera visita.
+	const paths = [];
+	// El catàleg pot tenir slugs repetits mentre no hi hagi índex únic, i una
+	// ruta repetida fa fallar el build.
+	const seen = new Set();
+	for (const item of [
+		...(activities.allActivities || []),
+		...(places.allPlaces || []),
+	]) {
+		const [categoria, slug] = listingPath(item).split("/").filter(Boolean);
+		if (!categoria || !slug) continue;
+		if (categoria === "activitats" || categoria === "allotjaments") continue;
+		const path = `${categoria}/${slug}`;
+		if (seen.has(path)) continue;
+		seen.add(path);
+		paths.push({ params: { categoria, slug } });
+	}
+
+	// "blocking" en lloc de false: amb false, una fitxa publicada des del
+	// panell donaria 404 fins al següent desplegament.
+	return { paths, fallback: "blocking" };
+}
+
+export async function getStaticProps({ params }) {
 	const service = new ContentService();
 	const categoryDetails = await service.getCategoryDetails(params.categoria);
 	const activityDetails = await service.activityDetails(params.slug);
@@ -1121,6 +1195,7 @@ export async function getServerSideProps({ params }) {
 	if (activityDetails == null && placeDetails == null) {
 		return {
 			notFound: true,
+			revalidate: 120,
 		};
 	}
 
@@ -1184,6 +1259,7 @@ export async function getServerSideProps({ params }) {
 			relatedResults,
 			relatedByCategory,
 		},
+		revalidate: 120,
 	};
 }
 

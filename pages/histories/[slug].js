@@ -15,7 +15,10 @@ import AdBanner from "../../components/ads/AdBanner";
 import MobileAnchorAd from "../../components/ads/MobileAnchorAd";
 import RelatedListings from "../../components/listingpage/RelatedListings";
 import ContentParser from "../../utils/ContentParser";
-import { cloudinaryImage, cloudinaryUrl } from "../../utils/cloudinary";
+import {
+	cloudinaryImage,
+	cloudinaryResponsive,
+} from "../../utils/cloudinary";
 
 const StoryListing = ({ storyDetails, relatedStories }) => {
 	const { user } = useContext(UserContext);
@@ -103,31 +106,40 @@ const StoryListing = ({ storyDetails, relatedStories }) => {
 	// `substring(63)` que darrere hi ha sempre un segment de versió de dotze
 	// caràcters. Amb qualsevol altra forma d'URL en sortia una ruta inventada i
 	// la imatge no es veia. `cloudinaryImage` ho fa amb el segment /upload/.
-	const desktopCover = cloudinaryImage(storyDetails.cover, 1729, 973);
-	const mobileCover = cloudinaryImage(storyDetails.cover, 450, 337);
+	// La portada és l'element més gran de la pantalla i el que decideix el LCP.
+	// Va per amplades: un mòbil es baixa la de 480 px, no la de 1.729. El
+	// retall canvia amb la pantalla (4:3 amunt, 16:9 a partir de tauleta),
+	// així que cada `<source>` porta la seva llista d'amplades.
+	const desktopCover = cloudinaryResponsive(storyDetails.cover, {
+		widths: [768, 1024, 1400, 1920],
+		ratio: 9 / 16,
+		sizes: "(min-width: 1200px) 1200px, 100vw",
+	});
+	const mobileCover = cloudinaryResponsive(storyDetails.cover, {
+		widths: [480, 768, 960],
+		ratio: 3 / 4,
+	});
 
 	const coverImg = desktopCover.src;
 	const coverImgMob = mobileCover.src;
-	const coverImgWebp = desktopCover.webp;
-	const coverImgWebpMobile = mobileCover.webp;
 
 	const ogImg = cloudinaryImage(storyDetails.cover, 1200, 630).src;
 
-	const coverAuthorImg = cloudinaryUrl(
-		storyDetails.owner.avatar,
-		"w_32,h_32,c_fill"
-	);
+	const coverAuthorImg = cloudinaryImage(storyDetails.owner.avatar, 32, 32).src;
 
 	return (
 		<>
 			{/* Browser metas  */}
 			<GlobalMetas
 				title={storyDetails.metaTitle}
+				fallbackTitle={storyDetails.title}
 				description={storyDetails.metaDescription}
+				fallbackDescription={storyDetails.subtitle}
 				url={`https://escapadesenparella.cat/histories/${storyDetails.slug}`}
 				image={ogImg}
 				canonical={`https://escapadesenparella.cat/histories/${storyDetails.slug}`}
 				preconnect={"https://res.cloudinary.com/"}
+				type="article"
 			/>
 			{/* Rich snippets */}
 			<BreadcrumbRichSnippet
@@ -135,7 +147,7 @@ const StoryListing = ({ storyDetails, relatedStories }) => {
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Històries"
 				page2Url="https://escapadesenparella.cat/histories"
-				page3Title={storyDetails.metaTitle}
+				page3Title={storyDetails.title}
 				page3Url={`https://escapadesenparella.cat/histories/${storyDetails.slug}`}
 			/>
 			<BlogPostingRichSnippet
@@ -242,25 +254,24 @@ const StoryListing = ({ storyDetails, relatedStories }) => {
 							<div className="container relative z-10">
 								<picture className="block aspect-[4/3] md:aspect-[16/9] relative rounded-2xl overflow-hidden max-w-[1200px] mx-auto">
 									<source
-										srcSet={coverImgWebpMobile}
+										srcSet={mobileCover.srcSet}
+										sizes={mobileCover.sizes}
 										media="(max-width: 768px)"
 									/>
 									<source
-										srcSet={coverImgWebp}
-										media="(min-width: 768px)"
-									/>
-									<source
-										srcSet={coverImg}
+										srcSet={desktopCover.srcSet}
+										sizes={desktopCover.sizes}
 										media="(min-width: 768px)"
 									/>
 									<img
-										src={coverImg}
+										src={desktopCover.src}
 										alt={storyDetails.title}
 										className={"w-full h-full object-cover"}
-										width={400}
-										height={300}
+										width={desktopCover.width}
+										height={desktopCover.height}
 										loading="eager"
 										fetchpriority="high"
+										decoding="async"
 									/>
 								</picture>
 							</div>
@@ -355,13 +366,45 @@ const StoryListing = ({ storyDetails, relatedStories }) => {
 	);
 };
 
-export async function getServerSideProps({ params }) {
+/**
+ * Les històries es generaven a cada visita: 1,1–1,8 s fins al primer byte,
+ * també per a Googlebot. Amb ISR es genera un cop, se serveix de la cache de
+ * Vercel i es refresca cada dos minuts, com ja fan la portada, les categories
+ * i les destinacions.
+ */
+export async function getStaticPaths() {
+	const service = new ContentService();
+
+	// Si l'API no respon en temps de build (per exemple, un desplegament del
+	// backend encara en curs), no s'ha de tombar tot el build: amb fallback
+	// "blocking" les pàgines es generen a la primera visita.
+	let stories = [];
+	try {
+		stories = (await service.getAllStories())?.allStories || [];
+	} catch (err) {
+		console.warn(
+			"getStaticPaths: no s'han pogut llistar les històries, es generaran sota demanda.",
+		);
+	}
+
+	return {
+		paths: stories
+			.filter((story) => story?.slug)
+			.map((story) => ({ params: { slug: story.slug } })),
+		// "blocking" en lloc de false: amb false, una història publicada des
+		// del panell donaria 404 fins al següent desplegament.
+		fallback: "blocking",
+	};
+}
+
+export async function getStaticProps({ params }) {
 	const service = new ContentService();
 	const storyDetails = await service.getStoryDetails(params.slug);
 
 	if (!storyDetails) {
 		return {
 			notFound: true,
+			revalidate: 120,
 		};
 	}
 
@@ -382,6 +425,7 @@ export async function getServerSideProps({ params }) {
 			storyDetails,
 			relatedStories,
 		},
+		revalidate: 120,
 	};
 }
 

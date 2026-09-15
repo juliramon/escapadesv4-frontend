@@ -1,5 +1,8 @@
 import { useRouter } from "next/router";
-import { cloudinaryUrl } from "../../utils/cloudinary";
+import {
+	cloudinaryImage,
+	cloudinaryResponsive,
+} from "../../utils/cloudinary";
 import { useContext, useEffect, useState } from "react";
 import Footer from "../../components/global/Footer";
 import NavigationBar from "../../components/global/NavigationBar";
@@ -17,6 +20,7 @@ import AdBanner from "../../components/ads/AdBanner";
 import MobileAnchorAd from "../../components/ads/MobileAnchorAd";
 import RelatedListings from "../../components/listingpage/RelatedListings";
 import ContentParser from "../../utils/ContentParser";
+import ItemListRichSnippet from "../../components/richsnippets/ItemListRichSnippet";
 
 const ListView = ({ listDetails, relatedLists }) => {
 	const { user } = useContext(UserContext);
@@ -53,24 +57,38 @@ const ListView = ({ listDetails, relatedLists }) => {
 	const handleShareModalVisibility = () => setShareModalVisibility(true);
 	const hideShareModalVisibility = () => setShareModalVisibility(false);
 
-	const coverImg = cloudinaryUrl(listDetails.cover, "w_1729,h_973,c_fill");
-	const coverImgMob = cloudinaryUrl(listDetails.cover, "w_450,h_337,c_fill");
-	const coverImgWebp = cloudinaryUrl(listDetails.cover, "f_webp,w_1729,h_973,c_fill");
-	const coverImgWebpMobile = cloudinaryUrl(listDetails.cover, "f_webp,w_450,h_337,c_fill");
+	// La portada és l'element més gran de la pantalla i el que decideix el LCP.
+	// Va per amplades: un mòbil es baixa la de 480 px, no la de 1.729. El
+	// retall canvia amb la pantalla (4:3 amunt, 16:9 a partir de tauleta),
+	// així que cada `<source>` porta la seva llista d'amplades.
+	const desktopCover = cloudinaryResponsive(listDetails.cover, {
+		widths: [768, 1024, 1400, 1920],
+		ratio: 9 / 16,
+		sizes: "(min-width: 1200px) 1200px, 100vw",
+	});
+	const mobileCover = cloudinaryResponsive(listDetails.cover, {
+		widths: [480, 768, 960],
+		ratio: 3 / 4,
+	});
 
-	const ogImg = cloudinaryUrl(listDetails.cover, "w_1200,h_630,c_fill");
+	const coverImg = desktopCover.src;
 
-	const coverAuthorImg = cloudinaryUrl(listDetails.owner.avatar, "w_32,h_32,c_fill");
+	const ogImg = cloudinaryImage(listDetails.cover, 1200, 630).src;
+
+	const coverAuthorImg = cloudinaryImage(listDetails.owner.avatar, 32, 32).src;
 
 	return (
 		<>
 			{/* Browser metas  */}
 			<GlobalMetas
 				title={listDetails.metaTitle}
+				fallbackTitle={listDetails.title}
 				description={listDetails.metaDescription}
+				fallbackDescription={listDetails.subtitle}
 				url={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
 				image={ogImg}
 				canonical={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
+				type="article"
 			/>
 			{/* Rich snippets */}
 			<BreadcrumbRichSnippet
@@ -78,7 +96,7 @@ const ListView = ({ listDetails, relatedLists }) => {
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Llistes"
 				page2Url="https://escapadesenparella.cat/llistes"
-				page3Title={listDetails.metaTitle}
+				page3Title={listDetails.title}
 				page3Url={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
 			/>
 			<BlogPostingRichSnippet
@@ -88,6 +106,12 @@ const ListView = ({ listDetails, relatedLists }) => {
 				author={listDetails.owner.fullName}
 				publicationDate={listDetails.createdAt}
 				modificationDate={listDetails.updatedAt}
+			/>
+			{/* Els elements de la llista, tal com estan escrits al text. */}
+			<ItemListRichSnippet
+				html={listDetails.description}
+				name={listDetails.title}
+				url={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
 			/>
 			<div className="listing-list">
 				<NavigationBar />
@@ -185,29 +209,24 @@ const ListView = ({ listDetails, relatedLists }) => {
 							<div className="container relative z-10">
 								<picture className="block aspect-[4/3] md:aspect-[16/9] relative rounded-2xl overflow-hidden max-w-[1200px] mx-auto">
 									<source
-										srcSet={coverImgWebpMobile}
+										srcSet={mobileCover.srcSet}
+										sizes={mobileCover.sizes}
 										media="(max-width: 768px)"
 									/>
 									<source
-										srcSet={coverImgWebp}
-										media="(min-width: 768px)"
-									/>
-									<source
-										srcSet={coverImgMob}
-										media="(max-width: 768px)"
-									/>
-									<source
-										srcSet={coverImg}
+										srcSet={desktopCover.srcSet}
+										sizes={desktopCover.sizes}
 										media="(min-width: 768px)"
 									/>
 									<img
-										src={coverImg}
+										src={desktopCover.src}
 										alt={listDetails.title}
 										className={"w-full h-full object-cover"}
-										width={400}
-										height={300}
+										width={desktopCover.width}
+										height={desktopCover.height}
 										loading="eager"
 										fetchpriority="high"
+										decoding="async"
 									/>
 								</picture>
 							</div>
@@ -315,13 +334,44 @@ const ListView = ({ listDetails, relatedLists }) => {
 	);
 };
 
-export async function getServerSideProps({ params }) {
+/**
+ * Les llistes es generaven a cada visita: 1,1–1,8 s fins al primer byte,
+ * també per a Googlebot. Amb ISR es genera un cop, se serveix de la cache de
+ * Vercel i es refresca cada dos minuts, com ja fan la portada, les categories
+ * i les destinacions.
+ */
+export async function getStaticPaths() {
+	const service = new ContentService();
+
+	// Si l'API no respon en temps de build, no s'ha de tombar tot el build:
+	// amb fallback "blocking" les pàgines es generen a la primera visita.
+	let lists = [];
+	try {
+		lists = (await service.getAllLists()) || [];
+	} catch (err) {
+		console.warn(
+			"getStaticPaths: no s'han pogut llistar les llistes, es generaran sota demanda.",
+		);
+	}
+
+	return {
+		paths: lists
+			.filter((list) => list?.slug)
+			.map((list) => ({ params: { slug: list.slug } })),
+		// "blocking" en lloc de false: amb false, una llista publicada des del
+		// panell donaria 404 fins al següent desplegament.
+		fallback: "blocking",
+	};
+}
+
+export async function getStaticProps({ params }) {
 	const service = new ContentService();
 	const listDetails = await service.getListDetails(params.slug);
 
 	if (!listDetails) {
 		return {
 			notFound: true,
+			revalidate: 120,
 		};
 	}
 
@@ -342,6 +392,7 @@ export async function getServerSideProps({ params }) {
 			listDetails,
 			relatedLists,
 		},
+		revalidate: 120,
 	};
 }
 

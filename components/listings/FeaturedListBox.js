@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { formatDateTimeToISODate } from "../../utils/helpers";
+import { cloudinaryImage, cloudinaryResponsive } from "../../utils/cloudinary";
 
 const FeaturedListBox = ({
 	slug,
@@ -13,6 +14,13 @@ const FeaturedListBox = ({
 }) => {
 	let shortenedSubtitle = subtitle.slice(0, 120);
 	let publicationDate = formatDateTimeToISODate(date);
+	// Ocupa tot l'ample del bloc destacat: cal una imatge per amplada de
+	// pantalla, no l'original de dos o tres mega.
+	const coverImage = cloudinaryResponsive(cover, {
+		widths: [480, 768, 1024, 1400],
+		ratio: 9 / 16,
+	});
+	const avatarImage = cloudinaryImage(avatar, 40, 40);
 	return (
 		<Link href={`/llistes/${slug}`}>
 			<a
@@ -23,10 +31,15 @@ const FeaturedListBox = ({
 				<div className="absolute top-0 left-0 w-full h-full">
 					<picture>
 						<img
-							src={cover}
+							src={coverImage.src}
+							srcSet={coverImage.srcSet}
+							sizes={coverImage.sizes}
+							width={coverImage.width}
+							height={coverImage.height}
 							alt={title}
 							className="w-full h-full object-cover"
 							loading="eager"
+							fetchpriority="high"
 						/>
 					</picture>
 				</div>
@@ -44,7 +57,7 @@ const FeaturedListBox = ({
 						<div className="w-10 h-10 mr-4 rounded-full overflow-hidden">
 							<picture>
 								<img
-									src={avatar}
+									src={avatarImage.src}
 									alt={owner}
 									width="40"
 									height="40"

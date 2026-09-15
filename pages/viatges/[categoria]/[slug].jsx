@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { cloudinaryUrl } from "../../../utils/cloudinary";
+import { cloudinaryImage, cloudinaryResponsive } from "../../../utils/cloudinary";
 import NavigationBar from "../../../components/global/NavigationBar";
 import ContentService from "../../../services/contentService";
 import UserContext from "../../../contexts/UserContext";
@@ -74,20 +74,37 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 		);
 	}
 
-	const coverImgDesktop = cloudinaryUrl(tripEntryDetails.cover, "w_1392,h_783,c_fill");
-	const coverImgMobile = cloudinaryUrl(tripEntryDetails.cover, "w_400,h_300,c_fill");
+	// La portada és l'element més gran de la pantalla i el que decideix el LCP.
+	// Va per amplades: un mòbil es baixa la de 480 px, no la de 1.729. El
+	// retall canvia amb la pantalla (4:3 amunt, 16:9 a partir de tauleta),
+	// així que cada `<source>` porta la seva llista d'amplades.
+	const desktopCover = cloudinaryResponsive(tripEntryDetails.cover, {
+		widths: [768, 1024, 1400, 1920],
+		ratio: 9 / 16,
+		sizes: "(min-width: 1400px) 1392px, 100vw",
+	});
+	const mobileCover = cloudinaryResponsive(tripEntryDetails.cover, {
+		widths: [480, 768, 960],
+		ratio: 3 / 4,
+	});
 
-	const coverAuthorImg = cloudinaryUrl(tripEntryDetails.owner.avatar, "w_32,h_32,c_fill");
+	const coverImgDesktop = desktopCover.src;
+	const coverImgMobile = mobileCover.src;
+
+	const coverAuthorImg = cloudinaryImage(tripEntryDetails.owner.avatar, 32, 32).src;
 
 	return (
 		<>
 			{/* Browser metas  */}
 			<GlobalMetas
 				title={tripEntryDetails.metaTitle}
+				fallbackTitle={tripEntryDetails.title}
 				description={tripEntryDetails.metaDescription}
+				fallbackDescription={tripEntryDetails.subtitle}
 				url={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}/${tripEntryDetails.slug}`}
 				image={tripEntryDetails.cover}
 				canonical={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}/${tripEntryDetails.slug}`}
+				type="article"
 			/>
 			{/* Rich snippets */}
 			<BreadcrumbRichSnippet
@@ -96,8 +113,8 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 				page2Title="Viatges"
 				page2Url="https://escapadesenparella.cat/viatges"
 				page3Title={categoryDetails.title}
-				page3Url={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}/${categoryDetails.slug}`}
-				page4Title={tripEntryDetails.metaTitle}
+				page3Url={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}`}
+				page4Title={tripEntryDetails.title}
 				page4Url={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}/${tripEntryDetails.slug}`}
 			/>
 			<BlogPostingRichSnippet
@@ -226,21 +243,24 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 							<div className="container relative z-10">
 								<picture className="block aspect-w-4 aspect-h-3 lg:aspect-w-16 lg:aspect-h-9 h-full rounded-2xl overflow-hidden">
 									<source
-										srcSet={coverImgMobile}
+										srcSet={mobileCover.srcSet}
+										sizes={mobileCover.sizes}
 										media="(max-width: 768px)"
 									/>
 									<source
-										srcSet={coverImgDesktop}
+										srcSet={desktopCover.srcSet}
+										sizes={desktopCover.sizes}
 										media="(min-width: 768px)"
 									/>
 									<img
-										src={coverImgDesktop}
+										src={desktopCover.src}
 										alt={tripEntryDetails.title}
 										className={"w-full h-full object-cover"}
-										width={400}
-										height={300}
+										width={desktopCover.width}
+										height={desktopCover.height}
 										loading="eager"
 										fetchpriority="high"
+										decoding="async"
 									/>
 								</picture>
 							</div>
@@ -325,7 +345,40 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 	);
 };
 
-export async function getServerSideProps({ params }) {
+/**
+ * Les entrades de viatge es generaven a cada visita: 1,1–1,8 s fins al primer
+ * byte, també per a Googlebot. Amb ISR es generen un cop, se serveixen de la
+ * cache de Vercel i es refresquen cada dos minuts, com ja fan la portada, les
+ * categories i les destinacions.
+ */
+export async function getStaticPaths() {
+	const service = new ContentService();
+
+	// Si l'API no respon en temps de build, no s'ha de tombar tot el build:
+	// amb fallback "blocking" les pàgines es generen a la primera visita.
+	let tripEntries = [];
+	try {
+		tripEntries = (await service.getAllTripEntries())?.allTrips || [];
+	} catch (err) {
+		console.warn(
+			"getStaticPaths: no s'han pogut llistar les entrades de viatge, es generaran sota demanda.",
+		);
+	}
+
+	return {
+		// L'entrada penja del slug de la seva categoria de viatge.
+		paths: tripEntries
+			.filter((entry) => entry?.slug && entry?.trip?.slug)
+			.map((entry) => ({
+				params: { categoria: entry.trip.slug, slug: entry.slug },
+			})),
+		// "blocking" en lloc de false: amb false, una entrada publicada des
+		// del panell donaria 404 fins al següent desplegament.
+		fallback: "blocking",
+	};
+}
+
+export async function getStaticProps({ params }) {
 	const service = new ContentService();
 	const categoryDetails = await service.getTripCategoryDetails(
 		params.categoria
@@ -335,6 +388,7 @@ export async function getServerSideProps({ params }) {
 	if (!tripEntryDetails) {
 		return {
 			notFound: true,
+			revalidate: 120,
 		};
 	}
 
@@ -343,6 +397,7 @@ export async function getServerSideProps({ params }) {
 			tripEntryDetails,
 			categoryDetails,
 		},
+		revalidate: 120,
 	};
 }
 

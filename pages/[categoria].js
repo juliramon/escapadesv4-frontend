@@ -13,6 +13,7 @@ import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnip
 import ContentService from "../services/contentService";
 import { toListingCard } from "../utils/listingProps";
 import { pagePath, pageTitle } from "../utils/pagination";
+import { cloudinaryImage } from "../utils/cloudinary";
 import ListingsTextareaFooter from "../components/listings/ListingsTextareaFooter";
 
 const CategoryPage = ({
@@ -77,7 +78,24 @@ const CategoryPage = ({
 						</div>
 						<div className="sponsor-block-right">
 							<div className="sponsor-logo">
-								<img src={categoryDetails.sponsorLogo} />
+								<img
+									src={
+										cloudinaryImage(
+											categoryDetails.sponsorLogo,
+											240,
+											120,
+											"fit",
+										).src
+									}
+									alt={
+										categoryDetails.sponsorClaim ||
+										"Patrocinador"
+									}
+									width={240}
+									height={120}
+									loading="lazy"
+									decoding="async"
+								/>
 							</div>
 							<div className="sponsor-block-claim">
 								<span>{categoryDetails.sponsorClaim}</span>

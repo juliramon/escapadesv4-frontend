@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { normalizeWebsite } from "../../utils/websiteUrl";
 import NavigationBar from "../../components/global/NavigationBar";
 import { Container, Row, Button, Spinner } from "react-bootstrap";
 import ContentService from "../../services/contentService";
@@ -669,7 +670,11 @@ const OrganizationProfile = ({ organizationData }) => {
 												<ul>
 													<li>
 														<Link
-															href={`${state.organizationProfile.website}`}
+															href={normalizeWebsite(
+																state
+																	.organizationProfile
+																	.website,
+															)}
 														>
 															<a>
 																<svg

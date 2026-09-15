@@ -30,15 +30,14 @@ const EditorialCard = ({
 			<Link href={href}>
 				<a title={title} className="block">
 					<picture className="block aspect-w-4 aspect-h-3 rounded-2xl overflow-hidden relative">
-						{image.webp ? (
-							<source srcSet={image.webp} type="image/webp" />
-						) : null}
 						<img
 							src={image.src}
 							alt={title}
 							width={520}
 							height={390}
 							loading={isEager ? "eager" : "lazy"}
+							fetchpriority={index === 0 ? "high" : undefined}
+							decoding="async"
 							className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
 						/>
 					</picture>

@@ -28,12 +28,6 @@ const DestinationRail = ({ destinations = [], className = "" }) => {
 							>
 								{destination.image ? (
 									<picture className="destination-rail__media">
-										{image.webp ? (
-											<source
-												srcSet={image.webp}
-												type="image/webp"
-											/>
-										) : null}
 										<img
 											src={image.src}
 											alt={destination.title}

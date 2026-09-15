@@ -1,5 +1,10 @@
 import ListingDiscount from "./ListingDiscount";
-import { hasLink, resolveAffiliate } from "../../utils/affiliate";
+import {
+	hasLink,
+	isAffiliateUrl,
+	resolveAffiliate,
+} from "../../utils/affiliate";
+import { normalizeWebsite } from "../../utils/websiteUrl";
 
 /**
  * Bloc de reserva de la fitxa d'allotjament i d'activitat.
@@ -64,11 +69,21 @@ const BookingCard = ({
 	discountInfo,
 }) => {
 	const isPlace = type === "place";
-	const affiliate = resolveAffiliate(website);
-	const showWebsite = hasLink(website);
+	// El camp es feia servir tal com s'havia escrit, i "www.exemple.cat" sense
+	// esquema el navegador el llegeix com a camí relatiu: cinc fitxes
+	// publicades enllaçaven un 404 del nostre domini.
+	const websiteUrl = normalizeWebsite(website);
+	const affiliate = resolveAffiliate(websiteUrl);
+	const showWebsite = Boolean(websiteUrl);
 	const showPhone = hasLink(phone);
 
 	if (!showWebsite && !showPhone) return null;
+
+	// Els enllaços de reserva deixen comissió: Google demana que portin
+	// `sponsored`, i fins ara només portaven `nofollow`.
+	const websiteRel = isAffiliateUrl(websiteUrl)
+		? "sponsored nofollow noreferrer"
+		: "nofollow noreferrer";
 
 	const ctaLabel = affiliate
 		? `${isPlace ? "Veure preus a" : "Reservar a"} ${affiliate.label}`
@@ -144,11 +159,11 @@ const BookingCard = ({
 
 	const ctaButton = showWebsite ? (
 		<a
-			href={website}
+			href={websiteUrl}
 			className="button button__cta button__med w-full justify-center"
 			title={ctaLabel}
 			target="_blank"
-			rel="nofollow noreferrer"
+			rel={websiteRel}
 		>
 			<GlobeIcon className="mr-2 shrink-0" />
 			{ctaLabel}
@@ -211,11 +226,11 @@ const BookingCard = ({
 					) : null}
 					<div className="booking-bar__action">
 						<a
-							href={website}
+							href={websiteUrl}
 							className="button button__cta button__med w-full justify-center"
 							title={ctaLabel}
 							target="_blank"
-							rel="nofollow noreferrer"
+							rel={websiteRel}
 						>
 							{affiliate
 								? `Veure a ${affiliate.label}`
