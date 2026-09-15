@@ -39,11 +39,13 @@ const PLACEMENTS = {
 		responsive: "true",
 		minHeight: "min-h-[250px] lg:min-h-[600px]",
 	},
+	// Mida fixa (320x50) i sense format responsive: amb "horizontal" +
+	// full-width-responsive, AdSense estirava el bloc fins a ~400px abans
+	// d'omplir-lo i la barra fixa saltava (CLS de 0,2 a la portada).
 	anchor: {
 		slot: "9222117584",
-		format: "horizontal",
-		responsive: "true",
-		minHeight: "min-h-[60px]",
+		insStyle: { display: "inline-block", width: "320px", height: "50px" },
+		minHeight: "",
 	},
 };
 
@@ -55,6 +57,7 @@ const AdSlot = ({
 	label = "Publicitat",
 	className = "",
 	containerClassName = "",
+	onUnfilled,
 }) => {
 	const config = PLACEMENTS[placement] || PLACEMENTS.leaderboard;
 	const wrapperRef = useRef(null);
@@ -70,6 +73,7 @@ const AdSlot = ({
 		const readStatus = () => {
 			if (ins.getAttribute("data-ad-status") === "unfilled") {
 				setIsUnfilled(true);
+				if (onUnfilled) onUnfilled();
 			}
 		};
 
@@ -101,6 +105,7 @@ const AdSlot = ({
 				data-ad-slot={slot || config.slot}
 				data-ad-format={format || config.format}
 				data-full-width-responsive={responsive || config.responsive}
+				{...(config.insStyle ? { style: config.insStyle } : {})}
 			/>
 		</div>
 	);
