@@ -85,6 +85,9 @@ const StoriesList = ({ stories, totalItems, numPages, currentPage = 1 }) => {
 					{/* Section stories */}
 					<section className="pt-6 md:pt-8 pb-12 lg:pb-20">
 						<div className="container">
+							{/* Les targetes són h3: sense aquest h2 la jerarquia saltava
+							    de l'h1 de la capçalera a l'h3 de cada història. */}
+							<h2 className="sr-only">Totes les històries</h2>
 							{stories.length > 0 ? (
 								<>
 									<EditorialGrid

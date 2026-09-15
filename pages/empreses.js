@@ -142,11 +142,13 @@ const Serveis = () => {
 					<div className="container">
 						<div className="flex flex-wrap items-start">
 							<div className="w-full">
-								<h3 className="text-center max-w-lg mx-auto">
+								{/* h2 amb aspecte d'h3: és el primer títol després de
+								    l'h1 i un h3 aquí trencava la jerarquia. */}
+								<h2 className="h3 text-center max-w-lg mx-auto">
 									Alguns dels allotjaments i activitats que
 									han confiat,
 									<br />i confien en nosaltres
-								</h3>
+								</h2>
 								<div className="logos-bar mt-5">
 									<img
 										src={
