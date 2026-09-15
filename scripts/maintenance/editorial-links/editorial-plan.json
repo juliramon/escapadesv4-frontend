@@ -1,0 +1,1240 @@
+{
+	"generatedAt": "2026-09-15T21:33:45.026Z",
+	"source": "API pública de producció, 15/09/2026",
+	"relatedStory": [
+		{
+			"collection": "activities",
+			"slug": "pedraforca-tartera-pollego-superior",
+			"story": "pedraforca-per-la-tartera-pollego-superior"
+		},
+		{
+			"collection": "activities",
+			"slug": "parc-natural-cap-de-creus",
+			"story": "visita-parc-natural-cap-de-creus"
+		},
+		{
+			"collection": "activities",
+			"slug": "cala-estreta-palamos",
+			"story": "cala-estreta-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "cala-sa-tuna-seixugador",
+			"story": "cala-sa-tuna-seixugador-begur-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "waterworld-lloret-de-mar",
+			"story": "waterworld-parc-aquatic-lloret-de-mar"
+		},
+		{
+			"collection": "places",
+			"slug": "torremirona-relais-hotel-golf-spa",
+			"story": "hotel-torremirona-3-joies-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "fornells-de-la-muntanya",
+			"story": "fornells-de-la-muntanya"
+		},
+		{
+			"collection": "activities",
+			"slug": "vilanova-de-banat",
+			"story": "vilanova-de-banat-serra-del-cadi"
+		},
+		{
+			"collection": "places",
+			"slug": "refugi-comes-rubio-massis-orri-pallars-sobira",
+			"story": "refugi-comes-de-rubio-pallars-sobira"
+		},
+		{
+			"collection": "activities",
+			"slug": "el-taga-des-de-bruguera",
+			"story": "excursio-el-taga-des-de-bruguera"
+		},
+		{
+			"collection": "activities",
+			"slug": "raquetes-neu-sant-joan-de-lerm",
+			"story": "sant-joan-de-lerm-raquetes-de-neu"
+		},
+		{
+			"collection": "activities",
+			"slug": "matagalls-per-sant-marcal",
+			"story": "matagalls-per-sant-marcal"
+		},
+		{
+			"collection": "activities",
+			"slug": "castanyer-de-les-9-branques",
+			"story": "castanyer-de-les-nou-branques-viladrau"
+		},
+		{
+			"collection": "activities",
+			"slug": "pont-medieval-llucanes-sant-marti-albars-osona",
+			"story": "pont-medieval-sant-marti-albars-llucanes"
+		},
+		{
+			"collection": "places",
+			"slug": "masia-el-puig",
+			"story": "masia-el-puig-vall-de-bianya"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-trossos-del-priorat",
+			"story": "trossos-del-priorat-hotel-gratallops"
+		},
+		{
+			"collection": "activities",
+			"slug": "rukimon-rucs-del-corredor",
+			"story": "rukimon-excursio-rucs-corredor"
+		},
+		{
+			"collection": "activities",
+			"slug": "comarca-aventura-rutes-segway",
+			"story": "excursio-segway-arenys-de-munt"
+		},
+		{
+			"collection": "activities",
+			"slug": "restaurant-pins-mar-sant-andreu-llavaneres",
+			"story": "restaurant-pins-mar-sant-andreu-llavaneres"
+		},
+		{
+			"collection": "activities",
+			"slug": "cals-frares",
+			"story": "cals-frares-restaurant-santa-elena-agell"
+		},
+		{
+			"collection": "activities",
+			"slug": "vol-en-globus-vol-de-coloms-garrotxa",
+			"story": "vol-en-globus-vol-de-coloms-garrotxa"
+		}
+	],
+	"textLinks": [
+		{
+			"collection": "stories",
+			"slug": "slow-life-cabana-turisme-sostenible-el-perello-tarragona",
+			"href": "https://escapadesenparella.cat/escapades-aventura/pintures-rupestres-de-cabrafeixet",
+			"anchors": [
+				"les Pintures Rupestres de Cabrafeixet al Perelló",
+				"Ruta fins a les Pintures Rupestres de Cabrafeixet al Perelló",
+				"pintures rupestres de Cabrafeixet"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "escapada-benifallet-coves-meravelles-llaut-castellot-iberic",
+			"href": "https://escapadesenparella.cat/escapades-culturals/les-coves-meravelles-benifallet",
+			"anchors": [
+				"Les Coves Meravella de Benifallet",
+				"Coves Meravelles"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "miami-platja-sunrisehomes-mont-roig-del-camp",
+			"href": "https://escapadesenparella.cat/escapades-culturals/ermita-mare-de-deu-de-la-roca-mont-roig",
+			"anchors": [
+				"L'Ermita Mare de Déu de la Roca i la Capella de Sant Ramon a Mont-Roig",
+				"Ermita Mare de Déu de la Roca"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "kayak-parc-natural-cap-de-creus-port-lligat",
+			"href": "https://escapadesenparella.cat/escapades-aventura/ruta-kayak-cap-de-creus",
+			"anchors": [
+				"kayak al Cap de Creus",
+				"Ruta amb kayak al Cap de Creus"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "escapada-moli-siurana-castell-montgri-aiguamolls-emporda-ruines-empuries",
+			"href": "https://escapadesenparella.cat/escapades-culturals/aiguamolls-emporda",
+			"anchors": [
+				"Aiguamolls de l'Empordà"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "escapada-moli-siurana-castell-montgri-aiguamolls-emporda-ruines-empuries",
+			"href": "https://escapadesenparella.cat/escapades-culturals/ruines-empuries",
+			"anchors": [
+				"Les Ruïnes d'Empúries"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "via-ferrada-cala-moli-sant-feliu-guixols-costa-brava",
+			"href": "https://escapadesenparella.cat/escapades-aventura/via-ferrada-cala-del-moli-costa-brava",
+			"anchors": [
+				"Via ferrata la Cala del Molí a la Costa Brava",
+				"Via Ferrada de la Cala del Molí"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "castell-de-la-popa-centelles",
+			"href": "https://escapadesenparella.cat/escapades-aventura/castell-de-la-popa-castell-castellcir-centelles",
+			"anchors": [
+				"Castell de la Popa",
+				"Visita al Castell de la Popa"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "escapada-hotel-terradets-pallars-jussa",
+			"href": "https://escapadesenparella.cat/escapades-culturals/llimiana-poble-encant-pallars-jussa",
+			"anchors": [
+				"Passejada amb encant a Llimiana"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "escapada-hotel-terradets-pallars-jussa",
+			"href": "https://escapadesenparella.cat/escapades-culturals/visita-guiada-castell-de-mur-pallars-jussa",
+			"anchors": [
+				"Castell de Mur",
+				"Visita al Castell de Mur"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "escapada-moli-siurana-castell-montgri-aiguamolls-emporda-ruines-empuries",
+			"href": "https://escapadesenparella.cat/escapades-culturals/castell-montgri-torroella-montgri-baix-emporda",
+			"anchors": [
+				"Castell de Montgrí"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "esterragalls-all-isovol-badlands-cerdanya-catalunya",
+			"href": "https://escapadesenparella.cat/escapades-aventura/esterragalls-all-olopte-cerdanya",
+			"anchors": [
+				"Esterragalls d'All",
+				"Visita als Esterragalls d'All",
+				"Esterregalls d'All"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "ruta-trineu-gossos-andorra",
+			"href": "https://escapadesenparella.cat/escapades-aventura/trineu-gossos-a-andorra",
+			"anchors": [
+				"Trineu amb gossos a Andorra"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "prats-de-cadi-des-destana",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/prats-de-cadi-des-d-estana",
+			"anchors": [
+				"Prats de Cadí des d'Estana",
+				"Prats de Cadí des d’Estana"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "basses-de-coll-de-nargo",
+			"href": "https://escapadesenparella.cat/escapades-de-relax/basses-de-coll-de-nargo",
+			"anchors": [
+				"Basses de Coll de Nargó"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "maria-de-cadaques-restaurant-palamos",
+			"href": "https://escapadesenparella.cat/escapades-gastronomiques/restaurant-maria-de-cadaques",
+			"anchors": [
+				"Restaurant Maria de Cadaqués"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "ruta-moto-neu-andorra-grau-roig",
+			"href": "https://escapadesenparella.cat/escapades-aventura/moto-de-neu-andorra-ruta-grau-roig",
+			"anchors": [
+				"Moto de neu a Andorra",
+				"moto de neu"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "glamping-camping-del-mar-costa-brava",
+			"href": "https://escapadesenparella.cat/escapades-de-relax/glamping-camping-del-mar-malgrat-de-mar",
+			"anchors": [
+				"Glamping a Càmping del Mar",
+				"Càmping del Mar"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "hotel-lazure-lloret-de-mar-costa-brava-escapada-romantica",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/lazure-hotel-lloret-de-mar-costa-brava",
+			"anchors": [
+				"L'Azure Hotel",
+				"hotel L'Azure",
+				"L'Azure"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "escapada-hotel-terradets-pallars-jussa",
+			"href": "https://escapadesenparella.cat/escapades-de-relax/hotel-terradets-cellers-lleida",
+			"anchors": [
+				"Hotel Terradets"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "mas-el-brugue-apartaments-turisme-rural-terrades",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/mas-el-bruge-apartaments-terrades",
+			"anchors": [
+				"Mas el Brugué"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "masia-boutique-vila-caelus-rubio-casa-rural",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/vila-caelus-masia-boutique-rubio",
+			"anchors": [
+				"Vila Caelus Masia Boutique"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "camping-repos-pedraforca-saldes",
+			"href": "https://escapadesenparella.cat/escapades-aventura/camping-repos-del-pedraforca-saldes",
+			"anchors": [
+				"Càmping Repòs del Pedraforca",
+				"Repòs del Pedraforca"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "apartament-parellada-vilafranca-penedes",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/apartament-spa-parellada",
+			"anchors": [
+				"Apartament Spa Parellada",
+				"Apartament Parellada"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "visita-estartit-illes-medes",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/argonavis-226",
+			"anchors": [
+				"Argonavis 226"
+			],
+			"reason": "parella"
+		},
+		{
+			"collection": "stories",
+			"slug": "pedraforca-per-la-tartera-pollego-superior",
+			"href": "https://escapadesenparella.cat/escapades-aventura/pedraforca-tartera-pollego-superior",
+			"anchors": [
+				"Pedraforca per la tartera"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "visita-parc-natural-cap-de-creus",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/parc-natural-cap-de-creus",
+			"anchors": [
+				"Parc Natural del Cap de Creus"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "cala-estreta-costa-brava",
+			"href": "https://escapadesenparella.cat/escapades-de-relax/cala-estreta-palamos",
+			"anchors": [
+				"Cala Estreta"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "cala-sa-tuna-seixugador-begur-costa-brava",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/cala-sa-tuna-seixugador",
+			"anchors": [
+				"Cala Sa Tuna i S'Eixugador",
+				"Cala Sa Tuna i S’Eixugador",
+				"Cala Sa Tuna"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "waterworld-parc-aquatic-lloret-de-mar",
+			"href": "https://escapadesenparella.cat/escapades-aventura/waterworld-lloret-de-mar",
+			"anchors": [
+				"Waterworld Lloret de Mar",
+				"Waterworld"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "hotel-torremirona-3-joies-costa-brava",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/torremirona-relais-hotel-golf-spa",
+			"anchors": [
+				"Torremirona Relais Hotel Golf & Spa"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "fornells-de-la-muntanya",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/fornells-de-la-muntanya",
+			"anchors": [
+				"Fornells de la Muntanya"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "vilanova-de-banat-serra-del-cadi",
+			"href": "https://escapadesenparella.cat/escapades-culturals/vilanova-de-banat",
+			"anchors": [
+				"Vilanova de Banat"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "refugi-comes-de-rubio-pallars-sobira",
+			"href": "https://escapadesenparella.cat/escapades-aventura/refugi-comes-rubio-massis-orri-pallars-sobira",
+			"anchors": [
+				"Refugi Comes de Rubió"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "excursio-el-taga-des-de-bruguera",
+			"href": "https://escapadesenparella.cat/escapades-aventura/el-taga-des-de-bruguera",
+			"anchors": [
+				"El Taga des de Bruguera"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "sant-joan-de-lerm-raquetes-de-neu",
+			"href": "https://escapadesenparella.cat/escapades-aventura/raquetes-neu-sant-joan-de-lerm",
+			"anchors": [
+				"Raquetes de neu a Sant Joan de l'Erm",
+				"Raquetes de neu a Sant Joan de l’Erm"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "matagalls-per-sant-marcal",
+			"href": "https://escapadesenparella.cat/escapades-aventura/matagalls-per-sant-marcal",
+			"anchors": [
+				"El Matagalls des de Sant Marçal",
+				"Matagalls"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "castanyer-de-les-nou-branques-viladrau",
+			"href": "https://escapadesenparella.cat/escapades-culturals/castanyer-de-les-9-branques",
+			"anchors": [
+				"Castanyer de les 9 branques"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "pont-medieval-sant-marti-albars-llucanes",
+			"href": "https://escapadesenparella.cat/escapades-culturals/pont-medieval-llucanes-sant-marti-albars-osona",
+			"anchors": [
+				"Pont medieval de Sant Martí d'Albars",
+				"Pont medieval de Sant Martí d’Albars"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "masia-el-puig-vall-de-bianya",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/masia-el-puig",
+			"anchors": [
+				"Masia el Puig"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "trossos-del-priorat-hotel-gratallops",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/hotel-trossos-del-priorat",
+			"anchors": [
+				"Hotel Trossos del Priorat"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "rukimon-excursio-rucs-corredor",
+			"href": "https://escapadesenparella.cat/escapades-aventura/rukimon-rucs-del-corredor",
+			"anchors": [
+				"Rukimon Rucs del Corredor"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "excursio-segway-arenys-de-munt",
+			"href": "https://escapadesenparella.cat/escapades-aventura/comarca-aventura-rutes-segway",
+			"anchors": [
+				"Comarca Aventura",
+				"Comarca Aventura, rutes amb segway"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "restaurant-pins-mar-sant-andreu-llavaneres",
+			"href": "https://escapadesenparella.cat/escapades-gastronomiques/restaurant-pins-mar-sant-andreu-llavaneres",
+			"anchors": [
+				"Restaurant Pins Mar"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "cals-frares-restaurant-santa-elena-agell",
+			"href": "https://escapadesenparella.cat/escapades-gastronomiques/cals-frares",
+			"anchors": [
+				"Cals Frares"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "stories",
+			"slug": "vol-en-globus-vol-de-coloms-garrotxa",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/vol-en-globus-vol-de-coloms-garrotxa",
+			"anchors": [
+				"Vol en globus amb Vol de Coloms",
+				"Vol de Coloms"
+			],
+			"reason": "parella nova"
+		},
+		{
+			"collection": "lists",
+			"slug": "escapades-romantiques-catalunya-parella",
+			"href": "https://escapadesenparella.cat/escapades-culturals/castell-burriac-medieval-cabrils-maresme-catalunya",
+			"anchors": [
+				"Castell de Burriac"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "que-fer-tardor-catalunya-activitats-on-anar",
+			"href": "https://escapadesenparella.cat/escapades-aventura/castell-de-llivia",
+			"anchors": [
+				"Castell de Llívia"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "que-fer-tardor-catalunya-activitats-on-anar",
+			"href": "https://escapadesenparella.cat/escapades-culturals/visita-jardins-artigas",
+			"anchors": [
+				"Jardins Artigas"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "que-fer-tardor-catalunya-activitats-on-anar",
+			"href": "https://escapadesenparella.cat/escapades-aventura/estany-negre-parc-nacional-aiguestortes-estanys-sant-maurici-pallars-sobira",
+			"anchors": [
+				"Estany Negre"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "cims-de-catalunya-escapada-en-parella",
+			"href": "https://escapadesenparella.cat/escapades-aventura/refugi-prat-aguilo-serra-del-cadi-pas-gosolans",
+			"anchors": [
+				"Refugi Prat d'Aguiló"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "descobrir-el-montseny-idees-que-fer-montseny",
+			"href": "https://escapadesenparella.cat/escapades-aventura/castell-de-montclus-sant-esteve-de-palautordera-montseny",
+			"anchors": [
+				"Castell de Montclús"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "descobrir-el-montseny-idees-que-fer-montseny",
+			"href": "https://escapadesenparella.cat/escapades-culturals/espai-montseny-viladrau-montseny",
+			"anchors": [
+				"Espai Montseny"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "descobrir-el-montseny-idees-que-fer-montseny",
+			"href": "https://escapadesenparella.cat/escapades-de-relax/arboretum-masjoan-espinelves",
+			"anchors": [
+				"Arboretum Masjoan"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "descobrir-el-montseny-idees-que-fer-montseny",
+			"href": "https://escapadesenparella.cat/escapades-culturals/castell-montsoriu-la-selva-catalunya",
+			"anchors": [
+				"Castell de Montsoriu"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "descobrir-el-montseny-idees-que-fer-montseny",
+			"href": "https://escapadesenparella.cat/escapades-culturals/castanyer-de-les-9-branques",
+			"anchors": [
+				"Castanyer de les 9 branques"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "9-castells-medievals-catalunya",
+			"href": "https://escapadesenparella.cat/escapades-aventura/castell-de-montclus-sant-esteve-de-palautordera-montseny",
+			"anchors": [
+				"Castell de Montclús"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "9-castells-medievals-catalunya",
+			"href": "https://escapadesenparella.cat/escapades-culturals/castell-miravet-ribera-ebre-tarragona",
+			"anchors": [
+				"Castell de Miravet"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "9-castells-medievals-catalunya",
+			"href": "https://escapadesenparella.cat/escapades-culturals/castell-oden-solsones",
+			"anchors": [
+				"Castell d'Odèn"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "9-castells-medievals-catalunya",
+			"href": "https://escapadesenparella.cat/escapades-culturals/castell-montsoriu-la-selva-catalunya",
+			"anchors": [
+				"Castell de Montsoriu"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "9-castells-medievals-catalunya",
+			"href": "https://escapadesenparella.cat/escapades-culturals/castell-burriac-medieval-cabrils-maresme-catalunya",
+			"anchors": [
+				"Castell de Burriac"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "9-castells-medievals-catalunya",
+			"href": "https://escapadesenparella.cat/escapades-culturals/castell-montgri-torroella-montgri-baix-emporda",
+			"anchors": [
+				"Castell de Montgrí"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "9-castells-medievals-catalunya",
+			"href": "https://escapadesenparella.cat/escapades-culturals/castell-lluca-llucanes-osona",
+			"anchors": [
+				"Castell de Lluçà"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "brama-cervol-pallars-sobira-gratuit",
+			"href": "https://escapadesenparella.cat/escapades-aventura/la-brama-del-cervol-pallars-sobira",
+			"anchors": [
+				"La Brama del Cérvol al Pallars Sobirà",
+				"brama del cérvol"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "que-fer-al-pallars-sobira-11-activitats-descobrir-el-pallars",
+			"href": "https://escapadesenparella.cat/escapades-aventura/la-brama-del-cervol-pallars-sobira",
+			"anchors": [
+				"La Brama del Cérvol al Pallars Sobirà",
+				"brama del cérvol"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "que-fer-al-pallars-sobira-11-activitats-descobrir-el-pallars",
+			"href": "https://escapadesenparella.cat/escapades-culturals/casa-de-os-bru-isil-pirineus",
+			"anchors": [
+				"La Casa de l'Ós Bru dels Pirineus"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "que-fer-al-pallars-sobira-11-activitats-descobrir-el-pallars",
+			"href": "https://escapadesenparella.cat/escapades-aventura/cascada-de-gerber-alt-aneu",
+			"anchors": [
+				"La Cascada de Gerber"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "que-fer-al-pallars-sobira-11-activitats-descobrir-el-pallars",
+			"href": "https://escapadesenparella.cat/escapades-aventura/cascada-de-la-ratera-parc-nacional-aiguestortes-estanys-sant-maurici-pallars-sobira",
+			"anchors": [
+				"Cascada de Ratera"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "que-fer-al-pallars-sobira-11-activitats-descobrir-el-pallars",
+			"href": "https://escapadesenparella.cat/escapades-culturals/esglesia-romanica-sant-joan-isil-pallars-sobira",
+			"anchors": [
+				"Església romànica de Sant Joan d'Isil"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "que-fer-estiu-catalunya-activitats-on-anar",
+			"href": "https://escapadesenparella.cat/escapades-culturals/panta-de-sau-osona",
+			"anchors": [
+				"Pantà de Sau"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "lists",
+			"slug": "millors-campings-catalunya",
+			"href": "https://escapadesenparella.cat/escapades-aventura/camping-repos-del-pedraforca-saldes",
+			"anchors": [
+				"Càmping Repòs del Pedraforca",
+				"Repòs del Pedraforca"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "stories",
+			"slug": "la-mer-cabrera-de-mar-maresme-escapada-romantica",
+			"href": "https://escapadesenparella.cat/escapades-culturals/castell-burriac-medieval-cabrils-maresme-catalunya",
+			"anchors": [
+				"Castell de Burriac"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "stories",
+			"slug": "castell-de-la-popa-centelles",
+			"href": "https://escapadesenparella.cat/escapades-culturals/castell-de-centelles-sant-marti-de-centelles-osona",
+			"anchors": [
+				"Castell de Centelles"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "stories",
+			"slug": "kayak-parc-natural-cap-de-creus-port-lligat",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/parc-natural-cap-de-creus",
+			"anchors": [
+				"Parc Natural del Cap de Creus"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "stories",
+			"slug": "pedraforca-per-la-tartera-pollego-superior",
+			"href": "https://escapadesenparella.cat/escapades-aventura/refugi-lluis-estasen-pedraforca-bergueda",
+			"anchors": [
+				"Refugi Lluis Estasen"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "stories",
+			"slug": "pedraforca-per-la-tartera-pollego-superior",
+			"href": "https://escapadesenparella.cat/escapades-aventura/camping-repos-del-pedraforca-saldes",
+			"anchors": [
+				"Càmping Repòs del Pedraforca",
+				"Repòs del Pedraforca"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "stories",
+			"slug": "camping-repos-pedraforca-saldes",
+			"href": "https://escapadesenparella.cat/escapades-aventura/pedraforca-tartera-pollego-superior",
+			"anchors": [
+				"Pedraforca per la tartera"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "stories",
+			"slug": "visita-estartit-illes-medes",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/aiguamolls-baix-emporda-estartit",
+			"anchors": [
+				"Aiguamolls del Baix Empordà"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "stories",
+			"slug": "creperia-versatil-cadaques-un-nou-concepte-de-creperia",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/parc-natural-cap-de-creus",
+			"anchors": [
+				"Parc Natural del Cap de Creus"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "stories",
+			"slug": "creperia-versatil-cadaques-un-nou-concepte-de-creperia",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/paratge-de-tudela",
+			"anchors": [
+				"Paratge de Tudela"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "stories",
+			"slug": "visita-parc-natural-cap-de-creus",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/paratge-de-tudela",
+			"anchors": [
+				"Paratge de Tudela"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "stories",
+			"slug": "maria-de-cadaques-restaurant-palamos",
+			"href": "https://escapadesenparella.cat/escapades-culturals/jardins-cap-roig-calella-palafrugell-costa-brava",
+			"anchors": [
+				"Jardins de Cap Roig"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "stories",
+			"slug": "hostal-el-roser-restaurant-escala",
+			"href": "https://escapadesenparella.cat/escapades-culturals/aiguamolls-emporda",
+			"anchors": [
+				"Aiguamolls de l'Empordà"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "stories",
+			"slug": "hostal-el-roser-restaurant-escala",
+			"href": "https://escapadesenparella.cat/escapades-culturals/ruines-empuries",
+			"anchors": [
+				"Les Ruïnes d'Empúries"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "stories",
+			"slug": "visita-calella-palafrugell",
+			"href": "https://escapadesenparella.cat/escapades-culturals/jardins-cap-roig-calella-palafrugell-costa-brava",
+			"anchors": [
+				"Jardins de Cap Roig"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "stories",
+			"slug": "visita-calella-palafrugell",
+			"href": "https://escapadesenparella.cat/escapades-aventura/cala-el-golfet-begur",
+			"anchors": [
+				"Cala El Golfet"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "activities",
+			"slug": "esglesia-de-santa-maria-de-lluca-llucanes",
+			"href": "https://escapadesenparella.cat/escapades-culturals/castell-lluca-llucanes-osona",
+			"anchors": [
+				"Castell de Lluçà"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "activities",
+			"slug": "la-vall-del-lord-camper-solsones",
+			"href": "https://escapadesenparella.cat/escapades-aventura/fonts-del-cardener-solsones-lleida",
+			"anchors": [
+				"Fonts del Cardener"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "places",
+			"slug": "la-mer-cabrera-de-mar-maresme-barcelona",
+			"href": "https://escapadesenparella.cat/escapades-culturals/castell-burriac-medieval-cabrils-maresme-catalunya",
+			"anchors": [
+				"Castell de Burriac"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-spa-porto-cristo-port-de-la-selva",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/parc-natural-cap-de-creus",
+			"anchors": [
+				"Parc Natural del Cap de Creus"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "places",
+			"slug": "el-castell-de-la-pobla-de-lillet-adults-only",
+			"href": "https://escapadesenparella.cat/escapades-culturals/visita-jardins-artigas",
+			"anchors": [
+				"Jardins Artigas"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "places",
+			"slug": "tramuntana-hotel-adults-only",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/parc-natural-cap-de-creus",
+			"anchors": [
+				"Parc Natural del Cap de Creus"
+			],
+			"reason": "anomenat"
+		},
+		{
+			"collection": "places",
+			"slug": "argonavis-226",
+			"href": "https://escapadesenparella.cat/escapades-romantiques/aiguamolls-baix-emporda-estartit",
+			"anchors": [
+				"Aiguamolls del Baix Empordà"
+			],
+			"reason": "anomenat"
+		}
+	],
+	"brokenLinks": [
+		{
+			"collection": "stories",
+			"slug": "visita-estartit-illes-medes",
+			"from": "https://escapadesenparella.cat/escapades-romantiques/apartaments-argonavis-estartit-illes-medes",
+			"to": "https://escapadesenparella.cat/escapades-romantiques/argonavis-226"
+		},
+		{
+			"collection": "stories",
+			"slug": "prats-de-cadi-des-destana",
+			"from": "https://escapadesenparella.cat/escapades-estiu/2018/basses-de-coll-de-nargo/",
+			"to": "https://escapadesenparella.cat/escapades-de-relax/basses-de-coll-de-nargo"
+		},
+		{
+			"collection": "stories",
+			"slug": "excursio-segway-arenys-de-munt",
+			"from": "http://escapadesenparella.cat/listing/comarcaventura-com-rutes-segway/",
+			"to": "https://escapadesenparella.cat/escapades-aventura/comarca-aventura-rutes-segway"
+		},
+		{
+			"collection": "stories",
+			"slug": "visita-parc-natural-cap-de-creus",
+			"from": "http://escapadesenparella.cat/cp/collections/entries/histories/visita-parc-natural-cap-de-creus#",
+			"byText": {
+				"Hotel Torremirona Golf & Spa": "https://escapadesenparella.cat/escapades-romantiques/torremirona-relais-hotel-golf-spa",
+				"Parc Natural de Cap de Creus": "https://escapadesenparella.cat/escapades-romantiques/parc-natural-cap-de-creus",
+				"Versàtil Cadaqués": "https://escapadesenparella.cat/histories/creperia-versatil-cadaques-un-nou-concepte-de-creperia"
+			}
+		},
+		{
+			"collection": "lists",
+			"slug": "idees-regals-nadal-parella",
+			"fromPrefix": "amazon.es/",
+			"addScheme": true
+		}
+	],
+	"listImageAlt": {
+		"collection": "lists"
+	},
+	"destinations": [
+		{
+			"collection": "activities",
+			"slug": "ruta-kayak-cap-de-creus",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "aiguamolls-emporda",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "ruines-empuries",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "via-ferrada-cala-del-moli-costa-brava",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "restaurant-el-pedro-pals",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "jardins-cap-roig-calella-palafrugell-costa-brava",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "museu-pesca-palamos-costa-brava",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-montgri-torroella-montgri-baix-emporda",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "cala-el-golfet-begur",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "parc-natural-cap-de-creus",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "cala-sa-tuna-seixugador",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "waterworld-lloret-de-mar",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "cala-estreta-palamos",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "restaurant-maria-de-cadaques",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "places",
+			"slug": "uau-campers-lloguer-campers-lloret-de-mar",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "places",
+			"slug": "mas-ferran-adults-only",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-casa-peya-adults-only",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-aatu-adults-only",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "places",
+			"slug": "el-cau-del-papibou-adults-only",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "places",
+			"slug": "jardi-de-pedra-adults-only",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-tarongeta-adults-only",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "places",
+			"slug": "lhort-de-sant-cebria",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "places",
+			"slug": "argonavis-226",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-mas-tapiolas-suits-natura",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-can-casi-adults-only",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "resturant-el-celler-argentona-maresme",
+			"destination": "escapades-maresme"
+		},
+		{
+			"collection": "activities",
+			"slug": "restaurant-pins-mar-sant-andreu-llavaneres",
+			"destination": "escapades-maresme"
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-burriac-medieval-cabrils-maresme-catalunya",
+			"destination": "escapades-maresme"
+		},
+		{
+			"collection": "activities",
+			"slug": "comarca-aventura-rutes-segway",
+			"destination": "escapades-maresme"
+		},
+		{
+			"collection": "activities",
+			"slug": "cals-frares",
+			"destination": "escapades-maresme"
+		},
+		{
+			"collection": "places",
+			"slug": "la-mer-cabrera-de-mar-maresme-barcelona",
+			"destination": "escapades-maresme"
+		},
+		{
+			"collection": "places",
+			"slug": "glamping-camping-del-mar-malgrat-de-mar",
+			"destination": "escapades-maresme"
+		},
+		{
+			"collection": "places",
+			"slug": "cabanes-dosrius",
+			"destination": "escapades-maresme"
+		},
+		{
+			"collection": "places",
+			"slug": "aqua-hotel-silhouette-and-spa-adults-only",
+			"destination": "escapades-maresme"
+		},
+		{
+			"collection": "activities",
+			"slug": "ermita-mare-de-deu-de-la-roca-mont-roig",
+			"destination": "escapades-costa-daurada"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-mas-mariassa",
+			"destination": "escapades-costa-daurada"
+		},
+		{
+			"collection": "places",
+			"slug": "iglus-de-les-estrelles-a-prades",
+			"destination": "escapades-costa-daurada"
+		},
+		{
+			"collection": "activities",
+			"slug": "falset-priorat",
+			"destination": "escapades-costa-daurada"
+		},
+		{
+			"collection": "activities",
+			"slug": "ermita-sant-gregori-falset",
+			"destination": "escapades-costa-daurada"
+		},
+		{
+			"collection": "places",
+			"slug": "casa-rural-mas-ardevol",
+			"destination": "escapades-costa-daurada"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-hostal-sport-falset-priorat",
+			"destination": "escapades-costa-daurada"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-palauet-del-priorat",
+			"destination": "escapades-costa-daurada"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-trossos-del-priorat",
+			"destination": "escapades-costa-daurada"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-rural-cal-torner-adults-only",
+			"destination": "escapades-costa-daurada"
+		}
+	]
+}
