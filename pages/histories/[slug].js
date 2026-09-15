@@ -132,7 +132,9 @@ const StoryListing = ({ storyDetails, relatedStories }) => {
 			{/* Browser metas  */}
 			<GlobalMetas
 				title={storyDetails.metaTitle}
+				fallbackTitle={storyDetails.title}
 				description={storyDetails.metaDescription}
+				fallbackDescription={storyDetails.subtitle}
 				url={`https://escapadesenparella.cat/histories/${storyDetails.slug}`}
 				image={ogImg}
 				canonical={`https://escapadesenparella.cat/histories/${storyDetails.slug}`}
@@ -145,7 +147,7 @@ const StoryListing = ({ storyDetails, relatedStories }) => {
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Històries"
 				page2Url="https://escapadesenparella.cat/histories"
-				page3Title={storyDetails.metaTitle}
+				page3Title={storyDetails.title}
 				page3Url={`https://escapadesenparella.cat/histories/${storyDetails.slug}`}
 			/>
 			<BlogPostingRichSnippet

@@ -82,7 +82,9 @@ const ListView = ({ listDetails, relatedLists }) => {
 			{/* Browser metas  */}
 			<GlobalMetas
 				title={listDetails.metaTitle}
+				fallbackTitle={listDetails.title}
 				description={listDetails.metaDescription}
+				fallbackDescription={listDetails.subtitle}
 				url={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
 				image={ogImg}
 				canonical={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
@@ -94,7 +96,7 @@ const ListView = ({ listDetails, relatedLists }) => {
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Llistes"
 				page2Url="https://escapadesenparella.cat/llistes"
-				page3Title={listDetails.metaTitle}
+				page3Title={listDetails.title}
 				page3Url={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
 			/>
 			<BlogPostingRichSnippet

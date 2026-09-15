@@ -361,7 +361,9 @@ const GetawayListing = ({
 				{/* Browser metas  */}
 				<GlobalMetas
 					title={getawayDetails.metaTitle}
+					fallbackTitle={getawayDetails.title}
 					description={getawayDetails.metaDescription}
+					fallbackDescription={getawayDetails.subtitle}
 					url={canonicalUrl}
 					image={getawayDetails.cover}
 					canonical={canonicalUrl}
@@ -372,7 +374,7 @@ const GetawayListing = ({
 					page1Url="https://escapadesenparella.cat"
 					page2Title={categoryDetails.title}
 					page2Url={`https://escapadesenparella.cat/${categoryDetails.slug}`}
-					page3Title={getawayDetails.metaTitle}
+					page3Title={getawayDetails.title}
 					page3Url={canonicalUrl}
 				/>
 				{/* Una fitxa és un lloc, no un article: amb `TouristAttraction`

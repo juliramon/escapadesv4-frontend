@@ -98,7 +98,9 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 			{/* Browser metas  */}
 			<GlobalMetas
 				title={tripEntryDetails.metaTitle}
+				fallbackTitle={tripEntryDetails.title}
 				description={tripEntryDetails.metaDescription}
+				fallbackDescription={tripEntryDetails.subtitle}
 				url={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}/${tripEntryDetails.slug}`}
 				image={tripEntryDetails.cover}
 				canonical={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}/${tripEntryDetails.slug}`}
@@ -112,7 +114,7 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 				page2Url="https://escapadesenparella.cat/viatges"
 				page3Title={categoryDetails.title}
 				page3Url={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}`}
-				page4Title={tripEntryDetails.metaTitle}
+				page4Title={tripEntryDetails.title}
 				page4Url={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}/${tripEntryDetails.slug}`}
 			/>
 			<BlogPostingRichSnippet

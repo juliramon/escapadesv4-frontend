@@ -1,4 +1,9 @@
 import Head from "next/head";
+import {
+	SITE_NAME,
+	serpDescription,
+	serpTitle,
+} from "../../utils/pageMeta";
 
 /**
  * Imatge de reserva per a les xarxes. Les cinc destinacions sense foto i
@@ -20,7 +25,26 @@ const GlobalMetas = ({
 	// Les històries, les llistes i les entrades de viatge són articles; la
 	// resta de pàgines, el web en si.
 	type = "website",
+	// De reserva quan l'entrada no té meta títol o meta descripció escrits.
+	fallbackTitle,
+	fallbackDescription,
 }) => {
+	// El títol ja porta la marca quan hi cap: `serpTitle` decideix, i és el
+	// mateix que ensenya la previsualització de l'admin.
+	const documentTitle = serpTitle({
+		metaTitle: title,
+		title: fallbackTitle,
+	});
+	const metaDescription = serpDescription({
+		metaDescription: description,
+		subtitle: fallbackDescription,
+	});
+	// A les xarxes la marca ja va a `og:site_name`: repetir-la al títol se'n
+	// menja l'espai i el deixa tallat.
+	const shareTitle = serpTitle({
+		metaTitle: title,
+		title: fallbackTitle,
+	}).replace(` | ${SITE_NAME}`, "");
 	// Les portades de temporada són fitxers del mateix web ("/home-cover-…"):
 	// Facebook i Twitter necessiten la URL sencera per poder-les llegir.
 	const shareImage = (image || DEFAULT_IMAGE).startsWith("/")
@@ -28,10 +52,10 @@ const GlobalMetas = ({
 		: image || DEFAULT_IMAGE;
 	return (
 		<Head>
-			<title>{title} | Escapadesenparella.cat</title>
+			<title>{documentTitle}</title>
 			<link rel="icon" href="/favicon.ico" />
 			<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-			<meta name="description" content={description} />
+			<meta name="description" content={metaDescription} />
 			<meta
 				name="robots"
 				content={index == true ? "index, follow" : "noindex, nofollow"}
@@ -40,12 +64,9 @@ const GlobalMetas = ({
 				name="googlebot"
 				content={index == true ? "index, follow" : "noindex, nofollow"}
 			/>
-			<meta
-				property="og:title"
-				content={`${title} - Escapadesenparella.cat `}
-			/>
+			<meta property="og:title" content={shareTitle} />
 			<meta property="og:type" content={type} />
-			<meta property="og:description" content={description} />
+			<meta property="og:description" content={metaDescription} />
 			<meta property="og:image" content={shareImage} />
 			<meta property="og:image:width" content="1200" />
 			<meta property="og:image:heigth" content="630" />
@@ -57,11 +78,8 @@ const GlobalMetas = ({
 			<meta name="twitter:site" content="@escapaenparella" />
 			<meta name="twitter:creator" content="@escapaenparella" />
 			<meta name="twitter:domain" content="https://escapadesenparella.cat" />
-			<meta
-				name="twitter:title"
-				content={`${title} - Escapadesenparella.cat `}
-			/>
-			<meta name="twitter:description" content={description} />
+			<meta name="twitter:title" content={shareTitle} />
+			<meta name="twitter:description" content={metaDescription} />
 			<meta name="twitter:image" content={shareImage} />
 			<link rel="canonical" href={canonical} />
 			<link href={`https://escapadesenparella.cat`} rel="home" />
