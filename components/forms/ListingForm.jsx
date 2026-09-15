@@ -432,6 +432,7 @@ const ListingForm = ({ variant, mode = "create", initialData = null }) => {
 			organization_id: formData.organization || undefined,
 			metaTitle: formData.metaTitle,
 			metaDescription: formData.metaDescription,
+			seoScore: seo.score,
 			...(config.hasDuration ? { duration: formData.duration } : {}),
 			...(config.hasPlaceType ? { placeType: formData.placeType } : {}),
 			...(config.hasCharacteristics

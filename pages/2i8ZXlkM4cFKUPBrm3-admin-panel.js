@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import NavigationBar from "../components/global/NavigationBar";
 import ContentService from "../services/contentService";
-import { analyzeListingSeo } from "../utils/seo";
+import { seoLevel } from "../utils/seo";
 import UserContext from "../contexts/UserContext";
 import FetchingSpinner from "../components/global/FetchingSpinner";
 import ContentBox from "../components/dashboard/ContentBox";
@@ -32,12 +32,12 @@ const contentBoxProps = (item) => {
 	// activitats i els allotjaments, a `images[0]`.
 	const image = item.cover || (Array.isArray(item.images) ? item.images[0] : "");
 
-	// Els llistats d'activitats i allotjaments arriben retallats des de l'API i
-	// no porten les metadades. Es distingeix "no ve al llistat" (undefined) de
-	// "està buit" (""): en el primer cas no es pot puntuar res i val més dir-ho
-	// que ensenyar un zero que no vol dir el que sembla.
-	const hasSeoFields =
-		item.metaTitle !== undefined || item.metaDescription !== undefined;
+	// La puntuació és la que calcula el formulari en desar i que la fitxa
+	// guarda a `seoScore`: la mateixa que surt a la pestanya de SEO. Abans es
+	// recalculava aquí amb només les metadades, i com que el llistat no porta
+	// el cos de la fitxa, les dues xifres no quadraven mai. Si la fitxa no en
+	// té, no es pinta res en comptes d'una aproximació.
+	const hasSeoScore = typeof item.seoScore === "number";
 
 	return {
 		type: item.type,
@@ -47,15 +47,8 @@ const contentBoxProps = (item) => {
 		subtitle: item.subtitle,
 		publicationDate: item.createdAt,
 		slug: item.slug,
-		seo: hasSeoFields
-			? analyzeListingSeo({
-					title: item.title,
-					subtitle: item.subtitle,
-					metaTitle: item.metaTitle,
-					metaDescription: item.metaDescription,
-					slug: item.slug,
-					hasCover: Boolean(image),
-				})
+		seo: hasSeoScore
+			? { score: item.seoScore, level: seoLevel(item.seoScore) }
 			: null,
 	};
 };

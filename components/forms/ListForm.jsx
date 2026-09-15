@@ -251,6 +251,7 @@ const ListForm = ({ mode = "create", initialData = null }) => {
 						formData.metaDescription,
 						formData.slug,
 						description,
+						seo.score,
 					)
 				: await service.list(
 						formData.type,
@@ -261,6 +262,7 @@ const ListForm = ({ mode = "create", initialData = null }) => {
 						formData.metaDescription,
 						formData.slug,
 						description,
+						seo.score,
 					);
 
 			const failure = readValidationError(response);

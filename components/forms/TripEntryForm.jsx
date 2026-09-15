@@ -304,6 +304,7 @@ const TripEntryForm = ({ mode = "create", initialData = null }) => {
 						formData.metaTitle,
 						formData.metaDescription,
 						formData.trip,
+						seo.score,
 					)
 				: await service.tripEntry(
 						formData.trip,
@@ -316,6 +317,7 @@ const TripEntryForm = ({ mode = "create", initialData = null }) => {
 						description,
 						formData.metaTitle,
 						formData.metaDescription,
+						seo.score,
 					);
 
 			const failure = readValidationError(response);
