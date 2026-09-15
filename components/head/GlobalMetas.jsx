@@ -1,5 +1,13 @@
 import Head from "next/head";
 
+/**
+ * Imatge de reserva per a les xarxes. Les cinc destinacions sense foto i
+ * Sobre nosaltres es compartien sense cap imatge, i l'enllaç hi sortia com
+ * una ratlla de text.
+ */
+const DEFAULT_IMAGE =
+	"https://res.cloudinary.com/juligoodie/image/upload/f_auto,q_auto,w_1200,h_630,c_fill/v1662135572/branding/logo-escapades-en-parella_dzg44a.jpg";
+
 const GlobalMetas = ({
 	title,
 	description,
@@ -8,8 +16,16 @@ const GlobalMetas = ({
 	canonical,
 	index = true,
 	preload,
-	preconnect
+	preconnect,
+	// Les històries, les llistes i les entrades de viatge són articles; la
+	// resta de pàgines, el web en si.
+	type = "website",
 }) => {
+	// Les portades de temporada són fitxers del mateix web ("/home-cover-…"):
+	// Facebook i Twitter necessiten la URL sencera per poder-les llegir.
+	const shareImage = (image || DEFAULT_IMAGE).startsWith("/")
+		? `https://escapadesenparella.cat${image || DEFAULT_IMAGE}`
+		: image || DEFAULT_IMAGE;
 	return (
 		<Head>
 			<title>{title} | Escapadesenparella.cat</title>
@@ -28,9 +44,9 @@ const GlobalMetas = ({
 				property="og:title"
 				content={`${title} - Escapadesenparella.cat `}
 			/>
-			<meta property="og:type" content="website" />
+			<meta property="og:type" content={type} />
 			<meta property="og:description" content={description} />
-			<meta property="og:image" content={image} />
+			<meta property="og:image" content={shareImage} />
 			<meta property="og:image:width" content="1200" />
 			<meta property="og:image:heigth" content="630" />
 			<meta property="og:url" content={url} />
@@ -46,7 +62,7 @@ const GlobalMetas = ({
 				content={`${title} - Escapadesenparella.cat `}
 			/>
 			<meta name="twitter:description" content={description} />
-			<meta name="twitter:image" content={image} />
+			<meta name="twitter:image" content={shareImage} />
 			<link rel="canonical" href={canonical} />
 			<link href={`https://escapadesenparella.cat`} rel="home" />
 			<meta property="fb:pages" content="1725186064424579" />

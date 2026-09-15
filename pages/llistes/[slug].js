@@ -20,6 +20,7 @@ import AdBanner from "../../components/ads/AdBanner";
 import MobileAnchorAd from "../../components/ads/MobileAnchorAd";
 import RelatedListings from "../../components/listingpage/RelatedListings";
 import ContentParser from "../../utils/ContentParser";
+import ItemListRichSnippet from "../../components/richsnippets/ItemListRichSnippet";
 
 const ListView = ({ listDetails, relatedLists }) => {
 	const { user } = useContext(UserContext);
@@ -85,6 +86,7 @@ const ListView = ({ listDetails, relatedLists }) => {
 				url={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
 				image={ogImg}
 				canonical={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
+				type="article"
 			/>
 			{/* Rich snippets */}
 			<BreadcrumbRichSnippet
@@ -102,6 +104,12 @@ const ListView = ({ listDetails, relatedLists }) => {
 				author={listDetails.owner.fullName}
 				publicationDate={listDetails.createdAt}
 				modificationDate={listDetails.updatedAt}
+			/>
+			{/* Els elements de la llista, tal com estan escrits al text. */}
+			<ItemListRichSnippet
+				html={listDetails.description}
+				name={listDetails.title}
+				url={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
 			/>
 			<div className="listing-list">
 				<NavigationBar />

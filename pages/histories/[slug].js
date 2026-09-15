@@ -137,6 +137,7 @@ const StoryListing = ({ storyDetails, relatedStories }) => {
 				image={ogImg}
 				canonical={`https://escapadesenparella.cat/histories/${storyDetails.slug}`}
 				preconnect={"https://res.cloudinary.com/"}
+				type="article"
 			/>
 			{/* Rich snippets */}
 			<BreadcrumbRichSnippet

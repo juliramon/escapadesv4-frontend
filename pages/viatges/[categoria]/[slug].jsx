@@ -102,6 +102,7 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 				url={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}/${tripEntryDetails.slug}`}
 				image={tripEntryDetails.cover}
 				canonical={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}/${tripEntryDetails.slug}`}
+				type="article"
 			/>
 			{/* Rich snippets */}
 			<BreadcrumbRichSnippet
@@ -110,7 +111,7 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 				page2Title="Viatges"
 				page2Url="https://escapadesenparella.cat/viatges"
 				page3Title={categoryDetails.title}
-				page3Url={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}/${categoryDetails.slug}`}
+				page3Url={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}`}
 				page4Title={tripEntryDetails.metaTitle}
 				page4Url={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}/${tripEntryDetails.slug}`}
 			/>

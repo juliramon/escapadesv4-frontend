@@ -17,7 +17,7 @@ import { formatDateTimeToISODate } from "../../utils/helpers";
 import ShareBarModal from "../../components/social/ShareBarModal";
 import { Splide, SplideTrack, SplideSlide } from "@splidejs/react-splide";
 import AdBanner from "../../components/ads/AdBanner";
-import ArticleRichSnippet from "../../components/richsnippets/ArticleRichSnippet";
+import ListingRichSnippet from "../../components/richsnippets/ListingRichSnippet";
 import "@splidejs/react-splide/css/core";
 import BookingCard from "../../components/listingpage/BookingCard";
 import RelatedListings from "../../components/listingpage/RelatedListings";
@@ -375,13 +375,13 @@ const GetawayListing = ({
 					page3Title={getawayDetails.metaTitle}
 					page3Url={canonicalUrl}
 				/>
-				<ArticleRichSnippet
-					headline={getawayDetails.title}
-					summary={getawayDetails.subtitle}
-					image={getawayDetails.cover}
-					author={getawayDetails.owner.fullName}
-					publicationDate={getawayDetails.createdAt}
-					modificationDate={getawayDetails.updatedAt}
+				{/* Una fitxa és un lloc, no un article: amb `TouristAttraction`
+				    o `LodgingBusiness`, Google en pot llegir l'adreça, les
+				    coordenades, el telèfon i l'horari. */}
+				<ListingRichSnippet
+					listing={getawayDetails}
+					url={canonicalUrl}
+					image={cloudinaryImage(getawayDetails.cover, 1200, 630).src}
 				/>
 				<div id="listingPage">
 					<NavigationBar user={user} />
