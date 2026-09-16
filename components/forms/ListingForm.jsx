@@ -34,6 +34,7 @@ import useEditorRevision from "../../hooks/useEditorRevision";
 import useSeoKeyword from "../../hooks/useSeoKeyword";
 import { analyzeSeo, buildSlug } from "../../utils/seo";
 import { listingPath } from "../../utils/listingRoutes";
+import { revalidatePaths } from "../../utils/revalidate";
 import { readValidationError } from "../../utils/apiErrors";
 
 /**
@@ -485,6 +486,19 @@ const ListingForm = ({ variant, mode = "create", initialData = null }) => {
 			}
 
 			autosave.markSaved();
+			// Les pàgines públiques es refresquen ara mateix: sense això, el
+			// canvi triga fins a dos minuts a veure's.
+			const publicPath = listingPath({
+				slug: formData.slug,
+				type: config.type,
+				categories: formData.categories ? [formData.categories] : [],
+			});
+			revalidatePaths([
+				publicPath,
+				`/${publicPath.split("/")[1]}`,
+				config.type === "place" ? "/allotjaments" : "/activitats",
+				"/",
+			]);
 
 			// Les imatges ja són al servidor: no s'han de tornar a pujar al
 			// desat següent.

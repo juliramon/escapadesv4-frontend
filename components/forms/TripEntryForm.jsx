@@ -26,6 +26,7 @@ import {
 	createUploader,
 	uploadSingleFile,
 } from "../../utils/uploads";
+import { revalidatePaths } from "../../utils/revalidate";
 
 /**
  * Formulari d'entrades de viatge, per crear-ne una de nova o editar-ne una
@@ -328,6 +329,15 @@ const TripEntryForm = ({ mode = "create", initialData = null }) => {
 			}
 
 			autosave.markSaved();
+			// Vegeu ListingForm: el refresc immediat de les pàgines públiques.
+			// L'entrada penja del slug del seu viatge, que només es coneix
+			// quan s'edita una entrada que ja existeix.
+			const tripSlug = initialData?.trip?.slug;
+			revalidatePaths([
+				tripSlug ? `/viatges/${tripSlug}/${formData.slug}` : null,
+				tripSlug ? `/viatges/${tripSlug}` : null,
+				"/viatges",
+			]);
 
 			setFormData((previous) => ({
 				...previous,
