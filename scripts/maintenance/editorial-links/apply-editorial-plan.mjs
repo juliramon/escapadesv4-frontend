@@ -22,6 +22,11 @@
  * - `alt`: text alternatiu a les imatges del cos de les llistes que no en
  *   tenen, amb el títol de l'element (l'`<h2>` o `<h3>` anterior).
  * - `destinations`: afegeix la destinació a les fitxes que no la tenen.
+ * - `fields`: textos nous (metes, descripcions, textos de destinació i de
+ *   categoria) des d'un pla de contingut (`content-plan.json`). Cada entrada
+ *   només s'escriu si el camp és buit (`expectEmpty`) o si encara té
+ *   exactament el valor que tenia quan es va fer el pla (`expect`): si algú
+ *   l'ha editat des del panell, es deixa com està i es llista.
  *
  * Seguretat, igual que `internal-link-rel`:
  * - Només s'executa contra bases de dades el nom de les quals acaba en `-dev`,
@@ -52,7 +57,14 @@ const { EJSON } = BSON;
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
-const OPERATIONS = ["broken", "related", "links", "alt", "destinations"];
+const OPERATIONS = [
+	"broken",
+	"related",
+	"links",
+	"alt",
+	"destinations",
+	"fields",
+];
 const SITE_HOSTS = ["escapadesenparella.cat", "www.escapadesenparella.cat"];
 const DEV_SUFFIX = "-dev";
 const BACKEND_DIR_NAME = "escapadesv4-backend";
@@ -513,6 +525,24 @@ const addImageAlts = (html, list, notes) => {
 /* Pla                                                                      */
 /* ------------------------------------------------------------------------ */
 
+/** Un camp sense text visible: absent, buit o només etiquetes buides. */
+const isBlank = (value) =>
+	value === null ||
+	value === undefined ||
+	!String(value)
+		.replace(/<[^>]+>/g, "")
+		.replace(/&nbsp;/g, " ")
+		.trim();
+
+/** El text d'un camp, pla i escurçat, per revisar-lo al dry-run. */
+const preview = (value, max = 220) => {
+	const text = String(value ?? "")
+		.replace(/<[^>]+>/g, " ")
+		.replace(/\s+/g, " ")
+		.trim();
+	return text.length > max ? `${text.slice(0, max)}…` : text;
+};
+
 const sameValue = (a, b) =>
 	EJSON.stringify(a ?? null, { relaxed: false }) ===
 	EJSON.stringify(b ?? null, { relaxed: false });
@@ -599,6 +629,8 @@ const collectPlan = async (db, plan, only) => {
 		linksMissing: [],
 		alts: 0,
 		destinations: 0,
+		fields: 0,
+		fieldsSkipped: [],
 		notFound: [],
 		errors: [],
 	};
@@ -718,6 +750,30 @@ const collectPlan = async (db, plan, only) => {
 		}
 	}
 
+	if (only.includes("fields")) {
+		for (const item of plan.fields || []) {
+			await forEachDoc(item.collection, item.slug, (doc) => {
+				const current = state.current(item.collection, doc, item.field);
+				if (sameValue(current, item.value)) return;
+				const expected = item.expectEmpty
+					? isBlank(current)
+					: sameValue(current ?? "", item.expect ?? "");
+				if (!expected) {
+					stats.fieldsSkipped.push(`${item.collection} ${item.slug} · ${item.field}`);
+					state.note(
+						item.collection,
+						doc,
+						`[fields] ${item.field}: ha canviat des que es va fer el pla; no es toca`,
+					);
+					return;
+				}
+				state.set(item.collection, doc, item.field, item.value);
+				state.note(item.collection, doc, `[fields] ${item.field} → «${preview(item.value)}»`);
+				stats.fields++;
+			});
+		}
+	}
+
 	return { entries: state.changed(), stats };
 };
 
@@ -739,6 +795,10 @@ const printPlan = ({ entries, stats }) => {
 	);
 	console.log(`  Imatges amb alt nou: ${stats.alts}`);
 	console.log(`  Destinacions afegides: ${stats.destinations}`);
+	console.log(
+		`  Textos nous: ${stats.fields} · ${stats.fieldsSkipped.length} no es toquen perquè han canviat`,
+	);
+	stats.fieldsSkipped.forEach((text) => console.log(`    ${text}`));
 	if (stats.linksMissing.length) {
 		console.log("\n  Enllaços no trobats (cal fer-los a mà):");
 		stats.linksMissing.forEach((text) => console.log(`    ${text}`));

@@ -1,0 +1,237 @@
+{
+	"generatedAt": "2026-09-15T21:44:45.852Z",
+	"note": "Esborranys per revisar abans d'aplicar. Delta de l'Ebre pendent de decidir l'abast.",
+	"fields": [
+		{
+			"collection": "places",
+			"slug": "la-garriga-de-castelladral",
+			"field": "metaTitle",
+			"value": "La Garriga de Castelladral: masia amb vistes a Montserrat",
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "set-terres-la-villa-de-llivia-adults-only",
+			"field": "metaTitle",
+			"value": "Set Terres, hotel adults only al centre de Llívia",
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "set-terres-la-villa-de-llivia-adults-only",
+			"field": "metaDescription",
+			"value": "Hotel adults only al centre de Llívia, amb parets de pedra, decoració moderna i terrassa. Una escapada romàntica a la Cerdanya.",
+			"expect": "Set Terres - La Villa de Llívia - Adults only, una escapada que us encantarà! Descobreix Set Terres - La Villa de Llívia - Adults only amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "pont-medieval-llucanes-sant-marti-albars-osona",
+			"field": "metaDescription",
+			"value": "Un pont medieval de 25 metres sobre la Gavarresa, a l'antic camí ral de Sant Martí d'Albars a Perafita. Un racó amagat del Lluçanès.",
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-lluca-llucanes-osona",
+			"field": "metaDescription",
+			"value": "Les ruïnes del Castell de Lluçà, dalt d'un turó a 896 metres, amb unes vistes espectaculars sobre el Lluçanès. Una escapada cultural curta i tranquil·la.",
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-hostal-sport-falset-priorat",
+			"field": "metaDescription",
+			"value": "Hotel amb encant a Falset, al cor del Priorat, fundat el 1923 i portat per la quarta generació de la família. Restaurant propi i terra de vins.",
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "apartaments-ca-estamenya-perafita-llucanes",
+			"field": "metaDescription",
+			"value": "Apartaments rurals a Perafita, al cor del Lluçanès, amb cuina, llar de foc i mascotes admeses. Ideals per a una escapada tranquil·la en parella.",
+			"expectEmpty": true
+		},
+		{
+			"collection": "stories",
+			"slug": "escapada-moli-siurana-castell-montgri-aiguamolls-emporda-ruines-empuries",
+			"field": "metaTitle",
+			"value": "El Molí de Siurana, el Montgrí, els Aiguamolls i Empúries",
+			"expect": "Escapada a El Molí de Siurana: Visitem el Castell de Montgrí, els Aiguamolls de l'Empordà i les Ruïnes d'Empúries"
+		},
+		{
+			"collection": "stories",
+			"slug": "escapada-moli-siurana-castell-montgri-aiguamolls-emporda-ruines-empuries",
+			"field": "metaDescription",
+			"value": "Un cap de setmana a l'Empordà: dormim al Molí de Siurana, pugem al Castell de Montgrí, passegem pels Aiguamolls i visitem les Ruïnes d'Empúries.",
+			"expectEmpty": true
+		},
+		{
+			"collection": "stories",
+			"slug": "mercat-escapades-catalunya-barcelona",
+			"field": "metaDescription",
+			"value": "El Mercat d'escapades a Catalunya, al Passeig de Lluís Companys de Barcelona: propostes de turisme rural, natura i aventura d'arreu del país.",
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "resturant-el-celler-argentona-maresme",
+			"field": "description",
+			"value": "<p>El Celler d'Argentona és un dels restaurants que cal tenir apuntats si feu una escapada al Maresme. És al carrer Bernat de Riudemeia, al centre de la vila d'Argentona, i el preu mitjà ronda els 45 € per persona.</p><h2>Què fer a prop</h2><p>Argentona és a tocar de Cabrera de Mar, on podeu pujar al <a href=\"https://escapadesenparella.cat/escapades-culturals/castell-burriac-medieval-cabrils-maresme-catalunya\">Castell de Burriac</a> abans de dinar, o fer la sobretaula a <a href=\"https://escapadesenparella.cat/escapades-gastronomiques/cals-frares\">Cals Frares</a>, un restaurant dins d'una masia del segle XIII. Si voleu allargar l'escapada, l'<a href=\"https://escapadesenparella.cat/escapades-romantiques/la-mer-cabrera-de-mar-maresme-barcelona\">hotel boutique La Mer</a> és a pocs minuts.</p><p>Us recomanem reservar abans d'anar-hi, sobretot en cap de setmana.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "restaurant-pins-mar-sant-andreu-llavaneres",
+			"field": "description",
+			"value": "<p>El Restaurant Pins Mar és a primera línia del passeig marítim de Sant Andreu de Llavaneres, amb el Mediterrani davant de la taula. Va obrir el 1955, quan l'Elías Aceña va comprar una guingueta de platja i la va convertir en restaurant, i avui el porten els seus fills, en Jaume i en Carles Aceña.</p><h2>Què hi menjareu</h2><p>Cuina de mercat i tradicional, feta amb producte de temporada. Els pèsols de Llavaneres són una de les especialitats de la casa. El preu mitjà ronda els 80 € per persona.</p><h2>La nostra visita</h2><p>Hi vam anar el dia de les Santes i ho expliquem a la història <a href=\"https://escapadesenparella.cat/histories/restaurant-pins-mar-sant-andreu-llavaneres\">Restaurant Pins Mar, cuina de mercat amb vistes al mar</a>.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "cals-frares",
+			"field": "description",
+			"value": "<p>Cals Frares és un restaurant situat al veïnat de Santa Elena d'Agell, a Cabrera de Mar. Ocupa una masia del segle XIII amb elements renaixentistes, barrocs i neoclàssics, i per això diem que és un restaurant gairebé museu. El preu mitjà ronda els 20 € per persona.</p><h2>Per què us agradarà</h2><ul><li>Menjar dins d'una masia amb més de set segles d'història.</li><li>Els animals de la finca: faisans, cavalls, cabres i ases.</li><li>Un preu molt ajustat per a l'entorn.</li></ul><h2>Què fer a prop</h2><p>Des de Cabrera de Mar podeu pujar al <a href=\"https://escapadesenparella.cat/escapades-culturals/castell-burriac-medieval-cabrils-maresme-catalunya\">Castell de Burriac</a> abans de dinar. Llegiu com va anar la nostra <a href=\"https://escapadesenparella.cat/histories/cals-frares-restaurant-santa-elena-agell\">escapada a Cals Frares</a>.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "vol-en-globus-vol-de-coloms-garrotxa",
+			"field": "description",
+			"value": "<p>Vol de Coloms organitza vols en globus aerostàtic des de Santa Pau, al cor del Parc Natural de la Zona Volcànica de la Garrotxa i a pocs minuts de la Fageda d'en Jordà. Des de l'aire es veuen els volcans, els boscos de fulla caduca i els pobles de la comarca. El preu ronda els 170 € per persona.</p><h2>Com és el vol</h2><p>Els vols surten a primera hora del matí, quan l'aire és més estable: prepareu-vos per matinar. Nosaltres hi vam anar a finals d'octubre, amb els colors de la tardor, i ens vam llevar a les 4:45 h.</p><h2>La nostra experiència</h2><p>Ho expliquem tot a la història <a href=\"https://escapadesenparella.cat/histories/vol-en-globus-vol-de-coloms-garrotxa\">Vol en globus amb Vol de Coloms</a>, on també trobareu com vam completar el cap de setmana a la Garrotxa.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-costa-brava",
+			"field": "subtitle",
+			"value": "Què visitar a la Costa Brava, on dormir i què fer en una escapada en parella.",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-costa-brava",
+			"field": "seoTextHeader",
+			"value": "<p>Si esteu pensant en una <strong>escapada a la Costa Brava</strong> en parella, aquí trobareu les cales, els pobles i els allotjaments amb encant que hem visitat, de Cadaqués a Lloret de Mar.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-costa-brava",
+			"field": "reviewText",
+			"value": "<h2>Benvinguts a la Costa Brava, cales i pobles de pedra</h2><p>Penya-segats que cauen al mar, cales d'aigua transparent entre pins, pobles medievals a l'interior de l'Empordà i una cuina marinera que s'entén millor sense presses. La Costa Brava és molt més que platja a l'estiu: a la primavera i a la tardor és quan es gaudeix de veritat.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-costa-brava",
+			"field": "seoText",
+			"value": "<h2>Què fer en una escapada a la Costa Brava</h2><p>Al nord, el <a href=\"https://escapadesenparella.cat/escapades-romantiques/parc-natural-cap-de-creus\">Parc Natural del Cap de Creus</a> és el paisatge més salvatge de la costa, i una <a href=\"https://escapadesenparella.cat/escapades-aventura/ruta-kayak-cap-de-creus\">ruta amb kayak pel Cap de Creus</a> és la millor manera de veure'l des de l'aigua. Més al sud hi ha les <a href=\"https://escapadesenparella.cat/escapades-culturals/ruines-empuries\">Ruïnes d'Empúries</a>, els <a href=\"https://escapadesenparella.cat/escapades-culturals/aiguamolls-emporda\">Aiguamolls de l'Empordà</a> per observar ocells i la pujada al <a href=\"https://escapadesenparella.cat/escapades-culturals/castell-montgri-torroella-montgri-baix-emporda\">Castell de Montgrí</a>, amb tot el Baix Empordà als peus.</p><p>Per als dies de mar, cales com la <a href=\"https://escapadesenparella.cat/escapades-de-relax/cala-estreta-palamos\">Cala Estreta</a>, <a href=\"https://escapadesenparella.cat/escapades-romantiques/cala-sa-tuna-seixugador\">Sa Tuna i s'Eixugador</a> o <a href=\"https://escapadesenparella.cat/escapades-aventura/cala-el-golfet-begur\">El Golfet</a>; per als més atrevits, la <a href=\"https://escapadesenparella.cat/escapades-aventura/via-ferrada-cala-del-moli-costa-brava\">via ferrada de la Cala del Molí</a>, a Sant Feliu de Guíxols. I per acabar el dia, un passeig pels <a href=\"https://escapadesenparella.cat/escapades-culturals/jardins-cap-roig-calella-palafrugell-costa-brava\">Jardins de Cap Roig</a>, a Calella de Palafrugell.</p><h3>On dormir a la Costa Brava</h3><p>Si busqueu tranquil·litat, els hotels adults only de Begur i Cadaqués, com el <a href=\"https://escapadesenparella.cat/escapades-romantiques/hotel-cap-sa-sal-luxury-adults-only\">Cap Sa Sal</a> o el <a href=\"https://escapadesenparella.cat/escapades-romantiques/tramuntana-hotel-adults-only\">Tramuntana Hotel</a>, i les masies de l'interior, com el <a href=\"https://escapadesenparella.cat/escapades-romantiques/hotel-mas-rabiol-eco-hotel\">Mas Rabiol</a> a Peratallada, són una aposta segura. A l'Estartit, l'<a href=\"https://escapadesenparella.cat/escapades-romantiques/argonavis-226\">apartament Argonavis 226</a> té les Illes Medes davant de casa.</p><h3>Les nostres escapades a la Costa Brava</h3><p>Llegiu com vam viure el <a href=\"https://escapadesenparella.cat/histories/kayak-parc-natural-cap-de-creus-port-lligat\">kayak fins a Portlligat</a>, la <a href=\"https://escapadesenparella.cat/histories/visita-estartit-illes-medes\">visita a l'Estartit i les Illes Medes</a> o un <a href=\"https://escapadesenparella.cat/histories/visita-calella-palafrugell\">dia a Calella de Palafrugell</a>.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-maresme",
+			"field": "subtitle",
+			"value": "Què visitar al Maresme, on dormir i on menjar a tocar de Barcelona.",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-maresme",
+			"field": "seoTextHeader",
+			"value": "<p>Una <strong>escapada al Maresme</strong> és la manera més ràpida de canviar d'aires sense allunyar-se de Barcelona: castells, masies, cuina de mercat i mar, a menys d'una hora de casa.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-maresme",
+			"field": "reviewText",
+			"value": "<h2>Benvinguts al Maresme, mar i muntanya a tocar de Barcelona</h2><p>Entre el Mediterrani i les serralades del Corredor i el Montnegre, el Maresme amaga masies centenàries, pobles d'estiueig i camins que pugen a castells medievals. És la comarca de les escapades de mig dia i dels caps de setmana que no demanen gaire carretera.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-maresme",
+			"field": "seoText",
+			"value": "<h2>Què fer en una escapada al Maresme</h2><p>La pujada al <a href=\"https://escapadesenparella.cat/escapades-culturals/castell-burriac-medieval-cabrils-maresme-catalunya\">Castell de Burriac</a>, a Cabrera de Mar, és la ruta clàssica de la comarca, amb vistes sobre tota la costa. Si voleu una altra manera de moure-us, <a href=\"https://escapadesenparella.cat/escapades-aventura/comarca-aventura-rutes-segway\">Comarca Aventura</a> organitza rutes amb segway per Arenys de Munt.</p><h3>On menjar al Maresme</h3><p>El Maresme és terra de pèsols i de cuina de mercat. El <a href=\"https://escapadesenparella.cat/escapades-gastronomiques/restaurant-pins-mar-sant-andreu-llavaneres\">Restaurant Pins Mar</a>, a primera línia a Sant Andreu de Llavaneres, és a mans de la mateixa família des del 1955; <a href=\"https://escapadesenparella.cat/escapades-gastronomiques/cals-frares\">Cals Frares</a> és un restaurant dins d'una masia del segle XIII; i a Argentona hi ha <a href=\"https://escapadesenparella.cat/escapades-gastronomiques/resturant-el-celler-argentona-maresme\">El Celler d'Argentona</a>.</p><h3>On dormir al Maresme</h3><p>L'<a href=\"https://escapadesenparella.cat/escapades-romantiques/la-mer-cabrera-de-mar-maresme-barcelona\">hotel boutique La Mer</a> ocupa una masia del segle XVI a Cabrera de Mar; a Dosrius, les <a href=\"https://escapadesenparella.cat/escapades-romantiques/cabanes-dosrius\">Cabanes Dosrius</a> són cabanes als arbres; i a Malgrat de Mar hi ha el <a href=\"https://escapadesenparella.cat/escapades-de-relax/glamping-camping-del-mar-malgrat-de-mar\">glamping del Càmping del Mar</a>, a primera línia, i l'<a href=\"https://escapadesenparella.cat/escapades-de-relax/aqua-hotel-silhouette-and-spa-adults-only\">Aqua Hotel Silhouette & Spa</a>, només per a adults.</p><p>La nostra <a href=\"https://escapadesenparella.cat/histories/la-mer-cabrera-de-mar-maresme-escapada-romantica\">escapada a La Mer</a> ho explica de primera mà.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-costa-daurada",
+			"field": "subtitle",
+			"value": "Què visitar a la Costa Daurada i al Priorat, on dormir i què fer en parella.",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-costa-daurada",
+			"field": "seoTextHeader",
+			"value": "<p>Una <strong>escapada a la Costa Daurada</strong> no s'acaba a la platja: a mitja hora de la costa hi ha el Priorat, amb pobles de pedra, ermites enfilades a la roca i alguns dels vins més coneguts del país.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-costa-daurada",
+			"field": "reviewText",
+			"value": "<h2>Benvinguts a la Costa Daurada, del mar a les vinyes</h2><p>Platges llargues de sorra fina al litoral i, terra endins, les serres de Prades i del Montsant i els costers de vinya del Priorat. És una destinació per combinar mar i interior en una mateixa escapada, i per anar-hi fora de temporada.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-costa-daurada",
+			"field": "seoText",
+			"value": "<h2>Què fer en una escapada a la Costa Daurada</h2><p>A Mont-roig del Camp, l'<a href=\"https://escapadesenparella.cat/escapades-culturals/ermita-mare-de-deu-de-la-roca-mont-roig\">Ermita de la Mare de Déu de la Roca</a> s'enfila dalt d'una roca amb vistes fins al mar. Terra endins, <a href=\"https://escapadesenparella.cat/escapades-culturals/falset-priorat\">Falset</a> és la porta d'entrada al Priorat, i molt a prop del poble hi ha l'<a href=\"https://escapadesenparella.cat/escapades-culturals/ermita-sant-gregori-falset\">Ermita de Sant Gregori</a>.</p><h3>On dormir a la Costa Daurada i al Priorat</h3><p>Per dormir envoltats de vinyes: l'<a href=\"https://escapadesenparella.cat/escapades-romantiques/hotel-trossos-del-priorat\">Hotel Trossos del Priorat</a> a Gratallops, l'<a href=\"https://escapadesenparella.cat/escapades-romantiques/hotel-palauet-del-priorat\">Hotel Palauet del Priorat</a> a Cornudella de Montsant, <a href=\"https://escapadesenparella.cat/escapades-romantiques/hotel-rural-cal-torner-adults-only\">Cal Torner</a> als Guiamets o, a Falset mateix, l'<a href=\"https://escapadesenparella.cat/escapades-romantiques/hotel-hostal-sport-falset-priorat\">Hotel Hostal Sport</a>, obert des del 1923, i <a href=\"https://escapadesenparella.cat/escapades-de-relax/casa-rural-mas-ardevol\">Mas Ardevol</a>. Si voleu una nit diferent, els <a href=\"https://escapadesenparella.cat/escapades-romantiques/iglus-de-les-estrelles-a-prades\">Iglús de les Estrelles</a>, a Prades, tenen el sostre de vidre, i a Pratdip el <a href=\"https://escapadesenparella.cat/escapades-romantiques/hotel-mas-mariassa\">Mas Mariassa</a> és un hotel gastronòmic entre muntanyes.</p><p>Llegiu la nostra <a href=\"https://escapadesenparella.cat/histories/miami-platja-sunrisehomes-mont-roig-del-camp\">escapada a Miami Platja i Mont-roig del Camp</a>.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-andorra",
+			"field": "subtitle",
+			"value": "Què fer a Andorra en parella, a l'hivern i a l'estiu.",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-andorra",
+			"field": "seoTextHeader",
+			"value": "<p>Una <strong>escapada a Andorra</strong> és molt més que esquí i compres: rutes amb trineu i moto de neu a l'hivern, miradors d'alta muntanya a l'estiu i nits sota les estrelles.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-andorra",
+			"field": "reviewText",
+			"value": "<h2>Benvinguts a Andorra, alta muntanya a tres hores de Barcelona</h2><p>Valls estretes, cims de gairebé tres mil metres i un país petit que es recorre en un matí. Andorra té dues cares: la de l'hivern, amb neu durant mesos, i la de l'estiu, amb llacs i miradors on la calor no arriba.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-andorra",
+			"field": "seoText",
+			"value": "<h2>Què fer en una escapada a Andorra</h2><p>A l'hivern, dues experiències per viure la neu d'una altra manera: el <a href=\"https://escapadesenparella.cat/escapades-aventura/trineu-gossos-a-andorra\">trineu amb gossos</a>, a Encamp, i una <a href=\"https://escapadesenparella.cat/escapades-aventura/moto-de-neu-andorra-ruta-grau-roig\">ruta amb moto de neu per Grau Roig</a>. A l'estiu, el <a href=\"https://escapadesenparella.cat/escapades-aventura/mirador-solar-tristaina-andorra\">Mirador Solar de Tristaina</a>, a Ordino, és un balcó sobre els llacs de Tristaina.</p><h3>On dormir a Andorra</h3><p>Per a una nit diferent, l'<a href=\"https://escapadesenparella.cat/escapades-romantiques/airstream-experience-dormir-estrelles-varllnord\">Airstream Experience</a>, a Ordino, us deixa dormir en una caravana clàssica sota les estrelles.</p><p>Llegiu com vam viure el <a href=\"https://escapadesenparella.cat/histories/ruta-trineu-gossos-andorra\">trineu amb gossos</a> i la <a href=\"https://escapadesenparella.cat/histories/ruta-moto-neu-andorra-grau-roig\">ruta amb moto de neu</a>.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "categories",
+			"slug": "campings",
+			"field": "seoText",
+			"value": "<h2>Càmpings amb encant a Catalunya per a una escapada en parella</h2><p>Dormir en un càmping ja no vol dir només tenda i sac. Molts <strong>càmpings de Catalunya</strong> tenen bungalous, glamping i cabanes amb totes les comoditats, en llocs on cap hotel pot arribar: al peu del Pedraforca, a primera línia de mar o al mig dels Pirineus.</p><h3>Càmpings de muntanya</h3><p>El <a href=\"https://escapadesenparella.cat/escapades-aventura/camping-repos-del-pedraforca-saldes\">Càmping Repòs del Pedraforca</a>, a Saldes, és el punt de partida ideal per pujar al <a href=\"https://escapadesenparella.cat/escapades-aventura/pedraforca-tartera-pollego-superior\">Pedraforca per la tartera</a>. Ho expliquem a la història <a href=\"https://escapadesenparella.cat/histories/camping-repos-pedraforca-saldes\">Així és el Càmping Repòs del Pedraforca</a>.</p><h3>Càmpings a prop del mar</h3><p>A Malgrat de Mar, el <a href=\"https://escapadesenparella.cat/escapades-de-relax/glamping-camping-del-mar-malgrat-de-mar\">glamping del Càmping del Mar</a> és a primera línia de platja, i al Baix Empordà el <a href=\"https://escapadesenparella.cat/escapades-aventura/camping-mas-patoxas-pals-baix-emporda\">Càmping Mas Patoxas</a> és a tocar de Pals i de les platges de la Costa Brava.</p><h3>Què cal tenir en compte</h3><p>Reserveu amb temps a l'estiu i als ponts: els bungalous i les parcel·les amb millors vistes són els primers que s'omplen. Fora de temporada, molts càmpings de muntanya són l'opció més tranquil·la i econòmica per a un cap de setmana.</p><p>Si encara no us decidiu, a la llista dels <a href=\"https://escapadesenparella.cat/llistes/millors-campings-catalunya\">millors càmpings de Catalunya</a> n'hem triat uns quants per a cada tipus d'escapada.</p>",
+			"expect": "<p>Descobreix els millors càmpings amb encant a Catalunya, ideals per a una escapada en parella</p>"
+		},
+		{
+			"collection": "categories",
+			"slug": "escapades-de-relax",
+			"field": "seoText",
+			"value": "<h2>Escapades de relax a Catalunya</h2><p>Una <strong>escapada de relax</strong> no demana gaire: un lloc tranquil, bon menjar i temps per no fer res. A Catalunya n'hi ha per a tots els gustos, des d'hotels amb spa a la costa fins a masies perdudes a la muntanya.</p><h3>Hotels per desconnectar</h3><p>L'<a href=\"https://escapadesenparella.cat/escapades-de-relax/hotel-terradets-cellers-lleida\">Hotel Terradets</a>, a Cellers, és un dels nostres llocs preferits per baixar el ritme al Pallars Jussà; ho expliquem a l'<a href=\"https://escapadesenparella.cat/histories/escapada-hotel-terradets-pallars-jussa\">escapada a l'Hotel Terradets</a>. A la costa, el <a href=\"https://escapadesenparella.cat/escapades-de-relax/glamping-camping-del-mar-malgrat-de-mar\">glamping del Càmping del Mar</a> us posa el mar a tocar de la tenda.</p><h3>Relax a l'aire lliure</h3><p>Les <a href=\"https://escapadesenparella.cat/escapades-de-relax/basses-de-coll-de-nargo\">Basses de Coll de Nargó</a>, a l'Alt Urgell, són ideals per a un bany a la muntanya; la <a href=\"https://escapadesenparella.cat/escapades-de-relax/cala-estreta-palamos\">Cala Estreta</a>, a Palamós, és una de les cales més tranquil·les de la Costa Brava; i l'<a href=\"https://escapadesenparella.cat/escapades-de-relax/arboretum-masjoan-espinelves\">Arboretum Masjoan</a>, a Espinelves, és un bosc per passejar sense presses.</p>",
+			"expect": "<p>Esteu buscant una <strong>escapada relaxant</strong> a Catalunya? No busqueu més! Catalunya es casa de platges precioses, muntanyes impressionants i poblets encantadors. </p><p>Ja sigui que vulgueu descansar a les platges de sorra del Mediterrani o fer una caminada pel Pirineu, Catalunya té una escapada relax per a tothom. </p><p>Des de la ciutat bulliciosa de Barcelona fins als pobles pacífics de la Costa Brava, hi ha moltes opcions per a una escapada relaxant. Així que per què esperar? Feu les maletes i gaudiu de la vostra propera escapada relax que mai oblidareu!</p>"
+		},
+		{
+			"collection": "categories",
+			"slug": "escapades-hivern",
+			"field": "seoText",
+			"value": "<h2>Escapades d'hivern a Catalunya</h2><p>L'hivern és la temporada de la neu, de les llars de foc i dels pobles de muntanya sense aglomeracions. Una <strong>escapada d'hivern</strong> pot ser un dia d'esquí, però també una ruta amb raquetes, un trineu amb gossos o un cap de setmana en una casa rural amb la neu a la finestra.</p><h3>Raquetes de neu</h3><p>Les raquetes són la manera més senzilla de caminar per la neu sense saber esquiar. Hem fet rutes als <a href=\"https://escapadesenparella.cat/histories/escapada-estanys-de-la-pera-raquetes-de-neu-cerdanya\">Estanys de la Pera</a>, al <a href=\"https://escapadesenparella.cat/histories/puigpedros-raquetes-neu-malniu\">Puigpedrós des de Malniu</a> i a <a href=\"https://escapadesenparella.cat/escapades-aventura/raquetes-neu-sant-joan-de-lerm\">Sant Joan de l'Erm</a>, a l'Alt Urgell.</p><h3>Neu i adrenalina a Andorra</h3><p>A Andorra hi ha el <a href=\"https://escapadesenparella.cat/escapades-aventura/trineu-gossos-a-andorra\">trineu amb gossos</a> d'Encamp i la <a href=\"https://escapadesenparella.cat/escapades-aventura/moto-de-neu-andorra-ruta-grau-roig\">ruta amb moto de neu per Grau Roig</a>, dues maneres de viure la neu d'una altra manera.</p><h3>Abans de sortir</h3><p>A l'hivern els dies són curts i a la muntanya el temps canvia de pressa. Comproveu l'estat de les carreteres i la previsió abans de sortir, i porteu cadenes al cotxe.</p>",
+			"expect": "<p>Esteu buscant l'<strong>escapada d'hivern</strong> perfecta a Catalunya? No cerqueu més! A Catalunya hi trobem una varietat d'activitats d'hivern i atraccions inacabable. Des de l'esquí al Pirineu fins a sopars al costat de la llar de foc a poblets encantadors, hi ha escapades d'hivern per a tothom a Catalunya. </p><p>La ciutat bulliciosa de Barcelona ofereix una barreja d'experiències culturals i festivitats d'hivern, mentre que els pobles pacífics de la Costa Brava proporcionen un ambient més relaxat. </p><p>Així que per què esperar? Planegeu la vostra propera escapada d'hivern a Catalunya i experimenteu tot Catalunya té per oferir!</p>"
+		}
+	]
+}
