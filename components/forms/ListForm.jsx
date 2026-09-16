@@ -24,6 +24,7 @@ import {
 	createUploader,
 	uploadSingleFile,
 } from "../../utils/uploads";
+import { revalidatePaths } from "../../utils/revalidate";
 
 /**
  * Formulari de llistes, per crear-ne una de nova o editar-ne una d'existent.
@@ -273,6 +274,8 @@ const ListForm = ({ mode = "create", initialData = null }) => {
 			}
 
 			autosave.markSaved();
+			// Vegeu ListingForm: el refresc immediat de les pàgines públiques.
+			revalidatePaths([`/llistes/${formData.slug}`, "/llistes", "/"]);
 
 			setFormData((previous) => ({
 				...previous,

@@ -26,6 +26,7 @@ import {
 	createUploader,
 	uploadSingleFile,
 } from "../../utils/uploads";
+import { revalidatePaths } from "../../utils/revalidate";
 
 /**
  * Formulari d'històries, per crear-ne una de nova o editar-ne una d'existent.
@@ -293,6 +294,8 @@ const StoryForm = ({ mode = "create", initialData = null }) => {
 			}
 
 			autosave.markSaved();
+			// Vegeu ListingForm: el refresc immediat de les pàgines públiques.
+			revalidatePaths([`/histories/${formData.slug}`, "/histories", "/"]);
 
 			// La portada ja és al servidor: no s'ha de tornar a pujar al
 			// desat següent.
