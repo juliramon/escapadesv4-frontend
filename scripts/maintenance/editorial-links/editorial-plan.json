@@ -1,5 +1,5 @@
 {
-	"generatedAt": "2026-09-15T21:33:45.026Z",
+	"generatedAt": "2026-09-16T20:39:54.689Z",
 	"source": "API pública de producció, 15/09/2026",
 	"relatedStory": [
 		{
@@ -1235,6 +1235,41 @@
 			"collection": "places",
 			"slug": "hotel-rural-cal-torner-adults-only",
 			"destination": "escapades-costa-daurada"
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-miravet-ribera-ebre-tarragona",
+			"destination": "escapades-delta-de-lebre"
+		},
+		{
+			"collection": "activities",
+			"slug": "miravet-ribera-ebre-tarragona",
+			"destination": "escapades-delta-de-lebre"
+		},
+		{
+			"collection": "activities",
+			"slug": "les-coves-meravelles-benifallet",
+			"destination": "escapades-delta-de-lebre"
+		},
+		{
+			"collection": "activities",
+			"slug": "pintures-rupestres-de-cabrafeixet",
+			"destination": "escapades-delta-de-lebre"
+		},
+		{
+			"collection": "activities",
+			"slug": "mirador-mont-caro-massis-ports",
+			"destination": "escapades-delta-de-lebre"
+		},
+		{
+			"collection": "places",
+			"slug": "refugi-font-farrera-parc-natural-dels-ports",
+			"destination": "escapades-delta-de-lebre"
+		},
+		{
+			"collection": "places",
+			"slug": "la-llar-del-mas-mas-de-barberans-turisme-rural",
+			"destination": "escapades-delta-de-lebre"
 		}
 	]
 }
