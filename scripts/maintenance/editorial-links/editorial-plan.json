@@ -1,5 +1,5 @@
 {
-	"generatedAt": "2026-09-16T21:02:19.496Z",
+	"generatedAt": "2026-09-16T21:15:26.608Z",
 	"source": "API pública de producció, 15/09/2026",
 	"relatedStory": [
 		{
@@ -1134,6 +1134,11 @@
 			"destination": "escapades-costa-brava"
 		},
 		{
+			"collection": "activities",
+			"slug": "aiguamolls-baix-emporda-estartit",
+			"destination": "escapades-costa-brava"
+		},
+		{
 			"collection": "places",
 			"slug": "hotel-mas-tapiolas-suits-natura",
 			"destination": "escapades-costa-brava"
@@ -1272,6 +1277,46 @@
 			"collection": "places",
 			"slug": "la-llar-del-mas-mas-de-barberans-turisme-rural",
 			"destination": "escapades-delta-de-lebre"
+		},
+		{
+			"collection": "activities",
+			"slug": "visita-guiada-castell-de-mur-pallars-jussa",
+			"destination": "escapades-pirineus"
+		},
+		{
+			"collection": "activities",
+			"slug": "llimiana-poble-encant-pallars-jussa",
+			"destination": "escapades-pirineus"
+		},
+		{
+			"collection": "places",
+			"slug": "apartament-les-3-valls-llavorsi-pallars-sobira-pirineus",
+			"destination": "escapades-pirineus"
+		},
+		{
+			"collection": "places",
+			"slug": "refugi-comes-rubio-massis-orri-pallars-sobira",
+			"destination": "escapades-pirineus"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-terradets-cellers-lleida",
+			"destination": "escapades-pirineus"
+		},
+		{
+			"collection": "activities",
+			"slug": "visita-tast-vins-celler-vila-corona-conca-tremp",
+			"destination": "escapades-pirineus"
+		},
+		{
+			"collection": "activities",
+			"slug": "agerair-parapent",
+			"destination": "escapades-pirineus"
+		},
+		{
+			"collection": "activities",
+			"slug": "excursio-amb-gicafer-andorra",
+			"destination": "escapades-andorra"
 		}
 	]
 }
