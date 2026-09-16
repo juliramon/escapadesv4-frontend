@@ -2,6 +2,27 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import TaxonomyChips from "./TaxonomyChips";
 
 /**
+ * El text SEO es desa amb els títols que tria qui l'escriu: el de
+ * `/rutes-i-excursions` comença per un `<h4>`, i la pàgina saltava de l'h1
+ * de la capçalera a l'h4. Es desplacen tots els nivells perquè el primer sigui
+ * el que toca (h2, o h3 si el bloc ja porta capçalera pròpia), mantenint la
+ * distància entre els uns i els altres.
+ */
+const normalizeHeadings = (html, topLevel) => {
+	const levels = [...String(html).matchAll(/<h([1-6])\b/gi)].map((match) =>
+		Number(match[1]),
+	);
+	if (!levels.length) return html;
+	const shift = topLevel - Math.min(...levels);
+	if (!shift) return html;
+	return String(html).replace(
+		/<(\/?)h([1-6])\b/gi,
+		(_, slash, level) =>
+			`<${slash}h${Math.min(6, Math.max(1, Number(level) + shift))}`,
+	);
+};
+
+/**
  * Bloc de text SEO del peu dels llistats.
  *
  * Abans era un mur de text pla, sense jerarquia tipogràfica i sense cap
@@ -61,7 +82,12 @@ const ListingsTextareaFooter = ({
 							className={`seo-block__content ${
 								isCollapsed ? "seo-block__content--clamped" : ""
 							}`}
-							dangerouslySetInnerHTML={{ __html: textareaFooter }}
+							dangerouslySetInnerHTML={{
+								__html: normalizeHeadings(
+									textareaFooter,
+									heading ? 3 : 2,
+								),
+							}}
 						></div>
 						{isCollapsed && isOverflowing ? (
 							<span

@@ -60,7 +60,6 @@ const CondicionsUs = () => {
 									<a
 										href="#termescondicions"
 										title="Termes i condicions"
-										rel="nofollow"
 									>
 										Termes i condicions
 									</a>
@@ -69,7 +68,6 @@ const CondicionsUs = () => {
 									<a
 										href="#sobreserveis"
 										title="Sobre els serveis"
-										rel="nofollow"
 									>
 										Sobre els serveis
 									</a>
@@ -78,7 +76,6 @@ const CondicionsUs = () => {
 											<a
 												href="#normesserveis"
 												title="Normes de serveis"
-												rel="nofollow"
 											>
 												Normes de serveis
 											</a>
@@ -87,7 +84,6 @@ const CondicionsUs = () => {
 											<a
 												href="#contractacioserveis"
 												title="Contraactació dels serveis"
-												rel="nofollow"
 											>
 												Contraactació dels serveis
 											</a>
@@ -96,7 +92,6 @@ const CondicionsUs = () => {
 											<a
 												href="#durada"
 												title="Durada"
-												rel="nofollow"
 											>
 												Durada
 											</a>
@@ -105,7 +100,6 @@ const CondicionsUs = () => {
 											<a
 												href="#ogligacions"
 												title="Obligacions i conducta de l'usuari"
-												rel="nofollow"
 											>
 												Obligacions i conducta de
 												l'usuari
@@ -117,7 +111,6 @@ const CondicionsUs = () => {
 									<a
 										href="#accesweb"
 										title="Accés al lloc web"
-										rel="nofollow"
 									>
 										Accés al lloc web
 									</a>
@@ -126,7 +119,6 @@ const CondicionsUs = () => {
 									<a
 										href="#comptes"
 										title="Comptes i inscripcions"
-										rel="nofollow"
 									>
 										Comptes i inscripcions
 									</a>
@@ -135,7 +127,6 @@ const CondicionsUs = () => {
 											<a
 												href="#condicionscompra"
 												title="Condicions de compra"
-												rel="nofollow"
 											>
 												Condicions de compra
 											</a>
@@ -144,7 +135,6 @@ const CondicionsUs = () => {
 											<a
 												href="#retiradadevolucio"
 												title="Retirada i devolució"
-												rel="nofollow"
 											>
 												Retirada i devolució
 											</a>
@@ -155,7 +145,6 @@ const CondicionsUs = () => {
 									<a
 										href="#politicacookies"
 										title="Política de cookies"
-										rel="nofollow"
 									>
 										Política de cookies
 									</a>
@@ -164,7 +153,6 @@ const CondicionsUs = () => {
 									<a
 										href="#propietatindustrial"
 										title="Propietat industrial i intel·lectual"
-										rel="nofollow"
 									>
 										Propietat industrial i intel·lectual
 									</a>
@@ -173,7 +161,6 @@ const CondicionsUs = () => {
 									<a
 										href="#exempcioresponsabilitat"
 										title="Exempció de responsabilitat"
-										rel="nofollow"
 									>
 										Exempció de responsabilitat
 									</a>
@@ -182,7 +169,6 @@ const CondicionsUs = () => {
 									<a
 										href="#confidencialitat"
 										title="Confidencialitat"
-										rel="nofollow"
 									>
 										Confidencialitat
 									</a>
@@ -191,7 +177,6 @@ const CondicionsUs = () => {
 									<a
 										href="#lleiaplicable"
 										title="Llei aplicable i jurisdicció"
-										rel="nofollow"
 									>
 										Llei aplicable i jurisdicció
 									</a>
@@ -200,7 +185,6 @@ const CondicionsUs = () => {
 									<a
 										href="#politicaprivacitat"
 										title="Política de privadesa"
-										rel="nofollow"
 									>
 										Política de privadesa
 									</a>
@@ -209,7 +193,6 @@ const CondicionsUs = () => {
 									<a
 										href="#propietat"
 										title="Propietat"
-										rel="nofollow"
 									>
 										Propietat
 									</a>

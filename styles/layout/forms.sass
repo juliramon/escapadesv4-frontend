@@ -82,6 +82,16 @@
 	width: 22px
 	height: 22px
 
+// «Alt»: text alternatiu de la imatge seleccionada. És l'únic botó amb text,
+// i sense imatge seleccionada no fa res, així que es veu apagat.
+.editor-bar__wrapper > .editor-bar__text-button
+	@apply text-xs font-semibold uppercase tracking-wide text-primary-500
+	width: auto
+	padding: 0 6px
+
+	&:disabled
+		@apply opacity-40 cursor-not-allowed
+
 // Cercador d'enllaços interns (`LinkPicker`). La barra és sticky i ja fa de
 // referència per a la posició absoluta, així que el desplegable la segueix.
 .link-picker

@@ -1,0 +1,17 @@
+{
+	"name": "internal-link-rel",
+	"version": "1.0.0",
+	"private": true,
+	"description": "Treu rel i target dels enllaços interns ja publicats a les descripcions.",
+	"type": "module",
+	"engines": {
+		"node": ">=18"
+	},
+	"scripts": {
+		"dry-run": "node fix-internal-link-rel.mjs"
+	},
+	"dependencies": {
+		"mongodb": "6.21.0",
+		"parse5": "8.0.1"
+	}
+}

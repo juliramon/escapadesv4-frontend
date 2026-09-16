@@ -112,6 +112,7 @@ const PressMedia = () => {
 			/>
 			<div className="anem-de-cap">
 				<NavigationBar />
+				<main>
 
 				{/* Section heading */}
 				<section className="pt-8 md:pt-12 lg:pt-20">
@@ -386,6 +387,7 @@ const PressMedia = () => {
 						</div>
 					</div>
 				</section>
+				</main>
 			</div>
 			<Footer />
 		</>
