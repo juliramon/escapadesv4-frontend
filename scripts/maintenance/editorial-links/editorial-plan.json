@@ -1,5 +1,5 @@
 {
-	"generatedAt": "2026-09-16T20:39:54.689Z",
+	"generatedAt": "2026-09-16T21:02:19.496Z",
 	"source": "API pública de producció, 15/09/2026",
 	"relatedStory": [
 		{
@@ -146,7 +146,8 @@
 			"href": "https://escapadesenparella.cat/escapades-aventura/ruta-kayak-cap-de-creus",
 			"anchors": [
 				"kayak al Cap de Creus",
-				"Ruta amb kayak al Cap de Creus"
+				"Ruta amb kayak al Cap de Creus",
+				"ruta amb Kayak"
 			],
 			"reason": "parella"
 		},
@@ -193,7 +194,8 @@
 			"slug": "escapada-hotel-terradets-pallars-jussa",
 			"href": "https://escapadesenparella.cat/escapades-culturals/llimiana-poble-encant-pallars-jussa",
 			"anchors": [
-				"Passejada amb encant a Llimiana"
+				"Passejada amb encant a Llimiana",
+				"poble de Llimiana"
 			],
 			"reason": "parella"
 		},

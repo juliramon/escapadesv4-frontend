@@ -1,0 +1,272 @@
+{
+	"generatedAt": "2026-09-16T21:06:53.278Z",
+	"note": "Meta descripcions de més de 200 caràcters, reescrites. Per revisar.",
+	"fields": [
+		{
+			"collection": "lists",
+			"slug": "descobrir-el-montseny-idees-que-fer-montseny",
+			"field": "metaDescription",
+			"value": "14 idees per descobrir el Montseny en parella: cims com el Matagalls, castells medievals, fonts, pobles amb encant i on dormir-hi.",
+			"expect": "Descobreix el Montseny amb la nostra llista de coses a fer al Montseny: rutes a cims com el Matagalls, visites a castells medievals, degustacions de cervesa artesanal i passejades pel Pantà de Santa Fe. Troba activitats ideals per a una escapada plena de natura, història i encant a prop de Barcelona."
+		},
+		{
+			"collection": "activities",
+			"slug": "fira-de-la-castanya-viladrau-montseny",
+			"field": "metaDescription",
+			"value": "La Fira de la Castanya de Viladrau, al cor del Montseny: tastos, artesania i activitats de tardor en una fira que se celebra des del 1995.",
+			"expect": "Descobreix la Fira de la Castanya de Viladrau, un esdeveniment únic de tardor amb tastos, artesania i activitats culturals al cor del Montseny. Gaudeix d'una escapada en parella i viu la màgia de la castanya en un entorn natural incomparable. Clica l'enllaç per saber-ne més!"
+		},
+		{
+			"collection": "stories",
+			"slug": "visita-calella-palafrugell",
+			"field": "metaDescription",
+			"value": "La nostra escapada a Calella de Palafrugell: els Jardins de Cap Roig, la cala El Golfet i el càmping La Siesta, a peu de la Costa Brava.",
+			"expect": "Escapada a Calella de Palafrugell, els Jardins de Cap Roig i la Cala del Golfet, una escapada que us encantarà! Descobreix amb nosaltres Escapada a Calella de Palafrugell, els Jardins de Cap Roig i la Cala del Golfet i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "mirador-sant-agusti-de-llucanes",
+			"field": "metaDescription",
+			"value": "El mirador de Sant Agustí de Lluçanès, al Santuari dels Munts: vistes de tot el Lluçanès i una parada tranquil·la per a una escapada curta.",
+			"expect": "Descobreix el Mirador de Sant Agustí de Lluçanès, un lloc perfecte per a una escapada romàntica amb vistes panoràmiques impressionants. Desconnecta i gaudeix de la natura en aquest indret encantador al cor del Lluçanès. Clica l’enllaç per saber-ne més!"
+		},
+		{
+			"collection": "activities",
+			"slug": "esglesia-de-santa-maria-de-lluca-llucanes",
+			"field": "metaDescription",
+			"value": "L'església de Santa Maria de Lluçà, joia del romànic del segle XII, amb el seu claustre i el castell de Lluçà a tocar. Com visitar-la.",
+			"expect": "Visita l’Església de Santa Maria de Lluçà, un dels tresors romànics del Lluçanès. Descobreix la seva arquitectura, història i el claustre que captiva per la seva bellesa i serenitat. Ideal per a una escapada cultural. Clica l’enllaç per saber-ne més!"
+		},
+		{
+			"collection": "stories",
+			"slug": "hotel-torremirona-3-joies-costa-brava",
+			"field": "metaDescription",
+			"value": "La nostra escapada a l'hotel Torremirona Golf & Spa, a Navata, i a tres joies de l'Alt Empordà. Com és l'hotel i què vam visitar.",
+			"expect": "Escapada a l’hotel Torremirona Golf & Spa, i a 3 joies de la Costa Brava, una escapada que us encantarà! Descobreix amb nosaltres Escapada a l’hotel Torremirona Golf & Spa, i a 3 joies de la Costa Brava i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "la-mer-cabrera-de-mar-maresme-barcelona",
+			"field": "metaDescription",
+			"value": "Hotel boutique La Mer, a Cabrera de Mar: una masia del segle XVI als peus del Castell de Burriac, per a una escapada romàntica al Maresme.",
+			"expect": "Descobreix la Masia La Mer a Cabrera de Mar, un lloc perfecte per a una escapada romàntica. Gaudeix de l'entorn natural, la proximitat al mar i una experiència gastronòmica autèntica a pocs minuts de Barcelona. Clica l’enllaç per saber-ne més!"
+		},
+		{
+			"collection": "stories",
+			"slug": "la-mer-cabrera-de-mar-maresme-escapada-romantica",
+			"field": "metaDescription",
+			"value": "La nostra escapada romàntica a La Mer, al Maresme: com és dormir en una masia de 400 anys i què vam descobrir pels voltants.",
+			"expect": "Descobreix la Masia La Mer a Cabrera de Mar, un lloc perfecte per a una escapada romàntica. Gaudeix de l'entorn natural, la proximitat al mar i una experiència gastronòmica autèntica a pocs minuts de Barcelona. Clica l’enllaç per saber-ne més!"
+		},
+		{
+			"collection": "activities",
+			"slug": "el-brull-poble-castell-montseny",
+			"field": "metaDescription",
+			"value": "El Brull, porta d'entrada al Montseny: l'església de Sant Martí, les ruïnes del castell medieval i camins per fer a peu.",
+			"expect": "Visita El Brull, un encantador poble del Montseny amb l'Església de Sant Martí i les ruïnes del seu castell medieval. Gaudeix de senderisme, gastronomia de muntanya i una escapada tranquil·la en plena natura. Clica l’enllaç per saber-ne més!"
+		},
+		{
+			"collection": "activities",
+			"slug": "poble-montseny-montseny",
+			"field": "metaDescription",
+			"value": "El poble de Montseny, l'únic del massís que en manté el nom, amb un campanar inclinat tres graus. Què veure-hi en una escapada tranquil·la.",
+			"expect": "Visita el poble de Montseny i gaudeix de la seva tranquil·litat, bellesa natural i encant rural. Ideal per a una escapada relaxant envoltada de natura dins el Parc Natural del Montseny, a prop de Barcelona. Clica l'enllaç per saber-ne més!"
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-de-tagamanent-valles-oriental-catalunya",
+			"field": "metaDescription",
+			"value": "Ruta fins al Castell de Tagamanent, castell romànic dalt d'un cim de 1.055 metres, amb una de les millors vistes del Montseny.",
+			"expect": "Explora el Castell de Tagamanent, un emplaçament històric amb vistes impressionants sobre el Montseny. Descobreix la seva història medieval i gaudeix d'una escapada ideal a la natura a prop de Barcelona. Clica l’enllaç per saber-ne més!"
+		},
+		{
+			"collection": "stories",
+			"slug": "slow-life-cabana-turisme-sostenible-el-perello-tarragona",
+			"field": "metaDescription",
+			"value": "La Cabana Calma d'Slow Life, al Perelló: glamping autosostenible de la Joana i en Cristoph. Com és dormir-hi i què fer a prop.",
+			"expect": "Escapada a Slow Life: descobrint el turisme sostenible a El Perelló, una escapada que us encantarà! Descobreix amb nosaltres Escapada a Slow Life: descobrint el turisme sostenible a El Perelló i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "hotel-lazure-lloret-de-mar-costa-brava-escapada-romantica",
+			"field": "metaDescription",
+			"value": "La nostra escapada a l'hotel L'Azure, un quatre estrelles a Lloret de Mar: com és l'hotel i quines cales vam descobrir a la vora.",
+			"expect": "Escapada a l'hotel L'Azure: una escapada deluxe a la Costa Brava, una escapada que us encantarà! Descobreix amb nosaltres Escapada a l'hotel L'Azure: una escapada deluxe a la Costa Brava i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "cal-ouaire-apartaments-turisme-rural",
+			"field": "metaDescription",
+			"value": "Cal Ouaire, apartaments de turisme rural en una masia del 1796 a Sant Jordi Desvalls. La nostra escapada romàntica al Gironès.",
+			"expect": "Escapada a Cal Ouaire: apartaments de turisme rural amb encant, una escapada que us encantarà! Descobreix amb nosaltres Escapada a Cal Ouaire: apartaments de turisme rural amb encant i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-de-montclus-sant-esteve-de-palautordera-montseny",
+			"field": "metaDescription",
+			"value": "El Castell de Montclús, o Castell dels Moros, del segle XI: ruïnes medievals al cor del Montseny, a Sant Esteve de Palautordera.",
+			"expect": "Descobreix el Castell de Montclús al Parc Natural del Montseny, una escapada ideal per explorar ruïnes medievals, gaudir de paisatges espectaculars i submergir-te en la història de Catalunya. Clica l'enllaç per saber-ne més!"
+		},
+		{
+			"collection": "stories",
+			"slug": "fornells-de-la-muntanya",
+			"field": "metaDescription",
+			"value": "Fornells de la Muntanya, a 1.250 m a la Collada de Tosses: un poble per desconnectar que visitem cada pocs mesos. Com hi arribem i què hi fem.",
+			"expect": "Escapada a Fornells de la Muntanya, un poble per desconnectar, una escapada que us encantarà! Descobreix amb nosaltres Escapada a Fornells de la Muntanya, un poble per desconnectar i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "vilanova-de-banat-serra-del-cadi",
+			"field": "metaDescription",
+			"value": "Vilanova de Banat, fundat el 1255 als peus de la Serra del Cadí: un dels pobles més desconeguts de l'Alt Urgell, i les seves vistes.",
+			"expect": "Escapada a Vilanova de Banat, als peus de la Serra del Cadí, una escapada que us encantarà! Descobreix amb nosaltres Escapada a Vilanova de Banat, als peus de la Serra del Cadí i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "pedraforca-per-la-tartera-pollego-superior",
+			"field": "metaDescription",
+			"value": "Pugem al Pollegó Superior del Pedraforca (2.506 m) per la tartera: com és la ruta, per on es comença i què cal tenir en compte.",
+			"expect": "Escapada al Pollegó Superior del Pedraforca per la tartera, una escapada que us encantarà! Descobreix amb nosaltres Escapada al Pollegó Superior del Pedraforca per la tartera i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "visita-estartit-illes-medes",
+			"field": "metaDescription",
+			"value": "L'Estartit i les Illes Medes des de l'apartament Argonavis 226, amb cinc llocs més per descobrir a Torroella de Montgrí.",
+			"expect": "Argonavis 226, i 5 llocs més per enamorar-se de l'Estartit, una escapada que us encantarà! Descobreix amb nosaltres Argonavis 226, i 5 llocs més per enamorar-se de l'Estartit i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "creperia-versatil-cadaques-un-nou-concepte-de-creperia",
+			"field": "metaDescription",
+			"value": "Versàtil Cadaqués, creperia a l'estil bretó: creps, galettes, tapes i còctels a Cadaqués. Com és i què hi vam menjar.",
+			"expect": "Escapada al Versàtil Cadaqués, un nou concepte de creperia, una escapada que us encantarà! Descobreix amb nosaltres Escapada al Versàtil Cadaqués, un nou concepte de creperia i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "la-terra-restaurant-girona",
+			"field": "metaDescription",
+			"value": "La Terra de Girona, un clàssic modernista a la vora de l'Onyar: decoració vintage, bon servei i bon menjar al centre de la ciutat.",
+			"expect": "Escapada a La Terra de Girona, tot un clàssic de la ciutat, una escapada que us encantarà! Descobreix amb nosaltres Escapada a La Terra de Girona, tot un clàssic de la ciutat i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "cala-sa-tuna-seixugador-begur-costa-brava",
+			"field": "metaDescription",
+			"value": "La Cala Sa Tuna i s'Eixugador, a Begur: dues cales emblemàtiques de la Costa Brava per fer-hi snorkel. Com arribar-hi i quan anar-hi.",
+			"expect": "Escapada a la Cala Sa Tuna i S’Eixugador, tresors de Begur, una escapada que us encantarà! Descobreix amb nosaltres Escapada a la Cala Sa Tuna i S’Eixugador, tresors de Begur i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "la-vita-in-fiori-restaurant-italia-sant-cugat",
+			"field": "metaDescription",
+			"value": "La Vita in Fiori, un tros d'Itàlia a Sant Cugat del Vallès: com és el restaurant i què hi vam sopar una nit d'escapada.",
+			"expect": "Escapada a La vita in Fiori, un tros d’Itàlia a Sant Cugat, una escapada que us encantarà! Descobreix amb nosaltres Escapada a La vita in Fiori, un tros d’Itàlia a Sant Cugat i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "avioneta-estavellada-santa-fe-montseny",
+			"field": "metaDescription",
+			"value": "Les restes de l'avioneta estavellada a Santa Fe del Montseny: com era aquesta excursió que avui ja no es pot fer.",
+			"expect": "Escapada a l’avioneta estavellada a Santa Fe del Montseny, una escapada que us encantarà! Descobreix amb nosaltres Escapada a l’avioneta estavellada a Santa Fe del Montseny i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "tarter-manairons-guardia-d-ares-alt-urgell",
+			"field": "metaDescription",
+			"value": "El Tarter de Manairons, a la Guàrdia d'Ares: un bosc de blocs de pedra ple de llegendes, a l'Alt Urgell. Com arribar-hi.",
+			"expect": "Visita el Tarter de Manairons a la Guàrdia d’Ares, un indret misteriós del Pallars Sobirà on la natura i les llegendes es troben. Ideal per a una escapada màgica en plena muntanya. Clica l’enllaç per saber-ne més!"
+		},
+		{
+			"collection": "activities",
+			"slug": "mirador-mont-caro-massis-ports",
+			"field": "metaDescription",
+			"value": "El mirador del Mont Caro, al cim de 1.441 m del Parc Natural dels Ports: vistes sobre la vall de l'Ebre i, els dies clars, fins al mar.",
+			"expect": "Mirador del Montcaro, un impressionant balcó natural al cor del Parc Natural dels Ports. Descobriu vistes panoràmiques, rutes de muntanya i la rica biodiversitat que fan d'aquest destí una experiència inoblidable."
+		},
+		{
+			"collection": "activities",
+			"slug": "aiguamolls-emporda",
+			"field": "metaDescription",
+			"value": "Els Aiguamolls de l'Empordà, entre el Fluvià i la Muga: una de les grans zones humides de Catalunya per observar ocells sense presses.",
+			"expect": "Els Aiguamolls de l'Empordà és ideal per una escapada de desconnexió i connexió amb la natural. Un Parc Natural amb reserves naturals integrals de les Llaunes i dels Estanys. Fes click a l'enllaç per saber-ne més!"
+		},
+		{
+			"collection": "stories",
+			"slug": "querforadat-poble-vistes-cadi",
+			"field": "metaDescription",
+			"value": "El Querforadat, a l'Alt Urgell: un poble petit amb les millors vistes sobre la Serra del Cadí i una llegenda de castell i forat.",
+			"expect": "Escapada al Querforadat, les vistes més maques del Cadí, una escapada que us encantarà! Descobreix amb nosaltres Escapada al Querforadat, les vistes més maques del Cadí i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "apartament-parellada-vilafranca-penedes",
+			"field": "metaDescription",
+			"value": "L'Apartament Parellada, un loft a la Casa Fortuny: enoturisme i romanticisme a mitja hora de Barcelona.",
+			"expect": "Escapada a l’Apartament Parellada, una escapada de luxe, una escapada que us encantarà! Descobreix amb nosaltres Escapada a l’Apartament Parellada, una escapada de luxe i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "tibidabo-parc-atraccions-barcelona",
+			"field": "metaDescription",
+			"value": "El parc d'atraccions del Tibidabo, a Barcelona: atraccions clàssiques, vistes sobre la ciutat i una escapada divertida en parella.",
+			"expect": "Escapada al Tibidabo, el parc d’atraccions de Barcelona, una escapada que us encantarà! Descobreix amb nosaltres Escapada al Tibidabo, el parc d’atraccions de Barcelona i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "rukimon-excursio-rucs-corredor",
+			"field": "metaDescription",
+			"value": "Rukimon, al Corredor: una excursió amb rucs per passar el matí entre animals, a poca estona de Barcelona.",
+			"expect": "Escapada al Rukimon Rucs del corredor, un dia d’animals, una escapada que us encantarà! Descobreix amb nosaltres Escapada al Rukimon Rucs del corredor, un dia d’animals i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "ruines-empuries",
+			"field": "metaDescription",
+			"value": "Les Ruïnes d'Empúries, a l'Escala: l'únic jaciment de la península on conviuen una ciutat grega i una de romana. Què s'hi veu.",
+			"expect": "Descobreix molt més sobre les Ruïnes d'Empúries, l'únic jaciment arqueològic de la península Ibèrica on conviuen les restes d'una ciutat grega amb les restes d'una ciutat romana. Clica l'enllaç per saber-ne més!"
+		},
+		{
+			"collection": "stories",
+			"slug": "la-pica-destats-pel-refugi-vallferrera",
+			"field": "metaDescription",
+			"value": "La Pica d'Estats (3.143 m), el cim més alt de Catalunya, pel refugi de Vallferrera: com és la ruta des del Pallars Sobirà.",
+			"expect": "Escapada a la Pica d’Estats pel Refugi de Vallferrera, una escapada que us encantarà! Descobreix amb nosaltres Escapada a la Pica d’Estats pel Refugi de Vallferrera i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "salo-internacional-del-comic-de-barcelona",
+			"field": "metaDescription",
+			"value": "El Saló Internacional del Còmic de Barcelona: com va ser la nostra visita i què hi trobareu si sou amants del còmic.",
+			"expect": "Escapada al Saló Internacional del Còmic de Barcelona, una escapada que us encantarà! Descobreix amb nosaltres Escapada al Saló Internacional del Còmic de Barcelona i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "kayak-parc-natural-cap-de-creus-port-lligat",
+			"field": "metaDescription",
+			"value": "Una ruta amb kayak des de la platja de Port Lligat fins al Parc Natural del Cap de Creus. Com és la sortida i què s'hi veu.",
+			"expect": "Escapada amb kayak al Parc Natural del Cap de Creus, una escapada que us encantarà! Descobreix amb nosaltres Escapada amb kayak al Parc Natural del Cap de Creus i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "masia-el-puig-vall-de-bianya",
+			"field": "metaDescription",
+			"value": "La Masia el Puig, a la Vall de Bianya: silenci, tranquil·litat i l'Alta Garrotxa al voltant. Com és aquesta escapada romàntica.",
+			"expect": "Escapada a la Masia el Puig, una escapada romàntica, una escapada que us encantarà! Descobreix amb nosaltres Escapada a la Masia el Puig, una escapada romàntica i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "maria-de-cadaques-restaurant-palamos",
+			"field": "metaDescription",
+			"value": "El restaurant Maria de Cadaqués, al cor de Palamós: un lloc amb història per acabar una escapada per la Costa Brava.",
+			"expect": "Escapada al restaurant Maria de Cadaqués de Palamós, una escapada que us encantarà! Descobreix amb nosaltres Escapada al restaurant Maria de Cadaqués de Palamós i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "lists",
+			"slug": "que-fer-tardor-catalunya-activitats-on-anar",
+			"field": "metaDescription",
+			"value": "17 idees per gaudir de la tardor a Catalunya en parella: estanys, boscos de colors, fires de castanyes i pobles per perdre-s'hi.",
+			"expect": "Descobreix 17 escapades per gaudir de la tardor a Catalunya: pobles amb encant, boscos plens de colors, rutes i experiències per viure en parella. Inspira't i prepara la vostra propera escapada de tardor!"
+		}
+	]
+}
