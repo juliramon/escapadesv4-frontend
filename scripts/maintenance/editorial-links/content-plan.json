@@ -1,5 +1,5 @@
 {
-	"generatedAt": "2026-09-15T21:44:45.852Z",
+	"generatedAt": "2026-09-16T20:49:46.459Z",
 	"note": "Esborranys per revisar abans d'aplicar. Delta de l'Ebre pendent de decidir l'abast.",
 	"fields": [
 		{
@@ -210,6 +210,34 @@
 			"slug": "escapades-andorra",
 			"field": "seoText",
 			"value": "<h2>Què fer en una escapada a Andorra</h2><p>A l'hivern, dues experiències per viure la neu d'una altra manera: el <a href=\"https://escapadesenparella.cat/escapades-aventura/trineu-gossos-a-andorra\">trineu amb gossos</a>, a Encamp, i una <a href=\"https://escapadesenparella.cat/escapades-aventura/moto-de-neu-andorra-ruta-grau-roig\">ruta amb moto de neu per Grau Roig</a>. A l'estiu, el <a href=\"https://escapadesenparella.cat/escapades-aventura/mirador-solar-tristaina-andorra\">Mirador Solar de Tristaina</a>, a Ordino, és un balcó sobre els llacs de Tristaina.</p><h3>On dormir a Andorra</h3><p>Per a una nit diferent, l'<a href=\"https://escapadesenparella.cat/escapades-romantiques/airstream-experience-dormir-estrelles-varllnord\">Airstream Experience</a>, a Ordino, us deixa dormir en una caravana clàssica sota les estrelles.</p><p>Llegiu com vam viure el <a href=\"https://escapadesenparella.cat/histories/ruta-trineu-gossos-andorra\">trineu amb gossos</a> i la <a href=\"https://escapadesenparella.cat/histories/ruta-moto-neu-andorra-grau-roig\">ruta amb moto de neu</a>.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-delta-de-lebre",
+			"field": "subtitle",
+			"value": "Què visitar a les Terres de l'Ebre, on dormir i què fer en parella.",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-delta-de-lebre",
+			"field": "seoTextHeader",
+			"value": "<p>Una <strong>escapada a les Terres de l'Ebre</strong> és el riu, els Ports i pobles de pedra amb molt poca gent: el racó més tranquil del sud de Catalunya.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-delta-de-lebre",
+			"field": "reviewText",
+			"value": "<h2>Benvinguts a les Terres de l'Ebre, el sud tranquil</h2><p>L'Ebre travessa la comarca fins al delta i, a banda i banda, hi ha castells enfilats damunt del riu, coves, pintures rupestres de fa milers d'anys i el massís dels Ports, on el paisatge canvia del tot. És una destinació per anar-hi sense presses, fora de l'estiu, i per dormir en llocs petits.</p>",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-delta-de-lebre",
+			"field": "seoText",
+			"value": "<h2>Què fer en una escapada a les Terres de l'Ebre</h2><p>El <a href=\"https://escapadesenparella.cat/escapades-culturals/castell-miravet-ribera-ebre-tarragona\">Castell de Miravet</a> domina el riu des de dalt, i als seus peus hi ha <a href=\"https://escapadesenparella.cat/escapades-culturals/miravet-ribera-ebre-tarragona\">el poble de Miravet</a>, un dels més bonics de la Ribera d'Ebre. Riu avall, les <a href=\"https://escapadesenparella.cat/escapades-culturals/les-coves-meravelles-benifallet\">Coves Meravella de Benifallet</a> es visiten a peu i són una bona parada quan fa calor.</p><p>Si us agrada caminar, al Perelló hi ha la ruta fins a les <a href=\"https://escapadesenparella.cat/escapades-aventura/pintures-rupestres-de-cabrafeixet\">pintures rupestres de Cabrafeixet</a>, i al massís dels Ports el <a href=\"https://escapadesenparella.cat/escapades-aventura/mirador-mont-caro-massis-ports\">mirador de Mont Caro</a> és el balcó més alt de la zona, amb el delta i el mar al fons.</p><h3>On dormir a les Terres de l'Ebre</h3><p>Per a una nit de muntanya, el <a href=\"https://escapadesenparella.cat/escapades-aventura/refugi-font-farrera-parc-natural-dels-ports\">refugi Font Farrera</a>, dins del Parc Natural dels Ports; per a una escapada amb més calma, <a href=\"https://escapadesenparella.cat/escapades-romantiques/la-llar-del-mas-mas-de-barberans-turisme-rural\">La Llar del Mas</a>, a Mas de Barberans.</p><h3>Les nostres escapades a les Terres de l'Ebre</h3><p>Llegiu la nostra <a href=\"https://escapadesenparella.cat/histories/escapada-benifallet-coves-meravelles-llaut-castellot-iberic\">escapada a Benifallet</a>, amb les coves i un tomb en llaüt pel riu, i l'<a href=\"https://escapadesenparella.cat/histories/slow-life-cabana-turisme-sostenible-el-perello-tarragona\">estada a Slow Life, al Perelló</a>. I si voleu baixar fins al delta, tenim una llista amb <a href=\"https://escapadesenparella.cat/llistes/que-fer-al-delta-de-lebre\">què fer al Delta de l'Ebre</a>.</p>",
 			"expectEmpty": true
 		},
 		{

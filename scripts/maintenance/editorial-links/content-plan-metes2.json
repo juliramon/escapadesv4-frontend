@@ -1,0 +1,286 @@
+{
+	"generatedAt": "2026-09-16T21:10:56.790Z",
+	"note": "Meta descripcions de 161 a 200 caràcters, reescrites. Per revisar.",
+	"fields": [
+		{
+			"collection": "activities",
+			"slug": "pintures-rupestres-de-cabrafeixet",
+			"field": "metaDescription",
+			"value": "Ruta fins a les pintures rupestres de Cabrafeixet, al Perelló: art de fa més de 9.000 anys al mig de la natura. Com arribar-hi.",
+			"expect": "Una ruta per la natura per descobrir la història dels primers habitants de fa més de 9.000 anys. Descobreix el que ens expliquen les Pintures Rupestres de Cabrafeixet. Clica l’enllaç per saber-ne més!"
+		},
+		{
+			"collection": "stories",
+			"slug": "sant-joan-de-lerm-raquetes-de-neu",
+			"field": "metaDescription",
+			"value": "La nostra sortida amb raquetes de neu a Sant Joan de l'Erm, a la vall de Castellbò: com és l'estació d'esquí nòrdic i la ruta.",
+			"expect": "Escapada a Sant Joan de l’Erm amb raquetes de neu, una escapada que us encantarà! Descobreix amb nosaltres Escapada a Sant Joan de l’Erm amb raquetes de neu i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "fira-bosc-medieval-canyamars",
+			"field": "metaDescription",
+			"value": "La Fira del Bosc Medieval de Canyamars: com és, quan se celebra i què s'hi troba en una escapada de cap de setmana.",
+			"expect": "Escapada a la Fira del Bosc Medieval de Canyamars, una escapada que us encantarà! Descobreix amb nosaltres Escapada a la Fira del Bosc Medieval de Canyamars i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "el-castell-de-la-pobla-de-lillet-adults-only",
+			"field": "metaDescription",
+			"value": "Hotel adults only a la Pobla de Lillet, al Berguedà, a 850 metres dels Jardins Artigas de Gaudí. Una escapada romàntica de muntanya.",
+			"expect": "El Castell de la Pobla de Lillet (Adults Only), una escapada que us encantarà! Descobreix El Castell de la Pobla de Lillet (Adults Only) amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "restaurant-can-nau-peratallada",
+			"field": "metaDescription",
+			"value": "El Restaurant Can Nau, a Peratallada: cuina de l'Empordà en un poble medieval. Com és i què hi vam menjar.",
+			"expect": "Escapada al Restaurant Can Nau de Peratallada,, una escapada que us encantarà! Descobreix amb nosaltres Escapada al Restaurant Can Nau de Peratallada, i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "restaurant-orquestra-argentona",
+			"field": "metaDescription",
+			"value": "El Restaurant l'Orquestra, a Argentona: un local petit i acollidor amb xiprer. Com és i què s'hi menja.",
+			"expect": "Escapada al Restaurant l’Orquestra d’Argentona, una escapada que us encantarà! Descobreix amb nosaltres Escapada al Restaurant l’Orquestra d’Argentona i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "cals-frares-restaurant-santa-elena-agell",
+			"field": "metaDescription",
+			"value": "Cals Frares, a Santa Elena d'Agell: dinar en una masia del segle XIII envoltada d'animals, a Cabrera de Mar.",
+			"expect": "Escapada a Cals Frares, a Santa Elena d'Agell, una escapada que us encantarà! Descobreix amb nosaltres Escapada a Cals Frares, a Santa Elena d'Agell i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "casa-rocamora-de-barcelona",
+			"field": "metaDescription",
+			"value": "La Casa Rocamora, a Barcelona: un palauet isabelí ple de col·leccions singulars. Com visitar-lo i què s'hi veu.",
+			"expect": "Un palauet isabelí ple de peces singulars que formen part de diverses col·leccions. Una escapada per saber molt més sobre la Casa Rocamora i la seva història! Clica l'enllaç per saber-ne més!"
+		},
+		{
+			"collection": "stories",
+			"slug": "cala-estreta-costa-brava",
+			"field": "metaDescription",
+			"value": "La Cala Estreta, a Palamós: aigües cristal·lines i poca gent. Com arribar-hi i què cal saber abans d'anar-hi.",
+			"expect": "Escapada a la Cala Estreta, a la Costa Brava, una escapada que us encantarà! Descobreix amb nosaltres Escapada a la Cala Estreta, a la Costa Brava i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "bunquers-collada-conflet-os-civis-alt-urgell",
+			"field": "metaDescription",
+			"value": "Ruta als búnquers de la Guerra Civil de la Collada de Conflent, des d'Os de Civís: paisatge d'alta muntanya i història.",
+			"expect": "Descobrireu els búnquers de la Guerra Civil: els búnquers de la Collada de Conflent des d'Os de Civís, passant per paisatges espectaculars, envoltats de natura. Fes click per saber-ne més."
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-palauet-del-priorat",
+			"field": "metaDescription",
+			"value": "Hotel Palauet del Priorat, a Cornudella de Montsant: allotjament amb encant, cuina local i el Montsant a tocar.",
+			"expect": "Viu una experiència única al Hotel Palauet del Priorat: allotjament amb encant, gastronomia local i entorn natural espectacular. Descobreix per què és perfecte per una escapada en parella."
+		},
+		{
+			"collection": "stories",
+			"slug": "terracotta-restaurant-argentona",
+			"field": "metaDescription",
+			"value": "El restaurant Terracotta, a Argentona: cuina creativa on l'aroma, el sabor i la textura es troben. Com és i què hi vam tastar.",
+			"expect": "Escapada al restaurant Terracotta Argentona, una escapada que us encantarà! Descobreix amb nosaltres Escapada al restaurant Terracotta Argentona i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "santuari-cabrera-collsacabra-montcabrer-osona",
+			"field": "metaDescription",
+			"value": "El Santuari de Cabrera, al Collsacabra: la seva història, com arribar-hi i les vistes que s'hi troben.",
+			"expect": "Voleu conèixer el Santuari de Cabrera al Collsacabra? Descobriu la seva història i com arribar-hi per gaudir de les seves vistes espectaculars i l'ambient tranquil del seu entorn natural."
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-montsoriu-la-selva-catalunya",
+			"field": "metaDescription",
+			"value": "El Castell de Montsoriu, a Arbúcies: una fortificació medieval envoltada del paisatge de la Selva. Història i com arribar-hi.",
+			"expect": "El Castell de Montsoriu és una antiga fortificació situada a la comarca de la Selva, envoltada per un paisatge espectacular. Descobreix la seva història i com arribar-hi en aquesta guia."
+		},
+		{
+			"collection": "stories",
+			"slug": "leks-thai-restaurant-tailandes-mataro-maresme",
+			"field": "metaDescription",
+			"value": "Leks Thai, a Mataró: cuina tailandesa autèntica al Maresme. Com és el restaurant i què hi vam demanar.",
+			"expect": "Escapada al restaurant tailandès Leks Thai, una escapada que us encantarà! Descobreix amb nosaltres Escapada al restaurant tailandès Leks Thai i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "mas-pla-hostal-rural-solius",
+			"field": "metaDescription",
+			"value": "El Mas Pla, hostal rural a Solius, en zona protegida de la Costa Brava: com és i per què hi tornaríem.",
+			"expect": "Escapada al Mas Pla, Hostal rural a Solius, una escapada que us encantarà! Descobreix amb nosaltres Escapada al Mas Pla, Hostal rural a Solius i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "puigpedros-raquetes-neu-malniu",
+			"field": "metaDescription",
+			"value": "Pujada al Puigpedrós amb raquetes de neu, dormint al refugi de Malniu: com és la ruta i què cal portar.",
+			"expect": "Escapada amb raquetes de neu al Puigpedrós, una escapada que us encantarà! Descobreix amb nosaltres Escapada amb raquetes de neu al Puigpedrós i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "aqua-hotel-silhouette-and-spa-adults-only",
+			"field": "metaDescription",
+			"value": "Aqua Hotel Silhouette & Spa, a Malgrat de Mar: hotel adults only amb dues piscines, jardí i spa, a tocar de la platja.",
+			"expect": "Aqua Hotel Silhouette & Spa - Adults Only, una escapada que us encantarà! Descobreix Aqua Hotel Silhouette & Spa - Adults Only amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "castanyer-de-les-nou-branques-viladrau",
+			"field": "metaDescription",
+			"value": "El Castanyer de les Nou Branques, a Viladrau: un dels arbres més emblemàtics del Montseny. Com arribar-hi a peu.",
+			"expect": "Escapada al Castanyer de les nou Branques, una escapada que us encantarà! Descobreix amb nosaltres Escapada al Castanyer de les nou Branques i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "visita-peratallada-poble-medieval",
+			"field": "metaDescription",
+			"value": "Peratallada, poble medieval del Baix Empordà: carrers de pedra, muralles i on parar a menjar. La nostra visita.",
+			"expect": "Escapada a Peratallada, un poble medieval, una escapada que us encantarà! Descobreix amb nosaltres Escapada a Peratallada, un poble medieval i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "fira-avet-espinelves-nadal",
+			"field": "metaDescription",
+			"value": "La Fira de l'Avet d'Espinelves, tradició des del 1981: com és, quan se celebra i què s'hi troba abans de Nadal.",
+			"expect": "Escapada a la Fira de l’Avet d’Espinelves, una escapada que us encantarà! Descobreix amb nosaltres Escapada a la Fira de l’Avet d’Espinelves i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "ruta-trineu-gossos-andorra",
+			"field": "metaDescription",
+			"value": "Trineu amb gossos a Andorra: com és una sortida de múixing, molt més que un esport o un transport.",
+			"expect": "Escapada amb trineu amb gossos a Andorra, una escapada que us encantarà! Descobreix amb nosaltres Escapada amb trineu amb gossos a Andorra i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "hostal-el-roser-restaurant-escala",
+			"field": "metaDescription",
+			"value": "L'Hostal El Roser, a l'Escala: cuina de mercat a tocar del mar. Com és el restaurant i què hi vam menjar.",
+			"expect": "Escapada a l’Hostal El Roser de l’Escala, una escapada que us encantarà! Descobreix amb nosaltres Escapada a l’Hostal El Roser de l’Escala i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "mutenroshi-ramen-restaurant-japones-barcelona",
+			"field": "metaDescription",
+			"value": "Mutenroshi Ramen, a Barcelona: un restaurant japonès petit i singular. Com és i quin ramen hi vam demanar.",
+			"expect": "Escapada al restaurant Mutenroshi Ramen, una escapada que us encantarà! Descobreix amb nosaltres Escapada al restaurant Mutenroshi Ramen i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "boutique-hotel-davallada-adults-only",
+			"field": "metaDescription",
+			"value": "Boutique Hotel Davallada, a Sitges: un hotel adults only d'estil colonial en un edifici catalogat del centre.",
+			"expect": "Boutique Hotel Davallada - Adults Only, una escapada que us encantarà! Descobreix Boutique Hotel Davallada - Adults Only amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "montanissell-cal-borda-la-serra-de-sant-joan-les-coves-dormini",
+			"field": "metaDescription",
+			"value": "Montanissell, a l'Alt Urgell: Cal Borda, la Serra de Sant Joan i les Coves d'Ormini, amb vistes al massís del Boumort.",
+			"expect": "Descobreix el poble de Montanissell, així com el restaurant Cal Borda, la Serra de Sant Joan i les Coves d'Ormini. Si vols conèixer el petit poble de Montanissell, fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "basses-de-coll-de-nargo",
+			"field": "metaDescription",
+			"value": "Les Basses del Codó, a Coll de Nargó: gorgues d'aigua entre roca calcària a l'Alt Urgell. Com arribar-hi.",
+			"expect": "Escapada a les Basses de Coll de Nargó, una escapada que us encantarà! Descobreix amb nosaltres Escapada a les Basses de Coll de Nargó i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "vol-en-globus-vol-de-coloms-garrotxa",
+			"field": "metaDescription",
+			"value": "Vol en globus amb Vol de Coloms, a Santa Pau: com és volar sobre els volcans de la Garrotxa de bon matí.",
+			"expect": "Escapada i vol en globus a la Garrotxa, una escapada que us encantarà! Descobreix amb nosaltres Escapada i vol en globus a la Garrotxa i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "mirador-solar-tristaina-andorra",
+			"field": "metaDescription",
+			"value": "El Mirador Solar de Tristaina, a Ordino: un observatori circular a més de 2.600 metres, amb els llacs als peus.",
+			"expect": "Escapada al Mirador Solar de Tristaina, un espectacular observatori circular situat a més de 2.600 metres d’altura. Fes clic per saber com arribar-hi, preus i consells pràctics."
+		},
+		{
+			"collection": "places",
+			"slug": "casa-rural-mas-ardevol",
+			"field": "metaDescription",
+			"value": "Mas Ardevol, a Falset: allotjament rural amb història al cor del Priorat, entre vinyes i muntanya.",
+			"expect": "Descobreix Mas Ardevol, un allotjament rural amb història, entorn natural i activitats per a parelles. Gaudeix de la tranquil·litat i l’autenticitat de la Catalunya més genuïna."
+		},
+		{
+			"collection": "stories",
+			"slug": "pic-de-les-tres-canaletes-josa-de-cadi-serra-del-cadi",
+			"field": "metaDescription",
+			"value": "El Pic de les Tres Canaletes (2.608 m), a la Serra del Cadí: com és la pujada i quines vistes s'hi troben.",
+			"expect": "Descobreix amb nosaltres el Pic de les Tres Canaletes, un dels cims de la Serra del Cadí, que amb 2.608 metres us brindarà amb paisatges excepcionals. Fes clic per saber-ne més."
+		},
+		{
+			"collection": "stories",
+			"slug": "matagalls-per-sant-marcal",
+			"field": "metaDescription",
+			"value": "El Matagalls (1.698 m) des de Sant Marçal: una de les pujades més populars del massís del Montseny, pas a pas.",
+			"expect": "Escapada al Matagalls per Sant Marçal, una escapada que us encantarà! Descobreix amb nosaltres Escapada al Matagalls per Sant Marçal i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "ruta-santuari-puig-agut",
+			"field": "metaDescription",
+			"value": "La ruta al Santuari de Puig-agut, a Manlleu: vistes del Montseny i els Pirineus, i com arribar-hi.",
+			"expect": "Descobreix la ruta al Santuari de Puig-Agut, un indret singular de Manlleu amb unes vistes privilegiades del Montseny i els Pirineus. Et diem com arribar-hi i què hi trobaràs."
+		},
+		{
+			"collection": "activities",
+			"slug": "raquetes-neu-sant-joan-de-lerm",
+			"field": "metaDescription",
+			"value": "Raquetes de neu a Sant Joan de l'Erm, a la vall de Castellbò: l'estació d'esquí nòrdic i les rutes que s'hi poden fer.",
+			"expect": "Raquetes de neu a Sant Joan de l’Erm, una escapada que us encantarà! Descobreix Raquetes de neu a Sant Joan de l’Erm amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "excursio-segway-arenys-de-munt",
+			"field": "metaDescription",
+			"value": "Una excursió amb segway per Arenys de Munt: com és la ruta i què cal saber abans de provar-ho.",
+			"expect": "Escapada amb Segway a Arenys de Munt, una escapada que us encantarà! Descobreix amb nosaltres Escapada amb Segway a Arenys de Munt i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "visita-castell-de-castelldefels",
+			"field": "metaDescription",
+			"value": "El Castell de Castelldefels, una de les joies del Baix Llobregat: la seva història i com visitar-lo.",
+			"expect": "Escapada al Castell de Castelldefels, una escapada que us encantarà! Descobreix amb nosaltres Escapada al Castell de Castelldefels i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "ruta-moto-neu-andorra-grau-roig",
+			"field": "metaDescription",
+			"value": "Ruta amb moto de neu per Grau Roig, a Andorra: com és l'experiència, quant dura i què cal portar.",
+			"expect": "Escapada amb moto de neu a Grau Roig, una escapada que us encantarà! Descobreix amb nosaltres Escapada amb moto de neu a Grau Roig i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hostal-montserrat-sant-celoni-montseny",
+			"field": "metaDescription",
+			"value": "Hostal Montserrat, al cor del Montseny: on és, com arribar-hi i què fer a prop en una escapada de cap de setmana.",
+			"expect": "Escapeu-vos al Montseny i gaudiu d'una estada increïble a l'Hostal Montserrat. Continua llegint per descobrir més sobre la seva ubicació, com arribar-hi i què fer-hi a prop."
+		},
+		{
+			"collection": "places",
+			"slug": "torremirona-relais-hotel-golf-spa",
+			"field": "metaDescription",
+			"value": "Torremirona Relais Hotel Golf & Spa, a Navata: un quatre estrelles amb golf i spa a l'Alt Empordà.",
+			"expect": "Torremirona Relais Hotel Golf & Spa, una escapada que us encantarà! Descobreix Torremirona Relais Hotel Golf & Spa amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "arrels-hotel-cadaques-adults-only",
+			"field": "metaDescription",
+			"value": "Arrels Hotel Cadaqués, adults only: piscina exterior, bar i aparcament gratuït a pocs minuts del centre de Cadaqués.",
+			"expect": "Arrels Hotel Cadaques - Adults Only, una escapada que us encantarà! Descobreix Arrels Hotel Cadaques - Adults Only amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		}
+	]
+}

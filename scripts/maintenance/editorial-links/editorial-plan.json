@@ -1,5 +1,5 @@
 {
-	"generatedAt": "2026-09-16T20:39:54.689Z",
+	"generatedAt": "2026-09-17T07:55:34.429Z",
 	"source": "API pública de producció, 15/09/2026",
 	"relatedStory": [
 		{
@@ -146,7 +146,8 @@
 			"href": "https://escapadesenparella.cat/escapades-aventura/ruta-kayak-cap-de-creus",
 			"anchors": [
 				"kayak al Cap de Creus",
-				"Ruta amb kayak al Cap de Creus"
+				"Ruta amb kayak al Cap de Creus",
+				"ruta amb Kayak"
 			],
 			"reason": "parella"
 		},
@@ -193,7 +194,8 @@
 			"slug": "escapada-hotel-terradets-pallars-jussa",
 			"href": "https://escapadesenparella.cat/escapades-culturals/llimiana-poble-encant-pallars-jussa",
 			"anchors": [
-				"Passejada amb encant a Llimiana"
+				"Passejada amb encant a Llimiana",
+				"poble de Llimiana"
 			],
 			"reason": "parella"
 		},
@@ -1132,6 +1134,11 @@
 			"destination": "escapades-costa-brava"
 		},
 		{
+			"collection": "activities",
+			"slug": "aiguamolls-baix-emporda-estartit",
+			"destination": "escapades-costa-brava"
+		},
+		{
 			"collection": "places",
 			"slug": "hotel-mas-tapiolas-suits-natura",
 			"destination": "escapades-costa-brava"
@@ -1139,6 +1146,31 @@
 		{
 			"collection": "places",
 			"slug": "hotel-can-casi-adults-only",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "paratge-de-tudela",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "activities",
+			"slug": "seacling-costa-brava-bici-aquatica-sant-feliu-de-guixols",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "places",
+			"slug": "torremirona-relais-hotel-golf-spa",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "places",
+			"slug": "mas-el-bruge-apartaments-terrades",
+			"destination": "escapades-costa-brava"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-spa-la-central-adults-only",
 			"destination": "escapades-costa-brava"
 		},
 		{
@@ -1184,6 +1216,11 @@
 		{
 			"collection": "places",
 			"slug": "aqua-hotel-silhouette-and-spa-adults-only",
+			"destination": "escapades-maresme"
+		},
+		{
+			"collection": "activities",
+			"slug": "rukimon-rucs-del-corredor",
 			"destination": "escapades-maresme"
 		},
 		{
@@ -1270,6 +1307,421 @@
 			"collection": "places",
 			"slug": "la-llar-del-mas-mas-de-barberans-turisme-rural",
 			"destination": "escapades-delta-de-lebre"
+		},
+		{
+			"collection": "activities",
+			"slug": "visita-guiada-castell-de-mur-pallars-jussa",
+			"destination": "escapades-pirineus"
+		},
+		{
+			"collection": "activities",
+			"slug": "llimiana-poble-encant-pallars-jussa",
+			"destination": "escapades-pirineus"
+		},
+		{
+			"collection": "places",
+			"slug": "apartament-les-3-valls-llavorsi-pallars-sobira-pirineus",
+			"destination": "escapades-pirineus"
+		},
+		{
+			"collection": "places",
+			"slug": "refugi-comes-rubio-massis-orri-pallars-sobira",
+			"destination": "escapades-pirineus"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-terradets-cellers-lleida",
+			"destination": "escapades-pirineus"
+		},
+		{
+			"collection": "activities",
+			"slug": "visita-tast-vins-celler-vila-corona-conca-tremp",
+			"destination": "escapades-pirineus"
+		},
+		{
+			"collection": "activities",
+			"slug": "agerair-parapent",
+			"destination": "escapades-pirineus"
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-de-llivia",
+			"destination": "escapades-pirineus"
+		},
+		{
+			"collection": "activities",
+			"slug": "basses-de-coll-de-nargo",
+			"destination": "escapades-pirineus"
+		},
+		{
+			"collection": "places",
+			"slug": "refugi-prat-aguilo-serra-del-cadi-pas-gosolans",
+			"destination": "escapades-pirineus"
+		},
+		{
+			"collection": "activities",
+			"slug": "excursio-amb-gicafer-andorra",
+			"destination": "escapades-andorra"
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-de-montclus-sant-esteve-de-palautordera-montseny",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "poble-montseny-montseny",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-de-tagamanent-valles-oriental-catalunya",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "el-brull-poble-castell-montseny",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "arboretum-masjoan-espinelves",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "fira-de-la-castanya-viladrau-montseny",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "espai-montseny-viladrau-montseny",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-montsoriu-la-selva-catalunya",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "matagalls-per-sant-marcal",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "castanyer-de-les-9-branques",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "avioneta-estavellada-a-santa-fe",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "places",
+			"slug": "casal-sagrat-cor-viladrau-montseny",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-somlom-montseny-ecofriendly-sant-esteve-palautordera",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "places",
+			"slug": "hostal-montserrat-sant-celoni-montseny",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "places",
+			"slug": "cabanes-als-arbres-sant-hilari-sacalm",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "places",
+			"slug": "el-follo-turisme-rural",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "places",
+			"slug": "balneario-font-vella-adults-only",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-can-cuch",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "places",
+			"slug": "casa-marcial-adults-only",
+			"destination": "escapades-garrotxa"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-puig-franco",
+			"destination": "escapades-garrotxa"
+		},
+		{
+			"collection": "places",
+			"slug": "masia-el-puig",
+			"destination": "escapades-garrotxa"
+		},
+		{
+			"collection": "places",
+			"slug": "cabanyes-entre-valls-vall-de-bianya-cabanes-arbres",
+			"destination": "escapades-garrotxa"
+		},
+		{
+			"collection": "places",
+			"slug": "mas-pineda-turisme-sostenible-oix-alta-garrotxa",
+			"destination": "escapades-garrotxa"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-les-cols-pavellons",
+			"destination": "escapades-garrotxa"
+		},
+		{
+			"collection": "places",
+			"slug": "les-planes-del-grau-hotel-rural-sant-joan-abadesses",
+			"destination": "escapades-garrotxa"
+		},
+		{
+			"collection": "activities",
+			"slug": "vol-en-globus-vol-de-coloms-garrotxa",
+			"destination": "escapades-garrotxa"
+		},
+		{
+			"collection": "places",
+			"slug": "cal-roget-turisme-rural-bergueda",
+			"destination": "escapades-bergueda"
+		},
+		{
+			"collection": "activities",
+			"slug": "visita-jardins-artigas",
+			"destination": "escapades-bergueda"
+		},
+		{
+			"collection": "places",
+			"slug": "el-castell-de-la-pobla-de-lillet-adults-only",
+			"destination": "escapades-bergueda"
+		},
+		{
+			"collection": "places",
+			"slug": "refugi-lluis-estasen-pedraforca-bergueda",
+			"destination": "escapades-bergueda"
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-oden-solsones",
+			"destination": "escapades-bergueda"
+		},
+		{
+			"collection": "activities",
+			"slug": "la-vall-del-lord-camper-solsones",
+			"destination": "escapades-bergueda"
+		},
+		{
+			"collection": "places",
+			"slug": "la-vella-farga-hotel",
+			"destination": "escapades-bergueda"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-la-freixera",
+			"destination": "escapades-bergueda"
+		},
+		{
+			"collection": "activities",
+			"slug": "bosc-de-les-escultures-de-joan-carola-de-celra-girona",
+			"destination": "escapades-girona-i-emporda-interior"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-mil-estrelles",
+			"destination": "escapades-girona-i-emporda-interior"
+		},
+		{
+			"collection": "activities",
+			"slug": "ruta-arros-pals-xiulet-pals-baix-emporda",
+			"destination": "escapades-girona-i-emporda-interior"
+		},
+		{
+			"collection": "activities",
+			"slug": "la-terra-a-girona",
+			"destination": "escapades-girona-i-emporda-interior"
+		},
+		{
+			"collection": "places",
+			"slug": "el-raco-de-madremanya",
+			"destination": "escapades-girona-i-emporda-interior"
+		},
+		{
+			"collection": "activities",
+			"slug": "santuari-dels-angels-sant-marti-vell-girones",
+			"destination": "escapades-girona-i-emporda-interior"
+		},
+		{
+			"collection": "places",
+			"slug": "mas-pla-solius",
+			"destination": "escapades-girona-i-emporda-interior"
+		},
+		{
+			"collection": "places",
+			"slug": "mas-de-torrent-hotel-and-spa",
+			"destination": "escapades-girona-i-emporda-interior"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-boutique-can-pico",
+			"destination": "escapades-girona-i-emporda-interior"
+		},
+		{
+			"collection": "places",
+			"slug": "mas-vermell-apartaments-fontanilles-baix-emporda",
+			"destination": "escapades-girona-i-emporda-interior"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-rural-vinyes-emporda",
+			"destination": "escapades-girona-i-emporda-interior"
+		},
+		{
+			"collection": "activities",
+			"slug": "casa-mila-la-pedrera-barcelona",
+			"destination": "escapades-barcelona-i-entorn"
+		},
+		{
+			"collection": "activities",
+			"slug": "casa-rocamora-de-barcelona",
+			"destination": "escapades-barcelona-i-entorn"
+		},
+		{
+			"collection": "activities",
+			"slug": "museu-de-cera-de-barcelona",
+			"destination": "escapades-barcelona-i-entorn"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-the-serras",
+			"destination": "escapades-barcelona-i-entorn"
+		},
+		{
+			"collection": "activities",
+			"slug": "fosbury-cafe-castelldefels-barcelona",
+			"destination": "escapades-barcelona-i-entorn"
+		},
+		{
+			"collection": "places",
+			"slug": "boutique-hotel-davallada-adults-only",
+			"destination": "escapades-barcelona-i-entorn"
+		},
+		{
+			"collection": "places",
+			"slug": "mas-salagros-ecoresort-and-spa",
+			"destination": "escapades-barcelona-i-entorn"
+		},
+		{
+			"collection": "activities",
+			"slug": "barranquisme-estrets-de-castellar-valles",
+			"destination": "escapades-barcelona-i-entorn"
+		},
+		{
+			"collection": "places",
+			"slug": "barraca-entre-vinyes-alt-penedes",
+			"destination": "escapades-penedes"
+		},
+		{
+			"collection": "places",
+			"slug": "apartament-spa-parellada",
+			"destination": "escapades-penedes"
+		},
+		{
+			"collection": "places",
+			"slug": "cava-and-hotel-mastinell",
+			"destination": "escapades-penedes"
+		},
+		{
+			"collection": "places",
+			"slug": "vila-caelus-masia-boutique-rubio",
+			"destination": "escapades-penedes"
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-de-la-popa-castell-castellcir-centelles",
+			"destination": "escapades-bages-moianes"
+		},
+		{
+			"collection": "places",
+			"slug": "refugi-agulles-vicenc-barbe-montserrat",
+			"destination": "escapades-bages-moianes"
+		},
+		{
+			"collection": "places",
+			"slug": "bell-planso-bed-breakfast-moia",
+			"destination": "escapades-bages-moianes"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-urbisol",
+			"destination": "escapades-bages-moianes"
+		},
+		{
+			"collection": "activities",
+			"slug": "mirador-sant-agusti-de-llucanes",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "activities",
+			"slug": "ruta-santuari-puig-agut",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "activities",
+			"slug": "panta-de-sau-osona",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-de-centelles-sant-marti-de-centelles-osona",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "activities",
+			"slug": "pont-medieval-llucanes-sant-marti-albars-osona",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-lluca-llucanes-osona",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "activities",
+			"slug": "roure-senyora-sant-boi-llucanes-roure-centenari",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "places",
+			"slug": "apartaments-ca-estamenya-perafita-llucanes",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "places",
+			"slug": "la-garriga-de-castelladral",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "activities",
+			"slug": "esglesia-de-santa-maria-de-lluca-llucanes",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "activities",
+			"slug": "santuari-cabrera-collsacabra-montcabrer-osona",
+			"destination": "escapades-osona"
 		}
 	]
 }

@@ -20,6 +20,26 @@ const STATIC_PATHS = [
 	{path: "/politica-privadesa", priority: "0.2", changefreq: "yearly"},
 ];
 
+/**
+ * Paraules visibles d'un camp HTML.
+ *
+ * Hi ha històries publicades sense text —`escapada-santuari-puig-agut-manlleu-osona`
+ * no en té ni una paraula— que no aporten res a qui hi arriba des de cerca. Al
+ * sitemap s'hi diu a Google què val la pena rastrejar, i una pàgina buida no
+ * hi pinta res: queda fora fins que s'escrigui.
+ */
+const wordCount = (html) => {
+	const text = String(html || "")
+		.replace(/<[^>]+>/g, " ")
+		.replace(/&nbsp;/g, " ")
+		.replace(/s+/g, " ")
+		.trim();
+	return text ? text.split(" ").length : 0;
+};
+
+/** Per sota d'això, la pàgina no té contingut propi. */
+const MIN_WORDS = 50;
+
 const escapeXml = (value) =>
 	String(value)
 		.replace(/&/g, "&amp;")
@@ -97,7 +117,12 @@ export async function getServerSideProps({res}) {
 	// categories, `listingPath` tornaria la ruta de reserva, com fins ara.
 	push(activities.allActivities, listingPath);
 	push(places.allPlaces, listingPath);
-	push(stories.allStories, (el) => `/histories/${el.slug}`);
+	push(
+		(stories.allStories || []).filter(
+			(story) => wordCount(story.description) >= MIN_WORDS,
+		),
+		(el) => `/histories/${el.slug}`,
+	);
 	push(lists, (el) => `/llistes/${el.slug}`);
 	push(destinations, (el) => `/destinacions/${el.slug}`);
 	push(categories, (el) => `/${el.slug}`);

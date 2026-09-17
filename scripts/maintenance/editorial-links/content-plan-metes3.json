@@ -1,0 +1,286 @@
+{
+	"generatedAt": "2026-09-16T21:13:11.351Z",
+	"note": "Últimes meta descripcions de més de 160 caràcters.",
+	"fields": [
+		{
+			"collection": "places",
+			"slug": "hotel-cap-sa-sal-luxury-adults-only",
+			"field": "metaDescription",
+			"value": "Hotel Cap Sa Sal, adults only a Begur: jardí, piscina exterior i vistes sobre el Baix Empordà. Una escapada romàntica a la Costa Brava.",
+			"expect": "Hotel Cap Sa Sal Luxury Adults Only, una escapada que us encantarà! Descobreix Hotel Cap Sa Sal Luxury Adults Only amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "ecorail-cardener-callus-sant-joan-vilatorrada",
+			"field": "metaDescription",
+			"value": "L'Ecorail del Cardener, entre Callús i Sant Joan de Vilatorrada: com és pedalar per l'antiga via del tren al Pla de Bages.",
+			"expect": "Escapada amb l'Ecorail del Cardener, una escapada que us encantarà! Descobreix amb nosaltres Escapada amb l'Ecorail del Cardener i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "waterworld-parc-aquatic-lloret-de-mar",
+			"field": "metaDescription",
+			"value": "Un dia a Waterworld, el parc aquàtic de Lloret de Mar: com és, què s'hi pot fer i consells per anar-hi en parella.",
+			"expect": "Escapada a Waterworld Lloret de Mar, una escapada que us encantarà! Descobreix amb nosaltres Escapada a Waterworld Lloret de Mar i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "lists",
+			"slug": "que-fer-al-delta-de-lebre",
+			"field": "metaDescription",
+			"value": "10 idees per a una escapada al Delta de l'Ebre: miradors, platges, excursions en barca i on menjar-hi arròs.",
+			"expect": "Descobreix què fer i què veure al Delta de l’Ebre: miradors, platges, excursions i gastronomia. Una guia amb 10 plans i restaurants on menjar al Delta de l’Ebre en parella."
+		},
+		{
+			"collection": "lists",
+			"slug": "idees-regals-nadal-parella",
+			"field": "metaDescription",
+			"value": "5 idees de regal de Nadal per a la parella: escapades, experiències i detalls per compartir en comptes d'acumular.",
+			"expect": "Busques idees originals per regalar aquest Nadal? Descobreix 5 regals perfectes per sorprendre la teva parella: escapades, experiències i detalls únics per compartir junts."
+		},
+		{
+			"collection": "places",
+			"slug": "hostal-la-lolita-sant-marti-vell-girones",
+			"field": "metaDescription",
+			"value": "Hostal La Lolita, a Sant Martí Vell: una masia del segle XVIII, adults only i pet-friendly, entre el Gironès i el Baix Empordà.",
+			"expect": "Un hostal adults only i pet-friendly amb molt d’encant on desconnectar, i conèixer el Gironès, el Baix Empordà i molts poblets medievals. Clica l’enllaç per saber-ne més! "
+		},
+		{
+			"collection": "stories",
+			"slug": "castell-de-la-popa-centelles",
+			"field": "metaDescription",
+			"value": "El Castell de la Popa, a Castellcir (Moianès): un castell molt fotogènic i com arribar-hi. La nostra visita.",
+			"expect": "Descobriu amb nosaltres aquest fantàstic Castell de la Popa, situat a la comarca del Moianès. Un castell molt fotogènic que val la pena visitar. Fes clic per saber-ne més."
+		},
+		{
+			"collection": "activities",
+			"slug": "barranquisme-estrets-de-castellar-valles",
+			"field": "metaDescription",
+			"value": "Barranquisme als Estrets de Castellar, a Castellar del Vallès: ràpels, salts i tobogans d'aigua a prop de Barcelona.",
+			"expect": "Fer barranquisme a prop de Barcelona és possible! El Barranc dels Estrets és una bona opció per fer barranquisme i trencar amb la rutina! Clica l'enllaç per saber-ne més!"
+		},
+		{
+			"collection": "activities",
+			"slug": "comarca-aventura-rutes-segway",
+			"field": "metaDescription",
+			"value": "Comarca Aventura, a Arenys de Munt: rutes amb segway pel Maresme, una manera diferent de descobrir la comarca.",
+			"expect": "Comarca Aventura, rutes amb segway, una escapada que us encantarà! Descobreix Comarca Aventura, rutes amb segway amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "balneario-font-vella-adults-only",
+			"field": "metaDescription",
+			"value": "Balneario Font Vella, adults only a Sant Hilari Sacalm: aigües termals i muntanya al cor de les Guilleries.",
+			"expect": "Balneario Font Vella - Adults Only, una escapada que us encantarà! Descobreix Balneario Font Vella - Adults Only amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-spa-la-central-adults-only",
+			"field": "metaDescription",
+			"value": "Hotel Spa La Central, adults only a Darnius: un edifici del segle XIX restaurat entre dos rius, a l'Alt Empordà.",
+			"expect": "Hotel Spa La Central - Adults Only, una escapada que us encantarà! Descobreix Hotel Spa La Central - Adults Only amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-rural-cal-torner-adults-only",
+			"field": "metaDescription",
+			"value": "Cal Torner, hotel rural adults only als Guiamets: habitacions elegants i tranquil·litat al cor del Priorat.",
+			"expect": "Hotel Rural Cal Torner Adults Only, una escapada que us encantarà! Descobreix Hotel Rural Cal Torner Adults Only amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "excursio-el-taga-des-de-bruguera",
+			"field": "metaDescription",
+			"value": "El Taga des de Bruguera: el mirador per excel·lència del Ripollès i el camí ral de Ribes a Ogassa.",
+			"expect": "Escapada a El Taga des de Bruguera, una escapada que us encantarà! Descobreix amb nosaltres Escapada a El Taga des de Bruguera i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "visita-tast-vins-celler-vila-corona-conca-tremp",
+			"field": "metaDescription",
+			"value": "Visita i tast de vins al Celler Vila Corona, a la Conca de Tremp: la D.O. Costers del Segre entre vinyes.",
+			"expect": "Gaudeix d'una visita i tast de vins al Celler Vila Corona, a la Conca de Tremp. Descobriu la D.O. Costers del Segre passejant entre les vinyes d'aquest autèntic celler."
+		},
+		{
+			"collection": "stories",
+			"slug": "refugi-comes-de-rubio-pallars-sobira",
+			"field": "metaDescription",
+			"value": "El Refugi Comes de Rubió, a 1.980 m al Parc Natural de l'Alt Pirineu: com s'hi arriba i com és dormir-hi.",
+			"expect": "Escapada al Refugi Comes de Rubió, una escapada que us encantarà! Descobreix amb nosaltres Escapada al Refugi Comes de Rubió i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "girona-temps-de-flors",
+			"field": "metaDescription",
+			"value": "Girona Temps de Flors, l'exposició que omple la ciutat de flors des del 1954: com és i què no us podeu perdre.",
+			"expect": "Escapada al Girona Temps de Flors, una escapada que us encantarà! Descobreix amb nosaltres Escapada al Girona Temps de Flors i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "mas-el-brugue-apartaments-turisme-rural-terrades",
+			"field": "metaDescription",
+			"value": "Mas el Brugué, apartaments rurals a Terrades: la nostra estada, Santa Magdalena i els contraforts de l'Alta Garrotxa.",
+			"expect": "Descobrint Mas el Brugué, Terrades i Santa Magdalena, una escapada que us encantarà! Descobreix amb nosaltres Mas el Brugué i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "lists",
+			"slug": "millors-campings-catalunya",
+			"field": "metaDescription",
+			"value": "16 càmpings de Catalunya per a una escapada en parella: de muntanya, a primera línia de mar i amb bungalous i glamping.",
+			"expect": "Buscant els millors càmpings de Catalunya per a una escapada en parella? Fes clic descobreix la llista dels millors càmpings de Catalunya feta per la nostra comunitat."
+		},
+		{
+			"collection": "activities",
+			"slug": "bosc-de-les-escultures-de-joan-carola-de-celra-girona",
+			"field": "metaDescription",
+			"value": "El Bosc de les Escultures de Celrà, a 30 minuts de Girona: una ruta curta entre figures amagades al bosc.",
+			"expect": "Descobrireu una ruta que s’endinsa dins del bosc màgic i de conte amb figures i escultures que li donen vida i el fan més sorprenent. Clica l’enllaç per saber-ne més!"
+		},
+		{
+			"collection": "places",
+			"slug": "iglus-de-les-estrelles-a-prades",
+			"field": "metaDescription",
+			"value": "Iglús de les Estrelles, a Prades: dormir sota un sostre de vidre envoltat de bosc, a les muntanyes de Prades.",
+			"expect": "Iglús de les Estrelles, a Prades, una escapada que us encantarà! Descobreix Iglús de les Estrelles, a Prades amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "el-cau-del-papibou-adults-only",
+			"field": "metaDescription",
+			"value": "El Cau del Papibou, adults only a Peratallada: un edifici del segle XIII reformat al cor del poble medieval.",
+			"expect": "El Cau del Papibou - Adults Only, una escapada que us encantarà! Descobreix El Cau del Papibou - Adults Only amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "pastorets-de-mataro-sala-cabanyes",
+			"field": "metaDescription",
+			"value": "Els Pastorets de Mataró, a Sala Cabanyes: uns dels pastorets amb més història. Com va anar la nostra visita.",
+			"expect": "Escapada als Pastorets de Mataró, una escapada que us encantarà! Descobreix amb nosaltres Escapada als Pastorets de Mataró i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "frankfurts-original-anec-blau-castelldefels",
+			"field": "metaDescription",
+			"value": "Frankfurt's Original, a Castelldefels: els frankfurts de tota la vida, modernitzats. Com és i què hi vam menjar.",
+			"expect": "Escapada al Frankfurt’s Original, una escapada que us encantarà! Descobreix amb nosaltres Escapada al Frankfurt’s Original i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "lists",
+			"slug": "escapades-romantiques-catalunya-parella",
+			"field": "metaDescription",
+			"value": "8 escapades romàntiques per Catalunya: allotjaments amb encant, tasts de vins, vols en globus i cales per a dos.",
+			"expect": "Descobreix 8 escapades romàntiques per gaudir en parella a Catalunya: allotjaments amb encant, tasts de vins, vols en globus i molt més per viure moments únics junts."
+		},
+		{
+			"collection": "activities",
+			"slug": "visita-jardins-artigas",
+			"field": "metaDescription",
+			"value": "Els Jardins Artigas, a la Pobla de Lillet: obra de Gaudí entre el riu i el bosc. Horaris, com arribar-hi i què veure.",
+			"expect": "Descobreix els Jardins Artigas, una joia del modernisme català dissenyada per Gaudí. Guia completa per visitar-los, amb horaris, curiositats i què no et pots perdre."
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-burriac-medieval-cabrils-maresme-catalunya",
+			"field": "metaDescription",
+			"value": "El Castell de Burriac, a Cabrera de Mar: un dels castells medievals més emblemàtics del Maresme. Com pujar-hi.",
+			"expect": "Descobreix tot sobre el Castell de Burriac situat a Maresme, Catalunya. Coneix la seva història, com arribar-hi i totes les informacions útils per a la teva visita."
+		},
+		{
+			"collection": "activities",
+			"slug": "matagalls-per-sant-marcal",
+			"field": "metaDescription",
+			"value": "El Matagalls des de Sant Marçal: 1.698 metres al massís del Montseny, com arribar al punt de sortida i quant es triga.",
+			"expect": "El Matagalls des de Sant Marçal, una escapada que us encantarà! Descobreix El Matagalls des de Sant Marçal amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "avioneta-estavellada-a-santa-fe",
+			"field": "metaDescription",
+			"value": "Les restes de l'avioneta que es va estavellar el 2000 a Santa Fe del Montseny: on són i com arribar-hi a peu.",
+			"expect": "Avioneta estavellada a Santa Fe, una escapada que us encantarà! Descobreix Avioneta estavellada a Santa Fe amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "vol-en-globus-vol-de-coloms-garrotxa",
+			"field": "metaDescription",
+			"value": "Vol en globus amb Vol de Coloms, des de Santa Pau: preu, durada i com és el vol sobre els volcans de la Garrotxa.",
+			"expect": "Vol en globus amb Vol de Coloms, una escapada que us encantarà! Descobreix Vol en globus amb Vol de Coloms amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-rural-vinyes-emporda",
+			"field": "metaDescription",
+			"value": "Hotel Rural Vinyes de l'Empordà, a Fonteta: una casa del segle XVIII amb l'encant de les masies del Baix Empordà.",
+			"expect": "Hotel Rural Vinyes de l’Empordà, una escapada que us encantarà! Descobreix Hotel Rural Vinyes de l’Empordà amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-mas-pastora-adults-only",
+			"field": "metaDescription",
+			"value": "Hotel Mas Pastora, adults only a Llafranc: una casa de camp del segle XVIII a pocs minuts de les cales.",
+			"expect": "Hotel Mas Pastora - Adults Only, una escapada que us encantarà! Descobreix Hotel Mas Pastora - Adults Only amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hostalet-de-begur-adults-only",
+			"field": "metaDescription",
+			"value": "Hostalet de Begur, adults only: piscina exterior, solàrium i esmorzar, a tocar de les platges de Begur.",
+			"expect": "Hostalet de Begur - Adults Only, una escapada que us encantarà! Descobreix Hostalet de Begur - Adults Only amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-mas-tapiolas-suits-natura",
+			"field": "metaDescription",
+			"value": "Mas Tapiolas Suits Natura, a Santa Cristina d'Aro: xalets privats de luxe en plena natura de la Costa Brava.",
+			"expect": "Hotel Mas Tapiolas Suits Natura, una escapada que us encantarà! Descobreix Hotel Mas Tapiolas Suits Natura amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "stories",
+			"slug": "restaurant-pins-mar-sant-andreu-llavaneres",
+			"field": "metaDescription",
+			"value": "El Restaurant Pins Mar, a primera línia de Sant Andreu de Llavaneres: cuina mediterrània amb el mar davant.",
+			"expect": "Escapada al Restaurant Pins Mar, una escapada que us encantarà! Descobreix amb nosaltres Escapada al Restaurant Pins Mar i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "tramuntana-hotel-adults-only",
+			"field": "metaDescription",
+			"value": "Tramuntana Hotel, adults only al nucli antic de Cadaqués, a 200 metres del mar. Una escapada romàntica al Cap de Creus.",
+			"expect": "Tramuntana Hotel - Adults Only, una escapada que us encantarà! Descobreix Tramuntana Hotel - Adults Only amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "casa-mila-la-pedrera-barcelona",
+			"field": "metaDescription",
+			"value": "La Casa Milà, La Pedrera de Gaudí a Barcelona: com visitar-la i per què és l'edifici més emblemàtic de l'Eixample.",
+			"expect": "L'edifici més emblemàtic d'Antoni Gaudí i la reflexió més evolucionada sobre un edifici en un xamfrà de l'Eixample de Barcelona. Clica l'enllaç per saber-ne més!"
+		},
+		{
+			"collection": "activities",
+			"slug": "casa-de-os-bru-isil-pirineus",
+			"field": "metaDescription",
+			"value": "La Casa de l'Ós Bru, a Isil: un espai per conèixer l'ós dels Pirineus i la seva conservació, al Pallars Sobirà.",
+			"expect": "Si vols conèixer molt més sobre l'ós dels Pirineus, la seva divulgació i la seva sensibilització, no et pots perdre aquesta escapada! Fes click per saber-ne més!"
+		},
+		{
+			"collection": "places",
+			"slug": "cabanyes-entre-valls-vall-de-bianya-cabanes-arbres",
+			"field": "metaDescription",
+			"value": "Cabanyes entre Valls, a la Vall de Bianya: cabanes als arbres amb llar de foc, barbacoa i jacuzzi per a dos.",
+			"expect": "Escapeu-vos a la natura i gaudiu d'una estada de somni a Cabanyes entre Valls. Cabanes amb llar de foc, barbacoa i jacuzzi. Ideals per a una escapada en parella."
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-spa-porto-cristo-port-de-la-selva",
+			"field": "metaDescription",
+			"value": "Hotel Spa Porto Cristo, al Port de la Selva: spa i mar al Cap de Creus, per a una escapada romàntica tranquil·la.",
+			"expect": "L'Hotel Spa Porto Cristo, al Port de la Selva, us sorprendrà. Fes clic per descobrir l'Hotel Spa Porto Cristo, ideal per a una escapada romàntica i desconnectar!"
+		},
+		{
+			"collection": "lists",
+			"slug": "mercats-de-nadal-fires-de-nadal-catalunya",
+			"field": "metaDescription",
+			"value": "Els 9 millors mercats de Nadal de Catalunya: on són, quan se celebren i com combinar-los amb una escapada en parella.",
+			"expect": "Buscant un mercat de Nadal o fira de Nadal per escapar-vos aquest desembre? Et llistem els 9 millors mercats de Nadal de Catalunya per a una escapada en parella!"
+		}
+	]
+}

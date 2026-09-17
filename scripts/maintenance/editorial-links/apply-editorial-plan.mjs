@@ -555,6 +555,18 @@ const createState = (db) => {
 	const docs = new Map();
 	const entries = new Map();
 
+	const findById = async (collection, id) => {
+		const key = `${collection}#${id}`;
+		if (!docs.has(key)) {
+			const { ObjectId } = await import("mongodb");
+			docs.set(
+				key,
+				await db.collection(collection).find({ _id: new ObjectId(String(id)) }).toArray(),
+			);
+		}
+		return docs.get(key);
+	};
+
 	const findBySlug = async (collection, slug) => {
 		const key = `${collection}:${slug}`;
 		if (!docs.has(key)) {
@@ -616,7 +628,7 @@ const createState = (db) => {
 			}))
 			.filter((entry) => Object.keys(entry.fields).length || entry.notes.length);
 
-	return { findBySlug, current, set, note, changed };
+	return { findBySlug, findById, current, set, note, changed };
 };
 
 const collectPlan = async (db, plan, only) => {
@@ -635,9 +647,13 @@ const collectPlan = async (db, plan, only) => {
 		errors: [],
 	};
 
-	const forEachDoc = async (collection, slug, callback) => {
-		const found = await state.findBySlug(collection, slug);
-		if (!found.length) stats.notFound.push(`${collection} ${slug}`);
+	const forEachDoc = async (collection, slug, callback, id) => {
+		// Amb slugs repetits (`hotel-mas-mariassa`) cal poder dir de quin
+		// document es parla: si l'entrada porta `id`, mana.
+		const found = id
+			? await state.findById(collection, id)
+			: await state.findBySlug(collection, slug);
+		if (!found.length) stats.notFound.push(`${collection} ${id || slug}`);
 		for (const doc of found) {
 			try {
 				await callback(doc);
@@ -733,7 +749,13 @@ const collectPlan = async (db, plan, only) => {
 				const destination = await db
 					.collection("destinations")
 					.findOne({ slug: item.destination, isRemoved: { $ne: true } });
-				destinationIds.set(item.destination, destination?._id || null);
+				// El model desa `destinations` com a text, no com a ObjectId: si
+				// s'hi escriu un ObjectId, les consultes del backend (que hi
+				// busquen cadenes) no el troben i la destinació surt buida.
+				destinationIds.set(
+					item.destination,
+					destination ? String(destination._id) : null,
+				);
 			}
 			const destinationId = destinationIds.get(item.destination);
 			if (!destinationId) {
@@ -752,7 +774,10 @@ const collectPlan = async (db, plan, only) => {
 
 	if (only.includes("fields")) {
 		for (const item of plan.fields || []) {
-			await forEachDoc(item.collection, item.slug, (doc) => {
+			await forEachDoc(
+				item.collection,
+				item.slug,
+				(doc) => {
 				const current = state.current(item.collection, doc, item.field);
 				if (sameValue(current, item.value)) return;
 				const expected = item.expectEmpty
@@ -770,7 +795,9 @@ const collectPlan = async (db, plan, only) => {
 				state.set(item.collection, doc, item.field, item.value);
 				state.note(item.collection, doc, `[fields] ${item.field} → «${preview(item.value)}»`);
 				stats.fields++;
-			});
+				},
+				item.id,
+			);
 		}
 	}
 
