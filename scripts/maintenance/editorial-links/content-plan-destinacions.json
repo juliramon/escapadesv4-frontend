@@ -1,0 +1,49 @@
+{
+	"generatedAt": "2026-09-17T06:43:38.401Z",
+	"note": "Imatges de capçalera de les destinacions i esborrat del duplicat de Mas Mariassa.",
+	"fields": [
+		{
+			"collection": "destinations",
+			"slug": "escapades-costa-brava",
+			"field": "image",
+			"value": "https://res.cloudinary.com/juligoodie/image/upload/v1618841966/getaways-guru/qsrbvlltfiqeyjcozwjd.jpg",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-maresme",
+			"field": "image",
+			"value": "https://res.cloudinary.com/juligoodie/image/upload/v1678401014/getaways-guru/j7wfv11na8cmjtsnrctp.jpg",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-costa-daurada",
+			"field": "image",
+			"value": "https://res.cloudinary.com/juligoodie/image/upload/v1716470465/getaways-guru/vv2tnogs663yeuj44k23.jpg",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-delta-de-lebre",
+			"field": "image",
+			"value": "https://res.cloudinary.com/juligoodie/image/upload/v1729603139/getaways-guru/lvwv5sngpwknbsiezqxh.jpg",
+			"expectEmpty": true
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-andorra",
+			"field": "image",
+			"value": "https://res.cloudinary.com/juligoodie/image/upload/v1668542591/getaways-guru/apkgwfkkn58ivqnpnjse.jpg",
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-mas-mariassa",
+			"id": "6075a16042941500158edbd2",
+			"field": "isRemoved",
+			"value": true,
+			"expect": false
+		}
+	]
+}

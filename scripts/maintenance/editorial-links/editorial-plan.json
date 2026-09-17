@@ -1,5 +1,5 @@
 {
-	"generatedAt": "2026-09-16T21:15:26.608Z",
+	"generatedAt": "2026-09-17T06:45:39.822Z",
 	"source": "API pública de producció, 15/09/2026",
 	"relatedStory": [
 		{
@@ -1317,6 +1317,146 @@
 			"collection": "activities",
 			"slug": "excursio-amb-gicafer-andorra",
 			"destination": "escapades-andorra"
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-de-montclus-sant-esteve-de-palautordera-montseny",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "poble-montseny-montseny",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-de-tagamanent-valles-oriental-catalunya",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "el-brull-poble-castell-montseny",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "arboretum-masjoan-espinelves",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "fira-de-la-castanya-viladrau-montseny",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "espai-montseny-viladrau-montseny",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-montsoriu-la-selva-catalunya",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "matagalls-per-sant-marcal",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "castanyer-de-les-9-branques",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "avioneta-estavellada-a-santa-fe",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "places",
+			"slug": "casal-sagrat-cor-viladrau-montseny",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-somlom-montseny-ecofriendly-sant-esteve-palautordera",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "places",
+			"slug": "hostal-montserrat-sant-celoni-montseny",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "places",
+			"slug": "cabanes-als-arbres-sant-hilari-sacalm",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "places",
+			"slug": "el-follo-turisme-rural",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "places",
+			"slug": "balneario-font-vella-adults-only",
+			"destination": "escapades-montseny"
+		},
+		{
+			"collection": "activities",
+			"slug": "mirador-sant-agusti-de-llucanes",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "activities",
+			"slug": "ruta-santuari-puig-agut",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "activities",
+			"slug": "panta-de-sau-osona",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-de-centelles-sant-marti-de-centelles-osona",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "activities",
+			"slug": "pont-medieval-llucanes-sant-marti-albars-osona",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-lluca-llucanes-osona",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "activities",
+			"slug": "roure-senyora-sant-boi-llucanes-roure-centenari",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "places",
+			"slug": "apartaments-ca-estamenya-perafita-llucanes",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "places",
+			"slug": "la-garriga-de-castelladral",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "activities",
+			"slug": "esglesia-de-santa-maria-de-lluca-llucanes",
+			"destination": "escapades-osona"
+		},
+		{
+			"collection": "activities",
+			"slug": "santuari-cabrera-collsacabra-montcabrer-osona",
+			"destination": "escapades-osona"
 		}
 	]
 }
