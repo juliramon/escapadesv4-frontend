@@ -26,6 +26,7 @@ import {
 	listingPath,
 	listingUrl,
 } from "../../utils/listingRoutes";
+import { storyCanonicalUrl } from "../../utils/storyCanonicals";
 import {
 	idOf,
 	loadListingCatalog,
@@ -358,7 +359,11 @@ const GetawayListing = ({
 		// La fitxa és accessible des de qualsevol slug de categoria, però la URL
 		// que mana és sempre la de la seva categoria principal. Sense això cada
 		// variant es canonicalitzava a si mateixa i competien entre elles.
-		const canonicalUrl = listingUrl(getawayDetails);
+		const ownUrl = listingUrl(getawayDetails);
+		// I quan el lloc també té una història, mana la història: totes dues
+		// sortien per a les mateixes cerques i es repartien els senyals.
+		// `utils/storyCanonicals.js` explica quan s'hi ha d'afegir una fitxa.
+		const canonicalUrl = storyCanonicalUrl(getawayDetails) || ownUrl;
 
 		return (
 			<>
@@ -379,14 +384,14 @@ const GetawayListing = ({
 					page2Title={categoryDetails.title}
 					page2Url={`https://escapadesenparella.cat/${categoryDetails.slug}`}
 					page3Title={getawayDetails.title}
-					page3Url={canonicalUrl}
+					page3Url={ownUrl}
 				/>
 				{/* Una fitxa és un lloc, no un article: amb `TouristAttraction`
 				    o `LodgingBusiness`, Google en pot llegir l'adreça, les
 				    coordenades, el telèfon i l'horari. */}
 				<ListingRichSnippet
 					listing={getawayDetails}
-					url={canonicalUrl}
+					url={ownUrl}
 					image={cloudinaryImage(getawayDetails.cover, 1200, 630).src}
 				/>
 				<div id="listingPage">
