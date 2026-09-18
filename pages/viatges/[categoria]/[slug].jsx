@@ -27,6 +27,7 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 				options={{
 					infinite: true,
 				}}
+				key={`images-grid-${start}-${end}`}
 			>
 				<div className="flex flex-wrap -mx-1 cursor-pointer">
 					{images.map((image, idx) => {
@@ -35,9 +36,9 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 								className="w-full md:w-1/2 lg:w-1/3 px-1 mb-2 flex-auto"
 								data-fancybox="gallery"
 								data-src={image}
+								key={idx}
 							>
 								<picture
-									key={idx}
 									className="block rounded-2xl overflow-hidden aspect-1 relative"
 								>
 									<img
