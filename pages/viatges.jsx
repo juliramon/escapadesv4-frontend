@@ -56,7 +56,7 @@ const Trips = ({ tripCategories, featuredTripCategories }) => {
 					    la primera fila de destinacions quedi per sobre del
 					    plec en un portàtil. */}
 					<ListingHeader
-						title={`<span class="text-secondary-500">Viatges</span> en parella`}
+						title="Viatges en parella"
 						subtitle="Descobreix el món amb nosaltres. T'expliquem els nostres viatges, aventures i consells a mesura que anem descobrint nous països."
 						breadcrumbLevel1="Viatges en parella"
 						actions={

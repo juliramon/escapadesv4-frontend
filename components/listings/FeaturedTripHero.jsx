@@ -137,7 +137,9 @@ const FeaturedTripCard = ({ category, isLcp }) => {
 						</ul>
 
 						<span className="featured-trip__cta">
-							<span className="button button__cta button__med">
+							{/* Fosc, no salmó: sobre el crema del bloc el salmó
+							    es confon amb el fons i deixa de semblar un botó. */}
+							<span className="button button__primary button__med">
 								Veure el viatge
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
