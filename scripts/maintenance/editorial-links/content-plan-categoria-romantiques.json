@@ -1,0 +1,13 @@
+{
+	"generatedAt": "2026-09-18T16:31:19.622Z",
+	"note": "Meta-descripció de la categoria d'escapades romàntiques. El camp `subtitle` de les categories només s'fa servir com a meta-descripció: la pàgina no el mostra enlloc. El text que hi havia tenia una errada («anomés») visible al resultat de Google.",
+	"fields": [
+		{
+			"collection": "categories",
+			"slug": "escapades-romantiques",
+			"field": "subtitle",
+			"value": "84 escapades romàntiques per Catalunya: cabanes als arbres, hotels amb encant i nits sota les estrelles. Amb preus, com arribar-hi i fotos nostres.",
+			"expect": "La vostra propera escapada romàntica a Catalunya anomés un clic!"
+		}
+	]
+}
