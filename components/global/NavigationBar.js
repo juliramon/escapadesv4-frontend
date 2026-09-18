@@ -4,6 +4,8 @@ import Link from "next/link";
 import UserContext from "../../contexts/UserContext";
 import ContentBar from "../homepage/ContentBar";
 import VerticalsNav from "./VerticalsNav";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useT } from "../../i18n/strings";
 import {
 	DESTINATIONS,
 	GETAWAY_CATEGORIES,
@@ -36,6 +38,7 @@ const DashboardIcon = () => (
 );
 
 const NavigationBar = () => {
+	const t = useT();
 	const { user } = useContext(UserContext);
 	const searchInputRef = useRef(null);
 
@@ -171,7 +174,7 @@ const NavigationBar = () => {
 					    administradors, perdia la manera de tornar a la portada. */}
 					<Link href="/">
 						<a
-							title="Inici"
+							title={t("nav.home")}
 							className="col-span-2 md:col-span-3 lg:col-span-3"
 						>
 							<picture>
@@ -194,10 +197,11 @@ const NavigationBar = () => {
 					>
 						{/* Button open */}
 						<div className="menu__open col-span-2 md:col-span-5">
+							<LanguageSwitcher />
 							<button
 								className="search__open"
 								onClick={() => handleSearchPanel()}
-								aria-label="Obrir panell de cerca"
+								aria-label={t("nav.searchOpen")}
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -217,7 +221,7 @@ const NavigationBar = () => {
 							</button>
 							<button
 								className=""
-								aria-label="Botó obrir menú"
+								aria-label={t("nav.menuOpen")}
 								onClick={() => handleResponsiveMenu()}
 							>
 								<svg
@@ -248,7 +252,7 @@ const NavigationBar = () => {
 						<div className="lg:hidden absolute top-0 right-0 z-[60]">
 							<button
 								className="menu__close"
-								aria-label="Botó tancar menu"
+								aria-label={t("nav.menuClose")}
 								onClick={() => handleResponsiveMenu()}
 							>
 								<svg
@@ -287,7 +291,7 @@ const NavigationBar = () => {
 									>
 										<button
 											className="search__close"
-											aria-label="Botó tancar menu"
+											aria-label={t("nav.menuClose")}
 											onClick={() => handleSearchPanel()}
 										>
 											<svg
@@ -348,7 +352,7 @@ const NavigationBar = () => {
 													className="search__submit button button__med button__primary"
 													onClick={handleSearchSubmit}
 												>
-													<span>Buscar</span>
+													<span>{t("nav.search")}</span>
 													<svg
 														xmlns="http://www.w3.org/2000/svg"
 														width="22"
@@ -499,7 +503,7 @@ const NavigationBar = () => {
 									<li className="menu__item">
 										<Link href="/descomptes-viatjar">
 											<a
-												title="Descomptes per viatjar"
+												title={t("nav.discounts")}
 												className="button button__ghost button__xs whitespace-nowrap"
 											>
 												Descomptes

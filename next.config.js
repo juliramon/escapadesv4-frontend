@@ -8,6 +8,17 @@ module.exports = withTM({
 		STRIPE_API_KEY: process.env.NEXT_PUBLIC_STRIPE_API_KEY,
 		GOOGLE_ADS_CLIENT_ID: process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID,
 	},
+	// El català es queda amb les URL de sempre i el castellà viu sota /es:
+	// les pàgines en català ja estan indexades i canviar-los la URL seria
+	// començar de zero. `localeDetection` apagat a posta —si Google o un
+	// visitant demana la pàgina en català, la rep en català— i perquè un
+	// redirect automàtic per capçalera d'idioma és justament el que fa que
+	// Googlebot no arribi mai a veure la versió castellana.
+	i18n: {
+		locales: ["ca", "es"],
+		defaultLocale: "ca",
+		localeDetection: false,
+	},
 	images: {
 		remotePatterns: [
 			{

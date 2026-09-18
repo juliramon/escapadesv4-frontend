@@ -8,8 +8,12 @@ class MyDocument extends Document {
 	}
 
 	render() {
+		// `locale` el posa Next a partir de la ruta: sense això, les pàgines de
+		// sota /es es declararien en català i els lectors de pantalla —i
+		// Google— es creurien l'etiqueta abans que el text.
+		const lang = this.props.__NEXT_DATA__?.locale || "ca";
 		return (
-			<Html lang="ca">
+			<Html lang={lang}>
 				<Head>
 					<Script
 						src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_TAG}`}

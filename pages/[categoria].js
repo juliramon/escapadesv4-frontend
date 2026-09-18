@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LOCALES } from "../utils/i18n";
 import { useEffect, useState } from "react";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
@@ -251,9 +252,16 @@ const CategoryPage = ({
 export async function getStaticPaths() {
 	const service = new ContentService();
 	const categories = await service.getCategories();
-	const paths = categories.map((categoria) => ({
-		params: { categoria: categoria.slug },
-	}));
+	// Amb `fallback: false` només existeix el que es genera aquí, i quan hi ha
+	// idiomes una ruta sense `locale` només val per al de per defecte: sense
+	// això, /es/hotels-amb-encant feia 404. Són setze categories per idioma,
+	// o sigui que generar-les totes no costa res.
+	const paths = LOCALES.flatMap((locale) =>
+		categories.map((categoria) => ({
+			params: { categoria: categoria.slug },
+			locale,
+		})),
+	);
 	return { paths, fallback: false };
 }
 
