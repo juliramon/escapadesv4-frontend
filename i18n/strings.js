@@ -27,6 +27,27 @@ const STRINGS = {
 		es: "Descuentos para viajar",
 	},
 	"nav.language": { ca: "Idioma", es: "Idioma" },
+	"nav.byGetawayType": {
+		ca: "Per tipus d'escapada",
+		es: "Por tipo de escapada",
+	},
+	"nav.byStayType": {
+		ca: "Per tipus d'allotjament",
+		es: "Por tipo de alojamiento",
+	},
+	"nav.zones": { ca: "Zones per descobrir", es: "Zonas por descubrir" },
+	"nav.allExperiences": {
+		ca: "Veure totes les experiències",
+		es: "Ver todas las experiencias",
+	},
+	"nav.allStays": {
+		ca: "Veure tots els allotjaments",
+		es: "Ver todos los alojamientos",
+	},
+	"nav.allDestinations": {
+		ca: "Veure totes les destinacions",
+		es: "Ver todos los destinos",
+	},
 	"footer.terms": { ca: "Condicions d'ús", es: "Condiciones de uso" },
 	"footer.privacy": {
 		ca: "Política de privadesa",

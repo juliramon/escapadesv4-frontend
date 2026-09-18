@@ -70,12 +70,76 @@ const localized = (doc, locale, fields) => {
 	if (!doc || !locale || locale === DEFAULT_LOCALE) return doc;
 	const out = { ...doc };
 	for (const field of fields) out[field] = t(doc, field, locale);
+	// El slug hi va sempre: un document traduït ha de portar la seva adreça,
+	// si no les targetes dels llistats enllaçarien la versió catalana. Es fa
+	// després de les crides a l'API, que sempre van amb el slug original.
+	out.slug = slugFor(doc, locale);
 	return out;
 };
 
+/**
+ * Els segments fixos de les rutes, traduïts.
+ *
+ * `/es/destinos/...` i no `/es/destinacions/...`: si la URL ha de ser en
+ * castellà, ho ha de ser sencera. Els fitxers de `pages/` continuen dient-se
+ * en català —són codi, no URL— i `next.config.js` hi fa arribar les
+ * castellanes amb un rewrite.
+ */
+const SEGMENTS = {
+	destinacions: { ca: "destinacions", es: "destinos" },
+	histories: { ca: "histories", es: "historias" },
+	llistes: { ca: "llistes", es: "listas" },
+	allotjaments: { ca: "allotjaments", es: "alojamientos" },
+	activitats: { ca: "activitats", es: "actividades" },
+	viatges: { ca: "viatges", es: "viajes" },
+};
+
+/** El segment d'una secció en un idioma. */
+const segment = (name, locale) =>
+	SEGMENTS[name]?.[locale] || SEGMENTS[name]?.[DEFAULT_LOCALE] || name;
+
+/** El segment en català a partir del d'un altre idioma, per desfer el camí. */
+const segmentToCatalan = (value) => {
+	const hit = Object.entries(SEGMENTS).find(([, noms]) =>
+		Object.values(noms).includes(value),
+	);
+	return hit ? hit[0] : value;
+};
+
+/**
+ * Slug d'un document en un idioma.
+ *
+ * Quan encara no n'hi ha de traduït es fa servir el català: l'adreça queda a
+ * mitges, però existeix i funciona, que és millor que un 404 mentre es va
+ * traduint el catàleg.
+ */
+const slugFor = (doc, locale) => {
+	if (!locale || locale === DEFAULT_LOCALE) return doc?.slug;
+	const traduit = doc?.translations?.[locale]?.slug;
+	return typeof traduit === "string" && traduit.trim() ? traduit : doc?.slug;
+};
+
+/**
+ * El document d'una llista que respon a un slug, sigui en l'idioma que sigui.
+ *
+ * Accepta també el slug català dins de l'idioma traduït: les adreces velles
+ * que algú hagi desat o enllaçat continuen portant a algun lloc, i la
+ * canònica ja s'encarrega de dir quina és la bona.
+ */
+const findBySlug = (docs, slug, locale) =>
+	(docs || []).find((doc) => slugFor(doc, locale) === slug) ||
+	(docs || []).find((doc) => doc?.slug === slug) ||
+	null;
+
 /** Camps que tradueix cada tipus de document. */
 const FIELDS = {
-	listing: ["title", "subtitle", "description", "metaTitle", "metaDescription"],
+	listing: [
+		"title",
+		"subtitle",
+		"description",
+		"metaTitle",
+		"metaDescription",
+	],
 	story: ["title", "subtitle", "description", "metaTitle", "metaDescription"],
 	list: ["title", "subtitle", "description", "metaTitle", "metaDescription"],
 	category: ["title", "subtitle", "seoText", "seoTextHeader"],
@@ -89,9 +153,14 @@ export {
 	DEFAULT_LOCALE,
 	LOCALE_LABELS,
 	FIELDS,
+	SEGMENTS,
+	findBySlug,
 	isLocale,
 	localePrefix,
 	localeUrl,
 	localized,
+	segment,
+	segmentToCatalan,
+	slugFor,
 	t,
 };

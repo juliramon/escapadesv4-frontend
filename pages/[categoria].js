@@ -1,5 +1,13 @@
 import Link from "next/link";
-import { FIELDS, LOCALES, localized } from "../utils/i18n";
+import { useRouter } from "next/router";
+import {
+	DEFAULT_LOCALE,
+	FIELDS,
+	LOCALES,
+	findBySlug,
+	localized,
+	slugFor,
+} from "../utils/i18n";
 import { useT } from "../i18n/strings";
 import { useEffect, useState } from "react";
 import Footer from "../components/global/Footer";
@@ -26,6 +34,10 @@ const CategoryPage = ({
 	currentPage = 1,
 }) => {
 	const t = useT();
+	const { locale } = useRouter();
+	// El document sempre porta el slug català: el de la ruta actual és el de
+	// l'idioma, i és el que han de dur el «Veure'n més» i el fil d'Ariadna.
+	const slugActual = slugFor(categoryDetails, locale);
 	// L'estat surt de les props des del primer render. Abans `hasResults`
 	// començava a false i el servidor pintava esquelets en lloc de fitxes: a
 	// l'HTML que llegeix Google, les categories no enllaçaven cap escapada.
@@ -51,9 +63,9 @@ const CategoryPage = ({
 
 	// Enllaços a les categories germanes: donen sortida a qui no troba res
 	// aquí i connecten entre elles les 16 pàgines de categoria.
-	const siblingCategories = categoryGroupFor(categoryDetails?.slug);
+	const siblingCategories = categoryGroupFor(slugActual, locale);
 
-	const basePath = `/${categoryDetails.slug}`;
+	const basePath = `/${slugActual}`;
 	const pageUrl = `https://escapadesenparella.cat${pagePath(
 		basePath,
 		currentPage,
@@ -169,7 +181,7 @@ const CategoryPage = ({
 				page1Title={t("nav.home")}
 				page1Url="https://escapadesenparella.cat"
 				page2Title={categoryDetails.title}
-				page2Url={`https://escapadesenparella.cat/${categoryDetails.slug}`}
+				page2Url={`https://escapadesenparella.cat/${slugActual}`}
 			/>
 			<div id="contentList" className="category relative">
 				<NavigationBar />
@@ -192,7 +204,7 @@ const CategoryPage = ({
 							<TaxonomyChips
 								heading={siblingCategories.heading}
 								items={siblingCategories.items}
-								activeSlug={categoryDetails.slug}
+								activeSlug={slugActual}
 								className="mb-5 md:mb-7"
 							/>
 							<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5">
@@ -237,7 +249,7 @@ const CategoryPage = ({
 							textareaFooter={categoryDetails.seoText}
 							relatedLinks={siblingCategories.items}
 							relatedLinksHeading={siblingCategories.heading}
-							activeSlug={categoryDetails.slug}
+							activeSlug={slugActual}
 						/>
 					) : null}
 				</main>
@@ -258,7 +270,7 @@ export async function getStaticPaths() {
 	// o sigui que generar-les totes no costa res.
 	const paths = LOCALES.flatMap((locale) =>
 		categories.map((categoria) => ({
-			params: { categoria: categoria.slug },
+			params: { categoria: slugFor(categoria, locale) },
 			locale,
 		})),
 	);
@@ -271,7 +283,13 @@ export async function getStaticPaths() {
  */
 export const getCategoryPageProps = async (slug, page = 1, locale) => {
 	const service = new ContentService();
-	const categoryDetails = await service.getCategoryDetails(slug);
+	// En castellà el que arriba és el slug traduït (`escapadas-romanticas`),
+	// que l'API no coneix: es busca al catàleg sencer, que són setze
+	// documents i ja venen de la memòria intermèdia d'ISR.
+	const categoryDetails =
+		locale && locale !== DEFAULT_LOCALE
+			? findBySlug(await service.getCategories(), slug, locale)
+			: await service.getCategoryDetails(slug);
 
 	if (!categoryDetails) {
 		return { notFound: true, revalidate: 120 };
@@ -291,7 +309,11 @@ export const getCategoryPageProps = async (slug, page = 1, locale) => {
 	// document encara no està traduït cau al català tot sol.
 	return {
 		props: {
-			categoryDetails: localized(categoryDetails, locale, FIELDS.category),
+			categoryDetails: localized(
+				categoryDetails,
+				locale,
+				FIELDS.category,
+			),
 			paginatedResults: (paginatedResults || [])
 				.map((item) => localized(item, locale, FIELDS.card))
 				.map(toListingCard),

@@ -197,7 +197,6 @@ const NavigationBar = () => {
 					>
 						{/* Button open */}
 						<div className="menu__open col-span-2 md:col-span-5">
-							<LanguageSwitcher />
 							<button
 								className="search__open"
 								onClick={() => handleSearchPanel()}
@@ -352,7 +351,9 @@ const NavigationBar = () => {
 													className="search__submit button button__med button__primary"
 													onClick={handleSearchSubmit}
 												>
-													<span>{t("nav.search")}</span>
+													<span>
+														{t("nav.search")}
+													</span>
 													<svg
 														xmlns="http://www.w3.org/2000/svg"
 														width="22"
@@ -462,6 +463,13 @@ const NavigationBar = () => {
 									))}
 
 									<div className="mt-6 pt-5 border-t border-neutral-100">
+										<span className="block text-13 uppercase tracking-wider text-grey-300 mb-2">
+											{t("nav.language")}
+										</span>
+										<LanguageSwitcher />
+									</div>
+
+									<div className="mt-6 pt-5 border-t border-neutral-100">
 										<ul className="list-none p-0 m-0 flex flex-col gap-y-1">
 											{dropdownItems.map((item) => (
 												<li
@@ -500,6 +508,9 @@ const NavigationBar = () => {
 											</Link>
 										</li>
 									) : null}
+									<li className="menu__item">
+										<LanguageSwitcher />
+									</li>
 									<li className="menu__item">
 										<Link href="/descomptes-viatjar">
 											<a

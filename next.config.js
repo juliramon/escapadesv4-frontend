@@ -487,6 +487,39 @@ module.exports = withTM({
 			},
 		];
 	},
+	/**
+	 * Les seccions, amb el nom en castellà sota /es.
+	 *
+	 * Els fitxers de `pages/` es continuen dient en català perquè són codi,
+	 * no URL. Aquí és on /es/destinos/… acaba a `pages/destinacions/…`.
+	 * `locale: false` perquè el prefix ja hi és escrit: sense això Next hi
+	 * tornaria a posar l'idioma al davant i el rewrite no casaria mai.
+	 *
+	 * La correspondència viu a `utils/i18n.js`, que és qui construeix els
+	 * enllaços: si se n'hi afegeix una, ha de sortir als dos llocs.
+	 */
+	async rewrites() {
+		const seccions = {
+			destinos: "destinacions",
+			historias: "histories",
+			listas: "llistes",
+			alojamientos: "allotjaments",
+			actividades: "activitats",
+			viajes: "viatges",
+		};
+		return Object.entries(seccions).flatMap(([es, ca]) => [
+			{
+				source: `/es/${es}`,
+				destination: `/es/${ca}`,
+				locale: false,
+			},
+			{
+				source: `/es/${es}/:path*`,
+				destination: `/es/${ca}/:path*`,
+				locale: false,
+			},
+		]);
+	},
 	async headers() {
 		const headers = [];
 		headers.push({
