@@ -46,8 +46,8 @@ const Homepage = (props) => {
 		<>
 			{/* Browser metas  */}
 			<GlobalMetas
-				title="Escapades en parella a Catalunya: 190 llocs que no fallen"
-				description="Fa 11 anys que dormim, mengem i caminem per Catalunya per triar 190 escapades en parella: cabanes, hotels amb encant i rutes. Amb preus i fotos nostres."
+				title="Escapades en parella: experiències i allotjaments memorables"
+				description="Descobreix centenars d’escapades en parella verificades: cabanes als arbres, hotels amb encant i experiències. Amb preus i fotos nostres."
 				url="https://escapadesenparella.cat"
 				image={slideImage.picture_raw}
 				canonical="https://escapadesenparella.cat"
