@@ -1,0 +1,454 @@
+{
+	"generatedAt": "2026-09-18T16:31:07.490Z",
+	"note": "Les 64 meta-descripcions que quedaven amb la plantilla «Fes clic aquí!».",
+	"fields": [
+		{
+			"collection": "activities",
+			"slug": "castanyer-de-les-9-branques",
+			"field": "metaDescription",
+			"value": "El Castanyer de les 9 branques, a Viladrau: un arbre de més de 700 anys i 24 metres d'alçada al cor del Montseny. Com arribar-hi i què hi ha a prop.",
+			"expect": "Castanyer de les 9 branques, una escapada que us encantarà! Descobreix Castanyer de les 9 branques amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "cala-el-golfet-begur",
+			"field": "metaDescription",
+			"value": "Cala El Golfet, a Palafrugell: 75 metres de sorra gruixuda entre penya-segats i pins, pel camí de ronda. Com arribar-hi i on aparcar.",
+			"expect": "Cala El Golfet, una escapada que us encantarà! Descobreix Cala El Golfet amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "airstream-experience-dormir-estrelles-varllnord",
+			"field": "metaDescription",
+			"value": "L'Airstream Experience d'Ordino Arcalís: dormir en una caravana americana enmig de la muntanya andorrana. Des de 143 € per persona.",
+			"expect": "Airstream Experience, una escapada que us encantarà! Descobreix Airstream Experience amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "agerair-parapent",
+			"field": "metaDescription",
+			"value": "Vol en parapent biplaça amb Agerair, a Sant Josep de Fontdepou: volen des del 1997 i no subcontracten cap vol. Des de 60 € per persona.",
+			"expect": "Agerair Parapent, una escapada que us encantarà! Descobreix Agerair Parapent amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "rukimon-rucs-del-corredor",
+			"field": "metaDescription",
+			"value": "Rukimon, als boscos entre Dosrius i Canyamars: passejada amb ruc pel Parc del Montnegre-Corredor i visita a les races d'ase. Des de 18 €.",
+			"expect": "Rukimon Rucs del Corredor, una escapada que us encantarà! Descobreix Rukimon Rucs del Corredor amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "parc-natural-cap-de-creus",
+			"field": "metaDescription",
+			"value": "El Parc Natural del Cap de Creus, a Cadaqués: el primer parc terrestre i marítim de Catalunya, esculpit per la tramuntana. Com visitar-lo.",
+			"expect": "Parc Natural del Cap de Creus, una escapada que us encantarà! Descobreix Parc Natural del Cap de Creus amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "paratge-de-tudela",
+			"field": "metaDescription",
+			"value": "El Paratge de Tudela, al Cap de Creus: roques erosionades amb formes d'animals, un dels racons més estranys del parc. Com arribar-hi.",
+			"expect": "Paratge de Tudela, una escapada que us encantarà! Descobreix Paratge de Tudela amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "fornells-de-la-muntanya",
+			"field": "metaDescription",
+			"value": "Fornells de la Muntanya, un poble de 27 habitants a la Collada de Toses: el Museu del Pastor i el Ripollès. Com arribar-hi i què s'hi veu.",
+			"expect": "Fornells de la Muntanya, una escapada que us encantarà! Descobreix Fornells de la Muntanya amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "excursio-amb-gicafer-andorra",
+			"field": "metaDescription",
+			"value": "Excursió amb Gicafer per les muntanyes d'Arcalís: un vehicle eruga amb guia per descobrir la flora i la fauna d'Andorra. Des de 45 € per persona.",
+			"expect": "Excursió amb Gicafer, una escapada que us encantarà! Descobreix Excursió amb Gicafer amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "el-taga-des-de-bruguera",
+			"field": "metaDescription",
+			"value": "El Taga (2.038 m) des de Bruguera: la ruta al cim que domina el Ripollès, amb vistes al Puigmal i al Canigó. Com arribar-hi i què cal saber.",
+			"expect": "El Taga des de Bruguera, una escapada que us encantarà! Descobreix El Taga des de Bruguera amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "cala-sa-tuna-seixugador",
+			"field": "metaDescription",
+			"value": "Cala Sa Tuna i s'Eixugador, a Begur: dues cales de pissarra amb aigua turquesa, resguardades del vent. Com arribar-hi i on aparcar.",
+			"expect": "Cala Sa Tuna i S’Eixugador, una escapada que us encantarà! Descobreix Cala Sa Tuna i S’Eixugador amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "waterworld-lloret-de-mar",
+			"field": "metaDescription",
+			"value": "Waterworld, a Lloret de Mar: 140.000 m² d'un dels parcs aquàtics més grans d'Europa, amb piscina d'onades i rius ràpids. Des de 35 € per persona.",
+			"expect": "Waterworld Lloret de Mar, una escapada que us encantarà! Descobreix Waterworld Lloret de Mar amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "trineu-gossos-a-andorra",
+			"field": "metaDescription",
+			"value": "Múixing a Andorra, a Encamp: conduir un trineu tirat per gossos sobre la neu de Grandvalira. Des de 85 € per persona.",
+			"expect": "Trineu amb gossos a Andorra, una escapada que us encantarà! Descobreix Trineu amb gossos a Andorra amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "pica-estats-vallferrera",
+			"field": "metaDescription",
+			"value": "La Pica d'Estats (3.143 m) per la Vallferrera: la ruta al cim més alt de Catalunya, unes 6 hores des del refugi. On deixar el cotxe.",
+			"expect": "Pica d’Estats per Vallferrera, una escapada que us encantarà! Descobreix Pica d’Estats per Vallferrera amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "prats-de-cadi-des-d-estana",
+			"field": "metaDescription",
+			"value": "Prats de Cadí des d'Estana: 7,5 km de pinedes i camins pedregosos fins als prats, sota la serra del Cadí. Com arribar-hi i quant s'hi triga.",
+			"expect": "Prats de Cadí des d’Estana, una escapada que us encantarà! Descobreix Prats de Cadí des d’Estana amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "cala-estreta-palamos",
+			"field": "metaDescription",
+			"value": "Cala Estreta, a Palamós: 200 metres de cala verge entre penya-segats, pel camí de ronda des de la platja del Castell. Com arribar-hi.",
+			"expect": "Cala Estreta, una escapada que us encantarà! Descobreix Cala Estreta amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "basses-de-coll-de-nargo",
+			"field": "metaDescription",
+			"value": "Les Basses del Codó, a Coll de Nargó: piscines naturals excavades pel riu Valldarques a la roca calcària. Com arribar-hi, on aparcar i quan anar-hi.",
+			"expect": "Basses de Coll de Nargó, una escapada que us encantarà! Descobreix Basses de Coll de Nargó amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "aiguamolls-baix-emporda-estartit",
+			"field": "metaDescription",
+			"value": "Els Aiguamolls del Baix Empordà, o del Ter Vell: zones humides de la plana del Ter, als peus del Montgrí, per observar-hi ocells. Com visitar-los.",
+			"expect": "Aiguamolls del Baix Empordà, una escapada que us encantarà! Descobreix Aiguamolls del Baix Empordà amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "pedraforca-tartera-pollego-superior",
+			"field": "metaDescription",
+			"value": "El Pedraforca pel Pollegó Superior (2.506 m), des de Gósol: la ruta per la tartera fins al punt més alt de la muntanya. Com arribar-hi.",
+			"expect": "Pedraforca per la tartera, una escapada que us encantarà! Descobreix Pedraforca per la tartera amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "restaurant-maria-de-cadaques",
+			"field": "metaDescription",
+			"value": "Restaurant Maria de Cadaqués, a Palamós: cuina mediterrània amb producte local i atenció al detall. Uns 25 € per persona.",
+			"expect": "Restaurant Maria de Cadaqués, una escapada que us encantarà! Descobreix Restaurant Maria de Cadaqués amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "la-terra-a-girona",
+			"field": "metaDescription",
+			"value": "La Terra, a Girona: un local modernista a la vora de l'Onyar, amb voltes, taules de marbre i hamburgueses. Uns 15 € per persona.",
+			"expect": "La Terra, a Girona, una escapada que us encantarà! Descobreix La Terra, a Girona amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "cals-frares",
+			"field": "metaDescription",
+			"value": "Cals Frares, a Cabrera de Mar: dinar dins d'una masia del segle XIII envoltada de faisans, cavalls i ases. Uns 20 € per persona.",
+			"expect": "Cals Frares, una escapada que us encantarà! Descobreix Cals Frares amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "vilanova-de-banat",
+			"field": "metaDescription",
+			"value": "Vilanova de Banat, a 1.240 metres d'altitud: un poble fundat el 1255 i un dels racons més desconeguts de la zona. Com arribar-hi.",
+			"expect": "Vilanova de Banat, una escapada que us encantarà! Descobreix Vilanova de Banat amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "activities",
+			"slug": "moto-de-neu-andorra-ruta-grau-roig",
+			"field": "metaDescription",
+			"value": "Ruta amb moto de neu per Grandvalira-Grau Roig: entre 30 i 60 minuts pels boscos d'Andorra. Des de 60 € per persona, per a majors d'edat.",
+			"expect": "Moto de neu a Grau Roig, una escapada que us encantarà! Descobreix Moto de neu a Grau Roig amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "cabanes-dosrius",
+			"field": "metaDescription",
+			"value": "Cabanes Dosrius, al Maresme: cabanes als arbres a un quilòmetre del Parc del Montnegre-Corredor. Des de 68 € per persona i nit.",
+			"expect": "Cabanes Dosrius, una escapada que us encantarà! Descobreix Cabanes Dosrius amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "cabanes-als-arbres-sant-hilari-sacalm",
+			"field": "metaDescription",
+			"value": "Cabanes als arbres de Sant Hilari Sacalm: deu cabanes entre les branques, a les Guilleries, amb llar de foc. Des de 120 € per persona i nit.",
+			"expect": "Cabanes als arbres, una escapada que us encantarà! Descobreix Cabanes als arbres amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "mas-pla-solius",
+			"field": "metaDescription",
+			"value": "Mas Pla, a Santa Cristina d'Aro: una masia del segle XVII convertida en hostal i restaurant, a l'interior de la Costa Brava. Des de 15 € per nit.",
+			"expect": "Mas Pla, una escapada que us encantarà! Descobreix Mas Pla amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "mas-el-bruge-apartaments-terrades",
+			"field": "metaDescription",
+			"value": "Mas El Brugué, a Terrades: apartaments amb terrassa i jardí entre l'Empordà i la Garrotxa, amb piscina i llar de foc. Des de 174 € per nit.",
+			"expect": "Mas el Brugué, una escapada que us encantarà! Descobreix Mas el Brugué amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "masia-el-puig",
+			"field": "metaDescription",
+			"value": "Masia el Puig, turisme rural a la Vall de Bianya (Alta Garrotxa): silenci, muntanya i poca cosa més. Des de 77 € per persona i nit.",
+			"expect": "Masia el Puig, una escapada que us encantarà! Descobreix Masia el Puig amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-les-cols-pavellons",
+			"field": "metaDescription",
+			"value": "Les Cols Pavellons, a Olot: cinc pavellons de vidre amb onsen, a tocar de la zona volcànica de la Garrotxa. Des de 360 € per persona i nit.",
+			"expect": "Hotel Les Cols Pavellons, una escapada que us encantarà! Descobreix Hotel Les Cols Pavellons amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-es-cel-de-begur",
+			"field": "metaDescription",
+			"value": "Hotel Es Cel de Begur: vistes al mar i a la Costa de Begur, amb piscina, spa i decoració minimalista. Des de 100 € per persona i nit.",
+			"expect": "Hotel Es Cel de Begur, una escapada que us encantarà! Descobreix Hotel Es Cel de Begur amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hostal-palouet-de-segarra",
+			"field": "metaDescription",
+			"value": "Hostal Palouet de Segarra: murs de pedra picada i celler original al petit poble de Palouet, amb dues piscines. Des de 51 € per persona i nit.",
+			"expect": "Hostal Palouet de Segarra, una escapada que us encantarà! Descobreix Hostal Palouet de Segarra amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-boutique-can-pico",
+			"field": "metaDescription",
+			"value": "Hotel Boutique Can Pico: una masia del segle XVII a 4 km de les platges de la badia de Roses, amb piscina climatitzada. Des de 99 € per nit.",
+			"expect": "Hotel Boutique Can Pico, una escapada que us encantarà! Descobreix Hotel Boutique Can Pico amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-trossos-del-priorat",
+			"field": "metaDescription",
+			"value": "Hotel Trossos del Priorat, a Gratallops: només per a adults, envoltat de les seves pròpies vinyes. Des de 53 € per persona i nit.",
+			"expect": "Hotel Trossos del Priorat, una escapada que us encantarà! Descobreix Hotel Trossos del Priorat amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "el-far-hotel-restaurant-llafranc",
+			"field": "metaDescription",
+			"value": "El Far Hotel Restaurant, a Llafranc: habitacions amb balcó a pocs metres de la platja i del far de Sant Sebastià. Des de 60 € per persona i nit.",
+			"expect": "El Far Hotel Restaurant, una escapada que us encantarà! Descobreix El Far Hotel Restaurant amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "mas-de-torrent-hotel-and-spa",
+			"field": "metaDescription",
+			"value": "Mas de Torrent Hotel & Spa: una masia del segle XVIII a l'Empordà, amb jardins, spa i piscines privades. Des de 138 € per persona i nit.",
+			"expect": "Mas de Torrent Hotel & Spa, una escapada que us encantarà! Descobreix Mas de Torrent Hotel & Spa amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-la-malcontenta",
+			"field": "metaDescription",
+			"value": "Hotel La Malcontenta, a Palamós: una mansió del segle XIX amb jardins i piscina, a 1 km de les cales verges. Des de 77 € per persona i nit.",
+			"expect": "Hotel La Malcontenta, una escapada que us encantarà! Descobreix Hotel La Malcontenta amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hostal-spa-empuries",
+			"field": "metaDescription",
+			"value": "Hostal Spa Empúries, a l'Escala: davant del mar i a tocar del jaciment d'Empúries, amb spa i platja solitària. Des de 66 € per persona i nit.",
+			"expect": "Hostal Spa Empúries, una escapada que us encantarà! Descobreix Hostal Spa Empúries amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "el-raco-de-madremanya",
+			"field": "metaDescription",
+			"value": "El Racó de Madremanya: hotel rural al poble medieval de Madremanya, entre Girona i la Costa Brava, amb dues piscines. Des de 71 € per nit.",
+			"expect": "El Racó de Madremanya, una escapada que us encantarà! Descobreix El Racó de Madremanya amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-la-freixera",
+			"field": "metaDescription",
+			"value": "Hotel La Freixera, a Solsona: un edifici del segle XIV convertit en hotel boutique, amb parets de pedra i bigues. Des de 63 € per persona i nit.",
+			"expect": "Hotel La Freixera, una escapada que us encantarà! Descobreix Hotel La Freixera amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "mas-salagros-ecoresort-and-spa",
+			"field": "metaDescription",
+			"value": "Mas Salagros EcoResort & Spa, a Vallromanes: el primer resort ecològic d'Espanya, amb llac, dues piscines i spa. Des de 167 € per persona i nit.",
+			"expect": "Mas Salagros EcoResort & SPA, una escapada que us encantarà! Descobreix Mas Salagros EcoResort & SPA amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-the-serras",
+			"field": "metaDescription",
+			"value": "Hotel The Serras, al gòtic de Barcelona: piscina infinita al terrat i estrella Michelin, davant del mar. Des de 310 € per persona i nit.",
+			"expect": "Hotel The Serras, una escapada que us encantarà! Descobreix Hotel The Serras amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "el-follo-turisme-rural",
+			"field": "metaDescription",
+			"value": "El Folló Turisme Rural, al Montseny: una casa del segle XII amb menjar ecològic, llar de foc i sala de lectura. Des de 55 € per persona i nit.",
+			"expect": "El Folló Turisme Rural, una escapada que us encantarà! Descobreix El Folló Turisme Rural amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-urbisol",
+			"field": "metaDescription",
+			"value": "Hotel Urbisol, a Calders: spa amb sauna i hidromassatge, dues piscines i vistes a la muntanya. Des de 84 € per persona i nit.",
+			"expect": "Hotel Urbisol, una escapada que us encantarà! Descobreix Hotel Urbisol amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "mas-ferran-adults-only",
+			"field": "metaDescription",
+			"value": "Mas Ferran, a Pals: allotjament només per a adults amb cuina compartida, al Baix Empordà. Des de 60 € per persona i nit.",
+			"expect": "Mas Ferran Adults Only, una escapada que us encantarà! Descobreix Mas Ferran Adults Only amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-casa-peya-adults-only",
+			"field": "metaDescription",
+			"value": "Hotel Casa Peya, a Palafrugell: només per a adults, amb piscina, a 10 minuts de Calella i Llafranc. Des de 65 € per persona i nit.",
+			"expect": "Hotel Casa Peya - Adults Only, una escapada que us encantarà! Descobreix Hotel Casa Peya - Adults Only amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-aatu-adults-only",
+			"field": "metaDescription",
+			"value": "Hotel Aatu, a Peratallada: només per a adults, amb 30.000 m² de jardins i dues piscines al poble medieval. Des de 55 € per persona i nit.",
+			"expect": "Hotel Aatu - Adults Only, una escapada que us encantarà! Descobreix Hotel Aatu - Adults Only amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "jardi-de-pedra-adults-only",
+			"field": "metaDescription",
+			"value": "Jardí de Pedra, a l'Escala: hotel de tres estrelles només per a adults, amb restaurant i terrassa. Des de 67 € per persona i nit.",
+			"expect": "Jardí de Pedra - Adults Only, una escapada que us encantarà! Descobreix Jardi de Pedra - Adults Only amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-tarongeta-adults-only",
+			"field": "metaDescription",
+			"value": "Hotel Tarongeta, a Cadaqués: només per a adults, de gestió familiar i a 150 metres de la platja. Des de 37 € per persona i nit.",
+			"expect": "Hotel Tarongeta - Adults Only, una escapada que us encantarà! Descobreix Hotel Tarongeta - Adults Only amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "casa-marcial-adults-only",
+			"field": "metaDescription",
+			"value": "Casa Marcial, a Besalú: només per a adults, a 100 metres del pont medieval i amb piscina al jardí. Des de 35 € per persona i nit.",
+			"expect": "Casa Marcial (adults only), una escapada que us encantarà! Descobreix Casa Marcial (adults only) amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-rural-vall-ferrera",
+			"field": "metaDescription",
+			"value": "Hotel Rural Vall Ferrera, a Àreu: fusta, tracte familiar i 17 habitacions al capdamunt de la Vallferrera. Des de 55 € per persona i nit.",
+			"expect": "Hotel Rural Vall Ferrera, una escapada que us encantarà! Descobreix Hotel Rural Vall Ferrera amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "camping-repos-del-pedraforca-saldes",
+			"field": "metaDescription",
+			"value": "Càmping Repòs del Pedraforca, entre Saldes i Maçaners: més de 30 anys al peu del Pedraforca, amb piscina i admet gossos. Com arribar-hi.",
+			"expect": "Camping Repòs del Pedraforca, una escapada que us encantarà! Descobreix Camping Repòs del Pedraforca amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "la-garriga-de-castelladral",
+			"field": "metaDescription",
+			"value": "La Garriga de Castelladral: una casa de pagès familiar amb vistes a Montserrat, celler del 1748 i piscina. Des de 83 € per persona i nit.",
+			"expect": "La Garriga de Castelladral, una escapada que us encantarà! Descobreix La Garriga de Castelladral amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "lhort-de-sant-cebria",
+			"field": "metaDescription",
+			"value": "L'Hort de Sant Cebrià, a Torroella de Fluvià: un bed and breakfast del segle XIX per a adults, amb piscina. Des de 55 € per persona i nit.",
+			"expect": "L'Hort de Sant Cebrià, una escapada que us encantarà! Descobreix L'Hort de Sant Cebrià amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-puig-franco",
+			"field": "metaDescription",
+			"value": "Hotel Puig Francó, a Camprodon: spa amb jacuzzi i sauna al Pirineu de Girona, amb venda de forfets. Des de 90 € per persona i nit.",
+			"expect": "Hotel Puig Francó, una escapada que us encantarà! Descobreix Hotel Puig Francó amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "la-vella-farga-hotel",
+			"field": "metaDescription",
+			"value": "La Vella Farga, a Lladurs: una masia del segle XI reconstruïda al Prepirineu, amb piscina i restaurant. Des de 217 € per persona i nit.",
+			"expect": "La Vella Farga Hotel, una escapada que us encantarà! Descobreix La Vella Farga Hotel amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-val-de-neu-g-l",
+			"field": "metaDescription",
+			"value": "Hotel Val de Neu, a Baqueira Beret: a 50 metres del remuntador, amb quatre restaurants i guardaesquís. Des de 164 € per persona i nit.",
+			"expect": "Hotel Val de Neu G.L., una escapada que us encantarà! Descobreix Hotel Val de Neu G.L. amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-can-cuch",
+			"field": "metaDescription",
+			"value": "Hotel Can Cuch, al Montseny: parets de pedra vista i una piscina amb vistes que arriben al Mediterrani. Des de 99 € per persona i nit.",
+			"expect": "Hotel Can Cuch, una escapada que us encantarà! Descobreix Hotel Can Cuch amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "apartament-spa-parellada",
+			"field": "metaDescription",
+			"value": "Apartament Spa Parellada, a Vilafranca del Penedès: un àtic per a dos amb spa i llar de foc, al casc antic. Des de 78 € per persona i nit.",
+			"expect": "Apartament Spa Parellada, una escapada que us encantarà! Descobreix Apartament Spa Parellada amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "argonavis-226",
+			"field": "metaDescription",
+			"value": "Argonavis 226, a l'Estartit: un apartament a primera línia de mar amb les Illes Medes des del balcó. Des de 35 € per persona i nit.",
+			"expect": "Argonavis 226, una escapada que us encantarà! Descobreix Argonavis 226 amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "cava-and-hotel-mastinell",
+			"field": "metaDescription",
+			"value": "Cava & Hotel Mastinell, a Vilafranca del Penedès: cinc estrelles amb forma d'ampolles apilades, entre vinyes. Des de 170 € per persona i nit.",
+			"expect": "Cava & Hotel Mastinell, una escapada que us encantarà! Descobreix Cava & Hotel Mastinell amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-mas-mariassa",
+			"field": "metaDescription",
+			"value": "Hotel Mas Mariassa, a Pratdip: una masia gastronòmica de set habitacions entre muntanyes i bosc mediterrani. Des de 123 € per persona i nit.",
+			"expect": "Hotel Mas Mariassa, una escapada que us encantarà! Descobreix Hotel Mas Mariassa amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-mil-estrelles",
+			"field": "metaDescription",
+			"value": "Hotel Mil Estrelles, a Cornellà del Terri: dormir mirant les estrelles, amb la intimitat d'una nit en parella. Des de 74 € per persona i nit.",
+			"expect": "Hotel Mil Estrelles, una escapada que us encantarà! Descobreix Hotel Mil Estrelles amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-can-casi-adults-only",
+			"field": "metaDescription",
+			"value": "Hotel Can Casi, a Regencós: quatre estrelles només per a adults, amb vuit habitacions amb terrassa i vestidor. Des de 202 € per persona i nit.",
+			"expect": "Hotel Can Casi Adults Only, una escapada que us encantarà! Descobreix Hotel Can Casi Adults Only amb nosaltres i sorprèn a la teva parella. Fes clic aquí!"
+		}
+	]
+}
