@@ -158,11 +158,11 @@ const StoryListing = ({
 				/>
 				<main>
 					<article>
-						<section className="pt-8 md:pt-10 lg:pt-12 pb-6 md:pb-8 bg-tertiary-50 ">
+						<section className="pt-8 md:pt-10 lg:pt-12">
 							{/* Breadcrumb + article header */}
 							<div className="w-full">
 								<div className="container">
-									<ul className="breadcrumb max-w-5xl mx-auto">
+									<ul className="breadcrumb max-w-3xl mx-auto">
 										<li className="breadcrumb__item">
 											<a
 												href="/"
@@ -194,13 +194,13 @@ const StoryListing = ({
 							{/* Article heading + subtitle + meta info */}
 							<div className="relative mt-4 md:mt-7">
 								<div className="container">
-									<div className="md:max-w-xl lg:max-w-5xl lg:mx-auto">
+									<div className="md:max-w-xl lg:max-w-3xl lg:mx-auto">
 										{/* Tornar al viatge. El fil d'Ariadna ja
 										    hi porta, però en lletra petita i sense
 										    dir que això és un diari: el xip diu de
 										    quin viatge és i per on va. */}
 										<Link href={categoryPath}>
-											<a className="inline-flex items-center gap-x-1.5 bg-white text-primary-500 text-13 leading-none rounded-full py-2 px-3 mb-3 hover:bg-primary-50 transition-colors duration-200 ease-in-out">
+											<a className="inline-flex items-center gap-x-1.5 bg-gray-100 text-primary-500 text-13 leading-none rounded-full py-2 px-3 mb-3 hover:bg-gray-200 transition-colors duration-200 ease-in-out">
 												<svg
 													xmlns="http://www.w3.org/2000/svg"
 													width={14}
@@ -226,65 +226,60 @@ const StoryListing = ({
 												{categoryDetails.title}
 											</a>
 										</Link>
-										<h1 className="font-display max-w-3xl my-0">
+										<h1 className="h2 max-w-3xl my-0">
 											{tripEntryDetails.title}
 										</h1>
-										<p className="lg:text-xl font-light mt-2.5 mb-3 md:mt-3 md:mb-4 max-w-3xl">
+										<p className="mt-4 !mb-0 text-block--xl leading-normal max-w-[55ch]">
 											{tripEntryDetails.subtitle}
 										</p>
 										{/* Informació de l'autor */}
-										<div className="flex flex-wrap items-center gap-4">
-											<div className="flex flex-wrap items-center">
-												<div className="rounded-full overflow-hidden w-8 h-8 mr-2.5">
-													<picture>
-														<img
-															src={coverAuthorImg}
-															alt={
-																tripEntryDetails
-																	.owner
-																	.fullName
-															}
-															className={
-																"w-full h-full object-cover"
-															}
-															width={32}
-															height={32}
-															loading="eager"
-															fetchpriority="high"
-														/>
-													</picture>
-												</div>
-												<span className="text-sm">
-													{
-														tripEntryDetails.owner
-															.fullName
-													}
-												</span>
-												<span className="mx-2 text-sm ">
-													–
-												</span>
-												<span className="text-sm ">
-													<time
-														dateTime={formatDateTimeToISODate(
-															tripEntryDetails.createdAt
-														)}
-													>
-														{formatDateTimeToISODate(
-															tripEntryDetails.createdAt
-														)}
-													</time>
-												</span>
+										<div className="flex flex-wrap items-stretch m-0 p-0 gap-x-2 mt-6">
+											<div className="flex flex-wrap items-center text-primary-500 bg-gray-100 rounded-lg py-2.5 px-3 text-sm gap-x-1">
+												<picture className="inline-block rounded-full overflow-hidden w-8 h-8 mr-1.5">
+													<img
+														src={coverAuthorImg}
+														alt={
+															tripEntryDetails
+																.owner.fullName
+														}
+														className={
+															"w-full h-full object-cover"
+														}
+														width={32}
+														height={32}
+														loading="eager"
+														fetchpriority="high"
+													/>
+												</picture>
+												{tripEntryDetails.owner.fullName}
 											</div>
-											<ShareBarModal
-												picture={coverImgMobile}
-												title={tripEntryDetails.title}
-												rating={null}
-												slug={shareUrl}
-												locality={null}
-												colorClass={
-													"text-primary-500 text-sm"
-												}
-											/>
+
+											<div className="flex flex-wrap items-center text-primary-500 bg-gray-100 rounded-lg py-2.5 px-3 text-sm gap-x-1">
+												<time
+													dateTime={formatDateTimeToISODate(
+														tripEntryDetails.createdAt
+													)}
+												>
+													{formatDateTimeToISODate(
+														tripEntryDetails.createdAt
+													)}
+												</time>
+											</div>
+
+											<div className="flex flex-wrap items-center text-primary-500 bg-gray-100 rounded-lg py-2.5 px-3 text-sm gap-x-1">
+												<ShareBarModal
+													picture={coverImgMobile}
+													title={
+														tripEntryDetails.title
+													}
+													rating={null}
+													slug={shareUrl}
+													locality={null}
+													colorClass={
+														"text-primary-500 text-sm"
+													}
+												/>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -292,10 +287,10 @@ const StoryListing = ({
 						</section>
 
 						{/* Article cover */}
-						<div className="relative after:absolute after:top-0 after:inset-x-0 after:bg-tertiary-50 after:h-20">
+						<div className="pt-8 md:pt-12">
 							<div className="container relative z-10">
-								<figure className="my-0">
-									<picture className="block aspect-w-4 aspect-h-3 lg:aspect-w-16 lg:aspect-h-9 h-full rounded-2xl overflow-hidden">
+								<figure className="my-0 max-w-[1200px] mx-auto">
+									<picture className="block aspect-[4/3] md:aspect-[16/9] relative rounded-2xl overflow-hidden">
 										<source
 											srcSet={mobileCover.srcSet}
 											sizes={mobileCover.sizes}
@@ -331,7 +326,7 @@ const StoryListing = ({
 						</div>
 
 						{/* Article description */}
-						<section className="pt-7">
+						<section className="py-7 md:pb-12">
 							<div className="container">
 								<div className="max-w-5xl mx-auto">
 									<div className="grid grid-cols-1 md:grid-cols-12 gap-y-8 gap-x-12">
