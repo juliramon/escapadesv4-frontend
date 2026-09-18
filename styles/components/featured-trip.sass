@@ -1,0 +1,101 @@
+@layer components
+	/* --- Viatge destacat de /viatges --- */
+
+	// El destacat era una targeta més: mateixa forma que les de la graella,
+	// mateixa foto amb degradat, i el que el distingia era una etiqueta petita
+	// en una cantonada. Aquí el que el fa destacat és el bloc sencer: és
+	// l'única cosa fosca de la pàgina, el títol va a l'escala dels h1 i la
+	// foto es reparteix amb dues més del viatge.
+	.featured-trip
+		@apply relative overflow-hidden rounded-2xl md:rounded-3xl bg-primary-500 text-white
+
+		&__grid
+			@apply grid grid-cols-1 lg:grid-cols-12 lg:min-h-[440px]
+
+		&__panel
+			@apply order-2 lg:order-1 lg:col-span-5 flex flex-col justify-center p-7 md:p-10 lg:p-12
+
+		&__eyebrow
+			@apply flex items-center gap-x-3 text-13 uppercase tracking-widest text-secondary-500
+
+		// Un filet que travessa el que queda de columna: marca que això obre
+		// secció i no és una etiqueta enganxada a la foto.
+		&__eyebrow-rule
+			@apply hidden sm:block h-px flex-auto bg-white/20
+
+		&__title
+			@apply text-white mt-4 mb-0 text-balance
+			font-size: clamp(28px, 3.2vw, 40px)
+			line-height: 1.15
+
+		&__text
+			@apply mt-3.5 mb-0 text-block text-white/70 max-w-[46ch] line-clamp-3
+
+			*
+				@apply text-white/70
+
+		&__meta
+			@apply flex flex-wrap items-center gap-2 mt-6 mb-0 pl-0 list-none
+
+		&__meta-item
+			@apply inline-flex items-center gap-x-1.5 rounded-full bg-white/10 text-white/80 text-13 leading-none py-2 px-3
+
+		&__cta
+			@apply mt-7
+
+		// Mosaic: la foto principal i, de costat, dues del carrusel del
+		// viatge. Els filets de separació són el blau del bloc.
+		//
+		// L'alçada la marca la proporció fins a l'escriptori; a partir d'allà
+		// el mosaic s'estira fins on arribi el text del panell del costat.
+		&__media
+			@apply order-1 lg:order-2 lg:col-span-7 grid grid-cols-3 grid-rows-2 gap-1.5
+			aspect-ratio: 4 / 3
+
+			@screen md
+				aspect-ratio: 16 / 9
+
+			@screen lg
+				aspect-ratio: auto
+				@apply h-full
+
+			img
+				@apply w-full h-full object-cover scale-100 transition-transform duration-700 ease-in-out
+
+		&__media-main
+			@apply col-span-3 row-span-2 md:col-span-2 overflow-hidden
+
+		// Sense prou fotos al carrusel, la principal ocupa tot el mosaic.
+		&__media-main--solo
+			@apply md:col-span-3
+
+		&__media-extra
+			@apply hidden md:block overflow-hidden
+
+		// Les tres fotos creixen alhora: el que es passeja per sobre és el
+		// bloc sencer, no cada tros per separat.
+		&:hover &__media img
+			@apply scale-105
+
+		// Crèdit del patrocinador, quan el viatge en té. Va en una franja al
+		// peu del bloc perquè es llegeixi com el que és —una col·locació
+		// pagada— i no com una dada més del viatge.
+		&__sponsor
+			@apply flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-white/10 px-7 md:px-10 lg:px-12 py-4
+
+		&__sponsor-label
+			@apply text-10 uppercase tracking-widest text-white/50
+
+		&__sponsor-link
+			@apply inline-flex items-center gap-x-3 text-13 text-white/70 transition-colors duration-300 ease-in-out
+
+			&:hover
+				@apply text-white
+
+		// Els logos solen ser foscos sobre fons transparent: sobre el blau del
+		// bloc desapareixerien, o sigui que van sobre una pastilla blanca.
+		&__sponsor-logo
+			@apply inline-flex items-center justify-center bg-white rounded-lg px-2.5 py-1.5
+
+			img
+				@apply block w-auto h-5 md:h-6 object-contain
