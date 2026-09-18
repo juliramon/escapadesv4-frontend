@@ -5,6 +5,12 @@
 		&__inner
 			@apply border-t border-neutral-100 pt-10 md:pt-14 lg:pt-16 pb-12 md:pb-16 max-w-3xl
 
+		// A la portada el bloc va centrat dins del contenidor, igual que les
+		// preguntes freqüents que té just a sobre; als llistats es queda
+		// alineat a l'esquerra, com la resta de la pàgina.
+		&--centered &__inner
+			@apply mx-auto
+
 		&__heading
 			@apply mt-0 mb-6
 
