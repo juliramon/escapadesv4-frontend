@@ -32,6 +32,12 @@ import {
 	nearestListings,
 	toListingCard,
 } from "../../utils/relatedContent";
+import {
+	DEFAULT_LOCALE,
+	FIELDS,
+	findBySlug,
+	localized,
+} from "../../utils/i18n";
 
 const GetawayListing = ({
 	getawayDetails,
@@ -56,7 +62,11 @@ const GetawayListing = ({
 			}
 		}, [router]);
 
-		const urlToShare = `https://escapadesenparella.cat/${categoryDetails.slug}/${router.query.slug}`;
+		// Del router i no del document: la ruta ja porta el segment i el slug
+		// en l'idioma que s'està veient.
+		const urlToShare = `https://escapadesenparella.cat${
+			router.locale && router.locale !== "ca" ? `/${router.locale}` : ""
+		}/${router.query.categoria}/${router.query.slug}`;
 
 		const initialState = {
 			bookmarkDetails: {},
@@ -358,7 +368,7 @@ const GetawayListing = ({
 		// La fitxa és accessible des de qualsevol slug de categoria, però la URL
 		// que mana és sempre la de la seva categoria principal. Sense això cada
 		// variant es canonicalitzava a si mateixa i competien entre elles.
-		const canonicalUrl = listingUrl(getawayDetails);
+		const canonicalUrl = listingUrl(getawayDetails, router.locale);
 
 		return (
 			<>
@@ -1265,11 +1275,25 @@ const categoryBlock = async (service, getaway) => {
 	}
 };
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, locale }) {
 	const service = new ContentService();
-	const categoryDetails = await service.getCategoryDetails(params.categoria);
-	const activityDetails = await service.activityDetails(params.slug);
-	const placeDetails = await service.getPlaceDetails(params.slug);
+	const esTraduit = Boolean(locale) && locale !== DEFAULT_LOCALE;
+	// En castellà, tant el segment de categoria com el slug de la fitxa
+	// arriben traduïts i l'API no els coneix: es desfà el camí amb els
+	// catàlegs, que ja estan a la memòria intermèdia del mòdul.
+	const categoryDetails = esTraduit
+		? findBySlug(await service.getCategories(), params.categoria, locale)
+		: await service.getCategoryDetails(params.categoria);
+	const slugCatala = esTraduit
+		? findBySlug(await loadListingCatalog(service), params.slug, locale)
+				?.slug
+		: params.slug;
+	const activityDetails = slugCatala
+		? await service.activityDetails(slugCatala)
+		: null;
+	const placeDetails = slugCatala
+		? await service.getPlaceDetails(slugCatala)
+		: null;
 	const characteristics = await service.getCharacteristics();
 
 	let getawayDetails;
@@ -1311,8 +1335,8 @@ export async function getStaticProps({ params }) {
 
 	return {
 		props: {
-			getawayDetails,
-			categoryDetails,
+			getawayDetails: localized(getawayDetails, locale, FIELDS.listing),
+			categoryDetails: localized(categoryDetails, locale, FIELDS.category),
 			checkedCharacteristics,
 			related,
 		},

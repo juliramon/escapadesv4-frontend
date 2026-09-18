@@ -12,13 +12,13 @@ export async function getStaticPaths() {
 	return { paths: [], fallback: "blocking" };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, locale }) {
 	const { page, ...outcome } = readPageParam(
 		params.pagina,
 		`/destinacions/${params.destination}`,
 	);
 	if (!page) return outcome;
-	return getDestinationPageProps(params.destination, page);
+	return getDestinationPageProps(params.destination, page, locale);
 }
 
 export default DestinationPage;

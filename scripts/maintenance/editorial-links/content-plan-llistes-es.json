@@ -1,0 +1,258 @@
+{
+	"generatedAt": "2026-09-18T23:00:20.600Z",
+	"note": "Castellà de les 18 llistes: slug, títol, subtítol i meta-descripció. El cos encara no.",
+	"fields": [
+		{
+			"collection": "lists",
+			"slug": "escapades-romantiques-catalunya-parella",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "escapadas-romanticas-cataluna-pareja",
+					"title": "¿Quieres sorprender a tu pareja? 8 ideas irresistibles para una escapada romántica en Cataluña",
+					"subtitle": "Alojamientos con encanto, cenas especiales, vuelos en globo y calas para dos. Ocho experiencias para desconectar en pareja.",
+					"metaDescription": "8 escapadas románticas por Cataluña: alojamientos con encanto, catas de vino, vuelos en globo y calas para dos. Con precios y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "lists",
+			"slug": "que-fer-tardor-catalunya-activitats-on-anar",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "que-hacer-otono-cataluna",
+					"title": "Qué hacer este otoño en Cataluña: 17 escapadas que no te puedes perder",
+					"subtitle": "Diecisiete ideas para escaparse en pareja y disfrutar del otoño en Cataluña, de estanques y hayedos a ferias de pueblo.",
+					"metaDescription": "17 escapadas de otoño por Cataluña: hayedos, estanques, ferias y castañadas. Con cómo llegar y cuándo ir, una por una."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "lists",
+			"slug": "que-fer-al-delta-de-lebre",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "que-hacer-en-el-delta-del-ebro",
+					"title": "Qué hacer en el Delta del Ebro: 10 propuestas para descubrirlo en pareja",
+					"subtitle": "Diez ideas para una escapada en pareja al Delta del Ebro: naturaleza, gastronomía, cultura y momentos de los que se recuerdan.",
+					"metaDescription": "10 planes para el Delta del Ebro en pareja: arrozales, barca por el río, flamencos y dónde comer arroz de verdad."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "lists",
+			"slug": "cims-de-catalunya-escapada-en-parella",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cimas-de-cataluna-escapada-en-pareja",
+					"title": "16 cimas y rutas de montaña para hacer en pareja en Cataluña",
+					"subtitle": "Dieciséis cimas para descubrir en pareja, con la distancia, el desnivel y dónde dejar el coche.",
+					"metaDescription": "16 cimas y rutas de montaña en Cataluña para hacer en pareja: distancia, desnivel, dónde aparcar y cuándo ir."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "lists",
+			"slug": "descobrir-el-montseny-idees-que-fer-montseny",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "que-hacer-en-el-montseny",
+					"title": "Qué hacer en el Montseny: 14 ideas para una escapada al Parque Natural",
+					"subtitle": "Catorce ideas para descubrir el Montseny de otra manera, entre historia, naturaleza y pueblos con encanto.",
+					"metaDescription": "14 ideas para descubrir el Montseny en pareja: cimas como el Matagalls, castillos medievales, fuentes, pueblos y dónde dormir."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "lists",
+			"slug": "9-castells-medievals-catalunya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "9-castillos-medievales-cataluna",
+					"title": "9 castillos medievales en Cataluña que no te puedes perder",
+					"subtitle": "Los nueve castillos que más nos han gustado de Cataluña, con lo que cuesta entrar y cómo se llega a cada uno.",
+					"metaDescription": "9 castillos medievales de Cataluña que se pueden visitar: horarios, precio de la entrada y cómo llegar a cada uno."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "lists",
+			"slug": "descobrir-la-garrotxa-ripolles-idees-que-fer-garrotxa",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "que-hacer-en-la-garrotxa-y-el-ripolles",
+					"title": "Qué hacer en la Garrotxa y el Ripollès: 5 ideas para una escapada a la Alta Garrotxa",
+					"subtitle": "Cinco ideas para descubrir la Garrotxa y el Ripollès en una escapada en pareja entre volcanes, hayedos y pueblos de piedra.",
+					"metaDescription": "5 planes para la Garrotxa y el Ripollès en pareja: volcanes, la fageda d'en Jordà, pueblos de piedra y dónde dormir."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "lists",
+			"slug": "mercats-nadal-belgica",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mercados-de-navidad-en-belgica",
+					"title": "Mercados de Navidad en Bélgica: 5 mercados para disfrutar de la Navidad",
+					"subtitle": "Cinco mercados de Navidad belgas para una escapada de diciembre, con cómo moverse entre ciudades y qué comer.",
+					"metaDescription": "5 mercados de Navidad en Bélgica: Bruselas, Brujas, Gante y dos más. Cuándo abren, cómo llegar y qué probar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "lists",
+			"slug": "brama-cervol-pallars-sobira-gratuit",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "berrea-del-ciervo-pallars-sobira",
+					"title": "Berrea del ciervo en el Pallars Sobirà: cuándo, cómo y dónde verla gratis",
+					"subtitle": "Todo lo que hay que saber para escuchar la berrea del ciervo en el Pallars Sobirà sin pagar una excursión guiada.",
+					"metaDescription": "Berrea del ciervo en el Pallars Sobirà: cuándo es, dónde verla gratis, a qué hora ir y qué hace falta llevar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "lists",
+			"slug": "que-fer-al-pallars-sobira-11-activitats-descobrir-el-pallars",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "que-hacer-en-el-pallars-sobira",
+					"title": "¿Qué hacer en el Pallars Sobirà? 11 actividades para descubrirlo",
+					"subtitle": "Once planes para una escapada al Pallars Sobirà, del rafting a los pueblos de piedra del valle.",
+					"metaDescription": "11 actividades en el Pallars Sobirà: rafting, quads, lagos de alta montaña, pueblos y dónde dormir. Con precios."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "lists",
+			"slug": "activitats-per-no-passar-calor-vacances-estiu-catalunya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "actividades-para-no-pasar-calor-verano-cataluna",
+					"title": "6 actividades para no pasar calor este verano en Cataluña",
+					"subtitle": "Seis escapadas para huir del calor y ver paisajes que valen el viaje, de pozas de montaña a bosques de sombra.",
+					"metaDescription": "6 planes para no pasar calor en Cataluña: pozas naturales, cuevas, bosques de montaña y lagos. Con cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "lists",
+			"slug": "festivals-musica-catalunya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "festivales-de-musica-en-cataluna",
+					"title": "10 festivales de música en Cataluña que no te puedes perder",
+					"subtitle": "Diez festivales de música en Cataluña para todos los gustos, con cuándo son y dónde se celebran.",
+					"metaDescription": "10 festivales de música en Cataluña: cuándo son, dónde se celebran y qué estilo tiene cada uno."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "lists",
+			"slug": "idees-regals-nadal-parella",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "ideas-regalos-navidad-pareja",
+					"title": "5 ideas de regalos de Navidad para sorprender a tu pareja",
+					"subtitle": "Cinco regalos para sorprender en pareja: escapadas, experiencias y detalles que se recuerdan más que un objeto.",
+					"metaDescription": "5 regalos de Navidad para sorprender a tu pareja: escapadas, experiencias y detalles. Con precios y dónde comprarlos."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "lists",
+			"slug": "que-fer-estiu-catalunya-activitats-on-anar",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "que-hacer-verano-cataluna",
+					"title": "Qué hacer este verano en Cataluña: 14 lugares que hay que visitar",
+					"subtitle": "Catorce sitios para no quedarse en casa este verano, recomendados por nosotros y por otras parejas.",
+					"metaDescription": "14 lugares que visitar este verano en Cataluña: calas, pozas, pueblos y rutas de montaña. Con cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "lists",
+			"slug": "coronavirus-idees-casa-parella",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "ideas-para-hacer-en-casa-en-pareja",
+					"title": "21 ideas para hacer en casa con tu pareja",
+					"subtitle": "Veintiuna ideas para pasarlo bien en casa en pareja cuando no se puede salir.",
+					"metaDescription": "21 ideas para hacer en casa en pareja: cenas, juegos, planes de sofá y cosas que no se nos habían ocurrido."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "lists",
+			"slug": "mercats-de-nadal-fires-de-nadal-catalunya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mejores-mercados-de-navidad-cataluna",
+					"title": "Los 9 mejores mercados de Navidad de Cataluña",
+					"subtitle": "Nueve mercados y ferias de Navidad por Cataluña, con las fechas de cada uno y qué se encuentra.",
+					"metaDescription": "Los 9 mejores mercados de Navidad de Cataluña: fechas, dónde son, qué se vende y cuál merece el viaje."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "lists",
+			"slug": "millors-campings-catalunya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mejores-campings-cataluna",
+					"title": "16 campings en Cataluña para una escapada en pareja",
+					"subtitle": "Dieciséis campings para desconectar en pareja, del mar a la alta montaña, con lo que cuesta cada uno.",
+					"metaDescription": "16 campings en Cataluña para ir en pareja: bungalós, glamping, piscina y mar o montaña al lado. Con precios."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "lists",
+			"slug": "10-millors-carnavals-catatalunya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mejores-carnavales-cataluna",
+					"title": "Los 10 mejores Carnavales de Cataluña",
+					"subtitle": "Los diez carnavales que más vale la pena ver en Cataluña, con las fechas y qué tiene de especial cada uno.",
+					"metaDescription": "Los 10 mejores carnavales de Cataluña: Sitges, Vilanova, Solsona y siete más. Fechas y qué se hace en cada uno."
+				}
+			},
+			"expectEmpty": true
+		}
+	]
+}
