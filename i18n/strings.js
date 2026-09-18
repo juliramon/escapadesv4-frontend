@@ -63,12 +63,26 @@ const STRINGS = {
 	},
 
 	// Llistats
-	"listings.weSuggest": { ca: "Us proposem", es: "Te proponemos" },
 	"listings.noResults": {
 		ca: "No hi ha res que hi encaixi.",
 		es: "No hay nada que encaje.",
 	},
 	"listings.loadMore": { ca: "Veure'n més", es: "Ver más" },
+
+	// Llistat d'una categoria
+	"category.weSuggest": {
+		ca: "Us proposem",
+		es: "Te proponemos",
+	},
+	"category.inCatalonia": { ca: "a Catalunya", es: "en Cataluña" },
+	"category.empty": {
+		ca: "No s'han trobat escapades per aquesta categoria.",
+		es: "No hemos encontrado escapadas en esta categoría.",
+	},
+	"category.tryLater": {
+		ca: "Torna-ho a provar més endavant.",
+		es: "Vuelve a probarlo más adelante.",
+	},
 
 	// Portada
 	"home.faqTitle": {

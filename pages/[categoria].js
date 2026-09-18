@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { LOCALES } from "../utils/i18n";
+import { FIELDS, LOCALES, localized } from "../utils/i18n";
+import { useT } from "../i18n/strings";
 import { useEffect, useState } from "react";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
@@ -24,6 +25,7 @@ const CategoryPage = ({
 	numPages,
 	currentPage = 1,
 }) => {
+	const t = useT();
 	// L'estat surt de les props des del primer render. Abans `hasResults`
 	// començava a false i el servidor pintava esquelets en lloc de fitxes: a
 	// l'HTML que llegeix Google, les categories no enllaçaven cap escapada.
@@ -164,7 +166,7 @@ const CategoryPage = ({
 			/>
 			{/* Rich snippets */}
 			<BreadcrumbRichSnippet
-				page1Title="Inici"
+				page1Title={t("nav.home")}
 				page1Url="https://escapadesenparella.cat"
 				page2Title={categoryDetails.title}
 				page2Url={`https://escapadesenparella.cat/${categoryDetails.slug}`}
@@ -175,9 +177,9 @@ const CategoryPage = ({
 					{/* Main column - Listings */}
 					<ListingHeader
 						title={categoryDetails.title}
-						subtitle={`Us proposem <strong class="lowercase">${totalItems} ${
+						subtitle={`${t("category.weSuggest")} <strong class="lowercase">${totalItems} ${
 							categoryDetails.title
-						}</strong> a Catalunya. ${
+						}</strong> ${t("category.inCatalonia")}. ${
 							categoryDetails.seoTextHeader || ""
 						}`}
 						sponsorData={sponsorBlock}
@@ -219,10 +221,8 @@ const CategoryPage = ({
 								) : (
 									<div className="col-span-full">
 										<p className="text-center mx-auto text-lg">
-											No s'han trobat escapades per
-											aquesta categoria.
-											<br /> Torna-ho a provar més
-											endavant.
+											{t("category.empty")}
+											<br /> {t("category.tryLater")}
 										</p>
 									</div>
 								)}
@@ -269,7 +269,7 @@ export async function getStaticPaths() {
  * Props d'una pàgina del llistat d'una categoria. També les fa servir
  * `pages/[categoria]/pagina/[pagina].js` per a la resta de tandes.
  */
-export const getCategoryPageProps = async (slug, page = 1) => {
+export const getCategoryPageProps = async (slug, page = 1, locale) => {
 	const service = new ContentService();
 	const categoryDetails = await service.getCategoryDetails(slug);
 
@@ -286,10 +286,15 @@ export const getCategoryPageProps = async (slug, page = 1) => {
 
 	// `allResults` arribava fins al client sencer (descripcions incloses) i
 	// aquesta pàgina no el feia servir enlloc: eren ~100 kB per pàgina.
+	// La traducció s'aplica aquí i no al JSX: així els components segueixen
+	// llegint `title` i `subtitle` sense saber res d'idiomes, i quan un
+	// document encara no està traduït cau al català tot sol.
 	return {
 		props: {
-			categoryDetails,
-			paginatedResults: (paginatedResults || []).map(toListingCard),
+			categoryDetails: localized(categoryDetails, locale, FIELDS.category),
+			paginatedResults: (paginatedResults || [])
+				.map((item) => localized(item, locale, FIELDS.card))
+				.map(toListingCard),
 			totalItems,
 			numPages,
 			currentPage: page,
@@ -298,8 +303,8 @@ export const getCategoryPageProps = async (slug, page = 1) => {
 	};
 };
 
-export async function getStaticProps({ params }) {
-	return getCategoryPageProps(params.categoria);
+export async function getStaticProps({ params, locale }) {
+	return getCategoryPageProps(params.categoria, 1, locale);
 }
 
 export default CategoryPage;

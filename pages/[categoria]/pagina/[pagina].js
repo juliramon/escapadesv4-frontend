@@ -10,13 +10,13 @@ export async function getStaticPaths() {
 	return { paths: [], fallback: "blocking" };
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, locale }) {
 	const { page, ...outcome } = readPageParam(
 		params.pagina,
 		`/${params.categoria}`,
 	);
 	if (!page) return outcome;
-	return getCategoryPageProps(params.categoria, page);
+	return getCategoryPageProps(params.categoria, page, locale);
 }
 
 export default CategoryPage;
