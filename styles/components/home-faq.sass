@@ -1,27 +1,39 @@
 @layer components
 	// Les preguntes que ens fa tothom abans de decidir-se, a la portada. Van
-	// visibles (i no plegades) perquè el marcatge FAQPage demana que la
-	// resposta es pugui llegir a la pàgina.
+	// plegades en un acordió —el `<details>` del navegador, sense JavaScript—,
+	// i com que el contingut es queda al DOM el marcatge FAQPage segueix bo.
 	.home-faq
 		@apply mt-10 md:mt-14 lg:mt-20
 
 		&__inner
-			@apply border-t border-neutral-100 pt-10 md:pt-14 lg:pt-16 max-w-3xl
+			@apply border-t border-neutral-100 pt-10 md:pt-14 lg:pt-16 max-w-3xl mx-auto
 
 		&__title
-			@apply mt-0 mb-6
+			@apply mt-0 mb-8 text-center
 
 		&__list
-			@apply grid gap-6 m-0 p-0
+			@apply grid gap-0 m-0 p-0
 
 		&__item
-			@apply border-b border-neutral-100 pb-6
+			@apply border-b border-neutral-100
 
-			&:last-child
-				@apply border-b-0 pb-0
+			&:first-child
+				@apply border-t border-neutral-100
 
 		&__question
-			@apply font-headings text-lg leading-snug m-0
+			@apply flex items-center justify-between gap-x-4 cursor-pointer py-5 font-headings text-lg leading-snug m-0 transition-colors duration-200 ease-in-out list-none
+
+			&::-webkit-details-marker
+				display: none
+
+			&:hover
+				@apply text-tertiary-800
+
+		&__icon
+			@apply shrink-0 text-tertiary-800 transition-transform duration-300 ease-in-out
+
+		&__item[open] &__icon
+			@apply rotate-180
 
 		&__answer
-			@apply text-block leading-relaxed text-grey-400 mt-2 ml-0
+			@apply text-block leading-relaxed text-grey-500 mt-0 mb-5 pr-8

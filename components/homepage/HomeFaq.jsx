@@ -5,8 +5,9 @@ import JsonLd from "../richsnippets/JsonLd";
  *
  * Són les que ens fa tothom abans de decidir-se —quant costa, quan anar-hi,
  * si hi poden portar el gos— i es responen amb el que diu el catàleg, no amb
- * generalitats. Van visibles a la pàgina i, a més, amb marcatge `FAQPage`:
- * Google només ensenya aquest format quan la resposta també es pot llegir.
+ * generalitats. Es plegen en un acordió de `<details>`, o sigui que les
+ * respostes són al DOM encara que no es vegin; el marcatge `FAQPage` que
+ * les acompanya segueix sent vàlid i la portada no s'allarga cinc pantalles.
  */
 const FAQ = [
 	{
@@ -52,15 +53,37 @@ const HomeFaq = () => (
 		<section className="home-faq">
 			<div className="container">
 				<div className="home-faq__inner">
-					<h2 className="home-faq__title">Dubtes abans de decidir-vos</h2>
-					<dl className="home-faq__list">
+					<h2 className="home-faq__title">Preguntes freqüents</h2>
+					<div className="home-faq__list">
 						{FAQ.map(({ question, answer }) => (
-							<div className="home-faq__item" key={question}>
-								<dt className="home-faq__question">{question}</dt>
-								<dd className="home-faq__answer">{answer}</dd>
-							</div>
+							<details className="home-faq__item" key={question}>
+								<summary className="home-faq__question">
+									<span>{question}</span>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										width={20}
+										height={20}
+										viewBox="0 0 24 24"
+										fill="none"
+										stroke="currentColor"
+										strokeWidth={2}
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										className="home-faq__icon"
+										aria-hidden="true"
+									>
+										<path
+											stroke="none"
+											d="M0 0h24v24H0z"
+											fill="none"
+										/>
+										<path d="M6 9l6 6l6 -6" />
+									</svg>
+								</summary>
+								<p className="home-faq__answer">{answer}</p>
+							</details>
 						))}
-					</dl>
+					</div>
 				</div>
 			</div>
 		</section>

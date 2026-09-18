@@ -26,7 +26,11 @@ const HOME_SEO_TEXT = `
 `;
 
 const HomeSeoText = () => (
-	<ListingsTextareaFooter textareaFooter={HOME_SEO_TEXT} collapsible />
+	<ListingsTextareaFooter
+		textareaFooter={HOME_SEO_TEXT}
+		collapsible
+		className="seo-block--centered"
+	/>
 );
 
 export { HOME_SEO_TEXT };
