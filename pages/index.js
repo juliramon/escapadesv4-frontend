@@ -5,6 +5,8 @@ import HomeHeader from "../components/headers/HomeHeader";
 import HomePageResults from "../components/homepage/HomePageResults";
 import Footer from "../components/global/Footer";
 import MobileAnchorAd from "../components/ads/MobileAnchorAd";
+import HomeFaq from "../components/homepage/HomeFaq";
+import HomeSeoText from "../components/homepage/HomeSeoText";
 import LocalBusinessRichSnippet from "../components/richsnippets/LocalBusinessRichSnippet";
 import { getPicturesBySeason } from "../utils/helpers";
 import { pickFields, toEditorialCard, toListingCard } from "../utils/listingProps";
@@ -44,8 +46,8 @@ const Homepage = (props) => {
 		<>
 			{/* Browser metas  */}
 			<GlobalMetas
-				title="Escapades originals a Catalunya"
-				description="Escapades en parella per gaudir i desconnectar. Experiències i allotjaments verificats i originals, pensats per a una escapada en parella per recordar."
+				title="Escapades en parella: experiències i allotjaments memorables"
+				description="Descobreix centenars d’escapades en parella verificades: cabanes als arbres, hotels amb encant i experiències. Amb preus i fotos nostres."
 				url="https://escapadesenparella.cat"
 				image={slideImage.picture_raw}
 				canonical="https://escapadesenparella.cat"
@@ -64,6 +66,8 @@ const Homepage = (props) => {
 					featuredLists={props.featuredLists}
 					totals={props.totals}
 				/>
+				<HomeFaq />
+				<HomeSeoText />
 				<Footer />
 				<MobileAnchorAd />
 			</main>
