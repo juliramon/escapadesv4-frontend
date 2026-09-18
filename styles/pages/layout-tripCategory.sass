@@ -1,6 +1,20 @@
 .tripCategory
     @apply relative
 
+    // Els enllaços de la sub-navegació salten a l'inici de cada secció: sense
+    // marge, la barra fixa de dalt en tapava el títol.
+    section[id]
+        scroll-margin-top: 150px
+
+    // La fila de seccions es pot desplaçar amb el dit a mòbil; la barra de
+    // desplaçament, però, hi fa més nosa que servei.
+    .no-scrollbar
+        -ms-overflow-style: none
+        scrollbar-width: none
+
+        &::-webkit-scrollbar
+            display: none
+
     &__intro
         h2
             font-size: clamp(22px, 3vw, 28px)
@@ -14,7 +28,7 @@
             @apply mb-10
 
     &__iframe
-        @apply aspect-[2/3] w-full h-full rounded-2xl overflow-hidden
+        @apply aspect-[4/3] w-full rounded-2xl overflow-hidden
 
         iframe
             @apply w-full h-full
