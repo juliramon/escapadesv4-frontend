@@ -113,6 +113,89 @@ const STRINGS = {
 	},
 
 	// Portada
+	"home.start": { ca: "Per on comencem?", es: "¿Por dónde empezamos?" },
+	"home.byPlan": {
+		ca: "Escapades per tipus de pla",
+		es: "Escapadas por tipo de plan",
+	},
+	"home.byPlanText": {
+		ca: "Trieu el pla i us ensenyem les experiències i els allotjaments que hi encaixen.",
+		es: "Elegid el plan y os enseñamos las experiencias y los alojamientos que encajan.",
+	},
+	"home.whereSleep": { ca: "On voleu dormir?", es: "¿Dónde queréis dormir?" },
+	"home.allStays": {
+		ca: "Veure tots els allotjaments",
+		es: "Ver todos los alojamientos",
+	},
+	"home.staysTitle": {
+		ca: "Allotjaments amb encant per a dos",
+		es: "Alojamientos con encanto para dos",
+	},
+	"home.experiencesTitle": {
+		ca: "Experiències per fer en parella",
+		es: "Experiencias para hacer en pareja",
+	},
+	"home.destinations": { ca: "Destinacions", es: "Destinos" },
+	"home.byZone": {
+		ca: "Escapades per Catalunya, zona a zona",
+		es: "Escapadas por Cataluña, zona a zona",
+	},
+	"home.byZoneText": {
+		ca: "Trieu una zona i us hi ensenyem on dormir, què fer i què val la pena veure.",
+		es: "Elegid una zona y os enseñamos dónde dormir, qué hacer y qué vale la pena ver.",
+	},
+	"home.allDestinations": {
+		ca: "Veure totes les destinacions",
+		es: "Ver todos los destinos",
+	},
+	"home.everything": {
+		ca: "Tot el que hi trobareu",
+		es: "Todo lo que encontraréis",
+	},
+	"home.sixWays": {
+		ca: "Sis maneres de preparar la propera escapada",
+		es: "Seis maneras de preparar la próxima escapada",
+	},
+	"home.stories": { ca: "Històries", es: "Historias" },
+	"home.storiesTitle": {
+		ca: "Escapades que hem fet nosaltres",
+		es: "Escapadas que hemos hecho nosotros",
+	},
+	"home.storiesText": {
+		ca: "Les explicem de primera mà, amb el que va funcionar i el que no.",
+		es: "Las contamos de primera mano, con lo que funcionó y lo que no.",
+	},
+	"home.allStories": {
+		ca: "Veure totes les històries",
+		es: "Ver todas las historias",
+	},
+	"home.lists": { ca: "Llistes", es: "Listas" },
+	"home.listsTitle": {
+		ca: "Idees ja triades, per decidir ràpid",
+		es: "Ideas ya elegidas, para decidir rápido",
+	},
+	"home.listsText": {
+		ca: "Seleccions temàtiques per quan sabeu que voleu sortir però no on.",
+		es: "Selecciones temáticas para cuando sabéis que queréis salir pero no adónde.",
+	},
+	"home.allLists": {
+		ca: "Veure totes les llistes",
+		es: "Ver todas las listas",
+	},
+	"home.experiences": { ca: "Experiències", es: "Experiencias" },
+	"home.stays": { ca: "Allotjaments", es: "Alojamientos" },
+	"home.allExperiences": {
+		ca: "Veure totes les experiències",
+		es: "Ver todas las experiencias",
+	},
+	"home.metaTitle": {
+		ca: "Escapades en parella: experiències i allotjaments memorables",
+		es: "Escapadas en pareja: experiencias y alojamientos memorables",
+	},
+	"home.metaDescription": {
+		ca: "Descobreix centenars d’escapades en parella verificades: cabanes als arbres, hotels amb encant i experiències. Amb preus i fotos nostres.",
+		es: "Cientos de escapadas en pareja por Cataluña: cabañas en los árboles, hoteles con encanto y experiencias. Con precios y fotos nuestras.",
+	},
 	"home.faqTitle": {
 		ca: "Dubtes abans de decidir-vos",
 		es: "Dudas antes de decidiros",

@@ -1,4 +1,6 @@
+import { useRouter } from "next/router";
 import JsonLd from "../richsnippets/JsonLd";
+import { useT } from "../../i18n/strings";
 
 /**
  * Preguntes freqüents de la portada.
@@ -7,6 +9,9 @@ import JsonLd from "../richsnippets/JsonLd";
  * si hi poden portar el gos— i es responen amb el que diu el catàleg, no amb
  * generalitats. Van visibles a la pàgina i, a més, amb marcatge `FAQPage`:
  * Google només ensenya aquest format quan la resposta també es pot llegir.
+ *
+ * El `FAQPage` es marca en l'idioma de la pàgina: enviar-li a Google unes
+ * preguntes en català dins d'una pàgina castellana és demanar que no l'ensenyi.
  */
 const FAQ = [
 	{
@@ -36,36 +41,71 @@ const FAQ = [
 	},
 ];
 
-const HomeFaq = () => (
-	<>
-		<JsonLd
-			data={{
-				"@context": "https://schema.org",
-				"@type": "FAQPage",
-				mainEntity: FAQ.map(({ question, answer }) => ({
-					"@type": "Question",
-					name: question,
-					acceptedAnswer: { "@type": "Answer", text: answer },
-				})),
-			}}
-		/>
-		<section className="home-faq">
-			<div className="container">
-				<div className="home-faq__inner">
-					<h2 className="home-faq__title">Dubtes abans de decidir-vos</h2>
-					<dl className="home-faq__list">
-						{FAQ.map(({ question, answer }) => (
-							<div className="home-faq__item" key={question}>
-								<dt className="home-faq__question">{question}</dt>
-								<dd className="home-faq__answer">{answer}</dd>
-							</div>
-						))}
-					</dl>
-				</div>
-			</div>
-		</section>
-	</>
-);
+const FAQ_ES = [
+	{
+		question: "¿Cuánto cuesta una escapada en pareja en Cataluña?",
+		answer:
+			"En los alojamientos que recomendamos, el precio medio ronda los 80 € por persona y noche, con casas rurales que arrancan en los 15 € y hoteles de lujo que pasan de los 400. De las experiencias, más de la mitad son gratuitas —rutas, miradores, pueblos— y el resto tienen un precio medio de unos 20 €.",
+	},
+	{
+		question: "¿Cuál es la mejor época para una escapada en pareja?",
+		answer:
+			"La primavera y el otoño: hay menos gente, los alojamientos son más baratos y los caminos se andan bien. El verano es para las calas y los alojamientos con piscina, y el invierno, para la nieve y las casas con chimenea. En los fines de semana largos conviene reservar con semanas de antelación.",
+	},
+	{
+		question: "¿Cuántas noches hacen falta?",
+		answer:
+			"Con una noche basta si no queréis conducir más de hora y media: llegar a la hora de comer, una actividad por la tarde, cenar y volver al día siguiente después de desayunar. Para los Pirineos o las Tierras del Ebro vale más contar con dos noches, porque el viaje se come una parte.",
+	},
+	{
+		question: "¿Hay alojamientos solo para adultos o que admitan perros?",
+		answer:
+			"Sí. En la web hay una veintena larga de alojamientos adults only, pensados para una escapada tranquila, y una decena que admiten mascotas. En cada ficha están los servicios del establecimiento, y los filtros del listado de alojamientos permiten buscarlos.",
+	},
+	{
+		question: "¿Cómo elegís los sitios que recomendáis?",
+		answer:
+			"Vamos. Desde 2015 visitamos los sitios que salen en la web, y las fichas marcadas como verificadas son las que hemos pisado nosotros; en las historias contamos cómo fue cada escapada, con nuestras fotos y lo que no salió bien.",
+	},
+];
 
-export { FAQ };
+const HomeFaq = () => {
+	const { locale } = useRouter();
+	const t = useT();
+	const items = locale === "es" ? FAQ_ES : FAQ;
+
+	return (
+		<>
+			<JsonLd
+				data={{
+					"@context": "https://schema.org",
+					"@type": "FAQPage",
+					inLanguage: locale === "es" ? "es-ES" : "ca-ES",
+					mainEntity: items.map(({ question, answer }) => ({
+						"@type": "Question",
+						name: question,
+						acceptedAnswer: { "@type": "Answer", text: answer },
+					})),
+				}}
+			/>
+			<section className="home-faq">
+				<div className="container">
+					<div className="home-faq__inner">
+						<h2 className="home-faq__title">{t("home.faqTitle")}</h2>
+						<dl className="home-faq__list">
+							{items.map(({ question, answer }) => (
+								<div className="home-faq__item" key={question}>
+									<dt className="home-faq__question">{question}</dt>
+									<dd className="home-faq__answer">{answer}</dd>
+								</div>
+							))}
+						</dl>
+					</div>
+				</div>
+			</section>
+		</>
+	);
+};
+
+export { FAQ, FAQ_ES };
 export default HomeFaq;

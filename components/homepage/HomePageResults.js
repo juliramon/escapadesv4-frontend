@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useT } from "../../i18n/strings";
 import AdSlot from "../ads/AdSlot";
 import EditorialCard from "../listings/EditorialCard";
 import ListingGrid from "../listings/ListingGrid";
@@ -33,6 +34,7 @@ const HomePageResults = ({
 	featuredLists = [],
 	totals = {},
 }) => {
+	const t = useT();
 	const getawayCategories = withCategoryImages(GETAWAY_CATEGORIES, categories);
 	const stayCategories = withCategoryImages(STAY_CATEGORIES, categories);
 
@@ -68,9 +70,9 @@ const HomePageResults = ({
 			<section className="pt-10 md:pt-14 lg:pt-16">
 				<div className="container">
 					<SectionHeading
-						eyebrow="Per on comencem?"
-						title="Escapades per tipus de pla"
-						description="Trieu el pla i us ensenyem les experiències i els allotjaments que hi encaixen."
+						eyebrow={t("home.start")}
+						title={t("home.byPlan")}
+						description={t("home.byPlanText")}
 					/>
 					<div className="mt-6 md:mt-8">
 						<CategoryRail categories={getawayCategories} />
@@ -78,10 +80,10 @@ const HomePageResults = ({
 
 					<div className="mt-10 md:mt-12">
 						<SectionHeading
-							title="On voleu dormir?"
+							title={t("home.whereSleep")}
 							titleTag="h3"
 							href="/allotjaments"
-							linkLabel="Veure tots els allotjaments"
+							linkLabel={t("home.allStays")}
 						/>
 						<div className="mt-5 md:mt-6">
 							<CategoryRail categories={stayCategories} />
@@ -95,10 +97,10 @@ const HomePageResults = ({
 				<div className="container">
 					<SectionHeading
 						eyebrow="Allotjaments"
-						title="Allotjaments amb encant per a dos"
+						title={t("home.staysTitle")}
 						description="Hotels petits, cases rurals, cabanyes als arbres i refugis triats un a un."
 						href="/allotjaments"
-						linkLabel="Veure tots els allotjaments"
+						linkLabel={t("home.allStays")}
 					/>
 					<div className="mt-6 md:mt-8">
 						<ListingGrid
@@ -115,10 +117,10 @@ const HomePageResults = ({
 				<div className="container">
 					<SectionHeading
 						eyebrow="Experiències"
-						title="Experiències per fer en parella"
+						title={t("home.experiencesTitle")}
 						description="Activitats, rutes i plans per omplir el cap de setmana d'alguna cosa més que carretera."
 						href="/activitats"
-						linkLabel="Veure totes les experiències"
+						linkLabel={t("home.allExperiences")}
 					/>
 					<div className="mt-6 md:mt-8">
 						<ListingGrid
@@ -144,11 +146,11 @@ const HomePageResults = ({
 			<section className="pt-12 md:pt-16 lg:pt-20">
 				<div className="container">
 					<SectionHeading
-						eyebrow="Destinacions"
-						title="Escapades per Catalunya, zona a zona"
-						description="Trieu una zona i us hi ensenyem on dormir, què fer i què val la pena veure."
+						eyebrow={t("home.destinations")}
+						title={t("home.byZone")}
+						description={t("home.byZoneText")}
 						href="/destinacions"
-						linkLabel="Veure totes les destinacions"
+						linkLabel={t("home.allDestinations")}
 					/>
 					<div className="mt-6 md:mt-8">
 						<DestinationRail destinations={featuredDestinations} />
@@ -160,8 +162,8 @@ const HomePageResults = ({
 			<section className="pt-12 md:pt-16 lg:pt-20">
 				<div className="container">
 					<SectionHeading
-						eyebrow="Tot el que hi trobareu"
-						title="Sis maneres de preparar la propera escapada"
+						eyebrow={t("home.everything")}
+						title={t("home.sixWays")}
 					/>
 					<div className="mt-6 md:mt-8">
 						<VerticalTiles totals={totals} />
@@ -173,11 +175,11 @@ const HomePageResults = ({
 			<section className="pt-12 md:pt-16 lg:pt-20">
 				<div className="container">
 					<SectionHeading
-						eyebrow="Històries"
-						title="Escapades que hem fet nosaltres"
-						description="Les explicem de primera mà, amb el que va funcionar i el que no."
+						eyebrow={t("home.stories")}
+						title={t("home.storiesTitle")}
+						description={t("home.storiesText")}
 						href="/histories"
-						linkLabel="Veure totes les històries"
+						linkLabel={t("home.allStories")}
 					/>
 					<div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-6 md:mt-8">
 						{mostRecentStories.slice(0, 3).map((story, index) => (
@@ -200,11 +202,11 @@ const HomePageResults = ({
 				<section className="pt-12 md:pt-16 lg:pt-20">
 					<div className="container">
 						<SectionHeading
-							eyebrow="Llistes"
-							title="Idees ja triades, per decidir ràpid"
-							description="Seleccions temàtiques per quan sabeu que voleu sortir però no on."
+							eyebrow={t("home.lists")}
+							title={t("home.listsTitle")}
+							description={t("home.listsText")}
 							href="/llistes"
-							linkLabel="Veure totes les llistes"
+							linkLabel={t("home.allLists")}
 						/>
 						<div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-6 md:mt-8">
 							{featuredLists.slice(0, 3).map((list, index) => (
