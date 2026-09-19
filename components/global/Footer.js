@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { useT } from "../../i18n/strings";
 import { useEffect, useState } from "react";
 import ContentService from "../../services/contentService";
 import NewsletterCta from "../homepage/NewsletterCta";
 
 const Footer = () => {
+	const t = useT();
 	const [state, setState] = useState({
 		placeCategories: [],
 		activityCategories: [],
@@ -59,8 +61,7 @@ const Footer = () => {
 								/>
 							</picture>
 							<span className="flex-1 text-sm inline-block mt-4 md:ml-6 border-t md:border-t-0 md:border-l border-primary-50 pt-4 md:pt-0 md:pl-6 opacity-70">
-								Escapadesenparella.cat és el recomanador
-								especialista d'escapades en parella a Catalunya.
+								{t("footer.claim")}
 							</span>
 						</div>
 					</div>
@@ -88,8 +89,8 @@ const Footer = () => {
 									</li>
 									<li className="py-1.5 text-sm xl:text-15 leading-tight">
 										<Link href="/histories">
-											<a title="Històries en parella">
-												Històries en parella
+											<a title={t("footer.stories")}>
+												{t("footer.stories")}
 											</a>
 										</Link>
 									</li>
@@ -120,7 +121,7 @@ const Footer = () => {
 						<div className="w-full">
 							<div className="footer-content">
 								<span className="footer-header text-xl mb-2 inline-block">
-									Per tipus d&apos;escapada
+									{t("footer.byGetawayType")}
 								</span>
 								<ul className="list-none m-0 p-0">
 									{state.activityCategories
@@ -241,12 +242,10 @@ const Footer = () => {
 						<div className="flex flex-col sm:flex-row items-center justify-center text-center sm:text-left gap-y-3 gap-x-6">
 							<p className="m-0 max-w-sm">
 								<span className="block text-15 xl:text-16 text-grey-700">
-									No et perdis cap escapada en parella
+									{t("footer.newsletterTitle")}
 								</span>
 								<span className="block text-sm text-grey-400">
-									A les xarxes hi publiquem les escapades
-									noves, els allotjaments amb encant que
-									trobem i els descomptes per viatjar.
+									{t("footer.newsletterText")}
 								</span>
 							</p>
 							<ul className="list-none flex items-center justify-center m-0 p-0 space-x-5">

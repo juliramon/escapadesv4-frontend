@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useT } from "../../i18n/strings";
 import { cloudinaryImage, cloudinaryResponsive } from "../../utils/cloudinary";
 import { withResponsiveImages } from "../../utils/contentImages";
 import { useRouter } from "next/router";
@@ -37,6 +38,7 @@ import {
 	FIELDS,
 	findBySlug,
 	localized,
+	segment,
 } from "../../utils/i18n";
 
 const GetawayListing = ({
@@ -47,6 +49,7 @@ const GetawayListing = ({
 }) => {
 	const { user } = useContext(UserContext);
 	const router = useRouter();
+	const t = useT();
 
 	if (getawayDetails && categoryDetails) {
 		useEffect(() => {
@@ -424,19 +427,19 @@ const GetawayListing = ({
 													{getawayDetails.type ===
 													"activity" ? (
 														<a
-															href={`/activitats`}
-															title={`Experiències`}
+															href={`/${segment("activitats", router.locale)}`}
+															title={t("listing.experiences")}
 															className="breadcrumb__link"
 														>
-															Experiències
+															{t("listing.experiences")}
 														</a>
 													) : (
 														<a
-															href={`/allotjaments`}
-															title={`Allotjaments`}
+															href={`/${segment("allotjaments", router.locale)}`}
+															title={t("listing.stays")}
 															className="breadcrumb__link"
 														>
-															Allotjaments
+															{t("listing.stays")}
 														</a>
 													)}
 												</li>
@@ -842,14 +845,10 @@ const GetawayListing = ({
 											getawayDetails.reasons !== "" ? (
 												<div className="pt-8 mt-8 md:pt-12 md:mt-12 border-t border-primary-50 max-w-[666px]">
 													<h2 className="mb-1">
-														Per què realitzar
-														aquesta activitat?
+														{t("listing.whyTitle")}
 													</h2>
 													<p>
-														Us compartim 5 raons per
-														les quals creiem que
-														hauríeu de fer aquesta
-														escapada:
+														{t("listing.whyText")}
 													</p>
 													<div
 														className="mt-4 listing__description"

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useT } from "../i18n/strings";
 import ContentService from "../services/contentService";
 import { toListingCard, toMapMarker } from "../utils/listingProps";
 import NavigationBar from "../components/global/NavigationBar";
@@ -29,6 +30,7 @@ const PlaceList = ({
 	numPages,
 	currentPage = 1,
 }) => {
+	const t = useT();
 	// L'estat surt de les props des del primer render. Abans `hasPlaces`
 	// començava a false i s'omplia en un useEffect: el servidor pintava
 	// esquelets i l'HTML que llegeix Google no enllaçava cap allotjament.
@@ -255,7 +257,7 @@ ${taxonomyLinksHtml(DESTINATIONS, "/destinacions/")}
 					<path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
 					<path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
 				</svg>
-				Veure mapa
+				{t("map.see")}
 			</button>
 		</div>
 	);

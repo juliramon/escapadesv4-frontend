@@ -117,6 +117,129 @@ const STRINGS = {
 		es: "Vuelve a probarlo más adelante.",
 	},
 
+	// Pàgina no trobada
+	"404.title": { ca: "Pàgina no trobada", es: "Página no encontrada" },
+	"404.metaDescription": {
+		ca: "Ho sentim, la pàgina que busques no s'ha trobat. Torna-ho a intentar de nou.",
+		es: "Lo sentimos, la página que buscas no se ha encontrado. Vuelve a intentarlo.",
+	},
+	"404.text1": {
+		ca: "La pàgina sol·licitada no està disponible, o potser ha canviat de direcció, disculpa les molèsties.",
+		es: "La página solicitada no está disponible, o quizá ha cambiado de dirección. Disculpa las molestias.",
+	},
+	"404.text2": {
+		ca: "Amb freqüència és degut a un error a l'escriure la direcció de la pàgina que estàs intentant accedir. Comprova-ho de nou a veure si és correcte.",
+		es: "A menudo se debe a un error al escribir la dirección de la página a la que intentas acceder. Compruébalo de nuevo, por si acaso.",
+	},
+
+	// Cercador
+	"search.results": { ca: "Resultats de cerca", es: "Resultados de búsqueda" },
+	"search.tryAnother": {
+		ca: "Proveu amb un altre terme, o entreu per aquí:",
+		es: "Probad con otro término, o entrad por aquí:",
+	},
+	"search.byGetawayType": {
+		ca: "Per tipus d'escapada",
+		es: "Por tipo de escapada",
+	},
+	"search.byStayType": {
+		ca: "Per tipus d'allotjament",
+		es: "Por tipo de alojamiento",
+	},
+	"search.label": {
+		ca: "Cerca experiències i allotjaments",
+		es: "Busca experiencias y alojamientos",
+	},
+	"nav.byCategories": {
+		ca: "Escapades per categories",
+		es: "Escapadas por categorías",
+	},
+	"nav.manageMenu": { ca: "Gestionar menú", es: "Gestionar menú" },
+
+	// Targeta de reserva
+	"booking.disclaimer": {
+		ca: "Preu orientatiu calculat per nosaltres. Pot variar segons les dates i no sempre està actualitzat.",
+		es: "Precio orientativo calculado por nosotros. Puede variar según las fechas y no siempre está actualizado.",
+	},
+	// Peu de pàgina
+	"footer.claim": {
+		ca: "Escapadesenparella.cat és el recomanador especialista d'escapades en parella a Catalunya.",
+		es: "Escapadesenparella.cat es el recomendador especialista en escapadas en pareja en Cataluña.",
+	},
+	"footer.stays": { ca: "Allotjaments amb encant", es: "Alojamientos con encanto" },
+	"footer.experiences": { ca: "Experiències", es: "Experiencias" },
+	"footer.stories": { ca: "Històries en parella", es: "Historias en pareja" },
+	"footer.lists": { ca: "Llistes d'escapades", es: "Listas de escapadas" },
+	"footer.trips": { ca: "Viatges en parella", es: "Viajes en pareja" },
+	"footer.destinations": { ca: "Destinacions", es: "Destinos" },
+	"footer.byGetawayType": {
+		ca: "Per tipus d'escapada",
+		es: "Por tipo de escapada",
+	},
+	"footer.newsletterTitle": {
+		ca: "No et perdis cap escapada en parella",
+		es: "No te pierdas ninguna escapada en pareja",
+	},
+	"footer.newsletterText": {
+		ca: "A les xarxes hi publiquem les escapades noves, els allotjaments amb encant que trobem i els descomptes per viatjar.",
+		es: "En las redes publicamos las escapadas nuevas, los alojamientos con encanto que encontramos y los descuentos para viajar.",
+	},
+
+	// Pàgina d'una història
+	"story.breadcrumb": { ca: "Històries en parella", es: "Historias en pareja" },
+	"story.placesTitle": {
+		ca: "Els llocs d'aquesta història",
+		es: "Los lugares de esta historia",
+	},
+	"story.placesText": {
+		ca: "Les fitxes amb l'adreça, com arribar-hi i on reservar.",
+		es: "Las fichas con la dirección, cómo llegar y dónde reservar.",
+	},
+	"story.keepReading": { ca: "Segueix llegint", es: "Sigue leyendo" },
+	"story.otherStories": {
+		ca: "Altres històries en parella",
+		es: "Otras historias en pareja",
+	},
+	"story.otherStoriesText": {
+		ca: "Més escapades explicades de primera mà.",
+		es: "Más escapadas contadas de primera mano.",
+	},
+	"story.allStories": {
+		ca: "Veure totes les històries",
+		es: "Ver todas las historias",
+	},
+
+	// Pàgina d'una llista
+	"list.breadcrumb": { ca: "Llistes", es: "Listas" },
+	"list.moreIdeas": { ca: "Més idees", es: "Más ideas" },
+	"list.otherLists": {
+		ca: "Altres llistes d'escapades",
+		es: "Otras listas de escapadas",
+	},
+	"list.otherListsText": {
+		ca: "Seleccions temàtiques per decidir on anar.",
+		es: "Selecciones temáticas para decidir adónde ir.",
+	},
+	"list.allLists": {
+		ca: "Veure totes les llistes",
+		es: "Ver todas las listas",
+	},
+
+	// Mapa i llistats
+	"map.see": { ca: "Veure mapa", es: "Ver mapa" },
+	"map.close": { ca: "Tancar mapa", es: "Cerrar mapa" },
+
+	// Fitxa
+	"listing.whyTitle": {
+		ca: "Per què realitzar aquesta activitat?",
+		es: "¿Por qué hacer esta actividad?",
+	},
+	"listing.whyText": {
+		ca: "Us compartim 5 raons per les quals hauríeu de fer aquesta escapada:",
+		es: "Os compartimos 5 razones por las que deberíais hacer esta escapada:",
+	},
+	"listing.experiences": { ca: "Experiències", es: "Experiencias" },
+	"listing.stays": { ca: "Allotjaments", es: "Alojamientos" },
 	// Capçalera de la portada
 	"hero.discountsRibbon": {
 		ca: "Estalvia amb els descomptes per viatjar",

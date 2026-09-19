@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useT } from "../../i18n/strings";
 import {
 	cloudinaryImage,
 	cloudinaryResponsive,
@@ -36,6 +37,7 @@ import ContentParser from "../../utils/ContentParser";
 import ItemListRichSnippet from "../../components/richsnippets/ItemListRichSnippet";
 
 const ListView = ({ listDetails, relatedLists }) => {
+	const t = useT();
 	const { user } = useContext(UserContext);
 	const router = useRouter();
 	// En castellà la ruta és `/es/listas/<slug traduït>`: el segment i el
@@ -322,11 +324,11 @@ const ListView = ({ listDetails, relatedLists }) => {
 						</section>
 					</article>
 				<RelatedListings
-					eyebrow="Més idees"
-					title="Altres llistes d'escapades"
-					description="Seleccions temàtiques per decidir on anar."
+					eyebrow={t("list.moreIdeas")}
+					title={t("list.otherLists")}
+					description={t("list.otherListsText")}
 					href="/llistes"
-					linkLabel="Veure totes les llistes"
+					linkLabel={t("list.allLists")}
 					items={relatedLists}
 					variant="editorial"
 					basePath="/llistes"

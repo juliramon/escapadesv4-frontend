@@ -1,13 +1,15 @@
 import Footer from "../components/global/Footer";
+import { useT } from "../i18n/strings";
 import NavigationBar from "../components/global/NavigationBar";
 import GlobalMetas from "../components/head/GlobalMetas";
 
 const Error404 = () => {
+	const t = useT();
 	return (
 		<>
 			<GlobalMetas
-				title={"Pàgina no trobada"}
-				description={`Ho sentim, la pàgina que busques no s'ha trobat. Torna-ho a intentar de nou.`}
+				title={t("404.title")}
+				description={t("404.metaDescription")}
 			/>
 			<NavigationBar />
 			<main>
@@ -22,18 +24,13 @@ const Error404 = () => {
 							<div className="w-full md:max-w-xl px-6 text-center md:text-left mt-5 md:mt-2">
 								<div className="max-w-xs mx-auto md:max-w-full">
 									<h1 className="mt-0 mb-5">
-										Pàgina no trobada
+										{t("404.title")}
 									</h1>
 									<p className="text-primary-400">
-										La pàgina sol·licitada no està
-										disponible, o potser ha canviat de
-										direcció, disculpa les molèsties.
+										{t("404.text1")}
 									</p>
 									<p className="text-primary-400">
-										Amb freqüència és degut a un error a
-										l'escriure la direcció de la pàgina que
-										estàs intentant accedir. Comprova-ho de
-										nou a veure si és correcte.
+										{t("404.text2")}
 									</p>
 								</div>
 							</div>
