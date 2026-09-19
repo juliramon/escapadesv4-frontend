@@ -1,0 +1,94 @@
+{
+	"generatedAt": "2026-09-19T10:49:50.470Z",
+	"note": "Castellà del camp seoText de 4 documents de categories, amb els enllaços interns ja apuntant a la versió castellana.",
+	"fields": [
+		{
+			"collection": "categories",
+			"slug": "escapades-gastronomiques",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Escapadas gastronómicas",
+					"subtitle": "Escapadas gastronómicas en pareja por Cataluña: restaurantes, bodegas y mercados. Con el precio medio por persona y cómo llegar.",
+					"seoTextHeader": "<p>Si el viaje gira alrededor de la mesa, esta es vuestra lista. Escapadas gastronómicas por Cataluña: restaurantes de pueblo, cocina de autor, bodegas que se visitan y sitios donde se come de maravilla por poco dinero.</p>",
+					"slug": "escapadas-gastronomicas",
+					"seoText": "<h2>Escapadas gastronómicas por Cataluña para disfrutar de los mejores sabores</h2><p>Si os gusta comer bien y queréis una experiencia que se recuerde, una <strong>escapada gastronómica por Cataluña</strong> es el plan. De la costa al interior, aquí hay restaurantes con encanto y hoteles gastronómicos para dar y vender.</p><h3>Escapadas gastronómicas para descubrir la cocina catalana</h3><p>Cataluña es un destino de referencia para las <strong>escapadas gastronómicas</strong>. Con producto local de primera y una tradición culinaria de siglos, hay experiencias para todos los gustos. Catar vinos del Penedès, comer marisco recién sacado en la Costa Brava o un plato de caza en los Pirineos: son maneras distintas de entender el mismo país.</p><h3>Hoteles gastronómicos en Cataluña: dormir donde se come bien</h3><p>Si queréis juntar descanso y buena mesa, los <strong>hoteles gastronómicos de Cataluña</strong> son la respuesta. Ofrecen menús degustación, maridajes y cocina de autor sin tener que coger el coche después de cenar. Un <strong>hotel gastronómico</strong> es una buena idea para una escapada en pareja o para celebrar algo.</p><h4>Actividades y experiencias gastronómicas</h4><p>Una <strong>escapada gastronómica</strong> no se acaba en el restaurante. También hay <strong>actividades</strong> para entrar en la cocina catalana por dentro. Algunas de las que más gustan:</p><p>Visitas a bodegas con cata de vinos y cavas.</p><p>Talleres de cocina tradicional catalana.</p><p>Rutas de tapas para descubrir platos locales.</p><p>Visitas a mercados para conocer el producto fresco de la zona.</p><p>Son maneras de vivir la gastronomía desde dentro y de entender por qué la cocina de aquí es como es.</p><h3>Restaurantes con encanto en Cataluña</h3><p>Cataluña también es conocida por sus <strong>restaurantes con encanto</strong>, en sitios que ya valen el viaje. De pequeños bistrós de pueblo a establecimientos con estrella Michelin, la oferta es amplia y difícil de agotar. Sea cual sea vuestro presupuesto, hay una mesa que os encajará.</p><h3>Descubre hoteles y escapadas gastronómicas</h3><p>Planear una <strong>escapada gastronómica por Cataluña</strong> es descubrir sitios con sabor y sin pretensiones. Tanto si buscáis un fin de semana tranquilo en un <strong>hotel gastronómico</strong> como si preferís recorrer los mejores restaurantes de la zona, aquí hay opciones para todos.</p><p>Mirad nuestra selección de escapadas gastronómicas y reservad la vuestra.</p><p>Esta es una de las muchas <a href=\"https://escapadesenparella.cat/es\">escapadas en pareja</a> que hemos ido recogiendo desde 2015.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"title": "Escapadas gastronómicas",
+					"subtitle": "Escapadas gastronómicas en pareja por Cataluña: restaurantes, bodegas y mercados. Con el precio medio por persona y cómo llegar.",
+					"seoTextHeader": "<p>Si el viaje gira alrededor de la mesa, esta es vuestra lista. Escapadas gastronómicas por Cataluña: restaurantes de pueblo, cocina de autor, bodegas que se visitan y sitios donde se come de maravilla por poco dinero.</p>",
+					"slug": "escapadas-gastronomicas"
+				}
+			}
+		},
+		{
+			"collection": "categories",
+			"slug": "cases-rurals",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Casas rurales",
+					"subtitle": "Casas rurales en Cataluña para una escapada en pareja: masías restauradas, chimenea y campo alrededor. Con precios y cómo llegar.",
+					"seoTextHeader": "<p>Cataluña tiene casas rurales para todos los gustos, y unas cuantas pensadas para dos. Aquí está nuestra selección de casas rurales con encanto: masías de piedra, chimenea, y el pueblo más cercano a diez minutos.</p>",
+					"slug": "casas-rurales",
+					"seoText": "<h2>Descubre las mejores casas rurales de Cataluña para una escapada con encanto</h2><p>Si queréis desconectar de la rutina, disfrutar del campo y conocer la Cataluña rural, las casas rurales son la manera. Aquí tenéis las mejores <strong>casas rurales con encanto</strong> para una escapada en pareja.</p><h3>Casas rurales con encanto: vuestra escapada ideal</h3><p>Cataluña tiene casas rurales de todo tipo, que juntan el entorno natural con todas las comodidades. Estas <strong>casas rurales con encanto</strong> son perfectas para unos días de calma, con montaña, campos y bosques alrededor. Muchas conservan detalles históricos —muros de piedra, vigas, una bodega— que le dan otro valor a la estancia.</p><h4>Por qué alojarse en una casa rural</h4><p>Dormir en una <strong>casa rural en Cataluña</strong> no es solo descansar en un sitio tranquilo: es vivir el sitio desde dentro. Disfrutad del <strong>turismo rural</strong> rodeados de naturaleza, caminad, visitad pueblos con encanto y comed lo que se cocina allí.</p><h3>Los mejores alojamientos y hoteles rurales con encanto</h3><p>Para quien busca algo más exclusivo, Cataluña también tiene una selección de <strong>hoteles rurales con encanto</strong>. Son ideales para una escapada romántica en el campo, con servicio cuidado y trato cercano.</p><h3>Apartamentos y alojamientos rurales</h3><p>Si viajáis con más gente, los <strong>apartamentos rurales</strong> son buena opción: el espacio y la libertad de una casa con el encanto del entorno. De las playas de la Costa Brava a los pueblos de los Pirineos, los hay en casi cualquier rincón.</p><h3>Escapadas rurales: naturaleza sin complicaciones</h3><p>Las <strong>escapadas rurales por Cataluña</strong> sirven tanto para no hacer nada como para llenar el día de rutas. Hay oferta suficiente para que cada pareja encuentre la suya.</p><h4>Las mejores casas rurales para una estancia memorable</h4><p>Hemos seleccionado opciones para todos los gustos: de alojamientos con encanto a casas enteras y equipadas para un fin de semana o para más días.</p><p>Mirad nuestra selección de <strong>casas rurales en Cataluña</strong> y reservad la próxima escapada.</p><p>Encontraréis el resto de propuestas en la recopilación de <a href=\"https://escapadesenparella.cat/es\">escapadas en pareja</a> por Cataluña, con los precios y cómo llegar.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"title": "Casas rurales",
+					"subtitle": "Casas rurales en Cataluña para una escapada en pareja: masías restauradas, chimenea y campo alrededor. Con precios y cómo llegar.",
+					"seoTextHeader": "<p>Cataluña tiene casas rurales para todos los gustos, y unas cuantas pensadas para dos. Aquí está nuestra selección de casas rurales con encanto: masías de piedra, chimenea, y el pueblo más cercano a diez minutos.</p>",
+					"slug": "casas-rurales"
+				}
+			}
+		},
+		{
+			"collection": "categories",
+			"slug": "escapades-aventura",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Escapadas de aventura",
+					"subtitle": "Escapadas de aventura en pareja por Cataluña: parapente, barranquismo, vías ferratas y kayak. Con precios y cómo reservarlas.",
+					"seoTextHeader": "<p>Cataluña es un paraíso para quien busca una escapada de aventura: parapente sobre el Montsec, barranquismo, vías ferratas y kayak por la Costa Brava. Esta es nuestra selección, con lo que cuesta cada actividad.</p>",
+					"slug": "escapadas-aventura",
+					"seoText": "<p>Cataluña es un paraíso para quien busca una <strong>escapada de aventura</strong>, con actividades y paisajes de sobra para llenar cualquier fin de semana. De las montañas de los Pirineos a la costa mediterránea, aquí hay aventura para todos los niveles.</p><p>Uno de los destinos principales para el aire libre son los Pirineos, donde podréis caminar, hacer bicicleta de montaña o escalar. La zona también tiene varias estaciones de esquí, así que en invierno el plan cambia por completo sin cambiar de sitio.</p><p>Si buscáis algo más tranquilo, la Costa Brava ofrece aventura de agua: surf, kayak y buceo. Y entre cala y cala hay pueblos de pescadores y playas donde no se oye nada, que es la otra mitad del plan.</p><p>Sea cual sea el tipo de aventura que tengáis en la cabeza, Cataluña la tiene. Con un paisaje que cambia cada media hora de coche y actividades para todos los niveles, es difícil aburrirse.</p><p>Encontraréis el resto de propuestas en la recopilación de <a href=\"https://escapadesenparella.cat/es\">escapadas en pareja</a> por Cataluña, con los precios y cómo llegar.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"title": "Escapadas de aventura",
+					"subtitle": "Escapadas de aventura en pareja por Cataluña: parapente, barranquismo, vías ferratas y kayak. Con precios y cómo reservarlas.",
+					"seoTextHeader": "<p>Cataluña es un paraíso para quien busca una escapada de aventura: parapente sobre el Montsec, barranquismo, vías ferratas y kayak por la Costa Brava. Esta es nuestra selección, con lo que cuesta cada actividad.</p>",
+					"slug": "escapadas-aventura"
+				}
+			}
+		},
+		{
+			"collection": "categories",
+			"slug": "rutes-i-excursions",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Rutas y excursiones",
+					"subtitle": "Rutas y excursiones por Cataluña para hacer en pareja: cimas, calas y caminos de ronda. Con la distancia, el desnivel y dónde dejar el coche.",
+					"seoTextHeader": "<p>Cataluña es un paraíso para caminar. Tanto si buscáis un paseo suave como una ruta de montaña exigente, aquí encontraréis las excursiones que hemos hecho nosotros, con la distancia, el desnivel y dónde aparcar.</p>",
+					"slug": "rutas-y-excursiones",
+					"seoText": "<h4><strong>Rutas y excursiones imprescindibles para descubrir Cataluña</strong></h4><p>Recorrer <strong>rutas y excursiones por Cataluña</strong> es la mejor manera de conocer el paisaje y la cultura del país. Del <strong>Pirineo catalán</strong> a la <strong>Costa Brava</strong>, pasando por parques naturales como el <strong>Montseny</strong> o la <strong>Sierra de Montsant</strong>, hay itinerarios para todos los públicos. Entre las rutas más conocidas están el <strong>Camí de Ronda</strong> en la costa, la subida al <strong>Pedraforca</strong> o los caminos de la <strong>Garrotxa</strong>, entre volcanes y hayedos.<br>Muchas de estas excursiones se hacen en un día y van bien para un fin de semana, en familia o con amigos. Además, buena parte están señalizadas y pasan por puntos de interés natural, histórico y gastronómico. Tanto si camináis a menudo como si acabáis de empezar, aquí hay ruta para vosotros.<br>Mirad nuestras recomendaciones y empezad a planear la próxima <strong>ruta por Cataluña</strong>, con la distancia, el desnivel y dónde dejar el coche.</p><p>Si buscáis más ideas, en la recopilación de <a href=\"https://escapadesenparella.cat/es\">escapadas en pareja</a> están todas las que hemos visitado, ordenadas por tipo y por zona.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"title": "Rutas y excursiones",
+					"subtitle": "Rutas y excursiones por Cataluña para hacer en pareja: cimas, calas y caminos de ronda. Con la distancia, el desnivel y dónde dejar el coche.",
+					"seoTextHeader": "<p>Cataluña es un paraíso para caminar. Tanto si buscáis un paseo suave como una ruta de montaña exigente, aquí encontraréis las excursiones que hemos hecho nosotros, con la distancia, el desnivel y dónde aparcar.</p>",
+					"slug": "rutas-y-excursiones"
+				}
+			}
+		}
+	]
+}
