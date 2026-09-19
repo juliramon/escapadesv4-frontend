@@ -1,0 +1,538 @@
+{
+	"generatedAt": "2026-09-18T23:10:26.216Z",
+	"note": "Castellà de 38 fitxes: slug, títol i metes. El cos de la fitxa encara no.",
+	"fields": [
+		{
+			"collection": "places",
+			"slug": "mas-salagros-ecoresort-and-spa",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mas-salagros-ecoresort-spa",
+					"title": "Mas Salagros EcoResort & SPA",
+					"metaTitle": "Mas Salagrós: el primer ecoresort de España",
+					"metaDescription": "Mas Salagros EcoResort & Spa, en Vallromanes: el primer resort ecológico de España, con lago, dos piscinas y spa. Desde 167 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-the-serras",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-the-serras-barcelona",
+					"title": "Hotel The Serras",
+					"metaTitle": "The Serras: piscina en la azotea del gótico de Barcelona",
+					"metaDescription": "Hotel The Serras, en el gótico de Barcelona: piscina infinita en la azotea y estrella Michelin, frente al mar. Desde 310 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "el-follo-turisme-rural",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "el-follo-turismo-rural-montseny",
+					"title": "El Folló Turismo Rural",
+					"metaTitle": "El Folló: casa del siglo XII en el Montseny",
+					"metaDescription": "El Folló Turismo Rural, en el Montseny: una casa del siglo XII con comida ecológica, chimenea y sala de lectura. Desde 55 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-urbisol",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-urbisol-calders",
+					"title": "Hotel Urbisol",
+					"metaTitle": "Hotel Urbisol, en Calders: spa y dos piscinas",
+					"metaDescription": "Hotel Urbisol, en Calders: spa con sauna e hidromasaje, dos piscinas y vistas a la montaña. Desde 84 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "boutique-hotel-davallada-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "boutique-hotel-davallada-adults-only-sitges",
+					"title": "Boutique Hotel Davallada - Adults Only",
+					"metaTitle": "Hotel Davallada: adults only en el centro de Sitges",
+					"metaDescription": "Boutique Hotel Davallada, en Sitges: un hotel adults only de estilo colonial en un edificio catalogado del centro."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "balneario-font-vella-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "balneario-font-vella-adults-only",
+					"title": "Balneario Font Vella - Adults Only",
+					"metaTitle": "Balneario Font Vella: aguas termales solo para adultos",
+					"metaDescription": "Balneario Font Vella, adults only en Sant Hilari Sacalm: aguas termales y montaña en pleno corazón de las Guilleries."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "mas-ferran-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mas-ferran-adults-only-pals",
+					"title": "Mas Ferran - Adults Only",
+					"metaTitle": "Mas Ferran: adults only en Pals",
+					"metaDescription": "Mas Ferran, en Pals: alojamiento solo para adultos con cocina compartida, en el Baix Empordà. Desde 60 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-spa-la-central-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-spa-la-central-adults-only-darnius",
+					"title": "Hotel Spa La Central - Adults Only",
+					"metaTitle": "Hotel Spa La Central: adults only entre dos ríos",
+					"metaDescription": "Hotel Spa La Central, adults only en Darnius: un edificio del siglo XIX restaurado entre dos ríos, en el Alt Empordà."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-casa-peya-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-casa-peya-adults-only-palafrugell",
+					"title": "Hotel Casa Peya - Adults Only",
+					"metaTitle": "Casa Peya: adults only en Palafrugell, con piscina",
+					"metaDescription": "Hotel Casa Peya, en Palafrugell: solo para adultos, con piscina, a 10 minutos de Calella y Llafranc. Desde 65 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-aatu-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-aatu-adults-only-peratallada",
+					"title": "Hotel Aatu - Adults Only",
+					"metaTitle": "Hotel Aatu: adults only en Peratallada",
+					"metaDescription": "Hotel Aatu, en Peratallada: solo para adultos, con 30.000 m² de jardines y dos piscinas en el pueblo medieval. Desde 55 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "el-cau-del-papibou-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "el-cau-del-papibou-adults-only-peratallada",
+					"title": "El Cau del Papibou - Adults Only",
+					"metaTitle": "El Cau del Papibou: adults only en Peratallada",
+					"metaDescription": "El Cau del Papibou, adults only en Peratallada: un edificio del siglo XIII reformado en pleno pueblo medieval."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "aqua-hotel-silhouette-and-spa-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "aqua-hotel-silhouette-spa-adults-only",
+					"title": "Aqua Hotel Silhouette & Spa - Adults Only",
+					"metaTitle": "Aqua Hotel Silhouette & Spa: adults only frente al mar",
+					"metaDescription": "Aqua Hotel Silhouette & Spa, en Malgrat de Mar: hotel adults only con dos piscinas, jardín y spa, junto a la playa."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "jardi-de-pedra-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "jardi-de-pedra-adults-only-lescala",
+					"title": "Jardí de Pedra - Adults Only",
+					"metaTitle": "Jardí de Pedra: adults only en L'Escala",
+					"metaDescription": "Jardí de Pedra, en L'Escala: hotel de tres estrellas solo para adultos, con restaurante y terraza. Desde 67 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-mas-pastora-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-mas-pastora-adults-only-llafranc",
+					"title": "Hotel Mas Pastora - Adults Only",
+					"metaTitle": "Mas Pastora: adults only cerca de Llafranc",
+					"metaDescription": "Hotel Mas Pastora, adults only en Llafranc: una casa de campo del siglo XVIII a pocos minutos de las calas."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "el-castell-de-la-pobla-de-lillet-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "el-castell-de-la-pobla-de-lillet-adults-only",
+					"title": "El Castell de la Pobla de Lillet - Adults Only",
+					"metaTitle": "El Castell de la Pobla de Lillet: adults only",
+					"metaDescription": "Hotel adults only en La Pobla de Lillet, en el Berguedà, a 850 metros de los Jardines Artigas de Gaudí. Escapada romántica de montaña."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "tramuntana-hotel-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "tramuntana-hotel-adults-only-cadaques",
+					"title": "Tramuntana Hotel - Adults Only",
+					"metaTitle": "Tramuntana Hotel: adults only en Cadaqués",
+					"metaDescription": "Tramuntana Hotel, adults only en el casco antiguo de Cadaqués, a 200 metros del mar. Una escapada romántica en el Cap de Creus."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-tarongeta-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-tarongeta-adults-only-cadaques",
+					"title": "Hotel Tarongeta - Adults Only",
+					"metaTitle": "Hotel Tarongeta: adults only a 150 m de la playa",
+					"metaDescription": "Hotel Tarongeta, en Cadaqués: solo para adultos, de gestión familiar y a 150 metros de la playa. Desde 37 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-rural-cal-torner-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-rural-cal-torner-adults-only",
+					"title": "Hotel Rural Cal Torner - Adults Only",
+					"metaTitle": "Cal Torner: hotel rural adults only en el Priorat",
+					"metaDescription": "Cal Torner, hotel rural adults only en Els Guiamets: habitaciones elegantes y tranquilidad en pleno Priorat."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "casa-marcial-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "casa-marcial-adults-only-besalu",
+					"title": "Casa Marcial - Adults Only",
+					"metaTitle": "Casa Marcial: adults only junto al puente de Besalú",
+					"metaDescription": "Casa Marcial, en Besalú: solo para adultos, a 100 metros del puente medieval y con piscina en el jardín. Desde 35 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hostalet-de-begur-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hostalet-de-begur-adults-only",
+					"title": "Hostalet de Begur - Adults Only",
+					"metaTitle": "Hostalet de Begur: adults only con piscina",
+					"metaDescription": "Hostalet de Begur, adults only: piscina exterior, solárium y desayuno, junto a las playas de Begur."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "arrels-hotel-cadaques-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "arrels-hotel-cadaques-adults-only",
+					"title": "Arrels Hotel Cadaqués - Adults Only",
+					"metaTitle": "Arrels Hotel Cadaqués: adults only con piscina",
+					"metaDescription": "Arrels Hotel Cadaqués, adults only: piscina exterior, bar y aparcamiento gratuito a pocos minutos del centro de Cadaqués."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-cap-sa-sal-luxury-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-cap-sa-sal-luxury-adults-only",
+					"title": "Hotel Cap Sa Sal Luxury Adults Only",
+					"metaTitle": "Cap Sa Sal: lujo adults only en Begur",
+					"metaDescription": "Hotel Cap Sa Sal, adults only en Begur: jardín, piscina exterior y vistas sobre el Baix Empordà. Escapada romántica en la Costa Brava."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-rural-vall-ferrera",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-rural-vall-ferrera-areu",
+					"title": "Hotel Rural Vall Ferrera",
+					"metaTitle": "Hotel Rural Vall Ferrera, en Àreu",
+					"metaDescription": "Hotel Rural Vall Ferrera, en Àreu: madera, trato familiar y 17 habitaciones en lo alto de la Vallferrera. Desde 55 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "camping-repos-del-pedraforca-saldes",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "camping-repos-del-pedraforca-saldes",
+					"title": "Camping Repòs del Pedraforca",
+					"metaTitle": "Camping Repòs del Pedraforca: piscina y admite perros",
+					"metaDescription": "Camping Repòs del Pedraforca, entre Saldes y Maçaners: más de 30 años a los pies del Pedraforca, con piscina y admite perros."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "la-garriga-de-castelladral",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "la-garriga-de-castelladral",
+					"title": "La Garriga de Castelladral",
+					"metaTitle": "La Garriga de Castelladral: masía con vistas a Montserrat",
+					"metaDescription": "La Garriga de Castelladral: una casa de labranza familiar con vistas a Montserrat, bodega de 1748 y piscina. Desde 83 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "lhort-de-sant-cebria",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "lhort-de-sant-cebria-torroella-de-fluvia",
+					"title": "L'Hort de Sant Cebrià",
+					"metaTitle": "L'Hort de Sant Cebrià: B&B del XIX solo para adultos",
+					"metaDescription": "L'Hort de Sant Cebrià, en Torroella de Fluvià: un bed and breakfast del siglo XIX para adultos, con piscina. Desde 55 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-puig-franco",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-puig-franco-camprodon",
+					"title": "Hotel Puig Francó",
+					"metaTitle": "Hotel Puig Francó: spa en Camprodon",
+					"metaDescription": "Hotel Puig Francó, en Camprodon: spa con jacuzzi y sauna en el Pirineo de Girona, con venta de forfaits. Desde 90 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "la-vella-farga-hotel",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "la-vella-farga-hotel-lladurs",
+					"title": "La Vella Farga Hotel",
+					"metaTitle": "La Vella Farga: masía del siglo XI en el Prepirineo",
+					"metaDescription": "La Vella Farga, en Lladurs: una masía del siglo XI reconstruida en el Prepirineo, con piscina y restaurante. Desde 217 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-val-de-neu-g-l",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-val-de-neu-baqueira-beret",
+					"title": "Hotel Val de Neu G.L.",
+					"metaTitle": "Hotel Val de Neu: a pie de pistas en Baqueira Beret",
+					"metaDescription": "Hotel Val de Neu, en Baqueira Beret: a 50 metros del remonte, con cuatro restaurantes y guardaesquís. Desde 164 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-can-cuch",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-can-cuch-montseny",
+					"title": "Hotel Can Cuch",
+					"metaTitle": "Hotel Can Cuch: piscina con vistas en el Montseny",
+					"metaDescription": "Hotel Can Cuch, en el Montseny: paredes de piedra vista y una piscina con vistas que llegan al Mediterráneo. Desde 99 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "set-terres-la-villa-de-llivia-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "set-terres-la-villa-de-llivia-adults-only",
+					"title": "Set Terres - La Villa de Llívia - Adults Only",
+					"metaTitle": "Set Terres: adults only en el centro de Llívia",
+					"metaDescription": "Hotel adults only en el centro de Llívia, con paredes de piedra, decoración moderna y terraza. Escapada romántica en la Cerdanya."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "apartament-spa-parellada",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "apartamento-spa-parellada-vilafranca",
+					"title": "Apartamento Spa Parellada",
+					"metaTitle": "Apartamento Spa Parellada: ático con spa en Vilafranca",
+					"metaDescription": "Apartamento Spa Parellada, en Vilafranca del Penedès: un ático para dos con spa y chimenea, en el casco antiguo. Desde 78 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "argonavis-226",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "argonavis-226-lestartit",
+					"title": "Argonavis 226",
+					"metaTitle": "Argonavis 226: apartamento frente a las Islas Medas",
+					"metaDescription": "Argonavis 226, en L'Estartit: un apartamento a primera línea de mar con las Islas Medas desde el balcón. Desde 35 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "cava-and-hotel-mastinell",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cava-hotel-mastinell-vilafranca",
+					"title": "Cava & Hotel Mastinell",
+					"metaTitle": "Cava & Hotel Mastinell: cinco estrellas entre viñedos",
+					"metaDescription": "Cava & Hotel Mastinell, en Vilafranca del Penedès: cinco estrellas con forma de botellas apiladas, entre viñedos. Desde 170 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-mas-mariassa",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-mas-mariassa-pratdip",
+					"title": "Hotel Mas Mariassa",
+					"metaTitle": "Mas Mariassa: masía gastronómica en Pratdip",
+					"metaDescription": "Hotel Mas Mariassa, en Pratdip: una masía gastronómica de siete habitaciones entre montañas y bosque mediterráneo. Desde 123 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-mas-tapiolas-suits-natura",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-mas-tapiolas-suits-natura",
+					"title": "Hotel Mas Tapiolas Suits Natura",
+					"metaTitle": "Mas Tapiolas Suits Natura: chalés privados de lujo",
+					"metaDescription": "Mas Tapiolas Suits Natura, en Santa Cristina d'Aro: chalés privados de lujo en plena naturaleza de la Costa Brava."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-mil-estrelles",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-mil-estrelles-cornella-del-terri",
+					"title": "Hotel Mil Estrelles",
+					"metaTitle": "Hotel Mil Estrelles: dormir mirando las estrellas",
+					"metaDescription": "Hotel Mil Estrelles, en Cornellà del Terri: dormir mirando las estrellas, con la intimidad de una noche en pareja. Desde 74 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-can-casi-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-can-casi-adults-only-regencos",
+					"title": "Hotel Can Casi Adults Only",
+					"metaTitle": "Hotel Can Casi: cuatro estrellas adults only en Regencós",
+					"metaDescription": "Hotel Can Casi, en Regencós: cuatro estrellas solo para adultos, con ocho habitaciones con terraza y vestidor. Desde 202 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		}
+	]
+}

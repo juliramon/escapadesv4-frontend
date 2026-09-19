@@ -1,0 +1,454 @@
+{
+	"generatedAt": "2026-09-18T23:04:15.403Z",
+	"note": "Castellà de 32 fitxes: slug, títol i metes. El cos de la fitxa encara no.",
+	"fields": [
+		{
+			"collection": "activities",
+			"slug": "castell-de-llivia",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "castillo-de-llivia",
+					"title": "Escapada al Castillo de Llívia",
+					"metaTitle": "Castillo de Llívia: historia y vistas de la Cerdanya",
+					"metaDescription": "El Castillo de Llívia, un mirador privilegiado de la Cerdanya con siglos de historia. Cómo llegar, qué ver y por qué vale la pena."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "visita-jardins-artigas",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "visita-jardines-artigas",
+					"title": "Visita a los Jardines Artigas",
+					"metaTitle": "Jardines Artigas: patrimonio modernista de Gaudí",
+					"metaDescription": "Los Jardines Artigas, en La Pobla de Lillet: obra de Gaudí entre el río y el bosque. Horarios, cómo llegar y qué ver."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "ruta-santuari-puig-agut",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "ruta-santuario-puig-agut",
+					"title": "Ruta al Santuario de Puig-agut",
+					"metaTitle": "Ruta al Santuario de Puig-agut: cómo llegar y qué ver",
+					"metaDescription": "La ruta al Santuario de Puig-agut, en Manlleu: vistas del Montseny y los Pirineos, y cómo llegar hasta arriba."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "mirador-sant-agusti-de-llucanes",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mirador-sant-agusti-de-llucanes",
+					"title": "Mirador de Sant Agustí de Lluçanès",
+					"metaTitle": "Mirador de Sant Agustí de Lluçanès",
+					"metaDescription": "El mirador de Sant Agustí de Lluçanès, en el Santuario de los Munts: vistas de todo el Lluçanès y una parada tranquila."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "esglesia-de-santa-maria-de-lluca-llucanes",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "iglesia-de-santa-maria-de-lluca",
+					"title": "Iglesia de Santa Maria de Lluçà",
+					"metaTitle": "Iglesia de Santa Maria de Lluçà",
+					"metaDescription": "La iglesia de Santa Maria de Lluçà, joya del románico del siglo XII, con su claustro y el castillo de Lluçà al lado. Cómo visitarla."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "tarter-manairons-guardia-d-ares-alt-urgell",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "tartera-manairons-guardia-d-ares",
+					"title": "La Tartera de Manairons de la Guàrdia d'Ares",
+					"metaTitle": "La Tartera de Manairons de la Guàrdia d'Ares",
+					"metaDescription": "La Tartera de Manairons, en la Guàrdia d'Ares: un bosque de bloques de piedra lleno de leyendas, en el Alt Urgell. Cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-de-montclus-sant-esteve-de-palautordera-montseny",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "castillo-de-montclus",
+					"title": "Castillo de Montclús",
+					"metaTitle": "Castillo de Montclús",
+					"metaDescription": "El Castillo de Montclús, o Castillo de los Moros, del siglo XI: ruinas medievales en pleno Montseny, en Sant Esteve de Palautordera."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "el-brull-poble-castell-montseny",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "el-brull-pueblo-castillo",
+					"title": "El Brull y el Castillo del Brull",
+					"metaTitle": "El Brull y el Castillo del Brull",
+					"metaDescription": "El Brull, puerta de entrada al Montseny: la iglesia de Sant Martí, las ruinas del castillo medieval y caminos para hacer a pie."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "poble-montseny-montseny",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "pueblo-de-montseny",
+					"title": "El pueblo de Montseny",
+					"metaTitle": "El pueblo de Montseny",
+					"metaDescription": "El pueblo de Montseny, el único del macizo que mantiene su nombre, con un campanario inclinado tres grados. Qué ver allí."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-de-tagamanent-valles-oriental-catalunya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "castillo-de-tagamanent",
+					"title": "Castillo de Tagamanent",
+					"metaTitle": "Castillo de Tagamanent",
+					"metaDescription": "Ruta hasta el Castillo de Tagamanent, castillo románico en una cima de 1.055 metros, con una de las mejores vistas del Montseny."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "fira-de-la-castanya-viladrau-montseny",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "feria-de-la-castana-viladrau",
+					"title": "Feria de la Castaña de Viladrau",
+					"metaTitle": "Feria de la Castaña de Viladrau",
+					"metaDescription": "La Feria de la Castaña de Viladrau, en pleno Montseny: degustaciones, artesanía y actividades de otoño desde 1995."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "arboretum-masjoan-espinelves",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "arboretum-masjoan-espinelves",
+					"title": "Arboretum Masjoan",
+					"metaTitle": "Arboretum Masjoan",
+					"metaDescription": "El Arboretum Masjoan, en Espinelves: un bosque de árboles centenarios traídos de medio mundo. Horarios y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "espai-montseny-viladrau-montseny",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "espai-montseny-viladrau",
+					"title": "Espai Montseny",
+					"metaTitle": "Espai Montseny, en Viladrau",
+					"metaDescription": "Espai Montseny, en Viladrau: la historia y las leyendas del macizo del Montseny en un centro de interpretación. Horarios y precio."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-miravet-ribera-ebre-tarragona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "castillo-de-miravet",
+					"title": "Castillo de Miravet",
+					"metaTitle": "Castillo de Miravet, en las Tierras del Ebro",
+					"metaDescription": "El Castillo de Miravet, castillo templario sobre el Ebro: una de las fortalezas mejor conservadas de Cataluña. Horarios y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "miravet-ribera-ebre-tarragona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "miravet-pueblo-ribera-ebro",
+					"title": "Miravet, un pueblo con mucho encanto de las Tierras del Ebro",
+					"metaTitle": "Miravet, un pueblo de postal a orillas del Ebro",
+					"metaDescription": "Miravet, a orillas del Ebro: casco antiguo, el paso de barca y el castillo templario encima. Qué ver y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "casa-mila-la-pedrera-barcelona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "casa-mila-la-pedrera-barcelona",
+					"title": "Visita a la Casa Milà, La Pedrera de Barcelona",
+					"metaTitle": "Casa Milà, La Pedrera: cómo visitarla en Barcelona",
+					"metaDescription": "La Casa Milà, La Pedrera de Gaudí en Barcelona: cómo visitarla y por qué es el edificio más emblemático del Eixample."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "fonts-del-cardener-solsones-lleida",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "fuentes-del-cardener",
+					"title": "Fuentes del Cardener",
+					"metaTitle": "Fuentes del Cardener, en el Solsonès",
+					"metaDescription": "Las Fuentes del Cardener, donde nace el río, en el Solsonès: un rincón de agua y bosque. Cómo llegar y qué ruta hacer."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "estany-negre-parc-nacional-aiguestortes-estanys-sant-maurici-pallars-sobira",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "estany-negre-aiguestortes",
+					"title": "Estany Negre, en el PN de Aigüestortes",
+					"metaTitle": "Estany Negre, en Aigüestortes: ruta y cómo llegar",
+					"metaDescription": "El Estany Negre, a 2.337 metros en el Parque Nacional de Aigüestortes: uno de los lagos más espectaculares del Pirineo. La ruta."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "la-brama-del-cervol-pallars-sobira",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "berrea-del-ciervo-pallars-sobira",
+					"title": "La berrea del ciervo en el Pallars Sobirà",
+					"metaTitle": "Berrea del ciervo en el Pallars Sobirà: cuándo y dónde",
+					"metaDescription": "La berrea del ciervo en el Pallars Sobirà: cuándo es, dónde escucharla y a qué hora ir. Una escapada de otoño distinta."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "panta-de-sau-osona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "pantano-de-sau",
+					"title": "Pantano de Sau",
+					"metaTitle": "Pantano de Sau y el pueblo sumergido",
+					"metaDescription": "El Pantano de Sau y el campanario del pueblo sumergido que asoma cuando baja el agua. Cómo llegar y desde dónde verlo."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "santuari-dels-angels-sant-marti-vell-girones",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "santuario-dels-angels",
+					"title": "Santuario dels Àngels",
+					"metaTitle": "Santuario dels Àngels, el mirador del Gironès",
+					"metaDescription": "El Santuario dels Àngels, conocido como el mirador del Gironès: vistas de la llanura y el mar. Cómo llegar y cuándo ir."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "bosc-de-les-escultures-de-joan-carola-de-celra-girona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "bosque-de-las-esculturas-de-celra",
+					"title": "Bosque de las Esculturas de Celrà",
+					"metaTitle": "Bosque de las Esculturas de Celrà",
+					"metaDescription": "El Bosque de las Esculturas de Celrà, a 30 minutos de Girona: una ruta corta entre figuras escondidas en el bosque."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "pintures-rupestres-de-cabrafeixet",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "pinturas-rupestres-de-cabrafeixet",
+					"title": "Ruta a las Pinturas Rupestres de Cabrafeixet, en El Perelló",
+					"metaTitle": "Pinturas rupestres de Cabrafeixet, en El Perelló",
+					"metaDescription": "Ruta hasta las pinturas rupestres de Cabrafeixet, en El Perelló: arte de hace más de 9.000 años en plena naturaleza. Cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "casa-rocamora-de-barcelona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "casa-rocamora-barcelona",
+					"title": "Visita a la Casa Rocamora de Barcelona",
+					"metaTitle": "Casa Rocamora: un palacete escondido en Barcelona",
+					"metaDescription": "La Casa Rocamora, en Barcelona: un palacete isabelino lleno de colecciones singulares. Cómo visitarlo y qué se ve dentro."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "ermita-mare-de-deu-de-la-roca-mont-roig",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "ermita-mare-de-deu-de-la-roca-mont-roig",
+					"title": "La Ermita Mare de Déu de la Roca y la Capilla de Sant Ramon, en Mont-roig",
+					"metaTitle": "Ermita Mare de Déu de la Roca, en Mont-roig",
+					"metaDescription": "La Ermita Mare de Déu de la Roca y la Capilla de Sant Ramon, encaramadas a la roca en Mont-roig del Camp. Cómo llegar y qué ver."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "les-coves-meravelles-benifallet",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cuevas-meravelles-benifallet",
+					"title": "Las Cuevas Meravelles de Benifallet",
+					"metaTitle": "Cuevas Meravelles de Benifallet: horarios y visita",
+					"metaDescription": "Las Cuevas Meravelles, en Benifallet: estalactitas, estalagmitas y galerías junto al Ebro. Horarios, precio y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "mirador-mont-caro-massis-ports",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mirador-del-mont-caro",
+					"title": "Mirador del Mont Caro",
+					"metaTitle": "Mirador del Mont Caro, en el Parque Natural dels Ports",
+					"metaDescription": "El mirador del Mont Caro, en la cima de 1.441 m del Parque Natural dels Ports: vistas del valle del Ebro y, si está claro, del mar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "casa-de-os-bru-isil-pirineus",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "casa-del-oso-pardo-isil",
+					"title": "La Casa del Oso Pardo de los Pirineos",
+					"metaTitle": "La Casa del Oso Pardo, en Isil",
+					"metaDescription": "La Casa del Oso Pardo, en Isil: un espacio para conocer al oso de los Pirineos y su conservación, en el Pallars Sobirà."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "cascada-de-gerber-alt-aneu",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cascada-de-gerber",
+					"title": "La Cascada de Gerber",
+					"metaTitle": "Cascada de Gerber: 125 metros de salto de agua",
+					"metaDescription": "La Cascada de Gerber, en el Alt Àneu: el salto de agua más alto de la comarca, con casi 125 metros. La ruta y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-de-centelles-sant-marti-de-centelles-osona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "castillo-de-centelles",
+					"title": "Excursión al Castillo de Centelles",
+					"metaTitle": "Castillo de Centelles: la ruta y las vistas",
+					"metaDescription": "El castillo de Centelles, o Sant Martí de Centelles: una ruta corta hasta unas vistas que valen el camino. Cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "ruta-kayak-cap-de-creus",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "ruta-en-kayak-cap-de-creus",
+					"title": "Ruta en kayak por el Cap de Creus",
+					"metaTitle": "Ruta en kayak por el Cap de Creus",
+					"metaDescription": "Descubrir la Costa Brava en kayak siguiendo el Mar d'Avall, en el Cap de Creus. Cuánto dura, qué cuesta y desde dónde se sale."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "aiguamolls-emporda",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "aiguamolls-del-emporda",
+					"title": "Aiguamolls de l'Empordà",
+					"metaTitle": "Aiguamolls de l'Empordà: cómo visitarlos",
+					"metaDescription": "Los Aiguamolls de l'Empordà, entre el Fluvià y la Muga: una de las grandes zonas húmedas de Cataluña para ver aves sin prisa."
+				}
+			},
+			"expectEmpty": true
+		}
+	]
+}

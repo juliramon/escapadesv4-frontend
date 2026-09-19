@@ -90,6 +90,13 @@ const STRINGS = {
 	},
 	"listings.loadMore": { ca: "Veure'n més", es: "Ver más" },
 
+	// Llistat d'una destinació
+	"destination.breadcrumb": { ca: "Destinacions", es: "Destinos" },
+	"destination.others": {
+		ca: "Altres destinacions",
+		es: "Otros destinos",
+	},
+
 	// Llistat d'una categoria
 	"category.weSuggest": {
 		ca: "Us proposem",

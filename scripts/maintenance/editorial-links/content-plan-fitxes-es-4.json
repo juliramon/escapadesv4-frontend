@@ -1,0 +1,566 @@
+{
+	"generatedAt": "2026-09-18T23:09:02.254Z",
+	"note": "Castellà de 40 fitxes: slug, títol i metes. El cos de la fitxa encara no.",
+	"fields": [
+		{
+			"collection": "places",
+			"slug": "apartament-les-3-valls-llavorsi-pallars-sobira-pirineus",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "apartamento-les-3-valls-llavorsi",
+					"title": "Apartamento Les 3 Valls",
+					"metaTitle": "Apartamento Les 3 Valls, en Llavorsí",
+					"metaDescription": "El apartamento Les 3 Valls, en Llavorsí: con encanto y a pie del Noguera Pallaresa, en el Pallars Sobirà. Precio y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "glamping-camping-del-mar-malgrat-de-mar",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "glamping-camping-del-mar-malgrat",
+					"title": "Glamping en Camping del Mar",
+					"metaTitle": "Glamping en Camping del Mar, en Malgrat de Mar",
+					"metaDescription": "Glamping en el Camping del Mar, en Malgrat de Mar: tiendas equipadas a primera línea de costa. Precio por noche y qué incluye."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-castell-de-ciutat-hotel-boutique-la-seu-urgell-lleida",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-castell-de-ciutat-la-seu-durgell",
+					"title": "Hotel boutique Castell de Ciutat",
+					"metaTitle": "Castell de Ciutat: hotel boutique en La Seu d'Urgell",
+					"metaDescription": "El Hotel Castell de Ciutat, en La Seu d'Urgell: un boutique con spa y restaurante en el Pirineo de Lleida. Precio y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "refugi-agulles-vicenc-barbe-montserrat",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "refugio-agulles-vicenc-barbe-montserrat",
+					"title": "Refugio Agulles Vicenç Barbé",
+					"metaTitle": "Refugio Agulles Vicenç Barbé, en Montserrat",
+					"metaDescription": "El Refugio Agulles Vicenç Barbé, en el Parque Natural de Montserrat: dormir entre las agujas de la montaña. Precio y reserva."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "refugi-font-farrera-parc-natural-dels-ports",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "refugio-font-farrera-els-ports",
+					"title": "Refugio Font Farrera",
+					"metaTitle": "Refugio Font Farrera, en el Parque Natural dels Ports",
+					"metaDescription": "El Refugio Font Farrera, en el Parque Natural dels Ports: un refugio de montaña a pie de sendero. Precio, media pensión y reserva."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "refugi-lluis-estasen-pedraforca-bergueda",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "refugio-lluis-estasen-pedraforca",
+					"title": "Refugio Lluís Estasen",
+					"metaTitle": "Refugio Lluís Estasen, a los pies del Pedraforca",
+					"metaDescription": "El Refugio Lluís Estasen, a los pies del Pedraforca: el punto de partida para subir a la montaña. Precio, reserva y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "cal-roget-turisme-rural-bergueda",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cal-roget-turismo-rural-gironella",
+					"title": "Cal Roget Turismo Rural",
+					"metaTitle": "Cal Roget: turismo rural en Gironella, el Berguedà",
+					"metaDescription": "Cal Roget, en Gironella: casa de turismo rural en el Berguedà, con el Pedraforca a media hora. Precio por noche y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "refugi-prat-aguilo-serra-del-cadi-pas-gosolans",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "refugio-prat-daguilo-serra-del-cadi",
+					"title": "Refugio Prat d'Aguiló",
+					"metaTitle": "Refugio Prat d'Aguiló, en la sierra del Cadí",
+					"metaDescription": "El Refugio Prat d'Aguiló, en la vertiente norte de la sierra del Cadí, a 2.037 metros. Precio, reserva y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "refugi-comes-rubio-massis-orri-pallars-sobira",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "refugio-comes-de-rubio-massis-de-lorri",
+					"title": "Refugio Comes de Rubió",
+					"metaTitle": "Refugio Comes de Rubió, en el macizo del Orri",
+					"metaDescription": "El Refugio Comes de Rubió, un refugio de alta montaña en el macizo del Orri, en el Pallars Sobirà. Precio y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "lazure-hotel-lloret-de-mar-costa-brava",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "lazure-hotel-lloret-de-mar",
+					"title": "L'Azure Hotel",
+					"metaTitle": "L'Azure Hotel: lujo en Lloret de Mar",
+					"metaDescription": "El Hotel L'Azure, en Lloret de Mar: un cinco estrellas con spa en pleno centro de la Costa Brava. Precio por noche y qué incluye."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "barraca-entre-vinyes-alt-penedes",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "barraca-entre-vinedos-alt-penedes",
+					"title": "Barraca entre viñedos",
+					"metaTitle": "Barraca entre viñedos, en el Alt Penedès",
+					"metaDescription": "Barraca entre viñedos, en el Alt Penedès: dormir en una barraca de piedra rodeada de viña. Ideal para enoturismo en pareja."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-somlom-montseny-ecofriendly-sant-esteve-palautordera",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-somlom-sant-esteve-de-palautordera",
+					"title": "Hotel Somlom",
+					"metaTitle": "Hotel Somlom: hotel ecológico en el Montseny",
+					"metaDescription": "El Hotel Somlom, en Sant Esteve de Palautordera: un hotel ecológico a los pies del Montseny, para una escapada romántica."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hostal-montserrat-sant-celoni-montseny",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hostal-montserrat-sant-celoni",
+					"title": "Hostal Montserrat",
+					"metaTitle": "Hostal Montserrat, en pleno Montseny",
+					"metaDescription": "El Hostal Montserrat, en el corazón del Montseny: dónde está, cómo llegar y qué hacer cerca en una escapada de fin de semana."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-hostal-sport-falset-priorat",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-hostal-sport-falset",
+					"title": "Hotel Hostal Sport",
+					"metaTitle": "Hostal Sport: hotel con encanto en Falset, el Priorat",
+					"metaDescription": "Hotel con encanto en Falset, en pleno Priorat, fundado en 1923 y llevado por la cuarta generación de la familia. Restaurante propio."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "apartaments-ca-estamenya-perafita-llucanes",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "apartamentos-ca-lestamenya-perafita",
+					"title": "Apartamentos Ca l'Estamenya",
+					"metaTitle": "Apartamentos Ca l'Estamenya, en Perafita",
+					"metaDescription": "Apartamentos rurales en Perafita, en el Lluçanès, con cocina, chimenea y mascotas admitidas. Para una escapada tranquila en pareja."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "mas-farner-adults-only-llivia-cerdanya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mas-farner-adults-only-llivia",
+					"title": "Mas Farner - Adults Only",
+					"metaTitle": "Mas Farner: turismo rural solo adultos en Llívia",
+					"metaDescription": "Mas Farner, en Llívia: turismo rural con encanto solo para adultos, en plena Cerdanya. Precio por noche y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-terradets-cellers-lleida",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-terradets-cellers",
+					"title": "Hotel Terradets",
+					"metaTitle": "Hotel Terradets, junto al pantano de Cellers",
+					"metaDescription": "El Hotel Terradets, en Cellers: un hotel con encanto junto al embalse, en el Pallars Jussà. Precio por noche y qué hay cerca."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "cabanyes-entre-valls-vall-de-bianya-cabanes-arbres",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cabanas-entre-valls-vall-de-bianya",
+					"title": "Cabanyes entre Valls",
+					"metaTitle": "Cabanyes entre Valls: cabañas en los árboles",
+					"metaDescription": "Cabanyes entre Valls, en la Vall de Bianya: cabañas en los árboles con chimenea, barbacoa y jacuzzi para dos. Precio por noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "cabanes-dosrius",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cabanas-dosrius",
+					"title": "Cabanes Dosrius",
+					"metaTitle": "Cabanes Dosrius: cabañas en los árboles en el Maresme",
+					"metaDescription": "Cabanes Dosrius, en el Maresme: cabañas en los árboles a un kilómetro del Parque del Montnegre-Corredor. Desde 68 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "cabanes-als-arbres-sant-hilari-sacalm",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cabanas-en-los-arboles-sant-hilari-sacalm",
+					"title": "Cabañas en los árboles",
+					"metaTitle": "Cabañas en los árboles de Sant Hilari Sacalm",
+					"metaDescription": "Cabañas en los árboles de Sant Hilari Sacalm: diez cabañas entre las ramas, en las Guilleries, con chimenea. Desde 120 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "mas-pla-solius",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mas-pla-solius",
+					"title": "Mas Pla",
+					"metaTitle": "Mas Pla: masía del siglo XVII en Santa Cristina d'Aro",
+					"metaDescription": "Mas Pla, en Santa Cristina d'Aro: una masía del siglo XVII convertida en hostal y restaurante, en el interior de la Costa Brava."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "iglus-de-les-estrelles-a-prades",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "iglus-de-las-estrellas-prades",
+					"title": "Iglús de les Estrelles, en Prades",
+					"metaTitle": "Iglús de les Estrelles: dormir bajo un techo de cristal",
+					"metaDescription": "Iglús de les Estrelles, en Prades: dormir bajo un techo de cristal rodeado de bosque, en las montañas de Prades. Precio por noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "mas-el-bruge-apartaments-terrades",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mas-el-brugue-apartamentos-terrades",
+					"title": "Mas el Brugué",
+					"metaTitle": "Mas el Brugué: apartamentos con piscina en Terrades",
+					"metaDescription": "Mas El Brugué, en Terrades: apartamentos con terraza y jardín entre el Empordà y la Garrotxa, con piscina y chimenea."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "masia-el-puig",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "masia-el-puig-vall-de-bianya",
+					"title": "Masia el Puig",
+					"metaTitle": "Masia el Puig: turismo rural en la Vall de Bianya",
+					"metaDescription": "Masia el Puig, turismo rural en la Vall de Bianya (Alta Garrotxa): silencio, montaña y poca cosa más. Desde 77 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "les-planes-del-grau-hotel-rural-sant-joan-abadesses",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "les-planes-del-grau-hotel-rural",
+					"title": "Les Planes del Grau, un hotel rural del siglo XV",
+					"metaTitle": "Les Planes del Grau: hotel rural en una masía de 600 años",
+					"metaDescription": "Les Planes del Grau, en Sant Joan de les Abadesses: un hotel rural en una masía con más de 600 años de historia. Precio y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-les-cols-pavellons",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-les-cols-pavellons-olot",
+					"title": "Hotel Les Cols Pavellons",
+					"metaTitle": "Les Cols Pavellons: pabellones de cristal en Olot",
+					"metaDescription": "Les Cols Pavellons, en Olot: cinco pabellones de cristal con onsen, junto a la zona volcánica de la Garrotxa. Desde 360 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-es-cel-de-begur",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-es-cel-de-begur",
+					"title": "Hotel Es Cel de Begur",
+					"metaTitle": "Hotel Es Cel de Begur: vistas al mar y spa",
+					"metaDescription": "Hotel Es Cel de Begur: vistas al mar y a la Costa de Begur, con piscina, spa y decoración minimalista. Desde 100 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-rural-vinyes-emporda",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-rural-vinyes-de-lemporda",
+					"title": "Hotel Rural Vinyes de l'Empordà",
+					"metaTitle": "Vinyes de l'Empordà: hotel rural en Fonteta",
+					"metaDescription": "Hotel Rural Vinyes de l'Empordà, en Fonteta: una casa del siglo XVIII con el encanto de las masías del Baix Empordà."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hostal-palouet-de-segarra",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hostal-palouet-de-segarra",
+					"title": "Hostal Palouet de Segarra",
+					"metaTitle": "Hostal Palouet de Segarra: piedra y dos piscinas",
+					"metaDescription": "Hostal Palouet de Segarra: muros de piedra y bodega original en el pequeño pueblo de Palouet, con dos piscinas. Desde 51 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "torremirona-relais-hotel-golf-spa",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "torremirona-relais-hotel-golf-spa",
+					"title": "Torremirona Relais Hotel Golf & Spa",
+					"metaTitle": "Torremirona: hotel con golf y spa en el Alt Empordà",
+					"metaDescription": "Torremirona Relais Hotel Golf & Spa, en Navata: un cuatro estrellas con campo de golf y spa en el Alt Empordà."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-boutique-can-pico",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-boutique-can-pico",
+					"title": "Hotel Boutique Can Pico",
+					"metaTitle": "Can Pico: masía del XVII cerca de la bahía de Roses",
+					"metaDescription": "Hotel Boutique Can Pico: una masía del siglo XVII a 4 km de las playas de la bahía de Roses, con piscina climatizada."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-trossos-del-priorat",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-trossos-del-priorat",
+					"title": "Hotel Trossos del Priorat",
+					"metaTitle": "Trossos del Priorat: solo adultos entre viñedos",
+					"metaDescription": "Hotel Trossos del Priorat, en Gratallops: solo para adultos, rodeado de sus propios viñedos. Desde 53 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-spa-porto-cristo-port-de-la-selva",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-spa-porto-cristo-port-de-la-selva",
+					"title": "Hotel Spa Porto Cristo, en El Port de la Selva",
+					"metaTitle": "Hotel Spa Porto Cristo, en el Cap de Creus",
+					"metaDescription": "Hotel Spa Porto Cristo, en El Port de la Selva: spa y mar en el Cap de Creus, para una escapada romántica tranquila."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "vila-caelus-masia-boutique-rubio",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "vila-caelus-masia-boutique-rubio",
+					"title": "Vila Caelus Masia Boutique",
+					"metaTitle": "Vila Caelus: masía boutique para una escapada romántica",
+					"metaDescription": "Vila Caelus Masia Boutique, en Rubió: una masía restaurada con habitaciones singulares, pensada para una escapada en pareja."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "el-far-hotel-restaurant-llafranc",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "el-far-hotel-restaurante-llafranc",
+					"title": "El Far Hotel Restaurante",
+					"metaTitle": "El Far, en Llafranc: junto al faro de Sant Sebastià",
+					"metaDescription": "El Far Hotel Restaurante, en Llafranc: habitaciones con balcón a pocos metros de la playa y del faro. Desde 60 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "mas-de-torrent-hotel-and-spa",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mas-de-torrent-hotel-spa",
+					"title": "Mas de Torrent Hotel & Spa",
+					"metaTitle": "Mas de Torrent: masía del XVIII con spa en el Empordà",
+					"metaDescription": "Mas de Torrent Hotel & Spa: una masía del siglo XVIII en el Empordà, con jardines, spa y piscinas privadas. Desde 138 € por persona y noche."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-la-malcontenta",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-la-malcontenta-palamos",
+					"title": "Hotel La Malcontenta",
+					"metaTitle": "La Malcontenta: mansión del XIX cerca de Palamós",
+					"metaDescription": "Hotel La Malcontenta, en Palamós: una mansión del siglo XIX con jardines y piscina, a 1 km de las calas vírgenes."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hostal-spa-empuries",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hostal-spa-empuries-lescala",
+					"title": "Hostal Spa Empúries",
+					"metaTitle": "Hostal Spa Empúries: frente al mar en L'Escala",
+					"metaDescription": "Hostal Spa Empúries, en L'Escala: frente al mar y junto al yacimiento de Ampurias, con spa y playa tranquila."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "el-raco-de-madremanya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "el-raco-de-madremanya",
+					"title": "El Racó de Madremanya",
+					"metaTitle": "El Racó de Madremanya: hotel rural en un pueblo medieval",
+					"metaDescription": "El Racó de Madremanya: hotel rural en el pueblo medieval de Madremanya, entre Girona y la Costa Brava, con dos piscinas."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-la-freixera",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-la-freixera-solsona",
+					"title": "Hotel La Freixera",
+					"metaTitle": "La Freixera: hotel boutique del siglo XIV en Solsona",
+					"metaDescription": "Hotel La Freixera, en Solsona: un edificio del siglo XIV convertido en hotel boutique, con paredes de piedra y vigas de madera."
+				}
+			},
+			"expectEmpty": true
+		}
+	]
+}

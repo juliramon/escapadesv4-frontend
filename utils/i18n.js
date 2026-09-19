@@ -69,7 +69,14 @@ const t = (doc, field, locale) => {
 const localized = (doc, locale, fields) => {
 	if (!doc || !locale || locale === DEFAULT_LOCALE) return doc;
 	const out = { ...doc };
-	for (const field of fields) out[field] = t(doc, field, locale);
+	for (const field of fields) {
+		const value = t(doc, field, locale);
+		// Els camps que el document no porta es deixen com estaven: posar-hi
+		// `undefined` fa petar el build, perquè Next no sap serialitzar-lo i
+		// les props de `getStaticProps` han de ser JSON. Passava amb el
+		// `longTitle`, que només tenen onze de les catorze destinacions.
+		if (value !== undefined) out[field] = value;
+	}
 	// El slug hi va sempre: un document traduït ha de portar la seva adreça,
 	// si no les targetes dels llistats enllaçarien la versió catalana. Es fa
 	// després de les crides a l'API, que sempre van amb el slug original.
@@ -143,7 +150,13 @@ const FIELDS = {
 	story: ["title", "subtitle", "description", "metaTitle", "metaDescription"],
 	list: ["title", "subtitle", "description", "metaTitle", "metaDescription"],
 	category: ["title", "subtitle", "seoText", "seoTextHeader"],
-	destination: ["title", "subtitle", "seoText", "seoTextHeader"],
+	destination: [
+		"title",
+		"longTitle",
+		"subtitle",
+		"seoText",
+		"seoTextHeader",
+	],
 	/** Les targetes dels llistats: només el que es veu a la targeta. */
 	card: ["title", "subtitle"],
 };

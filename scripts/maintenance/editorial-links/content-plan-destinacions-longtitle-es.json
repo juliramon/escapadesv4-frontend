@@ -1,0 +1,248 @@
+{
+	"generatedAt": "2026-09-19T03:14:52.159Z",
+	"note": "El longTitle castellà de les destinacions, que és el que fa d'H1.",
+	"fields": [
+		{
+			"collection": "destinations",
+			"slug": "escapades-andorra",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "escapadas-andorra",
+					"title": "Andorra",
+					"subtitle": "Qué hacer en Andorra en pareja, en invierno y en verano: trineo, moto de nieve, miradores y noches bajo las estrellas.",
+					"seoTextHeader": "<p>Una escapada a Andorra es mucho más que esquí y compras: rutas con trineo y moto de nieve en invierno, miradores de alta montaña en verano y noches bajo las estrellas.</p>",
+					"longTitle": "Escapadas a Andorra"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "escapadas-andorra",
+					"title": "Andorra",
+					"subtitle": "Qué hacer en Andorra en pareja, en invierno y en verano: trineo, moto de nieve, miradores y noches bajo las estrellas.",
+					"seoTextHeader": "<p>Una escapada a Andorra es mucho más que esquí y compras: rutas con trineo y moto de nieve en invierno, miradores de alta montaña en verano y noches bajo las estrellas.</p>"
+				}
+			}
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-maresme",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "escapadas-maresme",
+					"title": "Maresme",
+					"subtitle": "Qué visitar en el Maresme, dónde dormir y dónde comer a un paso de Barcelona. Con precios y cómo llegar.",
+					"seoTextHeader": "<p>Una escapada al Maresme es la forma más rápida de cambiar de aires sin alejarse de Barcelona: castillos, masías, cocina de mercado y mar, a menos de una hora de casa.</p>",
+					"longTitle": "Escapadas al Maresme"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "escapadas-maresme",
+					"title": "Maresme",
+					"subtitle": "Qué visitar en el Maresme, dónde dormir y dónde comer a un paso de Barcelona. Con precios y cómo llegar.",
+					"seoTextHeader": "<p>Una escapada al Maresme es la forma más rápida de cambiar de aires sin alejarse de Barcelona: castillos, masías, cocina de mercado y mar, a menos de una hora de casa.</p>"
+				}
+			}
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-montseny",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "escapadas-montseny",
+					"title": "Montseny y las Guilleries",
+					"subtitle": "Qué hacer en el Montseny y las Guilleries, dónde dormir y dónde comer a una hora de Barcelona.",
+					"seoTextHeader": "<p>El Montseny es la montaña de casa para mucha gente de Barcelona y de Girona: hayedos, castillos encaramados, pueblos pequeños y fondas de toda la vida, a una hora en coche.</p>",
+					"longTitle": "Escapadas al Montseny y las Guilleries"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "escapadas-montseny",
+					"title": "Montseny y las Guilleries",
+					"subtitle": "Qué hacer en el Montseny y las Guilleries, dónde dormir y dónde comer a una hora de Barcelona.",
+					"seoTextHeader": "<p>El Montseny es la montaña de casa para mucha gente de Barcelona y de Girona: hayedos, castillos encaramados, pueblos pequeños y fondas de toda la vida, a una hora en coche.</p>"
+				}
+			}
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-osona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "escapadas-osona",
+					"title": "Osona y el Lluçanès",
+					"subtitle": "Qué visitar en Osona y el Lluçanès, dónde dormir y qué hacer en una escapada tranquila. Con precios y cómo llegar.",
+					"seoTextHeader": "<p>Una escapada a Osona y al Lluçanès es el plan para quien quiere caminos cortos, románico y pueblos sin cola: la llanura de Vic, los cingles del Collsacabra y una meseta llena de masías.</p>",
+					"longTitle": "Escapadas a Osona y el Lluçanès"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "escapadas-osona",
+					"title": "Osona y el Lluçanès",
+					"subtitle": "Qué visitar en Osona y el Lluçanès, dónde dormir y qué hacer en una escapada tranquila. Con precios y cómo llegar.",
+					"seoTextHeader": "<p>Una escapada a Osona y al Lluçanès es el plan para quien quiere caminos cortos, románico y pueblos sin cola: la llanura de Vic, los cingles del Collsacabra y una meseta llena de masías.</p>"
+				}
+			}
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-garrotxa",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "escapadas-garrotxa",
+					"title": "La Garrotxa y el Ripollès",
+					"subtitle": "Qué hacer en la Garrotxa y el Ripollès, dónde dormir y dónde comer entre volcanes y hayedos.",
+					"seoTextHeader": "<p>Volcanes dormidos, hayedos que cambian de color cada otoño y pueblos de piedra: una escapada a la Garrotxa o al Ripollès es de las que se recuerdan.</p>",
+					"longTitle": "Escapadas a la Garrotxa y el Ripollès"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "escapadas-garrotxa",
+					"title": "La Garrotxa y el Ripollès",
+					"subtitle": "Qué hacer en la Garrotxa y el Ripollès, dónde dormir y dónde comer entre volcanes y hayedos.",
+					"seoTextHeader": "<p>Volcanes dormidos, hayedos que cambian de color cada otoño y pueblos de piedra: una escapada a la Garrotxa o al Ripollès es de las que se recuerdan.</p>"
+				}
+			}
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-bergueda",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "escapadas-bergueda",
+					"title": "El Berguedà y el Solsonès",
+					"subtitle": "Qué visitar en el Berguedà y el Solsonès, dónde dormir y qué rutas hacer. El Pedraforca a dos horas de Barcelona.",
+					"seoTextHeader": "<p>El Pedraforca preside el Berguedà, y a su lado el Solsonès esconde pueblos de montaña, iglesias románicas y caminos sin nadie. Una escapada al Berguedà es montaña de verdad a dos horas de Barcelona.</p>",
+					"longTitle": "Escapadas al Berguedà y el Solsonès"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "escapadas-bergueda",
+					"title": "El Berguedà y el Solsonès",
+					"subtitle": "Qué visitar en el Berguedà y el Solsonès, dónde dormir y qué rutas hacer. El Pedraforca a dos horas de Barcelona.",
+					"seoTextHeader": "<p>El Pedraforca preside el Berguedà, y a su lado el Solsonès esconde pueblos de montaña, iglesias románicas y caminos sin nadie. Una escapada al Berguedà es montaña de verdad a dos horas de Barcelona.</p>"
+				}
+			}
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-girona-i-emporda-interior",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "escapadas-girona-y-emporda-interior",
+					"title": "Girona y el Empordà interior",
+					"subtitle": "Qué visitar en Girona y el Empordà interior, dónde dormir y dónde comer lejos de la costa.",
+					"seoTextHeader": "<p>A media hora de las calas hay otra Costa Brava: pueblos de piedra entre campos, masías convertidas en hoteles y una ciudad, Girona, que se recorre a pie. Una escapada al Empordà interior es eso.</p>",
+					"longTitle": "Escapadas a Girona y el Empordà interior"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "escapadas-girona-y-emporda-interior",
+					"title": "Girona y el Empordà interior",
+					"subtitle": "Qué visitar en Girona y el Empordà interior, dónde dormir y dónde comer lejos de la costa.",
+					"seoTextHeader": "<p>A media hora de las calas hay otra Costa Brava: pueblos de piedra entre campos, masías convertidas en hoteles y una ciudad, Girona, que se recorre a pie. Una escapada al Empordà interior es eso.</p>"
+				}
+			}
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-barcelona-i-entorn",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "escapadas-barcelona-y-alrededores",
+					"title": "Barcelona y alrededores",
+					"subtitle": "Qué hacer en Barcelona y alrededores en pareja, dónde dormir y dónde comer sin salir del área.",
+					"seoTextHeader": "<p>No hace falta irse lejos para hacer una escapada: una escapada a Barcelona y sus alrededores puede ser un hotel en el Born, un barranco en el Vallès o una comida con vistas en el Garraf.</p>",
+					"longTitle": "Escapadas a Barcelona y alrededores"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "escapadas-barcelona-y-alrededores",
+					"title": "Barcelona y alrededores",
+					"subtitle": "Qué hacer en Barcelona y alrededores en pareja, dónde dormir y dónde comer sin salir del área.",
+					"seoTextHeader": "<p>No hace falta irse lejos para hacer una escapada: una escapada a Barcelona y sus alrededores puede ser un hotel en el Born, un barranco en el Vallès o una comida con vistas en el Garraf.</p>"
+				}
+			}
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-penedes",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "escapadas-penedes",
+					"title": "El Penedès y la Anoia",
+					"subtitle": "Enoturismo en el Penedès: dónde dormir entre viñedos y qué hacer en pareja. A tres cuartos de hora de Barcelona.",
+					"seoTextHeader": "<p>Viñedos hasta donde alcanza la vista, cavas que se visitan por dentro y pueblos tranquilos: una escapada al Penedès es la forma más fácil de combinar enoturismo y calma a tres cuartos de hora de Barcelona.</p>",
+					"longTitle": "Escapadas al Penedès y la Anoia"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "escapadas-penedes",
+					"title": "El Penedès y la Anoia",
+					"subtitle": "Enoturismo en el Penedès: dónde dormir entre viñedos y qué hacer en pareja. A tres cuartos de hora de Barcelona.",
+					"seoTextHeader": "<p>Viñedos hasta donde alcanza la vista, cavas que se visitan por dentro y pueblos tranquilos: una escapada al Penedès es la forma más fácil de combinar enoturismo y calma a tres cuartos de hora de Barcelona.</p>"
+				}
+			}
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-bages-moianes",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "escapadas-bages-moianes",
+					"title": "El Bages y el Moianès",
+					"subtitle": "Qué visitar en el Bages y el Moianès, dónde dormir y qué rutas hacer cerca de Montserrat.",
+					"seoTextHeader": "<p>Montserrat, castillos sobre una colina y masías de piedra: una escapada al Bages o al Moianès es montaña suave y pueblos pequeños a una hora de Barcelona.</p>",
+					"longTitle": "Escapadas al Bages y el Moianès"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "escapadas-bages-moianes",
+					"title": "El Bages y el Moianès",
+					"subtitle": "Qué visitar en el Bages y el Moianès, dónde dormir y qué rutas hacer cerca de Montserrat.",
+					"seoTextHeader": "<p>Montserrat, castillos sobre una colina y masías de piedra: una escapada al Bages o al Moianès es montaña suave y pueblos pequeños a una hora de Barcelona.</p>"
+				}
+			}
+		},
+		{
+			"collection": "destinations",
+			"slug": "escapades-pirineus",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "escapadas-pirineos",
+					"title": "Pirineos",
+					"subtitle": "Qué visitar en los Pirineos, dónde dormir y qué hacer en pareja: refugios, cimas y pueblos de montaña. Con precios.",
+					"seoTextHeader": "<p>Si estáis pensando en una escapada a los Pirineos, aquí tenéis las rutas que hemos hecho y los alojamientos donde hemos dormido: refugios a pie de sendero, hoteles con chimenea y pueblos de montaña.</p>",
+					"longTitle": "Escapadas a los Pirineos"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "escapadas-pirineos",
+					"title": "Pirineos",
+					"subtitle": "Qué visitar en los Pirineos, dónde dormir y qué hacer en pareja: refugios, cimas y pueblos de montaña. Con precios.",
+					"seoTextHeader": "<p>Si estáis pensando en una escapada a los Pirineos, aquí tenéis las rutas que hemos hecho y los alojamientos donde hemos dormido: refugios a pie de sendero, hoteles con chimenea y pueblos de montaña.</p>"
+				}
+			}
+		}
+	]
+}

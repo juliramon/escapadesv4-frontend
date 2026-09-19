@@ -1,0 +1,20 @@
+{
+	"generatedAt": "2026-09-18T23:02:56.139Z",
+	"note": "El Castell de Llívia tenia el metatítol i la meta-descripció intercanviats: Google n'ensenyava un títol de 165 caràcters, tallat, i una descripció de 58.",
+	"fields": [
+		{
+			"collection": "activities",
+			"slug": "castell-de-llivia",
+			"field": "metaTitle",
+			"value": "Castell de Llívia: història i vistes úniques a la Cerdanya",
+			"expect": "Descobreix el Castell de Llívia, un mirador privilegiat de la Cerdanya amb segles d’història. T’expliquem com arribar-hi, què veure i per què val la pena visitar-lo."
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-de-llivia",
+			"field": "metaDescription",
+			"value": "El Castell de Llívia, un mirador privilegiat de la Cerdanya amb segles d’història. Com arribar-hi, què veure-hi i per què val la pena.",
+			"expect": "Castell de Llívia: història i vistes úniques a la Cerdanya"
+		}
+	]
+}

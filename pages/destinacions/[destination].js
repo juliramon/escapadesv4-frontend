@@ -8,9 +8,13 @@ import GlobalMetas from "../../components/head/GlobalMetas";
 import ListingGrid from "../../components/listings/ListingGrid";
 import TaxonomyChips from "../../components/listings/TaxonomyChips";
 import MobileAnchorAd from "../../components/ads/MobileAnchorAd";
-import { DESTINATIONS } from "../../utils/siteTaxonomy";
+import {
+	DESTINATIONS,
+	localizedEntries,
+} from "../../utils/siteTaxonomy";
 import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
 import { useRouter } from "next/router";
+import { useT } from "../../i18n/strings";
 import ContentService from "../../services/contentService";
 import {
 	DEFAULT_LOCALE,
@@ -61,6 +65,7 @@ const DestinationPage = ({
 
 	const service = new ContentService();
 
+	const t = useT();
 	const { locale } = useRouter();
 	// En castellà la ruta és `/es/destinos/escapadas-pirineos`: tant el
 	// segment com el slug van traduïts.
@@ -299,7 +304,7 @@ const DestinationPage = ({
 						}
 						textHeader={destinationDetails.seoTextHeader}
 						sponsorData={sponsorBlock}
-						breadcrumbLevel1={"Destinacions"}
+						breadcrumbLevel1={t("destination.breadcrumb")}
 						breadcrumbLevel2={destinationDetails.title}
 						actions={listingActions}
 					/>
@@ -308,10 +313,10 @@ const DestinationPage = ({
 					<section className="pt-6 md:pt-8">
 						<div className="container">
 							<TaxonomyChips
-								heading="Altres destinacions"
-								items={DESTINATIONS}
-								prefix="/destinacions/"
-								activeSlug={destinationDetails?.slug}
+								heading={t("destination.others")}
+								items={localizedEntries(DESTINATIONS, locale)}
+								prefix={`/${seccio}/`}
+								activeSlug={slugActual}
 								className="mb-5 md:mb-7"
 							/>
 							<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5">

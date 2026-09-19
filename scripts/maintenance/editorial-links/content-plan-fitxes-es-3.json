@@ -1,0 +1,594 @@
+{
+	"generatedAt": "2026-09-18T23:07:29.923Z",
+	"note": "Castellà de 42 fitxes: slug, títol i metes. El cos de la fitxa encara no.",
+	"fields": [
+		{
+			"collection": "activities",
+			"slug": "comarca-aventura-rutes-segway",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "comarca-aventura-rutas-en-segway",
+					"title": "Comarca Aventura, rutas en segway",
+					"metaTitle": "Comarca Aventura: rutas en segway por el Maresme",
+					"metaDescription": "Comarca Aventura, en Arenys de Munt: rutas en segway por el Maresme, una manera distinta de descubrir la comarca. Precio y duración."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "castanyer-de-les-9-branques",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "castano-de-las-9-ramas-viladrau",
+					"title": "Castaño de las 9 ramas",
+					"metaTitle": "Castaño de las 9 ramas, en Viladrau",
+					"metaDescription": "El Castaño de las 9 ramas, en Viladrau: un árbol de más de 700 años y 24 metros de altura en pleno Montseny. Cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "cala-el-golfet-begur",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cala-el-golfet-palafrugell",
+					"title": "Cala El Golfet",
+					"metaTitle": "Cala El Golfet, en Palafrugell: cómo llegar",
+					"metaDescription": "Cala El Golfet, en Palafrugell: 75 metros de arena gruesa entre acantilados y pinos, por el camino de ronda. Cómo llegar y dónde aparcar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "airstream-experience-dormir-estrelles-varllnord",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "airstream-experience-ordino-arcalis",
+					"title": "Airstream Experience",
+					"metaTitle": "Airstream Experience: dormir bajo las estrellas en Andorra",
+					"metaDescription": "La Airstream Experience de Ordino Arcalís: dormir en una caravana americana en plena montaña andorrana. Desde 143 € por persona."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "agerair-parapent",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "agerair-parapente",
+					"title": "Agerair Parapente",
+					"metaTitle": "Agerair: vuelo en parapente biplaza en Àger",
+					"metaDescription": "Vuelo en parapente biplaza con Agerair, en Sant Josep de Fontdepou: vuelan desde 1997 y no subcontratan. Desde 60 € por persona."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "rukimon-rucs-del-corredor",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "rukimon-burros-del-corredor",
+					"title": "Rukimon, los burros del Corredor",
+					"metaTitle": "Rukimon: paseo con burros por el Montnegre-Corredor",
+					"metaDescription": "Rukimon, en los bosques entre Dosrius y Canyamars: paseo con burro por el Parque del Montnegre-Corredor. Desde 18 €."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "parc-natural-cap-de-creus",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "parque-natural-del-cap-de-creus",
+					"title": "Parque Natural del Cap de Creus",
+					"metaTitle": "Parque Natural del Cap de Creus: cómo visitarlo",
+					"metaDescription": "El Parque Natural del Cap de Creus, en Cadaqués: el primer parque terrestre y marítimo de Cataluña, esculpido por la tramontana."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "paratge-de-tudela",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "paraje-de-tudela-cap-de-creus",
+					"title": "Paraje de Tudela",
+					"metaTitle": "Paraje de Tudela, en el Cap de Creus",
+					"metaDescription": "El Paraje de Tudela, en el Cap de Creus: rocas erosionadas con formas de animales, uno de los rincones más extraños del parque."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "fornells-de-la-muntanya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "fornells-de-la-muntanya-toses",
+					"title": "Fornells de la Muntanya",
+					"metaTitle": "Fornells de la Muntanya: un pueblo de 27 habitantes",
+					"metaDescription": "Fornells de la Muntanya, un pueblo de 27 habitantes en la Collada de Toses: el Museu del Pastor y el Ripollès. Cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "excursio-amb-gicafer-andorra",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "excursion-con-gicafer-arcalis",
+					"title": "Excursión con Gicafer",
+					"metaTitle": "Excursión con Gicafer por las montañas de Arcalís",
+					"metaDescription": "Excursión con Gicafer por las montañas de Arcalís: un vehículo oruga con guía para descubrir la flora y la fauna de Andorra. Desde 45 €."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "el-taga-des-de-bruguera",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "el-taga-desde-bruguera",
+					"title": "El Taga desde Bruguera",
+					"metaTitle": "El Taga desde Bruguera: la ruta a 2.038 metros",
+					"metaDescription": "El Taga (2.038 m) desde Bruguera: la ruta a la cima que domina el Ripollès, con vistas al Puigmal y al Canigó. Cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "avioneta-estavellada-a-santa-fe",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "avioneta-estrellada-santa-fe-del-montseny",
+					"title": "Avioneta estrellada en Santa Fe",
+					"metaTitle": "La avioneta estrellada de Santa Fe del Montseny",
+					"metaDescription": "Los restos de la avioneta que se estrelló en el año 2000 en Santa Fe del Montseny: dónde están y cómo llegar a pie."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "cala-sa-tuna-seixugador",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cala-sa-tuna-y-seixugador-begur",
+					"title": "Cala Sa Tuna y s'Eixugador",
+					"metaTitle": "Cala Sa Tuna y s'Eixugador, en Begur",
+					"metaDescription": "Cala Sa Tuna y s'Eixugador, en Begur: dos calas de pizarra con agua turquesa, resguardadas del viento. Cómo llegar y dónde aparcar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "waterworld-lloret-de-mar",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "waterworld-lloret-de-mar",
+					"title": "Waterworld Lloret de Mar",
+					"metaTitle": "Waterworld Lloret de Mar: precios y atracciones",
+					"metaDescription": "Waterworld, en Lloret de Mar: 140.000 m² de uno de los parques acuáticos más grandes de Europa. Desde 35 € por persona."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "trineu-gossos-a-andorra",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "trineo-con-perros-en-andorra",
+					"title": "Trineo con perros en Andorra",
+					"metaTitle": "Mushing en Andorra: trineo con perros en Grandvalira",
+					"metaDescription": "Mushing en Andorra, en Encamp: conducir un trineo tirado por perros sobre la nieve de Grandvalira. Desde 85 € por persona."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "raquetes-neu-sant-joan-de-lerm",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "raquetas-de-nieve-sant-joan-de-lerm",
+					"title": "Raquetas de nieve en Sant Joan de l'Erm",
+					"metaTitle": "Raquetas de nieve en Sant Joan de l'Erm",
+					"metaDescription": "Raquetas de nieve en Sant Joan de l'Erm, en el valle de Castellbò: la estación de esquí nórdico y las rutas que se pueden hacer."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "pica-estats-vallferrera",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "pica-destats-por-vallferrera",
+					"title": "Pica d'Estats por Vallferrera",
+					"metaTitle": "Pica d'Estats: la ruta al techo de Cataluña",
+					"metaDescription": "La Pica d'Estats (3.143 m) por Vallferrera: la ruta a la cima más alta de Cataluña, unas 6 horas desde el refugio. Dónde aparcar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "vol-en-globus-vol-de-coloms-garrotxa",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "vuelo-en-globo-vol-de-coloms-garrotxa",
+					"title": "Vuelo en globo con Vol de Coloms",
+					"metaTitle": "Vuelo en globo sobre los volcanes de la Garrotxa",
+					"metaDescription": "Vuelo en globo con Vol de Coloms, desde Santa Pau: precio, duración y cómo es volar sobre los volcanes de la Garrotxa."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "prats-de-cadi-des-d-estana",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "prats-de-cadi-desde-estana",
+					"title": "Prats de Cadí desde Estana",
+					"metaTitle": "Prats de Cadí desde Estana: la ruta bajo el Cadí",
+					"metaDescription": "Prats de Cadí desde Estana: 7,5 km de pinares y caminos pedregosos bajo la sierra del Cadí. Cómo llegar y cuánto se tarda."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "cala-estreta-palamos",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cala-estreta-palamos",
+					"title": "Cala Estreta",
+					"metaTitle": "Cala Estreta, en Palamós: una cala virgen",
+					"metaDescription": "Cala Estreta, en Palamós: 200 metros de cala virgen entre acantilados, por el camino de ronda desde la platja del Castell."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "basses-de-coll-de-nargo",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "balsas-de-coll-de-nargo",
+					"title": "Balsas de Coll de Nargó",
+					"metaTitle": "Balsas del Codó, en Coll de Nargó: piscinas naturales",
+					"metaDescription": "Las Balsas del Codó, en Coll de Nargó: piscinas naturales excavadas por el río Valldarques en la roca caliza. Cómo llegar y dónde aparcar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "aiguamolls-baix-emporda-estartit",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "aiguamolls-del-baix-emporda",
+					"title": "Aiguamolls del Baix Empordà",
+					"metaTitle": "Aiguamolls del Baix Empordà: cómo visitarlos",
+					"metaDescription": "Los Aiguamolls del Baix Empordà, o del Ter Vell: zonas húmedas de la llanura del Ter, a los pies del Montgrí, para ver aves."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "pedraforca-tartera-pollego-superior",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "pedraforca-por-la-tartera",
+					"title": "Pedraforca por la tartera",
+					"metaTitle": "Pedraforca por la tartera: la ruta al Pollegó Superior",
+					"metaDescription": "El Pedraforca por el Pollegó Superior (2.506 m), desde Gósol: la ruta por la tartera hasta el punto más alto. Cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "restaurant-maria-de-cadaques",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "restaurante-maria-de-cadaques-palamos",
+					"title": "Restaurante Maria de Cadaqués",
+					"metaTitle": "Maria de Cadaqués, en Palamós: cocina mediterránea",
+					"metaDescription": "Restaurante Maria de Cadaqués, en Palamós: cocina mediterránea con producto local y atención al detalle. Unos 25 € por persona."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "la-terra-a-girona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "la-terra-girona",
+					"title": "La Terra, en Girona",
+					"metaTitle": "La Terra, en Girona: un local modernista junto al Onyar",
+					"metaDescription": "La Terra, en Girona: un local modernista a orillas del Onyar, con bóvedas, mesas de mármol y hamburguesas. Unos 15 € por persona."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "cals-frares",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cals-frares-cabrera-de-mar",
+					"title": "Cals Frares",
+					"metaTitle": "Cals Frares: comer en una masía del siglo XIII",
+					"metaDescription": "Cals Frares, en Cabrera de Mar: comer dentro de una masía del siglo XIII rodeada de faisanes, caballos y burros. Unos 20 € por persona."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "vilanova-de-banat",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "vilanova-de-banat",
+					"title": "Vilanova de Banat",
+					"metaTitle": "Vilanova de Banat, un pueblo a 1.240 metros",
+					"metaDescription": "Vilanova de Banat, a 1.240 metros de altitud: un pueblo fundado en 1255 y uno de los rincones más desconocidos de la zona."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "moto-de-neu-andorra-ruta-grau-roig",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "moto-de-nieve-en-andorra-grau-roig",
+					"title": "Moto de nieve en Andorra",
+					"metaTitle": "Moto de nieve en Grau Roig, Andorra",
+					"metaDescription": "Ruta en moto de nieve por Grandvalira-Grau Roig: entre 30 y 60 minutos por los bosques de Andorra. Desde 60 € por persona."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-mas-rabiol-eco-hotel",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-mas-rabiol-eco-hotel",
+					"title": "Hotel Mas Rabiol Eco Hotel",
+					"metaTitle": "Mas Rabiol: eco hotel en una casa del siglo XVI",
+					"metaDescription": "Mas Rabiol, en el Empordà: una casa rural del siglo XVI convertida en eco hotel, con mucho encanto y campo alrededor."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "casa-rural-mas-ardevol",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "casa-rural-mas-ardevol-falset",
+					"title": "Mas Ardevol",
+					"metaTitle": "Mas Ardevol, en Falset: casa rural en el Priorat",
+					"metaDescription": "Mas Ardevol, en Falset: alojamiento rural con historia en pleno Priorat, entre viñedos y montaña. Precio y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-palauet-del-priorat",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-palauet-del-priorat",
+					"title": "Hotel Palauet del Priorat",
+					"metaTitle": "Palauet del Priorat, en Cornudella de Montsant",
+					"metaDescription": "Hotel Palauet del Priorat, en Cornudella de Montsant: alojamiento con encanto, cocina local y el Montsant al lado."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "la-mer-cabrera-de-mar-maresme-barcelona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-boutique-la-mer-cabrera-de-mar",
+					"title": "Hotel boutique La Mer",
+					"metaTitle": "Hotel boutique La Mer, en Cabrera de Mar",
+					"metaDescription": "Hotel boutique La Mer, en Cabrera de Mar: una masía del siglo XVI a los pies del Castillo de Burriac, para una escapada en el Maresme."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "casal-sagrat-cor-viladrau-montseny",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "casal-sagrat-cor-viladrau",
+					"title": "Casal Sagrat Cor",
+					"metaTitle": "Casal Sagrat Cor: el primer albergue del Montseny",
+					"metaDescription": "El Casal Sagrat Cor, en Viladrau: el primer albergue dentro del Parque Natural del Montseny. Precio y cómo reservar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "Apartament-wintuwin-rialp-pallars.sobira-pirineus",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "apartamento-wintuwin-rialp",
+					"title": "Apartamento WinTuWin",
+					"metaTitle": "Apartamento WinTuWin, en Rialp: admite mascotas",
+					"metaDescription": "El apartamento WinTuWin, en Rialp (Pallars Sobirà): con encanto, admite mascotas y a un paso de las pistas. Precio y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "hostal-la-lolita-sant-marti-vell-girones",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hostal-la-lolita-sant-marti-vell",
+					"title": "Hostal La Lolita",
+					"metaTitle": "Hostal La Lolita: masía del XVIII solo para adultos",
+					"metaDescription": "Hostal La Lolita, en Sant Martí Vell: una masía del siglo XVIII, solo adultos y admite mascotas, entre el Gironès y el Baix Empordà."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "camping-mas-patoxas-pals-baix-emporda",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "camping-mas-patoxas-pals",
+					"title": "Camping Mas Patoxas",
+					"metaTitle": "Camping Mas Patoxas: bungalós en Pals",
+					"metaDescription": "El Camping Mas Patoxas, en Pals: bungalós, piscina y el Baix Empordà alrededor. Precio por noche y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "bell-planso-bed-breakfast-moia",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "bell-planso-bed-and-breakfast-moia",
+					"title": "Bell Plançó B&B",
+					"metaTitle": "Bell Plançó: bed & breakfast con encanto en Moià",
+					"metaDescription": "Bell Plançó, en Moià: un bed & breakfast con mucho encanto en el Moianès, a una hora de Barcelona. Precio y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "pey-resort-hotel-muntanya-sort-pallars-sobira",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-pey-resort-sort",
+					"title": "Hotel Pey Resort",
+					"metaTitle": "Pey Resort: hotel de montaña en Sort",
+					"metaDescription": "Pey Resort, en Sort: un hotel de montaña para descubrir el Pallars Sobirà, con el río Noguera al lado. Precio y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "la-llar-del-mas-mas-de-barberans-turisme-rural",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "la-llar-del-mas-mas-de-barberans",
+					"title": "La Llar del Mas",
+					"metaTitle": "La Llar del Mas: turismo rural en Mas de Barberans",
+					"metaDescription": "La Llar del Mas, en Mas de Barberans: casa de turismo rural a los pies de los Puertos, para una escapada tranquila."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "uau-campers-lloguer-campers-lloret-de-mar",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "uau-campers-alquiler-de-campers-lloret",
+					"title": "UAU Campers",
+					"metaTitle": "UAU Campers: alquiler de campers en Lloret de Mar",
+					"metaDescription": "UAU Campers, en Lloret de Mar: alquiler de furgonetas camper equipadas para recorrer Cataluña sin horarios. Precio por día."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "mas-vermell-apartaments-fontanilles-baix-emporda",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mas-vermell-apartamentos-fontanilles",
+					"title": "Mas Vermell",
+					"metaTitle": "Mas Vermell: apartamentos rurales en Fontanilles",
+					"metaDescription": "Mas Vermell, en Fontanilles: apartamentos de turismo rural con encanto en el Baix Empordà, a diez minutos de las calas."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "places",
+			"slug": "mas-pineda-turisme-sostenible-oix-alta-garrotxa",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mas-pineda-turismo-sostenible-oix",
+					"title": "Mas Pineda",
+					"metaTitle": "Mas Pineda: turismo sostenible en la Alta Garrotxa",
+					"metaDescription": "Mas Pineda, en Oix: una casa rural con encanto para una escapada de relax en la Alta Garrotxa. Precio y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		}
+	]
+}
