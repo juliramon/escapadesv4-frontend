@@ -1,0 +1,214 @@
+{
+	"generatedAt": "2026-09-18T22:40:02.217Z",
+	"note": "Castellà de les 16 categories: títol, meta-descripció i entradeta. El cos llarg (seoText) encara no; mentrestant la pàgina castellana el mostra en català.",
+	"fields": [
+		{
+			"collection": "categories",
+			"slug": "escapades-estiu",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Escapadas de verano",
+					"subtitle": "Escapadas de verano en pareja por Cataluña: calas, alojamientos con piscina y planes para cuando aprieta el calor. Con precios y cómo llegar.",
+					"seoTextHeader": "<p>¿Buscáis una escapada de verano por Cataluña? Aquí está nuestra selección: calas donde el agua sigue fría en agosto, alojamientos con piscina y pueblos de montaña donde se duerme con manta. Todas las hemos hecho nosotros.</p>"
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "categories",
+			"slug": "hotels-amb-encant",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Hoteles con encanto en Cataluña",
+					"subtitle": "Hoteles con encanto en Cataluña para una escapada en pareja: masías del siglo XVII, hoteles boutique y casas rurales. Con precios y fotos nuestras.",
+					"seoTextHeader": "<p>Pequeños hoteles con encanto en Cataluña para una escapada en pareja. En esta lista os recomendamos los hoteles románticos y los hoteles rurales con más encanto del país, uno por uno y con lo que cuesta dormir en cada sitio.</p>"
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "categories",
+			"slug": "refugis",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Refugios",
+					"subtitle": "Refugios de montaña en Cataluña para dormir en pareja a pie de ruta: dónde están, cómo se reservan y qué se come. Con precios.",
+					"seoTextHeader": "<p>¿Buscáis un refugio donde desconectar y disfrutar de la montaña en pareja? Aquí tenéis nuestra selección de refugios de montaña de Cataluña, con la ruta que los deja a mano y lo que cuesta la media pensión.</p>"
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "categories",
+			"slug": "escapades-culturals",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Escapadas culturales",
+					"subtitle": "Escapadas culturales en pareja por Cataluña: castillos medievales, pueblos de piedra, monasterios y museos. Con horarios y cómo llegar.",
+					"seoTextHeader": "<p>Cataluña tiene tanto patrimonio que hay escapadas culturales para todos los gustos. Aquí está nuestra selección: castillos que se pueden visitar, pueblos medievales que siguen habitados y monasterios en medio de la nada.</p>"
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "categories",
+			"slug": "escapades-de-relax",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Escapadas de relax",
+					"subtitle": "Escapadas de relax en Cataluña: spas, balnearios y alojamientos donde el plan es no hacer nada. Con precios, fotos nuestras y cómo llegar.",
+					"seoTextHeader": "<p>Una escapada de relax no pide mucho: un sitio tranquilo, buena comida y tiempo para no hacer nada. Esta es nuestra selección de escapadas de relax por Cataluña, de balnearios a masías donde solo se oyen los pájaros.</p>"
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "categories",
+			"slug": "cases-rurals",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Casas rurales",
+					"subtitle": "Casas rurales en Cataluña para una escapada en pareja: masías restauradas, chimenea y campo alrededor. Con precios y cómo llegar.",
+					"seoTextHeader": "<p>Cataluña tiene casas rurales para todos los gustos, y unas cuantas pensadas para dos. Aquí está nuestra selección de casas rurales con encanto: masías de piedra, chimenea, y el pueblo más cercano a diez minutos.</p>"
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "categories",
+			"slug": "apartaments-per-a-parelles",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Apartamentos para parejas",
+					"subtitle": "Apartamentos para dos en Cataluña: a pie de playa, en pueblos medievales o entre viñedos, con cocina propia. Con precios y fotos nuestras.",
+					"seoTextHeader": "<p>Si buscáis el apartamento para una escapada en pareja por Cataluña, estáis en el sitio. Aquí está nuestra selección: primera línea de mar, casco antiguo o campo, siempre con cocina y sin nadie más en casa.</p>"
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "categories",
+			"slug": "escapades-hivern",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Escapadas de invierno",
+					"subtitle": "Escapadas de invierno en Cataluña: nieve, chimenea y pueblos de montaña sin colas. Con precios, cómo llegar y fotos nuestras.",
+					"seoTextHeader": "<p>El invierno es la temporada de la nieve, de las chimeneas y de los pueblos de montaña sin aglomeraciones. Esta es nuestra selección de escapadas de invierno por Cataluña, de las pistas a las casas donde no apetece salir.</p>"
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "categories",
+			"slug": "escapades-de-cap-de-setmana",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Escapadas de fin de semana",
+					"subtitle": "Escapadas de fin de semana en pareja por Cataluña, a menos de dos horas de casa. Con precios, cómo llegar y qué hacer cerca.",
+					"seoTextHeader": "<p>Un fin de semana da para más de lo que parece si no hay que conducir tres horas. Esta es nuestra selección de escapadas de fin de semana por Cataluña: llegar a la hora de comer, una actividad por la tarde y volver el domingo.</p>"
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "categories",
+			"slug": "cabanyes-als-arbres",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Cabañas en Cataluña",
+					"subtitle": "Cabañas en Cataluña para dormir en pareja: cabañas en los árboles, con jacuzzi y chimenea. Con precios, fotos nuestras y cómo llegar.",
+					"seoTextHeader": "<p>Cabañas en los árboles, cabañas entre valles y, sobre todo, cabañas con mucho encanto para una escapada en pareja. En esta lista os recomendamos las mejores cabañas de Cataluña, con lo que cuesta cada noche.</p>"
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "categories",
+			"slug": "caravanes",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Caravanas",
+					"subtitle": "Caravanas y furgonetas camper para recorrer Cataluña en pareja: dónde alquilarlas, qué llevan y cuánto cuestan.",
+					"seoTextHeader": "<p>¿Con ganas de echaros a la carretera para descubrir Cataluña? Aquí está nuestra selección de caravanas y campers para dos: lo que lleva cada una, dónde se recogen y lo que cuesta el día.</p>"
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "categories",
+			"slug": "campings",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Campings",
+					"subtitle": "Campings con encanto en Cataluña para una escapada en pareja: bungalós, piscina y mar o montaña al lado. Con precios y cómo llegar.",
+					"seoTextHeader": "<p>Dormir en un camping ya no significa solo tienda y saco. Muchos campings de Cataluña tienen bungalós, piscina y el mar o la montaña a diez minutos. Esta es nuestra selección para una escapada en pareja.</p>"
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "categories",
+			"slug": "rutes-i-excursions",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Rutas y excursiones",
+					"subtitle": "Rutas y excursiones por Cataluña para hacer en pareja: cimas, calas y caminos de ronda. Con la distancia, el desnivel y dónde dejar el coche.",
+					"seoTextHeader": "<p>Cataluña es un paraíso para caminar. Tanto si buscáis un paseo suave como una ruta de montaña exigente, aquí encontraréis las excursiones que hemos hecho nosotros, con la distancia, el desnivel y dónde aparcar.</p>"
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "categories",
+			"slug": "escapades-aventura",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Escapadas de aventura",
+					"subtitle": "Escapadas de aventura en pareja por Cataluña: parapente, barranquismo, vías ferratas y kayak. Con precios y cómo reservarlas.",
+					"seoTextHeader": "<p>Cataluña es un paraíso para quien busca una escapada de aventura: parapente sobre el Montsec, barranquismo, vías ferratas y kayak por la Costa Brava. Esta es nuestra selección, con lo que cuesta cada actividad.</p>"
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "categories",
+			"slug": "escapades-romantiques",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Escapadas románticas",
+					"subtitle": "84 escapadas románticas por Cataluña: cabañas en los árboles, hoteles con encanto y noches bajo las estrellas. Con precios y fotos nuestras.",
+					"seoTextHeader": "<p>Cataluña tiene mil sitios para una escapada romántica en pareja, y llevamos desde 2015 buscándolos. Aquí está nuestra selección: cabañas en los árboles, hoteles solo para adultos y habitaciones con el techo de cristal.</p>"
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "categories",
+			"slug": "escapades-gastronomiques",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Escapadas gastronómicas",
+					"subtitle": "Escapadas gastronómicas en pareja por Cataluña: restaurantes, bodegas y mercados. Con el precio medio por persona y cómo llegar.",
+					"seoTextHeader": "<p>Si el viaje gira alrededor de la mesa, esta es vuestra lista. Escapadas gastronómicas por Cataluña: restaurantes de pueblo, cocina de autor, bodegas que se visitan y sitios donde se come de maravilla por poco dinero.</p>"
+				}
+			},
+			"expectEmpty": true
+		}
+	]
+}

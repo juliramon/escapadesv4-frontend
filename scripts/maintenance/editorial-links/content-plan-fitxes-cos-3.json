@@ -1,0 +1,141 @@
+{
+	"generatedAt": "2026-09-19T11:26:19.001Z",
+	"note": "Cos en castellà de 6 fitxes, amb els enllaços interns ja apuntant a la versió castellana.",
+	"fields": [
+		{
+			"collection": "places",
+			"slug": "hotel-mil-estrelles",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-mil-estrelles-cornella-del-terri",
+					"title": "Hotel Mil Estrelles",
+					"metaTitle": "Hotel Mil Estrelles: dormir mirando las estrellas",
+					"metaDescription": "Hotel Mil Estrelles, en Cornellà del Terri: dormir mirando las estrellas, con la intimidad de una noche en pareja. Desde 74 € por persona y noche.",
+					"description": "<p>En el <strong>Hotel Mil Estrelles</strong> dormir bajo las estrellas es posible. Es una experiencia distinta: naturaleza con un buen nivel de comodidad, sin que el techo ni las paredes se interpongan, y con la intimidad que pide una noche en pareja.</p><p>La idea era crear un sitio para celebrar la vida y el amor, y para ser conscientes de lo que normalmente no nos paramos a mirar. El Mil Estrelles está en Cornellà del Terri, junto al río Terri y a 10 minutos en coche del lago de Banyoles.</p><p>El establecimiento tiene habitaciones burbuja exteriores, pensadas para mirar las estrellas, y un restaurante. También hay jardín con terraza amueblada. La zona va bien para salir en bicicleta o a caminar.</p><p>Hay servicio de masajes y bañera de hidromasaje. A menos de 3 minutos en coche están los pueblos de Púbol y Foixà, con varios restaurantes de cocina tradicional catalana. Girona está a 20 km y el aeropuerto, a 30 minutos en coche.</p><p>El hotel es de estilo rústico, con decoración cuidada y habitaciones luminosas con baño privado y aire acondicionado. Las habitaciones burbuja exteriores tienen telescopio y una vista del cielo difícil de igualar.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "hotel-mil-estrelles-cornella-del-terri",
+					"title": "Hotel Mil Estrelles",
+					"metaTitle": "Hotel Mil Estrelles: dormir mirando las estrellas",
+					"metaDescription": "Hotel Mil Estrelles, en Cornellà del Terri: dormir mirando las estrellas, con la intimidad de una noche en pareja. Desde 74 € por persona y noche."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "mirador-mont-caro-massis-ports",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mirador-del-mont-caro",
+					"title": "Mirador del Mont Caro",
+					"metaTitle": "Mirador del Mont Caro, en el Parque Natural dels Ports",
+					"metaDescription": "El mirador del Mont Caro, en la cima de 1.441 m del Parque Natural dels Ports: vistas del valle del Ebro y, si está claro, del mar.",
+					"description": "<p>El <strong>Mirador del Mont Caro</strong>, en la misma cima del Caro, a 1.441 metros sobre el nivel del mar, ofrece unas vistas espectaculares del último tramo del valle del Ebro y del macizo de los Puertos de Beceite. Si el día acompaña, se llega a ver incluso la isla de Mallorca.</p><p>Se llega en coche y se aparca a pocos metros del inicio de la pasarela. Además, tiene paneles interpretativos y está adaptado para personas con movilidad reducida.</p>",
+					"reasons": "<ul><li><p><strong>Vistas panorámicas únicas</strong>: desde el Mont Caro se ve el valle del Ebro, el macizo de los Puertos y, los días claros, hasta Mallorca.</p></li><li><p><strong>Naturaleza de verdad</strong>: un entorno poco alterado, con cabras salvajes y aves rapaces si tenéis suerte.</p></li><li><p><strong>Rutas de senderismo</strong>: la zona tiene varias rutas para explorar la montaña sin alejaros del coche.</p></li><li><p><strong>Tranquilidad</strong>: lejos del bullicio, es un buen sitio para parar y no hacer nada un rato.</p></li><li><p><strong>Tortosa al lado</strong>: después de la visita podéis bajar a Tortosa y dar una vuelta por su casco antiguo.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "mirador-del-mont-caro",
+					"title": "Mirador del Mont Caro",
+					"metaTitle": "Mirador del Mont Caro, en el Parque Natural dels Ports",
+					"metaDescription": "El mirador del Mont Caro, en la cima de 1.441 m del Parque Natural dels Ports: vistas del valle del Ebro y, si está claro, del mar."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-les-cols-pavellons",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-les-cols-pavellons-olot",
+					"title": "Hotel Les Cols Pavellons",
+					"metaTitle": "Les Cols Pavellons: pabellones de cristal en Olot",
+					"metaDescription": "Les Cols Pavellons, en Olot: cinco pabellones de cristal con onsen, junto a la zona volcánica de la Garrotxa. Desde 360 € por persona y noche.",
+					"description": "Les Cols Pavellons está en Olot, cerca del parque natural de la zona volcánica de la Garrotxa. Es un alojamiento distinto: habitaciones de estilo zen, con suelo y paredes de cristal.\n\nRodeado de naturaleza, tiene 5 pabellones, cada uno con onsen climatizado, baño privado y un futón muy cómodo. Cada detalle está pensado —el diseño, los materiales, la instalación— y la luz es buena parte de la experiencia.\n\nAl lado hay un restaurante de cocina catalana con 2 estrellas Michelin. Girona está a menos de una hora en coche y Barcelona, a 150 km.\n\nEs casi todo transparente, y el baño tiene una pequeña piscina. Es una arquitectura que no se parece a nada y una noche que no se olvida.\n\nLos pabellones están montados sobre un antiguo granero y la habitación es prácticamente diáfana: está pensada solo para relajarse, mirar cómo cambia la luz y descansar. Si llegáis y no veis la cama, tranquilos: aparece por la noche.\n\nY, de propina, la cocina del restaurante Les Cols, con dos estrellas Michelin."
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "hotel-les-cols-pavellons-olot",
+					"title": "Hotel Les Cols Pavellons",
+					"metaTitle": "Les Cols Pavellons: pabellones de cristal en Olot",
+					"metaDescription": "Les Cols Pavellons, en Olot: cinco pabellones de cristal con onsen, junto a la zona volcánica de la Garrotxa. Desde 360 € por persona y noche."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "panta-de-sau-osona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "pantano-de-sau",
+					"title": "Pantano de Sau",
+					"metaTitle": "Pantano de Sau y el pueblo sumergido",
+					"metaDescription": "El Pantano de Sau y el campanario del pueblo sumergido que asoma cuando baja el agua. Cómo llegar y desde dónde verlo.",
+					"description": "<p>El Pantano de Sau es un embalse del río Ter, formado por la presa de Vilanova de Sau, en la comarca de Osona. Abarca la sierra de las Guilleries y se extiende por Vilanova de Sau, les Masies de Roda, l'Esquirol y Tavertet.</p><p>Tiene 17 km de largo y 3 km de ancho, con una capacidad máxima de 177 hm³.</p><p>El Ter forma un sistema de tres embalses junto con los de Susqueda y el Pasteral, entre las comarcas de Osona y La Selva.</p><p>El Pantano de Sau es conocido por el pueblo sumergido bajo sus aguas. Se construyó en 1949 sobre el pueblo de Sant Romà de Sau, y cuando baja el nivel del agua asoma la iglesia románica del siglo XI.</p><p>Como curiosidad, es la iglesia más antigua del mundo conservada bajo el agua, según el libro de registros Official World Record.</p><p>Desde Sant Romà de Sau salen varias rutas de senderismo: el Puig de la Força, que forma parte de los 100 cims de Cataluña, el Morro de l'Abella o la Rocallarga, en la meseta del Collsacabra.</p>",
+					"reasons": "<ul><li><p>Paisaje espectacular, con las aguas tranquilas del pantano y el campanario de Sant Romà asomando cuando baja el nivel.</p></li><li><p>Ideal para salir en kayak o en paddle surf en pareja, en un entorno natural.</p></li><li><p>Rutas de senderismo y de bicicleta rodeadas de bosque y tranquilidad.</p></li><li><p>Un sitio perfecto para un picnic con vistas a los cingles de Tavertet y al Montseny.</p></li><li><p>Un lugar para desconectar, lejos de las aglomeraciones.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "pantano-de-sau",
+					"title": "Pantano de Sau",
+					"metaTitle": "Pantano de Sau y el pueblo sumergido",
+					"metaDescription": "El Pantano de Sau y el campanario del pueblo sumergido que asoma cuando baja el agua. Cómo llegar y desde dónde verlo."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "refugi-lluis-estasen-pedraforca-bergueda",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "refugio-lluis-estasen-pedraforca",
+					"title": "Refugio Lluís Estasen",
+					"metaTitle": "Refugio Lluís Estasen, a los pies del Pedraforca",
+					"metaDescription": "El Refugio Lluís Estasen, a los pies del Pedraforca: el punto de partida para subir a la montaña. Precio, reserva y cómo llegar.",
+					"description": "<p>El <strong>Refugio Lluís Estasen</strong> es un refugio de montaña a los pies del Pedraforca, en la Jaça del Prat.</p><p>Tiene capacidad para 87 personas cuando hay guarda y para 30 cuando no lo hay. Es de pago y ofrece mantas, comida y bebidas, calefacción e internet.</p><p>Pertenece a la Federació d'Entitats Excursionistes de Catalunya (FEEC).</p><p>Hay que tener en cuenta que la ruta al Pedraforca se considera de dificultad elevada.</p><h2>Cómo funciona</h2><p>El refugio está en la Jaça del Prat, a los pies del Pedraforca, y tiene 87 plazas cuando hay guarda. Es el punto de salida de la subida al <a href=\"https://escapadesenparella.cat/es/escapadas-aventura/pedraforca-por-la-tartera\">Pollegó Superior por la tartera</a> y hay que reservar antes de ir. Se llega a pie desde Saldes en poco más de una hora.</p><h3>Información práctica</h3><ul><li><strong>Mejor época:</strong> primavera y verano.</li></ul><h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/camping-repos-del-pedraforca-saldes\">Camping Repòs del Pedraforca</a>, a 4 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-culturales/vilanova-de-banat\">Vilanova de Banat</a>, a 4 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/pedraforca-por-la-tartera\">Pedraforca por la tartera</a>, a 5 km</li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "refugio-lluis-estasen-pedraforca",
+					"title": "Refugio Lluís Estasen",
+					"metaTitle": "Refugio Lluís Estasen, a los pies del Pedraforca",
+					"metaDescription": "El Refugio Lluís Estasen, a los pies del Pedraforca: el punto de partida para subir a la montaña. Precio, reserva y cómo llegar."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "poble-montseny-montseny",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "pueblo-de-montseny",
+					"title": "El pueblo de Montseny",
+					"metaTitle": "El pueblo de Montseny",
+					"metaDescription": "El pueblo de Montseny, el único del macizo que mantiene su nombre, con un campanario inclinado tres grados. Qué ver allí.",
+					"description": "<p>El municipio de Montseny, conocido antiguamente por el nombre de su parroquia, Sant Julià de Montseny, tiene una extensión de 27,02 km². Está en la vertiente meridional de la montaña del Montseny y es el único pueblo del macizo que mantiene su nombre.</p><p>El relieve es muy accidentado: va desde las cimas del Matagalls y les Agudes hasta más abajo del núcleo del pueblo, a 530 metros de altitud.</p><p>Entre la vegetación del Montseny destaca un ejemplar excepcional, el boj de la iglesia, árbol monumental declarado en 1990 por la Generalitat de Catalunya y situado en el patio delante de la iglesia.</p><p>La iglesia de Sant Julià de Montseny es una iglesia primitiva de una sola nave, consagrada en el siglo XII y documentada desde 1079, aunque la parroquia se menciona ya en 1004. Se conservan restos como el campanario, del siglo XII, de torre cuadrada y con la particularidad de estar ligeramente inclinado: es uno de los campanarios más inclinados del mundo, aunque su poca altura no deja apreciarlo (con 13,60 metros tiene un desplome de 0,77, lo que da una inclinación de 3,35 grados).</p><p>Entre los sitios de interés están la iglesia de Sant Julià de Montseny, la ermita de Sant Martí de Montseny d'Amunt y la ermita de Sant Bernat. También el mirador de l'Estela, les Esquelles d'en Jaume y la Taula dels Tres Bisbes.</p>",
+					"reasons": "<ul><li><p><strong>Pueblo de verdad</strong>: calles de piedra, casas tradicionales y un ambiente tranquilo que parece de otra época.</p></li><li><p><strong>Naturaleza a la puerta</strong>: está dentro del Parque Natural del Montseny y es un buen punto de partida para rutas entre bosques.</p></li><li><p><strong>Gastronomía local</strong>: cocina de montaña en los restaurantes del pueblo, con producto de proximidad.</p></li><li><p><strong>Cerca de Barcelona</strong>: está a una hora, o sea que da para una escapada corta.</p></li><li><p><strong>Miradores</strong>: los de los alrededores tienen vistas a las montañas del Montseny que valen la subida.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "pueblo-de-montseny",
+					"title": "El pueblo de Montseny",
+					"metaTitle": "El pueblo de Montseny",
+					"metaDescription": "El pueblo de Montseny, el único del macizo que mantiene su nombre, con un campanario inclinado tres grados. Qué ver allí."
+				}
+			}
+		}
+	]
+}

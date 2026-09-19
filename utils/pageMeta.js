@@ -46,9 +46,15 @@ const serpTitle = ({ metaTitle, title }) => {
 		: base;
 };
 
-/** Meta descripció, amb el subtítol de reserva quan no se n'ha escrit cap. */
+/**
+ * Meta descripció, amb el subtítol de reserva quan no se n'ha escrit cap.
+ *
+ * Passa pel filtre d'HTML encara que vingui del camp de metes: les vuit
+ * pàgines de viatge hi enviaven el `seoTextHeader`, que és HTML de l'editor, i
+ * Google n'ensenyava el resultat amb un «&lt;p&gt;» al davant.
+ */
 const serpDescription = ({ metaDescription, subtitle }) =>
-	String(metaDescription || "").trim() || stripHtml(subtitle) || "";
+	stripHtml(metaDescription) || stripHtml(subtitle) || "";
 
 export {
 	SITE_NAME,

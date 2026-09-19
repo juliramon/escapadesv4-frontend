@@ -5,7 +5,12 @@ import {
 	DESTINATIONS,
 	GETAWAY_CATEGORIES,
 	STAY_CATEGORIES,
+	localizedEntries,
+	localizedEntry,
+	VERTICALS,
 } from "../../utils/siteTaxonomy";
+import { segment } from "../../utils/i18n";
+import { text } from "../../i18n/strings";
 
 const iconProps = {
 	xmlns: "http://www.w3.org/2000/svg",
@@ -98,89 +103,88 @@ const icons = {
  * manera de fer visibles les 16 categories i les 6 destinacions, que fins ara
  * nomes s'arribaven des del desplegable del cercador.
  */
-const ITEMS = [
+/**
+ * El menú, en l'idioma de la ruta.
+ *
+ * Era una constant del mòdul: amb dos idiomes ha de ser una funció,
+ * perquè els enllaços i les etiquetes canvien. Es construeix a cada
+ * render, que són trenta objectes i no es nota.
+ */
+const itemsFor = (locale) => [
 	{
 		id: "experiences",
-		href: "/activitats",
-		label: "Experiències",
-		title: "Experiències originals per fer en parella a Catalunya",
+		...localizedEntry(VERTICALS[0], locale),
 		icon: icons.experiences,
 		panel: {
-			heading: "Per tipus d'escapada",
+			heading: text("nav.byGetawayType", locale),
 			seeAll: {
-				href: "/activitats",
-				label: "Veure totes les experiències",
+				href: localizedEntry(VERTICALS[0], locale).href,
+				label: text("nav.allExperiences", locale),
 			},
-			links: GETAWAY_CATEGORIES.map((category) => ({
-				href: `/${category.slug}`,
-				label: category.label,
-				hint: category.hint,
-			})),
+			links: localizedEntries(GETAWAY_CATEGORIES, locale).map(
+				(category) => ({
+					href: `/${category.slug}`,
+					label: category.label,
+					hint: category.hint,
+				}),
+			),
 		},
 	},
 	{
 		id: "stays",
-		href: "/allotjaments",
-		label: "Allotjaments",
-		title: "Allotjaments amb encant a Catalunya",
+		...localizedEntry(VERTICALS[1], locale),
 		icon: icons.stays,
 		panel: {
-			heading: "Per tipus d'allotjament",
+			heading: text("nav.byStayType", locale),
 			seeAll: {
-				href: "/allotjaments",
-				label: "Veure tots els allotjaments",
+				href: localizedEntry(VERTICALS[1], locale).href,
+				label: text("nav.allStays", locale),
 			},
-			links: STAY_CATEGORIES.map((category) => ({
-				href: `/${category.slug}`,
-				label: category.label,
-				hint: category.hint,
-			})),
+			links: localizedEntries(STAY_CATEGORIES, locale).map(
+				(category) => ({
+					href: `/${category.slug}`,
+					label: category.label,
+					hint: category.hint,
+				}),
+			),
 		},
 	},
 	{
 		id: "destinations",
-		href: "/destinacions",
-		label: "Destinacions",
-		title: "Destinacions per a escapades en parella",
+		...localizedEntry(VERTICALS[2], locale),
 		icon: icons.destinations,
 		panel: {
-			heading: "Zones per descobrir",
+			heading: text("nav.zones", locale),
 			seeAll: {
-				href: "/destinacions",
-				label: "Veure totes les destinacions",
+				href: localizedEntry(VERTICALS[2], locale).href,
+				label: text("nav.allDestinations", locale),
 			},
-			links: DESTINATIONS.map((destination) => ({
-				href: `/destinacions/${destination.slug}`,
-				label: destination.label,
-			})),
+			links: localizedEntries(DESTINATIONS, locale).map(
+				(destination) => ({
+					href: `/${segment("destinacions", locale)}/${destination.slug}`,
+					label: destination.label,
+				}),
+			),
 		},
 	},
 	{
 		id: "lists",
-		href: "/llistes",
-		label: "Llistes",
-		title: "Llistes d'idees per a escapades en parella",
+		...localizedEntry(VERTICALS[3], locale),
 		icon: icons.lists,
 	},
 	{
 		id: "stories",
-		href: "/histories",
-		label: "Històries",
-		title: "Històries d'escapades viscudes en parella",
+		...localizedEntry(VERTICALS[4], locale),
 		icon: icons.stories,
 	},
 	{
 		id: "trips",
-		href: "/viatges",
-		label: "Viatges",
-		title: "Viatges en parella arreu del món",
+		...localizedEntry(VERTICALS[5], locale),
 		icon: icons.trips,
 	},
 	{
 		id: "discounts",
-		href: "/descomptes-viatjar",
-		label: "Descomptes",
-		title: "Descomptes per viatjar",
+		...localizedEntry(VERTICALS[6], locale),
 		icon: icons.discounts,
 		highlight: true,
 	},
@@ -188,6 +192,7 @@ const ITEMS = [
 
 const VerticalsNav = () => {
 	const router = useRouter();
+	const items = itemsFor(router.locale);
 	const [openPanel, setOpenPanel] = useState(null);
 	const navRef = useRef(null);
 
@@ -235,7 +240,7 @@ const VerticalsNav = () => {
 					className="verticals-nav__list"
 					aria-label="Seccions del web"
 				>
-					{ITEMS.map((item) => {
+					{items.map((item) => {
 						const active = isActive(item);
 						const isOpen = openPanel === item.id;
 						return (
@@ -277,7 +282,7 @@ const VerticalsNav = () => {
 											}`}
 											onClick={() =>
 												setOpenPanel(
-													isOpen ? null : item.id
+													isOpen ? null : item.id,
 												)
 											}
 										>

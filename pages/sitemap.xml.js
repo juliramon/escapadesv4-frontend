@@ -1,17 +1,18 @@
 import ContentService from "../services/contentService";
 import { listingPath } from "../utils/listingRoutes";
+import { segment, slugFor } from "../utils/i18n";
 
 const SITE = "https://escapadesenparella.cat";
 
 /** Pàgines fixes que sempre hi han de constar. */
 const STATIC_PATHS = [
-	{path: "/", priority: "1.0", changefreq: "daily"},
-	{path: "/activitats", priority: "0.9", changefreq: "daily"},
-	{path: "/allotjaments", priority: "0.9", changefreq: "daily"},
-	{path: "/destinacions", priority: "0.9", changefreq: "weekly"},
-	{path: "/histories", priority: "0.8", changefreq: "weekly"},
-	{path: "/llistes", priority: "0.8", changefreq: "weekly"},
-	{path: "/viatges", priority: "0.8", changefreq: "weekly"},
+	{path: "/", es: "/es", priority: "1.0", changefreq: "daily"},
+	{path: "/activitats", es: "/es/actividades", priority: "0.9", changefreq: "daily"},
+	{path: "/allotjaments", es: "/es/alojamientos", priority: "0.9", changefreq: "daily"},
+	{path: "/destinacions", es: "/es/destinos", priority: "0.9", changefreq: "weekly"},
+	{path: "/histories", es: "/es/historias", priority: "0.8", changefreq: "weekly"},
+	{path: "/llistes", es: "/es/listas", priority: "0.8", changefreq: "weekly"},
+	{path: "/viatges", es: "/es/viajes", priority: "0.8", changefreq: "weekly"},
 	{path: "/empreses", priority: "0.5", changefreq: "monthly"},
 	{path: "/sobre-nosaltres", priority: "0.4", changefreq: "yearly"},
 	{path: "/contacte", priority: "0.4", changefreq: "yearly"},
@@ -40,6 +41,9 @@ const wordCount = (html) => {
 /** Per sota d'això, la pàgina no té contingut propi. */
 const MIN_WORDS = 50;
 
+/** Salt de línia del XML. */
+const SALT = String.fromCharCode(10);
+
 const escapeXml = (value) =>
 	String(value)
 		.replace(/&/g, "&amp;")
@@ -48,8 +52,37 @@ const escapeXml = (value) =>
 		.replace(/"/g, "&quot;")
 		.replace(/'/g, "&apos;");
 
-const urlEntry = ({path, lastmod, priority, changefreq}) => {
-	const parts = [`    <loc>${escapeXml(SITE + path)}</loc>`];
+/**
+ * Una entrada del sitemap.
+ *
+ * Quan la pàgina existeix en castellà, totes dues versions es llisten i
+ * cadascuna porta els `xhtml:link` de les dues: és la condició perquè
+ * Google les llegeixi com la mateixa pàgina en dos idiomes i no com a
+ * contingut duplicat. Les pàgines que encara no estan traduïdes només hi
+ * surten en català; val més que no hi siguin que no pas convidar Google a
+ * indexar una còpia en la llengua que no toca.
+ */
+const urlEntry = ({path, es, lastmod, priority, changefreq}) => {
+	const alternates = es
+		? [
+				`    <xhtml:link rel="alternate" hreflang="ca-ES" href="${escapeXml(
+					SITE + path,
+				)}"/>`,
+				`    <xhtml:link rel="alternate" hreflang="es-ES" href="${escapeXml(
+					SITE + es,
+				)}"/>`,
+				`    <xhtml:link rel="alternate" hreflang="x-default" href="${escapeXml(
+					SITE + path,
+				)}"/>`,
+			]
+		: [];
+	return [path, ...(es ? [es] : [])]
+		.map((loc) => entryXml({loc, alternates, lastmod, priority, changefreq}))
+		.join(SALT);
+};
+
+const entryXml = ({loc, alternates, lastmod, priority, changefreq}) => {
+	const parts = [`    <loc>${escapeXml(SITE + loc)}</loc>`, ...alternates];
 	if (lastmod) {
 		parts.push(`    <lastmod>${new Date(lastmod).toISOString()}</lastmod>`);
 	}
@@ -99,11 +132,17 @@ export async function getServerSideProps({res}) {
 
 	const entries = [...STATIC_PATHS];
 
+	// El camí castellà només hi va quan el document està traduït de debò:
+	// `slugFor` cau al slug català quan no n'hi ha, i llistar la versió
+	// castellana d'una pàgina que encara surt en català és convidar Google a
+	// indexar una còpia.
 	const push = (items, toPath) => {
 		(items || []).forEach((item) => {
 			if (!item || !item.slug) return;
+			const traduit = Boolean(item.translations?.es);
 			entries.push({
-				path: toPath(item),
+				path: toPath(item, "ca"),
+				es: traduit ? `/es${toPath(item, "es")}` : null,
 				lastmod: item.updatedAt || item.createdAt,
 				changefreq: "weekly",
 				priority: "0.7",
@@ -121,12 +160,22 @@ export async function getServerSideProps({res}) {
 		(stories.allStories || []).filter(
 			(story) => wordCount(story.description) >= MIN_WORDS,
 		),
-		(el) => `/histories/${el.slug}`,
+		(el, locale) => `/${segment("histories", locale)}/${slugFor(el, locale)}`,
 	);
-	push(lists, (el) => `/llistes/${el.slug}`);
-	push(destinations, (el) => `/destinacions/${el.slug}`);
-	push(categories, (el) => `/${el.slug}`);
-	push(tripCategories, (el) => `/viatges/${el.slug}`);
+	push(
+		lists,
+		(el, locale) => `/${segment("llistes", locale)}/${slugFor(el, locale)}`,
+	);
+	push(
+		destinations,
+		(el, locale) =>
+			`/${segment("destinacions", locale)}/${slugFor(el, locale)}`,
+	);
+	push(categories, (el, locale) => `/${slugFor(el, locale)}`);
+	push(
+		tripCategories,
+		(el, locale) => `/${segment("viatges", locale)}/${slugFor(el, locale)}`,
+	);
 
 	// Les entrades de viatge pengen del slug de la seva categoria.
 	(tripEntries.allTrips || []).forEach((el) => {
@@ -153,7 +202,7 @@ export async function getServerSideProps({res}) {
 	});
 
 	const xml = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${uniqueEntries.map(urlEntry).join("\n")}
 </urlset>`;
 

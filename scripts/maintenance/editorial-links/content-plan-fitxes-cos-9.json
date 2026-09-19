@@ -1,0 +1,143 @@
+{
+	"generatedAt": "2026-09-19T14:06:06.486Z",
+	"note": "Cos en castellà de 6 fitxes, amb els enllaços interns ja apuntant a la versió castellana.",
+	"fields": [
+		{
+			"collection": "activities",
+			"slug": "fonts-del-cardener-solsones-lleida",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "fuentes-del-cardener",
+					"title": "Fuentes del Cardener",
+					"metaTitle": "Fuentes del Cardener, en el Solsonès",
+					"metaDescription": "Las Fuentes del Cardener, donde nace el río, en el Solsonès: un rincón de agua y bosque. Cómo llegar y qué ruta hacer.",
+					"description": "<p>Las Fuentes del Cardener son un conjunto de fuentes y cascadas en la comarca del Solsonès.</p><p>Estas son algunas de sus características:</p><ul><li><p>Están a 1.100 metros de altitud, dentro del municipio de La Coma i la Pedra.</p></li><li><p>Allí nace el río Cardener, afluente del Llobregat a su paso por Manresa.</p></li><li><p>En primavera y en otoño es cuando bajan con más fuerza, por el deshielo y por las lluvias.</p></li><li><p>En la zona hay barbacoas y un área de picnic con mesas de madera, para comer rodeados de bosque.</p></li><li><p>Es un destino muy popular para pasar un día tranquilo en la montaña, con caminos fáciles y accesibles.</p></li><li><p>El río Cardener fue un elemento importante del pasado industrial de la comarca: abastecía molinos y otras actividades productivas.</p></li></ul>",
+					"reasons": "<ul><li><p><strong>Paisaje espectacular</strong>: las Fuentes del Cardener son un entorno natural notable, con cascadas y fuentes que brotan con fuerza, sobre todo en primavera y otoño.</p></li><li><p><strong>Rutas de senderismo</strong>: caminos señalizados, ideales para pasear en pareja entre bosque y tranquilidad.</p></li><li><p><strong>Área de picnic</strong>: con mesas y barbacoas preparadas para comer al aire libre.</p></li><li><p><strong>El origen del Cardener</strong>: descubrir dónde nace un río con tanta importancia histórica para la comarca.</p></li><li><p><strong>Cerca de Barcelona</strong>: una buena opción para un día suelto, sin grandes desplazamientos.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "fuentes-del-cardener",
+					"title": "Fuentes del Cardener",
+					"metaTitle": "Fuentes del Cardener, en el Solsonès",
+					"metaDescription": "Las Fuentes del Cardener, donde nace el río, en el Solsonès: un rincón de agua y bosque. Cómo llegar y qué ruta hacer."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "mas-farner-adults-only-llivia-cerdanya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mas-farner-adults-only-llivia",
+					"title": "Mas Farner - Adults Only",
+					"metaTitle": "Mas Farner: turismo rural solo adultos en Llívia",
+					"metaDescription": "Mas Farner, en Llívia: turismo rural con encanto solo para adultos, en plena Cerdanya. Precio por noche y cómo llegar.",
+					"description": "<p><strong>Mas Farner - Adults Only</strong> es un alojamiento de turismo rural con encanto de solo tres habitaciones. Un proyecto personal en el pequeño pueblo de Cereja, a un paso de Llívia (Cerdaña), donde los responsables han cuidado hasta el último detalle.</p><p>En Mas Farner encontraréis habitaciones amplias y bien equipadas y unas zonas comunes con vistas privilegiadas del llano cerdano.</p><h2>Para quién es</h2><p>Una casa de solo tres habitaciones, en Cereja, un pueblo minúsculo junto a Llívia. Es solo para adultos y tiene chimenea y bañera, así que funciona igual de bien en invierno, con nieve, que en verano. Desde aquí tenéis toda la Cerdaña, a medio camino entre Puigcerdà y La Seu d'Urgell.</p><h3>Información práctica</h3><ul><li><strong>Cuándo ir:</strong> todo el año.</li><li><strong>Servicios:</strong> chimenea, aparcamiento gratuito, aire acondicionado, bañera, solo adultos, wifi, smart tv.</li></ul><h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/castillo-de-llivia\">Castillo de Llívia</a>, a 2 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/set-terres-la-villa-de-llivia-adults-only\">Set Terres</a>, a 2 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/esterragalls-dall-cerdanya\">Esterragalls d'All</a>, a 14 km</li></ul>",
+					"reasons": "<ul><li><p>Alojamiento rústico con mucho encanto</p></li><li><p>Habitaciones bien equipadas y decoradas con gusto</p></li><li><p>Gastronomía de montaña de calidad</p></li><li><p>Una ubicación inmejorable en Llívia para recorrer la Cerdaña</p></li><li><p>Actividades y experiencias distintas</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "mas-farner-adults-only-llivia",
+					"title": "Mas Farner - Adults Only",
+					"metaTitle": "Mas Farner: turismo rural solo adultos en Llívia",
+					"metaDescription": "Mas Farner, en Llívia: turismo rural con encanto solo para adultos, en plena Cerdanya. Precio por noche y cómo llegar."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "camping-mas-patoxas-pals-baix-emporda",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "camping-mas-patoxas-pals",
+					"title": "Camping Mas Patoxas",
+					"metaTitle": "Camping Mas Patoxas: bungalós en Pals",
+					"metaDescription": "El Camping Mas Patoxas, en Pals: bungalós, piscina y el Baix Empordà alrededor. Precio por noche y cómo llegar.",
+					"description": "<p>El <strong>Camping Mas Patoxas</strong> está en pleno Baix Empordà y es una buena base para descubrir la comarca.</p><p>Rodeado de campo, va bien para quien busque un ambiente tranquilo y estar en contacto con la naturaleza, sea de mar o de montaña.</p><p>Está a pocos minutos de Pals, muy cerca de las calas de la Costa Brava y de los pueblos medievales del Baix Empordà, así que da para explorar tanto el paisaje como el patrimonio de la zona.</p><p>El camping destaca por sus servicios: instalaciones modernas, dos piscinas, zonas de ocio, bar, restaurante y gimnasio.</p><p>Con trato cercano y buen ambiente, el Camping Mas Patoxas es un sitio del que se vuelve con ganas de repetir.</p>",
+					"reasons": "<ol><li><p><strong>Servicios completos</strong>: el Camping Mas Patoxas tiene de todo para que no echéis nada en falta.</p></li><li><p><strong>Ubicación</strong>: en el Baix Empordà, es una base perfecta para recorrer la Costa Brava, empezando por Pals.</p></li><li><p><strong>Naturaleza</strong>: zonas verdes y tranquilidad, que es a lo que se va.</p></li><li><p><strong>Actividades</strong>: de rutas de senderismo a deportes acuáticos, hay opciones para todos los gustos.</p></li><li><p><strong>Trato cercano</strong>: el equipo del camping está pendiente de que la estancia salga bien.</p></li></ol>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "camping-mas-patoxas-pals",
+					"title": "Camping Mas Patoxas",
+					"metaTitle": "Camping Mas Patoxas: bungalós en Pals",
+					"metaDescription": "El Camping Mas Patoxas, en Pals: bungalós, piscina y el Baix Empordà alrededor. Precio por noche y cómo llegar."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "la-mer-cabrera-de-mar-maresme-barcelona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-boutique-la-mer-cabrera-de-mar",
+					"title": "Hotel boutique La Mer",
+					"metaTitle": "Hotel boutique La Mer, en Cabrera de Mar",
+					"metaDescription": "Hotel boutique La Mer, en Cabrera de Mar: una masía del siglo XVI a los pies del Castillo de Burriac, para una escapada en el Maresme.",
+					"description": "<p>La Mer, en pleno campo del Maresme y a los pies del <a href=\"https://escapadesenparella.cat/es/escapadas-culturales/castillo-de-burriac\">Castillo de Burriac</a>, es el relevo de la antigua masía de Can Vivé, con más de 400 años de historia.</p><p>En el hotel boutique rural La Mer se ha aprovechado la estructura completa de la masía Can Vivé, reformándola y adaptándola a un concepto nuevo. El hotel tiene habitaciones con mucho encanto, la bodega, la sala de estar con chimenea, una biblioteca y una sala de yoga y gimnasio.</p><p>Las habitaciones están decoradas cuidando hasta el último detalle, con vistas al entorno donde está la masía, a los pies del cerro del Castillo de Burriac.</p><p>En el jardín hay una pequeña piscina exterior en forma de baño romano, para disfrutarla con calma. Además, durante el año organizan eventos como vermuts con música en directo en el jardín.</p><p>Su ubicación da fácil acceso a rutas de campo y a playas cercanas, además de a una buena oferta gastronómica con producto local.</p>",
+					"reasons": "<ul><li><p><strong>Entorno tranquilo</strong>: la masía La Mer, en Cabrera de Mar, tiene jardines cuidados y vistas al mar y a la montaña.</p></li><li><p><strong>Gastronomía</strong>: la zona tiene restaurantes de cocina catalana con producto local y de temporada.</p></li><li><p><strong>Patrimonio</strong>: Cabrera de Mar tiene yacimientos arqueológicos y castillos medievales a poca distancia.</p></li><li><p><strong>Descanso</strong>: la calma de La Mer, con playas y caminos cerca, permite tanto no hacer nada como salir a caminar o en bicicleta.</p></li><li><p><strong>Cerca de Barcelona</strong>: se llega en poco rato, así que funciona para un fin de semana sin complicaciones.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "hotel-boutique-la-mer-cabrera-de-mar",
+					"title": "Hotel boutique La Mer",
+					"metaTitle": "Hotel boutique La Mer, en Cabrera de Mar",
+					"metaDescription": "Hotel boutique La Mer, en Cabrera de Mar: una masía del siglo XVI a los pies del Castillo de Burriac, para una escapada en el Maresme."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "la-brama-del-cervol-pallars-sobira",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "berrea-del-ciervo-pallars-sobira",
+					"title": "La berrea del ciervo en el Pallars Sobirà",
+					"metaTitle": "Berrea del ciervo en el Pallars Sobirà: cuándo y dónde",
+					"metaDescription": "La berrea del ciervo en el Pallars Sobirà: cuándo es, dónde escucharla y a qué hora ir. Una escapada de otoño distinta.",
+					"description": "<p>Entre mediados de septiembre y mediados de octubre, los ciervos entran en época de celo y es cuando emiten la berrea, para marcar territorio y aparearse con las hembras. La berrea es un tono grave y muy fácil de identificar.</p><p>Se puede escuchar la berrea del ciervo en el Pallars Sobirà desde tres puntos de observación gratuitos: Les Ares, Alós d'Isil y Cerbi.</p><p>No hace falta llevar ningún equipo, porque los guías acreditados llevan todo el material necesario.</p><p>Si queréis saber más sobre la berrea del ciervo en el Pallars Sobirà, seguid el enlace.</p>",
+					"reasons": "<ul><li><p>Vivir la berrea del ciervo, un espectáculo natural de otoño que no se parece a nada.</p></li><li><p>Un entorno salvaje en pleno Pirineo, con paisajes impresionantes y silencio.</p></li><li><p>Rutas guiadas para escuchar a los ciervos en su hábitat, que además se aprende.</p></li><li><p>Alojamientos rurales con encanto, perfectos para una escapada rodeados de naturaleza.</p></li><li><p>Descubrir la fauna y la flora del Pallars Sobirà, uno de los territorios más auténticos de Cataluña.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "berrea-del-ciervo-pallars-sobira",
+					"title": "La berrea del ciervo en el Pallars Sobirà",
+					"metaTitle": "Berrea del ciervo en el Pallars Sobirà: cuándo y dónde",
+					"metaDescription": "La berrea del ciervo en el Pallars Sobirà: cuándo es, dónde escucharla y a qué hora ir. Una escapada de otoño distinta."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "refugi-font-farrera-parc-natural-dels-ports",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "refugio-font-farrera-els-ports",
+					"title": "Refugio Font Farrera",
+					"metaTitle": "Refugio Font Farrera, en el Parque Natural dels Ports",
+					"metaDescription": "El Refugio Font Farrera, en el Parque Natural dels Ports: un refugio de montaña a pie de sendero. Precio, media pensión y reserva.",
+					"description": "<p>El <strong>Refugio Font Ferrera</strong> es un refugio de montaña en el Parque Natural dels Ports, cerca del pueblo de Fredes.</p><p>Tiene capacidad para 40 personas y está a 1.157 metros de altitud.</p><p>Desde el refugio salen varias rutas de senderismo por la zona.</p><p>Entre los servicios hay mantas, comida y bebidas, calefacción, internet, ducha y lavabo.</p><p>Está cerca del Tossal d'en Cervera, de 1.346 metros.</p><h2>Cómo funciona</h2><p>Refugio de montaña en el Parque Natural dels Ports, con capacidad para 40 personas. Como en todos los refugios guardados, hay que reservar plaza antes de ir y llevarse el saco sábana; se llega a pie y es una buena base para subir al <a href=\"https://escapadesenparella.cat/es/escapadas-aventura/mirador-del-mont-caro\">Mont Caro</a> y recorrer el macizo.</p><h3>Información práctica</h3><ul><li><strong>Mejor época:</strong> primavera y verano.</li></ul><h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/la-llar-del-mas-mas-de-barberans\">La Llar del Mas</a>, a 14 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/mirador-del-mont-caro\">Mirador del Mont Caro</a>, a 14 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-culturales/cuevas-meravelles-benifallet\">Las Cuevas Meravelles de Benifallet</a>, a 36 km</li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "refugio-font-farrera-els-ports",
+					"title": "Refugio Font Farrera",
+					"metaTitle": "Refugio Font Farrera, en el Parque Natural dels Ports",
+					"metaDescription": "El Refugio Font Farrera, en el Parque Natural dels Ports: un refugio de montaña a pie de sendero. Precio, media pensión y reserva."
+				}
+			}
+		}
+	]
+}

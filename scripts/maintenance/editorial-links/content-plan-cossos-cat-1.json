@@ -1,0 +1,94 @@
+{
+	"generatedAt": "2026-09-19T10:47:48.849Z",
+	"note": "Castellà del camp seoText de 4 documents de categories, amb els enllaços interns ja apuntant a la versió castellana.",
+	"fields": [
+		{
+			"collection": "categories",
+			"slug": "escapades-romantiques",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Escapadas románticas",
+					"subtitle": "84 escapadas románticas por Cataluña: cabañas en los árboles, hoteles con encanto y noches bajo las estrellas. Con precios y fotos nuestras.",
+					"seoTextHeader": "<p>Cataluña tiene mil sitios para una escapada romántica en pareja, y llevamos desde 2015 buscándolos. Aquí está nuestra selección: cabañas en los árboles, hoteles solo para adultos y habitaciones con el techo de cristal.</p>",
+					"slug": "escapadas-romanticas",
+					"seoText": "<h2>Escapadas románticas para parejas en Cataluña</h2><p>¿Buscáis una escapada mágica para compartir en pareja? Cataluña es el destino perfecto para las <strong>escapadas románticas</strong>, con una oferta enorme de experiencias para disfrutar con la persona que queréis. De paseos por paisajes que quitan el hipo a noches en hoteles románticos, aquí encontraréis todo lo necesario para un fin de semana de los que se recuerdan.</p><h3>Escapadas en pareja para descubrir Cataluña</h3><p>Las <strong>escapadas en pareja por Cataluña</strong> son ideales para salir de la rutina. Imaginaos un fin de semana explorando pueblos con siglos de historia, cenando con el mar delante o perdiéndoos por un hayedo sin nadie alrededor. Sea cual sea vuestro plan, Cataluña tiene una <strong>escapada romántica</strong> que encaja.</p><h3>Hoteles románticos en Cataluña para una noche especial</h3><p>Una parte importante de la escapada es dónde se duerme. Los <strong>hoteles románticos de Cataluña</strong> están en sitios privilegiados: calas escondidas de la Costa Brava, campos del Empordà, pueblos de montaña. Muchos tienen habitaciones con jacuzzi, vistas que valen el viaje y cenas para dos. Aquí encontraréis el que mejor os encaje, con lo que cuesta cada noche.</p><h2>Fin de semana romántico: momentos que se recuerdan</h2><p>Organizar un <strong>fin de semana romántico en Cataluña</strong> es más fácil de lo que parece. De visitas a bodegas con cata a excursiones por parques naturales, las opciones no se acaban. Y si os tira más la historia, una escapada cultural en pareja da para castillos, monasterios y pueblos medievales sin salir del país.</p><h3>Escapadas románticas para todos los gustos</h3><p>Si preferís tranquilidad, la montaña es vuestro sitio: pueblos pequeños, caminos sin gente y casas con chimenea. Si buscáis movimiento, las ciudades catalanas tienen de sobra para llenar un fin de semana. Descubrid las mejores <strong>escapadas para parejas</strong> y sorprended a la vuestra con algo que no se olvide.</p><p><strong>Cataluña</strong> da para mucho en muy poco espacio. Elegid la próxima escapada en pareja y volved a enamoraros de un país que se recorre en dos horas de punta a punta.</p><p>Y si todavía no lo tenéis decidido, empezad por todas nuestras <a href=\"https://escapadesenparella.cat/es\">escapadas en pareja</a>: hay para cada época del año.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"title": "Escapadas románticas",
+					"subtitle": "84 escapadas románticas por Cataluña: cabañas en los árboles, hoteles con encanto y noches bajo las estrellas. Con precios y fotos nuestras.",
+					"seoTextHeader": "<p>Cataluña tiene mil sitios para una escapada romántica en pareja, y llevamos desde 2015 buscándolos. Aquí está nuestra selección: cabañas en los árboles, hoteles solo para adultos y habitaciones con el techo de cristal.</p>",
+					"slug": "escapadas-romanticas"
+				}
+			}
+		},
+		{
+			"collection": "categories",
+			"slug": "hotels-amb-encant",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Hoteles con encanto en Cataluña",
+					"subtitle": "Hoteles con encanto en Cataluña para una escapada en pareja: masías del siglo XVII, hoteles boutique y casas rurales. Con precios y fotos nuestras.",
+					"seoTextHeader": "<p>Pequeños hoteles con encanto en Cataluña para una escapada en pareja. En esta lista os recomendamos los hoteles románticos y los hoteles rurales con más encanto del país, uno por uno y con lo que cuesta dormir en cada sitio.</p>",
+					"slug": "hoteles-con-encanto",
+					"seoText": "<h2>Descubre los mejores hoteles con encanto de Cataluña</h2><p>En Cataluña, un hotel con encanto es sinónimo de dormir en un sitio con historia. Hay de todo: masías del siglo XVII reconvertidas, pequeños hoteles rurales de diez habitaciones y alojamientos pensados solo para parejas. Esta selección reúne los que más nos han gustado, en sitios donde el paisaje ya vale el viaje.</p><p>En <em>Escapades en Parella</em> os traemos una guía completa de los hoteles con encanto de Cataluña, para quien busca algo más que una cama. Encontraréis pequeños hoteles rurales, casas de pueblo restauradas y alojamientos rodeados de campo, viñedos o mar. De muchos os contamos también lo que cuesta la noche y cómo llegar.</p><h2>Pequeños hoteles con encanto para una escapada íntima</h2><p>Si lo que queréis es algo recogido, mirad los pequeños hoteles repartidos por toda Cataluña. Se distinguen por el trato cercano y por el cuidado en cada detalle: el desayuno, la chimenea, el jardín. Para una celebración o simplemente para desconectar, estos hoteles rurales con encanto son el refugio que buscáis.</p><p>De los Pirineos a la Costa Brava, Cataluña está llena de hoteles con encanto donde se duerme de otra manera. Aquí tenéis los que hemos visitado, para que encontréis el que mejor encaje con vuestro plan.</p><p>Encontraréis el resto de propuestas en la recopilación de <a href=\"https://escapadesenparella.cat/es\">escapadas en pareja</a> por Cataluña, con los precios y cómo llegar.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"title": "Hoteles con encanto en Cataluña",
+					"subtitle": "Hoteles con encanto en Cataluña para una escapada en pareja: masías del siglo XVII, hoteles boutique y casas rurales. Con precios y fotos nuestras.",
+					"seoTextHeader": "<p>Pequeños hoteles con encanto en Cataluña para una escapada en pareja. En esta lista os recomendamos los hoteles románticos y los hoteles rurales con más encanto del país, uno por uno y con lo que cuesta dormir en cada sitio.</p>",
+					"slug": "hoteles-con-encanto"
+				}
+			}
+		},
+		{
+			"collection": "categories",
+			"slug": "cabanyes-als-arbres",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Cabañas en Cataluña",
+					"subtitle": "Cabañas en Cataluña para dormir en pareja: cabañas en los árboles, con jacuzzi y chimenea. Con precios, fotos nuestras y cómo llegar.",
+					"seoTextHeader": "<p>Cabañas en los árboles, cabañas entre valles y, sobre todo, cabañas con mucho encanto para una escapada en pareja. En esta lista os recomendamos las mejores cabañas de Cataluña, con lo que cuesta cada noche.</p>",
+					"slug": "cabanas-cataluna",
+					"seoText": "<p>Dormir en una <strong>cabaña en los árboles</strong> es una experiencia de las que no se olvidan y, por si no lo sabíais, tiene unas cuantas ventajas. Aquí van algunas, por si os ayudan a decidiros a pasar una noche en una <strong>cabaña en Cataluña</strong>:</p><ol><li><p>Naturaleza de verdad: las <strong>cabañas en los árboles</strong> os dejan rodeados de bosque y de los animales que viven en él. Es una manera difícil de igualar de desconectar del ruido.</p></li><li><p>Distinto y memorable: desde subir por la escalera hasta despertaros entre las ramas, no se parece a nada que hayáis hecho antes.</p></li><li><p>Romántico: una cabaña en los árboles es un sitio íntimo, perfecto para una escapada en pareja. Despertar con vistas al bosque y pasar el día sin mirar el reloj es buena parte del plan.</p></li><li><p>Respetuoso con el entorno: las casas árbol y las <strong>cabañas entre valles</strong> suelen construirse con materiales sostenibles, así que la escapada deja poca huella.</p></li><li><p>Aventura: tienen ese punto de emoción que engancha a quien disfruta al aire libre, tanto si salís a caminar como si os quedáis en la terraza de la cabaña.</p></li></ol><p>En resumen, dormir en una <strong>cabaña en Cataluña</strong> junta naturaleza, intimidad y una noche que se recuerda. Es de esas escapadas que hay que hacer al menos una vez.</p><p>Encontraréis el resto de propuestas en la recopilación de <a href=\"https://escapadesenparella.cat/es\">escapadas en pareja</a> por Cataluña, con los precios y cómo llegar.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"title": "Cabañas en Cataluña",
+					"subtitle": "Cabañas en Cataluña para dormir en pareja: cabañas en los árboles, con jacuzzi y chimenea. Con precios, fotos nuestras y cómo llegar.",
+					"seoTextHeader": "<p>Cabañas en los árboles, cabañas entre valles y, sobre todo, cabañas con mucho encanto para una escapada en pareja. En esta lista os recomendamos las mejores cabañas de Cataluña, con lo que cuesta cada noche.</p>",
+					"slug": "cabanas-cataluna"
+				}
+			}
+		},
+		{
+			"collection": "categories",
+			"slug": "escapades-de-relax",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Escapadas de relax",
+					"subtitle": "Escapadas de relax en Cataluña: spas, balnearios y alojamientos donde el plan es no hacer nada. Con precios, fotos nuestras y cómo llegar.",
+					"seoTextHeader": "<p>Una escapada de relax no pide mucho: un sitio tranquilo, buena comida y tiempo para no hacer nada. Esta es nuestra selección de escapadas de relax por Cataluña, de balnearios a masías donde solo se oyen los pájaros.</p>",
+					"slug": "escapadas-relax",
+					"seoText": "<h2>Escapadas de relax en Cataluña</h2><p>Una <strong>escapada de relax</strong> no pide mucho: un sitio tranquilo, buena comida y tiempo para no hacer nada. En Cataluña hay para todos los gustos, de hoteles con spa en la costa a masías perdidas en la montaña.</p><h3>Hoteles para desconectar</h3><p>El <a href=\"https://escapadesenparella.cat/es/escapadas-relax/hotel-terradets-cellers\">Hotel Terradets</a>, en Cellers, es uno de nuestros sitios preferidos para bajar el ritmo en el Pallars Jussà; lo contamos en la <a href=\"https://escapadesenparella.cat/es/historias/escapada-hotel-terradets-pallars-jussa\">escapada al Hotel Terradets</a>. En la costa, el <a href=\"https://escapadesenparella.cat/es/escapadas-relax/glamping-camping-del-mar-malgrat\">glamping del Camping del Mar</a> os pone el mar a un paso de la tienda.</p><h3>Relax al aire libre</h3><p>Las <a href=\"https://escapadesenparella.cat/es/escapadas-relax/balsas-de-coll-de-nargo\">Balsas de Coll de Nargó</a>, en el Alt Urgell, son ideales para un baño de montaña; la <a href=\"https://escapadesenparella.cat/es/escapadas-relax/cala-estreta-palamos\">Cala Estreta</a>, en Palamós, es de las calas más tranquilas de la Costa Brava; y el <a href=\"https://escapadesenparella.cat/es/escapadas-relax/arboretum-masjoan-espinelves\">Arboretum Masjoan</a>, en Espinelves, es un bosque para pasear sin prisa.</p><p>Si buscáis más ideas, en la recopilación de <a href=\"https://escapadesenparella.cat/es\">escapadas en pareja</a> están todas las que hemos visitado, ordenadas por tipo y por zona.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"title": "Escapadas de relax",
+					"subtitle": "Escapadas de relax en Cataluña: spas, balnearios y alojamientos donde el plan es no hacer nada. Con precios, fotos nuestras y cómo llegar.",
+					"seoTextHeader": "<p>Una escapada de relax no pide mucho: un sitio tranquilo, buena comida y tiempo para no hacer nada. Esta es nuestra selección de escapadas de relax por Cataluña, de balnearios a masías donde solo se oyen los pájaros.</p>",
+					"slug": "escapadas-relax"
+				}
+			}
+		}
+	]
+}

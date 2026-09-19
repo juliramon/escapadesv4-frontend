@@ -1,0 +1,140 @@
+{
+	"generatedAt": "2026-09-19T15:49:25.845Z",
+	"note": "Cos en castellà de 6 fitxes, amb els enllaços interns ja apuntant a la versió castellana.",
+	"fields": [
+		{
+			"collection": "activities",
+			"slug": "llimiana-poble-encant-pallars-jussa",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "llimiana-pueblo-con-encanto",
+					"title": "Paseo con encanto por Llimiana",
+					"metaTitle": "Llimiana, un pueblo con encanto del Pallars Jussà",
+					"metaDescription": "Llimiana, en el Pallars Jussà: un pueblo de piedra con mucha historia y vistas impresionantes sobre el valle de la Noguera.",
+					"description": "<p><strong>Llimiana</strong> es un pueblo medieval del Pallars Jussà que conserva todo su encanto, sin haber sufrido grandes remodelaciones.</p><p>Es un buen ejemplo del románico catalán y un sitio perfecto para pasear entre su arquitectura sin prisa.</p><p>Entre lo que hay que ver están el mirador de Llimiana, la Cova Negra, la playa de Llimiana, el castillo, la ermita de Sant Andreu y la iglesia de Santa Maria. Una mezcla de historia, naturaleza y cultura que vale la pena si os escapáis al Pallars Jussà.</p>",
+					"reasons": "<ol><li><p><strong>Encanto rural</strong>: Llimiana engancha por su ambiente tranquilo y sus vistas, perfecto para una escapada de descanso.</p></li><li><p><strong>Patrimonio</strong>: edificios antiguos y calles empedradas, con la arquitectura tradicional bien conservada.</p></li><li><p><strong>Entorno</strong>: con los Pirineos de fondo y el valle de la Noguera Pallaresa a sus pies.</p></li><li><p><strong>Senderismo y aire libre</strong>: está bien situado para caminar, pescar o salir en piragua.</p></li><li><p><strong>Cultura y gastronomía</strong>: cocina tradicional catalana y vida de pueblo.</p></li></ol>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "llimiana-pueblo-con-encanto",
+					"title": "Paseo con encanto por Llimiana",
+					"metaTitle": "Llimiana, un pueblo con encanto del Pallars Jussà",
+					"metaDescription": "Llimiana, en el Pallars Jussà: un pueblo de piedra con mucha historia y vistas impresionantes sobre el valle de la Noguera."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "resturant-el-celler-argentona-maresme",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "restaurante-el-celler-dargentona",
+					"title": "Restaurante El Celler d'Argentona",
+					"metaTitle": "El Celler d'Argentona: cocina de mercado en el Maresme",
+					"metaDescription": "El Celler d'Argentona, en la villa de Argentona: cocina de mercado en una casa señorial del Maresme. Precio medio y qué pedir.",
+					"description": "<p>El Celler d'Argentona es uno de esos restaurantes que conviene tener apuntados si hacéis una escapada al Maresme. Está en la calle Bernat de Riudemeia, en el centro de Argentona, y el precio medio ronda los 45 € por persona.</p><h2>Cuándo podéis ir</h2><p>Abre solo a mediodía, de martes a domingo, y cierra los lunes. Está en el centro de Argentona, a cinco minutos a pie de la plaza de la Iglesia y del Museu del Càntir, así que se puede combinar con una vuelta por el pueblo antes de comer.</p><h3>Información práctica</h3><ul><li><strong>Mejor época:</strong> primavera, verano y otoño.</li><li><strong>Cuánto rato:</strong> contad unas 3 horas.</li></ul><h2>Qué hacer cerca</h2><p>Argentona está junto a Cabrera de Mar, donde podéis subir al <a href=\"https://escapadesenparella.cat/es/escapadas-culturales/castillo-de-burriac\">Castillo de Burriac</a> antes de comer, o alargar la sobremesa en <a href=\"https://escapadesenparella.cat/es/escapadas-gastronomicas/cals-frares-cabrera-de-mar\">Cals Frares</a>, un restaurante dentro de una masía del siglo XIII. Si queréis hacer noche, el <a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/hotel-boutique-la-mer-cabrera-de-mar\">hotel boutique La Mer</a> está a pocos minutos.</p><p>Recomendamos reservar antes de ir, sobre todo en fin de semana.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "restaurante-el-celler-dargentona",
+					"title": "Restaurante El Celler d'Argentona",
+					"metaTitle": "El Celler d'Argentona: cocina de mercado en el Maresme",
+					"metaDescription": "El Celler d'Argentona, en la villa de Argentona: cocina de mercado en una casa señorial del Maresme. Precio medio y qué pedir."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-urbisol",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-urbisol-calders",
+					"title": "Hotel Urbisol",
+					"metaTitle": "Hotel Urbisol, en Calders: spa y dos piscinas",
+					"metaDescription": "Hotel Urbisol, en Calders: spa con sauna e hidromasaje, dos piscinas y vistas a la montaña. Desde 84 € por persona y noche.",
+					"description": "El Hotel Urbisol está en el campo, en el pueblo de Urbisol. Tiene spa, 2 piscinas y habitaciones con aire acondicionado, TV de pantalla plana y vistas a la montaña.\n\nEl spa de esta casa rural incluye piscinas cubierta y exterior, sauna y bañera de hidromasaje. También hay gimnasio y se ofrece una variedad de masajes y tratamientos de belleza.\n\nLas habitaciones tienen parquet, baño privado con bañera de hidromasaje y servicio para preparar té y café.\n\nEl restaurante del Urbisol sirve cocina tradicional catalana con un punto moderno. También hay bar, donde tomar el aperitivo.\n\nEl hotel ofrece alquiler gratuito de bicicletas para recorrer los alrededores. El parque natural del Montseny está a 35 minutos en coche y el centro de Barcelona, a menos de una hora.<h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/bell-planso-bed-and-breakfast-moia\">Bell Plançó B&B</a>, a 7 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/castillo-de-la-popa-castellcir\">Castillo de la Popa</a>, a 13 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-culturales/castillo-de-centelles\">Castillo de Centelles</a>, a 16 km</li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "hotel-urbisol-calders",
+					"title": "Hotel Urbisol",
+					"metaTitle": "Hotel Urbisol, en Calders: spa y dos piscinas",
+					"metaDescription": "Hotel Urbisol, en Calders: spa con sauna e hidromasaje, dos piscinas y vistas a la montaña. Desde 84 € por persona y noche."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "jardins-cap-roig-calella-palafrugell-costa-brava",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "jardines-de-cap-roig",
+					"title": "Jardines de Cap Roig",
+					"metaTitle": "Jardines de Cap Roig: horarios, precio y qué ver",
+					"metaDescription": "Los Jardines de Cap Roig, en Calella de Palafrugell: uno de los jardines botánicos más bonitos del Mediterráneo, sobre el mar.",
+					"description": "<p>Los <strong>Jardines de Cap Roig</strong> están considerados uno de los jardines botánicos más destacados del Mediterráneo, donde la naturaleza, la historia, el arte y la cultura se juntan entre más de mil especies de plantas de todo el mundo y esculturas de artistas nacionales e internacionales.</p><p>Los jardines los crearon el matrimonio Woevodsky en 1927, y son un lugar de una belleza excepcional en la Costa Brava. Incluyen el icónico castillo, construido con la roca local, rica en hierro.</p><p>Los Jardines de Cap Roig son también el escenario del Festival Jardins de Cap Roig, un festival de música de verano, y durante todo el año ofrecen visitas guiadas y actividades pensadas para familias, estudiantes y jubilados.</p><p>Hay más de 1.000 especies de plantas distintas, de todas las regiones del mundo con clima mediterráneo, y están junto al bonito pueblo costero de Calella de Palafrugell, en la provincia de Girona.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "jardines-de-cap-roig",
+					"title": "Jardines de Cap Roig",
+					"metaTitle": "Jardines de Cap Roig: horarios, precio y qué ver",
+					"metaDescription": "Los Jardines de Cap Roig, en Calella de Palafrugell: uno de los jardines botánicos más bonitos del Mediterráneo, sobre el mar."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "cala-sa-tuna-seixugador",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cala-sa-tuna-y-seixugador-begur",
+					"title": "Cala Sa Tuna y s'Eixugador",
+					"metaTitle": "Cala Sa Tuna y s'Eixugador, en Begur",
+					"metaDescription": "Cala Sa Tuna y s'Eixugador, en Begur: dos calas de pizarra con agua turquesa, resguardadas del viento. Cómo llegar y dónde aparcar.",
+					"description": "La Cala Sa Tuna, en el pueblo marinero de Begur (Baix Empordà) y uno de los puntos emblemáticos de la Costa Brava, es una playa natural de poco más de 80 metros de largo y 15 de ancho. Está resguardada del viento gracias a su posición entre la Punta d'es Plom y el Cap sa Sal. El color pizarra de la playa hace que el agua se tiña de turquesa. Por su parte, la Cala s'Eixugador tiene unos 50 metros de largo y 15 de ancho, y la suelen frecuentar quienes, como nosotros, huyen de la masificación de Sa Tuna.<h2>Cómo llegar</h2><p>Sa Tuna está en el término de Begur y tiene muy poco aparcamiento: vale más dejar el coche antes de bajar al pueblo y hacer los últimos metros a pie. De Sa Tuna a s'Eixugador se va por el camino de ronda, que sube hasta unos 37 metros sobre el mar y luego baja a la segunda cala. Lo contamos en <a href=\"https://escapadesenparella.cat/es/historias/cala-sa-tuna-seixugador-begur-costa-brava\">la escapada a las dos calas</a>.</p><h3>Información práctica</h3><ul><li><strong>Mejor época:</strong> primavera y verano.</li><li><strong>Cuánto rato:</strong> contad unas 4 horas.</li></ul><h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/hotel-cap-sa-sal-luxury-adults-only\">Hotel Cap Sa Sal Luxury Adults Only</a>, a menos de un kilómetro</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/hotel-es-cel-de-begur\">Hotel Es Cel de Begur</a>, a 2 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/hostalet-de-begur-adults-only\">Hostalet de Begur</a>, a 2 km</li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "cala-sa-tuna-y-seixugador-begur",
+					"title": "Cala Sa Tuna y s'Eixugador",
+					"metaTitle": "Cala Sa Tuna y s'Eixugador, en Begur",
+					"metaDescription": "Cala Sa Tuna y s'Eixugador, en Begur: dos calas de pizarra con agua turquesa, resguardadas del viento. Cómo llegar y dónde aparcar."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "mirador-solar-tristaina-andorra",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mirador-solar-de-tristaina",
+					"title": "Mirador solar de Tristaina",
+					"metaTitle": "Mirador solar de Tristaina: cómo llegar y precios",
+					"metaDescription": "El Mirador Solar de Tristaina, en Ordino: un observatorio circular a más de 2.600 metros, con los lagos a los pies.",
+					"description": "<p>La escapada al <strong>Mirador de Tristaina</strong>, en el pico de Peyreguils, a 2.701 metros de altitud y a pocos metros de la frontera entre Andorra y Francia, empieza en el aparcamiento de la estación de esquí de Ordino Arcalís.<br><br>El Mirador Solar de Tristaina lo crearon Joan Viladomat, el arquitecto Toni Riberaygua, el ingeniero civil Sergi Riba y el ingeniero de estructuras Lluís Moya. Como curiosidad, este reloj consta de una esfera metálica en suspensión de 25 metros de diámetro y 1,25 metros de ancho, con una vista magnífica de los lagos de Tristaina y del valle de Ordino.<br><br>La ruta, de unas 3 horas, descubre los Lagos de Tristaina y un paisaje impresionante. Son 3: el estanque primero, el del medio y el de más arriba.<br><br>Desde el Mirador Solar de Tristaina se ve el Pic d'Arcalís, también conocido como la Montaña Solar, donde se produce un fenómeno natural extraordinario una vez al año: cada 7 de agosto, a las 7:37 de la mañana y desde un punto exacto del pico, el sol es visible durante tres minutos a través de un gran agujero entre las rocas.<br><br>Aparte de hacer la ruta a pie, se puede subir en telecabina y telesilla. Solo funcionan del 7 de junio al 2 de noviembre, que es cuando el mirador está abierto al público; a partir de esa fecha queda cerrado.<br><br>Los precios del telecabina y del telesilla varían según el año y la época, entre 20 y 22 € por persona (incluye los dos forfaits de acceso).</p>",
+					"reasons": "<ul><li><p><strong>Vistas espectaculares de los Pirineos:</strong> desde el Mirador Solar de Tristaina se ven los valles de Ordino y los tres lagos glaciares. Es un sitio inmejorable para entender la escala del Pirineo.</p></li><li><p><strong>Para quien disfruta del campo:</strong> el camino hasta el mirador es un paseo entre montañas, aire limpio y silencio.</p></li><li><p><strong>Un mirador con su porqué:</strong> su forma de reloj solar no es casual: habla del paso del tiempo y de la relación con el entorno. La puesta de sol desde allí es otra cosa.</p></li><li><p><strong>Fácil de alcanzar:</strong> pese a estar rodeado de montañas, el acceso es sencillo. Se llega en coche hasta el aparcamiento de Arcalís y luego se camina un rato o se sube en telecabina y telesilla.</p></li><li><p><strong>Un plan completo en Andorra:</strong> la visita se puede combinar con Ordino, con la gastronomía andorrana o con un spa.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "mirador-solar-de-tristaina",
+					"title": "Mirador solar de Tristaina",
+					"metaTitle": "Mirador solar de Tristaina: cómo llegar y precios",
+					"metaDescription": "El Mirador Solar de Tristaina, en Ordino: un observatorio circular a más de 2.600 metros, con los lagos a los pies."
+				}
+			}
+		}
+	]
+}

@@ -7,6 +7,7 @@ import Footer from "../components/global/Footer";
 import MobileAnchorAd from "../components/ads/MobileAnchorAd";
 import HomeFaq from "../components/homepage/HomeFaq";
 import HomeSeoText from "../components/homepage/HomeSeoText";
+import { useT } from "../i18n/strings";
 import LocalBusinessRichSnippet from "../components/richsnippets/LocalBusinessRichSnippet";
 import { getPicturesBySeason } from "../utils/helpers";
 import { pickFields, toEditorialCard, toListingCard } from "../utils/listingProps";
@@ -39,6 +40,7 @@ const Homepage = (props) => {
 		},
 	};
 
+	const t = useT();
 	const currentDate = new Date();
 	const slideImage = getPicturesBySeason(currentDate, firstSlidePictures);
 
@@ -46,8 +48,8 @@ const Homepage = (props) => {
 		<>
 			{/* Browser metas  */}
 			<GlobalMetas
-				title="Escapades en parella: experiències i allotjaments memorables"
-				description="Descobreix centenars d’escapades en parella verificades: cabanes als arbres, hotels amb encant i experiències. Amb preus i fotos nostres."
+				title={t("home.metaTitle")}
+				description={t("home.metaDescription")}
 				url="https://escapadesenparella.cat"
 				image={slideImage.picture_raw}
 				canonical="https://escapadesenparella.cat"

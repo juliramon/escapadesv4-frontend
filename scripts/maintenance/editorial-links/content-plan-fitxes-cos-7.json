@@ -1,0 +1,142 @@
+{
+	"generatedAt": "2026-09-19T11:43:46.718Z",
+	"note": "Cos en castellà de 6 fitxes, amb els enllaços interns ja apuntant a la versió castellana.",
+	"fields": [
+		{
+			"collection": "places",
+			"slug": "mas-pla-solius",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mas-pla-solius",
+					"title": "Mas Pla",
+					"metaTitle": "Mas Pla: masía del siglo XVII en Santa Cristina d'Aro",
+					"metaDescription": "Mas Pla, en Santa Cristina d'Aro: una masía del siglo XVII convertida en hostal y restaurante, en el interior de la Costa Brava.",
+					"description": "El Mas Pla data del siglo XVII. Es una casa de labranza en la zona protegida de interés natural de Solius, en la Costa Brava, dentro del municipio de Santa Cristina d'Aro. La masía, hoy convertida en restaurante y hostal, conserva las características típicas de la masía catalana y está en pleno entorno rural, pero cerca de zonas turísticas con actividades para todos.<h2>Dónde está</h2><p>Una casa de labranza del siglo XVII en Santa Maria de Solius, dentro del espacio protegido de Solius y a un cuarto de hora de las playas de la Costa Brava. Es un hostal rural tranquilo, bueno para hacer noche si queréis dormir en el interior y bajar al mar durante el día. Lo contamos en <a href=\"https://escapadesenparella.cat/es/historias/mas-pla-hostal-rural-solius\">la escapada al Mas Pla</a>.</p><h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/hotel-mas-tapiolas-suits-natura\">Hotel Mas Tapiolas Suits Natura</a>, a menos de un kilómetro</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/seacling-costa-brava-bici-acuatica\">Seacling Costa Brava</a>, a 7 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/via-ferrata-cala-del-moli\">Vía ferrata de la Cala del Molí</a>, a 8 km</li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "mas-pla-solius",
+					"title": "Mas Pla",
+					"metaTitle": "Mas Pla: masía del siglo XVII en Santa Cristina d'Aro",
+					"metaDescription": "Mas Pla, en Santa Cristina d'Aro: una masía del siglo XVII convertida en hostal y restaurante, en el interior de la Costa Brava."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "les-coves-meravelles-benifallet",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cuevas-meravelles-benifallet",
+					"title": "Las Cuevas Meravelles de Benifallet",
+					"metaTitle": "Cuevas Meravelles de Benifallet: horarios y visita",
+					"metaDescription": "Las Cuevas Meravelles, en Benifallet: estalactitas, estalagmitas y galerías junto al Ebro. Horarios, precio y cómo llegar.",
+					"description": "<p>Las Cuevas Meravelles están a unos 4 kilómetros del centro de Benifallet. Las descubrió el Grup d'Investigacions Espeleològiques (GIE) del Centre Excursionista de Gràcia en las primaveras de 1967 y 1968, durante una campaña en la Sierra de Cardó. Desde 2021, las Cuevas de Benifallet están declaradas Bien Cultural de Interés Local.</p><p>Las Cuevas Meravelles forman el conjunto de cuevas de Benifallet: la Cova Meravelles y la Cova del Dos.<br><br>En la Cova del Dos se aprecian restos históricos (reproducciones) del Neolítico y también de la Batalla del Ebro, porque durante la guerra la gente del pueblo se refugió allí; por eso es una de las cuevas con más modificaciones hechas por el hombre.<br><br>La Cova Meravelles es la más impresionante de las dos, y dentro se visitan tres salas: la Sala de los Lápices, la Sala del Anfiteatro y la Sala de la Música. Hay abundantes estalactitas, estalagmitas, columnas gigantescas, coladas, macarrones y un buen número de excéntricas.</p><p>Las visitas son siempre guiadas y duran unos 45 minutos.</p>",
+					"reasons": "<ul><li><p>Espectáculo natural bajo tierra: las Cuevas Meravelles de Benifallet tienen un conjunto impresionante de estalactitas y estalagmitas.</p></li><li><p>Aventura y misterio: entrar en estas cuevas es como meterse en un mundo aparte, perfecto para una escapada distinta.</p></li><li><p>Visitas guiadas: explican la geología y la historia de las cuevas, así que se sale sabiendo más de lo que se entró.</p></li><li><p>El Ebro al lado: después de la visita podéis pasear junto al río y ver Benifallet con calma.</p></li><li><p>Gastronomía local: la zona tiene cocina tradicional y vinos que completan bien el día.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "cuevas-meravelles-benifallet",
+					"title": "Las Cuevas Meravelles de Benifallet",
+					"metaTitle": "Cuevas Meravelles de Benifallet: horarios y visita",
+					"metaDescription": "Las Cuevas Meravelles, en Benifallet: estalactitas, estalagmitas y galerías junto al Ebro. Horarios, precio y cómo llegar."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-cap-sa-sal-luxury-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-cap-sa-sal-luxury-adults-only",
+					"title": "Hotel Cap Sa Sal Luxury Adults Only",
+					"metaTitle": "Cap Sa Sal: lujo adults only en Begur",
+					"metaDescription": "Hotel Cap Sa Sal, adults only en Begur: jardín, piscina exterior y vistas sobre el Baix Empordà. Escapada romántica en la Costa Brava.",
+					"description": "El Hotel Cap Sa Sal Luxury Adults Only está en Begur, en el Baix Empordà. Tiene jardín y piscina exterior de temporada. Es un hotel de 4 estrellas, con terraza y habitaciones con aire acondicionado, wifi gratuito y baño privado.\n\nTodas las habitaciones tienen TV de pantalla plana y cafetera. Algunas también tienen cocina equipada con microondas y lavavajillas. Además, incluyen armario y hervidor de agua. Algunas tienen balcón con vistas al Mediterráneo.\n\nEl Hotel Cap Sa Sal sirve cada día un desayuno continental.\n\nPlatja d'Aro está a 32 km. El aeropuerto más cercano, el de Girona-Costa Brava, está a 62 km.<h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/cala-sa-tuna-y-seixugador-begur\">Cala Sa Tuna y s'Eixugador</a>, a menos de un kilómetro</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/hotel-es-cel-de-begur\">Hotel Es Cel de Begur</a>, a 2 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/hostalet-de-begur-adults-only\">Hostalet de Begur</a>, a 2 km</li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "hotel-cap-sa-sal-luxury-adults-only",
+					"title": "Hotel Cap Sa Sal Luxury Adults Only",
+					"metaTitle": "Cap Sa Sal: lujo adults only en Begur",
+					"metaDescription": "Hotel Cap Sa Sal, adults only en Begur: jardín, piscina exterior y vistas sobre el Baix Empordà. Escapada romántica en la Costa Brava."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "casa-de-os-bru-isil-pirineus",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "casa-del-oso-pardo-isil",
+					"title": "La Casa del Oso Pardo de los Pirineos",
+					"metaTitle": "La Casa del Oso Pardo, en Isil",
+					"metaDescription": "La Casa del Oso Pardo, en Isil: un espacio para conocer al oso de los Pirineos y su conservación, en el Pallars Sobirà.",
+					"description": "<p>La Casa del Oso Pardo, inaugurada en 2012, es un espacio de divulgación en torno al oso, una de las especies más emblemáticas del Pirineo. Nace con el objetivo de concienciar sobre la importancia de conservarlo y de entender a fondo su relación con los habitantes de la zona y con el entorno.<br><br>El recorrido pasa por distintos escenarios recreados, con paneles informativos, vídeos y objetos con los que se puede interactuar para conocer mejor al oso, su entorno y la cultura que lo rodea.<br><br>Si queréis visitarla, conviene consultar su web para confirmar fechas y horarios de apertura.<br><br>La Casa del Oso Pardo es un proyecto de la Associació Casa de l'Ós Bru dels Pirineus, formada por la EMD de Isil y Alòs y la Fundación Oso Pardo, con el apoyo de la Generalitat de Catalunya.</p>",
+					"reasons": "<ul><li><p><strong>La fauna de aquí</strong>: la Casa del Oso Pardo de Isil permite conocer a fondo al oso pardo de los Pirineos, su hábitat y los trabajos de conservación.</p></li><li><p><strong>Educativa y entretenida</strong>: la visita incluye exposiciones interactivas y material audiovisual, así que se aprende sin que se haga largo.</p></li><li><p><strong>En pleno Pirineo</strong>: está en un entorno precioso, perfecto para combinar la visita con un paseo por el Alt Pirineu.</p></li><li><p><strong>Cultura local</strong>: Isil tiene una historia interesante y arquitectura tradicional que merece una vuelta.</p></li><li><p><strong>Un plan distinto</strong>: pasar el día descubriendo esto en pareja es una manera diferente de conocer el Pirineo.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "casa-del-oso-pardo-isil",
+					"title": "La Casa del Oso Pardo de los Pirineos",
+					"metaTitle": "La Casa del Oso Pardo, en Isil",
+					"metaDescription": "La Casa del Oso Pardo, en Isil: un espacio para conocer al oso de los Pirineos y su conservación, en el Pallars Sobirà."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "santuari-dels-angels-sant-marti-vell-girones",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "santuario-dels-angels",
+					"title": "Santuario dels Àngels",
+					"metaTitle": "Santuario dels Àngels, el mirador del Gironès",
+					"metaDescription": "El Santuario dels Àngels, conocido como el mirador del Gironès: vistas de la llanura y el mar. Cómo llegar y cuándo ir.",
+					"description": "<p>En uno de los puntos más altos del macizo de las Gavarres está este famoso santuario dedicado a la Mare de Déu dels Àngels, construido por los propios habitantes del pueblo medieval de Sant Martí Vell.</p><p>Sus orígenes se remontan al año 1409. El santuario se amplió en el siglo XVII y tiene una nave central y dos capillas laterales. Además, ofrece una panorámica espectacular del llano de Girona, el Baix Empordà, las Islas Medas, los Pirineos, el Montseny y las Guilleries.</p><p>El Santuario dels Àngels también tiene hospedería y servicio de restaurante y bar, que admite perros.<br><br>Como curiosidad: el 8 de agosto de 1958, Salvador Dalí y Gala se casaron en este santuario.</p>",
+					"reasons": "<ul><li><p>Vistas panorámicas sobre el Gironès y la Costa Brava desde lo alto del santuario.</p></li><li><p>Un sitio para desconectar y disfrutar de la tranquilidad en plena naturaleza.</p></li><li><p>Un edificio con historia, entre la devoción y la tradición de la zona.</p></li><li><p>Se puede combinar la excursión con una comida en el restaurante del santuario.</p></li><li><p>Es un buen punto de partida para rutas de senderismo por las Gavarres.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "santuario-dels-angels",
+					"title": "Santuario dels Àngels",
+					"metaTitle": "Santuario dels Àngels, el mirador del Gironès",
+					"metaDescription": "El Santuario dels Àngels, conocido como el mirador del Gironès: vistas de la llanura y el mar. Cómo llegar y cuándo ir."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "santuari-cabrera-collsacabra-montcabrer-osona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "santuario-de-cabrera-collsacabra",
+					"title": "Santuario de Cabrera, en el Collsacabra",
+					"metaTitle": "Santuario de Cabrera: historia y cómo llegar",
+					"metaDescription": "El Santuario de Cabrera, en el Collsacabra: su historia, cómo llegar y las vistas sobre el pantano de Sau desde arriba.",
+					"description": "<p>El <strong>Santuario de Cabrera</strong>, en el Montcabrer (Osona), es un sitio especial que no hay que perderse si buscáis salir de la ciudad y disfrutar del campo y de la tranquilidad. Aquí os contamos su historia, dónde está y cómo llegar.</p><h3>Historia del Santuario de Cabrera</h3><p>El Santuario de Cabrera tiene una historia larga que se remonta al siglo XVII. El santuario actual es de alrededor de 1622-1641, porque el anterior lo destruyó un terremoto en 1428.</p><p>Durante los siglos XVII y XVIII fue un lugar de peregrinación importante para la gente de la zona, que subía a venerar la imagen de la Virgen de Cabrera. También fue importante durante la Guerra Civil española, porque sirvió de refugio a los habitantes de los alrededores.</p><h3>Dónde está</h3><p>El Santuario de Cabrera está en la comarca de Osona, en la provincia de Barcelona, a unos 1.232 metros de altitud, en lo alto de la montaña de Montcabrer. Desde ahí arriba se ve la sierra de Cabrera y toda la comarca.</p><h3>Cómo llegar</h3><p>Se puede ir por la carretera BV-4601, que une Vic con Tavèrnoles. Desde la carretera se siguen las indicaciones hasta Montcabrer y se deja el coche en la zona de aparcamiento habilitada.</p><p>Desde allí se sube caminando. La caminata dura aproximadamente una hora y tiene algún tramo empinado, pero las vistas y la tranquilidad compensan.</p><p>El Santuario de Cabrera es un buen plan para salir de la ciudad: historia, vistas sobre la sierra de Cabrera y servicio de restauración en la casa anexa de los ermitaños los fines de semana y festivos.</p>",
+					"reasons": "<ul><li><p>Vistas espectaculares desde el Montcabrer</p></li><li><p>Una excursión agradable y de poca dificultad</p></li><li><p>Un santuario con mucha historia</p></li><li><p>Arriba hay servicio de bar-restaurante</p></li><li><p>Un paraje que impresiona</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "santuario-de-cabrera-collsacabra",
+					"title": "Santuario de Cabrera, en el Collsacabra",
+					"metaTitle": "Santuario de Cabrera: historia y cómo llegar",
+					"metaDescription": "El Santuario de Cabrera, en el Collsacabra: su historia, cómo llegar y las vistas sobre el pantano de Sau desde arriba."
+				}
+			}
+		}
+	]
+}

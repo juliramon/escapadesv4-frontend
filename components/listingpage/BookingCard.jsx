@@ -1,4 +1,5 @@
 import ListingDiscount from "./ListingDiscount";
+import { useT } from "../../i18n/strings";
 import {
 	hasLink,
 	isAffiliateUrl,
@@ -68,6 +69,7 @@ const BookingCard = ({
 	discountCode,
 	discountInfo,
 }) => {
+	const t = useT();
 	const isPlace = type === "place";
 	// El camp es feia servir tal com s'havia escrit, i "www.exemple.cat" sense
 	// esquema el navegador el llegeix com a camí relatiu: cinc fitxes
@@ -198,8 +200,7 @@ const BookingCard = ({
 
 				{price ? (
 					<p className="booking-card__disclaimer">
-						Preu orientatiu calculat per nosaltres. Pot variar
-						segons les dates i no sempre està actualitzat.
+						{t("booking.disclaimer")}
 					</p>
 				) : null}
 

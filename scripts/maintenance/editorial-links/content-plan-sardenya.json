@@ -1,0 +1,20 @@
+{
+	"generatedAt": "2026-09-18T22:19:54.636Z",
+	"note": "Punt 5 de l'informe: la pàgina de Sardenya és la segona més vista del web (11.904 impressions en 3 mesos, posició 7,9) i en treu un 0,9% de CTR. El títol repetia quatre vegades la mateixa paraula i la descripció acabava amb «Fes clic!».",
+	"fields": [
+		{
+			"collection": "tripentries",
+			"slug": "que-visitar-a-sardenya-vacances-a-sardenya",
+			"field": "metaTitle",
+			"value": "Sardenya en una setmana: la ruta dia a dia i les platges",
+			"expect": "Què fer a Sardenya? • Viatge a Sardenya"
+		},
+		{
+			"collection": "tripentries",
+			"slug": "que-visitar-a-sardenya-vacances-a-sardenya",
+			"field": "metaDescription",
+			"value": "Vam recórrer Sardenya en una setmana: la Costa Esmeralda, l'arxipèlag de la Maddalena, Orgosolo i l'Alguer. La ruta dia a dia i les platges.",
+			"expect": "Què fer a Sardenya? Aneu de vacances a Sardenya i no sabeu què visitar a Sardenya? Us expliquem com gaudir al màxim del vostre viatge a Sardenya! Fes clic!"
+		}
+	]
+}

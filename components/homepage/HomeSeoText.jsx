@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import ListingsTextareaFooter from "../listings/ListingsTextareaFooter";
 
 /**
@@ -11,6 +12,10 @@ import ListingsTextareaFooter from "../listings/ListingsTextareaFooter";
  *
  * Viu al codi i no a la base de dades perquè la portada no té cap camp de
  * text propi al panell; el dia que en tingui, això es podrà moure allà.
+ *
+ * La versió castellana no és una traducció literal: els enllaços apunten als
+ * slugs castellans i el text fa servir els termes que la gent busca de debò
+ * en castellà, que és tot el sentit de tenir-la.
  */
 const HOME_SEO_TEXT = `
 <h2>Escapades en parella a Catalunya: com triar la vostra</h2>
@@ -25,13 +30,29 @@ const HOME_SEO_TEXT = `
 <p>Des del 2015 recorrem Catalunya buscant llocs per a dos. Cada fitxa d'<a href="/allotjaments">allotjament</a> i d'<a href="/activitats">experiència</a> porta el preu, com arribar-hi i què hi ha a prop, i les <a href="/histories">històries</a> expliquen com va anar cada escapada, amb les nostres fotos. Si voleu anar directament al gra, a les <a href="/llistes">llistes</a> hi ha les idees ja triades per temporada i per tema.</p>
 `;
 
-const HomeSeoText = () => (
-	<ListingsTextareaFooter
-		textareaFooter={HOME_SEO_TEXT}
-		collapsible
-		className="seo-block--centered"
-	/>
-);
+const HOME_SEO_TEXT_ES = `
+<h2>Escapadas en pareja por Cataluña: cómo elegir la vuestra</h2>
+<p>Una escapada en pareja es un paréntesis corto —una noche, dos— en un sitio donde el tiempo pase de otra manera. En Cataluña se pueden hacer todo el año sin conducir mucho: en dos horas se pasa de las calas de la <a href="/es/destinos/escapadas-costa-brava">Costa Brava</a> a las cimas de los <a href="/es/destinos/escapadas-pirineos">Pirineos</a>, y por el medio hay pueblos de piedra, masías reconvertidas y mesas donde vale la pena sentarse sin mirar el reloj.</p>
+<h3>Según el plan que tengáis en la cabeza</h3>
+<p>Si lo que queréis es no hacer nada, mirad las <a href="/es/escapadas-relax">escapadas de relax</a> y los <a href="/es/hoteles-con-encanto">hoteles con encanto</a>. Si sois de caminar, las <a href="/es/escapadas-aventura">escapadas de aventura</a> y las <a href="/es/rutas-y-excursiones">rutas y excursiones</a>. Si el viaje gira alrededor de la mesa, las <a href="/es/escapadas-gastronomicas">gastronómicas</a>. Y si buscáis la noche especial, un aniversario o una sorpresa, las <a href="/es/escapadas-romanticas">escapadas románticas</a>, con <a href="/es/cabanas-cataluna">cabañas en los árboles</a>, <a href="/es/apartamentos-para-parejas">apartamentos para dos</a> y <a href="/es/casas-rurales">casas rurales</a>.</p>
+<h3>Según adónde queráis ir</h3>
+<p>Tenemos el país repartido en catorce <a href="/es/destinos">destinos</a>, con las fichas de cada zona: del <a href="/es/destinos/escapadas-montseny">Montseny</a> y <a href="/es/destinos/escapadas-osona">Osona</a>, a un paso de casa, a las <a href="/es/destinos/escapadas-tierras-del-ebro">Tierras del Ebro</a>, la <a href="/es/destinos/escapadas-garrotxa">Garrotxa</a> o el <a href="/es/destinos/escapadas-bergueda">Berguedà</a>. Si salís de Barcelona y tenéis pocas horas, el <a href="/es/destinos/escapadas-maresme">Maresme</a> y el <a href="/es/destinos/escapadas-penedes">Penedès</a> se hacen en una mañana.</p>
+<h3>Según la época</h3>
+<p>La primavera y el otoño son las mejores épocas para casi todo: hay menos gente, los precios bajan y los caminos se andan bien. El verano es para las calas y para los alojamientos con piscina; el invierno, para la nieve, las <a href="/es/escapadas-invierno">escapadas de invierno</a> y las casas con chimenea. Y los fines de semana largos son la temporada alta de verdad: reservad con tiempo.</p>
+<h3>Qué encontraréis aquí</h3>
+<p>Desde 2015 recorremos Cataluña buscando sitios para dos. Cada ficha de <a href="/es/alojamientos">alojamiento</a> y de <a href="/es/actividades">experiencia</a> lleva el precio, cómo llegar y qué hay cerca, y las <a href="/es/historias">historias</a> cuentan cómo fue cada escapada, con nuestras fotos. Si queréis ir directamente al grano, en las <a href="/es/listas">listas</a> están las ideas ya elegidas por temporada y por tema.</p>
+`;
 
-export { HOME_SEO_TEXT };
+const HomeSeoText = () => {
+	const { locale } = useRouter();
+	return (
+		<ListingsTextareaFooter
+			textareaFooter={locale === "es" ? HOME_SEO_TEXT_ES : HOME_SEO_TEXT}
+			collapsible
+			className="seo-block--centered"
+		/>
+	);
+};
+
+export { HOME_SEO_TEXT, HOME_SEO_TEXT_ES };
 export default HomeSeoText;

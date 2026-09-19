@@ -1,4 +1,14 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
+import {
+	DEFAULT_LOCALE,
+	FIELDS,
+	LOCALES,
+	findBySlug,
+	localized,
+	slugFor,
+} from "../utils/i18n";
+import { useT } from "../i18n/strings";
 import { useEffect, useState } from "react";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
@@ -23,6 +33,11 @@ const CategoryPage = ({
 	numPages,
 	currentPage = 1,
 }) => {
+	const t = useT();
+	const { locale } = useRouter();
+	// El document sempre porta el slug català: el de la ruta actual és el de
+	// l'idioma, i és el que han de dur el «Veure'n més» i el fil d'Ariadna.
+	const slugActual = slugFor(categoryDetails, locale);
 	// L'estat surt de les props des del primer render. Abans `hasResults`
 	// començava a false i el servidor pintava esquelets en lloc de fitxes: a
 	// l'HTML que llegeix Google, les categories no enllaçaven cap escapada.
@@ -48,9 +63,9 @@ const CategoryPage = ({
 
 	// Enllaços a les categories germanes: donen sortida a qui no troba res
 	// aquí i connecten entre elles les 16 pàgines de categoria.
-	const siblingCategories = categoryGroupFor(categoryDetails?.slug);
+	const siblingCategories = categoryGroupFor(slugActual, locale);
 
-	const basePath = `/${categoryDetails.slug}`;
+	const basePath = `/${slugActual}`;
 	const pageUrl = `https://escapadesenparella.cat${pagePath(
 		basePath,
 		currentPage,
@@ -163,10 +178,10 @@ const CategoryPage = ({
 			/>
 			{/* Rich snippets */}
 			<BreadcrumbRichSnippet
-				page1Title="Inici"
+				page1Title={t("nav.home")}
 				page1Url="https://escapadesenparella.cat"
 				page2Title={categoryDetails.title}
-				page2Url={`https://escapadesenparella.cat/${categoryDetails.slug}`}
+				page2Url={`https://escapadesenparella.cat/${slugActual}`}
 			/>
 			<div id="contentList" className="category relative">
 				<NavigationBar />
@@ -174,9 +189,9 @@ const CategoryPage = ({
 					{/* Main column - Listings */}
 					<ListingHeader
 						title={categoryDetails.title}
-						subtitle={`Us proposem <strong class="lowercase">${totalItems} ${
+						subtitle={`${t("category.weSuggest")} <strong class="lowercase">${totalItems} ${
 							categoryDetails.title
-						}</strong> a Catalunya. ${
+						}</strong> ${t("category.inCatalonia")}. ${
 							categoryDetails.seoTextHeader || ""
 						}`}
 						sponsorData={sponsorBlock}
@@ -189,7 +204,7 @@ const CategoryPage = ({
 							<TaxonomyChips
 								heading={siblingCategories.heading}
 								items={siblingCategories.items}
-								activeSlug={categoryDetails.slug}
+								activeSlug={slugActual}
 								className="mb-5 md:mb-7"
 							/>
 							<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5">
@@ -218,10 +233,8 @@ const CategoryPage = ({
 								) : (
 									<div className="col-span-full">
 										<p className="text-center mx-auto text-lg">
-											No s'han trobat escapades per
-											aquesta categoria.
-											<br /> Torna-ho a provar més
-											endavant.
+											{t("category.empty")}
+											<br /> {t("category.tryLater")}
 										</p>
 									</div>
 								)}
@@ -236,7 +249,7 @@ const CategoryPage = ({
 							textareaFooter={categoryDetails.seoText}
 							relatedLinks={siblingCategories.items}
 							relatedLinksHeading={siblingCategories.heading}
-							activeSlug={categoryDetails.slug}
+							activeSlug={slugActual}
 						/>
 					) : null}
 				</main>
@@ -251,9 +264,16 @@ const CategoryPage = ({
 export async function getStaticPaths() {
 	const service = new ContentService();
 	const categories = await service.getCategories();
-	const paths = categories.map((categoria) => ({
-		params: { categoria: categoria.slug },
-	}));
+	// Amb `fallback: false` només existeix el que es genera aquí, i quan hi ha
+	// idiomes una ruta sense `locale` només val per al de per defecte: sense
+	// això, /es/hotels-amb-encant feia 404. Són setze categories per idioma,
+	// o sigui que generar-les totes no costa res.
+	const paths = LOCALES.flatMap((locale) =>
+		categories.map((categoria) => ({
+			params: { categoria: slugFor(categoria, locale) },
+			locale,
+		})),
+	);
 	return { paths, fallback: false };
 }
 
@@ -261,9 +281,15 @@ export async function getStaticPaths() {
  * Props d'una pàgina del llistat d'una categoria. També les fa servir
  * `pages/[categoria]/pagina/[pagina].js` per a la resta de tandes.
  */
-export const getCategoryPageProps = async (slug, page = 1) => {
+export const getCategoryPageProps = async (slug, page = 1, locale) => {
 	const service = new ContentService();
-	const categoryDetails = await service.getCategoryDetails(slug);
+	// En castellà el que arriba és el slug traduït (`escapadas-romanticas`),
+	// que l'API no coneix: es busca al catàleg sencer, que són setze
+	// documents i ja venen de la memòria intermèdia d'ISR.
+	const categoryDetails =
+		locale && locale !== DEFAULT_LOCALE
+			? findBySlug(await service.getCategories(), slug, locale)
+			: await service.getCategoryDetails(slug);
 
 	if (!categoryDetails) {
 		return { notFound: true, revalidate: 120 };
@@ -278,10 +304,19 @@ export const getCategoryPageProps = async (slug, page = 1) => {
 
 	// `allResults` arribava fins al client sencer (descripcions incloses) i
 	// aquesta pàgina no el feia servir enlloc: eren ~100 kB per pàgina.
+	// La traducció s'aplica aquí i no al JSX: així els components segueixen
+	// llegint `title` i `subtitle` sense saber res d'idiomes, i quan un
+	// document encara no està traduït cau al català tot sol.
 	return {
 		props: {
-			categoryDetails,
-			paginatedResults: (paginatedResults || []).map(toListingCard),
+			categoryDetails: localized(
+				categoryDetails,
+				locale,
+				FIELDS.category,
+			),
+			paginatedResults: (paginatedResults || [])
+				.map((item) => localized(item, locale, FIELDS.card))
+				.map(toListingCard),
 			totalItems,
 			numPages,
 			currentPage: page,
@@ -290,8 +325,8 @@ export const getCategoryPageProps = async (slug, page = 1) => {
 	};
 };
 
-export async function getStaticProps({ params }) {
-	return getCategoryPageProps(params.categoria);
+export async function getStaticProps({ params, locale }) {
+	return getCategoryPageProps(params.categoria, 1, locale);
 }
 
 export default CategoryPage;

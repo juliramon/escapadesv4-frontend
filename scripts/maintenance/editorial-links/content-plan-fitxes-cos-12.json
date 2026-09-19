@@ -1,0 +1,139 @@
+{
+	"generatedAt": "2026-09-19T15:51:23.274Z",
+	"note": "Cos en castellà de 6 fitxes, amb els enllaços interns ja apuntant a la versió castellana.",
+	"fields": [
+		{
+			"collection": "places",
+			"slug": "refugi-agulles-vicenc-barbe-montserrat",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "refugio-agulles-vicenc-barbe-montserrat",
+					"title": "Refugio Agulles Vicenç Barbé",
+					"metaTitle": "Refugio Agulles Vicenç Barbé, en Montserrat",
+					"metaDescription": "El Refugio Agulles Vicenç Barbé, en el Parque Natural de Montserrat: dormir entre las agujas de la montaña. Precio y reserva.",
+					"description": "<p>El <strong>Refugio Agulles Vicenç Barbé</strong> es un refugio de montaña a 900 metros de altitud, en el Parque Natural de la Montaña de Montserrat.</p><p>Tiene guarda, pero no dispone de teléfono ni radio.</p><p>Es de pago y ofrece servicios como mantas, comida y bebidas, calefacción, internet y lavabos.</p><p>Está en la zona de las Agulles, en la vertiente sur del macizo de Montserrat.</p><p>Es un sitio ideal para escalar y para caminar.</p><h2>Cómo funciona</h2><p>Refugio a 900 metros, dentro del Parque Natural de la Montaña de Montserrat, y base habitual para recorrer las Agulles. Abre de viernes a domingo y hay que reservar; se llega a pie desde El Bruc en poco más de una hora, y es un buen punto de partida para las vías y los caminos de la zona.</p><h3>Información práctica</h3><ul><li><strong>Mejor época:</strong> primavera y verano.</li></ul><h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/vila-caelus-masia-boutique-rubio\">Vila Caelus Masia Boutique</a>, a 17 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/barranquismo-estrets-de-castellar\">Barranquismo en Estrets de Castellar</a>, a 24 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/la-garriga-de-castelladral\">La Garriga de Castelladral</a>, a 29 km</li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "refugio-agulles-vicenc-barbe-montserrat",
+					"title": "Refugio Agulles Vicenç Barbé",
+					"metaTitle": "Refugio Agulles Vicenç Barbé, en Montserrat",
+					"metaDescription": "El Refugio Agulles Vicenç Barbé, en el Parque Natural de Montserrat: dormir entre las agujas de la montaña. Precio y reserva."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "hostal-montserrat-sant-celoni-montseny",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hostal-montserrat-sant-celoni",
+					"title": "Hostal Montserrat",
+					"metaTitle": "Hostal Montserrat, en pleno Montseny",
+					"metaDescription": "El Hostal Montserrat, en el corazón del Montseny: dónde está, cómo llegar y qué hacer cerca en una escapada de fin de semana.",
+					"description": "<p>Escapaos al Montseny y pasad unos días en el <strong>Hostal Montserrat</strong>. Está bien situado, tiene fácil acceso y está cerca de los principales puntos de interés de la zona. Aquí os contamos dónde está, cómo llegar y qué hacer cerca.</p><p>Encajado entre las montañas del Montseny, el <strong>Hostal Montserrat</strong> es un refugio tranquilo, a buena distancia del ruido de la ciudad y con tiendas, restaurantes y cafés a mano.</p><p>Para llegar podéis coger un tren o un autobús desde Barcelona hasta Sant Celoni, y desde allí subir hasta el hostal. Si vais en coche, el Hostal Montserrat ofrece aparcamiento gratuito.</p><p>Alrededor hay mucho que hacer: caminar por el Parque Natural del Montseny, salir a caballo o recorrer los pueblos de la zona. Y si os apetece algo de historia, Vic queda cerca y su casco antiguo medieval merece la visita.</p><p>El Hostal Montserrat tiene una historia larga, que se remonta a principios del siglo XX, cuando se estableció como destino para quienes buscaban descanso en la montaña. Hoy sigue recibiendo huéspedes con el mismo trato que lo ha convertido en una institución del Montseny durante más de un siglo.</p><p>Reservad vuestra estancia en el Hostal Montserrat y descubrid el <strong>Montseny</strong> de primera mano.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "hostal-montserrat-sant-celoni",
+					"title": "Hostal Montserrat",
+					"metaTitle": "Hostal Montserrat, en pleno Montseny",
+					"metaDescription": "El Hostal Montserrat, en el corazón del Montseny: dónde está, cómo llegar y qué hacer cerca en una escapada de fin de semana."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-trossos-del-priorat",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-trossos-del-priorat",
+					"title": "Hotel Trossos del Priorat",
+					"metaTitle": "Trossos del Priorat: solo adultos entre viñedos",
+					"metaDescription": "Hotel Trossos del Priorat, en Gratallops: solo para adultos, rodeado de sus propios viñedos. Desde 53 € por persona y noche.",
+					"description": "El Hotel Trossos del Priorat está rodeado de sus propios viñedos y es un oasis de calma donde la naturaleza y el vino se juntan. De líneas rectas pero muy bien adaptado al entorno, Trossos del Priorat combina hormigón, cemento y madera, creando espacios ideales para disfrutar del vino, del campo y de vosotros dos.\n\nEn Gratallops, el Hotel Trossos del Priorat está a 33 kilómetros de Salou, a 40 de Tarragona y a 32 del aeropuerto de Reus.\n\nLas 6 habitaciones son cálidas y muy acogedoras. Al entrar os espera una nota de Laura, la directora del hotel, junto con una botella de Lo Món, un tinto de aromas afrutados y notas acarameladas, que podéis disfrutar junto a la chimenea del hotel. Al otro lado de la habitación está la terraza con las viñas al alcance de la mano, un baño muy completo con todos los accesorios y una cama muy amplia donde se descansa de maravilla.\n\nEl Hotel Trossos del Priorat también ofrece wifi gratuito, bufé libre para desayunar, y cocina compartida y zona de barbacoa para el resto de comidas. También hay servicio de bar y una cesta con productos locales para comer."
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "hotel-trossos-del-priorat",
+					"title": "Hotel Trossos del Priorat",
+					"metaTitle": "Trossos del Priorat: solo adultos entre viñedos",
+					"metaDescription": "Hotel Trossos del Priorat, en Gratallops: solo para adultos, rodeado de sus propios viñedos. Desde 53 € por persona y noche."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "refugi-comes-rubio-massis-orri-pallars-sobira",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "refugio-comes-de-rubio-massis-de-lorri",
+					"title": "Refugio Comes de Rubió",
+					"metaTitle": "Refugio Comes de Rubió, en el macizo del Orri",
+					"metaDescription": "El Refugio Comes de Rubió, un refugio de alta montaña en el macizo del Orri, en el Pallars Sobirà. Precio y cómo llegar.",
+					"description": "<p>El Refugio Comes de Rubió es un refugio de montaña a 1.980 metros de altitud, en el Parque Natural del Alt Pirineu.</p><p>Ofrece a los visitantes:</p><ul><li><p>Literas: dispone de cincuenta.</p></li><li><p>Comida y bebida: tiene servicio de restauración.</p></li><li><p>Ducha y WC.</p></li><li><p>Radio de emergencia.</p></li><li><p>Chimenea para calentarse.</p></li><li><p>Abierto toda la temporada invernal con nieve: es el único refugio de alta montaña aislado del Pallars Sobirà que abre todo el invierno.</p></li></ul><p>El Refugio Comes de Rubió es un sitio ideal para quien camina por la montaña y busca dónde parar y dormir. Con estas instalaciones, se puede pasar la noche cómodamente en un entorno de alta montaña.</p><h2>Cómo llegar al Refugio Comes de Rubió</h2><p>Para llegar podéis seguir estas indicaciones:</p><ol><li><p>Coger la carretera del Port del Cantó (N-260), que va de Sort a La Seu d'Urgell, o al revés, hasta llegar a Rubió (1.687 m, el pueblo habitado más alto de Cataluña).</p></li><li><p>Desde Rubió, seguir la pista que sale del pueblo hacia el este, en dirección al refugio.</p></li><li><p>También se puede llegar desde el Port del Cantó, siguiendo la ruta señalizada con marcas amarillas y algunos hitos.</p></li><li><p>Otra opción es seguir la ruta que sale de Rubió hasta el refugio pasando por el Pic de l'Orri.</p></li></ol>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "refugio-comes-de-rubio-massis-de-lorri",
+					"title": "Refugio Comes de Rubió",
+					"metaTitle": "Refugio Comes de Rubió, en el macizo del Orri",
+					"metaDescription": "El Refugio Comes de Rubió, un refugio de alta montaña en el macizo del Orri, en el Pallars Sobirà. Precio y cómo llegar."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "vilanova-de-banat",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "vilanova-de-banat",
+					"title": "Vilanova de Banat",
+					"metaTitle": "Vilanova de Banat, un pueblo a 1.240 metros",
+					"metaDescription": "Vilanova de Banat, a 1.240 metros de altitud: un pueblo fundado en 1255 y uno de los rincones más desconocidos de la zona.",
+					"description": "<p>El pueblo de <strong>Vilanova de Banat</strong> fue fundado en 1255 por Galceran de Pinós, después de trasladar el castillo de Banat —documentado también como Banat de Sobirà— al cerro de Calbell. Al principio el municipio se llamó Calbell de Banat, pero en 1290 cambió al nombre actual.</p><p>Vilanova de Banat, a 1.240 m de altitud, ha sido siempre uno de los municipios más desconocidos de la comarca del Alt Urgell, incluso para la gente de La Seu d'Urgell. Pero vale la pena acercarse, no solo por el pueblo, sino por las vistas privilegiadas sobre la sierra del Cadí.</p>",
+					"reasons": "<ul><li><p>Vistas increíbles de la cara norte de la Sierra del Cadí</p></li><li><p>Vilanova de Banat es el inicio de varias rutas por el Parque Natural del Cadí-Moixeró</p></li><li><p>El pueblo tiene un patrimonio cultural e histórico notable</p></li><li><p>Gastronomía local y trato cercano</p></li><li><p>Una escapada que funciona en cualquier estación, para desconectar y respirar aire de Pirineo</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "vilanova-de-banat",
+					"title": "Vilanova de Banat",
+					"metaTitle": "Vilanova de Banat, un pueblo a 1.240 metros",
+					"metaDescription": "Vilanova de Banat, a 1.240 metros de altitud: un pueblo fundado en 1255 y uno de los rincones más desconocidos de la zona."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-la-freixera",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-la-freixera-solsona",
+					"title": "Hotel La Freixera",
+					"metaTitle": "La Freixera: hotel boutique del siglo XIV en Solsona",
+					"metaDescription": "Hotel La Freixera, en Solsona: un edificio del siglo XIV convertido en hotel boutique, con paredes de piedra y vigas de madera.",
+					"description": "La Freixera es un hotel boutique en un edificio del siglo XIV reconvertido, en Solsona, provincia de Lleida.\n\nEl Hotel La Freixera combina lo antiguo con lo nuevo: paredes de piedra, vigas y elementos de madera, parquet y TV por satélite. Ofrece habitaciones singulares con balcón, wifi gratuito y TV de pantalla plana con canales por satélite. Las habitaciones también tienen aire acondicionado, caja fuerte, minibar y baño privado con secador. Hay servicio de limpieza diario y cuna gratuita disponible.\n\nEl desayuno incluye productos locales y se sirve en el comedor. El alojamiento tiene un salón con butacas, chimenea, juegos de mesa y zona de lectura. También hay bar y comedor.\n\nOfrece aparcamiento bajo petición. Solsona tiene un casco antiguo bonito y la catedral gótica está a 3 minutos a pie de La Freixera."
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "hotel-la-freixera-solsona",
+					"title": "Hotel La Freixera",
+					"metaTitle": "La Freixera: hotel boutique del siglo XIV en Solsona",
+					"metaDescription": "Hotel La Freixera, en Solsona: un edificio del siglo XIV convertido en hotel boutique, con paredes de piedra y vigas de madera."
+				}
+			}
+		}
+	]
+}

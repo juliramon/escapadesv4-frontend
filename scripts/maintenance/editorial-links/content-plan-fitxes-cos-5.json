@@ -1,0 +1,141 @@
+{
+	"generatedAt": "2026-09-19T11:39:44.390Z",
+	"note": "Cos en castellà de 6 fitxes, amb els enllaços interns ja apuntant a la versió castellana.",
+	"fields": [
+		{
+			"collection": "places",
+			"slug": "cal-roget-turisme-rural-bergueda",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cal-roget-turismo-rural-gironella",
+					"title": "Cal Roget Turismo Rural",
+					"metaTitle": "Cal Roget: turismo rural en Gironella, el Berguedà",
+					"metaDescription": "Cal Roget, en Gironella: casa de turismo rural en el Berguedà, con el Pedraforca a media hora. Precio por noche y cómo llegar.",
+					"description": "<p><strong>Cal Roget</strong> está en Gironella, en el Berguedà, una comarca rica por la variedad de sus paisajes y por el patrimonio románico repartido por todo el territorio.</p><p>Es una pequeña masía formada por dos edificios, construidos directamente sobre roca.</p><p>La casa rural tiene dos plantas y capacidad para 12 personas.</p><p>En la planta principal están el comedor con chimenea y unas vistas excelentes a Gironella, la cocina (totalmente equipada con lavavajillas, vitrocerámica, microondas, cafetera, batidora y tostadora), un baño y una habitación doble.</p><p>En la planta inferior hay dos habitaciones dobles, una cuádruple con literas, una doble con literas, dos baños y una sala de ocio.</p><p>La casa tiene calefacción central de eficiencia energética A, con caldera centralizada de pellets, ropa de cama y toallas de baño (excepto para la piscina) y wifi gratuito.</p><p>Cal Roget es una casa acogedora, ideal para descansar y para familias con niños que busquen paz y tranquilidad.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "cal-roget-turismo-rural-gironella",
+					"title": "Cal Roget Turismo Rural",
+					"metaTitle": "Cal Roget: turismo rural en Gironella, el Berguedà",
+					"metaDescription": "Cal Roget, en Gironella: casa de turismo rural en el Berguedà, con el Pedraforca a media hora. Precio por noche y cómo llegar."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "balneario-font-vella-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "balneario-font-vella-adults-only",
+					"title": "Balneario Font Vella - Adults Only",
+					"metaTitle": "Balneario Font Vella: aguas termales solo para adultos",
+					"metaDescription": "Balneario Font Vella, adults only en Sant Hilari Sacalm: aguas termales y montaña en pleno corazón de las Guilleries.",
+					"description": "El Hotel Balneario Font Vella está en Sant Hilari Sacalm, localidad conocida por sus fuentes de montaña. El hotel ofrece acceso gratuito a un gran spa, wifi gratuito en todo el establecimiento y aparcamiento privado gratuito.\n\nLas habitaciones del Hotel Font Vella son elegantes y tienen TV por satélite y baño privado con bañera, albornoz y zapatillas.\n\nEl spa del hotel incluye saunas, pediluvio de piedras y servicio de masajes. También hay piscina cubierta, fuente de hielo y varias salas de vapor.\n\nEl restaurante Sacalm del hotel sirve platos modernos de cocina mediterránea, con una carta de vinos variada.\n\nEl Font Vella está en el macizo de las Guilleries, una zona muy popular para caminar. El aeropuerto de Girona está a 45 km.<h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/cabanas-en-los-arboles-sant-hilari-sacalm\">Cabañas en los árboles</a>, a 4 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-relax/arboretum-masjoan-espinelves\">Arboretum Masjoan</a>, a 8 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/casal-sagrat-cor-viladrau\">Casal Sagrat Cor</a>, a 10 km</li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "balneario-font-vella-adults-only",
+					"title": "Balneario Font Vella - Adults Only",
+					"metaTitle": "Balneario Font Vella: aguas termales solo para adultos",
+					"metaDescription": "Balneario Font Vella, adults only en Sant Hilari Sacalm: aguas termales y montaña en pleno corazón de las Guilleries."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-can-casi-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-can-casi-adults-only-regencos",
+					"title": "Hotel Can Casi Adults Only",
+					"metaTitle": "Hotel Can Casi: cuatro estrellas adults only en Regencós",
+					"metaDescription": "Hotel Can Casi, en Regencós: cuatro estrellas solo para adultos, con ocho habitaciones con terraza y vestidor. Desde 202 € por persona y noche.",
+					"description": "<p>El <strong>Hotel Can Casi Adults Only</strong> es un alojamiento de 4 estrellas en el pequeño pueblo de Regencós (Costa Brava), a solo 827 metros del centro del municipio.</p><p>Está a 3,6 km del Castillo de Begur y tiene 8 habitaciones, todas con terraza contigua y vestidor.</p><p>Si buscáis un alojamiento tranquilo y solo para adultos, el Hotel Can Casi es una excelente opción en la Costa Brava.</p><h2><strong>Qué instalaciones tiene el Hotel Can Casi Adults Only</strong></h2><p>El hotel ofrece a sus clientes:</p><ul><li><p>Piscina</p></li><li><p>Wifi gratuito</p></li><li><p>Aparcamiento gratuito</p></li><li><p>Spa</p></li><li><p>Minibar en las habitaciones</p></li><li><p>Secador de pelo</p></li><li><p>Artículos de aseo gratuitos</p></li><li><p>Televisor de pantalla plana</p></li><li><p>Aire acondicionado</p></li><li><p>Camas largas (más de 2 metros)</p></li><li><p>Habitaciones con vistas a la montaña, al jardín o a la piscina</p></li><li><p>Insonorización</p></li><li><p>Terraza contigua</p></li><li><p>Vestidor</p></li><li><p>Zona de estar con chimenea en las instalaciones comunes</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "hotel-can-casi-adults-only-regencos",
+					"title": "Hotel Can Casi Adults Only",
+					"metaTitle": "Hotel Can Casi: cuatro estrellas adults only en Regencós",
+					"metaDescription": "Hotel Can Casi, en Regencós: cuatro estrellas solo para adultos, con ocho habitaciones con terraza y vestidor. Desde 202 € por persona y noche."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-palauet-del-priorat",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-palauet-del-priorat",
+					"title": "Hotel Palauet del Priorat",
+					"metaTitle": "Palauet del Priorat, en Cornudella de Montsant",
+					"metaDescription": "Hotel Palauet del Priorat, en Cornudella de Montsant: alojamiento con encanto, cocina local y el Montsant al lado.",
+					"description": "<p>El Hotel Palauet del Priorat es un hotel con mucho encanto y estilo en Cornudella de Montsant. Tiene 7 habitaciones, cada una con un diseño distinto: 5 suites y 2 dobles. Todos los espacios están climatizados, y tanto los dormitorios como el salón o los baños tienen diseños exclusivos y acabados nobles.</p><p>La estancia se puede completar con experiencias gastronómicas, rutas en 4x4, enoturismo o visitas guiadas, entre otras.</p><p>El restaurante del hotel, Aura, ofrece menús de maridaje y degustación donde el producto más básico se combina con técnicas de cocción modernas, jugando con los sabores y las texturas.<br><br>Un hotel rodeado de paisaje en plena comarca del Priorat, a solo 40 km de Tarragona y a hora y media de Barcelona.</p>",
+					"reasons": "<p><strong>1. Un alojamiento con encanto e historia</strong><br>El <strong>Hotel Palauet del Priorat</strong> combina arquitectura modernista y detalles antiguos, y el resultado es un sitio acogedor para una escapada en pareja.</p><p><strong>2. Los vinos y los paisajes del Priorat</strong><br>En plena comarca del <strong>Priorat</strong>, el hotel es un buen punto de partida para visitar viñedos, bodegas y pueblos con encanto. Las rutas enológicas dejan catar los mejores vinos del territorio.</p><p><strong>3. Descanso rodeados de naturaleza</strong><br>Jardines, terrazas y habitaciones con vistas a la montaña, pensados para desconectar.</p><p><strong>4. Gastronomía local</strong><br>Cerca del hotel hay restaurantes de <strong>cocina prioratina</strong> que combinan producto de proximidad y recetas tradicionales con un punto moderno.</p><p><strong>5. Una escapada íntima</strong><br>El hotel es pequeño y recogido, perfecto para quien busque intimidad y un entorno que invite a quedarse.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "hotel-palauet-del-priorat",
+					"title": "Hotel Palauet del Priorat",
+					"metaTitle": "Palauet del Priorat, en Cornudella de Montsant",
+					"metaDescription": "Hotel Palauet del Priorat, en Cornudella de Montsant: alojamiento con encanto, cocina local y el Montsant al lado."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "barraca-entre-vinyes-alt-penedes",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "barraca-entre-vinedos-alt-penedes",
+					"title": "Barraca entre viñedos",
+					"metaTitle": "Barraca entre viñedos, en el Alt Penedès",
+					"metaDescription": "Barraca entre viñedos, en el Alt Penedès: dormir en una barraca de piedra rodeada de viña. Ideal para enoturismo en pareja.",
+					"description": "<p><strong>Barraca entre vinyes</strong> es una experiencia enoturística distinta, que junta tradición y naturaleza dentro de una barraca de piedra seca.</p><p>A finales del siglo XVIII, con la llegada de los arados de hierro, se generaron grandes cantidades de piedra seca, que se usaron para levantar barracas, pozos, hornos de cal y márgenes. Barraca entre Vinyes reivindica ese patrimonio con una recreación fiel a los patrones constructivos tradicionales.</p><p>Estos son algunos aspectos de la experiencia:</p><ul><li><p>Tradición: reivindica el patrimonio de las barracas de piedra seca con una recreación fiel a la construcción tradicional.</p></li></ul><ul><li><p>Experiencia: se puede pasar una noche en una barraca de piedra a pie de viña, con la tranquilidad y la belleza del paisaje. También se puede pasear entre las viñas y degustar vinos exclusivos y un desayuno servido en la misma barraca, en una cesta.</p></li><li><p>Sostenibilidad: el compromiso con el entorno es la esencia del proyecto. La experiencia es 100% sostenible, como acredita su adhesión a Biosphere, y trabajan en exclusiva con productos de proveedores locales de máxima calidad y producción responsable.</p></li></ul><p>Barraca entre Vinyes está en la Plana de Sant Pere, donde se juntan los términos de Aiguamúrcia, el Pla de Santa Maria y el Pont d'Armentera, en el Alt Penedès.</p><p>Además, se pueden ver otras barracas de viña por la zona, como las de la Ruta del Vino del Penedès.</p><h2><strong>Cómo llegar a Barraca entre Vinyes desde Barcelona</strong></h2><p>Para llegar desde Barcelona, lo más cómodo es:</p><ol><li><p>Coger la autopista AP-7 en dirección a Tarragona.</p></li><li><p>Salir de la autopista en la salida 31 (Vilafranca del Penedès).</p></li><li><p>Seguir por la carretera C-15 en dirección a Vilafranca del Penedès.</p></li><li><p>En Vilafranca, coger la carretera BP-2121 en dirección a Sant Martí Sarroca.</p></li><li><p>Seguir por la BP-2121 hasta la Plana de Sant Pere, donde se juntan los términos de Aiguamúrcia, el Pla de Santa Maria y el Pont d'Armentera.</p></li><li><p>Buscar la calle Font del Cuscó, número 16, en L'Arboçar, donde está Barraca entre Vinyes.</p></li></ol><p>Hay que tener en cuenta que las barracas de piedra seca no tienen electricidad ni agua corriente, pero sí iluminación led, una jarra de agua para el aseo personal y un WC seco y 100% biodegradable.</p><h2>¿Hay aparcamiento en Barraca entre Vinyes?</h2><p>Sí, hay aparcamiento gratuito para quienes se alojan en las barracas de piedra seca, así que podéis dejar el coche mientras disfrutáis de la experiencia a pie de viña.</p>",
+					"reasons": "<ul><li><p><strong>Un rincón entre viñas:</strong> Barraca entre Vinyes es una experiencia distinta, en medio de un paisaje vinícola, que funciona como refugio para unos días en pareja.</p></li><li><p><strong>Intimidad y desconexión:</strong> aislada de todo, la barraca permite desconectar de verdad. Baños de sol en la terraza privada, cenas a la luz de las velas y noches estrelladas rodeados de campo.</p></li><li><p><strong>Enoturismo de verdad:</strong> visitas guiadas a las viñas, catas y maridajes con producto local, para quien disfruta del vino y de la mesa.</p></li><li><p><strong>Comodidad y detalles:</strong> la barraca está equipada con lo necesario para que la estancia sea cómoda, con camas confortables y los detalles justos.</p></li><li><p><strong>Todo entra por los sentidos:</strong> el olor del campo, el canto de los pájaros y la vista de las viñas. Es de esas escapadas que se recuerdan por lo que se siente, no por lo que se hace.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "barraca-entre-vinedos-alt-penedes",
+					"title": "Barraca entre viñedos",
+					"metaTitle": "Barraca entre viñedos, en el Alt Penedès",
+					"metaDescription": "Barraca entre viñedos, en el Alt Penedès: dormir en una barraca de piedra rodeada de viña. Ideal para enoturismo en pareja."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "hostal-la-lolita-sant-marti-vell-girones",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hostal-la-lolita-sant-marti-vell",
+					"title": "Hostal La Lolita",
+					"metaTitle": "Hostal La Lolita: masía del XVIII solo para adultos",
+					"metaDescription": "Hostal La Lolita, en Sant Martí Vell: una masía del siglo XVIII, solo adultos y admite mascotas, entre el Gironès y el Baix Empordà.",
+					"description": "<p>El Hostal La Lolita es una masía centenaria del siglo XVIII con mucho encanto. Está en el precioso pueblo medieval de Sant Martí Vell, entre el Gironès y el Baix Empordà.</p><p>Es un hostal pensado para ofrecer calma y tranquilidad, con rincones muy cuidados tanto dentro de la casa como en el jardín, para disfrutar de la escapada en pareja.</p><p>Los desayunos se hacen mayoritariamente con producto de proximidad.</p><p>Entre los servicios destacan la piscina, las zonas comunes, los dos jardines exteriores y el desayuno.</p>",
+					"reasons": "<p>· <strong>Romanticismo rural</strong>: el Hostal La Lolita es un sitio tranquilo, ideal para desconectar y disfrutar de la compañía en pareja.</p><p>· <strong>Entorno natural</strong>: en Sant Martí Vell, rodeado de verde y de montaña, perfecto para pasear y explorar.</p><p>· <strong>Alojamiento con encanto</strong>: habitaciones acogedoras y decoración cuidada en cada rincón.</p><p>· <strong>Gastronomía local</strong>: cocina casera y auténtica con producto de la zona.</p><p>· <strong>Girona al lado</strong>: permite combinar una escapada rural con una visita a la ciudad.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "hostal-la-lolita-sant-marti-vell",
+					"title": "Hostal La Lolita",
+					"metaTitle": "Hostal La Lolita: masía del XVIII solo para adultos",
+					"metaDescription": "Hostal La Lolita, en Sant Martí Vell: una masía del siglo XVIII, solo adultos y admite mascotas, entre el Gironès y el Baix Empordà."
+				}
+			}
+		}
+	]
+}

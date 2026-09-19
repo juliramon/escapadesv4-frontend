@@ -1,4 +1,5 @@
 import { useState, useEffect, useContext } from "react";
+import { useT } from "../../i18n/strings";
 import { cloudinaryImage, cloudinaryResponsive } from "../../utils/cloudinary";
 import { withResponsiveImages } from "../../utils/contentImages";
 import { useRouter } from "next/router";
@@ -26,12 +27,21 @@ import {
 	listingPath,
 	listingUrl,
 } from "../../utils/listingRoutes";
+import { storyCanonicalUrl } from "../../utils/storyCanonicals";
+import { GETAWAY_CATEGORIES, STAY_CATEGORIES } from "../../utils/siteTaxonomy";
 import {
 	idOf,
 	loadListingCatalog,
 	nearestListings,
 	toListingCard,
 } from "../../utils/relatedContent";
+import {
+	DEFAULT_LOCALE,
+	FIELDS,
+	findBySlug,
+	localized,
+	segment,
+} from "../../utils/i18n";
 
 const GetawayListing = ({
 	getawayDetails,
@@ -41,6 +51,7 @@ const GetawayListing = ({
 }) => {
 	const { user } = useContext(UserContext);
 	const router = useRouter();
+	const t = useT();
 
 	if (getawayDetails && categoryDetails) {
 		useEffect(() => {
@@ -56,7 +67,11 @@ const GetawayListing = ({
 			}
 		}, [router]);
 
-		const urlToShare = `https://escapadesenparella.cat/${categoryDetails.slug}/${router.query.slug}`;
+		// Del router i no del document: la ruta ja porta el segment i el slug
+		// en l'idioma que s'està veient.
+		const urlToShare = `https://escapadesenparella.cat${
+			router.locale && router.locale !== "ca" ? `/${router.locale}` : ""
+		}/${router.query.categoria}/${router.query.slug}`;
 
 		const initialState = {
 			bookmarkDetails: {},
@@ -358,7 +373,12 @@ const GetawayListing = ({
 		// La fitxa és accessible des de qualsevol slug de categoria, però la URL
 		// que mana és sempre la de la seva categoria principal. Sense això cada
 		// variant es canonicalitzava a si mateixa i competien entre elles.
-		const canonicalUrl = listingUrl(getawayDetails);
+		const ownUrl = listingUrl(getawayDetails, router.locale);
+		// I quan el lloc també té una història, mana la història: totes dues
+		// sortien per a les mateixes cerques i es repartien els senyals.
+		// `utils/storyCanonicals.js` explica quan s'hi ha d'afegir una fitxa.
+		const canonicalUrl =
+			storyCanonicalUrl(getawayDetails, router.locale) || ownUrl;
 
 		return (
 			<>
@@ -379,14 +399,14 @@ const GetawayListing = ({
 					page2Title={categoryDetails.title}
 					page2Url={`https://escapadesenparella.cat/${categoryDetails.slug}`}
 					page3Title={getawayDetails.title}
-					page3Url={canonicalUrl}
+					page3Url={ownUrl}
 				/>
 				{/* Una fitxa és un lloc, no un article: amb `TouristAttraction`
 				    o `LodgingBusiness`, Google en pot llegir l'adreça, les
 				    coordenades, el telèfon i l'horari. */}
 				<ListingRichSnippet
 					listing={getawayDetails}
-					url={canonicalUrl}
+					url={ownUrl}
 					image={cloudinaryImage(getawayDetails.cover, 1200, 630).src}
 				/>
 				<div id="listingPage">
@@ -414,19 +434,19 @@ const GetawayListing = ({
 													{getawayDetails.type ===
 													"activity" ? (
 														<a
-															href={`/activitats`}
-															title={`Experiències`}
+															href={`/${segment("activitats", router.locale)}`}
+															title={t("listing.experiences")}
 															className="breadcrumb__link"
 														>
-															Experiències
+															{t("listing.experiences")}
 														</a>
 													) : (
 														<a
-															href={`/allotjaments`}
-															title={`Allotjaments`}
+															href={`/${segment("allotjaments", router.locale)}`}
+															title={t("listing.stays")}
 															className="breadcrumb__link"
 														>
-															Allotjaments
+															{t("listing.stays")}
 														</a>
 													)}
 												</li>
@@ -832,14 +852,10 @@ const GetawayListing = ({
 											getawayDetails.reasons !== "" ? (
 												<div className="pt-8 mt-8 md:pt-12 md:mt-12 border-t border-primary-50 max-w-[666px]">
 													<h2 className="mb-1">
-														Per què realitzar
-														aquesta activitat?
+														{t("listing.whyTitle")}
 													</h2>
 													<p>
-														Us compartim 5 raons per
-														les quals creiem que
-														hauríeu de fer aquesta
-														escapada:
+														{t("listing.whyText")}
 													</p>
 													<div
 														className="mt-4 listing__description"
@@ -1265,11 +1281,47 @@ const categoryBlock = async (service, getaway) => {
 	}
 };
 
-export async function getStaticProps({ params }) {
+/**
+ * Els segments de categoria que existeixen de debò, en tots dos idiomes.
+ *
+ * Amb `fallback: "blocking"`, qualsevol primer segment inventat entrava aquí i
+ * es renderitzava igualment: `/categoria-inventada/cabanes-dosrius` tornava un
+ * 200 amb la pàgina en blanc, sense títol. Per a Google això és un error tou, i
+ * amb 190 fitxes i qualsevol prefix imaginable és una superfície infinita.
+ *
+ * Hi ha d'haver els slugs castellans: en castellà el que arriba és
+ * `escapadas-romanticas`, i amb només els catalans totes les fitxes en
+ * castellà farien 404.
+ */
+const CATEGORIES_PUBLICADES = new Set(
+	[...GETAWAY_CATEGORIES, ...STAY_CATEGORIES].flatMap((category) =>
+		[category.slug, category.es?.slug].filter(Boolean),
+	),
+);
+
+export async function getStaticProps({ params, locale }) {
+	if (!CATEGORIES_PUBLICADES.has(params.categoria)) {
+		return { notFound: true, revalidate: 120 };
+	}
+
 	const service = new ContentService();
-	const categoryDetails = await service.getCategoryDetails(params.categoria);
-	const activityDetails = await service.activityDetails(params.slug);
-	const placeDetails = await service.getPlaceDetails(params.slug);
+	const esTraduit = Boolean(locale) && locale !== DEFAULT_LOCALE;
+	// En castellà, tant el segment de categoria com el slug de la fitxa
+	// arriben traduïts i l'API no els coneix: es desfà el camí amb els
+	// catàlegs, que ja estan a la memòria intermèdia del mòdul.
+	const categoryDetails = esTraduit
+		? findBySlug(await service.getCategories(), params.categoria, locale)
+		: await service.getCategoryDetails(params.categoria);
+	const slugCatala = esTraduit
+		? findBySlug(await loadListingCatalog(service), params.slug, locale)
+				?.slug
+		: params.slug;
+	const activityDetails = slugCatala
+		? await service.activityDetails(slugCatala)
+		: null;
+	const placeDetails = slugCatala
+		? await service.getPlaceDetails(slugCatala)
+		: null;
 	const characteristics = await service.getCharacteristics();
 
 	let getawayDetails;
@@ -1282,6 +1334,20 @@ export async function getStaticProps({ params }) {
 	if (activityDetails == null && placeDetails == null) {
 		return {
 			notFound: true,
+			revalidate: 120,
+		};
+	}
+
+	// La mateixa fitxa es podia llegir des de qualsevol de les setze
+	// categories, totes amb un 200 i totes amb la mateixa canònica. Google en
+	// té una d'indexada ("pàgina alternativa amb l'etiqueta canònica
+	// correcta") i li fa gastar rastreig per res: val més dir-li d'entrada
+	// quina és la bona.
+	const canonica = listingPath(getawayDetails);
+	const propia = canonica.split("/").filter(Boolean)[0];
+	if (CATEGORIES_PUBLICADES.has(propia) && propia !== params.categoria) {
+		return {
+			redirect: { destination: canonica, permanent: true },
 			revalidate: 120,
 		};
 	}
@@ -1311,8 +1377,8 @@ export async function getStaticProps({ params }) {
 
 	return {
 		props: {
-			getawayDetails,
-			categoryDetails,
+			getawayDetails: localized(getawayDetails, locale, FIELDS.listing),
+			categoryDetails: localized(categoryDetails, locale, FIELDS.category),
 			checkedCharacteristics,
 			related,
 		},

@@ -1,4 +1,5 @@
 import { useEffect, useContext } from "react";
+import { useT } from "../../i18n/strings";
 import { useRouter } from "next/router";
 import NavigationBar from "../../components/global/NavigationBar";
 import ContentService from "../../services/contentService";
@@ -29,6 +30,7 @@ import {
 } from "../../utils/relatedContent";
 
 const StoryListing = ({ storyDetails, storyListings, relatedStories }) => {
+	const t = useT();
 	const { user } = useContext(UserContext);
 	const router = useRouter();
 
@@ -188,7 +190,7 @@ const StoryListing = ({ storyDetails, storyListings, relatedStories }) => {
 												href="/histories"
 												className="breadcrumb__link"
 											>
-												Històries en parella
+												{t("story.breadcrumb")}
 											</a>
 										</li>
 									</ul>
@@ -353,16 +355,16 @@ const StoryListing = ({ storyDetails, storyListings, relatedStories }) => {
 					</article>
 				<RelatedListings
 					eyebrow="On és"
-					title="Els llocs d'aquesta història"
-					description="Les fitxes amb l'adreça, com arribar-hi i on reservar."
+					title={t("story.placesTitle")}
+					description={t("story.placesText")}
 					items={storyListings}
 				/>
 				<RelatedListings
-					eyebrow="Segueix llegint"
-					title="Altres històries en parella"
-					description="Més escapades explicades de primera mà."
+					eyebrow={t("story.keepReading")}
+					title={t("story.otherStories")}
+					description={t("story.otherStoriesText")}
 					href="/histories"
-					linkLabel="Veure totes les històries"
+					linkLabel={t("story.allStories")}
 					items={relatedStories}
 					variant="editorial"
 					basePath="/histories"

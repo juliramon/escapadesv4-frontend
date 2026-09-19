@@ -1,4 +1,6 @@
+import { useRouter } from "next/router";
 import JsonLd from "../richsnippets/JsonLd";
+import { useT } from "../../i18n/strings";
 
 /**
  * Preguntes freqüents de la portada.
@@ -8,6 +10,9 @@ import JsonLd from "../richsnippets/JsonLd";
  * generalitats. Es plegen en un acordió de `<details>`, o sigui que les
  * respostes són al DOM encara que no es vegin; el marcatge `FAQPage` que
  * les acompanya segueix sent vàlid i la portada no s'allarga cinc pantalles.
+ *
+ * El `FAQPage` es marca en l'idioma de la pàgina: enviar-li a Google unes
+ * preguntes en català dins d'una pàgina castellana és demanar que no l'ensenyi.
  */
 const FAQ = [
 	{
@@ -37,58 +42,93 @@ const FAQ = [
 	},
 ];
 
-const HomeFaq = () => (
-	<>
-		<JsonLd
-			data={{
-				"@context": "https://schema.org",
-				"@type": "FAQPage",
-				mainEntity: FAQ.map(({ question, answer }) => ({
-					"@type": "Question",
-					name: question,
-					acceptedAnswer: { "@type": "Answer", text: answer },
-				})),
-			}}
-		/>
-		<section className="home-faq">
-			<div className="container">
-				<div className="home-faq__inner">
-					<h2 className="home-faq__title">Preguntes freqüents</h2>
-					<div className="home-faq__list">
-						{FAQ.map(({ question, answer }) => (
-							<details className="home-faq__item" key={question}>
-								<summary className="home-faq__question">
-									<span>{question}</span>
-									<svg
-										xmlns="http://www.w3.org/2000/svg"
-										width={20}
-										height={20}
-										viewBox="0 0 24 24"
-										fill="none"
-										stroke="currentColor"
-										strokeWidth={2}
-										strokeLinecap="round"
-										strokeLinejoin="round"
-										className="home-faq__icon"
-										aria-hidden="true"
-									>
-										<path
-											stroke="none"
-											d="M0 0h24v24H0z"
+const FAQ_ES = [
+	{
+		question: "¿Cuánto cuesta una escapada en pareja en Cataluña?",
+		answer:
+			"En los alojamientos que recomendamos, el precio medio ronda los 80 € por persona y noche, con casas rurales que arrancan en los 15 € y hoteles de lujo que pasan de los 400. De las experiencias, más de la mitad son gratuitas —rutas, miradores, pueblos— y el resto tienen un precio medio de unos 20 €.",
+	},
+	{
+		question: "¿Cuál es la mejor época para una escapada en pareja?",
+		answer:
+			"La primavera y el otoño: hay menos gente, los alojamientos son más baratos y los caminos se andan bien. El verano es para las calas y los alojamientos con piscina, y el invierno, para la nieve y las casas con chimenea. En los fines de semana largos conviene reservar con semanas de antelación.",
+	},
+	{
+		question: "¿Cuántas noches hacen falta?",
+		answer:
+			"Con una noche basta si no queréis conducir más de hora y media: llegar a la hora de comer, una actividad por la tarde, cenar y volver al día siguiente después de desayunar. Para los Pirineos o las Tierras del Ebro vale más contar con dos noches, porque el viaje se come una parte.",
+	},
+	{
+		question: "¿Hay alojamientos solo para adultos o que admitan perros?",
+		answer:
+			"Sí. En la web hay una veintena larga de alojamientos adults only, pensados para una escapada tranquila, y una decena que admiten mascotas. En cada ficha están los servicios del establecimiento, y los filtros del listado de alojamientos permiten buscarlos.",
+	},
+	{
+		question: "¿Cómo elegís los sitios que recomendáis?",
+		answer:
+			"Vamos. Desde 2015 visitamos los sitios que salen en la web, y las fichas marcadas como verificadas son las que hemos pisado nosotros; en las historias contamos cómo fue cada escapada, con nuestras fotos y lo que no salió bien.",
+	},
+];
+
+const HomeFaq = () => {
+	const { locale } = useRouter();
+	const t = useT();
+	const items = locale === "es" ? FAQ_ES : FAQ;
+
+	return (
+		<>
+			<JsonLd
+				data={{
+					"@context": "https://schema.org",
+					"@type": "FAQPage",
+					inLanguage: locale === "es" ? "es-ES" : "ca-ES",
+					mainEntity: items.map(({ question, answer }) => ({
+						"@type": "Question",
+						name: question,
+						acceptedAnswer: { "@type": "Answer", text: answer },
+					})),
+				}}
+			/>
+			<section className="home-faq">
+				<div className="container">
+					<div className="home-faq__inner">
+						<h2 className="home-faq__title">{t("home.faqTitle")}</h2>
+						<div className="home-faq__list">
+							{items.map(({ question, answer }) => (
+								<details className="home-faq__item" key={question}>
+									<summary className="home-faq__question">
+										<span>{question}</span>
+										<svg
+											xmlns="http://www.w3.org/2000/svg"
+											width={20}
+											height={20}
+											viewBox="0 0 24 24"
 											fill="none"
-										/>
-										<path d="M6 9l6 6l6 -6" />
-									</svg>
-								</summary>
-								<p className="home-faq__answer">{answer}</p>
-							</details>
-						))}
+											stroke="currentColor"
+											strokeWidth={2}
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											className="home-faq__icon"
+											aria-hidden="true"
+										>
+											<path
+												stroke="none"
+												d="M0 0h24v24H0z"
+												fill="none"
+											/>
+											<path d="M6 9l6 6l6 -6" />
+										</svg>
+									</summary>
+									<p className="home-faq__answer">{answer}</p>
+								</details>
+							))}
+						</div>
 					</div>
 				</div>
-			</div>
-		</section>
-	</>
-);
+			</section>
+		</>
+	);
+};
 
-export { FAQ };
+export { FAQ, FAQ_ES };
 export default HomeFaq;

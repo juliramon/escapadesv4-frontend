@@ -534,9 +534,17 @@ const isBlank = (value) =>
 		.replace(/&nbsp;/g, " ")
 		.trim();
 
-/** El text d'un camp, pla i escurçat, per revisar-lo al dry-run. */
+/**
+ * El text d'un camp, pla i escurçat, per revisar-lo al dry-run.
+ *
+ * Els camps que no són text —`translations`, que és un objecte per idioma— es
+ * pinten com a JSON: amb `String()` sortien tots com a «[object Object]» i el
+ * dry-run no servia per revisar res.
+ */
 const preview = (value, max = 220) => {
-	const text = String(value ?? "")
+	const brut =
+		value && typeof value === "object" ? JSON.stringify(value) : String(value ?? "");
+	const text = brut
 		.replace(/<[^>]+>/g, " ")
 		.replace(/\s+/g, " ")
 		.trim();

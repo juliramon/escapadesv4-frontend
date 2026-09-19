@@ -1,0 +1,94 @@
+{
+	"generatedAt": "2026-09-19T10:53:17.500Z",
+	"note": "Castellà del camp seoText de 4 documents de categories, amb els enllaços interns ja apuntant a la versió castellana.",
+	"fields": [
+		{
+			"collection": "categories",
+			"slug": "refugis",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Refugios",
+					"subtitle": "Refugios de montaña en Cataluña para dormir en pareja a pie de ruta: dónde están, cómo se reservan y qué se come. Con precios.",
+					"seoTextHeader": "<p>¿Buscáis un refugio donde desconectar y disfrutar de la montaña en pareja? Aquí tenéis nuestra selección de refugios de montaña de Cataluña, con la ruta que los deja a mano y lo que cuesta la media pensión.</p>",
+					"slug": "refugios",
+					"seoText": "<p>Dormir en un <strong>refugio de montaña</strong> tiene algo que no da ningún hotel. Están en mitad del paisaje, a pie de sendero, y se llega caminando: eso ya cambia la escapada.</p><p>La primera ventaja es evidente: se desconecta de verdad. En muchos refugios no hay cobertura ni wifi, así que el móvil se queda en el bolsillo y la tarde se alarga.</p><p>La segunda es que se duerme donde se camina. No hay que madrugar para conducir hasta el punto de salida, y eso permite rutas que desde el valle no se harían. La cena es compartida, el silencio es real y la oscuridad, de las que dejan ver estrellas.</p><p>En resumen, una noche en un refugio es la forma más directa de estar en la montaña. Reservad con tiempo: en verano y en los puentes se llenan semanas antes.</p><p>Y si todavía no lo tenéis decidido, empezad por todas nuestras <a href=\"https://escapadesenparella.cat/es\">escapadas en pareja</a>: hay para cada época del año.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"title": "Refugios",
+					"subtitle": "Refugios de montaña en Cataluña para dormir en pareja a pie de ruta: dónde están, cómo se reservan y qué se come. Con precios.",
+					"seoTextHeader": "<p>¿Buscáis un refugio donde desconectar y disfrutar de la montaña en pareja? Aquí tenéis nuestra selección de refugios de montaña de Cataluña, con la ruta que los deja a mano y lo que cuesta la media pensión.</p>",
+					"slug": "refugios"
+				}
+			}
+		},
+		{
+			"collection": "categories",
+			"slug": "campings",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Campings",
+					"subtitle": "Campings con encanto en Cataluña para una escapada en pareja: bungalós, piscina y mar o montaña al lado. Con precios y cómo llegar.",
+					"seoTextHeader": "<p>Dormir en un camping ya no significa solo tienda y saco. Muchos campings de Cataluña tienen bungalós, piscina y el mar o la montaña a diez minutos. Esta es nuestra selección para una escapada en pareja.</p>",
+					"slug": "campings",
+					"seoText": "<h2>Campings con encanto en Cataluña para una escapada en pareja</h2><p>Dormir en un camping ya no significa solo tienda y saco. Muchos <strong>campings de Cataluña</strong> tienen bungalós, glamping y cabañas con todas las comodidades, en sitios donde ningún hotel llega: a los pies del Pedraforca, a primera línea de mar o en pleno Pirineo.</p><h3>Campings de montaña</h3><p>El <a href=\"https://escapadesenparella.cat/es/escapadas-aventura/camping-repos-del-pedraforca-saldes\">Camping Repòs del Pedraforca</a>, en Saldes, es el punto de partida ideal para subir al <a href=\"https://escapadesenparella.cat/es/escapadas-aventura/pedraforca-por-la-tartera\">Pedraforca por la tartera</a>. Lo contamos en la historia <a href=\"https://escapadesenparella.cat/es/historias/camping-repos-pedraforca-saldes\">Así es el Camping Repòs del Pedraforca</a>.</p><h3>Campings cerca del mar</h3><p>En Malgrat de Mar, el <a href=\"https://escapadesenparella.cat/es/escapadas-relax/glamping-camping-del-mar-malgrat\">glamping del Camping del Mar</a> está a primera línea de playa, y en el Baix Empordà el <a href=\"https://escapadesenparella.cat/es/escapadas-aventura/camping-mas-patoxas-pals\">Camping Mas Patoxas</a> está junto a Pals y a las playas de la Costa Brava.</p><h3>Qué hay que tener en cuenta</h3><p>Reservad con tiempo en verano y en los puentes: los bungalós y las parcelas con mejores vistas son los primeros que se llenan. Fuera de temporada, muchos campings de montaña son la opción más tranquila y barata para un fin de semana.</p><p>Si todavía no os decidís, en la lista de los <a href=\"https://escapadesenparella.cat/es/listas/millors-campings-catalunya\">mejores campings de Cataluña</a> hemos elegido unos cuantos para cada tipo de escapada.</p><p>Esta es una de las muchas <a href=\"https://escapadesenparella.cat/es\">escapadas en pareja</a> que hemos ido recogiendo desde 2015.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"title": "Campings",
+					"subtitle": "Campings con encanto en Cataluña para una escapada en pareja: bungalós, piscina y mar o montaña al lado. Con precios y cómo llegar.",
+					"seoTextHeader": "<p>Dormir en un camping ya no significa solo tienda y saco. Muchos campings de Cataluña tienen bungalós, piscina y el mar o la montaña a diez minutos. Esta es nuestra selección para una escapada en pareja.</p>",
+					"slug": "campings"
+				}
+			}
+		},
+		{
+			"collection": "categories",
+			"slug": "caravanes",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Caravanas",
+					"subtitle": "Caravanas y furgonetas camper para recorrer Cataluña en pareja: dónde alquilarlas, qué llevan y cuánto cuestan.",
+					"seoTextHeader": "<p>¿Con ganas de echaros a la carretera para descubrir Cataluña? Aquí está nuestra selección de caravanas y campers para dos: lo que lleva cada una, dónde se recogen y lo que cuesta el día.</p>",
+					"slug": "caravanas",
+					"seoText": "<p>Dormir en una caravana se ha convertido en una alternativa seria al alojamiento de siempre. Aquí van unas cuantas razones para plantearos la próxima escapada sobre ruedas:</p><ol><li><p>Sale a cuenta: con una camper os ahorráis el hotel. En muchas zonas se puede pernoctar sin pagar, y en un camping cuesta bastante menos que una habitación.</p></li><li><p>Vais donde queráis: la caravana os deja cambiar de plan sobre la marcha, de la ciudad al pueblo más pequeño del Pirineo, sin depender de reservas.</p></li><li><p>Comodidad: las de alquiler vienen equipadas con cama, cocina y sitio para el equipaje. Es llevarse media casa puesta.</p></li><li><p>Aventura: dormir donde acaba el día tiene un punto de libertad que engancha. Y al día siguiente la vista desde la puerta es nueva.</p></li></ol><p>En resumen, la camper es una forma barata, flexible y cómoda de viajar, con la ventaja de poder parar donde apetezca.</p><p>Y si todavía no lo tenéis decidido, empezad por todas nuestras <a href=\"https://escapadesenparella.cat/es\">escapadas en pareja</a>: hay para cada época del año.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"title": "Caravanas",
+					"subtitle": "Caravanas y furgonetas camper para recorrer Cataluña en pareja: dónde alquilarlas, qué llevan y cuánto cuestan.",
+					"seoTextHeader": "<p>¿Con ganas de echaros a la carretera para descubrir Cataluña? Aquí está nuestra selección de caravanas y campers para dos: lo que lleva cada una, dónde se recogen y lo que cuesta el día.</p>",
+					"slug": "caravanas"
+				}
+			}
+		},
+		{
+			"collection": "categories",
+			"slug": "apartaments-per-a-parelles",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Apartamentos para parejas",
+					"subtitle": "Apartamentos para dos en Cataluña: a pie de playa, en pueblos medievales o entre viñedos, con cocina propia. Con precios y fotos nuestras.",
+					"seoTextHeader": "<p>Si buscáis el apartamento para una escapada en pareja por Cataluña, estáis en el sitio. Aquí está nuestra selección: primera línea de mar, casco antiguo o campo, siempre con cocina y sin nadie más en casa.</p>",
+					"slug": "apartamentos-para-parejas",
+					"seoText": "<p>Cataluña es conocida por sus playas, su cultura y sus ciudades. Si buscáis el apartamento para una escapada en pareja, aquí encontraréis opciones para cada plan y cada presupuesto.</p><p>Una posibilidad es Barcelona. Con ambiente a cualquier hora y planes de sobra, es un buen destino para una escapada romántica en apartamento. Tanto si buscáis un ático moderno con vistas a la ciudad como un piso tradicional en el casco antiguo, Barcelona tiene <strong>apartamentos con encanto</strong> para cada pareja.</p><p>Si preferís tranquilidad, la Costa Brava es la otra opción. Es un tramo de costa lleno de pueblos pequeños, cada uno con su carácter. De <strong>apartamentos de lujo</strong> frente a la playa a pisos de campo en el interior, hay para todos los gustos.</p><p>Sea lo que sea lo que busquéis, seguro que lo encontráis. Cataluña junta paisaje, cultura y planes en muy poco espacio, y eso se nota en un fin de semana.</p><p>Y si todavía no lo tenéis decidido, empezad por todas nuestras <a href=\"https://escapadesenparella.cat/es\">escapadas en pareja</a>: hay para cada época del año.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"title": "Apartamentos para parejas",
+					"subtitle": "Apartamentos para dos en Cataluña: a pie de playa, en pueblos medievales o entre viñedos, con cocina propia. Con precios y fotos nuestras.",
+					"seoTextHeader": "<p>Si buscáis el apartamento para una escapada en pareja por Cataluña, estáis en el sitio. Aquí está nuestra selección: primera línea de mar, casco antiguo o campo, siempre con cocina y sin nadie más en casa.</p>",
+					"slug": "apartamentos-para-parejas"
+				}
+			}
+		}
+	]
+}

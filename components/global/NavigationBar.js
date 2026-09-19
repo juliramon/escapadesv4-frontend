@@ -4,6 +4,8 @@ import Link from "next/link";
 import UserContext from "../../contexts/UserContext";
 import ContentBar from "../homepage/ContentBar";
 import VerticalsNav from "./VerticalsNav";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useT } from "../../i18n/strings";
 import {
 	DESTINATIONS,
 	GETAWAY_CATEGORIES,
@@ -36,6 +38,7 @@ const DashboardIcon = () => (
 );
 
 const NavigationBar = () => {
+	const t = useT();
 	const { user } = useContext(UserContext);
 	const searchInputRef = useRef(null);
 
@@ -171,7 +174,7 @@ const NavigationBar = () => {
 					    administradors, perdia la manera de tornar a la portada. */}
 					<Link href="/">
 						<a
-							title="Inici"
+							title={t("nav.home")}
 							className="col-span-2 md:col-span-3 lg:col-span-3"
 						>
 							<picture>
@@ -197,7 +200,7 @@ const NavigationBar = () => {
 							<button
 								className="search__open"
 								onClick={() => handleSearchPanel()}
-								aria-label="Obrir panell de cerca"
+								aria-label={t("nav.searchOpen")}
 							>
 								<svg
 									xmlns="http://www.w3.org/2000/svg"
@@ -217,7 +220,7 @@ const NavigationBar = () => {
 							</button>
 							<button
 								className=""
-								aria-label="Botó obrir menú"
+								aria-label={t("nav.menuOpen")}
 								onClick={() => handleResponsiveMenu()}
 							>
 								<svg
@@ -248,7 +251,7 @@ const NavigationBar = () => {
 						<div className="lg:hidden absolute top-0 right-0 z-[60]">
 							<button
 								className="menu__close"
-								aria-label="Botó tancar menu"
+								aria-label={t("nav.menuClose")}
 								onClick={() => handleResponsiveMenu()}
 							>
 								<svg
@@ -287,7 +290,7 @@ const NavigationBar = () => {
 									>
 										<button
 											className="search__close"
-											aria-label="Botó tancar menu"
+											aria-label={t("nav.menuClose")}
 											onClick={() => handleSearchPanel()}
 										>
 											<svg
@@ -335,7 +338,7 @@ const NavigationBar = () => {
 													name="search"
 													id="search"
 													ref={searchInputRef}
-													placeholder="On voleu anar? Cerca una experiència, un allotjament o una zona"
+													placeholder={t("nav.searchPlaceholder")}
 													className="search__input"
 													autoComplete="off"
 													onFocus={() =>
@@ -348,7 +351,9 @@ const NavigationBar = () => {
 													className="search__submit button button__med button__primary"
 													onClick={handleSearchSubmit}
 												>
-													<span>Buscar</span>
+													<span>
+														{t("nav.search")}
+													</span>
 													<svg
 														xmlns="http://www.w3.org/2000/svg"
 														width="22"
@@ -458,6 +463,13 @@ const NavigationBar = () => {
 									))}
 
 									<div className="mt-6 pt-5 border-t border-neutral-100">
+										<span className="block text-13 uppercase tracking-wider text-grey-300 mb-2">
+											{t("nav.language")}
+										</span>
+										<LanguageSwitcher />
+									</div>
+
+									<div className="mt-6 pt-5 border-t border-neutral-100">
 										<ul className="list-none p-0 m-0 flex flex-col gap-y-1">
 											{dropdownItems.map((item) => (
 												<li
@@ -499,12 +511,15 @@ const NavigationBar = () => {
 									<li className="menu__item">
 										<Link href="/descomptes-viatjar">
 											<a
-												title="Descomptes per viatjar"
+												title={t("nav.discounts")}
 												className="button button__ghost button__xs whitespace-nowrap"
 											>
-												Descomptes
+												{t("nav.discountsShort")}
 											</a>
 										</Link>
+									</li>
+									<li className="menu__item">
+										<LanguageSwitcher />
 									</li>
 									<li
 										className={`menu__item menu-dropdown ${
@@ -518,7 +533,7 @@ const NavigationBar = () => {
 											onClick={() =>
 												handleMenuDropdownVisibility()
 											}
-											aria-label="Gestionar menú"
+											aria-label={t("nav.manageMenu")}
 										>
 											<svg
 												xmlns="http://www.w3.org/2000/svg"

@@ -1,0 +1,538 @@
+{
+	"generatedAt": "2026-09-18T23:05:54.198Z",
+	"note": "Castellà de 38 fitxes: slug, títol i metes. El cos de la fitxa encara no.",
+	"fields": [
+		{
+			"collection": "activities",
+			"slug": "ruines-empuries",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "ruinas-de-ampurias",
+					"title": "Las Ruinas de Ampurias",
+					"metaTitle": "Ruinas de Ampurias: qué se ve y cómo visitarlas",
+					"metaDescription": "Las Ruinas de Ampurias, en L'Escala: el único yacimiento de la península donde conviven una ciudad griega y una romana. Qué se ve."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "la-vall-del-lord-camper-solsones",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "valle-del-lord-en-camper",
+					"title": "La Vall del Lord en camper",
+					"metaTitle": "La Vall del Lord en camper: ruta y dónde parar",
+					"metaDescription": "Recorrer la Vall del Lord en camper, en el Solsonès: por dónde pasar, dónde pernoctar y qué ver sin prisa."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "barranquisme-estrets-de-castellar-valles",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "barranquismo-estrets-de-castellar",
+					"title": "Barranquismo en Estrets de Castellar, en Castellar del Vallès",
+					"metaTitle": "Barranquismo en Estrets de Castellar, cerca de Barcelona",
+					"metaDescription": "Barranquismo en los Estrets de Castellar, en Castellar del Vallès: rápeles, saltos y toboganes de agua a media hora de Barcelona."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "via-ferrada-cala-del-moli-costa-brava",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "via-ferrata-cala-del-moli",
+					"title": "Vía ferrata de la Cala del Molí, en la Costa Brava",
+					"metaTitle": "Vía ferrata Cala del Molí: la más popular de la Costa Brava",
+					"metaDescription": "Una de las vías ferratas más populares de Cataluña, sobre los acantilados de la Costa Brava. Dificultad, precio y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-oden-solsones",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "castillo-de-oden",
+					"title": "Castillo de Odèn",
+					"metaTitle": "Castillo de Odèn, en el Solsonès",
+					"metaDescription": "La subida al Castillo de Odèn, en el Solsonès: ruinas sobre un risco y vistas de toda la comarca. Cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "falset-priorat",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "falset-capital-del-priorat",
+					"title": "Falset, la capital del Priorat",
+					"metaTitle": "Falset, la capital del Priorat: qué ver",
+					"metaDescription": "Falset, rodeado de montañas, es la puerta de entrada al Priorat: casco antiguo, bodegas y castillo. Qué ver y dónde comer."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "bunquers-collada-conflet-os-civis-alt-urgell",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "bunkers-collada-de-conflent-os-de-civis",
+					"title": "Escapada a los búnkeres de la Collada de Conflent desde Os de Civís",
+					"metaTitle": "Búnkeres de la Collada de Conflent, desde Os de Civís",
+					"metaDescription": "Ruta a los búnkeres de la Guerra Civil de la Collada de Conflent, desde Os de Civís: alta montaña e historia. Cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "ermita-sant-gregori-falset",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "ermita-de-sant-gregori-falset",
+					"title": "Escapada a la Ermita de Sant Gregori, en Falset",
+					"metaTitle": "Ermita de Sant Gregori, en Falset",
+					"metaDescription": "La Ermita de Sant Gregori, en Falset: un paseo corto entre viñedos del Priorat hasta una de las ermitas con más encanto."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "restaurant-el-pedro-pals",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "restaurante-el-pedro-pals",
+					"title": "Restaurante El Pedró",
+					"metaTitle": "Restaurante El Pedró, en Pals: el mejor arroz",
+					"metaDescription": "El restaurante El Pedró, en Pals: cocina mediterránea y casera, con el arroz de Pals como plato estrella. Precio medio y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "ruta-arros-pals-xiulet-pals-baix-emporda",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "ruta-del-arroz-de-pals",
+					"title": "Ruta del arroz de Pals con El Xiulet de Pals",
+					"metaTitle": "Ruta del arroz de Pals: visita a los arrozales",
+					"metaDescription": "La ruta del arroz de Pals con El Xiulet: cómo se cultiva, por qué es de los mejores de Cataluña y cuánto dura la visita."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "visita-front-del-pallars-guies-del-pallars",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "visita-guiada-frente-del-pallars",
+					"title": "Visita guiada al Frente del Pallars 1938",
+					"metaTitle": "Frente del Pallars 1938: visita guiada",
+					"metaDescription": "Visita guiada al Frente del Pallars: qué pasó en estas montañas durante la Guerra Civil, contado sobre el terreno."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-de-la-popa-castell-castellcir-centelles",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "castillo-de-la-popa-castellcir",
+					"title": "Visita al Castillo de la Popa",
+					"metaTitle": "Castillo de la Popa, en el Moianès",
+					"metaDescription": "El Castillo de la Popa, también conocido como Castillo de Castellcir: una fortaleza sobre la roca en el Moianès. Cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "llimiana-poble-encant-pallars-jussa",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "llimiana-pueblo-con-encanto",
+					"title": "Paseo con encanto por Llimiana",
+					"metaTitle": "Llimiana, un pueblo con encanto del Pallars Jussà",
+					"metaDescription": "Llimiana, en el Pallars Jussà: un pueblo de piedra con mucha historia y vistas impresionantes sobre el valle de la Noguera."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "visita-guiada-castell-de-mur-pallars-jussa",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "visita-guiada-castillo-de-mur",
+					"title": "Visita al Castillo de Mur",
+					"metaTitle": "Visita guiada al Castillo de Mur",
+					"metaDescription": "El Castillo de Mur, en el Pallars Jussà: uno de los castillos medievales mejor conservados de Cataluña. Horarios y visita guiada."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "visita-tast-vins-celler-vila-corona-conca-tremp",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cata-de-vinos-celler-vila-corona",
+					"title": "Cata de vinos en el Celler Vila Corona",
+					"metaTitle": "Visita y cata en el Celler Vila Corona, en Tremp",
+					"metaDescription": "Visita y cata de vinos en el Celler Vila Corona, en la Conca de Tremp: la D.O. Costers del Segre entre viñedos. Precio y duración."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "seacling-costa-brava-bici-aquatica-sant-feliu-de-guixols",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "seacling-costa-brava-bici-acuatica",
+					"title": "Seacling Costa Brava",
+					"metaTitle": "Seacling: bici sobre el agua en la Costa Brava",
+					"metaDescription": "Seacling Costa Brava, en Sant Feliu de Guíxols: pedalear sobre el agua por las calas. Cuánto dura, qué cuesta y desde dónde sale."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "museu-de-cera-de-barcelona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "museo-de-cera-de-barcelona",
+					"title": "Visita al Museo de Cera de Barcelona",
+					"metaTitle": "Museo de Cera de Barcelona: horarios y entradas",
+					"metaDescription": "El Museo de Cera de Barcelona, en las Ramblas: un plan distinto para un día en la ciudad. Horarios, precio y qué se ve."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "fonts-del-llobregat-castellar-de-nhug-bergueda-catalunya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "fuentes-del-llobregat",
+					"title": "Fuentes del Llobregat",
+					"metaTitle": "Fuentes del Llobregat, en Castellar de n'Hug",
+					"metaDescription": "Las Fuentes del Llobregat, en Castellar de n'Hug: el nacimiento de uno de los ríos más emblemáticos de Cataluña. Cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "pont-de-pedret-pont-medieval-bergueda-catalunya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "puente-de-pedret",
+					"title": "Puente de Pedret",
+					"metaTitle": "Puente de Pedret, un puente medieval del Berguedà",
+					"metaDescription": "El Puente de Pedret, sobre el Llobregat: un puente medieval y una iglesia románica al lado, en el Berguedà. Cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "cascada-de-la-ratera-parc-nacional-aiguestortes-estanys-sant-maurici-pallars-sobira",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cascada-de-ratera-aiguestortes",
+					"title": "Cascada de Ratera, en el PN de Aigüestortes",
+					"metaTitle": "Cascada de Ratera, en Aigüestortes: la ruta",
+					"metaDescription": "La Cascada de Ratera, en el Parque Nacional de Aigüestortes: un salto de agua a media hora del lago de Sant Maurici. La ruta."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "restaurant-esquella-braseria-esterri-daneu-pallars-sobira",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "restaurante-braseria-lesquella-esterri-daneu",
+					"title": "Restaurante braseria l'Esquella",
+					"metaTitle": "L'Esquella: cocina de montaña en Esterri d'Àneu",
+					"metaDescription": "El restaurante braseria l'Esquella, en Esterri d'Àneu: brasa y cocina de montaña en el Pallars Sobirà. Precio medio y qué pedir."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "esglesia-romanica-sant-joan-isil-pallars-sobira",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "iglesia-romanica-sant-joan-disil",
+					"title": "Iglesia románica de Sant Joan d'Isil",
+					"metaTitle": "Sant Joan d'Isil, iglesia románica del año 1095",
+					"metaDescription": "Sant Joan d'Isil, una iglesia románica de 1095 a los pies de la Noguera Pallaresa, en el Pallars Sobirà. Cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "resturant-el-celler-argentona-maresme",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "restaurante-el-celler-dargentona",
+					"title": "Restaurante El Celler d'Argentona",
+					"metaTitle": "El Celler d'Argentona: cocina de mercado en el Maresme",
+					"metaDescription": "El Celler d'Argentona, en la villa de Argentona: cocina de mercado en una casa señorial del Maresme. Precio medio y qué pedir."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "restaurant-pins-mar-sant-andreu-llavaneres",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "restaurante-pins-mar-llavaneres",
+					"title": "Restaurante Pins Mar",
+					"metaTitle": "Pins Mar: comer con vistas al mar en el Maresme",
+					"metaDescription": "El restaurante Pins Mar, en Sant Andreu de Llavaneres: pescado y arroces con el Mediterráneo delante. Precio medio y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "quads-pallars-pallars-sobira-ruta-quads-pirineus",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "ruta-en-quad-pallars-sobira",
+					"title": "Ruta en quad por el Pallars Sobirà",
+					"metaTitle": "Rutas en quad por el Pallars Sobirà",
+					"metaDescription": "Ruta en quad por las pistas del Pallars Sobirà con Quads Pallars: cuánto dura, qué cuesta y desde dónde se sale."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "jardins-cap-roig-calella-palafrugell-costa-brava",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "jardines-de-cap-roig",
+					"title": "Jardines de Cap Roig",
+					"metaTitle": "Jardines de Cap Roig: horarios, precio y qué ver",
+					"metaDescription": "Los Jardines de Cap Roig, en Calella de Palafrugell: uno de los jardines botánicos más bonitos del Mediterráneo, sobre el mar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "museu-pesca-palamos-costa-brava",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "museo-de-la-pesca-de-palamos",
+					"title": "Museo de la Pesca de Palamós",
+					"metaTitle": "Museo de la Pesca de Palamós: horarios y visita",
+					"metaDescription": "El Museo de la Pesca de Palamós, a pie de puerto: la cultura marinera de la Costa Brava contada desde dentro. Horarios y precio."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "fosbury-cafe-castelldefels-barcelona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "fosbury-cafe-castelldefels",
+					"title": "Restaurante Fosbury Cafè",
+					"metaTitle": "Fosbury Cafè, en Castelldefels",
+					"metaDescription": "El Fosbury Cafè, en Castelldefels: uno de los sitios con más ambiente para desayunar o comer cerca de la playa. Precio medio."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "santuari-cabrera-collsacabra-montcabrer-osona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "santuario-de-cabrera-collsacabra",
+					"title": "Santuario de Cabrera, en el Collsacabra",
+					"metaTitle": "Santuario de Cabrera: historia y cómo llegar",
+					"metaDescription": "El Santuario de Cabrera, en el Collsacabra: su historia, cómo llegar y las vistas sobre el pantano de Sau desde arriba."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-montsoriu-la-selva-catalunya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "castillo-de-montsoriu",
+					"title": "Castillo de Montsoriu",
+					"metaTitle": "Castillo de Montsoriu: historia y visita",
+					"metaDescription": "El Castillo de Montsoriu, en Arbúcies: una fortificación medieval rodeada del paisaje de La Selva. Historia y cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-burriac-medieval-cabrils-maresme-catalunya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "castillo-de-burriac",
+					"title": "Castillo de Burriac",
+					"metaTitle": "Castillo de Burriac: la ruta y las vistas del Maresme",
+					"metaDescription": "El Castillo de Burriac, en Cabrera de Mar: uno de los castillos medievales más emblemáticos del Maresme. Cómo subir hasta arriba."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-montgri-torroella-montgri-baix-emporda",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "castillo-de-montgri",
+					"title": "Castillo de Montgrí",
+					"metaTitle": "Castillo de Montgrí: la subida y las vistas",
+					"metaDescription": "El Castillo de Montgrí, sobre Torroella: una subida de una hora hasta un emblema medieval del Baix Empordà. Cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "pont-medieval-llucanes-sant-marti-albars-osona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "puente-medieval-de-sant-marti-dalbars",
+					"title": "Puente medieval de Sant Martí d'Albars",
+					"metaTitle": "Puente medieval de Sant Martí d'Albars",
+					"metaDescription": "Un puente medieval de 25 metros sobre la Gavarresa, en el antiguo camino real del Lluçanès. Un rincón escondido."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-lluca-llucanes-osona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "castillo-de-lluca",
+					"title": "Castillo de Lluçà, en el Lluçanès",
+					"metaTitle": "Castillo de Lluçà, en el Lluçanès",
+					"metaDescription": "Las ruinas del Castillo de Lluçà, en una colina a 896 metros, con vistas sobre todo el Lluçanès. Una escapada corta y tranquila."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "roure-senyora-sant-boi-llucanes-roure-centenari",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "roble-de-la-senyora-sant-boi-de-llucanes",
+					"title": "Roble de la Senyora",
+					"metaTitle": "Roble de la Senyora, un roble centenario del Lluçanès",
+					"metaDescription": "El Roble de la Senyora, en Sant Boi de Lluçanès: uno de los robles más grandes de Cataluña. Cómo llegar y qué hay cerca."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "mirador-solar-tristaina-andorra",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "mirador-solar-de-tristaina",
+					"title": "Mirador solar de Tristaina",
+					"metaTitle": "Mirador solar de Tristaina: cómo llegar y precios",
+					"metaDescription": "El Mirador Solar de Tristaina, en Ordino: un observatorio circular a más de 2.600 metros, con los lagos a los pies."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "esterragalls-all-olopte-cerdanya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "esterragalls-dall-cerdanya",
+					"title": "Visita a los Esterragalls d'All",
+					"metaTitle": "Esterragalls d'All: las cárcavas de la Cerdanya",
+					"metaDescription": "Los Esterragalls d'All, en la Cerdanya: unas formaciones de arcilla erosionada que parecen de otro planeta. Cómo llegar."
+				}
+			},
+			"expectEmpty": true
+		},
+		{
+			"collection": "activities",
+			"slug": "matagalls-per-sant-marcal",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "matagalls-desde-sant-marcal",
+					"title": "El Matagalls desde Sant Marçal",
+					"metaTitle": "El Matagalls desde Sant Marçal: ruta y horario",
+					"metaDescription": "El Matagalls desde Sant Marçal: 1.698 metros en el macizo del Montseny, cómo llegar al punto de salida y cuánto se tarda."
+				}
+			},
+			"expectEmpty": true
+		}
+	]
+}

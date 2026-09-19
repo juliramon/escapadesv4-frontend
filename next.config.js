@@ -8,6 +8,17 @@ module.exports = withTM({
 		STRIPE_API_KEY: process.env.NEXT_PUBLIC_STRIPE_API_KEY,
 		GOOGLE_ADS_CLIENT_ID: process.env.NEXT_PUBLIC_GOOGLE_ADS_CLIENT_ID,
 	},
+	// El català es queda amb les URL de sempre i el castellà viu sota /es:
+	// les pàgines en català ja estan indexades i canviar-los la URL seria
+	// començar de zero. `localeDetection` apagat a posta —si Google o un
+	// visitant demana la pàgina en català, la rep en català— i perquè un
+	// redirect automàtic per capçalera d'idioma és justament el que fa que
+	// Googlebot no arribi mai a veure la versió castellana.
+	i18n: {
+		locales: ["ca", "es"],
+		defaultLocale: "ca",
+		localeDetection: false,
+	},
 	images: {
 		remotePatterns: [
 			{
@@ -19,28 +30,33 @@ module.exports = withTM({
 	async redirects() {
 		return [
 			// Migració /escapades-catalunya/* -> /destinacions/*.
-			// Les destinacions ja no són províncies sinó zones curades, així que
-			// Barcelona, Girona, Lleida i Tarragona no tenen equivalent directe i
-			// van a l'índex de destinacions. Han d'anar abans del comodí de sota,
-			// perquè Next aplica el primer redirect que casa.
+			// Les destinacions són zones, no províncies, i quan es va fer aquest
+			// redirect encara no hi havia equivalent: les quatre capitals anaven a
+			// l'índex. Search Console diu que aquestes adreces encara reben visites
+			// —Girona en fa 1.233 en setze mesos— i, per a Google, un redirect cap a
+			// una pàgina que no respon la cerca és un error tou. Ara ja hi ha la zona
+			// que els pertoca. Han d'anar abans del comodí de sota, perquè Next
+			// aplica el primer redirect que casa.
 			{
 				source: "/escapades-catalunya/escapades-barcelona",
-				destination: "/destinacions",
+				destination: "/destinacions/escapades-barcelona-i-entorn",
 				permanent: true,
 			},
 			{
 				source: "/escapades-catalunya/escapades-girona",
-				destination: "/destinacions",
+				destination: "/destinacions/escapades-girona-i-emporda-interior",
 				permanent: true,
 			},
+			// Lleida no té cap zona pròpia, però de les 31 fitxes de la província la
+			// majoria són al Pallars, l'Alt Urgell o la Cerdanya.
 			{
 				source: "/escapades-catalunya/escapades-lleida",
-				destination: "/destinacions",
+				destination: "/destinacions/escapades-pirineus",
 				permanent: true,
 			},
 			{
 				source: "/escapades-catalunya/escapades-tarragona",
-				destination: "/destinacions",
+				destination: "/destinacions/escapades-costa-daurada",
 				permanent: true,
 			},
 			{
@@ -475,6 +491,39 @@ module.exports = withTM({
 				permanent: true,
 			},
 		];
+	},
+	/**
+	 * Les seccions, amb el nom en castellà sota /es.
+	 *
+	 * Els fitxers de `pages/` es continuen dient en català perquè són codi,
+	 * no URL. Aquí és on /es/destinos/… acaba a `pages/destinacions/…`.
+	 * `locale: false` perquè el prefix ja hi és escrit: sense això Next hi
+	 * tornaria a posar l'idioma al davant i el rewrite no casaria mai.
+	 *
+	 * La correspondència viu a `utils/i18n.js`, que és qui construeix els
+	 * enllaços: si se n'hi afegeix una, ha de sortir als dos llocs.
+	 */
+	async rewrites() {
+		const seccions = {
+			destinos: "destinacions",
+			historias: "histories",
+			listas: "llistes",
+			alojamientos: "allotjaments",
+			actividades: "activitats",
+			viajes: "viatges",
+		};
+		return Object.entries(seccions).flatMap(([es, ca]) => [
+			{
+				source: `/es/${es}`,
+				destination: `/es/${ca}`,
+				locale: false,
+			},
+			{
+				source: `/es/${es}/:path*`,
+				destination: `/es/${ca}/:path*`,
+				locale: false,
+			},
+		]);
 	},
 	async headers() {
 		const headers = [];

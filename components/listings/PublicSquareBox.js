@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { cloudinaryImage } from "../../utils/cloudinary";
+import { useRouter } from "next/router";
 import { listingPath, resolveCategoryRoute } from "../../utils/listingRoutes";
-
 
 const PLACE_TYPES = [
 	{ match: "hotel", label: "Hotel" },
@@ -44,7 +44,8 @@ const PublicSquareBox = ({
 	const isPlace = type === "place";
 
 	const category = resolveCategoryRoute(categoria);
-	const href = listingPath({ slug, type, categories: categoria });
+	const { locale } = useRouter();
+	const href = listingPath({ slug, type, categories: categoria }, locale);
 
 	const placeTypeLabel =
 		placeType && placeType.length > 0
@@ -82,7 +83,9 @@ const PublicSquareBox = ({
 								className="w-full h-full object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
 								width={457}
 								height={343}
-								loading={priority === "eager" ? "eager" : "lazy"}
+								loading={
+									priority === "eager" ? "eager" : "lazy"
+								}
 								fetchpriority={isLcp ? "high" : undefined}
 								decoding="async"
 							/>

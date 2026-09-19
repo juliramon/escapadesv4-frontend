@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import { useT } from "../../i18n/strings";
 import {
 	cloudinaryImage,
 	cloudinaryResponsive,
@@ -10,6 +11,15 @@ import ShareModal from "../../components/modals/ShareModal";
 import SignUpModal from "../../components/modals/SignUpModal";
 import UserContext from "../../contexts/UserContext";
 import ContentService from "../../services/contentService";
+import {
+	DEFAULT_LOCALE,
+	FIELDS,
+	LOCALES,
+	findBySlug,
+	localized,
+	segment,
+	slugFor,
+} from "../../utils/i18n";
 import FollowInstagramBox from "../../components/global/FollowInstagramBox";
 import GlobalMetas from "../../components/head/GlobalMetas";
 import BlogPostingRichSnippet from "../../components/richsnippets/BlogPostingRichSnippet";
@@ -27,8 +37,16 @@ import ContentParser from "../../utils/ContentParser";
 import ItemListRichSnippet from "../../components/richsnippets/ItemListRichSnippet";
 
 const ListView = ({ listDetails, relatedLists }) => {
+	const t = useT();
 	const { user } = useContext(UserContext);
 	const router = useRouter();
+	// En castellà la ruta és `/es/listas/<slug traduït>`: el segment i el
+	// slug van tots dos en l'idioma de la pàgina.
+	const seccio = segment("llistes", router.locale);
+	const urlLlista = `https://escapadesenparella.cat/${seccio}/${slugFor(
+		listDetails,
+		router.locale,
+	)}`;
 
 	useEffect(() => {
 		if (
@@ -89,9 +107,9 @@ const ListView = ({ listDetails, relatedLists }) => {
 				fallbackTitle={listDetails.title}
 				description={listDetails.metaDescription}
 				fallbackDescription={listDetails.subtitle}
-				url={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
+				url={urlLlista}
 				image={ogImg}
-				canonical={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
+				canonical={urlLlista}
 				type="article"
 			/>
 			{/* Rich snippets */}
@@ -99,9 +117,9 @@ const ListView = ({ listDetails, relatedLists }) => {
 				page1Title="Inici"
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Llistes"
-				page2Url="https://escapadesenparella.cat/llistes"
+				page2Url={`https://escapadesenparella.cat/${seccio}`}
 				page3Title={listDetails.title}
-				page3Url={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
+				page3Url={urlLlista}
 			/>
 			<BlogPostingRichSnippet
 				headline={listDetails.title}
@@ -115,7 +133,7 @@ const ListView = ({ listDetails, relatedLists }) => {
 			<ItemListRichSnippet
 				html={listDetails.description}
 				name={listDetails.title}
-				url={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
+				url={urlLlista}
 			/>
 			<div className="listing-list">
 				<NavigationBar />
@@ -195,7 +213,7 @@ const ListView = ({ listDetails, relatedLists }) => {
 													picture={coverImg}
 													title={listDetails.title}
 													rating={null}
-													slug={`https://escapadesenparella.cat/llistes/${listDetails.slug}`}
+													slug={urlLlista}
 													locality={null}
 													colorClass={
 														"text-primary-500 text-sm"
@@ -306,11 +324,11 @@ const ListView = ({ listDetails, relatedLists }) => {
 						</section>
 					</article>
 				<RelatedListings
-					eyebrow="Més idees"
-					title="Altres llistes d'escapades"
-					description="Seleccions temàtiques per decidir on anar."
+					eyebrow={t("list.moreIdeas")}
+					title={t("list.otherLists")}
+					description={t("list.otherListsText")}
 					href="/llistes"
-					linkLabel="Veure totes les llistes"
+					linkLabel={t("list.allLists")}
 					items={relatedLists}
 					variant="editorial"
 					basePath="/llistes"
@@ -359,18 +377,29 @@ export async function getStaticPaths() {
 	}
 
 	return {
-		paths: lists
-			.filter((list) => list?.slug)
-			.map((list) => ({ params: { slug: list.slug } })),
+		paths: LOCALES.flatMap((locale) =>
+			lists
+				.filter((list) => list?.slug)
+				.map((list) => ({
+					params: { slug: slugFor(list, locale) },
+					locale,
+				})),
+		),
 		// "blocking" en lloc de false: amb false, una llista publicada des del
 		// panell donaria 404 fins al següent desplegament.
 		fallback: "blocking",
 	};
 }
 
-export async function getStaticProps({ params }) {
+export async function getStaticProps({ params, locale }) {
 	const service = new ContentService();
-	const listDetails = await service.getListDetails(params.slug);
+	// En castellà arriba el slug traduït, que l'API no coneix: es busca al
+	// catàleg de llistes, que ja està a la memòria intermèdia del mòdul.
+	const catala =
+		locale && locale !== DEFAULT_LOCALE
+			? findBySlug(await service.getAllLists(), params.slug, locale)?.slug
+			: params.slug;
+	const listDetails = catala ? await service.getListDetails(catala) : null;
 
 	if (!listDetails) {
 		return {
@@ -395,8 +424,10 @@ export async function getStaticProps({ params }) {
 
 	return {
 		props: {
-			listDetails,
-			relatedLists,
+			listDetails: localized(listDetails, locale, FIELDS.list),
+			relatedLists: (relatedLists || []).map((item) =>
+				localized(item, locale, FIELDS.card),
+			),
 		},
 		revalidate: 120,
 	};

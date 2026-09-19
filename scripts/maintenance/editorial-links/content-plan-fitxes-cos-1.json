@@ -1,0 +1,95 @@
+{
+	"generatedAt": "2026-09-19T11:22:19.028Z",
+	"note": "Cos en castellà de 4 fitxes, amb els enllaços interns ja apuntant a la versió castellana.",
+	"fields": [
+		{
+			"collection": "places",
+			"slug": "cabanes-als-arbres-sant-hilari-sacalm",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cabanas-en-los-arboles-sant-hilari-sacalm",
+					"title": "Cabañas en los árboles",
+					"metaTitle": "Cabañas en los árboles de Sant Hilari Sacalm",
+					"metaDescription": "Cabañas en los árboles de Sant Hilari Sacalm: diez cabañas entre las ramas, en las Guilleries, con chimenea. Desde 120 € por persona y noche.",
+					"description": "<p><strong>Cabanes als arbres</strong> ofrece la oportunidad de dormir en contacto directo con el árbol y su ecosistema: el placer de un retiro entre el follaje y la experiencia de pasar unas noches en un nido montado entre las ramas.</p><p>Sumergidas en un océano de ramas en el nordeste de Cataluña, en Sant Hilari Sacalm, dentro del municipio de La Selva, diez <strong>cabañas cómodas</strong> se camuflan entre las hojas, cada una con su nombre de pájaro.</p><p>Uno de los grandes alicientes de dormir en una cabaña en este rincón de Cataluña es la sensación de libertad e intimidad. Mires donde mires, te sientes rodeado de la tranquilidad que transmite el canto de los pájaros y el murmullo del bosque; una tranquilidad algo engañosa, porque a pocos metros asoma otra de estas maravillas de madera o la masía La Vileta.</p><p>La masía tiene aparcamiento, recepción, comedor, sala de estar, duchas, piscina y jardín.</p><p>Adaptadas a la medida y a la naturaleza del árbol que las sostiene, las cabañas son de forma redondeada y tienen 30 m². La terraza, de 10 m², está pensada como espacio de descanso, para aprovechar al máximo el bosque y las vistas al Montseny o a los Pirineos.</p><p>Se accede a la cabaña por un puente colgante o por una escalera vertical.</p><p>No se admiten menores de 10 años. Para preservar al máximo el entorno, las cabañas no tienen electricidad ni agua corriente.</p><p>Cada cabaña dispone de linternas y velas, agua y lavamanos. El WC es biodegradable y se recicla como compost. El desayuno se toma en la propia cabaña y se sirve en una cesta, para aprovechar la calma de la mañana y la situación privilegiada, escuchando a los pájaros muy de cerca.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "cabanas-en-los-arboles-sant-hilari-sacalm",
+					"title": "Cabañas en los árboles",
+					"metaTitle": "Cabañas en los árboles de Sant Hilari Sacalm",
+					"metaDescription": "Cabañas en los árboles de Sant Hilari Sacalm: diez cabañas entre las ramas, en las Guilleries, con chimenea. Desde 120 € por persona y noche."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "cabanyes-entre-valls-vall-de-bianya-cabanes-arbres",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cabanas-entre-valls-vall-de-bianya",
+					"title": "Cabanyes entre Valls",
+					"metaTitle": "Cabanyes entre Valls: cabañas en los árboles",
+					"metaDescription": "Cabanyes entre Valls, en la Vall de Bianya: cabañas en los árboles con chimenea, barbacoa y jacuzzi para dos. Precio por noche.",
+					"description": "<p>Escondidas entre los árboles de la Vall de Bianya, en la Garrotxa, están <strong>Cabanyes entre Valls</strong>, un oasis de tranquilidad ideal para una escapada en pareja.</p><p>Cabanyes entre Valls está en la Vall de Bianya, a unos 10 minutos en coche desde Olot por la carretera N-260a dirección Vallfogona del Ripollès; en el km 94, a mano derecha, veréis el cartel y el camino de acceso.</p><p>Es un sitio donde la naturaleza, los valores ecológicos, la comodidad y el diseño se juntan para crear una escapada al bosque que se recuerda. El paisaje rural, muy vivo, es ideal para salir a caminar, y el paso de una estación a otra cambia por completo lo que se ve.</p><p>Las cabañas, construidas con madera y materiales sostenibles, tienen todo lo necesario para una estancia cómoda: chimenea, barbacoa, baño privado con ducha y una terraza propia con vistas al valle.</p><p>Desde aquí podéis disfrutar de la calma y hacer un montón de actividades al aire libre: senderismo, bicicleta, pesca u observación de aves.</p><p>También hay piscina, jacuzzi y zona de juegos. Y si lo que queréis es relajaros, podéis reservar un masaje o un tratamiento en su spa.</p><p>En Cabanyes entre Valls trabajan con el medio ambiente por delante: usan energía renovable, recogen el agua de lluvia y tienen un huerto ecológico donde cultivan sus propias verduras.</p><p>En el restaurante sirven producto de proximidad y de temporada.</p><p>Si buscáis un alojamiento distinto en la <strong>Vall de Bianya</strong>, Cabanyes entre Valls es vuestra opción.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "cabanas-entre-valls-vall-de-bianya",
+					"title": "Cabanyes entre Valls",
+					"metaTitle": "Cabanyes entre Valls: cabañas en los árboles",
+					"metaDescription": "Cabanyes entre Valls, en la Vall de Bianya: cabañas en los árboles con chimenea, barbacoa y jacuzzi para dos. Precio por noche."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "iglus-de-les-estrelles-a-prades",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "iglus-de-las-estrellas-prades",
+					"title": "Iglús de les Estrelles, en Prades",
+					"metaTitle": "Iglús de les Estrelles: dormir bajo un techo de cristal",
+					"metaDescription": "Iglús de les Estrelles, en Prades: dormir bajo un techo de cristal rodeado de bosque, en las montañas de Prades. Precio por noche.",
+					"description": "El Xalet de Prades es un complejo de chalés de madera rodeados de bosque, a las afueras de Prades, en el Baix Camp, a 55 km de Tarragona y del aeropuerto de Reus. Tiene piscina exterior, spa y aparcamiento gratuito.\n\nDesde los Iglús de les Estrelles de Prades se ve el espectáculo de la noche cómodamente y bajo una cúpula transparente de 360º. En pleno Parque Natural de las Montañas de Prades, tendréis toda la intimidad que hace falta para mirar el cielo sin prisa.\n\nEs un buen sitio para preparar una noche romántica, con la oportunidad de ver uno de los mejores cielos de Europa desde una cama caliente. La poca contaminación lumínica de Prades permite aprovechar al máximo un alojamiento con techo de cristal y un espacio completamente diáfano.<h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/hotel-palauet-del-priorat\">Hotel Palauet del Priorat</a>, a 8 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-relax/casa-rural-mas-ardevol-falset\">Mas Ardevol</a>, a 19 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/hotel-trossos-del-priorat\">Hotel Trossos del Priorat</a>, a 21 km</li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "iglus-de-las-estrellas-prades",
+					"title": "Iglús de les Estrelles, en Prades",
+					"metaTitle": "Iglús de les Estrelles: dormir bajo un techo de cristal",
+					"metaDescription": "Iglús de les Estrelles, en Prades: dormir bajo un techo de cristal rodeado de bosque, en las montañas de Prades. Precio por noche."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "basses-de-coll-de-nargo",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "balsas-de-coll-de-nargo",
+					"title": "Balsas de Coll de Nargó",
+					"metaTitle": "Balsas del Codó, en Coll de Nargó: piscinas naturales",
+					"metaDescription": "Las Balsas del Codó, en Coll de Nargó: piscinas naturales excavadas por el río Valldarques en la roca caliza. Cómo llegar y dónde aparcar.",
+					"description": "<p>Las <strong>Balsas del Codó</strong> de Coll de Nargó son un espectáculo de la naturaleza, un paraje tranquilo entre montañas y cerros de roca caliza.</p><p>La piedra, desgastada por la fuerza del agua del río Valldarques a lo largo del tiempo, ha creado unas piscinas naturales —de ahí el nombre de Balsas del Codó— donde bañarse, dejar que el agua caiga sobre los hombros o tirarse por el tobogán que ha ido abriendo la corriente en la roca, que hace las delicias de pequeños y mayores.</p>",
+					"reasons": "<ul><li><p><strong>Paisaje idílico</strong>: las Balsas del Codó son un entorno natural espectacular, con aguas cristalinas rodeadas de vegetación, ideal para desconectar.</p></li><li><p><strong>Tranquilidad e intimidad</strong>: es un sitio perfecto para disfrutar de la calma en pareja, lejos de las aglomeraciones.</p></li><li><p><strong>Actividades al aire libre</strong>: se puede caminar, darse un baño y hacer un picnic a la orilla de las balsas.</p></li><li><p><strong>Fauna y flora</strong>: la zona tiene mucha biodiversidad y se pueden ver distintas especies de animales y plantas autóctonas.</p></li><li><p><strong>Coll de Nargó al lado</strong>: después del baño podéis visitar el pueblo, conocido por sus restos prehistóricos y su casco antiguo medieval.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "balsas-de-coll-de-nargo",
+					"title": "Balsas de Coll de Nargó",
+					"metaTitle": "Balsas del Codó, en Coll de Nargó: piscinas naturales",
+					"metaDescription": "Las Balsas del Codó, en Coll de Nargó: piscinas naturales excavadas por el río Valldarques en la roca caliza. Cómo llegar y dónde aparcar."
+				}
+			}
+		}
+	]
+}

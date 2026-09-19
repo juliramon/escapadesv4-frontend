@@ -11,21 +11,48 @@
  */
 
 import { GETAWAY_CATEGORIES, STAY_CATEGORIES } from "./siteTaxonomy";
+import { DEFAULT_LOCALE, segment, slugFor } from "./i18n";
 
 const CATEGORY_ROUTES = [
-	{ match: "romantica", label: "Romàntica", path: "escapades-romantiques" },
+	{
+		match: "romantica",
+		label: "Romàntica",
+		path: "escapades-romantiques",
+		pathEs: "escapadas-romanticas",
+	},
 	{
 		match: "gastronomica",
 		label: "Gastronòmica",
 		path: "escapades-gastronomiques",
+		pathEs: "escapadas-gastronomicas",
 	},
-	{ match: "aventura", label: "Aventura", path: "escapades-aventura" },
-	{ match: "relax", label: "Relax", path: "escapades-de-relax" },
+	{
+		match: "aventura",
+		label: "Aventura",
+		path: "escapades-aventura",
+		pathEs: "escapadas-aventura",
+	},
+	{
+		match: "relax",
+		label: "Relax",
+		path: "escapades-de-relax",
+		pathEs: "escapadas-relax",
+	},
 	// El slug `escapades-a-la-neu` no existeix a l'API: qualsevol fitxa amb
 	// categoria "neu" generava un enllaç a una pàgina 404. La categoria
 	// publicada equivalent és `escapades-hivern`.
-	{ match: "neu", label: "Neu", path: "escapades-hivern" },
-	{ match: "cultural", label: "Cultural", path: "escapades-culturals" },
+	{
+		match: "neu",
+		label: "Neu",
+		path: "escapades-hivern",
+		pathEs: "escapadas-invierno",
+	},
+	{
+		match: "cultural",
+		label: "Cultural",
+		path: "escapades-culturals",
+		pathEs: "escapadas-culturales",
+	},
 ];
 
 /** Ruta per defecte quan la categoria no es reconeix, com abans. */
@@ -51,21 +78,34 @@ const resolveCategoryRoute = (categories) => {
  * @param {{slug: string, type?: string, categories?: string[]}} item
  * @returns {string}
  */
-const listingPath = (item) => {
+const listingPath = (item, locale) => {
 	if (!item || !item.slug) return "/";
+	// En castellà, tant el segment de la categoria com el de la fitxa van
+	// traduïts: la URL o és en castellà sencera o no ho és.
+	const slug = slugFor(item, locale);
+	const es = locale && locale !== DEFAULT_LOCALE;
 	const route = resolveCategoryRoute(item.categories);
-	if (route) return `/${route.path}/${item.slug}`;
+	if (route) return `/${(es && route.pathEs) || route.path}/${slug}`;
 	if (Array.isArray(item.categories) && item.categories.length) {
-		return `/${FALLBACK_CATEGORY_PATH}/${item.slug}`;
+		const fallback = CATEGORY_ROUTES.find(
+			(entry) => entry.path === FALLBACK_CATEGORY_PATH,
+		);
+		return `/${(es && fallback?.pathEs) || FALLBACK_CATEGORY_PATH}/${slug}`;
 	}
-	return `/${item.type === "place" ? "allotjaments" : "activitats"}/${
-		item.slug
-	}`;
+	return `/${segment(
+		item.type === "place" ? "allotjaments" : "activitats",
+		locale,
+	)}/${slug}`;
 };
 
-/** URL absoluta, per a `canonical` i `og:url`. */
-const listingUrl = (item) =>
-	`https://escapadesenparella.cat${listingPath(item)}`;
+/**
+ * URL absoluta, per a `canonical` i `og:url`.
+ *
+ * Sense idioma torna la catalana: `GlobalMetas` ja hi posa el prefix `/es`
+ * quan toca, i posar-l'hi dues vegades donaria `/es/es/...`.
+ */
+const listingUrl = (item, locale) =>
+	`https://escapadesenparella.cat${listingPath(item, locale)}`;
 
 /**
  * Títol llarg de la categoria principal d'una fitxa ("Escapades romàntiques"),
@@ -78,7 +118,7 @@ const categoryHeadingFor = (categories) => {
 	const route = resolveCategoryRoute(categories);
 	if (!route) return null;
 	const entry = [...GETAWAY_CATEGORIES, ...STAY_CATEGORIES].find(
-		(category) => category.slug === route.path
+		(category) => category.slug === route.path,
 	);
 	return { slug: route.path, title: entry?.title || route.label };
 };

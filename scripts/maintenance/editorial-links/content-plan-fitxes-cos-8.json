@@ -1,0 +1,142 @@
+{
+	"generatedAt": "2026-09-19T14:04:08.496Z",
+	"note": "Cos en castellà de 6 fitxes, amb els enllaços interns ja apuntant a la versió castellana.",
+	"fields": [
+		{
+			"collection": "activities",
+			"slug": "cala-estreta-palamos",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cala-estreta-palamos",
+					"title": "Cala Estreta",
+					"metaTitle": "Cala Estreta, en Palamós: una cala virgen",
+					"metaDescription": "Cala Estreta, en Palamós: 200 metros de cala virgen entre acantilados, por el camino de ronda desde la platja del Castell.",
+					"description": "La Cala Estreta es una preciosa cala virgen, rodeada de acantilados, de unos 200 metros de largo y cinco de ancho (si llegan). Para llegar hay que seguir el camino de ronda que pasa por la playa de El Castell de Palamós, entre bosques de pinos.\n\nDesde esta playa, a un kilómetro aproximadamente, están las Islas Formigues, así que el horizonte es espectacular. A mitad de camino se encuentra la Barraca d'en Dalí, una pequeña cabaña en medio del bosque que el millonario Albert Puig Palau le construyó para que la usara como taller, aunque nunca llegó a hacer allí ninguna obra.\n\nYa en la Cala Estreta hay una casita de pescadores del siglo XV donde vive el conocido Quico, sin radio ni televisión, pero que os ayudará en lo que haga falta. La cala no tiene ningún servicio; solo en verano se ve algún socorrista.\n\nDurante los meses de verano hay que aparcar en el parking de la playa de El Castell de Palamós, porque se prohíbe el tráfico rodado; en invierno la cala tiene un aparcamiento más cerca. Es una cala donde se practica el nudismo."
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "cala-estreta-palamos",
+					"title": "Cala Estreta",
+					"metaTitle": "Cala Estreta, en Palamós: una cala virgen",
+					"metaDescription": "Cala Estreta, en Palamós: 200 metros de cala virgen entre acantilados, por el camino de ronda desde la platja del Castell."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-montsoriu-la-selva-catalunya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "castillo-de-montsoriu",
+					"title": "Castillo de Montsoriu",
+					"metaTitle": "Castillo de Montsoriu: historia y visita",
+					"metaDescription": "El Castillo de Montsoriu, en Arbúcies: una fortificación medieval rodeada del paisaje de La Selva. Historia y cómo llegar.",
+					"description": "<p>El <strong>Castillo de Montsoriu</strong> es uno de los castillos más importantes de Cataluña. Está en la comarca de La Selva, en el término de Arbúcies, y es una de las construcciones medievales mejor conservadas de la zona.</p><p>Su historia es notable. Se construyó para defender la zona y tuvo un papel relevante en distintos episodios bélicos. Además, fue residencia de varias familias nobles a lo largo de los siglos y llegó a quedar abandonado durante un tiempo.</p><p>Hoy, el Castillo de Montsoriu es una visita muy popular por su arquitectura y por dónde está: en lo alto, a unos 600 metros de altitud, con vistas a toda la comarca. Se ha restaurado recientemente y se puede visitar todo el año.</p><h2>Cómo llegar al Castillo de Montsoriu</h2><p>Hay varias rutas desde los pueblos cercanos. Se puede subir desde Arbúcies, desde Sant Feliu de Buixalleu o desde Hostalric. Los caminos están señalizados y bien mantenidos, pero conviene llevar calzado adecuado y agua, porque la subida es larga y tiene tramos exigentes.</p><p>En resumen, el Castillo de Montsoriu es una visita obligada si os gustan la historia y el paisaje. Su ubicación y su estado de conservación lo convierten en uno de los castillos más interesantes de Cataluña.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "castillo-de-montsoriu",
+					"title": "Castillo de Montsoriu",
+					"metaTitle": "Castillo de Montsoriu: historia y visita",
+					"metaDescription": "El Castillo de Montsoriu, en Arbúcies: una fortificación medieval rodeada del paisaje de La Selva. Historia y cómo llegar."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "pey-resort-hotel-muntanya-sort-pallars-sobira",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-pey-resort-sort",
+					"title": "Hotel Pey Resort",
+					"metaTitle": "Pey Resort: hotel de montaña en Sort",
+					"metaDescription": "Pey Resort, en Sort: un hotel de montaña para descubrir el Pallars Sobirà, con el río Noguera al lado. Precio y cómo llegar.",
+					"description": "<p>El <strong>Hotel Pey Resort</strong>, en Sort, ofrece distintos tipos de alojamiento: habitaciones, áticos y apartamentos sencillos para una escapada al Pallars Sobirà.</p><p>Entre sus servicios hay piscina exterior, jardines y cenas al fresco con música en directo si vais en verano.</p><p>Tanto las habitaciones como los apartamentos están equipados con todas las comodidades: baño privado, calefacción, televisión y conexión a internet, además de cocina, nevera y microondas en el caso de los apartamentos.</p><p>El establecimiento admite animales de compañía bajo petición previa.</p><p>Es una buena opción para quien busque un alojamiento cómodo y bien equipado en el Pallars Sobirà.</p><h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/apartamento-wintuwin-rialp\">Apartamento WinTuWin</a>, a 4 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/ruta-en-quad-pallars-sobira\">Ruta en quad por el Pallars Sobirà</a>, a 4 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/refugio-comes-de-rubio-massis-de-lorri\">Refugio Comes de Rubió</a>, a 9 km</li></ul>",
+					"reasons": "<ul><li><p>Una localización inmejorable para descubrir el Pallars Sobirà</p></li><li><p>Habitaciones cómodas y con encanto</p></li><li><p>Piscina exterior y servicio de restaurante</p></li><li><p>Actividades de aventura para todos los gustos</p></li><li><p>Muy buen trato</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "hotel-pey-resort-sort",
+					"title": "Hotel Pey Resort",
+					"metaTitle": "Pey Resort: hotel de montaña en Sort",
+					"metaDescription": "Pey Resort, en Sort: un hotel de montaña para descubrir el Pallars Sobirà, con el río Noguera al lado. Precio y cómo llegar."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "la-vall-del-lord-camper-solsones",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "valle-del-lord-en-camper",
+					"title": "La Vall del Lord en camper",
+					"metaTitle": "La Vall del Lord en camper: ruta y dónde parar",
+					"metaDescription": "Recorrer la Vall del Lord en camper, en el Solsonès: por dónde pasar, dónde pernoctar y qué ver sin prisa.",
+					"description": "<p>La Vall del Lord es un valle pequeño del Solsonès que reúne todos los elementos del Pirineo: montaña, ríos, bosque y fauna. Y también historia: el valle se conoce desde el siglo IX, la época de Guifré el Pilós.<br><br>Destacan municipios como Sant Llorenç de Morunys, La Coma i la Pedra, Guixers y Navès, así como los castillos de Castelltort, Sisquer y La Pedra, y las muchas ermitas románicas repartidas por todo el valle, sobre todo en La Coma i la Pedra y Guixers. Entre ellas están la ermita románica de Sant Serni del Grau, la de Santa Creu dels Ollers, la iglesia de La Pedra y el Santuario de Lord.<br><br>Si recorréis la Vall del Lord en camper, no os perdáis el paisaje desde el Mirador del Codó, las <a href=\"https://escapadesenparella.cat/es/escapadas-aventura/fuentes-del-cardener\">Fuentes del Cardener</a>, la Font de la Puda y el puente románico de Vallonga.</p>",
+					"reasons": "<ul><li><p>Libertad y flexibilidad: viajar en camper deja moveros a vuestro ritmo y descubrir la Vall del Lord sin horarios de entrada y salida. Paráis donde queréis y el itinerario se adapta sobre la marcha.</p></li><li><p>Naturaleza a todas horas: el valle tiene paisajes espectaculares, como el embalse de la Llosa del Cavall, las montañas y los bosques. En camper os despertáis dentro del paisaje.</p></li><li><p>Actividades al aire libre: senderismo, bicicleta, kayak en el embalse y escalada. Con la camper lleváis el equipo siempre a mano.</p></li><li><p>Intimidad: lejos de las multitudes, con cenas bajo las estrellas y tiempo para vosotros.</p></li><li><p>Cultura y gastronomía: además del paisaje, el valle tiene patrimonio y producto local. Podéis parar en Sant Llorenç de Morunys, probar lo de allí y coincidir con alguna fiesta tradicional.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "valle-del-lord-en-camper",
+					"title": "La Vall del Lord en camper",
+					"metaTitle": "La Vall del Lord en camper: ruta y dónde parar",
+					"metaDescription": "Recorrer la Vall del Lord en camper, en el Solsonès: por dónde pasar, dónde pernoctar y qué ver sin prisa."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "casa-mila-la-pedrera-barcelona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "casa-mila-la-pedrera-barcelona",
+					"title": "Visita a la Casa Milà, La Pedrera de Barcelona",
+					"metaTitle": "Casa Milà, La Pedrera: cómo visitarla en Barcelona",
+					"metaDescription": "La Casa Milà, La Pedrera de Gaudí en Barcelona: cómo visitarla y por qué es el edificio más emblemático del Eixample.",
+					"description": "<p>La Casa Milà (1906-1912) es un edificio construido por el arquitecto catalán Antoni Gaudí por encargo de Pere Milà y Roser Segimon.</p><p>Conocida como La Pedrera, el nombre del edificio es Casa Milà, porque fue la nueva residencia de la familia Milà.</p><p>Es el edificio más emblemático de Gaudí, tanto por sus innovaciones constructivas y funcionales como por las soluciones ornamentales y decorativas.</p><p>En la visita se ven las dos caras del edificio: la arquitectura y la vivienda. Se conoce la distribución interior y los elementos ornamentales que diseñó Gaudí, como los pomos, los tiradores y las puertas.</p><p>El desván destaca por sus 270 arcos catenarios de ladrillo apoyados en el suelo: una estructura ligera y fácil de construir que reparte perfectamente las cargas.</p><p>Y, por supuesto, hay que subir a la azotea y ver la estética y la funcionalidad de las cajas de escalera, las torres de ventilación y las chimeneas.</p>",
+					"reasons": "<ul><li><p><strong>Arquitectura única</strong>: la Casa Milà, conocida como La Pedrera, es una obra maestra modernista de Gaudí, con formas onduladas y detalles que no se ven en ningún otro sitio.</p></li><li><p><strong>Vistas de Barcelona</strong>: la azotea ofrece una panorámica de la ciudad difícil de igualar.</p></li><li><p><strong>El interior</strong>: los apartamentos restaurados enseñan cómo vivía la burguesía barcelonesa de principios del siglo XX, con muebles y decoración de la época.</p></li><li><p><strong>Simbolismo</strong>: cada detalle esconde algo de la manera de pensar de Gaudí.</p></li><li><p><strong>Y algo más</strong>: además del edificio, hay exposiciones temporales y actividades culturales que completan la visita.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "casa-mila-la-pedrera-barcelona",
+					"title": "Visita a la Casa Milà, La Pedrera de Barcelona",
+					"metaTitle": "Casa Milà, La Pedrera: cómo visitarla en Barcelona",
+					"metaDescription": "La Casa Milà, La Pedrera de Gaudí en Barcelona: cómo visitarla y por qué es el edificio más emblemático del Eixample."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-terradets-cellers-lleida",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-terradets-cellers",
+					"title": "Hotel Terradets",
+					"metaTitle": "Hotel Terradets, junto al pantano de Cellers",
+					"metaDescription": "El Hotel Terradets, en Cellers: un hotel con encanto junto al embalse, en el Pallars Jussà. Precio por noche y qué hay cerca.",
+					"description": "<p>Bienvenidos al <strong>Hotel Terradets</strong>, un refugio en Cellers, en el <strong>Pallars Jussà</strong>, donde el paisaje y la comodidad van de la mano.</p><p>A los pies de los Pirineos, el Hotel Terradets invita a meterse en la calma de una comarca con mucha historia y muchos rincones por descubrir. Con un ambiente acogedor y un entorno que impresiona, aquí encontraréis lo necesario para desconectar del día a día.</p><p>Habitaciones modernas con todas las comodidades, un restaurante de cocina de proximidad y una ubicación inmejorable hacen del Hotel Terradets un buen sitio para una escapada al Pallars Jussà.</p>",
+					"reasons": "<ol><li><p><strong>Ambiente tranquilo:</strong> el Hotel Terradets, en el Pallars Jussà, es un buen sitio para una escapada en pareja. Las vistas y el entorno hacen el resto.</p></li><li><p><strong>Cocina de proximidad:</strong> el restaurante del hotel trabaja con producto fresco de la zona.</p></li><li><p><strong>Habitaciones cómodas:</strong> pensadas para descansar, con vistas y detalles actuales.</p></li><li><p><strong>Aventura y naturaleza:</strong> el Pallars Jussà es un escenario impresionante. Desde paseos tranquilos hasta el Congost de Mont-rebei, hay plan para cada día.</p></li><li><p><strong>Descanso:</strong> con piscina y zonas de ocio para no hacer nada.</p></li></ol>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "hotel-terradets-cellers",
+					"title": "Hotel Terradets",
+					"metaTitle": "Hotel Terradets, junto al pantano de Cellers",
+					"metaDescription": "El Hotel Terradets, en Cellers: un hotel con encanto junto al embalse, en el Pallars Jussà. Precio por noche y qué hay cerca."
+				}
+			}
+		}
+	]
+}

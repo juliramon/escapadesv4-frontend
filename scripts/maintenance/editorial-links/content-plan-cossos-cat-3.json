@@ -1,0 +1,94 @@
+{
+	"generatedAt": "2026-09-19T10:51:31.403Z",
+	"note": "Castellà del camp seoText de 4 documents de categories, amb els enllaços interns ja apuntant a la versió castellana.",
+	"fields": [
+		{
+			"collection": "categories",
+			"slug": "escapades-estiu",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Escapadas de verano",
+					"subtitle": "Escapadas de verano en pareja por Cataluña: calas, alojamientos con piscina y planes para cuando aprieta el calor. Con precios y cómo llegar.",
+					"seoTextHeader": "<p>¿Buscáis una escapada de verano por Cataluña? Aquí está nuestra selección: calas donde el agua sigue fría en agosto, alojamientos con piscina y pueblos de montaña donde se duerme con manta. Todas las hemos hecho nosotros.</p>",
+					"slug": "escapadas-verano",
+					"seoText": "<p>Las <strong>escapadas de verano</strong> son una buena manera de bajar el ritmo en pareja y volver con las pilas cargadas. Tanto si buscáis playa, montaña o un viaje lleno de actividades, hay una escapada de verano que os encaja.</p><p>Aquí van unas cuantas razones para escaparse este verano:</p><ol><li><p>Tiempo de verdad juntos: una escapada de verano os deja pasar tiempo sin las distracciones de cada día. Un par de días sin móvil dan para mucho.</p></li><li><p>Descanso: es la ocasión de parar. Tanto si es tumbados en una cala como metidos en un jacuzzi, el plan es no tener plan.</p></li><li><p>Aventura: también es la ocasión de probar cosas nuevas. Caminar hasta una cima, salir en kayak o recorrer un pueblo que no conocíais: de eso se acuerda uno años después.</p></li><li><p>Romanticismo: paisajes que impresionan y tiempo para disfrutarlos. No hace falta mucho más.</p></li></ol><p>Así que no lo dejéis para el año que viene: elegid la escapada de verano y marchaos.</p><p>Si buscáis más ideas, en la recopilación de <a href=\"https://escapadesenparella.cat/es\">escapadas en pareja</a> están todas las que hemos visitado, ordenadas por tipo y por zona.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"title": "Escapadas de verano",
+					"subtitle": "Escapadas de verano en pareja por Cataluña: calas, alojamientos con piscina y planes para cuando aprieta el calor. Con precios y cómo llegar.",
+					"seoTextHeader": "<p>¿Buscáis una escapada de verano por Cataluña? Aquí está nuestra selección: calas donde el agua sigue fría en agosto, alojamientos con piscina y pueblos de montaña donde se duerme con manta. Todas las hemos hecho nosotros.</p>",
+					"slug": "escapadas-verano"
+				}
+			}
+		},
+		{
+			"collection": "categories",
+			"slug": "escapades-hivern",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Escapadas de invierno",
+					"subtitle": "Escapadas de invierno en Cataluña: nieve, chimenea y pueblos de montaña sin colas. Con precios, cómo llegar y fotos nuestras.",
+					"seoTextHeader": "<p>El invierno es la temporada de la nieve, de las chimeneas y de los pueblos de montaña sin aglomeraciones. Esta es nuestra selección de escapadas de invierno por Cataluña, de las pistas a las casas donde no apetece salir.</p>",
+					"slug": "escapadas-invierno",
+					"seoText": "<h2>Escapadas de invierno en Cataluña</h2><p>El invierno es la temporada de la nieve, de las chimeneas y de los pueblos de montaña sin aglomeraciones. Una <strong>escapada de invierno</strong> puede ser un día de esquí, pero también una ruta con raquetas, un trineo con perros o un fin de semana en una casa rural con la nieve en la ventana.</p><h3>Raquetas de nieve</h3><p>Las raquetas son la forma más sencilla de caminar por la nieve sin saber esquiar. Hemos hecho rutas en los <a href=\"https://escapadesenparella.cat/es/historias/escapada-estanys-de-la-pera-raquetes-de-neu-cerdanya\">Estanys de la Pera</a>, en el <a href=\"https://escapadesenparella.cat/es/historias/puigpedros-raquetes-neu-malniu\">Puigpedrós desde Malniu</a> y en <a href=\"https://escapadesenparella.cat/es/escapadas-aventura/raquetas-de-nieve-sant-joan-de-lerm\">Sant Joan de l'Erm</a>, en el Alt Urgell.</p><h3>Nieve y adrenalina en Andorra</h3><p>En Andorra están el <a href=\"https://escapadesenparella.cat/es/escapadas-aventura/trineo-con-perros-en-andorra\">trineo con perros</a> de Encamp y la <a href=\"https://escapadesenparella.cat/es/escapadas-aventura/moto-de-nieve-en-andorra-grau-roig\">ruta en moto de nieve por Grau Roig</a>, dos maneras distintas de vivir la nieve.</p><h3>Antes de salir</h3><p>En invierno los días son cortos y en la montaña el tiempo cambia deprisa. Comprobad el estado de las carreteras y la previsión antes de salir, y llevad cadenas en el coche.</p><p>Esta es una de las muchas <a href=\"https://escapadesenparella.cat/es\">escapadas en pareja</a> que hemos ido recogiendo desde 2015.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"title": "Escapadas de invierno",
+					"subtitle": "Escapadas de invierno en Cataluña: nieve, chimenea y pueblos de montaña sin colas. Con precios, cómo llegar y fotos nuestras.",
+					"seoTextHeader": "<p>El invierno es la temporada de la nieve, de las chimeneas y de los pueblos de montaña sin aglomeraciones. Esta es nuestra selección de escapadas de invierno por Cataluña, de las pistas a las casas donde no apetece salir.</p>",
+					"slug": "escapadas-invierno"
+				}
+			}
+		},
+		{
+			"collection": "categories",
+			"slug": "escapades-de-cap-de-setmana",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Escapadas de fin de semana",
+					"subtitle": "Escapadas de fin de semana en pareja por Cataluña, a menos de dos horas de casa. Con precios, cómo llegar y qué hacer cerca.",
+					"seoTextHeader": "<p>Un fin de semana da para más de lo que parece si no hay que conducir tres horas. Esta es nuestra selección de escapadas de fin de semana por Cataluña: llegar a la hora de comer, una actividad por la tarde y volver el domingo.</p>",
+					"slug": "escapadas-fin-de-semana",
+					"seoText": "<p>Hay muchas razones para hacer una escapada de fin de semana en pareja. Son dos días, pero dan para parar, reconectar y volver de otra manera.</p><p>La principal ventaja de una <strong>escapada de fin de semana</strong> es poder <strong>salir de la rutina</strong> y pasar tiempo juntos de verdad. Sin trabajo ni tareas de casa por medio, la conversación cambia.</p><p>Además, un cambio de escenario y unas cuantas experiencias nuevas le devuelven la chispa a una relación. Es difícil aburrirse cuando todo lo que ves es nuevo.</p><p>También es una buena ocasión para probar cosas que en casa no se hacen: caminar hasta una cima, salir en bicicleta, catar vinos o meterse en una clase de cocina. De esos días uno se acuerda.</p><p>En resumen: un fin de semana fuera es de las cosas más baratas que se pueden hacer por una relación. Y en Cataluña se llega a casi todas partes en menos de dos horas.</p><p>Si buscáis más ideas, en la recopilación de <a href=\"https://escapadesenparella.cat/es\">escapadas en pareja</a> están todas las que hemos visitado, ordenadas por tipo y por zona.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"title": "Escapadas de fin de semana",
+					"subtitle": "Escapadas de fin de semana en pareja por Cataluña, a menos de dos horas de casa. Con precios, cómo llegar y qué hacer cerca.",
+					"seoTextHeader": "<p>Un fin de semana da para más de lo que parece si no hay que conducir tres horas. Esta es nuestra selección de escapadas de fin de semana por Cataluña: llegar a la hora de comer, una actividad por la tarde y volver el domingo.</p>",
+					"slug": "escapadas-fin-de-semana"
+				}
+			}
+		},
+		{
+			"collection": "categories",
+			"slug": "escapades-culturals",
+			"field": "translations",
+			"value": {
+				"es": {
+					"title": "Escapadas culturales",
+					"subtitle": "Escapadas culturales en pareja por Cataluña: castillos medievales, pueblos de piedra, monasterios y museos. Con horarios y cómo llegar.",
+					"seoTextHeader": "<p>Cataluña tiene tanto patrimonio que hay escapadas culturales para todos los gustos. Aquí está nuestra selección: castillos que se pueden visitar, pueblos medievales que siguen habitados y monasterios en medio de la nada.</p>",
+					"slug": "escapadas-culturales",
+					"seoText": "<p>Cataluña tiene un patrimonio que da para <strong>escapadas culturales</strong> de todos los tipos. De Barcelona a la costa mediterránea, pasando por pueblos medievales que siguen habitados, no falta dónde mirar.</p><p>Uno de los destinos obvios es Barcelona, conocida por su arquitectura, su arte y su cocina. La ciudad tiene museos y galerías de sobra, además de la Sagrada Familia, de Antoni Gaudí. El Barrio Gótico es la otra visita imprescindible, con sus calles estrechas, sus plazas y sus catedrales.</p><p>Si buscáis algo más tranquilo, la Costa Brava es un tramo de costa lleno de pueblos de pescadores y calas donde no se oye nada. Por la zona pasa también la Ruta del Vino del Empordà, para catar vinos con el mar a la vista.</p><p>Pero la cultura no se acaba en la ciudad ni en la costa. Los Pirineos tienen iglesias románicas por todas partes, muchas de ellas en pueblos de veinte habitantes, y varios parques naturales donde el patrimonio y el paisaje van juntos.</p><p>Sea cual sea el tipo de escapada cultural que busquéis, en Cataluña la encontraréis a menos de dos horas de casa.</p><p>Esta es una de las muchas <a href=\"https://escapadesenparella.cat/es\">escapadas en pareja</a> que hemos ido recogiendo desde 2015.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"title": "Escapadas culturales",
+					"subtitle": "Escapadas culturales en pareja por Cataluña: castillos medievales, pueblos de piedra, monasterios y museos. Con horarios y cómo llegar.",
+					"seoTextHeader": "<p>Cataluña tiene tanto patrimonio que hay escapadas culturales para todos los gustos. Aquí está nuestra selección: castillos que se pueden visitar, pueblos medievales que siguen habitados y monasterios en medio de la nada.</p>",
+					"slug": "escapadas-culturales"
+				}
+			}
+		}
+	]
+}

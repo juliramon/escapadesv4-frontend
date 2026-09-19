@@ -1,0 +1,77 @@
+// Tria d'idioma.
+//
+// Per sota de `lg` el botó no es pinta i els dos idiomes queden a la vista:
+// dins del menú del mòbil ja hi ha prou coses per obrir. A l'escriptori és un
+// desplegable, com el del menú.
+//
+// L'estat obert va a la mateixa llista (`is-open`) i no a un avantpassat:
+// depenia de l'especificitat entre `.language-switcher.open .list` i `.list`,
+// i el panell es quedava a `opacity: 0` amb la classe `open` posada. Amb el
+// modificador al mateix element no hi ha cascada que valgui.
+//
+// La llista no es treu del DOM en cap moment: s'amaga amb opacitat i
+// `pointer-events` perquè Googlebot pugui seguir els enllaços i trobar
+// l'altra versió del web, que és mitja feina de posicionar-la.
+@layer components
+    .language-switcher
+        &__button
+            display: none !important
+
+        &__list
+            @apply list-none p-0 m-0 flex flex-row flex-wrap gap-2
+
+        &__item
+            @apply inline-flex items-center gap-x-2 rounded-lg px-3 py-2 text-15 text-grey-700 no-underline
+
+            &:hover
+                @apply bg-neutral-100 text-primary-500
+
+            &:focus-visible
+                @apply outline-none ring-2 ring-primary-500 ring-offset-1
+
+            &.is-current
+                @apply bg-neutral-100 text-primary-500 font-medium
+
+        &__code
+            @apply text-13 font-semibold tracking-wide uppercase text-grey-300
+
+        &__item.is-current &__code
+            @apply text-primary-500
+
+    @screen lg
+        .language-switcher
+            @apply relative flex items-center
+
+            &__button
+                display: inline-flex !important
+                @apply items-center gap-x-1 rounded-full border border-primary-50 bg-white px-2.5 py-2 text-13 font-semibold uppercase tracking-wide text-grey-700 transition-colors duration-200
+
+                &:hover
+                    @apply bg-neutral-100
+
+                &:focus-visible
+                    @apply outline-none ring-2 ring-primary-500 ring-offset-1
+
+            &__chevron
+                @apply transition-transform duration-200
+
+            &.open &__button
+                @apply bg-neutral-100
+
+            &.open &__chevron
+                @apply rotate-180
+
+            &__list
+                pointer-events: none
+                opacity: 0
+                z-index: -10
+                min-width: 180px
+                @apply bg-white rounded-xl border border-primary-50 shadow-md m-0 absolute top-12 right-0 p-2 flex flex-col gap-y-1 transition-all duration-300 ease-in-out
+
+                &.is-open
+                    pointer-events: auto
+                    opacity: 1
+                    z-index: 50
+
+            &__item
+                @apply w-full

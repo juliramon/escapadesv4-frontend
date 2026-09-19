@@ -8,9 +8,23 @@ import GlobalMetas from "../../components/head/GlobalMetas";
 import ListingGrid from "../../components/listings/ListingGrid";
 import TaxonomyChips from "../../components/listings/TaxonomyChips";
 import MobileAnchorAd from "../../components/ads/MobileAnchorAd";
-import { DESTINATIONS } from "../../utils/siteTaxonomy";
+import {
+	DESTINATIONS,
+	localizedEntries,
+} from "../../utils/siteTaxonomy";
 import BreadcrumbRichSnippet from "../../components/richsnippets/BreadcrumbRichSnippet";
+import { useRouter } from "next/router";
+import { useT } from "../../i18n/strings";
 import ContentService from "../../services/contentService";
+import {
+	DEFAULT_LOCALE,
+	FIELDS,
+	LOCALES,
+	findBySlug,
+	localized,
+	segment,
+	slugFor,
+} from "../../utils/i18n";
 import { toListingCard, toMapMarker } from "../../utils/listingProps";
 import ListingHeader from "../../components/headers/ListingHeader";
 import MapModal from "../../components/modals/MapModal";
@@ -51,7 +65,13 @@ const DestinationPage = ({
 
 	const service = new ContentService();
 
-	const basePath = `/destinacions/${destinationDetails.slug}`;
+	const t = useT();
+	const { locale } = useRouter();
+	// En castellà la ruta és `/es/destinos/escapadas-pirineos`: tant el
+	// segment com el slug van traduïts.
+	const seccio = segment("destinacions", locale);
+	const slugActual = slugFor(destinationDetails, locale);
+	const basePath = `/${seccio}/${slugActual}`;
 	const pageUrl = `https://escapadesenparella.cat${pagePath(
 		basePath,
 		currentPage,
@@ -243,7 +263,7 @@ const DestinationPage = ({
 					<path d="M9 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
 					<path d="M17.657 16.657l-4.243 4.243a2 2 0 0 1 -2.827 0l-4.244 -4.243a8 8 0 1 1 11.314 0z" />
 				</svg>
-				Veure mapa
+				{t("map.see")}
 			</button>
 		</div>
 	);
@@ -263,9 +283,9 @@ const DestinationPage = ({
 				page1Title="Inici"
 				page1Url="https://escapadesenparella.cat"
 				page2Title="Destinacions"
-				page2Url="https://escapadesenparella.cat/destinacions"
+				page2Url={`https://escapadesenparella.cat/${seccio}`}
 				page3Title={destinationDetails.title}
-				page3Url={`https://escapadesenparella.cat/destinacions/${destinationDetails.slug}`}
+				page3Url={`https://escapadesenparella.cat/${basePath.slice(1)}`}
 			/>
 			<div id="contentList" className="category relative">
 				<NavigationBar />
@@ -284,7 +304,7 @@ const DestinationPage = ({
 						}
 						textHeader={destinationDetails.seoTextHeader}
 						sponsorData={sponsorBlock}
-						breadcrumbLevel1={"Destinacions"}
+						breadcrumbLevel1={t("destination.breadcrumb")}
 						breadcrumbLevel2={destinationDetails.title}
 						actions={listingActions}
 					/>
@@ -293,10 +313,10 @@ const DestinationPage = ({
 					<section className="pt-6 md:pt-8">
 						<div className="container">
 							<TaxonomyChips
-								heading="Altres destinacions"
-								items={DESTINATIONS}
-								prefix="/destinacions/"
-								activeSlug={destinationDetails?.slug}
+								heading={t("destination.others")}
+								items={localizedEntries(DESTINATIONS, locale)}
+								prefix={`/${seccio}/`}
+								activeSlug={slugActual}
 								className="mb-5 md:mb-7"
 							/>
 							<div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 gap-5">
@@ -439,9 +459,12 @@ export async function getStaticPaths() {
 		destinations = [];
 	}
 
-	const paths = destinations.map((destination) => ({
-		params: { destination: destination.slug },
-	}));
+	const paths = LOCALES.flatMap((locale) =>
+		destinations.map((destination) => ({
+			params: { destination: slugFor(destination, locale) },
+			locale,
+		})),
+	);
 	// "blocking" en lloc de false: amb false, una destinació creada des del
 	// panell d'administració donava 404 fins al següent desplegament.
 	return { paths, fallback: "blocking" };
@@ -452,9 +475,14 @@ export async function getStaticPaths() {
  * `pages/destinacions/[destination]/pagina/[pagina].js` per a la resta de
  * tandes.
  */
-export const getDestinationPageProps = async (slug, page = 1) => {
+export const getDestinationPageProps = async (slug, page = 1, locale) => {
 	const service = new ContentService();
-	const destinationDetails = await service.getDestinationDetails(slug);
+	// En castellà arriba el slug traduït, que l'API no coneix: es busca al
+	// catàleg, que són catorze documents.
+	const destinationDetails =
+		locale && locale !== DEFAULT_LOCALE
+			? findBySlug(await service.getDestinations(), slug, locale)
+			: await service.getDestinationDetails(slug);
 
 	if (!destinationDetails) {
 		return { notFound: true, revalidate: 120 };
@@ -472,9 +500,15 @@ export const getDestinationPageProps = async (slug, page = 1) => {
 	// la pàgina sense pintar-ne res més.
 	return {
 		props: {
-			destinationDetails,
+			destinationDetails: localized(
+				destinationDetails,
+				locale,
+				FIELDS.destination,
+			),
 			allResults: (allResults || []).map(toMapMarker),
-			paginatedResults: (paginatedResults || []).map(toListingCard),
+			paginatedResults: (paginatedResults || [])
+				.map((item) => localized(item, locale, FIELDS.card))
+				.map(toListingCard),
 			totalItems,
 			numPages,
 			currentPage: page,
@@ -483,8 +517,8 @@ export const getDestinationPageProps = async (slug, page = 1) => {
 	};
 };
 
-export async function getStaticProps({ params }) {
-	return getDestinationPageProps(params.destination);
+export async function getStaticProps({ params, locale }) {
+	return getDestinationPageProps(params.destination, 1, locale);
 }
 
 export default DestinationPage;
