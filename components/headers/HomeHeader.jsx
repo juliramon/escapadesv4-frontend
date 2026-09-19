@@ -1,7 +1,12 @@
 import Link from "next/link";
-import Router from "next/router";
+import Router, { useRouter } from "next/router";
 import { useState } from "react";
-import { GETAWAY_CATEGORIES, STAY_CATEGORIES } from "../../utils/siteTaxonomy";
+import {
+	GETAWAY_CATEGORIES,
+	STAY_CATEGORIES,
+	localizedEntries,
+} from "../../utils/siteTaxonomy";
+import { useT } from "../../i18n/strings";
 
 /**
  * Capçalera de la portada.
@@ -25,7 +30,12 @@ const QUICK_LINKS = [
 	STAY_CATEGORIES.find((c) => c.slug === "cabanyes-als-arbres"),
 ].filter(Boolean);
 
+/** Els accessos ràpids, amb el slug i l'etiqueta de l'idioma de la ruta. */
+const quickLinksFor = (locale) => localizedEntries(QUICK_LINKS, locale);
+
 const HomeHeader = ({ slideImage, totals = {} }) => {
+	const t = useT();
+	const { locale } = useRouter();
 	const [query, setQuery] = useState("");
 
 	const handleSubmit = (e) => {
@@ -95,9 +105,9 @@ const HomeHeader = ({ slideImage, totals = {} }) => {
 									<path d="M7 7m-1 0a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
 									<path d="M6 18l12 -12" />
 								</svg>
-								Descomptes
+								{t("nav.discountsShort")}
 							</span>
-							Estalvia amb els descomptes per viatjar
+							{t("hero.discountsRibbon")}
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width={15}
@@ -120,16 +130,15 @@ const HomeHeader = ({ slideImage, totals = {} }) => {
 					</Link>
 
 					<h1 className="h1--hero home-hero__title">
-						La vostra propera escapada en parella comença aquí
+						{t("hero.title")}
 					</h1>
 					<p className="home-hero__subtitle">
-						Experiències i allotjaments amb encant a Catalunya,
-						visitats i verificats per nosaltres.
+						{t("hero.subtitle")}
 					</p>
 
 					<form className="home-hero__search" onSubmit={handleSubmit}>
 						<label htmlFor="hero-search" className="sr-only">
-							Cerca experiències, allotjaments o destinacions
+							{t("hero.searchLabel")}
 						</label>
 						<span className="home-hero__search-icon">
 							<svg
@@ -158,7 +167,7 @@ const HomeHeader = ({ slideImage, totals = {} }) => {
 							name="query"
 							value={query}
 							onChange={(e) => setQuery(e.target.value)}
-							placeholder="On voleu anar?"
+							placeholder={t("hero.searchPlaceholder")}
 							className="home-hero__search-input"
 							autoComplete="off"
 						/>
@@ -166,12 +175,12 @@ const HomeHeader = ({ slideImage, totals = {} }) => {
 							type="submit"
 							className="home-hero__search-button button button__primary button__med"
 						>
-							Cercar
+							{t("hero.searchButton")}
 						</button>
 					</form>
 
 					<ul className="home-hero__quick-links">
-						{QUICK_LINKS.map((link) => (
+						{quickLinksFor(locale).map((link) => (
 							<li key={link.slug} className="m-0">
 								<Link href={`/${link.slug}`}>
 									<a className="home-hero__chip">
@@ -184,12 +193,16 @@ const HomeHeader = ({ slideImage, totals = {} }) => {
 
 					<ul className="home-hero__trust">
 						{totals.activities ? (
-							<li>{totals.activities} experiències</li>
+							<li>
+								{totals.activities} {t("hero.experiences")}
+							</li>
 						) : null}
 						{totals.places ? (
-							<li>{totals.places} allotjaments amb encant</li>
+							<li>
+								{totals.places} {t("hero.stays")}
+							</li>
 						) : null}
-						<li>Visitats i verificats per nosaltres</li>
+						<li>{t("hero.verified")}</li>
 					</ul>
 				</div>
 			</div>

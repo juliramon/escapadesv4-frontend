@@ -26,6 +26,11 @@ const STRINGS = {
 		ca: "Descomptes per viatjar",
 		es: "Descuentos para viajar",
 	},
+	"nav.searchPlaceholder": {
+		ca: "On voleu anar? Cerca una experiència, un allotjament o una zona",
+		es: "¿Adónde queréis ir? Busca una experiencia, un alojamiento o una zona",
+	},
+	"nav.discountsShort": { ca: "Descomptes", es: "Descuentos" },
 	"nav.language": { ca: "Idioma", es: "Idioma" },
 	"nav.byGetawayType": {
 		ca: "Per tipus d'escapada",
@@ -112,6 +117,37 @@ const STRINGS = {
 		es: "Vuelve a probarlo más adelante.",
 	},
 
+	// Capçalera de la portada
+	"hero.discountsRibbon": {
+		ca: "Estalvia amb els descomptes per viatjar",
+		es: "Ahorra con los descuentos para viajar",
+	},
+	"hero.title": {
+		ca: "La vostra propera escapada en parella comença aquí",
+		es: "Vuestra próxima escapada en pareja empieza aquí",
+	},
+	"hero.subtitle": {
+		ca: "Experiències i allotjaments amb encant a Catalunya, visitats i verificats per nosaltres.",
+		es: "Experiencias y alojamientos con encanto en Cataluña, visitados y verificados por nosotros.",
+	},
+	"hero.searchLabel": {
+		ca: "Cerca experiències, allotjaments o destinacions",
+		es: "Busca experiencias, alojamientos o destinos",
+	},
+	"hero.searchPlaceholder": {
+		ca: "On voleu anar?",
+		es: "¿Adónde queréis ir?",
+	},
+	"hero.searchButton": { ca: "Cercar", es: "Buscar" },
+	"hero.experiences": { ca: "experiències", es: "experiencias" },
+	"hero.stays": {
+		ca: "allotjaments amb encant",
+		es: "alojamientos con encanto",
+	},
+	"hero.verified": {
+		ca: "Visitats i verificats per nosaltres",
+		es: "Visitados y verificados por nosotros",
+	},
 	// Portada
 	"home.start": { ca: "Per on comencem?", es: "¿Por dónde empezamos?" },
 	"home.byPlan": {

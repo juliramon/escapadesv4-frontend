@@ -338,7 +338,7 @@ const NavigationBar = () => {
 													name="search"
 													id="search"
 													ref={searchInputRef}
-													placeholder="On voleu anar? Cerca una experiència, un allotjament o una zona"
+													placeholder={t("nav.searchPlaceholder")}
 													className="search__input"
 													autoComplete="off"
 													onFocus={() =>
@@ -509,17 +509,17 @@ const NavigationBar = () => {
 										</li>
 									) : null}
 									<li className="menu__item">
-										<LanguageSwitcher />
-									</li>
-									<li className="menu__item">
 										<Link href="/descomptes-viatjar">
 											<a
 												title={t("nav.discounts")}
 												className="button button__ghost button__xs whitespace-nowrap"
 											>
-												Descomptes
+												{t("nav.discountsShort")}
 											</a>
 										</Link>
+									</li>
+									<li className="menu__item">
+										<LanguageSwitcher />
 									</li>
 									<li
 										className={`menu__item menu-dropdown ${
