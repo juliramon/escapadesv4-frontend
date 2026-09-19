@@ -1,0 +1,143 @@
+{
+	"generatedAt": "2026-09-19T15:53:24.598Z",
+	"note": "Cos en castellà de 6 fitxes, amb els enllaços interns ja apuntant a la versió castellana.",
+	"fields": [
+		{
+			"collection": "places",
+			"slug": "hotel-la-malcontenta",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-la-malcontenta-palamos",
+					"title": "Hotel La Malcontenta",
+					"metaTitle": "La Malcontenta: mansión del XIX cerca de Palamós",
+					"metaDescription": "Hotel La Malcontenta, en Palamós: una mansión del siglo XIX con jardines y piscina, a 1 km de las calas vírgenes.",
+					"description": "El Hotel La Malcontenta está en una mansión rural renovada del siglo XIX, cerca de Palamós, en la Costa Brava. Tiene piscina exterior, wifi gratuito y aparcamiento gratuito.\n\nEs un hotel elegante en medio de unos grandes jardines. Cerca están algunas de las playas más vírgenes y con más encanto de la Costa Brava: a 1 km está la playa de Castell.\n\nLas habitaciones incluyen aire acondicionado, TV por satélite y baño privado con albornoz, zapatillas y secador.\n\nEl restaurante del hotel sirve cocina mediterránea creativa en un comedor acogedor con vistas al jardín. Se recomienda reservar mesa con antelación.\n\nEl hotel tiene mostrador de información turística y servicio de alquiler de coches y bicicletas, para visitar con comodidad los sitios más emblemáticos de esta parte de la Costa Brava."
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "hotel-la-malcontenta-palamos",
+					"title": "Hotel La Malcontenta",
+					"metaTitle": "La Malcontenta: mansión del XIX cerca de Palamós",
+					"metaDescription": "Hotel La Malcontenta, en Palamós: una mansión del siglo XIX con jardines y piscina, a 1 km de las calas vírgenes."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-de-la-popa-castell-castellcir-centelles",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "castillo-de-la-popa-castellcir",
+					"title": "Visita al Castillo de la Popa",
+					"metaTitle": "Castillo de la Popa, en el Moianès",
+					"metaDescription": "El Castillo de la Popa, también conocido como Castillo de Castellcir: una fortaleza sobre la roca en el Moianès. Cómo llegar.",
+					"description": "<p>El <strong>Castillo de la Popa</strong>, también conocido como Castillo de Castellcir, tiene una historia que se remonta al año 923, cuando ya se mencionaba esta construcción. Al principio se llamó Castell Cir, pero después adoptó el nombre de Popa.</p><p>Su denominación actual viene de la forma de la roca que lo sostiene, que recuerda a la popa de un barco.</p><p>Esta estructura, en Castellcir, ha sido un punto de interés cultural y patrimonial a lo largo de los siglos, y está declarada bien cultural de interés nacional. Necesita intervenciones urgentes para su conservación.</p>",
+					"reasons": "<ol><li><p>Historia al aire libre: el Castillo de la Popa tiene más de mil años. Desde sus inicios medievales hasta hoy ha visto de todo, y eso se nota en cada piedra.</p></li><li><p>Vistas: está en alto, así que la panorámica del entorno es buena parte del atractivo.</p></li><li><p>Arquitectura: murallas, torres y pasadizos de una obra medieval que se deja recorrer.</p></li><li><p>Entorno natural: está rodeado de campo, perfecto para combinar la visita con una caminata.</p></li><li><p>Tranquilidad: la calma que se respira alrededor del castillo invita a quedarse un rato.</p></li></ol>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "castillo-de-la-popa-castellcir",
+					"title": "Visita al Castillo de la Popa",
+					"metaTitle": "Castillo de la Popa, en el Moianès",
+					"metaDescription": "El Castillo de la Popa, también conocido como Castillo de Castellcir: una fortaleza sobre la roca en el Moianès. Cómo llegar."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "seacling-costa-brava-bici-aquatica-sant-feliu-de-guixols",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "seacling-costa-brava-bici-acuatica",
+					"title": "Seacling Costa Brava",
+					"metaTitle": "Seacling: bici sobre el agua en la Costa Brava",
+					"metaDescription": "Seacling Costa Brava, en Sant Feliu de Guíxols: pedalear sobre el agua por las calas. Cuánto dura, qué cuesta y desde dónde sale.",
+					"description": "<p><strong>Seacling Costa Brava</strong> ofrece rutas guiadas en bici acuática por la Costa Brava, una manera distinta de ver la costa.</p><p>El servicio de alquiler de bicis acuáticas de Seacling Costa Brava está en Sant Feliu de Guíxols y promete ser la actividad más divertida del verano.</p><p>Las rutas duran entre 1 y 2 horas y llevan a descubrir calas y rincones de la Costa Brava a los que no se llega de otra manera.</p><p>Es una forma innovadora y entretenida de conocer esta parte del litoral.</p><h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/via-ferrata-cala-del-moli\">Vía ferrata de la Cala del Molí</a>, a menos de un kilómetro</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/mas-pla-solius\">Mas Pla</a>, a 7 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/hotel-mas-tapiolas-suits-natura\">Hotel Mas Tapiolas Suits Natura</a>, a 7 km</li></ul>",
+					"reasons": "<ul><li><p>Descubriréis calas escondidas</p></li><li><p>Una experiencia acuática distinta</p></li><li><p>Naturaleza desde el agua</p></li><li><p>Una actividad saludable y con encanto</p></li><li><p>Otra perspectiva de la Costa Brava</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "seacling-costa-brava-bici-acuatica",
+					"title": "Seacling Costa Brava",
+					"metaTitle": "Seacling: bici sobre el agua en la Costa Brava",
+					"metaDescription": "Seacling Costa Brava, en Sant Feliu de Guíxols: pedalear sobre el agua por las calas. Cuánto dura, qué cuesta y desde dónde sale."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "casal-sagrat-cor-viladrau-montseny",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "casal-sagrat-cor-viladrau",
+					"title": "Casal Sagrat Cor",
+					"metaTitle": "Casal Sagrat Cor: el primer albergue del Montseny",
+					"metaDescription": "El Casal Sagrat Cor, en Viladrau: el primer albergue dentro del Parque Natural del Montseny. Precio y cómo reservar.",
+					"description": "<p>El Casal Sagrat Cor, en pleno Montseny, es una antigua casa señorial propiedad de la Fundació Pere Relats de Barcelona.</p><p>Está dentro del Parque Natural del Montseny, en una zona rural tranquila rodeada de bosque, con unas vistas magníficas del macizo.</p><p>El centro de Viladrau está a 5 minutos a pie y se puede dejar el coche en el propio aparcamiento del albergue.</p><p>El albergue tiene capacidad para 50 plazas: 26 en la primera planta, 19 en la segunda y 10 en la tercera (algunas habitaciones tienen baño propio). Dispone de recepción, comedor grande y comedor pequeño, cocina y la sala del piano con TV. También tiene ascensor, wifi, agua caliente y calefacción.</p><p>Además, cuenta con una capilla / sala polivalente con sillas y mesas para 100 personas, donde se pueden hacer distintas actividades culturales.</p><p>Destaca el gran patio, un terreno ajardinado donde hacer actividades y juegos al aire libre rodeados del paisaje del Montseny.</p>",
+					"reasons": "<ul><li><p><strong>Entorno privilegiado</strong>: dentro del Parque Natural del Montseny, rodeado de bosque y montaña.</p></li><li><p><strong>Calma</strong>: un sitio para salir del estrés diario y respirar aire de montaña.</p></li><li><p><strong>Patrimonio</strong>: el casal es un edificio con historia y con encanto.</p></li><li><p><strong>Rutas a la puerta</strong>: desde aquí salen varias excursiones por el Montseny.</p></li><li><p><strong>Ambiente acogedor</strong>: el paisaje y la casa hacen que apetezca quedarse.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "casal-sagrat-cor-viladrau",
+					"title": "Casal Sagrat Cor",
+					"metaTitle": "Casal Sagrat Cor: el primer albergue del Montseny",
+					"metaDescription": "El Casal Sagrat Cor, en Viladrau: el primer albergue dentro del Parque Natural del Montseny. Precio y cómo reservar."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "cascada-de-gerber-alt-aneu",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cascada-de-gerber",
+					"title": "La Cascada de Gerber",
+					"metaTitle": "Cascada de Gerber: 125 metros de salto de agua",
+					"metaDescription": "La Cascada de Gerber, en el Alt Àneu: el salto de agua más alto de la comarca, con casi 125 metros. La ruta y cómo llegar.",
+					"description": "<p>La Cascada de Gerber es un salto de agua de casi 125 metros de altura en el término municipal del Alt Àneu, en el entorno del Parque Nacional de Aigüestortes. Es el desagüe natural del lago de Gerber (2.165 m), que baja por el valle y se precipita por el barranco de Gerber hacia el valle de la Bonaigua.<br><br>Para llegar se puede hacer una ruta circular de unos quince minutos, dejando el coche en un aparcamiento junto a la carretera, o una ruta circular de más de una hora. Las dos opciones son buenas para ver el salto de agua. En el segundo caso, el coche se puede dejar en el refugio de montaña del término del Alt Àneu, en el Pallars Sobirà, donde empieza la ruta hasta la cascada.</p>",
+					"reasons": "<ul><li><p><strong>Paisaje espectacular</strong>: la ruta hasta la Cascada de Gerber pasa por bosques y valles, y la cascada en sí vale el viaje.</p></li><li><p><strong>Un rincón escondido</strong>: llegar allí es como encontrar un sitio que no sale en las guías. Un picnic al lado del agua es plan de día completo.</p></li><li><p><strong>Actividad moderada</strong>: la caminata no es exigente y se hace en familia o en pareja sin problema.</p></li><li><p><strong>Naturaleza de verdad</strong>: el Alt Àneu es conocido por su biodiversidad y por lo poco alterado de su paisaje.</p></li><li><p><strong>Y más cosas cerca</strong>: después podéis recorrer los pueblos del valle, comer allí o encadenar otra ruta.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "cascada-de-gerber",
+					"title": "La Cascada de Gerber",
+					"metaTitle": "Cascada de Gerber: 125 metros de salto de agua",
+					"metaDescription": "La Cascada de Gerber, en el Alt Àneu: el salto de agua más alto de la comarca, con casi 125 metros. La ruta y cómo llegar."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "estany-negre-parc-nacional-aiguestortes-estanys-sant-maurici-pallars-sobira",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "estany-negre-aiguestortes",
+					"title": "Estany Negre, en el PN de Aigüestortes",
+					"metaTitle": "Estany Negre, en Aigüestortes: ruta y cómo llegar",
+					"metaDescription": "El Estany Negre, a 2.337 metros en el Parque Nacional de Aigüestortes: uno de los lagos más espectaculares del Pirineo. La ruta.",
+					"description": "<p>El Estany Negre de Peguera es un impresionante lago de forma circular, a 2.337 m de altitud, en la cabecera del valle de Peguera, dentro del Parque Nacional de Aigüestortes i Estany de Sant Maurici. Mide 754 m en su punto más largo y tiene 70 m de profundidad: es el más profundo del parque, y de ahí le viene el nombre.</p><p>Recoge las aguas de las Canals de Peguera y las vierte en el Estany Trull.</p><p>El Refugio Josep Maria Blanc está a 2.350 m de altitud, en una pequeña península que se mete en el Estany Tort. Tiene 60 plazas para pernoctar, equipadas con colchones y mantas, además de WC, duchas de agua caliente y demás. También ofrece servicio de cocina con especialidades típicas de un refugio de alta montaña.</p><p>Como curiosidad, el Estany Negre de Peguera está en la ruta Carros de Foc, y desde allí se puede seguir hacia la collada de Saburó, el refugio de la Colomina en la Vall Fosca o el coll de Monestero.</p>",
+					"reasons": "<ul><li><p>Descubrir el Estany Negre, rodeado de cimas y de bosque alpino.</p></li><li><p>Una caminata por naturaleza poco alterada dentro del Parque Nacional de Aigüestortes.</p></li><li><p>Tranquilidad absoluta junto al lago, que es a lo que se sube.</p></li><li><p>Uno de los rincones más icónicos del Pirineo, con vistas espectaculares.</p></li><li><p>Se puede encadenar con otras rutas del parque, que da para días.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "estany-negre-aiguestortes",
+					"title": "Estany Negre, en el PN de Aigüestortes",
+					"metaTitle": "Estany Negre, en Aigüestortes: ruta y cómo llegar",
+					"metaDescription": "El Estany Negre, a 2.337 metros en el Parque Nacional de Aigüestortes: uno de los lagos más espectaculares del Pirineo. La ruta."
+				}
+			}
+		}
+	]
+}
