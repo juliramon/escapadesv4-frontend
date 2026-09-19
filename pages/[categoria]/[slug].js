@@ -27,6 +27,8 @@ import {
 	listingPath,
 	listingUrl,
 } from "../../utils/listingRoutes";
+import { storyCanonicalUrl } from "../../utils/storyCanonicals";
+import { GETAWAY_CATEGORIES, STAY_CATEGORIES } from "../../utils/siteTaxonomy";
 import {
 	idOf,
 	loadListingCatalog,
@@ -371,7 +373,12 @@ const GetawayListing = ({
 		// La fitxa és accessible des de qualsevol slug de categoria, però la URL
 		// que mana és sempre la de la seva categoria principal. Sense això cada
 		// variant es canonicalitzava a si mateixa i competien entre elles.
-		const canonicalUrl = listingUrl(getawayDetails, router.locale);
+		const ownUrl = listingUrl(getawayDetails, router.locale);
+		// I quan el lloc també té una història, mana la història: totes dues
+		// sortien per a les mateixes cerques i es repartien els senyals.
+		// `utils/storyCanonicals.js` explica quan s'hi ha d'afegir una fitxa.
+		const canonicalUrl =
+			storyCanonicalUrl(getawayDetails, router.locale) || ownUrl;
 
 		return (
 			<>
@@ -392,14 +399,14 @@ const GetawayListing = ({
 					page2Title={categoryDetails.title}
 					page2Url={`https://escapadesenparella.cat/${categoryDetails.slug}`}
 					page3Title={getawayDetails.title}
-					page3Url={canonicalUrl}
+					page3Url={ownUrl}
 				/>
 				{/* Una fitxa és un lloc, no un article: amb `TouristAttraction`
 				    o `LodgingBusiness`, Google en pot llegir l'adreça, les
 				    coordenades, el telèfon i l'horari. */}
 				<ListingRichSnippet
 					listing={getawayDetails}
-					url={canonicalUrl}
+					url={ownUrl}
 					image={cloudinaryImage(getawayDetails.cover, 1200, 630).src}
 				/>
 				<div id="listingPage">
@@ -1274,7 +1281,29 @@ const categoryBlock = async (service, getaway) => {
 	}
 };
 
+/**
+ * Els segments de categoria que existeixen de debò, en tots dos idiomes.
+ *
+ * Amb `fallback: "blocking"`, qualsevol primer segment inventat entrava aquí i
+ * es renderitzava igualment: `/categoria-inventada/cabanes-dosrius` tornava un
+ * 200 amb la pàgina en blanc, sense títol. Per a Google això és un error tou, i
+ * amb 190 fitxes i qualsevol prefix imaginable és una superfície infinita.
+ *
+ * Hi ha d'haver els slugs castellans: en castellà el que arriba és
+ * `escapadas-romanticas`, i amb només els catalans totes les fitxes en
+ * castellà farien 404.
+ */
+const CATEGORIES_PUBLICADES = new Set(
+	[...GETAWAY_CATEGORIES, ...STAY_CATEGORIES].flatMap((category) =>
+		[category.slug, category.es?.slug].filter(Boolean),
+	),
+);
+
 export async function getStaticProps({ params, locale }) {
+	if (!CATEGORIES_PUBLICADES.has(params.categoria)) {
+		return { notFound: true, revalidate: 120 };
+	}
+
 	const service = new ContentService();
 	const esTraduit = Boolean(locale) && locale !== DEFAULT_LOCALE;
 	// En castellà, tant el segment de categoria com el slug de la fitxa
@@ -1305,6 +1334,20 @@ export async function getStaticProps({ params, locale }) {
 	if (activityDetails == null && placeDetails == null) {
 		return {
 			notFound: true,
+			revalidate: 120,
+		};
+	}
+
+	// La mateixa fitxa es podia llegir des de qualsevol de les setze
+	// categories, totes amb un 200 i totes amb la mateixa canònica. Google en
+	// té una d'indexada ("pàgina alternativa amb l'etiqueta canònica
+	// correcta") i li fa gastar rastreig per res: val més dir-li d'entrada
+	// quina és la bona.
+	const canonica = listingPath(getawayDetails);
+	const propia = canonica.split("/").filter(Boolean)[0];
+	if (CATEGORIES_PUBLICADES.has(propia) && propia !== params.categoria) {
+		return {
+			redirect: { destination: canonica, permanent: true },
 			revalidate: 120,
 		};
 	}
