@@ -1,0 +1,142 @@
+{
+	"generatedAt": "2026-09-19T11:41:45.228Z",
+	"note": "Cos en castellà de 6 fitxes, amb els enllaços interns ja apuntant a la versió castellana.",
+	"fields": [
+		{
+			"collection": "activities",
+			"slug": "arboretum-masjoan-espinelves",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "arboretum-masjoan-espinelves",
+					"title": "Arboretum Masjoan",
+					"metaTitle": "Arboretum Masjoan",
+					"metaDescription": "El Arboretum Masjoan, en Espinelves: un bosque de árboles centenarios traídos de medio mundo. Horarios y cómo llegar.",
+					"description": "<p>Masjoan es una masía de Espinelves del siglo XII donde la familia Masferrer reside desde 1710. El arboreto de Masjoan lo creó principalmente Marià Masferrer Rierola (1856-1923), naturalista y botánico que estudió a fondo la fauna y la flora de las Guilleries.</p><p>Hoy, en Masjoan está la mayor concentración de árboles monumentales de Cataluña, declarados patrimonio natural por la Generalitat.<br>Entre las actividades que se hacen allí están el arboreto, los baños de bosque, los productos naturales, los viveros y la actividad de buscar el tió.</p><p>Al pasear por el arboreto señalizado —tanto con el mapa que dan en la entrada como con los indicadores del recorrido— se van descubriendo distintos tipos de árboles, en un sitio ideal para desconectar. Entre ellos destacan las secuoyas de California, que pueden superar los 100 metros de altura y los 11 metros de diámetro.</p><p>El recorrido se puede hacer con guía (concertando la visita antes) o por libre (sin reserva). Dura unos 45 minutos y pasa por una serie de árboles notables —los más altos de Cataluña—, plantados entre 1860 y 1953.</p><p>Se permite la entrada de perros.</p>",
+					"reasons": "<ul><li><p><strong>Paseos entre árboles monumentales</strong>: el Arboretum Masjoan tiene una de las colecciones de árboles más impresionantes de Cataluña, ideal para un paseo tranquilo en pareja.</p></li><li><p><strong>Especies centenarias</strong>: es un museo vivo, con ejemplares de distintas partes del mundo.</p></li><li><p><strong>Colores que cambian con la estación</strong>: de la floración de primavera a los tonos del otoño, cada visita es distinta.</p></li><li><p><strong>Desconexión</strong>: en un entorno tranquilo de Espinelves, es un buen sitio para respirar y no hacer nada.</p></li><li><p><strong>Y el pueblo al lado</strong>: Espinelves, conocido por su Feria del Abeto, permite completar la visita con una jornada cultural y gastronómica.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "arboretum-masjoan-espinelves",
+					"title": "Arboretum Masjoan",
+					"metaTitle": "Arboretum Masjoan",
+					"metaDescription": "El Arboretum Masjoan, en Espinelves: un bosque de árboles centenarios traídos de medio mundo. Horarios y cómo llegar."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "pont-de-pedret-pont-medieval-bergueda-catalunya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "puente-de-pedret",
+					"title": "Puente de Pedret",
+					"metaTitle": "Puente de Pedret, un puente medieval del Berguedà",
+					"metaDescription": "El Puente de Pedret, sobre el Llobregat: un puente medieval y una iglesia románica al lado, en el Berguedà. Cómo llegar.",
+					"description": "<p>El <strong>Puente de Pedret</strong> es un bonito puente medieval que está cerca de la iglesia de Sant Quirze de Pedret, en la comarca del Berguedà.</p><p>Estas son algunas de sus características:</p><ul><li><p>El Puente de Pedret está documentado por primera vez en el siglo XI y es uno de los pocos puentes medievales que se conservan en la zona.</p></li><li><p>Está cerca de la confluencia de los ríos Llobregat y Saldes.</p></li><li><p>Es un puente de piedra de carácter románico, con arcos de medio punto y una estructura robusta.</p></li><li><p>Es uno de los elementos arquitectónicos más relevantes de la comarca del Berguedà.</p></li><li><p>Cerca del puente está la iglesia de Sant Quirze de Pedret, otro ejemplo de arquitectura románica, del siglo X.</p></li><li><p>Tanto el puente como la iglesia están considerados patrimonio cultural de Cataluña.</p></li><li><p>La zona es ideal para pasear y hacer excursiones a pie, por el entorno natural que la rodea.</p></li></ul><p>Su ubicación cerca de la confluencia del Llobregat y el Saldes y su estructura robusta lo convierten en un punto de interés y en un buen inicio para caminar por la zona.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "puente-de-pedret",
+					"title": "Puente de Pedret",
+					"metaTitle": "Puente de Pedret, un puente medieval del Berguedà",
+					"metaDescription": "El Puente de Pedret, sobre el Llobregat: un puente medieval y una iglesia románica al lado, en el Berguedà. Cómo llegar."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-burriac-medieval-cabrils-maresme-catalunya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "castillo-de-burriac",
+					"title": "Castillo de Burriac",
+					"metaTitle": "Castillo de Burriac: la ruta y las vistas del Maresme",
+					"metaDescription": "El Castillo de Burriac, en Cabrera de Mar: uno de los castillos medievales más emblemáticos del Maresme. Cómo subir hasta arriba.",
+					"description": "<p>El <strong>Castillo de Burriac</strong>, también llamado Castillo de Sant Vicenç, es una antigua fortificación entre los pueblos de Cabrera de Mar, Cabrils y Argentona, en la comarca del Maresme. Está en una posición elevada, a casi 400 metros sobre el nivel del mar, y se construyó sobre una torre de defensa anterior, de época romana. La primera documentación que se conserva del castillo es del año 1017.</p><p>La edificación actual es en general del siglo XV, y solo quedan algunos testimonios de las construcciones de los siglos X-XI y la cisterna de época romana, que se aprovechó en las construcciones posteriores.</p><p>El Castillo de Burriac es una de las principales atracciones de la zona, está declarado Bien Cultural de Interés Nacional (BCIN) y, una vez arriba, ofrece una vista espectacular de la costa del Maresme, de buena parte de la costa de Barcelona y, los días más claros, hasta de Mallorca.</p><h2><strong>Cómo llegar al Castillo de Burriac</strong></h2><p>Se puede llegar por la carretera BV-5022, que conecta Cabrils con el castillo. También se puede subir a pie desde Cabrils, siguiendo el camino señalizado, o desde Argentona, por la pista forestal que sale de la Font Picant y que lleva hasta arriba.</p><p>La subida por ambos lados no es demasiado dura, salvo algún tramo final, y todo el recorrido está bien señalizado. Es una escapada que recomendamos.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "castillo-de-burriac",
+					"title": "Castillo de Burriac",
+					"metaTitle": "Castillo de Burriac: la ruta y las vistas del Maresme",
+					"metaDescription": "El Castillo de Burriac, en Cabrera de Mar: uno de los castillos medievales más emblemáticos del Maresme. Cómo subir hasta arriba."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "ruta-arros-pals-xiulet-pals-baix-emporda",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "ruta-del-arroz-de-pals",
+					"title": "Ruta del arroz de Pals con El Xiulet de Pals",
+					"metaTitle": "Ruta del arroz de Pals: visita a los arrozales",
+					"metaDescription": "La ruta del arroz de Pals con El Xiulet: cómo se cultiva, por qué es de los mejores de Cataluña y cuánto dura la visita.",
+					"description": "<p>La ruta del arroz con el Xiulet de Pals empieza en el casco antiguo de Pals, justo donde está la parada del tren: el Xiulet. Desde allí sale el trayecto que lleva hasta el molino, pasando por la zona de las granjas de Pals y por los campos de cultivo típicos de la llanura del Empordà.<br><br>En el Molí de Pals explican la historia del edificio ligada al arroz y todo el proceso de elaboración, se visitan las instalaciones donde se fabricaba electricidad a principios del siglo XX y la sala del molino viejo.<br><br>Además, hay una degustación de distintos productos hechos con arroz: cerveza, vermut, crema de arroz y ratafía. Todos elaborados con el arroz del molino, l'Arrossa.<br><br>La visita acaba con el regreso en el Xiulet de Pals hasta el centro del pueblo, pasando entre los campos de arroz, rodeados de naturaleza, animales y aves, dentro del Parque Natural del Montgrí, las Islas Medas y el Baix Ter. Recomendamos llevar prismáticos para aprovechar la ruta al máximo.</p>",
+					"reasons": "<ol><li><p>Una experiencia gastronómica distinta: la ruta del arroz de Pals permite descubrir todo el proceso de cultivo y probar productos locales hechos con este ingrediente. Una buena idea para quien disfruta de la mesa.</p></li><li><p>Contacto con la naturaleza: el recorrido por los campos de arroz deja ver el paisaje rural de Pals y entender su ciclo de cultivo.</p></li><li><p>Visita al molino: conocer de cerca la historia y el funcionamiento de esta infraestructura tradicional ayuda a entender la importancia del molino en el procesado del arroz.</p></li><li><p>Cata de producto local: el punto culminante es probar los productos elaborados con el arroz de Pals, que es de una calidad notable.</p></li><li><p>Una experiencia compartida: hacer la ruta en pareja da para descubrir, probar y charlar sin prisa.</p></li></ol>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "ruta-del-arroz-de-pals",
+					"title": "Ruta del arroz de Pals con El Xiulet de Pals",
+					"metaTitle": "Ruta del arroz de Pals: visita a los arrozales",
+					"metaDescription": "La ruta del arroz de Pals con El Xiulet: cómo se cultiva, por qué es de los mejores de Cataluña y cuánto dura la visita."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "casa-rural-mas-ardevol",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "casa-rural-mas-ardevol-falset",
+					"title": "Mas Ardevol",
+					"metaTitle": "Mas Ardevol, en Falset: casa rural en el Priorat",
+					"metaDescription": "Mas Ardevol, en Falset: alojamiento rural con historia en pleno Priorat, entre viñedos y montaña. Precio y cómo llegar.",
+					"description": "<p>Mas Ardèvol, entre Falset y Porrera, dentro de la DOQ Priorat, es una masía de turismo rural ecosostenible. El edificio es de 1800 y la finca es propiedad familiar desde el año 1600.</p><p>Las habitaciones tienen sala, chimenea y jardín, y una de ellas terraza. Destacan por la claridad que entra por las ventanas y por sus vistas.</p><p>Entre las instalaciones está la piscina biológica, que se puede usar en verano, y la sala de lectura, un espacio para leer con calma o coger alguno de los libros de la biblioteca.</p><p>La cocina de Mas Ardèvol ofrece cenas de temporada con recetas prioratinas según el producto de cada momento. El huerto de la casa y otros huertos de km 0 son el origen principal de las verduras, flores y frutas.</p><p>La estancia se puede completar con tratamientos de belleza y bienestar, con cosmética elaborada con ingredientes 100% naturales: uva de la DOQ Priorat, aceitunas con certificado ecológico y avellanas de la DOP Reus.</p>",
+					"reasons": "<p><strong>1. Una casa rural con encanto en pleno Priorat</strong><br><strong>Mas Ardèvol</strong> está rodeado de viñas, olivos y monte. Un sitio con carácter, perfecto para una <strong>escapada en pareja</strong> tranquila.</p><p><strong>2. Alojamiento sostenible y sin prisa</strong><br>En Mas Ardèvol apuestan por la <strong>sostenibilidad</strong>: producto local, materiales naturales y un ritmo pausado que invita a desconectar.</p><p><strong>3. Desayunos y cocina casera con producto local</strong><br>Los <strong>desayunos artesanos</strong> son uno de los grandes atractivos: mermeladas, pan recién hecho, fruta de temporada y producto del Priorat.</p><p><strong>4. Un buen punto de partida</strong><br>Desde aquí podéis visitar <strong>bodegas, pueblos con encanto y rutas de senderismo</strong> entre viñedos y montañas.</p><p><strong>5. Íntimo y tranquilo</strong><br>El silencio, el campo y el paisaje hacen de <strong>Mas Ardèvol</strong> un buen sitio para pasar unos días en pareja sin que pase nada.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "casa-rural-mas-ardevol-falset",
+					"title": "Mas Ardevol",
+					"metaTitle": "Mas Ardevol, en Falset: casa rural en el Priorat",
+					"metaDescription": "Mas Ardevol, en Falset: alojamiento rural con historia en pleno Priorat, entre viñedos y montaña. Precio y cómo llegar."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "visita-jardins-artigas",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "visita-jardines-artigas",
+					"title": "Visita a los Jardines Artigas",
+					"metaTitle": "Jardines Artigas: patrimonio modernista de Gaudí",
+					"metaDescription": "Los Jardines Artigas, en La Pobla de Lillet: obra de Gaudí entre el río y el bosque. Horarios, cómo llegar y qué ver.",
+					"description": "<p>Los Jardines Artigas, diseñados por Antoni Gaudí, son unos jardines preciosos en La Pobla de Lillet. La obra se construyó en agradecimiento a la familia Artigas, que acogió a Gaudí en su casa mientras él trabajaba en la construcción del Xalet del Catllaràs, una vivienda para los trabajadores e ingenieros de las minas que extraían carbón para la fábrica de cemento.</p><p>Es una de las obras más desconocidas de Gaudí. En 1992 se inició el proceso de restauración del entorno y se habilitó el acceso, que se abrió en 1997.</p><p>En esta escapada en pareja podréis recorrer los jardines en unos 3 km y ver la arquitectura característica de Gaudí, con elementos como el trencadís, el arco catenario y esculturas de animales como el águila o el león. También destacan las cuatro obras que representan a los cuatro evangelistas dentro de los jardines.</p><p>Por el camino iréis descubriendo los distintos ambientes que creó el arquitecto, pasando por la Cruz con los 4 evangelistas, la construcción de piedra seca y el arco catenario o parabólico.</p><p>La visita se puede combinar con una vuelta por La Pobla de Lillet, con el tren del cemento y con el pueblo de Castellar de n'Hug y las Fuentes del Llobregat.</p><p>Se puede llegar en coche, porque hay aparcamiento gratuito, o con el Tren del Cemento.</p>",
+					"reasons": "<ol><li><p><strong>Un entorno natural y tranquilo</strong><br>Los Jardines Artigas están rodeados de bosque y riachuelos, perfectos para desconectar sin ruido ni aglomeraciones.</p></li><li><p><strong>Arquitectura de Gaudí</strong><br>Pasear entre puentes, escaleras y detalles de piedra diseñados por Gaudí es una experiencia cultural poco conocida.</p></li><li><p><strong>Rincones para fotos</strong><br>Los puentes y las fuentes del jardín son escenarios inmejorables para llevarse un recuerdo.</p></li><li><p><strong>Paseos para todos los niveles</strong><br>Los caminos son fáciles y accesibles, ideales para caminar sin prisa.</p></li><li><p><strong>Cultura y descanso a la vez</strong><br>La visita junta arte, historia y naturaleza en el mismo sitio.</p></li></ol>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "visita-jardines-artigas",
+					"title": "Visita a los Jardines Artigas",
+					"metaTitle": "Jardines Artigas: patrimonio modernista de Gaudí",
+					"metaDescription": "Los Jardines Artigas, en La Pobla de Lillet: obra de Gaudí entre el río y el bosque. Horarios, cómo llegar y qué ver."
+				}
+			}
+		}
+	]
+}
