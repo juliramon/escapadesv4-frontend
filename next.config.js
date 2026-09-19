@@ -19,28 +19,33 @@ module.exports = withTM({
 	async redirects() {
 		return [
 			// Migració /escapades-catalunya/* -> /destinacions/*.
-			// Les destinacions ja no són províncies sinó zones curades, així que
-			// Barcelona, Girona, Lleida i Tarragona no tenen equivalent directe i
-			// van a l'índex de destinacions. Han d'anar abans del comodí de sota,
-			// perquè Next aplica el primer redirect que casa.
+			// Les destinacions són zones, no províncies, i quan es va fer aquest
+			// redirect encara no hi havia equivalent: les quatre capitals anaven a
+			// l'índex. Search Console diu que aquestes adreces encara reben visites
+			// —Girona en fa 1.233 en setze mesos— i, per a Google, un redirect cap a
+			// una pàgina que no respon la cerca és un error tou. Ara ja hi ha la zona
+			// que els pertoca. Han d'anar abans del comodí de sota, perquè Next
+			// aplica el primer redirect que casa.
 			{
 				source: "/escapades-catalunya/escapades-barcelona",
-				destination: "/destinacions",
+				destination: "/destinacions/escapades-barcelona-i-entorn",
 				permanent: true,
 			},
 			{
 				source: "/escapades-catalunya/escapades-girona",
-				destination: "/destinacions",
+				destination: "/destinacions/escapades-girona-i-emporda-interior",
 				permanent: true,
 			},
+			// Lleida no té cap zona pròpia, però de les 31 fitxes de la província la
+			// majoria són al Pallars, l'Alt Urgell o la Cerdanya.
 			{
 				source: "/escapades-catalunya/escapades-lleida",
-				destination: "/destinacions",
+				destination: "/destinacions/escapades-pirineus",
 				permanent: true,
 			},
 			{
 				source: "/escapades-catalunya/escapades-tarragona",
-				destination: "/destinacions",
+				destination: "/destinacions/escapades-costa-daurada",
 				permanent: true,
 			},
 			{

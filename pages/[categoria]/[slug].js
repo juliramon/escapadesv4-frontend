@@ -27,6 +27,7 @@ import {
 	listingUrl,
 } from "../../utils/listingRoutes";
 import { storyCanonicalUrl } from "../../utils/storyCanonicals";
+import { GETAWAY_CATEGORIES, STAY_CATEGORIES } from "../../utils/siteTaxonomy";
 import {
 	idOf,
 	loadListingCatalog,
@@ -1270,7 +1271,23 @@ const categoryBlock = async (service, getaway) => {
 	}
 };
 
+/**
+ * Els setze segments de categoria que existeixen de debò.
+ *
+ * Amb `fallback: "blocking"`, qualsevol primer segment inventat entrava aquí i
+ * es renderitzava igualment: `/categoria-inventada/cabanes-dosrius` tornava un
+ * 200 amb la pàgina en blanc, sense títol. Per a Google això és un error tou, i
+ * amb 190 fitxes i qualsevol prefix imaginable és una superfície infinita.
+ */
+const CATEGORIES_PUBLICADES = new Set(
+	[...GETAWAY_CATEGORIES, ...STAY_CATEGORIES].map((category) => category.slug),
+);
+
 export async function getStaticProps({ params }) {
+	if (!CATEGORIES_PUBLICADES.has(params.categoria)) {
+		return { notFound: true, revalidate: 120 };
+	}
+
 	const service = new ContentService();
 	const categoryDetails = await service.getCategoryDetails(params.categoria);
 	const activityDetails = await service.activityDetails(params.slug);
@@ -1287,6 +1304,20 @@ export async function getStaticProps({ params }) {
 	if (activityDetails == null && placeDetails == null) {
 		return {
 			notFound: true,
+			revalidate: 120,
+		};
+	}
+
+	// La mateixa fitxa es podia llegir des de qualsevol de les setze
+	// categories, totes amb un 200 i totes amb la mateixa canònica. Google en
+	// té una d'indexada ("pàgina alternativa amb l'etiqueta canònica
+	// correcta") i li fa gastar rastreig per res: val més dir-li d'entrada
+	// quina és la bona.
+	const canonica = listingPath(getawayDetails);
+	const propia = canonica.split("/").filter(Boolean)[0];
+	if (CATEGORIES_PUBLICADES.has(propia) && propia !== params.categoria) {
+		return {
+			redirect: { destination: canonica, permanent: true },
 			revalidate: 120,
 		};
 	}
