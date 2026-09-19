@@ -1,0 +1,139 @@
+{
+	"generatedAt": "2026-09-19T11:24:15.374Z",
+	"note": "Cos en castellà de 6 fitxes, amb els enllaços interns ja apuntant a la versió castellana.",
+	"fields": [
+		{
+			"collection": "places",
+			"slug": "cabanes-dosrius",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "cabanas-dosrius",
+					"title": "Cabanes Dosrius",
+					"metaTitle": "Cabanes Dosrius: cabañas en los árboles en el Maresme",
+					"metaDescription": "Cabanes Dosrius, en el Maresme: cabañas en los árboles a un kilómetro del Parque del Montnegre-Corredor. Desde 68 € por persona y noche.",
+					"description": "Cabanes Dosrius, en la localidad maresmense de Dosrius, está a apenas 1 kilómetro del Parque Natural del Montnegre-Corredor.\n\nEn Cabanes Dosrius encontraréis bonitas cabañas en los árboles desde las que se disfruta de una vista preciosa del paisaje que las rodea, y eso es lo que hace de Cabanes Dosrius un sitio con encanto y una propuesta de alojamiento distinta.\n\nLas cabañas están construidas alrededor de los troncos de los grandes pinos que hay dentro del recinto. También hay una cabaña a ras de suelo, pensada para personas con movilidad reducida, con agua corriente y electricidad.\n\nEl resto de cabañas no tienen ni electricidad ni agua, pero sí acceso a baños compartidos. Todas incluyen una terraza con vistas al parque natural.\n\nAdemás de las cabañas, Cabanes Dosrius tiene recepción, un salón y un snack-bar.\n\nEl entorno da para muchas actividades: montar a caballo, pasear en burro, caminar o salir en bicicleta."
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "cabanas-dosrius",
+					"title": "Cabanes Dosrius",
+					"metaTitle": "Cabanes Dosrius: cabañas en los árboles en el Maresme",
+					"metaDescription": "Cabanes Dosrius, en el Maresme: cabañas en los árboles a un kilómetro del Parque del Montnegre-Corredor. Desde 68 € por persona y noche."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "fornells-de-la-muntanya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "fornells-de-la-muntanya-toses",
+					"title": "Fornells de la Muntanya",
+					"metaTitle": "Fornells de la Muntanya: un pueblo de 27 habitantes",
+					"metaDescription": "Fornells de la Muntanya, un pueblo de 27 habitantes en la Collada de Toses: el Museu del Pastor y el Ripollès. Cómo llegar.",
+					"description": "Fornells de la Muntanya es un pueblo de 27 habitantes que forma parte del municipio de Toses, junto con Dòrria, Espinosa y Nevà. Está en la comarca del Ripollès (Girona), a los pies de la Collada de Toses y a medio camino entre La Molina y Ribes de Freser. Entre los sitios de interés destaca el Museu del Pastor.<h2>Qué encontraréis</h2><p>Fornells es una de las entidades del municipio de Toses, a los pies de la Collada de Toses, y se recorre en un paseo corto. Hay casas de alquiler para pasar el fin de semana y un restaurante de cocina de montaña, con carne a la brasa. Nosotros subimos unas cuantas veces al año y lo contamos en <a href=\"https://escapadesenparella.cat/es/historias/fornells-de-la-muntanya\">la escapada a Fornells</a>.</p><h3>Información práctica</h3><ul><li><strong>Cuándo ir:</strong> todo el año.</li></ul><h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/fuentes-del-llobregat\">Fuentes del Llobregat</a>, a 5 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-culturales/visita-jardines-artigas\">Jardines Artigas</a>, a 10 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/el-castell-de-la-pobla-de-lillet-adults-only\">El Castell de la Pobla de Lillet</a>, a 11 km</li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "fornells-de-la-muntanya-toses",
+					"title": "Fornells de la Muntanya",
+					"metaTitle": "Fornells de la Muntanya: un pueblo de 27 habitantes",
+					"metaDescription": "Fornells de la Muntanya, un pueblo de 27 habitantes en la Collada de Toses: el Museu del Pastor y el Ripollès. Cómo llegar."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "restaurant-esquella-braseria-esterri-daneu-pallars-sobira",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "restaurante-braseria-lesquella-esterri-daneu",
+					"title": "Restaurante braseria l'Esquella",
+					"metaTitle": "L'Esquella: cocina de montaña en Esterri d'Àneu",
+					"metaDescription": "El restaurante braseria l'Esquella, en Esterri d'Àneu: brasa y cocina de montaña en el Pallars Sobirà. Precio medio y qué pedir.",
+					"description": "<p>El <strong>restaurante braseria l'Esquella</strong> es un restaurante de cocina tradicional de montaña en Esterri d'Àneu, en la comarca del Pallars Sobirà.</p><p>Es conocido por su brasa de leña y por su cocina pallaresa, hecha con producto de proximidad.</p><p>De l'Esquella destacamos la calidad de la comida, el buen servicio y un comedor de decoración rústica que encaja con el entorno de montaña.</p><p>Es una opción recomendable para quien pase por el Pallars Sobirà y le guste la cocina tradicional.</p><p>El restaurante es una muestra de la riqueza gastronómica y cultural de esta comarca del Pirineo catalán.</p><h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/berrea-del-ciervo-pallars-sobira\">La berrea del ciervo en el Pallars Sobirà</a>, a menos de un kilómetro</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/cascada-de-gerber\">La Cascada de Gerber</a>, a 1 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-culturales/iglesia-romanica-sant-joan-disil\">Iglesia románica de Sant Joan d'Isil</a>, a 6 km</li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "restaurante-braseria-lesquella-esterri-daneu",
+					"title": "Restaurante braseria l'Esquella",
+					"metaTitle": "L'Esquella: cocina de montaña en Esterri d'Àneu",
+					"metaDescription": "El restaurante braseria l'Esquella, en Esterri d'Àneu: brasa y cocina de montaña en el Pallars Sobirà. Precio medio y qué pedir."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "ruta-santuari-puig-agut",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "ruta-santuario-puig-agut",
+					"title": "Ruta al Santuario de Puig-agut",
+					"metaTitle": "Ruta al Santuario de Puig-agut: cómo llegar y qué ver",
+					"metaDescription": "La ruta al Santuario de Puig-agut, en Manlleu: vistas del Montseny y los Pirineos, y cómo llegar hasta arriba.",
+					"description": "<p>El <strong>Santuario de Puig-agut</strong> es uno de los sitios más emblemáticos de Manlleu y un punto de referencia para quien disfruta caminando con buenas vistas. Está en lo alto de un cerro, a 696 metros de altitud, y desde allí se ve desde el Montseny hasta las cimas del Pirineo, pasando por la Plana de Vic.</p><h3>Un poco de historia</h3><p>El santuario, construido a mediados del siglo XIX, es el único de Cataluña dedicado al Sagrado Corazón de Jesús. Destaca su estilo neogótico, que contrasta con el entorno natural. Dicen que antiguamente era punto de encuentro de pastores y payeses, que aprovechaban su altura para orientarse.</p><h3>Cómo llegar al Santuario de Puig-agut</h3><p>Hay varias maneras de subir:</p><ul><li><p><strong>A pie o en bicicleta:</strong> desde el centro de Manlleu se hace un paseo agradable siguiendo caminos señalizados.</p></li><li><p><strong>En coche:</strong> también se llega por carretera local, con acceso fácil y un pequeño espacio para aparcar.</p></li></ul><h3>Qué encontraréis arriba</h3><p>Además del edificio, allí tenéis:</p><ul><li><p><strong>Mirador natural:</strong> vistas de la Plana de Vic y de las montañas cercanas, con el Prepirineo, el Montseny y el Collsacabra.</p></li><li><p><strong>Entorno tranquilo:</strong> ideal para parar, descansar y mirar el paisaje.</p></li><li><p><strong>Más caminos:</strong> desde el santuario salen senderos secundarios que llevan a masías y campos típicos de Osona.</p></li><li><p><strong>Bar-restaurante:</strong> al lado está Ca l'Ermità, de cocina tradicional catalana con producto de proximidad.</p></li></ul>",
+					"reasons": "<ul><li><p><strong>Vistas espectaculares:</strong> un mirador natural que conecta la Plana de Vic con el Montseny y los Pirineos.</p></li><li><p><strong>Patrimonio único:</strong> el único santuario catalán dedicado al Sagrado Corazón de Jesús.</p></li><li><p><strong>Rutas para todos:</strong> se puede subir a pie, en bici o en coche, según el día que tengáis.</p></li><li><p><strong>Tranquilidad asegurada:</strong> un entorno natural para desconectar sin ir muy lejos.</p></li><li><p><strong>Experiencia local:</strong> se puede completar con gastronomía o con una vuelta por Manlleu.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "ruta-santuario-puig-agut",
+					"title": "Ruta al Santuario de Puig-agut",
+					"metaTitle": "Ruta al Santuario de Puig-agut: cómo llegar y qué ver",
+					"metaDescription": "La ruta al Santuario de Puig-agut, en Manlleu: vistas del Montseny y los Pirineos, y cómo llegar hasta arriba."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "hotel-rural-vinyes-emporda",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-rural-vinyes-de-lemporda",
+					"title": "Hotel Rural Vinyes de l'Empordà",
+					"metaTitle": "Vinyes de l'Empordà: hotel rural en Fonteta",
+					"metaDescription": "Hotel Rural Vinyes de l'Empordà, en Fonteta: una casa del siglo XVIII con el encanto de las masías del Baix Empordà.",
+					"description": "Mas Patiràs es una casa del siglo XVIII que conserva el encanto de una masía del Empordà, en los alrededores del pueblo de Fonteta. Además de sus habitaciones, ofrece zonas comunes donde leer, tomar un vino o darse un baño en la piscina.\n\nVinyes de l'Empordà es un recinto formado por la casa «Mas Patiràs» y sus jardines, los «Jardins de l'Empordà». La casa tiene 8 habitaciones y varios rincones preparados para pasar un buen rato en compañía o para estar en paz con un libro. Una casa con encanto en pleno Empordà, perfecta para desconectar.\n\nEl nombre viene de la falta de agua que tenía en su día, que traía de cabeza a los masoveros. Hoy, en cambio, el entorno se ha convertido en unos jardines botánicos de gran riqueza y uno de los atractivos de la zona. La familia Torrent de Fonteta lleva además trescientos años cultivando la viña y elaborando vino, y sus vinos pertenecen a la Denominación de Origen Empordà."
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "hotel-rural-vinyes-de-lemporda",
+					"title": "Hotel Rural Vinyes de l'Empordà",
+					"metaTitle": "Vinyes de l'Empordà: hotel rural en Fonteta",
+					"metaDescription": "Hotel Rural Vinyes de l'Empordà, en Fonteta: una casa del siglo XVIII con el encanto de las masías del Baix Empordà."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "waterworld-lloret-de-mar",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "waterworld-lloret-de-mar",
+					"title": "Waterworld Lloret de Mar",
+					"metaTitle": "Waterworld Lloret de Mar: precios y atracciones",
+					"metaDescription": "Waterworld, en Lloret de Mar: 140.000 m² de uno de los parques acuáticos más grandes de Europa. Desde 35 € por persona.",
+					"description": "Waterworld es uno de los parques acuáticos más grandes de Europa, con una superficie de 140.000 metros cuadrados y un montón de atracciones: piscinas de olas, ríos rápidos, toboganes, kamikazes y pistas blandas. En las mismas instalaciones hay restaurantes, creperías, zona de picnic y sitios para descansar.<h2>Qué hay</h2><p>Con 140.000 metros cuadrados, es uno de los parques acuáticos más grandes de Europa: toboganes de velocidad, ríos artificiales, piscinas de olas y zonas tranquilas para no hacer nada. Es un plan de día entero y de pleno verano; nosotros fuimos un sábado de julio y lo contamos en <a href=\"https://escapadesenparella.cat/es/historias/waterworld-parc-aquatic-lloret-de-mar\">nuestra visita</a>.</p><h3>Información práctica</h3><ul><li><strong>Mejor época:</strong> verano.</li><li><strong>Cuánto rato:</strong> contad unas 5 horas.</li></ul><h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/uau-campers-alquiler-de-campers-lloret\">UAU Campers</a>, a menos de un kilómetro</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/lazure-hotel-lloret-de-mar\">L'Azure Hotel</a>, a 1 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-relax/glamping-camping-del-mar-malgrat\">Glamping en Camping del Mar</a>, a 9 km</li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "waterworld-lloret-de-mar",
+					"title": "Waterworld Lloret de Mar",
+					"metaTitle": "Waterworld Lloret de Mar: precios y atracciones",
+					"metaDescription": "Waterworld, en Lloret de Mar: 140.000 m² de uno de los parques acuáticos más grandes de Europa. Desde 35 € por persona."
+				}
+			}
+		}
+	]
+}

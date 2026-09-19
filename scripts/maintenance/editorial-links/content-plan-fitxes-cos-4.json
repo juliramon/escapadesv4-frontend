@@ -1,0 +1,143 @@
+{
+	"generatedAt": "2026-09-19T11:28:20.888Z",
+	"note": "Cos en castellà de 6 fitxes, amb els enllaços interns ja apuntant a la versió castellana.",
+	"fields": [
+		{
+			"collection": "activities",
+			"slug": "bosc-de-les-escultures-de-joan-carola-de-celra-girona",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "bosque-de-las-esculturas-de-celra",
+					"title": "Bosque de las Esculturas de Celrà",
+					"metaTitle": "Bosque de las Esculturas de Celrà",
+					"metaDescription": "El Bosque de las Esculturas de Celrà, a 30 minutos de Girona: una ruta corta entre figuras escondidas en el bosque.",
+					"description": "<p>En el municipio de Celrà, concretamente en el Veïnat de Mas Valls, a 30 minutos de Girona, está el Bosque de las Esculturas de Joan Carola.</p><p>Es una ruta corta y fácil de unos 2 km, señalizada con dos carteles al principio y al final, donde las esculturas conviven con el bosque. El recorrido está en plena naturaleza, entre árboles y matorral.<br><br>Encontraréis más de 40 figuras que crean un paisaje de cuento. Son esculturas simbólicas o filosóficas, algunas con forma de instrumento musical, y también hay pirámides o sirenas. Todas con un estilo propio y colocadas de manera que aparecen por el camino, medio escondidas entre la vegetación.<br></p><p>Se puede aparcar en la entrada al Veïnat de Mas Valls y Mas Castell y empezar la ruta desde allí.</p>",
+					"reasons": "<ul><li><p><strong>Arte en la naturaleza</strong>: el Bosque de las Esculturas de Joan Carola junta arte contemporáneo y paisaje, que no es una combinación que se encuentre a menudo.</p></li><li><p><strong>Paseos tranquilos</strong>: caminatas suaves entre árboles y esculturas que se integran en el entorno.</p></li><li><p><strong>Para pensar un rato</strong>: las obras repartidas por el bosque invitan a pararse delante de cada una.</p></li><li><p><strong>Sorpresas en cada recodo</strong>: el bosque está lleno de figuras que van apareciendo, y eso hace el paseo.</p></li><li><p><strong>Girona al lado</strong>: se puede combinar con una visita a la ciudad y hacer el día completo.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "bosque-de-las-esculturas-de-celra",
+					"title": "Bosque de las Esculturas de Celrà",
+					"metaTitle": "Bosque de las Esculturas de Celrà",
+					"metaDescription": "El Bosque de las Esculturas de Celrà, a 30 minutos de Girona: una ruta corta entre figuras escondidas en el bosque."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-de-tagamanent-valles-oriental-catalunya",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "castillo-de-tagamanent",
+					"title": "Castillo de Tagamanent",
+					"metaTitle": "Castillo de Tagamanent",
+					"metaDescription": "Ruta hasta el Castillo de Tagamanent, castillo románico en una cima de 1.055 metros, con una de las mejores vistas del Montseny.",
+					"description": "<p>El Tagamanent es una cima pequeña, de 1.055 metros de altitud, en la comarca del Vallès, dentro del Parque Natural del Montseny.</p><p>El Castillo de Tagamanent, en esa cima, es un castillo de origen medieval románico del siglo XI, documentado por primera vez en el año 945. Su ubicación, dentro del condado y obispado de Osona, era zona de frontera.</p><p>El castillo se ve desde todo el Vallès y desde la plana de Vic, y forma el último contrafuerte del macizo del Montseny. Al lado están la antigua parroquia y santuario de Santa Maria de Tagamanent, con los restos de la casa rectoral.</p><p>Hoy se conservan el edificio principal y restos del muro de defensa en dos puntos.</p><p>Para subir recomendamos la ruta circular hasta el castillo, de unos 2,36 km, que además del castillo deja un mirador magnífico sobre el Vallès y la plana de Vic.</p>",
+					"reasons": "<ul><li><p><strong>Vistas espectaculares</strong>: el Castillo de Tagamanent es un mirador sobre el Montseny y las montañas de alrededor.</p></li><li><p><strong>Patrimonio histórico</strong>: un castillo medieval documentado desde el año 945, en una zona que era frontera.</p></li><li><p><strong>Caminata corta</strong>: se sube por una ruta circular de poco más de 2 km entre bosque.</p></li><li><p><strong>Cerca de Barcelona</strong>: a poco más de una hora de la ciudad, o sea que da para un día suelto.</p></li><li><p><strong>Punto de partida</strong>: desde allí salen más rutas por el Parque Natural del Montseny.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "castillo-de-tagamanent",
+					"title": "Castillo de Tagamanent",
+					"metaTitle": "Castillo de Tagamanent",
+					"metaDescription": "Ruta hasta el Castillo de Tagamanent, castillo románico en una cima de 1.055 metros, con una de las mejores vistas del Montseny."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "falset-priorat",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "falset-capital-del-priorat",
+					"title": "Falset, la capital del Priorat",
+					"metaTitle": "Falset, la capital del Priorat: qué ver",
+					"metaDescription": "Falset, rodeado de montañas, es la puerta de entrada al Priorat: casco antiguo, bodegas y castillo. Qué ver y dónde comer.",
+					"description": "<p>Falset es la capital de la comarca del Priorat. Está al sudeste de la comarca, entre las montañas de Roca Roja y la sierra de Llaberia.<br><br>En el pueblo destaca la plaza de la Quartera, rodeada de antiguos porches y en medio de una pendiente notable. También la iglesia arciprestal de Santa Maria, construida con piedras del antiguo castillo y de la iglesia románica. El Portal del Bou, del siglo XII, es uno de los cinco portales que cerraban la villa y todavía conserva marcas de los canteros.<br><br>Falset tiene varias fiestas tradicionales: la Encamisada, que se celebra por San Antonio Abad, con un pasacalles por el pueblo con animales y la gente vestida con el traje tradicional, y la Feria del Vino de la comarca del Priorat (DOQ Priorat y DO Montsant).</p>",
+					"reasons": "<ul><li><p><strong>Gastronomía</strong>: Falset es conocido por su cocina y, sobre todo, por los vinos del Priorat. Una comida o una cena maridada con vino local ya justifica el viaje.</p></li><li><p><strong>Paisaje</strong>: está en pleno Priorat, rodeado de viñedos y montañas. Los alrededores dan para pasear sin rumbo.</p></li><li><p><strong>Patrimonio</strong>: castillo, iglesias y edificios históricos. La Cooperativa Vinícola es otra visita que vale la pena.</p></li><li><p><strong>Actividades</strong>: senderismo, rutas en bicicleta por los caminos del Priorat, visitas guiadas a bodegas y catas.</p></li><li><p><strong>Encanto de pueblo</strong>: calles empedradas, plazas recogidas y una calma que se agradece.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "falset-capital-del-priorat",
+					"title": "Falset, la capital del Priorat",
+					"metaTitle": "Falset, la capital del Priorat: qué ver",
+					"metaDescription": "Falset, rodeado de montañas, es la puerta de entrada al Priorat: casco antiguo, bodegas y castillo. Qué ver y dónde comer."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "quads-pallars-pallars-sobira-ruta-quads-pirineus",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "ruta-en-quad-pallars-sobira",
+					"title": "Ruta en quad por el Pallars Sobirà",
+					"metaTitle": "Rutas en quad por el Pallars Sobirà",
+					"metaDescription": "Ruta en quad por las pistas del Pallars Sobirà con Quads Pallars: cuánto dura, qué cuesta y desde dónde se sale.",
+					"description": "<p><strong>Quads Pallars</strong> es una empresa que ofrece <strong>rutas en quad por el Pallars Sobirà</strong>, ya sea recorriendo el Parque Natural del Alt Pirineu o subiendo hasta la parte alta de las pistas de esquí de Port Ainé, a 2.500 metros de altitud, donde las vistas de 360 grados son puro Pirineo. También tienen circuitos de quads, escalada, puenting y tiro con arco, entre otras actividades.</p><p>Si buscáis una escapada donde la aventura sea la protagonista, una <strong>ruta en quad por el Pallars Sobirà</strong> con Quads Pallars es una buena opción.</p><h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/apartamento-wintuwin-rialp\">Apartamento WinTuWin</a>, a menos de un kilómetro</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/hotel-pey-resort-sort\">Hotel Pey Resort</a>, a 4 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/apartamento-les-3-valls-llavorsi\">Apartamento Les 3 Valls</a>, a 8 km</li></ul>",
+					"reasons": "<ul><li><p>Una experiencia distinta para hacer en pareja</p></li><li><p>Rincones del Pallars Sobirà a los que no se llega de otra manera</p></li><li><p>Un tentempié a 2.500 metros de altitud</p></li><li><p>Adrenalina en una escapada de pura aventura</p></li><li><p>Las rutas se adaptan a todos los niveles de experiencia y conducción</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "ruta-en-quad-pallars-sobira",
+					"title": "Ruta en quad por el Pallars Sobirà",
+					"metaTitle": "Rutas en quad por el Pallars Sobirà",
+					"metaDescription": "Ruta en quad por las pistas del Pallars Sobirà con Quads Pallars: cuánto dura, qué cuesta y desde dónde se sale."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "castell-de-llivia",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "castillo-de-llivia",
+					"title": "Escapada al Castillo de Llívia",
+					"metaTitle": "Castillo de Llívia: historia y vistas de la Cerdanya",
+					"metaDescription": "El Castillo de Llívia, un mirador privilegiado de la Cerdanya con siglos de historia. Cómo llegar, qué ver y por qué vale la pena.",
+					"description": "<p>El Castillo de Llívia está en un cerro a 1.357 metros de altitud, a los pies del pueblo de Llívia. Para llegar hasta este mirador hay que seguir la ruta señalizada que empieza en la iglesia de la Mare de Déu dels Àngels de Llívia.</p><p>La ruta dura unos 45 minutos caminando, y hay que saber que no está adaptada para personas con movilidad reducida.</p><p>Una vez arriba, el mirador abre una panorámica muy amplia del llano, con vistas al Puigmal, la Tosa d'Alp, el Moixeró, el Cadí, el Puigpedrós y el macizo del Carlit; y ahí está el castillo. También se ve Llívia desde el mejor ángulo posible. Los restos son de origen medieval, en la parte superior del Puig del Castell, reformados en el siglo XIII, y durante los siglos XIV y XV fueron la principal fortificación del condado de Cerdaña.</p><p>Por la zona se circula a pie por unas pasarelas que evitan el foso que rodea el castillo. También hay plataformas para acceder a las 4 torres, y en cada una hay paneles que explican la historia del castillo.</p>",
+					"reasons": "<ul><li><p><strong>Un castillo con historia</strong><br>El Castillo de Llívia es una joya del Pirineo catalán, en un cerro con vistas privilegiadas. Pasear entre sus restos da idea de cuando Llívia era una villa fortificada.</p></li><li><p><strong>Las mejores vistas de la Cerdaña</strong><br>Desde arriba se ve el llano, las montañas y los pueblos de piedra. Al atardecer es cuando mejor está.</p></li><li><p><strong>Una caminata corta</strong><br>Son unos 45 minutos desde la iglesia de la Mare de Déu dels Àngels, por ruta señalizada. Fácil de hacer en pareja.</p></li><li><p><strong>Y después, a comer</strong><br>La cocina ceretana de los restaurantes de Llívia o Puigcerdà completa la escapada: producto local, quesos y vinos del Pirineo.</p></li><li><p><strong>Un sitio para desconectar</strong><br>Si buscáis naturaleza e historia en el mismo sitio, el Castillo de Llívia es una apuesta segura.</p></li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "castillo-de-llivia",
+					"title": "Escapada al Castillo de Llívia",
+					"metaTitle": "Castillo de Llívia: historia y vistas de la Cerdanya",
+					"metaDescription": "El Castillo de Llívia, un mirador privilegiado de la Cerdanya con siglos de historia. Cómo llegar, qué ver y por qué vale la pena."
+				}
+			}
+		},
+		{
+			"collection": "activities",
+			"slug": "restaurant-pins-mar-sant-andreu-llavaneres",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "restaurante-pins-mar-llavaneres",
+					"title": "Restaurante Pins Mar",
+					"metaTitle": "Pins Mar: comer con vistas al mar en el Maresme",
+					"metaDescription": "El restaurante Pins Mar, en Sant Andreu de Llavaneres: pescado y arroces con el Mediterráneo delante. Precio medio y cómo llegar.",
+					"description": "<p>El Restaurante Pins Mar está en primera línea del paseo marítimo de Sant Andreu de Llavaneres, con el Mediterráneo delante de la mesa. Abrió en 1955, cuando Elías Aceña compró un chiringuito de playa y lo convirtió en restaurante, y hoy lo llevan sus hijos, Jaume y Carles Aceña.</p><h2>Qué se come</h2><p>Cocina de mercado y tradicional, con producto de temporada. Los guisantes de Llavaneres son una de las especialidades de la casa. El precio medio ronda los 80 € por persona.</p><h2>Nuestra visita</h2><p>Fuimos el día de les Santes y lo contamos en la historia <a href=\"https://escapadesenparella.cat/es/historias/restaurant-pins-mar-sant-andreu-llavaneres\">Restaurant Pins Mar, cuina de mercat amb vistes al mar</a>.</p><h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/comarca-aventura-rutas-en-segway\">Comarca Aventura</a>, a 7 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/cabanas-dosrius\">Cabanes Dosrius</a>, a 7 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-gastronomicas/restaurante-el-celler-dargentona\">Restaurante El Celler d'Argentona</a>, a 8 km</li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "restaurante-pins-mar-llavaneres",
+					"title": "Restaurante Pins Mar",
+					"metaTitle": "Pins Mar: comer con vistas al mar en el Maresme",
+					"metaDescription": "El restaurante Pins Mar, en Sant Andreu de Llavaneres: pescado y arroces con el Mediterráneo delante. Precio medio y cómo llegar."
+				}
+			}
+		}
+	]
+}
