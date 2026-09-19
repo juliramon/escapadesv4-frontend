@@ -1,0 +1,139 @@
+{
+	"generatedAt": "2026-09-19T14:08:12.172Z",
+	"note": "Cos en castellà de 6 fitxes, amb els enllaços interns ja apuntant a la versió castellana.",
+	"fields": [
+		{
+			"collection": "places",
+			"slug": "hotel-mas-mariassa",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "hotel-mas-mariassa-pratdip",
+					"title": "Hotel Mas Mariassa",
+					"metaTitle": "Mas Mariassa: masía gastronómica en Pratdip",
+					"metaDescription": "Hotel Mas Mariassa, en Pratdip: una masía gastronómica de siete habitaciones entre montañas y bosque mediterráneo. Desde 123 € por persona y noche.",
+					"description": "Entre montañas y bosque mediterráneo está esta masía catalana, hoy convertida en un hotel gastronómico con encanto: el Hotel Mas Mariassa.\n\nMas Mariassa se ha hecho buscando el equilibrio con el entorno, con interiores blancos combinados con madera de roble en el suelo, las puertas, los ventanales y las vigas del techo.\n\nEn sus 7 habitaciones se respira esa tranquilidad, con toques modernos y detalles de estilo clásico que crean un ambiente acogedor.\n\nPara las tardes frías hay una sala de descanso con chimenea. Y para el buen tiempo, una zona chill out junto a la piscina. Entre los servicios también hay una zona de spa con sauna y jacuzzi.\n\nEl restaurante trabaja con producto de proximidad de los huertos cercanos, vino del Priorat y del Montsant y pescado que llega directamente de la lonja de l'Ametlla de Mar. El desayuno es tipo bufé.\n\nEl hotel está cerca de las largas playas de arena fina y aguas cristalinas de la Costa Dorada. Es un buen sitio para quien quiera recorrer esta parte del litoral catalán.\n\nAdemás, en el Hotel Mas Mariassa se admiten animales de compañía: tienen 3 habitaciones donde es posible alojarlos, siempre que los propietarios acepten una serie de condiciones."
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "hotel-mas-mariassa-pratdip",
+					"title": "Hotel Mas Mariassa",
+					"metaTitle": "Mas Mariassa: masía gastronómica en Pratdip",
+					"metaDescription": "Hotel Mas Mariassa, en Pratdip: una masía gastronómica de siete habitaciones entre montañas y bosque mediterráneo. Desde 123 € por persona y noche."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "apartament-les-3-valls-llavorsi-pallars-sobira-pirineus",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "apartamento-les-3-valls-llavorsi",
+					"title": "Apartamento Les 3 Valls",
+					"metaTitle": "Apartamento Les 3 Valls, en Llavorsí",
+					"metaDescription": "El apartamento Les 3 Valls, en Llavorsí: con encanto y a pie del Noguera Pallaresa, en el Pallars Sobirà. Precio y cómo llegar.",
+					"description": "<p>El <strong>apartamento Les 3 Valls</strong> es un apartamento con encanto en el pequeño pueblo de Llavorsí, en el Pallars Sobirà.</p><p>Tiene capacidad para 5 personas y consta de 2 habitaciones dobles totalmente amuebladas —una de matrimonio y otra con 2 camas individuales—, baño completo y cocina semiabierta equipada con vitrocerámica, horno, lavavajillas, microondas, lavadora, hervidor, tostadora, cafetera Dolce Gusto de cápsulas y todos los utensilios de cocina.</p><p>En el comedor hay chimenea, sofá cama con chaise longue, smart TV de 50 pulgadas con acceso a internet (Netflix, HBO, etc.) y wifi en todo el alojamiento.</p><p><strong>Les 3 Valls Llavorsí</strong> está en el norte de Cataluña, en la comarca del Pallars Sobirà, rodeado por tres valles: la Vall d'Àneu, la Vall de Cardós y la Vall Ferrera, de donde viene su nombre.</p><p>Llavorsí es un pueblo de unos 350 habitantes y tiene todo tipo de servicios: restaurantes, bares, CAP, bomberos, panadería, carnicería, supermercado, tiendas de recuerdos… algo poco habitual en los pueblos pequeños del Pallars Sobirà. Pese a su tamaño, también tiene oficina de turismo, junto al río.</p><p>Dentro de su término hay seis núcleos más de población: Aidí, Arestui, Baiasca, Montenartró, Romadriu y Sant Romà de Tavèrnoles.<br><br>En cuanto al patrimonio, vale la pena visitar la ermita de la Mare de Déu de Biuse, un santuario barroco que presidía el antiguo poblado medieval del mismo nombre. Cada año la gente de Llavorsí celebra allí un encuentro. Muy cerca están las ruinas del castillo de Gilareny.<br><br>En Llavorsí las casas están agrupadas unas sobre otras y da la impresión de que están encajadas entre las montañas que las rodean. El pueblo tiene el aire pirenaico típico y, aunque hay casas de construcción nueva, se ha respetado el entorno.</p><h2>¿Qué hacer en Llavorsí?</h2><p>A Llavorsí seguramente lo conocéis por los deportes que se practican en la zona, sobre todo el rafting, porque el río Noguera Pallaresa permite grandes descensos.<br><br>- El rafting es la actividad estrella. Consiste en bajar las aguas bravas del Noguera Pallaresa en una barca neumática con capacidad para ocho personas.<br>- Barranquismo. Los barrancos son ríos pequeños de caudal muy limitado que se pueden bajar de varias maneras: rápeles, toboganes, saltos… Es como un parque acuático en plena naturaleza.<br>- Hípica. Excursiones a caballo.<br>- Senderismo. Rutas de trekking dentro del Parque Nacional de Aigüestortes i Estany de Sant Maurici.<br>- Raquetas de nieve y esquí en las pistas de Espot, Port Ainé y Baqueira.</p>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "apartamento-les-3-valls-llavorsi",
+					"title": "Apartamento Les 3 Valls",
+					"metaTitle": "Apartamento Les 3 Valls, en Llavorsí",
+					"metaDescription": "El apartamento Les 3 Valls, en Llavorsí: con encanto y a pie del Noguera Pallaresa, en el Pallars Sobirà. Precio y cómo llegar."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "bell-planso-bed-breakfast-moia",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "bell-planso-bed-and-breakfast-moia",
+					"title": "Bell Plançó B&B",
+					"metaTitle": "Bell Plançó: bed & breakfast con encanto en Moià",
+					"metaDescription": "Bell Plançó, en Moià: un bed & breakfast con mucho encanto en el Moianès, a una hora de Barcelona. Precio y cómo llegar.",
+					"description": "<p><strong>Bell Plançó</strong> es un <strong>bed &amp; breakfast</strong> con encanto en Moià, en la comarca del Moianès. Nace con la idea de ser un alojamiento pequeño y de trato familiar, donde se han cuidado todos los detalles.</p><p>Bell Plançó está en una de las tres casas del conjunto patrimonial que perteneció al tenor Viñas, gran intérprete de las obras de Richard Wagner. De ahí el nombre de las dos habitaciones: Tristán e Isolda.</p><h2>Las habitaciones de Bell Plançó</h2><p>Bell Plançó tiene dos habitaciones dobles, Tristán e Isolda, recién reformadas y situadas en la planta baja de la casa catalogada donde viven Anna y Albert, los impulsores del proyecto. La suite Tristán tiene 25 m² y la suite Isolda, 30 m²; las dos con baño privado con ducha.</p><p>Cada habitación dispone de cama doble, ropa de cama, mantas, ventilador de techo, calefacción, armario, escritorio, zona de estar con dos sillas y mesita, agua y vasos.</p><p>En el baño encontraréis champú y gel, dos toallas por persona, secador de pelo (previa petición), jabón de manos y papel higiénico.</p><h2>El jardín privado y el espacio compartido</h2><p>Cada una de las dos habitaciones tiene salida directa al jardín privado, un pequeño oasis donde desconectar, descansar o tomar el desayuno o la cena.</p><p>Además, las dos habitaciones comparten un salón-comedor donde se sirven los desayunos por la mañana, y que también sirve para leer en el sofá delante de la chimenea.</p><p>El jardín tiene mesa con dos sillas, sombrilla y hamaca.</p><p>En el espacio común encontraréis nevera, hervidor de agua, café, té y leche, cacao y agua. Chimenea, calefacción, zona de sofás, mesa de comedor, equipo de música, libros y guías, y juegos de mesa.</p><h2>Comidas</h2><p>Cada mañana ofrecen un desayuno completo con productos frescos, ecológicos y de proximidad, incluido en el precio del alojamiento.</p>",
+					"reasons": "<ol><li><p><strong>Entorno natural</strong>: Bell Plançó está rodeado de campo, con vistas a las montañas. Perfecto para salir del ruido de la ciudad.</p></li><li><p><strong>Íntimo y recogido</strong>: es un bed and breakfast pequeño, ideal para pasar tiempo en pareja sin gente alrededor.</p></li><li><p><strong>Gastronomía</strong>: el Moianès tiene buena cocina, con producto local y de temporada.</p></li><li><p><strong>Actividades al aire libre</strong>: en Moià y sus alrededores hay senderismo, rutas en bicicleta y paseos a caballo.</p></li><li><p><strong>Trato personal</strong>: Anna y Albert están pendientes de la estancia y saben qué recomendar de la zona.</p></li></ol>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "bell-planso-bed-and-breakfast-moia",
+					"title": "Bell Plançó B&B",
+					"metaTitle": "Bell Plançó: bed & breakfast con encanto en Moià",
+					"metaDescription": "Bell Plançó, en Moià: un bed & breakfast con mucho encanto en el Moianès, a una hora de Barcelona. Precio y cómo llegar."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "refugi-prat-aguilo-serra-del-cadi-pas-gosolans",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "refugio-prat-daguilo-serra-del-cadi",
+					"title": "Refugio Prat d'Aguiló",
+					"metaTitle": "Refugio Prat d'Aguiló, en la sierra del Cadí",
+					"metaDescription": "El Refugio Prat d'Aguiló, en la vertiente norte de la sierra del Cadí, a 2.037 metros. Precio, reserva y cómo llegar.",
+					"description": "<p>El <strong>Refugio Prat d'Aguiló</strong> es un refugio de montaña en la Sierra del Cadí, en la vertiente norte del Pas dels Gosolans.</p><p>Está a 2.010 metros de altitud, rodeado de prados y con unas vistas magníficas.</p><p>El Refugio Prat d'Aguiló es propiedad de la Federació d'Entitats Excursionistes de Catalunya (FEEC).</p><p>Se accede por una pista de tierra, solo apta para vehículos 4x4, y los pueblos más cercanos son Estana y Montellà.</p><p>El refugio está considerado bien cultural del patrimonio de Cataluña.</p><h2>Cómo funciona</h2><p>El refugio está a 2.010 metros, en la vertiente norte de la Sierra del Cadí, bajo el Pas dels Gosolans. Se sube por una pista de montaña desde Montellà y es la base para cruzar el Cadí. Hay que reservar plaza, y en invierno conviene comprobar el estado de la pista antes de subir.</p><h3>Información práctica</h3><ul><li><strong>Cuándo ir:</strong> todo el año.</li></ul><h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-culturales/vilanova-de-banat\">Vilanova de Banat</a>, a 2 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/prats-de-cadi-desde-estana\">Prats de Cadí desde Estana</a>, a 4 km</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-aventura/refugio-lluis-estasen-pedraforca\">Refugio Lluís Estasen</a>, a 6 km</li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "refugio-prat-daguilo-serra-del-cadi",
+					"title": "Refugio Prat d'Aguiló",
+					"metaTitle": "Refugio Prat d'Aguiló, en la sierra del Cadí",
+					"metaDescription": "El Refugio Prat d'Aguiló, en la vertiente norte de la sierra del Cadí, a 2.037 metros. Precio, reserva y cómo llegar."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "masia-el-puig",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "masia-el-puig-vall-de-bianya",
+					"title": "Masia el Puig",
+					"metaTitle": "Masia el Puig: turismo rural en la Vall de Bianya",
+					"metaDescription": "Masia el Puig, turismo rural en la Vall de Bianya (Alta Garrotxa): silencio, montaña y poca cosa más. Desde 77 € por persona y noche.",
+					"description": "Bienvenidos a la Masia el Puig, turismo rural en la Vall de Bianya (Alta Garrotxa).\nEl Puig es el resultado de buscar un sitio muy concreto. El silencio y la tranquilidad definen esta masía rural.\n\nLejos del ruido y del estrés de cada día, el entorno del Puig, en un punto único de la Garrotxa, es un espacio de paz absoluta.\n\nLa masía está en la comarca de la Garrotxa, conocida como la comarca de los volcanes. La Vall de Bianya es un conjunto de valles grandes y pequeños que llenan un territorio de prados, bosques y riachuelos. El municipio lo forman varios núcleos de población dispersos, la mayoría alrededor de una iglesia románica. Históricamente el valle tiene mucho que contar: por él pasa la vía romana del Capsacosta, una vía secundaria que enlazaba con la Vía Augusta camino de Roma.\n\nPor la mitad sur de la Garrotxa se extienden casi medio centenar de volcanes que forman un paisaje protegido por el Parque Natural de la Zona Volcánica de la Garrotxa, con itinerarios a pie que recorren los rincones más interesantes del parque. Además del patrimonio natural, la comarca tiene un gran patrimonio arquitectónico, como demuestran pueblos como Besalú, Castellfollit de la Roca, Olot y Santa Pau. Es un sitio ideal para pasar unos días tranquilos, disfrutar de los bosques y recorrer caminos a pie, en bicicleta o a caballo.\n\nEl acceso a la Masia el Puig es por el pueblo de Sant Joan les Fonts, dirección a Castellar de la Muntanya. ATENCIÓN: si venís de Girona, Francia o Figueres, puede que el navegador os desvíe hacia Castellfollit de la Roca y os indique un camino impracticable. Dad la vuelta y dirigíos a Sant Joan les Fonts; pasado el pueblo encontraréis el desvío en una rotonda hacia Castellar de la Muntanya. Para cualquier duda, no dudéis en llamar: (+34) 872 005 041."
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "masia-el-puig-vall-de-bianya",
+					"title": "Masia el Puig",
+					"metaTitle": "Masia el Puig: turismo rural en la Vall de Bianya",
+					"metaDescription": "Masia el Puig, turismo rural en la Vall de Bianya (Alta Garrotxa): silencio, montaña y poca cosa más. Desde 77 € por persona y noche."
+				}
+			}
+		},
+		{
+			"collection": "places",
+			"slug": "arrels-hotel-cadaques-adults-only",
+			"field": "translations",
+			"value": {
+				"es": {
+					"slug": "arrels-hotel-cadaques-adults-only",
+					"title": "Arrels Hotel Cadaqués - Adults Only",
+					"metaTitle": "Arrels Hotel Cadaqués: adults only con piscina",
+					"metaDescription": "Arrels Hotel Cadaqués, adults only: piscina exterior, bar y aparcamiento gratuito a pocos minutos del centro de Cadaqués.",
+					"description": "<p>El Arrels Hotel Cadaqués - Adults Only está en Cadaqués y ofrece alojamiento con piscina exterior de temporada, aparcamiento privado gratuito, bar y salón compartido. Además, tiene vistas al jardín, terraza y wifi gratuito.</p><p>Todas las habitaciones incluyen escritorio, TV de pantalla plana, baño privado y zona de estar. Por la mañana se sirve un desayuno continental.</p><p>El hotel está cerca de varios sitios de interés, como la playa de Port d'Alguer, a unos 500 m, y la playa de es Poal, a unos 700 m. La Casa Museo de Salvador Dalí está a 2,5 km. El aeropuerto más cercano, el de Girona-Costa Brava, está a 84 km. La playa Gran queda a solo 500 m.</p><h2>Qué hacer cerca</h2><p>Si vais, podéis completar la escapada con alguno de estos sitios:</p><ul><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/hotel-tarongeta-adults-only-cadaques\">Hotel Tarongeta</a>, a menos de un kilómetro</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/tramuntana-hotel-adults-only-cadaques\">Tramuntana Hotel</a>, a menos de un kilómetro</li><li><a href=\"https://escapadesenparella.cat/es/escapadas-romanticas/parque-natural-del-cap-de-creus\">Parque Natural del Cap de Creus</a>, a menos de un kilómetro</li></ul>"
+				}
+			},
+			"expect": {
+				"es": {
+					"slug": "arrels-hotel-cadaques-adults-only",
+					"title": "Arrels Hotel Cadaqués - Adults Only",
+					"metaTitle": "Arrels Hotel Cadaqués: adults only con piscina",
+					"metaDescription": "Arrels Hotel Cadaqués, adults only: piscina exterior, bar y aparcamiento gratuito a pocos minutos del centro de Cadaqués."
+				}
+			}
+		}
+	]
+}
