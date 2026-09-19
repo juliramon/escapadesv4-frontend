@@ -1,38 +1,37 @@
-import Link from "next/link";
-import { cloudinaryResponsive } from "../utils/cloudinary";
+import { Fragment, useContext } from "react";
 import Footer from "../components/global/Footer";
 import NavigationBar from "../components/global/NavigationBar";
 import GlobalMetas from "../components/head/GlobalMetas";
 import BreadcrumbRichSnippet from "../components/richsnippets/BreadcrumbRichSnippet";
 import UserContext from "../contexts/UserContext";
-import { Fragment, useContext, useEffect } from "react";
 import ContentService from "../services/contentService";
+import ListingHeader from "../components/headers/ListingHeader";
+import SectionHeading from "../components/homepage/SectionHeading";
 import TripCategoryBox from "../components/listings/TripCategoryBox";
+import FeaturedTripHero from "../components/listings/FeaturedTripHero";
 import ShareBarModal from "../components/social/ShareBarModal";
 import AdSlot from "../components/ads/AdSlot";
 import MobileAnchorAd from "../components/ads/MobileAnchorAd";
+import {
+	toFeaturedTripCard,
+	toTripCategoryCard,
+} from "../utils/listingProps";
 
-
-/**
- * Imatge de fons del carrusel: ocupa tota l'amplada de la pantalla, de manera
- * que el mòbil no s'ha de baixar la versió d'escriptori.
- */
-const heroImage = (url) => {
-	const { src, srcSet, sizes, width, height } = cloudinaryResponsive(url, {
-		widths: [640, 1024, 1400, 1920],
-		ratio: 2 / 3,
-	});
-	return { src, srcSet, sizes, width, height };
-};
+/** Després de la primera fila d'escriptori (3 columnes) i de la tercera. */
+const AD_POSITIONS = [3, 9];
 
 const Trips = ({ tripCategories, featuredTripCategories }) => {
 	const { user } = useContext(UserContext);
-	useEffect(() => {
-		const underlinedElement = document.querySelector(".underlined-element");
-		if (!underlinedElement) return;
 
-		underlinedElement.classList.add("active");
-	});
+	// El destacat ja surt a dalt: repetir-lo a la graella era ensenyar dues
+	// vegades el mateix viatge en una pantalla i mitja.
+	const featuredSlugs = new Set(
+		(featuredTripCategories || []).map((category) => category.slug)
+	);
+	const restOfCategories = (tripCategories || []).filter(
+		(category) => !featuredSlugs.has(category.slug)
+	);
+
 	return (
 		<>
 			{/* Browser metas  */}
@@ -53,217 +52,75 @@ const Trips = ({ tripCategories, featuredTripCategories }) => {
 			<div className="lists">
 				<NavigationBar user={user} />
 				<main>
-					{/* Section cover */}
-					<section className="container pt-6">
-						<div className="flex flex-wrap items-stretch -mx-3">
-							<div className="px-3 w-full lg:w-auto">
-								<div className="bg-gray-50 flex items-center justify-center p-8 md:pl-14 md:pr-16 md:py-14 rounded-lg md:rounded-2xl h-full">
-									<div className="max-w-xs">
-										<ul className="breadcrumb mb-3">
-											<li className="breadcrumb__item">
-												<a
-													href="/"
-													title="Inici"
-													className="breadcrumb__link"
-												>
-													Inici
-												</a>
-											</li>
-											<li className="breadcrumb__item">
-												<span className="breadcrumb__link active">
-													Viatges en parella
-												</span>
-											</li>
-										</ul>
-										<h1 className="mt-4 md:mt-7 mb-0 h2">
-											<span className="text-secondary-500">
-												Viatges
-											</span>{" "}
-											en parella
-										</h1>
-										<div className="mt-4 text-block font-light leading-normal">
-											Descobreix el món amb nosaltres.
-											<br />
-											T'expliquem els nostres viatges,
-											aventures i consells a mesura que
-											anem descobrint nous països.
-										</div>
-										<ShareBarModal
-											picture={null}
-											title={"Viatges en parella"}
-											rating={null}
-											slug={`https://escapadesenparella.cat/viatges`}
-											locality={null}
-											colorClass={
-												"text-primary-500 text-sm"
-											}
-										/>
-									</div>
-								</div>
-							</div>
+					{/* Capçalera: la mateixa que la resta de llistats, perquè
+					    la primera fila de destinacions quedi per sobre del
+					    plec en un portàtil. */}
+					<ListingHeader
+						title="Viatges en parella"
+						subtitle="Descobreix el món amb nosaltres. T'expliquem els nostres viatges, aventures i consells a mesura que anem descobrint nous països."
+						breadcrumbLevel1="Viatges en parella"
+						actions={
+							<ShareBarModal
+								picture={null}
+								title={"Viatges en parella"}
+								rating={null}
+								slug={`https://escapadesenparella.cat/viatges`}
+								locality={null}
+								colorClass={"text-primary-500 text-sm"}
+							/>
+						}
+					/>
 
-							<div className="w-full lg:flex-1 px-3">
-								<div className="glide js-slider-featuredTripCategories">
-									<div
-										className="glide__track"
-										data-glide-el="track"
+					{/* Viatge destacat */}
+					{featuredTripCategories &&
+					featuredTripCategories.length > 0 ? (
+						<section className="pt-6 md:pt-8">
+							<div className="container">
+								<h2 className="sr-only">Viatge destacat</h2>
+								<FeaturedTripHero
+									categories={featuredTripCategories}
+								/>
+							</div>
+						</section>
+					) : null}
+
+					{/* Totes les destinacions */}
+					<section className="pt-10 md:pt-14 pb-12 lg:pb-20">
+						<div className="container">
+							<SectionHeading
+								eyebrow="Destinacions"
+								title="Tots els viatges"
+								description={`${
+									tripCategories ? tripCategories.length : 0
+								} països i regions explicats dia a dia, amb el que ens va agradar més i el que no us podeu perdre.`}
+							/>
+							<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 mt-6 md:mt-8">
+								{restOfCategories.map((tripCategory, idx) => (
+									<Fragment
+										key={
+											tripCategory._id ||
+											tripCategory.slug
+										}
 									>
-										<div className="glide__slides">
-											{featuredTripCategories
-												? featuredTripCategories.map(
-														(category) => {
-															return (
-																<div className="rounded-lg lg:rounded-2xl overflow-hidden glide__slide">
-																	<div className="flex flex-wrap items-stretch justify-end rounded-lg lg:rounded-2xl overflow-hidden bg-primary-400 relative lg:min-h-[65vh]">
-																		<div className="w-full absolute h-full inset-0">
-																			<picture className="block w-full h-full relative after:absolute after:inset-0 after:bg-primary-900 after:bg-opacity-20 after:mix-blend-multiply">
-																				<img
-																					{...heroImage(
-																						category.image
-																					)}
-																					alt={
-																						category.title
-																					}
-																					className="w-full h-full object-cover object-[100%_95%]"
-																					loading="eager"
-																					fetchpriority="high"
-																					decoding="async"
-																				/>
-																			</picture>
-																		</div>
-																		<div className="w-full relative z-10">
-																			<div className="flex justify-end items-end p-6 h-full ">
-																				<Link
-																					href={`/viatges/${category.slug}`}
-																				>
-																					<a className="w-full max-w-sm bg-white p-8 rounded-lg md:rounded-xl">
-																						<span className="bg-secondary-600 px-3 py-1 text-xs text-white rounded-md inline-block mb-4">
-																							Destacat
-																						</span>
-																						<h2 className="text-block font-normal my-0">
-																							{
-																								category.title
-																							}
-																						</h2>
-																						<div
-																							className="text-block text-block--sm mt-1.5 line-clamp-4"
-																							dangerouslySetInnerHTML={{
-																								__html: category.seoTextHeader,
-																							}}
-																						></div>
-
-																						<div class="mt-6 flex items-center justify-between">
-																							<div class="inline-flex items-center justify-center text-sm leading-tight">
-																								<svg
-																									xmlns="http://www.w3.org/2000/svg"
-																									className="icon icon-tabler icon-tabler-globe mr-1.5"
-																									width={
-																										15
-																									}
-																									height={
-																										15
-																									}
-																									viewBox="0 0 24 24"
-																									strokeWidth={
-																										1.5
-																									}
-																									stroke="currentColor"
-																									fill="none"
-																									strokeLinecap="round"
-																									strokeLinejoin="round"
-																								>
-																									<path
-																										stroke="none"
-																										d="M0 0h24v24H0z"
-																										fill="none"
-																									></path>
-																									<path d="M7 9a4 4 0 1 0 8 0a4 4 0 0 0 -8 0"></path>
-																									<path d="M5.75 15a8.015 8.015 0 1 0 9.25 -13"></path>
-																									<path d="M11 17v4"></path>
-																									<path d="M7 21h8"></path>
-																								</svg>
-
-																								{
-																									category.country
-																								}
-																							</div>
-																							<span class="text-13 text-tertiary-800 group-hover:text-tertiary-900 transition-all duration-300 ease-in-out inline-flex items-center leading-tight">
-																								<svg
-																									xmlns="http://www.w3.org/2000/svg"
-																									class="mr-1"
-																									width="15"
-																									height="15"
-																									viewBox="0 0 24 24"
-																									strokeWidth="2"
-																									stroke="currentColor"
-																									fill="none"
-																									stroke-linecap="round"
-																									stroke-linejoin="round"
-																								>
-																									<path
-																										stroke="none"
-																										d="M0 0h24v24H0z"
-																										fill="none"
-																									></path>
-																									<path d="M12 5l0 14"></path>
-																									<path d="M5 12l14 0"></path>
-																								</svg>
-																								Veure'n
-																								més
-																							</span>
-																						</div>
-																					</a>
-																				</Link>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															);
-														}
-												  )
-												: null}
-										</div>
-									</div>
-								</div>
+										<TripCategoryBox
+											image={tripCategory.image}
+											title={tripCategory.title}
+											subtitle={
+												tripCategory.seoTextHeader
+											}
+											slug={tripCategory.slug}
+											country={tripCategory.country}
+											priority={idx < 3 ? "eager" : "lazy"}
+										/>
+										{AD_POSITIONS.includes(idx + 1) ? (
+											<AdSlot
+												placement="inFeed"
+												containerClassName="h-full rounded-2xl bg-gray-50 p-3"
+											/>
+										) : null}
+									</Fragment>
+								))}
 							</div>
-						</div>
-					</section>
-
-					{/* Section trips list */}
-					<section className="container pt-6 pb-8">
-						<div className="flex flex-wrap items-stretch -mx-3">
-							{tripCategories
-								? tripCategories.map((tripCategory, idx) => {
-										return (
-											<Fragment
-												key={
-													tripCategory._id ||
-													tripCategory.slug
-												}
-											>
-												<TripCategoryBox
-													image={tripCategory.image}
-													title={tripCategory.title}
-													subtitle={
-														tripCategory.seoTextHeader
-													}
-													slug={tripCategory.slug}
-													country={
-														tripCategory.country
-													}
-												/>
-												{idx === 2 ? (
-													<div className="px-3 w-full lg:w-1/2 xl:w-1/3 mb-6">
-														<AdSlot
-															placement="inFeed"
-															containerClassName="h-full rounded-lg md:rounded-2xl bg-gray-50 p-4"
-														/>
-													</div>
-												) : null}
-											</Fragment>
-										);
-								  })
-								: null}
 						</div>
 					</section>
 				</main>
@@ -274,15 +131,22 @@ const Trips = ({ tripCategories, featuredTripCategories }) => {
 	);
 };
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps() {
 	const service = new ContentService();
-	const tripCategories = await service.getTripCategories();
-	const featuredTripCategories = await service.getFeaturedTripCategories();
+	const [tripCategories, featuredTripCategories] = await Promise.all([
+		service.getTripCategories(),
+		service.getFeaturedTripCategories(),
+	]);
 
+	// L'API torna el document sencer de cada categoria —carrusel, relat,
+	// iframe del mapa i tot el text de SEO—, i Next ho incrusta a l'HTML com a
+	// JSON encara que la pàgina només en pinti la portada i l'entradeta.
 	return {
 		props: {
-			tripCategories,
-			featuredTripCategories,
+			tripCategories: (tripCategories || []).map(toTripCategoryCard),
+			featuredTripCategories: (featuredTripCategories || []).map(
+				toFeaturedTripCard
+			),
 		},
 	};
 }

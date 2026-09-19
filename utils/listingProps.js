@@ -55,7 +55,49 @@ const pickFields = (source, fields) => {
 	}, {});
 };
 
+/**
+ * Camps que fa servir la targeta d'una categoria de viatge (`TripCategoryBox`).
+ *
+ * L'API de `/trip-categories` torna el document sencer: les imatges del
+ * carrusel, el relat, l'iframe del mapa i tot el text de SEO. El llistat només
+ * en pinta la portada, el títol, el país i l'entradeta, però Next incrusta les
+ * props dins l'HTML, o sigui que vuit categories senceres són desenes de kB
+ * per res.
+ */
+const TRIP_CATEGORY_CARD_FIELDS = [
+	"_id",
+	"slug",
+	"title",
+	"richTitle",
+	"image",
+	"country",
+	"seoTextHeader",
+];
+
 const toListingCard = (item) => pickFields(item, LISTING_CARD_FIELDS);
+
+const toTripCategoryCard = (item) => pickFields(item, TRIP_CATEGORY_CARD_FIELDS);
+
+/** Crèdit del patrocinador, quan el viatge destacat en té. */
+const SPONSOR_FIELDS = [
+	"isSponsored",
+	"sponsorURL",
+	"sponsorLogo",
+	"sponsorClaim",
+];
+
+/**
+ * El destacat, a més, ensenya dues fotos del carrusel al costat de la
+ * portada. Només s'envien les dues que es pinten; per dir quantes en té el
+ * viatge ja hi ha `carouselImagesCount`, que és un número i no una llista
+ * d'URL.
+ */
+const toFeaturedTripCard = (item) => ({
+	...toTripCategoryCard(item),
+	...pickFields(item, SPONSOR_FIELDS),
+	carouselImages: (item?.carouselImages || []).slice(0, 2),
+	carouselImagesCount: (item?.carouselImages || []).length,
+});
 
 const toEditorialCard = (item) => pickFields(item, EDITORIAL_CARD_FIELDS);
 
@@ -113,9 +155,12 @@ const toMapMarker = (item) => {
 export {
 	LISTING_CARD_FIELDS,
 	EDITORIAL_CARD_FIELDS,
+	TRIP_CATEGORY_CARD_FIELDS,
 	firstDefined,
 	pickFields,
 	toListingCard,
 	toEditorialCard,
+	toTripCategoryCard,
+	toFeaturedTripCard,
 	toMapMarker,
 };

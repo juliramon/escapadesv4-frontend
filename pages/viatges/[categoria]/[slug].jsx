@@ -1,5 +1,9 @@
 import { useContext } from "react";
-import { cloudinaryImage, cloudinaryResponsive } from "../../../utils/cloudinary";
+import Link from "next/link";
+import {
+	cloudinaryImage,
+	cloudinaryResponsive,
+} from "../../../utils/cloudinary";
 import NavigationBar from "../../../components/global/NavigationBar";
 import ContentService from "../../../services/contentService";
 import UserContext from "../../../contexts/UserContext";
@@ -13,34 +17,48 @@ import BreadcrumbRichSnippet from "../../../components/richsnippets/BreadcrumbRi
 import ShareBarModal from "../../../components/social/ShareBarModal";
 import FollowInstagramBox from "../../../components/global/FollowInstagramBox";
 import AdBanner from "../../../components/ads/AdBanner";
+import AdSlot from "../../../components/ads/AdSlot";
+import MobileAnchorAd from "../../../components/ads/MobileAnchorAd";
+import RelatedListings from "../../../components/listingpage/RelatedListings";
+import TripEntryPager from "../../../components/listings/TripEntryPager";
+import { toEditorialCard } from "../../../utils/listingProps";
 
-const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
+const StoryListing = ({
+	tripEntryDetails,
+	categoryDetails,
+	previousEntry,
+	nextEntry,
+	otherEntries,
+}) => {
 	const { user } = useContext(UserContext);
 
 	let slicedDescription = [];
 
+	const categoryPath = `/viatges/${categoryDetails.slug}`;
+
 	const buildImagesGrid = (start, end) => {
 		const images = tripEntryDetails.images.slice(start, end);
 
+		// El parser substitueix el marcador `post_images` d'enmig del text per
+		// això, dins d'un array que React pinta tal qual: sense clau, avisa que
+		// falta i pot reaprofitar el node equivocat si n'hi ha més d'una.
 		return (
 			<FancyboxUtil
+				key={`gallery-${start}-${end}`}
 				options={{
 					infinite: true,
 				}}
-				key={`images-grid-${start}-${end}`}
 			>
 				<div className="flex flex-wrap -mx-1 cursor-pointer">
 					{images.map((image, idx) => {
 						return (
 							<div
+								key={image || idx}
 								className="w-full md:w-1/2 lg:w-1/3 px-1 mb-2 flex-auto"
 								data-fancybox="gallery"
 								data-src={image}
-								key={idx}
 							>
-								<picture
-									className="block rounded-2xl overflow-hidden aspect-1 relative"
-								>
+								<picture className="block rounded-2xl overflow-hidden aspect-1 relative">
 									<img
 										src={image}
 										alt={`${tripEntryDetails.title} - ${
@@ -89,10 +107,15 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 		ratio: 3 / 4,
 	});
 
-	const coverImgDesktop = desktopCover.src;
 	const coverImgMobile = mobileCover.src;
 
-	const coverAuthorImg = cloudinaryImage(tripEntryDetails.owner.avatar, 32, 32).src;
+	const coverAuthorImg = cloudinaryImage(
+		tripEntryDetails.owner.avatar,
+		32,
+		32
+	).src;
+
+	const shareUrl = `https://escapadesenparella.cat/viatges/${categoryDetails.slug}/${tripEntryDetails.slug}`;
 
 	return (
 		<>
@@ -102,9 +125,9 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 				fallbackTitle={tripEntryDetails.title}
 				description={tripEntryDetails.metaDescription}
 				fallbackDescription={tripEntryDetails.subtitle}
-				url={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}/${tripEntryDetails.slug}`}
+				url={shareUrl}
 				image={tripEntryDetails.cover}
-				canonical={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}/${tripEntryDetails.slug}`}
+				canonical={shareUrl}
 				type="article"
 			/>
 			{/* Rich snippets */}
@@ -116,7 +139,7 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 				page3Title={categoryDetails.title}
 				page3Url={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}`}
 				page4Title={tripEntryDetails.title}
-				page4Url={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}/${tripEntryDetails.slug}`}
+				page4Url={shareUrl}
 			/>
 			<BlogPostingRichSnippet
 				headline={tripEntryDetails.title}
@@ -135,11 +158,11 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 				/>
 				<main>
 					<article>
-						<section className="pt-8 md:pt-10 lg:pt-12 pb-6 md:pb-8 bg-tertiary-50 ">
+						<section className="pt-8 md:pt-10 lg:pt-12">
 							{/* Breadcrumb + article header */}
 							<div className="w-full">
 								<div className="container">
-									<ul className="breadcrumb max-w-5xl mx-auto">
+									<ul className="breadcrumb max-w-3xl mx-auto">
 										<li className="breadcrumb__item">
 											<a
 												href="/"
@@ -158,7 +181,7 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 										</li>
 										<li className="breadcrumb__item">
 											<a
-												href={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}`}
+												href={categoryPath}
 												className="breadcrumb__link"
 											>
 												{categoryDetails.title}
@@ -171,68 +194,92 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 							{/* Article heading + subtitle + meta info */}
 							<div className="relative mt-4 md:mt-7">
 								<div className="container">
-									<div className="md:max-w-xl lg:max-w-5xl lg:mx-auto">
-										<h1 className="font-display max-w-3xl my-0">
+									<div className="md:max-w-xl lg:max-w-3xl lg:mx-auto">
+										{/* Tornar al viatge. El fil d'Ariadna ja
+										    hi porta, però en lletra petita i sense
+										    dir que això és un diari: el xip diu de
+										    quin viatge és i per on va. */}
+										<Link href={categoryPath}>
+											<a className="inline-flex items-center gap-x-1.5 bg-gray-100 text-primary-500 text-13 leading-none rounded-full py-2 px-3 mb-3 hover:bg-gray-200 transition-colors duration-200 ease-in-out">
+												<svg
+													xmlns="http://www.w3.org/2000/svg"
+													width={14}
+													height={14}
+													viewBox="0 0 24 24"
+													strokeWidth={1.5}
+													stroke="currentColor"
+													fill="none"
+													strokeLinecap="round"
+													strokeLinejoin="round"
+													aria-hidden="true"
+												>
+													<path
+														stroke="none"
+														d="M0 0h24v24H0z"
+														fill="none"
+													/>
+													<path d="M7 9a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+													<path d="M5.75 15a8.015 8.015 0 1 0 9.25 -13" />
+													<path d="M11 17v4" />
+													<path d="M7 21h8" />
+												</svg>
+												{categoryDetails.title}
+											</a>
+										</Link>
+										<h1 className="h2 max-w-3xl my-0">
 											{tripEntryDetails.title}
 										</h1>
-										<p className="lg:text-xl font-light mt-2.5 mb-3 md:mt-3 md:mb-4 max-w-3xl">
+										<p className="mt-4 !mb-0 text-block--xl leading-normal max-w-[55ch]">
 											{tripEntryDetails.subtitle}
 										</p>
 										{/* Informació de l'autor */}
-										<div className="flex flex-wrap items-center gap-4">
-											<div className="flex flex-wrap items-center">
-												<div className="rounded-full overflow-hidden w-8 h-8 mr-2.5">
-													<picture>
-														<img
-															src={coverAuthorImg}
-															alt={
-																tripEntryDetails
-																	.owner
-																	.fullName
-															}
-															className={
-																"w-full h-full object-cover"
-															}
-															width={32}
-															height={32}
-															loading="eager"
-															fetchpriority="high"
-														/>
-													</picture>
-												</div>
-												<span className="text-sm">
-													{
-														tripEntryDetails.owner
-															.fullName
-													}
-												</span>
-												<span className="mx-2 text-sm ">
-													–
-												</span>
-												<span className="text-sm ">
-													<time
-														dateTime={formatDateTimeToISODate(
-															tripEntryDetails.createdAt
-														)}
-													>
-														<u>
-															{formatDateTimeToISODate(
-																tripEntryDetails.createdAt
-															)}
-														</u>
-													</time>
-												</span>
+										<div className="flex flex-wrap items-stretch m-0 p-0 gap-x-2 mt-6">
+											<div className="flex flex-wrap items-center text-primary-500 bg-gray-100 rounded-lg py-2.5 px-3 text-sm gap-x-1">
+												<picture className="inline-block rounded-full overflow-hidden w-8 h-8 mr-1.5">
+													<img
+														src={coverAuthorImg}
+														alt={
+															tripEntryDetails
+																.owner.fullName
+														}
+														className={
+															"w-full h-full object-cover"
+														}
+														width={32}
+														height={32}
+														loading="eager"
+														fetchpriority="high"
+													/>
+												</picture>
+												{tripEntryDetails.owner.fullName}
 											</div>
-											<ShareBarModal
-												picture={coverImgMobile}
-												title={tripEntryDetails.title}
-												rating={null}
-												slug={`https://escapadesenparella.cat/viatges/${categoryDetails.slug}/${tripEntryDetails.slug}`}
-												locality={null}
-												colorClass={
-													"text-primary-500 text-sm"
-												}
-											/>
+
+											<div className="flex flex-wrap items-center text-primary-500 bg-gray-100 rounded-lg py-2.5 px-3 text-sm gap-x-1">
+												<time
+													dateTime={formatDateTimeToISODate(
+														tripEntryDetails.createdAt
+													)}
+												>
+													{formatDateTimeToISODate(
+														tripEntryDetails.createdAt
+													)}
+												</time>
+											</div>
+
+											<div className="flex flex-wrap items-center text-primary-500 bg-gray-100 rounded-lg py-2.5 px-3 text-sm gap-x-1">
+												<ShareBarModal
+													picture={coverImgMobile}
+													title={
+														tripEntryDetails.title
+													}
+													rating={null}
+													slug={shareUrl}
+													locality={null}
+													colorClass={
+														"text-primary-500 text-sm"
+													}
+												/>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -240,84 +287,101 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 						</section>
 
 						{/* Article cover */}
-						<div className="relative after:absolute after:top-0 after:inset-x-0 after:bg-tertiary-50 after:h-20">
+						<div className="pt-8 md:pt-12">
 							<div className="container relative z-10">
-								<picture className="block aspect-w-4 aspect-h-3 lg:aspect-w-16 lg:aspect-h-9 h-full rounded-2xl overflow-hidden">
-									<source
-										srcSet={mobileCover.srcSet}
-										sizes={mobileCover.sizes}
-										media="(max-width: 768px)"
-									/>
-									<source
-										srcSet={desktopCover.srcSet}
-										sizes={desktopCover.sizes}
-										media="(min-width: 768px)"
-									/>
-									<img
-										src={desktopCover.src}
-										alt={tripEntryDetails.title}
-										className={"w-full h-full object-cover"}
-										width={desktopCover.width}
-										height={desktopCover.height}
-										loading="eager"
-										fetchpriority="high"
-										decoding="async"
-									/>
-								</picture>
+								<figure className="my-0 max-w-[1200px] mx-auto">
+									<picture className="block aspect-[4/3] md:aspect-[16/9] relative rounded-2xl overflow-hidden">
+										<source
+											srcSet={mobileCover.srcSet}
+											sizes={mobileCover.sizes}
+											media="(max-width: 768px)"
+										/>
+										<source
+											srcSet={desktopCover.srcSet}
+											sizes={desktopCover.sizes}
+											media="(min-width: 768px)"
+										/>
+										<img
+											src={desktopCover.src}
+											alt={tripEntryDetails.title}
+											className={
+												"w-full h-full object-cover"
+											}
+											width={desktopCover.width}
+											height={desktopCover.height}
+											loading="eager"
+											fetchpriority="high"
+											decoding="async"
+										/>
+									</picture>
+									{/* El `figcaption` anava solt, fora de cap
+									    `figure`, i tant el crèdit com les dates
+									    anaven subratllats sense ser enllaços. */}
+									<figcaption className="mt-2 text-13 text-grey-400">
+										Foto d&apos;Andrea Prat i Juli Ramon per
+										Escapadesenparella.cat
+									</figcaption>
+								</figure>
 							</div>
 						</div>
 
 						{/* Article description */}
-						<section className="pt-7">
+						<section className="py-7 md:pb-12">
 							<div className="container">
 								<div className="max-w-5xl mx-auto">
 									<div className="grid grid-cols-1 md:grid-cols-12 gap-y-8 gap-x-12">
 										<div className="md:col-span-8">
-											<div className="w-full border-b border-primary-50 pb-8">
-												<div className="flex flex-col h-full">
-													<span className="block text-sm">
-														Darrera actualització:{" "}
-														<time
-															dateTime={formatDateTimeToISODate(
-																tripEntryDetails.updatedAt
-															)}
-														>
-															<u>
-																{formatDateTimeToISODate(
-																	tripEntryDetails.updatedAt
-																)}
-															</u>
-														</time>
-													</span>
-													<figcaption className="text-sm font-light block">
-														Foto d'{" "}
-														<u>Andrea Prat</u> i{" "}
-														<u>Juli Ramon</u> per
-														Escapadesenparella.cat
-													</figcaption>
-												</div>
+											<div className="w-full border-b border-primary-50 pb-4">
+												<span className="block text-13 text-grey-400">
+													Darrera actualització:{" "}
+													<time
+														dateTime={formatDateTimeToISODate(
+															tripEntryDetails.updatedAt
+														)}
+													>
+														{formatDateTimeToISODate(
+															tripEntryDetails.updatedAt
+														)}
+													</time>
+												</span>
 											</div>
 											<div className="listing-description w-full mt-6 md:mt-8">
 												{slicedDescription}
+											</div>
+
+											{/* Continuar llegint el viatge, al
+											    final del text i abans dels
+											    anuncis. */}
+											<div className="mt-10 md:mt-14">
+												<TripEntryPager
+													previousEntry={
+														previousEntry
+													}
+													nextEntry={nextEntry}
+													basePath={categoryPath}
+												/>
+											</div>
+
+											<div className="pt-8 md:pt-12">
+												<div className="border-t border-primary-50 pt-8 md:pt-12">
+													<AdBanner
+														data-ad-slot="9222117584"
+														data-ad-format="autorelaxed"
+													/>
+												</div>
 											</div>
 										</div>
 
 										{/* Aside */}
 										<aside className="md:col-span-4">
-											<div className="relative xl:sticky xl:top-24 mt-1.5">
+											<div className="relative md:sticky md:top-24 mt-1.5">
 												<div className="p-7 bg-white rounded-2xl border border-primary-50">
 													<FollowInstagramBox />
 												</div>
-												<div className="p-7 bg-white rounded-2xl border border-primary-50 mt-7">
-													<span className="inline-block text-xs">
-														Anunci
-													</span>
-													<AdBanner
-														data-ad-slot="4940975412"
-														data-ad-format="auto"
-														data-full-width-responsive="true"
-													/>
-												</div>
+												<AdSlot
+													placement="sidebar"
+													containerClassName="p-7 bg-white rounded-2xl border border-primary-50 mt-7"
+												/>
 											</div>
 										</aside>
 									</div>
@@ -325,23 +389,29 @@ const StoryListing = ({ tripEntryDetails, categoryDetails }) => {
 							</div>
 						</section>
 					</article>
+
+					{/* La resta de dies del viatge: fins ara l'entrada no
+					    enllaçava enlloc i qui hi arribava des de cerca no
+					    tenia manera de saber que formava part d'un diari. */}
+					<RelatedListings
+						eyebrow="Segueix el viatge"
+						title={`Més dies de ${categoryDetails.title}`}
+						description="La resta del diari d'aquest viatge, dia a dia."
+						href={categoryPath}
+						linkLabel="Veure el viatge sencer"
+						items={otherEntries}
+						variant="editorial"
+						basePath={categoryPath}
+						badge={categoryDetails.country}
+					/>
 				</main>
-				<section className="py-8 md:py-12">
-					<div className="container">
-						<div className="border-t border-primary-50 pt-8 md:pt-12">
-							<AdBanner
-								data-ad-slot="9222117584"
-								data-ad-format="autorelaxed"
-							/>
-						</div>
-					</div>
-				</section>
 			</div>
 			<Footer
 				logo_url={
 					"https://res.cloudinary.com/juligoodie/image/upload/v1619634337/getaways-guru/static-files/logo-escapadesenparella-v4_hf0pr0.svg"
 				}
 			/>
+			<MobileAnchorAd />
 		</>
 	);
 };
@@ -386,17 +456,59 @@ export async function getStaticProps({ params }) {
 	);
 	const tripEntryDetails = await service.getTripEntryDetails(params.slug);
 
-	if (!tripEntryDetails) {
+	if (!tripEntryDetails || !categoryDetails) {
 		return {
 			notFound: true,
 			revalidate: 120,
 		};
 	}
 
+	// Els germans d'aquesta entrada, per ordre de publicació ascendent: és
+	// l'ordre del viatge («dia 1», «dia 2»...), no el del llistat, que ensenya
+	// primer el més nou.
+	let siblings = [];
+	try {
+		const { allTrips } = await service.paginateTripCategory(
+			categoryDetails._id,
+			0
+		);
+		siblings = (allTrips || [])
+			.map(toEditorialCard)
+			.sort((a, b) => new Date(a.createdAt) - new Date(b.createdAt));
+	} catch (err) {
+		console.warn(
+			"getStaticProps: no s'han pogut llistar els altres dies del viatge."
+		);
+	}
+
+	const currentIndex = siblings.findIndex(
+		(entry) => entry.slug === tripEntryDetails.slug
+	);
+	const previousEntry =
+		currentIndex > 0 ? siblings[currentIndex - 1] : null;
+	const nextEntry =
+		currentIndex >= 0 && currentIndex < siblings.length - 1
+			? siblings[currentIndex + 1]
+			: null;
+
+	// Al bloc de relacionats hi van els dies que no són ni aquest ni els dos
+	// que ja surten a l'anterior/següent: així no es repeteix res.
+	const shownSlugs = new Set(
+		[tripEntryDetails.slug, previousEntry?.slug, nextEntry?.slug].filter(
+			Boolean
+		)
+	);
+	const otherEntries = siblings.filter(
+		(entry) => !shownSlugs.has(entry.slug)
+	);
+
 	return {
 		props: {
 			tripEntryDetails,
 			categoryDetails,
+			previousEntry,
+			nextEntry,
+			otherEntries,
 		},
 		revalidate: 120,
 	};

@@ -49,6 +49,7 @@ const HomeSeoText = () => {
 		<ListingsTextareaFooter
 			textareaFooter={locale === "es" ? HOME_SEO_TEXT_ES : HOME_SEO_TEXT}
 			collapsible
+			className="seo-block--centered"
 		/>
 	);
 };

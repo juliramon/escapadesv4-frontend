@@ -233,8 +233,8 @@ const STRINGS = {
 		es: "Cientos de escapadas en pareja por Cataluña: cabañas en los árboles, hoteles con encanto y experiencias. Con precios y fotos nuestras.",
 	},
 	"home.faqTitle": {
-		ca: "Dubtes abans de decidir-vos",
-		es: "Dudas antes de decidiros",
+		ca: "Preguntes freqüents",
+		es: "Preguntas frecuentes",
 	},
 };
 
